@@ -164,6 +164,8 @@ export interface Stage2View {
   cable_blocked_fraction: number | null;
   frame: FrameBox[];
   insertion_order: string[] | null;
+  com_shift_mm?: number | null;
+  com_z_unshifted_mm?: number | null;
   assumed: string[];
 }
 

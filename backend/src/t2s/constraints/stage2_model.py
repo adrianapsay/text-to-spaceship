@@ -15,6 +15,11 @@ All dimensions ASSUMED unless the CDS gives them (see stage2.py). The model wrap
   (Addendum 2.3 option b; card guides are not implemented). A board whose standoffs do not reach a wall is not
   mounted, and the layout is infeasible — boards are never left floating.
 * **Mounting reach** (U6): every other part needs one side 3–8 mm from a wall, a rail or the stack's end faces.
+* **COM-centring shift:** the decoder packs from the −Z end plate, so a short layout has its centre of mass far
+  below the middle. After decoding, the whole layout (stack, rods, harness breaks and reserved block included) moves
+  along Z: at least far enough to bring the COM inside the CDS box (|z| ≤ 70 mm), and further toward the envelope
+  centre as a third extra key asks (a search variable: more centring costs used length). The end plates limit the
+  shift, and a shift that would lose a mount (e.g. a part fixed to the −Z end plate) is not taken.
 
 Layout-specific geometry (stack height, corridor wall, standoffs) travels with each candidate in `meta`, so the
 validator rebuilds exactly the rules the layout was decoded under.
@@ -48,6 +53,8 @@ def _box(lo, hi) -> np.ndarray:
 
 OVERFLOW = 400.0               # the decoder may stack parts this far beyond the end plate; overflow is a violation
 HARNESS_BREAK = s2.C_WALL + 0.01   # harness interruption beyond the stack ends (1.2 mm clearance + rounding allowance)
+COM_BOX_Z = 70.0               # CDS Rev 14.1 COM box half-height (mm, "shall")
+COM_SHIFT_MARGIN = 0.5         # the minimal shift puts the COM this far inside the box edge (rounding, standoff mass)
 
 
 def corridor_box(wall: str, z_hi: float | None = None) -> np.ndarray:
@@ -154,10 +161,11 @@ def mode_for(cable: float, threshold: float = 70.0) -> str:
 
 
 class Stage2Model:
-    """Decoder + rule builder for one parts set and one mode. Chromosome: 3n keys + 2 extra keys
-    (stack height, corridor wall)."""
+    """Decoder + rule builder for one parts set and one mode. Chromosome: 3n keys + 3 extra keys
+    (stack height, corridor wall, COM centring)."""
 
-    n_extra = 2
+    n_extra = 3
+    EXTRA_DEFAULT = (0.5, 0.5, 0.0)      # keys missing from a short chromosome (older keys, constructive passes)
 
     RELAXABLE = ("clearances", "frame", "pcb_stack", "harness", "mounting", "com_box")
 
@@ -223,6 +231,8 @@ class Stage2Model:
         self._statics_rails = [] if "frame" in self.relax else \
             [np.concatenate([b[:3], [b[3], b[4], self.dec_hi[2]]]) for b in rail_boxes()]
         self.harness_on = "harness" not in self.relax
+        self.com_shift_on = "com_box" not in self.relax and not self.fixed
+        self._phys_cache: dict = {}
 
     def _rep(self, pid: str, o: int) -> int:
         if pid not in self.equiv:
@@ -323,7 +333,9 @@ class Stage2Model:
     # ------------------------------------------------------------------------------------------ decoding
     def decode(self, order, orient_keys, rule_keys) -> DecodeResult:
         rule_keys = np.asarray(rule_keys, float)
-        extra = rule_keys[self.n:] if len(rule_keys) > self.n else np.full(self.n_extra, 0.5)
+        extra = np.array(self.EXTRA_DEFAULT, float)
+        given = rule_keys[self.n:self.n + self.n_extra]
+        extra[:len(given)] = given
         rk = rule_keys[:self.n]
         meta = {"mode": self.mode}
         pre_poses, skip = [], set()
@@ -362,7 +374,13 @@ class Stage2Model:
                 res = dec.decode(order, orient_keys, rk, extra_obstacles=extra_obs, skip=skip)
                 pre_poses = poses
         poses = pre_poses + [(pid, int(o), np.round(np.asarray(t, float) * 1000.0) / 1000.0) for pid, o, t in res.poses]
-        penalty, mounts, extras = self.mount_check(poses, meta)
+        shift, poses, meta, (penalty, mounts, extras) = self._com_shift(poses, meta, extra[2], bool(res.unplaced))
+        placed_boxes, length_top = res.placed_boxes, res.length_top
+        if shift:
+            placed_boxes = np.asarray(placed_boxes, float).copy()
+            if placed_boxes.size:
+                placed_boxes[:, [2, 5]] += shift
+            length_top = length_top + shift
         meta["mounts"] = mounts
         meta["unmounted"] = [p for p, v in mounts.items() if not v["ok"]]
         top = max((t[2] + self.records[pid].orient_bounds[o][5] for pid, o, t in poses), default=self.inner[0][2])
@@ -381,7 +399,7 @@ class Stage2Model:
         # the pad was only a reservation: report each part with its bare-part representative orientation
         meta["pad_orients"] = {pid: int(o) for pid, o, _ in poses if pid in self.pads or pid in self.macro}
         poses = [(pid, self._rep(pid, o) if (pid in self.pads or pid in self.macro) else o, t) for pid, o, t in poses]
-        out = DecodeResult(poses, res.placed_boxes, res.unplaced, res.length_top)
+        out = DecodeResult(poses, placed_boxes, res.unplaced, length_top)
         out.meta = meta
         out.penalty = float(penalty)
         out.raw_extra = {k: meta[k] for k in ("H", "C") if k in meta}
@@ -402,12 +420,12 @@ class Stage2Model:
             for i, pid in enumerate(self.ids):
                 if pid in o_of and o_of[pid] in self.allowed[pid]:
                     okeys[i] = (self.allowed[pid].index(o_of[pid]) + 0.5) / len(self.allowed[pid])
-            rk = np.concatenate([np.full(n, rule), [0.5, 0.5]])
+            rk = np.concatenate([np.full(n, rule), [0.5, 0.5, 0.0]])
             out = self.decode(order, okeys, rk)
             out.keys_hint = (okeys, rk)
             return out
         # flat stack: orientations of the free parts from a best-fit pass, then a normal decode
-        rk = np.concatenate([np.full(n, rule), [0.0, 0.5]])
+        rk = np.concatenate([np.full(n, rule), [0.0, 0.5, 0.0]])     # minimal COM shift: the baseline stays short
         best = None
         for kz in (0.0, 1.0, 0.5):
             rk[n] = kz
@@ -444,6 +462,103 @@ class Stage2Model:
         """The stack block grown so that part boxes keep the part-part gap from it on every side."""
         g = max(self.gap_pp - dec.half, 0.0)
         return np.array([block[0] - g, block[1] - g, block[2] - g, block[3] + g, block[4] + g, block[5] + g])
+
+    # ------------------------------------------------------------------------------------------ COM centring
+    def _phys(self, pid):
+        """Mass properties of a part (cached; recomputed when its mass or density changes)."""
+        from ..objectives.metrics import part_phys
+        r = self.records[pid]
+        key = (r.mass_kg, r.density_kg_m3)
+        hit = self._phys_cache.get(pid)
+        if hit is None or hit[0] != key:
+            hit = self._phys_cache[pid] = (key, part_phys(r))
+        return hit[1]
+
+    def _com_z(self, poses) -> float | None:
+        """COM height of the parts (the CDS box check uses the parts only, decision U7); None if a mass is withheld."""
+        m = mz = 0.0
+        for pid, o, t in poses:
+            p = self._phys(pid)
+            if p is None:
+                return None
+            m += p.mass_kg
+            mz += p.mass_kg * float(ROTATIONS_F[o][2] @ p.com_can_mm + t[2])
+        return mz / m if m > 0 else None
+
+    def _z_room(self, poses) -> tuple[float, float]:
+        """How far the whole layout may move down / up: proxy boxes (mounting pads included) keep the wall clearance
+        from both end plates, and the bare parts stay below the overflow limit."""
+        lo, hi = self.inner
+        bottom, top, bare_top = np.inf, -np.inf, -np.inf
+        for pid, o, t in poses:
+            ob = self.parts[pid].oriented(o)
+            bottom = min(bottom, float(ob[:, 2].min() + t[2]))
+            top = max(top, float(ob[:, 5].max() + t[2]))
+            bare_top = max(bare_top, float(self.records[pid].orient_bounds[o][5] + t[2]))
+        return bottom - (lo[2] + self.wall_gap), min(hi[2] - self.wall_gap - top, hi[2] - s2.C_WALL - bare_top)
+
+    def com_shift_options(self, poses, u: float) -> tuple[list[float], dict]:
+        """Candidate shifts along Z, preferred first: the key's choice between the minimal shift that brings the COM
+        inside the CDS box and full centring (u = 0 … 1), then the minimal shift, then none. µm multiples, within
+        the room the end plates leave."""
+        info = {}
+        com = self._com_z(poses) if self.com_shift_on and poses else None
+        if com is None:
+            return [0.0], info
+        down, up = self._z_room(poses)
+        info = {"com_z_unshifted_mm": com, "room_mm": [-max(down, 0.0), max(up, 0.0)]}
+        if up < -SLACK or down < -SLACK:      # overflowing (beyond the µm-rounding allowance): nothing to move into
+            return [0.0], info
+        down, up = max(down, 0.0), max(up, 0.0)
+        lim = COM_BOX_Z - COM_SHIFT_MARGIN
+        s_min = (-lim - com) if com < -lim else ((lim - com) if com > lim else 0.0)
+        s_full = -com                           # COM at the envelope centre (the CDS box centre)
+        u = float(np.clip(u, 0.0, 1.0))
+
+        def fit(s):
+            return float(np.trunc(np.clip(s, -down, up) * 1000.0) / 1000.0)
+        out = []
+        for s in (fit(s_min + u * (s_full - s_min)), fit(s_min), 0.0):
+            if s not in out:
+                out.append(s)
+        return out, info
+
+    @staticmethod
+    def shifted(poses, meta, s: float):
+        """The layout moved by s along Z, with the stack-relative rules (rods, harness breaks, reserve) moved too."""
+        if not s:
+            return poses, meta
+        dz = np.array([0.0, 0.0, s])
+        poses = [(pid, o, np.round((np.asarray(t, float) + dz) * 1000.0) / 1000.0) for pid, o, t in poses]
+        meta = dict(meta)
+        if meta.get("stack_block") is not None:
+            b = list(meta["stack_block"])
+            b[2] += s
+            b[5] += s
+            meta["stack_block"] = b
+            meta["stack_span"] = (meta["stack_span"][0] + s, meta["stack_span"][1] + s)
+            meta["stack_z"] = meta["stack_z"] + s
+        return poses, meta
+
+    def _com_shift(self, poses, meta, u: float, partial: bool):
+        """Apply the first candidate shift that mounts as many parts as any candidate does (a shift never costs a
+        mount). Returns (shift, poses, meta, mount_check result)."""
+        opts, info = self.com_shift_options(poses, u) if not partial else ([0.0], {})
+        best = None
+        for s in opts:
+            p2, m2 = self.shifted(poses, meta, s)
+            mc = self.mount_check(p2, m2)
+            if best is None or mc[0] < best[3][0]:
+                best = (s, p2, m2, mc)
+            if mc[0] == 0:
+                break
+        s, p2, m2, mc = best
+        m2 = dict(m2)
+        m2["com_shift_mm"] = s
+        if info:
+            m2["com_z_unshifted_mm"] = info["com_z_unshifted_mm"]
+            m2["com_shift_room_mm"] = info["room_mm"]
+        return s, p2, m2, mc
 
     # ------------------------------------------------------------------------------------------ checks
     def mount_check(self, poses, meta) -> tuple[int, dict, list]:

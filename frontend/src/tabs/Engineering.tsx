@@ -109,6 +109,7 @@ export function EngineeringTab() {
     ['Frame mass in COM check', settings?.show_frame_mass_in_com ? 'included' : 'excluded by default (COM reported both ways)'],
     ['Cable-routing mode threshold', `${threshold}`],
     ['PCB stack', 'PCB-tagged parts parallel to XY, rail-centred, 15.24 mm PC/104 pitch'],
+    ['COM-centring shift', 'whole layout moved along Z: at least into the COM box, further toward the centre as the search chooses; within the end plates, never at the cost of a mount'],
   ];
   return (
     <div className="tab-scroll" data-testid="tab-engineering">
@@ -169,6 +170,14 @@ export function EngineeringTab() {
           ) : (
             <EmptyState title="No ENGINEERING-CONSTRAINED layout to check yet" />
           )}
+          {b.data?.stage2?.com_shift_mm != null ? (
+            <div className="small muted" style={{ marginTop: 6 }} data-testid="com-shift">
+              {b.data.stage2.com_shift_mm
+                ? `COM-centring shift: whole layout moved ${fmt(b.data.stage2.com_shift_mm, 'mm')} along Z`
+                : 'COM-centring shift: none for this layout (no room between the end plates, no need, or it would cost a mount)'}
+              {b.data.stage2.com_shift_mm && b.data.stage2.com_z_unshifted_mm != null ? ` (COM z before the shift ${fmt(b.data.stage2.com_z_unshifted_mm, 'mm')})` : ''}.
+            </div>
+          ) : null}
         </Panel>
         <Panel title="ASSUMED rules" caption="values from the project; editing needs a backend endpoint (not in the contract yet)">
           <table className="data">

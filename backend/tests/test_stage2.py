@@ -74,7 +74,8 @@ def test_continuous_mode_keeps_corridor_free_and_mounts_boards(recs, val):
     rng = np.random.default_rng(7)
     seen_mounted = False
     for _ in range(30):
-        k = rng.random(m.dim)
+        # the draw sequence of the original 3n + 2 chromosome (its layouts include a mounted board), COM key 0
+        k = np.concatenate([rng.random(m.dim - 1), [0.0]])
         r = m.decode(list(np.argsort(k[:n])), k[n:2 * n], k[2 * n:])
         cb = corridor_box(r.meta["corridor"])
         for pid, o, t in r.poses:                                         # nothing inside the corridor
@@ -103,6 +104,83 @@ def test_mounting_layer_rule(recs):
     info = r.meta["mounts"]["battery_pack"]
     assert PAD == pytest.approx(1.8)
     assert info["ok"] or "not within reach" in info["how"]
+
+
+def _decode(m, keys):
+    n = m.n
+    return m.decode(list(np.argsort(keys[:n], kind="stable")), keys[n:2 * n], keys[2 * n:])
+
+
+def _com_z(recs, poses):
+    from t2s.objectives.metrics import part_phys
+    from t2s.core.rotations import ROTATIONS_F
+    m = mz = 0.0
+    for pid, o, t in poses:
+        p = part_phys(recs[pid])
+        m += p.mass_kg
+        mz += p.mass_kg * (ROTATIONS_F[o][2] @ p.com_can_mm + t[2])
+    return mz / m
+
+
+SHORT = ("battery_pack", "payload_electronics_box", "reaction_wheel", "sensor_housing_hex")
+
+
+def test_com_shift_brings_a_short_layout_into_the_com_box(recs, val):
+    """A short layout packed against the −Z end plate has its COM below the CDS box; the minimal shift (key 0)
+    moves the whole layout just inside it, key 1 centres it; both are certified under their own rules."""
+    sub = {k: recs[k] for k in SHORT}
+    plain = Stage2Model(sub, "soft", relax={"mounting", "com_box"})      # no shift: the decoder's own result
+    shifty = Stage2Model(sub, "soft", relax={"mounting"})
+    k = np.random.default_rng(5).random(plain.dim)
+    r0 = _decode(plain, k)
+    assert not r0.unplaced and r0.meta["com_shift_mm"] == 0.0
+    z0 = _com_z(sub, r0.poses)
+    assert z0 < -70.0                                                    # the problem the shift solves
+    for u, check in ((0.0, lambda z: -70.0 < z <= -69.0), (1.0, lambda z: abs(z) < 0.01)):
+        k2 = k.copy()
+        k2[-1] = u
+        r = _decode(shifty, k2)
+        z = _com_z(sub, r.poses)
+        assert check(z), (u, z)
+        assert r.meta["com_shift_mm"] == pytest.approx(z - z0, abs=2e-3)
+        assert r.meta["com_z_unshifted_mm"] == pytest.approx(z0, abs=1e-6)
+        assert r.meta["overflow_mm"] == 0.0
+        assert r.length_top == pytest.approx(r0.length_top + r.meta["com_shift_mm"], abs=1e-6)
+        for (pa, oa, ta), (pb, ob, tb) in zip(r0.poses, r.poses):          # one rigid move along Z
+            assert pa == pb and oa == ob and np.allclose(tb - ta, [0, 0, r.meta["com_shift_mm"]], atol=1e-6)
+        assert val.validate(r.poses, shifty.spec(r.meta)).valid
+
+
+def test_com_shift_never_costs_a_mount(recs):
+    for names, mode in ((SHORT, "soft"), (tuple(recs), "default")):
+        sub = {k: recs[k] for k in names}
+        plain = Stage2Model(sub, mode, relax={"com_box"})
+        shifty = Stage2Model(sub, mode)
+        rng = np.random.default_rng(9)
+        for _ in range(8):
+            k = rng.random(shifty.dim)
+            a, b = _decode(plain, k), _decode(shifty, k)
+            assert len(b.meta["unmounted"]) <= len(a.meta["unmounted"]), (mode, b.meta["com_shift_mm"])
+
+
+def test_shifted_pc104_stack_keeps_its_rules(recs, val):
+    names = ("pcb_obc", "pcb_eps", "battery_pack", "reaction_wheel", "payload_electronics_box")
+    sub = {k: recs[k] for k in names}
+    plain = Stage2Model(sub, "default", relax={"com_box", "mounting"})
+    shifty = Stage2Model(sub, "default", relax={"mounting"})
+    k = np.random.default_rng(3).random(plain.dim)
+    k[plain.n * 3] = 0.0                                                 # stack at the bottom: COM low
+    k[-1] = 1.0
+    a, b = _decode(plain, k), _decode(shifty, k)
+    s = b.meta["com_shift_mm"]
+    assert s > 0 and not b.unplaced
+    assert b.meta["stack_span"][0] == pytest.approx(a.meta["stack_span"][0] + s, abs=1e-9)
+    assert b.meta["stack_block"][5] == pytest.approx(a.meta["stack_block"][5] + s, abs=1e-9)
+    st = {x.name: x for x in shifty.statics(b.meta)}
+    assert st["rod++"].corners[:, 2].min() == pytest.approx(b.meta["stack_span"][0])     # rods moved with it
+    assert st["harness0"].corners[:, 2].max() < b.meta["stack_span"][0] - s2.C_WALL      # harness break too
+    rep = val.validate(b.poses, shifty.spec(b.meta))
+    assert rep.valid, rep.violations[:3]
 
 
 def test_insertion_order_on_a_simple_column(recs):

@@ -1187,10 +1187,13 @@ class Coordinator:
         return {"mode": meta.get("mode"), "corridor": meta.get("corridor"), "stack_span_mm": meta.get("stack_span"),
                 "overflow_mm": meta.get("overflow_mm"), "unmounted": meta.get("unmounted", []),
                 "mounts": meta.get("mounts", {}), "cable_blocked_fraction": meta.get("H"), "frame": frame,
-                "insertion_order": e.geo.get("insertion_order"),
+                "insertion_order": e.geo.get("insertion_order"), "com_shift_mm": meta.get("com_shift_mm"),
+                "com_z_unshifted_mm": meta.get("com_z_unshifted_mm"),
                 "assumed": ["2 mm walls", "8.5 mm corner rails", "clearances 2.2 / 1.2 mm (U4)",
                             "PC/104 stack, 15.24 mm pitch, rods at (±35, ±35) mm", "3 mm mounting layer (U6)",
-                            "10 mm harness channel (U5)", "M3 standoffs 5 × 5 mm, 3–50 mm long (Addendum 2.3)"]}
+                            "10 mm harness channel (U5)", "M3 standoffs 5 × 5 mm, 3–50 mm long (Addendum 2.3)",
+                            "whole layout shifted along Z toward a centred COM (at least into the CDS box), within "
+                            "the end plates and never at the cost of a mount"]}
 
     def item_mesh(self, iid: str) -> bytes:
         lid, _, _ = iid.rpartition("-")

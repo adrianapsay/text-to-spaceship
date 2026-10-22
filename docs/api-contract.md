@@ -78,7 +78,10 @@ Status `INFEASIBLE` (Stage 2 only): certified collision-free under the layout's 
 rule (outside the enclosure, a part not mountable, COM outside the CDS box, no ±Z insertion order). Stage 2 layouts
 also carry `label` ("ENGINEERING-CONSTRAINED — not flight-qualified"), `violations_engineering: [text]`,
 `verdict` (INFEASIBLE only) and `stage2: {mode, corridor, stack_span_mm, overflow_mm, unmounted, mounts, frame:
-[{kind, id, min, max}], insertion_order, assumed}`; mounting hardware (standoffs) appears in `extra_items`.
+[{kind, id, min, max}], insertion_order, com_shift_mm, com_z_unshifted_mm, assumed}`; mounting hardware (standoffs)
+appears in `extra_items`. `com_shift_mm` is how far the whole layout was moved along +Z by the COM-centring shift
+(0 when there was no room, no need, or a shift would have cost a mount); `com_z_unshifted_mm` is the parts' COM
+height before it.
 
 ### Settings
 ```json

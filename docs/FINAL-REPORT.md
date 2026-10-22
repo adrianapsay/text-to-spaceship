@@ -20,6 +20,7 @@ substitute.
 | M4 live backend: islands, validators, coordinator, REST + WebSocket | completed, tested | `test_api` |
 | M5 front end (11 tabs, 3D viewport, live editing) | completed, tested | Vitest 64, mock E2E 4, live E2E 7 |
 | Robust progress files (atomic write with retry on Windows) | completed, tested | full backend run |
+| Stage 2 COM-centring shift (whole layout along Z, at least into the CDS box, further as a search key; end plates and mounts respected) | completed, tested; fixes the COM-box failure of short layouts, has not made more layouts feasible (section 3) | `test_stage2` (+3), live app check, before/after probe and Size Study |
 | M6 search: memetic BRKGA, LAHC, NSGA-II (pymoo), height-map decoder, compaction, selector, detail ladder F0–F4 | completed with deviations | `test_selector`, `test_pymoo_accuracy`, `test_api` |
 | M7 Stage 2 engineering model, cable-slider modes, mounting, insertion order, INFEASIBLE reporting, constraint attribution | completed with deviations | `test_stage2`, `test_api` |
 | M8 benchmarks (1,480 runs), CP-SAT seed, evidence-based selector, idea map, slider → algorithm sweep / map | completed, tested | full benchmark run, `test_api`, live E2E "slider switches the algorithm where the sweep says" |
@@ -39,7 +40,7 @@ substitute.
 
 | Suite | Result |
 |---|---|
-| Backend (pytest, all modules) | 121 passed, 0 failed |
+| Backend (pytest, all modules) | 124 passed, 0 failed |
 | Front end unit tests (Vitest) | 64 passed |
 | Front end E2E, mock backend (Playwright) | 4 passed |
 | Front end E2E, live backend (Playwright) | 7 passed |
@@ -73,9 +74,18 @@ Failures found and fixed on the way (recorded, not hidden):
   by 1.109 in all three axes, right at the axis-aligned fit bound (1.111: the largest second-longest part dimension
   against the 100 mm envelope width). The best algorithm changes with size: height-map hybrid at 1.00, box hybrid at 1.05–1.10 and 1.109,
   constructive multistart at 1.106. In Stage 2 a valid layout was found only by the box hybrid, at scales 0.70, 0.80
-  and 0.85 — none at full size. At small scales the decoder packs everything against the −Z end, which pushes the
-  centre of mass outside the CDS box. The study ran 26 min past its cap because the cap was checked only between
+  and 0.85 — none at full size. At small scales the decoder packed everything against the −Z end, which pushed the
+  centre of mass outside the CDS box (addressed by the COM-centring shift below). The study ran 26 min past its cap because the cap was checked only between
   batches; that is fixed. A full 6-hour run has not been made.
+- **COM-centring shift (added afterwards; before → after, same seeds and effort):** short Stage 2 layouts no longer
+  fail the CDS COM box for want of a shift. At scale 0.7, random decodes with the COM inside the box rose from 109 to
+  218, 32 to 151 and 51 to 194 of 300 (default, soft, continuous modes). Over 10 GA seeds, the COM-in-box count rose
+  from 33 to 38 of 40 runs, and the mean violation fell in three of the four cases. Full-size layouts overflow the
+  end plate, so they are never shifted. Feasibility did not improve: 2 of 40 GA runs were fully valid before (scale
+  0.8, soft) and 0 of 40 after, which is not a significant difference at this sample size. A 30-minute Stage 2 Size
+  Study found no valid layout at any scale with either version; after the change, the COM of the small layouts sits
+  at the box edge (about 70 mm from the target instead of 66–133 mm). The remaining blocker is mounting: parts that
+  end up out of reach of any wall, rail or deck.
 - **Free rotation (19 parts, 120 s):** from the shortest validated axis-aligned layout (233.17 mm), 231.58 mm
   (−1.59 mm); the final layout re-checks valid on the meshes. Of the two parts left off-axis, one is the sphere
   (geometrically neutral), so the run does not show how much of the gain the rotations themselves made.
