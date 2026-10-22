@@ -1,0 +1,101 @@
+/* Design tokens (protocol §I.1). Square corners, neutral greys, one accent. Light/dark follow the OS; the
+   3D viewport is always dark (#26282C). Contrast pairs are checked in tests/unit/contrast.test.ts. */
+:root {
+  --bg-app: #f3f4f6;
+  --bg-panel: #ffffff;
+  --bg-sunken: #eceef1;
+  --bg-hover: #e4e7eb;
+  --bg-selected: #dbe6f7;
+  --text: #1b1d21;
+  --text-muted: #4b5260;
+  --border: #7c838e;
+  --border-subtle: #d0d4da;
+  --accent: #1f5fbf;
+  --accent-text: #ffffff;
+  --ok: #1e7a46;
+  --warn: #8a5a00;
+  --err: #b42318;
+  --mock-bg: #8a5a00;
+  --mock-text: #ffffff;
+  --focus: #1f5fbf;
+
+  --viewport: #26282c;
+  --vp-enclosure: #8c929b;
+  --vp-label: #e6e8eb;
+
+  --c-power: #e69f00;
+  --c-electronics: #56b4e9;
+  --c-adcs: #009e73;
+  --c-tanks: #f0e442;
+  --c-payload: #cc79a7;
+  --c-structure: #8c929b;
+  --c-unknown: #d4d7db;
+  --c-collision: #d55e00;
+  --c-am: #b48cff;
+
+  --font-ui: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-num: Consolas, 'Cascadia Mono', ui-monospace, monospace;
+  --fs-11: 11px;
+  --fs-12: 12px;
+  --fs-13: 13px;
+  --fs-15: 15px;
+  --fs-18: 18px;
+  --row: 28px;
+  --gap: 8px;
+  --motion: 120ms;
+  color-scheme: light;
+}
+
+:root[data-density='expert'] {
+  --row: 24px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg-app: #1c1e21;
+    --bg-panel: #25282c;
+    --bg-sunken: #202326;
+    --bg-hover: #30343a;
+    --bg-selected: #2a3a55;
+    --text: #e6e8eb;
+    --text-muted: #a3aab4;
+    --border: #7a818c;
+    --border-subtle: #3a3f46;
+    --accent: #5d96f0;
+    --accent-text: #111317;
+    --ok: #5cc08a;
+    --warn: #e3b341;
+    --err: #f2877a;
+    --mock-bg: #e3b341;
+    --mock-text: #1b1d21;
+    --focus: #5d96f0;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --bg-app: #1c1e21;
+  --bg-panel: #25282c;
+  --bg-sunken: #202326;
+  --bg-hover: #30343a;
+  --bg-selected: #2a3a55;
+  --text: #e6e8eb;
+  --text-muted: #a3aab4;
+  --border: #7a818c;
+  --border-subtle: #3a3f46;
+  --accent: #5d96f0;
+  --accent-text: #111317;
+  --ok: #5cc08a;
+  --warn: #e3b341;
+  --err: #f2877a;
+  --mock-bg: #e3b341;
+  --mock-text: #1b1d21;
+  --focus: #5d96f0;
+  color-scheme: dark;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion: 0ms;
+  }
+}

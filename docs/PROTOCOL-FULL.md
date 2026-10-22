@@ -1845,3 +1845,59 @@ Each edge is labelled with the quantity that drove the decision. Examples: "stro
 | M6 | Selector with the default rules + the chip next to the sliders |
 | M8 | Benchmark evidence base + Explain tab (idea map, proof view, explorer) |
 
+---
+
+## Addendum 4 — Request of 2026-10-22: automatic detail-level ladder for every added STL
+
+When a part is added, the app finds, by measurement, the most detailed shape representation that still pays off in accuracy without taking too long. It does this by simplifying the shape and then making it progressively more complex, with every algorithm run at every level.
+
+### 4.1 Detail ladder per part (simplest → most detailed)
+| Level | Representation | Conservative? |
+|---|---|---|
+| F0 | Bounding box (OBB) | yes |
+| F1 | Compound boxes, k = 2, 4, 6 | yes (certified) |
+| F2 | Convex hull, simplified to a support polytope with 26 / 64 / 128 directions, then the exact hull | yes |
+| F3 | Planar-cut convex cover, 2 / 4 / 8 / 16 pieces | yes (by construction; re-derived by the proof checker) |
+| F4 | Conservative voxels at 2 / 1 / 0.5 mm | yes (for search only) |
+| F5 | Decimated mesh at 1k / 5k / 20k triangles, inflated by its measured Hausdorff distance | yes, after inflation |
+| F6 | Full mesh | exact |
+
+Validation always uses the full mesh (§D.3). The ladder only changes what the *search* uses.
+
+### 4.2 What is measured at each level
+**Shape cost**
+- proxy volume and overhead over the true solid;
+- build time;
+- evaluation time per collision query, as a median over 10⁴ queries.
+
+**Task accuracy.** The part set is packed with each applicable algorithm (box decoder, hybrid, voxel decoder) while the new part uses that level. The same seeds and a fixed budget are used throughout. Recorded per run:
+- length used, COM error and inertia of the resulting validated layout;
+- time to the first valid layout;
+- the false-reject rate, i.e. how often the proxy blocked a placement that the full mesh would allow.
+
+### 4.3 Stopping and choice
+The ladder climbs one level at a time and stops when either:
+- **(a) accuracy has converged:** two successive levels change the best length used by < 0.5 mm, change the scalarised score by < 0.5 %, and change the false-reject rate by < 1 point; or
+- **(b) time has run out:** the next level would push the per-evaluation time past the interactive budget, so that the first improved valid layout can no longer arrive within about 2 s.
+
+**The chosen level** is the cheapest level whose accuracy is within those tolerances of the most detailed level tested. Each part has a **chosen level per algorithm**. The algorithm selector (Addendum 3) uses these, and the choice is shown with its evidence.
+
+**Running it**
+- The ladder runs in the background whenever a part is added or replaced.
+- Default budget: 10 minutes per new part. It can be extended, and can be re-run at any time.
+- Results are cached by mesh hash and invalidated when constraints change.
+
+### 4.4 Display
+- **Components tab, per part "Detail level" panel:**
+  - a chart of accuracy (best length used, false-reject rate) against time, one line per algorithm, with one point per level;
+  - the chosen level highlighted, with its plain-language reason, e.g. "more detail than 8-piece cover changed the result by only 0.2 mm but took 6× longer";
+  - level thumbnails.
+- **Algorithm Comparison tab:** a summary table of the chosen level for every part and algorithm.
+
+### 4.5 Roadmap placement
+| Milestone | Work |
+|---|---|
+| M1/M2 | Ladder representations and their certificates |
+| M6 | Ladder runner, stopping rule, cache, selector integration |
+| M8 | UI |
+

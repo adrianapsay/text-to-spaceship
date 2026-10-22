@@ -1,0 +1,207 @@
+{
+ "mock": true,
+ "layouts": [
+  {
+   "id": "L-MOCK-0001",
+   "hash": "2a6ba7c342c5d953",
+   "stage": 1,
+   "mode": "default",
+   "status": "VALIDATED",
+   "parts_rev": 1,
+   "constraint_rev": 1,
+   "mass_rev": 1,
+   "weights_rev": 1,
+   "poses": [
+    {
+     "part_id": "p01",
+     "orient": 18,
+     "t_um": [
+      -9995,
+      -38995,
+      -17025
+     ]
+    },
+    {
+     "part_id": "p02",
+     "orient": 4,
+     "t_um": [
+      -4995,
+      -4995,
+      -109440
+     ]
+    },
+    {
+     "part_id": "p03",
+     "orient": 16,
+     "t_um": [
+      -4995,
+      -4995,
+      -107835
+     ]
+    },
+    {
+     "part_id": "p04",
+     "orient": 9,
+     "t_um": [
+      -22775,
+      -16415,
+      61918
+     ]
+    },
+    {
+     "part_id": "p05",
+     "orient": 1,
+     "t_um": [
+      21198,
+      18149,
+      -145245
+     ]
+    },
+    {
+     "part_id": "p06",
+     "orient": 0,
+     "t_um": [
+      -44995,
+      37015,
+      -17025
+     ]
+    },
+    {
+     "part_id": "p07",
+     "orient": 0,
+     "t_um": [
+      -19995,
+      2010,
+      -27025
+     ]
+    },
+    {
+     "part_id": "p08",
+     "orient": 1,
+     "t_um": [
+      22510,
+      -4995,
+      -84530
+     ]
+    },
+    {
+     "part_id": "p09",
+     "orient": 0,
+     "t_um": [
+      -26901,
+      25649,
+      -145245
+     ]
+    },
+    {
+     "part_id": "p10",
+     "orient": 1,
+     "t_um": [
+      22406,
+      -30258,
+      124081
+     ]
+    },
+    {
+     "part_id": "p11",
+     "orient": 0,
+     "t_um": [
+      -20747,
+      17581,
+      124407
+     ]
+    },
+    {
+     "part_id": "p12",
+     "orient": 8,
+     "t_um": [
+      25010,
+      7010,
+      -22025
+     ]
+    },
+    {
+     "part_id": "p13",
+     "orient": 5,
+     "t_um": [
+      19450,
+      -9995,
+      52980
+     ]
+    },
+    {
+     "part_id": "p14",
+     "orient": 1,
+     "t_um": [
+      -25995,
+      -25995,
+      124861
+     ]
+    },
+    {
+     "part_id": "p15",
+     "orient": 17,
+     "t_um": [
+      -24995,
+      -14995,
+      -82030
+     ]
+    },
+    {
+     "part_id": "p16",
+     "orient": 7,
+     "t_um": [
+      -29995,
+      -29995,
+      -140245
+     ]
+    },
+    {
+     "part_id": "p17",
+     "orient": 1,
+     "t_um": [
+      -11995,
+      38010,
+      60980
+     ]
+    },
+    {
+     "part_id": "p18",
+     "orient": 1,
+     "t_um": [
+      21078,
+      35654,
+      -145365
+     ]
+    },
+    {
+     "part_id": "p19",
+     "orient": 5,
+     "t_um": [
+      18251,
+      -22175,
+      -140455
+     ]
+    }
+   ],
+   "extra_items": [],
+   "metrics": null,
+   "scores": null,
+   "algorithm": {
+    "id": "mock_stack",
+    "label": "MOCK placeholder stack",
+    "reason": "MOCK placeholder (layers along Z; AABB footprints packed side by side in each layer (max-rects)); not an optimisation result"
+   },
+   "validation": {
+    "certified": true,
+    "validator_version": "mock-aabb-1",
+    "tolerance_mm": 0,
+    "pairs": 171,
+    "checked_at": "1970-01-01T00:00:00.000Z"
+   },
+   "origin": "archive",
+   "created": "1970-01-01T00:00:00.000Z",
+   "mock": true
+  }
+ ]
+}

@@ -106,6 +106,20 @@ A local app that runs in your browser.
   - In this tab, one strip per slider shows which algorithm would be chosen across its whole 0–100 range, with the others held where they are. A two-slider map is available too.
   - The choice is based on measured benchmark results for similar settings, and the evidence is shown. Every switch is logged.
 
+**6. Detail ladder for every added STL.**
+- **How it works.** Each new part is first represented very simply (a box), then in progressively more detail:
+  1. several boxes;
+  2. a wrapped shell;
+  3. 2 → 16 convex pieces;
+  4. voxels;
+  5. lighter meshes;
+  6. the full mesh.
+
+  Every algorithm runs at every level.
+- **Where it stops.** The ladder stops at the level where more detail no longer improves the result (under 0.5 mm) or would make the optimiser too slow.
+- **What you see.** The Components tab shows accuracy vs. time for each level and the chosen one, with the reason.
+- **What stays the same.** The final validity check always uses the full mesh, whatever level the search used.
+
 ## Build plan
 | Step | Delivers |
 |---|---|

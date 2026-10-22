@@ -1,0 +1,49 @@
+[project]
+name = "t2s"
+version = "0.1.0"
+description = "TEXT-TO-SPACESHIP: physics-aware CubeSat packaging optimiser (backend)"
+requires-python = ">=3.14,<3.15"
+dependencies = [
+    "numpy>=2.4,<2.6",
+    "scipy>=1.16",
+    "trimesh>=4.6",
+    "manifold3d>=3.2",
+    "python-fcl>=0.7.0.8",
+    "coacd>=1.0.7",
+    "numba>=0.62",
+    "ortools>=9.12",
+    "pymoo>=0.6.2",
+    "fastapi>=0.115",
+    "uvicorn>=0.34",
+    "websockets>=13",
+    "pydantic>=2.10",
+    "python-multipart>=0.0.20",
+    "psutil>=6",
+    "threadpoolctl>=3.5",
+    "fast-simplification>=0.1.9",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "hypothesis>=6.120",
+    "ruff>=0.9",
+]
+
+[tool.uv]
+package = false
+no-build = true
+exclude-newer = "2026-10-08T00:00:00Z"
+required-environments = ["sys_platform == 'win32' and platform_machine == 'AMD64'"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-q"
+markers = [
+    "slow: long-running tests (fuzzing, benchmarks)",
+]
+
+[tool.ruff]
+line-length = 110
+target-version = "py314"
