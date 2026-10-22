@@ -176,18 +176,13 @@ def build_part(data: bytes, name: str, part_id: str, units: str = "mm", units_co
             wv, vecs = np.linalg.eigh(j)
             gaps = [abs(wv[1] - wv[0]), abs(wv[2] - wv[1])]
             axis_hint = vecs[:, 2] if gaps[0] < gaps[1] else vecs[:, 0]
-        if (hull_vol or 0) > volume * 1.02 and not (method.startswith("exact") and ok):
-            cover = planar_cut_cover(v, f, volume, axis_hint=axis_hint)
-        elif method.startswith("exact") and ok:
-            cover = Cover(certified=True, detail=f"{len(boxes)} exact box piece(s)")
-            from ..geometry.proxies import CoverPiece
-            for b in boxes:
-                corners = np.array([[x, y, z] for x in (b[0], b[3]) for y in (b[1], b[4]) for z in (b[2], b[5])])
-                planes = [(np.array([-1.0, 0, 0]), b[0]), (np.array([1.0, 0, 0]), -b[3]),
-                          (np.array([0, -1.0, 0]), b[1]), (np.array([0, 1.0, 0]), -b[4]),
-                          (np.array([0, 0, -1.0]), b[2]), (np.array([0, 0, 1.0]), -b[5])]
-                cover.pieces.append(CoverPiece(planes=planes, vertices=corners, hull_volume=float(np.prod(b[3:] - b[:3]))))
-            cover.total_hull_volume = float(sum(p.hull_volume for p in cover.pieces))
+        from ..geometry.proxies import is_rectilinear
+        rect = is_rectilinear(v, f)
+        hull_exact = (hull_vol or 0) - volume <= 1e-6 * volume        # float32 noise on rotated parts ~1e-8
+        if not hull_exact and (rect or (hull_vol or 0) > volume * 1.02):
+            # rectilinear parts are cut until exact (e.g. PCB notches must stay open); others to <= 2 % overhead
+            cover = planar_cut_cover(v, f, volume, axis_hint=axis_hint,
+                                     target_overhead=1e-9 if rect else 0.02)
         else:
             cover = Cover(certified=True, detail="single convex hull")
             from ..geometry.proxies import CoverPiece

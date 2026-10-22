@@ -338,15 +338,71 @@ def cell_corners(planes) -> np.ndarray:
 
 
 def piece_vertices(v: np.ndarray, f: np.ndarray, planes) -> np.ndarray:
-    """V-representation of the solid piece (solid ∩ cell): clipped surface fragments + interior cell corners."""
+    """Conservative V-representation of the solid piece P = solid ∩ cell.
+
+    Every vertex of P is the meeting point of three bounding facets, each a surface triangle or a cell plane, so it
+    is one of: (a) a mesh vertex in the closed cell, (b) a mesh edge crossing a cell plane, (c) a cell edge line
+    (two planes) crossing a surface triangle, (d) a cell corner (three planes) in the closed solid. All candidates
+    in the closed cell are kept, so conv(result) ⊇ P. Extra points only make the cover more conservative.
+    The fit-proof checker re-derives the same set with the same rule.
+    """
     from .mesh import ray_parity_inside
-    pts = _cell_vertices(v[f], planes)
+    if not planes:
+        return v.copy()
+    nrm = np.array([np.asarray(n, float) for n, _ in planes])
+    off = np.array([float(d) for _, d in planes])
+    scale = max(1.0, float(np.abs(v).max()))
+    tol = 1e-9 * scale
+
+    def inside(p):
+        return np.all(p @ nrm.T + off <= tol, axis=1)
+
+    out = [v[inside(v)]]
+    e = np.unique(np.sort(f[:, [0, 1, 1, 2, 2, 0]].reshape(-1, 2), axis=1), axis=0)
+    p0, p1 = v[e[:, 0]], v[e[:, 1]]
+    for n, d in zip(nrm, off):
+        s0, s1 = p0 @ n + d, p1 @ n + d
+        cross = s0 * s1 < 0
+        if cross.any():
+            t = s0[cross] / (s0[cross] - s1[cross])
+            q = p0[cross] + t[:, None] * (p1[cross] - p0[cross])
+            out.append(q[inside(q)])
+    tri = v[f]
+    for i in range(len(planes)):
+        for j in range(i + 1, len(planes)):
+            direc = np.cross(nrm[i], nrm[j])
+            if np.linalg.norm(direc) < 1e-12:
+                continue
+            x0 = np.linalg.solve(np.vstack([nrm[i], nrm[j], direc]), np.array([-off[i], -off[j], 0.0]))
+            q = _line_triangles(x0, direc, tri)
+            if len(q):
+                out.append(q[inside(q)])
     corners = cell_corners(planes)
-    if len(corners) and len(pts):
-        inside = ray_parity_inside(corners, v, f) > 0.5
-        if inside.any():
-            pts = np.vstack([pts, corners[inside]])
-    return pts
+    if len(corners):
+        wn = ray_parity_inside(corners, v, f)
+        out.append(corners[wn > 1e-6])          # closure of the solid (boundary corners included)
+    pts = np.concatenate([o for o in out if len(o)]) if any(len(o) for o in out) else np.zeros((0, 3))
+    return np.unique(np.round(pts, 12), axis=0) if len(pts) else pts
+
+
+def _line_triangles(x0: np.ndarray, d: np.ndarray, tri: np.ndarray, eps: float = 1e-12) -> np.ndarray:
+    """Intersections of the infinite line x0 + t·d with triangles (closed, Möller–Trumbore, t unrestricted)."""
+    e1 = tri[:, 1] - tri[:, 0]
+    e2 = tri[:, 2] - tri[:, 0]
+    h = np.cross(d, e2)
+    a = np.einsum("ij,ij->i", e1, h)
+    ok = np.abs(a) > eps * np.linalg.norm(e1, axis=1) * np.linalg.norm(e2, axis=1) * np.linalg.norm(d)
+    if not ok.any():
+        return np.zeros((0, 3))
+    inv = 1.0 / a[ok]
+    s = x0 - tri[ok, 0]
+    u = inv * np.einsum("ij,ij->i", s, h[ok])
+    q = np.cross(s, e1[ok])
+    w = inv * (q @ d)
+    t = inv * np.einsum("ij,ij->i", e2[ok], q)
+    tol = 1e-9
+    hit = (u >= -tol) & (w >= -tol) & (u + w <= 1 + tol)
+    return x0 + t[hit, None] * d
 
 
 def clip_triangles(tri: np.ndarray, planes) -> np.ndarray:
@@ -362,7 +418,34 @@ def _hull_vol(pts: np.ndarray) -> float:
         return 0.0
 
 
+def _nudge(n: np.ndarray, d: float, v: np.ndarray, step: float = 7.31e-4) -> float:
+    """Shift a cut plane so no mesh vertex lies within 1e-6 mm of it (removes coplanar degeneracies)."""
+    for k in range(1, 50):
+        if np.min(np.abs(v @ n + d)) > 1e-6:
+            return d
+        d = d + step * (1 if k % 2 else -1) * k
+    return d
+
+
 def _candidate_planes(v: np.ndarray, centre: np.ndarray, axis_hint: np.ndarray | None) -> list[tuple[np.ndarray, float]]:
+    """Raw candidates moved off mesh vertices. A plane through a face is offered nudged to BOTH sides: one side
+    leaves a 0.7 µm sliver of the face's own solid in the far cell (whose hull can then span a cavity), the other
+    does not; the greedy search keeps whichever is better."""
+    out = []
+    for n, d in _candidate_planes_raw(v, centre, axis_hint):
+        if np.min(np.abs(v @ n + d)) > 1e-6:
+            out.append((n, d))
+            continue
+        for sign in (1.0, -1.0):
+            dd = d + sign * 7.31e-4
+            if np.min(np.abs(v @ n + dd)) > 1e-6:
+                out.append((n, dd))
+            else:
+                out.append((n, _nudge(n, dd, v)))
+    return out
+
+
+def _candidate_planes_raw(v: np.ndarray, centre: np.ndarray, axis_hint: np.ndarray | None) -> list[tuple[np.ndarray, float]]:
     cands = []
     for a in range(3):
         n = np.zeros(3)
@@ -394,18 +477,32 @@ def _candidate_planes(v: np.ndarray, centre: np.ndarray, axis_hint: np.ndarray |
 
 
 def _sector_planes(axis: np.ndarray, centre: np.ndarray, k: int) -> list[list[tuple[np.ndarray, float]]]:
+    """k = 2^m radial sectors about the axis, built as a binary cut tree (each split uses a plane and its exact
+    negation), so the cells provably partition space; the fit-proof checker verifies the tree structure."""
     ax = axis / np.linalg.norm(axis)
     ref = np.array([1.0, 0, 0]) if abs(ax[0]) < 0.9 else np.array([0, 1.0, 0])
     u = np.cross(ax, ref)
     u /= np.linalg.norm(u)
     w = np.cross(ax, u)
-    cells = []
-    for i in range(k):
-        a, b = 2 * np.pi * i / k, 2 * np.pi * (i + 1) / k
-        n1 = np.sin(a) * u - np.cos(a) * w           # keeps points left of ray a
-        n2 = -np.sin(b) * u + np.cos(b) * w          # keeps points right of ray b
-        cells.append([(n1, -float(n1 @ centre)), (n2, -float(n2 @ centre))])
-    return cells
+    depth = int(round(np.log2(k)))
+    phase = 1.37e-4               # rad: keeps sector planes off vertex columns of regularly tessellated parts
+
+    def right_of(gamma):          # half-space of points with angle < gamma inside a wedge of width <= pi
+        n = -np.sin(gamma + phase) * u + np.cos(gamma + phase) * w
+        return n, -float(n @ centre)
+
+    root_n = np.sin(phase) * u - np.cos(phase) * w             # left of ray 0: angles in [0, pi]
+    root = (root_n, -float(root_n @ centre))
+    leaves = [([root], 0.0, np.pi), ([(-root[0], -root[1])], np.pi, 2 * np.pi)]
+    for _ in range(depth - 1):
+        nxt = []
+        for planes, a, b in leaves:
+            g = 0.5 * (a + b)
+            n, d = right_of(g)
+            nxt.append((planes + [(n, d)], a, g))
+            nxt.append((planes + [(-n, -d)], g, b))
+        leaves = nxt
+    return [p for p, _, _ in leaves]
 
 
 def planar_cut_cover(v: np.ndarray, f: np.ndarray, volume: float, axis_hint: np.ndarray | None = None,
@@ -439,8 +536,11 @@ def _search_mesh(v: np.ndarray, f: np.ndarray, max_tris: int = 6000):
 
 
 def _choose_cuts(v, f, volume, axis_hint, max_pieces, target_overhead):
-    tri = v[f]
     centre = 0.5 * (v.min(axis=0) + v.max(axis=0))
+
+    def _cell_vertices(_tri, planes):           # evaluate candidates with the same construction as the result
+        return piece_vertices(v, f, planes)
+    tri = None
     cands = _candidate_planes(v, centre, axis_hint)
     leaves = [[]]                                       # list of plane-lists
     leaf_vol = [_hull_vol(v)]
@@ -473,7 +573,8 @@ def _choose_cuts(v, f, volume, axis_hint, max_pieces, target_overhead):
                 if best is None or gain > best[0]:
                     best = (gain, li, pa, pb, va, vb)
             del lo, hi
-        if best is None or best[0] < 0.01 * volume:
+        min_gain = 0.01 * volume if target_overhead >= 0.01 else 1e-9 * volume
+        if best is None or best[0] < min_gain:
             break
         _, li, pa, pb, va, vb = best
         leaves[li:li + 1] = [pa, pb]
