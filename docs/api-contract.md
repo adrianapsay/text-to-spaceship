@@ -28,7 +28,7 @@ Everything is JSON unless stated. Field names are snake_case.
 {
   "id": "p03", "name": "battery_pack", "file": "battery_pack.stl", "sha256": "…",
   "units": "mm", "units_confirmed": true,
-  "status": "VALID" | "REPAIRED" | "WITHHELD" | "NEEDS_UNITS",
+  "status": "VALID" | "REPAIRED" | "WITHHELD" | "NEEDS_UNITS" | "ANALYSING",
   "status_detail": "string (plain language, e.g. 'open mesh — 3 holes')",
   "repairs": ["flipped winding", "..."],
   "triangles": 12, "display_triangles": 12,

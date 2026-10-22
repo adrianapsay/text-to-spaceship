@@ -30,5 +30,5 @@ frontend/playwright-report/
 # Runtime data
 cache/
 data/runs/
-data/projects/*/cache/
+data/projects/
 *.log

@@ -61,6 +61,9 @@ class PartRecord:
     lock_pose: dict | None = None
     tags: list[str] = field(default_factory=list)
     suggested_units: str | None = None
+    geom_status: str | None = None    # VALID | REPAIRED | WITHHELD whatever the units confirmation
+    geom_detail: str = ""
+    build_s: float | None = None
 
     # ------------------------------------------------------------------ physics accessors
     @property
@@ -209,5 +212,5 @@ def build_part(data: bytes, name: str, part_id: str, units: str = "mm", units_co
         obb_extents_mm=np.sort(v.max(0) - v.min(0))[::-1], desc=d, labels=lab,
         subsystem=classify.suggest_subsystem(name), boxes=boxes, boxes_method=method, boxes_certified=ok,
         boxes_detail=detail, cover=cover, allowed_orients=allowed, orient_bounds=bounds,
-        suggested_units=suggested,
+        suggested_units=suggested, geom_status=status, geom_detail=rep.detail,
         mass_source="ASSUMED" if status != "WITHHELD" else "WITHHELD")
