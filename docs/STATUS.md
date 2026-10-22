@@ -16,9 +16,9 @@ and are not the M8 benchmark (no repetitions, no statistics).
 | M5 front end on the live backend | done | Playwright live suite (4), mock suite (4), Vitest (62) |
 | M6 search: memetic BRKGA, LAHC, pymoo NSGA-II, height-map decoder, compaction, selector, detail ladder | done with deviations (below) | `test_selector`, `test_pymoo_accuracy`, `test_api` |
 | M7 Stage 2 model and search, cable-slider modes, mounting, insertion order, least-violating reporting, constraint attribution, comparison view | done with deviations (below) | `test_stage2` (8), `test_api` Stage 2 + attribution, Vitest INFEASIBLE rules |
-| M8 benchmarks, Size Study, Explain backend | planned | — |
-| M9 Manufacturable Design | planned | — |
-| M10 exports, CAD package, final report | planned | — |
+| M8 benchmarks, CP-SAT seed, Size Study, Explain backend (selector sweep / map, idea map) | done with deviations (below) | full benchmark run (1,480 runs), `test_api` CP-SAT / Size Study / selector + idea map |
+| M9 Manufacturable Design (mount rules, brackets incl. conformal metal AM, exact bracket checks, cost, exports) | done with deviations (below) | `test_api` Manufacturable Design, full-dataset smoke run |
+| M10 reports (Markdown / HTML), placed-STL ZIP, Fusion 360 export package (prepared only), CAD Validation tab | done; Fusion 360 validation NOT CONFIGURED | `test_api` reports / exports / package |
 
 ## M6 deviations from the protocol (recorded, not hidden)
 
@@ -56,6 +56,44 @@ and are not the M8 benchmark (no repetitions, no statistics).
 - **Stage 2 search uses the box decoder only** (the height-map decoder has no keep-out model).
 - **"INFEASIBLE (proven)"** is never claimed: no Stage 2 bound proof is implemented.
 
+## M8 notes
+
+- **Benchmark protocol:** fixed budget of 5,000 box-decode equivalents per run, 10 seeds, 4 weight presets, instances
+  I1 (19 parts, Stage 1), I2 (19 parts, Stage 2), I3 / I4 (8- and 12-part subsets), I5 (perfect packing, optimum ≤
+  200 mm); Wilcoxon + Vargha–Delaney A12 + Holm, Friedman over instance × preset blocks. Results:
+  `docs/benchmarks/full-b5000-benchmarks.json`.
+- **The hybrid did not meet the pre-registered adoption rule** (A12 ≥ 0.64 with Holm p < 0.05 on at least half the
+  instances, worse on none): it wins on none and is worse on I3 and I5. The selector therefore uses the measured
+  evidence (nearest instance, nearest weights, best median score) instead of preferring the hybrid.
+- **I2 (Stage 2) was run only for V1, V4, V5, V6 with the balanced preset** and produced no feasible layout in any
+  of its 40 runs.
+- **CP-SAT** solves the single-box proxy problem only (0.1 mm grid); its bound is valid for that proxy problem, not
+  for the true shapes. Its layout is validated like any other.
+- **Size Study** is implemented (scan → bisection → successive halving, 6 h cap, stops on convergence or a proven
+  optimum) and tested only with tiny budgets (`test_api`); no multi-hour run has been made yet.
+
+## M9 deviations and modelling choices (labelled "manufacturing concept — assumed cost model, not a quote; brackets not stress-analysed")
+
+- **Mount rules (ASSUMED):** bracket reach 40 mm; flat side (≥ 60 % planar) → direct fasteners ≤ 3.5 mm, machined
+  block ≤ 15 mm, sheet Z-bracket beyond; symmetric elongated / curved bodies → tube clamp; otherwise a conformal
+  metal-AM bracket (AlSi10Mg, decision N2). Relative cost units (N1): fastener 0.1, catalogue 1, sheet 3 + 0.5 per
+  bend, machined 5 + 0.5 / cm³, metal AM 10 + 2 / cm³ + 1 support.
+- **Conformal AM brackets** are a signed-distance level set (2 mm shell at a 0.3 mm gap, 2 mm plate, 2.5 mm ribs)
+  built clear of the other parts' certified boxes plus 1.2 mm + margin, then checked exactly (FCL distance +
+  containment probes both ways). A bracket that still fails is rebuilt with a larger margin, then replaced by a
+  labelled machined block. Bracket-to-bracket pairs are checked exactly too.
+- **Not modelled:** loads, stiffness, fastener holes in the meshes, thermal paths; AM rules are reported (wall by
+  construction, overhang share per best build axis, build-volume fit), supports only counted in the cost.
+- **Algorithm choice:** the selector's Stage 2 rule for the manufacturable weights (box decoder: mount synthesis needs
+  its frame, rail and keep-out model); the height-map decoder is not available in this tab.
+
+## M10 notes
+
+- Reports are built from the archived layout, the part records and a fresh full proof; nothing is re-estimated. The
+  HTML report draws convex-hull silhouettes (concave parts look fuller than they are) and hatches metal-AM brackets.
+- **FUSION 360 VALIDATION: NOT CONFIGURED.** The export package is prepared only; it contains a DRAFT import script
+  that has never been run and a list of the deferred Fusion 360 tasks. No Fusion 360 API call is made anywhere.
+
 ## Measured so far
 
 | What | Result |
@@ -73,4 +111,11 @@ and are not the M8 benchmark (no repetitions, no statistics).
 | Stage 2 used length in a 700 mm test box, box decoder, 20 s GA, no mounting / COM | default 416.7 mm, soft 347.6 mm, continuous 367.4 mm (usable ≈ 334 mm) |
 | Stage 2, one island, 90 s, all rules | default: 13.1 mm over, 2 parts unmounted; soft: 56.7 mm over, all mounted; continuous: 4.2 mm over, 3 unmounted |
 | Live Stage 2 (4 islands, ~60 s, default mode) | NO FEASIBLE LAYOUT FOUND; least-violating L-0463: 78.2 mm over, 3 parts unmounted |
+| Full benchmark (5,000 decodes per run, 10 seeds, 8 workers) | 1,480 runs in 2,146 s; 1,461 outputs validated, 0 invalid; Friedman p = 0.015, mean ranks V9 NSGA-II 3.19, V5 hybrid 3.94, V4 BRKGA+LS 4.13 … V1 constructive 6.50 |
+| Benchmark, I5 perfect packing (optimum ≤ 200 mm) | shortest found 231.0 mm (V4, min-inertia preset); best median under max-packing weights 250.6 mm (V1): no variant got within 31 mm of the optimum |
+| Benchmark, shortest used length found per instance | I1 250.0 mm (V6), I3 119.6 mm (V4), I4 162.5 mm (V1), I5 231.0 mm (V4) |
+| Benchmark, I1 balanced preset | best median score V9 (median L 285.5 mm, best 278.4 mm) |
+| CP-SAT single-box proxy, I1, 60 s | 225.3 mm |
+| Manufacturable Design, full dataset, default harness mode, 120 s search | 172 s total; NO FEASIBLE LAYOUT FOUND: 18.5 mm over, 1 part unmounted, 1 unplaced; 16 hardware items incl. 6 conformal metal-AM brackets (27.7–74.3 g), relative cost 264.5, hardware 0.360 kg; parts validated (153 pairs), 16 / 16 bracket checks and 120 bracket pairs pass |
+| Conformal AM bracket construction (1 mm grid, compiled SDF) | sphere 9.5 s, blob 18.4 s (pure-Python SDF: 84 s) |
 | Constraint attribution, default mode, 25 generations × 40 per row | baseline 393.8 mm / violation 9.85; clearances → Stage 1: 339.0 mm; no walls/rails: 346.0 mm; free boards: 363.6 mm; no harness: 397.4 mm; **no mounting rule: 330.8 mm, violation 1.00**; COM box off: 413.4 mm (noise) |

@@ -1,14 +1,11 @@
 """M1: rotations, STL I/O, topology and repair (protocol tests T-G)."""
-import io
-import struct
 
 import numpy as np
-import pytest
 
 from t2s.core.rotations import ROTATIONS
 from t2s.geometry import mesh as meshmod
 from t2s.geometry.stl_io import read_stl_bytes, write_binary_stl
-from t2s.parts.build import build_part, suggest_units
+from t2s.parts.build import suggest_units
 
 
 def box_mesh(lo, hi):

@@ -14,7 +14,6 @@ import numpy as np
 from scipy.spatial import ConvexHull
 
 from .mesh import ray_parity_inside
-from .voxel import conservative_voxels
 
 EPS_BOX = 1e-6   # mm: inflation of proxy boxes to keep containment strict
 COVER_DELTA = 1e-4  # mm (0.1 µm): convex covers are certified to contain the part up to this L∞ inflation;

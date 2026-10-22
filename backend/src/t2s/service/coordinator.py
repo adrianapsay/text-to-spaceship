@@ -293,6 +293,7 @@ class Coordinator:
         self.evidence: list[dict] = []               # benchmark evidence rows for the selector (M8)
         self.evidence_source: str | None = None
         self.studies: dict[str, dict] = {}           # "size" | "benchmark" -> {proc, path, mtime}
+        self.mfg_budget_s = 90.0
 
     # =========================================================================================== lifecycle
     @property
@@ -719,7 +720,10 @@ class Coordinator:
             r = ROTATIONS_F[o]
             items.append((p.mass_kg, r @ p.com_can_mm + t, r @ p.inertia_com_kgm2 @ r.T))
         hardware = []
-        if e.meta.get("standoffs"):
+        if e.meta.get("hardware"):                 # Manufacturable Design: every bracket, spacer and standoff
+            hardware = [(m, np.asarray(c, float), np.asarray(i, float)) for m, c, i in e.meta["hardware"]]
+            items += hardware
+        elif e.meta.get("standoffs"):
             from ..constraints.stage2_model import Stage2Model
             hardware = Stage2Model.standoff_mass(e.meta["standoffs"])
             items += hardware
@@ -771,7 +775,7 @@ class Coordinator:
         m.setdefault("insertion_order", None)
         m.setdefault("interlocked", [])
         m.setdefault("cable_blocked_fraction", None)
-        m.setdefault("hardware_cost_rel", None)
+        m.setdefault("hardware_cost_rel", e.meta.get("hardware_cost_rel"))
         e.metrics = jsonable(m)
         e.raw = raw
 
@@ -1156,6 +1160,8 @@ class Coordinator:
 
     def _extra_items(self, e: LayoutEntry) -> list[dict]:
         from ..constraints.stage2_model import Stage2Model
+        if e.meta.get("mfg_items") is not None:
+            return [{k: v for k, v in it.items() if k != "file"} for it in e.meta["mfg_items"]]
         out = []
         st = e.meta.get("standoffs") or []
         masses = Stage2Model.standoff_mass(st)
@@ -1186,6 +1192,14 @@ class Coordinator:
                             "10 mm harness channel (U5)", "M3 standoffs 5 × 5 mm, 3–50 mm long (Addendum 2.3)"]}
 
     def item_mesh(self, iid: str) -> bytes:
+        lid, _, _ = iid.rpartition("-")
+        e = self.archive.get(lid)
+        if e is not None and e.meta.get("mfg_items") is not None:
+            it = next((x for x in e.meta["mfg_items"] if x["id"] == iid), None)
+            p = self.store.cache / "items" / lid / f"{iid}.bin" if it is not None else None
+            if p is None or not p.is_file():
+                raise KeyError(iid)
+            return p.read_bytes()
         lid, _, k = iid.rpartition("-so")
         e = self.archive.get(lid)
         if e is None or not k.isdigit() or int(k) >= len(e.meta.get("standoffs") or []):
@@ -1795,6 +1809,8 @@ class Coordinator:
             except (OSError, json.JSONDecodeError):
                 continue
             L["status"], L["progress"] = res.get("status", "RUNNING"), res.get("progress", 0.0)
+            if L.get("study") == "mfg":                # finished through _on_mfg
+                continue
             if L.get("study") == "attribution":
                 self.broadcast("study.update", {"study": "attribution", "progress": L["progress"],
                                                 "partial": {"status": L["status"], "rows": len(res.get("rows", []))}})
@@ -1871,6 +1887,138 @@ class Coordinator:
                                "ctx_id": ctx_id, "sigs": sigs, "algo": algo, "compact": False, "meta": None,
                                "kind": "cpsat"})
         self._dispatch_validation()
+
+    # =========================================================================================== Manufacturable Design
+    def _mfg_dir(self) -> Path:
+        return self.store.cache / "mfg" / (self.ctx.parts_sig if self.ctx else "none")
+
+    def start_mfg(self, opts: dict | None = None) -> dict:
+        import pickle
+        from ..mfg.design import mfg_job
+        if self.ctx is None:
+            raise ValueError("no packable parts")
+        L = self.ladders.get("__mfg__")
+        if L is not None and not L.get("finalised"):
+            raise ValueError("a Manufacturable Design run is already in progress")
+        recs = self._active_records()
+        snap = self.store.cache / f"mfg_records_{self.ctx.parts_sig}.pkl"
+        snap.write_bytes(pickle.dumps(recs, protocol=pickle.HIGHEST_PROTOCOL))
+        out = self._mfg_dir()
+        (out / "mfg.json").unlink(missing_ok=True)
+        budget = float((opts or {}).get("budget_s", self.mfg_budget_s))
+        mode = self._stage2_mode()
+        fut = self.ladder_pool.submit(mfg_job, str(snap), mode, dict(self.store.settings["sliders"]), str(out), budget)
+        self.ladders["__mfg__"] = {"future": fut, "path": out / "mfg.json", "mtime": None, "status": "PENDING",
+                                   "progress": 0.0, "study": "mfg"}
+        wf = asyncio.wrap_future(fut, loop=self.loop)
+        wf.add_done_callback(lambda f, o=out, s=self.ctx.parts_sig: self._on_mfg(f, o, s))
+        self.broadcast("study.update", {"study": "mfg", "progress": 0.0, "partial": {"status": "RUNNING"}})
+        return {"status": "RUNNING", "mode": mode, "budget_s": budget}
+
+    def _on_mfg(self, fut, out: Path, parts_sig: str) -> None:
+        L = self.ladders.get("__mfg__")
+        try:
+            self._finish_mfg(fut, out, parts_sig)
+        except Exception as exc:  # noqa: BLE001
+            if L is not None:
+                L["error"] = repr(exc)
+            self._error(f"Manufacturable Design could not be archived: {exc!r}")
+        finally:
+            if L is not None:
+                L["finalised"] = True
+
+    def _finish_mfg(self, fut, out: Path, parts_sig: str) -> None:
+        import pickle
+        L = self.ladders.get("__mfg__")
+        if fut.cancelled():
+            return
+        if fut.exception() is not None:
+            L["error"] = repr(fut.exception())
+            self._error(f"Manufacturable Design failed: {fut.exception()!r}")
+            return
+        res = json.loads((out / "mfg.json").read_text(encoding="utf-8"))
+        lay = pickle.loads((out / "layout.pkl").read_bytes())
+        if self.ctx is None or self.ctx.parts_sig != parts_sig:
+            return
+        n = self.store.next_id("layout")
+        lid = f"L-{n:04d}"
+        meta = dict(lay["meta"] or {})
+        hw = []
+        items = []
+        idir = self.store.cache / "items" / lid
+        idir.mkdir(parents=True, exist_ok=True)
+        for b in lay["brackets"]:
+            hw.append((b.mass_kg, np.asarray(b.com_mm).tolist(), np.asarray(b.inertia_kgm2).tolist()))
+            iid = f"{lid}-{b.id}"
+            v = np.vstack([m[0] for m in b.meshes]).astype("<f4")
+            offs = np.cumsum([0] + [len(m[0]) for m in b.meshes[:-1]])
+            f = np.vstack([np.asarray(m[1]) + o for m, o in zip(b.meshes, offs)]).astype("<u4")
+            (idir / f"{iid}.bin").write_bytes(np.array([len(v), len(f)], "<u4").tobytes() + v.tobytes() + f.tobytes())
+            items.append({"id": iid, "kind": "bracket" if b.process not in ("direct", "standoff") else b.process,
+                          "process": b.process, "for_part": b.for_part, "mesh_url": f"/api/items/{iid}/mesh",
+                          "mass_kg": b.mass_kg, "cost_rel": b.cost_rel, "material": b.material,
+                          "label": b.label or b.mount_type, "mount_type": b.mount_type})
+        meta["hardware"] = hw
+        meta["mfg_items"] = items
+        meta["hardware_cost_rel"] = res["total_cost_rel"]
+        poses = [(p, int(o), np.asarray(t, float)) for p, o, t in lay["poses"]]
+        summary = {"valid": bool(lay["validation"]), "min_clearance_mm": lay["min_clearance_mm"], "levels": lay["levels"],
+                   "violations": res["validation"]["violations"], "pairs": lay["pairs"], "statics": lay["statics"],
+                   "seconds": res["seconds"], "validator_version": "1.0"}
+        geo = self._geo_metrics(poses, summary, 2)
+        sigs = (self.ctx.parts_sig, self.ctx.constraint_sig, 2, self.ctx.spec_sig)
+        ch = res.get("algorithm") or {}
+        algo = {"id": ch.get("id", "hybrid_box"), "label": ch.get("label", ALGORITHMS["hybrid_box"]),
+                "reason": f"{ch.get('reason', '')}; brackets bridge up to {res['bracket_reach_mm']:.0f} mm and the "
+                          f"hardware cost is weighted by the cost slider", "search": "brkga+lahc", "decoder": "box",
+                "detail": "Manufacturable Design: BRKGA + LAHC on the Stage 2 box decoder with mount synthesis"}
+        e = LayoutEntry(id=lid, hash=layout_hash(2, poses), stage=2, mode="manufacturable", algorithm=algo,
+                        status="VALIDATED" if summary["valid"] else "REJECTED", parts_sig=sigs[0],
+                        constraint_sig=sigs[1], poses=poses, geo=geo,
+                        validation={"certified": summary["valid"], "validator_version": "1.0", "tolerance_mm": 0.001,
+                                    "pairs": summary["pairs"], "statics": summary["statics"], "levels": summary["levels"],
+                                    "min_clearance_mm": summary["min_clearance_mm"], "checked_at": now_iso(),
+                                    "violations": summary["violations"], "engineering_violations": res["violations"],
+                                    "relaxed_rules": res["validation"]["relaxed_rules"],
+                                    "brackets": res["validation"]["brackets"]},
+                        keys=None, spec_sig="mfg:" + sigs[3], meta=jsonable(meta), origin="search")
+        self._compute_physics(e)
+        e.revs = {k: self.store.revs[k] for k in ("parts_rev", "constraint_rev", "mass_rev", "weights_rev")}
+        self._score_entry(e)
+        self.archive[e.id] = e
+        self._persist(e)
+        res["layout_id"] = lid
+        res["algorithm"] = {"id": algo["id"], "label": algo["label"], "reason": algo["reason"]}
+        # the final verdict is the archived layout's: COM box with the bracket masses included, all violations
+        res["feasible"] = e.status == "VALIDATED"
+        res["violations"] = list(e.metrics.get("violations", []))
+        res["verdict"] = None if res["feasible"] else "NO FEASIBLE LAYOUT FOUND (not proven infeasible)"
+        res["layout_status"] = e.status
+        res["com_mm"] = e.metrics.get("com_mm")
+        for it, x in zip(res["items"], items):
+            it["item_id"] = x["id"]
+        res["exports"] = [{**x, "url": f"/api/mfg/download/{x['url']}"} for x in res["exports"]]
+        (out / "mfg.json").write_text(json.dumps(res, indent=1, default=float), encoding="utf-8")
+        self.broadcast("study.update", {"study": "mfg", "progress": 1.0, "partial": {"status": "DONE", "layout_id": lid}})
+
+    def mfg(self) -> dict | None:
+        if self.ctx is None:
+            return None
+        p = self._mfg_dir() / "mfg.json"
+        L = self.ladders.get("__mfg__")
+        if L is not None and L.get("error"):
+            return {"status": "ERROR", "detail": L["error"]}
+        if L is not None and not L.get("finalised"):
+            return {"status": "RUNNING"}
+        if not p.exists():
+            return None
+        return json.loads(p.read_text(encoding="utf-8"))
+
+    def mfg_file(self, name: str) -> Path:
+        p = (self._mfg_dir() / name).resolve()
+        if self._mfg_dir().resolve() not in p.parents or not p.is_file() or p.suffix not in (".stl", ".csv"):
+            raise KeyError(name)
+        return p
 
     # =========================================================================================== attribution
     def _attribution_path(self) -> Path:

@@ -17,7 +17,7 @@ export function CadValidationTab() {
   const best = useApp((s) => s.solver.best);
   const newest = useApp((s) => s.conn.newest);
   const status = useAsync(() => session().api.cadStatus(), []);
-  const [pkg, setPkg] = useState<string | null>(null);
+  const [pkg, setPkg] = useState<{ text: string; download?: string; id: string } | null>(null);
   const [err, setErr] = useState<string | null>(null);
   const kind = best ? displayKind(best, newest) : null;
   const canPackage = kind === 'VALIDATED' || kind === 'FINAL';
@@ -27,7 +27,7 @@ export function CadValidationTab() {
     setPkg(null);
     try {
       const r = await session().api.cadPackage(best.id);
-      setPkg(String(r.path ?? r.download ?? JSON.stringify(r)));
+      setPkg({ text: String(r.path ?? r.download ?? JSON.stringify(r)), download: typeof r.download === 'string' ? r.download : undefined, id: best.id });
     } catch (e) {
       setErr((e as Error).message);
     }
@@ -56,7 +56,22 @@ export function CadValidationTab() {
             </Button>
             {!canPackage ? <span className="small muted">{best ? `The layout on screen is ${kind}.` : 'No layout on screen.'}</span> : null}
           </div>
-          {pkg ? <Notice tone="ok">Package ready: {pkg}</Notice> : null}
+          {pkg ? (
+            <Notice tone="ok">
+              Package prepared (not checked in Fusion 360): {pkg.text}
+              {pkg.download ? (
+                <div style={{ marginTop: 6 }}>
+                  <Button size="small" onClick={() => void session().api.download(pkg.download!, `fusion_package_${pkg.id}.zip`)} data-testid="cad-download">
+                    Download package (ZIP)
+                  </Button>
+                </div>
+              ) : null}
+            </Notice>
+          ) : null}
+          <p className="small muted" style={{ marginTop: 8 }}>
+            The package holds the placed and canonical meshes, transforms, the app’s mass properties and validation results for comparison, the report, the proof certificate with its checker, and a
+            DRAFT Fusion 360 import script that has never been run.
+          </p>
           {err ? <Notice tone="err">{err}</Notice> : null}
         </Panel>
         <Panel title="Setup checklist" caption="deferred until you authorise">

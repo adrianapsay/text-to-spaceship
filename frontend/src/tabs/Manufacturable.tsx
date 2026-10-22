@@ -122,16 +122,43 @@ export function ManufacturableTab() {
           {msg ? <Notice tone={msg.startsWith('Could not') ? 'err' : 'info'}>{msg}</Notice> : null}
         </Panel>
         <Panel title="Totals">
-          {r ? (
-            <div className="small">
-              Hardware items: {r.items?.length ?? 0} · relative cost {fmt(r.total_cost_rel ?? null, 'rel')} (ASSUMED cost model; catalogue part = 1)
+          {r && r.status === 'DONE' ? (
+            <div className="small" data-testid="mfg-totals">
+              <div>
+                {r.feasible ? <Badge tone="ok">FEASIBLE</Badge> : <Badge tone="err">INFEASIBLE</Badge>}{' '}
+                {r.verdict ?? (r.feasible ? 'all parts mounted, parts and brackets validated' : 'see the violations below')}
+              </div>
+              <div style={{ marginTop: 4 }}>
+                Hardware items: {r.items?.length ?? 0} · relative cost {fmt(r.total_cost_rel ?? null, 'rel')} (ASSUMED cost model; catalogue part = 1) · hardware mass {fmt(r.hardware_mass_kg ?? null, 'kg')}
+              </div>
+              {r.validation ? (
+                <div style={{ marginTop: 4 }}>
+                  Parts {r.validation.parts_valid ? 'validated' : 'NOT validated'} ({r.validation.pairs} pairs, {r.validation.statics} frame checks
+                  {r.validation.relaxed_rules ? ', end-plate rule relaxed to report the overflow' : ''}) · brackets clear of other parts (≥ 1.2 mm, exact meshes):{' '}
+                  {r.validation.brackets.filter((b) => b.ok).length}/{r.validation.brackets.length}
+                </div>
+              ) : null}
+              {r.violations?.length ? (
+                <ul style={{ margin: '4px 0 0 16px' }} data-testid="mfg-violations">
+                  {r.violations.map((v) => (
+                    <li key={v}>{v}</li>
+                  ))}
+                </ul>
+              ) : null}
+              <div className="muted" style={{ marginTop: 4 }}>
+                {fmt(r.seconds ?? null, 's')} · {r.evaluations ?? '—'} layouts evaluated · harness mode {r.mode ?? '—'} · bracket reach {r.bracket_reach_mm ?? '—'} mm
+              </div>
             </div>
+          ) : r?.status === 'RUNNING' ? (
+            <span className="small">Running… the result appears here when the search, bracket synthesis and checks finish.</span>
+          ) : r?.status === 'ERROR' ? (
+            <Notice tone="err">The run failed: {r.detail}</Notice>
           ) : (
             <span className="muted small">—</span>
           )}
         </Panel>
       </div>
-      {res.notAvailable || !r ? (
+      {res.notAvailable || !r || r.status !== 'DONE' ? (
         <EmptyState title="No Manufacturable Design result yet">
           {res.notAvailable ? 'The backend has not published a Manufacturable Design result. ' : res.error ?? ''}It chooses a mount for every part (direct, catalogue, sheet metal, machined or metal 3D-printed), checks the brackets like any part, and lists the hardware.
         </EmptyState>

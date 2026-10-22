@@ -13,7 +13,6 @@ import time
 
 import numpy as np
 
-from ..core.rotations import ROTATIONS_F
 
 GRID = 0.1           # mm per integer unit
 GAP = 0.005          # Stage 1 placement gap (mm)

@@ -2,7 +2,7 @@
 import numpy as np
 import pytest
 
-from t2s.collision.geom import part_geom_from_record, to_world
+from t2s.collision.geom import part_geom_from_record
 from t2s.collision.validate import StageSpec, StaticItem, Validator
 
 STAGE1 = StageSpec(1, np.array([-50.0, -50.0, -170.25]), np.array([50.0, 50.0, 170.25]), 0.0, 0.0)

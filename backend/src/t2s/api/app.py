@@ -10,7 +10,6 @@ import csv
 import io
 import json
 from contextlib import asynccontextmanager
-from pathlib import Path
 
 from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile, WebSocket, WebSocketDisconnect
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response
@@ -26,10 +25,6 @@ FRONTEND_DIST = REPO / "frontend" / "dist"
 class JSON(JSONResponse):
     def render(self, content) -> bytes:
         return json.dumps(jsonable(content), allow_nan=False, separators=(",", ":")).encode("utf-8")
-
-
-def not_built(what: str, milestone: str):
-    return JSON({"status": "NOT_AVAILABLE", "detail": f"{what} is not built yet ({milestone})."}, status_code=501)
 
 
 def create_app(coord: Coordinator | None = None, project: str = "default", **coord_kwargs) -> FastAPI:
@@ -336,12 +331,31 @@ def create_app(coord: Coordinator | None = None, project: str = "default", **coo
         return {"stopped": C(request).stop_study("size")}
 
     @app.get("/api/mfg")
-    async def mfg():
-        return {"status": "NOT_RUN", "detail": "Manufacturable Design arrives with M9."}
+    async def mfg(request: Request):
+        r = C(request).mfg()
+        if r is None:
+            raise HTTPException(404, "Manufacturable Design has not been run for these parts (POST /api/mfg/run)")
+        return r
 
     @app.post("/api/mfg/run")
-    async def mfg_run():
-        return not_built("Manufacturable Design", "M9")
+    async def mfg_run(request: Request):
+        try:
+            body = await request.json()
+        except Exception:  # noqa: BLE001
+            body = {}
+        try:
+            return C(request).start_mfg(body or {})
+        except ValueError as exc:
+            raise HTTPException(409, str(exc)) from exc
+
+    @app.get("/api/mfg/download/{name}")
+    async def mfg_download(request: Request, name: str):
+        try:
+            p = C(request).mfg_file(name)
+        except KeyError as exc:
+            raise HTTPException(404, f"no export {name}") from exc
+        media = "text/csv" if p.suffix == ".csv" else "model/stl"
+        return FileResponse(p, media_type=media, filename=p.name)
 
     @app.get("/api/items/{iid}/mesh")
     async def item_mesh(request: Request, iid: str):
@@ -357,9 +371,40 @@ def create_app(coord: Coordinator | None = None, project: str = "default", **coo
                 "detail": "FUSION 360 VALIDATION: NOT CONFIGURED. Autodesk Fusion 360 is not installed or configured; "
                           "no Fusion 360 API calls are made until you confirm the integration is ready."}
 
+    async def _report(c: Coordinator, e) -> tuple[list, dict | None]:
+        from ..report.build import report_blocks
+        proof, err = None, None
+        try:
+            proof = await asyncio.to_thread(c.build_proof, e.id)
+        except (ValueError, KeyError) as exc:
+            err = str(exc)
+        return report_blocks(c, e, VERSION, proof, err), proof
+
     @app.post("/api/cad/package/{lid}")
-    async def cad_package(lid: str):
-        return not_built("The Fusion 360 export package", "M10")
+    async def cad_package(request: Request, lid: str):
+        """Prepares the Fusion 360 export package (no Fusion 360 call is made: NOT CONFIGURED)."""
+        from ..report.build import FUSION_STATUS, fusion_package, render_markdown
+        c = C(request)
+        e = layout_or_404(c, lid)
+        if e.status not in ("VALIDATED", "FINAL") or not c._current(e):
+            raise HTTPException(409, f"only a VALIDATED or FINAL layout for the current inputs can be packaged "
+                                     f"({lid} is {e.status}{'' if c._current(e) else ', inputs changed'})")
+        blocks, proof = await _report(c, e)
+        data = await asyncio.to_thread(fusion_package, c, e, VERSION, render_markdown(blocks), proof, CHECKER)
+        out = c.store.folder / "exports" / f"fusion_package_{lid}.zip"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_bytes(data)
+        return {"status": "PACKAGED", "fusion360": "NOT_CONFIGURED", "detail": f"{FUSION_STATUS}: package prepared, "
+                "nothing was checked in Fusion 360", "path": str(out), "bytes": len(data),
+                "download": f"/api/cad/package/{lid}/download"}
+
+    @app.get("/api/cad/package/{lid}/download")
+    async def cad_package_download(request: Request, lid: str):
+        c = C(request)
+        p = c.store.folder / "exports" / f"fusion_package_{lid}.zip"
+        if lid not in c.archive or not p.is_file():
+            raise HTTPException(404, f"no Fusion export package for {lid} (POST /api/cad/package/{lid})")
+        return FileResponse(p, media_type="application/zip", filename=p.name)
 
     @app.get("/api/export/{lid}")
     async def export(request: Request, lid: str, kind: str = "json"):
@@ -379,7 +424,19 @@ def create_app(coord: Coordinator | None = None, project: str = "default", **coo
                              rec.mass_kg if rec else "", rec.mass_source if rec else ""])
             return Response(buf.getvalue(), media_type="text/csv",
                             headers={"Content-Disposition": f'attachment; filename="layout_{lid}.csv"'})
-        return not_built(f"Export kind '{kind}'", "M10")
+        from ..report.build import render_html, render_markdown, stl_zip
+        if kind in ("report_md", "report_html"):
+            blocks, _ = await _report(c, e)
+            if kind == "report_md":
+                return Response(render_markdown(blocks), media_type="text/markdown",
+                                headers={"Content-Disposition": f'attachment; filename="report_{lid}.md"'})
+            return Response(render_html(blocks, f"Layout report {lid}"), media_type="text/html",
+                            headers={"Content-Disposition": f'attachment; filename="report_{lid}.html"'})
+        if kind == "stl_zip":
+            data = await asyncio.to_thread(stl_zip, c, e, VERSION)
+            return Response(data, media_type="application/zip",
+                            headers={"Content-Disposition": f'attachment; filename="layout_{lid}_stl.zip"'})
+        raise HTTPException(400, "kind must be json, csv, report_md, report_html or stl_zip")
 
     # ------------------------------------------------------------------------------------------- WebSocket
     @app.websocket("/ws")

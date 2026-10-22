@@ -413,6 +413,13 @@ export interface MfgItem {
   mass_kg?: number | null;
   cost_rel?: number | null;
   fasteners?: number | null;
+  label?: string | null;
+  item_id?: string | null;
+}
+export interface MfgBracketCheck {
+  item_id: string;
+  ok: boolean;
+  min_clearance_mm: number | null;
 }
 export interface MfgRule {
   item_id: string;
@@ -428,7 +435,25 @@ export interface MfgResult {
   items?: MfgItem[];
   am_rules?: MfgRule[];
   total_cost_rel?: number | null;
-  exports?: { kind: string; url: string; label: string }[];
+  exports?: { kind: string; url: string; label: string; metal_am?: boolean }[];
+  detail?: string;
+  label?: string;
+  mode?: string;
+  seconds?: number;
+  evaluations?: number;
+  feasible?: boolean;
+  verdict?: string | null;
+  violations?: string[];
+  hardware_mass_kg?: number | null;
+  bracket_reach_mm?: number;
+  validation?: {
+    parts_valid: boolean;
+    pairs: number;
+    statics: number;
+    violations: unknown[];
+    brackets: MfgBracketCheck[];
+    relaxed_rules: boolean;
+  };
 }
 
 // ---- Stage 2 constraint attribution (protocol §O.3; endpoint /api/stage2/attribution)

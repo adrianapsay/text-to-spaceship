@@ -12,7 +12,7 @@ import numpy as np
 
 from ..core.rotations import ROTATIONS_F
 from ..decoders.box_decoder import BoxDecoder
-from ..physics.assembly import PartPhys, assembly, inertia_metrics
+from ..physics.assembly import PartPhys, assembly
 from .scalarize import Normaliser, scalarise
 
 

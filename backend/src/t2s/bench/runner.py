@@ -17,7 +17,7 @@ from pathlib import Path
 
 import numpy as np
 
-from .stats import a12, a12_ci, friedman, frozen_normaliser, holm, hypervolume, norm_point, wilcoxon_p
+from .stats import a12, a12_ci, friedman, frozen_normaliser, holm, hypervolume, wilcoxon_p
 from .variants import SELECTOR_ID, VARIANTS
 
 PRESET_IDS = ("max_packing", "com_priority", "min_inertia", "balanced")

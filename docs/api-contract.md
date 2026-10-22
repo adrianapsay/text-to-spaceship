@@ -121,8 +121,10 @@ also carry `label` ("ENGINEERING-CONSTRAINED — not flight-qualified"), `violat
 | GET | `/api/pareto` | `{points:[{layout_id, L, D, I, ...}], hv, norm_epoch}` |
 | GET / POST | `/api/benchmarks`, `/api/benchmarks/run` | Results table, run trigger |
 | GET / POST | `/api/studies/size`, `/api/studies/size/run` | Size Study results / start |
-| GET / POST | `/api/mfg`, `/api/mfg/run` | Manufacturable Design result / start |
-| GET | `/api/items/{id}/mesh` | Binary mesh of an extra item (bracket), in **world frame** |
+| GET | `/api/mfg` | Manufacturable Design result for the current parts: `{status: "RUNNING"\|"DONE"\|"ERROR", label, mode, seconds, evaluations, weights, bracket_reach_mm, algorithm:{id,label,reason}, layout_id, feasible, layout_status, verdict, violations[], com_mm, validation:{parts_valid, pairs, statics, violations, brackets:[{item_id, ok, min_clearance_mm}], bracket_pairs_checked, bracket_conflicts[], relaxed_rules}, items:[{id, item_id, for_part, part_name, mount_type, process, material, mass_kg, cost_rel, fasteners, label}], am_rules:[{item_id, rule, value, limit, pass}], total_cost_rel, hardware_mass_kg, exports:[{kind, url, label, metal_am?}]}`; 404 until run |
+| POST | `/api/mfg/run` `{budget_s?}` | Start it (background, default 90 s search); 409 while one runs. The layout is archived as Stage 2, mode `manufacturable`, with the hardware as `extra_items` |
+| GET | `/api/mfg/download/{file}` | Hardware list (CSV) and bracket STL files; metal 3D-printed brackets are `bracket_AM_<part>.stl` |
+| GET | `/api/items/{id}/mesh` | Binary mesh of an extra item (bracket, spacer set, standoff), in **world frame** |
 | GET | `/api/parts/{id}/fidelity` | Detail-ladder result: `{status: "PENDING"\|"RUNNING"\|"DONE", levels:[{level:"F3-8", family:"F3", label, params, proxy_volume_mm3, overhead, build_s, eval_us_median, results:{<algorithm_id>: {length_used_mm, com_error_mm, score_g, first_valid_s, false_reject_rate}}}], chosen:{<algorithm_id>: level}, reasons:{<algorithm_id>: "plain text"}, stop_reason:"converged"\|"time_budget"\|"max_level"}` |
 | POST | `/api/fidelity/run` `{part_ids?: [...], budget_s?}` | Start or restart the detail-ladder study (it also starts automatically when a part is added) |
 | GET | `/api/fidelity/summary` | `{parts:[{part_id, name, chosen:{algorithm_id: level}}]}` |
@@ -130,8 +132,9 @@ also carry `label` ("ENGINEERING-CONSTRAINED — not flight-qualified"), `violat
 | POST | `/api/stage2/attribution/run` | Start it (background; progress as `study.update` with `study: "attribution"`) |
 | GET | `/api/debug/state` | Coordinator diagnostics (queues, workers, last errors) |
 | GET | `/api/cad/status` | `{status: "NOT_CONFIGURED", detail}` |
-| POST | `/api/cad/package/{layout_id}` | Builds the Fusion export package; returns a download path |
-| GET | `/api/export/{layout_id}?kind=report_md\|report_html\|csv\|json\|stl_zip` | Exports |
+| POST | `/api/cad/package/{layout_id}` | Prepares the Fusion 360 export package for a VALIDATED or FINAL layout of the current inputs (409 otherwise): `{status: "PACKAGED", fusion360: "NOT_CONFIGURED", detail, path, bytes, download}`. No Fusion 360 call is made |
+| GET | `/api/cad/package/{layout_id}/download` | The package ZIP: `parts_world/`, `parts_canonical/`, `hardware/`, `assembly.json` (transforms, densities, the app's mass properties and validation for comparison), report, proof certificate + checker, DRAFT import script (never run), README with the deferred tasks |
+| GET | `/api/export/{layout_id}?kind=report_md\|report_html\|csv\|json\|stl_zip` | Exports. The reports re-run the full proof; the HTML report adds top / front / side views; the ZIP holds every placed part and hardware item as world-frame STL (mm) |
 
 ## 4. WebSocket `/ws`
 **Envelope (both directions)**

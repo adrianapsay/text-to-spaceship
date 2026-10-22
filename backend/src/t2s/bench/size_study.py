@@ -27,7 +27,6 @@ from dataclasses import replace
 from datetime import datetime, timezone
 from pathlib import Path
 
-import numpy as np
 
 STAGE_VARIANTS = {1: ("V1", "V5", "V7"), 2: ("V1", "V5")}
 LABELS = {"V1": "constructive box decoder", "V5": "hybrid, box decoder", "V7": "hybrid, height-map decoder"}

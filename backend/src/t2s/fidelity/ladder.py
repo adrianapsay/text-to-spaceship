@@ -28,7 +28,6 @@ import numpy as np
 
 from ..collision.geom import part_geom_from_record, to_world
 from ..collision.validate import StageSpec, Validator, plane_certificate
-from ..core.rotations import ROTATIONS_F
 from ..decoders.box_decoder import PLACEMENT_GAP_STAGE1, BoxDecoder, ProxyPart
 from ..decoders.heightmap import HeightmapDecoder
 from ..geometry.proxies import COVER_DELTA, certify_boxes, compound_boxes, planar_cut_cover

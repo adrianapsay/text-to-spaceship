@@ -218,7 +218,47 @@ def test_bad_upload_and_unbuilt_features(live):
     r = client.post("/api/parts", files=[("files[]", ("junk.stl", b"not an stl", "application/octet-stream"))])
     assert r.status_code == 400
     assert client.get("/api/cad/status").json()["status"] == "NOT_CONFIGURED"
-    assert client.post("/api/cad/package/L-0001").status_code == 501
+    assert client.post("/api/cad/package/L-9999").status_code == 404
+    assert client.get("/api/export/L-9999", params={"kind": "report_md"}).status_code == 404
+
+
+def test_reports_exports_and_fusion_package(live):
+    """M10: report (Markdown / HTML), placed STL ZIP and the Fusion export package — values from the layout."""
+    import io
+    import zipfile
+    client, coord, _ = live
+    lid = wait_for(lambda: best(client))
+    lay = client.get(f"/api/layouts/{lid}").json()
+    md = client.get(f"/api/export/{lid}", params={"kind": "report_md"})
+    assert md.status_code == 200 and f"layout report — {lid}" in md.text
+    assert "FUSION 360 VALIDATION: NOT CONFIGURED" in md.text and "IDEALIZED" in md.text
+    assert f"{lay['metrics']['length_used_mm']:,.1f} mm" in md.text
+    assert "Proof that the parts fit" in md.text and "VALID" in md.text
+    h = client.get(f"/api/export/{lid}", params={"kind": "report_html"})
+    assert h.status_code == 200 and h.text.startswith("<!doctype html>") and "<svg" in h.text
+    assert h.text.count("<polygon") == 3 * len(lay["poses"]) + 3 * len(lay["extra_items"])
+    z = zipfile.ZipFile(io.BytesIO(client.get(f"/api/export/{lid}", params={"kind": "stl_zip"}).content))
+    stls = [n for n in z.namelist() if n.startswith("parts/") and n.endswith(".stl")]
+    assert len(stls) == len(lay["poses"]) and f"layout_{lid}.json" in z.namelist()
+    data = z.read(stls[0])
+    assert len(data) == 84 + 50 * int(np.frombuffer(data[80:84], "<u4")[0])
+    assert client.get(f"/api/export/{lid}", params={"kind": "nope"}).status_code == 400
+    r = client.post(f"/api/cad/package/{lid}")
+    assert r.status_code == 200, r.text
+    pkg = r.json()
+    assert pkg["status"] == "PACKAGED" and pkg["fusion360"] == "NOT_CONFIGURED"
+    z = zipfile.ZipFile(io.BytesIO(client.get(pkg["download"]).content))
+    names = set(z.namelist())
+    assert {"assembly.json", "README.md", "fusion_import_t2s.py", f"report_{lid}.md", f"certificate_{lid}.json",
+            "check_certificate.py"} <= names
+    asm = json.loads(z.read("assembly.json"))
+    assert asm["status"] == "FUSION 360 VALIDATION: NOT CONFIGURED" and len(asm["parts"]) == len(lay["poses"])
+    assert sum(p["app_mass_kg"] for p in asm["parts"]) == pytest.approx(lay["metrics"]["mass_kg"])
+    p0 = asm["parts"][0]
+    pose = next(p for p in lay["poses"] if p["part_id"] == p0["id"])
+    assert np.allclose(np.array(p0["canonical_to_world_4x4_mm"])[:3, 3], np.array(pose["t_um"]) / 1000)
+    assert "DRAFT - NEVER RUN" in z.read("fusion_import_t2s.py").decode()
+    assert client.get("/api/cad/status").json()["status"] == "NOT_CONFIGURED"
 
 
 def test_detail_ladder_runs_and_feeds_the_search(live):
@@ -308,6 +348,52 @@ def test_size_study_runs_in_the_background(live):
     assert d["stop_reason"] in ("converged", "time_limit", "proven_optimal")
     assert any(r["feasible"] for r in d["results"]) and d["max_scale"]["S1·V1"] is not None
     assert {b["kind"] for b in d["bounds"]} >= {"rigorous", "axis-aligned orientations only"}
+
+
+def test_manufacturable_design_runs_and_archives_its_layout(live):
+    """Addendum 1.5: own algorithm choice, mounts and brackets, exact bracket checks, hardware list and exports."""
+    client, coord, _ = live
+    wait_for(lambda: best(client))
+    assert client.get("/api/mfg").status_code == 404
+    r = client.post("/api/mfg/run", json={"budget_s": 15})
+    assert r.status_code == 200 and r.json()["status"] == "RUNNING"
+    assert client.post("/api/mfg/run", json={"budget_s": 15}).status_code == 409
+    try:
+        res = wait_for(lambda: (x := client.get("/api/mfg")).status_code == 200 and x.json()["status"] in ("DONE", "ERROR")
+                       and x.json(), timeout=420, every=1.0)
+    except AssertionError:
+        raise AssertionError(f"mfg did not finish; coordinator errors: {coord.errors[-3:]}") from None
+    assert res["status"] == "DONE", res
+    assert res["label"].startswith("manufacturing concept") and res["layout_id"]
+    assert res["algorithm"]["id"] == "hybrid_box" and res["algorithm"]["reason"]
+    assert res["items"] and all(i["cost_rel"] >= 0 and i["mass_kg"] > 0 for i in res["items"])
+    assert res["total_cost_rel"] == pytest.approx(sum(i["cost_rel"] for i in res["items"]))
+    assert len(res["validation"]["brackets"]) == sum(i["process"] != "standoff" for i in res["items"])
+    lay = client.get(f"/api/layouts/{res['layout_id']}").json()
+    assert lay["stage"] == 2 and lay["mode"] == "manufacturable"
+    assert lay["validation"]["certified"] == res["validation"]["parts_valid"]
+    assert res["feasible"] == (lay["status"] == "VALIDATED") and res["layout_status"] == lay["status"]
+    if res["feasible"]:
+        assert not res["violations"] and res["verdict"] is None
+    elif lay["validation"]["certified"]:
+        assert lay["status"] == "INFEASIBLE" and res["violations"]
+    assert [i["process"] for i in lay["extra_items"]] == [i["process"] for i in res["items"]]
+    assert lay["metrics"]["hardware_mass_kg"] == pytest.approx(res["hardware_mass_kg"])
+    assert lay["metrics"]["hardware_cost_rel"] == pytest.approx(res["total_cost_rel"])
+    for it in lay["extra_items"]:
+        mesh = client.get(it["mesh_url"]).content
+        nv, nf = np.frombuffer(mesh[:8], "<u4")
+        assert nf > 0 and len(mesh) == 8 + 12 * int(nv) + 12 * int(nf)
+    csv = client.get(res["exports"][0]["url"])
+    assert csv.status_code == 200 and "relative_cost" in csv.text and "not a quote" in csv.text
+    for x in res["exports"][1:]:
+        stl = client.get(x["url"])
+        assert stl.status_code == 200 and len(stl.content) > 84
+    for it in (i for i in res["items"] if i["process"] == "metal_am"):
+        assert any(x["url"].endswith(f"bracket_AM_{it['for_part']}.stl") for x in res["exports"])
+        assert any(row["item_id"] == it["id"] for row in res["am_rules"])
+    assert client.get("/api/mfg/download/layout.pkl").status_code == 404
+    assert client.get("/api/mfg/download/..%2F..%2Fsettings.json").status_code == 404
 
 
 def test_selector_endpoints(live):

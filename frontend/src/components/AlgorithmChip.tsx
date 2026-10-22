@@ -47,7 +47,7 @@ export function AlgorithmChip() {
     >
       <div className="chip" data-testid="algorithm-chip" tabIndex={0} aria-label={`Algorithm in use: ${label}${because ? `, because ${because}` : ''}`}>
         <span className="muted">Algorithm in use:</span>
-        <strong>{label}</strong>
+        <strong data-testid="algorithm-label">{label}</strong>
         {because ? <span className="muted">— because {because}</span> : null}
         <MockTag what="selector rule is illustrative" />
       </div>

@@ -15,7 +15,7 @@ import numpy as np
 
 from ..decoders.box_decoder import PLACEMENT_GAP_STAGE1, BoxDecoder, ProxyPart
 from ..objectives.metrics import ENCLOSURE_HI, ENCLOSURE_LO, part_phys
-from ..optimise.brkga import (Candidate, Evaluator, IslandState, LahcState, best_candidates, run_island, run_lahc,
+from ..optimise.brkga import (Candidate, Evaluator, IslandState, LahcState, run_island, run_lahc,
                               score, seed_keys, sort_key)
 from ..optimise.scalarize import PRESETS, Normaliser, alpha_from, slider_weights
 

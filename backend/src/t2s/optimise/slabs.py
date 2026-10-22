@@ -11,7 +11,7 @@ from itertools import permutations
 
 import numpy as np
 
-from ..core.rotations import ROTATIONS, ROTATIONS_F
+from ..core.rotations import ROTATIONS
 
 _KEY = {tuple(r.ravel()): i for i, r in enumerate(ROTATIONS)}
 
