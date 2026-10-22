@@ -269,8 +269,8 @@ def create_app(coord: Coordinator | None = None, project: str = "default", **coo
             raise HTTPException(400, str(exc)) from exc
 
     @app.get("/api/ideamap")
-    async def ideamap():
-        return not_built("The idea map", "M8")
+    async def ideamap(request: Request):
+        return C(request).ideamap()
 
     @app.get("/api/pareto")
     async def pareto(request: Request):
@@ -292,20 +292,48 @@ def create_app(coord: Coordinator | None = None, project: str = "default", **coo
 
     # ------------------------------------------------------------------------------------------- studies
     @app.get("/api/benchmarks")
-    async def benchmarks():
-        return {"status": "NOT_RUN", "detail": "Benchmarks arrive with M8."}
+    async def benchmarks(request: Request, instance: str | None = None, preset: str | None = None):
+        b = await asyncio.to_thread(C(request).benchmarks, instance, preset)
+        if b is None:
+            raise HTTPException(404, "no benchmark results yet (POST /api/benchmarks/run)")
+        return b
 
     @app.post("/api/benchmarks/run")
-    async def benchmarks_run():
-        return not_built("Benchmarks", "M8")
+    async def benchmarks_run(request: Request):
+        try:
+            body = await request.json()
+        except Exception:  # noqa: BLE001
+            body = {}
+        try:
+            return C(request).start_benchmarks(body or {})
+        except ValueError as exc:
+            raise HTTPException(409, str(exc)) from exc
+
+    @app.post("/api/benchmarks/stop")
+    async def benchmarks_stop(request: Request):
+        return {"stopped": C(request).stop_study("benchmark")}
 
     @app.get("/api/studies/size")
-    async def size_study():
-        return {"status": "NOT_RUN", "detail": "The Size Study arrives with M8."}
+    async def size_study(request: Request):
+        s = C(request).size_study()
+        if s is None:
+            raise HTTPException(404, "the Size Study has not been run for these parts (POST /api/studies/size/run)")
+        return s
 
     @app.post("/api/studies/size/run")
-    async def size_study_run():
-        return not_built("The Size Study", "M8")
+    async def size_study_run(request: Request):
+        try:
+            body = await request.json()
+        except Exception:  # noqa: BLE001
+            body = {}
+        try:
+            return C(request).start_size_study(body or {})
+        except ValueError as exc:
+            raise HTTPException(409, str(exc)) from exc
+
+    @app.post("/api/studies/size/stop")
+    async def size_study_stop(request: Request):
+        return {"stopped": C(request).stop_study("size")}
 
     @app.get("/api/mfg")
     async def mfg():

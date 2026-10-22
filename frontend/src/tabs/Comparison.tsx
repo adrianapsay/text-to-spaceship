@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import * as Plot from '@observablehq/plot';
 import { session } from '../api/session';
 import type { Benchmarks, Pareto } from '../api/types';
@@ -111,9 +111,71 @@ export function FidelitySummaryTable() {
   );
 }
 
+function BenchmarkStats({ b, block, setBlock }: { b: Benchmarks; block: string; setBlock: (v: string) => void }) {
+  const ext = b as Benchmarks & BenchExtras;
+  const tests = ext.tests ?? [];
+  const label = (id: string) => ext.algorithms?.find((a) => a.id === id)?.label ?? id;
+  return (
+    <div className="stack" data-testid="bench-stats">
+      <div className="row">
+        <label className="small" htmlFor="bench-block">
+          Instance and preset
+        </label>{' '}
+        <select id="bench-block" value={block} onChange={(e) => setBlock(e.target.value)} data-testid="bench-block">
+          {(ext.blocks ?? []).map((k) => (
+            <option key={k} value={k}>
+              {k.replace('|', ' · ')}
+            </option>
+          ))}
+        </select>
+        <span className="small muted">
+          budget {fmt(ext.budget ?? null, 'int')} decode-equivalents · {ext.seeds ?? '—'} seeds · {ext.validation ? `${ext.validation.validated_outputs}/${ext.validation.runs} best layouts re-validated, ${ext.validation.invalid_outputs} invalid` : ''}
+        </span>
+      </div>
+      {ext.adoption ? <Notice tone={ext.adoption.ships_as_default ? 'ok' : 'warn'}>Adoption rule (§D.4): {ext.adoption.text}.</Notice> : null}
+      {tests.length ? (
+        <table className="data" data-testid="bench-tests">
+          <thead>
+            <tr>
+              <th>Full hybrid vs</th>
+              <th className="num">A12 (95 % CI)</th>
+              <th className="num">p (Holm)</th>
+              <th>Verdict</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tests.map((t) => (
+              <tr key={t.b}>
+                <td>{label(t.b)}</td>
+                <td className="num">
+                  {fmt(t.a12, 'ratio')} ({fmt(t.a12_ci[0], 'ratio')}–{fmt(t.a12_ci[1], 'ratio')})
+                </td>
+                <td className="num">{fmt(t.p_holm, 'ratio')}</td>
+                <td>{t.verdict === 'inconclusive' ? <Badge>inconclusive</Badge> : t.verdict === 'hybrid better' ? <Badge tone="ok">hybrid better</Badge> : <Badge tone="err">hybrid worse</Badge>}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : null}
+      <div className="small muted">A12 = probability that the full hybrid scores better than the other variant on a seed; with 10 seeds, non-significant differences are reported as inconclusive, not as equivalent.</div>
+    </div>
+  );
+}
+
+interface BenchExtras {
+  blocks?: string[];
+  block?: { instance: string; preset: string };
+  budget?: number;
+  seeds?: number;
+  validation?: { runs: number; validated_outputs: number; invalid_outputs: number };
+  adoption?: { ships_as_default: boolean; text: string };
+  tests?: { b: string; a12: number; a12_ci: [number, number]; p_holm: number; verdict: string }[];
+}
+
 export function ComparisonTab() {
   const bests = useApp((s) => s.solver.best?.id);
-  const bench = useAsync(() => session().api.benchmarks(), []);
+  const [block, setBlock] = useState('I1|balanced');
+  const bench = useAsync(() => session().api.benchmarks(block), [block]);
   const pareto = useAsync(() => session().api.pareto(), [bests]);
   const limits = useApp((s) => s.dataset.project?.limits);
   const box = (limits?.com_box_mm as number[] | undefined) ?? [20, 20, 70];
@@ -176,6 +238,11 @@ export function ComparisonTab() {
           )}
         </Panel>
       </div>
+      {bench.data && bench.data.status === 'DONE' ? (
+        <Panel title="Benchmark statistics" caption="paired tests per instance and preset (protocol §J.3)">
+          <BenchmarkStats b={bench.data} block={block} setBlock={setBlock} />
+        </Panel>
+      ) : null}
       <Panel title="Seeds per algorithm" caption="strip plots (dots = seeds, tick = median)">
         {bench.data ? <StripPlots b={bench.data} /> : <EmptyState title="No benchmark results yet">{bench.notAvailable ? 'Benchmarks run in the backend (milestone M8).' : bench.error ?? ''}</EmptyState>}
       </Panel>

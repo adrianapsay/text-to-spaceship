@@ -94,7 +94,7 @@ class Evaluator:
 
     def refresh(self, c: Candidate) -> None:
         """Recompute the physics terms after a mass edit (geometry unchanged)."""
-        raw_extra = {k: c.raw[k] for k in ("H",) if k in c.raw}
+        raw_extra = {k: c.raw[k] for k in ("H", "C") if k in c.raw}
         c.raw, c.cv = self.raw_from_poses(c.poses, c.unplaced, c.penalty, c.extra_mass, raw_extra)
 
 
@@ -230,7 +230,7 @@ class LahcState:
 
 
 def run_lahc(state: LahcState, ev: Evaluator, norm: Normaliser, weights: dict, alpha: float, rng,
-             time_budget_s: float = 0.5, hist_len: int = 60) -> LahcState:
+             time_budget_s: float = 0.5, hist_len: int = 60, max_iters: int | None = None) -> LahcState:
     n = len(ev.ids)
     sizes = [len(ev.dec.parts[pid].allowed) for pid in ev.ids]
     wkey = (tuple(sorted(weights.items())), alpha, norm.epoch)
@@ -242,7 +242,9 @@ def run_lahc(state: LahcState, ev: Evaluator, norm: Normaliser, weights: dict, a
         if sort_key(state.current) < sort_key(state.best):
             state.best = state.current
     t_end = time.perf_counter() + time_budget_s
-    while time.perf_counter() < t_end:
+    done = 0
+    while time.perf_counter() < t_end and (max_iters is None or done < max_iters):
+        done += 1
         focus = _focus(ev, state.current)
         k = neighbour(state.current.keys, n, sizes, rng, focus)
         if rng.random() < 0.3:

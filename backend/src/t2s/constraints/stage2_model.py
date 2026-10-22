@@ -106,14 +106,40 @@ def board_macro(rec):
 PAD = s2.MOUNT_LAYER - s2.C_WALL        # 1.8 mm reserved beyond the 1.2 mm clearance = the 3 mm mounting layer
 
 
+def planar_face_areas(rec) -> dict:
+    """Planar contact area (mm²) on each of the six canonical bounding-box faces: triangles lying in the face plane
+    with the outward normal. Keys (axis, sign), sign -1 = the low face."""
+    v, f = rec.v, rec.f
+    lo, hi = v.min(0), v.max(0)
+    tri = v[f]
+    n = np.cross(tri[:, 1] - tri[:, 0], tri[:, 2] - tri[:, 0])
+    a2 = np.linalg.norm(n, axis=1)
+    ok = a2 > 0
+    nn = np.zeros_like(n)
+    nn[ok] = n[ok] / a2[ok, None]
+    cen = tri.mean(axis=1)
+    out = {}
+    for a in range(3):
+        for sgn, plane in ((-1, lo[a]), (1, hi[a])):
+            sel = (np.abs(cen[:, a] - plane) < 0.25) & (nn[:, a] * sgn > 0.99)
+            out[(a, sgn)] = float(0.5 * a2[sel].sum())
+    return out
+
+
 def pad_box(rec):
-    """Mounting-layer reservation on the part's largest canonical face (the -a face, a = thinnest axis)."""
+    """Mounting-layer reservation (U6) on the bounding-box face with the most planar contact area (ties: the
+    larger face). Returns (box, axis, sign)."""
     lo, hi = rec.v.min(0), rec.v.max(0)
-    a = int(np.argmin(hi - lo))
+    ext = hi - lo
+    areas = planar_face_areas(rec)
+    rect = {(a, s): ext[[k for k in range(3) if k != a]].prod() for a in range(3) for s in (-1, 1)}
+    a, sgn = max(areas, key=lambda k: (round(areas[k], 3), rect[k], -k[0], -k[1]))
     blo, bhi = lo.copy(), hi.copy()
-    bhi[a] = lo[a]
-    blo[a] = lo[a] - PAD
-    return _box(blo, bhi), a
+    if sgn < 0:
+        bhi[a], blo[a] = lo[a], lo[a] - PAD
+    else:
+        blo[a], bhi[a] = hi[a], hi[a] + PAD
+    return _box(blo, bhi), a, sgn
 
 
 @dataclass
@@ -135,9 +161,12 @@ class Stage2Model:
 
     RELAXABLE = ("clearances", "frame", "pcb_stack", "harness", "mounting", "com_box")
 
-    def __init__(self, records: dict, mode: str, fixed: list | None = None, relax=frozenset()):
+    def __init__(self, records: dict, mode: str, fixed: list | None = None, relax=frozenset(), mfg: bool = False):
         """relax: constraint families switched off (constraint attribution, protocol §O.3 — never used for the
-        layouts the app reports as Stage 2 results)."""
+        layouts the app reports as Stage 2 results). mfg: Manufacturable Design — brackets may bridge up to
+        MFG_REACH to a wall, end plate, rail or deck, and the relative hardware cost C becomes an objective."""
+        self.mfg = bool(mfg)
+        self.profiles: dict = {}
         self.records = records
         self.ids = list(records)
         self.n = len(self.ids)
@@ -179,8 +208,8 @@ class Stage2Model:
             elif pid not in self.pcb and "mounting" not in self.relax:
                 # … and the mounting side gets the 3 mm layer (U6): a 1.8 mm pad reserved on the part's largest
                 # face, pointed by the part's orientation (any of 24), so that side ends up 3.0 mm from its target
-                pad, a = pad_box(r)
-                self.pads[pid] = (pad, a)
+                pad, a, sgn = pad_box(r)
+                self.pads[pid] = (pad, a, sgn)
                 boxes = np.vstack([r.boxes, pad[None]])
                 # with the pad, orientations that are equivalent for the bare part differ: offer every orientation
                 # whose bare-part representative is allowed, and report poses with the representative
@@ -343,13 +372,19 @@ class Stage2Model:
             meta["standoffs"] = extras
         if self.mode == "soft":
             meta["H"] = self.blocked_fraction(poses, meta)
+        if self.mfg:
+            from ..mfg.rules import COST
+            c = sum(v.get("cost_est", 0.0) for v in mounts.values() if v.get("ok"))
+            c += len(meta.get("standoffs", [])) * (COST["catalogue"] + 2 * COST["fastener"])
+            c += len(self.pcb) * (COST["catalogue"] + 4 * COST["fastener"]) if meta.get("stack_block") else 0.0
+            meta["C"] = float(c)
         # the pad was only a reservation: report each part with its bare-part representative orientation
         meta["pad_orients"] = {pid: int(o) for pid, o, _ in poses if pid in self.pads or pid in self.macro}
         poses = [(pid, self._rep(pid, o) if (pid in self.pads or pid in self.macro) else o, t) for pid, o, t in poses]
         out = DecodeResult(poses, res.placed_boxes, res.unplaced, res.length_top)
         out.meta = meta
         out.penalty = float(penalty)
-        out.raw_extra = {"H": meta["H"]} if "H" in meta else {}
+        out.raw_extra = {k: meta[k] for k in ("H", "C") if k in meta}
         out.extra_mass = self.standoff_mass(extras)
         return out
 
@@ -445,20 +480,83 @@ class Stage2Model:
             if pid not in self.pads:
                 info[pid] = {"ok": True, "how": "mounting not checked (relaxed)"}
                 continue
+            if self.mfg:
+                info[pid] = self._mfg_mount(pid, o, t, decks, world_boxes, keepouts)
+                fails += 0 if info[pid]["ok"] else 1
+                continue
             ok, how = self._layer_mount(pid, o, t, decks)
             info[pid] = {"ok": ok, "how": how}
             fails += 0 if ok else 1
         return fails, info, standoffs
 
+    def _mfg_mount(self, pid, o, t, decks, world_boxes, keepouts) -> dict:
+        """Manufacturable Design: the nearest wall / end plate / deck / rail in front of the mounting side, a clear
+        bracket envelope to it, and the cheapest mount type the rules allow for that gap and side shape."""
+        from ..mfg.rules import MFG_REACH, choose_mount, face_profile
+        lo, hi = self.inner
+        pad, a, sgn = self.pads[pid]
+        if pid not in self.profiles:
+            self.profiles[pid] = face_profile(self.records[pid], a, sgn)
+        R = ROTATIONS_F[o]
+        c = np.array([pad[:3] @ R.T, pad[3:] @ R.T])
+        pw = np.concatenate([c.min(0) + t, c.max(0) + t])
+        d = sgn * R[:, a]
+        ax = int(np.argmax(np.abs(d)))
+        neg = d[ax] < 0
+        face = pw[ax] if neg else pw[3 + ax]
+        side = f"{'-' if neg else '+'}{'xyz'[ax]}"
+        b, cc = [k for k in range(3) if k != ax]
+        targets = [((face - lo[ax]) if neg else (hi[ax] - face), lo[ax] if neg else hi[ax],
+                    f"{side} {'end plate' if ax == 2 else 'wall'}")]
+        for dax, z, sgn in decks:
+            if dax == ax and ((sgn > 0 and neg) or (sgn < 0 and not neg)):
+                targets.append(((face - z) if neg else (z - face), z, "PC/104 stack deck"))
+        for rb in self._statics_rails:
+            if rb[b] < pw[3 + b] and rb[3 + b] > pw[b] and rb[cc] < pw[3 + cc] and rb[3 + cc] > pw[cc]:
+                plane = rb[3 + ax] if neg else rb[ax]
+                dist = (face - plane) if neg else (plane - face)
+                if dist >= 0:
+                    targets.append((dist, plane, f"corner rail ({side})"))
+        for dist, plane, label in sorted(targets):
+            if dist < -1e-6:
+                continue
+            gap = dist + PAD                         # part side → target surface
+            if gap > MFG_REACH + 1e-9:
+                break
+            env = pw.copy()
+            if neg:
+                env[ax], env[3 + ax] = plane, face
+            else:
+                env[ax], env[3 + ax] = face, plane
+            blocked = None
+            for qid, boxes in world_boxes.items():
+                if qid == pid or dist <= s2.C_WALL + 0.01:
+                    continue
+                if np.any(np.all((boxes[:, :3] < env[3:] - 1e-6) & (boxes[:, 3:] > env[:3] + 1e-6), axis=1)):
+                    blocked = qid
+                    break
+            if blocked:
+                continue
+            if any(np.all(kb[:3] < env[3:] - 1e-6) and np.all(kb[3:] > env[:3] + 1e-6) for kb in keepouts):
+                continue                             # the bracket would cross a rail or the cable corridor
+            ch = choose_mount(self.profiles[pid], gap)
+            if ch is None:
+                break
+            return {"ok": True, "how": f"{ch.mount_type} to the {label} ({gap:.1f} mm)", "mount_type": ch.mount_type,
+                    "process": ch.process, "fasteners": ch.fasteners, "cost_est": ch.cost_est, "gap_mm": gap,
+                    "target": label, "envelope": env.tolist(), "axis": ax, "neg": bool(neg), "reason": ch.reason}
+        return {"ok": False, "how": f"no wall, rail or deck within {MFG_REACH:.0f} mm in front of its mounting side "
+                                    f"({side}), or the bracket path is blocked"}
+
     def _layer_mount(self, pid, o, t, decks):
         """U6: the side carrying the reserved 3 mm layer must face a wall, end plate, rail or the stack deck within
         reach (the layer face 1.2–6.2 mm from it, i.e. the part side 3.0–8.0 mm away)."""
         lo, hi = self.inner
-        pad, a = self.pads[pid]
+        pad, a, sgn = self.pads[pid]
         R = ROTATIONS_F[o]
         c = np.array([pad[:3] @ R.T, pad[3:] @ R.T])
         pw = np.concatenate([c.min(0) + t, c.max(0) + t])     # pad in world
-        d = -R[:, a]                                          # outward normal of the mounting side
+        d = sgn * R[:, a]                                     # outward normal of the mounting side
         ax = int(np.argmax(np.abs(d)))
         neg = d[ax] < 0
         lo_r, hi_r = s2.C_WALL - 1e-6, s2.C_WALL + s2.MOUNT_REACH

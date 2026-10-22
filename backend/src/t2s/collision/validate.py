@@ -197,9 +197,10 @@ class Validator:
         if gap >= c:
             return PairResult(pa, pb, "G2" if gap > gap0 else "G0", gap, c, True, [(np.asarray(n).tolist(), hi_a, lo_b, gap)])
         if ga.pieces_ok and gb.pieces_ok and (len(ga.pieces) > 1 or len(gb.pieces) > 1 or not (ga.hull_exact and gb.hull_exact)):
-            ok, worst, planes = self._pieces(wa, wb, c + PIECE_MARGIN)
+            margin = max(PIECE_MARGIN, ga.piece_delta + gb.piece_delta)
+            ok, worst, planes = self._pieces(wa, wb, c + margin)
             if ok:
-                return PairResult(pa, pb, "G3", worst - PIECE_MARGIN, c, True, planes)
+                return PairResult(pa, pb, "G3", worst - margin, c, True, planes)
         if ga.boxes_ok and gb.boxes_ok:
             bxa, bxb = boxes_world(ga.boxes, oa, ta), boxes_world(gb.boxes, ob, tb)
             g = np.max(np.maximum(bxb[None, :, :3] - bxa[:, None, 3:], bxa[:, None, :3] - bxb[None, :, 3:]), axis=2)
@@ -212,7 +213,7 @@ class Validator:
         if gap >= c:
             res.planes = [(n.tolist(), hi_a, lo_b, gap)]
             return
-        ok, worst, planes = self._pieces(wa, wb, c + PIECE_MARGIN)
+        ok, worst, planes = self._pieces(wa, wb, c + max(PIECE_MARGIN, wa[3].piece_delta + wb[3].piece_delta))
         if ok:
             res.planes = planes
 
@@ -286,18 +287,19 @@ class Validator:
         if gap >= c:
             return PairResult(pid, s.name, "G2", gap, c, True, [(n.tolist(), hi_a, lo_b, gap)])
         if g.pieces_ok:
+            margin = max(PIECE_MARGIN, 2 * g.piece_delta)
             worst = np.inf
             planes = []
             for i, piece in enumerate(g.pieces):
                 xp = to_world(piece, orient, t)
                 n, gp, ha, lb = plane_certificate(xp, s.corners)
-                if gp < c + PIECE_MARGIN:
+                if gp < c + margin:
                     worst = None
                     break
                 worst = min(worst, gp)
                 planes.append({"piece_a": i, "piece_b": 0, "n": n.tolist(), "hi_a": ha, "lo_b": lb, "gap": gp})
             if worst is not None:
-                return PairResult(pid, s.name, "G3", worst - PIECE_MARGIN, c, True, planes)
+                return PairResult(pid, s.name, "G3", worst - margin, c, True, planes)
         if g.boxes_ok:
             # statics are axis-aligned boxes: certified compound boxes separate by an axis gap per box
             bx = boxes_world(g.boxes, orient, t)

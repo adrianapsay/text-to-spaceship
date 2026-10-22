@@ -33,7 +33,7 @@ def read_stl_bytes(data: bytes) -> tuple[np.ndarray, str]:
     return tri, "ascii"
 
 
-def write_binary_stl(path, vertices: np.ndarray, faces: np.ndarray, header: str = "t2s") -> None:
+def stl_bytes(vertices: np.ndarray, faces: np.ndarray, header: str = "t2s") -> bytes:
     tri = vertices[faces].astype(np.float32)
     n = np.cross(tri[:, 1] - tri[:, 0], tri[:, 2] - tri[:, 0])
     ln = np.linalg.norm(n, axis=1, keepdims=True)
@@ -41,7 +41,13 @@ def write_binary_stl(path, vertices: np.ndarray, faces: np.ndarray, header: str 
     rec = np.zeros(len(faces), dtype=np.dtype([("normal", "<f4", 3), ("v", "<f4", (3, 3)), ("attr", "<u2")]))
     rec["normal"] = n
     rec["v"] = tri
+    return header.encode("ascii", "replace")[:80].ljust(80, b" ") + struct.pack("<I", len(faces)) + rec.tobytes()
+
+
+def write_binary_stl(path, vertices: np.ndarray, faces: np.ndarray, header: str = "t2s") -> None:
+    data = stl_bytes(vertices, faces, header)
+    if hasattr(path, "write"):
+        path.write(data)
+        return
     with open(path, "wb") as fh:
-        fh.write(header.encode("ascii", "replace")[:80].ljust(80, b" "))
-        fh.write(struct.pack("<I", len(faces)))
-        fh.write(rec.tobytes())
+        fh.write(data)

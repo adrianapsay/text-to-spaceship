@@ -38,6 +38,8 @@ def live(tmp_path_factory):
     for name in PARTS:
         store.add_file((DATASET / f"{name}.stl").read_bytes(), f"{name}.stl", units="mm", source="dataset")
     coord = Coordinator(store, n_islands=1, n_validators=1, seed=7)
+    coord.cpsat_time_s = 10.0
+    coord.use_evidence = False                      # the selector tests check the documented default rules
     coord.auto_ladder = False                       # the ladder has its own (shortened) test below
     coord.ladder_opts = {"generations": 2, "pop": 12, "fr_samples": 20}
     app = create_app(coord)
@@ -48,6 +50,16 @@ def live(tmp_path_factory):
 def best(client):
     r = client.get("/api/layouts", params={"limit": 1}).json()
     return r["best_id"]
+
+
+def test_cpsat_seed_layout_is_validated_and_archived(live):
+    client, coord, _ = live
+    e = wait_for(lambda: next((x for x in list(coord.archive.values()) if x.algorithm.get("id") == "cpsat_box"), None),
+                 timeout=120)
+    assert e.status == "VALIDATED" and e.validation["certified"]
+    res = coord.cpsat_results[e.parts_sig]
+    assert res["lower_bound_mm"] is not None and res["lower_bound_mm"] <= res["length_mm"] + 1e-9
+    assert client.get("/api/project").json()["bounds"]["cpsat_single_box"]["status"] in ("OPTIMAL", "FEASIBLE")
 
 
 def test_health_and_project(live):
@@ -271,14 +283,31 @@ def test_stage2_default_then_continuous_cable(live):
     coord.attribution_opts = {"generations": 2, "pop": 10}
     assert client.get("/api/stage2/attribution").status_code == 404
     assert client.post("/api/stage2/attribution/run").json()["status"] == "PENDING"
-    att = wait_for(lambda: (x := client.get("/api/stage2/attribution")).status_code == 200 and
-                   x.json()["status"] == "DONE" and x.json(), timeout=240, every=1.0)
+    try:
+        att = wait_for(lambda: (x := client.get("/api/stage2/attribution")).status_code == 200 and
+                       x.json()["status"] == "DONE" and x.json(), timeout=240, every=1.0)
+    except AssertionError:
+        raise AssertionError(f"attribution did not finish; coordinator errors: {coord.errors[-3:]}") from None
     fams = [r["relaxed"] for r in att["rows"]]
     assert fams[0] == "none" and {"clearances", "frame", "pcb_stack", "harness", "mounting", "com_box"} <= set(fams)
     assert all(r["evaluations"] > 0 for r in att["rows"])
     assert "delta_length_used_mm" in att["rows"][1]
     client.put("/api/settings", json={"stage": 1, "sliders": {"cable": 0}})
     wait_for(lambda: coord.ctx is not None and coord.ctx.stage == 1 and best(client), timeout=60)
+
+
+def test_size_study_runs_in_the_background(live):
+    client, coord, _ = live
+    assert client.get("/api/studies/size").status_code == 404
+    r = client.post("/api/studies/size/run", json={"stages": [1], "seeds": 1, "budget0": 100, "max_hours": 0.02,
+                                                     "workers": 1, "conv_minutes": 0.2, "min_minutes_per_combo": 0.01,
+                                                     "step": 0.25, "tol": 0.05})
+    assert r.status_code == 200
+    d = wait_for(lambda: (x := client.get("/api/studies/size")).status_code == 200 and x.json()["status"] == "DONE"
+                 and x.json(), timeout=240, every=1.0)
+    assert d["stop_reason"] in ("converged", "time_limit", "proven_optimal")
+    assert any(r["feasible"] for r in d["results"]) and d["max_scale"]["S1·V1"] is not None
+    assert {b["kind"] for b in d["bounds"]} >= {"rigorous", "axis-aligned orientations only"}
 
 
 def test_selector_endpoints(live):
@@ -293,4 +322,9 @@ def test_selector_endpoints(live):
     assert len(m["grid"]) == 5 and len(m["grid"][0]) == 5
     assert client.get("/api/selector/sweep", params={"slider": "nope"}).status_code == 400
     lay = client.get(f"/api/layouts/{best(client)}").json()
-    assert lay["algorithm"]["search"] in ("brkga", "lahc", "nsga2") and lay["algorithm"]["decoder"] in ("box", "heightmap")
+    assert lay["algorithm"]["search"] in ("brkga", "lahc", "nsga2", "cp-sat")
+    im = client.get("/api/ideamap").json()
+    ids = {n["id"] for n in im["nodes"]}
+    assert {"parts", "choice", "layout", "proof", "stage"} <= ids
+    assert all(e["from"] in ids and e["to"] in ids for e in im["edges"])
+    assert any(e["to"] == "choice" and e["label"] and "weight" in e["label"] for e in im["edges"])

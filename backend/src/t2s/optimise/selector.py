@@ -17,6 +17,7 @@ ALGORITHMS = {
     "hybrid_box": "Hybrid BRKGA + box decoder",
     "hybrid_heightmap": "Hybrid BRKGA + height-map decoder",
     "portfolio": "Portfolio: box + height-map islands",
+    "nsga2_box": "NSGA-II islands + box decoder",
     "box_constructive": "Constructive best-fit (box decoder)",
 }
 
@@ -101,22 +102,39 @@ def select_algorithm(stage: int, sliders: dict, stats: PartStats, mode: str = "d
 
 
 def _from_evidence(stage, w, stats, evidence):
+    """Performance-based selection: the benchmark instance most similar to the current parts (part count, box-proxy
+    overhead), then the nearest measured weight vector, then the best median score (scores are only compared
+    within one instance and one weight vector)."""
     rows = [e for e in evidence if e.get("stage") == stage and e.get("algorithm") in ALGORITHMS]
     if not rows:
         return None
+
+    def sdist(e):
+        if "n_parts" not in e:
+            return 0.0
+        n0, n1 = max(stats.n_parts, 1), max(e["n_parts"], 1)
+        return abs(n0 - n1) / max(n0, n1) + abs(stats.box_overhead - e.get("box_overhead", stats.box_overhead))
+    near_s = min(sdist(e) for e in rows)
+    inst_rows = [e for e in rows if sdist(e) <= near_s + 1e-9]
+    inst = sorted({e.get("instance") for e in inst_rows}, key=str)[0]
+    inst_rows = [e for e in inst_rows if e.get("instance") == inst]
     keys = sorted(w)
 
     def dist(e):
         ew = e.get("weights", {})
         return float(np.sqrt(sum((w.get(k, 0) - ew.get(k, 0)) ** 2 for k in keys)))
-    near = min(dist(e) for e in rows)
-    cand = [e for e in rows if dist(e) <= near + 1e-9]
+    near = min(dist(e) for e in inst_rows)
+    cand = [e for e in inst_rows if dist(e) <= near + 1e-9]
     best = min(cand, key=lambda e: e["median_g"])
     alg = best["algorithm"]
-    dec = {"hybrid_box": "box", "hybrid_heightmap": "heightmap", "portfolio": "mixed", "box_constructive": "box"}[alg]
-    reasons = [f"best median benchmark score at the nearest measured weights: {best['median_g']:.4f} "
-               f"(n = {best.get('n', '?')}) vs " + ", ".join(f"{e['algorithm']} {e['median_g']:.4f}" for e in cand if e is not best)]
-    return AlgorithmChoice(alg, ALGORITHMS[alg], dec, "brkga+lahc", "default", reasons, cand, "evidence")
+    dec = {"hybrid_box": "box", "hybrid_heightmap": "heightmap", "portfolio": "mixed", "box_constructive": "box",
+           "nsga2_box": "box"}[alg]
+    search = "nsga2" if alg == "nsga2_box" else "brkga+lahc"
+    others = ", ".join(f"{ALGORITHMS[e['algorithm']]} {e['median_g']:.4f}" for e in cand if e is not best)
+    reasons = [f"benchmark evidence: best median score on {inst} ({best.get('n_parts', '?')} parts, nearest to yours) at "
+               f"the nearest measured weights ({best.get('preset', '?')}): {best['median_g']:.4f} (n = {best.get('n', '?')})"
+               + (f" vs {others}" if others else "")]
+    return AlgorithmChoice(alg, ALGORITHMS[alg], dec, search, "default", reasons, cand, "evidence")
 
 
 def sweep(stage: int, sliders: dict, stats: PartStats, slider: str, mode: str = "default", evidence=None) -> dict:

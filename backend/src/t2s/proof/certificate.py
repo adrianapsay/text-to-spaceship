@@ -72,6 +72,11 @@ def build_certificate(layout_id: str, report, records: dict, poses, spec, files:
 
 
 def proof_markdown(cert: dict, report, metrics: dict | None = None) -> str:
+    names = {p["id"]: p.get("name") or p["id"] for p in cert["parts"]}
+
+    def nm(pid):
+        n = names.get(pid)
+        return f"{pid} ({n})" if n and n != pid else pid
     L = []
     st = "IDEALIZED (Stage 1)" if cert["stage"] == 1 else "ENGINEERING-CONSTRAINED (Stage 2)"
     L.append(f"# Proof that layout {cert['layout_id']} fits — {st}\n")
@@ -87,7 +92,7 @@ def proof_markdown(cert: dict, report, metrics: dict | None = None) -> str:
     for c in report.containment:
         m = np.minimum(c["margin_lo_mm"], c["margin_hi_mm"])
         k = int(np.argmin(m))
-        L.append(f"| {c['part']} | {m[k]:.4f} | {'xyz'[k]} |")
+        L.append(f"| {nm(c['part'])} | {m[k]:.4f} | {'xyz'[k]} |")
     L.append("\n## Lemma 2 — convex separation\n")
     L.append("For point sets A, B and a unit vector n: if max over A of n·a ≤ h and min over B of n·b ≥ h + g, then "
              "every point of conv(A) is at least g from every point of conv(B). Each part lies in conv(its vertices).\n")
@@ -99,12 +104,17 @@ def proof_markdown(cert: dict, report, metrics: dict | None = None) -> str:
     L.append("## Pairwise separation\n")
     L.append("| Part A | Part B | method | certified gap ≥ (mm) | required (mm) |\n|---|---|---|---|---|")
     for p in cert["pairs"]:
-        L.append(f"| {p['a']} | {p['b']} | {p['method'].replace('_', ' ')} | {p['gap_lb_mm']:.4f} | {p['required_mm']:.3f} |")
+        L.append(f"| {nm(p['a'])} | {nm(p['b'])} | {p['method'].replace('_', ' ')} | {p['gap_lb_mm']:.4f} | "
+                 f"{p['required_mm']:.3f} |")
     if cert["statics"]:
         L.append("\n## Frame and keep-outs\n")
         L.append("| Part | item | certified gap ≥ (mm) | required (mm) |\n|---|---|---|---|")
         for s in cert["statics"]:
-            L.append(f"| {s['part']} | {s['static']} | {s['gap_lb_mm']:.4f} | {s['required_mm']:.3f} |")
+            L.append(f"| {nm(s['part'])} | {s['static']} | {s['gap_lb_mm']:.4f} | {s['required_mm']:.3f} |")
+    L.append("\n> **Arithmetic.** All inequalities are evaluated in float64 from the original float32 STL vertices and "
+             "the integer-µm poses. Rounding allowance: poses are exact multiples of 1 µm; every certified gap above "
+             "exceeds the required value by more than the 1e-9 mm comparison tolerance, and cover pieces carry "
+             f"their δ = {cert['cover_delta_mm'] * 1e3:.1f} µm inflation explicitly.")
     numeric = [p for p in cert["pairs"] if p["method"] == "numeric"]
     if numeric:
         L.append(f"\n> {len(numeric)} pair(s) are verified numerically (exact mesh distance by two independent "

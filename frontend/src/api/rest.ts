@@ -186,8 +186,10 @@ export class ApiClient {
   pareto() {
     return this.json<Pareto>('/api/pareto');
   }
-  benchmarks() {
-    return this.json<Benchmarks>('/api/benchmarks');
+  benchmarks(block?: string) {
+    if (!block) return this.json<Benchmarks>('/api/benchmarks');
+    const [instance, preset] = block.split('|');
+    return this.json<Benchmarks>(`/api/benchmarks?instance=${encodeURIComponent(instance)}&preset=${encodeURIComponent(preset ?? '')}`);
   }
   runBenchmarks() {
     return this.send<unknown>('POST', '/api/benchmarks/run', {});

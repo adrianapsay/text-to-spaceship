@@ -21,6 +21,7 @@ class PartGeom:
     pieces_ok: bool
     orient_bounds: np.ndarray            # (24, 6) AABB of R_k · hull
     comp_probe: np.ndarray               # one vertex per connected component (containment test)
+    piece_delta: float = COVER_DELTA     # inflation under which the cover pieces contain the part
     _fcl: object = field(default=None, repr=False)
     _hull_bvh: object = field(default=None, repr=False)
     _piece_bvh: dict = field(default_factory=dict, repr=False)
@@ -72,7 +73,7 @@ def part_geom_from_record(rec) -> "PartGeom":
         probes.append(rec.v[rec.f[np.flatnonzero(labels == c)[0], 0]])
     return PartGeom(rec.id, rec.v, rec.f, hull_pts, bool(exact), rec.boxes, bool(rec.boxes_certified),
                     [p.vertices for p in rec.cover.pieces], bool(rec.cover.certified), rec.orient_bounds,
-                    np.array(probes))
+                    np.array(probes), float(getattr(rec, "cover_delta", COVER_DELTA)))
 
 
 def to_world(points: np.ndarray, orient: int, t_mm: np.ndarray) -> np.ndarray:

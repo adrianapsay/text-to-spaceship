@@ -47,6 +47,41 @@ DECODER_LABELS = {"box": "box decoder", "heightmap": "height-map decoder"}
 SELECTOR_SETTLE_S = 1.0
 
 
+def _kill_tree(pid: int | None) -> None:
+    """Terminate a study process and the worker processes it spawned (they are its children)."""
+    if not pid:
+        return
+    try:
+        import psutil
+        p = psutil.Process(pid)
+        for c in p.children(recursive=True):
+            c.kill()
+        p.kill()
+    except Exception:  # noqa: BLE001 - already gone
+        pass
+
+
+def _bench_main(out_dir: str, opts: dict) -> None:
+    """Background benchmark process (protocol §J.3) on the accepted dataset."""
+    import json as _json
+    from ..bench.instances import dataset_instances
+    from ..bench.runner import PRESET_IDS, run_benchmarks
+    from ..parts.build import build_part
+    repo = Path(__file__).resolve().parents[4]
+    man = _json.loads((repo / "data" / "synthetic" / "manifest.json").read_text())
+    recs = {p["name"]: build_part((repo / "data" / "synthetic" / p["file"]).read_bytes(), p["name"], p["name"],
+                                  file=p["file"]) for p in man["parts"] if p["role"] == "packable"}
+    want = set(opts.get("instances", ["I1", "I2", "I3", "I4", "I5"]))
+    insts = [i for i in dataset_instances(recs) if i.id in want]
+    prog = Path(out_dir) / "progress.json"
+
+    def progress(frac, r):
+        prog.write_text(_json.dumps({"status": "RUNNING", "progress": frac}), encoding="utf-8")
+    run_benchmarks(insts, Path(out_dir), budget=float(opts.get("budget", 5000)), seeds=int(opts.get("seeds", 10)),
+                   workers=int(opts.get("workers", 4)), presets=tuple(opts.get("presets", PRESET_IDS)), progress=progress)
+    prog.write_text(_json.dumps({"status": "DONE", "progress": 1.0}), encoding="utf-8")
+
+
 def _mode_name(meta: dict | None) -> str:
     return "continuous_cable" if (meta or {}).get("mode") == "continuous" else "default"
 
@@ -68,6 +103,14 @@ def perturbed_weights(weights: dict, k: int, sigma: float = 0.3) -> dict:
 def island_plans(choice: AlgorithmChoice, n: int) -> list[dict]:
     """Which search runs on which decoder in each island, for the selected algorithm."""
     plans = []
+    if choice.id == "nsga2_box":                 # benchmark evidence favours NSGA-II: most islands run it
+        plans = [{"search": "nsga2", "decoder": "box", "h": 2.0} for _ in range(n)]
+        if n >= 3:
+            plans[0] = {"search": "brkga", "decoder": "box", "h": 2.0}
+        if n >= 2:
+            plans[-1] = {"search": "lahc", "decoder": "box", "h": 2.0}
+        plans[0]["all_seeds"] = True
+        return plans
     for i in range(n):
         dec = choice.decoder if choice.decoder != "mixed" else ("box" if i % 2 == 0 else "heightmap")
         plans.append({"search": "brkga", "decoder": dec, "h": 2.0})
@@ -243,6 +286,13 @@ class Coordinator:
         self.auto_ladder = True
         self.ladder_opts: dict = {}
         self.attribution_opts: dict = {}
+        self.cpsat_pool: ProcessPoolExecutor | None = None
+        self.cpsat_time_s = 60.0
+        self.cpsat_results: dict[str, dict] = {}     # parts_sig -> {status, length_mm, lower_bound_mm, ...}
+        self.use_cpsat = True
+        self.evidence: list[dict] = []               # benchmark evidence rows for the selector (M8)
+        self.evidence_source: str | None = None
+        self.studies: dict[str, dict] = {}           # "size" | "benchmark" -> {proc, path, mtime}
 
     # =========================================================================================== lifecycle
     @property
@@ -255,11 +305,13 @@ class Coordinator:
         self.store.seed_from_dataset()
         self.store.save()
         self._load_archive()
+        self._load_evidence()
         for var in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "NUMBA_NUM_THREADS"):
             os.environ[var] = "1"
         spawn = mp.get_context("spawn")
         self.build_pool = ProcessPoolExecutor(max_workers=2, mp_context=spawn)
         self.ladder_pool = ProcessPoolExecutor(max_workers=1, mp_context=spawn)
+        self.cpsat_pool = ProcessPoolExecutor(max_workers=1, mp_context=spawn)
         for e in self.store.entries.values():
             self._load_ladder(e)
         if self.use_workers:
@@ -289,6 +341,10 @@ class Coordinator:
         self._stopping = True
         for t in self._tasks:
             t.cancel()
+        for name in list(self.studies):
+            self.stop_study(name)
+            s = self.studies[name]
+            _kill_tree(s["proc"].pid)
         for w in self.workers:
             try:
                 w.cmd_q.put(("stop",))
@@ -305,10 +361,12 @@ class Coordinator:
                 pass
         if self.build_pool:
             self.build_pool.shutdown(wait=False, cancel_futures=True)
-        if self.ladder_pool:
-            procs = list((getattr(self.ladder_pool, "_processes", None) or {}).values())
-            self.ladder_pool.shutdown(wait=False, cancel_futures=True)
-            for p in procs:                     # a ladder can run for minutes: do not wait for it
+        for pool in (self.ladder_pool, self.cpsat_pool):
+            if not pool:
+                continue
+            procs = list((getattr(pool, "_processes", None) or {}).values())
+            pool.shutdown(wait=False, cancel_futures=True)
+            for p in procs:                     # a ladder or CP-SAT run can take minutes: do not wait for it
                 try:
                     p.terminate()
                 except Exception:  # noqa: BLE001
@@ -346,9 +404,10 @@ class Coordinator:
                 self.broadcast("project.changed", {"reason": f"{len(new)} file(s) picked up from the inbox"})
         if self.choice_pending is not None and now - self.choice_pending[1] >= SELECTOR_SETTLE_S:
             self._apply_choice(self.choice_pending[0], restart=True)
-        if self.ladders and now - self.last_ladder_poll > 1.0:
+        if (self.ladders or self.studies) and now - self.last_ladder_poll > 1.0:
             self.last_ladder_poll = now
             self._poll_ladders()
+            self._poll_studies()
         if self.run_status == "SEARCHING":
             self._dispatch()
             self._dispatch_validation()
@@ -515,6 +574,7 @@ class Coordinator:
             self._apply_choice(self._compute_choice(), restart=False)
             for w in self.workers:
                 self._send_context(w, warm)
+            self._start_cpsat()
             self.last_improve = time.monotonic()
             self.search_t0 = time.monotonic()
             if self.run_status in ("CONVERGED", "IDLE") and (self.auto_start or self.search_requested):
@@ -562,7 +622,7 @@ class Coordinator:
 
     def _compute_choice(self) -> AlgorithmChoice:
         s = self.store.settings
-        return select_algorithm(int(s["stage"]), s["sliders"], self._part_stats(), self._mode())
+        return select_algorithm(int(s["stage"]), s["sliders"], self._part_stats(), self._mode(), self.evidence or None)
 
     def _apply_choice(self, choice: AlgorithmChoice, restart: bool) -> None:
         changed = self.choice is None or choice.id != self.choice.id
@@ -858,7 +918,7 @@ class Coordinator:
         for c in cands:
             if c["unplaced"]:
                 continue
-            raw_extra = {k: c["raw"][k] for k in ("H",) if k in c["raw"]}
+            raw_extra = {k: c["raw"][k] for k in ("H", "C") if k in c["raw"]}
             raw, cv = self.ev.raw_from_poses(c["poses"], c["unplaced"], c.get("penalty", 0.0),
                                              [(m, np.asarray(p), np.asarray(i)) for m, p, i in c.get("extra_mass", [])],
                                              raw_extra)
@@ -1197,6 +1257,7 @@ class Coordinator:
             "revs": self.revs,
             "dataset_sha256": self.store.dataset_sha256,
             "building": building,
+            "bounds": {"cpsat_single_box": self.cpsat_results.get(self.ctx.parts_sig) if self.ctx else None},
             "inbox": str(self.store.inbox),
             "fusion360": "NOT_CONFIGURED",
         })
@@ -1225,9 +1286,10 @@ class Coordinator:
         s = self.store.settings
         if slider not in s["sliders"]:
             raise ValueError(f"unknown slider {slider!r}")
-        out = sweep(int(s["stage"]), s["sliders"], self._part_stats(), slider, self._mode())
+        out = sweep(int(s["stage"]), s["sliders"], self._part_stats(), slider, self._mode(), self.evidence or None)
         out["current"] = s["sliders"][slider]
-        out["rule"] = "default rule — no benchmark evidence yet"
+        out["rule"] = (f"benchmark evidence ({self.evidence_source})" if self.evidence
+                       else "default rule — no benchmark evidence yet")
         return out
 
     def selector_map(self, x: str, y: str, n: int) -> dict:
@@ -1235,9 +1297,223 @@ class Coordinator:
         for k in (x, y):
             if k not in s["sliders"]:
                 raise ValueError(f"unknown slider {k!r}")
-        out = grid_map(int(s["stage"]), s["sliders"], self._part_stats(), x, y, max(2, min(int(n), 101)), self._mode())
+        out = grid_map(int(s["stage"]), s["sliders"], self._part_stats(), x, y, max(2, min(int(n), 101)), self._mode(),
+                       self.evidence or None)
         out["current"] = [s["sliders"][x], s["sliders"][y]]
         return out
+
+    # =========================================================================================== idea map
+    def ideamap(self) -> dict:
+        """Addendum 3.2a: node-link graph from live state; every edge carries the quantity behind the decision."""
+        nodes, edges = [], []
+
+        def node(i, label, kind, tab=None, detail=None):
+            nodes.append({"id": i, "label": label, "kind": kind, "tab": tab, "detail": detail})
+
+        def edge(a, b, label=None):
+            edges.append({"from": a, "to": b, "label": label})
+        recs = self._active_records()
+        stats = self._part_stats() if recs else None
+        s = self.store.settings
+        node("parts", f"{len(recs)} parts", "input", "components",
+             f"total solid volume {sum((r.volume_mm3 or 0) for r in recs.values()) / 1e3:.1f} cm³")
+        groups = {"box-like": [], "convex": [], "curved": [], "concave": [], "through-hole": []}
+        for pid, r in recs.items():
+            for g in groups:
+                if any(lab.startswith(g) or (g == "concave" and "concave" in lab) for lab in r.labels):
+                    groups[g].append(r.name)
+        for g, names in groups.items():
+            if not names:
+                continue
+            share = stats.shares.get(g, 0.0) if stats else 0.0
+            node(f"grp:{g}", f"{g} ({len(names)})", "classification", "components", ", ".join(names))
+            edge("parts", f"grp:{g}", f"{100 * share:.0f} % of the volume")
+        node("proxy:boxes", "certified compound boxes", "proxy", "components",
+             f"box proxies over-cover the solids by {100 * stats.box_overhead:.0f} %" if stats else None)
+        node("proxy:cover", "certified convex covers", "proxy", "components", "used by the validator (G3)")
+        node("proxy:mesh", "full meshes", "proxy", "components", "validator G4 and the height-map decoder")
+        for g in groups:
+            if groups[g]:
+                edge(f"grp:{g}", "proxy:boxes" if g in ("box-like", "convex") else "proxy:cover")
+        w = slider_weights(s["sliders"], int(s["stage"]), "default")
+        for k, label in (("L", "compactness"), ("D", "balance (COM)"), ("I", "rotational inertia"),
+                         ("G", "feasibility margin"), ("H", "cable path"), ("C", "hardware cost")):
+            if k in w:
+                node(f"w:{k}", f"{label}", "objective", "optimization", f"weight {w[k]:.2f}")
+        node("stage", f"Stage {s['stage']} {'IDEALIZED' if int(s['stage']) == 1 else 'ENGINEERING-CONSTRAINED'}",
+             "constraint", "engineering",
+             "containment and non-interpenetration" if int(s["stage"]) == 1 else
+             f"walls, rails, 2.2 / 1.2 mm clearances, PC/104 stack, mounting, COM box; cable mode: {self._stage2_mode()}")
+        locks = [r.name for r in recs.values() if r.locked]
+        if locks:
+            node("locks", f"{len(locks)} locked part(s)", "constraint", "components", ", ".join(locks))
+        for aid, lab in ALGORITHMS.items():
+            if aid == "box_constructive":
+                continue
+            node(f"alg:{aid}", lab, "algorithm", "comparison")
+            edge("proxy:boxes" if aid != "hybrid_heightmap" else "proxy:mesh", f"alg:{aid}")
+        node("alg:cpsat_box", "CP-SAT on single-box proxies", "algorithm", "comparison",
+             (lambda c: f"{c.get('status')}, length {c.get('length_mm')} mm, bound {c.get('lower_bound_mm')} mm "
+                        "(single-box proxies only)")(self.cpsat_results.get(self.ctx.parts_sig, {}))
+             if self.ctx else None)
+        c = self.choice
+        if c is not None:
+            node("choice", f"chosen: {c.label}", "decision", "explain", c.reasons[0] if c.reasons else None)
+            if c.id in ALGORITHMS:
+                edge(f"alg:{c.id}", "choice", "default rule" if c.rule == "default" else "benchmark evidence")
+            for k in w:
+                edge(f"w:{k}", "choice", f"weight {w[k]:.2f}")
+            edge("stage", "choice", f"Stage {s['stage']}")
+            if stats:
+                edge("proxy:boxes", "choice", f"box overhead {100 * stats.box_overhead:.0f} %")
+        best = self.archive.get(self.best_id) if self.best_id else None
+        least = self.archive.get(self.least_id) if self.least_id else None
+        show = best or least
+        if show is not None:
+            m = show.metrics
+            node("layout", f"{show.id} {show.status}", "result", "overview",
+                 f"length {m.get('length_used_mm', 0):.1f} mm, COM error {m.get('com_error_mm') or 0:.1f} mm, "
+                 f"λmax {m.get('lambda_max_kgm2') or 0:.3e} kg·m²")
+            edge("choice", "layout", show.algorithm.get("detail") or show.algorithm.get("label"))
+            node("proof", "fit proof", "proof", "explain", "theorem + lemmas, certificate JSON, stand-alone checker")
+            edge("layout", "proof", f"{show.validation.get('pairs', 0)} pairs certified")
+        return jsonable({"nodes": nodes, "edges": edges, "generated": now_iso()})
+
+    # =========================================================================================== M8 studies
+    BENCH_DIR = Path(__file__).resolve().parents[4] / "data" / "runs" / "benchmarks"
+
+    def _latest_benchmark(self) -> Path | None:
+        if not self.BENCH_DIR.exists():
+            return None
+        files = sorted(self.BENCH_DIR.glob("*/benchmarks.json"), key=lambda p: p.stat().st_mtime)
+        return files[-1] if files else None
+
+    def _load_evidence(self) -> None:
+        if not getattr(self, "use_evidence", True):
+            return
+        p = self._latest_benchmark()
+        if p is None:
+            return
+        try:
+            d = json.loads(p.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            return
+        self.evidence = d.get("evidence", [])
+        self.evidence_source = f"{p.parent.name}, {d.get('seeds')} seeds, budget {d.get('budget')}"
+
+    def benchmarks(self, instance: str | None = None, preset: str | None = None) -> dict | None:
+        live = self.studies.get("benchmark")
+        if live and live["proc"].is_alive():
+            prog = self._study_progress("benchmark")
+            return {"status": "RUNNING", "progress": prog, "rows": []}
+        p = self._latest_benchmark()
+        if p is None:
+            return None
+        d = json.loads(p.read_text(encoding="utf-8"))
+        blocks = sorted({f"{r['instance']}|{r['preset']}" for r in d.get("rows", [])})
+        want = f"{instance or 'I1'}|{preset or 'balanced'}"
+        if want not in blocks and blocks:
+            want = blocks[0]
+        inst, pre = want.split("|")
+        rows = [r for r in d["rows"] if r["instance"] == inst and r["preset"] == pre]
+        curves = {k.split("|")[2]: v for k, v in d.get("curves", {}).items() if k.startswith(want + "|")}
+        return {**{k: v for k, v in d.items() if k not in ("rows", "curves")}, "rows": rows, "curves": curves,
+                "block": {"instance": inst, "preset": pre}, "blocks": blocks, "source": str(p.parent.name),
+                "summary": [s for s in d.get("summary", []) if s["instance"] == inst and s["preset"] == pre],
+                "tests": [t for t in d.get("tests", []) if t["instance"] == inst and t["preset"] == pre]}
+
+    def start_benchmarks(self, opts: dict) -> dict:
+        from datetime import datetime as _dt, timezone as _tz
+        cur = self.studies.get("benchmark")
+        if cur and cur["proc"].is_alive():
+            raise ValueError("a benchmark run is already in progress")
+        out = self.BENCH_DIR / _dt.now(_tz.utc).strftime("%Y%m%dT%H%M%SZ")
+        out.mkdir(parents=True, exist_ok=True)
+        # not daemonic: the study runs its own worker pool (terminated explicitly in stop())
+        proc = mp.get_context("spawn").Process(target=_bench_main, args=(str(out), dict(opts)), daemon=False)
+        proc.start()
+        self.studies["benchmark"] = {"proc": proc, "path": out / "progress.json", "mtime": None, "out": out}
+        return {"status": "RUNNING", "folder": str(out)}
+
+    def _size_path(self) -> Path:
+        return self.store.cache / f"size_study_{self.ctx.parts_sig if self.ctx else 'none'}.json"
+
+    def size_study(self) -> dict | None:
+        p = self._size_path()
+        if not p.exists():
+            return None
+        try:
+            d = json.loads(p.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            return None
+        live = self.studies.get("size")
+        if d.get("status") == "RUNNING" and not (live and live["proc"].is_alive()):
+            d["status"], d["stop_reason"] = "STOPPED", d.get("stop_reason") or "stopped (process ended)"
+        return d
+
+    def start_size_study(self, opts: dict) -> dict:
+        import pickle
+        from ..bench.size_study import size_study_main
+        if self.ctx is None:
+            raise ValueError("no packable parts")
+        cur = self.studies.get("size")
+        if cur and cur["proc"].is_alive():
+            raise ValueError("a Size Study is already running")
+        snap = self.store.cache / f"size_records_{self.ctx.parts_sig}.pkl"
+        snap.write_bytes(pickle.dumps(self._active_records(), protocol=pickle.HIGHEST_PROTOCOL))
+        path = self._size_path()
+        allowed = {"stages", "seeds", "budget0", "max_hours", "workers", "preset", "conv_minutes",
+                   "min_minutes_per_combo", "step", "tol"}
+        o = {k: v for k, v in (opts or {}).items() if k in allowed}
+        o.setdefault("workers", max(2, 12 - len(self.workers) - 1))
+        proc = mp.get_context("spawn").Process(target=size_study_main, args=(str(snap), str(path), o), daemon=False)
+        proc.start()
+        self.studies["size"] = {"proc": proc, "path": path, "mtime": None}
+        return {"status": "RUNNING", "workers": o["workers"]}
+
+    def stop_study(self, name: str) -> bool:
+        s = self.studies.get(name)
+        if not s or not s["proc"].is_alive():
+            return False
+        _kill_tree(s["proc"].pid)                  # the study and its worker pool
+        s["proc"].terminate()
+        if name == "size" and s["path"].exists():
+            try:
+                d = json.loads(s["path"].read_text(encoding="utf-8"))
+                d["status"], d["stop_reason"] = "STOPPED", "stopped by the user"
+                s["path"].write_text(json.dumps(d, indent=1), encoding="utf-8")
+            except (OSError, json.JSONDecodeError):
+                pass
+        return True
+
+    def _study_progress(self, name: str) -> float | None:
+        s = self.studies.get(name)
+        if not s or not s["path"].exists():
+            return None
+        try:
+            return float(json.loads(s["path"].read_text(encoding="utf-8")).get("progress") or 0.0)
+        except (OSError, json.JSONDecodeError, ValueError):
+            return None
+
+    def _poll_studies(self) -> None:
+        for name, s in list(self.studies.items()):
+            p = s["path"]
+            if p.exists():
+                m = p.stat().st_mtime
+                if m != s["mtime"]:
+                    s["mtime"] = m
+                    try:
+                        d = json.loads(p.read_text(encoding="utf-8"))
+                    except (OSError, json.JSONDecodeError):
+                        d = {}
+                    self.broadcast("study.update", {"study": name, "progress": d.get("progress"),
+                                                    "partial": {"status": d.get("status"), "phase": d.get("phase")}})
+            if name == "benchmark" and not s["proc"].is_alive() and not s.get("done"):
+                s["done"] = True
+                self._load_evidence()
+                self.broadcast("study.update", {"study": "benchmark", "progress": 1.0, "partial": {"status": "DONE"}})
+                if self.ctx is not None:
+                    self.choice_pending = (self._compute_choice(), 0.0)
 
     def pareto(self) -> dict:
         cur = [e for e in self.archive.values() if self._current(e) and e.status in ("VALIDATED", "FINAL")
@@ -1551,6 +1827,51 @@ class Coordinator:
                     "part_id": pid}
         return None
 
+    # =========================================================================================== CP-SAT seed
+    def _start_cpsat(self) -> None:
+        """Protocol §D.4 step 1: a CP-SAT solution on single-box proxies (Stage 1, no locked parts). Its layout is
+        validated like any other; its bound is valid for the single-box proxy problem only."""
+        import pickle
+        from ..bench.cpsat import cpsat_job
+        ctx = self.ctx
+        if not self.use_cpsat or ctx is None or ctx.stage != 1 or ctx.fixed or self.cpsat_pool is None:
+            return
+        if ctx.parts_sig in self.cpsat_results:
+            return
+        self.cpsat_results[ctx.parts_sig] = {"status": "RUNNING"}
+        snap = self.store.cache / f"cpsat_records_{ctx.parts_sig}.pkl"
+        snap.write_bytes(pickle.dumps(ctx.records, protocol=pickle.HIGHEST_PROTOCOL))
+        fut = asyncio.wrap_future(self.cpsat_pool.submit(cpsat_job, str(snap), self.cpsat_time_s, 2, 0), loop=self.loop)
+        sigs = (ctx.parts_sig, ctx.constraint_sig, ctx.stage, ctx.spec_sig)
+        fut.add_done_callback(lambda f, c=ctx.ctx_id, s=sigs: self._on_cpsat(f, c, s))
+
+    def _on_cpsat(self, fut, ctx_id: str, sigs) -> None:
+        if fut.cancelled():
+            return
+        if fut.exception() is not None:
+            self.cpsat_results[sigs[0]] = {"status": "ERROR", "detail": repr(fut.exception())}
+            return
+        r = fut.result()
+        self.cpsat_results[sigs[0]] = {k: r.get(k) for k in ("status", "length_mm", "lower_bound_mm", "seconds",
+                                                               "valid_for", "optimal", "grid_mm")}
+        if not r.get("poses") or self.ctx is None or self.ctx.ctx_id != ctx_id:
+            return
+        poses = [(p, int(o), np.asarray(t, float)) for p, o, t in r["poses"]]
+        raw, cv = self.ev.raw_from_poses(poses, [])
+        g, _ = self._score_raw(raw)
+        h = layout_hash(sigs[2], poses)
+        if h in self.by_hash or h in self.pending_hashes:
+            return
+        algo = {"id": "cpsat_box", "label": "CP-SAT on single-box proxies",
+                "reason": f"{r['status']} after {r['seconds']:.0f} s; minimises the used length only",
+                "search": "cp-sat", "decoder": "single-box proxy", "detail": "CP-SAT (OR-Tools) on single-box proxies",
+                "lower_bound_mm": r.get("lower_bound_mm")}
+        self.pending_hashes.add(h)
+        self.val_queue.append({"key": (-1.0, g), "g": g, "cv": cv, "h": h, "poses": poses, "raw": raw, "keys": None,
+                               "ctx_id": ctx_id, "sigs": sigs, "algo": algo, "compact": False, "meta": None,
+                               "kind": "cpsat"})
+        self._dispatch_validation()
+
     # =========================================================================================== attribution
     def _attribution_path(self) -> Path:
         return self.store.cache / f"attribution_{self.ctx.parts_sig}_{self._stage2_mode()}.json"
@@ -1672,6 +1993,12 @@ class Coordinator:
         metrics = dict(e.metrics)
         metrics["lower_bounds"] = [(f"{b['name']} (valid for {b['valid_for']})", b["value_mm"], b["why"])
                                    for b in lbs if b.get("value_mm") is not None]
+        cps = self.cpsat_results.get(e.parts_sig) or {}
+        if e.stage == 1 and cps.get("lower_bound_mm") is not None:
+            metrics["lower_bounds"].append(
+                ("CP-SAT best bound (valid for single-box proxies only)", cps["lower_bound_mm"],
+                 f"OR-Tools CP-SAT, {cps.get('status')}, {cps.get('seconds', 0):.0f} s, 0.1 mm grid with dimensions "
+                 "rounded up; not a bound for the true shapes"))
         md = proof_markdown(cert, rep, metrics)
         out = {"markdown": md, "certificate": cert, "valid": rep.valid}
         self.proof_cache[key] = out
