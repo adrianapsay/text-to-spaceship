@@ -230,6 +230,57 @@ def test_detail_ladder_runs_and_feeds_the_search(live):
     assert next(p for p in summary if p["part_id"] == pid)["in_use"]["hybrid_box"] == "F0"
 
 
+def _stage2_result(client, coord):
+    if coord.best_id is not None and coord.archive[coord.best_id].stage == 2:
+        return coord.layout_json(coord.archive[coord.best_id])
+    if coord.least_id is not None:
+        return coord.layout_json(coord.archive[coord.least_id])
+    return None
+
+
+def test_stage2_default_then_continuous_cable(live):
+    client, coord, store = live
+    wait_for(lambda: best(client))
+    s = client.put("/api/settings", json={"stage": 2, "sliders": {"cable": 0}}).json()
+    assert s["stage"] == 2
+    lay = wait_for(lambda: (x := _stage2_result(client, coord)) and x["current"] and x, timeout=120)
+    assert lay["stage"] == 2 and lay["label"] == "ENGINEERING-CONSTRAINED — not flight-qualified"
+    assert lay["status"] in ("VALIDATED", "INFEASIBLE") and lay["validation"]["certified"]
+    st2 = lay["stage2"]
+    assert st2["mode"] == "default" and any(f["kind"] == "rail" for f in st2["frame"])
+    if lay["status"] == "INFEASIBLE":
+        assert lay["verdict"] == "NO FEASIBLE LAYOUT FOUND (not proven infeasible)" and lay["violations_engineering"]
+    else:
+        assert not lay["violations_engineering"] and lay["metrics"]["com_box_ok"]
+        assert lay["stage2"]["insertion_order"]
+    c0 = store.revs["constraint_rev"]
+    client.put("/api/settings", json={"sliders": {"cable": 85}})
+    assert store.revs["constraint_rev"] > c0                 # continuous-cable mode: new rules, new islands
+    lay = wait_for(lambda: (x := _stage2_result(client, coord)) and x["current"] and x["stage2"]["mode"] == "continuous"
+                   and x, timeout=120)
+    assert lay["stage2"]["corridor"] in ("+x", "-x", "+y", "-y")
+    board = lay["stage2"]["mounts"].get(next(p for p, e in store.entries.items() if e.name == "pcb_obc"))
+    assert board is not None
+    if board["ok"]:
+        items = [i for i in lay["extra_items"] if i["kind"] == "standoff"]
+        assert len(items) == 4 and all(i["mass_kg"] > 0 for i in items)
+        mesh = client.get(items[0]["mesh_url"]).content
+        assert np.frombuffer(mesh[:8], "<u4").tolist() == [8, 12]
+    client.put("/api/settings", json={"sliders": {"cable": 0}})
+    # constraint attribution (O.3): one row per relaxed family, same seed and budget
+    coord.attribution_opts = {"generations": 2, "pop": 10}
+    assert client.get("/api/stage2/attribution").status_code == 404
+    assert client.post("/api/stage2/attribution/run").json()["status"] == "PENDING"
+    att = wait_for(lambda: (x := client.get("/api/stage2/attribution")).status_code == 200 and
+                   x.json()["status"] == "DONE" and x.json(), timeout=240, every=1.0)
+    fams = [r["relaxed"] for r in att["rows"]]
+    assert fams[0] == "none" and {"clearances", "frame", "pcb_stack", "harness", "mounting", "com_box"} <= set(fams)
+    assert all(r["evaluations"] > 0 for r in att["rows"])
+    assert "delta_length_used_mm" in att["rows"][1]
+    client.put("/api/settings", json={"stage": 1, "sliders": {"cable": 0}})
+    wait_for(lambda: coord.ctx is not None and coord.ctx.stage == 1 and best(client), timeout=60)
+
+
 def test_selector_endpoints(live):
     client, coord, _ = live
     wait_for(lambda: best(client))

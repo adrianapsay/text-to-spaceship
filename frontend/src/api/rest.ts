@@ -1,6 +1,7 @@
 // Typed REST client for docs/api-contract.md §3.
 import type { Transport } from './transport';
 import type {
+  Attribution,
   Benchmarks,
   CadStatus,
   FidelityResult,
@@ -211,6 +212,12 @@ export class ApiClient {
   }
   fidelitySummary() {
     return this.json<FidelitySummary>('/api/fidelity/summary');
+  }
+  attribution() {
+    return this.json<Attribution>('/api/stage2/attribution');
+  }
+  runAttribution() {
+    return this.send<unknown>('POST', '/api/stage2/attribution/run', {});
   }
   cadStatus() {
     return this.json<CadStatus>('/api/cad/status');

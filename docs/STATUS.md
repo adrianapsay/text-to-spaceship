@@ -15,7 +15,7 @@ and are not the M8 benchmark (no repetitions, no statistics).
 | M4 live backend (project store, islands, validators, coordinator, REST + WebSocket) | done | `test_api` (11 tests) |
 | M5 front end on the live backend | done | Playwright live suite (4), mock suite (4), Vitest (62) |
 | M6 search: memetic BRKGA, LAHC, pymoo NSGA-II, height-map decoder, compaction, selector, detail ladder | done with deviations (below) | `test_selector`, `test_pymoo_accuracy`, `test_api` |
-| M7 Stage 2 search, cable modes, comparison | planned | — |
+| M7 Stage 2 model and search, cable-slider modes, mounting, insertion order, least-violating reporting, constraint attribution, comparison view | done with deviations (below) | `test_stage2` (8), `test_api` Stage 2 + attribution, Vitest INFEASIBLE rules |
 | M8 benchmarks, Size Study, Explain backend | planned | — |
 | M9 Manufacturable Design | planned | — |
 | M10 exports, CAD package, final report | planned | — |
@@ -38,6 +38,24 @@ and are not the M8 benchmark (no repetitions, no statistics).
 - **NSGA-II:** pymoo 0.6.2 (decision U1) after passing the accuracy tests (non-dominated sorting = brute force on
   tie-heavy sets, hypervolume exact in 2-D and 3-D, IGD < 0.01 on ZDT1, constrained ask/tell).
 
+## M7 deviations and modelling choices (all ASSUMED rules are labelled in the app)
+
+- **U6 mounting layer** modelled as a 1.8 mm pad reserved on each part's largest face (any orientation), so that
+  side ends 3.0 mm from its wall / end plate / rail / PC/104 deck; reach ≤ 5 mm beyond the layer. All other sides
+  keep the 1.2 mm clearance. The *face* is fixed (largest face); its direction is the search's choice.
+- **Edge-standing boards** (continuous-cable mode): option (b) only — four M3 standoffs (5 × 5 mm envelope,
+  3–50 mm, lengthened to the facing wall when the path is clear). Card guides (option a) are not implemented.
+- **Volume between stacked PCBs is reserved** for board components (ASSUMED); nothing else is placed there.
+- **Thermal tags, connector-access zones and cable bend radius:** not modelled (as in the protocol, "inactive until
+  tagged" / "NOT MODELLED").
+- **Overflow model:** the Stage 2 decoder may stack parts beyond the end plate; overflow is a violation the search
+  minimises. A candidate that breaks any engineering rule is certified under relaxed rules and reported as
+  INFEASIBLE ("NO FEASIBLE LAYOUT FOUND (not proven infeasible)"), never as VALIDATED.
+- **Constraint attribution** rows are search results under relaxed rules (box-feasible by construction, not
+  certified), equal effort per row (fixed generations), baseline repeated with a second seed to show noise.
+- **Stage 2 search uses the box decoder only** (the height-map decoder has no keep-out model).
+- **"INFEASIBLE (proven)"** is never claimed: no Stage 2 bound proof is implemented.
+
 ## Measured so far
 
 | What | Result |
@@ -52,3 +70,7 @@ and are not the M8 benchmark (no repetitions, no statistics).
 | Settings edit → `edit.ack` | 7.1 ms; mass edit → `metrics.update` 63 ms (≈ 250 archived layouts re-computed) |
 | Proof for a live layout | 0.30 s; stand-alone checker OVERALL: PASS |
 | Detail ladder, torus, 10 levels (before the convergence fix) | 515 s; F3-16 cover build alone 118 s |
+| Stage 2 used length in a 700 mm test box, box decoder, 20 s GA, no mounting / COM | default 416.7 mm, soft 347.6 mm, continuous 367.4 mm (usable ≈ 334 mm) |
+| Stage 2, one island, 90 s, all rules | default: 13.1 mm over, 2 parts unmounted; soft: 56.7 mm over, all mounted; continuous: 4.2 mm over, 3 unmounted |
+| Live Stage 2 (4 islands, ~60 s, default mode) | NO FEASIBLE LAYOUT FOUND; least-violating L-0463: 78.2 mm over, 3 parts unmounted |
+| Constraint attribution, default mode, 25 generations × 40 per row | baseline 393.8 mm / violation 9.85; clearances → Stage 1: 339.0 mm; no walls/rails: 346.0 mm; free boards: 363.6 mm; no harness: 397.4 mm; **no mounting rule: 330.8 mm, violation 1.00**; COM box off: 413.4 mm (noise) |

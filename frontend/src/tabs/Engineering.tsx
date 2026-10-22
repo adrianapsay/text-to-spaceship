@@ -1,10 +1,11 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import type { LayoutSummary, Metrics, Vec3 } from '../api/types';
+import { session } from '../api/session';
 import { useApp } from '../store/store';
-import { useParts } from '../hooks';
+import { useAsync, useParts } from '../hooks';
 import { itemsFor, MetricsDeltaTable, useFullLayout, useLayoutList } from '../components/LayoutCompare';
 import { DualViewport } from '../components/viewport/DualViewport';
-import { Badge, EmptyState, MockTag, Notice, Panel } from '../components/ui';
+import { Badge, Button, EmptyState, MockTag, Notice, Panel } from '../components/ui';
 import { fmt } from '../lib/fmt';
 import { DISCLAIMER_STAGE2 } from '../lib/copy';
 
@@ -78,8 +79,11 @@ export function EngineeringTab() {
   const newest = useApp((s) => s.conn.newest);
   const parts = useParts();
   const list = useLayoutList();
+  const infeasible = useApp((s) => s.solver.infeasible);
   const s1 = latest(list.data, (l) => l.stage === 1);
-  const s2 = latest(list.data, (l) => l.stage === 2);
+  const s2v = latest(list.data, (l) => l.stage === 2);
+  // no feasible Stage 2 layout yet: compare against the least-violating certified candidate (labelled)
+  const s2 = s2v ?? (infeasible && infeasible.stage === 2 ? (infeasible as unknown as LayoutSummary) : null);
   const s2default = latest(list.data, (l) => l.stage === 2 && (l.mode ?? 'default') === 'default');
   const s2cable = latest(list.data, (l) => l.stage === 2 && l.mode === 'continuous_cable');
   const a = useFullLayout(s1?.id ?? null);
@@ -91,7 +95,9 @@ export function EngineeringTab() {
   const cm = cableMode(settings?.sliders.cable ?? 0, threshold);
   const dL = s2default?.metrics?.length_used_mm != null && s2cable?.metrics?.length_used_mm != null ? s2cable.metrics.length_used_mm - s2default.metrics.length_used_mm : null;
   const dD = s2default?.metrics?.com_error_mm != null && s2cable?.metrics?.com_error_mm != null ? s2cable.metrics.com_error_mm - s2default.metrics.com_error_mm : null;
-  const searchedNothing = settings?.stage === 2 && !s2 && (runStatus === 'CONVERGED' || runStatus === 'IDLE') && (progress?.evaluations ?? 0) > 0;
+  const searchedNothing =
+    (settings?.stage === 2 && !s2v && !!infeasible) ||
+    (settings?.stage === 2 && !s2 && (runStatus === 'CONVERGED' || runStatus === 'IDLE') && (progress?.evaluations ?? 0) > 0);
   const infeasibleProven = /INFEASIBLE \(proven\)/i.test(detail);
   const byId = Object.fromEntries(parts.map((p) => [p.id, p.name]));
   const rules: [string, string][] = [
@@ -113,6 +119,12 @@ export function EngineeringTab() {
         {searchedNothing || infeasibleProven ? (
           <Notice tone="err" role="status">
             <strong data-testid="no-feasible">{infeasibleProven ? 'INFEASIBLE (proven)' : 'NO FEASIBLE LAYOUT FOUND (not proven infeasible)'}</strong> — constraints are never relaxed automatically.
+            {b.data?.status === 'INFEASIBLE' && b.data.violations_engineering?.length ? (
+              <span>
+                {' '}
+                Least-violating candidate {b.data.id} (geometry certified) breaks: {b.data.violations_engineering.join('; ')}.
+              </span>
+            ) : null}
           </Notice>
         ) : null}
         <div style={{ height: 420, display: 'flex' }}>
@@ -199,9 +211,76 @@ export function EngineeringTab() {
           {b.data?.metrics?.interlocked?.length ? <Notice tone="err">Interlocked: {b.data.metrics.interlocked.map((p) => p.map((x) => byId[x] ?? x).join(' ↔ ')).join('; ')}</Notice> : null}
         </Panel>
       </div>
-      <Panel title="Constraint attribution" caption="Stage 2 re-solved with each constraint family relaxed in turn (measured, with the budget used)">
-        <EmptyState title="No constraint-attribution results yet">The contract has no endpoint for attribution results yet; the chart appears when the backend publishes them.</EmptyState>
-      </Panel>
+      <AttributionPanel />
     </div>
+  );
+}
+
+function AttributionPanel() {
+  const study = useApp((s) => s.solver.studies['attribution']);
+  const res = useAsync(() => session().api.attribution(), [study?.progress, study?.at]);
+  const [err, setErr] = useState<string | null>(null);
+  const a = res.data;
+  const running = a && a.status !== 'DONE';
+  const run = async () => {
+    setErr(null);
+    try {
+      await session().api.runAttribution();
+    } catch (e) {
+      setErr((e as Error).message);
+    }
+    res.reload();
+  };
+  return (
+    <Panel
+      title="Constraint attribution"
+      caption="Stage 2 re-solved with each constraint family relaxed in turn — same seed and budget per row (measured, not certified)"
+      right={
+        <Button size="small" onClick={run} disabled={!!running} data-testid="attribution-run">
+          {running ? 'Running…' : 'Run attribution'}
+        </Button>
+      }
+    >
+      {err ? <Notice tone="err">{err}</Notice> : null}
+      {!a || res.notAvailable ? (
+        <EmptyState title="No constraint-attribution results yet">Run it to see which ASSUMED rule costs the most length, balance or feasibility.</EmptyState>
+      ) : (
+        <>
+          {a.largest_effect ? <Notice tone="info">{a.largest_effect.text}.</Notice> : null}
+          <table className="data" data-testid="attribution-table">
+            <thead>
+              <tr>
+                <th>Relaxed</th>
+                <th className="num">Violation measure</th>
+                <th className="num">Used length</th>
+                <th className="num">ΔL vs all rules</th>
+                <th className="num">Overflow</th>
+                <th className="num">Unmounted</th>
+                <th className="num">COM error</th>
+                <th>Feasible</th>
+              </tr>
+            </thead>
+            <tbody>
+              {a.rows.map((r) => (
+                <tr key={r.relaxed}>
+                  <td>{r.label}</td>
+                  <td className="num">{fmt(r.cv, 'score')}</td>
+                  <td className="num">{fmt(r.length_used_mm, 'mm')}</td>
+                  <td className="num">{r.delta_length_used_mm == null ? '—' : fmt(r.delta_length_used_mm, 'mm', { signed: true })}</td>
+                  <td className="num">{fmt(r.overflow_mm, 'mm')}</td>
+                  <td className="num">{r.unmounted}</td>
+                  <td className="num">{fmt(r.com_error_mm, 'mm')}</td>
+                  <td>{r.feasible ? <Badge tone="ok">yes</Badge> : <Badge tone="err">no</Badge>}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <div className="muted small">
+            {a.note} · mode {a.mode ?? '—'} · seed {a.seed ?? '—'} · {a.generations ?? '—'} generations × {a.population ?? '—'} per row
+            {running ? ` · running ${Math.round((a.progress ?? 0) * 100)} %` : ''}
+          </div>
+        </>
+      )}
+    </Panel>
   );
 }

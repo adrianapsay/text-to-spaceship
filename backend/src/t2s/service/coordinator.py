@@ -47,6 +47,10 @@ DECODER_LABELS = {"box": "box decoder", "heightmap": "height-map decoder"}
 SELECTOR_SETTLE_S = 1.0
 
 
+def _mode_name(meta: dict | None) -> str:
+    return "continuous_cable" if (meta or {}).get("mode") == "continuous" else "default"
+
+
 def perturbed_weights(weights: dict, k: int, sigma: float = 0.3) -> dict:
     """Island k searches slightly perturbed weights (protocol §F.7) so nearby slider positions are already covered
     in the archive; island 0 uses the exact weights. Deterministic per island; all candidates are re-scored with
@@ -134,6 +138,7 @@ class LayoutEntry:
     keys: list | None = None
     algorithm: dict = field(default_factory=lambda: dict(ALGORITHM))
     spec_sig: str = ""
+    meta: dict = field(default_factory=dict)     # Stage 2: stack, corridor, mounts, standoffs, overflow
 
     def to_store(self) -> dict:
         d = asdict(self)
@@ -227,6 +232,7 @@ class Coordinator:
         self.search_requested = False
         self.choice: AlgorithmChoice | None = None
         self.choice_pending: tuple[AlgorithmChoice, float] | None = None
+        self.least_id: str | None = None           # Stage 2: least-violating certified candidate
         self.selector_log: list[dict] = []
         self._stats = None
         self._stats_sig = None
@@ -236,6 +242,7 @@ class Coordinator:
         self.last_ladder_poll = 0.0
         self.auto_ladder = True
         self.ladder_opts: dict = {}
+        self.attribution_opts: dict = {}
 
     # =========================================================================================== lifecycle
     @property
@@ -489,7 +496,8 @@ class Coordinator:
             self._set_status("IDLE", "no packable parts")
             self.broadcast("project.changed", {"reason": reason})
             return
-        ctx = build_context(recs, stage, {pid: self.reps[pid] for pid in recs if pid in self.reps})
+        ctx = build_context(recs, stage, {pid: self.reps[pid] for pid in recs if pid in self.reps},
+                            stage2_mode=self._stage2_mode())
         if old is None or ctx.ctx_id != old.ctx_id:
             if old is not None and (ctx.constraint_sig != old.constraint_sig or ctx.stage != old.stage) \
                     and ctx.parts_sig == old.parts_sig:
@@ -516,6 +524,9 @@ class Coordinator:
         self._restamp_and_rescore(physics=True)
         self.broadcast("project.changed", {"reason": reason})
         self._publish_best("archive", force=True)
+        if self.best_id is None and self.least_id is not None:
+            self.broadcast("layout.infeasible", {"layout": self.layout_json(self.archive[self.least_id]),
+                                                 "verdict": "NO FEASIBLE LAYOUT FOUND (not proven infeasible)"})
 
     def _send_context(self, w: WorkerHandle, warm=()) -> None:
         if self.ctx is None or self.ctx_path is None:
@@ -544,6 +555,10 @@ class Coordinator:
     def _mode(self) -> str:
         s = self.store.settings
         return "continuous_cable" if int(s["stage"]) == 2 and float(s["sliders"].get("cable", 0)) >= 70 else "default"
+
+    def _stage2_mode(self) -> str:
+        from ..constraints.stage2_model import mode_for
+        return mode_for(float(self.store.settings["sliders"].get("cable", 0)))
 
     def _compute_choice(self) -> AlgorithmChoice:
         s = self.store.settings
@@ -599,7 +614,7 @@ class Coordinator:
 
     def _restamp_and_rescore(self, physics: bool) -> None:
         for e in self.archive.values():
-            if not self._current(e) or e.status not in ("VALIDATED", "FINAL"):
+            if not self._current(e) or e.status not in ("VALIDATED", "FINAL", "INFEASIBLE"):
                 continue
             if physics:
                 self._compute_physics(e)
@@ -643,7 +658,14 @@ class Coordinator:
                 continue
             r = ROTATIONS_F[o]
             items.append((p.mass_kg, r @ p.com_can_mm + t, r @ p.inertia_com_kgm2 @ r.T))
+        hardware = []
+        if e.meta.get("standoffs"):
+            from ..constraints.stage2_model import Stage2Model
+            hardware = Stage2Model.standoff_mass(e.meta["standoffs"])
+            items += hardware
         m = dict(e.geo)
+        if hardware:
+            m["hardware_mass_kg"] = float(sum(h[0] for h in hardware))
         m["mass_excluded_parts"] = excluded
         raw = {"L": e.geo["length_used_mm"], "span": e.geo["span_mm"]}
         if "margin_objective" in e.geo and e.stage == 2:
@@ -668,6 +690,24 @@ class Coordinator:
                     m["com_box_verdict"] = "NOT ASSESSABLE"
                 excess = np.maximum(np.abs(a.com_mm) - np.array([20.0, 20.0, 70.0]), 0)
                 e.cv = float(excess.sum() / 10.0)
+        if e.stage == 2:
+            ev_ = list(e.validation.get("engineering_violations", []))
+            e.cv += float(len(e.meta.get("unmounted", []))) + float(e.meta.get("overflow_mm", 0.0)) / 10.0
+            if m.get("com_box_ok") is False:
+                ev_.append("COM outside the CDS box (|x| ≤ 20, |y| ≤ 20, |z| ≤ 70 mm): "
+                           f"({m['com_mm'][0]:.1f}, {m['com_mm'][1]:.1f}, {m['com_mm'][2]:.1f}) mm")
+            if m.get("com_box_ok") is None and excluded:
+                ev_.append("COM box NOT ASSESSABLE: mass properties withheld for " + ", ".join(excluded))
+            m["violations"] = ev_
+            m["cable_blocked_fraction"] = e.meta.get("H")
+            m["mounting"] = e.meta.get("mounts")
+            if e.status in ("VALIDATED", "INFEASIBLE"):
+                if not e.validation.get("certified"):
+                    e.status = "REJECTED"
+                elif ev_ or e.cv > 0:
+                    e.status = "INFEASIBLE"
+                else:
+                    e.status = "VALIDATED"
         m.setdefault("insertion_order", None)
         m.setdefault("interlocked", [])
         m.setdefault("cable_blocked_fraction", None)
@@ -679,10 +719,23 @@ class Coordinator:
         cur = [e for e in self.archive.values() if self._current(e) and e.status in ("VALIDATED", "FINAL")]
         if not cur:
             self.best_id = None
-            return
-        best = min(cur, key=lambda e: (e.cv, e.g, e.raw.get("L", math.inf), e.id))
-        if best.id != self.best_id:
-            self.best_id = best.id
+        else:
+            best = min(cur, key=lambda e: (e.cv, e.g, e.raw.get("L", math.inf), e.id))
+            if best.id != self.best_id:
+                self.best_id = best.id
+        self._select_least(publish=False)
+
+    def _select_least(self, publish: bool = True) -> None:
+        """Stage 2 with no feasible layout: the least-violating certified candidate (shown, never as VALIDATED)."""
+        prev = self.least_id
+        if self.best_id is not None:
+            self.least_id = None
+        else:
+            inf = [e for e in self.archive.values() if self._current(e) and e.status == "INFEASIBLE"]
+            self.least_id = min(inf, key=lambda e: (e.cv, e.g, e.id)).id if inf else None
+        if publish and self.least_id is not None and self.least_id != prev:
+            self.broadcast("layout.infeasible", {"layout": self.layout_json(self.archive[self.least_id]),
+                                                 "verdict": "NO FEASIBLE LAYOUT FOUND (not proven infeasible)"})
 
     def _maybe_new_epoch(self, force: bool = False) -> None:
         if self.ctx is None:
@@ -744,13 +797,13 @@ class Coordinator:
     def _dispatch_validation(self) -> None:
         idle = [w for w in self.workers if w.role == "validator" and w.ready and not w.busy]
         while idle and self.val_queue:
-            self.val_queue.sort(key=lambda x: x[0])
+            self.val_queue.sort(key=lambda x: x["key"])
             item = self.val_queue.pop(0)
-            ctx_id = item[5]
+            ctx_id = item["ctx_id"]
             w = next((w for w in idle if w.ctx_id == ctx_id), None)
             if w is None:
                 if self.ctx is not None and ctx_id != self.ctx.ctx_id:
-                    self.pending_hashes.discard(item[1])
+                    self.pending_hashes.discard(item["h"])
                     continue                  # older inputs: nobody can validate it any more
                 self.val_queue.insert(0, item)
                 break
@@ -758,7 +811,7 @@ class Coordinator:
             self.job_counter += 1
             w.busy, w.job = True, self.job_counter
             self.val_pending[w.job] = item
-            w.cmd_q.put(("validate", w.job, ctx_id, item[2], False, bool(item[8])))
+            w.cmd_q.put(("validate", w.job, ctx_id, item["poses"], False, bool(item["compact"]), item["meta"]))
 
     def _migrate(self) -> None:
         if self.ctx is None or self.best_id is None:
@@ -798,19 +851,35 @@ class Coordinator:
             return
         best_cand = None
         best_g_now = self.archive[self.best_id].g if self.best_id else math.inf
+        least = self.archive.get(self.least_id) if self.least_id else None
         pool = self.raw_pool.setdefault(ctx_id, [])
         cur = [e for e in self.archive.values() if self._current(e) and e.status in ("VALIDATED", "FINAL")]
+        sigs = (self.ctx.parts_sig, self.ctx.constraint_sig, self.ctx.stage, self.ctx.spec_sig)
         for c in cands:
             if c["unplaced"]:
                 continue
-            raw, cv = self.ev.raw_from_poses(c["poses"], c["unplaced"])
+            raw_extra = {k: c["raw"][k] for k in ("H",) if k in c["raw"]}
+            raw, cv = self.ev.raw_from_poses(c["poses"], c["unplaced"], c.get("penalty", 0.0),
+                                             [(m, np.asarray(p), np.asarray(i)) for m, p, i in c.get("extra_mass", [])],
+                                             raw_extra)
+            g, nrm = self._score_raw(raw)
+            h = layout_hash(self.ctx.stage, c["poses"])
+            item = {"key": (cv, g), "g": g, "cv": cv, "h": h, "poses": c["poses"], "raw": raw,
+                    "keys": np.asarray(c["keys"]).tolist(), "ctx_id": ctx_id, "sigs": sigs, "algo": self._algo_for(w),
+                    "compact": False, "meta": c.get("meta"), "kind": "search"}
             if cv > 0:
+                # Stage 2 without a feasible layout yet: certify the least-violating candidate (protocol §F.2)
+                if self.ctx.stage == 2 and not cur and h not in self.by_hash and h not in self.pending_hashes and \
+                        (least is None or (cv, g) < (least.cv, least.g)) and \
+                        not any(x["kind"] == "least" for x in self.val_queue) and \
+                        not any(x["kind"] == "least" for x in self.val_pending.values()):
+                    item["kind"] = "least"
+                    self.pending_hashes.add(h)
+                    self.val_queue.append(item)
                 continue
             pool.append(raw)
-            g, nrm = self._score_raw(raw)
             if w.best_g is None or g < w.best_g:
                 w.best_g = g
-            h = layout_hash(self.ctx.stage, c["poses"])
             if best_cand is None or g < best_cand[0]:
                 best_cand = (g, h, c, raw, nrm)
             if h in self.by_hash or h in self.pending_hashes:
@@ -820,17 +889,15 @@ class Coordinator:
                 all(k in e.raw for k in keys3) and dominates(e.raw, raw, keys3) for e in cur)
             if g < best_g_now - 1e-12 or nondom:
                 self.pending_hashes.add(h)
-                # a would-be new best from the box decoder also gets certified drop compaction
-                compact = g < best_g_now - 1e-12 and w.plan.get("decoder") == "box"
-                self.val_queue.append((g, h, c["poses"], raw, np.asarray(c["keys"]).tolist(), ctx_id,
-                                       (self.ctx.parts_sig, self.ctx.constraint_sig, self.ctx.stage, self.ctx.spec_sig),
-                                       self._algo_for(w), compact))
+                # a would-be new best from the box decoder also gets certified drop compaction (Stage 1)
+                item["compact"] = g < best_g_now - 1e-12 and w.plan.get("decoder") == "box" and self.ctx.stage == 1
+                self.val_queue.append(item)
         if len(pool) > 2000:
             del pool[:1000]
         if len(self.val_queue) > 24:
-            self.val_queue.sort(key=lambda x: x[0])
+            self.val_queue.sort(key=lambda x: x["key"])
             for item in self.val_queue[24:]:
-                self.pending_hashes.discard(item[1])
+                self.pending_hashes.discard(item["h"])
             del self.val_queue[24:]
         now = time.monotonic()
         if best_cand is not None and now - self.last_candidate > CANDIDATE_EVERY_S and \
@@ -848,32 +915,39 @@ class Coordinator:
         item = self.val_pending.pop(job, None)
         if item is None:
             return
-        g, h, poses, raw, keys, item_ctx, sigs, algo, _compact = item
+        h, poses, sigs, keys = item["h"], item["poses"], item["sigs"], item["keys"]
         self.pending_hashes.discard(h)
         if summary is None:                    # the validator had switched context: retry if still relevant
-            if self.ctx is not None and item_ctx == self.ctx.ctx_id:
+            if self.ctx is not None and item["ctx_id"] == self.ctx.ctx_id:
                 self.pending_hashes.add(h)
                 self.val_queue.append(item)
             return
         decoded_hash = h
-        algo = dict(algo)
+        algo = dict(item["algo"])
         if extra and extra.get("poses"):
             poses = extra["poses"]
             h = layout_hash(sigs[2], poses)
             algo["detail"] += " + certified drop compaction"
             algo["compaction"] = {"moved_mm": {k: v for k, v in extra["moved_mm"].items() if v > 0},
                                   "seconds": extra["seconds"]}
+        meta = item.get("meta") or {}
         geo = self._geo_metrics(poses, summary, sigs[2])
+        if sigs[2] == 2:
+            order = summary.get("insertion_order")
+            geo["insertion_order"] = [p for p, _ in order] if order else None
+            geo["insertion_directions"] = [u for _, u in order] if order else None
         n = self.store.next_id("layout")
-        e = LayoutEntry(id=f"L-{n:04d}", hash=h, stage=sigs[2], mode="default", algorithm=algo,
+        e = LayoutEntry(id=f"L-{n:04d}", hash=h, stage=sigs[2], mode=_mode_name(meta), algorithm=algo,
                         status="VALIDATED" if summary["valid"] else "REJECTED", parts_sig=sigs[0], constraint_sig=sigs[1],
                         poses=[(pid, int(o), np.asarray(t, float)) for pid, o, t in poses], geo=geo,
                         validation={"certified": bool(summary["valid"]), "validator_version": summary["validator_version"],
                                     "tolerance_mm": 0.001, "pairs": summary["pairs"], "statics": summary["statics"],
                                     "levels": summary["levels"], "min_clearance_mm": summary["min_clearance_mm"],
                                     "seconds": summary["seconds"], "checked_at": now_iso(),
-                                    "violations": summary["violations"]},
-                        keys=keys, spec_sig=sigs[3])
+                                    "violations": summary["violations"],
+                                    "engineering_violations": summary.get("engineering_violations", []),
+                                    "relaxed_rules": bool(summary.get("relaxed"))},
+                        keys=keys, spec_sig=sigs[3], meta=jsonable(meta))
         if not summary["valid"]:
             self._error(f"validator rejected decoder layout {e.id}: {summary['violations'][:3]}")
         self._compute_physics(e)
@@ -883,6 +957,9 @@ class Coordinator:
         self.by_hash[h] = e.id
         self.by_hash[decoded_hash] = e.id
         self._persist(e)
+        if self._current(e) and e.status == "INFEASIBLE":
+            self._select_least()
+            return
         if not self._current(e) or e.status != "VALIDATED":
             return
         prev = self.best_id
@@ -945,7 +1022,9 @@ class Coordinator:
             if h in self.by_hash or h in self.pending_hashes:
                 continue
             self.pending_hashes.add(h)
-            self.val_queue.append((g, h, cand, raw, e.keys, self.ctx.ctx_id, sigs, algo, False))
+            self.val_queue.append({"key": (0.0, g), "g": g, "cv": 0.0, "h": h, "poses": cand, "raw": raw,
+                                   "keys": e.keys, "ctx_id": self.ctx.ctx_id, "sigs": sigs, "algo": algo,
+                                   "compact": False, "meta": None, "kind": "slab"})
 
     def _geo_metrics(self, poses, summary, stage: int) -> dict:
         tops, bottoms, vol = [], [], 0.0
@@ -1003,10 +1082,59 @@ class Coordinator:
             "algorithm": e.algorithm, "validation": e.validation, "origin": e.origin, "created": e.created,
             "part_ids": [p[0] for p in e.poses], "current": self._current(e),
         }
+        if e.stage == 2:
+            d["label"] = "ENGINEERING-CONSTRAINED — not flight-qualified"
+            d["violations_engineering"] = e.metrics.get("violations", [])
+            if e.status == "INFEASIBLE":
+                d["verdict"] = "NO FEASIBLE LAYOUT FOUND (not proven infeasible)"
         if full:
             d["poses"] = self.pose_json(e.poses)
-            d["extra_items"] = []
+            d["extra_items"] = self._extra_items(e)
+            if e.stage == 2:
+                d["stage2"] = self._stage2_view(e)
         return jsonable(d)
+
+    def _extra_items(self, e: LayoutEntry) -> list[dict]:
+        from ..constraints.stage2_model import Stage2Model
+        out = []
+        st = e.meta.get("standoffs") or []
+        masses = Stage2Model.standoff_mass(st)
+        for k, ((pid, b), (m, _, _)) in enumerate(zip(st, masses)):
+            out.append({"id": f"{e.id}-so{k}", "kind": "standoff", "process": "standoff", "for_part": pid,
+                        "mesh_url": f"/api/items/{e.id}-so{k}/mesh", "mass_kg": m, "cost_rel": None,
+                        "material": "aluminium (ASSUMED)", "label": "M3 standoff (ASSUMED 5 × 5 mm envelope)",
+                        "box_mm": b})
+        return out
+
+    def _stage2_view(self, e: LayoutEntry) -> dict:
+        """Rules this layout was decoded under, for display (rails, harness / corridor, rods, stack block)."""
+        meta = e.meta or {}
+        frame = []
+        if self.ctx is not None and self.ctx.stage == 2:
+            try:
+                for s in self.ctx.stage2_model().statics(meta):
+                    frame.append({"kind": s.kind, "id": s.name, "min": s.corners.min(0).tolist(),
+                                  "max": s.corners.max(0).tolist()})
+            except Exception:  # noqa: BLE001
+                frame = []
+        return {"mode": meta.get("mode"), "corridor": meta.get("corridor"), "stack_span_mm": meta.get("stack_span"),
+                "overflow_mm": meta.get("overflow_mm"), "unmounted": meta.get("unmounted", []),
+                "mounts": meta.get("mounts", {}), "cable_blocked_fraction": meta.get("H"), "frame": frame,
+                "insertion_order": e.geo.get("insertion_order"),
+                "assumed": ["2 mm walls", "8.5 mm corner rails", "clearances 2.2 / 1.2 mm (U4)",
+                            "PC/104 stack, 15.24 mm pitch, rods at (±35, ±35) mm", "3 mm mounting layer (U6)",
+                            "10 mm harness channel (U5)", "M3 standoffs 5 × 5 mm, 3–50 mm long (Addendum 2.3)"]}
+
+    def item_mesh(self, iid: str) -> bytes:
+        lid, _, k = iid.rpartition("-so")
+        e = self.archive.get(lid)
+        if e is None or not k.isdigit() or int(k) >= len(e.meta.get("standoffs") or []):
+            raise KeyError(iid)
+        b = np.asarray(e.meta["standoffs"][int(k)][1], float)
+        v = np.array([[x, y, z] for z in (b[2], b[5]) for y in (b[1], b[4]) for x in (b[0], b[3])], "<f4")
+        f = np.array([[0, 2, 1], [1, 2, 3], [4, 5, 6], [5, 7, 6], [0, 1, 4], [1, 5, 4], [2, 6, 3], [3, 6, 7],
+                      [0, 4, 2], [2, 4, 6], [1, 3, 5], [3, 7, 5]], "<u4")
+        return np.array([len(v), len(f)], "<u4").tobytes() + v.tobytes() + f.tobytes()
 
     def _candidate_json(self, h, poses, raw, g, nrm) -> dict:
         return jsonable({
@@ -1075,8 +1203,10 @@ class Coordinator:
 
     def snapshot(self) -> dict:
         best = self.archive.get(self.best_id) if self.best_id else None
+        least = self.archive.get(self.least_id) if self.least_id else None
         return {"project": self.project_json(), "best_validated": self.layout_json(best) if best else None,
-                "candidate": self.candidate, "run_status": self.run_status, "selector": self.selector()}
+                "candidate": self.candidate, "run_status": self.run_status, "selector": self.selector(),
+                "least_violating": self.layout_json(least) if least else None}
 
     def selector(self) -> dict:
         c = self.choice or (self._compute_choice() if self.ctx is not None else None)
@@ -1165,6 +1295,7 @@ class Coordinator:
         s = self.store.settings
         old_stage = int(s.get("stage", 1))
         old_target = list(s.get("target_com_mm", [0, 0, 0]))
+        old_s2 = self._stage2_mode()
         for k in ("stage", "target_com_mm", "compactness_definition", "show_frame_mass_in_com"):
             if k in new and new[k] is not None:
                 s[k] = new[k]
@@ -1176,6 +1307,9 @@ class Coordinator:
         self._bump("weights_rev")
         if int(s["stage"]) != old_stage:
             self._refresh_inputs(f"stage {s['stage']} selected", bump_parts=False)
+        elif int(s["stage"]) == 2 and self._stage2_mode() != old_s2:
+            # the cable-routing slider crossed a mode boundary (0 / 1–69 / ≥ 70): different rules, new islands
+            self._refresh_inputs(f"cable routing: {self._stage2_mode()} mode", bump_parts=False)
         else:
             if list(s.get("target_com_mm", [0, 0, 0])) != old_target and self.ev is not None:
                 self.ev.target = np.asarray(self._target(), float)
@@ -1244,6 +1378,7 @@ class Coordinator:
             constraint_changed = True
         if "tags" in patch:
             e.tags = [str(t) for t in (patch["tags"] or [])]
+            e.tags_user = True
             constraint_changed = True
         if "subsystem" in patch:
             e.subsystem_override = str(patch["subsystem"]) if patch["subsystem"] else None
@@ -1384,6 +1519,10 @@ class Coordinator:
             except (OSError, json.JSONDecodeError):
                 continue
             L["status"], L["progress"] = res.get("status", "RUNNING"), res.get("progress", 0.0)
+            if L.get("study") == "attribution":
+                self.broadcast("study.update", {"study": "attribution", "progress": L["progress"],
+                                                "partial": {"status": L["status"], "rows": len(res.get("rows", []))}})
+                continue
             self.broadcast("study.update", {"study": "fidelity", "progress": L["progress"],
                                             "partial": {"part_id": pid, "status": L["status"], "progress": L["progress"],
                                                         "level": res.get("current_level")}})
@@ -1410,6 +1549,40 @@ class Coordinator:
         if L is not None and not L["future"].done():
             return {"status": "PENDING", "levels": [], "chosen": {}, "reasons": {}, "stop_reason": None,
                     "part_id": pid}
+        return None
+
+    # =========================================================================================== attribution
+    def _attribution_path(self) -> Path:
+        return self.store.cache / f"attribution_{self.ctx.parts_sig}_{self._stage2_mode()}.json"
+
+    def start_attribution(self, opts: dict | None = None) -> dict:
+        import pickle
+        from ..constraints.attribution import attribution_job
+        if self.ctx is None:
+            raise ValueError("no packable parts")
+        recs = self._active_records()
+        snap = self.store.cache / f"attr_records_{self.ctx.parts_sig}.pkl"
+        snap.write_bytes(pickle.dumps(recs, protocol=pickle.HIGHEST_PROTOCOL))
+        path = self._attribution_path()
+        path.unlink(missing_ok=True)
+        fut = self.ladder_pool.submit(attribution_job, str(snap), self._stage2_mode(),
+                                      dict(self.store.settings["sliders"]), str(path), dict(opts or self.attribution_opts))
+        self.ladders["__attribution__"] = {"future": fut, "path": path, "mtime": None, "status": "PENDING",
+                                           "progress": 0.0, "study": "attribution"}
+        return {"status": "PENDING", "mode": self._stage2_mode()}
+
+    def attribution(self) -> dict | None:
+        if self.ctx is None:
+            return None
+        p = self._attribution_path()
+        if p.exists():
+            try:
+                return json.loads(p.read_text(encoding="utf-8"))
+            except (OSError, json.JSONDecodeError):
+                return None
+        L = self.ladders.get("__attribution__")
+        if L is not None and not L["future"].done():
+            return {"status": "PENDING", "rows": []}
         return None
 
     def fidelity_summary(self) -> dict:
@@ -1485,7 +1658,9 @@ class Coordinator:
         if not self._current(e) and any(pid not in self.records for pid, _, _ in e.poses):
             raise ValueError("this layout's parts are no longer in the project")
         if e.stage == 2:
-            spec = s2.stage2_spec(stage2_config({pid: self.records[pid] for pid, _, _ in e.poses}))
+            from ..constraints.stage2_model import Stage2Model
+            model = Stage2Model({pid: self.records[pid] for pid, _, _ in e.poses}, (e.meta or {}).get("mode", "default"))
+            spec = model.spec(e.meta or {}, relaxed=bool(e.validation.get("relaxed_rules")))
         else:
             spec = StageSpec(1, ENCLOSURE_LO.copy(), ENCLOSURE_HI.copy(), 0.0, 0.0)
         geoms = {pid: self.geoms[pid] for pid, _, _ in e.poses}

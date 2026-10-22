@@ -39,7 +39,8 @@ export function OverviewTab() {
   const showGhost = useApp((s) => s.view.showGhost);
   const dm = useDisplayMetrics();
   const items = useMemo(() => renderPlan(solver, newest, { expert, showGhost }), [solver, newest, expert, showGhost]);
-  const best = solver.best;
+  const showingInfeasible = items[0]?.kind === 'INFEASIBLE';
+  const best = showingInfeasible ? items[0].layout : solver.best;
   return (
     <div className="overview" data-testid="tab-overview">
       <aside className="left" aria-label="Parts and physical properties">
@@ -49,13 +50,28 @@ export function OverviewTab() {
       </aside>
       <section className="centre" aria-label="3D view">
         <div className="vp-head">
-          <strong>{best ? (isCurrent(best, newest) && best.status !== 'STALE' ? 'BEST VALIDATED' : 'LAST VALIDATED') : 'NO LAYOUT'}</strong>
+          <strong data-testid="layout-heading">
+            {showingInfeasible
+              ? 'LEAST-VIOLATING CANDIDATE'
+              : best
+                ? isCurrent(best, newest) && best.status !== 'STALE'
+                  ? 'BEST VALIDATED'
+                  : 'LAST VALIDATED'
+                : 'NO LAYOUT'}
+          </strong>
           {best ? <span className="num">{best.id}</span> : null}
           {best?.algorithm ? <span className="muted">· {best.algorithm.label}</span> : null}
           {best ? <Badge tone="neutral">{best.stage === 2 ? 'ENGINEERING-CONSTRAINED' : 'IDEALIZED'}</Badge> : null}
           <span className="muted small">{NOT_OPTIMAL}</span>
         </div>
         <RerunBar />
+        {showingInfeasible ? (
+          <div className="notice err" role="status" style={{ margin: 0 }} data-testid="infeasible-violations">
+            <strong>NO FEASIBLE LAYOUT FOUND (not proven infeasible).</strong> Constraints are never relaxed automatically. The
+            least-violating candidate {best?.id} is certified collision-free under its rules but breaks:{' '}
+            {(best?.violations_engineering ?? []).join('; ')}. See Engineering Constraints → constraint attribution.
+          </div>
+        ) : null}
         <MainViewport items={items} metrics={dm.metrics} prevLayout={solver.prevBest} testId="overview-viewport" />
       </section>
       <aside className="right" aria-label="Goals">

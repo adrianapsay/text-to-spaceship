@@ -46,7 +46,7 @@ export interface Pose {
   t_um: Vec3;
 }
 
-export type LayoutStatus = 'CANDIDATE' | 'VALIDATING' | 'VALIDATED' | 'REJECTED' | 'STALE' | 'FINAL';
+export type LayoutStatus = 'CANDIDATE' | 'VALIDATING' | 'VALIDATED' | 'REJECTED' | 'STALE' | 'FINAL' | 'INFEASIBLE';
 export type LayoutMode = 'default' | 'continuous_cable' | 'manufacturable';
 export type ExtraProcess = 'metal_am' | 'sheet' | 'machined' | 'catalogue' | 'direct' | 'card_guide' | 'standoff';
 
@@ -142,8 +142,29 @@ export interface Layout {
   created: string;
   /** optional extension */
   violations?: Violation[];
+  /** Stage 2: "ENGINEERING-CONSTRAINED — not flight-qualified" */
+  label?: string;
+  /** Stage 2 INFEASIBLE: "NO FEASIBLE LAYOUT FOUND (not proven infeasible)" */
+  verdict?: string;
+  /** Stage 2: engineering rules this layout breaks (empty when feasible) */
+  violations_engineering?: string[];
+  /** Stage 2: the rules this layout was decoded under */
+  stage2?: Stage2View;
   /** mock fixtures only */
   mock?: boolean;
+}
+
+export interface Stage2View {
+  mode: string | null;
+  corridor: string | null;
+  stack_span_mm: [number, number] | null;
+  overflow_mm: number | null;
+  unmounted: string[];
+  mounts: Record<string, { ok: boolean; how: string }>;
+  cable_blocked_fraction: number | null;
+  frame: FrameBox[];
+  insertion_order: string[] | null;
+  assumed: string[];
 }
 
 export type SliderKey = 'space' | 'balance' | 'inertia' | 'feasibility' | 'mass_symmetry' | 'cable' | 'cost' | 'speed_quality';
@@ -410,6 +431,36 @@ export interface MfgResult {
   exports?: { kind: string; url: string; label: string }[];
 }
 
+// ---- Stage 2 constraint attribution (protocol §O.3; endpoint /api/stage2/attribution)
+export interface AttributionRow {
+  relaxed: string;
+  label: string;
+  cv: number;
+  feasible: boolean;
+  length_used_mm: number | null;
+  overflow_mm: number | null;
+  unmounted: number;
+  unplaced: number;
+  com_error_mm: number | null;
+  evaluations: number;
+  seconds: number;
+  delta_length_used_mm?: number;
+  delta_overflow_mm?: number;
+  delta_com_error_mm?: number;
+  delta_cv?: number;
+}
+export interface Attribution {
+  status: string;
+  mode?: string;
+  seed?: number;
+  generations?: number;
+  population?: number;
+  rows: AttributionRow[];
+  progress?: number;
+  note?: string;
+  largest_effect?: { family: string; label: string; text: string };
+}
+
 // ---- WebSocket envelope
 export interface Envelope<T = unknown> {
   v: 1;
@@ -439,6 +490,8 @@ export interface SnapshotPayload {
   candidate: Layout | null;
   run_status: RunStatus | string;
   selector: SelectorChoice | null;
+  /** Stage 2 without a feasible layout: the least-violating certified candidate */
+  least_violating?: Layout | null;
 }
 
 export interface StudyUpdatePayload {

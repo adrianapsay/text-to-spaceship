@@ -273,3 +273,40 @@ describe('generation / revision invariants (T-UI3, fast-check)', () => {
     expect(renderPlan(solver, conn.newest, { expert: false, showGhost: false })[0].style).toBe('stale');
   });
 });
+
+describe('Stage 2 least-violating candidate (INFEASIBLE)', () => {
+  const revs: Revs = { epoch: 3, parts_rev: 2, constraint_rev: 5, mass_rev: 1, weights_rev: 1 };
+  const env = (type: string, payload: unknown, seq: number): Envelope => ({
+    v: 1, type, seq, ...revs, applied_client_seq: 0, ts: new Date(0).toISOString(), payload,
+  });
+  it('is shown only when no current validated layout exists, and never as VALIDATED', () => {
+    let conn = initialConn();
+    let solver = initialSolver();
+    const inf = { ...layout('L-0007', 'INFEASIBLE', revs), stage: 2 as const, violations_engineering: ['exceeds the usable length by 4.2 mm'] };
+    ({ conn, solver } = reduceEnvelope(conn, solver, env('state.snapshot', { project: null, best_validated: null, candidate: null, run_status: 'SEARCHING', selector: null, least_violating: inf }, 1)));
+    let plan = renderPlan(solver, conn.newest, { expert: false, showGhost: false });
+    expect(plan).toHaveLength(1);
+    expect(plan[0].kind).toBe('INFEASIBLE');
+    expect(plan[0].style).toBe('stale');
+    expect(displayKind(inf, conn.newest)).toBe('INFEASIBLE');
+    // a layout.validated with status INFEASIBLE is refused as a "best"
+    ({ solver } = reduceEnvelope(conn, solver, env('layout.validated', { layout: { ...inf, id: 'L-0008' } }, 2)));
+    expect(solver.best).toBeNull();
+    // a feasible validated layout for the current inputs takes over
+    const ok = { ...layout('L-0009', 'VALIDATED', revs), stage: 2 as const };
+    ({ conn, solver } = reduceEnvelope(conn, solver, env('layout.validated', { layout: ok, source: 'search' }, 3)));
+    plan = renderPlan(solver, conn.newest, { expert: false, showGhost: false });
+    expect(plan[0].layout.id).toBe('L-0009');
+    expect(plan[0].kind).toBe('VALIDATED');
+  });
+  it('layout.infeasible updates the candidate but ignores older inputs', () => {
+    let conn = initialConn();
+    let solver = initialSolver();
+    const a = { ...layout('L-0001', 'INFEASIBLE', revs), stage: 2 as const };
+    ({ conn, solver } = reduceEnvelope(conn, solver, env('layout.infeasible', { layout: a }, 1)));
+    expect(solver.infeasible?.id).toBe('L-0001');
+    const older = { ...layout('L-0002', 'INFEASIBLE', { ...revs, constraint_rev: 4 }), stage: 2 as const };
+    ({ conn, solver } = reduceEnvelope(conn, solver, env('layout.infeasible', { layout: older }, 2)));
+    expect(solver.infeasible?.id).toBe('L-0001');
+  });
+});

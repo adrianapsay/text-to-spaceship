@@ -72,10 +72,30 @@ class SearchContext:
     records: dict = field(default_factory=dict, repr=False)   # part_id -> PartRecord (for validation workers)
     hm_meshes: dict = field(default_factory=dict, repr=False)  # part_id -> (v, f) chosen by the detail ladder
     levels: dict = field(default_factory=dict)                # part_id -> {algorithm: level} in use
+    stage2_mode: str | None = None                            # default | soft | continuous (cable slider)
 
-    def decoder(self) -> BoxDecoder:
+    def decoder(self):
+        if self.stage == 2:
+            return self.stage2_model()
         return BoxDecoder(self.proxies, self.dec_lo, self.dec_hi, self.gap_pp, self.wall_gap,
                           self.obstacles if len(self.obstacles) else None, self.obstacle_gap, self.fixed)
+
+    def stage2_model(self):
+        from ..constraints.stage2_model import Stage2Model
+        if getattr(self, "_s2", None) is None:
+            self._s2 = Stage2Model(self.records, self.stage2_mode or "default", self.fixed)
+        return self._s2
+
+    def spec_for(self, meta: dict | None, relaxed: bool = False) -> StageSpec:
+        """Validation rules for one layout (Stage 2 rules depend on the layout's stack height / corridor)."""
+        if self.stage == 2:
+            return self.stage2_model().spec(meta or {"mode": self.stage2_mode}, relaxed)
+        return self.spec
+
+    def __getstate__(self):
+        d = dict(self.__dict__)
+        d.pop("_s2", None)
+        return d
 
 
 def stage2_config(records: dict) -> s2.Stage2Config:
@@ -83,8 +103,9 @@ def stage2_config(records: dict) -> s2.Stage2Config:
     return s2.Stage2Config(harness=True, harness_mode="interrupted", pcb_ids=pcb, stack_z=None)
 
 
-def build_context(records: dict, stage: int, reps: dict | None = None) -> SearchContext:
-    """reps: part_id -> {algorithm id: Representation} from finished detail ladders (Addendum 4)."""
+def build_context(records: dict, stage: int, reps: dict | None = None, stage2_mode: str = "default") -> SearchContext:
+    """reps: part_id -> {algorithm id: Representation} from finished detail ladders (Addendum 4).
+    stage2_mode: cable-slider mode for Stage 2 (default | soft | continuous)."""
     recs = {pid: r for pid, r in records.items() if packable(r)}
     ids = list(recs)
     reps = reps or {}
@@ -113,21 +134,28 @@ def build_context(records: dict, stage: int, reps: dict | None = None) -> Search
                    obstacles=np.zeros((0, 6)), obstacle_gap=0.0)
         com_box = None
     else:
-        cfg = stage2_config(recs)
-        spec = s2.stage2_spec(cfg)
+        # Stage 2 rules depend on each layout (stack height, corridor wall): see constraints/stage2_model.py
         lo, hi = s2.inner_box()
-        obs = np.array([np.concatenate([s.corners.min(0), s.corners.max(0)]) for s in spec.statics]).reshape(-1, 6)
+        spec = StageSpec(2, lo + s2.C_WALL, hi - s2.C_WALL, s2.C_PP, s2.C_WALL)
         dec = dict(dec_lo=lo, dec_hi=hi, gap_pp=s2.C_PP + QUANT_SLACK, wall_gap=s2.C_WALL + QUANT_SLACK / 2,
-                   obstacles=obs, obstacle_gap=s2.C_WALL + QUANT_SLACK)
+                   obstacles=np.zeros((0, 6)), obstacle_gap=s2.C_WALL + QUANT_SLACK)
         com_box = np.array([20.0, 20.0, 70.0])
     psig = parts_signature(recs)
-    csig = constraint_signature(recs, stage)
+    csig = constraint_signature(recs, stage, {"stage2_mode": stage2_mode} if stage == 2 else None)
     lsig = hashlib.sha256(json.dumps(levels, sort_keys=True).encode()).hexdigest()[:8]
+    if stage == 2:
+        from ..constraints import stage2_model as s2m
+        pcb = sorted(pid for pid in ids if "pcb" in recs[pid].tags)
+        ssig = hashlib.sha256(json.dumps([2, stage2_mode, pcb, s2.WALL, s2.RAIL, s2.C_PP, s2.C_WALL, s2.HARNESS_W,
+                                          s2.PCB_PITCH, s2m.PAD, s2m.STANDOFF_INSET, s2m.STANDOFF_SIDE]).encode()
+                              ).hexdigest()[:16]
+    else:
+        ssig = spec_signature(spec)
     return SearchContext(ctx_id=f"{psig}-{csig}-{lsig}", stage=stage, parts_sig=psig, constraint_sig=csig,
-                         spec_sig=spec_signature(spec), ids=ids,
+                         spec_sig=ssig, ids=ids,
                          proxies=proxies, orient_bounds={pid: recs[pid].orient_bounds for pid in ids}, fixed=fixed,
                          spec=spec, z0=float(ENCLOSURE_LO[2]), com_box=com_box, records=recs, hm_meshes=hm_meshes,
-                         levels=levels, **dec)
+                         levels=levels, stage2_mode=stage2_mode if stage == 2 else None, **dec)
 
 
 def write_context(ctx: SearchContext, folder: Path) -> Path:

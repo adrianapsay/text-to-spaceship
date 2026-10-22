@@ -56,6 +56,8 @@ export interface FidelityRun {
 
 export interface SolverState {
   best: Layout | null;
+  /** Stage 2 with no feasible layout: least-violating certified candidate (never drawn as VALIDATED) */
+  infeasible: Layout | null;
   bestSource: 'archive' | 'search' | 'snapshot' | null;
   prevBest: Layout | null;
   candidate: Layout | null;
@@ -89,6 +91,7 @@ export function initialConn(): ConnProto {
 export function initialSolver(): SolverState {
   return {
     best: null,
+    infeasible: null,
     bestSource: null,
     prevBest: null,
     candidate: null,
@@ -198,6 +201,7 @@ export function reduceEnvelope(conn: ConnProto, solver: SolverState, env: Envelo
     const nextSolver: SolverState = {
       ...solver,
       best: incoming,
+      infeasible: p.least_violating && p.least_violating.status === 'INFEASIBLE' ? p.least_violating : null,
       bestSource: incoming ? 'snapshot' : null,
       prevBest: solver.best && incoming && solver.best.id !== incoming.id ? solver.best : solver.prevBest,
       candidate: p.candidate ?? null,
@@ -250,6 +254,13 @@ export function reduceEnvelope(conn: ConnProto, solver: SolverState, env: Envelo
         log: pushLog(s.log, { at, kind: 'validated', text: `${L.id} validated (${p.source ?? 'search'})` }),
       };
       if (!s.prevBest || s.prevBest.id !== L.id) effects.push({ type: 'announce', text: `New validated layout ${L.id}` });
+      break;
+    }
+    case 'layout.infeasible': {
+      const L = (env.payload as { layout: Layout })?.layout;
+      if (!L || L.status !== 'INFEASIBLE') break;
+      if (s.infeasible && isOlderThan(L, s.infeasible)) break;
+      s = { ...s, infeasible: L, log: pushLog(s.log, { at, kind: 'info', text: `${L.id}: least-violating candidate (INFEASIBLE)` }) };
       break;
     }
     case 'layout.candidate': {
@@ -345,12 +356,13 @@ export function reduceEnvelope(conn: ConnProto, solver: SolverState, env: Envelo
 
 // ---------------------------------------------------------------------------------------------- display rules
 
-export type DisplayKind = 'VALIDATED' | 'FINAL' | 'PREVIOUS_INPUTS' | 'STALE' | 'UNVERIFIED' | 'REJECTED';
+export type DisplayKind = 'VALIDATED' | 'FINAL' | 'PREVIOUS_INPUTS' | 'STALE' | 'UNVERIFIED' | 'REJECTED' | 'INFEASIBLE';
 export type RenderStyle = 'solid' | 'stale' | 'ghost';
 
 export function displayKind(l: Layout, newest: Revs, role: 'best' | 'candidate' | 'archive' = 'best'): DisplayKind {
   if (role === 'candidate' || l.status === 'CANDIDATE' || l.status === 'VALIDATING') return 'UNVERIFIED';
   if (l.status === 'REJECTED') return 'REJECTED';
+  if (l.status === 'INFEASIBLE') return 'INFEASIBLE';
   if (!isCurrent(l, newest)) return 'PREVIOUS_INPUTS';
   if (l.status === 'STALE') return 'STALE';
   return l.status === 'FINAL' ? 'FINAL' : 'VALIDATED';
@@ -370,6 +382,8 @@ export function badgeText(kind: DisplayKind): string {
       return 'UNVERIFIED';
     case 'REJECTED':
       return 'REJECTED';
+    case 'INFEASIBLE':
+      return 'NO FEASIBLE LAYOUT FOUND (not proven infeasible)';
   }
 }
 
@@ -392,9 +406,18 @@ export interface RenderItem {
 }
 
 /** What the viewport draws. Candidates are only ever ghosts (rule 3), and only in Expert mode with ghosts enabled. */
-export function renderPlan(solver: Pick<SolverState, 'best' | 'candidate'>, newest: Revs, opts: { expert: boolean; showGhost: boolean }): RenderItem[] {
+export function renderPlan(
+  solver: Pick<SolverState, 'best' | 'candidate'> & Partial<Pick<SolverState, 'infeasible'>>,
+  newest: Revs,
+  opts: { expert: boolean; showGhost: boolean },
+): RenderItem[] {
   const out: RenderItem[] = [];
-  if (solver.best) {
+  const inf = solver.infeasible ?? null;
+  // Stage 2 with no feasible layout for the current inputs: show the least-violating candidate, desaturated and
+  // labelled with the verdict — never as VALIDATED.
+  if (inf && isCurrent(inf, newest) && (!solver.best || !isCurrent(solver.best, newest))) {
+    out.push({ layout: inf, role: 'best', kind: 'INFEASIBLE', style: 'stale' });
+  } else if (solver.best) {
     const kind = displayKind(solver.best, newest, 'best');
     out.push({ layout: solver.best, role: 'best', kind, style: styleFor(kind) });
   }

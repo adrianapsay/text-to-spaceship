@@ -24,6 +24,9 @@ class Candidate:
     cv: float
     g: float = np.inf
     unplaced: list = field(default_factory=list)
+    meta: dict | None = None            # decoder-specific facts (Stage 2: stack, corridor, mounts, standoffs)
+    penalty: float = 0.0
+    extra_mass: list = field(default_factory=list)
 
 
 @dataclass
@@ -48,10 +51,14 @@ class Evaluator:
         self.target = np.asarray(target, float)
         self.com_box = com_box                 # (3,) half-widths when the CDS box is hard (Stage 2)
 
-    def raw_from_poses(self, poses, unplaced) -> tuple[dict, float]:
+    @property
+    def dim(self) -> int:
+        return getattr(self.dec, "dim", 3 * len(self.ids))
+
+    def raw_from_poses(self, poses, unplaced, penalty: float = 0.0, extra_mass=(), raw_extra=None) -> tuple[dict, float]:
         tops = [t[2] + self.bounds[pid][o, 5] for pid, o, t in poses]
         bottoms = [t[2] + self.bounds[pid][o, 2] for pid, o, t in poses]
-        items = []
+        items = list(extra_mass)
         for pid, o, t in poses:
             p = self.phys.get(pid)
             if p is None:
@@ -59,7 +66,8 @@ class Evaluator:
             r = ROTATIONS_F[o]
             items.append((p.mass_kg, r @ p.com_can_mm + t, r @ p.inertia_com_kgm2 @ r.T))
         raw = {"L": float(max(tops) - self.z0) if tops else 0.0, "span": float(max(tops) - min(bottoms)) if tops else 0.0}
-        cv = float(len(unplaced))
+        raw.update(raw_extra or {})
+        cv = float(len(unplaced)) + float(penalty)
         if items:
             a = assembly([], [], np.zeros((0, 3)), items)
             i = a.inertia_kgm2
@@ -77,12 +85,17 @@ class Evaluator:
         n = len(self.ids)
         res = self.dec.decode(list(np.argsort(keys[:n], kind="stable")), keys[n:2 * n], keys[2 * n:])
         poses = [(pid, o, np.round(t * 1000.0) / 1000.0) for pid, o, t in res.poses]   # wire poses: integer µm
-        raw, cv = self.raw_from_poses(poses, res.unplaced)
-        return Candidate(keys.copy(), poses, raw, cv, unplaced=list(res.unplaced))
+        penalty = float(getattr(res, "penalty", 0.0))
+        extra_mass = list(getattr(res, "extra_mass", []))
+        raw_extra = dict(getattr(res, "raw_extra", {}))
+        raw, cv = self.raw_from_poses(poses, res.unplaced, penalty, extra_mass, raw_extra)
+        return Candidate(keys.copy(), poses, raw, cv, unplaced=list(res.unplaced), meta=getattr(res, "meta", None),
+                         penalty=penalty, extra_mass=extra_mass)
 
     def refresh(self, c: Candidate) -> None:
         """Recompute the physics terms after a mass edit (geometry unchanged)."""
-        c.raw, c.cv = self.raw_from_poses(c.poses, c.unplaced)
+        raw_extra = {k: c.raw[k] for k in ("H",) if k in c.raw}
+        c.raw, c.cv = self.raw_from_poses(c.poses, c.unplaced, c.penalty, c.extra_mass, raw_extra)
 
 
 def score(c: Candidate, norm: Normaliser, weights: dict, alpha: float) -> float:
@@ -109,9 +122,21 @@ def seed_keys(order: list[int], orients: list[int], allowed: list[list[int]], ru
     return k
 
 
-def neighbour(keys: np.ndarray, n: int, allowed_sizes: list[int], rng) -> np.ndarray:
-    """One key-space move (protocol §F.7 memetic moves): re-orient, swap, re-insert or re-rule one part."""
+def neighbour(keys: np.ndarray, n: int, allowed_sizes: list[int], rng, focus: list[int] | None = None) -> np.ndarray:
+    """One key-space move (protocol §F.7 memetic moves): re-orient, swap, re-insert or re-rule one part.
+    focus: part indices that violate a constraint (e.g. not mountable) — re-oriented preferentially.
+    Keys beyond 3n (decoder variables such as the PC/104 stack height) get their own small moves."""
     k = keys.copy()
+    extra = len(k) - 3 * n
+    if extra > 0 and rng.random() < 0.15:
+        j = 3 * n + int(rng.integers(extra))
+        k[j] = float(np.clip(k[j] + rng.normal(0.0, 0.15), 0.0, 1.0 - 1e-9)) if rng.random() < 0.7 else rng.random()
+        return k
+    if focus and rng.random() < 0.6:
+        i = int(focus[rng.integers(len(focus))])
+        if allowed_sizes[i] > 1:
+            k[n + i] = rng.random()
+            return k
     m = rng.integers(4)
     i = int(rng.integers(n))
     if m == 0 and allowed_sizes[i] > 1:
@@ -135,11 +160,18 @@ def local_search(c: Candidate, ev: Evaluator, norm: Normaliser, weights: dict, a
     n = len(ev.ids)
     best = c
     for _ in range(moves):
-        cand = ev.evaluate(neighbour(best.keys, n, sizes, rng))
+        cand = ev.evaluate(neighbour(best.keys, n, sizes, rng, _focus(ev, best)))
         score(cand, norm, weights, alpha)
         if sort_key(cand) < sort_key(best):
             best = cand
     return best, moves
+
+
+def _focus(ev: Evaluator, c: Candidate) -> list[int] | None:
+    if not c.meta or not c.meta.get("unmounted"):
+        return None
+    idx = {pid: i for i, pid in enumerate(ev.ids)}
+    return [idx[p] for p in c.meta["unmounted"] if p in idx] or None
 
 
 def run_island(state: IslandState, ev: Evaluator, norm: Normaliser, weights: dict, alpha: float,
@@ -211,9 +243,10 @@ def run_lahc(state: LahcState, ev: Evaluator, norm: Normaliser, weights: dict, a
             state.best = state.current
     t_end = time.perf_counter() + time_budget_s
     while time.perf_counter() < t_end:
-        k = neighbour(state.current.keys, n, sizes, rng)
+        focus = _focus(ev, state.current)
+        k = neighbour(state.current.keys, n, sizes, rng, focus)
         if rng.random() < 0.3:
-            k = neighbour(k, n, sizes, rng)
+            k = neighbour(k, n, sizes, rng, focus)
         cand = ev.evaluate(k)
         score(cand, norm, weights, alpha)
         state.evaluations += 1

@@ -1,4 +1,5 @@
 import type { Layout, Metrics } from '../api/types';
+import { isCurrent } from '../api/protocol';
 import { useApp } from '../store/store';
 import { useDisplayMetrics } from '../hooks';
 import { fmt, fmtDelta, type Quantity } from '../lib/fmt';
@@ -24,8 +25,12 @@ export function MetricStrip() {
   const limits = useApp((s) => s.dataset.project?.limits);
   const size = useApp((s) => s.dataset.project?.enclosure.size_mm as number[] | undefined);
   const mode = useApp((s) => s.conn.mode);
+  const infeasible = useApp((s) => s.solver.infeasible);
+  const best = useApp((s) => s.solver.best);
+  const newest = useApp((s) => s.conn.newest);
   const m = dm.metrics;
   const layoutStage = dm.layout?.stage ?? null;
+  const showingInfeasible = !!infeasible && isCurrent(infeasible, newest) && (!best || !isCurrent(best, newest));
   const total = size?.[2] ?? 340.5;
   const note = limits?.cds_mass_note_kg ?? 6.0;
   const src = dm.source === 'local' ? ' · local recompute (awaiting backend)' : '';
@@ -51,13 +56,25 @@ export function MetricStrip() {
       <Metric
         k="Engineering validity"
         tipKey="validity"
-        v={layoutStage !== 2 ? 'Not assessed' : m ? (m.min_clearance_mm != null ? `min slack ${fmt(m.min_clearance_mm, 'clearance')}` : '—') : '—'}
+        v={
+          showingInfeasible
+            ? 'INFEASIBLE'
+            : layoutStage !== 2
+              ? 'Not assessed'
+              : m
+                ? m.min_clearance_mm != null
+                  ? `min slack ${fmt(m.min_clearance_mm, 'clearance')}`
+                  : '—'
+                : '—'
+        }
         n={
-          layoutStage !== 2
-            ? stage === 2
-              ? 'layout on screen is IDEALIZED — no Stage 2 layout yet'
-              : 'IDEALIZED — switch to Stage 2 for engineering checks'
-            : `ENGINEERING-CONSTRAINED — not flight-qualified · ${NOT_OPTIMAL}`
+          showingInfeasible
+            ? `no feasible layout found yet (not proven infeasible) — least-violating candidate breaks ${infeasible?.violations_engineering?.length ?? 0} rule(s)`
+            : layoutStage !== 2
+              ? stage === 2
+                ? 'layout on screen is IDEALIZED — no Stage 2 layout yet'
+                : 'IDEALIZED — switch to Stage 2 for engineering checks'
+              : `ENGINEERING-CONSTRAINED — not flight-qualified · ${NOT_OPTIMAL}`
         }
         testId="metric-validity"
       />

@@ -298,8 +298,38 @@ class Validator:
                 planes.append({"piece_a": i, "piece_b": 0, "n": n.tolist(), "hi_a": ha, "lo_b": lb, "gap": gp})
             if worst is not None:
                 return PairResult(pid, s.name, "G3", worst - PIECE_MARGIN, c, True, planes)
-        return PairResult(pid, s.name, "OVERLAP" if gap < 0 else "G2", gap, c, False,
-                          detail=f"clearance to {s.kind} {gap:.3f} mm < required {c:.3f} mm")
+        if g.boxes_ok:
+            # statics are axis-aligned boxes: certified compound boxes separate by an axis gap per box
+            bx = boxes_world(g.boxes, orient, t)
+            gb = np.max(np.maximum(sbox[None, :3] - bx[:, 3:], bx[:, :3] - sbox[None, 3:]), axis=1)
+            if gb.min() >= c:
+                return PairResult(pid, s.name, "G1", float(gb.min()), c, True, detail="certified compound boxes")
+        d = self._static_exact(w, s)
+        if d is not None and d >= c - G4_TOL:
+            return PairResult(pid, s.name, "G4", d, c, True, detail="exact mesh distance")
+        worst_gap = gap if d is None else d
+        return PairResult(pid, s.name, "OVERLAP" if worst_gap < 0 else "G4", worst_gap, c, False,
+                          detail=f"clearance to {s.kind} {worst_gap:.3f} mm < required {c:.3f} mm")
+
+    def _static_exact(self, w, s: StaticItem) -> float | None:
+        """Exact distance between the part mesh and a static box (FCL), with the containment trap checked."""
+        import fcl
+        pid, orient, t, g, _, _ = w
+        lo, hi = s.corners.min(0), s.corners.max(0)
+        probe = to_world(g.comp_probe, orient, t)
+        if np.any(np.all((probe > lo) & (probe < hi), axis=1)):
+            return -1.0                                     # a part component lies inside the keep-out
+        centre = (0.5 * (lo + hi) - np.asarray(t, float)) @ ROTATIONS_F[orient]
+        if ray_parity_inside(centre[None], g.v, g.f)[0] > 0.5:
+            return -1.0                                     # the keep-out lies inside the part
+        try:
+            part = fcl.CollisionObject(g.fcl_model(), fcl.Transform(ROTATIONS_F[orient], np.asarray(t, float)))
+            box = fcl.CollisionObject(fcl.Box(*(hi - lo)), fcl.Transform(0.5 * (lo + hi)))
+            if fcl.collide(part, box, fcl.CollisionRequest(), fcl.CollisionResult()) > 0:
+                return -1.0
+            return float(fcl.distance(part, box, fcl.DistanceRequest(), fcl.DistanceResult()))
+        except Exception:  # noqa: BLE001
+            return None
 
 
 def _manifold_gap(ga, oa, ta, gb, ob, tb, search: float):

@@ -74,6 +74,11 @@ Everything is JSON unless stated. Field names are snake_case.
   "created": "ISO time"
 }
 ```
+Status `INFEASIBLE` (Stage 2 only): certified collision-free under the layout's own rules, but breaking an engineering
+rule (outside the enclosure, a part not mountable, COM outside the CDS box, no ±Z insertion order). Stage 2 layouts
+also carry `label` ("ENGINEERING-CONSTRAINED — not flight-qualified"), `violations_engineering: [text]`,
+`verdict` (INFEASIBLE only) and `stage2: {mode, corridor, stack_span_mm, overflow_mm, unmounted, mounts, frame:
+[{kind, id, min, max}], insertion_order, assumed}`; mounting hardware (standoffs) appears in `extra_items`.
 
 ### Settings
 ```json
@@ -121,6 +126,9 @@ Everything is JSON unless stated. Field names are snake_case.
 | GET | `/api/parts/{id}/fidelity` | Detail-ladder result: `{status: "PENDING"\|"RUNNING"\|"DONE", levels:[{level:"F3-8", family:"F3", label, params, proxy_volume_mm3, overhead, build_s, eval_us_median, results:{<algorithm_id>: {length_used_mm, com_error_mm, score_g, first_valid_s, false_reject_rate}}}], chosen:{<algorithm_id>: level}, reasons:{<algorithm_id>: "plain text"}, stop_reason:"converged"\|"time_budget"\|"max_level"}` |
 | POST | `/api/fidelity/run` `{part_ids?: [...], budget_s?}` | Start or restart the detail-ladder study (it also starts automatically when a part is added) |
 | GET | `/api/fidelity/summary` | `{parts:[{part_id, name, chosen:{algorithm_id: level}}]}` |
+| GET | `/api/stage2/attribution` | Constraint attribution (§O.3): `{status, mode, seed, generations, population, rows:[{relaxed, label, cv, feasible, length_used_mm, overflow_mm, unmounted, unplaced, com_error_mm, evaluations, seconds, delta_*}], largest_effect, note}`; 404 until run |
+| POST | `/api/stage2/attribution/run` | Start it (background; progress as `study.update` with `study: "attribution"`) |
+| GET | `/api/debug/state` | Coordinator diagnostics (queues, workers, last errors) |
 | GET | `/api/cad/status` | `{status: "NOT_CONFIGURED", detail}` |
 | POST | `/api/cad/package/{layout_id}` | Builds the Fusion export package; returns a download path |
 | GET | `/api/export/{layout_id}?kind=report_md\|report_html\|csv\|json\|stl_zip` | Exports |
@@ -144,12 +152,14 @@ Everything is JSON unless stated. Field names are snake_case.
 **Server → client**
 | Message | Payload / behaviour |
 |---|---|
-| `state.snapshot` | `{project, best_validated: Layout\|null, candidate: Layout\|null, run_status, selector}` |
+| `state.snapshot` | `{project, best_validated: Layout\|null, candidate: Layout\|null, run_status, selector, least_violating: Layout\|null}` |
 | `edit.ack` | `{client_seq}` |
 | `metrics.update` | `{layout_id, metrics}`, sent immediately after a mass edit |
 | `layout.validated` | `{layout: Layout, source: "archive"\|"search"}` |
 | `layout.candidate` | `{layout}` (only if the client asked for candidates) |
 | `layout.stale` | `{layout_id, reason}` |
+| `layout.infeasible` | `{layout, verdict}` — Stage 2 with no feasible layout: the least-violating candidate, status `INFEASIBLE` (geometry certified under its rules; `violations_engineering` lists what it breaks). Never drawn as VALIDATED |
+| `project.changed` | `{reason}` — parts or part data changed; revisions in the envelope tell the client to re-fetch the project |
 | `progress` | `{status, evaluations, best_g, elapsed_s, islands:[...]}`, ≤ 10 Hz |
 | `selector.changed` | `{algorithm, reasons}` |
 | `pareto.update` | `{points}` |

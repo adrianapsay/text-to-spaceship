@@ -59,6 +59,17 @@ class PartEntry:
     subsystem_override: str | None = None
     added: str = field(default_factory=now_iso)
     source: str = "upload"          # dataset | upload | inbox
+    tags_user: bool = False         # tags edited by the user (no automatic suggestion afterwards)
+
+
+def suggest_tags(name: str, labels: list[str] | None = None, extents=None) -> list[str]:
+    """Automatic tag suggestion (editable): circuit boards join the PC/104 stack in Stage 2."""
+    low = name.lower()
+    if "pcb" in low or "board" in low:
+        return ["pcb"]
+    if labels and extents is not None and ("thin" in labels) and min(extents) <= 3.0 and sorted(extents)[1] >= 80.0:
+        return ["pcb"]
+    return []
 
 
 def _safe_name(filename: str) -> str:
@@ -123,6 +134,9 @@ class ProjectStore:
             return
         d = json.loads(p.read_text(encoding="utf-8"))
         self.entries = {e["id"]: PartEntry(**e) for e in d.get("parts", [])}
+        for e in self.entries.values():          # projects created before tag suggestions existed
+            if not e.tags and not e.tags_user:
+                e.tags = suggest_tags(e.name)
         s = json.loads(json.dumps(DEFAULT_SETTINGS))
         s.update(d.get("settings", {}))
         s["sliders"] = {**DEFAULT_SETTINGS["sliders"], **d.get("settings", {}).get("sliders", {})}
@@ -156,6 +170,7 @@ class ProjectStore:
             src = dataset / p["file"]
             e = self._add_bytes(src.read_bytes(), src.name, units="mm", confirmed=True, source="dataset")
             e.name = p["name"]
+            e.tags = suggest_tags(e.name)
         self.save()
 
     def _unique_file(self, filename: str) -> str:
@@ -174,7 +189,7 @@ class ProjectStore:
         pid = f"p{self.next_id('part'):02d}"
         e = PartEntry(id=pid, name=_safe_name(filename), file=fname, sha256=sha256_bytes(data),
                       units=units if units else info["suggested_units"], units_confirmed=bool(confirmed and units),
-                      suggested_units=info["suggested_units"], source=source)
+                      suggested_units=info["suggested_units"], source=source, tags=suggest_tags(_safe_name(filename)))
         self.entries[pid] = e
         return e
 

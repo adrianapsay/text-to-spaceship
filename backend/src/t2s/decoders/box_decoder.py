@@ -91,8 +91,9 @@ def _try_candidate(c0, c1, c2, tb, off, m, alo, ahi, amaxlo, obs, gs, ge, gb, n_
 
 
 @_jit
-def _place_one(tb, off, m, aabb, obs, gs, ge, gb, n_grp, eps, n_eps, zs, lo, hi, top, rule, t, best_t):
-    """Best candidate over all extreme points (part min corner at the EP) and the centred column at each EP z."""
+def _place_one(tb, off, m, aabb, obs, gs, ge, gb, n_grp, eps, n_eps, zs, lo, hi, top, rule, t, best_t, mixed):
+    """Best candidate over all extreme points (part min corner at the EP) and the centred column at each EP z.
+    mixed: also try 'against the EP in one axis, centred in the other' (useful between corner rails)."""
     alo = aabb[:3]
     ahi = aabb[3:]
     for a in range(3):
@@ -116,6 +117,16 @@ def _place_one(tb, off, m, aabb, obs, gs, ge, gb, n_grp, eps, n_eps, zs, lo, hi,
         zs[e] = eps[e, 2]
     zsort = np.sort(zs[:n_eps])
     cx, cy = -0.5 * (alo[0] + ahi[0]), -0.5 * (alo[1] + ahi[1])
+    if mixed:
+        for e in range(n_eps):
+            for which in range(2):
+                c0 = eps[e, 0] - alo[0] if which == 0 else cx
+                c1 = cy if which == 0 else eps[e, 1] - alo[1]
+                mr = _try_candidate(c0, c1, eps[e, 2] - alo[2], tb, off, m, alo, ahi, amaxlo, obs, gs, ge, gb, n_grp,
+                                    lo, hi, top, rule, t)
+                if mr < best:
+                    best = mr
+                    best_t[0], best_t[1], best_t[2] = t[0], t[1], t[2]
     for e in range(n_eps):
         if e > 0 and zsort[e] - zsort[e - 1] <= TOL:
             continue
@@ -141,8 +152,9 @@ def _point_blocked(px, py, pz, obs, gs, ge, gb, n_grp):
 
 
 @_jit
-def _decode_kernel(seq, okeys, rules, all_orient, allowed, n_allowed, tb, toff, tcnt, taabb, lo, hi,
-                   obs, gs, ge, gb, n_obs, n_grp, eps, n_eps, top, out_t, out_o):
+def _decode_kernel(seq, okeys, rules, all_orient, allowed, n_allowed, tb, toff, tcnt, taabb, lo_p, hi_p,
+                   obs, gs, ge, gb, n_obs, n_grp, eps, n_eps, top, out_t, out_o, mixed):
+    """lo_p / hi_p: (n, 3) per-part containment bounds (parts may keep different wall gaps)."""
     zs = np.empty(eps.shape[0])
     t = np.zeros(3)
     cand_t = np.zeros(3)
@@ -163,8 +175,8 @@ def _decode_kernel(seq, okeys, rules, all_orient, allowed, n_allowed, tb, toff, 
         best_merit, best_o = np.inf, -1
         for jj in range(j0, j1):
             o = allowed[p, jj]
-            mr = _place_one(tb, toff[p, o], tcnt[p, o], taabb[p, o], obs, gs, ge, gb, n_grp, eps, n_eps, zs, lo, hi,
-                            top, rules[p], t, cand_t)
+            mr = _place_one(tb, toff[p, o], tcnt[p, o], taabb[p, o], obs, gs, ge, gb, n_grp, eps, n_eps, zs, lo_p[p],
+                            hi_p[p], top, rules[p], t, cand_t, mixed)
             if mr < best_merit:
                 best_merit, best_o = mr, o
                 best_t[0], best_t[1], best_t[2] = cand_t[0], cand_t[1], cand_t[2]
@@ -237,13 +249,22 @@ class DecodeResult:
 class BoxDecoder:
     def __init__(self, parts: list[ProxyPart], lo: np.ndarray, hi: np.ndarray, gap_pp: float,
                  wall_gap: float = 0.0, obstacles: np.ndarray | None = None, obstacle_gap: float = 0.0,
-                 fixed: list[tuple[str, int, np.ndarray]] | None = None):
+                 fixed: list[tuple[str, int, np.ndarray]] | None = None, part_wall_gap: dict | None = None,
+                 mixed_candidates: bool = False):
+        """part_wall_gap: part_id -> wall gap overriding `wall_gap` for that part.
+        mixed_candidates: also try positions against an extreme point in X and centred in Y (and vice versa)."""
+        self.mixed = bool(mixed_candidates)
         self.parts = {p.id: p for p in parts}
         self.order_ids = [p.id for p in parts]
         self.index = {pid: i for i, pid in enumerate(self.order_ids)}
         self.half = gap_pp / 2.0
-        self.lo = np.asarray(lo, float) + wall_gap
-        self.hi = np.asarray(hi, float) - wall_gap
+        lo, hi = np.asarray(lo, float), np.asarray(hi, float)
+        gaps = np.array([(part_wall_gap or {}).get(pid, wall_gap) for pid in self.order_ids], float)
+        self.lo_p = np.ascontiguousarray(lo[None, :] + gaps[:, None]) if len(gaps) else np.zeros((0, 3))
+        self.hi_p = np.ascontiguousarray(hi[None, :] - gaps[:, None]) if len(gaps) else np.zeros((0, 3))
+        g0 = float(gaps.min()) if len(gaps) else wall_gap
+        self.lo = lo + g0
+        self.hi = hi - g0
         # obstacles are inflated so that part boxes inflated by `half` keep `obstacle_gap` from them
         obs = np.zeros((0, 6)) if obstacles is None else np.asarray(obstacles, float)
         grow = max(obstacle_gap - self.half, 0.0)
@@ -277,10 +298,15 @@ class BoxDecoder:
         self.max_boxes = int(sum(len(p.boxes) for p in parts))
 
     def _build_initial_state(self) -> None:
-        groups = [b[None, :] for b in self.obstacles]
+        st = self._initial_state(self.obstacles, self.fixed)
+        self._obs0, self._gb0, self._eps0, self._top0, self._ge0, self._gs0, self._fixed_poses = st
+        self._fixed_idx = {self.index[f[0]] for f in self.fixed if f[0] in self.index}
+
+    def _initial_state(self, obstacles: np.ndarray, fixed: list):
+        groups = [b[None, :] for b in obstacles]
         top = self.lo[2]
         fixed_poses = []
-        for pid, o, t in self.fixed:
+        for pid, o, t in fixed:
             b = self._world(self.parts[pid], o, t)
             groups.append(b)
             fixed_poses.append((pid, o, np.asarray(t, float)))
@@ -289,48 +315,68 @@ class BoxDecoder:
         ends = np.cumsum([len(g) for g in groups]).astype(np.int64)
         gb = np.array([np.concatenate([g[:, :3].min(axis=0), g[:, 3:].max(axis=0)]) for g in groups]).reshape(-1, 6)
         eps = [self.lo.copy()]
-        for g in groups[len(self.obstacles):]:
+        # extreme points from fixed parts, and from the top face of every obstacle (a deck parts can stand on)
+        for g in groups[len(obstacles):]:
             for x in g:
                 eps += [np.array([x[3], x[1], x[2]]), np.array([x[0], x[4], x[2]]), np.array([x[0], x[1], x[5]])]
+        for x in obstacles:
+            # beside an obstacle (e.g. next to a corner rail) and on top of it
+            eps += [np.array([x[3], max(x[1], self.lo[1]), max(x[2], self.lo[2])]),
+                    np.array([max(x[0], self.lo[0]), x[4], max(x[2], self.lo[2])]),
+                    np.array([max(x[0], self.lo[0]), max(x[1], self.lo[1]), x[5]])]
         pts = np.unique(np.round(np.array(eps), 9), axis=0)
         if len(obs):
             inside = np.any(np.all((pts[:, None, :] > obs[None, :, :3] + TOL) & (pts[:, None, :] < obs[None, :, 3:] - TOL),
                                    axis=2), axis=1)
             pts = pts[~inside]
-        self._obs0, self._gb0, self._eps0, self._top0 = obs, gb, pts, float(top)
-        self._ge0 = ends
-        self._gs0 = np.concatenate([[0], ends[:-1]]).astype(np.int64) if len(ends) else ends
-        self._fixed_poses = fixed_poses
-        self._fixed_idx = {self.index[f[0]] for f in self.fixed if f[0] in self.index}
+        gs = np.concatenate([[0], ends[:-1]]).astype(np.int64) if len(ends) else ends
+        return obs, gb, pts, float(top), ends, gs, fixed_poses
+
+    def inflate_obstacles(self, obstacles: np.ndarray, gap: float) -> np.ndarray:
+        """Obstacle boxes grown so that part boxes (inflated by half the part gap) keep `gap` from them."""
+        obs = np.asarray(obstacles, float).reshape(-1, 6)
+        grow = max(gap - self.half, 0.0)
+        return np.concatenate([obs[:, :3] - grow, obs[:, 3:] + grow], axis=1) if len(obs) else obs
 
     # ------------------------------------------------------------------------------------- decode
-    def decode(self, order: list[int], orient_keys: np.ndarray, rule_keys: np.ndarray) -> DecodeResult:
-        return self._run(order, np.asarray(orient_keys, float), np.asarray(rule_keys, float), False)
+    def decode(self, order: list[int], orient_keys: np.ndarray, rule_keys: np.ndarray,
+               extra_obstacles: np.ndarray | None = None, skip: set[int] = frozenset()) -> DecodeResult:
+        """extra_obstacles: boxes already inflated (see inflate_obstacles) for this decode only.
+        skip: part indices that are not placed by this decode (e.g. a macro placed by the caller)."""
+        return self._run(order, np.asarray(orient_keys, float), np.asarray(rule_keys, float), False, extra_obstacles,
+                         skip)
 
-    def best_fit_all_orientations(self, order: list[int], rule: float = 0.0) -> DecodeResult:
+    def best_fit_all_orientations(self, order: list[int], rule: float = 0.0,
+                                  extra_obstacles: np.ndarray | None = None, skip: set[int] = frozenset()) -> DecodeResult:
         """Constructive heuristic: every part tries every allowed orientation (initialiser / Stage 2 baseline)."""
         n = len(self.order_ids)
-        return self._run(order, np.zeros(n), np.full(n, float(rule)), True)
+        return self._run(order, np.zeros(n), np.full(n, float(rule)), True, extra_obstacles, skip)
 
-    def _run(self, order, okeys, rules, all_orient: bool) -> DecodeResult:
+    def _run(self, order, okeys, rules, all_orient: bool, extra_obstacles=None, skip=frozenset()) -> DecodeResult:
         n = len(self.order_ids)
-        seq = np.array([-1 if i in self._fixed_idx else int(i) for i in order], np.int64)
-        n_obs0, n_grp0, n_eps0 = len(self._obs0), len(self._gb0), len(self._eps0)
+        if extra_obstacles is not None and len(extra_obstacles):
+            obs0, gb0, eps0, top0, ge0, gs0, fixed_poses = self._initial_state(
+                np.vstack([self.obstacles.reshape(-1, 6), np.asarray(extra_obstacles, float).reshape(-1, 6)]), self.fixed)
+        else:
+            obs0, gb0, eps0, top0, ge0, gs0, fixed_poses = (self._obs0, self._gb0, self._eps0, self._top0, self._ge0,
+                                                            self._gs0, self._fixed_poses)
+        seq = np.array([-1 if (i in self._fixed_idx or i in skip) else int(i) for i in order], np.int64)
+        n_obs0, n_grp0, n_eps0 = len(obs0), len(gb0), len(eps0)
         obs = np.empty((n_obs0 + self.max_boxes, 6))
-        obs[:n_obs0] = self._obs0
+        obs[:n_obs0] = obs0
         gs = np.empty(n_grp0 + n, np.int64)
         ge = np.empty(n_grp0 + n, np.int64)
         gb = np.empty((n_grp0 + n, 6))
-        gs[:n_grp0], ge[:n_grp0], gb[:n_grp0] = self._gs0, self._ge0, self._gb0
+        gs[:n_grp0], ge[:n_grp0], gb[:n_grp0] = gs0, ge0, gb0
         eps = np.empty((n_eps0 + 3 * self.max_boxes, 3))
-        eps[:n_eps0] = self._eps0
+        eps[:n_eps0] = eps0
         out_t = np.zeros((n, 3))
         out_o = np.full(n, -2, np.int64)
         top, n_obs = _decode_kernel(seq, np.ascontiguousarray(okeys), np.ascontiguousarray(rules), all_orient,
                                     self.allowed, self.n_allowed, self.tb, self.toff, self.tcnt, self.taabb,
-                                    self.lo, self.hi, obs, gs, ge, gb, n_obs0, n_grp0, eps, n_eps0, self._top0,
-                                    out_t, out_o)
-        poses = list(self._fixed_poses)
+                                    self.lo_p, self.hi_p, obs, gs, ge, gb, n_obs0, n_grp0, eps, n_eps0, top0,
+                                    out_t, out_o, self.mixed)
+        poses = list(fixed_poses)
         unplaced = []
         for i in seq:
             if i < 0:

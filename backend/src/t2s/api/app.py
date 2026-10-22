@@ -64,6 +64,17 @@ def create_app(coord: Coordinator | None = None, project: str = "default", **coo
                 "workers": [{"id": w.id, "role": w.role, "ready": w.ready} for w in c.workers],
                 "fusion360": "NOT_CONFIGURED"}
 
+    @app.get("/api/debug/state")
+    async def debug_state(request: Request):
+        c = C(request)
+        return {"run_status": c.run_status, "detail": c.status_detail, "ctx": c.ctx.ctx_id if c.ctx else None,
+                "stage": c.ctx.stage if c.ctx else None, "stage2_mode": c.ctx.stage2_mode if c.ctx else None,
+                "val_queue": [{"kind": x["kind"], "key": x["key"]} for x in c.val_queue],
+                "val_pending": len(c.val_pending), "best_id": c.best_id, "least_id": c.least_id,
+                "errors": c.errors[-8:],
+                "workers": [{"id": w.id, "role": w.role, "ready": w.ready, "busy": w.busy, "ctx_ok": c.ctx is not None
+                             and w.ctx_id == c.ctx.ctx_id, "info": w.info, "evals": w.evaluations} for w in c.workers]}
+
     @app.get("/api/project")
     async def project_snapshot(request: Request):
         return C(request).project_json()
@@ -265,6 +276,20 @@ def create_app(coord: Coordinator | None = None, project: str = "default", **coo
     async def pareto(request: Request):
         return C(request).pareto()
 
+    @app.get("/api/stage2/attribution")
+    async def attribution(request: Request):
+        a = C(request).attribution()
+        if a is None:
+            raise HTTPException(404, "constraint attribution has not been run (POST /api/stage2/attribution/run)")
+        return a
+
+    @app.post("/api/stage2/attribution/run")
+    async def attribution_run(request: Request):
+        try:
+            return C(request).start_attribution()
+        except ValueError as exc:
+            raise HTTPException(409, str(exc)) from exc
+
     # ------------------------------------------------------------------------------------------- studies
     @app.get("/api/benchmarks")
     async def benchmarks():
@@ -291,8 +316,11 @@ def create_app(coord: Coordinator | None = None, project: str = "default", **coo
         return not_built("Manufacturable Design", "M9")
 
     @app.get("/api/items/{iid}/mesh")
-    async def item_mesh(iid: str):
-        raise HTTPException(404, f"no item {iid}")
+    async def item_mesh(request: Request, iid: str):
+        try:
+            return Response(C(request).item_mesh(iid), media_type="application/octet-stream")
+        except KeyError as exc:
+            raise HTTPException(404, f"no item {iid}") from exc
 
     # ------------------------------------------------------------------------------------------- CAD / export
     @app.get("/api/cad/status")

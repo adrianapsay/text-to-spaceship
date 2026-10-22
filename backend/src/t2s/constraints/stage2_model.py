@@ -1,0 +1,560 @@
+"""Stage 2 search model (protocol §O.2, §F.2; Addendum 1.4 cable slider; Addendum 2.3 mountable edge boards).
+
+All dimensions ASSUMED unless the CDS gives them (see stage2.py). The model wraps the certified box decoder:
+
+* **Frame:** 2 mm walls, four 8.5 mm corner rails; parts keep 2.2 mm from each other and 1.2 mm from rails and
+  keep-outs. Wall-facing sides keep 3.0 mm, so the 3 mm mounting layer of U6 fits on any wall-facing side
+  (a conservative simplification of "3 mm on an optimiser-chosen face, replacing the 1.2 mm clearance there").
+* **PC/104 stack** (cable slider < 70): PCB-tagged parts lie flat, centred on the enclosure axis, 15.24 mm apart.
+  The stack's height along the enclosure is a search variable (an extra random key). The volume between boards is
+  reserved for board components (ASSUMED), so nothing else is placed there. Rods (keep-outs) span the stack only.
+* **Harness** (U5): slider 0 → a 10 mm channel on the +X wall between the rails, a hard keep-out except across the
+  stack (wiring there uses the PC/104 bus, ASSUMED). Slider 1–69 → no keep-out; H = blocked fraction of the full
+  +X corridor is a weighted objective. Slider ≥ 70 → continuous-cable mode: the corridor is a hard full-length
+  keep-out on a wall chosen by the search (extra key), and boards stand on edge on four M3 standoffs
+  (Addendum 2.3 option b; card guides are not implemented). A board whose standoffs do not reach a wall is not
+  mounted, and the layout is infeasible — boards are never left floating.
+* **Mounting reach** (U6): every other part needs one side 3–8 mm from a wall, a rail or the stack's end faces.
+
+Layout-specific geometry (stack height, corridor wall, standoffs) travels with each candidate in `meta`, so the
+validator rebuilds exactly the rules the layout was decoded under.
+"""
+from __future__ import annotations
+
+from dataclasses import dataclass
+
+import numpy as np
+
+from ..collision.validate import StageSpec, StaticItem
+from ..core.rotations import ROTATIONS_F
+from ..decoders.box_decoder import BoxDecoder, DecodeResult, ProxyPart
+from ..parts.build import orient_equivalence
+from . import stage2 as s2
+
+SLACK = 0.002                  # integer-µm rounding allowance kept on every Stage 2 gap
+WALL_MOUNT_GAP = s2.MOUNT_LAYER  # wall-facing sides keep room for the 3 mm mounting layer
+STANDOFF_SIDE = 5.0            # ASSUMED M3 standoff envelope (square section, mm)
+STANDOFF_LEN = 3.0             # shortest standoff (Addendum 2.3: 3–50 mm); it is lengthened to reach the wall
+STANDOFF_MAX = 50.0
+STANDOFF_INSET = 8.5           # ASSUMED distance of the standoff centre from the board corner (clear of the rails)
+STANDOFF_MASS_DENSITY = 2700.0  # aluminium (ASSUMED)
+WALLS = ("+x", "-x", "+y", "-y")
+REACH = s2.MOUNT_LAYER + s2.MOUNT_REACH
+
+
+def _box(lo, hi) -> np.ndarray:
+    return np.concatenate([np.asarray(lo, float), np.asarray(hi, float)])
+
+
+OVERFLOW = 400.0               # the decoder may stack parts this far beyond the end plate; overflow is a violation
+HARNESS_BREAK = s2.C_WALL + 0.01   # harness interruption beyond the stack ends (1.2 mm clearance + rounding allowance)
+
+
+def corridor_box(wall: str, z_hi: float | None = None) -> np.ndarray:
+    """10 mm channel along `wall`, between the rails, full inner length (or up to z_hi)."""
+    lo, hi = s2.inner_box()
+    if z_hi is not None:
+        hi = hi.copy()
+        hi[2] = z_hi
+    r = s2.ENVELOPE[:2] / 2 - s2.RAIL
+    ax = 0 if wall[1] == "x" else 1
+    other = 1 - ax
+    blo, bhi = lo.copy(), hi.copy()
+    if wall[0] == "+":
+        blo[ax] = hi[ax] - s2.HARNESS_W
+    else:
+        bhi[ax] = lo[ax] + s2.HARNESS_W
+    blo[other], bhi[other] = -r[other], r[other]
+    return _box(blo, bhi)
+
+
+def rail_boxes() -> list[np.ndarray]:
+    return [np.concatenate([r.corners.min(0), r.corners.max(0)]) for r in s2.rails()]
+
+
+def flat_orient(rec) -> int | None:
+    """An allowed orientation that puts the board's thinnest extent along Z."""
+    best = None
+    for o in rec.allowed_orients:
+        b = rec.orient_bounds[o]
+        ext = b[3:] - b[:3]
+        if ext[2] <= ext.min() + 1e-6:
+            if best is None:
+                best = o
+    return best
+
+
+def board_macro(rec):
+    """Board compound boxes + four standoffs on the board's -a face (a = thinnest canonical axis)."""
+    v = rec.v
+    lo, hi = v.min(0), v.max(0)
+    a = int(np.argmin(hi - lo))
+    b, c = [k for k in range(3) if k != a]
+    boxes = [np.asarray(x, float) for x in rec.boxes]
+    stand = []
+    h = STANDOFF_SIDE / 2
+    for sb in (lo[b] + STANDOFF_INSET, hi[b] - STANDOFF_INSET):
+        for sc in (lo[c] + STANDOFF_INSET, hi[c] - STANDOFF_INSET):
+            blo, bhi = np.zeros(3), np.zeros(3)
+            blo[a], bhi[a] = lo[a] - STANDOFF_LEN, lo[a]
+            blo[b], bhi[b] = sb - h, sb + h
+            blo[c], bhi[c] = sc - h, sc + h
+            stand.append(_box(blo, bhi))
+    return np.array(boxes + stand), np.array(stand), a
+
+
+PAD = s2.MOUNT_LAYER - s2.C_WALL        # 1.8 mm reserved beyond the 1.2 mm clearance = the 3 mm mounting layer
+
+
+def pad_box(rec):
+    """Mounting-layer reservation on the part's largest canonical face (the -a face, a = thinnest axis)."""
+    lo, hi = rec.v.min(0), rec.v.max(0)
+    a = int(np.argmin(hi - lo))
+    blo, bhi = lo.copy(), hi.copy()
+    bhi[a] = lo[a]
+    blo[a] = lo[a] - PAD
+    return _box(blo, bhi), a
+
+
+@dataclass
+class Stage2Config:
+    mode: str                  # default | soft | continuous
+    pcb_ids: list
+    threshold: float = 70.0
+
+
+def mode_for(cable: float, threshold: float = 70.0) -> str:
+    return "continuous" if cable >= threshold else ("soft" if cable > 0 else "default")
+
+
+class Stage2Model:
+    """Decoder + rule builder for one parts set and one mode. Chromosome: 3n keys + 2 extra keys
+    (stack height, corridor wall)."""
+
+    n_extra = 2
+
+    RELAXABLE = ("clearances", "frame", "pcb_stack", "harness", "mounting", "com_box")
+
+    def __init__(self, records: dict, mode: str, fixed: list | None = None, relax=frozenset()):
+        """relax: constraint families switched off (constraint attribution, protocol §O.3 — never used for the
+        layouts the app reports as Stage 2 results)."""
+        self.records = records
+        self.ids = list(records)
+        self.n = len(self.ids)
+        self.dim = 3 * self.n + self.n_extra
+        self.mode = mode
+        self.relax = frozenset(relax)
+        self.pcb = [] if "pcb_stack" in self.relax else [pid for pid in self.ids if "pcb" in records[pid].tags]
+        lo, hi = s2.inner_box()
+        if "frame" in self.relax:                      # no walls, no rails: the bare 100 × 100 × 340.5 envelope
+            lo, hi = -s2.ENVELOPE / 2, s2.ENVELOPE / 2
+        self.inner = (lo, hi)
+        self.dec_hi = hi + np.array([0.0, 0.0, OVERFLOW])   # decoder container: open beyond the end plate
+        self.wall_gap = s2.C_WALL + SLACK               # every side keeps the 1.2 mm wall clearance …
+        self.gap_pp = s2.C_PP + SLACK
+        self.obs_gap = s2.C_WALL + SLACK
+        if "clearances" in self.relax:                 # Stage 1 contact policy instead of 2.2 / 1.2 mm
+            self.gap_pp = 0.005 + SLACK
+            self.obs_gap = SLACK
+            self.wall_gap = self.gap_pp / 2
+        # the box decoder inflates part boxes by half the part gap on every side, walls included
+        self.dec_wall_gap = self.wall_gap - self.gap_pp / 2
+        self.board_wall_gap = self.wall_gap
+        self.flat = {pid: flat_orient(records[pid]) for pid in self.pcb}
+        self.stack_ok = self.mode != "continuous" and all(o is not None for o in self.flat.values())
+        proxies = []
+        self.macro = {}
+        self.pads = {}
+        self.equiv = {}
+        for pid in self.ids:
+            r = records[pid]
+            allowed = list(r.allowed_orients)
+            boxes = r.boxes
+            if pid in self.pcb and self.mode == "continuous":
+                mb, stand, a = board_macro(r)
+                # edge-on: the board's thin axis (and so the standoffs) must point along X or Y
+                edge = [o for o in range(24) if abs(ROTATIONS_F[o][2, a]) < 0.5]
+                self.macro[pid] = {"stand": stand, "axis": a}
+                boxes, allowed = mb, edge
+            elif pid not in self.pcb and "mounting" not in self.relax:
+                # … and the mounting side gets the 3 mm layer (U6): a 1.8 mm pad reserved on the part's largest
+                # face, pointed by the part's orientation (any of 24), so that side ends up 3.0 mm from its target
+                pad, a = pad_box(r)
+                self.pads[pid] = (pad, a)
+                boxes = np.vstack([r.boxes, pad[None]])
+                # with the pad, orientations that are equivalent for the bare part differ: offer every orientation
+                # whose bare-part representative is allowed, and report poses with the representative
+                allowed = [o for o in range(24) if self._rep(pid, o) in r.allowed_orients]
+            proxies.append(ProxyPart(pid, boxes, allowed))
+        self.proxies = proxies
+        self.parts = {p.id: p for p in proxies}
+        self.allowed = {p.id: list(p.allowed) for p in proxies}
+        self.decoders = {}
+        self.fixed = [f for f in (fixed or []) if f[0] not in self.pcb or self.mode == "continuous"]
+        self._statics_rails = [] if "frame" in self.relax else \
+            [np.concatenate([b[:3], [b[3], b[4], self.dec_hi[2]]]) for b in rail_boxes()]
+        self.harness_on = "harness" not in self.relax
+
+    def _rep(self, pid: str, o: int) -> int:
+        if pid not in self.equiv:
+            r = self.records[pid]
+            self.equiv[pid] = getattr(r, "_orient_equiv", None) or orient_equivalence(r.v)
+            try:
+                r._orient_equiv = self.equiv[pid]
+            except Exception:  # noqa: BLE001
+                pass
+        return int(self.equiv[pid][o])
+
+    # ------------------------------------------------------------------------------------------ geometry
+    def _decoder(self, key: str, obstacles: list[np.ndarray]) -> BoxDecoder:
+        if key not in self.decoders:
+            lo, hi = self.inner[0], self.dec_hi
+            pwg = {pid: self.board_wall_gap - self.gap_pp / 2 for pid in self.macro}
+            self.decoders[key] = BoxDecoder(self.proxies, lo, hi, self.gap_pp, self.dec_wall_gap,
+                                            np.array(obstacles).reshape(-1, 6), self.obs_gap, self.fixed,
+                                            part_wall_gap=pwg, mixed_candidates=True)
+        return self.decoders[key]
+
+    def stack_layout(self, key_z: float):
+        """Board poses, the reserved stack block and its z-span for a stack-height key in [0, 1)."""
+        lo, hi = self.inner
+        poses, boxes = [], []
+        thick = []
+        for pid in self.pcb:
+            b = self.records[pid].orient_bounds[self.flat[pid]]
+            thick.append(b[5] - b[2])
+        span = (len(self.pcb) - 1) * s2.PCB_PITCH + (thick[-1] if thick else 0.0)
+        zmin = lo[2] + self.wall_gap
+        zmax = hi[2] - self.wall_gap - span
+        if zmax < zmin:
+            return None
+        z0 = zmin + float(key_z) * (zmax - zmin)
+        z0 = np.ceil(z0 * 1000.0) / 1000.0
+        for k, pid in enumerate(self.pcb):
+            o = self.flat[pid]
+            b = self.records[pid].orient_bounds[o]
+            c = 0.5 * (b[:3] + b[3:])
+            t = np.array([-c[0], -c[1], z0 + k * s2.PCB_PITCH - b[2]])
+            t = np.round(t * 1000.0) / 1000.0
+            poses.append((pid, o, t))
+            boxes.append(np.concatenate([b[:3] + t, b[3:] + t]))
+        bb = np.array(boxes)
+        block = np.concatenate([bb[:, :3].min(0), bb[:, 3:].max(0)])
+        return poses, block, (float(block[2]), float(block[5]))
+
+    def statics(self, meta: dict, relaxed: bool = False) -> list[StaticItem]:
+        """Keep-outs a layout was decoded under (for validation and display). relaxed: extended beyond the end
+        plate, to certify an overflowing (infeasible) candidate everywhere else."""
+        lo, hi = self.inner[0], (self.dec_hi if relaxed else self.inner[1])
+        out = [] if "frame" in self.relax else \
+            [StaticItem(r.name, s2.box_corners(r.corners.min(0), np.concatenate([r.corners.max(0)[:2], [hi[2]]])), "rail")
+             for r in s2.rails()]
+        if meta.get("mode") == "continuous" and meta.get("corridor"):
+            cb = corridor_box(meta["corridor"], hi[2])
+            out.append(StaticItem(f"corridor{meta['corridor']}", s2.box_corners(cb[:3], cb[3:]), "harness"))
+            for k, (pid, b) in enumerate(meta.get("standoffs", [])):
+                out.append(StaticItem(f"standoff{k}:{pid}", s2.box_corners(b[:3], b[3:]), "standoff"))
+        else:
+            span = meta.get("stack_span")
+            if meta.get("mode") == "default" and self.harness_on:
+                cb = corridor_box("+x")
+                segs = [(lo[2], hi[2])] if span is None else [(lo[2], span[0] - HARNESS_BREAK),
+                                                               (span[1] + HARNESS_BREAK, hi[2])]
+                for i, (a, b) in enumerate(segs):
+                    if b - a > 1e-6:
+                        out.append(StaticItem(f"harness{i}", s2.box_corners([cb[0], cb[1], a], [cb[3], cb[4], b]),
+                                              "harness"))
+            if span is not None and self.pcb:
+                h = s2.ROD_D / 2
+                for sx in (1, -1):
+                    for sy in (1, -1):
+                        out.append(StaticItem(f"rod{'+' if sx > 0 else '-'}{'+' if sy > 0 else '-'}",
+                                              s2.box_corners([sx * s2.ROD_XY - h, sy * s2.ROD_XY - h, span[0]],
+                                                             [sx * s2.ROD_XY + h, sy * s2.ROD_XY + h, span[1]]), "rod"))
+                blk = meta["stack_block"]
+                out.append(StaticItem("stack_reserve", s2.box_corners(blk[:3], blk[3:]), "stack"))
+        return out
+
+    def spec(self, meta: dict, relaxed: bool = False) -> StageSpec:
+        lo, hi = self.inner[0], (self.dec_hi if relaxed else self.inner[1])
+        st = self.statics(meta, relaxed)
+        exempt = set()
+        for s in st:
+            if s.kind in ("rod", "stack"):
+                exempt |= {(pid, s.name) for pid in self.pcb}
+            if s.kind == "standoff":
+                exempt.add((s.name.split(":", 1)[1], s.name))
+        return StageSpec(2, lo + s2.C_WALL, hi - s2.C_WALL, s2.C_PP, s2.C_WALL, st, exempt)
+
+    def feasible(self, meta: dict) -> bool:
+        """Engineering feasibility beyond geometry (validated separately): inside the enclosure, every part
+        mounted. The COM box and insertion order are checked by the caller."""
+        return meta.get("overflow_mm", 0.0) <= 0.0 and not meta.get("unmounted")
+
+    # ------------------------------------------------------------------------------------------ decoding
+    def decode(self, order, orient_keys, rule_keys) -> DecodeResult:
+        rule_keys = np.asarray(rule_keys, float)
+        extra = rule_keys[self.n:] if len(rule_keys) > self.n else np.full(self.n_extra, 0.5)
+        rk = rule_keys[:self.n]
+        meta = {"mode": self.mode}
+        pre_poses, skip = [], set()
+        idx = {pid: i for i, pid in enumerate(self.ids)}
+        ztop = self.dec_hi[2]
+        if self.mode == "continuous":
+            wall = WALLS[min(int(extra[1] * 4), 3)]
+            if self.harness_on:
+                meta["corridor"] = wall
+            dec = self._decoder(wall, self._statics_rails + ([corridor_box(wall, ztop)] if self.harness_on else []))
+            res = dec.decode(order, orient_keys, rk)
+        else:
+            obstacles = self._statics_rails + ([corridor_box("+x", ztop)]
+                                               if self.mode == "default" and self.harness_on else [])
+            stack = self.stack_layout(extra[0]) if self.stack_ok and self.pcb else None
+            if self.pcb and stack is None:
+                return DecodeResult([], np.zeros((0, 6)), list(self.ids), 0.0)
+            if stack is None:
+                dec = self._decoder(self.mode, obstacles)
+                res = dec.decode(order, orient_keys, rk)
+            else:
+                poses, block, span = stack
+                meta.update(stack_z=span[0], stack_span=span, stack_block=block.tolist(), stack_ids=list(self.pcb))
+                # harness interrupted across the stack span (default mode)
+                obs = list(self._statics_rails)
+                if self.mode == "default" and self.harness_on:
+                    cb = corridor_box("+x")
+                    lo, hi = self.inner
+                    for a, b in ((lo[2], span[0] - HARNESS_BREAK), (span[1] + HARNESS_BREAK, ztop)):
+                        if b - a > 1e-6:
+                            obs.append(np.array([cb[0], cb[1], a, cb[3], cb[4], b]))
+                dec = self._decoder(f"{self.mode}-stack", self._statics_rails)
+                extra_obs = dec.inflate_obstacles(np.array(obs[len(self._statics_rails):]).reshape(-1, 6), self.obs_gap)
+                extra_obs = np.vstack([extra_obs.reshape(-1, 6), self._stack_obstacle(dec, block)[None]])
+                skip = {idx[p] for p in self.pcb}
+                res = dec.decode(order, orient_keys, rk, extra_obstacles=extra_obs, skip=skip)
+                pre_poses = poses
+        poses = pre_poses + [(pid, int(o), np.round(np.asarray(t, float) * 1000.0) / 1000.0) for pid, o, t in res.poses]
+        penalty, mounts, extras = self.mount_check(poses, meta)
+        meta["mounts"] = mounts
+        meta["unmounted"] = [p for p, v in mounts.items() if not v["ok"]]
+        top = max((t[2] + self.records[pid].orient_bounds[o][5] for pid, o, t in poses), default=self.inner[0][2])
+        meta["overflow_mm"] = float(max(0.0, top - (self.inner[1][2] - s2.C_WALL)))
+        penalty += meta["overflow_mm"] / 10.0
+        if self.mode == "continuous":
+            meta["standoffs"] = extras
+        if self.mode == "soft":
+            meta["H"] = self.blocked_fraction(poses, meta)
+        # the pad was only a reservation: report each part with its bare-part representative orientation
+        meta["pad_orients"] = {pid: int(o) for pid, o, _ in poses if pid in self.pads or pid in self.macro}
+        poses = [(pid, self._rep(pid, o) if (pid in self.pads or pid in self.macro) else o, t) for pid, o, t in poses]
+        out = DecodeResult(poses, res.placed_boxes, res.unplaced, res.length_top)
+        out.meta = meta
+        out.penalty = float(penalty)
+        out.raw_extra = {"H": meta["H"]} if "H" in meta else {}
+        out.extra_mass = self.standoff_mass(extras)
+        return out
+
+    def best_fit_all_orientations(self, order, rule: float = 0.0) -> DecodeResult:
+        """Constructive baseline: stack at mid-height (key 0.5), corridor wall key 0.5, all orientations tried."""
+        n = self.n
+        if self.mode == "continuous":
+            wall = WALLS[2]
+            dec = self._decoder(wall, self._statics_rails + [corridor_box(wall, self.dec_hi[2])])
+            res = dec.best_fit_all_orientations(order, rule)
+            meta = {"mode": self.mode, "corridor": wall}
+            poses = [(p, int(o), np.round(np.asarray(t) * 1000) / 1000) for p, o, t in res.poses]
+            okeys = np.zeros(n)
+            o_of = {p: o for p, o, _ in poses}
+            for i, pid in enumerate(self.ids):
+                if pid in o_of and o_of[pid] in self.allowed[pid]:
+                    okeys[i] = (self.allowed[pid].index(o_of[pid]) + 0.5) / len(self.allowed[pid])
+            rk = np.concatenate([np.full(n, rule), [0.5, 0.5]])
+            out = self.decode(order, okeys, rk)
+            out.keys_hint = (okeys, rk)
+            return out
+        # flat stack: orientations of the free parts from a best-fit pass, then a normal decode
+        rk = np.concatenate([np.full(n, rule), [0.0, 0.5]])
+        best = None
+        for kz in (0.0, 1.0, 0.5):
+            rk[n] = kz
+            probe = self._best_fit_orients(order, rule, kz)
+            r = self.decode(order, probe, rk.copy())
+            if best is None or (len(r.unplaced), r.penalty, r.length_top) < (len(best.unplaced), best.penalty, best.length_top):
+                best = r
+                best.keys_hint = (probe.copy(), rk.copy())
+        return best
+
+    def _best_fit_orients(self, order, rule, kz) -> np.ndarray:
+        n = self.n
+        stack = self.stack_layout(kz) if self.stack_ok and self.pcb else None
+        okeys = np.full(n, 0.5)
+        if stack is None:
+            return okeys
+        poses, block, span = stack
+        dec = self._decoder(f"{self.mode}-stack", self._statics_rails)
+        obs = [self._stack_obstacle(dec, block)]
+        if self.mode == "default" and self.harness_on:
+            cb = corridor_box("+x")
+            lo, hi = self.inner
+            for a, b in ((lo[2], span[0] - HARNESS_BREAK), (span[1] + HARNESS_BREAK, self.dec_hi[2])):
+                if b - a > 1e-6:
+                    obs += list(dec.inflate_obstacles(np.array([cb[0], cb[1], a, cb[3], cb[4], b]), self.obs_gap))
+        idx = {pid: i for i, pid in enumerate(self.ids)}
+        res = dec.best_fit_all_orientations(order, rule, extra_obstacles=np.array(obs), skip={idx[p] for p in self.pcb})
+        for pid, o, _ in res.poses:
+            i = idx[pid]
+            okeys[i] = (self.allowed[pid].index(o) + 0.5) / len(self.allowed[pid])
+        return okeys
+
+    def _stack_obstacle(self, dec: BoxDecoder, block) -> np.ndarray:
+        """The stack block grown so that part boxes keep the part-part gap from it on every side."""
+        g = max(self.gap_pp - dec.half, 0.0)
+        return np.array([block[0] - g, block[1] - g, block[2] - g, block[3] + g, block[4] + g, block[5] + g])
+
+    # ------------------------------------------------------------------------------------------ checks
+    def mount_check(self, poses, meta) -> tuple[int, dict, list]:
+        """U6 reach check for normal parts; standoff contact for edge boards. Returns (failures, info, standoffs)."""
+        lo, hi = self.inner
+        decks = []
+        if meta.get("stack_block") is not None:
+            blk = meta["stack_block"]
+            decks = [(2, blk[5], +1), (2, blk[2], -1)]
+        fails, info, standoffs = 0, {}, []
+        world_boxes = {}
+        for pid, o, t in poses:
+            p = self.proxies[self.ids.index(pid)]
+            ob = p.oriented(o)
+            world_boxes[pid] = np.concatenate([ob[:, :3] + t, ob[:, 3:] + t], axis=1)
+        keepouts = list(self._statics_rails)
+        if meta.get("corridor"):
+            keepouts.append(corridor_box(meta["corridor"], self.dec_hi[2]))
+        for pid, o, t in poses:
+            if pid in self.pcb and self.mode != "continuous":
+                info[pid] = {"ok": True, "how": "PC/104 stack rods"}
+                continue
+            r = self.records[pid]
+            b = r.orient_bounds[o]
+            plo, phi = b[:3] + t, b[3:] + t
+            if pid in self.macro:
+                ok, how, st = self._standoffs(pid, o, t, world_boxes, keepouts)
+                if "mounting" in self.relax and not ok:
+                    ok, how, st = True, "mounting not checked (relaxed)", []
+                standoffs += [(pid, s) for s in st]
+                info[pid] = {"ok": ok, "how": how}
+                fails += 0 if ok else 1
+                continue
+            if pid not in self.pads:
+                info[pid] = {"ok": True, "how": "mounting not checked (relaxed)"}
+                continue
+            ok, how = self._layer_mount(pid, o, t, decks)
+            info[pid] = {"ok": ok, "how": how}
+            fails += 0 if ok else 1
+        return fails, info, standoffs
+
+    def _layer_mount(self, pid, o, t, decks):
+        """U6: the side carrying the reserved 3 mm layer must face a wall, end plate, rail or the stack deck within
+        reach (the layer face 1.2–6.2 mm from it, i.e. the part side 3.0–8.0 mm away)."""
+        lo, hi = self.inner
+        pad, a = self.pads[pid]
+        R = ROTATIONS_F[o]
+        c = np.array([pad[:3] @ R.T, pad[3:] @ R.T])
+        pw = np.concatenate([c.min(0) + t, c.max(0) + t])     # pad in world
+        d = -R[:, a]                                          # outward normal of the mounting side
+        ax = int(np.argmax(np.abs(d)))
+        neg = d[ax] < 0
+        lo_r, hi_r = s2.C_WALL - 1e-6, s2.C_WALL + s2.MOUNT_REACH
+        face = pw[ax] if neg else pw[3 + ax]
+        side = f"{'-' if neg else '+'}{'xyz'[ax]}"
+        dist = (face - lo[ax]) if neg else (hi[ax] - face)
+        if lo_r <= dist <= hi_r:
+            return True, f"3 mm layer on the {side} {'end plate' if ax == 2 else 'wall'} ({dist + PAD:.1f} mm)"
+        for dax, z, sgn in decks:
+            if dax == ax and ((sgn > 0 and neg) or (sgn < 0 and not neg)):
+                dd = (face - z) if neg else (z - face)
+                if lo_r <= dd <= hi_r + s2.C_PP:
+                    return True, f"3 mm layer on the PC/104 stack {'top' if sgn > 0 else 'underside'}"
+        b, cc = [k for k in range(3) if k != ax]
+        for rb in self._statics_rails:
+            if not (rb[b] < pw[3 + b] and rb[3 + b] > pw[b] and rb[cc] < pw[3 + cc] and rb[3 + cc] > pw[cc]):
+                continue
+            dd = (face - rb[3 + ax]) if neg else (rb[ax] - face)
+            if lo_r <= dd <= hi_r:
+                return True, f"3 mm layer on a corner rail ({side})"
+        return False, f"its mounting side ({side}) is not within reach of a wall, rail or deck"
+
+    def _standoffs(self, pid, o, t, world_boxes, keepouts):
+        """Lengthen the board's 3 mm standoffs to the wall they face (≤ 50 mm) if the path is clear."""
+        lo, hi = self.inner
+        m = self.macro[pid]
+        R = ROTATIONS_F[o]
+        st = []
+        for sb in m["stand"]:
+            c = np.array([sb[:3] @ R.T, sb[3:] @ R.T])
+            st.append(np.concatenate([c.min(0) + t, c.max(0) + t]))
+        d = -R[:, m["axis"]]                      # world direction the standoffs point to
+        ax = int(np.argmax(np.abs(d)))
+        neg = d[ax] < 0
+        tips = min(s[ax] for s in st) if neg else max(s[3 + ax] for s in st)
+        wall = lo[ax] if neg else hi[ax]
+        gap = abs(tips - wall)
+        name = f"{'-' if neg else '+'}{'xyz'[ax]} wall"
+        if STANDOFF_LEN + gap > STANDOFF_MAX + 1e-9:
+            return False, f"the {name} is {gap + STANDOFF_LEN:.1f} mm from the board (> {STANDOFF_MAX:.0f} mm standoffs)", []
+        ext = []
+        for s in st:
+            s = s.copy()
+            if neg:
+                s[ax] = wall
+            else:
+                s[3 + ax] = wall
+            ext.append(s)
+        c = s2.C_WALL
+        for e in ext:
+            path = e.copy()
+            if neg:
+                path[3 + ax] = tips             # only the added length can meet something new
+            else:
+                path[ax] = tips
+            for qid, boxes in world_boxes.items():
+                if qid == pid:
+                    continue
+                if np.any(np.all((boxes[:, :3] < path[3:] + c) & (boxes[:, 3:] > path[:3] - c), axis=1)):
+                    return False, f"the path to the {name} is blocked by {qid}", []
+            for kb in keepouts:
+                if np.all(kb[:3] < path[3:] + c) and np.all(kb[3:] > path[:3] - c):
+                    return False, f"the path to the {name} crosses a rail or the cable corridor", []
+        length = STANDOFF_LEN + gap
+        return True, f"4 × M3 standoffs ({length:.1f} mm) to the {name}", [e.tolist() for e in ext]
+
+    def blocked_fraction(self, poses, meta) -> float:
+        """Share of the +X corridor's length crossed by any part (soft mode objective H)."""
+        cb = corridor_box("+x")
+        ivs = []
+        for pid, o, t in poses:
+            b = self.records[pid].orient_bounds[o]
+            plo, phi = b[:3] + t, b[3:] + t
+            if np.all(plo[:2] < cb[3:5] + s2.C_WALL) and np.all(phi[:2] > cb[:2] - s2.C_WALL):
+                ivs.append((max(plo[2], cb[2]), min(phi[2], cb[5])))
+        ivs = sorted(iv for iv in ivs if iv[1] > iv[0])
+        total, cur = 0.0, None
+        for a, b in ivs:
+            if cur is None or a > cur[1]:
+                if cur:
+                    total += cur[1] - cur[0]
+                cur = [a, b]
+            else:
+                cur[1] = max(cur[1], b)
+        if cur:
+            total += cur[1] - cur[0]
+        return float(total / (cb[5] - cb[2]))
+
+    @staticmethod
+    def standoff_mass(standoffs) -> list:
+        out = []
+        for _, b in standoffs:
+            b = np.asarray(b, float)
+            d = b[3:] - b[:3]
+            m = STANDOFF_MASS_DENSITY * float(np.prod(d)) * 1e-9
+            c = 0.5 * (b[:3] + b[3:])
+            i = m / 12 * np.diag([d[1] ** 2 + d[2] ** 2, d[0] ** 2 + d[2] ** 2, d[0] ** 2 + d[1] ** 2]) * 1e-6
+            out.append((m, c, i))
+        return out

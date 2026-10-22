@@ -249,6 +249,11 @@ export function MainViewport(props: MainViewportProps) {
                   <span className="vp-chip warn">{staleReasons[solid.layout.id]}</span>
                 </div>
               ) : null}
+              {solid.kind === 'INFEASIBLE' ? (
+                <div>
+                  <span className="vp-chip warn">least-violating candidate — geometry certified, rules broken (listed above)</span>
+                </div>
+              ) : null}
               {coverage.missing.length ? (
                 <div>
                   <span className="vp-chip warn" data-testid="missing-parts">
