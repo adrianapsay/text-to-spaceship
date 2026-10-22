@@ -27,6 +27,10 @@ const argVal = (flag, dflt) => {
 };
 const DATA = argVal('--data', resolve(here, '../../data/synthetic'));
 const OUT = argVal('--out', resolve(here, '../public/mock-fixtures'));
+if (args.includes('--if-missing') && existsSync(join(OUT, 'project.json')) && existsSync(join(OUT, 'layouts.json'))) {
+  console.log(`mock fixtures present in ${OUT} (run "npm run fixtures" to rebuild)`);
+  process.exit(0);
+}
 const DENSITY = 2700; // kg/m^3, ASSUMED (protocol default)
 const ENCL = { x: 100, y: 100, z: 340.5 };
 const Z0 = -ENCL.z / 2; // -170.25

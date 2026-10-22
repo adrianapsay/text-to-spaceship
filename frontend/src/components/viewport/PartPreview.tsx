@@ -22,7 +22,7 @@ export function PartPreview({ part }: { part: Part }) {
     return m;
   }, [part.com_canonical_mm, part.extents_mm]);
   return (
-    <div className="viewport-wrap" style={{ minHeight: 260 }} tabIndex={0} role="region" aria-label={`Part ${part.name} in its own frame`} onKeyDown={viewportKeyHandler(() => cam.current, {})}>
+    <div className="viewport-wrap" style={{ height: 300, flex: 'none' }} tabIndex={0} role="region" aria-label={`Part ${part.name} in its own frame`} onKeyDown={viewportKeyHandler(() => cam.current, {})}>
       <Canvas frameloop="demand" dpr={[1, 2]} camera={{ position: [200, -260, 160], up: [0, 0, 1], fov: 35, near: 0.1, far: 20000 }}>
         <color attach="background" args={['#26282C']} />
         <ambientLight intensity={0.6} />

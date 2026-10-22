@@ -5,7 +5,7 @@ import { useApp } from '../store/store';
 import { useDisplayMetrics, useParts } from '../hooks';
 import { MainViewport } from '../components/viewport/Viewport';
 import { GoalsPanel } from '../components/GoalsPanel';
-import { PartInspector, PartsList } from '../components/PartsPanel';
+import { HardwareItemsList, PartInspector, PartsList } from '../components/PartsPanel';
 import { MetricStrip, WhatChanged } from '../components/Metrics';
 import { Badge, Button } from '../components/ui';
 import { NOT_OPTIMAL } from '../lib/copy';
@@ -44,6 +44,7 @@ export function OverviewTab() {
     <div className="overview" data-testid="tab-overview">
       <aside className="left" aria-label="Parts and physical properties">
         <PartsList />
+        <HardwareItemsList />
         <PartInspector />
       </aside>
       <section className="centre" aria-label="3D view">

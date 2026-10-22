@@ -1,7 +1,8 @@
 import * as THREE from 'three';
 import { useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 import { useFrame, useThree, type ThreeEvent } from '@react-three/fiber';
-import { Html, Outlines } from '@react-three/drei';
+import { Outlines } from '@react-three/drei';
+import { Label3D } from './labels';
 import type { ExtraItem, Mat3, Part, Pose } from '../../api/types';
 import type { RenderStyle } from '../../api/protocol';
 import { VIEWPORT, extraItemStyle } from '../../lib/colors';
@@ -114,13 +115,7 @@ export function PartObject(p: PartObjectProps) {
       ) : null}
       {edgeObj ? <primitive object={edgeObj} /> : null}
       {bbox ? <primitive object={bbox} /> : null}
-      {p.showLabel && geo ? (
-        <Html center zIndexRange={[20, 10]} style={{ pointerEvents: 'none' }}>
-          <div className="vp-label" role="note">
-            {p.part.name}
-          </div>
-        </Html>
-      ) : null}
+      {p.showLabel && geo ? <Label3D position={[p.pose.t_um[0] / 1000, p.pose.t_um[1] / 1000, p.pose.t_um[2] / 1000]} text={p.part.name} priority={p.selected ? 15 : 0} /> : null}
     </group>
   );
 }
@@ -140,11 +135,7 @@ export function ExtraItemMesh(props: { item: ExtraItem; showLabel: boolean }) {
     <group userData={{ itemId: props.item.id, process: props.item.process }}>
       <mesh geometry={geo.geometry} material={material} />
       {edges ? <primitive object={edges} /> : null}
-      {centre && (st.badge || props.showLabel) ? (
-        <Html position={centre} center zIndexRange={[25, 15]} style={{ pointerEvents: 'none' }}>
-          <div className={`vp-label ${st.badge === 'AM' ? 'am' : ''}`}>{st.badge ?? st.label}</div>
-        </Html>
-      ) : null}
+      {centre && (st.badge || props.showLabel) ? <Label3D position={[centre.x, centre.y, centre.z]} text={st.badge ?? st.label} className={st.badge === 'AM' ? 'am' : ''} priority={st.badge ? 20 : 1} /> : null}
     </group>
   );
 }

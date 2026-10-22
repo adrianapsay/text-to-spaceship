@@ -177,7 +177,7 @@ export function KV(props: { rows: [ReactNode, ReactNode][] }) {
   );
 }
 
-export function Notice(props: { tone?: 'warn' | 'err' | 'ok' | 'info'; children: ReactNode; role?: 'status' | 'alert' }) {
+export function Notice(props: { tone?: 'warn' | 'err' | 'ok' | 'info'; children: ReactNode; role?: 'status' | 'alert' | 'note' }) {
   return (
     <div className={`notice ${props.tone ?? 'warn'}`} role={props.role}>
       {props.children}

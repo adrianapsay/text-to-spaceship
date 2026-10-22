@@ -447,7 +447,8 @@ input[type='radio'] {
 
 .chip {
   display: inline-flex;
-  gap: 6px;
+  flex-wrap: wrap;
+  gap: 2px 6px;
   align-items: baseline;
   padding: 4px 8px;
   border: 1px solid var(--border-subtle);
@@ -680,6 +681,13 @@ table.data tbody tr:hover td {
   white-space: nowrap;
   pointer-events: none;
   border: 1px solid rgba(230, 232, 235, 0.35);
+}
+.vp-label.collision {
+  border-color: #d55e00;
+  color: #ffb08a;
+}
+.vp-label.clearance {
+  border-color: #e69f00;
 }
 .vp-label.am {
   color: #1b1d21;

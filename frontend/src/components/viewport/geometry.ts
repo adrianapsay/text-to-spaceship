@@ -6,14 +6,9 @@ import { hasSession, session } from '../../api/session';
 import type { MeshData } from '../../api/rest';
 
 // three-mesh-bvh picking (firstHitOnly is set on the raycaster in the canvas)
-declare module 'three' {
-  interface BufferGeometry {
-    computeBoundsTree: typeof computeBoundsTree;
-    disposeBoundsTree: typeof disposeBoundsTree;
-  }
-}
-THREE.BufferGeometry.prototype.computeBoundsTree = computeBoundsTree;
-THREE.BufferGeometry.prototype.disposeBoundsTree = disposeBoundsTree;
+const proto = THREE.BufferGeometry.prototype as unknown as { computeBoundsTree: unknown; disposeBoundsTree: unknown };
+proto.computeBoundsTree = computeBoundsTree;
+proto.disposeBoundsTree = disposeBoundsTree;
 THREE.Mesh.prototype.raycast = acceleratedRaycast;
 
 export interface PartGeometry {
@@ -32,7 +27,7 @@ export function buildGeometry(m: MeshData, edgeAngleDeg = 30): PartGeometry {
   g.computeBoundingBox();
   g.computeBoundingSphere();
   try {
-    g.computeBoundsTree();
+    (g as unknown as { computeBoundsTree: () => void }).computeBoundsTree();
   } catch {
     /* BVH is an optimisation only */
   }

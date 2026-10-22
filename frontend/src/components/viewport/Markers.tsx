@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { useEffect, useMemo } from 'react';
 import { useThree } from '@react-three/fiber';
-import { Html } from '@react-three/drei';
+import { Label3D } from './labels';
 import type { Limits, Mat3, Stage2Frame, Vec3, Violation } from '../../api/types';
 import { VIEWPORT } from '../../lib/colors';
 import { fmt } from '../../lib/fmt';
@@ -176,21 +176,11 @@ export function ComMarkers(p: ComMarkerProps) {
       {p.com ? <PointsMarker positions={[p.com]} sizePx={16} texture={discTex} onTop /> : null}
       {axes ? <primitive object={axes} /> : null}
       {p.html && p.com && dist !== null ? (
-        <Html position={[(p.com[0] + p.target[0]) / 2 + 4, (p.com[1] + p.target[1]) / 2, (p.com[2] + p.target[2]) / 2]} zIndexRange={[30, 20]} style={{ pointerEvents: 'none' }}>
-          <div className="vp-label">target → COM {fmt(dist, 'mm')}</div>
-        </Html>
+        <Label3D position={[(p.com[0] + p.target[0]) / 2, (p.com[1] + p.target[1]) / 2, (p.com[2] + p.target[2]) / 2]} offset={[70, 0]} priority={10} text={`target → COM ${fmt(dist, 'mm')}`} />
       ) : null}
-      {p.html ? (
-        <Html position={[box[0], -box[1], box[2]]} zIndexRange={[30, 20]} style={{ pointerEvents: 'none' }}>
-          <div className="vp-label">{p.stage === 2 ? 'CDS COM box — HARD' : 'CDS COM box (shown, not enforced in Stage 1)'}</div>
-        </Html>
-      ) : null}
+      {p.html ? <Label3D position={[box[0], -box[1], box[2]]} offset={[90, 0]} priority={9} text={p.stage === 2 ? 'CDS COM box — HARD' : 'CDS COM box (shown, not enforced in Stage 1)'} /> : null}
       {p.html && p.showAxes && p.com && p.principalMoments ? (
-        <Html position={[p.com[0] + 62, p.com[1], p.com[2]]} zIndexRange={[30, 20]} style={{ pointerEvents: 'none' }}>
-          <div className="vp-label">
-            I₁ ≤ I₂ ≤ I₃ · tilt {fmt(p.tiltDeg, 'deg')}
-          </div>
-        </Html>
+        <Label3D position={[p.com[0] + 62, p.com[1], p.com[2]]} offset={[60, 0]} priority={8} text={`I₁ ≤ I₂ ≤ I₃ · tilt ${fmt(p.tiltDeg, 'deg')}`} />
       ) : null}
     </group>
   );
@@ -220,11 +210,7 @@ export function CompactnessLine(props: { lengthUsed: number | null; size: Vec3; 
     <group>
       <primitive object={obj} />
       {props.html ? (
-        <Html position={[x + 6, y, z0 + (props.lengthUsed ?? 0) / 2]} zIndexRange={[30, 20]} style={{ pointerEvents: 'none' }}>
-          <div className="vp-label">
-            used {fmt(props.lengthUsed, 'mm', { unit: false })} / {fmt(props.size[2], 'mm')}
-          </div>
-        </Html>
+        <Label3D position={[x + 6, y, z0 + (props.lengthUsed ?? 0) / 2]} offset={[60, 0]} priority={11} text={`used ${fmt(props.lengthUsed, 'mm', { unit: false })} / ${fmt(props.size[2], 'mm')}`} />
       ) : null}
     </group>
   );
@@ -249,11 +235,12 @@ export function Violations(props: { violations: Violation[] | undefined; html: b
         ? props.violations
             ?.filter((x) => x.points)
             .map((x, i) => (
-              <Html key={i} position={x.points![0]} zIndexRange={[30, 20]} style={{ pointerEvents: 'none' }}>
-                <div className="vp-label" style={{ borderColor: x.kind === 'overlap' ? VIEWPORT.collision : VIEWPORT.clearance }}>
-                  {x.kind === 'overlap' ? 'OVERLAP' : `${fmt(x.distance_mm, 'clearance', { unit: false })} / ${fmt(x.required_mm ?? null, 'clearance')}`}
-                </div>
-              </Html>
+              <Label3D
+                key={i}
+                position={x.points![0]}
+                className={x.kind === 'overlap' ? 'collision' : 'clearance'}
+                text={x.kind === 'overlap' ? 'OVERLAP' : `${fmt(x.distance_mm, 'clearance', { unit: false })} / ${fmt(x.required_mm ?? null, 'clearance')}`}
+              />
             ))
         : null}
     </group>

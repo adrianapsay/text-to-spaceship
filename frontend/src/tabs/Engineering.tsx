@@ -1,0 +1,207 @@
+import { useMemo } from 'react';
+import type { LayoutSummary, Metrics, Vec3 } from '../api/types';
+import { useApp } from '../store/store';
+import { useParts } from '../hooks';
+import { itemsFor, MetricsDeltaTable, useFullLayout, useLayoutList } from '../components/LayoutCompare';
+import { DualViewport } from '../components/viewport/DualViewport';
+import { Badge, EmptyState, MockTag, Notice, Panel } from '../components/ui';
+import { fmt } from '../lib/fmt';
+import { DISCLAIMER_STAGE2 } from '../lib/copy';
+
+export interface Check {
+  name: string;
+  value: string;
+  limit: string;
+  margin: string;
+  pass: boolean | null;
+}
+
+/** Checks table rows from a Stage 2 layout's metrics (backend verdicts; nothing is re-derived here). */
+export function stage2Checks(m: Metrics | null, limits: Record<string, unknown>): Check[] {
+  if (!m) return [];
+  const box = (limits.com_box_mm as Vec3 | undefined) ?? [20, 20, 70];
+  const cPart = (limits.clearance_part_mm as number | undefined) ?? 2.2;
+  const com = (m.com_mm as Vec3 | null) ?? null;
+  const out: Check[] = [];
+  (['x', 'y', 'z'] as const).forEach((ax, k) => {
+    const v = com ? Math.abs(com[k]) : null;
+    out.push({
+      name: `COM |${ax}| (CDS box, HARD)`,
+      value: fmt(v, 'mm'),
+      limit: `≤ ${fmt(box[k], 'mm')}`,
+      margin: fmt(m.com_box_margin_mm?.[k] ?? (v != null ? box[k] - v : null), 'mm'),
+      pass: m.com_box_margin_mm ? m.com_box_margin_mm[k] >= 0 : v != null ? v <= box[k] : null,
+    });
+  });
+  out.push({
+    name: 'Minimum certified clearance (slack beyond required)',
+    value: fmt(m.min_clearance_mm ?? null, 'clearance'),
+    limit: `part–part ${fmt(cPart, 'clearance')} / part–wall ${fmt((limits.clearance_wall_mm as number | undefined) ?? 1.2, 'clearance')} required`,
+    margin: '—',
+    pass: m.min_clearance_mm == null ? null : m.min_clearance_mm >= 0,
+  });
+  out.push({
+    name: 'Insertion order along ±Z',
+    value: m.insertion_order ? `${m.insertion_order.length} steps` : '—',
+    limit: 'every part insertable',
+    margin: m.interlocked?.length ? `${m.interlocked.length} interlocked pair(s)` : '—',
+    pass: m.insertion_order ? !(m.interlocked && m.interlocked.length) : null,
+  });
+  out.push({
+    name: 'Cable channel blocked fraction',
+    value: fmt(m.cable_blocked_fraction ?? null, 'pct'),
+    limit: 'objective (hard 0 % in continuous-cable mode)',
+    margin: '—',
+    pass: null,
+  });
+  return out;
+}
+
+function latest(list: LayoutSummary[] | null, pred: (l: LayoutSummary) => boolean): LayoutSummary | null {
+  const c = (list ?? []).filter((l) => (l.status === 'VALIDATED' || l.status === 'FINAL') && pred(l));
+  c.sort((a, b) => ((a.created ?? '') < (b.created ?? '') ? 1 : -1));
+  return c[0] ?? null;
+}
+
+export function cableMode(v: number, threshold = 70): { mode: string; text: string } {
+  if (v <= 0) return { mode: 'Default', text: 'channel interrupted across the PCB stack; wiring ASSUMED through the PC/104 stack bus' };
+  if (v < threshold) return { mode: 'Soft', text: 'blocked channel length is a weighted objective' };
+  return { mode: 'Continuous-cable', text: 'full-length channel is a HARD keep-out; channel wall is a search variable; edge-mounted boards only with validated card guides or standoffs' };
+}
+
+export function EngineeringTab() {
+  const project = useApp((s) => s.dataset.project);
+  const settings = useApp((s) => s.goals.settings);
+  const runStatus = useApp((s) => s.solver.runStatus);
+  const detail = useApp((s) => s.solver.statusDetail);
+  const progress = useApp((s) => s.solver.progress);
+  const newest = useApp((s) => s.conn.newest);
+  const parts = useParts();
+  const list = useLayoutList();
+  const s1 = latest(list.data, (l) => l.stage === 1);
+  const s2 = latest(list.data, (l) => l.stage === 2);
+  const s2default = latest(list.data, (l) => l.stage === 2 && (l.mode ?? 'default') === 'default');
+  const s2cable = latest(list.data, (l) => l.stage === 2 && l.mode === 'continuous_cable');
+  const a = useFullLayout(s1?.id ?? null);
+  const b = useFullLayout(s2?.id ?? null);
+  const limits = project?.limits ?? {};
+  const frame = project?.stage2_frame;
+  const checks = useMemo(() => stage2Checks(b.data?.metrics ?? null, limits), [b.data, limits]);
+  const threshold = (limits.cable_mode_threshold as number | undefined) ?? 70;
+  const cm = cableMode(settings?.sliders.cable ?? 0, threshold);
+  const dL = s2default?.metrics?.length_used_mm != null && s2cable?.metrics?.length_used_mm != null ? s2cable.metrics.length_used_mm - s2default.metrics.length_used_mm : null;
+  const dD = s2default?.metrics?.com_error_mm != null && s2cable?.metrics?.com_error_mm != null ? s2cable.metrics.com_error_mm - s2default.metrics.com_error_mm : null;
+  const searchedNothing = settings?.stage === 2 && !s2 && (runStatus === 'CONVERGED' || runStatus === 'IDLE') && (progress?.evaluations ?? 0) > 0;
+  const infeasibleProven = /INFEASIBLE \(proven\)/i.test(detail);
+  const byId = Object.fromEntries(parts.map((p) => [p.id, p.name]));
+  const rules: [string, string][] = [
+    ['Enclosure walls', frame?.wall_mm != null ? `${fmt(frame.wall_mm, 'mm')} → inner box ${(frame.inner_box_mm ?? []).map((v) => fmt(v, 'mm', { unit: false })).join(' × ')} mm` : '—'],
+    ['Corner rails', frame?.rail_mm ? `${frame.rail_mm.map((v) => fmt(v, 'mm', { unit: false })).join(' × ')} mm, full length` : '—'],
+    ['Clearance part–part', fmt((limits.clearance_part_mm as number | undefined) ?? null, 'clearance')],
+    ['Clearance part–wall/rail', fmt((limits.clearance_wall_mm as number | undefined) ?? null, 'clearance')],
+    ['CDS COM box', ((limits.com_box_mm as number[] | undefined) ?? []).map((v) => `±${v}`).join(' / ') + ' mm (standard, HARD in Stage 2)'],
+    ['Frame mass in COM check', settings?.show_frame_mass_in_com ? 'included' : 'excluded by default (COM reported both ways)'],
+    ['Cable-routing mode threshold', `${threshold}`],
+    ['PCB stack', 'PCB-tagged parts parallel to XY, rail-centred, 15.24 mm PC/104 pitch'],
+  ];
+  return (
+    <div className="tab-scroll" data-testid="tab-engineering">
+      <Notice tone="warn" role="note">
+        {DISCLAIMER_STAGE2} Every Stage 2 result is ENGINEERING-CONSTRAINED — not flight-qualified.
+      </Notice>
+      <Panel title="IDEALIZED vs ENGINEERING-CONSTRAINED" caption="synchronised cameras; movement overlay shows per-part arrows and ΔCOM" right={<MockTag />}>
+        {searchedNothing || infeasibleProven ? (
+          <Notice tone="err" role="status">
+            <strong data-testid="no-feasible">{infeasibleProven ? 'INFEASIBLE (proven)' : 'NO FEASIBLE LAYOUT FOUND (not proven infeasible)'}</strong> — constraints are never relaxed automatically.
+          </Notice>
+        ) : null}
+        <div style={{ height: 420, display: 'flex' }}>
+          <DualViewport
+            left={{ label: s1?.id ?? 'no Stage 1 layout', items: itemsFor(a.data, newest), metrics: a.data?.metrics ?? null, stage: 1, empty: <span className="vp-chip">No Stage 1 layout yet</span> }}
+            right={{
+              label: s2?.id ?? 'no Stage 2 layout',
+              items: itemsFor(b.data, newest),
+              metrics: b.data?.metrics ?? null,
+              stage: 2,
+              empty: <span className="vp-chip">{list.notAvailable ? 'No layout archive from the backend' : 'No ENGINEERING-CONSTRAINED layout yet — switch to Stage 2 and optimise'}</span>,
+            }}
+          />
+        </div>
+        {a.data && b.data ? <MetricsDeltaTable a={a.data} b={b.data} labels={['IDEALIZED', 'ENGINEERING']} /> : null}
+      </Panel>
+      <div className="grid-2">
+        <Panel title="Checks" caption="value / limit / margin / pass — backend verdicts">
+          {checks.length ? (
+            <table className="data" data-testid="checks-table">
+              <thead>
+                <tr>
+                  <th>Check</th>
+                  <th className="num">Value</th>
+                  <th>Limit</th>
+                  <th className="num">Margin</th>
+                  <th>Result</th>
+                </tr>
+              </thead>
+              <tbody>
+                {checks.map((c) => (
+                  <tr key={c.name}>
+                    <td>{c.name}</td>
+                    <td className="num">{c.value}</td>
+                    <td className="small">{c.limit}</td>
+                    <td className="num">{c.margin}</td>
+                    <td>{c.pass === null ? <Badge>—</Badge> : c.pass ? <Badge tone="ok">PASS</Badge> : <Badge tone="err">FAIL</Badge>}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <EmptyState title="No ENGINEERING-CONSTRAINED layout to check yet" />
+          )}
+        </Panel>
+        <Panel title="ASSUMED rules" caption="values from the project; editing needs a backend endpoint (not in the contract yet)">
+          <table className="data">
+            <tbody>
+              {rules.map(([k, v]) => (
+                <tr key={k}>
+                  <td>{k}</td>
+                  <td>{v}</td>
+                  <td>
+                    <Badge tone="warn">ASSUMED</Badge>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </Panel>
+      </div>
+      <div className="grid-2">
+        <Panel title="Cable routing" caption="driven by the “Keep cable path clear” slider">
+          <div className="row">
+            <Badge tone={cm.mode === 'Continuous-cable' ? 'accent' : 'neutral'}>
+              <span data-testid="cable-mode">MODE: {cm.mode.toUpperCase()}</span>
+            </Badge>
+            <span className="small">{cm.text}</span>
+          </div>
+          <div className="small" style={{ marginTop: 6 }}>
+            Packing penalty vs default mode: ΔL {dL == null ? '—' : fmt(dL, 'mm', { signed: true })} · ΔCOM error {dD == null ? '—' : fmt(dD, 'mm', { signed: true })}
+          </div>
+        </Panel>
+        <Panel title="Insertion order" caption="exact ±Z blocking matrix, greedy removal">
+          {b.data?.metrics?.insertion_order?.length ? (
+            <ol className="small" data-testid="insertion-order">
+              {b.data.metrics.insertion_order.map((id) => (
+                <li key={id}>{byId[id] ?? id}</li>
+              ))}
+            </ol>
+          ) : (
+            <EmptyState title="No insertion order yet" />
+          )}
+          {b.data?.metrics?.interlocked?.length ? <Notice tone="err">Interlocked: {b.data.metrics.interlocked.map((p) => p.map((x) => byId[x] ?? x).join(' ↔ ')).join('; ')}</Notice> : null}
+        </Panel>
+      </div>
+      <Panel title="Constraint attribution" caption="Stage 2 re-solved with each constraint family relaxed in turn (measured, with the budget used)">
+        <EmptyState title="No constraint-attribution results yet">The contract has no endpoint for attribution results yet; the chart appears when the backend publishes them.</EmptyState>
+      </Panel>
+    </div>
+  );
+}

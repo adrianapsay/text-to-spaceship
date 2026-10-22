@@ -191,38 +191,42 @@ export const CameraRig = forwardRef<CameraApi, { size: Vec3; fitKey: number; onC
   const controls = useRef<CameraControls>(null);
   const camera = useThree((s) => s.camera);
   const invalidate = useThree((s) => s.invalidate);
-  const box = useMemo(() => new THREE.Box3(new THREE.Vector3(-props.size[0] / 2, -props.size[1] / 2, -props.size[2] / 2), new THREE.Vector3(props.size[0] / 2, props.size[1] / 2, props.size[2] / 2)), [props.size]);
-  useImperativeHandle(ref, () => ({
-    fit(animate = true) {
-      void controls.current?.fitToBox(box, animate, { paddingTop: 20, paddingBottom: 20, paddingLeft: 20, paddingRight: 20 });
-      invalidate();
-    },
-    view(n: number) {
-      const d = VIEWS[n];
-      if (!d || !controls.current) return;
-      const dist = 650;
-      const len = Math.hypot(d[0], d[1], d[2]);
-      void controls.current.setLookAt((d[0] / len) * dist, (d[1] / len) * dist, (d[2] / len) * dist, 0, 0, 0, true).then(() => this.fit(true));
-      invalidate();
-    },
-    orbit(dAz: number, dPolar: number) {
-      void controls.current?.rotate(dAz, dPolar, true);
-      invalidate();
-    },
-    controls: () => controls.current,
-  }));
+  // fitToSphere keeps the current viewing direction (fitToBox would snap to an axis view)
+  const sphere = useMemo(() => new THREE.Sphere(new THREE.Vector3(0, 0, 0), (Math.hypot(props.size[0], props.size[1], props.size[2]) / 2) * 1.02), [props.size]);
+  useImperativeHandle(ref, () => {
+    const api: CameraApi = {
+      fit(animate = true) {
+        void controls.current?.fitToSphere(sphere, animate);
+        invalidate();
+      },
+      view(n: number) {
+        const d = VIEWS[n];
+        if (!d || !controls.current) return;
+        const dist = 650;
+        const len = Math.hypot(d[0], d[1], d[2]);
+        void controls.current.setLookAt((d[0] / len) * dist, (d[1] / len) * dist, (d[2] / len) * dist, 0, 0, 0, false).then(() => api.fit(true));
+        invalidate();
+      },
+      orbit(dAz: number, dPolar: number) {
+        void controls.current?.rotate(dAz, dPolar, true);
+        invalidate();
+      },
+      controls: () => controls.current,
+    };
+    return api;
+  });
   useEffect(() => {
     camera.up.set(0, 0, 1);
     const c = controls.current;
     if (!c) return;
     c.updateCameraUp();
-    void c.setLookAt(420, -560, 300, 0, 0, 0, false).then(() => c.fitToBox(box, false, { paddingTop: 20, paddingBottom: 20, paddingLeft: 20, paddingRight: 20 }));
+    void c.setLookAt(420, -560, 300, 0, 0, 0, false).then(() => c.fitToSphere(sphere, false));
     invalidate();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
-    if (props.fitKey > 0) void controls.current?.fitToBox(box, true, { paddingTop: 20, paddingBottom: 20, paddingLeft: 20, paddingRight: 20 });
-  }, [props.fitKey, box]);
+    if (props.fitKey > 0) void controls.current?.fitToSphere(sphere, true);
+  }, [props.fitKey, sphere]);
   return <CameraControls ref={controls} makeDefault onChange={() => props.onChange?.()} />;
 });
 

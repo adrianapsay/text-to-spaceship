@@ -26,6 +26,20 @@ function ViewCamera(props: { camera: THREE.PerspectiveCamera }) {
   return <primitive object={props.camera} />;
 }
 
+/** Initial framing of a view: isometric-ish direction, fit to the enclosure's bounding sphere. */
+function InitialFit(props: { controls: React.RefObject<CameraControls | null>; size: Vec3 }) {
+  const invalidate = useThree((s) => s.invalidate);
+  useLayoutEffect(() => {
+    const c = props.controls.current;
+    if (!c) return;
+    const r = (Math.hypot(props.size[0], props.size[1], props.size[2]) / 2) * 1.02;
+    void c.setLookAt(420, -560, 300, 0, 0, 0, false).then(() => c.fitToSphere(new THREE.Sphere(new THREE.Vector3(), r), false));
+    invalidate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  return null;
+}
+
 function makeCamera(): THREE.PerspectiveCamera {
   const c = new THREE.PerspectiveCamera(35, 1, 1, 20000);
   c.up.set(0, 0, 1);
@@ -148,6 +162,7 @@ export function DualViewport(props: { left: DualSide; right: DualSide; testId?: 
           {props.left.items.length ? <View style={{ position: 'absolute', inset: 0 }} index={1}>
             <ViewCamera camera={camA} />
             <CameraControls ref={ctlA} camera={camA} onChange={() => sync(ctlA.current, ctlB.current)} />
+            <InitialFit controls={ctlA} size={size} />
             <SceneContent spec={specFor(props.left)} />
           </View> : <div className="vp-overlay tl" style={{ top: 60 }}>{props.left.empty}</div>}
           {badge(props.left)}
@@ -156,6 +171,7 @@ export function DualViewport(props: { left: DualSide; right: DualSide; testId?: 
           {props.right.items.length ? <View style={{ position: 'absolute', inset: 0 }} index={2}>
             <ViewCamera camera={camB} />
             <CameraControls ref={ctlB} camera={camB} onChange={() => sync(ctlB.current, ctlA.current)} />
+            <InitialFit controls={ctlB} size={size} />
             <SceneContent spec={specFor(props.right)} />
             {showMove ? <MovementArrows pairs={pairs} comFrom={comL} comTo={comR} /> : null}
           </View> : <div className="vp-overlay tl" style={{ top: 60, pointerEvents: 'auto' }}>{props.right.empty}</div>}

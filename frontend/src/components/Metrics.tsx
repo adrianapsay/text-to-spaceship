@@ -25,6 +25,7 @@ export function MetricStrip() {
   const size = useApp((s) => s.dataset.project?.enclosure.size_mm as number[] | undefined);
   const mode = useApp((s) => s.conn.mode);
   const m = dm.metrics;
+  const layoutStage = dm.layout?.stage ?? null;
   const total = size?.[2] ?? 340.5;
   const note = limits?.cds_mass_note_kg ?? 6.0;
   const src = dm.source === 'local' ? ' · local recompute (awaiting backend)' : '';
@@ -50,8 +51,14 @@ export function MetricStrip() {
       <Metric
         k="Engineering validity"
         tipKey="validity"
-        v={stage === 1 ? 'Not assessed' : m ? (m.min_clearance_mm != null ? `min gap ${fmt(m.min_clearance_mm, 'clearance')}` : '—') : '—'}
-        n={stage === 1 ? 'IDEALIZED — switch to Stage 2 for engineering checks' : `ENGINEERING-CONSTRAINED — not flight-qualified · ${NOT_OPTIMAL}`}
+        v={layoutStage !== 2 ? 'Not assessed' : m ? (m.min_clearance_mm != null ? `min slack ${fmt(m.min_clearance_mm, 'clearance')}` : '—') : '—'}
+        n={
+          layoutStage !== 2
+            ? stage === 2
+              ? 'layout on screen is IDEALIZED — no Stage 2 layout yet'
+              : 'IDEALIZED — switch to Stage 2 for engineering checks'
+            : `ENGINEERING-CONSTRAINED — not flight-qualified · ${NOT_OPTIMAL}`
+        }
         testId="metric-validity"
       />
     </div>

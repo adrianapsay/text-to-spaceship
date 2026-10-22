@@ -3,7 +3,7 @@ import type { Part } from '../api/types';
 import { session } from '../api/session';
 import { useApp } from '../store/store';
 import { useParts } from '../hooks';
-import { subsystemColor, SUBSYSTEM_LABELS } from '../lib/colors';
+import { extraItemStyle, subsystemColor, SUBSYSTEM_LABELS } from '../lib/colors';
 import { fmt, fmtVec } from '../lib/fmt';
 import { PHYSICAL_CAPTION } from '../lib/copy';
 import { Badge, Button, NumberField, Notice } from './ui';
@@ -144,6 +144,55 @@ export function PartsList() {
           );
         })}
       </ul>
+    </div>
+  );
+}
+
+/** Mounting hardware of the displayed layout; metal 3D-printed brackets in their own section. */
+const NO_ITEMS: never[] = [];
+
+export function HardwareItemsList() {
+  // selector must return a stable reference (a fresh [] would loop useSyncExternalStore)
+  const items = useApp((s) => s.solver.best?.extra_items ?? NO_ITEMS);
+  const parts = useApp((s) => s.dataset.parts);
+  if (!items.length) return null;
+  const am = items.filter((i) => extraItemStyle(i.process).section === 'METAL 3D-PRINTED');
+  const other = items.filter((i) => extraItemStyle(i.process).section !== 'METAL 3D-PRINTED');
+  const row = (i: (typeof items)[number]) => {
+    const st = extraItemStyle(i.process);
+    return (
+      <li key={i.id} data-process={i.process}>
+        <span className={`swatch ${st.hatch ? 'hatch' : ''}`} style={{ background: st.color }} />
+        <span className="name">
+          {st.label} — {parts[i.for_part]?.name ?? i.for_part}
+        </span>
+        {st.badge ? <Badge tone="accent">{st.badge}</Badge> : null}
+        <span className="num small">{fmt(i.mass_kg, 'kg')}</span>
+      </li>
+    );
+  };
+  return (
+    <div data-testid="hardware-items">
+      {am.length ? (
+        <>
+          <div className="panel-head">
+            <h3>Metal 3D-printed ({am.length})</h3>
+          </div>
+          <ul className="parts-list" style={{ flex: 'none' }}>
+            {am.map(row)}
+          </ul>
+        </>
+      ) : null}
+      {other.length ? (
+        <>
+          <div className="panel-head">
+            <h3>Other hardware ({other.length})</h3>
+          </div>
+          <ul className="parts-list" style={{ flex: 'none' }}>
+            {other.map(row)}
+          </ul>
+        </>
+      ) : null}
     </div>
   );
 }

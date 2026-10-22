@@ -167,7 +167,7 @@ function buildChart(pts: FidelityPoint[], key: 'length_mm' | 'frr_pct', yLabel: 
     height: 220,
     marginLeft: 56,
     marginRight: 20,
-    x: { type: 'log' as const, label: 'evaluation time per query (µs, log) →', grid: true },
+    x: { type: 'log' as const, label: 'evaluation time per query (µs, log) →', grid: true, tickFormat: '~g' },
     y: { label: yLabel, grid: true },
     color: { domain: algos, range: algos.map(color), legend: true },
     marks: [

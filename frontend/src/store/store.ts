@@ -220,7 +220,16 @@ export function createAppStore(init: Partial<AppState> = {}): AppStore {
     ...init,
 
     // ------------------------------------------------------------------ dataset
-    loadProject(p) {
+    loadProject(raw) {
+      // tolerate partial snapshots (missing arrays / revs) from an early backend
+      const p: ProjectSnapshot = {
+        ...raw,
+        parts: raw.parts ?? [],
+        rotations: raw.rotations ?? [],
+        limits: raw.limits ?? {},
+        enclosure: raw.enclosure ?? {},
+        revs: { ...{ epoch: 0, parts_rev: 0, constraint_rev: 0, mass_rev: 0, weights_rev: 0 }, ...((raw.revs as Partial<ProjectSnapshot['revs']> | undefined) ?? {}) },
+      };
       const parts = Object.fromEntries(p.parts.map((x) => [x.id, x]));
       const s = get();
       // pending settings edits survive a project reload (they are re-sent); otherwise adopt the server's settings
@@ -243,7 +252,7 @@ export function createAppStore(init: Partial<AppState> = {}): AppStore {
           Object.keys(lockEdits).length === Object.keys(s.physical.lockEdits).length
             ? s.physical
             : { massEdits, lockEdits },
-        goals: settings === s.goals.settings ? s.goals : { ...s.goals, settings, preset: detectPreset(settings.sliders, settings.stage) },
+        goals: !settings || settings === s.goals.settings ? s.goals : { ...s.goals, settings, preset: detectPreset(settings.sliders, settings.stage) },
         conn: { ...s.conn, newest: maxRevs(s.conn.newest, p.revs) },
         view: s.view.selectedPartId && !parts[s.view.selectedPartId] ? { ...s.view, selectedPartId: null } : s.view,
       });

@@ -45,8 +45,10 @@ function Projection(props: { title: string; ax: [0 | 1 | 2, 0 | 1 | 2]; size: Ve
   );
 }
 
-function TensorTable(props: { M: Mat3; caption: string; testId?: string; names?: string[] }) {
-  const col = fmtColumn(props.M.flat());
+function TensorTable(props: { M: Mat3; caption: string; testId?: string; names?: string[]; unitless?: boolean }) {
+  const col = props.unitless
+    ? { header: '(unit vectors)', cells: props.M.flat().map((v) => fmt(v, 'score')) }
+    : fmtColumn(props.M.flat());
   const n = props.names ?? ['x', 'y', 'z'];
   return (
     <table className="data" style={{ width: 'auto' }} data-testid={props.testId}>
@@ -86,6 +88,7 @@ export function PhysicsTab() {
   const project = useApp((s) => s.dataset.project);
   const settings = useApp((s) => s.goals.settings);
   const massEdits = useApp((s) => s.physical.massEdits);
+  const expert = useApp((s) => s.view.expert);
   const m = dm.metrics;
   const layout = dm.layout;
   const size = (project?.enclosure.size_mm as Vec3 | undefined) ?? [100, 100, 340.5];
@@ -128,7 +131,8 @@ export function PhysicsTab() {
           />
         </div>
       </Panel>
-      <div className="grid-2">
+      {!expert ? <Notice tone="info">Beginner view: switch to Expert (top right) to see the full inertia tensor and the products-of-inertia table.</Notice> : null}
+      <div className="grid-2" hidden={!expert}>
         <Panel title="Inertia tensor about the COM" caption="I = ∫(‖r‖²E − r rᵀ) dm, so off-diagonal I_xy = −∫xy dm">
           {I ? <TensorTable M={I} caption="Inertia tensor I_C" testId="inertia-tensor" /> : <span className="muted">—</span>}
         </Panel>
@@ -150,7 +154,7 @@ export function PhysicsTab() {
               ['Gravity-gradient indicator λ_max − λ_min', m.principal_kgm2 ? fmt((m.principal_kgm2 as Vec3)[2] - (m.principal_kgm2 as Vec3)[0], 'kgm2') : '—'],
             ]}
           />
-          {m.principal_axes ? <TensorTable M={m.principal_axes as Mat3} caption="Principal axes (rows, unit vectors in body axes)" names={['axis 1', 'axis 2', 'axis 3']} /> : null}
+          {m.principal_axes ? <TensorTable M={m.principal_axes as Mat3} caption="Principal axes (rows; components along body x, y, z)" names={['axis 1', 'axis 2', 'axis 3']} unitless /> : null}
         </div>
         {contrib?.axes_degenerate ? <Notice tone="info">Axes not unique (moments symmetric within 0.1 %); a Gram–Schmidt basis from the body axes is shown.</Notice> : null}
       </Panel>

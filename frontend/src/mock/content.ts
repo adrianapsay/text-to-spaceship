@@ -107,20 +107,22 @@ export function mockFidelity(part: Part, status: FidelityResult['status'] = 'DON
   const last = Math.min(upTo ?? stopAt + 1, LADDER.length - 1);
   const levels: FidelityLevel[] = [];
   const baseL = 300 + rnd() * 20;
+  const over0 = Math.max(0, aabbV / trueV - 1);
   for (let i = 0; i <= last; i++) {
     const def = LADDER[i];
-    const tight = 1 - Math.exp(-(i + 0.5) / (stopAt + 0.5) * 2.5);
+    const tight = 1 - Math.exp(-((i + 0.5) / (stopAt + 0.5)) * 2.5);
     const vol = def.level === 'F0' ? aabbV : def.level === 'F6' ? trueV : trueV + (aabbV - trueV) * (1 - tight);
+    const over = Math.max(0, vol / trueV - 1);
+    const gainShare = over0 > 1e-6 ? 1 - over / over0 : 1; // 0 at the box, → 1 at the exact shape
     const evalUs = 0.4 * 1.9 ** i * (1 + rnd() * 0.2);
     const results: FidelityLevel['results'] = {};
     for (const [k, a] of FIDELITY_ALGOS.entries()) {
-      const gain = (aabbV - trueV) / 1e4;
       results[a] = {
-        length_used_mm: Number((baseL - k * 4 - Math.min(gain, 25) * tight + rnd() * 0.3).toFixed(1)),
+        length_used_mm: Number((baseL - k * 4 - Math.min(20, over0 * 8) * gainShare + rnd() * 0.2).toFixed(1)),
         com_error_mm: Number((30 + rnd() * 10).toFixed(1)),
-        score_g: Number((0.5 - 0.2 * tight + rnd() * 0.01).toFixed(3)),
+        score_g: Number((0.5 - 0.2 * gainShare + rnd() * 0.01).toFixed(3)),
         first_valid_s: Number((0.05 * 1.6 ** i).toFixed(2)),
-        false_reject_rate: Number(Math.max(0, (1 - tight) * (0.6 - k * 0.1) + rnd() * 0.01).toFixed(3)),
+        false_reject_rate: Number(Math.max(0, Math.min(0.6, over * 0.5) * (1 - 0.15 * k) + rnd() * 0.003).toFixed(3)),
       };
     }
     levels.push({ level: def.level, family: def.family, label: def.label, params: def.params, proxy_volume_mm3: vol, overhead: vol / trueV - 1, build_s: Number((0.01 * 2 ** i).toFixed(3)), eval_us_median: Number(evalUs.toFixed(2)), results });

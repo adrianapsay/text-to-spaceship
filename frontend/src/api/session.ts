@@ -106,7 +106,10 @@ export class Session {
 
   private resendIntents(): void {
     if (this.pendingSettings) this.sendSettings(this.pendingSettings.settings, true);
-    for (const [id, it] of [...this.pendingParts]) this.sendPart(id, it.patch);
+    for (const [id, it] of [...this.pendingParts]) {
+      const seq = this.sendPart(id, it.patch);
+      if (typeof it.patch.mass_kg === 'number') this.store.getState().setMassEdit(id, it.patch.mass_kg, seq, true);
+    }
   }
 
   scheduleRefetch(delayMs = 120): void {

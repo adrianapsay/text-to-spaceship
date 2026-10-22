@@ -549,8 +549,14 @@ export class MockBackend {
     this.evaluations += 1;
     const parts = this.packable();
     const s = this.project.enclosure.size_mm ?? [100, 100, 340.5];
-    const seed = 1000 + this.evaluations * 7919 + this.revs.parts_rev * 104729;
-    const res = packOnce(parts, this.rotations, { x: s[0], y: s[1], z: s[2] }, seed, { flip: this.evaluations % 3 === 0, centreXY: this.evaluations % 2 === 0 });
+    // a "step" = up to 400 seeded packer attempts; the first one that fits becomes the candidate
+    let seed = 0;
+    let res = packOnce(parts, this.rotations, { x: s[0], y: s[1], z: s[2] }, 1, {});
+    for (let k = 0; k < 400; k++) {
+      seed = 1000 + this.evaluations * 7919 + k * 104729 + this.revs.parts_rev * 31;
+      res = packOnce(parts, this.rotations, { x: s[0], y: s[1], z: s[2] }, seed, { flip: this.evaluations % 3 === 0, centreXY: this.evaluations % 2 === 0 });
+      if (res.fits) break;
+    }
     const id = `L-MOCK-${String(++this.layoutCounter).padStart(4, '0')}`;
     const layout: Layout = {
       id, hash: `${seed.toString(16)}`, stage: 1, mode: 'default', status: 'CANDIDATE',

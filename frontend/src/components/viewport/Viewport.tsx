@@ -10,6 +10,8 @@ import { useParts, useReducedMotion } from '../../hooks';
 import { CameraRig, SceneContent, viewportKeyHandler, type CameraApi, type SceneSpec } from './Scene';
 import { TWEEN_MS } from './SceneParts';
 import { Toggle } from '../ui';
+import { LabelContext, LabelHub, LabelLayer, LabelProjector } from './labels';
+import { ErrorBoundary } from '../ErrorBoundary';
 
 export function Legend(props: { mode: ColorMode; parts: { subsystem: string }[]; note?: string }) {
   if (props.mode === 'subsystem') {
@@ -125,6 +127,7 @@ export function MainViewport(props: MainViewportProps) {
   const dataset = useApp((s) => s.dataset);
   const reduced = useReducedMotion();
   const cam = useRef<CameraApi>(null);
+  const hub = useMemo(() => new LabelHub(), []);
   const [dpr, setDpr] = useState<number | [number, number]>([1, 2]);
   const [tweening, setTweening] = useState(false);
   const stage = props.stage ?? settings?.stage ?? 1;
@@ -208,6 +211,8 @@ export function MainViewport(props: MainViewportProps) {
         <span id={helpId} className="sr-only">
           Keyboard: F fit, 1 to 6 standard views, 0 isometric, arrow keys orbit, H hide selected part, I isolate, Shift+H show all, E enclosure. Parts are listed in the parts list.
         </span>
+        <ErrorBoundary label="The 3D viewport">
+        <LabelContext.Provider value={hub}>
         <Canvas
           frameloop="demand"
           dpr={dpr}
@@ -223,10 +228,14 @@ export function MainViewport(props: MainViewportProps) {
           <color attach="background" args={['#26282C']} />
           <CameraRig ref={cam} size={size} fitKey={view.fitRequest} />
           <SceneContent spec={spec} />
+          <LabelProjector />
           <GizmoHelper alignment="bottom-right" margin={[56, 56]}>
             <GizmoViewport axisColors={['#F2877A', '#5CC08A', '#5D96F0']} labelColor="#111317" />
           </GizmoHelper>
         </Canvas>
+        </LabelContext.Provider>
+        </ErrorBoundary>
+        <LabelLayer hub={hub} />
         <div className="vp-overlay tl">
           {solid ? (
             <div>
