@@ -13,6 +13,7 @@ from pathlib import Path
 
 import numpy as np
 
+from ..core.fileio import atomic_write_text
 from ..objectives.metrics import part_phys
 from ..optimise.brkga import Evaluator, IslandState, best_candidates, run_island, seed_keys
 from ..optimise.scalarize import Normaliser, alpha_from, slider_weights
@@ -74,9 +75,7 @@ def run_attribution(records: dict, mode: str, sliders: dict, out_path: Path, gen
            "note": "measured with the same seed and budget per row; search results under relaxed rules, not certified"}
 
     def save():
-        tmp = Path(out_path).with_suffix(".tmp")
-        tmp.write_text(json.dumps(out, indent=1, default=float), encoding="utf-8")
-        tmp.replace(out_path)
+        atomic_write_text(out_path, json.dumps(out, indent=1, default=float))
 
     save()
     base = None

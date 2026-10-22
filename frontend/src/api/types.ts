@@ -456,6 +456,26 @@ export interface MfgResult {
   };
 }
 
+// ---- free-rotation experiment (Stage 1, research; endpoint /api/experiments/free-rotation)
+export interface FreeRotationResult {
+  status: 'RUNNING' | 'DONE' | 'ERROR' | 'STOPPED' | string;
+  detail?: string;
+  label?: string;
+  method?: string;
+  start_layout_id?: string;
+  start_length_mm?: number;
+  length_used_mm?: number | null;
+  improvement_mm?: number | null;
+  valid?: boolean;
+  min_distance_mm?: number | null;
+  seconds?: number;
+  rounds?: number;
+  accepted_moves?: number;
+  exact_checks?: number;
+  rotated?: { part_id: string; name?: string; angle_deg: number }[];
+  history?: { t_s: number; length_mm: number }[];
+}
+
 // ---- Stage 2 constraint attribution (protocol §O.3; endpoint /api/stage2/attribution)
 export interface AttributionRow {
   relaxed: string;

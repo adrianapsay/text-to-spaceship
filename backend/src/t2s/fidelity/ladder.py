@@ -28,6 +28,7 @@ import numpy as np
 
 from ..collision.geom import part_geom_from_record, to_world
 from ..collision.validate import StageSpec, Validator, plane_certificate
+from ..core.fileio import atomic_write_text
 from ..decoders.box_decoder import PLACEMENT_GAP_STAGE1, BoxDecoder, ProxyPart
 from ..decoders.heightmap import HeightmapDecoder
 from ..geometry.proxies import COVER_DELTA, certify_boxes, compound_boxes, planar_cut_cover
@@ -281,9 +282,7 @@ def run_ladder(records: dict, pid: str, sliders: dict, out_path: Path, budget_s:
     hist = {ALG_BOX: [], ALG_HM: []}
 
     def save():
-        tmp = Path(out_path).with_suffix(".tmp")
-        tmp.write_text(json.dumps(_clean(out), indent=1), encoding="utf-8")
-        tmp.replace(out_path)
+        atomic_write_text(out_path, json.dumps(_clean(out), indent=1))
 
     hull_exact = rec.volume_mm3 is not None and rec.hull_volume_mm3 is not None and \
         rec.hull_volume_mm3 - rec.volume_mm3 <= 1e-6 * rec.volume_mm3

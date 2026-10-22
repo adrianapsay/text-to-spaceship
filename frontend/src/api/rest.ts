@@ -6,6 +6,7 @@ import type {
   CadStatus,
   FidelityResult,
   FidelitySummary,
+  FreeRotationResult,
   IdeaMap,
   Layout,
   LayoutSummary,
@@ -199,6 +200,12 @@ export class ApiClient {
   }
   runSizeStudy(body: Record<string, unknown> = {}) {
     return this.send<unknown>('POST', '/api/studies/size/run', body);
+  }
+  freeRotation() {
+    return this.json<FreeRotationResult>('/api/experiments/free-rotation');
+  }
+  runFreeRotation(body: Record<string, unknown> = {}) {
+    return this.send<unknown>('POST', '/api/experiments/free-rotation/run', body);
   }
   mfg() {
     return this.json<MfgResult>('/api/mfg');

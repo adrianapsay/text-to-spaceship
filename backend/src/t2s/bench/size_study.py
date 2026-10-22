@@ -27,6 +27,7 @@ from dataclasses import replace
 from datetime import datetime, timezone
 from pathlib import Path
 
+from ..core.fileio import atomic_write_text
 
 STAGE_VARIANTS = {1: ("V1", "V5", "V7"), 2: ("V1", "V5")}
 LABELS = {"V1": "constructive box decoder", "V5": "hybrid, box decoder", "V7": "hybrid, height-map decoder"}
@@ -169,20 +170,25 @@ class SizeStudy:
                                            "length_used_mm": L})
             for b in bounds_for(self.records, st):
                 out["bounds"].append({**b, "id": f"S{st}·{b['id']}", "label": f"Stage {st}: {b['label']}"})
-        tmp = self.out_path.with_suffix(".tmp")
-        tmp.write_text(json.dumps(out, indent=1, default=float), encoding="utf-8")
-        tmp.replace(self.out_path)
+        atomic_write_text(self.out_path, json.dumps(out, indent=1, default=float))
 
     # ------------------------------------------------------------------------------------------ running
     def _batch(self, pool, jobs) -> list[dict]:
         futs = [pool.submit(_job, *j, self.preset) for j in jobs]
         out = []
         for f in as_completed(futs):
+            if f.cancelled():
+                continue
             try:
                 r = f.result()
             except Exception as exc:  # noqa: BLE001 - recorded, never hidden
                 self.notes.append(f"run failed: {exc!r}")
                 continue
+            if time.perf_counter() - self.t0 >= self.max_s:
+                # the time cap also holds inside a batch: queued runs are cancelled (running ones finish)
+                n = sum(1 for g in futs if g.cancel())
+                if n:
+                    self.notes.append(f"time limit reached during a batch: {n} queued run(s) cancelled")
             out.append(r)
             self.rows.append(r)
             k = (r["stage"], r["scale"], r["algorithm"])

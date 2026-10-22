@@ -252,6 +252,73 @@ export function ComparisonTab() {
       <Panel title="Chosen detail level per part and algorithm" caption="from the detail-ladder study (Addendum 4)" right={<Badge tone="neutral">GET /api/fidelity/summary</Badge>}>
         <FidelitySummaryTable />
       </Panel>
+      <Panel title="Free-rotation experiment (Stage 1, research)" caption="reported separately — the main search and every other tab use the 24 axis-aligned orientations">
+        <FreeRotationPanel />
+      </Panel>
+    </div>
+  );
+}
+
+function FreeRotationPanel() {
+  const study = useApp((s) => s.solver.studies.free_rotation);
+  const res = useAsync(() => session().api.freeRotation(), [study?.at]);
+  const [msg, setMsg] = useState<string | null>(null);
+  const r = res.data;
+  const run = async () => {
+    setMsg(null);
+    try {
+      await session().api.runFreeRotation({ budget_s: 120 });
+      setMsg('Started (about 2 minutes).');
+      res.reload();
+    } catch (e) {
+      setMsg(`Could not start: ${(e as Error).message}`);
+    }
+  };
+  return (
+    <div data-testid="free-rotation">
+      <div className="row">
+        <Button onClick={run} disabled={r?.status === 'RUNNING'} data-testid="free-rotation-run">
+          Run free-rotation experiment
+        </Button>
+        {r?.status === 'RUNNING' ? <span className="small muted">running…</span> : null}
+        {msg ? <span className="small">{msg}</span> : null}
+      </div>
+      {r && r.status === 'DONE' ? (
+        <div className="small" style={{ marginTop: 8 }} data-testid="free-rotation-result">
+          <div>
+            {r.valid ? <Badge tone="ok">checked on the meshes</Badge> : <Badge tone="err">final check failed</Badge>} Start {r.start_layout_id}: {fmt(r.start_length_mm ?? null, 'mm')} → with free rotations{' '}
+            <strong>{fmt(r.length_used_mm ?? null, 'mm')}</strong> (shorter by {fmt(r.improvement_mm ?? null, 'mm')})
+          </div>
+          <div className="muted" style={{ marginTop: 4 }}>
+            {r.accepted_moves} moves kept in {r.rounds} rounds · {r.exact_checks} exact pair checks · {fmt(r.seconds ?? null, 's')} · minimum distance {fmt(r.min_distance_mm ?? null, 'clearance')}
+          </div>
+          {r.rotated?.length ? (
+            <table className="data" style={{ marginTop: 6 }}>
+              <thead>
+                <tr>
+                  <th>Part</th>
+                  <th className="num">Turned away from axis-aligned by</th>
+                </tr>
+              </thead>
+              <tbody>
+                {r.rotated.map((x) => (
+                  <tr key={x.part_id}>
+                    <td>{x.name ?? x.part_id}</td>
+                    <td className="num">{fmt(x.angle_deg, 'deg')}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <div className="muted">No part ended at a non-axis-aligned orientation.</div>
+          )}
+          <div className="muted" style={{ marginTop: 4 }}>Method: {r.method}</div>
+        </div>
+      ) : r?.status === 'ERROR' ? (
+        <Notice tone="err">{r.detail}</Notice>
+      ) : !r ? (
+        <EmptyState title="Not run yet">Starts from the shortest validated axis-aligned Stage 1 layout and tries arbitrary rotations of the parts that set the length; every kept pose is checked on the meshes.</EmptyState>
+      ) : null}
     </div>
   );
 }

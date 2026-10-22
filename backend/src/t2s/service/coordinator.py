@@ -29,6 +29,7 @@ import numpy as np
 from ..collision.geom import part_geom_from_record, to_world
 from ..collision.validate import Validator
 from ..constraints import stage2 as s2
+from ..core.fileio import atomic_write_text
 from ..core.rotations import ROTATIONS_F, as_lists
 from ..geometry.stl_io import UNIT_TO_MM, read_stl_bytes
 from ..objectives.metrics import ENCLOSURE_HI, ENCLOSURE_LO
@@ -76,10 +77,10 @@ def _bench_main(out_dir: str, opts: dict) -> None:
     prog = Path(out_dir) / "progress.json"
 
     def progress(frac, r):
-        prog.write_text(_json.dumps({"status": "RUNNING", "progress": frac}), encoding="utf-8")
+        atomic_write_text(prog, _json.dumps({"status": "RUNNING", "progress": frac}))
     run_benchmarks(insts, Path(out_dir), budget=float(opts.get("budget", 5000)), seeds=int(opts.get("seeds", 10)),
                    workers=int(opts.get("workers", 4)), presets=tuple(opts.get("presets", PRESET_IDS)), progress=progress)
-    prog.write_text(_json.dumps({"status": "DONE", "progress": 1.0}), encoding="utf-8")
+    atomic_write_text(prog, _json.dumps({"status": "DONE", "progress": 1.0}))
 
 
 def _mode_name(meta: dict | None) -> str:
@@ -1495,7 +1496,7 @@ class Coordinator:
             try:
                 d = json.loads(s["path"].read_text(encoding="utf-8"))
                 d["status"], d["stop_reason"] = "STOPPED", "stopped by the user"
-                s["path"].write_text(json.dumps(d, indent=1), encoding="utf-8")
+                atomic_write_text(s["path"], json.dumps(d, indent=1))
             except (OSError, json.JSONDecodeError):
                 pass
         return True
@@ -1811,6 +1812,10 @@ class Coordinator:
             L["status"], L["progress"] = res.get("status", "RUNNING"), res.get("progress", 0.0)
             if L.get("study") == "mfg":                # finished through _on_mfg
                 continue
+            if L.get("study") == "free_rotation":
+                self.broadcast("study.update", {"study": "free_rotation", "progress": 1.0 if L["status"] == "DONE" else 0.0,
+                                                "partial": {"status": L["status"]}})
+                continue
             if L.get("study") == "attribution":
                 self.broadcast("study.update", {"study": "attribution", "progress": L["progress"],
                                                 "partial": {"status": L["status"], "rows": len(res.get("rows", []))}})
@@ -2019,6 +2024,56 @@ class Coordinator:
         if self._mfg_dir().resolve() not in p.parents or not p.is_file() or p.suffix not in (".stl", ".csv"):
             raise KeyError(name)
         return p
+
+    # =========================================================================================== free rotation
+    def _free_rotation_path(self) -> Path:
+        return self.store.cache / f"free_rotation_{self.ctx.parts_sig if self.ctx else 'none'}.json"
+
+    def start_free_rotation(self, opts: dict | None = None) -> dict:
+        """Research experiment: arbitrary rotations from the shortest validated Stage 1 layout of these parts."""
+        import pickle
+        from ..experiments.free_rotation import free_rotation_job
+        if self.ctx is None:
+            raise ValueError("no packable parts")
+        L = self.ladders.get("__free_rotation__")
+        if L is not None and not L["future"].done():
+            raise ValueError("the free-rotation experiment is already running")
+        pids = set(self.ctx.records)
+        starts = [e for e in self.archive.values() if e.stage == 1 and e.parts_sig == self.ctx.parts_sig
+                  and e.status in ("VALIDATED", "FINAL") and {p for p, _, _ in e.poses} == pids]
+        if not starts:
+            raise ValueError("no validated Stage 1 layout of the current parts yet")
+        start = min(starts, key=lambda e: e.geo.get("length_used_mm", math.inf))
+        snap = self.store.cache / f"freerot_records_{self.ctx.parts_sig}.pkl"
+        snap.write_bytes(pickle.dumps(self._active_records(), protocol=pickle.HIGHEST_PROTOCOL))
+        path = self._free_rotation_path()
+        path.unlink(missing_ok=True)
+        budget = float((opts or {}).get("budget_s", 120.0))
+        poses = [(p, int(o), np.asarray(t, float)) for p, o, t in start.poses]
+        fut = self.ladder_pool.submit(free_rotation_job, str(snap), poses, start.id, str(path), budget,
+                                      int((opts or {}).get("seed", 20261022)))
+        self.ladders["__free_rotation__"] = {"future": fut, "path": path, "mtime": None, "status": "PENDING",
+                                             "progress": 0.0, "study": "free_rotation"}
+        return {"status": "RUNNING", "start_layout_id": start.id, "budget_s": budget}
+
+    def free_rotation(self) -> dict | None:
+        if self.ctx is None:
+            return None
+        L = self.ladders.get("__free_rotation__")
+        if L is not None and L["future"].done() and L["future"].exception() is not None:
+            return {"status": "ERROR", "detail": repr(L["future"].exception())}
+        p = self._free_rotation_path()
+        if p.exists():
+            try:
+                d = json.loads(p.read_text(encoding="utf-8"))
+            except (OSError, json.JSONDecodeError):
+                d = {"status": "RUNNING"}
+            if d.get("status") == "RUNNING" and not (L is not None and not L["future"].done()):
+                d["status"] = "STOPPED"
+            return d
+        if L is not None and not L["future"].done():
+            return {"status": "RUNNING"}
+        return None
 
     # =========================================================================================== attribution
     def _attribution_path(self) -> Path:

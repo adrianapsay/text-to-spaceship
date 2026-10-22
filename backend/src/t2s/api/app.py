@@ -330,6 +330,25 @@ def create_app(coord: Coordinator | None = None, project: str = "default", **coo
     async def size_study_stop(request: Request):
         return {"stopped": C(request).stop_study("size")}
 
+    @app.get("/api/experiments/free-rotation")
+    async def free_rotation(request: Request):
+        r = C(request).free_rotation()
+        if r is None:
+            raise HTTPException(404, "the free-rotation experiment has not been run for these parts "
+                                     "(POST /api/experiments/free-rotation/run)")
+        return r
+
+    @app.post("/api/experiments/free-rotation/run")
+    async def free_rotation_run(request: Request):
+        try:
+            body = await request.json()
+        except Exception:  # noqa: BLE001
+            body = {}
+        try:
+            return C(request).start_free_rotation(body or {})
+        except ValueError as exc:
+            raise HTTPException(409, str(exc)) from exc
+
     @app.get("/api/mfg")
     async def mfg(request: Request):
         r = C(request).mfg()

@@ -396,6 +396,23 @@ def test_manufacturable_design_runs_and_archives_its_layout(live):
     assert client.get("/api/mfg/download/..%2F..%2Fsettings.json").status_code == 404
 
 
+def test_free_rotation_experiment_endpoint(live):
+    """Research experiment, reported separately: starts from the shortest validated Stage 1 layout."""
+    client, coord, _ = live
+    wait_for(lambda: best(client))
+    assert client.get("/api/experiments/free-rotation").status_code == 404
+    r = client.post("/api/experiments/free-rotation/run", json={"budget_s": 8})
+    assert r.status_code == 200, r.text
+    start = r.json()["start_layout_id"]
+    assert coord.archive[start].stage == 1 and coord.archive[start].status in ("VALIDATED", "FINAL")
+    d = wait_for(lambda: (x := client.get("/api/experiments/free-rotation")).status_code == 200 and
+                 x.json()["status"] in ("DONE", "ERROR") and x.json(), timeout=240, every=1.0)
+    assert d["status"] == "DONE" and d["start_valid"] and d["valid"], d
+    assert d["start_layout_id"] == start and d["improvement_mm"] >= 0
+    assert d["start_length_mm"] == pytest.approx(coord.archive[start].geo["length_used_mm"], abs=1e-6)
+    assert "not used by the main search" in d["label"]
+
+
 def test_selector_endpoints(live):
     client, coord, _ = live
     wait_for(lambda: best(client))
