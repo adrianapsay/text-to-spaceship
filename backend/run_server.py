@@ -21,12 +21,25 @@ def main() -> None:
     ap.add_argument("--validators", type=int, default=2)
     ap.add_argument("--no-search", action="store_true", help="do not start searching automatically")
     ap.add_argument("--add", nargs="*", default=[], help="STL files to drop into the project inbox")
+    ap.add_argument("--fresh", action="store_true",
+                    help="test projects only (name starts with 'e2e' or 'test'): forget parts, settings and layouts "
+                         "but keep the analysis cache")
     a = ap.parse_args()
 
     import uvicorn
 
     from t2s.api.app import create_app
-    from t2s.service.project import ProjectStore
+    from t2s.service.project import PROJECTS, ProjectStore
+
+    if a.fresh:
+        if not a.project.startswith(("e2e", "test")):
+            sys.exit("--fresh is only allowed for projects named e2e* or test*")
+        folder = PROJECTS / a.project
+        if folder.exists():
+            for p in folder.iterdir():
+                if p.name != "cache":
+                    shutil.rmtree(p) if p.is_dir() else p.unlink()
+            print(f"fresh project {folder} (analysis cache kept)")
 
     if a.add:
         store = ProjectStore(a.project)

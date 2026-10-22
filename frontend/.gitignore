@@ -5,3 +5,4 @@ dist/
 test-results/
 playwright-report/
 tests/e2e/.generated/
+tests/e2e-live/.generated/

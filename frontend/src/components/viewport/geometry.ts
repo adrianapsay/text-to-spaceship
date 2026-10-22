@@ -56,7 +56,7 @@ export function usePartGeometry(p: Part | undefined | null): PartGeometry | null
   const [g, setG] = useState<PartGeometry | null>(null);
   const key = p ? partKey(p) : '';
   useEffect(() => {
-    if (!p || p.status === 'NEEDS_UNITS' || !hasSession()) {
+    if (!p || p.status === 'NEEDS_UNITS' || p.status === 'ANALYSING' || !hasSession()) {
       setG(null);
       return;
     }

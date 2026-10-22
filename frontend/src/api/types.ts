@@ -5,7 +5,7 @@
 export type Vec3 = [number, number, number];
 export type Mat3 = [Vec3, Vec3, Vec3];
 
-export type PartStatus = 'VALID' | 'REPAIRED' | 'WITHHELD' | 'NEEDS_UNITS';
+export type PartStatus = 'VALID' | 'REPAIRED' | 'WITHHELD' | 'NEEDS_UNITS' | 'ANALYSING';
 export type MassSource = 'ASSUMED' | 'USER_MASS' | 'USER_DENSITY' | 'WITHHELD';
 export type Subsystem = 'power' | 'electronics' | 'adcs' | 'tanks' | 'payload' | 'structure' | 'unknown';
 export type Units = 'mm' | 'cm' | 'm' | 'in';

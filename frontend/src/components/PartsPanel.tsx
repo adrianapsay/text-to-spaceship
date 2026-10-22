@@ -54,6 +54,12 @@ export function statusBadge(p: Part) {
           UNITS?
         </Badge>
       );
+    case 'ANALYSING':
+      return (
+        <Badge tone="neutral" title={p.status_detail || 'mesh checks, mass properties and proxies are being computed'}>
+          ANALYSING…
+        </Badge>
+      );
   }
 }
 
@@ -218,7 +224,7 @@ export function PartInspector() {
   const mass = edit?.mass_kg ?? part.mass_kg;
   const locked = lockEdit?.locked ?? part.locked;
   const maxMass = Math.max(1, (part.mass_kg ?? 0.5) * 3);
-  const canEditMass = part.status !== 'NEEDS_UNITS';
+  const canEditMass = part.status !== 'NEEDS_UNITS' && part.status !== 'ANALYSING';
   return (
     <div className="panel-flat" data-testid="part-inspector">
       <div className="panel-head">
@@ -285,7 +291,7 @@ export function PartInspector() {
         </dl>
         <div className="row">
           <label className="check">
-            <input type="checkbox" checked={locked} onChange={(e) => session().setLocked(part.id, e.target.checked)} data-testid="lock-position" disabled={part.status === 'NEEDS_UNITS'} />
+            <input type="checkbox" checked={locked} onChange={(e) => session().setLocked(part.id, e.target.checked)} data-testid="lock-position" disabled={!canEditMass} />
             Lock position
           </label>
           <span style={{ flex: 1 }} />
