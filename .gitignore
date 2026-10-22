@@ -1,0 +1,34 @@
+# Toolchain binaries and caches (rebuilt from tools/toolchain.lock.json)
+tools/downloads/
+tools/uv/
+tools/node/
+tools/mingit/
+tools/python/
+tools/bin/
+tools/cache/
+tools/uv-tools/
+tools/npm-global/
+tools/ms-playwright/
+tools/gitconfig
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+*.egg-info/
+
+# Front end
+frontend/node_modules/
+frontend/dist/
+frontend/test-results/
+frontend/playwright-report/
+
+# Runtime data
+cache/
+data/runs/
+data/projects/*/cache/
+*.log

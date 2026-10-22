@@ -1,0 +1,2557 @@
+{
+ "density_kg_m3": 2700.0,
+ "results": {
+  "battery_pack.stl": {
+   "format": "binary",
+   "triangles": 12,
+   "vertices": 8,
+   "boundary_edges": 0,
+   "nonmanifold_edges": 0,
+   "misoriented_edges": 0,
+   "degenerate_triangles": 0,
+   "components": 1,
+   "euler_characteristic": 2,
+   "genus_total": 0,
+   "watertight": true,
+   "consistently_oriented": true,
+   "aabb_min_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "aabb_extents_mm": [
+    80.0,
+    80.0,
+    22.0
+   ],
+   "surface_area_mm2": 19840.0,
+   "signed_volume_mm3": 140800.0,
+   "mass_properties": "OK",
+   "volume_mm3": 140800.0,
+   "centroid_mm": [
+    40.0,
+    40.0,
+    11.0
+   ],
+   "inertia_about_com_unit_density_mm5": [
+    [
+     80772266.66666667,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     80772266.66666667,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     150186666.66666666
+    ]
+   ],
+   "principal_moments_unit_density_mm5": [
+    80772266.66666667,
+    80772266.66666667,
+    150186666.66666666
+   ],
+   "principal_axes": [
+    [
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "mass_kg": 0.38016,
+   "principal_moments_kg_m2": [
+    0.00021808512,
+    0.00021808512,
+    0.00040550400000000005
+   ],
+   "convex_hull_volume_mm3": 140800.0,
+   "convex_hull_faces": 12,
+   "solidity": 1.0,
+   "obb_extents_mm": [
+    80.0,
+    80.0,
+    22.0
+   ],
+   "obb_axes": [
+    [
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "aabb_fill": 1.0,
+   "obb_fill": 1.0,
+   "sphericity": 0.659696570769789,
+   "planar_area_fraction": 1.0,
+   "labels": [
+    "box-like",
+    "convex",
+    "planar-faceted"
+   ],
+   "analysis_seconds": 0.0011644999030977488,
+   "role": "packable",
+   "intended_labels": [
+    "box-like",
+    "convex"
+   ],
+   "analytic_check": {
+    "basis": "exact",
+    "volume_rel_err": 0.0,
+    "com_err_mm": 0.0,
+    "inertia_rel_err_frobenius": 0.0,
+    "tensor_asymmetry_rel": 0.0
+   }
+  },
+  "camera_with_lens.stl": {
+   "format": "binary",
+   "triangles": 388,
+   "vertices": 196,
+   "boundary_edges": 0,
+   "nonmanifold_edges": 0,
+   "misoriented_edges": 0,
+   "degenerate_triangles": 0,
+   "components": 1,
+   "euler_characteristic": 2,
+   "genus_total": 0,
+   "watertight": true,
+   "consistently_oriented": true,
+   "aabb_min_mm": [
+    -25.0,
+    -25.0,
+    0.0
+   ],
+   "aabb_extents_mm": [
+    50.0,
+    50.0,
+    70.0
+   ],
+   "surface_area_mm2": 15826.298046313976,
+   "signed_volume_mm3": 121171.70238691235,
+   "mass_properties": "OK",
+   "volume_mm3": 121171.70238691235,
+   "centroid_mm": [
+    -4.003111546594504e-17,
+    0.0,
+    26.11536826622953
+   ],
+   "inertia_about_com_unit_density_mm5": [
+    [
+     58347330.0247462,
+     -6.20881716410319e-11,
+     -3.451407860959457e-11
+    ],
+    [
+     -6.20881716410319e-11,
+     58347330.024746194,
+     9.934107462565104e-10
+    ],
+    [
+     -3.451407860959457e-11,
+     9.934107462565104e-10,
+     44044660.16118216
+    ]
+   ],
+   "principal_moments_unit_density_mm5": [
+    44044660.16118216,
+    58347330.024746194,
+    58347330.0247462
+   ],
+   "principal_axes": [
+    [
+     0.0,
+     0.0,
+     1.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     -1.0,
+     -0.0,
+     -0.0
+    ]
+   ],
+   "mass_kg": 0.32716359644466336,
+   "principal_moments_kg_m2": [
+    0.00011892058243519183,
+    0.00015753779106681475,
+    0.00015753779106681478
+   ],
+   "convex_hull_volume_mm3": 147057.23412897074,
+   "convex_hull_faces": 140,
+   "solidity": 0.8239764817053712,
+   "obb_extents_mm": [
+    70.0,
+    50.0,
+    50.0
+   ],
+   "obb_axes": [
+    [
+     0.0,
+     0.0,
+     1.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     -1.0,
+     -0.0,
+     -0.0
+    ]
+   ],
+   "aabb_fill": 0.6924097279252135,
+   "obb_fill": 0.6924097279252135,
+   "sphericity": 0.7482365586524127,
+   "planar_area_fraction": 0.82141761528545,
+   "labels": [
+    "strongly concave"
+   ],
+   "analysis_seconds": 0.017931499984115362,
+   "role": "packable",
+   "intended_labels": [
+    "concave"
+   ],
+   "analytic_check": {
+    "basis": "continuous shape; the mesh is a tessellation",
+    "volume_rel_err": 0.000280910969183331,
+    "com_err_mm": 0.008114009894832463,
+    "inertia_rel_err_frobenius": 0.0005319125401623071,
+    "tensor_asymmetry_rel": 0.0
+   }
+  },
+  "cross_connector_hub.stl": {
+   "format": "binary",
+   "triangles": 60,
+   "vertices": 32,
+   "boundary_edges": 0,
+   "nonmanifold_edges": 0,
+   "misoriented_edges": 0,
+   "degenerate_triangles": 0,
+   "components": 1,
+   "euler_characteristic": 2,
+   "genus_total": 0,
+   "watertight": true,
+   "consistently_oriented": true,
+   "aabb_min_mm": [
+    -24.0,
+    -24.0,
+    -24.0
+   ],
+   "aabb_extents_mm": [
+    48.0,
+    48.0,
+    48.0
+   ],
+   "surface_area_mm2": 7680.0,
+   "signed_volume_mm3": 28672.0,
+   "mass_properties": "OK",
+   "volume_mm3": 28672.0,
+   "centroid_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "inertia_about_com_unit_density_mm5": [
+    [
+     5417642.666666666,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     5417642.666666666,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     5417642.666666666
+    ]
+   ],
+   "principal_moments_unit_density_mm5": [
+    5417642.666666666,
+    5417642.666666666,
+    5417642.666666666
+   ],
+   "principal_axes": [
+    [
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "mass_kg": 0.07741440000000001,
+   "principal_moments_kg_m2": [
+    1.46276352e-05,
+    1.46276352e-05,
+    1.46276352e-05
+   ],
+   "convex_hull_volume_mm3": 58709.333333333336,
+   "convex_hull_faces": 44,
+   "solidity": 0.4883720930232558,
+   "obb_extents_mm": [
+    48.0,
+    45.25483399593904,
+    45.25483399593904
+   ],
+   "obb_axes": [
+    [
+     0.0,
+     -0.0,
+     1.0
+    ],
+    [
+     -0.7071067811865475,
+     -0.7071067811865475,
+     0.0
+    ],
+    [
+     0.7071067811865475,
+     -0.7071067811865475,
+     -0.0
+    ]
+   ],
+   "aabb_fill": 0.25925925925925924,
+   "obb_fill": 0.2916666666666667,
+   "sphericity": 0.5898771361843552,
+   "planar_area_fraction": 1.0,
+   "labels": [
+    "strongly concave",
+    "planar-faceted"
+   ],
+   "analysis_seconds": 0.004326000111177564,
+   "role": "packable",
+   "intended_labels": [
+    "concave",
+    "strongly non-convex"
+   ],
+   "analytic_check": {
+    "basis": "exact",
+    "volume_rel_err": 0.0,
+    "com_err_mm": 0.0,
+    "inertia_rel_err_frobenius": 2.431110903768425e-16,
+    "tensor_asymmetry_rel": 0.0
+   }
+  },
+  "ellipsoid_module.stl": {
+   "format": "binary",
+   "triangles": 9024,
+   "vertices": 4514,
+   "boundary_edges": 0,
+   "nonmanifold_edges": 0,
+   "misoriented_edges": 0,
+   "degenerate_triangles": 0,
+   "components": 1,
+   "euler_characteristic": 2,
+   "genus_total": 0,
+   "watertight": true,
+   "consistently_oriented": true,
+   "aabb_min_mm": [
+    -24.39579200744629,
+    -23.219308853149414,
+    -19.737323760986328
+   ],
+   "aabb_extents_mm": [
+    48.79158401489258,
+    46.43861770629883,
+    39.474647521972656
+   ],
+   "surface_area_mm2": 5775.81915734679,
+   "signed_volume_mm3": 37631.87298227185,
+   "mass_properties": "OK",
+   "volume_mm3": 37631.87298227185,
+   "centroid_mm": [
+    -6.482174931874726e-12,
+    -2.924028763586471e-13,
+    -6.137204729607839e-13
+   ],
+   "inertia_about_com_unit_density_mm5": [
+    [
+     6985279.928183073,
+     -1255850.31101245,
+     -1549902.271603584
+    ],
+    [
+     -1255850.31101245,
+     7406675.257858578,
+     -1519481.4951488567
+    ],
+    [
+     -1549902.271603584,
+     -1519481.4951488567,
+     8533149.895381853
+    ]
+   ],
+   "principal_moments_unit_density_mm5": [
+    4698479.820474257,
+    8456297.980276354,
+    9770327.280672891
+   ],
+   "principal_axes": [
+    [
+     0.6509578714065357,
+     0.5779815287524587,
+     0.492129253423166
+    ],
+    [
+     -0.6956361790211375,
+     0.7137070177141177,
+     0.08193045406008687
+    ],
+    [
+     -0.30388181270149106,
+     -0.39567618741414123,
+     0.8666580632652449
+    ]
+   ],
+   "mass_kg": 0.101606057052134,
+   "principal_moments_kg_m2": [
+    1.2685895515280494e-05,
+    2.2832004546746156e-05,
+    2.637988365781681e-05
+   ],
+   "convex_hull_volume_mm3": 37631.873008141374,
+   "convex_hull_faces": 9024,
+   "solidity": 0.9999999993125636,
+   "obb_extents_mm": [
+    29.991051989550137,
+    59.98541444708093,
+    39.97915839199797
+   ],
+   "obb_axes": [
+    [
+     -0.287677716416009,
+     -0.41372025876988433,
+     0.8637575348215785
+    ],
+    [
+     -0.6658932313357129,
+     -0.5618099463968004,
+     -0.4908724769132072
+    ],
+    [
+     0.6883514625094894,
+     -0.7163833691627719,
+     -0.11387331754209366
+    ]
+   ],
+   "aabb_fill": 0.42073958254419647,
+   "obb_fill": 0.5232205864569653,
+   "sphericity": 0.9402451323107937,
+   "planar_area_fraction": 0.0,
+   "labels": [
+    "convex",
+    "curved"
+   ],
+   "analysis_seconds": 0.6626999999862164,
+   "role": "packable",
+   "intended_labels": [
+    "convex"
+   ],
+   "analytic_check": {
+    "basis": "continuous shape; the mesh is a tessellation",
+    "volume_rel_err": 0.0017835661775147068,
+    "com_err_mm": 6.517725378416855e-12,
+    "inertia_rel_err_frobenius": 0.003125372837694998,
+    "tensor_asymmetry_rel": 0.0
+   }
+  },
+  "gas_tank_capsule.stl": {
+   "format": "binary",
+   "triangles": 9216,
+   "vertices": 4610,
+   "boundary_edges": 0,
+   "nonmanifold_edges": 0,
+   "misoriented_edges": 0,
+   "degenerate_triangles": 0,
+   "components": 1,
+   "euler_characteristic": 2,
+   "genus_total": 0,
+   "watertight": true,
+   "consistently_oriented": true,
+   "aabb_min_mm": [
+    -22.5,
+    -22.5,
+    -45.0
+   ],
+   "aabb_extents_mm": [
+    45.0,
+    45.0,
+    90.0
+   ],
+   "surface_area_mm2": 12716.6390000876,
+   "signed_volume_mm3": 119146.16020730419,
+   "mass_properties": "OK",
+   "volume_mm3": 119146.16020730419,
+   "centroid_mm": [
+    1.091392635795503e-16,
+    1.5269451924291263e-16,
+    -1.6840475121178788e-15
+   ],
+   "inertia_about_com_unit_density_mm5": [
+    [
+     72936937.71296695,
+     -5.469947828018462e-11,
+     -3.8039615901652746e-11
+    ],
+    [
+     -5.469947828018462e-11,
+     72936937.71296695,
+     9.284744824829732e-11
+    ],
+    [
+     -3.8039615901652746e-11,
+     9.284744824829732e-11,
+     27721031.6856248
+    ]
+   ],
+   "principal_moments_unit_density_mm5": [
+    27721031.6856248,
+    72936937.71296695,
+    72936937.71296695
+   ],
+   "principal_axes": [
+    [
+     0.0,
+     0.0,
+     1.0
+    ],
+    [
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0
+    ]
+   ],
+   "mass_kg": 0.3216946325597213,
+   "principal_moments_kg_m2": [
+    7.484678555118697e-05,
+    0.00019692973182501079,
+    0.00019692973182501079
+   ],
+   "convex_hull_volume_mm3": 119146.16022282478,
+   "convex_hull_faces": 9216,
+   "solidity": 0.9999999998697349,
+   "obb_extents_mm": [
+    90.0,
+    44.97590643852762,
+    44.97590643852762
+   ],
+   "obb_axes": [
+    [
+     0.0,
+     0.0,
+     1.0
+    ],
+    [
+     0.2902854520662941,
+     -0.9569401006952667,
+     0.0
+    ],
+    [
+     0.9569401006952667,
+     0.2902854520662941,
+     0.0
+    ]
+   ],
+   "aabb_fill": 0.6537512219879517,
+   "obb_fill": 0.6544518377377757,
+   "sphericity": 0.9207996570564072,
+   "planar_area_fraction": 0.0,
+   "labels": [
+    "convex",
+    "elongated",
+    "curved"
+   ],
+   "analysis_seconds": 0.5743702999316156,
+   "role": "packable",
+   "intended_labels": [
+    "convex",
+    "elongated"
+   ],
+   "analytic_check": {
+    "basis": "continuous shape; the mesh is a tessellation",
+    "volume_rel_err": 0.0011417100952049448,
+    "com_err_mm": 1.6944742600971925e-15,
+    "inertia_rel_err_frobenius": 0.0018104800703503303,
+    "tensor_asymmetry_rel": 0.0
+   }
+  },
+  "gear_mechanism.stl": {
+   "format": "binary",
+   "triangles": 252,
+   "vertices": 128,
+   "boundary_edges": 0,
+   "nonmanifold_edges": 0,
+   "misoriented_edges": 0,
+   "degenerate_triangles": 0,
+   "components": 1,
+   "euler_characteristic": 2,
+   "genus_total": 0,
+   "watertight": true,
+   "consistently_oriented": true,
+   "aabb_min_mm": [
+    -24.87961769104004,
+    -24.87961769104004,
+    0.0
+   ],
+   "aabb_extents_mm": [
+    49.75923538208008,
+    49.75923538208008,
+    10.0
+   ],
+   "surface_area_mm2": 5629.637461448807,
+   "signed_volume_mm3": 15878.77666943564,
+   "mass_properties": "OK",
+   "volume_mm3": 15878.77666943564,
+   "centroid_mm": [
+    -7.636983803028728e-17,
+    -4.131727565310464e-15,
+    5.0
+   ],
+   "inertia_about_com_unit_density_mm5": [
+    [
+     2204938.6507666986,
+     -8.779655521114667e-11,
+     0.0
+    ],
+    [
+     -8.779655521114667e-11,
+     2204938.6507666986,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     4145231.02370947
+    ]
+   ],
+   "principal_moments_unit_density_mm5": [
+    2204938.6507666986,
+    2204938.6507666986,
+    4145231.02370947
+   ],
+   "principal_axes": [
+    [
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "mass_kg": 0.04287269700747623,
+   "principal_moments_kg_m2": [
+    5.953334357070087e-06,
+    5.953334357070087e-06,
+    1.119212376401557e-05
+   ],
+   "convex_hull_volume_mm3": 19415.09095107292,
+   "convex_hull_faces": 126,
+   "solidity": 0.8178574444719839,
+   "obb_extents_mm": [
+    10.0,
+    49.45882514358889,
+    49.45882514358889
+   ],
+   "obb_axes": [
+    [
+     -0.0,
+     0.0,
+     1.0
+    ],
+    [
+     -0.941544027421103,
+     -0.33688995892969115,
+     0.0
+    ],
+    [
+     0.33688995892969115,
+     -0.941544027421103,
+     0.0
+    ]
+   ],
+   "aabb_fill": 0.641312410136352,
+   "obb_fill": 0.6491266639957362,
+   "sphericity": 0.5426857153918563,
+   "planar_area_fraction": 0.5641136495261693,
+   "labels": [
+    "strongly concave",
+    "plate-like"
+   ],
+   "analysis_seconds": 0.012913599843159318,
+   "role": "packable",
+   "intended_labels": [
+    "concave",
+    "plate-like"
+   ],
+   "analytic_check": {
+    "basis": "exact",
+    "volume_rel_err": 4.027588186923975e-09,
+    "com_err_mm": 3.9200944505185e-15,
+    "inertia_rel_err_frobenius": 8.36946420508148e-09,
+    "tensor_asymmetry_rel": 0.0
+   }
+  },
+  "irregular_blob.stl": {
+   "format": "binary",
+   "triangles": 50880,
+   "vertices": 25442,
+   "boundary_edges": 0,
+   "nonmanifold_edges": 0,
+   "misoriented_edges": 0,
+   "degenerate_triangles": 0,
+   "components": 1,
+   "euler_characteristic": 2,
+   "genus_total": 0,
+   "watertight": true,
+   "consistently_oriented": true,
+   "aabb_min_mm": [
+    -28.553129196166992,
+    -29.048913955688477,
+    -27.971569061279297
+   ],
+   "aabb_extents_mm": [
+    59.579959869384766,
+    56.481292724609375,
+    55.639089584350586
+   ],
+   "surface_area_mm2": 10009.6345244929,
+   "signed_volume_mm3": 71282.72430141848,
+   "mass_properties": "OK",
+   "volume_mm3": 71282.72430141848,
+   "centroid_mm": [
+    0.6262378539029528,
+    -0.8961530214033138,
+    0.8378623804162036
+   ],
+   "inertia_about_com_unit_density_mm5": [
+    [
+     19206775.59661398,
+     -492552.3468505944,
+     207757.13463940055
+    ],
+    [
+     -492552.3468505944,
+     19898667.672860775,
+     -267359.2587492925
+    ],
+    [
+     207757.13463940055,
+     -267359.2587492925,
+     21063425.362597518
+    ]
+   ],
+   "principal_moments_unit_density_mm5": [
+    18948975.206280995,
+    20045975.426591605,
+    21173917.999199696
+   ],
+   "principal_axes": [
+    [
+     0.8907519452506694,
+     0.45348658064586045,
+     -0.03018100737673272
+    ],
+    [
+     -0.42296260638311467,
+     0.8514340723825076,
+     0.3101010383532138
+    ],
+    [
+     0.16632379755690768,
+     -0.2634576655940466,
+     0.9502244223371573
+    ]
+   ],
+   "mass_kg": 0.1924633556138299,
+   "principal_moments_kg_m2": [
+    5.116223305695869e-05,
+    5.412413365179734e-05,
+    5.7169578597839183e-05
+   ],
+   "convex_hull_volume_mm3": 87579.98693981102,
+   "convex_hull_faces": 4666,
+   "solidity": 0.8139156763109274,
+   "obb_extents_mm": [
+    53.439129837563755,
+    52.861761212203476,
+    54.66563875419784
+   ],
+   "obb_axes": [
+    [
+     -0.5828643831939471,
+     -0.2961149756938028,
+     0.7566934861446862
+    ],
+    [
+     -0.6566468261775796,
+     -0.3768770225014497,
+     -0.6532829827734328
+    ],
+    [
+     0.4786272625695812,
+     -0.8776557588714953,
+     0.025225234287291964
+    ]
+   ],
+   "aabb_fill": 0.38071451925394084,
+   "obb_fill": 0.46160324785207785,
+   "sphericity": 0.830593949963534,
+   "planar_area_fraction": 0.0,
+   "labels": [
+    "strongly concave",
+    "curved",
+    "highly irregular"
+   ],
+   "analysis_seconds": 0.9871382999699563,
+   "role": "packable",
+   "intended_labels": [
+    "concave",
+    "highly irregular"
+   ],
+   "analytic_check": null
+  },
+  "l_shaped_electronics.stl": {
+   "format": "binary",
+   "triangles": 20,
+   "vertices": 12,
+   "boundary_edges": 0,
+   "nonmanifold_edges": 0,
+   "misoriented_edges": 0,
+   "degenerate_triangles": 0,
+   "components": 1,
+   "euler_characteristic": 2,
+   "genus_total": 0,
+   "watertight": true,
+   "consistently_oriented": true,
+   "aabb_min_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "aabb_extents_mm": [
+    70.0,
+    70.0,
+    30.0
+   ],
+   "surface_area_mm2": 14150.0,
+   "signed_volume_mm3": 86250.0,
+   "mass_properties": "OK",
+   "volume_mm3": 86250.0,
+   "centroid_mm": [
+    26.195652173913043,
+    26.195652173913043,
+    15.0
+   ],
+   "inertia_about_com_unit_density_mm5": [
+    [
+     40064198.36956522,
+     16177989.130434783,
+     0.0
+    ],
+    [
+     16177989.130434783,
+     40064198.36956522,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     67190896.73913044
+    ]
+   ],
+   "principal_moments_unit_density_mm5": [
+    23886209.239130437,
+    56242187.49999999,
+    67190896.73913044
+   ],
+   "principal_axes": [
+    [
+     0.7071067811865475,
+     -0.7071067811865475,
+     0.0
+    ],
+    [
+     0.7071067811865475,
+     0.7071067811865475,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "mass_kg": 0.23287500000000003,
+   "principal_moments_kg_m2": [
+    6.449276494565218e-05,
+    0.00015185390624999998,
+    0.0001814154211956522
+   ],
+   "convex_hull_volume_mm3": 116625.0,
+   "convex_hull_faces": 16,
+   "solidity": 0.7395498392282959,
+   "obb_extents_mm": [
+    70.0,
+    70.0,
+    30.0
+   ],
+   "obb_axes": [
+    [
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "aabb_fill": 0.5867346938775511,
+   "obb_fill": 0.5867346938775511,
+   "sphericity": 0.6671657665552346,
+   "planar_area_fraction": 1.0,
+   "labels": [
+    "strongly concave",
+    "planar-faceted"
+   ],
+   "analysis_seconds": 0.0015487000346183777,
+   "role": "packable",
+   "intended_labels": [
+    "concave"
+   ],
+   "analytic_check": {
+    "basis": "exact",
+    "volume_rel_err": 0.0,
+    "com_err_mm": 0.0,
+    "inertia_rel_err_frobenius": 2.900424401027779e-17,
+    "tensor_asymmetry_rel": 0.0
+   }
+  },
+  "magnetometer_ring_torus.stl": {
+   "format": "binary",
+   "triangles": 6144,
+   "vertices": 3072,
+   "boundary_edges": 0,
+   "nonmanifold_edges": 0,
+   "misoriented_edges": 0,
+   "degenerate_triangles": 0,
+   "components": 1,
+   "euler_characteristic": 0,
+   "genus_total": 1,
+   "watertight": true,
+   "consistently_oriented": true,
+   "aabb_min_mm": [
+    -38.0,
+    -38.0,
+    -8.0
+   ],
+   "aabb_extents_mm": [
+    76.0,
+    76.0,
+    16.0
+   ],
+   "surface_area_mm2": 9455.387173330475,
+   "signed_volume_mm3": 37629.34749577793,
+   "mass_properties": "OK",
+   "volume_mm3": 37629.34749577793,
+   "centroid_mm": [
+    -1.289057273714317e-16,
+    5.243089399433721e-16,
+    -1.0055024388469833e-16
+   ],
+   "inertia_about_com_unit_density_mm5": [
+    [
+     18416014.20088312,
+     4.3146428652107714e-10,
+     -1.709850039333105e-11
+    ],
+    [
+     4.3146428652107714e-10,
+     18416014.20088313,
+     2.3289317141461654e-10
+    ],
+    [
+     -1.709850039333105e-11,
+     2.3289317141461654e-10,
+     35635601.71834928
+    ]
+   ],
+   "principal_moments_unit_density_mm5": [
+    18416014.20088312,
+    18416014.20088313,
+    35635601.71834928
+   ],
+   "principal_axes": [
+    [
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "mass_kg": 0.10159923823860043,
+   "principal_moments_kg_m2": [
+    4.972323834238443e-05,
+    4.9723238342384455e-05,
+    9.621612463954305e-05
+   ],
+   "convex_hull_volume_mm3": 66143.85649412326,
+   "convex_hull_faces": 3260,
+   "solidity": 0.5689016257937911,
+   "obb_extents_mm": [
+    75.96038470978372,
+    75.96038470978372,
+    16.0
+   ],
+   "obb_axes": [
+    [
+     0.9867143147198254,
+     0.16246495353455648,
+     0.0
+    ],
+    [
+     -0.16246495353455648,
+     0.9867143147198254,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "aabb_fill": 0.4071735142808381,
+   "obb_fill": 0.40759832790389133,
+   "sphericity": 0.5743226348690322,
+   "planar_area_fraction": 0.0,
+   "labels": [
+    "strongly concave",
+    "plate-like",
+    "curved",
+    "through-hole (genus 1)"
+   ],
+   "analysis_seconds": 0.3115974999964237,
+   "role": "packable",
+   "intended_labels": [
+    "concave",
+    "through-hole",
+    "curved"
+   ],
+   "analytic_check": {
+    "basis": "continuous shape; the mesh is a tessellation",
+    "volume_rel_err": 0.007122388551807504,
+    "com_err_mm": 5.492057015353835e-16,
+    "inertia_rel_err_frobenius": 0.008213775360320029,
+    "tensor_asymmetry_rel": 0.0
+   }
+  },
+  "magnetorquer_rod.stl": {
+   "format": "binary",
+   "triangles": 192,
+   "vertices": 98,
+   "boundary_edges": 0,
+   "nonmanifold_edges": 0,
+   "misoriented_edges": 0,
+   "degenerate_triangles": 0,
+   "components": 1,
+   "euler_characteristic": 2,
+   "genus_total": 0,
+   "watertight": true,
+   "consistently_oriented": true,
+   "aabb_min_mm": [
+    -5.0,
+    -5.0,
+    0.0
+   ],
+   "aabb_extents_mm": [
+    10.0,
+    10.0,
+    80.0
+   ],
+   "surface_area_mm2": 2668.111587021929,
+   "signed_volume_mm3": 6265.257199592782,
+   "mass_properties": "OK",
+   "volume_mm3": 6265.257199592782,
+   "centroid_mm": [
+    -9.072798937049643e-18,
+    -1.1662326966999228e-16,
+    40.0
+   ],
+   "inertia_about_com_unit_density_mm5": [
+    [
+     3380516.6968124555,
+     -1.0989727646422882e-13,
+     -4.850638409455618e-13
+    ],
+    [
+     -1.0989727646422882e-13,
+     3380516.6968124555,
+     3.304497416441638e-12
+    ],
+    [
+     -4.850638409455618e-13,
+     3.304497416441638e-12,
+     78092.38072595326
+    ]
+   ],
+   "principal_moments_unit_density_mm5": [
+    78092.38072595326,
+    3380516.6968124555,
+    3380516.6968124555
+   ],
+   "principal_axes": [
+    [
+     0.0,
+     0.0,
+     1.0
+    ],
+    [
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0
+    ]
+   ],
+   "mass_kg": 0.016916194438900512,
+   "principal_moments_kg_m2": [
+    2.108494279600738e-07,
+    9.12739508139363e-06,
+    9.12739508139363e-06
+   ],
+   "convex_hull_volume_mm3": 6265.25719959278,
+   "convex_hull_faces": 188,
+   "solidity": 1.0000000000000002,
+   "obb_extents_mm": [
+    79.99999999999999,
+    9.978589069660345,
+    9.978589069660346
+   ],
+   "obb_axes": [
+    [
+     0.0,
+     0.0,
+     0.9999999999999999
+    ],
+    [
+     0.3214392366717332,
+     -0.9469302071049868,
+     0.0
+    ],
+    [
+     0.9469302071049869,
+     0.32143923667173324,
+     0.0
+    ]
+   ],
+   "aabb_fill": 0.7831571499490978,
+   "obb_fill": 0.7865215760495412,
+   "sphericity": 0.6159886901987871,
+   "planar_area_fraction": 0.0,
+   "labels": [
+    "convex",
+    "elongated",
+    "curved"
+   ],
+   "analysis_seconds": 0.022732699988409877,
+   "role": "packable",
+   "intended_labels": [
+    "convex",
+    "elongated",
+    "cylindrical"
+   ],
+   "analytic_check": {
+    "basis": "continuous shape; the mesh is a tessellation",
+    "volume_rel_err": 0.002853346942723295,
+    "com_err_mm": 1.1697565006902875e-16,
+    "inertia_rel_err_frobenius": 0.002887405043981204,
+    "tensor_asymmetry_rel": 0.0
+   }
+  },
+  "optics_baffle_tube.stl": {
+   "format": "binary",
+   "triangles": 768,
+   "vertices": 384,
+   "boundary_edges": 0,
+   "nonmanifold_edges": 0,
+   "misoriented_edges": 0,
+   "degenerate_triangles": 0,
+   "components": 1,
+   "euler_characteristic": 0,
+   "genus_total": 1,
+   "watertight": true,
+   "consistently_oriented": true,
+   "aabb_min_mm": [
+    -20.0,
+    -20.0,
+    0.0
+   ],
+   "aabb_extents_mm": [
+    40.0,
+    40.0,
+    60.0
+   ],
+   "surface_area_mm2": 14643.117543776889,
+   "signed_volume_mm3": 20908.072170943946,
+   "mass_properties": "OK",
+   "volume_mm3": 20908.072170943946,
+   "centroid_mm": [
+    -2.1749846048380722e-16,
+    -1.7155191070660294e-15,
+    30.0
+   ],
+   "inertia_about_com_unit_density_mm5": [
+    [
+     9871266.750883516,
+     -8.076312951743601e-11,
+     -1.1641532182693484e-11
+    ],
+    [
+     -8.076312951743601e-11,
+     9871266.750883518,
+     8.149072527885435e-11
+    ],
+    [
+     -1.1641532182693484e-11,
+     8.149072527885435e-11,
+     7197690.199200651
+    ]
+   ],
+   "principal_moments_unit_density_mm5": [
+    7197690.199200651,
+    9871266.750883516,
+    9871266.750883518
+   ],
+   "principal_axes": [
+    [
+     0.0,
+     0.0,
+     1.0
+    ],
+    [
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0
+    ]
+   ],
+   "mass_kg": 0.05645179486154866,
+   "principal_moments_kg_m2": [
+    1.943376353784176e-05,
+    2.6652420227385497e-05,
+    2.66524202273855e-05
+   ],
+   "convex_hull_volume_mm3": 75344.4042496624,
+   "convex_hull_faces": 390,
+   "solidity": 0.2774999998893432,
+   "obb_extents_mm": [
+    60.0,
+    39.97858268352915,
+    39.97858268352915
+   ],
+   "obb_axes": [
+    [
+     0.0,
+     -0.0,
+     1.0
+    ],
+    [
+     0.2270766699293398,
+     -0.9738768844026444,
+     -0.0
+    ],
+    [
+     0.9738768844026444,
+     0.2270766699293398,
+     -0.0
+    ]
+   ],
+   "aabb_fill": 0.21779241844733277,
+   "obb_fill": 0.2180258323543728,
+   "sphericity": 0.2506454948549766,
+   "planar_area_fraction": 0.0,
+   "labels": [
+    "strongly concave",
+    "curved",
+    "through-hole (genus 1)"
+   ],
+   "analysis_seconds": 0.05369019997306168,
+   "role": "packable",
+   "intended_labels": [
+    "concave",
+    "through-hole"
+   ],
+   "analytic_check": {
+    "basis": "continuous shape; the mesh is a tessellation",
+    "volume_rel_err": 0.0007138028444971547,
+    "com_err_mm": 1.7292516841169918e-15,
+    "inertia_rel_err_frobenius": 0.0010849654192420133,
+    "tensor_asymmetry_rel": 0.0
+   }
+  },
+  "payload_electronics_box.stl": {
+   "format": "binary",
+   "triangles": 12,
+   "vertices": 8,
+   "boundary_edges": 0,
+   "nonmanifold_edges": 0,
+   "misoriented_edges": 0,
+   "degenerate_triangles": 0,
+   "components": 1,
+   "euler_characteristic": 2,
+   "genus_total": 0,
+   "watertight": true,
+   "consistently_oriented": true,
+   "aabb_min_mm": [
+    -26.438241958618164,
+    -40.83026123046875,
+    -23.220104217529297
+   ],
+   "aabb_extents_mm": [
+    77.8764820098877,
+    67.1605224609375,
+    54.440208435058594
+   ],
+   "surface_area_mm2": 10800.000047499852,
+   "signed_volume_mm3": 72000.00025291232,
+   "mass_properties": "OK",
+   "volume_mm3": 72000.00025291232,
+   "centroid_mm": [
+    12.499999505372408,
+    -7.249999825970929,
+    3.9999999291930064
+   ],
+   "inertia_about_com_unit_density_mm5": [
+    [
+     19627041.397876825,
+     -5102499.916655472,
+     4139544.24944073
+    ],
+    [
+     -5102499.916655472,
+     23886305.65731805,
+     1418382.4559468473
+    ],
+    [
+     4139544.24944073,
+     1418382.4559468473,
+     29686653.3840094
+    ]
+   ],
+   "principal_moments_unit_density_mm5": [
+    15000000.09373546,
+    27000000.19886152,
+    31200000.146607295
+   ],
+   "principal_axes": [
+    [
+     0.8130186806204234,
+     0.5112918570787065,
+     -0.27853413048894693
+    ],
+    [
+     -0.45375912661142576,
+     0.8561682121255989,
+     0.24714094675405682
+    ],
+    [
+     0.3648332221427515,
+     -0.07454280267512807,
+     0.928084096723069
+    ]
+   ],
+   "mass_kg": 0.19440000068286326,
+   "principal_moments_kg_m2": [
+    4.050000025308574e-05,
+    7.29000005369261e-05,
+    8.42400003958397e-05
+   ],
+   "convex_hull_volume_mm3": 72000.00096244528,
+   "convex_hull_faces": 12,
+   "solidity": 0.9999999901453757,
+   "obb_extents_mm": [
+    60.000001280516116,
+    40.000002000252444,
+    30.000002038654493
+   ],
+   "obb_axes": [
+    [
+     0.8130186806204234,
+     0.5112918570787065,
+     -0.27853413048894693
+    ],
+    [
+     -0.45375912661142576,
+     0.8561682121255989,
+     0.24714094675405682
+    ],
+    [
+     0.3648332221427515,
+     -0.07454280267512807,
+     0.928084096723069
+    ]
+   ],
+   "aabb_fill": 0.25286710016691394,
+   "obb_fill": 0.9999998642092879,
+   "sphericity": 0.7749648994128151,
+   "planar_area_fraction": 0.9999999999999997,
+   "labels": [
+    "box-like",
+    "convex",
+    "planar-faceted"
+   ],
+   "analysis_seconds": 0.0016542000230401754,
+   "role": "packable",
+   "intended_labels": [
+    "box-like",
+    "convex"
+   ],
+   "analytic_check": {
+    "basis": "exact",
+    "volume_rel_err": 3.5126710524006435e-09,
+    "com_err_mm": 5.291088762560332e-07,
+    "inertia_rel_err_frobenius": 1.0493526845789232e-08,
+    "tensor_asymmetry_rel": 0.0
+   }
+  },
+  "pcb_eps.stl": {
+   "format": "binary",
+   "triangles": 44,
+   "vertices": 24,
+   "boundary_edges": 0,
+   "nonmanifold_edges": 0,
+   "misoriented_edges": 0,
+   "degenerate_triangles": 0,
+   "components": 1,
+   "euler_characteristic": 2,
+   "genus_total": 0,
+   "watertight": true,
+   "consistently_oriented": true,
+   "aabb_min_mm": [
+    -45.0,
+    -45.0,
+    0.0
+   ],
+   "aabb_extents_mm": [
+    90.0,
+    90.0,
+    1.600000023841858
+   ],
+   "surface_area_mm2": 16384.00000858307,
+   "signed_volume_mm3": 12646.400188446045,
+   "mass_properties": "OK",
+   "volume_mm3": 12646.400188446045,
+   "centroid_mm": [
+    0.0,
+    0.0,
+    0.800000011920929
+   ],
+   "inertia_about_com_unit_density_mm5": [
+    [
+     8209319.887742133,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     8209319.887742133,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     16413243.977909723
+    ]
+   ],
+   "principal_moments_unit_density_mm5": [
+    8209319.887742133,
+    8209319.887742133,
+    16413243.977909723
+   ],
+   "principal_axes": [
+    [
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "mass_kg": 0.03414528050880432,
+   "principal_moments_kg_m2": [
+    2.2165163696903762e-05,
+    2.2165163696903762e-05,
+    4.431575874035626e-05
+   ],
+   "convex_hull_volume_mm3": 12803.200190782547,
+   "convex_hull_faces": 28,
+   "solidity": 0.9877530617345663,
+   "obb_extents_mm": [
+    90.0,
+    90.0,
+    1.600000023841858
+   ],
+   "obb_axes": [
+    [
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "aabb_fill": 0.9758024691358025,
+   "obb_fill": 0.9758024691358025,
+   "sphericity": 0.16021707499435103,
+   "planar_area_fraction": 0.9648437494945483,
+   "labels": [
+    "box-like",
+    "convex",
+    "thin",
+    "planar-faceted"
+   ],
+   "analysis_seconds": 0.002175399800762534,
+   "role": "packable",
+   "intended_labels": [
+    "plate-like",
+    "thin",
+    "near-box"
+   ],
+   "analytic_check": {
+    "basis": "exact",
+    "volume_rel_err": 1.4901161078780005e-08,
+    "com_err_mm": 1.1920928910669204e-08,
+    "inertia_rel_err_frobenius": 1.49044279290694e-08,
+    "tensor_asymmetry_rel": 0.0
+   }
+  },
+  "pcb_obc.stl": {
+   "format": "binary",
+   "triangles": 44,
+   "vertices": 24,
+   "boundary_edges": 0,
+   "nonmanifold_edges": 0,
+   "misoriented_edges": 0,
+   "degenerate_triangles": 0,
+   "components": 1,
+   "euler_characteristic": 2,
+   "genus_total": 0,
+   "watertight": true,
+   "consistently_oriented": true,
+   "aabb_min_mm": [
+    -45.0,
+    -45.0,
+    0.0
+   ],
+   "aabb_extents_mm": [
+    90.0,
+    90.0,
+    1.600000023841858
+   ],
+   "surface_area_mm2": 16384.00000858307,
+   "signed_volume_mm3": 12646.400188446045,
+   "mass_properties": "OK",
+   "volume_mm3": 12646.400188446045,
+   "centroid_mm": [
+    0.0,
+    0.0,
+    0.800000011920929
+   ],
+   "inertia_about_com_unit_density_mm5": [
+    [
+     8209319.887742133,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     8209319.887742133,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     16413243.977909723
+    ]
+   ],
+   "principal_moments_unit_density_mm5": [
+    8209319.887742133,
+    8209319.887742133,
+    16413243.977909723
+   ],
+   "principal_axes": [
+    [
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "mass_kg": 0.03414528050880432,
+   "principal_moments_kg_m2": [
+    2.2165163696903762e-05,
+    2.2165163696903762e-05,
+    4.431575874035626e-05
+   ],
+   "convex_hull_volume_mm3": 12803.200190782547,
+   "convex_hull_faces": 28,
+   "solidity": 0.9877530617345663,
+   "obb_extents_mm": [
+    90.0,
+    90.0,
+    1.600000023841858
+   ],
+   "obb_axes": [
+    [
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "aabb_fill": 0.9758024691358025,
+   "obb_fill": 0.9758024691358025,
+   "sphericity": 0.16021707499435103,
+   "planar_area_fraction": 0.9648437494945483,
+   "labels": [
+    "box-like",
+    "convex",
+    "thin",
+    "planar-faceted"
+   ],
+   "analysis_seconds": 0.0023064000997692347,
+   "role": "packable",
+   "intended_labels": [
+    "plate-like",
+    "thin",
+    "near-box"
+   ],
+   "analytic_check": {
+    "basis": "exact",
+    "volume_rel_err": 1.4901161078780005e-08,
+    "com_err_mm": 1.1920928910669204e-08,
+    "inertia_rel_err_frobenius": 1.49044279290694e-08,
+    "tensor_asymmetry_rel": 0.0
+   }
+  },
+  "propellant_tank_sphere.stl": {
+   "format": "binary",
+   "triangles": 9024,
+   "vertices": 4514,
+   "boundary_edges": 0,
+   "nonmanifold_edges": 0,
+   "misoriented_edges": 0,
+   "degenerate_triangles": 0,
+   "components": 1,
+   "euler_characteristic": 2,
+   "genus_total": 0,
+   "watertight": true,
+   "consistently_oriented": true,
+   "aabb_min_mm": [
+    -30.0,
+    -30.0,
+    -30.0
+   ],
+   "aabb_extents_mm": [
+    60.0,
+    60.0,
+    60.0
+   ],
+   "surface_area_mm2": 11299.643223877856,
+   "signed_volume_mm3": 112895.61891263082,
+   "mass_properties": "OK",
+   "volume_mm3": 112895.61891263082,
+   "centroid_mm": [
+    -5.3865771484510386e-17,
+    -1.3469339823219163e-16,
+    7.113675244504382e-16
+   ],
+   "inertia_about_com_unit_density_mm5": [
+    [
+     40598921.39618481,
+     2.1574209085883923e-11,
+     1.3403678167378526e-11
+    ],
+    [
+     2.1574209085883923e-11,
+     40598921.3961848,
+     -1.890569478746329e-10
+    ],
+    [
+     1.3403678167378526e-11,
+     -1.890569478746329e-10,
+     40584436.27461824
+    ]
+   ],
+   "principal_moments_unit_density_mm5": [
+    40584436.27461824,
+    40598921.3961848,
+    40598921.39618481
+   ],
+   "principal_axes": [
+    [
+     0.0,
+     0.0,
+     1.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     -1.0,
+     -0.0,
+     -0.0
+    ]
+   ],
+   "mass_kg": 0.3048181710641032,
+   "principal_moments_kg_m2": [
+    0.00010957797794146924,
+    0.00010961708776969897,
+    0.000109617087769699
+   ],
+   "convex_hull_volume_mm3": 112895.61894384488,
+   "convex_hull_faces": 9024,
+   "solidity": 0.9999999997235139,
+   "obb_extents_mm": [
+    59.96787561556168,
+    59.95679206497452,
+    59.93580344524725
+   ],
+   "obb_axes": [
+    [
+     -0.28538121003310213,
+     -0.05385165946312833,
+     0.9568999758245947
+    ],
+    [
+     -0.9134452406615122,
+     -0.28695777521353727,
+     -0.2885706630226457
+    ],
+    [
+     0.2901298972406579,
+     -0.9564283736995489,
+     0.03270181508052714
+    ]
+   ],
+   "aabb_fill": 0.5226649023732908,
+   "obb_fill": 0.5238822752415158,
+   "sphericity": 0.9997025175042982,
+   "planar_area_fraction": 0.0,
+   "labels": [
+    "convex",
+    "curved"
+   ],
+   "analysis_seconds": 0.5969846001826227,
+   "role": "packable",
+   "intended_labels": [
+    "convex",
+    "spherical"
+   ],
+   "analytic_check": {
+    "basis": "continuous shape; the mesh is a tessellation",
+    "volume_rel_err": 0.001783566479774306,
+    "com_err_mm": 7.260079804710841e-16,
+    "inertia_rel_err_frobenius": 0.002975322306498141,
+    "tensor_asymmetry_rel": 0.0
+   }
+  },
+  "reaction_wheel.stl": {
+   "format": "binary",
+   "triangles": 384,
+   "vertices": 194,
+   "boundary_edges": 0,
+   "nonmanifold_edges": 0,
+   "misoriented_edges": 0,
+   "degenerate_triangles": 0,
+   "components": 1,
+   "euler_characteristic": 2,
+   "genus_total": 0,
+   "watertight": true,
+   "consistently_oriented": true,
+   "aabb_min_mm": [
+    -25.0,
+    -25.0,
+    -12.5
+   ],
+   "aabb_extents_mm": [
+    50.0,
+    50.0,
+    25.0
+   ],
+   "surface_area_mm2": 7850.477712869622,
+   "signed_volume_mm3": 49052.347092973774,
+   "mass_properties": "OK",
+   "volume_mm3": 49052.347092973774,
+   "centroid_mm": [
+    -3.2138268125785283e-16,
+    -4.3533447329038484e-16,
+    7.725545222544541e-17
+   ],
+   "inertia_about_com_unit_density_mm5": [
+    [
+     10213768.960530043,
+     1.1496013030409815e-10,
+     -5.820766091346743e-12
+    ],
+    [
+     1.1496013030409815e-10,
+     10213768.960530043,
+     1.443064926813046e-11
+    ],
+    [
+     -5.820766091346743e-12,
+     1.443064926813046e-11,
+     15317918.432208654
+    ]
+   ],
+   "principal_moments_unit_density_mm5": [
+    10213768.960530043,
+    10213768.960530043,
+    15317918.432208654
+   ],
+   "principal_axes": [
+    [
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "mass_kg": 0.1324413371510292,
+   "principal_moments_kg_m2": [
+    2.7577176193431116e-05,
+    2.7577176193431116e-05,
+    4.1358379766963366e-05
+   ],
+   "convex_hull_volume_mm3": 49052.34709297366,
+   "convex_hull_faces": 380,
+   "solidity": 1.0000000000000024,
+   "obb_extents_mm": [
+    25.0,
+    49.973229141051426,
+    49.973229141051426
+   ],
+   "obb_axes": [
+    [
+     -0.0,
+     0.0,
+     1.0
+    ],
+    [
+     -0.6835922038736192,
+     -0.7298641646246297,
+     0.0
+    ],
+    [
+     0.7298641646246297,
+     -0.6835922038736192,
+     0.0
+    ]
+   ],
+   "aabb_fill": 0.7848375534875803,
+   "obb_fill": 0.7856786599592437,
+   "sphericity": 0.8254572150927733,
+   "planar_area_fraction": 0.499866111460301,
+   "labels": [
+    "convex"
+   ],
+   "analysis_seconds": 0.04113060003146529,
+   "role": "packable",
+   "intended_labels": [
+    "convex",
+    "cylindrical"
+   ],
+   "analytic_check": {
+    "basis": "continuous shape; the mesh is a tessellation",
+    "volume_rel_err": 0.0007137907064141847,
+    "com_err_mm": 5.46599795413483e-16,
+    "inertia_rel_err_frobenius": 0.001346011770109948,
+    "tensor_asymmetry_rel": 0.0
+   }
+  },
+  "sensor_housing_hex.stl": {
+   "format": "binary",
+   "triangles": 20,
+   "vertices": 12,
+   "boundary_edges": 0,
+   "nonmanifold_edges": 0,
+   "misoriented_edges": 0,
+   "degenerate_triangles": 0,
+   "components": 1,
+   "euler_characteristic": 2,
+   "genus_total": 0,
+   "watertight": true,
+   "consistently_oriented": true,
+   "aabb_min_mm": [
+    -23.094011306762695,
+    -20.0,
+    0.0
+   ],
+   "aabb_extents_mm": [
+    46.18802261352539,
+    40.0,
+    50.0
+   ],
+   "surface_area_mm2": 9699.484667963683,
+   "signed_volume_mm3": 69282.03392028809,
+   "mass_properties": "OK",
+   "volume_mm3": 69282.03392028809,
+   "centroid_mm": [
+    1.4002586630284215e-16,
+    0.0,
+    25.0
+   ],
+   "inertia_about_com_unit_density_mm5": [
+    [
+     22131760.835647583,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     22131761.19509937,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     15396007.897293583
+    ]
+   ],
+   "principal_moments_unit_density_mm5": [
+    15396007.897293583,
+    22131760.835647583,
+    22131761.19509937
+   ],
+   "principal_axes": [
+    [
+     0.0,
+     0.0,
+     1.0
+    ],
+    [
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0
+    ]
+   ],
+   "mass_kg": 0.18706149158477786,
+   "principal_moments_kg_m2": [
+    4.156922132269268e-05,
+    5.975575425624848e-05,
+    5.97557552267683e-05
+   ],
+   "convex_hull_volume_mm3": 69282.03392028809,
+   "convex_hull_faces": 20,
+   "solidity": 1.0,
+   "obb_extents_mm": [
+    50.0,
+    46.18802261352539,
+    40.0
+   ],
+   "obb_axes": [
+    [
+     0.0,
+     0.0,
+     1.0
+    ],
+    [
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0
+    ]
+   ],
+   "aabb_fill": 0.75,
+   "obb_fill": 0.75,
+   "sphericity": 0.8410385115862553,
+   "planar_area_fraction": 1.0,
+   "labels": [
+    "convex",
+    "planar-faceted"
+   ],
+   "analysis_seconds": 0.0016308999620378017,
+   "role": "packable",
+   "intended_labels": [
+    "convex",
+    "prismatic"
+   ],
+   "analytic_check": {
+    "basis": "exact",
+    "volume_rel_err": 2.334707753800009e-08,
+    "com_err_mm": 1.2088957770089676e-15,
+    "inertia_rel_err_frobenius": 3.570974747608747e-08,
+    "tensor_asymmetry_rel": 0.0
+   }
+  },
+  "u_channel_bracket.stl": {
+   "format": "binary",
+   "triangles": 28,
+   "vertices": 16,
+   "boundary_edges": 0,
+   "nonmanifold_edges": 0,
+   "misoriented_edges": 0,
+   "degenerate_triangles": 0,
+   "components": 1,
+   "euler_characteristic": 2,
+   "genus_total": 0,
+   "watertight": true,
+   "consistently_oriented": true,
+   "aabb_min_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "aabb_extents_mm": [
+    60.0,
+    30.0,
+    80.0
+   ],
+   "surface_area_mm2": 19456.0,
+   "signed_volume_mm3": 35840.0,
+   "mass_properties": "OK",
+   "volume_mm3": 35840.0,
+   "centroid_mm": [
+    30.0,
+    8.964285714285715,
+    40.0
+   ],
+   "inertia_about_com_unit_density_mm5": [
+    [
+     22083367.619047616,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     37942613.33333333,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     21796647.619047616
+    ]
+   ],
+   "principal_moments_unit_density_mm5": [
+    21796647.619047616,
+    22083367.619047616,
+    37942613.33333333
+   ],
+   "principal_axes": [
+    [
+     0.0,
+     0.0,
+     1.0
+    ],
+    [
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0
+    ]
+   ],
+   "mass_kg": 0.096768,
+   "principal_moments_kg_m2": [
+    5.885094857142857e-05,
+    5.962509257142857e-05,
+    0.00010244505599999999
+   ],
+   "convex_hull_volume_mm3": 144000.0,
+   "convex_hull_faces": 12,
+   "solidity": 0.24888888888888888,
+   "obb_extents_mm": [
+    80.0,
+    60.0,
+    30.0
+   ],
+   "obb_axes": [
+    [
+     0.0,
+     0.0,
+     1.0
+    ],
+    [
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0
+    ]
+   ],
+   "aabb_fill": 0.24888888888888888,
+   "obb_fill": 0.24888888888888888,
+   "sphericity": 0.27019412452468294,
+   "planar_area_fraction": 0.9539473684210527,
+   "labels": [
+    "strongly concave",
+    "planar-faceted"
+   ],
+   "analysis_seconds": 0.001227600034326315,
+   "role": "packable",
+   "intended_labels": [
+    "concave",
+    "open cavity"
+   ],
+   "analytic_check": {
+    "basis": "exact",
+    "volume_rel_err": 0.0,
+    "com_err_mm": 1.7763568394002505e-15,
+    "inertia_rel_err_frobenius": 3.2420240924489626e-16,
+    "tensor_asymmetry_rel": 0.0
+   }
+  },
+  "wedge_bracket.stl": {
+   "format": "binary",
+   "triangles": 8,
+   "vertices": 6,
+   "boundary_edges": 0,
+   "nonmanifold_edges": 0,
+   "misoriented_edges": 0,
+   "degenerate_triangles": 0,
+   "components": 1,
+   "euler_characteristic": 2,
+   "genus_total": 0,
+   "watertight": true,
+   "consistently_oriented": true,
+   "aabb_min_mm": [
+    -23.965087890625,
+    10.046550750732422,
+    8.0
+   ],
+   "aabb_extents_mm": [
+    58.49662780761719,
+    39.14268112182617,
+    47.091243743896484
+   ],
+   "surface_area_mm2": 7032.380705564248,
+   "signed_volume_mm3": 29999.998506929132,
+   "mass_properties": "OK",
+   "volume_mm3": 29999.998506929132,
+   "centroid_mm": [
+    -1.1655422229044508,
+    30.06695649095072,
+    30.832208832566803
+   ],
+   "inertia_about_com_unit_density_mm5": [
+    [
+     5026414.622527402,
+     243617.7173123206,
+     107847.44999756487
+    ],
+    [
+     243617.7173123206,
+     8382361.1578838155,
+     839460.7938162114
+    ],
+    [
+     107847.44999756487,
+     839460.7938162114,
+     5924556.6811027415
+    ]
+   ],
+   "principal_moments_unit_density_mm5": [
+    5005690.223631646,
+    5666666.497492925,
+    8660975.740389392
+   ],
+   "principal_axes": [
+    [
+     0.9962592824755643,
+     -0.0553873613149312,
+     -0.06633010091838394
+    ],
+    [
+     0.04684628331116233,
+     -0.2988362130629235,
+     0.9531538928746717
+    ],
+    [
+     -0.07261451522391407,
+     -0.9526957321037923,
+     -0.29512365918376615
+    ]
+   ],
+   "mass_kg": 0.08099999596870866,
+   "principal_moments_kg_m2": [
+    1.3515363603805444e-05,
+    1.52999995432309e-05,
+    2.3384634499051358e-05
+   ],
+   "convex_hull_volume_mm3": 29999.999574425947,
+   "convex_hull_faces": 8,
+   "solidity": 0.9999999644167723,
+   "obb_extents_mm": [
+    40.00057341733992,
+    30.000768856425385,
+    50.00000116476785
+   ],
+   "obb_axes": [
+    [
+     0.04685182981288511,
+     -0.2988535973508021,
+     0.9531481696953884
+    ],
+    [
+     0.29883537891844236,
+     -0.9063020514826708,
+     -0.2988544926631906
+    ],
+    [
+     0.953153881778727,
+     0.29883627428541315,
+     0.046846118530331826
+    ]
+   ],
+   "aabb_fill": 0.2782272553940183,
+   "obb_fill": 0.4999799820936069,
+   "sphericity": 0.6639406197685325,
+   "planar_area_fraction": 1.0,
+   "labels": [
+    "convex",
+    "planar-faceted"
+   ],
+   "analysis_seconds": 0.0014358998741954565,
+   "role": "packable",
+   "intended_labels": [
+    "convex",
+    "prismatic"
+   ],
+   "analytic_check": {
+    "basis": "exact",
+    "volume_rel_err": 4.976902891939971e-08,
+    "com_err_mm": 6.283187872507557e-07,
+    "inertia_rel_err_frobenius": 5.0717655910732773e-08,
+    "tensor_asymmetry_rel": 0.0
+   }
+  },
+  "fixtures/fixture_flipped_normals.stl": {
+   "format": "binary",
+   "triangles": 192,
+   "vertices": 98,
+   "boundary_edges": 0,
+   "nonmanifold_edges": 0,
+   "misoriented_edges": 0,
+   "degenerate_triangles": 0,
+   "components": 1,
+   "euler_characteristic": 2,
+   "genus_total": 0,
+   "watertight": true,
+   "consistently_oriented": true,
+   "aabb_min_mm": [
+    -10.0,
+    -10.0,
+    0.0
+   ],
+   "aabb_extents_mm": [
+    20.0,
+    20.0,
+    30.0
+   ],
+   "surface_area_mm2": 2510.135837733361,
+   "signed_volume_mm3": -9397.885799389163,
+   "mass_properties": "WITHHELD: closed but inverted (normals point inward); repair winding first",
+   "analysis_seconds": 0.001463599968701601,
+   "role": "fixture",
+   "intended_labels": [
+    "defect: inverted"
+   ],
+   "analytic_check": null
+  },
+  "fixtures/fixture_open_mesh.stl": {
+   "format": "binary",
+   "triangles": 11,
+   "vertices": 8,
+   "boundary_edges": 3,
+   "nonmanifold_edges": 0,
+   "misoriented_edges": 0,
+   "degenerate_triangles": 0,
+   "components": 1,
+   "euler_characteristic": 1,
+   "genus_total": null,
+   "watertight": false,
+   "consistently_oriented": false,
+   "aabb_min_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "aabb_extents_mm": [
+    30.0,
+    20.0,
+    10.0
+   ],
+   "surface_area_mm2": 2100.0,
+   "signed_volume_mm3": 5500.0,
+   "mass_properties": "WITHHELD: mesh is not closed and consistently oriented",
+   "analysis_seconds": 0.0001979998778551817,
+   "role": "fixture",
+   "intended_labels": [
+    "defect: open"
+   ],
+   "analytic_check": null
+  },
+  "fixtures/fixture_two_bodies.stl": {
+   "format": "binary",
+   "triangles": 24,
+   "vertices": 16,
+   "boundary_edges": 0,
+   "nonmanifold_edges": 0,
+   "misoriented_edges": 0,
+   "degenerate_triangles": 0,
+   "components": 2,
+   "euler_characteristic": 4,
+   "genus_total": 0,
+   "watertight": true,
+   "consistently_oriented": true,
+   "aabb_min_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "aabb_extents_mm": [
+    50.0,
+    20.0,
+    15.0
+   ],
+   "surface_area_mm2": 4000.0,
+   "signed_volume_mm3": 12000.0,
+   "mass_properties": "OK",
+   "volume_mm3": 12000.0,
+   "centroid_mm": [
+    25.0,
+    10.0,
+    7.5
+   ],
+   "inertia_about_com_unit_density_mm5": [
+    [
+     625000.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     3325000.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     3500000.0
+    ]
+   ],
+   "principal_moments_unit_density_mm5": [
+    625000.0,
+    3325000.0,
+    3500000.0
+   ],
+   "principal_axes": [
+    [
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "mass_kg": 0.0324,
+   "principal_moments_kg_m2": [
+    1.6875000000000001e-06,
+    8.9775e-06,
+    9.450000000000001e-06
+   ],
+   "convex_hull_volume_mm3": 15000.0,
+   "convex_hull_faces": 12,
+   "solidity": 0.8,
+   "obb_extents_mm": [
+    50.0,
+    20.0,
+    15.0
+   ],
+   "obb_axes": [
+    [
+     1.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "aabb_fill": 0.8,
+   "obb_fill": 0.8,
+   "sphericity": 0.6336921061533967,
+   "planar_area_fraction": 1.0,
+   "labels": [
+    "strongly concave",
+    "elongated",
+    "planar-faceted",
+    "multi-body"
+   ],
+   "analysis_seconds": 0.0011692000553011894,
+   "role": "fixture",
+   "intended_labels": [
+    "multi-body"
+   ],
+   "analytic_check": {
+    "basis": "exact",
+    "volume_rel_err": 0.0,
+    "com_err_mm": 0.0,
+    "inertia_rel_err_frobenius": 0.0,
+    "tensor_asymmetry_rel": 0.0
+   }
+  }
+ }
+}

@@ -1,0 +1,1791 @@
+{
+ "dataset": "text-to-spaceship synthetic CubeSat parts",
+ "generator_version": "0.1.0",
+ "seed": 20261021,
+ "units": "mm",
+ "stl_precision": "binary STL stores float32 coordinates",
+ "inertia_convention": "about COM, I = integral(|r|^2 E - r r^T) dV, unit density, mm^5",
+ "dataset_sha256": "8dd5692792870f55a2e666a96555d7172e7e40adff351026d1eb17fa087e0f7f",
+ "parts": [
+  {
+   "name": "battery_pack",
+   "file": "battery_pack.stl",
+   "sha256": "ac1551de509f3f4abb8399f749c947254fc11388e8e88b03f89cf64682af664a",
+   "bytes": 684,
+   "role": "packable",
+   "triangles": 12,
+   "welded_vertices": 8,
+   "generator_self_check": {
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "misoriented_edges": 0,
+    "signed_volume_mm3": 140800.0
+   },
+   "intended_labels": [
+    "box-like",
+    "convex"
+   ],
+   "suggested_type": "battery",
+   "construction": {
+    "primitive": "box",
+    "size_mm": [
+     80,
+     80,
+     22
+    ],
+    "frame": "corner at origin"
+   },
+   "authored_transform": {
+    "rotation": [
+     [
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "translation_mm": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "analytic": {
+    "volume_mm3": 140800,
+    "com_mm": [
+     40,
+     40,
+     11
+    ],
+    "inertia_about_com_unit_density_mm5": [
+     [
+      80772266.66666667,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      80772266.66666667,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      150186666.66666666
+     ]
+    ],
+    "basis": "exact"
+   },
+   "note": ""
+  },
+  {
+   "name": "pcb_obc",
+   "file": "pcb_obc.stl",
+   "sha256": "e045526051deab367acea4808ad027a48042ad74c3f879ec298e44b4f2dee5ff",
+   "bytes": 2284,
+   "role": "packable",
+   "triangles": 44,
+   "welded_vertices": 24,
+   "generator_self_check": {
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "misoriented_edges": 0,
+    "signed_volume_mm3": 12646.400000000001
+   },
+   "intended_labels": [
+    "plate-like",
+    "thin",
+    "near-box"
+   ],
+   "suggested_type": "pcb",
+   "construction": {
+    "primitive": "extruded polygon",
+    "outline_mm": "90 x 90 with 7 x 7 corner notches",
+    "thickness_mm": 1.6
+   },
+   "authored_transform": {
+    "rotation": [
+     [
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "translation_mm": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "analytic": {
+    "volume_mm3": 12646.400000000001,
+    "com_mm": [
+     0.0,
+     0.0,
+     0.8
+    ],
+    "inertia_about_com_unit_density_mm5": [
+     [
+      8209319.765333334,
+      -0.0,
+      0.0
+     ],
+     [
+      -0.0,
+      8209319.765333334,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      16413243.733333334
+     ]
+    ],
+    "basis": "exact"
+   },
+   "note": ""
+  },
+  {
+   "name": "pcb_eps",
+   "file": "pcb_eps.stl",
+   "sha256": "237b88f2fb9ecdb69974a31cabd34992026fc5649db5ba04db0654ee285c1cac",
+   "bytes": 2284,
+   "role": "packable",
+   "triangles": 44,
+   "welded_vertices": 24,
+   "generator_self_check": {
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "misoriented_edges": 0,
+    "signed_volume_mm3": 12646.400000000001
+   },
+   "intended_labels": [
+    "plate-like",
+    "thin",
+    "near-box"
+   ],
+   "suggested_type": "pcb",
+   "construction": {
+    "primitive": "extruded polygon",
+    "outline_mm": "90 x 90 with 7 x 7 corner notches",
+    "thickness_mm": 1.6
+   },
+   "authored_transform": {
+    "rotation": [
+     [
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "translation_mm": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "analytic": {
+    "volume_mm3": 12646.400000000001,
+    "com_mm": [
+     0.0,
+     0.0,
+     0.8
+    ],
+    "inertia_about_com_unit_density_mm5": [
+     [
+      8209319.765333334,
+      -0.0,
+      0.0
+     ],
+     [
+      -0.0,
+      8209319.765333334,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      16413243.733333334
+     ]
+    ],
+    "basis": "exact"
+   },
+   "note": ""
+  },
+  {
+   "name": "payload_electronics_box",
+   "file": "payload_electronics_box.stl",
+   "sha256": "efb7252350729367c76f83c97a8f654fbf1d0ed0a80406511d8fcb0f8a18dba4",
+   "bytes": 684,
+   "role": "packable",
+   "triangles": 12,
+   "welded_vertices": 8,
+   "generator_self_check": {
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "misoriented_edges": 0,
+    "signed_volume_mm3": 71999.99999936274
+   },
+   "intended_labels": [
+    "box-like",
+    "convex"
+   ],
+   "suggested_type": "electronics",
+   "construction": {
+    "primitive": "box",
+    "size_mm": [
+     60,
+     40,
+     30
+    ]
+   },
+   "authored_transform": {
+    "rotation": [
+     [
+      0.8130186879010576,
+      -0.45375913575998295,
+      0.36483319453963614
+     ],
+     [
+      0.5112918471750422,
+      0.856168221462352,
+      -0.07454276336658207
+     ],
+     [
+      -0.2785341274170473,
+      0.24714089761175967,
+      0.928084110731176
+     ]
+    ],
+    "translation_mm": [
+     12.5,
+     -7.25,
+     4.0
+    ]
+   },
+   "analytic": {
+    "volume_mm3": 72000,
+    "com_mm": [
+     12.5,
+     -7.25,
+     4.0
+    ],
+    "inertia_about_com_unit_density_mm5": [
+     [
+      19627041.048803292,
+      -5102499.75355027,
+      4139544.1515613236
+     ],
+     [
+      -5102499.753550268,
+      23886305.58314337,
+      1418382.5342480298
+     ],
+     [
+      4139544.1515613236,
+      1418382.5342480307,
+      29686653.368053336
+     ]
+    ],
+    "basis": "exact"
+   },
+   "note": "authored in a tilted, offset frame"
+  },
+  {
+   "name": "reaction_wheel",
+   "file": "reaction_wheel.stl",
+   "sha256": "afe2aa6553d9272fae1c5ee0441c3fc4ec88c0734c4b5adb111c6324107c15f9",
+   "bytes": 19284,
+   "role": "packable",
+   "triangles": 384,
+   "welded_vertices": 194,
+   "generator_self_check": {
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "misoriented_edges": 0,
+    "signed_volume_mm3": 49052.34692247764
+   },
+   "intended_labels": [
+    "convex",
+    "cylindrical"
+   ],
+   "suggested_type": "reaction wheel",
+   "construction": {
+    "primitive": "cylinder",
+    "diameter_mm": 50,
+    "height_mm": 25,
+    "segments": 96
+   },
+   "authored_transform": {
+    "rotation": [
+     [
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "translation_mm": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "analytic": {
+    "volume_mm3": 49087.385212340516,
+    "com_mm": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "inertia_about_com_unit_density_mm5": [
+     [
+      10226538.585904274,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      10226538.585904274,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      15339807.878856411
+     ]
+    ],
+    "basis": "continuous shape; the mesh is a tessellation"
+   },
+   "note": ""
+  },
+  {
+   "name": "magnetorquer_rod",
+   "file": "magnetorquer_rod.stl",
+   "sha256": "4b246664446eac6024184b779086af79afe544bc4aacc8ffaa420b5cc959144f",
+   "bytes": 9684,
+   "role": "packable",
+   "triangles": 192,
+   "welded_vertices": 98,
+   "generator_self_check": {
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "misoriented_edges": 0,
+    "signed_volume_mm3": 6265.257226569079
+   },
+   "intended_labels": [
+    "convex",
+    "elongated",
+    "cylindrical"
+   ],
+   "suggested_type": "magnetorquer",
+   "construction": {
+    "primitive": "cylinder",
+    "diameter_mm": 10,
+    "length_mm": 80,
+    "segments": 48
+   },
+   "authored_transform": {
+    "rotation": [
+     [
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "translation_mm": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "analytic": {
+    "volume_mm3": 6283.185307179587,
+    "com_mm": [
+     0.0,
+     0.0,
+     40.0
+    ],
+    "inertia_about_com_unit_density_mm5": [
+     [
+      3390302.0719989855,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      3390302.0719989855,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      78539.81633974484
+     ]
+    ],
+    "basis": "continuous shape; the mesh is a tessellation"
+   },
+   "note": ""
+  },
+  {
+   "name": "propellant_tank_sphere",
+   "file": "propellant_tank_sphere.stl",
+   "sha256": "c71facf8e035c4e39120dd80471eb828714dab12631c52f6242d296a9ec63609",
+   "bytes": 451284,
+   "role": "packable",
+   "triangles": 9024,
+   "welded_vertices": 4514,
+   "generator_self_check": {
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "misoriented_edges": 0,
+    "signed_volume_mm3": 112895.61869431451
+   },
+   "intended_labels": [
+    "convex",
+    "spherical"
+   ],
+   "suggested_type": "tank",
+   "construction": {
+    "primitive": "sphere",
+    "diameter_mm": 60,
+    "latitude_bands": 48,
+    "longitude_segments": 96
+   },
+   "authored_transform": {
+    "rotation": [
+     [
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "translation_mm": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "analytic": {
+    "volume_mm3": 113097.33552923254,
+    "com_mm": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "inertia_about_com_unit_density_mm5": [
+     [
+      40715040.790523715,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      40715040.790523715,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      40715040.790523715
+     ]
+    ],
+    "basis": "continuous shape; the mesh is a tessellation"
+   },
+   "note": ""
+  },
+  {
+   "name": "gas_tank_capsule",
+   "file": "gas_tank_capsule.stl",
+   "sha256": "a1ab3a3177e90b94e41c42d4d6b278b3961c936280f29fc4dff0dac5c5ca4f3e",
+   "bytes": 460884,
+   "role": "packable",
+   "triangles": 9216,
+   "welded_vertices": 4610,
+   "generator_self_check": {
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "misoriented_edges": 0,
+    "signed_volume_mm3": 119146.16095084256
+   },
+   "intended_labels": [
+    "convex",
+    "elongated"
+   ],
+   "suggested_type": "tank",
+   "construction": {
+    "primitive": "capsule",
+    "diameter_mm": 45,
+    "overall_length_mm": 90,
+    "segments": 96,
+    "hemisphere_rings": 24
+   },
+   "authored_transform": {
+    "rotation": [
+     [
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "translation_mm": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "analytic": {
+    "volume_mm3": 119282.34606598745,
+    "com_mm": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "inertia_about_com_unit_density_mm5": [
+     [
+      73067892.11204644,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      73067892.11204644,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      27777876.34011683
+     ]
+    ],
+    "basis": "continuous shape; the mesh is a tessellation"
+   },
+   "note": ""
+  },
+  {
+   "name": "sensor_housing_hex",
+   "file": "sensor_housing_hex.stl",
+   "sha256": "9a1994edda1ad2064e6fc37d57cf6a0729095d9a65c7aa7fae55c759bc77036f",
+   "bytes": 1084,
+   "role": "packable",
+   "triangles": 20,
+   "welded_vertices": 12,
+   "generator_self_check": {
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "misoriented_edges": 0,
+    "signed_volume_mm3": 69282.03230399998
+   },
+   "intended_labels": [
+    "convex",
+    "prismatic"
+   ],
+   "suggested_type": "sensor",
+   "construction": {
+    "primitive": "hexagonal prism",
+    "across_flats_mm": 40,
+    "height_mm": 50
+   },
+   "authored_transform": {
+    "rotation": [
+     [
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "translation_mm": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "analytic": {
+    "volume_mm3": 69282.0323027551,
+    "com_mm": [
+     -8.751616848252308e-16,
+     -6.563712636189231e-16,
+     25.0
+    ],
+    "inertia_about_com_unit_density_mm5": [
+     [
+      22131760.318935663,
+      -1.5764574830730755e-09,
+      0.0
+     ],
+     [
+      -1.5764574830730755e-09,
+      22131760.31893566,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      15396007.178390026
+     ]
+    ],
+    "basis": "exact"
+   },
+   "note": ""
+  },
+  {
+   "name": "ellipsoid_module",
+   "file": "ellipsoid_module.stl",
+   "sha256": "82f2edaf7f84b0db1913490407d7ef8a3b8de9b9b87ebb5f86b93f43f946a6b5",
+   "bytes": 451284,
+   "role": "packable",
+   "triangles": 9024,
+   "welded_vertices": 4514,
+   "generator_self_check": {
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "misoriented_edges": 0,
+    "signed_volume_mm3": 37631.872898009155
+   },
+   "intended_labels": [
+    "convex"
+   ],
+   "suggested_type": "module",
+   "construction": {
+    "primitive": "ellipsoid",
+    "axes_mm": [
+     60,
+     40,
+     30
+    ]
+   },
+   "authored_transform": {
+    "rotation": [
+     [
+      0.6509578704488121,
+      -0.6956361795175247,
+      -0.3038818136167574
+     ],
+     [
+      0.577981529107012,
+      0.7137070173344189,
+      -0.3956761875811176
+     ],
+     [
+      0.49212925427357784,
+      0.08193045315308362,
+      0.8666580628680856
+     ]
+    ],
+    "translation_mm": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "analytic": {
+    "volume_mm3": 37699.11184307751,
+    "com_mm": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "inertia_about_com_unit_density_mm5": [
+     [
+      7006660.062027988,
+      -1259746.1557929122,
+      -1555208.92424224
+     ],
+     [
+      -1259746.1557929134,
+      7429489.237176059,
+      -1524786.587588534
+     ],
+     [
+      -1555208.9242422394,
+      -1524786.5875885342,
+      8560308.925073233
+     ]
+    ],
+    "basis": "continuous shape; the mesh is a tessellation"
+   },
+   "note": "authored in a tilted frame"
+  },
+  {
+   "name": "wedge_bracket",
+   "file": "wedge_bracket.stl",
+   "sha256": "58d5d969d9e8ca71a281cdd397919eeb34d460b7e69d3d8a1078a279301c29ef",
+   "bytes": 484,
+   "role": "packable",
+   "triangles": 8,
+   "welded_vertices": 6,
+   "generator_self_check": {
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "misoriented_edges": 0,
+    "signed_volume_mm3": 30000.0000005542
+   },
+   "intended_labels": [
+    "convex",
+    "prismatic"
+   ],
+   "suggested_type": "bracket",
+   "construction": {
+    "primitive": "triangular prism",
+    "legs_mm": [
+     50,
+     30
+    ],
+    "thickness_mm": 40
+   },
+   "authored_transform": {
+    "rotation": [
+     [
+      0.9531538935183249,
+      -0.29883623873011983,
+      0.046846106481675025
+     ],
+     [
+      0.29883623873011983,
+      0.9063077870366499,
+      -0.29883623873011983
+     ],
+     [
+      0.046846106481675025,
+      0.29883623873011983,
+      0.9531538935183249
+     ]
+    ],
+    "translation_mm": [
+     -15.0,
+     22.0,
+     8.0
+    ]
+   },
+   "analytic": {
+    "volume_mm3": 30000.0,
+    "com_mm": [
+     -1.1655420323622803,
+     30.066957074599433,
+     30.832208699028946
+    ],
+    "inertia_about_com_unit_density_mm5": [
+     [
+      5026415.041982759,
+      243617.7766823683,
+      107847.34401820367
+     ],
+     [
+      243617.7766823683,
+      8382361.354703073,
+      839460.9173250908
+     ],
+     [
+      107847.34401820358,
+      839460.9173250908,
+      5924556.936647499
+     ]
+    ],
+    "basis": "exact"
+   },
+   "note": "authored in a tilted, offset frame"
+  },
+  {
+   "name": "l_shaped_electronics",
+   "file": "l_shaped_electronics.stl",
+   "sha256": "eea858b91cbc81201c2d2bd18b2d5a3245911484da1822be4730785679b2d1fb",
+   "bytes": 1084,
+   "role": "packable",
+   "triangles": 20,
+   "welded_vertices": 12,
+   "generator_self_check": {
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "misoriented_edges": 0,
+    "signed_volume_mm3": 86250.0
+   },
+   "intended_labels": [
+    "concave"
+   ],
+   "suggested_type": "electronics",
+   "construction": {
+    "primitive": "extruded L",
+    "outline_mm": "70 x 70, 25 wide arms",
+    "height_mm": 30
+   },
+   "authored_transform": {
+    "rotation": [
+     [
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "translation_mm": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "analytic": {
+    "volume_mm3": 86250.0,
+    "com_mm": [
+     26.195652173913043,
+     26.195652173913043,
+     15.0
+    ],
+    "inertia_about_com_unit_density_mm5": [
+     [
+      40064198.36956522,
+      16177989.130434785,
+      0.0
+     ],
+     [
+      16177989.130434785,
+      40064198.36956522,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      67190896.73913044
+     ]
+    ],
+    "basis": "exact"
+   },
+   "note": ""
+  },
+  {
+   "name": "u_channel_bracket",
+   "file": "u_channel_bracket.stl",
+   "sha256": "927b6135c866e880b260b974d7f99bab735ad36e0eb946c8056e9abdd7826f7b",
+   "bytes": 1484,
+   "role": "packable",
+   "triangles": 28,
+   "welded_vertices": 16,
+   "generator_self_check": {
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "misoriented_edges": 0,
+    "signed_volume_mm3": 35840.0
+   },
+   "intended_labels": [
+    "concave",
+    "open cavity"
+   ],
+   "suggested_type": "bracket",
+   "construction": {
+    "primitive": "extruded U",
+    "outline_mm": "60 x 30, 4 mm walls",
+    "length_mm": 80
+   },
+   "authored_transform": {
+    "rotation": [
+     [
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "translation_mm": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "analytic": {
+    "volume_mm3": 35840.0,
+    "com_mm": [
+     30.0,
+     8.964285714285714,
+     40.0
+    ],
+    "inertia_about_com_unit_density_mm5": [
+     [
+      22083367.61904762,
+      -1.1641532182693481e-09,
+      0.0
+     ],
+     [
+      -1.1641532182693481e-09,
+      37942613.33333334,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      21796647.61904762
+     ]
+    ],
+    "basis": "exact"
+   },
+   "note": ""
+  },
+  {
+   "name": "cross_connector_hub",
+   "file": "cross_connector_hub.stl",
+   "sha256": "0dc369cb10c531b808e4258f33da85942051274ef8569da751519812223a0991",
+   "bytes": 3084,
+   "role": "packable",
+   "triangles": 60,
+   "welded_vertices": 32,
+   "generator_self_check": {
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "misoriented_edges": 0,
+    "signed_volume_mm3": 28672.0
+   },
+   "intended_labels": [
+    "concave",
+    "strongly non-convex"
+   ],
+   "suggested_type": "connector hub",
+   "construction": {
+    "primitive": "3D cross",
+    "core_mm": 16.0,
+    "arm_length_mm": 16.0
+   },
+   "authored_transform": {
+    "rotation": [
+     [
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "translation_mm": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "analytic": {
+    "volume_mm3": 28672.0,
+    "com_mm": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "inertia_about_com_unit_density_mm5": [
+     [
+      5417642.666666667,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      5417642.666666667,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      5417642.666666668
+     ]
+    ],
+    "basis": "exact"
+   },
+   "note": ""
+  },
+  {
+   "name": "camera_with_lens",
+   "file": "camera_with_lens.stl",
+   "sha256": "7fd3b46b2d4f0696ed72d4446dab1009d0aba803487b6140258c6fd71868f489",
+   "bytes": 19484,
+   "role": "packable",
+   "triangles": 388,
+   "welded_vertices": 196,
+   "generator_self_check": {
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "misoriented_edges": 0,
+    "signed_volume_mm3": 121171.70231096359
+   },
+   "intended_labels": [
+    "concave"
+   ],
+   "suggested_type": "camera",
+   "construction": {
+    "primitive": "box + cylinder",
+    "body_mm": [
+     50,
+     50,
+     40
+    ],
+    "lens_diameter_mm": 30,
+    "lens_length_mm": 30,
+    "segments": 64
+   },
+   "authored_transform": {
+    "rotation": [
+     [
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "translation_mm": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "analytic": {
+    "volume_mm3": 121205.7504117311,
+    "com_mm": [
+     0.0,
+     0.0,
+     26.123482276124363
+    ],
+    "inertia_about_com_unit_density_mm5": [
+     [
+      58382109.37464164,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      58382109.37464164,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      44052313.58798641
+     ]
+    ],
+    "basis": "continuous shape; the mesh is a tessellation"
+   },
+   "note": ""
+  },
+  {
+   "name": "optics_baffle_tube",
+   "file": "optics_baffle_tube.stl",
+   "sha256": "a0b887483397fee5707d05ecd4f6b341a02b4933f444e68180b5fb54698320b3",
+   "bytes": 38484,
+   "role": "packable",
+   "triangles": 768,
+   "welded_vertices": 384,
+   "generator_self_check": {
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "misoriented_edges": 0,
+    "signed_volume_mm3": 20908.072352961917
+   },
+   "intended_labels": [
+    "concave",
+    "through-hole"
+   ],
+   "suggested_type": "optics",
+   "construction": {
+    "primitive": "tube",
+    "outer_diameter_mm": 40,
+    "inner_diameter_mm": 34,
+    "length_mm": 60,
+    "segments": 96
+   },
+   "authored_transform": {
+    "rotation": [
+     [
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "translation_mm": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "analytic": {
+    "volume_mm3": 20923.00707290802,
+    "com_mm": [
+     0.0,
+     0.0,
+     30.0
+    ],
+    "inertia_about_com_unit_density_mm5": [
+     [
+      9880890.090180812,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      9880890.090180812,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      7207975.936616814
+     ]
+    ],
+    "basis": "continuous shape; the mesh is a tessellation"
+   },
+   "note": ""
+  },
+  {
+   "name": "magnetometer_ring_torus",
+   "file": "magnetometer_ring_torus.stl",
+   "sha256": "443662235c5944616da952db1a6bba5a4dfc5e6733374e9428be3e4358263d0d",
+   "bytes": 307284,
+   "role": "packable",
+   "triangles": 6144,
+   "welded_vertices": 3072,
+   "generator_self_check": {
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "misoriented_edges": 0,
+    "signed_volume_mm3": 37629.348372939974
+   },
+   "intended_labels": [
+    "concave",
+    "through-hole",
+    "curved"
+   ],
+   "suggested_type": "magnetometer",
+   "construction": {
+    "primitive": "torus",
+    "ring_radius_mm": 30,
+    "tube_radius_mm": 8,
+    "segments": [
+     96,
+     32
+    ]
+   },
+   "authored_transform": {
+    "rotation": [
+     [
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "translation_mm": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "analytic": {
+    "volume_mm3": 37899.280900183134,
+    "com_mm": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "inertia_about_com_unit_density_mm5": [
+     [
+      18570647.641089737,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      18570647.641089737,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      35928518.293373615
+     ]
+    ],
+    "basis": "continuous shape; the mesh is a tessellation"
+   },
+   "note": ""
+  },
+  {
+   "name": "gear_mechanism",
+   "file": "gear_mechanism.stl",
+   "sha256": "375f3aaed14b28bff55cd7c7c096b51894a638c0ce8a23f781b6b3359d855ec5",
+   "bytes": 12684,
+   "role": "packable",
+   "triangles": 252,
+   "welded_vertices": 128,
+   "generator_self_check": {
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "misoriented_edges": 0,
+    "signed_volume_mm3": 15878.776733214114
+   },
+   "intended_labels": [
+    "concave",
+    "plate-like"
+   ],
+   "suggested_type": "mechanism",
+   "construction": {
+    "primitive": "extruded gear outline",
+    "root_diameter_mm": 40,
+    "tip_diameter_mm": 50,
+    "teeth": 16,
+    "thickness_mm": 10
+   },
+   "authored_transform": {
+    "rotation": [
+     [
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "translation_mm": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "analytic": {
+    "volume_mm3": 15878.776733388813,
+    "com_mm": [
+     1.9092459430675255e-16,
+     -2.2075656216718266e-16,
+     5.0
+    ],
+    "inertia_about_com_unit_density_mm5": [
+     [
+      2204938.668843744,
+      7.010688326166321e-11,
+      0.0
+     ],
+     [
+      7.010688326166321e-11,
+      2204938.6688437434,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      4145231.0587976733
+     ]
+    ],
+    "basis": "exact"
+   },
+   "note": ""
+  },
+  {
+   "name": "irregular_blob",
+   "file": "irregular_blob.stl",
+   "sha256": "edacc4c34a9c463f7bb73ac5898455ad52b60b86155dc9e6fe97c01550dd9f9e",
+   "bytes": 2544084,
+   "role": "packable",
+   "triangles": 50880,
+   "welded_vertices": 25442,
+   "generator_self_check": {
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "misoriented_edges": 0,
+    "signed_volume_mm3": 71282.72434466578
+   },
+   "intended_labels": [
+    "concave",
+    "highly irregular"
+   ],
+   "suggested_type": "unknown",
+   "construction": {
+    "primitive": "radially displaced sphere",
+    "base_radius_mm": 25,
+    "grid": [
+     160,
+     160
+    ],
+    "waves": [
+     {
+      "direction": [
+       -0.9543725138034956,
+       -0.2850652052783579,
+       0.0889434294144562
+      ],
+      "frequency": 6.9058535398685486,
+      "phase": 1.9737164841848025,
+      "amplitude": 0.05607765131317302
+     },
+     {
+      "direction": [
+       -0.11524225495480125,
+       -0.9868885529672169,
+       0.11300533923317607
+      ],
+      "frequency": 9.54207763894263,
+      "phase": 0.11394793227169622,
+      "amplitude": 0.05703199197066545
+     },
+     {
+      "direction": [
+       -0.5522438547716413,
+       -0.3341581081097464,
+       -0.763783401005464
+      ],
+      "frequency": 6.540577402446779,
+      "phase": 5.32810506279656,
+      "amplitude": 0.04647800616864299
+     },
+     {
+      "direction": [
+       0.17742344805551605,
+       0.4259991448140819,
+       0.887155932572038
+      ],
+      "frequency": 9.870054905717069,
+      "phase": 4.097056754971179,
+      "amplitude": 0.0428566359926407
+     },
+     {
+      "direction": [
+       0.893367646265388,
+       0.29079185623638376,
+       0.34254101207423127
+      ],
+      "frequency": 5.063883694377548,
+      "phase": 3.6939816987335092,
+      "amplitude": 0.04915269037331004
+     },
+     {
+      "direction": [
+       0.9297072966991077,
+       -0.36234604694681793,
+       -0.0659521396654569
+      ],
+      "frequency": 6.515395596841301,
+      "phase": 2.896625878311049,
+      "amplitude": 0.061401544281465374
+     },
+     {
+      "direction": [
+       0.7178114303683277,
+       0.5271492087157931,
+       -0.4548191532718129
+      ],
+      "frequency": 9.851088091090904,
+      "phase": 2.663108936317527,
+      "amplitude": 0.04508898229413996
+     },
+     {
+      "direction": [
+       0.29013438705735756,
+       0.9526616672290253,
+       0.09087235684885178
+      ],
+      "frequency": 8.346842180302682,
+      "phase": 1.6774968734745273,
+      "amplitude": 0.058214085283552416
+     },
+     {
+      "direction": [
+       -0.25217357605351726,
+       -0.2178116923474205,
+       0.9428502289426107
+      ],
+      "frequency": 6.208416511947558,
+      "phase": 3.8912378165852366,
+      "amplitude": 0.06366637573673628
+     }
+    ]
+   },
+   "authored_transform": {
+    "rotation": [
+     [
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "translation_mm": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "analytic": null,
+   "note": "no closed-form answer; reference values come from the mesh itself"
+  },
+  {
+   "name": "fixture_two_bodies",
+   "file": "fixtures/fixture_two_bodies.stl",
+   "sha256": "ff76a14b2ec63bc67e3aa68735b7e7a364e04bd363c73918dc03e1e7c92a9123",
+   "bytes": 1284,
+   "role": "fixture",
+   "triangles": 24,
+   "welded_vertices": 16,
+   "generator_self_check": {
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "misoriented_edges": 0,
+    "signed_volume_mm3": 12000.0
+   },
+   "intended_labels": [
+    "multi-body"
+   ],
+   "suggested_type": "fixture",
+   "construction": {
+    "primitive": "two separate boxes",
+    "size_mm": [
+     20,
+     20,
+     15
+    ],
+    "gap_mm": 10
+   },
+   "authored_transform": {
+    "rotation": [
+     [
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "translation_mm": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "analytic": {
+    "volume_mm3": 12000,
+    "com_mm": [
+     25.0,
+     10.0,
+     7.5
+    ],
+    "inertia_about_com_unit_density_mm5": [
+     [
+      625000.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      3325000.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      3500000.0
+     ]
+    ],
+    "basis": "exact"
+   },
+   "note": ""
+  },
+  {
+   "name": "fixture_open_mesh",
+   "file": "fixtures/fixture_open_mesh.stl",
+   "sha256": "5a27ef45cad04ba52a0fcd1ff2d0b40447cd1e318ba514c5c9248b52ba686e70",
+   "bytes": 634,
+   "role": "fixture",
+   "triangles": 11,
+   "welded_vertices": 8,
+   "generator_self_check": {
+    "boundary_edges": 3,
+    "nonmanifold_edges": 0,
+    "misoriented_edges": 0,
+    "signed_volume_mm3": 5000.0
+   },
+   "intended_labels": [
+    "defect: open"
+   ],
+   "suggested_type": "fixture",
+   "construction": {
+    "primitive": "box with one triangle removed",
+    "size_mm": [
+     30,
+     20,
+     10
+    ]
+   },
+   "authored_transform": {
+    "rotation": [
+     [
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "translation_mm": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "analytic": {
+    "volume_mm3": 6000,
+    "com_mm": [
+     15,
+     10,
+     5
+    ],
+    "inertia_about_com_unit_density_mm5": [
+     [
+      250000.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      500000.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      650000.0
+     ]
+    ],
+    "basis": "exact"
+   },
+   "note": "mass properties must be withheld; analytic values are for the intact box"
+  },
+  {
+   "name": "fixture_flipped_normals",
+   "file": "fixtures/fixture_flipped_normals.stl",
+   "sha256": "efc522e15bfce01fba570944ea50fbe27d9225f9c6267fea6ac0b3a402da9fde",
+   "bytes": 9684,
+   "role": "fixture",
+   "triangles": 192,
+   "welded_vertices": 98,
+   "generator_self_check": {
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "misoriented_edges": 0,
+    "signed_volume_mm3": -9397.885840034238
+   },
+   "intended_labels": [
+    "defect: inverted"
+   ],
+   "suggested_type": "fixture",
+   "construction": {
+    "primitive": "cylinder with every face reversed",
+    "diameter_mm": 20,
+    "height_mm": 30,
+    "segments": 48
+   },
+   "authored_transform": {
+    "rotation": [
+     [
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "translation_mm": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "analytic": {
+    "volume_mm3": 9424.77796076938,
+    "com_mm": [
+     0.0,
+     0.0,
+     15.0
+    ],
+    "inertia_about_com_unit_density_mm5": [
+     [
+      942477.7960769379,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      942477.7960769379,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      471238.89803846896
+     ]
+    ],
+    "basis": "continuous shape; the mesh is a tessellation"
+   },
+   "note": "signed volume is negative until the winding is repaired"
+  }
+ ]
+}
