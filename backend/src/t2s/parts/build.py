@@ -122,6 +122,18 @@ def _orient_tables(v: np.ndarray, hull: HullInfo | None):
     return allowed, bounds
 
 
+def orient_equivalence(v: np.ndarray) -> list[int]:
+    """For each of the 24 orientations, the first orientation that maps the part onto the same vertex set
+    (the representative kept in the symmetry-reduced allowed list). Same rounding as _orient_tables."""
+    rounded = np.round(v, 4)
+    keys, rep = {}, []
+    for k, r in enumerate(ROTATIONS_F):
+        rv = np.round(rounded @ r.T, 4) + 0.0
+        key = hashlib.sha1(np.ascontiguousarray(rv[np.lexsort(rv.T[::-1])]).tobytes()).hexdigest()
+        rep.append(keys.setdefault(key, k))
+    return rep
+
+
 def build_part(data: bytes, name: str, part_id: str, units: str = "mm", units_confirmed: bool = True,
                file: str | None = None) -> PartRecord:
     sha = sha256_bytes(data)

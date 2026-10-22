@@ -34,14 +34,46 @@ from ..geometry.stl_io import UNIT_TO_MM, read_stl_bytes
 from ..objectives.metrics import ENCLOSURE_HI, ENCLOSURE_LO
 from ..optimise.brkga import Evaluator
 from ..optimise.scalarize import Normaliser, alpha_from, dominates, scalarise, slider_weights
+from ..optimise.selector import ALGORITHMS, AlgorithmChoice, grid_map, part_stats, select_algorithm, sweep
 from ..physics.assembly import PartPhys, assembly, com_box_check, inertia_metrics
 from .context import SearchContext, build_context, packable, stage2_config, write_context
 from .project import PartEntry, ProjectStore, build_record_file, now_iso, part_json, quick_inspect
 
-VERSION = "0.4.0"
-ALGORITHM = {"id": "hybrid_box", "label": "Hybrid BRKGA + box decoder",
-             "reason": "Random-key genetic search over the certified compound-box decoder (the only search "
-                       "algorithm in this build; the algorithm selector arrives with M6)."}
+VERSION = "0.6.0"
+ALGORITHM = {"id": "hybrid_box", "label": "Hybrid BRKGA + box decoder", "reason": "archived layout"}
+SEARCH_LABELS = {"brkga": "BRKGA + memetic local search", "lahc": "late-acceptance hill climbing",
+                 "nsga2": "NSGA-II (pymoo)"}
+DECODER_LABELS = {"box": "box decoder", "heightmap": "height-map decoder"}
+SELECTOR_SETTLE_S = 1.0
+
+
+def perturbed_weights(weights: dict, k: int, sigma: float = 0.3) -> dict:
+    """Island k searches slightly perturbed weights (protocol §F.7) so nearby slider positions are already covered
+    in the archive; island 0 uses the exact weights. Deterministic per island; all candidates are re-scored with
+    the exact weights in the coordinator."""
+    if k == 0:
+        return dict(weights)
+    rng = np.random.default_rng(1000 + k)
+    keys = sorted(weights)
+    f = np.exp(sigma * rng.standard_normal(len(keys)))
+    w = np.array([weights[x] for x in keys]) * f
+    w /= w.sum()
+    return {x: float(v) for x, v in zip(keys, w)}
+
+
+def island_plans(choice: AlgorithmChoice, n: int) -> list[dict]:
+    """Which search runs on which decoder in each island, for the selected algorithm."""
+    plans = []
+    for i in range(n):
+        dec = choice.decoder if choice.decoder != "mixed" else ("box" if i % 2 == 0 else "heightmap")
+        plans.append({"search": "brkga", "decoder": dec, "h": 2.0})
+    if n >= 2:
+        plans[-1]["search"] = "lahc"
+    if n >= 4:
+        plans[-2] = {"search": "nsga2", "decoder": "heightmap" if choice.decoder == "heightmap" else "box", "h": 2.0}
+    if plans:
+        plans[0]["all_seeds"] = True
+    return plans
 POP_SIZE = 60
 SLICE_S = 0.5
 PROGRESS_EVERY_S = 0.5
@@ -136,6 +168,8 @@ class WorkerHandle:
         self.evaluations = 0
         self.generations = 0
         self.best_g: float | None = None
+        self.plan: dict = {}
+        self.info: dict = {}
 
 
 class Coordinator:
@@ -191,6 +225,17 @@ class Coordinator:
         self._qual: dict[tuple[str, str], bool] = {}
         self.last_pareto = 0.0
         self.search_requested = False
+        self.choice: AlgorithmChoice | None = None
+        self.choice_pending: tuple[AlgorithmChoice, float] | None = None
+        self.selector_log: list[dict] = []
+        self._stats = None
+        self._stats_sig = None
+        self.ladder_pool: ProcessPoolExecutor | None = None
+        self.ladders: dict[str, dict] = {}         # part_id -> {future, path, mtime, status}
+        self.reps: dict[str, dict] = {}            # part_id -> {algorithm: Representation} (chosen levels)
+        self.last_ladder_poll = 0.0
+        self.auto_ladder = True
+        self.ladder_opts: dict = {}
 
     # =========================================================================================== lifecycle
     @property
@@ -207,6 +252,9 @@ class Coordinator:
             os.environ[var] = "1"
         spawn = mp.get_context("spawn")
         self.build_pool = ProcessPoolExecutor(max_workers=2, mp_context=spawn)
+        self.ladder_pool = ProcessPoolExecutor(max_workers=1, mp_context=spawn)
+        for e in self.store.entries.values():
+            self._load_ladder(e)
         if self.use_workers:
             self.res_q = spawn.Queue()
             from .worker import island_main
@@ -250,6 +298,14 @@ class Coordinator:
                 pass
         if self.build_pool:
             self.build_pool.shutdown(wait=False, cancel_futures=True)
+        if self.ladder_pool:
+            procs = list((getattr(self.ladder_pool, "_processes", None) or {}).values())
+            self.ladder_pool.shutdown(wait=False, cancel_futures=True)
+            for p in procs:                     # a ladder can run for minutes: do not wait for it
+                try:
+                    p.terminate()
+                except Exception:  # noqa: BLE001
+                    pass
         self.store.save()
 
     def _pump(self) -> None:
@@ -281,6 +337,11 @@ class Coordinator:
             if new:
                 self._bump("parts_rev")
                 self.broadcast("project.changed", {"reason": f"{len(new)} file(s) picked up from the inbox"})
+        if self.choice_pending is not None and now - self.choice_pending[1] >= SELECTOR_SETTLE_S:
+            self._apply_choice(self.choice_pending[0], restart=True)
+        if self.ladders and now - self.last_ladder_poll > 1.0:
+            self.last_ladder_poll = now
+            self._poll_ladders()
         if self.run_status == "SEARCHING":
             self._dispatch()
             self._dispatch_validation()
@@ -340,6 +401,7 @@ class Coordinator:
             return
         self._set_record(rec)
         self._refresh_inputs(f"part {e.name} analysed")
+        self._maybe_auto_ladder(e)
 
     def _on_new_entry(self, e: PartEntry) -> None:
         try:
@@ -427,7 +489,7 @@ class Coordinator:
             self._set_status("IDLE", "no packable parts")
             self.broadcast("project.changed", {"reason": reason})
             return
-        ctx = build_context(recs, stage)
+        ctx = build_context(recs, stage, {pid: self.reps[pid] for pid in recs if pid in self.reps})
         if old is None or ctx.ctx_id != old.ctx_id:
             if old is not None and (ctx.constraint_sig != old.constraint_sig or ctx.stage != old.stage) \
                     and ctx.parts_sig == old.parts_sig:
@@ -442,6 +504,7 @@ class Coordinator:
             best = self.archive.get(self.best_id) if self.best_id else None
             if best is not None:
                 warm.append(best.poses)
+            self._apply_choice(self._compute_choice(), restart=False)
             for w in self.workers:
                 self._send_context(w, warm)
             self.last_improve = time.monotonic()
@@ -463,8 +526,52 @@ class Coordinator:
         w.ctx_sent = tag
         w.ctx_id = None
         w.busy = False
+        islands = [x for x in self.workers if x.role == "island"]
+        plans = island_plans(self.choice, len(islands)) if self.choice is not None else []
+        w.plan = plans[islands.index(w)] if w.role == "island" and plans else {}
         w.cmd_q.put(("context", self.ctx.ctx_id, str(self.ctx_path), self.store.revs["mass_rev"], self._phys_wire(),
-                     self._target(), list(warm), POP_SIZE, self.ctx_counter))
+                     self._target(), list(warm), POP_SIZE, self.ctx_counter, w.plan))
+
+    # =========================================================================================== selector
+    def _part_stats(self):
+        recs = self._active_records()
+        sig = self.ctx.parts_sig if self.ctx is not None else None
+        if self._stats is None or self._stats_sig != sig:
+            self._stats = part_stats(list(recs.values()))
+            self._stats_sig = sig
+        return self._stats
+
+    def _mode(self) -> str:
+        s = self.store.settings
+        return "continuous_cable" if int(s["stage"]) == 2 and float(s["sliders"].get("cable", 0)) >= 70 else "default"
+
+    def _compute_choice(self) -> AlgorithmChoice:
+        s = self.store.settings
+        return select_algorithm(int(s["stage"]), s["sliders"], self._part_stats(), self._mode())
+
+    def _apply_choice(self, choice: AlgorithmChoice, restart: bool) -> None:
+        changed = self.choice is None or choice.id != self.choice.id
+        self.choice = choice
+        self.choice_pending = None
+        if changed:
+            self.selector_log.append({"at": now_iso(), "algorithm": choice.id, "reasons": choice.reasons})
+            del self.selector_log[:-200]
+        self.broadcast("selector.changed", self.selector())
+        if changed and restart and self.ctx is not None:
+            self.ctx_counter += 1
+            best = self.archive.get(self.best_id) if self.best_id else None
+            warm = [best.poses] if best is not None else []
+            for w in self.workers:
+                if w.role == "island":
+                    self._send_context(w, warm)
+
+    def _algo_for(self, w: WorkerHandle) -> dict:
+        c = self.choice
+        p = w.plan or {}
+        detail = f"{SEARCH_LABELS.get(p.get('search'), p.get('search'))} on the {DECODER_LABELS.get(p.get('decoder'), '?')}"
+        return {"id": c.id if c else "hybrid_box", "label": c.label if c else ALGORITHMS["hybrid_box"],
+                "reason": c.reasons[0] if c and c.reasons else "", "search": p.get("search"), "decoder": p.get("decoder"),
+                "island": w.id, "detail": detail}
 
     def _current(self, e: LayoutEntry) -> bool:
         """A layout is current when it was validated under the same parts and validation rules and satisfies the
@@ -627,12 +734,12 @@ class Coordinator:
         alpha = alpha_from(self.store.settings["sliders"])
         norm = self._norm()
         nw = {"epoch": norm.epoch, "utopia": norm.utopia, "nadir": norm.nadir}
-        for w in self.workers:
-            if w.role != "island" or not w.ready or w.busy or w.ctx_id != self.ctx.ctx_id:
+        for k, w in enumerate(x for x in self.workers if x.role == "island"):
+            if not w.ready or w.busy or w.ctx_id != self.ctx.ctx_id:
                 continue
             self.job_counter += 1
             w.busy, w.job = True, self.job_counter
-            w.cmd_q.put(("run", w.job, self.ctx.ctx_id, SLICE_S, weights, alpha, nw, 3))
+            w.cmd_q.put(("run", w.job, self.ctx.ctx_id, SLICE_S, perturbed_weights(weights, k), alpha, nw, 3))
 
     def _dispatch_validation(self) -> None:
         idle = [w for w in self.workers if w.role == "validator" and w.ready and not w.busy]
@@ -651,7 +758,7 @@ class Coordinator:
             self.job_counter += 1
             w.busy, w.job = True, self.job_counter
             self.val_pending[w.job] = item
-            w.cmd_q.put(("validate", w.job, ctx_id, item[2], False))
+            w.cmd_q.put(("validate", w.job, ctx_id, item[2], False, bool(item[8])))
 
     def _migrate(self) -> None:
         if self.ctx is None or self.best_id is None:
@@ -671,6 +778,7 @@ class Coordinator:
             self._send_context(w)
         elif kind == "context_ok":
             self.workers[msg[1]].ctx_id = msg[2]
+            self.workers[msg[1]].info = msg[3] if len(msg) > 3 else {}
         elif kind == "island":
             self._on_island(*msg[1:])
         elif kind == "validated":
@@ -712,8 +820,11 @@ class Coordinator:
                 all(k in e.raw for k in keys3) and dominates(e.raw, raw, keys3) for e in cur)
             if g < best_g_now - 1e-12 or nondom:
                 self.pending_hashes.add(h)
+                # a would-be new best from the box decoder also gets certified drop compaction
+                compact = g < best_g_now - 1e-12 and w.plan.get("decoder") == "box"
                 self.val_queue.append((g, h, c["poses"], raw, np.asarray(c["keys"]).tolist(), ctx_id,
-                                       (self.ctx.parts_sig, self.ctx.constraint_sig, self.ctx.stage, self.ctx.spec_sig)))
+                                       (self.ctx.parts_sig, self.ctx.constraint_sig, self.ctx.stage, self.ctx.spec_sig),
+                                       self._algo_for(w), compact))
         if len(pool) > 2000:
             del pool[:1000]
         if len(self.val_queue) > 24:
@@ -731,22 +842,30 @@ class Coordinator:
         self._dispatch()
         self._dispatch_validation()
 
-    def _on_validated(self, wid, job, ctx_id, summary) -> None:
+    def _on_validated(self, wid, job, ctx_id, summary, extra=None) -> None:
         w = self.workers[wid]
         w.busy = False
         item = self.val_pending.pop(job, None)
         if item is None:
             return
-        g, h, poses, raw, keys, item_ctx, sigs = item
+        g, h, poses, raw, keys, item_ctx, sigs, algo, _compact = item
         self.pending_hashes.discard(h)
         if summary is None:                    # the validator had switched context: retry if still relevant
             if self.ctx is not None and item_ctx == self.ctx.ctx_id:
                 self.pending_hashes.add(h)
                 self.val_queue.append(item)
             return
+        decoded_hash = h
+        algo = dict(algo)
+        if extra and extra.get("poses"):
+            poses = extra["poses"]
+            h = layout_hash(sigs[2], poses)
+            algo["detail"] += " + certified drop compaction"
+            algo["compaction"] = {"moved_mm": {k: v for k, v in extra["moved_mm"].items() if v > 0},
+                                  "seconds": extra["seconds"]}
         geo = self._geo_metrics(poses, summary, sigs[2])
         n = self.store.next_id("layout")
-        e = LayoutEntry(id=f"L-{n:04d}", hash=h, stage=sigs[2], mode="default",
+        e = LayoutEntry(id=f"L-{n:04d}", hash=h, stage=sigs[2], mode="default", algorithm=algo,
                         status="VALIDATED" if summary["valid"] else "REJECTED", parts_sig=sigs[0], constraint_sig=sigs[1],
                         poses=[(pid, int(o), np.asarray(t, float)) for pid, o, t in poses], geo=geo,
                         validation={"certified": bool(summary["valid"]), "validator_version": summary["validator_version"],
@@ -762,6 +881,7 @@ class Coordinator:
         self._score_entry(e)
         self.archive[e.id] = e
         self.by_hash[h] = e.id
+        self.by_hash[decoded_hash] = e.id
         self._persist(e)
         if not self._current(e) or e.status != "VALIDATED":
             return
@@ -773,9 +893,59 @@ class Coordinator:
                 self.last_improve = time.monotonic()
             self._publish_best("search")
             self.best_g_hist.append((time.monotonic(), e.g))
+            if self.best_id == e.id and "slab" not in algo.get("detail", ""):
+                self._slab_polish(e)
         if time.monotonic() - self.last_pareto > 2.0:
             self.last_pareto = time.monotonic()
             self.broadcast("pareto.update", self.pareto())
+
+    def _orient_equiv(self, pid: str) -> list[int]:
+        cache = self.__dict__.setdefault("_equiv_cache", {})
+        rec = self.records[pid]
+        key = (pid, rec.sha256, rec.units)
+        if key not in cache:
+            from ..parts.build import orient_equivalence
+            cache[key] = orient_equivalence(rec.v)
+        return cache[key]
+
+    def _slab_polish(self, e: LayoutEntry, limit: int = 300, keep: int = 3) -> None:
+        """Slab post-optimiser (A1): reorder / rotate / flip Z-slabs of a new best at constant used length and queue
+        the variants that score better under the current weights for validation."""
+        if self.ctx is None or self.ev is None or self.ctx.fixed or e.stage != 1:
+            return
+        from ..optimise.slabs import slab_candidates
+        zint = []
+        for pid, o, t in e.poses:
+            b = self.ctx.orient_bounds[pid][o]
+            zint.append((float(t[2] + b[2]), float(t[2] + b[5])))
+        allowed = {p.id: set(p.allowed) for p in self.ctx.proxies}
+        equiv = {pid: self._orient_equiv(pid) for pid, _, _ in e.poses}
+        scored = []
+        rng = np.random.default_rng(len(self.archive))
+        for k, cand in enumerate(slab_candidates(e.poses, zint, rng=rng)):
+            if k >= limit:
+                break
+            # a rotated symmetric part is the same solid as its representative orientation (same vertex set)
+            cand = [(pid, int(equiv[pid][o]), t) for pid, o, t in cand]
+            if any(o not in allowed[pid] for pid, o, _ in cand):
+                continue                       # a rotated slab must keep every part in its allowed orientations
+            cand = [(pid, int(o), np.round(np.asarray(t, float) * 1000.0) / 1000.0) for pid, o, t in cand]
+            raw, cv = self.ev.raw_from_poses(cand, [])
+            if cv > 0:
+                continue
+            g, _ = self._score_raw(raw)
+            if g < e.g - 1e-9:
+                scored.append((g, cand, raw))
+        scored.sort(key=lambda x: x[0])
+        algo = dict(e.algorithm)
+        algo["detail"] = algo.get("detail", "") + " + slab post-optimiser"
+        sigs = (e.parts_sig, e.constraint_sig, e.stage, e.spec_sig)
+        for g, cand, raw in scored[:keep]:
+            h = layout_hash(e.stage, cand)
+            if h in self.by_hash or h in self.pending_hashes:
+                continue
+            self.pending_hashes.add(h)
+            self.val_queue.append((g, h, cand, raw, e.keys, self.ctx.ctx_id, sigs, algo, False))
 
     def _geo_metrics(self, poses, summary, stage: int) -> dict:
         tops, bottoms, vol = [], [], 0.0
@@ -909,8 +1079,35 @@ class Coordinator:
                 "candidate": self.candidate, "run_status": self.run_status, "selector": self.selector()}
 
     def selector(self) -> dict:
-        return {"algorithm": {"id": ALGORITHM["id"], "label": ALGORITHM["label"]},
-                "reasons": [ALGORITHM["reason"]], "evidence": []}
+        c = self.choice or (self._compute_choice() if self.ctx is not None else None)
+        if c is None:
+            return {"algorithm": None, "reasons": ["no packable parts yet"], "evidence": []}
+        d = c.to_json()
+        islands = [w for w in self.workers if w.role == "island"]
+        d["islands"] = [{"id": w.id, **(w.plan or {}), "running": w.info} for w in islands]
+        d["pending"] = self.choice_pending[0].id if self.choice_pending else None
+        d["log"] = self.selector_log[-20:]
+        d["part_stats"] = {"n_parts": self._part_stats().n_parts, "box_overhead": self._part_stats().box_overhead,
+                           "volume_shares": self._part_stats().shares}
+        return jsonable(d)
+
+    def selector_sweep(self, slider: str) -> dict:
+        s = self.store.settings
+        if slider not in s["sliders"]:
+            raise ValueError(f"unknown slider {slider!r}")
+        out = sweep(int(s["stage"]), s["sliders"], self._part_stats(), slider, self._mode())
+        out["current"] = s["sliders"][slider]
+        out["rule"] = "default rule — no benchmark evidence yet"
+        return out
+
+    def selector_map(self, x: str, y: str, n: int) -> dict:
+        s = self.store.settings
+        for k in (x, y):
+            if k not in s["sliders"]:
+                raise ValueError(f"unknown slider {k!r}")
+        out = grid_map(int(s["stage"]), s["sliders"], self._part_stats(), x, y, max(2, min(int(n), 101)), self._mode())
+        out["current"] = [s["sliders"][x], s["sliders"][y]]
+        return out
 
     def pareto(self) -> dict:
         cur = [e for e in self.archive.values() if self._current(e) and e.status in ("VALIDATED", "FINAL")
@@ -988,6 +1185,17 @@ class Coordinator:
                                      self._target()))
             self._restamp_and_rescore(physics=list(s.get("target_com_mm")) != old_target)
             self._publish_best("archive")
+            if self.ctx is not None:
+                nc = self._compute_choice()
+                if self.choice is not None and nc.id != self.choice.id:
+                    # the islands switch only once the choice has been stable for a moment (slider drags)
+                    self.choice_pending = (nc, time.monotonic())
+                else:
+                    self.choice_pending = None
+                    old_reasons = self.choice.reasons if self.choice else None
+                    self.choice = nc
+                    if nc.reasons != old_reasons:
+                        self.broadcast("selector.changed", self.selector())
         if self.run_status == "CONVERGED" and self.ctx is not None:
             self._set_status("SEARCHING", "goals changed")
 
@@ -1104,7 +1312,114 @@ class Coordinator:
         if rec is not None:
             self._set_record(rec)
             self._refresh_inputs(f"units of {e.name} confirmed ({units})")
+            self._maybe_auto_ladder(e)
         return self.part_json(pid)
+
+    # =========================================================================================== detail ladder
+    def _ladder_path(self, e: PartEntry) -> Path:
+        d = self.store.cache / "fidelity"
+        d.mkdir(parents=True, exist_ok=True)
+        return d / f"{e.sha256[:24]}_{e.units}.json"
+
+    def _load_ladder(self, e: PartEntry) -> None:
+        from ..fidelity.ladder import load_choice
+        res, reps = load_choice(self._ladder_path(e))
+        if res.get("status") == "DONE":
+            self.reps[e.id] = reps
+
+    def _maybe_auto_ladder(self, e: PartEntry) -> None:
+        """Addendum 4: the ladder runs by itself for parts added later (not for the seeded dataset)."""
+        if not self.auto_ladder or e.source == "dataset" or not e.units_confirmed:
+            return
+        if e.id in self.ladders and not self.ladders[e.id]["future"].done():
+            return
+        if self._ladder_path(e).exists():
+            self._load_ladder(e)
+            return
+        self.start_ladders([e.id])
+
+    def start_ladders(self, pids: list[str] | None = None, budget_s: float = 600.0) -> list[str]:
+        import pickle
+        from ..fidelity.ladder import ladder_job
+        recs = self._active_records()
+        pids = [p for p in (pids or list(recs)) if p in recs]
+        if not pids:
+            return []
+        snap = self.store.cache / f"ladder_records_{self.ctx.parts_sig if self.ctx else 'x'}.pkl"
+        snap.write_bytes(pickle.dumps(recs, protocol=pickle.HIGHEST_PROTOCOL))
+        started = []
+        for pid in pids:
+            old = self.ladders.get(pid)
+            if old is not None and not old["future"].done():
+                continue
+            e = self.store.entries[pid]
+            path = self._ladder_path(e)
+            for f in path.parent.glob(path.stem + "*"):
+                f.unlink(missing_ok=True)
+            fut = self.ladder_pool.submit(ladder_job, str(snap), pid, dict(self.store.settings["sliders"]), str(path),
+                                          float(budget_s), dict(self.ladder_opts))
+            self.ladders[pid] = {"future": fut, "path": path, "mtime": None, "status": "PENDING", "progress": 0.0}
+            self.reps.pop(pid, None)
+            started.append(pid)
+            self.broadcast("study.update", {"study": "fidelity", "progress": 0.0,
+                                            "partial": {"part_id": pid, "status": "PENDING", "progress": 0.0}})
+        return started
+
+    def _poll_ladders(self) -> None:
+        for pid, L in list(self.ladders.items()):
+            p = L["path"]
+            fut = L["future"]
+            if fut.done() and fut.exception() is not None and L["status"] != "ERROR":
+                L["status"] = "ERROR"
+                self._error(f"detail ladder for {pid} failed: {fut.exception()!r}")
+                continue
+            if not p.exists():
+                continue
+            m = p.stat().st_mtime
+            if m == L["mtime"]:
+                continue
+            L["mtime"] = m
+            try:
+                res = json.loads(p.read_text(encoding="utf-8"))
+            except (OSError, json.JSONDecodeError):
+                continue
+            L["status"], L["progress"] = res.get("status", "RUNNING"), res.get("progress", 0.0)
+            self.broadcast("study.update", {"study": "fidelity", "progress": L["progress"],
+                                            "partial": {"part_id": pid, "status": L["status"], "progress": L["progress"],
+                                                        "level": res.get("current_level")}})
+            if L["status"] == "DONE":
+                e = self.store.entries.get(pid)
+                if e is not None:
+                    self._load_ladder(e)
+                    self._refresh_inputs(f"detail levels chosen for {e.name}", bump_parts=False)
+
+    def fidelity(self, pid: str) -> dict | None:
+        e = self.store.entries.get(pid)
+        if e is None:
+            raise KeyError(pid)
+        L = self.ladders.get(pid)
+        p = self._ladder_path(e)
+        if p.exists():
+            try:
+                res = json.loads(p.read_text(encoding="utf-8"))
+            except (OSError, json.JSONDecodeError):
+                res = None
+            if res is not None:
+                res["in_use"] = (self.ctx.levels.get(pid) if self.ctx is not None else None)
+                return res
+        if L is not None and not L["future"].done():
+            return {"status": "PENDING", "levels": [], "chosen": {}, "reasons": {}, "stop_reason": None,
+                    "part_id": pid}
+        return None
+
+    def fidelity_summary(self) -> dict:
+        out = []
+        for pid, e in self.store.entries.items():
+            f = self.fidelity(pid)
+            out.append({"part_id": pid, "name": e.name, "status": f["status"] if f else "NOT_RUN",
+                        "chosen": f.get("chosen", {}) if f else {},
+                        "in_use": self.ctx.levels.get(pid) if self.ctx is not None else None})
+        return {"parts": out}
 
     def remove_part(self, pid: str) -> None:
         e = self.store.entries.get(pid)

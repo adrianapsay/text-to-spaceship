@@ -3,14 +3,14 @@
   "configurations": [
     {
       "name": "backend",
-      "runtimeExecutable": "powershell",
-      "runtimeArgs": ["-NoProfile", "-Command", ". D:\\text-to-spaceship\\tools\\env.ps1; Set-Location D:\\text-to-spaceship\\backend; uv run python run_server.py --project dev --islands 4"],
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "call D:\\text-to-spaceship\\tools\\env.cmd && cd /d D:\\text-to-spaceship\\backend && uv run python run_server.py --project dev --islands 4"],
       "port": 8765
     },
     {
       "name": "frontend",
-      "runtimeExecutable": "powershell",
-      "runtimeArgs": ["-NoProfile", "-Command", ". D:\\text-to-spaceship\\tools\\env.ps1; Set-Location D:\\text-to-spaceship\\frontend; npm run dev"],
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "call D:\\text-to-spaceship\\tools\\env.cmd && cd /d D:\\text-to-spaceship\\frontend && npm run dev"],
       "port": 5173
     }
   ]

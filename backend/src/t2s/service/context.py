@@ -70,6 +70,8 @@ class SearchContext:
     z0: float
     com_box: np.ndarray | None
     records: dict = field(default_factory=dict, repr=False)   # part_id -> PartRecord (for validation workers)
+    hm_meshes: dict = field(default_factory=dict, repr=False)  # part_id -> (v, f) chosen by the detail ladder
+    levels: dict = field(default_factory=dict)                # part_id -> {algorithm: level} in use
 
     def decoder(self) -> BoxDecoder:
         return BoxDecoder(self.proxies, self.dec_lo, self.dec_hi, self.gap_pp, self.wall_gap,
@@ -81,10 +83,25 @@ def stage2_config(records: dict) -> s2.Stage2Config:
     return s2.Stage2Config(harness=True, harness_mode="interrupted", pcb_ids=pcb, stack_z=None)
 
 
-def build_context(records: dict, stage: int) -> SearchContext:
+def build_context(records: dict, stage: int, reps: dict | None = None) -> SearchContext:
+    """reps: part_id -> {algorithm id: Representation} from finished detail ladders (Addendum 4)."""
     recs = {pid: r for pid, r in records.items() if packable(r)}
     ids = list(recs)
-    proxies = [ProxyPart(pid, recs[pid].boxes, list(recs[pid].allowed_orients)) for pid in ids]
+    reps = reps or {}
+    levels = {pid: {"hybrid_box": "F1-6", "hybrid_heightmap": "F4-2"} for pid in ids}
+    proxies = []
+    for pid in ids:
+        rb = reps.get(pid, {}).get("hybrid_box")
+        boxes = rb.boxes if rb is not None and rb.boxes is not None else recs[pid].boxes
+        if rb is not None and rb.boxes is not None:
+            levels[pid]["hybrid_box"] = rb.level
+        proxies.append(ProxyPart(pid, boxes, list(recs[pid].allowed_orients)))
+    hm_meshes = {}
+    for pid in ids:
+        rh = reps.get(pid, {}).get("hybrid_heightmap")
+        if rh is not None and rh.mesh is not None:
+            hm_meshes[pid] = rh.mesh
+            levels[pid]["hybrid_heightmap"] = rh.level
     fixed = []
     for pid in ids:
         r = recs[pid]
@@ -105,10 +122,12 @@ def build_context(records: dict, stage: int) -> SearchContext:
         com_box = np.array([20.0, 20.0, 70.0])
     psig = parts_signature(recs)
     csig = constraint_signature(recs, stage)
-    return SearchContext(ctx_id=f"{psig}-{csig}", stage=stage, parts_sig=psig, constraint_sig=csig,
+    lsig = hashlib.sha256(json.dumps(levels, sort_keys=True).encode()).hexdigest()[:8]
+    return SearchContext(ctx_id=f"{psig}-{csig}-{lsig}", stage=stage, parts_sig=psig, constraint_sig=csig,
                          spec_sig=spec_signature(spec), ids=ids,
                          proxies=proxies, orient_bounds={pid: recs[pid].orient_bounds for pid in ids}, fixed=fixed,
-                         spec=spec, z0=float(ENCLOSURE_LO[2]), com_box=com_box, records=recs, **dec)
+                         spec=spec, z0=float(ENCLOSURE_LO[2]), com_box=com_box, records=recs, hm_meshes=hm_meshes,
+                         levels=levels, **dec)
 
 
 def write_context(ctx: SearchContext, folder: Path) -> Path:

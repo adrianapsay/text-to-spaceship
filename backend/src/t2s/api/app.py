@@ -59,6 +59,7 @@ def create_app(coord: Coordinator | None = None, project: str = "default", **coo
     async def health(request: Request):
         c = C(request)
         return {"ok": True, "version": VERSION, "ready": c.ready, "run_status": c.run_status,
+                "evaluations": c.evaluations, "archive": len(c.archive), "best_id": c.best_id,
                 "building": sum(1 for f in c.builds.values() if not f.done()),
                 "workers": [{"id": w.id, "role": w.role, "ready": w.ready} for w in c.workers],
                 "fusion360": "NOT_CONFIGURED"}
@@ -138,16 +139,28 @@ def create_app(coord: Coordinator | None = None, project: str = "default", **coo
         raise HTTPException(400, "level must be G1, G2 or G3")
 
     @app.get("/api/parts/{pid}/fidelity")
-    async def part_fidelity(pid: str):
-        return not_built("The detail-ladder study", "M6")
+    async def part_fidelity(request: Request, pid: str):
+        try:
+            f = C(request).fidelity(pid)
+        except KeyError as exc:
+            raise HTTPException(404, f"no part {pid}") from exc
+        if f is None:
+            raise HTTPException(404, "the detail-level study has not been run for this part (POST /api/fidelity/run)")
+        return f
 
     @app.post("/api/fidelity/run")
-    async def fidelity_run():
-        return not_built("The detail-ladder study", "M6")
+    async def fidelity_run(request: Request):
+        try:
+            body = await request.json()
+        except Exception:  # noqa: BLE001
+            body = {}
+        c = C(request)
+        started = c.start_ladders(body.get("part_ids"), float(body.get("budget_s", 600.0)))
+        return {"started": started, "queued_total": sum(1 for x in c.ladders.values() if not x["future"].done())}
 
     @app.get("/api/fidelity/summary")
-    async def fidelity_summary():
-        return not_built("The detail-ladder study", "M6")
+    async def fidelity_summary(request: Request):
+        return C(request).fidelity_summary()
 
     # ------------------------------------------------------------------------------------------- settings / run
     @app.put("/api/settings")
@@ -225,12 +238,24 @@ def create_app(coord: Coordinator | None = None, project: str = "default", **coo
         return C(request).selector()
 
     @app.get("/api/selector/sweep")
-    async def selector_sweep(slider: str = "space"):
-        return not_built("The algorithm selector sweep", "M6")
+    async def selector_sweep(request: Request, slider: str = "space"):
+        c = C(request)
+        if c.ctx is None:
+            raise HTTPException(409, "no packable parts yet")
+        try:
+            return c.selector_sweep(slider)
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
 
     @app.get("/api/selector/map")
-    async def selector_map():
-        return not_built("The algorithm selector map", "M6")
+    async def selector_map(request: Request, x: str = "space", y: str = "balance", n: int = 41):
+        c = C(request)
+        if c.ctx is None:
+            raise HTTPException(409, "no packable parts yet")
+        try:
+            return c.selector_map(x, y, n)
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
 
     @app.get("/api/ideamap")
     async def ideamap():

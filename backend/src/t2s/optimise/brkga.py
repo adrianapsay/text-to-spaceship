@@ -109,9 +109,42 @@ def seed_keys(order: list[int], orients: list[int], allowed: list[list[int]], ru
     return k
 
 
+def neighbour(keys: np.ndarray, n: int, allowed_sizes: list[int], rng) -> np.ndarray:
+    """One key-space move (protocol §F.7 memetic moves): re-orient, swap, re-insert or re-rule one part."""
+    k = keys.copy()
+    m = rng.integers(4)
+    i = int(rng.integers(n))
+    if m == 0 and allowed_sizes[i] > 1:
+        cur = min(int(k[n + i] * allowed_sizes[i]), allowed_sizes[i] - 1)
+        new = (cur + 1 + int(rng.integers(allowed_sizes[i] - 1))) % allowed_sizes[i]
+        k[n + i] = (new + 0.5) / allowed_sizes[i]
+    elif m == 1:
+        j = int(rng.integers(n - 1))
+        j = j + 1 if j >= i else j
+        k[i], k[j] = k[j], k[i]
+    elif m == 2:
+        k[i] = rng.random()
+    else:
+        k[2 * n + i] = 0.0 if k[2 * n + i] > 0.5 else 1.0
+    return k
+
+
+def local_search(c: Candidate, ev: Evaluator, norm: Normaliser, weights: dict, alpha: float, rng,
+                 moves: int, sizes: list[int]) -> tuple[Candidate, int]:
+    """First-improvement descent on one elite; the improved chromosome is written back (Lamarckian)."""
+    n = len(ev.ids)
+    best = c
+    for _ in range(moves):
+        cand = ev.evaluate(neighbour(best.keys, n, sizes, rng))
+        score(cand, norm, weights, alpha)
+        if sort_key(cand) < sort_key(best):
+            best = cand
+    return best, moves
+
+
 def run_island(state: IslandState, ev: Evaluator, norm: Normaliser, weights: dict, alpha: float,
                time_budget_s: float = 0.5, max_generations: int | None = None, elite_frac: float = 0.2,
-               mutant_frac: float = 0.15, bias: float = 0.7) -> IslandState:
+               mutant_frac: float = 0.15, bias: float = 0.7, ls_elites: int = 2, ls_moves: int = 6) -> IslandState:
     """Advance an island for a time slice. Existing candidates are re-scored first (weights may have changed)."""
     rng = state.rng
     dim = state.pop.shape[1]
@@ -138,11 +171,62 @@ def run_island(state: IslandState, ev: Evaluator, norm: Normaliser, weights: dic
         new = [ev.evaluate(k) for k in children + mutants]
         for c in new:
             score(c, norm, weights, alpha)
+        if ls_elites and ls_moves:
+            sizes = [len(ev.dec.parts[pid].allowed) for pid in ev.ids]
+            for e_i in range(min(ls_elites, len(elites))):
+                improved, used = local_search(elites[e_i], ev, norm, weights, alpha, rng, ls_moves, sizes)
+                elites[e_i] = improved
+                state.evaluations += used
         state.cands = elites + new
         state.pop = np.array([c.keys for c in state.cands])
         state.evaluations += len(new)
         gens += 1
     state.generations += gens
+    return state
+
+
+@dataclass
+class LahcState:
+    """Late-acceptance hill climbing on one chromosome (refiner island, protocol §F.7)."""
+    current: Candidate | None = None
+    best: Candidate | None = None
+    hist: np.ndarray | None = None
+    it: int = 0
+    evaluations: int = 0
+    generations: int = 0
+    weights_key: tuple | None = None
+
+
+def run_lahc(state: LahcState, ev: Evaluator, norm: Normaliser, weights: dict, alpha: float, rng,
+             time_budget_s: float = 0.5, hist_len: int = 60) -> LahcState:
+    n = len(ev.ids)
+    sizes = [len(ev.dec.parts[pid].allowed) for pid in ev.ids]
+    wkey = (tuple(sorted(weights.items())), alpha, norm.epoch)
+    for c in (state.current, state.best):
+        score(c, norm, weights, alpha)
+    if state.hist is None or state.weights_key != wkey:
+        state.hist = np.full(hist_len, state.current.g)     # g values are only comparable under fixed weights
+        state.weights_key = wkey
+        if sort_key(state.current) < sort_key(state.best):
+            state.best = state.current
+    t_end = time.perf_counter() + time_budget_s
+    while time.perf_counter() < t_end:
+        k = neighbour(state.current.keys, n, sizes, rng)
+        if rng.random() < 0.3:
+            k = neighbour(k, n, sizes, rng)
+        cand = ev.evaluate(k)
+        score(cand, norm, weights, alpha)
+        state.evaluations += 1
+        v = state.it % hist_len
+        cur = state.current
+        if sort_key(cand) <= sort_key(cur) or (cand.cv == 0 and cur.cv == 0 and cand.g <= state.hist[v]):
+            state.current = cand
+        if state.current.cv == 0 and state.current.g < state.hist[v]:
+            state.hist[v] = state.current.g
+        if sort_key(state.current) < sort_key(state.best):
+            state.best = state.current
+        state.it += 1
+    state.generations += 1
     return state
 
 

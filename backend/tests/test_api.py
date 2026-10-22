@@ -38,6 +38,8 @@ def live(tmp_path_factory):
     for name in PARTS:
         store.add_file((DATASET / f"{name}.stl").read_bytes(), f"{name}.stl", units="mm", source="dataset")
     coord = Coordinator(store, n_islands=1, n_validators=1, seed=7)
+    coord.auto_ladder = False                       # the ladder has its own (shortened) test below
+    coord.ladder_opts = {"generations": 2, "pop": 12, "fr_samples": 20}
     app = create_app(coord)
     with TestClient(app) as client:
         yield client, coord, store
@@ -204,5 +206,40 @@ def test_bad_upload_and_unbuilt_features(live):
     r = client.post("/api/parts", files=[("files[]", ("junk.stl", b"not an stl", "application/octet-stream"))])
     assert r.status_code == 400
     assert client.get("/api/cad/status").json()["status"] == "NOT_CONFIGURED"
-    assert client.get("/api/selector/map").status_code == 501
     assert client.post("/api/cad/package/L-0001").status_code == 501
+
+
+def test_detail_ladder_runs_and_feeds_the_search(live):
+    """Addendum 4 on a box-shaped part: every level gives the same result, so the cheapest (F0) is chosen."""
+    client, coord, store = live
+    pid = next(pid for pid, e in store.entries.items() if e.name == "battery_pack")
+    assert client.get(f"/api/parts/{pid}/fidelity").status_code == 404
+    r = client.post("/api/fidelity/run", json={"part_ids": [pid], "budget_s": 240})
+    assert r.status_code == 200 and r.json()["started"] == [pid]
+    f = wait_for(lambda: (x := client.get(f"/api/parts/{pid}/fidelity")).status_code == 200 and
+                 x.json()["status"] == "DONE" and x.json(), timeout=300, every=1.0)
+    assert f["levels"] and f["levels"][0]["level"] == "F0"
+    assert set(f["chosen"]) == {"hybrid_box", "hybrid_heightmap"}
+    assert f["chosen"]["hybrid_box"] == "F0" and f["reasons"]["hybrid_box"]
+    for lv in f["levels"]:
+        for alg, res in lv["results"].items():
+            assert res.get("skipped") or res["valid"], (lv["level"], alg, res)
+    assert f["stop_reason"] in ("converged", "time_budget", "max_level")
+    wait_for(lambda: coord.ctx is not None and coord.ctx.levels[pid]["hybrid_box"] == "F0", timeout=30)
+    summary = client.get("/api/fidelity/summary").json()["parts"]
+    assert next(p for p in summary if p["part_id"] == pid)["in_use"]["hybrid_box"] == "F0"
+
+
+def test_selector_endpoints(live):
+    client, coord, _ = live
+    wait_for(lambda: best(client))
+    s = client.get("/api/selector").json()
+    assert s["algorithm"]["id"] in ("hybrid_box", "hybrid_heightmap", "portfolio")
+    assert "default rule" in s["reasons"][0] and s["islands"]
+    sw = client.get("/api/selector/sweep", params={"slider": "space"}).json()
+    assert len(sw["choices"]) == 101 and set(sw["choices"]) <= set(sw["legend"])
+    m = client.get("/api/selector/map", params={"x": "space", "y": "balance", "n": 5}).json()
+    assert len(m["grid"]) == 5 and len(m["grid"][0]) == 5
+    assert client.get("/api/selector/sweep", params={"slider": "nope"}).status_code == 400
+    lay = client.get(f"/api/layouts/{best(client)}").json()
+    assert lay["algorithm"]["search"] in ("brkga", "lahc", "nsga2") and lay["algorithm"]["decoder"] in ("box", "heightmap")

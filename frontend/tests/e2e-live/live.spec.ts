@@ -41,7 +41,9 @@ test('live: the real optimiser streams a validated layout with real metrics', as
   const errors = await openLive(page);
   await expect(page.getByTestId('metric-mass')).toContainText('2.916');
   await expect(page.getByTestId('metric-space')).not.toContainText('MOCK');
-  await expect(page.getByTestId('algorithm-chip')).toContainText('Hybrid BRKGA + box decoder');
+  // balanced Stage 1 weights: packing weight 0.33 sits between the default-rule thresholds → portfolio
+  await expect(page.getByTestId('algorithm-chip')).toContainText('Portfolio: box + height-map islands');
+  await expect(page.getByTestId('algorithm-chip')).toContainText('default rule — no benchmark evidence yet');
   await expect(page.getByTestId('status-bar')).toContainText('SEARCHING');
   const canvas = page.getByTestId('overview-viewport').locator('canvas');
   await expect(canvas).toBeVisible();
@@ -56,6 +58,17 @@ test('live: a slider edit is acknowledged and the layout stays validated', async
   await expect(slider).toHaveAttribute('aria-valuetext', '35 percent priority');
   await expect(page.getByTestId('status-bar')).toContainText('in sync');
   await expect(page.getByTestId('layout-badge')).toHaveText('VALIDATED');
+});
+
+test('live: raising the packing priority switches the selected algorithm to the height-map decoder', async ({ page }) => {
+  await openLive(page);
+  const slider = page.locator('#goal-space');
+  await slider.focus();
+  for (let i = 0; i < 75; i++) await page.keyboard.press('ArrowRight');   // 25 → 100
+  await expect(slider).toHaveAttribute('aria-valuetext', '100 percent priority');
+  await expect(page.getByTestId('algorithm-chip')).toContainText('Hybrid BRKGA + height-map decoder', { timeout: 20_000 });
+  for (let i = 0; i < 75; i++) await page.keyboard.press('ArrowLeft');    // back to 25 for the next tests
+  await expect(page.getByTestId('algorithm-chip')).toContainText('Portfolio', { timeout: 20_000 });
 });
 
 test('live: proof tab shows the backend certificate; CAD stays NOT CONFIGURED', async ({ page }) => {
