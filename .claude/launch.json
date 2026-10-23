@@ -2,16 +2,22 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "backend",
+      "name": "app-v2",
       "runtimeExecutable": "cmd",
-      "runtimeArgs": ["/c", "call D:\\text-to-spaceship\\tools\\env.cmd && cd /d D:\\text-to-spaceship\\backend && uv run python run_server.py --project dev --islands 4"],
-      "port": 8765
+      "runtimeArgs": ["/c", "call D:\\text-to-spaceship-v2\\tools\\env.cmd && cd /d D:\\text-to-spaceship-v2\\backend && uv run python run_server.py --project default"],
+      "port": 8766
     },
     {
-      "name": "frontend",
+      "name": "backend-v2",
       "runtimeExecutable": "cmd",
-      "runtimeArgs": ["/c", "call D:\\text-to-spaceship\\tools\\env.cmd && cd /d D:\\text-to-spaceship\\frontend && npm run dev"],
-      "port": 5173
+      "runtimeArgs": ["/c", "call D:\\text-to-spaceship-v2\\tools\\env.cmd && cd /d D:\\text-to-spaceship-v2\\backend && uv run python run_server.py --project dev --islands 4"],
+      "port": 8766
+    },
+    {
+      "name": "frontend-v2",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "call D:\\text-to-spaceship-v2\\tools\\env.cmd && cd /d D:\\text-to-spaceship-v2\\frontend && npm run dev -- --port 5174"],
+      "port": 5174
     }
   ]
 }

@@ -7,8 +7,8 @@
   "hostRequirements": { "cpus": 4, "memory": "8gb" },
   "postCreateCommand": "bash .devcontainer/setup.sh",
   "postAttachCommand": "bash .devcontainer/start-app.sh",
-  "forwardPorts": [8765],
+  "forwardPorts": [8766],
   "portsAttributes": {
-    "8765": { "label": "TEXT-TO-SPACESHIP", "onAutoForward": "openBrowser" }
+    "8766": { "label": "TEXT-TO-SPACESHIP", "onAutoForward": "openBrowser" }
   }
 }

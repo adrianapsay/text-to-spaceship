@@ -1,6 +1,6 @@
 # API contract (backend ⇄ front end), v1
 
-Backend: FastAPI on `http://127.0.0.1:8765`, bound to localhost only. The front-end dev server proxies `/api` and `/ws` to it.
+Backend: FastAPI on `http://127.0.0.1:8766`, bound to localhost only. The front-end dev server proxies `/api` and `/ws` to it.
 
 **Wire units:**
 

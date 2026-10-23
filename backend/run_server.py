@@ -1,4 +1,4 @@
-"""Start the TEXT-TO-SPACESHIP backend on http://127.0.0.1:8765 (localhost only).
+"""Start the TEXT-TO-SPACESHIP backend on http://127.0.0.1:8766 (localhost only).
 
     uv run python run_server.py [--project NAME] [--islands N] [--no-search] [--add FILE.stl ...]
 
@@ -16,7 +16,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent / "src"))
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--project", default="default")
-    ap.add_argument("--port", type=int, default=8765)
+    ap.add_argument("--port", type=int, default=8766)
     ap.add_argument("--islands", type=int, default=None, help="search worker processes (default: min(6, cores-4))")
     ap.add_argument("--validators", type=int, default=2)
     ap.add_argument("--no-search", action="store_true", help="do not start searching automatically")

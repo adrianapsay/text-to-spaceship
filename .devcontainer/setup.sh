@@ -10,4 +10,4 @@ if ! command -v uv >/dev/null; then
 fi
 (cd backend && uv sync --frozen)
 (cd frontend && npm ci && npm run build)
-echo "Setup done. The app starts on port 8765 (Ports tab: TEXT-TO-SPACESHIP)."
+echo "Setup done. The app starts on port 8766 (Ports tab: TEXT-TO-SPACESHIP)."
