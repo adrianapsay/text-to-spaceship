@@ -51,3 +51,8 @@ the next search. `start.cmd --add part.stl` / `bash start.sh --add part.stl` que
 
 * Backend: `cd backend` then `uv run pytest`
 * Front end: `cd frontend` then `npm ci`, `npm test` (unit) and `npx playwright test` (browser, mock backend)
+
+## Licence
+
+[MIT](LICENSE) © 2026 Sebastian Shunda. The Python and JavaScript packages that uv and npm install are not part of
+this repository and keep their own licences.
