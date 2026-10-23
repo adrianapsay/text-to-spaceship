@@ -299,6 +299,8 @@ export interface Settings {
   part_scale_pct?: number;
   /** V2: CubeSat size (CDS Rev 14.1): 3U 100 × 100 × 340.5, 6U 226.3 × 100 × 366, 12U 226.3 × 226.3 × 366 mm */
   form_factor?: '3U' | '6U' | '12U';
+  /** V2: design the metal-AM / cradle / clamp brackets of the best Stage 2 layout when the search pauses (default on) */
+  auto_design_brackets?: boolean;
 }
 
 export interface Revs {

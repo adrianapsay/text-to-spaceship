@@ -35,6 +35,7 @@ DEFAULT_SETTINGS = {
     "show_frame_mass_in_com": False,
     "part_scale_pct": 100,          # V2: part-size slider (Stage 2), 50 … 100 %
     "form_factor": "3U",            # V2: 3U / 6U / 12U envelope (CDS Rev 14.1)
+    "auto_design_brackets": True,   # V2: design the metal-AM / cradle / clamp brackets when the search pauses
 }
 
 

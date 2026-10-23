@@ -73,8 +73,8 @@ export const SLIDERS: SliderDef[] = [
   {
     key: 'bracket_budget',
     label: 'Bracket budget',
-    plain: '0 holds every part with simple brackets (machined, sheet metal, clamps), which are bulkier and use more space. 100 lets the search use metal 3D-printed brackets wherever they save space.',
-    technical: 'Stage 2 brackets are part of the packing. At 0 metal-AM brackets are not allowed; above 0 they are, and the hardware cost C is weighted by (100 − budget) / 100.',
+    plain: '0 holds every part with simple brackets (machined, sheet metal, clamps). The higher the budget, the more parts get a metal 3D-printed bracket instead; at 100 every bracket that can be 3D-printed is (parts bolted straight to a wall keep their bolts).',
+    technical: 'Steps: 0 simple only · 1–33 metal AM only where no simple bracket fits · 34–66 metal AM where it costs ≤ 2× the cheapest simple bracket that fits (replaces cradles) · 67–99 ≤ 10× (also blocks, sheet brackets, clamps) · 100 wherever it fits. Crossing a step restarts the search; the hardware cost C is weighted by (100 − budget) / 100.',
     why: '3D-printed brackets are thinner and follow the part, so parts fit more closely, but they cost more.',
     stage2Only: true,
     ends: ['simple brackets', 'metal 3D-printed'],

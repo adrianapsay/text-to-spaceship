@@ -20,8 +20,9 @@ NOTE = ("search-based: the largest size at which a fixed-effort search found a l
         "(certified by the validator); not a proof that larger sizes are impossible")
 
 
-def _try(records: dict, scale: float, mode: str, sliders: dict, am_allowed: bool, generations: int, pop: int,
+def _try(records: dict, scale: float, mode: str, sliders: dict, am_allowed: bool | int, generations: int, pop: int,
          seed: int) -> dict:
+    """am_allowed: the bracket budget's metal-AM step (mfg.rules.am_level; True / False = step 1 / 0)."""
     from ..collision.geom import part_geom_from_record
     from ..collision.validate import Validator
     from ..constraints.stage2_model import Stage2Model
@@ -32,7 +33,7 @@ def _try(records: dict, scale: float, mode: str, sliders: dict, am_allowed: bool
     from ..parts.scale import scale_part
     t0 = time.perf_counter()
     recs = {pid: scale_part(r, scale) for pid, r in records.items()}
-    model = Stage2Model(recs, mode, am_allowed=am_allowed)
+    model = Stage2Model(recs, mode, am_level=int(am_allowed))
     ids = model.ids
     n = len(ids)
     optional = [p for p in ids if "optional" in (recs[p].tags or [])]

@@ -174,14 +174,19 @@ class Stage2Model:
     RELAXABLE = ("clearances", "frame", "pcb_stack", "harness", "mounting", "com_box")
 
     def __init__(self, records: dict, mode: str, fixed: list | None = None, relax=frozenset(), mfg: bool = False,
-                 am_allowed: bool = True):
+                 am_allowed: bool = True, am_level: int | None = None):
         """relax: constraint families switched off (constraint attribution, protocol §O.3 — never used for the
         layouts the app reports as Stage 2 results). mfg: V1 Manufacturable Design tab — brackets may bridge up to
         MFG_REACH and are synthesised after the search. Otherwise (V2 Stage 2) every part except the boards is held
         by a modelled bracket whose reserved box is part of the packing; am_allowed (bracket budget > 0) lets a
-        metal-AM bracket stand in where no simple bracket fits. The relative hardware cost C is an objective."""
+        metal-AM bracket stand in where no simple bracket fits, and am_level (mfg.rules.am_level, from the budget)
+        how strongly metal AM is preferred over a cheaper simple bracket. The relative hardware cost C is an
+        objective."""
+        from ..mfg.rules import AM_FACTOR
         self.mfg = bool(mfg)
-        self.am_allowed = bool(am_allowed)
+        self.am_level = (1 if am_allowed else 0) if am_level is None else int(am_level)
+        self.am_allowed = self.am_level > 0
+        self.am_factor = AM_FACTOR.get(self.am_level, 1.0)
         self.profiles: dict = {}
         self.records = records
         self.ids = list(records)
@@ -242,6 +247,41 @@ class Stage2Model:
         self.harness_on = "harness" not in self.relax
         self.com_shift_on = "com_box" not in self.relax and not self.fixed
         self._phys_cache: dict = {}
+        # PC/104 rods follow the boards: with the part-size slider the boards shrink, and rods at the full-size
+        # positions would stand outside them (and outside the stack block the decoder avoids)
+        sc = [float(getattr(records[p], "part_scale", 1.0)) for p in self.pcb]
+        self.rod_xy = s2.ROD_XY * (min(sc) if sc else 1.0)
+
+    def _mount_spec(self, n_obstacles: int):
+        """Bracket-aware placement for the V2 Stage 2 brackets (decoders.box_decoder.MountSpec): every part with a
+        mounting layer, the inner walls, MFG_REACH, the bracket clearance; the corner rails are targets. Edge-on
+        boards (continuous-cable mode) take part too: their 3 mm standoff stubs are the layer, reaching up to the
+        50 mm standoff length to the side wall they face (only a wall: standoffs stand on a wall, Addendum 2.3)."""
+        if self.mfg or "mounting" in self.relax or not (self.pads or self.macro):
+            return None
+        from ..decoders.box_decoder import PEN_END, PEN_END_SHIFTED, MountSpec
+        from ..mfg.rules import BRACKET_CLEARANCE, BRACKET_MIN_W, MFG_REACH
+        lo, hi = self.inner
+        n_rails = len(self._statics_rails)
+        pads = dict(self.pads)
+        for pid, m in self.macro.items():
+            st = np.asarray(m["stand"], float)
+            pads[pid] = (np.concatenate([st[:, :3].min(0), st[:, 3:].max(0)]), m["axis"], -1)
+        # the decoder packs from the −Z end plate and the COM shift then lifts the layout: a bracket to an end plate
+        # would usually be torn off by the shift (which is then not taken, leaving the COM outside the CDS box)
+        return MountSpec(pads=pads, walls=np.array([lo[0], hi[0], lo[1], hi[1], lo[2], hi[2]], float),
+                         reach=MFG_REACH, clearance=BRACKET_CLEARANCE + SLACK,
+                         targets=[i < n_rails for i in range(n_obstacles)], min_width=BRACKET_MIN_W,
+                         end_plate_cost=PEN_END_SHIFTED if self.com_shift_on else PEN_END,
+                         part_reach={pid: STANDOFF_MAX for pid in self.macro}, walls_only=frozenset(self.macro))
+
+    def rod_boxes(self, span) -> list[tuple[str, np.ndarray]]:
+        """The four PC/104 rods (keep-outs) over the stack span, at ±rod_xy."""
+        h = s2.ROD_D / 2
+        x = self.rod_xy
+        return [(f"rod{'+' if sx > 0 else '-'}{'+' if sy > 0 else '-'}",
+                 np.array([sx * x - h, sy * x - h, span[0], sx * x + h, sy * x + h, span[1]]))
+                for sx in (1, -1) for sy in (1, -1)]
 
     def _rep(self, pid: str, o: int) -> int:
         if pid not in self.equiv:
@@ -260,7 +300,8 @@ class Stage2Model:
             pwg = {pid: self.board_wall_gap - self.gap_pp / 2 for pid in self.macro}
             self.decoders[key] = BoxDecoder(self.proxies, lo, hi, self.gap_pp, self.dec_wall_gap,
                                             np.array(obstacles).reshape(-1, 6), self.obs_gap, self.fixed,
-                                            part_wall_gap=pwg, mixed_candidates=True)
+                                            part_wall_gap=pwg, mixed_candidates=True,
+                                            mount=self._mount_spec(len(obstacles)))
         return self.decoders[key]
 
     def stack_layout(self, key_z: float):
@@ -314,11 +355,12 @@ class Stage2Model:
                                               "harness"))
             if span is not None and self.pcb:
                 h = s2.ROD_D / 2
+                x = float(meta.get("rod_xy", s2.ROD_XY))          # layouts decoded before rods followed the boards
                 for sx in (1, -1):
                     for sy in (1, -1):
                         out.append(StaticItem(f"rod{'+' if sx > 0 else '-'}{'+' if sy > 0 else '-'}",
-                                              s2.box_corners([sx * s2.ROD_XY - h, sy * s2.ROD_XY - h, span[0]],
-                                                             [sx * s2.ROD_XY + h, sy * s2.ROD_XY + h, span[1]]), "rod"))
+                                              s2.box_corners([sx * x - h, sy * x - h, span[0]],
+                                                             [sx * x + h, sy * x + h, span[1]]), "rod"))
                 blk = meta["stack_block"]
                 out.append(StaticItem("stack_reserve", s2.box_corners(blk[:3], blk[3:]), "stack"))
         for b in meta.get("brackets", []):          # V2: every bracket's reserved box is a keep-out for the others
@@ -391,11 +433,15 @@ class Stage2Model:
                     for a, b in ((lo[2], span[0] - HARNESS_BREAK), (span[1] + HARNESS_BREAK, ztop)):
                         if b - a > 1e-6:
                             obs.append(np.array([cb[0], cb[1], a, cb[3], cb[4], b]))
+                obs += [b for _, b in self.rod_boxes(span)]
+                meta["rod_xy"] = self.rod_xy
                 dec = self._decoder(f"{self.mode}-stack", self._statics_rails)
-                extra_obs = dec.inflate_obstacles(np.array(obs[len(self._statics_rails):]).reshape(-1, 6), self.obs_gap)
+                plain = np.array(obs[len(self._statics_rails):]).reshape(-1, 6)       # harness breaks, rods
+                extra_obs = dec.inflate_obstacles(plain, self.obs_gap)
                 extra_obs = np.vstack([extra_obs.reshape(-1, 6), self._stack_obstacle(dec, block)[None]])
                 skip = {idx[p] for p in self.pcb}
-                res = dec.decode(order, orient_keys, rk, extra_obstacles=extra_obs, skip=skip)
+                res = dec.decode(order, orient_keys, rk, extra_obstacles=extra_obs, skip=skip,
+                                 extra_targets=[False] * len(plain) + [True])       # the stack deck is a target
                 pre_poses = poses
         poses = pre_poses + [(pid, int(o), np.round(np.asarray(t, float) * 1000.0) / 1000.0) for pid, o, t in res.poses]
         dropped = []
@@ -718,9 +764,12 @@ class Stage2Model:
                 if r is None:
                     continue
                 cost, vol = bracket_estimate(opt.kind, r, ax, gap, depth, opt.fasteners)
-                cands.append((cost, gap, len(cands), opt, r, depth, plane, label, tkeep, tparts))
+                # the order the options are tried in: the cheapest first, with metal AM's cost divided by the
+                # budget's preference factor (am_level), and a direct mount (fasteners to the wall) always first
+                key = -1.0 if opt.kind == "direct" else (cost / self.am_factor if opt.kind == "metal_am" else cost)
+                cands.append((key, gap, len(cands), opt, r, depth, plane, label, tkeep, tparts, cost))
         blocked = None
-        for cost, gap, _, opt, r, depth, plane, label, tkeep, tparts in sorted(cands, key=lambda x: x[:3]):
+        for _, gap, _, opt, r, depth, plane, label, tkeep, tparts, cost in sorted(cands, key=lambda x: x[:3]):
             hit = self._clear(r, pid, world_boxes, keep, reserved, tkeep, tparts)
             if hit is not None:
                 blocked = blocked or (opt.kind, label, hit)

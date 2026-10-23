@@ -323,14 +323,15 @@ def am_bracket(bid, pid, rec, o, t, mount, h: float = 1.0, obstacles=None, clear
                        "bbox_mm": bb.tolist(), "wall_mm": AM_SHELL, "gap_mm": AM_GAP})
 
 
-def spacer_set(bid, pid, block, z_lo, z_hi, upper: str | None = None) -> Bracket:
+def spacer_set(bid, pid, block, z_lo, z_hi, upper: str | None = None, rod_xy: float | None = None) -> Bracket:
     """4 PC/104 spacers (catalogue) between two stacked boards (`pid` below, `upper` above), at the rod positions
-    (±35, ±35) mm; they touch both boards by design."""
+    (±35, ±35) mm, or ±rod_xy when the boards are scaled; they touch both boards by design."""
     from ..constraints import stage2 as s2
+    x = s2.ROD_XY if rod_xy is None else float(rod_xy)
     boxes = []
     for sx in (1, -1):
         for sy in (1, -1):
-            c = np.array([sx * s2.ROD_XY, sy * s2.ROD_XY])
+            c = np.array([sx * x, sy * x])
             boxes.append((np.r_[c - 2.5, z_lo], np.r_[c + 2.5, z_hi]))
     meshes = [box_mesh(a, b) for a, b in boxes]
     m = SPACER_SET_MASS_KG

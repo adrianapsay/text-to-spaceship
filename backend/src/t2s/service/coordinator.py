@@ -46,6 +46,9 @@ ALGORITHM = {"id": "hybrid_box", "label": "Hybrid BRKGA + box decoder", "reason"
 SEARCH_LABELS = {"brkga": "BRKGA + memetic local search", "lahc": "late-acceptance hill climbing",
                  "nsga2": "NSGA-II (pymoo)"}
 DECODER_LABELS = {"box": "box decoder", "heightmap": "height-map decoder"}
+AM_LEVEL_TEXT = {0: "simple brackets only", 1: "metal AM only where no simple bracket fits",
+                 2: "metal AM where it costs at most 2x the simple bracket",
+                 3: "metal AM where it costs at most 10x the simple bracket", 4: "metal AM wherever it fits"}
 SELECTOR_SETTLE_S = 1.0
 
 
@@ -433,6 +436,9 @@ class Coordinator:
                 self._set_status("CONVERGED", "6 h time limit reached")
         elif self.val_queue or self.val_pending:
             self._dispatch_validation()
+        elif self.__dict__.get("_auto_design_due") and self.run_status in ("PAUSED", "CONVERGED"):
+            self._auto_design_due = False              # the validation backlog has drained: the best is settled
+            self._maybe_auto_design()
 
     # =========================================================================================== records
     def _set_record(self, rec) -> None:
@@ -615,7 +621,8 @@ class Coordinator:
             return
         ctx = build_context(recs, stage, {pid: self.reps[pid] for pid in recs if pid in self.reps},
                             stage2_mode=self._stage2_mode(), part_scale=self.part_scale(),
-                            am_allowed=self._am_allowed(), form_factor=formfactor.current())
+                            am_allowed=self._am_allowed(), form_factor=formfactor.current(),
+                            am_level=self._am_level())
         self._sig_scale[ctx.parts_sig] = ctx.part_scale
         if old is None or ctx.ctx_id != old.ctx_id:
             if old is not None and (ctx.constraint_sig != old.constraint_sig or ctx.stage != old.stage) \
@@ -683,6 +690,11 @@ class Coordinator:
     def _am_allowed(self) -> bool:
         """V2 bracket budget: 0 = simple brackets only; above 0 a metal-AM bracket may stand in where needed."""
         return float(self.store.settings["sliders"].get("bracket_budget", 50)) > 0
+
+    def _am_level(self) -> int:
+        """V2 bracket budget step (mfg.rules.am_level): how strongly metal AM is preferred over simple brackets."""
+        from ..mfg.rules import am_level
+        return am_level(float(self.store.settings["sliders"].get("bracket_budget", 50)))
 
     def _compute_choice(self) -> AlgorithmChoice:
         s = self.store.settings
@@ -868,6 +880,8 @@ class Coordinator:
             best = min(cur, key=lambda e: (e.cv, e.g, e.raw.get("L", math.inf), e.id))
             if best.id != self.best_id:
                 self.best_id = best.id
+                if self.run_status in ("PAUSED", "CONVERGED"):    # a late validation while paused: design it too
+                    self._maybe_auto_design()
         self._select_least(publish=False)
 
     def _select_least(self, publish: bool = True) -> None:
@@ -924,6 +938,8 @@ class Coordinator:
                 self.search_t0 = time.monotonic()
         self.run_status, self.status_detail = status, detail
         self.broadcast("status", {"run_status": status, "detail": detail})
+        if status in ("PAUSED", "CONVERGED"):
+            self._maybe_auto_design()
 
     def _dispatch(self) -> None:
         if self.ctx is None:
@@ -1256,8 +1272,11 @@ class Coordinator:
         for k, b in enumerate(e.meta.get("brackets") or []):        # V2 Stage 2 brackets (designed solid if any)
             d = (e.meta.get("bracket_designs") or {}).get(b["pid"])
             d = d if d and d.get("mass_kg") is not None else None    # a failed design keeps the estimate
+            # a designed solid gets its own URL: viewers cache meshes by URL and must not keep showing the box
+            ver = f"?v=d{int(round(d['mass_kg'] * 1e7))}" if d else ""
             out.append({"id": f"{e.id}-br{k}", "kind": "bracket", "bracket_kind": b["kind"], "process": b["process"],
-                        "for_part": b["pid"], "mesh_url": f"/api/items/{e.id}-br{k}/mesh",
+                        "for_part": b["pid"], "mesh_url": f"/api/items/{e.id}-br{k}/mesh{ver}",
+                        "designed": bool(d),
                         "mass_kg": d["mass_kg"] if d else b["mass_kg"], "cost_rel": d["cost_rel"] if d else b["cost_rel"],
                         "material": b["material"], "label": d["label"] if d else b["label"],
                         "exact": True if d else b["exact"], "box_mm": b["reserve"], "target": b["target"]})
@@ -1710,7 +1729,7 @@ class Coordinator:
         old_target = list(s.get("target_com_mm", [0, 0, 0]))
         old_s2 = self._stage2_mode()
         old_scale = self.part_scale()
-        old_am = self._am_allowed()
+        old_am = self._am_level()
         old_ff = s.get("form_factor", formfactor.DEFAULT)
         for k in ("stage", "target_com_mm", "compactness_definition", "show_frame_mass_in_com"):
             if k in new and new[k] is not None:
@@ -1719,6 +1738,10 @@ class Coordinator:
             s["form_factor"] = new["form_factor"]
         if new.get("part_scale_pct") is not None:
             s["part_scale_pct"] = float(np.clip(float(new["part_scale_pct"]), 50.0, 100.0))
+        if new.get("auto_design_brackets") is not None:
+            s["auto_design_brackets"] = bool(new["auto_design_brackets"])
+            if s["auto_design_brackets"] and self.run_status in ("PAUSED", "CONVERGED"):
+                self._maybe_auto_design()
         if "sliders" in new and isinstance(new["sliders"], dict):
             for k, v in new["sliders"].items():
                 if k in s["sliders"] and v is not None:
@@ -1737,10 +1760,10 @@ class Coordinator:
         elif self.part_scale() != old_scale:
             # V2 part-size slider: scaled parts are other parts (new context, new search)
             self._refresh_inputs(f"part size {100 * self.part_scale():.0f} %", bump_parts=True)
-        elif int(s["stage"]) == 2 and self._am_allowed() != old_am:
-            # V2 bracket budget crossed 0: metal-AM brackets switched on / off (different rules, new islands)
-            self._refresh_inputs("bracket budget: " + ("metal-AM brackets allowed" if self._am_allowed()
-                                                       else "simple brackets only"), bump_parts=False)
+        elif int(s["stage"]) == 2 and self._am_level() != old_am:
+            # V2 bracket budget crossed a step (0 / 34 / 67 / 100): another metal-AM preference — different
+            # bracket choices, new islands
+            self._refresh_inputs("bracket budget: " + AM_LEVEL_TEXT[self._am_level()], bump_parts=False)
         else:
             if list(s.get("target_com_mm", [0, 0, 0])) != old_target and self.ev is not None:
                 self.ev.target = np.asarray(self._target(), float)
@@ -2235,17 +2258,17 @@ class Coordinator:
             return None
 
     def start_bracket_design(self, layout_id: str) -> dict:
-        """Design every metal-AM and cradle bracket of a Stage 2 layout inside its reserved box (contest winner for
-        metal AM, rule-based cradles), each checked with CalculiX and NGSolve; the designed solids replace the
-        estimates in the layout's physics and fit proof."""
+        """Design every metal-AM, cradle and tube-clamp bracket of a Stage 2 layout inside its reserved box (contest
+        winner for metal AM, rule-based cradles and clamp bands), each checked with CalculiX and NGSolve; the designed
+        solids replace the estimates and envelopes in the layout's 3D views, physics, exports and fit proof."""
         import pickle
-        from ..gd.design import design_job
+        from ..gd.design import DESIGNED_KINDS, design_job
         e = self.archive.get(layout_id)
         if e is None:
             raise KeyError(layout_id)
         brs = (e.meta or {}).get("brackets") or []
-        if e.stage != 2 or not any(b["kind"] in ("metal_am", "cradle") for b in brs):
-            raise ValueError("this layout has no metal-AM or cradle bracket to design")
+        if e.stage != 2 or not any(b["kind"] in DESIGNED_KINDS for b in brs):
+            raise ValueError("this layout has no metal-AM, cradle or clamp bracket to design")
         L = self.ladders.get("__bracket_design__")
         if L is not None and not L.get("finalised"):
             raise ValueError("a bracket design run is already in progress")
@@ -2268,7 +2291,39 @@ class Coordinator:
         self.broadcast("study.update", {"study": "bracket_design", "progress": 0.0,
                                         "partial": {"status": "RUNNING", "layout_id": e.id}})
         return {"status": "RUNNING", "layout_id": e.id,
-                "brackets": sum(1 for b in brs if b["kind"] in ("metal_am", "cradle"))}
+                "brackets": sum(1 for b in brs if b["kind"] in DESIGNED_KINDS)}
+
+    def _maybe_auto_design(self) -> None:
+        """V2 (setting auto_design_brackets, on by default): when the search pauses or converges, design the brackets
+        of the best Stage 2 layout that are still estimates or catalogue envelopes, so its 3D views and exports show
+        the real bracket shapes. It waits until the validations still queued at the pause have finished (the best
+        can change until then), runs one design job at a time, and designs each layout once (a bracket already
+        designed or tried is not designed again; the button can always start a run)."""
+        from ..gd.design import DESIGNED_KINDS
+        if not self.store.settings.get("auto_design_brackets", True):
+            return
+        if self.val_queue or self.val_pending:       # validations still running after the pause: the best may still
+            self._auto_design_due = True             # change — run when they have drained (_tick)
+            return
+        if self.best_id is None:
+            return
+        e = self.archive.get(self.best_id)
+        if e is None or e.stage != 2 or e.status not in ("VALIDATED", "FINAL"):
+            return
+        done = (e.meta or {}).get("bracket_designs") or {}
+        if not any(b["kind"] in DESIGNED_KINDS and b["pid"] not in done for b in (e.meta or {}).get("brackets") or []):
+            return
+        L = self.ladders.get("__bracket_design__")
+        if L is not None and not L.get("finalised"):
+            return
+        tried = self.__dict__.setdefault("_auto_design_tried", set())
+        if e.id in tried:                            # once per layout: a failed run is not repeated on its own
+            return
+        tried.add(e.id)
+        try:
+            self.start_bracket_design(e.id)
+        except (KeyError, ValueError, OSError) as exc:
+            self._error(f"automatic bracket design not started: {exc}")
 
     def _on_bracket_design(self, fut, lid: str, out: Path) -> None:
         L = self.ladders.get("__bracket_design__")
@@ -2297,11 +2352,13 @@ class Coordinator:
         finally:
             if L is not None:
                 L["finalised"] = True
+        if self.run_status in ("PAUSED", "CONVERGED"):        # the best may have changed while this one ran
+            self._maybe_auto_design()
 
     # =========================================================================================== largest size (V2)
     def _largest_size_path(self) -> Path:
         full = parts_signature({pid: self.records[pid] for pid in self._active_records()})
-        return self.store.cache / (f"largest_size_{full}_{self._stage2_mode()}_{int(self._am_allowed())}_"
+        return self.store.cache / (f"largest_size_{full}_{self._stage2_mode()}_am{self._am_level()}_"
                                    f"{formfactor.current()}.json")
 
     def start_largest_size(self, opts: dict | None = None) -> dict:
@@ -2321,7 +2378,7 @@ class Coordinator:
         path.unlink(missing_ok=True)
         fut = self.ladder_pool.submit(formfactor.call_with, formfactor.current(), largest_size_job, str(snap),
                                       self._stage2_mode(), dict(self.store.settings["sliders"]), str(path),
-                                      self._am_allowed(), dict(opts or {}))
+                                      self._am_level(), dict(opts or {}))
         self.ladders["__largest_size__"] = {"future": fut, "path": path, "mtime": None, "status": "PENDING",
                                             "progress": 0.0, "study": "largest_size"}
         return {"status": "PENDING"}

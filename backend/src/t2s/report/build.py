@@ -548,13 +548,25 @@ def stl_zip(c, e, version: str) -> bytes:
     lj = c.layout_json(e)
     with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
         names = []
+        allv, allf, nv = [], [], 0                    # the whole assembly in one file as well
         for pid, r, o, t in _placed_parts(c, e):
             fn = f"parts/{_safe(pid)}_{_safe(r.name)}.stl"
-            z.writestr(fn, stl_bytes(to_world(r.v, o, t), r.f, f"t2s {e.id} {r.name} world mm"))
+            vw = to_world(r.v, o, t)
+            z.writestr(fn, stl_bytes(vw, r.f, f"t2s {e.id} {r.name} world mm"))
             names.append(fn)
+            allv.append(vw)
+            allf.append(np.asarray(r.f, np.int64) + nv)
+            nv += len(vw)
         for it, name, v, f in _hardware_meshes(c, e):
             fn = f"hardware/{name}.stl"
             z.writestr(fn, stl_bytes(v, f, f"t2s {e.id} {it['id']} {it.get('process')}"))
+            names.append(fn)
+            allv.append(v)
+            allf.append(f + nv)
+            nv += len(v)
+        if allv:
+            fn = f"assembly_{e.id}.stl"
+            z.writestr(fn, stl_bytes(np.vstack(allv), np.vstack(allf), f"t2s {e.id} assembly world mm"))
             names.append(fn)
         z.writestr(f"layout_{e.id}.json", json.dumps(lj, indent=1))
         z.writestr("README.txt", "\n".join([
@@ -562,7 +574,9 @@ def stl_zip(c, e, version: str) -> bytes:
             STAGE_LABEL.get(e.stage, ""), (MFG_LABEL if e.mode == "manufacturable" else ""),
             f"Status: {e.status}. Units: millimetres. World frame: origin at the {_ff().current()} envelope centre, "
             f"{_frame_text(ascii_only=True)}.",
-            "Metal 3D-printed brackets are the files hardware/AM_*.stl.",
+            "Metal 3D-printed brackets are the files hardware/AM_*.stl. Brackets designed by the bracket design job "
+            "are their real solids; others are their simple solids, or their reserved box (cradle / metal AM) or "
+            "catalogue envelope (clamp) until designed. assembly_*.stl holds every part and bracket in one file.",
             FUSION_STATUS, "", "Files:", *names, ""]))
     return buf.getvalue()
 

@@ -49,6 +49,8 @@ def test_stage2_unmounted_optional_part_is_left_out(dataset_parts):
     allr = _recs(dataset_parts)
     sub = {k: allr[k] for k in names}
     m_plain = Stage2Model(sub, "soft", relax={"com_box"})
+    # geometry-only placement: bracket-aware decoding mounts all five parts, and this test needs one that is not
+    m_plain._mount_spec = lambda n: None
     rng = np.random.default_rng(3)
     for _ in range(40):
         k = rng.random(m_plain.dim)
@@ -61,6 +63,7 @@ def test_stage2_unmounted_optional_part_is_left_out(dataset_parts):
     sub2 = {k: copy.copy(v) for k, v in sub.items()}
     sub2[bad].tags = list(sub2[bad].tags) + ["optional"]
     m_opt = Stage2Model(sub2, "soft", relax={"com_box"})
+    m_opt._mount_spec = lambda n: None
     r2 = m_opt.decode(list(np.argsort(k[:m_opt.n])), k[m_opt.n:2 * m_opt.n], k[2 * m_opt.n:])
     assert bad in r2.meta["dropped"] and bad not in r2.meta["unmounted"]
     assert all(p != bad for p, _, _ in r2.poses)

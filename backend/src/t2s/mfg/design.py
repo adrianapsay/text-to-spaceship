@@ -112,7 +112,8 @@ def synthesize(model, records, best, geoms=None) -> list:
             lo_b, up_b = boards[k], boards[k + 1]
             top = poses[lo_b][1][2] + records[lo_b].orient_bounds[poses[lo_b][0]][5]
             bottom = poses[up_b][1][2] + records[up_b].orient_bounds[poses[up_b][0]][2]
-            out.append(br.spacer_set(f"s{k + 1:02d}", lo_b, meta["stack_block"], top, bottom, upper=up_b))
+            out.append(br.spacer_set(f"s{k + 1:02d}", lo_b, meta["stack_block"], top, bottom, upper=up_b,
+                                     rod_xy=meta.get("rod_xy")))
     out += br.standoff_items("so", meta.get("standoffs", []))
     return out
 

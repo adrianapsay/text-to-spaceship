@@ -1,8 +1,9 @@
-"""Bracket design job: give every metal-AM and cradle bracket of a V2 Stage 2 layout a real solid inside its reserved
-box, checked with CalculiX and NGSolve (gd.evaluate). Metal-AM brackets use the contest winner (the volume-fraction
-ladder, lightest passing design first); cradles use the rule-based conformal shape (a machined cradle follows the
-part). A bracket with no passing design keeps its best attempt, labelled with the failed criterion; if no solid can be
-built at all, the machined-block reference is used and labelled as a fallback.
+"""Bracket design job: give every metal-AM, cradle and tube-clamp bracket of a V2 Stage 2 layout a real solid inside
+its reserved box, checked with CalculiX and NGSolve (gd.evaluate). Metal-AM brackets use the contest winner (the
+volume-fraction ladder, lightest passing design first); cradles and clamps use the rule-based conformal shape (a
+machined cradle follows the part; a clamp is a band around the tube on a foot, until then shown as the catalogue
+envelope). A bracket with no passing design keeps its best attempt, labelled with the failed criterion; if no solid
+can be built at all, the machined-block reference is used and labelled as a fallback.
 """
 from __future__ import annotations
 
@@ -16,6 +17,8 @@ import numpy as np
 
 from .contest import ENTRANTS, REFERENCES, VOL_LADDER
 from .domain import domain_from_bracket
+
+DESIGNED_KINDS = ("metal_am", "cradle", "clamp")     # brackets whose solid the design job builds
 
 
 def winner_key(results_path: Path | None) -> str:
@@ -110,8 +113,9 @@ def design_bracket(b: dict, rec, orient: int, t, part_mass_kg: float, key: str, 
     from ..mfg.brackets import _combine, _fastener_items
     m2, c2, i2 = _combine([(m, com, inertia)] + _fastener_items(fpts))
     cost = bracket_cost(b["kind"], float(b["gap_mm"]), vol / 1e3, nf)
-    label = (f"{'metal-AM bracket' if am else 'machined cradle'} designed by {name}"
-             + (f" (volume fraction {best['vol_frac']:.2f})" if best.get("vol_frac") else ""))
+    what = {"metal_am": "metal-AM bracket", "cradle": "machined cradle",
+            "clamp": "tube-clamp band (aluminium, follows the tube)"}.get(b["kind"], b["kind"])
+    label = (f"{what} designed by {name}" + (f" (volume fraction {best['vol_frac']:.2f})" if best.get("vol_frac") else ""))
     d = {"pid": b["pid"], "generator": name, "mass_kg": m2, "com_mm": c2.tolist(), "inertia_kgm2": np.asarray(i2).tolist(),
          "solid_mass_kg": m, "volume_cm3": vol / 1e3, "cost_rel": float(cost), "label": label,
          "passed": bool(best.get("passed")), "reason": best.get("reason", ""), "sigma_mpa": best.get("sigma_mpa"),
@@ -133,7 +137,7 @@ def design_job(snapshot: str, out_dir: str, threads: int = 2) -> str:
     out.mkdir(parents=True, exist_ok=True)
     key = winner_key(snap.get("results_path"))
     lid = snap["layout_id"]
-    todo = [(k, b) for k, b in enumerate(snap["brackets"]) if b["kind"] in ("metal_am", "cradle")]
+    todo = [(k, b) for k, b in enumerate(snap["brackets"]) if b["kind"] in DESIGNED_KINDS]
     designs, t0 = {}, time.perf_counter()
     prog = out / "progress.json"
 

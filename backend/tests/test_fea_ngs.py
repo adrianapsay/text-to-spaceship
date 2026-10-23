@@ -121,7 +121,8 @@ def test_cantilever_tip_mass_frequency(cantilever, ratio):
     assert abs(_report(f"cantilever + {ratio:g}x tip mass, first frequency (Hz)", res.frequencies_hz[0], f_an)) < 0.02
 
     # the added mass enters the mass matrix only: the static results are unchanged (to round-off: two solves of the
-    # same system differ in the last digits when the machine is loaded — measured up to 1.0e-9 relative)
+    # same system differ in the last digits when the machine is loaded — measured up to 1.0e-9 relative in the
+    # displacements and 1.0e-9 of the applied load in the reactions, so both are held to 1e-8)
     du = 0.0
     for c0, c1, d0, d1 in zip(base.cases, res.cases, base_fields.displacement, fields.displacement, strict=True):
         du = max(du, float(np.abs(d1 - d0).max()))
@@ -129,7 +130,7 @@ def test_cantilever_tip_mass_frequency(cantilever, ratio):
         assert c1.max_disp_mm == pytest.approx(c0.max_disp_mm, rel=1e-8)
         assert c1.max_vm_mpa == pytest.approx(c0.max_vm_mpa, rel=1e-8)
         assert np.array_equal(c1.applied_n, c0.applied_n)
-        assert np.allclose(c1.reaction_n, c0.reaction_n, rtol=0, atol=1e-9 * np.abs(c0.applied_n).max())
+        assert np.allclose(c1.reaction_n, c0.reaction_n, rtol=0, atol=1e-8 * np.abs(c0.applied_n).max())
     print(f"\n  static results with the added mass: max |u - u_without| = {du:.3g} mm")
 
 

@@ -80,6 +80,7 @@ class SearchContext:
     part_scale: float = 1.0                                   # V2 part-size slider (Stage 2): records are scaled
     am_allowed: bool = True                                   # V2 bracket budget > 0: metal-AM brackets allowed
     form_factor: str = "3U"                                   # V2: 3U / 6U / 12U envelope (core.formfactor)
+    am_level: int | None = None                               # V2 bracket-budget step (mfg.rules.am_level)
 
     def decoder(self):
         if self.stage == 2:
@@ -91,7 +92,8 @@ class SearchContext:
         from ..constraints.stage2_model import Stage2Model
         if getattr(self, "_s2", None) is None:
             self._s2 = Stage2Model(self.records, self.stage2_mode or "default", self.fixed,
-                                   am_allowed=getattr(self, "am_allowed", True))
+                                   am_allowed=getattr(self, "am_allowed", True),
+                                   am_level=getattr(self, "am_level", None))
         return self._s2
 
     def spec_for(self, meta: dict | None, relaxed: bool = False) -> StageSpec:
@@ -112,12 +114,17 @@ def stage2_config(records: dict) -> s2.Stage2Config:
 
 
 def build_context(records: dict, stage: int, reps: dict | None = None, stage2_mode: str = "default",
-                  part_scale: float = 1.0, am_allowed: bool = True, form_factor: str | None = None) -> SearchContext:
+                  part_scale: float = 1.0, am_allowed: bool = True, form_factor: str | None = None,
+                  am_level: int | None = None) -> SearchContext:
     """reps: part_id -> {algorithm id: Representation} from finished detail ladders (Addendum 4).
     stage2_mode: cable-slider mode for Stage 2 (default | soft | continuous).
     part_scale: V2 part-size factor, Stage 2 only (the detail-ladder proxies belong to the full-size parts, so they
     are not used for scaled parts).
-    am_allowed: V2 bracket budget above 0 — metal-AM brackets may stand in where no simple bracket fits."""
+    am_allowed: V2 bracket budget above 0 — metal-AM brackets may stand in where no simple bracket fits;
+    am_level: the budget's step (mfg.rules.am_level: how strongly metal AM is preferred); it decides am_allowed."""
+    if am_level is not None:
+        am_allowed = int(am_level) > 0
+    am_level = (int(am_level) if am_level is not None else (1 if am_allowed else 0)) if stage == 2 else None
     am_allowed = bool(am_allowed) if stage == 2 else True
     from ..core import formfactor as ff
     form_factor = ff.set_form_factor(form_factor or ff.current())     # the envelope arrays follow it
@@ -160,7 +167,7 @@ def build_context(records: dict, stage: int, reps: dict | None = None, stage2_mo
         com_box = COM_BOX.copy()
     psig = parts_signature(recs, part_scale)
     csig = constraint_signature(recs, stage, {"stage2_mode": stage2_mode, "am_allowed": am_allowed,
-                                              "form_factor": form_factor} if stage == 2 else
+                                              "am_level": am_level, "form_factor": form_factor} if stage == 2 else
                                 ({"form_factor": form_factor} if form_factor != "3U" else None))
     lsig = hashlib.sha256(json.dumps(levels, sort_keys=True).encode()).hexdigest()[:8]
     if stage == 2:
@@ -170,7 +177,7 @@ def build_context(records: dict, stage: int, reps: dict | None = None, stage2_mo
         ssig = hashlib.sha256(json.dumps([2, stage2_mode, pcb, s2.WALL, s2.RAIL, s2.C_PP, s2.C_WALL, s2.HARNESS_W,
                                           s2.PCB_PITCH, s2m.PAD, s2m.STANDOFF_INSET, s2m.STANDOFF_SIDE,
                                           mr.BRACKET_MODEL_VERSION, mr.BRACKET_CLEARANCE, mr.MFG_REACH,
-                                          am_allowed] + ([form_factor] if form_factor != "3U" else [])).encode()
+                                          am_allowed, am_level] + ([form_factor] if form_factor != "3U" else [])).encode()
                               ).hexdigest()[:16]
     else:
         ssig = spec_signature(spec)
@@ -179,7 +186,7 @@ def build_context(records: dict, stage: int, reps: dict | None = None, stage2_mo
                          proxies=proxies, orient_bounds={pid: recs[pid].orient_bounds for pid in ids}, fixed=fixed,
                          spec=spec, z0=float(ENCLOSURE_LO[2]), com_box=com_box, records=recs, hm_meshes=hm_meshes,
                          levels=levels, stage2_mode=stage2_mode if stage == 2 else None, part_scale=part_scale,
-                         am_allowed=am_allowed, form_factor=form_factor, **dec)
+                         am_allowed=am_allowed, form_factor=form_factor, am_level=am_level, **dec)
 
 
 def write_context(ctx: SearchContext, folder: Path) -> Path:

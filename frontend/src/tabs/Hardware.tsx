@@ -20,6 +20,17 @@ const KIND_LABEL: Record<string, string> = {
   metal_am: 'Metal 3D-printed bracket',
 };
 
+const DESIGNED_KINDS = ['metal_am', 'cradle', 'clamp'];
+
+/** The bracket budget's metal-AM step (backend mfg.rules.am_level). */
+function amLevelText(budget: number): string {
+  if (budget <= 0) return 'Budget 0: simple brackets only (direct, machined, sheet metal, clamps, machined cradles).';
+  if (budget < 34) return 'Metal 3D-printed brackets only where no simple bracket fits.';
+  if (budget < 67) return 'Metal 3D-printed brackets where they cost at most 2× the cheapest simple bracket that fits (they replace machined cradles).';
+  if (budget < 100) return 'Metal 3D-printed brackets where they cost at most 10× the cheapest simple bracket (also instead of blocks, sheet brackets and clamps).';
+  return 'Budget 100: a metal 3D-printed bracket wherever one fits (parts bolted straight to a wall keep their bolts).';
+}
+
 function latestStage2(list: LayoutSummary[] | null): LayoutSummary | null {
   const c = (list ?? []).filter((l) => l.stage === 2 && (l.status === 'VALIDATED' || l.status === 'FINAL'));
   c.sort((a, b) => ((a.created ?? '') < (b.created ?? '') ? 1 : -1));
@@ -224,9 +235,14 @@ export function HardwareTab() {
   const newest = useApp((s) => s.conn.newest);
   const study = useApp((s) => s.solver.studies['bracket_design']);
   const infeasible = useApp((s) => s.solver.infeasible);
+  const best = useApp((s) => s.solver.best);
   const parts = useParts();
   const list = useLayoutList();
-  const s2v = latestStage2(list.data);
+  // the best Stage 2 layout (the one the search reports and the automatic bracket design works on), else the newest
+  const s2v =
+    best && best.stage === 2 && (best.status === 'VALIDATED' || best.status === 'FINAL')
+      ? (best as unknown as LayoutSummary)
+      : latestStage2(list.data);
   const s2 = s2v ?? (infeasible && infeasible.stage === 2 ? (infeasible as unknown as LayoutSummary) : null);
   // reloaded when a bracket-design run reports progress (designed solids replace the estimates)
   const layout = useAsync(s2?.id ? () => session().api.layout(s2.id) : null, [s2?.id, study?.progress, study?.at]);
@@ -250,12 +266,15 @@ export function HardwareTab() {
       ? null
       : view.hardware_cost_rel + brackets.reduce((s, b) => s + (designs[b.pid]?.mass_kg != null ? designs[b.pid].cost_rel - b.cost_rel : 0), 0);
   const estimates = brackets.filter((b) => !b.exact && !designs[b.pid]).length;
+  // brackets the design job gives a real solid (metal AM, cradle, clamp band); until then: box / catalogue envelope
+  const undesigned = brackets.filter((b) => DESIGNED_KINDS.includes(b.kind) && designs[b.pid]?.mass_kg == null).length;
+  const auto = settings?.auto_design_brackets ?? true;
   const design = async () => {
     if (!layout.data) return;
     setMsg(null);
     try {
       await session().api.designBrackets(layout.data.id);
-      setMsg('Bracket design started: the contest winner designs every metal-AM and cradle bracket inside its reserved box; each design is checked with CalculiX and NGSolve.');
+      setMsg('Bracket design started: the contest winner designs every metal-AM bracket, and the rule-based shape every cradle and clamp band, inside its reserved box; each design is checked with CalculiX and NGSolve and replaces the box in the 3D views and exports.');
     } catch (e) {
       setMsg(`Could not start: ${(e as Error).message}`);
     }
@@ -278,9 +297,8 @@ export function HardwareTab() {
             </div>
           ) : null}
           <div className="small" style={{ marginTop: 6 }} data-testid="budget-mode">
-            {(settings?.sliders.bracket_budget ?? 50) <= 0
-              ? 'Budget 0: simple brackets only (direct, machined, sheet metal, clamps, machined cradles).'
-              : 'Metal 3D-printed brackets allowed where no cheaper bracket fits; hardware cost weighted by ' + (100 - (settings?.sliders.bracket_budget ?? 50)).toFixed(0) + ' / 100.'}
+            {amLevelText(settings?.sliders.bracket_budget ?? 50)}
+            {(settings?.sliders.bracket_budget ?? 50) > 0 ? ` Hardware cost weighted by ${(100 - (settings?.sliders.bracket_budget ?? 50)).toFixed(0)} / 100.` : ''}
           </div>
         </Panel>
         <Panel title="Totals" caption={s2 ? `layout ${s2.id}` : undefined}>
@@ -298,11 +316,20 @@ export function HardwareTab() {
                 ))}
               </div>
               <div className="row" style={{ marginTop: 8 }}>
-                <Button variant="primary" onClick={design} disabled={!layout.data || !brackets.some((b) => !b.exact)} data-testid="design-brackets">
-                  Design the 3D-printed and cradle brackets
+                <Button variant="primary" onClick={design} disabled={!layout.data || !undesigned} data-testid="design-brackets">
+                  Design the 3D-printed, cradle and clamp brackets{undesigned ? ` (${undesigned})` : ''}
                 </Button>
                 {study ? <span className="small muted">progress {fmt((study.progress ?? 0) * 100, 'pct100')}</span> : null}
               </div>
+              <label className="small row" style={{ marginTop: 6, gap: 6 }}>
+                <input
+                  type="checkbox"
+                  checked={auto}
+                  onChange={(ev) => session().patchSettings({ auto_design_brackets: ev.target.checked })}
+                  data-testid="auto-design"
+                />
+                Design them automatically when the search pauses or converges (best Stage 2 layout)
+              </label>
               {msg ? <Notice tone={msg.startsWith('Could not') ? 'err' : 'info'}>{msg}</Notice> : null}
             </div>
           ) : (
@@ -314,7 +341,10 @@ export function HardwareTab() {
         <EmptyState title="No ENGINEERING-CONSTRAINED layout yet">Switch to Stage 2 and optimise: every layout found there carries its brackets.</EmptyState>
       ) : (
         <>
-          <Panel title={`Layout ${s2.id} with its brackets`} caption="metal 3D-printed brackets: hatched, AM badge; reserved boxes of undesigned brackets shown as boxes">
+          <Panel
+            title={`Layout ${s2.id} with its brackets`}
+            caption={`metal 3D-printed brackets hatched (AM badge); ${undesigned ? `${undesigned} not designed yet: shown as their reserved box (cradle, metal AM) or catalogue envelope (clamp)` : 'every bracket shown as its real solid'}`}
+          >
             <div style={{ height: 420, display: 'flex' }}>
               <MainViewport items={items} metrics={layout.data?.metrics ?? null} stage={2} testId="hardware-viewport" />
             </div>
@@ -328,7 +358,7 @@ export function HardwareTab() {
       <Panel title="Bracket rules (ASSUMED)">
         <ul className="small" style={{ margin: '0 0 0 16px' }}>
           <li>Reach: a bracket bridges up to 40 mm from the part's mounting side (its 3 mm layer side) to a wall, end plate, corner rail or the PC/104 deck.</li>
-          <li>Cheapest bracket that fits: direct (≤ 3.5 mm), machined block (≤ 15 mm), sheet Z-bracket, tube clamp for cylindrical parts, machined cradle for curved or irregular sides; metal 3D-printed only with a budget above 0.</li>
+          <li>Cheapest bracket that fits: direct (≤ 3.5 mm), machined block (≤ 15 mm), sheet Z-bracket, tube clamp for cylindrical parts, machined cradle for curved or irregular sides. Metal 3D-printed brackets need a budget above 0, and the budget sets how much more they may cost than the simple bracket they replace (steps at 34, 67 and 100).</li>
           <li>Clearance: each reserved box keeps 1.2 mm from every other part, bracket and keep-out except the one it is fixed to.</li>
           <li>Loads: 68 g quasi-static in each axis separately; factors of safety 1.25 (yield) and 1.4 (ultimate); AlSi10Mg 170 / 280 MPa, E 65 GPa; random vibration (Miles 3σ on the GEVS acceptance spectrum, factors 1.6 / 1.8) where it is larger; first natural frequency with the part, any mode including twisting, ≥ 100 Hz (target 200 Hz).</li>
         </ul>

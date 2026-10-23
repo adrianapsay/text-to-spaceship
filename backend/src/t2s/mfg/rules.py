@@ -98,7 +98,21 @@ CRADLE_5AXIS = 3.0                            # relative cost surcharge: cradle 
 BRACKET_MIN_W = 6.0                           # mm: narrowest flange where a bracket is clipped to a rail or deck
 # estimated solid share of the reserved box: (between part and target, wrap region inside the part's bounding box)
 FILL = {"cradle": (0.6, 0.3), "metal_am": (0.25, 0.15)}
-BRACKET_MODEL_VERSION = "v2.1"                # part of the search signature: layouts decoded under other rules differ
+# v2.2: bracket-aware placement, PC/104 rods scaled with the boards, the bracket budget's metal-AM preference steps
+BRACKET_MODEL_VERSION = "v2.2"                # part of the search signature: layouts decoded under other rules differ
+# bracket budget step → how much more a metal-AM bracket may cost than the cheapest simple bracket that fits and
+# still be chosen (am_level)
+AM_FACTOR = {1: 1.0, 2: 2.0, 3: 10.0, 4: float("inf")}
+
+
+def am_level(budget: float) -> int:
+    """The V2 bracket budget (0–100) in steps — "0 = simple, 100 = 3D printed":
+    0: simple brackets only; 1 (1–33): metal AM only where no simple bracket fits; 2 (34–66): metal AM also where
+    it costs at most 2× the cheapest simple bracket that fits (it replaces machined cradles); 3 (67–99): at most 10×
+    (also blocks, sheet brackets, clamps); 4 (100): metal AM wherever it fits. A part bolted straight to its wall
+    (direct mount) keeps its fasteners. Steps, so that the search restarts only when the slider crosses one."""
+    b = float(budget)
+    return 0 if b <= 0 else 1 if b < 34 else 2 if b < 67 else 3 if b < 100 else 4
 
 
 @dataclass
