@@ -55,6 +55,13 @@ class FeaProblem:
     n_modes: int = 3                  # natural frequencies wanted (0 = none)
     exclude_nodes: np.ndarray | None = None   # nodes excluded from the "filtered" peak stress (singular edges)
     label: str = ""
+    # non-structural mass: list of (faces (k, 6) boundary faces, mass_t float), each spread uniformly over its faces
+    # (mass per area = mass_t / face area). MASS matrix only (modal analysis); load cases do NOT apply body
+    # acceleration to it (a held part's inertia load is given separately as a SurfaceLoad).
+    added_masses: list = field(default_factory=list)
+
+    def added_mass_t(self) -> float:
+        return float(sum(float(m) for _, m in self.added_masses))
 
     def fixed_nodes(self) -> np.ndarray:
         return np.unique(self.fixed_faces.ravel()) if len(self.fixed_faces) else np.zeros(0, np.int64)
@@ -70,13 +77,14 @@ class FeaProblem:
 
 @dataclass
 class CaseResult:
-    """Stresses are NODAL von Mises values: at every mesh node (corners and mid-sides), the average over the
-    elements sharing it of the element's stress evaluated at that node."""
+    """Stresses are NODAL von Mises values: at every mesh node (corners and mid-sides), the stress TENSOR of each
+    element sharing the node, evaluated at the node, is averaged component-wise, and von Mises is taken of that
+    averaged tensor (both solvers)."""
     name: str
     max_disp_mm: float                # max |u| over all nodes
     max_vm_mpa: float                 # max nodal von Mises (may be a singular peak)
     max_vm_filtered_mpa: float        # max nodal von Mises over nodes not in exclude_nodes
-    reaction_n: np.ndarray            # (3,) sum of reaction forces at fixed nodes (should balance the loads)
+    reaction_n: np.ndarray            # (3,) force exerted BY the supports ON the part: reaction_n = -applied_n
     applied_n: np.ndarray             # (3,) sum of applied forces incl. body load
 
 

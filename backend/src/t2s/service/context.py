@@ -76,6 +76,7 @@ class SearchContext:
     levels: dict = field(default_factory=dict)                # part_id -> {algorithm: level} in use
     stage2_mode: str | None = None                            # default | soft | continuous (cable slider)
     part_scale: float = 1.0                                   # V2 part-size slider (Stage 2): records are scaled
+    am_allowed: bool = True                                   # V2 bracket budget > 0: metal-AM brackets allowed
 
     def decoder(self):
         if self.stage == 2:
@@ -86,7 +87,8 @@ class SearchContext:
     def stage2_model(self):
         from ..constraints.stage2_model import Stage2Model
         if getattr(self, "_s2", None) is None:
-            self._s2 = Stage2Model(self.records, self.stage2_mode or "default", self.fixed)
+            self._s2 = Stage2Model(self.records, self.stage2_mode or "default", self.fixed,
+                                   am_allowed=getattr(self, "am_allowed", True))
         return self._s2
 
     def spec_for(self, meta: dict | None, relaxed: bool = False) -> StageSpec:
@@ -107,11 +109,13 @@ def stage2_config(records: dict) -> s2.Stage2Config:
 
 
 def build_context(records: dict, stage: int, reps: dict | None = None, stage2_mode: str = "default",
-                  part_scale: float = 1.0) -> SearchContext:
+                  part_scale: float = 1.0, am_allowed: bool = True) -> SearchContext:
     """reps: part_id -> {algorithm id: Representation} from finished detail ladders (Addendum 4).
     stage2_mode: cable-slider mode for Stage 2 (default | soft | continuous).
     part_scale: V2 part-size factor, Stage 2 only (the detail-ladder proxies belong to the full-size parts, so they
-    are not used for scaled parts)."""
+    are not used for scaled parts).
+    am_allowed: V2 bracket budget above 0 — metal-AM brackets may stand in where no simple bracket fits."""
+    am_allowed = bool(am_allowed) if stage == 2 else True
     from ..parts.scale import scale_part
     part_scale = float(part_scale) if stage == 2 else 1.0
     recs = {pid: scale_part(r, part_scale) for pid, r in records.items() if packable(r)}
@@ -149,21 +153,25 @@ def build_context(records: dict, stage: int, reps: dict | None = None, stage2_mo
                    obstacles=np.zeros((0, 6)), obstacle_gap=s2.C_WALL + QUANT_SLACK)
         com_box = np.array([20.0, 20.0, 70.0])
     psig = parts_signature(recs, part_scale)
-    csig = constraint_signature(recs, stage, {"stage2_mode": stage2_mode} if stage == 2 else None)
+    csig = constraint_signature(recs, stage, {"stage2_mode": stage2_mode, "am_allowed": am_allowed}
+                                if stage == 2 else None)
     lsig = hashlib.sha256(json.dumps(levels, sort_keys=True).encode()).hexdigest()[:8]
     if stage == 2:
         from ..constraints import stage2_model as s2m
+        from ..mfg import rules as mr
         pcb = sorted(pid for pid in ids if "pcb" in recs[pid].tags)
         ssig = hashlib.sha256(json.dumps([2, stage2_mode, pcb, s2.WALL, s2.RAIL, s2.C_PP, s2.C_WALL, s2.HARNESS_W,
-                                          s2.PCB_PITCH, s2m.PAD, s2m.STANDOFF_INSET, s2m.STANDOFF_SIDE]).encode()
-                              ).hexdigest()[:16]
+                                          s2.PCB_PITCH, s2m.PAD, s2m.STANDOFF_INSET, s2m.STANDOFF_SIDE,
+                                          mr.BRACKET_MODEL_VERSION, mr.BRACKET_CLEARANCE, mr.MFG_REACH,
+                                          am_allowed]).encode()).hexdigest()[:16]
     else:
         ssig = spec_signature(spec)
     return SearchContext(ctx_id=f"{psig}-{csig}-{lsig}", stage=stage, parts_sig=psig, constraint_sig=csig,
                          spec_sig=ssig, ids=ids,
                          proxies=proxies, orient_bounds={pid: recs[pid].orient_bounds for pid in ids}, fixed=fixed,
                          spec=spec, z0=float(ENCLOSURE_LO[2]), com_box=com_box, records=recs, hm_meshes=hm_meshes,
-                         levels=levels, stage2_mode=stage2_mode if stage == 2 else None, part_scale=part_scale, **dec)
+                         levels=levels, stage2_mode=stage2_mode if stage == 2 else None, part_scale=part_scale,
+                         am_allowed=am_allowed, **dec)
 
 
 def write_context(ctx: SearchContext, folder: Path) -> Path:

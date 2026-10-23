@@ -42,6 +42,7 @@ class Bracket:
     am: dict = field(default_factory=dict)     # AM facts (volume, overhang, bbox) for the rule report
     label: str = ""
     hosts: tuple = ()                          # parts it may touch (default: for_part)
+    estimate: bool = False                     # V2: mass properties estimated from the reserved box (no solid yet)
 
     def host_set(self) -> set:
         return set(self.hosts) | {self.for_part}
@@ -348,6 +349,97 @@ def standoff_items(bid0, standoffs) -> list[Bracket]:
                            m + FASTENER_MASS_KG, c, i, COST["catalogue"] + 2 * COST["fastener"], 2, b.tolist(),
                            label="M3 standoff (edge-mounted board)"))
     return out
+
+
+def v2_bracket(bid, pid, info) -> Bracket:
+    """V2 Stage 2: the bracket built inside its reserved box (`info` from the Stage 2 mount check). Direct mounts,
+    machined blocks, sheet Z-brackets and clamps are solids made of boxes clipped to the reserve (exact mass
+    properties; the clamp's mass is a catalogue figure). A cradle or metal-AM bracket is an ESTIMATE from the box
+    (FILL shares) until the generative design job builds its solid inside the same box."""
+    from .rules import CLAMP_MASS_KG, MACHINED_MAX, bracket_estimate, estimate_cradle_am
+    r = np.asarray(info["reserve"], float)
+    ax, kind, nf = int(info["axis"]), info["kind"], int(info["fasteners"])
+    side, plane = float(info["part_side_mm"]), float(info["plane_mm"])
+    gap = abs(side - plane)
+    glo, ghi = r[:3].copy(), r[3:].copy()            # between the target plane and the part side
+    glo[ax], ghi[ax] = min(side, plane), max(side, plane)
+    b, c = [k for k in range(3) if k != ax]
+    cost, vol = bracket_estimate(kind, r, ax, gap, float(info.get("depth_mm", 0.0)), nf)
+    estimate = False
+    if kind == "direct":
+        boxes = []
+        s = {k: min(WASHER, 0.5 * (ghi[k] - glo[k]) - 0.5) for k in (b, c)}
+        for pb in (glo[b] + 0.5, ghi[b] - 0.5 - s[b]):
+            for pc in (glo[c] + 0.5, ghi[c] - 0.5 - s[c]):
+                lo, hi = glo.copy(), ghi.copy()
+                lo[b], hi[b], lo[c], hi[c] = pb, pb + s[b], pc, pc + s[c]
+                boxes.append((lo, hi))
+        m, com, inertia = _box_props(boxes, STEEL)
+        mat, label = "steel fasteners / spacer washers (ASSUMED)", f"{nf} × M3 with spacer washers"
+    elif kind == "machined":
+        boxes = [(glo, ghi)]
+        m, com, inertia = _box_props(boxes, MATERIAL["machined"][1])
+        mat, label = MATERIAL["machined"][0], f"machined spacer block {vol:.1f} cm³"
+    elif kind in ("sheet", "clamp"):
+        t = min(SHEET_T, gap / 3)
+        near_part = (side - t, side) if side > plane else (side, side + t)
+        near_wall = (plane, plane + t) if side > plane else (plane - t, plane)
+        boxes = []
+        for a0, a1 in (near_part, near_wall):
+            lo, hi = glo.copy(), ghi.copy()
+            lo[ax], hi[ax] = a0, a1
+            boxes.append((lo, hi))
+        lo, hi = glo.copy(), ghi.copy()                # web: one plate across the gap
+        lo[ax], hi[ax] = min(side, plane) + t, max(side, plane) - t
+        hi[b] = lo[b] + min(SHEET_T, ghi[b] - glo[b])
+        if hi[ax] > lo[ax]:
+            boxes.append((lo, hi))
+        if kind == "sheet":
+            m, com, inertia = _box_props(boxes, MATERIAL["sheet"][1])
+            mat, label = MATERIAL["sheet"][0], "sheet-metal Z-bracket, 2 bends, 1.5 mm"
+        else:
+            items = [(CLAMP_MASS_KG, 0.5 * (r[:3] + r[3:]), np.zeros((3, 3)))]
+            if gap > MACHINED_MAX:
+                items.append(_box_props(boxes, MATERIAL["sheet"][1]))
+            else:
+                boxes = []
+            m, com, inertia = _combine(items)
+            boxes.append((r[:3], r[3:]))               # the clamp band's catalogue envelope
+            mat = MATERIAL["catalogue"][0]
+            label = "generic tube clamp (catalogue envelope)" + (" on a sheet bracket" if gap > MACHINED_MAX else "")
+    else:                                              # cradle / metal_am: estimate until designed
+        dens = MATERIAL["metal_am" if kind == "metal_am" else "machined"][1]
+        m, com, inertia, vol = estimate_cradle_am(kind, r, ax, gap, float(info.get("depth_mm", 0.0)), dens)
+        boxes = [(r[:3], r[3:])]
+        estimate = True
+        mat = MATERIAL["metal_am" if kind == "metal_am" else "machined"][0]
+        label = ("metal-AM bracket" if kind == "metal_am" else "machined cradle") + \
+            " — ESTIMATE from its reserved box (solid not designed yet)"
+    fpts = []
+    for pb in (glo[b] + 0.25 * (ghi[b] - glo[b]), glo[b] + 0.75 * (ghi[b] - glo[b])):
+        for pc in (glo[c] + 0.25 * (ghi[c] - glo[c]), glo[c] + 0.75 * (ghi[c] - glo[c])):
+            p = 0.5 * (glo + ghi)
+            p[b], p[c], p[ax] = pb, pc, plane
+            fpts.append(p)
+    m2, c2, i2 = _combine([(m, com, inertia)] + _fastener_items(fpts[:nf]))
+    return Bracket(bid, pid, info["mount_type"], info["process"], mat, [box_mesh(lo, hi) for lo, hi in boxes],
+                   m2, c2, i2, float(cost), nf, r.tolist(), label=label, estimate=estimate)
+
+
+def cert_entry(b: dict, designed_vertices=None) -> dict:
+    """Certificate entry of one V2 bracket (Lemma 4): its reserved box and every vertex of its solid — the designed
+    solid when given, else the simple solid; a cradle or metal-AM bracket not designed yet has only its box."""
+    br = v2_bracket(b["name"], b["pid"], b)
+    if designed_vertices is not None:
+        verts, estimate = np.asarray(designed_vertices, float), False
+    elif br.estimate:
+        verts, estimate = np.zeros((0, 3)), True
+    else:
+        verts, estimate = np.vstack([np.asarray(v, float) for v, _ in br.meshes]), False
+    return {"name": b["name"], "part": b["pid"], "kind": b["kind"], "target": b["target"],
+            "reserve": [round(float(x), 9) for x in b["reserve"]],
+            "solid_vertices": np.round(verts, 9).tolist(), "estimate": estimate,
+            "exempt_parts": [b["pid"], *b.get("target_parts", [])], "target_statics": list(b.get("target_statics", []))}
 
 
 def _fcl_obj(v, f):

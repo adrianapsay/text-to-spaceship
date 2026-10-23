@@ -612,7 +612,8 @@ class Coordinator:
             self.broadcast("project.changed", {"reason": reason})
             return
         ctx = build_context(recs, stage, {pid: self.reps[pid] for pid in recs if pid in self.reps},
-                            stage2_mode=self._stage2_mode(), part_scale=self.part_scale())
+                            stage2_mode=self._stage2_mode(), part_scale=self.part_scale(),
+                            am_allowed=self._am_allowed())
         self._sig_scale[ctx.parts_sig] = ctx.part_scale
         if old is None or ctx.ctx_id != old.ctx_id:
             if old is not None and (ctx.constraint_sig != old.constraint_sig or ctx.stage != old.stage) \
@@ -676,6 +677,10 @@ class Coordinator:
     def _stage2_mode(self) -> str:
         from ..constraints.stage2_model import mode_for
         return mode_for(float(self.store.settings["sliders"].get("cable", 0)))
+
+    def _am_allowed(self) -> bool:
+        """V2 bracket budget: 0 = simple brackets only; above 0 a metal-AM bracket may stand in where needed."""
+        return float(self.store.settings["sliders"].get("bracket_budget", 50)) > 0
 
     def _compute_choice(self) -> AlgorithmChoice:
         s = self.store.settings
@@ -779,9 +784,11 @@ class Coordinator:
         if e.meta.get("hardware"):                 # Manufacturable Design: every bracket, spacer and standoff
             hardware = [(m, np.asarray(c, float), np.asarray(i, float)) for m, c, i in e.meta["hardware"]]
             items += hardware
-        elif e.meta.get("standoffs"):
+        elif e.meta.get("standoffs") or e.meta.get("brackets"):
             from ..constraints.stage2_model import Stage2Model
-            hardware = Stage2Model.standoff_mass(e.meta["standoffs"])
+            hardware = Stage2Model.standoff_mass(e.meta.get("standoffs") or [])
+            hardware += [(b["mass_kg"], np.asarray(b["com_mm"], float), np.asarray(b["inertia_kgm2"], float))
+                         for b in e.meta.get("brackets") or []]           # V2 Stage 2 brackets
             items += hardware
         m = dict(e.geo)
         if hardware:
@@ -790,6 +797,10 @@ class Coordinator:
         raw = {"L": e.geo["length_used_mm"], "span": e.geo["span_mm"]}
         if "margin_objective" in e.geo and e.stage == 2:
             raw["G"] = e.geo["margin_objective"]
+        if e.stage == 2:                            # cable path and hardware cost travel with the layout
+            raw.update({k: float(e.meta[k]) for k in ("H", "C") if e.meta.get(k) is not None})
+            if e.meta.get("C") is not None:
+                m["hardware_cost_rel"] = e.meta.get("hardware_cost_rel", float(e.meta["C"]))
         if items:
             a = assembly([], [], np.zeros((0, 3)), items)
             im = inertia_metrics(a.inertia_kgm2)
@@ -1227,6 +1238,13 @@ class Coordinator:
                         "mesh_url": f"/api/items/{e.id}-so{k}/mesh", "mass_kg": m, "cost_rel": None,
                         "material": "aluminium (ASSUMED)", "label": "M3 standoff (ASSUMED 5 × 5 mm envelope)",
                         "box_mm": b})
+        for k, b in enumerate(e.meta.get("brackets") or []):        # V2 Stage 2 brackets (designed solid if any)
+            d = (e.meta.get("bracket_designs") or {}).get(b["pid"])
+            out.append({"id": f"{e.id}-br{k}", "kind": "bracket", "bracket_kind": b["kind"], "process": b["process"],
+                        "for_part": b["pid"], "mesh_url": f"/api/items/{e.id}-br{k}/mesh",
+                        "mass_kg": d["mass_kg"] if d else b["mass_kg"], "cost_rel": d["cost_rel"] if d else b["cost_rel"],
+                        "material": b["material"], "label": d["label"] if d else b["label"],
+                        "exact": True if d else b["exact"], "box_mm": b["reserve"], "target": b["target"]})
         return out
 
     def _stage2_view(self, e: LayoutEntry) -> dict:
@@ -1244,9 +1262,13 @@ class Coordinator:
                 "overflow_mm": meta.get("overflow_mm"), "unmounted": meta.get("unmounted", []),
                 "mounts": meta.get("mounts", {}), "cable_blocked_fraction": meta.get("H"), "frame": frame,
                 "insertion_order": e.geo.get("insertion_order"), "com_shift_mm": meta.get("com_shift_mm"),
-                "com_z_unshifted_mm": meta.get("com_z_unshifted_mm"),
+                "com_z_unshifted_mm": meta.get("com_z_unshifted_mm"), "brackets": meta.get("brackets", []),
+                "hardware_cost_rel": meta.get("C"),
                 "assumed": ["2 mm walls", "8.5 mm corner rails", "clearances 2.2 / 1.2 mm (U4)",
                             "PC/104 stack, 15.24 mm pitch, rods at (±35, ±35) mm", "3 mm mounting layer (U6)",
+                            "V2 brackets: one per part to a wall, end plate, rail or the stack deck ≤ 40 mm away; "
+                            "each reserved box keeps 1.2 mm from other parts, brackets and keep-outs; relative "
+                            "costs, cradle / metal-AM masses estimated until designed",
                             "10 mm harness channel (U5)", "M3 standoffs 5 × 5 mm, 3–50 mm long (Addendum 2.3)",
                             "whole layout shifted along Z toward a centred COM (at least into the CDS box), within "
                             "the end plates and never at the cost of a mount"]}
@@ -1260,6 +1282,10 @@ class Coordinator:
             if p is None or not p.is_file():
                 raise KeyError(iid)
             return p.read_bytes()
+        lid, _, k = iid.rpartition("-br")
+        e = self.archive.get(lid)
+        if e is not None and k.isdigit() and int(k) < len(e.meta.get("brackets") or []):
+            return self._bracket_mesh(e, int(k))
         lid, _, k = iid.rpartition("-so")
         e = self.archive.get(lid)
         if e is None or not k.isdigit() or int(k) >= len(e.meta.get("standoffs") or []):
@@ -1268,6 +1294,23 @@ class Coordinator:
         v = np.array([[x, y, z] for z in (b[2], b[5]) for y in (b[1], b[4]) for x in (b[0], b[3])], "<f4")
         f = np.array([[0, 2, 1], [1, 2, 3], [4, 5, 6], [5, 7, 6], [0, 1, 4], [1, 5, 4], [2, 6, 3], [3, 6, 7],
                       [0, 4, 2], [2, 4, 6], [1, 3, 5], [3, 7, 5]], "<u4")
+        return np.array([len(v), len(f)], "<u4").tobytes() + v.tobytes() + f.tobytes()
+
+    def _bracket_mesh(self, e: LayoutEntry, k: int) -> bytes:
+        """A V2 bracket's mesh: the designed solid when the bracket design job has built one, else the solid built
+        inside its reserved box (an estimate's box for a cradle or metal-AM bracket)."""
+        from ..mfg.brackets import v2_bracket
+        b = e.meta["brackets"][k]
+        p = self.store.cache / "items" / e.id / f"{e.id}-br{k}.bin"
+        if (e.meta.get("bracket_designs") or {}).get(b["pid"]) and p.is_file():
+            return p.read_bytes()
+        br = v2_bracket(b["name"], b["pid"], b)
+        vs, fs, n = [], [], 0
+        for v, f in br.meshes:
+            vs.append(np.asarray(v, "<f4"))
+            fs.append(np.asarray(f, np.int64) + n)
+            n += len(v)
+        v, f = np.vstack(vs), np.vstack(fs).astype("<u4")
         return np.array([len(v), len(f)], "<u4").tobytes() + v.tobytes() + f.tobytes()
 
     def _candidate_json(self, h, poses, raw, g, nrm) -> dict:
@@ -1647,6 +1690,7 @@ class Coordinator:
         old_target = list(s.get("target_com_mm", [0, 0, 0]))
         old_s2 = self._stage2_mode()
         old_scale = self.part_scale()
+        old_am = self._am_allowed()
         for k in ("stage", "target_com_mm", "compactness_definition", "show_frame_mass_in_com"):
             if k in new and new[k] is not None:
                 s[k] = new[k]
@@ -1666,6 +1710,10 @@ class Coordinator:
         elif self.part_scale() != old_scale:
             # V2 part-size slider: scaled parts are other parts (new context, new search)
             self._refresh_inputs(f"part size {100 * self.part_scale():.0f} %", bump_parts=True)
+        elif int(s["stage"]) == 2 and self._am_allowed() != old_am:
+            # V2 bracket budget crossed 0: metal-AM brackets switched on / off (different rules, new islands)
+            self._refresh_inputs("bracket budget: " + ("metal-AM brackets allowed" if self._am_allowed()
+                                                       else "simple brackets only"), bump_parts=False)
         else:
             if list(s.get("target_com_mm", [0, 0, 0])) != old_target and self.ev is not None:
                 self.ev.target = np.asarray(self._target(), float)
@@ -2257,7 +2305,8 @@ class Coordinator:
         geoms = self.layout_geoms(e)
         rep = Validator(geoms).validate(e.poses, spec, want_planes=True)
         cert = build_certificate(e.id, rep, records, e.poses, spec, self._files_for(e.poses),
-                                 extra={"layout_hash": e.hash, "app_version": VERSION, "part_scale": e.part_scale})
+                                 extra={"layout_hash": e.hash, "app_version": VERSION, "part_scale": e.part_scale},
+                                 brackets=self._bracket_cert(e))
         from ..optimise.bounds import lower_bounds
         lbs = lower_bounds(list(records.values()))
         metrics = dict(e.metrics)
@@ -2272,6 +2321,21 @@ class Coordinator:
         md = proof_markdown(cert, rep, metrics)
         out = {"markdown": md, "certificate": cert, "valid": rep.valid}
         self.proof_cache[key] = out
+        return out
+
+    def _bracket_cert(self, e: LayoutEntry) -> list[dict]:
+        """V2 Stage 2 brackets for the certificate: reserved box and every vertex of the solid in it (the designed
+        solid when there is one; a cradle or metal-AM bracket not designed yet has only its box)."""
+        from ..mfg.brackets import cert_entry
+        out = []
+        for b in (e.meta or {}).get("brackets") or []:
+            d = (e.meta.get("bracket_designs") or {}).get(b["pid"])
+            verts = None
+            if d and d.get("vertices_file"):
+                p = self.store.cache / "items" / e.id / d["vertices_file"]
+                if p.is_file():
+                    verts = np.load(p)
+            out.append(cert_entry(b, verts))
         return out
 
     def finalize(self, layout_id: str) -> dict:

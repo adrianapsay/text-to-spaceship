@@ -41,6 +41,8 @@ class StageSpec:
     c_static: float                # required part-static separation (mm)
     statics: list[StaticItem] = field(default_factory=list)
     exempt: set = field(default_factory=set)      # {(part_id, static_name)} pairs exempt by design
+    # V2: clearances between static boxes (bracket reserves vs each other and vs keep-outs): (name_a, name_b, mm)
+    static_pairs: list = field(default_factory=list)
 
 
 @dataclass
@@ -67,6 +69,13 @@ class ValidationReport:
     seconds: float
     violations: list[str]
     validator_version: str = VALIDATOR_VERSION
+    static_pairs: list = field(default_factory=list)   # PairResult per spec.static_pairs entry (box arithmetic)
+
+
+def box_gap(ca: np.ndarray, cb: np.ndarray) -> float:
+    """Largest axis separation between the axis-aligned boxes spanned by two corner sets (≤ their distance)."""
+    la, ha, lb, hb = ca.min(0), ca.max(0), cb.min(0), cb.max(0)
+    return float(np.max(np.maximum(lb - ha, la - hb)))
 
 
 def separating_direction(a: np.ndarray, b: np.ndarray, iters: int = 80):
@@ -173,10 +182,19 @@ class Validator:
                 statics.append(r)
                 if not r.ok:
                     violations.append(f"{r.a} – {r.b}: {r.detail}")
+        named = {s.name: s for s in spec.statics}
+        static_pairs: list[PairResult] = []
+        for a, b, req in spec.static_pairs:
+            g = box_gap(named[a].corners, named[b].corners)
+            ok = g >= req - 1e-9
+            static_pairs.append(PairResult(a, b, "AABB", g, req, ok,
+                                           detail="" if ok else f"box gap {g:.4f} mm < required {req:.4f} mm"))
+            if not ok:
+                violations.append(f"{a} – {b}: box gap {g:.4f} mm < required {req:.4f} mm")
         gaps = [p.gap_lb_mm for p in pairs] + [p.gap_lb_mm for p in statics]
         return ValidationReport(valid=not violations, stage=spec.stage, containment=containment, pairs=pairs,
                                 statics=statics, levels=levels, min_clearance_mm=float(min(gaps)) if gaps else np.inf,
-                                seconds=time.perf_counter() - t0, violations=violations)
+                                seconds=time.perf_counter() - t0, violations=violations, static_pairs=static_pairs)
 
     # ----------------------------------------------------------------------------------------- pairs
     def _pair(self, wa, wb, c: float, want_planes: bool) -> PairResult:

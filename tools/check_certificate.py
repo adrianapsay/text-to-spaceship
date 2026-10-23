@@ -11,6 +11,9 @@ It does not import or trust any part of the application. It:
   4. checks that each part's cover cells form a full binary cut tree (so they partition space),
   5. rebuilds each cover piece's vertex set (surface clipped to the cell + cell corners inside the solid),
   6. checks every separating-plane inequality of Lemmas 2 and 3 for every pair and frame item,
+  7. V2 brackets (Lemma 4): every solid vertex inside its reserved box, every box apart from the other boxes and the
+     keep-outs (box arithmetic), and every part / box / keep-out combination covered by a check or a declared
+     exemption,
 and prints PASS/FAIL per lemma. Exit code 0 only if everything passes.
 """
 import hashlib
@@ -202,6 +205,12 @@ def gap(n, a_pts, b_pts):
     return min(dot(n, b) for b in b_pts) - max(dot(n, a) for a in a_pts)
 
 
+def box_gap(ca, cb):
+    """Largest axis separation of the axis-aligned boxes spanned by two corner sets (a lower bound on distance)."""
+    return max(max(min(q[k] for q in cb) - max(p[k] for p in ca), min(p[k] for p in ca) - max(q[k] for q in cb))
+               for k in range(3))
+
+
 def main(cert_path, stl_dir):
     cert = json.load(open(cert_path))
     results = {"files": True, "lemma1_containment": True, "cells_partition": True, "pairs": True, "frame": True}
@@ -279,10 +288,61 @@ def main(cert_path, stl_dir):
         if g < req - EPS:
             results["frame"] = False
             msgs.append(f"FAIL {s['part']} vs {s['static']}: gap {g:.6f} < {req}")
+    numeric_static = sum(1 for s in cert["statics"] if s["method"] == "numeric")
+    # V2 Lemma 4: brackets inside their reserved boxes, boxes apart from each other and from the keep-outs
+    if cert.get("brackets") or cert.get("static_pairs"):
+        results["bracket_boxes_apart"] = True
+        results["bracket_solids_in_boxes"] = True
+        results["bracket_checks_complete"] = True
+    for sp in cert.get("static_pairs", []):
+        g = box_gap(sp["corners_a"], sp["corners_b"])
+        if g < sp["required_mm"] - EPS:
+            results["bracket_boxes_apart"] = False
+            msgs.append(f"FAIL {sp['a']} vs {sp['b']}: box gap {g:.6f} < {sp['required_mm']}")
+    static_corners = {}
+    for s in cert["statics"]:
+        static_corners.setdefault(s["static"], s["corners"])
+    for sp in cert.get("static_pairs", []):
+        static_corners.setdefault(sp["a"], sp["corners_a"])
+        static_corners.setdefault(sp["b"], sp["corners_b"])
+    exempt = {(a, b) for a, b in cert.get("exempt", [])}
+    checked = {(s["part"], s["static"]) for s in cert["statics"]}
+    pair_set = {frozenset((sp["a"], sp["b"])) for sp in cert.get("static_pairs", [])}
+    names = [b["name"] for b in cert.get("brackets", [])]
+    for b in cert.get("brackets", []):
+        lo, hi = b["reserve"][:3], b["reserve"][3:]
+        c = static_corners.get(b["name"])
+        if c is None or any(abs(min(p[k] for p in c) - lo[k]) > 1e-6 or abs(max(p[k] for p in c) - hi[k]) > 1e-6
+                            for k in range(3)):
+            results["bracket_checks_complete"] = False
+            msgs.append(f"FAIL {b['name']}: its reserved box differs from the box used in the clearance checks")
+        for v in b["solid_vertices"]:
+            if any(v[k] < lo[k] - EPS or v[k] > hi[k] + EPS for k in range(3)):
+                results["bracket_solids_in_boxes"] = False
+                msgs.append(f"FAIL {b['name']}: solid vertex {v} outside its reserved box")
+                break
+        if b.get("estimate"):
+            msgs.append(f"NOTE {b['name']}: {b['kind']} not designed yet — its reserved box is certified, no solid")
+        for p in cert["parts"]:          # every part except its own (and the deck boards) is checked against it
+            if p["id"] in b["exempt_parts"]:
+                if (p["id"], b["name"]) not in exempt:
+                    results["bracket_checks_complete"] = False
+                    msgs.append(f"FAIL {b['name']}: exemption of {p['id']} not declared")
+            elif (p["id"], b["name"]) not in checked:
+                results["bracket_checks_complete"] = False
+                msgs.append(f"FAIL {p['id']} vs {b['name']}: no clearance check")
+        keepouts = [n for n in static_corners if n not in names and n not in b.get("target_statics", [])]
+        for o in names + keepouts:
+            if o != b["name"] and frozenset((o, b["name"])) not in pair_set:
+                results["bracket_checks_complete"] = False
+                msgs.append(f"FAIL {b['name']} vs {o}: no box-gap check")
     for k, ok in results.items():
         print(f"{'PASS' if ok else 'FAIL'}  {k}")
     if numeric:
         print(f"NOTE  {numeric} pair(s) are certified numerically by the app (no closed-form plane); not re-checked")
+    if numeric_static:
+        print(f"NOTE  {numeric_static} frame item(s) are certified numerically by the app (compound boxes or exact "
+              "mesh distance); not re-checked")
     for m in msgs[:50]:
         print(m)
     ok = all(results.values())

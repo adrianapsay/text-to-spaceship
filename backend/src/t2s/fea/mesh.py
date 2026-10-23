@@ -2,6 +2,7 @@
 
 Every solver gets the same `nodes` / `tets` (10-node, gmsh ordering, straight edges: `Mesh.SecondOrderLinear = 1`),
 so mid-side nodes are exact edge midpoints; `check_tet10` verifies the ordering instead of trusting documentation.
+Meshing runs single-threaded with a fixed seed by default: multi-threaded gmsh gave a different mesh on every call.
 """
 from __future__ import annotations
 
@@ -20,7 +21,8 @@ def _start(h: float, threads: int):
         gmsh.initialize(interruptible=False)
     gmsh.clear()
     gmsh.option.setNumber("General.Terminal", 0)
-    gmsh.option.setNumber("General.NumThreads", threads)
+    gmsh.option.setNumber("General.NumThreads", threads)   # 1 (default): the same input gives the same mesh
+    gmsh.option.setNumber("Mesh.RandomSeed", 1)
     gmsh.option.setNumber("Mesh.CharacteristicLengthMin", h * 0.5)
     gmsh.option.setNumber("Mesh.CharacteristicLengthMax", h)
     gmsh.option.setNumber("Mesh.SecondOrderLinear", 1)
@@ -71,7 +73,7 @@ def check_tet10(nodes: np.ndarray, tets: np.ndarray, tol: float = 1e-6) -> None:
             raise ValueError(f"tet10 node {4 + k} is not the midpoint of edge {a}-{b} (error {err:.3g} mm)")
 
 
-def mesh_box(lo, hi, h: float, threads: int = 2):
+def mesh_box(lo, hi, h: float, threads: int = 1):
     with _LOCK:
         gmsh = _start(h, threads)
         lo, hi = np.asarray(lo, float), np.asarray(hi, float)
@@ -80,7 +82,7 @@ def mesh_box(lo, hi, h: float, threads: int = 2):
         return _extract_tet10(gmsh)
 
 
-def mesh_hollow_cylinder(ri: float, ro: float, length: float, h: float, threads: int = 2):
+def mesh_hollow_cylinder(ri: float, ro: float, length: float, h: float, threads: int = 1):
     """Axis along +z from z = 0 to z = length."""
     with _LOCK:
         gmsh = _start(h, threads)
@@ -91,8 +93,10 @@ def mesh_hollow_cylinder(ri: float, ro: float, length: float, h: float, threads:
         return _extract_tet10(gmsh)
 
 
-def mesh_surface(v: np.ndarray, f: np.ndarray, h: float, threads: int = 2):
-    """Tetrahedralise a closed, consistently oriented triangle mesh (a bracket STL)."""
+def mesh_surface(v: np.ndarray, f: np.ndarray, h: float, threads: int = 1, remesh: bool = True):
+    """Tetrahedralise a closed, consistently oriented triangle mesh (a bracket STL). remesh=False keeps the given
+    surface triangles as the boundary of the tet mesh (the solid meshed is exactly the solid given — used for designed
+    brackets, whose surface is the certified one)."""
     import os
     import tempfile
     from ..geometry.stl_io import write_binary_stl
@@ -102,8 +106,9 @@ def mesh_surface(v: np.ndarray, f: np.ndarray, h: float, threads: int = 2):
             p = os.path.join(d, "surface.stl")
             write_binary_stl(p, np.asarray(v, float), np.asarray(f, np.int64))
             gmsh.merge(p)
-        gmsh.model.mesh.classifySurfaces(40 * np.pi / 180, True, True, np.pi)
-        gmsh.model.mesh.createGeometry()
+        if remesh:
+            gmsh.model.mesh.classifySurfaces(40 * np.pi / 180, True, True, np.pi)
+            gmsh.model.mesh.createGeometry()
         surfaces = [s[1] for s in gmsh.model.getEntities(2)]
         loop = gmsh.model.geo.addSurfaceLoop(surfaces)
         gmsh.model.geo.addVolume([loop])

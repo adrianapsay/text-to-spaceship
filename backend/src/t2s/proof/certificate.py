@@ -22,8 +22,10 @@ def _r(x, nd=12):
     return [round(float(v), nd) for v in np.ravel(x)]
 
 
-def build_certificate(layout_id: str, report, records: dict, poses, spec, files: dict, extra: dict | None = None):
-    """records: part_id -> PartRecord; poses: [(part_id, orient, t_mm)]; files: part_id -> (relative path, sha256)."""
+def build_certificate(layout_id: str, report, records: dict, poses, spec, files: dict, extra: dict | None = None,
+                      brackets: list | None = None):
+    """records: part_id -> PartRecord; poses: [(part_id, orient, t_mm)]; files: part_id -> (relative path, sha256).
+    brackets (V2 Stage 2): [{name, part, kind, target, reserve (lo+hi), solid_vertices, estimate, exempt_parts}]."""
     parts = []
     for pid, orient, t in poses:
         rec = records[pid]
@@ -62,14 +64,22 @@ def build_certificate(layout_id: str, report, records: dict, poses, spec, files:
             e.update(method="hull_plane", n=_r(p.planes[0][0]))
         elif p.planes:
             e.update(method="piece_planes", planes=[{"piece_a": q["piece_a"], "n": _r(q["n"])} for q in p.planes])
+        elif p.level in ("G1", "G4"):
+            e.update(method="numeric", note=f"verified by {p.level}: {p.detail or 'exact mesh distance'}")
         else:
             e.update(method="aabb")
         statics.append(e)
+    named = {s.name: s for s in spec.statics}
+    static_pairs = [{"a": p.a, "b": p.b, "corners_a": named[p.a].corners.tolist(),
+                     "corners_b": named[p.b].corners.tolist(), "required_mm": p.required_mm, "gap_mm": p.gap_lb_mm}
+                    for p in getattr(report, "static_pairs", [])]
     return {
         "certificate_version": CERT_VERSION, "layout_id": layout_id, "stage": spec.stage,
         "created": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "enclosure_vertex_bounds_mm": {"lo": _r(spec.lo, 9), "hi": _r(spec.hi, 9)},
         "cover_delta_mm": COVER_DELTA, "parts": parts, "pairs": pairs, "statics": statics,
+        "static_pairs": static_pairs, "brackets": brackets or [],
+        "exempt": sorted([list(x) for x in spec.exempt]),
         "extra": extra or {},
     }
 
@@ -114,6 +124,26 @@ def proof_markdown(cert: dict, report, metrics: dict | None = None) -> str:
         L.append("| Part | item | certified gap ≥ (mm) | required (mm) |\n|---|---|---|---|")
         for s in cert["statics"]:
             L.append(f"| {nm(s['part'])} | {s['static']} | {s['gap_lb_mm']:.4f} | {s['required_mm']:.3f} |")
+    if cert.get("brackets"):
+        L.append("\n## Lemma 4 — brackets fit\n")
+        L.append("Every bracket lies inside its reserved box B: each vertex of its solid satisfies the box bounds, and a "
+                 "box is convex, so the whole solid does. The boxes are listed with the frame items above, so Lemma 2 "
+                 "(with the box corners as one point set) shows every part keeps the required gap from every bracket "
+                 "it does not belong to. Two axis-aligned boxes are at least g apart when, on some axis, the low face "
+                 "of one is at least g beyond the high face of the other; this is checked for every bracket against "
+                 "every other bracket and every keep-out except the one it is fixed to. A bracket touches only its "
+                 "own part (and, for a bracket on the PC/104 deck, the stack boards it is fixed to).\n")
+        L.append("| Bracket | part | type | fixed to | reserved box (mm) | solid |\n|---|---|---|---|---|---|")
+        for b in cert["brackets"]:
+            r = np.asarray(b["reserve"], float)
+            size = " × ".join(f"{x:.1f}" for x in r[3:] - r[:3])
+            L.append(f"| {b['name']} | {nm(b['part'])} | {b['kind']} | {b['target']} | {size} | "
+                     + ("box only — solid not designed yet (estimate)" if b.get("estimate") else
+                        f"{len(b['solid_vertices'])} vertices inside the box") + " |")
+        if cert.get("static_pairs"):
+            worst = min(cert["static_pairs"], key=lambda p: p["gap_mm"] - p["required_mm"])
+            L.append(f"\n{len(cert['static_pairs'])} box–box conditions hold; the tightest is {worst['a']} – "
+                     f"{worst['b']}: {worst['gap_mm']:.4f} mm ≥ {worst['required_mm']:.3f} mm.")
     L.append("\n> **Arithmetic.** All inequalities are evaluated in float64 from the original float32 STL vertices and "
              "the integer-µm poses. Rounding allowance: poses are exact multiples of 1 µm; every certified gap above "
              "exceeds the required value by more than the 1e-9 mm comparison tolerance, and cover pieces carry "

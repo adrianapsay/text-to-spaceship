@@ -2,7 +2,7 @@
 
 Raw objectives (all minimised): L length used (mm), D COM error (mm), T inertia trace (kg·m²), P products-of-inertia
 norm (kg·m²), G feasibility margin in [0, 1] (Stage 2 only), H blocked cable-corridor fraction (Stage 2), C hardware
-cost (relative units, Manufacturable Design). The inertia objective is I = α·T̂ + (1 − α)·P̂.
+cost (relative units; V2 Stage 2 brackets, and the Manufacturable Design tab). The inertia objective is I = α·T̂ + (1 − α)·P̂.
 Hard constraints never enter g: candidates are compared by (CV, g).
 """
 from __future__ import annotations
@@ -63,8 +63,12 @@ def slider_weights(sliders: dict, stage: int, mode: str = "default") -> dict:
         active["G"] = sliders.get("feasibility", 25)
         if sliders.get("cable", 0) > 0:
             active["H"] = sliders.get("cable", 0)
-    if mode == "manufacturable" or sliders.get("cost", 0) > 0 and stage == 2:
+    if mode == "manufacturable":
         active["C"] = sliders.get("cost", 0)
+    elif stage == 2:
+        # V2: the bracket budget (0 = simple brackets only, 100 = metal-AM brackets where needed) sets the weight
+        # of the hardware cost: full weight at 0, the least weight at 100
+        active["C"] = 100 - float(np.clip(sliders.get("bracket_budget", 50), 0, 100))
     tot = sum(s + 1 for s in active.values())
     return {k: (s + 1) / tot for k, s in active.items()}
 

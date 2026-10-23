@@ -30,6 +30,160 @@
       "build": "cpython-3.14.8-windows-x86_64-none (python-build-standalone via uv 0.12.23)",
       "install_dir": "tools/python",
       "registry_written": false
+    },
+    "ccx": {
+      "version": "2.23",
+      "build": "calculix-2.23-pl5321h7abefab_8 (conda-forge win-64)",
+      "install_dir": "tools/ccx",
+      "hash_source": "anaconda.org package files API (https://api.anaconda.org/package/conda-forge/<name>/files)",
+      "verified": "2026-10-22: every file uploaded on or before 2026-10-08 (main label) and its SHA-256 equal to the published value; archives kept in tools/ccx/pkgs, extracted to tools/ccx/x/<name>",
+      "packages": [
+        {
+          "name": "calculix",
+          "version": "2.23",
+          "build": "pl5321h7abefab_8",
+          "url": "https://conda.anaconda.org/conda-forge/win-64/calculix-2.23-pl5321h7abefab_8.conda",
+          "sha256": "a6c1e75c092893d73d0bb3902cba9db7e14ba3fe4d2f8cd74cdfbc1bc041d1d1",
+          "bytes": 2625351,
+          "uploaded": "2026-09-28T09:22:06Z"
+        },
+        {
+          "name": "arpack",
+          "version": "3.9.1",
+          "build": "nompi_h1f7371d_102",
+          "url": "https://conda.anaconda.org/conda-forge/win-64/arpack-3.9.1-nompi_h1f7371d_102.conda",
+          "sha256": "393a0f11fe53c9a4ce8e003f0f9816ce098179d4c06eacffd573afbb0f2e2f0c",
+          "bytes": 162939,
+          "uploaded": "2025-01-05T13:40:15Z"
+        },
+        {
+          "name": "libgcc",
+          "version": "15.3.0",
+          "build": "h045dfae_7",
+          "url": "https://conda.anaconda.org/conda-forge/win-64/libgcc-15.3.0-h045dfae_7.conda",
+          "sha256": "c00f1818aa5a8a50980e3ef6436bc89ed32214dc2de84edb10fd7b82be943055",
+          "bytes": 819085,
+          "uploaded": "2026-09-25T02:53:41Z"
+        },
+        {
+          "name": "libgfortran5",
+          "version": "15.3.0",
+          "build": "hb70172a_7",
+          "url": "https://conda.anaconda.org/conda-forge/win-64/libgfortran5-15.3.0-hb70172a_7.conda",
+          "sha256": "d0359da890d9d9b36c9cf39438410263e24f00884abf9c57d2bc18905165c3bc",
+          "bytes": 2760710,
+          "uploaded": "2026-09-25T02:59:03Z"
+        },
+        {
+          "name": "libgomp",
+          "version": "15.3.0",
+          "build": "h8ee18e1_7",
+          "url": "https://conda.anaconda.org/conda-forge/win-64/libgomp-15.3.0-h8ee18e1_7.conda",
+          "sha256": "1bd0068592e59e7944cbcf9c758989515887a38433b21b4671ba85f6504d1a99",
+          "bytes": 662774,
+          "uploaded": "2026-09-25T02:54:03Z"
+        },
+        {
+          "name": "libwinpthread",
+          "version": "12.0.0.r4.gg4f2fc60ca",
+          "build": "h11686cb_11",
+          "url": "https://conda.anaconda.org/conda-forge/win-64/libwinpthread-12.0.0.r4.gg4f2fc60ca-h11686cb_11.conda",
+          "sha256": "988c8fe5fca9e3510fd0b5671d67ae42c1fd632f8bd28f832a6735970eb69a36",
+          "bytes": 37145,
+          "uploaded": "2026-08-20T23:44:11Z"
+        },
+        {
+          "name": "libblas",
+          "version": "3.9.0",
+          "build": "16_h6c93730_netlib",
+          "url": "https://conda.anaconda.org/conda-forge/win-64/libblas-3.9.0-16_h6c93730_netlib.conda",
+          "sha256": "f41effbf292ce1bb1a62e92935314ebd6a84e04864198fba0fa7547c75974a43",
+          "bytes": 156565,
+          "uploaded": "2026-09-10T07:52:52Z"
+        },
+        {
+          "name": "liblapack",
+          "version": "3.9.0",
+          "build": "16_h018ca30_netlib",
+          "url": "https://conda.anaconda.org/conda-forge/win-64/liblapack-3.9.0-16_h018ca30_netlib.conda",
+          "sha256": "3dc2449f63bce73bf17ccc52ea555797889f2aab73ad3f6fbb444464e20a3643",
+          "bytes": 2053970,
+          "uploaded": "2026-09-10T07:52:40Z"
+        },
+        {
+          "name": "vc14_runtime",
+          "version": "14.44.35208",
+          "build": "h818238b_41",
+          "url": "https://conda.anaconda.org/conda-forge/win-64/vc14_runtime-14.44.35208-h818238b_41.conda",
+          "sha256": "ec706fe9368b837fbd05af4851f5ebef12bef8c471a273f4805f7af788407317",
+          "bytes": 682908,
+          "uploaded": "2026-07-29T20:58:53Z"
+        }
+      ],
+      "files": {
+        "ccx.exe": {
+          "from": "calculix",
+          "sha256": "2e9c75bb1b97f8fa202ce8d00a83fd87ae3a6f250f23412a283f3872598bb8ee",
+          "bytes": 7649366
+        },
+        "libarpack.dll": {
+          "from": "arpack",
+          "sha256": "2f656d5db107aa88dabaa46042dd6608dddb8c06515e43c964e70fd6075de22c",
+          "bytes": 495870
+        },
+        "libgcc_s_seh-1.dll": {
+          "from": "libgcc",
+          "sha256": "96349b5b51f64901d6452f5e5dcde702fedafcc8a448af1bdda73bf33ae1cd04",
+          "bytes": 1009429
+        },
+        "libquadmath-0.dll": {
+          "from": "libgcc",
+          "sha256": "c2ab1f041405c9a27eab4887b1d8c0e29e39beca7caa384733f92f24c3e97d72",
+          "bytes": 1248964
+        },
+        "libgfortran-5.dll": {
+          "from": "libgfortran5",
+          "sha256": "96ac61c375cb31b4d21cc24bb322101d1da14a51c034751df123342375d38049",
+          "bytes": 13660627
+        },
+        "libgomp-1.dll": {
+          "from": "libgomp",
+          "sha256": "292b5f54e9752b21aaccf4b15f7901cd4ee49056783bd10d0548b2475aa56c74",
+          "bytes": 1846128
+        },
+        "libwinpthread-1.dll": {
+          "from": "libwinpthread",
+          "sha256": "f5e5fa5937950b2a8e21b7a6417badfca6821dc0a3f0a850e5928dbdb4780b93",
+          "bytes": 67530
+        },
+        "libblas.dll": {
+          "from": "libblas",
+          "sha256": "4c3e9675a1a795414047a19786991bcce361955c2ee90a61ecd0f25c6378b42b",
+          "bytes": 821248
+        },
+        "liblapack.dll": {
+          "from": "liblapack",
+          "sha256": "f77bde13ba3e2fadcf80583d5d81123e178f40ec175ff66b94903d3beb30bded",
+          "bytes": 12415488
+        },
+        "vcruntime140.dll": {
+          "from": "vc14_runtime",
+          "sha256": "0205071c36c17f1efbd70178c852cb7d49985c484202752b8704b7ac6b184e60",
+          "bytes": 124496
+        }
+      },
+      "layout": "ccx.exe and the DLLs it loads copied flat into tools/ccx (Windows loads DLLs from the exe's folder first)",
+      "not_installed": {
+        "ucrt": "Windows 10 system UCRT (api-ms-win-crt-*.dll) is used",
+        "libgfortran": "metapackage without files (libgfortran5 holds libgfortran-5.dll)",
+        "_openmp_mutex": "metapackage; libgomp-1.dll comes from libgomp",
+        "libstdcxx": "listed by arpack but libarpack.dll does not import libstdc++",
+        "vcomp14": "listed by vc14_runtime but nothing imports vcomp140.dll",
+        "vc": "metapackage without files"
+      },
+      "blas": "netlib reference BLAS/LAPACK (the variant the calculix build used), single-threaded",
+      "threads": "OMP_NUM_THREADS, NUMBER_OF_CPUS, CCX_NPROC_EQUATION_SOLVER, CCX_NPROC_STIFFNESS, CCX_NPROC_RESULTS (set by t2s.fea.ccx)",
+      "check": "ccx.exe -v prints 'This is Version 2.23'; the package's smoketest.inp solves to u = -4.761905E-04"
     }
   }
 }
