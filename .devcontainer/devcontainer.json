@@ -1,0 +1,14 @@
+{
+  "name": "TEXT-TO-SPACESHIP",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": { "version": "24" }
+  },
+  "hostRequirements": { "cpus": 4, "memory": "8gb" },
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+  "postAttachCommand": "bash .devcontainer/start-app.sh",
+  "forwardPorts": [8765],
+  "portsAttributes": {
+    "8765": { "label": "TEXT-TO-SPACESHIP", "onAutoForward": "openBrowser" }
+  }
+}
