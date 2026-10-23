@@ -3,7 +3,7 @@ import { useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 import { useFrame, useThree, type ThreeEvent } from '@react-three/fiber';
 import { Outlines } from '@react-three/drei';
 import { Label3D } from './labels';
-import type { ExtraItem, Mat3, Part, Pose } from '../../api/types';
+import type { ExtraItem, Mat3, Part, Pose, Vec3 } from '../../api/types';
 import type { RenderStyle } from '../../api/protocol';
 import { VIEWPORT, extraItemStyle } from '../../lib/colors';
 import { poseTRS, useItemGeometry, usePartGeometry } from './geometry';
@@ -27,6 +27,10 @@ function dashedBox(ext: [number, number, number], color: string, dash = 3, gap =
 export interface PartObjectProps {
   part: Part;
   pose: Pose;
+  /** V2 part-size factor of the layout (uniform, about the canonical origin); default 1 */
+  scale?: number;
+  /** exploded-view offset (mm, world); default none */
+  offset?: Vec3;
   rotations: Mat3[];
   color: string;
   style: RenderStyle;
@@ -44,9 +48,24 @@ export function PartObject(p: PartObjectProps) {
   const geo = usePartGeometry(p.part);
   const group = useRef<THREE.Group>(null);
   const invalidate = useThree((s) => s.invalidate);
-  const target = useMemo(() => poseTRS(p.pose, p.rotations), [p.pose, p.rotations]);
+  const ox = p.offset?.[0] ?? 0;
+  const oy = p.offset?.[1] ?? 0;
+  const oz = p.offset?.[2] ?? 0;
+  const target = useMemo(() => {
+    const t = poseTRS(p.pose, p.rotations);
+    t.position.add(new THREE.Vector3(ox, oy, oz));
+    return t;
+  }, [p.pose, p.rotations, ox, oy, oz]);
+  const scale = p.scale ?? 1;
   const anim = useRef<{ p: THREE.Vector3; q: THREE.Quaternion; start: number } | null>(null);
   const placed = useRef(false);
+
+  useLayoutEffect(() => {
+    const g = group.current;
+    if (!g) return;
+    g.scale.setScalar(scale);
+    invalidate();
+  }, [scale, invalidate]);
 
   useLayoutEffect(() => {
     const g = group.current;
@@ -115,12 +134,12 @@ export function PartObject(p: PartObjectProps) {
       ) : null}
       {edgeObj ? <primitive object={edgeObj} /> : null}
       {bbox ? <primitive object={bbox} /> : null}
-      {p.showLabel && geo ? <Label3D position={[p.pose.t_um[0] / 1000, p.pose.t_um[1] / 1000, p.pose.t_um[2] / 1000]} text={p.part.name} priority={p.selected ? 15 : 0} /> : null}
+      {p.showLabel && geo ? <Label3D position={[p.pose.t_um[0] / 1000 + ox, p.pose.t_um[1] / 1000 + oy, p.pose.t_um[2] / 1000 + oz]} text={p.part.name} priority={p.selected ? 15 : 0} /> : null}
     </group>
   );
 }
 
-export function ExtraItemMesh(props: { item: ExtraItem; showLabel: boolean }) {
+export function ExtraItemMesh(props: { item: ExtraItem; showLabel: boolean; offset?: Vec3 }) {
   const geo = useItemGeometry(props.item.mesh_url);
   const st = extraItemStyle(props.item.process);
   const material = useMemo(() => extraItemMaterial(String(props.item.process)), [props.item.process]);
@@ -131,11 +150,12 @@ export function ExtraItemMesh(props: { item: ExtraItem; showLabel: boolean }) {
     return geo.geometry.boundingBox.getCenter(new THREE.Vector3());
   }, [geo]);
   if (!geo) return null;
+  const o = props.offset ?? [0, 0, 0];           // exploded view: the item moves with the part it holds
   return (
-    <group userData={{ itemId: props.item.id, process: props.item.process }}>
+    <group userData={{ itemId: props.item.id, process: props.item.process }} position={o}>
       <mesh geometry={geo.geometry} material={material} />
       {edges ? <primitive object={edges} /> : null}
-      {centre && (st.badge || props.showLabel) ? <Label3D position={[centre.x, centre.y, centre.z]} text={st.badge ?? st.label} className={st.badge === 'AM' ? 'am' : ''} priority={st.badge ? 20 : 1} /> : null}
+      {centre && (st.badge || props.showLabel) ? <Label3D position={[centre.x + o[0], centre.y + o[1], centre.z + o[2]]} text={st.badge ?? st.label} className={st.badge === 'AM' ? 'am' : ''} priority={st.badge ? 20 : 1} /> : null}
     </group>
   );
 }

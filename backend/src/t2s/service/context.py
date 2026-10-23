@@ -26,9 +26,11 @@ def packable(rec) -> bool:
     return rec is not None and rec.status in ("VALID", "REPAIRED", "WITHHELD")
 
 
-def parts_signature(records: dict) -> str:
+def parts_signature(records: dict, part_scale: float = 1.0) -> str:
+    """Ids, file hashes and units; the V2 part-size factor too when it is not 1 (scaled parts are other parts)."""
     items = sorted((pid, r.sha256, r.units) for pid, r in records.items() if packable(r))
-    return hashlib.sha256(json.dumps(items).encode()).hexdigest()[:16]
+    key = items if part_scale == 1.0 else [items, round(float(part_scale), 6)]
+    return hashlib.sha256(json.dumps(key).encode()).hexdigest()[:16]
 
 
 def constraint_signature(records: dict, stage: int, extra: dict | None = None) -> str:
@@ -73,6 +75,7 @@ class SearchContext:
     hm_meshes: dict = field(default_factory=dict, repr=False)  # part_id -> (v, f) chosen by the detail ladder
     levels: dict = field(default_factory=dict)                # part_id -> {algorithm: level} in use
     stage2_mode: str | None = None                            # default | soft | continuous (cable slider)
+    part_scale: float = 1.0                                   # V2 part-size slider (Stage 2): records are scaled
 
     def decoder(self):
         if self.stage == 2:
@@ -103,12 +106,17 @@ def stage2_config(records: dict) -> s2.Stage2Config:
     return s2.Stage2Config(harness=True, harness_mode="interrupted", pcb_ids=pcb, stack_z=None)
 
 
-def build_context(records: dict, stage: int, reps: dict | None = None, stage2_mode: str = "default") -> SearchContext:
+def build_context(records: dict, stage: int, reps: dict | None = None, stage2_mode: str = "default",
+                  part_scale: float = 1.0) -> SearchContext:
     """reps: part_id -> {algorithm id: Representation} from finished detail ladders (Addendum 4).
-    stage2_mode: cable-slider mode for Stage 2 (default | soft | continuous)."""
-    recs = {pid: r for pid, r in records.items() if packable(r)}
+    stage2_mode: cable-slider mode for Stage 2 (default | soft | continuous).
+    part_scale: V2 part-size factor, Stage 2 only (the detail-ladder proxies belong to the full-size parts, so they
+    are not used for scaled parts)."""
+    from ..parts.scale import scale_part
+    part_scale = float(part_scale) if stage == 2 else 1.0
+    recs = {pid: scale_part(r, part_scale) for pid, r in records.items() if packable(r)}
     ids = list(recs)
-    reps = reps or {}
+    reps = (reps or {}) if part_scale == 1.0 else {}
     levels = {pid: {"hybrid_box": "F1-6", "hybrid_heightmap": "F4-2"} for pid in ids}
     proxies = []
     for pid in ids:
@@ -140,7 +148,7 @@ def build_context(records: dict, stage: int, reps: dict | None = None, stage2_mo
         dec = dict(dec_lo=lo, dec_hi=hi, gap_pp=s2.C_PP + QUANT_SLACK, wall_gap=s2.C_WALL + QUANT_SLACK / 2,
                    obstacles=np.zeros((0, 6)), obstacle_gap=s2.C_WALL + QUANT_SLACK)
         com_box = np.array([20.0, 20.0, 70.0])
-    psig = parts_signature(recs)
+    psig = parts_signature(recs, part_scale)
     csig = constraint_signature(recs, stage, {"stage2_mode": stage2_mode} if stage == 2 else None)
     lsig = hashlib.sha256(json.dumps(levels, sort_keys=True).encode()).hexdigest()[:8]
     if stage == 2:
@@ -155,7 +163,7 @@ def build_context(records: dict, stage: int, reps: dict | None = None, stage2_mo
                          spec_sig=ssig, ids=ids,
                          proxies=proxies, orient_bounds={pid: recs[pid].orient_bounds for pid in ids}, fixed=fixed,
                          spec=spec, z0=float(ENCLOSURE_LO[2]), com_box=com_box, records=recs, hm_meshes=hm_meshes,
-                         levels=levels, stage2_mode=stage2_mode if stage == 2 else None, **dec)
+                         levels=levels, stage2_mode=stage2_mode if stage == 2 else None, part_scale=part_scale, **dec)
 
 
 def write_context(ctx: SearchContext, folder: Path) -> Path:

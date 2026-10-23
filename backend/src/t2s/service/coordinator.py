@@ -183,6 +183,7 @@ class LayoutEntry:
     algorithm: dict = field(default_factory=lambda: dict(ALGORITHM))
     spec_sig: str = ""
     meta: dict = field(default_factory=dict)     # Stage 2: stack, corridor, mounts, standoffs, overflow
+    part_scale: float = 1.0                      # V2 part-size factor the layout was found and validated at
 
     def to_store(self) -> dict:
         d = asdict(self)
@@ -295,6 +296,8 @@ class Coordinator:
         self.evidence_source: str | None = None
         self.studies: dict[str, dict] = {}           # "size" | "benchmark" -> {proc, path, mtime}
         self.mfg_budget_s = 90.0
+        self._scaled: dict = {}                      # (part, record, scale, mass inputs) -> [scaled record, geometry]
+        self._sig_scale: dict[str, float] = {}       # parts signature -> part-size factor of that context
 
     # =========================================================================================== lifecycle
     @property
@@ -512,9 +515,60 @@ class Coordinator:
         self.store.revs[key] = self.store.revs.get(key, 0) + 1
         self.store.save()
 
-    def _phys(self) -> dict:
+    # ------------------------------------------------------------------------------ part size (V2)
+    def part_scale(self) -> float:
+        """The part-size slider: Stage 2 only, 0.5 … 1.0 (full size)."""
+        from ..parts.scale import PART_SCALE_MAX, PART_SCALE_MIN
+        s = self.store.settings
+        if int(s.get("stage", 1)) != 2:
+            return 1.0
+        return float(np.clip(float(s.get("part_scale_pct", 100)) / 100.0, PART_SCALE_MIN, PART_SCALE_MAX))
+
+    def _ctx_scale(self) -> float:
+        return self.ctx.part_scale if self.ctx is not None else 1.0
+
+    def _scaled_entry(self, pid: str, scale: float):
+        rec = self.records.get(pid)
+        if rec is None:
+            return None
+        key = (pid, id(rec), round(float(scale), 6), rec.mass_override_kg, rec.density_kg_m3, rec.mass_source)
+        hit = self._scaled.get(key)
+        if hit is None:
+            from ..parts.scale import scale_part
+            hit = self._scaled[key] = [scale_part(rec, float(scale)), None]
+            if len(self._scaled) > 400:                       # stale keys (old records, old masses)
+                for k in list(self._scaled)[:200]:
+                    del self._scaled[k]
+        return hit
+
+    def rec_at(self, pid: str, scale: float = 1.0):
+        """The part's record at a part-size factor (the record itself at 1)."""
+        if scale == 1.0:
+            return self.records.get(pid)
+        hit = self._scaled_entry(pid, scale)
+        return hit[0] if hit else None
+
+    def geom_at(self, pid: str, scale: float = 1.0):
+        if scale == 1.0:
+            return self.geoms.get(pid)
+        hit = self._scaled_entry(pid, scale)
+        if hit is None:
+            return None
+        if hit[1] is None:
+            hit[1] = part_geom_from_record(hit[0])
+        return hit[1]
+
+    def layout_records(self, e) -> dict:
+        """Records of a layout's parts at the size it was found at (reports, proofs, exports)."""
+        return {pid: r for pid, _, _ in e.poses if (r := self.rec_at(pid, e.part_scale)) is not None}
+
+    def layout_geoms(self, e) -> dict:
+        return {pid: g for pid, _, _ in e.poses if (g := self.geom_at(pid, e.part_scale)) is not None}
+
+    def _phys(self, scale: float = 1.0) -> dict:
         out = {}
-        for pid, rec in self._active_records().items():
+        for pid in self._active_records():
+            rec = self.rec_at(pid, scale)
             if rec.com_can_mm is None or rec.mass_kg is None:
                 out[pid] = None
             else:
@@ -523,7 +577,7 @@ class Coordinator:
 
     def _phys_wire(self) -> dict:
         return {pid: None if p is None else (p.mass_kg, p.com_can_mm.tolist(), p.inertia_com_kgm2.tolist())
-                for pid, p in self._phys().items()}
+                for pid, p in self._phys(self._ctx_scale()).items()}
 
     def _target(self) -> list[float]:
         return [float(x) for x in self.store.settings.get("target_com_mm", [0, 0, 0])]
@@ -558,7 +612,8 @@ class Coordinator:
             self.broadcast("project.changed", {"reason": reason})
             return
         ctx = build_context(recs, stage, {pid: self.reps[pid] for pid in recs if pid in self.reps},
-                            stage2_mode=self._stage2_mode())
+                            stage2_mode=self._stage2_mode(), part_scale=self.part_scale())
+        self._sig_scale[ctx.parts_sig] = ctx.part_scale
         if old is None or ctx.ctx_id != old.ctx_id:
             if old is not None and (ctx.constraint_sig != old.constraint_sig or ctx.stage != old.stage) \
                     and ctx.parts_sig == old.parts_sig:
@@ -581,7 +636,7 @@ class Coordinator:
             self.search_t0 = time.monotonic()
             if self.run_status in ("CONVERGED", "IDLE") and (self.auto_start or self.search_requested):
                 self._set_status("SEARCHING", f"inputs changed: {reason}")
-        self.ev = Evaluator(None, ctx.ids, self._phys(), ctx.orient_bounds, ctx.z0, target=self._target(),
+        self.ev = Evaluator(None, ctx.ids, self._phys(ctx.part_scale), ctx.orient_bounds, ctx.z0, target=self._target(),
                             com_box=ctx.com_box)
         self._restamp_and_rescore(physics=True)
         self.broadcast("project.changed", {"reason": reason})
@@ -711,7 +766,7 @@ class Coordinator:
         e.norm_epoch = self._norm().epoch
 
     def _compute_physics(self, e: LayoutEntry) -> None:
-        phys = self._phys()
+        phys = self._phys(e.part_scale)
         items, excluded = [], []
         for pid, o, t in e.poses:
             p = phys.get(pid)
@@ -996,7 +1051,8 @@ class Coordinator:
             algo["compaction"] = {"moved_mm": {k: v for k, v in extra["moved_mm"].items() if v > 0},
                                   "seconds": extra["seconds"]}
         meta = item.get("meta") or {}
-        geo = self._geo_metrics(poses, summary, sigs[2])
+        scale = self._sig_scale.get(sigs[0], 1.0)
+        geo = self._geo_metrics(poses, summary, sigs[2], scale)
         if sigs[2] == 2:
             order = summary.get("insertion_order")
             geo["insertion_order"] = [p for p, _ in order] if order else None
@@ -1012,7 +1068,7 @@ class Coordinator:
                                     "violations": summary["violations"],
                                     "engineering_violations": summary.get("engineering_violations", []),
                                     "relaxed_rules": bool(summary.get("relaxed"))},
-                        keys=keys, spec_sig=sigs[3], meta=jsonable(meta))
+                        keys=keys, spec_sig=sigs[3], meta=jsonable(meta), part_scale=scale)
         if not summary["valid"]:
             self._error(f"validator rejected decoder layout {e.id}: {summary['violations'][:3]}")
         self._compute_physics(e)
@@ -1091,13 +1147,13 @@ class Coordinator:
                                    "keys": e.keys, "ctx_id": self.ctx.ctx_id, "sigs": sigs, "algo": algo,
                                    "compact": False, "meta": None, "kind": "slab"})
 
-    def _geo_metrics(self, poses, summary, stage: int) -> dict:
+    def _geo_metrics(self, poses, summary, stage: int, scale: float = 1.0) -> dict:
         tops, bottoms, vol = [], [], 0.0
         for pid, o, t in poses:
-            hw = to_world(self.geoms[pid].hull_pts, o, np.asarray(t, float))
+            hw = to_world(self.geom_at(pid, scale).hull_pts, o, np.asarray(t, float))
             tops.append(hw[:, 2].max())
             bottoms.append(hw[:, 2].min())
-            vol += self.records[pid].volume_mm3 or 0.0
+            vol += self.rec_at(pid, scale).volume_mm3 or 0.0
         z0 = float(ENCLOSURE_LO[2])
         req = s2.C_PP if stage == 2 else 0.0
         mc = summary["min_clearance_mm"]
@@ -1145,7 +1201,7 @@ class Coordinator:
             "metrics": e.metrics,
             "scores": {"normalised": e.normalised, "g": _f(e.g), "norm_epoch": e.norm_epoch},
             "algorithm": e.algorithm, "validation": e.validation, "origin": e.origin, "created": e.created,
-            "part_ids": [p[0] for p in e.poses], "current": self._current(e),
+            "part_ids": [p[0] for p in e.poses], "current": self._current(e), "part_scale": e.part_scale,
         }
         if e.stage == 2:
             d["label"] = "ENGINEERING-CONSTRAINED — not flight-qualified"
@@ -1590,9 +1646,12 @@ class Coordinator:
         old_stage = int(s.get("stage", 1))
         old_target = list(s.get("target_com_mm", [0, 0, 0]))
         old_s2 = self._stage2_mode()
+        old_scale = self.part_scale()
         for k in ("stage", "target_com_mm", "compactness_definition", "show_frame_mass_in_com"):
             if k in new and new[k] is not None:
                 s[k] = new[k]
+        if new.get("part_scale_pct") is not None:
+            s["part_scale_pct"] = float(np.clip(float(new["part_scale_pct"]), 50.0, 100.0))
         if "sliders" in new and isinstance(new["sliders"], dict):
             for k, v in new["sliders"].items():
                 if k in s["sliders"] and v is not None:
@@ -1604,6 +1663,9 @@ class Coordinator:
         elif int(s["stage"]) == 2 and self._stage2_mode() != old_s2:
             # the cable-routing slider crossed a mode boundary (0 / 1–69 / ≥ 70): different rules, new islands
             self._refresh_inputs(f"cable routing: {self._stage2_mode()} mode", bump_parts=False)
+        elif self.part_scale() != old_scale:
+            # V2 part-size slider: scaled parts are other parts (new context, new search)
+            self._refresh_inputs(f"part size {100 * self.part_scale():.0f} %", bump_parts=True)
         else:
             if list(s.get("target_com_mm", [0, 0, 0])) != old_target and self.ev is not None:
                 self.ev.target = np.asarray(self._target(), float)
@@ -1685,7 +1747,7 @@ class Coordinator:
         elif mass_changed:
             self._bump("mass_rev")
             if self.ev is not None:
-                self.ev.phys = self._phys()
+                self.ev.phys = self._phys(self._ctx_scale())
             for w in self.workers:
                 if w.role == "island" and self.ctx is not None:
                     w.cmd_q.put(("phys", self.ctx.ctx_id, self.store.revs["mass_rev"], self._phys_wire(), self._target()))
@@ -1908,7 +1970,7 @@ class Coordinator:
         L = self.ladders.get("__mfg__")
         if L is not None and not L.get("finalised"):
             raise ValueError("a Manufacturable Design run is already in progress")
-        recs = self._active_records()
+        recs = {pid: self.rec_at(pid, self._ctx_scale()) for pid in self._active_records()}   # at the part size
         snap = self.store.cache / f"mfg_records_{self.ctx.parts_sig}.pkl"
         snap.write_bytes(pickle.dumps(recs, protocol=pickle.HIGHEST_PROTOCOL))
         out = self._mfg_dir()
@@ -1973,7 +2035,8 @@ class Coordinator:
         summary = {"valid": bool(lay["validation"]), "min_clearance_mm": lay["min_clearance_mm"], "levels": lay["levels"],
                    "violations": res["validation"]["violations"], "pairs": lay["pairs"], "statics": lay["statics"],
                    "seconds": res["seconds"], "validator_version": "1.0"}
-        geo = self._geo_metrics(poses, summary, 2)
+        scale = self._sig_scale.get(parts_sig, 1.0)
+        geo = self._geo_metrics(poses, summary, 2, scale)
         sigs = (self.ctx.parts_sig, self.ctx.constraint_sig, 2, self.ctx.spec_sig)
         ch = res.get("algorithm") or {}
         algo = {"id": ch.get("id", "hybrid_box"), "label": ch.get("label", ALGORITHMS["hybrid_box"]),
@@ -1989,7 +2052,7 @@ class Coordinator:
                                     "violations": summary["violations"], "engineering_violations": res["violations"],
                                     "relaxed_rules": res["validation"]["relaxed_rules"],
                                     "brackets": res["validation"]["brackets"]},
-                        keys=None, spec_sig="mfg:" + sigs[3], meta=jsonable(meta), origin="search")
+                        keys=None, spec_sig="mfg:" + sigs[3], meta=jsonable(meta), origin="search", part_scale=scale)
         self._compute_physics(e)
         e.revs = {k: self.store.revs[k] for k in ("parts_rev", "constraint_rev", "mass_rev", "weights_rev")}
         self._score_entry(e)
@@ -2087,7 +2150,7 @@ class Coordinator:
         from ..constraints.attribution import attribution_job
         if self.ctx is None:
             raise ValueError("no packable parts")
-        recs = self._active_records()
+        recs = {pid: self.rec_at(pid, self._ctx_scale()) for pid in self._active_records()}   # at the part size
         snap = self.store.cache / f"attr_records_{self.ctx.parts_sig}.pkl"
         snap.write_bytes(pickle.dumps(recs, protocol=pickle.HIGHEST_PROTOCOL))
         path = self._attribution_path()
@@ -2184,18 +2247,19 @@ class Coordinator:
             return self.proof_cache[key]
         if not self._current(e) and any(pid not in self.records for pid, _, _ in e.poses):
             raise ValueError("this layout's parts are no longer in the project")
+        records = self.layout_records(e)                  # at the part size the layout was found at
         if e.stage == 2:
             from ..constraints.stage2_model import Stage2Model
-            model = Stage2Model({pid: self.records[pid] for pid, _, _ in e.poses}, (e.meta or {}).get("mode", "default"))
+            model = Stage2Model(records, (e.meta or {}).get("mode", "default"))
             spec = model.spec(e.meta or {}, relaxed=bool(e.validation.get("relaxed_rules")))
         else:
             spec = StageSpec(1, ENCLOSURE_LO.copy(), ENCLOSURE_HI.copy(), 0.0, 0.0)
-        geoms = {pid: self.geoms[pid] for pid, _, _ in e.poses}
+        geoms = self.layout_geoms(e)
         rep = Validator(geoms).validate(e.poses, spec, want_planes=True)
-        cert = build_certificate(e.id, rep, self.records, e.poses, spec, self._files_for(e.poses),
-                                 extra={"layout_hash": e.hash, "app_version": VERSION})
+        cert = build_certificate(e.id, rep, records, e.poses, spec, self._files_for(e.poses),
+                                 extra={"layout_hash": e.hash, "app_version": VERSION, "part_scale": e.part_scale})
         from ..optimise.bounds import lower_bounds
-        lbs = lower_bounds([self.records[pid] for pid, _, _ in e.poses])
+        lbs = lower_bounds(list(records.values()))
         metrics = dict(e.metrics)
         metrics["lower_bounds"] = [(f"{b['name']} (valid for {b['valid_for']})", b["value_mm"], b["why"])
                                    for b in lbs if b.get("value_mm") is not None]

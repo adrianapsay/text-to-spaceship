@@ -9,6 +9,7 @@ import { fmt, fmtVec } from '../../lib/fmt';
 import { useApp, displayMass } from '../../store/store';
 import { MovementArrows } from './Markers';
 import { SceneContent, type SceneSpec } from './Scene';
+import { ExplodeControl } from './Viewport';
 
 export interface DualSide {
   label: string;
@@ -108,6 +109,7 @@ export function DualViewport(props: { left: DualSide; right: DualSide; testId?: 
       isolated: view.isolated,
       selectedId: view.selectedPartId,
       hoveredId: null,
+      explode: view.explode / 100,
     },
     interactive: true,
     html: false,
@@ -153,6 +155,7 @@ export function DualViewport(props: { left: DualSide; right: DualSide; testId?: 
         <button type="button" className="btn small" aria-pressed={view.showMovement} onClick={() => setFlag('showMovement', !view.showMovement)}>
           Movement overlay
         </button>
+        <ExplodeControl />
         <span className="small muted" style={{ marginLeft: 8 }} data-testid="delta-com">
           ΔCOM {dCom ? `${fmt(norm(dCom), 'mm')} · ${fmtVec(dCom)}` : '—'}
         </span>

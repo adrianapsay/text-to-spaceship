@@ -89,6 +89,8 @@ export interface ViewSlice {
   announce: string;
   fitRequest: number;
   explainSection: 'map' | 'proof' | 'selector';
+  /** exploded view, 0 (assembled) … 100 (parts pulled apart); display only */
+  explode: number;
 }
 
 export interface ConnSlice extends ConnProto {
@@ -152,6 +154,7 @@ export interface AppActions {
   announce(text: string): void;
   requestFit(): void;
   setExplainSection(s: ViewSlice['explainSection']): void;
+  setExplode(v: number): void;
 }
 
 export type AppStore = StoreApi<AppState & AppActions>;
@@ -199,6 +202,7 @@ export function initialState(): AppState {
       announce: '',
       fitRequest: 0,
       explainSection: 'map',
+      explode: 0,
     },
     conn: {
       ...initialConn(),
@@ -421,6 +425,9 @@ export function createAppStore(init: Partial<AppState> = {}): AppStore {
     },
     setExplainSection(explainSection) {
       set({ view: { ...get().view, explainSection } });
+    },
+    setExplode(v) {
+      set({ view: { ...get().view, explode: Math.max(0, Math.min(100, Math.round(v))) } });
     },
   }));
 }

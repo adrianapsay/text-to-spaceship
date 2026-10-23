@@ -150,6 +150,8 @@ export interface Layout {
   violations_engineering?: string[];
   /** Stage 2: the rules this layout was decoded under */
   stage2?: Stage2View;
+  /** V2 part-size slider: the factor (0.5 … 1) every part was scaled by in this layout; absent = 1 */
+  part_scale?: number;
   /** mock fixtures only */
   mock?: boolean;
 }
@@ -169,7 +171,16 @@ export interface Stage2View {
   assumed: string[];
 }
 
-export type SliderKey = 'space' | 'balance' | 'inertia' | 'feasibility' | 'mass_symmetry' | 'cable' | 'cost' | 'speed_quality';
+export type SliderKey =
+  | 'space'
+  | 'balance'
+  | 'inertia'
+  | 'feasibility'
+  | 'mass_symmetry'
+  | 'cable'
+  | 'cost'
+  | 'speed_quality'
+  | 'bracket_budget';
 export type Sliders = Record<SliderKey, number>;
 
 export interface Settings {
@@ -178,6 +189,8 @@ export interface Settings {
   target_com_mm: Vec3;
   compactness_definition: 'one_end' | 'span';
   show_frame_mass_in_com: boolean;
+  /** V2 part-size slider (Stage 2): 50 … 100 % of full size */
+  part_scale_pct?: number;
 }
 
 export interface Revs {

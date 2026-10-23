@@ -34,27 +34,10 @@ LABELS = {"V1": "constructive box decoder", "V5": "hybrid, box decoder", "V7": "
 
 
 def scale_record(rec, s: float):
-    """Uniformly scaled copy of a part record (about the canonical origin; packing is translation-invariant)."""
-    r = copy.copy(rec)
-    r.v = rec.v * s
-    r.boxes = rec.boxes * s
-    r.orient_bounds = rec.orient_bounds * s
-    r.obb_extents_mm = rec.obb_extents_mm * s
-    if rec.volume_mm3 is not None:
-        r.volume_mm3 = rec.volume_mm3 * s ** 3
-        r.com_can_mm = rec.com_can_mm * s
-        r.j_unit_mm5 = rec.j_unit_mm5 * s ** 5
-    if rec.hull_volume_mm3 is not None:
-        r.hull_volume_mm3 = rec.hull_volume_mm3 * s ** 3
-    if rec.mass_override_kg is not None:
-        r.mass_override_kg = rec.mass_override_kg * s ** 3          # density held constant
-    cov = copy.copy(rec.cover)
-    cov.pieces = [replace(p, vertices=p.vertices * s, hull_volume=p.hull_volume * s ** 3) for p in rec.cover.pieces]
-    cov.total_hull_volume = rec.cover.total_hull_volume * s ** 3
-    r.cover = cov
-    from ..geometry.proxies import COVER_DELTA
-    r.cover_delta = COVER_DELTA * max(1.0, s)                       # the cover certificate's inflation scales too
-    return r
+    """Uniformly scaled copy of a part record (about the canonical origin; packing is translation-invariant).
+    The Size Study scales entered masses too (the same parts, built smaller)."""
+    from ..parts.scale import scale_part
+    return scale_part(rec, s, keep_user_mass=False) if s != 1.0 else copy.copy(rec)
 
 
 def bounds_for(records: dict, stage: int) -> list[dict]:

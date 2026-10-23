@@ -48,6 +48,29 @@ export function Legend(props: { mode: ColorMode; parts: { subsystem: string }[];
   );
 }
 
+/** Exploded view: pulls the parts (with their brackets) apart from the layout centre; display only. */
+export function ExplodeControl() {
+  const v = useApp((s) => s.view.explode);
+  const setExplode = useApp((s) => s.setExplode);
+  return (
+    <label className="row small" style={{ gap: 4, marginLeft: 6 }} title="Exploded view: pull the parts apart (display only; the layout itself does not change)">
+      Exploded view
+      <input
+        type="range"
+        min={0}
+        max={100}
+        step={1}
+        value={v}
+        onChange={(e) => setExplode(Number(e.target.value))}
+        aria-label="Exploded view"
+        aria-valuetext={v === 0 ? 'assembled' : `${v} percent exploded`}
+        data-testid="explode-slider"
+        style={{ width: 90 }}
+      />
+    </label>
+  );
+}
+
 export function ViewportToolbar(props: { extra?: ReactNode; onFit: () => void }) {
   const v = useApp((s) => s.view);
   const setFlag = useApp((s) => s.setViewFlag);
@@ -88,6 +111,7 @@ export function ViewportToolbar(props: { extra?: ReactNode; onFit: () => void })
           <option value="displacement">Displacement</option>
         </select>
       </label>
+      <ExplodeControl />
       {props.extra}
     </div>
   );
@@ -175,6 +199,7 @@ export function MainViewport(props: MainViewportProps) {
         isolated: view.isolated,
         selectedId: view.selectedPartId,
         hoveredId: view.hoveredPartId,
+        explode: view.explode / 100,
       },
       interactive: true,
       html: true,

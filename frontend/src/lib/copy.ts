@@ -15,6 +15,10 @@ export interface SliderDef extends Explainer {
   /** greyed out in Stage 1 with this explanation */
   stage1Disabled?: string;
   expertOnly?: boolean;
+  /** not listed in the Goals panel (shown in its own tab) */
+  notInGoals?: boolean;
+  /** what the ends of the slider mean, instead of "priority" */
+  ends?: [string, string];
 }
 
 export const SLIDERS: SliderDef[] = [
@@ -62,6 +66,16 @@ export const SLIDERS: SliderDef[] = [
     technical: 'weight of C, the relative hardware cost (ASSUMED cost model, relative units).',
     why: 'custom and metal 3D-printed brackets cost more than direct mounts.',
     stage2Only: true,
+    notInGoals: true,
+  },
+  {
+    key: 'bracket_budget',
+    label: 'Bracket budget',
+    plain: '0 holds every part with simple brackets (machined, sheet metal, clamps), which are bulkier and use more space. 100 lets the search use metal 3D-printed brackets wherever they save space.',
+    technical: 'Stage 2 brackets are part of the packing. At 0 metal-AM brackets are not allowed; above 0 they are, and the hardware cost C is weighted by (100 − budget) / 100.',
+    why: '3D-printed brackets are thinner and follow the part, so parts fit more closely, but they cost more.',
+    stage2Only: true,
+    ends: ['simple brackets', 'metal 3D-printed'],
   },
   {
     key: 'mass_symmetry',

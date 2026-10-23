@@ -5,7 +5,8 @@ Usage:  python check_certificate.py certificate.json <folder containing the orig
 
 It does not import or trust any part of the application. It:
   1. verifies each STL file's SHA-256 against the certificate,
-  2. re-reads the triangles, converts units, applies the authored->canonical transform and the pose,
+  2. re-reads the triangles, converts units, applies the authored->canonical transform, the part-size factor
+     (V2 part-size slider; 1 when absent) and the pose,
   3. checks Lemma 1 (every vertex inside the enclosure bounds),
   4. checks that each part's cover cells form a full binary cut tree (so they partition space),
   5. rebuilds each cover piece's vertex set (surface clipped to the cell + cell corners inside the solid),
@@ -213,6 +214,10 @@ def main(cert_path, stl_dir):
             results["files"] = False
             msgs.append(f"FAIL file hash: {p['file']}")
         can = [tuple(to_canonical(v, p["units_to_mm"], p["canonical_R"], p["canonical_origin_mm"]) for v in t) for t in tris]
+        s = float(p.get("part_scale", 1.0))         # V2 part-size slider: the part scaled about its canonical origin
+        if s != 1.0:
+            can = [tuple((v[0] * s, v[1] * s, v[2] * s) for v in tri) for tri in can]
+            msgs.append(f"NOTE {p['id']}: part scaled by {s:g} (part-size slider)")
         if "repaired_mesh" in p:
             rv, rf = p["repaired_mesh"]["vertices"], p["repaired_mesh"]["faces"]
             can = [tuple(tuple(rv[i]) for i in face) for face in rf]

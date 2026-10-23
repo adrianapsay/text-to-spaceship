@@ -9,6 +9,7 @@ import { matVec } from '../../lib/math3';
 import type { ColorMode } from '../../store/store';
 import { ComMarkers, CompactnessLine, Enclosure, Violations } from './Markers';
 import { ExtraItemMesh, PartObject } from './SceneParts';
+import { explodeOffsets } from '../../lib/explode';
 
 export interface SceneView {
   colorMode: ColorMode;
@@ -21,7 +22,11 @@ export interface SceneView {
   isolated: string | null;
   selectedId: string | null;
   hoveredId: string | null;
+  /** exploded view, 0 … 1 (display only) */
+  explode?: number;
 }
+
+const ZERO: Vec3 = [0, 0, 0];
 
 export interface SceneSpec {
   items: RenderItem[];
@@ -79,6 +84,10 @@ export function SceneContent({ spec }: { spec: SceneSpec }) {
     return Math.max(0, ...solid.layout.poses.map((p) => displacement(spec.prevLayout, solid.layout, p.part_id) ?? 0));
   }, [solid, spec.prevLayout]);
 
+  // V2: parts are drawn at the size their layout was found at, and pulled apart in the exploded view
+  const scale = solid?.layout.part_scale ?? 1;
+  const offsets = useMemo(() => explodeOffsets(solid?.layout ?? null, spec.view.explode ?? 0), [solid, spec.view.explode]);
+
   const partComs = useMemo(() => {
     if (!solid || !spec.view.showCom) return [];
     const out: Vec3[] = [];
@@ -87,11 +96,12 @@ export function SceneContent({ spec }: { spec: SceneSpec }) {
       const R = spec.rotations[pose.orient];
       if (!part?.com_canonical_mm || !R || !visible(pose.part_id)) continue;
       const c = matVec(R, part.com_canonical_mm);
-      out.push([c[0] + pose.t_um[0] / 1000, c[1] + pose.t_um[1] / 1000, c[2] + pose.t_um[2] / 1000]);
+      const o = offsets[pose.part_id] ?? ZERO;
+      out.push([c[0] * scale + pose.t_um[0] / 1000 + o[0], c[1] * scale + pose.t_um[1] / 1000 + o[1], c[2] * scale + pose.t_um[2] / 1000 + o[2]]);
     }
     return out;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [solid, spec.parts, spec.rotations, spec.view.showCom, spec.view.hidden, spec.view.isolated]);
+  }, [solid, spec.parts, spec.rotations, spec.view.showCom, spec.view.hidden, spec.view.isolated, offsets, scale]);
 
   const m = spec.metrics;
   return (
@@ -110,6 +120,8 @@ export function SceneContent({ spec }: { spec: SceneSpec }) {
                 key={`s-${pose.part_id}`}
                 part={part}
                 pose={pose}
+                scale={scale}
+                offset={offsets[pose.part_id]}
                 rotations={spec.rotations}
                 color={partColor(spec, part, solid.layout, maxMass, maxDisp, part.locked)}
                 style={solid.style}
@@ -125,7 +137,9 @@ export function SceneContent({ spec }: { spec: SceneSpec }) {
             );
           })
         : null}
-      {solid?.layout.extra_items?.map((it) => <ExtraItemMesh key={it.id} item={it} showLabel={spec.html && spec.view.showLabels} />)}
+      {solid?.layout.extra_items?.map((it) => (
+        <ExtraItemMesh key={it.id} item={it} offset={offsets[it.for_part ?? '']} showLabel={spec.html && spec.view.showLabels} />
+      ))}
       {ghosts.map((g) =>
         g.layout.poses.map((pose) => {
           const part = spec.parts[pose.part_id];
@@ -135,6 +149,7 @@ export function SceneContent({ spec }: { spec: SceneSpec }) {
               key={`g-${g.layout.id}-${pose.part_id}`}
               part={part}
               pose={pose}
+              scale={g.layout.part_scale ?? 1}
               rotations={spec.rotations}
               color="#E6E8EB"
               style="ghost"

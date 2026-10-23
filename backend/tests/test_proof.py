@@ -102,6 +102,34 @@ def test_mutation_corrupted_plane_fails(setup, dataset_parts, tmp_path):
     assert code != 0
 
 
+def test_scaled_parts_round_trip_and_tampered_scale_fails(setup, dataset_parts, tmp_path):
+    """V2 part-size slider: a layout of parts at 70 % is certified at that size, and the checker rebuilds them at
+    it; claiming a larger size than the layout was checked at fails."""
+    from t2s.parts.scale import scale_part
+    _, records, files = setup
+    names = ["battery_pack", "magnetometer_ring_torus", "irregular_blob", "pcb_obc"]
+    small = {n: scale_part(records[n], 0.7) for n in names}
+    geoms = {n: part_geom_from_record(r) for n, r in small.items()}
+    poses, z = [], -165.0
+    for n in names:                                 # stacked with a 0.3 mm gap at the scaled size
+        r = small[n]
+        o = min(r.allowed_orients, key=lambda k: r.orient_bounds[k, 5] - r.orient_bounds[k, 2])
+        b = r.orient_bounds[o]
+        poses.append((n, o, np.array([-(b[0] + b[3]) / 2, -(b[1] + b[4]) / 2, z - b[2]])))
+        z = poses[-1][2][2] + b[5] + 0.3
+    rep = Validator(geoms).validate(poses, STAGE1)
+    assert rep.valid, rep.violations
+    cert = build_certificate("L-scaled", rep, small, poses, STAGE1, files)
+    assert all(p["part_scale"] == pytest.approx(0.7) for p in cert["parts"])
+    code, out = run_checker(cert, tmp_path)
+    assert code == 0 and "OVERALL: PASS" in out, out
+    bad = copy.deepcopy(cert)
+    for p in bad["parts"]:
+        p["part_scale"] = 0.8                       # bigger parts than were certified: they overlap
+    code, out = run_checker(bad, tmp_path)
+    assert code != 0 and "FAIL" in out
+
+
 def test_stage2_spec_frame(setup, dataset_parts):
     from t2s.constraints.stage2 import frame_mass_props
     m, c, i = frame_mass_props()

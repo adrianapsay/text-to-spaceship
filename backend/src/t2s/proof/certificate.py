@@ -33,9 +33,12 @@ def build_certificate(layout_id: str, report, records: dict, poses, spec, files:
             "canonical_R": _r(rec.r_auth_to_can), "canonical_origin_mm": _r(rec.origin_auth),
             "orient": int(orient), "R_orient": ROTATIONS[int(orient)].ravel().tolist(), "t_mm": _r(t, 6),
             "cells": [[{"n": _r(n), "d": round(float(d), 12)} for n, d in piece.planes] for piece in rec.cover.pieces],
+            # V2 part-size slider: canonical vertices are multiplied by this before the pose (cells are given at it)
+            "part_scale": float(getattr(rec, "part_scale", 1.0)),
         })
         if rec.status == "REPAIRED":
-            # declared repair: the checker uses this canonical-frame mesh instead of re-implementing the repair
+            # declared repair: the checker uses this canonical-frame mesh (already at part_scale) instead of
+            # re-implementing the repair
             parts[-1]["repaired_mesh"] = {"note": "; ".join(rec.repairs), "vertices": np.round(rec.v, 12).tolist(),
                                           "faces": rec.f.tolist()}
     pairs = []

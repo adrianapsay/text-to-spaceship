@@ -436,11 +436,11 @@ def create_app(coord: Coordinator | None = None, project: str = "default", **coo
         if kind == "csv":
             buf = io.StringIO()
             wr = csv.writer(buf)
-            wr.writerow(["part_id", "name", "orient", "x_mm", "y_mm", "z_mm", "mass_kg", "mass_source"])
+            wr.writerow(["part_id", "name", "orient", "x_mm", "y_mm", "z_mm", "mass_kg", "mass_source", "part_scale"])
             for p in lj["poses"]:
-                rec = c.records.get(p["part_id"])
+                rec = c.rec_at(p["part_id"], e.part_scale)
                 wr.writerow([p["part_id"], rec.name if rec else "", p["orient"], *[v / 1000 for v in p["t_um"]],
-                             rec.mass_kg if rec else "", rec.mass_source if rec else ""])
+                             rec.mass_kg if rec else "", rec.mass_source if rec else "", e.part_scale])
             return Response(buf.getvalue(), media_type="text/csv",
                             headers={"Content-Disposition": f'attachment; filename="layout_{lid}.csv"'})
         from ..report.build import render_html, render_markdown, stl_zip

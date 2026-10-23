@@ -140,10 +140,13 @@ def report_blocks(c, e, version: str, proof: dict | None = None, proof_error: st
 
     # ---- inputs
     B.append(("h2", "2  Input parts"))
+    if e.part_scale != 1.0:
+        B.append(("note", f"Part-size slider: every part scaled to {100 * e.part_scale:.0f} % in all three axes "
+                          "(volumes and computed masses × s³; masses you entered are kept)."))
     prow = []
     levels = (c.ctx.levels if c.ctx is not None else {}) or {}
     for pid, o, t in e.poses:
-        r = c.records.get(pid)
+        r = c.rec_at(pid, e.part_scale)
         pe = c.store.entries.get(pid)
         if r is None:
             prow.append([pid, "(no longer in the project)", "", "", "", "", "", ""])
@@ -177,7 +180,7 @@ def report_blocks(c, e, version: str, proof: dict | None = None, proof_error: st
                    "Each part's canonical vertices v map to world as R·v + t."))
     rows = []
     for pid, o, t in e.poses:
-        r = c.records.get(pid)
+        r = c.rec_at(pid, e.part_scale)
         b = r.orient_bounds[o] if r is not None else None
         rows.append([r.name if r else pid, _orient_text(o), _vec(t, 3),
                      _vec(b[:3] + t, 1) if b is not None else "—", _vec(b[3:] + t, 1) if b is not None else "—"])
@@ -451,7 +454,7 @@ def _views_svg(c, e) -> str:
              ("Side (looking along −X)", 1, 2, 0, 1.0)]
     shapes = []
     for k, (pid, o, t) in enumerate(e.poses):
-        g = c.geoms.get(pid)
+        g = c.geom_at(pid, e.part_scale)
         if g is None:
             continue
         shapes.append((c.records[pid].name if pid in c.records else pid, PALETTE[k % len(PALETTE)], False,
@@ -499,7 +502,7 @@ def _views_svg(c, e) -> str:
 # ================================================================================================ files
 def _placed_parts(c, e):
     for pid, o, t in e.poses:
-        r = c.records.get(pid)
+        r = c.rec_at(pid, e.part_scale)           # at the part size the layout was found at
         if r is None:
             continue
         yield pid, r, o, np.asarray(t, float)
@@ -593,7 +596,7 @@ def run(context):
 def fusion_package(c, e, version: str, report_md: str, proof: dict | None, checker_path=None) -> bytes:
     """Files a later Fusion 360 cross-check needs: placed and canonical meshes, transforms, the app's mass
     properties and validation results for comparison, the report, the proof certificate and a DRAFT import script."""
-    phys = c._phys()
+    phys = c._phys(e.part_scale)
     buf = io.BytesIO()
     parts, hardware = [], []
     with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
