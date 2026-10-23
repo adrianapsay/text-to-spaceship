@@ -21,6 +21,10 @@ dependencies = [
     "psutil>=6",
     "threadpoolctl>=3.5",
     "fast-simplification>=0.1.9",
+    "gmsh>=4.15.2",
+    "ngsolve>=6.2.2608",
+    "pymoto>=2.0.1",
+    "pytopo3d>=0.3.0",
 ]
 
 [dependency-groups]
