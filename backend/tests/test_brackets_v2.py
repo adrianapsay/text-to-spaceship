@@ -154,6 +154,14 @@ def test_bracket_proof_round_trip_and_mutations(recs, files, tmp_path):
         bad["static_pairs"][0]["corners_b"] = bad["static_pairs"][0]["corners_a"]
         code, out = check(bad)
         assert code != 0
+    # a frame item the app certified numerically (compound boxes / exact distance) is counted, not re-derived from
+    # the part's vertex box (a sphere in a corner overlaps the rail as a box, not as a solid)
+    num = copy.deepcopy(cert)
+    num["statics"][0]["method"] = "numeric"
+    num["statics"][0]["corners"] = [list(p) for p in np.asarray(num["statics"][0]["corners"]) * 0 +
+                                    np.asarray(num["parts"][0]["t_mm"])]
+    code, out = check(num)
+    assert code == 0 and "certified numerically" in out, out
     # a part-to-bracket clearance check left out
     i = next(i for i, s in enumerate(cert["statics"]) if s["static"].startswith("bracket:"))
     bad = copy.deepcopy(cert)

@@ -93,15 +93,50 @@ def mesh_hollow_cylinder(ri: float, ro: float, length: float, h: float, threads:
         return _extract_tet10(gmsh)
 
 
-def mesh_surface(v: np.ndarray, f: np.ndarray, h: float, threads: int = 1, remesh: bool = True):
+def mesh_surface(v: np.ndarray, f: np.ndarray, h: float, threads: int = 1, remesh: bool = True,
+                 algorithms=(10, 4, 1)):
     """Tetrahedralise a closed, consistently oriented triangle mesh (a bracket STL). remesh=False keeps the given
     surface triangles as the boundary of the tet mesh (the solid meshed is exactly the solid given — used for designed
-    brackets, whose surface is the certified one)."""
+    brackets, whose surface is the certified one). gmsh 3D algorithms are tried in turn until no tetrahedron is
+    degenerate: HXT (10) first — on marching-cubes surfaces gmsh's Delaunay (1) left zero-volume slivers that
+    CalculiX rejects — then Frontal (4), then Delaunay. A mesh whose worst tetrahedron has quality ≥ 1e-3 is taken at
+    once; otherwise the best one, if its worst element is still ≥ 1e-5 (CalculiX rejected elements near 1e-6)."""
+    best, err = None, None
+    for alg in algorithms:
+        try:
+            nodes, tets = _mesh_surface_once(v, f, h, threads, remesh, alg)
+        except (OSError, RuntimeError, ValueError) as exc:     # gmsh can crash on a surface (access violation):
+            err = exc                                           # start it afresh and try the next algorithm
+            _reset_gmsh()
+            continue
+        q = float(tet_quality(nodes, tets).min())
+        if q >= 1e-3:
+            return nodes, tets
+        if best is None or q > best[0]:
+            best = (q, nodes, tets)
+    if best is None:
+        raise ValueError(f"gmsh failed with every algorithm ({err!r})")
+    if best[0] >= 1e-5:
+        return best[1], best[2]
+    raise ValueError(f"degenerate tetrahedra with every gmsh algorithm (best min quality {best[0]:.2e})")
+
+
+def _reset_gmsh():
+    import gmsh
+    try:
+        if gmsh.isInitialized():
+            gmsh.finalize()
+    except Exception:  # noqa: BLE001 - a crashed gmsh may not finalise cleanly
+        pass
+
+
+def _mesh_surface_once(v, f, h, threads, remesh, algorithm3d):
     import os
     import tempfile
     from ..geometry.stl_io import write_binary_stl
     with _LOCK:
         gmsh = _start(h, threads)
+        gmsh.option.setNumber("Mesh.Algorithm3D", algorithm3d)
         with tempfile.TemporaryDirectory() as d:
             p = os.path.join(d, "surface.stl")
             write_binary_stl(p, np.asarray(v, float), np.asarray(f, np.int64))
@@ -114,6 +149,14 @@ def mesh_surface(v: np.ndarray, f: np.ndarray, h: float, threads: int = 1, remes
         gmsh.model.geo.addVolume([loop])
         gmsh.model.geo.synchronize()
         return _extract_tet10(gmsh)
+
+
+def tet_quality(nodes: np.ndarray, tets: np.ndarray) -> np.ndarray:
+    """Shape quality of the corner tetrahedra: 6√2·V / l_rms³ (1 = regular, 0 = flat)."""
+    p = nodes[tets[:, :4]]
+    vol = np.einsum("ij,ij->i", p[:, 1] - p[:, 0], np.cross(p[:, 2] - p[:, 0], p[:, 3] - p[:, 0])) / 6.0
+    l2 = sum(np.sum((p[:, a] - p[:, b]) ** 2, axis=1) for a, b in ((0, 1), (0, 2), (0, 3), (1, 2), (1, 3), (2, 3)))
+    return 6.0 * np.sqrt(2.0) * vol / np.sqrt(l2 / 6.0) ** 3
 
 
 def boundary_faces(tets: np.ndarray) -> np.ndarray:
@@ -135,11 +178,60 @@ def boundary_faces(tets: np.ndarray) -> np.ndarray:
     return np.array(list(faces.values()), dtype=np.int64).reshape(-1, 6)
 
 
-def consistent_surface_load(nodes: np.ndarray, faces: np.ndarray, total_force) -> dict[int, np.ndarray]:
-    """Spread a total force over the given 6-node boundary triangles as a uniform traction (force per area):
-    for a straight-sided quadratic triangle the consistent nodal loads are 0 at the corners and 1/3 of the face's
-    share at each mid-side node."""
+def face_set_moments(nodes: np.ndarray, faces: np.ndarray):
+    """(area A, area centroid c, J) of a set of straight triangles, J = ∫ (|r|² I − r rᵀ) dA with r = x − c (exact:
+    ∫_T x xᵀ dA = A/12 · (Σ pᵢ pᵢᵀ + s sᵀ), s = Σ pᵢ)."""
+    p = nodes[np.asarray(faces)[:, :3]].astype(float)
+    a = 0.5 * np.linalg.norm(np.cross(p[:, 1] - p[:, 0], p[:, 2] - p[:, 0]), axis=1)
+    A = float(a.sum())
+    c = (a[:, None] * p.mean(axis=1)).sum(0) / A
+    q = p - c
+    s = q.sum(axis=1)
+    S = (a[:, None, None] / 12.0 * (np.einsum("fki,fkj->fij", q, q) + np.einsum("fi,fj->fij", s, s))).sum(0)
+    return A, c, np.trace(S) * np.eye(3) - S
+
+
+def traction_field(nodes, faces, total_force, moment=None):
+    """(a, ω, c) of the traction t(x) = a + ω × (x − c) carrying `total_force` and `moment` (about the area
+    centroid c) on the faces (see problem.SurfaceLoad)."""
+    A, c, J = face_set_moments(nodes, faces)
+    a = np.asarray(total_force, float) / A
+    w = np.zeros(3) if moment is None else np.linalg.solve(J, np.asarray(moment, float))
+    return a, w, c
+
+
+def _tri_rule():
+    """Dunavant's degree-5, 7-point rule on the triangle (barycentric points, weights summing to 1)."""
+    pts, wts = [(1 / 3, 1 / 3, 1 / 3)], [0.225]
+    for a, b, w in ((0.059715871789770, 0.470142064105115, 0.132394152788506),
+                    (0.797426985353087, 0.101286507323456, 0.125939180544827)):
+        for perm in ((a, b, b), (b, a, b), (b, b, a)):
+            pts.append(perm)
+            wts.append(w)
+    return np.array(pts), np.array(wts)
+
+
+def consistent_surface_load(nodes: np.ndarray, faces: np.ndarray, total_force, moment=None) -> dict[int, np.ndarray]:
+    """Spread a total force over the given 6-node boundary triangles as a traction. Uniform (no moment): for a
+    straight-sided quadratic triangle the consistent nodal loads are 0 at the corners and 1/3 of the face's share at
+    each mid-side node. With a moment (about the faces' area centroid) the traction is linear (traction_field) and
+    the consistent loads ∫ Nᵢ t dA are integrated exactly (degree-5 rule; the integrand is cubic)."""
     total_force = np.asarray(total_force, float)
+    if moment is not None and np.any(np.asarray(moment, float)):
+        a, w, c = traction_field(nodes, faces, total_force, moment)
+        L, wq = _tri_rule()
+        P = nodes[faces[:, :3]].astype(float)                                 # (F, 3, 3)
+        area = 0.5 * np.linalg.norm(np.cross(P[:, 1] - P[:, 0], P[:, 2] - P[:, 0]), axis=1)
+        N = np.stack([L[:, 0] * (2 * L[:, 0] - 1), L[:, 1] * (2 * L[:, 1] - 1), L[:, 2] * (2 * L[:, 2] - 1),
+                      4 * L[:, 0] * L[:, 1], 4 * L[:, 1] * L[:, 2], 4 * L[:, 2] * L[:, 0]], axis=1)   # (Q, 6)
+        X = np.einsum("qk,fkj->fqj", L, P)                                    # (F, Q, 3) quadrature points
+        T = a + np.cross(w, X - c)                                            # (F, Q, 3) traction
+        Fn = np.einsum("f,q,qi,fqj->fij", area, wq, N, T)                     # (F, 6, 3) nodal forces
+        out: dict[int, np.ndarray] = {}
+        for fi in range(len(faces)):
+            for k, nidx in enumerate(faces[fi]):
+                out[int(nidx)] = out.get(int(nidx), np.zeros(3)) + Fn[fi, k]
+        return out
     p = nodes[faces[:, :3]]
     area = 0.5 * np.linalg.norm(np.cross(p[:, 1] - p[:, 0], p[:, 2] - p[:, 0]), axis=1)
     out: dict[int, np.ndarray] = {}

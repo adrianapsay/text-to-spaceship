@@ -43,13 +43,21 @@ REFERENCES = {
     "block": ("t2s.gd.entrants.baseline_shell", "machined_block", "reference: whole reserved space solid"),
     "sheet": ("t2s.gd.entrants.baseline_shell", "sheet_bracket", "reference: 1.5 mm sheet Z-bracket"),
 }
-VOL_LADDER = (0.12, 0.2, 0.3, 0.45)
-CRITERIA = [f"{LIMIT_G:.0f} g quasi-static in X, Y, Z separately (part inertia on the contact faces + bracket self-weight)",
-            f"FoS {FOS_YIELD} yield / {FOS_ULT} ultimate on {MATERIAL['yield_mpa']:.0f} / {MATERIAL['ultimate_mpa']:.0f} MPa "
-            f"(AlSi10Mg L-PBF stress-relieved)",
-            f"first frequency with the part ≥ {F1_PASS:.0f} Hz (target {F1_TARGET:.0f} Hz), E = {MATERIAL['E_mpa'] / 1000:.0f} GPa",
-            "peak von Mises over both solvers, nodes on the bolted face excluded (constraint singularity)",
-            "solid inside the reserved box, joined to the wall and the part"]
+VOL_LADDER = (0.03, 0.05, 0.08, 0.12, 0.2, 0.3, 0.45)   # lightest first: the first passing rung is the result
+CRITERIA = [f"{LIMIT_G:.0f} g quasi-static in X, Y, Z separately: the part's inertia acting at its centre of mass "
+            "(force + moment on the contact faces, RBE3-like) + the bracket's self-weight",
+            "natural modes by Rayleigh–Ritz on six static deflections (the three 68 g cases and three pure torques on "
+            "the contact faces), the part a rigid mass with its inertia at its centre of mass",
+            "random vibration: Miles 3σ load on the GEVS acceptance spectrum, Q = 10; per axis the larger of Miles at "
+            "the mode with the largest effective mass along it and the SRSS of all modes' base forces",
+            f"design loads: yield max({FOS_YIELD} × {LIMIT_G:.0f} g, 1.6 × 3σ), ultimate max({FOS_ULT} × {LIMIT_G:.0f} g, "
+            f"1.8 × 3σ) on {MATERIAL['yield_mpa']:.0f} / {MATERIAL['ultimate_mpa']:.0f} MPa (AlSi10Mg L-PBF stress-relieved)",
+            f"first frequency (the lowest mode of any kind, a twisting part included) ≥ {F1_PASS:.0f} Hz "
+            f"(target {F1_TARGET:.0f} Hz), E = {MATERIAL['E_mpa'] / 1000:.0f} GPa",
+            "stress for the margins: von Mises of the stress averaged over each design voxel (peak over the voxels, "
+            "the cases and both solvers); raw nodal peaks sit at singular sharp corners and grow with mesh "
+            "refinement, so they are reported, not used",
+            "solid inside the reserved box, joined to the wall, with the whole contact layer joined to the wall"]
 
 
 def _load_part(name: str):
@@ -120,23 +128,27 @@ def run_contest(out_dir: str | Path, h: float = 1.0, budget_s: float = 240.0, th
             continue
         for dom, _ in probs:
             ladder = VOL_LADDER if key in ENTRANTS and key != "baseline" else (None,)
-            best = None
+            best, attempts = None, []
             for vf in ladder:
                 if vf is not None:
                     dom.vol_frac = vf
                 t0 = time.perf_counter()
                 try:
                     g = fn(dom, budget_s=budget_s, threads=threads)
-                except Exception as exc:  # noqa: BLE001
+                except Exception as exc:  # noqa: BLE001 - a failed rung: try the next volume fraction
                     log(f"[contest] {key} on {dom.name} vf={vf}: generator failed {exc!r}")
+                    attempts.append({"vol_frac": vf, "result": f"generator failed: {type(exc).__name__}"})
                     best = best or {"problem": dom.name, "generator": name or key, "key": key, "ok": False,
                                     "passed": False, "reason": f"generator failed: {exc!r}"}
-                    break
+                    continue
                 ev = evaluate(dom, g, threads=threads)
                 row = ev.summary()
                 row.update(problem=dom.name, generator=g.generator, vol_frac=vf, key=key,
                            iterations=g.iterations, notes=g.notes)
                 row["solvers"] = ev.solvers
+                attempts.append({"vol_frac": vf, "mass_g": row["mass_g"], "sigma_mpa": row["sigma_mpa"],
+                                 "f1_hz": row["f1_hz"], "passed": row["passed"],
+                                 "result": "PASS" if row["passed"] else (row["reason"] or "FAIL")})
                 log(f"[contest] {key} {dom.name} vf={vf}: mass {row['mass_g']} g, σ {row['sigma_mpa']}, "
                     f"f1 {row['f1_hz']}, passed {row['passed']} ({time.perf_counter() - t0:.0f} s)")
                 if ev.mesh is not None:
@@ -148,6 +160,7 @@ def run_contest(out_dir: str | Path, h: float = 1.0, budget_s: float = 240.0, th
                     best = row
                 if row["passed"]:
                     break
+            best["attempts"] = attempts
             rows.append(best)
             _save(out_dir, probs, entrant_info, rows, "RUNNING")
     res = _save(out_dir, probs, entrant_info, rows, "DONE")
@@ -163,6 +176,7 @@ def run_contest(out_dir: str | Path, h: float = 1.0, budget_s: float = 240.0, th
                 dom.vol_frac = r["vol_frac"]
             fine = evaluate(dom, GenResult(None, 0.0, r["generator"], mesh=mesh), threads=threads, h_fea=0.75 * dom.h)
             conv.append({"problem": dom.name, "note": "surface triangles split in four, interior element size 0.75 h",
+                         "reason": fine.reason, "sigma_peak_mpa": [r.get("sigma_peak_mpa"), fine.sigma_peak_mpa],
                          "sigma_mpa": [r["sigma_mpa"], fine.sigma_mpa],
                          "f1_hz": [r["f1_hz"], fine.f1_hz], "n_nodes": [r.get("n_nodes"), fine.n_nodes],
                          "sigma_change": (fine.sigma_mpa - r["sigma_mpa"]) / r["sigma_mpa"] if fine.sigma_mpa else None,
@@ -204,7 +218,10 @@ def contest_markdown(res: dict) -> str:
     L = ["# V2 generative-design contest — metal 3D-printed brackets", "",
          f"Results of `scripts/gd_contest.py` ({res['created']}, status {res['status']}). Every design is meshed "
          "(quadratic tetrahedra) and solved with **CalculiX 2.23 and NGSolve 6.2.2608** under the same loads; margins "
-         "use the larger peak stress and the lower first frequency of the two.", "", "## Criteria (ASSUMED)", ""]
+         "use the larger voxel-averaged stress and the lower first frequency of the two."
+         + (f" Every saved design was re-checked on {res['reevaluation']['at']} with `scripts/gd_reevaluate.py` "
+            "(see *Re-check with the modal analysis*)." if res.get("reevaluation") else ""),
+         "", "## Criteria (ASSUMED)", ""]
     L += [f"* {c}" for c in res["criteria"]]
     L += ["", "## Entrants", "", "| Entrant | Source | Run |", "|---|---|---|"]
     for e in res["entrants"]:
@@ -216,16 +233,37 @@ def contest_markdown(res: dict) -> str:
                  f"{' × '.join(map(str, p['grid']))} at {p['voxel_mm']} mm |")
     L += ["", "## Results", ""]
     for p in res["problems"]:
-        L += [f"### {p['name']}", "", "| Generator | Vol. frac. | Mass | Peak σ | MS yield | MS ult. | f1 (with part) | "
-              "σ agreement | Time | Result |", "|---|---|---|---|---|---|---|---|---|---|"]
+        L += [f"### {p['name']}", "", "| Generator | Vol. frac. | Mass | σ at 68 g (voxel avg) | raw nodal peak | "
+              "governing load | MS yield | MS ult. | f1 (with part) | σ agreement | Time | Result |",
+              "|---|---|---|---|---|---|---|---|---|---|---|---|"]
         for r in [x for x in res["rows"] if x["problem"] == p["name"]]:
             ag = (r.get("agreement") or {}).get("sigma_rel")
             t = (r.get("gen_seconds") or 0) + (r.get("fea_seconds") or 0)
+            gov = min(r["axes"], key=lambda a: a["ms_yield"]) if r.get("axes") else None
+            gtxt = (f"{gov['case']}, {gov['governs']} ({gov['yield_factor_g']:.0f} g)" if gov else "—")
+            mode = (r.get("modes") or [{}])[0].get("motion")
             L.append(f"| {r['generator']} | {n(r.get('vol_frac'), '.2f')} | {n(r.get('mass_g'), '.1f', ' g')} | "
-                     f"{n(r.get('sigma_mpa'), '.0f', ' MPa')} | {n(r.get('ms_yield'), '+.2f')} | {n(r.get('ms_ult'), '+.2f')} | "
-                     f"{n(r.get('f1_hz'), '.0f', ' Hz')} | {n(None if ag is None else 100 * ag, '.4f', ' %')} | "
+                     f"{n(r.get('sigma_mpa'), '.0f', ' MPa')} | {n(r.get('sigma_peak_mpa'), '.0f', ' MPa')} | {gtxt} | "
+                     f"{n(r.get('ms_yield'), '+.2f')} | {n(r.get('ms_ult'), '+.2f')} | "
+                     f"{n(r.get('f1_hz'), '.0f', ' Hz')}{f' ({mode})' if mode else ''} | "
+                     f"{n(None if ag is None else 100 * ag, '.4f', ' %')} | "
                      f"{t:.0f} s | {'PASS' if r.get('passed') else ('FAIL' if r.get('ok') else 'NO DESIGN')}"
                      f"{(': ' + r['reason']) if r.get('reason') else ''} |")
+        L.append("")
+    L += ["## Weight vs strength: every rung of the volume-fraction ladder", "",
+          "Each optimiser was run from the lightest volume fraction up and stopped at the first design that passed.", ""]
+    for p in res["problems"]:
+        L += [f"**{p['name']}**", "", "| Generator | Volume fraction → mass, σ (voxel avg), f1, result |", "|---|---|"]
+        for r in [x for x in res["rows"] if x["problem"] == p["name"] and x.get("attempts") and
+                  x["attempts"][0].get("vol_frac") is not None]:
+            cells = []
+            for a in r["attempts"]:
+                if a.get("mass_g") is None:
+                    cells.append(f"{a['vol_frac']:.2f}: {a['result']}")
+                else:
+                    cells.append(f"{a['vol_frac']:.2f}: {a['mass_g']:.1f} g, {n(a.get('sigma_mpa'), '.0f')} MPa, "
+                                 f"{n(a.get('f1_hz'), '.0f')} Hz, {'PASS' if a['passed'] else 'fail'}")
+            L.append(f"| {r['generator']} | {' · '.join(cells)} |")
         L.append("")
     L += ["## Standings", "", "| Rank | Generator | Passed | Total mass (failed problem = machined block) |",
           "|---|---|---|---|"]
@@ -234,35 +272,75 @@ def contest_markdown(res: dict) -> str:
     w = res.get("winner")
     L += ["", "## Winner", "", f"**{w['generator']}** — {w['why']}." if w else "No entrant passed a problem.", ""]
     if w and w.get("refinement"):
-        L += ["Mesh-refinement check of the winner's designs (surface triangles split in four, finer interior):", "",
-              "| Problem | Peak σ (base → fine) | f1 (base → fine) | Still passes |", "|---|---|---|---|"]
+        L += ["Mesh-refinement check of the winner's designs (surface triangles split in four, interior 0.75 h; about "
+              "five times the nodes):", "",
+              "| Problem | σ voxel avg (base → fine) | raw nodal peak (base → fine) | f1 (base → fine) | Still passes |",
+              "|---|---|---|---|---|"]
         for c in w["refinement"]:
             s0, s1 = c["sigma_mpa"]
+            p0, p1 = c.get("sigma_peak_mpa") or (None, None)
             f0, f1 = c["f1_hz"]
+            pc = None if p0 is None or p1 is None else 100 * (p1 / p0 - 1)
             L.append(f"| {c['problem']} | {n(s0, '.0f')} → {n(s1, '.0f')} MPa ({n(None if c['sigma_change'] is None else 100 * c['sigma_change'], '+.1f', ' %')}) | "
+                     f"{n(p0, '.0f')} → {n(p1, '.0f')} MPa ({n(pc, '+.1f', ' %')}) | "
                      f"{n(f0, '.0f')} → {n(f1, '.0f')} Hz ({n(None if c['f1_change'] is None else 100 * c['f1_change'], '+.1f', ' %')}) | "
-                     f"{'yes' if c['passed_fine'] else 'NO'} |")
+                     f"{'yes' if c['passed_fine'] else 'NO' + (': ' + c['reason'] if c.get('reason') else '')} |")
         L.append("")
+    rc = res.get("reevaluation")
+    if rc:
+        L += ["## Re-check with the modal analysis", "", rc["note"], "",
+              "| Design | f1 before → now (first mode now) | axis frequencies before → now | MS yield before → now | "
+              "Result before → now |", "|---|---|---|---|---|"]
+        for c in rc["changes"]:
+            fa = " / ".join(f"{n(a, '.0f')}→{n(b, '.0f')}" for a, b in zip(c["axis_f_old"], c["axis_f_new"]))
+            L.append(f"| {c['design']} | {n(c['f1_old'], '.0f')} → {n(c['f1_new'], '.0f')} Hz ({c.get('mode') or '—'}) | "
+                     f"{fa} Hz | {n(c['ms_yield_old'], '+.2f')} → {n(c['ms_yield_new'], '+.2f')} | "
+                     f"{'PASS' if c['passed_old'] else 'fail'} → {'PASS' if c['passed_new'] else 'fail'} |")
+        if rc.get("ladder"):
+            L += ["", *[f"* {x}" for x in rc["ladder"]]]
+        L.append("")
+    ref = [c for c in ((w or {}).get("refinement") or []) if c.get("sigma_change") is not None
+           and (c.get("sigma_peak_mpa") or [None, None])[1] is not None]
+    if ref:
+        pk = [100 * (c["sigma_peak_mpa"][1] / c["sigma_peak_mpa"][0] - 1) for c in ref]
+        va = [100 * c["sigma_change"] for c in ref]
+        measured = (f"in the refinement check above the raw peaks changed by {min(pk):+.0f} … {max(pk):+.0f} % while "
+                    f"the voxel averages changed by {min(va):+.0f} … {max(va):+.0f} %")
+    else:
+        measured = "see the refinement check"
     L += ["## Notes", "",
           "* The two solvers solve the same discrete problem exactly, so their agreement verifies the implementations; "
           "mesh accuracy is checked by the refinement above and by the analytical benchmarks in the solver tests.",
-          "* Peak stresses exclude only the nodes on the bolted face (the clamp is singular there); fasteners, bearing "
-          "and fillets are not modelled (hand calculations per the research note).",
+          "* Why the voxel average: a design made of voxels has sharp corners (the voxel staircase, the edge of the "
+          "clamped face, the edge of the uniform load patch). Linear-elastic stress at a sharp re-entrant corner is "
+          f"singular, so the raw nodal peak grows each time the mesh is refined — {measured}. The voxel is the "
+          "resolution of the design; fillets and local details belong to the detailed design, where the peak "
+          "stresses must be checked again.",
+          "* Fasteners, bearing and the part–bracket interface are not modelled (hand calculations per the research "
+          "note). Nodes on the bolted face are excluded.",
           "* Generators get the same time budget per run; their own settings are in their module docstrings. "
           "The volume-fraction ladder stops at the first passing design, so the reported design is the lightest "
           "passing one on that ladder.",
-          "* Material values are typical datasheet values, not A/B-basis allowables; ASSUMED, not flight-qualified.", ""]
+          "* Material values are typical datasheet values, not A/B-basis allowables; ASSUMED, not flight-qualified.",
+          "* Every design keeps the passive 1.5 mm bolted and contact layers, so the lightest possible design of a "
+          "problem is never far below the mass of those layers.",
+          "* Generator failures are listed as they happened (e.g. a Pardiso zero-pivot in pyMOTO at the lowest volume "
+          "fraction); a failed rung moves the entrant to the next one.", ""]
     return "\n".join(L)
+
+
+def winner(st) -> dict | None:
+    if not st or not st[0]["passed"]:
+        return None
+    w = st[0]
+    why = (f"passed {w['passed']}/{w['problems']} problems with the lowest total mass "
+           f"({w['total_mass_g']:.1f} g; a failed problem counts as the machined block)")
+    return {"generator": w["generator"], "key": w["key"], "why": why}
 
 
 def _save(out_dir: Path, probs, entrant_info, rows, status) -> dict:
     st = standings(rows, entrant_info)
-    win = None
-    if st and status == "DONE" and st[0]["passed"]:
-        w = st[0]
-        why = (f"passed {w['passed']}/{w['problems']} problems with the lowest total mass "
-               f"({w['total_mass_g']:.1f} g; a failed problem counts as the machined block)")
-        win = {"generator": w["generator"], "key": w["key"], "why": why}
+    win = winner(st) if status == "DONE" else None
     res = {"created": datetime.now(UTC).isoformat(timespec="seconds"), "status": status, "criteria": CRITERIA,
            "problems": [{"name": d.name, "description": desc, "part_mass_kg": d.part_mass_kg,
                          "reserve_mm": [round(float(x), 3) for x in d.reserve], "voxel_mm": d.h,

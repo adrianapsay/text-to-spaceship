@@ -47,13 +47,29 @@ def _props(v, f, density):
     return float(m), np.asarray(up.com_mm, float), m * (np.asarray(up.j_mm5) / up.volume_mm3) * 1e-6, float(up.volume_mm3)
 
 
-def design_bracket(b: dict, rec, orient: int, t, part_mass_kg: float, key: str, h: float = 1.0,
-                   budget_s: float = 180.0, threads: int = 2, log=print) -> tuple[dict, tuple | None]:
+MAX_VOXELS = 40000      # a larger reserved box is designed on coarser voxels (memory and time of the FE check)
+
+
+def design_h(reserve, axis: int | None = None, h_min: float = 1.5, layers: int = 6) -> float:
+    """Voxel size for a bracket's reserved box: the contest's 1.5 mm, coarser (in 0.25 mm steps) when the box would
+    need more than MAX_VOXELS voxels — but fine enough for `layers` voxel layers between the wall and the far end of
+    the box along the bracket axis (a 3 mm gap needs ~1 mm voxels to hold a bolted layer, a contact layer and
+    material between them)."""
+    ext = np.asarray(reserve[3:], float) - np.asarray(reserve[:3], float)
+    h = float(np.ceil(max(h_min, float(np.prod(ext) / MAX_VOXELS) ** (1.0 / 3.0)) * 4.0) / 4.0)
+    if axis is not None:
+        h = min(h, max(0.5, float(np.floor(ext[axis] / layers * 4.0) / 4.0)))
+    return h
+
+
+def design_bracket(b: dict, rec, orient: int, t, part_mass_kg: float, key: str, h: float | None = None,
+                   budget_s: float = 300.0, threads: int = 2, log=print) -> tuple[dict, tuple | None]:
     from ..mfg.rules import FASTENER_MASS_KG, MATERIAL, bracket_cost
     from .evaluate import evaluate
     am = b["kind"] == "metal_am"
     gkey = key if am else "baseline"
     fn, name = _gen(gkey)
+    h = design_h(b["reserve"], int(b["axis"])) if h is None else h
     dom = domain_from_bracket(b, rec, orient, t, h=h, part_mass_kg=part_mass_kg)
     ladder = VOL_LADDER if (am and gkey != "baseline") else (None,)
     best, best_mesh = None, None
@@ -101,9 +117,11 @@ def design_bracket(b: dict, rec, orient: int, t, part_mass_kg: float, key: str, 
          "passed": bool(best.get("passed")), "reason": best.get("reason", ""), "sigma_mpa": best.get("sigma_mpa"),
          "ms_yield": best.get("ms_yield"), "ms_ult": best.get("ms_ult"), "f1_hz": best.get("f1_hz"),
          "agreement": best.get("agreement"), "fallback": fallback, "n_nodes": best.get("n_nodes"),
-         "solvers": {k: {"solver": s["solver"], "f1_hz": s["f1_hz"], "seconds": s["seconds"]}
-                     for k, s in (best.get("solvers") or {}).items()},
-         "overhang_fraction": best.get("overhang_fraction"), "fastener_mass_kg": nf * FASTENER_MASS_KG}
+         "solvers": {k: {"solver": s["solver"], "seconds": s["seconds"], "f1_hz": s.get("f1_hz")}
+                     for k, s in (best.get("solvers") or {}).items() if isinstance(s, dict) and "solver" in s},
+         "modes": best.get("modes"),
+         "overhang_fraction": best.get("overhang_fraction"), "fastener_mass_kg": nf * FASTENER_MASS_KG,
+         "voxel_mm": h, "sigma_peak_mpa": best.get("sigma_peak_mpa"), "axes": best.get("axes")}
     return d, (v, f)
 
 

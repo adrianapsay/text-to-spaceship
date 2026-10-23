@@ -194,8 +194,9 @@ def problem_from_domain(domain: DesignDomain, rmin_mm: float = RMIN_MM) -> tuple
     ff = []
     n_c = int(domain.contact.sum())
     for lc in domain.load_cases():
-        f = np.zeros(domain.shape + (3,))
-        f[domain.contact] = np.asarray(lc["contact_force_n"], float) / n_c     # total force over the contact layer
+        # the part's force at its centre of mass, as force + moment over the contact voxels (domain.contact_voxel_forces)
+        f = domain.contact_voxel_forces(lc)
+        assert n_c and np.allclose(f.sum(axis=(0, 1, 2)), lc["contact_force_n"])
         ff.append(np.ascontiguousarray(np.transpose(f, (1, 0, 2, 3))))
     rmin = max(1.5, rmin_mm / domain.h)
     prob = Pytopo3dProblem(to_p(domain.void), to_p(domain.fixed | domain.contact), to_p(domain.fixed), ff, rmin,

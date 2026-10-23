@@ -96,7 +96,8 @@ def case_nodal_loads(problem: FeaProblem, case) -> dict[int, np.ndarray]:
             if np.any(np.asarray(sl.total_force_n, float) != 0):
                 raise ValueError(f"load case {case.name!r}: a surface load of {sl.total_force_n} N has no faces")
             continue
-        for n, f in consistent_surface_load(problem.nodes, np.asarray(sl.faces), sl.total_force_n).items():
+        for n, f in consistent_surface_load(problem.nodes, np.asarray(sl.faces), sl.total_force_n,
+                                            getattr(sl, "moment_nmm", None)).items():
             out[n] = out.get(n, np.zeros(3)) + f
     return out
 

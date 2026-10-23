@@ -170,10 +170,12 @@ def write_deck(dom: DesignDomain, path: Path, design: np.ndarray, passive: np.nd
             "*BOUNDARY", "NFIX,1,3"]
     cases = dom.load_cases()
     for case in cases:
-        f_tot = np.asarray(case["contact_force_n"], float)
+        # the part's force at its centre of mass, as force + moment over the contact voxels
+        # (domain.contact_voxel_forces), each voxel's share split 1/8 to its nodes
+        fv = dom.contact_voxel_forces(case)[tuple(vox[cont].T)]            # (nc, 3), same rows as cont_nodes
         loads = np.zeros((len(used), 3))
         pos = np.searchsorted(used, cont_nodes.ravel())
-        np.add.at(loads, pos, np.repeat(f_tot[None] / (8.0 * len(cont_nodes)), cont_nodes.size, axis=0))
+        np.add.at(loads, pos, np.repeat(fv / 8.0, 8, axis=0))
         out += [f"** load case {case['name']}", "*STEP", f"*STATIC, SOLVER={solver}", "*CLOAD, OP=NEW"]
         lines = [f"{n},{d + 1},{_f(v[d])}" for n, v in zip(used.tolist(), loads.tolist()) for d in range(3)
                  if v[d] != 0.0]

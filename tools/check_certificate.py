@@ -274,6 +274,8 @@ def main(cert_path, stl_dir):
         else:
             numeric += 1
     for s in cert["statics"]:
+        if s["method"] == "numeric":       # certified by the app (compound boxes / exact distance): counted below
+            continue
         a, req = parts[s["part"]], s["required_mm"]
         corners = [tuple(c) for c in s["corners"]]
         if s["method"] == "hull_plane":

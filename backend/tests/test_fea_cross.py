@@ -24,6 +24,38 @@ def l_bracket(h=2.0):
     return mesh_surface(np.asarray(mesh.vert_properties)[:, :3], np.asarray(mesh.tri_verts), h=h)
 
 
+@pytest.mark.skipif(not ccx.available(), reason="CalculiX not installed (tools/ccx)")
+def test_offset_tip_load_matches_beam_theory_in_both_solvers():
+    """A force acting 50 mm beyond the free end, brought onto the tip face as force + moment (linear traction):
+    tip deflection = F L³/3EI + F e L²/2EI (+ shear F L/κGA) in both solvers; the clamp carries F (L + e)."""
+    from t2s.fea.mesh import consistent_surface_load, face_set_moments
+    E, nu, L, B, H, F, e = 70000.0, 0.33, 200.0, 10.0, 6.0, 100.0, 50.0
+    nodes, tets = mesh_box([0, 0, 0], [L, B, H], h=2.5)
+    faces = boundary_faces(tets)
+    p = nodes[faces[:, :3]]
+    fixed = faces[np.all(np.abs(p[:, :, 0]) < 1e-9, axis=1)]
+    tip = faces[np.all(np.abs(p[:, :, 0] - L) < 1e-9, axis=1)]
+    A, c, _ = face_set_moments(nodes, tip)
+    force = np.array([0.0, 0.0, -F])
+    moment = np.cross(np.array([L + e, B / 2, H / 2]) - c, force)
+    loads = consistent_surface_load(nodes, tip, force, moment)            # resultant and moment reproduced exactly
+    tot = sum(loads.values())
+    mom = sum(np.cross(nodes[n] - c, f) for n, f in loads.items())
+    assert np.allclose(tot, force, atol=1e-9) and np.allclose(mom, moment, atol=1e-6)
+    prob = FeaProblem(nodes, tets, Material("Al", E, nu, 2.7e-9), fixed,
+                      [LoadCase("offset", [SurfaceLoad(tip, force, moment)])], n_modes=0)
+    I = B * H ** 3 / 12.0
+    G = E / (2 * (1 + nu))
+    ref = F * L ** 3 / (3 * E * I) + F * e * L ** 2 / (2 * E * I) + F * L / (5 / 6 * G * B * H)
+    for solve in (lambda pr: ccx.run(pr, threads=2), lambda pr: ngs.solve_with_fields(pr, threads=2)):
+        res, fields = solve(prob)
+        u = np.asarray(fields.displacement[0])
+        tip_nodes = np.unique(tip.ravel())
+        w = np.mean(u[tip_nodes, 2])
+        assert abs(-w - ref) / ref < 0.015, (res.solver, -w, ref)
+        assert np.allclose(res.cases[0].reaction_n, -force, atol=1e-6 * F)
+
+
 def test_mesher_is_deterministic():
     a = mesh_box([0, 0, 0], [20, 10, 6], h=2.0)
     b = mesh_box([0, 0, 0], [20, 10, 6], h=2.0)

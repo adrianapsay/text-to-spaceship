@@ -103,9 +103,19 @@ export interface BracketDesign {
   ms_yield: number | null;
   ms_ult: number | null;
   f1_hz: number | null;
+  /** natural modes (Rayleigh–Ritz, part at its CG), lowest first */
+  modes?: BracketMode[] | null;
   agreement?: Record<string, number | null>;
   solvers?: Record<string, { solver: string; f1_hz: number | null; seconds: number }>;
   fallback?: string | null;
+}
+
+export interface BracketMode {
+  f_hz: number;
+  /** effective-mass fraction along x, y, z */
+  eff_mass_frac: [number, number, number];
+  /** e.g. "part rotates about x", "part moves along y" */
+  motion: string;
 }
 
 /** V2: generative-design contest results (endpoint /api/gd/contest) */
@@ -116,10 +126,14 @@ export interface ContestRow {
   passed: boolean;
   reason: string;
   mass_g: number | null;
+  /** von Mises averaged over each design voxel (used for the margins) */
   sigma_mpa: number | null;
+  /** raw nodal peak at sharp corners: grows with mesh refinement, reported only */
+  sigma_peak_mpa?: number | null;
   ms_yield: number | null;
   ms_ult: number | null;
   f1_hz: number | null;
+  modes?: BracketMode[] | null;
   max_disp_mm: number | null;
   gen_seconds: number | null;
   fea_seconds: number | null;

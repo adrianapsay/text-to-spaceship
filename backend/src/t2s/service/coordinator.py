@@ -1255,6 +1255,7 @@ class Coordinator:
                         "box_mm": b})
         for k, b in enumerate(e.meta.get("brackets") or []):        # V2 Stage 2 brackets (designed solid if any)
             d = (e.meta.get("bracket_designs") or {}).get(b["pid"])
+            d = d if d and d.get("mass_kg") is not None else None    # a failed design keeps the estimate
             out.append({"id": f"{e.id}-br{k}", "kind": "bracket", "bracket_kind": b["kind"], "process": b["process"],
                         "for_part": b["pid"], "mesh_url": f"/api/items/{e.id}-br{k}/mesh",
                         "mass_kg": d["mass_kg"] if d else b["mass_kg"], "cost_rel": d["cost_rel"] if d else b["cost_rel"],

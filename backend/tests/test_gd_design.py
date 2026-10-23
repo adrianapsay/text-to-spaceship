@@ -33,6 +33,9 @@ def test_metal_am_bracket_is_designed_inside_its_box(dataset_parts):
             o, t = next((pad.get(p, o), t) for p, o, t in r.poses if p == b["pid"])
             break
     assert b is not None, "no metal-AM bracket in 30 random layouts"
+    from t2s.gd.design import design_h
+    assert design_h([0, 0, 0, 30, 30, 30]) == 1.5 and design_h([0, 0, 0, 100, 100, 100]) > 1.5
+    assert design_h([0, 0, 0, 7, 48, 32], axis=0) == 1.0            # a 3 mm gap + 4 mm wrap: six layers across
     d, mesh = design_bracket(b, recs[b["pid"]], o, t, 0.3, "baseline", h=2.0, threads=2, log=lambda *_: None)
     assert mesh is not None and d["mass_kg"] > 0 and d["generator"]
     v, f = mesh

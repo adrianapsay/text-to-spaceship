@@ -271,12 +271,23 @@ def _run(problem: FeaProblem, notes: list[str]) -> tuple[list[CaseResult], NgsFi
         n_terms = 0
         for sl, s in zip(case.surface_loads, regions.case_sets[ci]):
             force = np.asarray(sl.total_force_n, float).reshape(3)
-            if not np.any(force):
+            moment = getattr(sl, "moment_nmm", None)
+            has_moment = moment is not None and np.any(np.asarray(moment, float))
+            if not np.any(force) and not has_moment:
                 continue
             area = regions.set_area[s]
             if area <= 0.0:
                 raise ValueError(f"load case {case.name!r}: a non-zero surface load acts on zero area")
-            f += ngs.InnerProduct(ngs.CF(tuple(force / area)), v) * ngs.ds(regions.set_regex[s])
+            if has_moment:
+                # linear traction t(x) = a + ω × (x − c) carrying the force and the moment (problem.SurfaceLoad)
+                from .mesh import traction_field
+                ta, w, c = traction_field(problem.nodes, np.asarray(sl.faces), force, moment)
+                rx, ry, rz = ngs.x - c[0], ngs.y - c[1], ngs.z - c[2]
+                t_cf = ngs.CF((ta[0] + w[1] * rz - w[2] * ry, ta[1] + w[2] * rx - w[0] * rz,
+                               ta[2] + w[0] * ry - w[1] * rx))
+            else:
+                t_cf = ngs.CF(tuple(force / area))
+            f += ngs.InnerProduct(t_cf, v) * ngs.ds(regions.set_regex[s])
             applied += force
             n_terms += 1
         if case.body_accel_mm_s2 is not None and np.any(case.body_accel_mm_s2):
@@ -292,7 +303,8 @@ def _run(problem: FeaProblem, notes: list[str]) -> tuple[list[CaseResult], NgsFi
             fvec[:] = 0.0
         fn = fvec.FV().NumPy()
         assembled = rigid @ fn                                            # resultant of the assembled load
-        tol = 1e-9 * max(1.0, float(np.abs(applied).max()))
+        # (a pure torque has zero resultant: the tolerance also scales with the nodal loads' size)
+        tol = 1e-9 * max(1.0, float(np.abs(applied).max())) + 1e-12 * float(np.abs(fn).sum())
         if np.abs(assembled - applied).max() > tol:
             raise RuntimeError(f"load case {case.name!r}: assembled load {assembled} != applied {applied}")
 

@@ -224,8 +224,16 @@ def build(domain: DesignDomain) -> SimpleNamespace:
     Fc = np.array([c["contact_force_n"] for c in cases], float)           # (ncases, 3) N
     acc = np.array([c["body_accel_mm_s2"] for c in cases], float)         # (ncases, 3) mm/s²
     c_el = el[contact]
-    w = np.bincount(dom.conn[c_el].ravel(), minlength=dom.nnodes) / (8.0 * c_el.size)
-    F0 = (w[:, None, None] * Fc.T[None, :, :]).reshape(3 * dom.nnodes, len(cases))
+    # the part's force at its centre of mass, as force + moment over the contact voxels (domain.contact_voxel_forces),
+    # each voxel's share split 1/8 to its nodes
+    F0 = np.zeros((dom.nnodes, 3, len(cases)))
+    for k, c in enumerate(cases):
+        fv = domain.contact_voxel_forces(c)[contact]                      # (n_contact, 3), grid order = el[contact]
+        nodal = np.zeros((dom.nnodes, 3))
+        np.add.at(nodal, dom.conn[c_el].ravel(), np.repeat(fv / 8.0, 8, axis=0))
+        F0[:, :, k] = nodal
+    assert np.allclose(F0.sum(axis=0).T, Fc)
+    F0 = F0.reshape(3 * dom.nnodes, len(cases))
     m_vox = float(mat["rho_t_mm3"]) * h ** 3                              # t; t·mm/s² = N
 
     use_pardiso = SolverSparsePardiso.defined

@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import type { BracketDesign, BracketInfo, ContestResults, LayoutSummary } from '../api/types';
+import type { BracketDesign, BracketInfo, BracketMode, ContestResults, LayoutSummary } from '../api/types';
 import { session } from '../api/session';
 import { useApp } from '../store/store';
 import { useAsync, useParts } from '../hooks';
@@ -36,8 +36,26 @@ function Margin({ v }: { v: number | null | undefined }) {
   return <Badge tone={v >= 0 ? 'ok' : 'err'}>{(v >= 0 ? '+' : '') + v.toFixed(2)}</Badge>;
 }
 
+/** First natural frequency and what the part does in that mode (e.g. "part rotates about x"). */
+function F1Cell({ f1, modes }: { f1: number | null | undefined; modes?: BracketMode[] | null }) {
+  if (f1 == null) return <span className="muted">—</span>;
+  const m = modes?.[0];
+  return (
+    <span title={modes?.map((x) => `${Math.round(x.f_hz)} Hz: ${x.motion}`).join('\n')}>
+      {Math.round(f1)} Hz{m ? <span className="muted small"> ({m.motion})</span> : null}
+    </span>
+  );
+}
+
 /** Mass cell: exact (built solid), ESTIMATE (reserved box only) or the designed, FEA-checked solid. */
 function MassCell({ b, d }: { b: BracketInfo; d?: BracketDesign }) {
+  if (d && d.mass_kg == null) {
+    return (
+      <span title={d.reason}>
+        {fmt(b.mass_kg, 'kg')} <Badge tone="err">design failed</Badge>
+      </span>
+    );
+  }
   if (d) {
     return (
       <span>
@@ -72,7 +90,9 @@ function BracketTable({ brackets, designs, names }: { brackets: BracketInfo[]; d
       </thead>
       <tbody>
         {brackets.map((b) => {
-          const d = designs[b.pid];
+          const d0 = designs[b.pid];
+          const failed = !!d0 && d0.mass_kg == null;
+          const d = failed ? undefined : d0;
           const st = extraItemStyle(b.process);
           return (
             <tr key={b.name}>
@@ -90,7 +110,7 @@ function BracketTable({ brackets, designs, names }: { brackets: BracketInfo[]; d
               <td className="small">{boxSize(b.reserve)}</td>
               <td className="small">{b.material}</td>
               <td className="num">
-                <MassCell b={b} d={d} />
+                <MassCell b={b} d={d0} />
               </td>
               <td className="num">{fmt(d ? d.cost_rel : b.cost_rel, 'rel')}</td>
               <td className="num">
@@ -99,7 +119,7 @@ function BracketTable({ brackets, designs, names }: { brackets: BracketInfo[]; d
               <td className="num">
                 <Margin v={d?.ms_ult} />
               </td>
-              <td className="num">{d?.f1_hz != null ? `${Math.round(d.f1_hz)} Hz` : '—'}</td>
+              <td className="num"><F1Cell f1={d?.f1_hz} modes={d?.modes} /></td>
             </tr>
           );
         })}
@@ -156,7 +176,8 @@ function ContestPanel({ c, notAvailable }: { c: ContestResults | null; notAvaila
               <tr>
                 <th>Generator</th>
                 <th className="num">Mass</th>
-                <th className="num">Peak stress</th>
+                <th className="num">Stress (voxel avg)</th>
+                <th className="num">Raw peak</th>
                 <th className="num">MS yield</th>
                 <th className="num">MS ult.</th>
                 <th className="num">f1 (with part)</th>
@@ -173,13 +194,14 @@ function ContestPanel({ c, notAvailable }: { c: ContestResults | null; notAvaila
                     <td>{r.generator}</td>
                     <td className="num">{r.mass_g != null ? `${r.mass_g.toFixed(1)} g` : '—'}</td>
                     <td className="num">{r.sigma_mpa != null ? `${r.sigma_mpa.toFixed(0)} MPa` : '—'}</td>
+                    <td className="num muted">{r.sigma_peak_mpa != null ? `${r.sigma_peak_mpa.toFixed(0)} MPa` : '—'}</td>
                     <td className="num">
                       <Margin v={r.ms_yield} />
                     </td>
                     <td className="num">
                       <Margin v={r.ms_ult} />
                     </td>
-                    <td className="num">{r.f1_hz != null ? `${Math.round(r.f1_hz)} Hz` : '—'}</td>
+                    <td className="num"><F1Cell f1={r.f1_hz} modes={r.modes} /></td>
                     <td className="num small">{r.agreement?.sigma_rel != null ? `σ ${(100 * r.agreement.sigma_rel).toFixed(3)} %` : '—'}</td>
                     <td className="num">{fmt((r.gen_seconds ?? 0) + (r.fea_seconds ?? 0), 's')}</td>
                     <td>{r.passed ? <Badge tone="ok">PASS</Badge> : <Badge tone="err">{r.ok ? 'FAIL' : 'NO DESIGN'}</Badge>}{r.reason ? <div className="small muted">{r.reason}</div> : null}</td>
@@ -190,7 +212,8 @@ function ContestPanel({ c, notAvailable }: { c: ContestResults | null; notAvaila
         </div>
       ))}
       <div className="small muted" style={{ marginTop: 8 }}>
-        Criteria (ASSUMED): {c.criteria.join(' · ')}. Entrants: {c.entrants.map((e) => `${e.name}${e.available ? '' : ' (not run: ' + (e.note ?? 'unavailable') + ')'}`).join('; ')}.
+        Margins use the stress averaged over each design voxel: the raw peak at the sharp corners of a voxel-built
+        design grows every time the mesh is refined, the voxel average does not. Criteria (ASSUMED): {c.criteria.join(' · ')}. Entrants: {c.entrants.map((e) => `${e.name}${e.available ? '' : ' (not run: ' + (e.note ?? 'unavailable') + ')'}`).join('; ')}.
       </div>
     </Panel>
   );
@@ -221,6 +244,11 @@ export function HardwareTab() {
     return m;
   }, [brackets]);
   const mass = brackets.reduce((s, b) => s + (designs[b.pid]?.mass_kg ?? b.mass_kg), 0);
+  // the layout's cost C is the search-time estimate; designed brackets replace their estimated cost
+  const cost =
+    view?.hardware_cost_rel == null
+      ? null
+      : view.hardware_cost_rel + brackets.reduce((s, b) => s + (designs[b.pid]?.mass_kg != null ? designs[b.pid].cost_rel - b.cost_rel : 0), 0);
   const estimates = brackets.filter((b) => !b.exact && !designs[b.pid]).length;
   const design = async () => {
     if (!layout.data) return;
@@ -260,7 +288,7 @@ export function HardwareTab() {
             <div className="small" data-testid="hardware-totals">
               <div>
                 {brackets.length} brackets · hardware mass {fmt(mass, 'kg')}
-                {estimates ? ` (${estimates} estimated)` : ''} · relative cost {fmt(view?.hardware_cost_rel ?? null, 'rel')}
+                {estimates ? ` (${estimates} estimated)` : ''} · relative cost {fmt(cost, 'rel')}
               </div>
               <div style={{ marginTop: 4 }}>
                 {Object.entries(byKind).map(([k, n]) => (
@@ -302,7 +330,7 @@ export function HardwareTab() {
           <li>Reach: a bracket bridges up to 40 mm from the part's mounting side (its 3 mm layer side) to a wall, end plate, corner rail or the PC/104 deck.</li>
           <li>Cheapest bracket that fits: direct (≤ 3.5 mm), machined block (≤ 15 mm), sheet Z-bracket, tube clamp for cylindrical parts, machined cradle for curved or irregular sides; metal 3D-printed only with a budget above 0.</li>
           <li>Clearance: each reserved box keeps 1.2 mm from every other part, bracket and keep-out except the one it is fixed to.</li>
-          <li>Loads: 68 g quasi-static in each axis separately; factors of safety 1.25 (yield) and 1.4 (ultimate); AlSi10Mg 170 / 280 MPa, E 65 GPa; first frequency with the part ≥ 100 Hz (target 200 Hz).</li>
+          <li>Loads: 68 g quasi-static in each axis separately; factors of safety 1.25 (yield) and 1.4 (ultimate); AlSi10Mg 170 / 280 MPa, E 65 GPa; random vibration (Miles 3σ on the GEVS acceptance spectrum, factors 1.6 / 1.8) where it is larger; first natural frequency with the part, any mode including twisting, ≥ 100 Hz (target 200 Hz).</li>
         </ul>
       </Panel>
     </div>

@@ -31,9 +31,14 @@ class Material:
 
 @dataclass
 class SurfaceLoad:
-    """A total force (N) spread as a uniform traction (force per area) over a set of boundary faces."""
+    """A total force (N) spread over a set of boundary faces as a traction. Without a moment the traction is uniform
+    (force / area). With `moment_nmm` (N·mm, about the faces' area centroid c) it is the linear field
+    t(x) = F / A + ω × (x − c), ω = J⁻¹ M, J = ∫ (|r|² I − r rᵀ) dA (r = x − c): its resultant is F and its moment
+    about c is M — the least-squares (RBE3-like, area-weighted) way to bring a force acting elsewhere, e.g. at a held
+    part's centre of mass, onto the faces (mesh.face_set_moments)."""
     faces: np.ndarray                 # (k, 6) boundary 6-node triangles (mesh.boundary_faces rows)
     total_force_n: np.ndarray         # (3,)
+    moment_nmm: np.ndarray | None = None   # (3,) about the area centroid of `faces`
 
 
 @dataclass
