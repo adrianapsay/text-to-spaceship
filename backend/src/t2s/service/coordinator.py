@@ -29,6 +29,7 @@ import numpy as np
 from ..collision.geom import part_geom_from_record, to_world
 from ..collision.validate import Validator
 from ..constraints import stage2 as s2
+from ..core import formfactor
 from ..core.fileio import atomic_write_text
 from ..core.rotations import ROTATIONS_F, as_lists
 from ..geometry.stl_io import UNIT_TO_MM, read_stl_bytes
@@ -37,7 +38,7 @@ from ..optimise.brkga import Evaluator
 from ..optimise.scalarize import Normaliser, alpha_from, dominates, scalarise, slider_weights
 from ..optimise.selector import ALGORITHMS, AlgorithmChoice, grid_map, part_stats, select_algorithm, sweep
 from ..physics.assembly import PartPhys, assembly, com_box_check, inertia_metrics
-from .context import SearchContext, build_context, packable, stage2_config, write_context
+from .context import SearchContext, build_context, packable, parts_signature, stage2_config, write_context
 from .project import PartEntry, ProjectStore, build_record_file, now_iso, part_json, quick_inspect
 
 VERSION = "2.0.0-dev"
@@ -592,6 +593,7 @@ class Coordinator:
 
     def _refresh_inputs(self, reason: str, bump_parts: bool = True) -> None:
         """Rebuild the search context if parts or constraints changed; re-stamp, re-score, re-select."""
+        formfactor.set_form_factor(self.store.settings.get("form_factor", formfactor.DEFAULT))
         if bump_parts:
             self._bump("parts_rev")
         pending = self._confirmed_builds_pending()
@@ -613,7 +615,7 @@ class Coordinator:
             return
         ctx = build_context(recs, stage, {pid: self.reps[pid] for pid in recs if pid in self.reps},
                             stage2_mode=self._stage2_mode(), part_scale=self.part_scale(),
-                            am_allowed=self._am_allowed())
+                            am_allowed=self._am_allowed(), form_factor=formfactor.current())
         self._sig_scale[ctx.parts_sig] = ctx.part_scale
         if old is None or ctx.ctx_id != old.ctx_id:
             if old is not None and (ctx.constraint_sig != old.constraint_sig or ctx.stage != old.stage) \
@@ -638,7 +640,7 @@ class Coordinator:
             if self.run_status in ("CONVERGED", "IDLE") and (self.auto_start or self.search_requested):
                 self._set_status("SEARCHING", f"inputs changed: {reason}")
         self.ev = Evaluator(None, ctx.ids, self._phys(ctx.part_scale), ctx.orient_bounds, ctx.z0, target=self._target(),
-                            com_box=ctx.com_box)
+                            com_box=ctx.com_box, optional=self._optional_ids())
         self._restamp_and_rescore(physics=True)
         self.broadcast("project.changed", {"reason": reason})
         self._publish_best("archive", force=True)
@@ -747,7 +749,13 @@ class Coordinator:
     # =========================================================================================== scoring
     def _weights(self) -> dict:
         s = self.store.settings
-        return slider_weights(s["sliders"], int(s["stage"]), "default")
+        return slider_weights(s["sliders"], int(s["stage"]), "default", optional=bool(self._optional_ids()))
+
+    def _optional_ids(self) -> list[str]:
+        """V2 optional parts (tag "optional"): the search may leave them out; objective O is the share left out."""
+        if self.ctx is None:
+            return []
+        return [pid for pid, r in self.ctx.records.items() if "optional" in (r.tags or [])]
 
     def _norm(self) -> Normaliser:
         if self.ctx is None:
@@ -763,7 +771,7 @@ class Coordinator:
         g = scalarise(n, self._weights(), alpha)
         out = {"L": n.get("L"), "D": n.get("D"),
                "I": (alpha * n["T"] + (1 - alpha) * n["P"]) if "T" in n and "P" in n else None,
-               "G": n.get("G"), "H": n.get("H"), "C": n.get("C")}
+               "G": n.get("G"), "H": n.get("H"), "C": n.get("C"), "O": n.get("O")}
         return g, out
 
     def _score_entry(self, e: LayoutEntry) -> None:
@@ -787,8 +795,11 @@ class Coordinator:
         elif e.meta.get("standoffs") or e.meta.get("brackets"):
             from ..constraints.stage2_model import Stage2Model
             hardware = Stage2Model.standoff_mass(e.meta.get("standoffs") or [])
-            hardware += [(b["mass_kg"], np.asarray(b["com_mm"], float), np.asarray(b["inertia_kgm2"], float))
-                         for b in e.meta.get("brackets") or []]           # V2 Stage 2 brackets
+            designs = e.meta.get("bracket_designs") or {}
+            for b in e.meta.get("brackets") or []:                          # V2 Stage 2 brackets
+                d = designs.get(b["pid"]) if designs.get(b["pid"], {}).get("mass_kg") is not None else None
+                src = d or b                                                # a designed solid replaces the estimate
+                hardware.append((src["mass_kg"], np.asarray(src["com_mm"], float), np.asarray(src["inertia_kgm2"], float)))
             items += hardware
         m = dict(e.geo)
         if hardware:
@@ -801,6 +812,9 @@ class Coordinator:
             raw.update({k: float(e.meta[k]) for k in ("H", "C") if e.meta.get(k) is not None})
             if e.meta.get("C") is not None:
                 m["hardware_cost_rel"] = e.meta.get("hardware_cost_rel", float(e.meta["C"]))
+        if (e.meta or {}).get("O") is not None:      # V2 optional parts left out of this layout
+            raw["O"] = float(e.meta["O"])
+            m["optional_left_out"] = list(e.meta.get("dropped", []))
         if items:
             a = assembly([], [], np.zeros((0, 3)), items)
             im = inertia_metrics(a.inertia_kgm2)
@@ -819,7 +833,7 @@ class Coordinator:
                 if excluded:
                     m["com_box_ok"] = None
                     m["com_box_verdict"] = "NOT ASSESSABLE"
-                excess = np.maximum(np.abs(a.com_mm) - np.array([20.0, 20.0, 70.0]), 0)
+                excess = np.maximum(np.abs(a.com_mm) - formfactor.COM_BOX, 0)
                 e.cv = float(excess.sum() / 10.0)
         if e.stage == 2:
             ev_ = list(e.validation.get("engineering_violations", []))
@@ -989,7 +1003,7 @@ class Coordinator:
         for c in cands:
             if c["unplaced"]:
                 continue
-            raw_extra = {k: c["raw"][k] for k in ("H", "C") if k in c["raw"]}
+            raw_extra = {k: c["raw"][k] for k in ("H", "C", "O") if k in c["raw"]}
             raw, cv = self.ev.raw_from_poses(c["poses"], c["unplaced"], c.get("penalty", 0.0),
                                              [(m, np.asarray(p), np.asarray(i)) for m, p, i in c.get("extra_mass", [])],
                                              raw_extra)
@@ -1174,7 +1188,8 @@ class Coordinator:
             "free_length_mm": float(ENCLOSURE_HI[2] - max(tops)),
             "space_used": float(vol / float(np.prod(ENCLOSURE_HI - ENCLOSURE_LO))), "parts_placed": len(poses),
             "min_clearance_mm": mc, "required_clearance_mm": req, "margin_objective": float(1.0 - min(1.0, slack / 5.0)),
-            "largest_empty_box_mm": [100.0, 100.0, float(ENCLOSURE_HI[2] - max(tops))] if stage == 1 else None,
+            "largest_empty_box_mm": [float(ENCLOSURE_HI[0] - ENCLOSURE_LO[0]), float(ENCLOSURE_HI[1] - ENCLOSURE_LO[1]),
+                                     float(ENCLOSURE_HI[2] - max(tops))] if stage == 1 else None,
         })
 
     # =========================================================================================== publishing
@@ -1263,7 +1278,7 @@ class Coordinator:
                 "mounts": meta.get("mounts", {}), "cable_blocked_fraction": meta.get("H"), "frame": frame,
                 "insertion_order": e.geo.get("insertion_order"), "com_shift_mm": meta.get("com_shift_mm"),
                 "com_z_unshifted_mm": meta.get("com_z_unshifted_mm"), "brackets": meta.get("brackets", []),
-                "hardware_cost_rel": meta.get("C"),
+                "hardware_cost_rel": meta.get("C"), "bracket_designs": meta.get("bracket_designs", {}),
                 "assumed": ["2 mm walls", "8.5 mm corner rails", "clearances 2.2 / 1.2 mm (U4)",
                             "PC/104 stack, 15.24 mm pitch, rods at (±35, ±35) mm", "3 mm mounting layer (U6)",
                             "V2 brackets: one per part to a wall, end plate, rail or the stack deck ≤ 40 mm away; "
@@ -1356,10 +1371,12 @@ class Coordinator:
                        for s in spec.statics]
         fm, fc, _ = s2.frame_mass_props()
         building = [{"id": pid, "units": u} for (pid, u), f in self.builds.items() if not f.done()]
+        ff = formfactor.info()
         return jsonable({
             "name": self.store.name,
-            "enclosure": {"size_mm": [100.0, 100.0, 340.5], "min_mm": ENCLOSURE_LO.tolist(), "max_mm": ENCLOSURE_HI.tolist(),
-                          "form": "3U CubeSat, CDS Rev 14.1 envelope"},
+            "enclosure": {"size_mm": list(ff["envelope_mm"]), "min_mm": ENCLOSURE_LO.tolist(), "max_mm": ENCLOSURE_HI.tolist(),
+                          "form": f"{ff['name']} CubeSat, CDS Rev 14.1 envelope ({ff['drawing']})",
+                          "form_factor": ff["name"], "options": list(formfactor.FORM_FACTORS)},
             "rotations": [np.asarray(m).reshape(3, 3).tolist() for m in as_lists()],
             "parts": self.part_list(),
             "settings": self.store.settings,
@@ -1369,8 +1386,9 @@ class Coordinator:
                              "frame_mass_kg": fm, "frame_com_mm": fc.tolist(),
                              "note": "harness channel interrupted across the PCB stack (U5 default); PCB stack macro "
                                      "and rods arrive with M7"},
-            "limits": {"com_box_mm": [20.0, 20.0, 70.0], "cds_mass_note_kg": 6.0, "clearance_part_mm": s2.C_PP,
-                       "clearance_wall_mm": s2.C_WALL, "length_mm": 340.5, "cable_mode_threshold": 70},
+            "limits": {"com_box_mm": list(ff["com_box_mm"]), "cds_mass_note_kg": ff["mass_note_kg"],
+                       "clearance_part_mm": s2.C_PP, "clearance_wall_mm": s2.C_WALL,
+                       "length_mm": float(ff["envelope_mm"][2]), "cable_mode_threshold": 70},
             "revs": self.revs,
             "dataset_sha256": self.store.dataset_sha256,
             "building": building,
@@ -1454,7 +1472,8 @@ class Coordinator:
                 edge(f"grp:{g}", "proxy:boxes" if g in ("box-like", "convex") else "proxy:cover")
         w = slider_weights(s["sliders"], int(s["stage"]), "default")
         for k, label in (("L", "compactness"), ("D", "balance (COM)"), ("I", "rotational inertia"),
-                         ("G", "feasibility margin"), ("H", "cable path"), ("C", "hardware cost")):
+                         ("G", "feasibility margin"), ("H", "cable path"), ("C", "hardware cost"),
+                         ("O", "optional parts included")):
             if k in w:
                 node(f"w:{k}", f"{label}", "objective", "optimization", f"weight {w[k]:.2f}")
         node("stage", f"Stage {s['stage']} {'IDEALIZED' if int(s['stage']) == 1 else 'ENGINEERING-CONSTRAINED'}",
@@ -1691,9 +1710,12 @@ class Coordinator:
         old_s2 = self._stage2_mode()
         old_scale = self.part_scale()
         old_am = self._am_allowed()
+        old_ff = s.get("form_factor", formfactor.DEFAULT)
         for k in ("stage", "target_com_mm", "compactness_definition", "show_frame_mass_in_com"):
             if k in new and new[k] is not None:
                 s[k] = new[k]
+        if new.get("form_factor") in formfactor.FORM_FACTORS:
+            s["form_factor"] = new["form_factor"]
         if new.get("part_scale_pct") is not None:
             s["part_scale_pct"] = float(np.clip(float(new["part_scale_pct"]), 50.0, 100.0))
         if "sliders" in new and isinstance(new["sliders"], dict):
@@ -1702,7 +1724,11 @@ class Coordinator:
                     s["sliders"][k] = float(np.clip(float(v), 0, 100))
         s["stage"] = 2 if int(s.get("stage", 1)) == 2 else 1
         self._bump("weights_rev")
-        if int(s["stage"]) != old_stage:
+        if s.get("form_factor", formfactor.DEFAULT) != old_ff:
+            # V2 form factor: another envelope and COM box — new context, new search, project re-sent
+            self._refresh_inputs(f"form factor {s['form_factor']}", bump_parts=True)
+            self.broadcast("project.changed", {"reason": f"form factor {s['form_factor']}"})
+        elif int(s["stage"]) != old_stage:
             self._refresh_inputs(f"stage {s['stage']} selected", bump_parts=False)
         elif int(s["stage"]) == 2 and self._stage2_mode() != old_s2:
             # the cable-routing slider crossed a mode boundary (0 / 1–69 / ≥ 70): different rules, new islands
@@ -1895,7 +1921,7 @@ class Coordinator:
             path = self._ladder_path(e)
             for f in path.parent.glob(path.stem + "*"):
                 f.unlink(missing_ok=True)
-            fut = self.ladder_pool.submit(ladder_job, str(snap), pid, dict(self.store.settings["sliders"]), str(path),
+            fut = self.ladder_pool.submit(formfactor.call_with, formfactor.current(), ladder_job, str(snap), pid, dict(self.store.settings["sliders"]), str(path),
                                           float(budget_s), dict(self.ladder_opts))
             self.ladders[pid] = {"future": fut, "path": path, "mtime": None, "status": "PENDING", "progress": 0.0}
             self.reps.pop(pid, None)
@@ -1932,6 +1958,14 @@ class Coordinator:
             if L.get("study") == "attribution":
                 self.broadcast("study.update", {"study": "attribution", "progress": L["progress"],
                                                 "partial": {"status": L["status"], "rows": len(res.get("rows", []))}})
+                continue
+            if L.get("study") == "largest_size":
+                self.broadcast("study.update", {"study": "largest_size", "progress": L["progress"],
+                                                "partial": {"status": L["status"], "largest_pct": res.get("largest_pct")}})
+                continue
+            if L.get("study") == "bracket_design":     # finished through _on_bracket_design
+                self.broadcast("study.update", {"study": "bracket_design", "progress": L["progress"],
+                                                "partial": {"status": L["status"], "layout_id": res.get("layout_id")}})
                 continue
             self.broadcast("study.update", {"study": "fidelity", "progress": L["progress"],
                                             "partial": {"part_id": pid, "status": L["status"], "progress": L["progress"],
@@ -2025,7 +2059,7 @@ class Coordinator:
         (out / "mfg.json").unlink(missing_ok=True)
         budget = float((opts or {}).get("budget_s", self.mfg_budget_s))
         mode = self._stage2_mode()
-        fut = self.ladder_pool.submit(mfg_job, str(snap), mode, dict(self.store.settings["sliders"]), str(out), budget)
+        fut = self.ladder_pool.submit(formfactor.call_with, formfactor.current(), mfg_job, str(snap), mode, dict(self.store.settings["sliders"]), str(out), budget)
         self.ladders["__mfg__"] = {"future": fut, "path": out / "mfg.json", "mtime": None, "status": "PENDING",
                                    "progress": 0.0, "study": "mfg"}
         wf = asyncio.wrap_future(fut, loop=self.loop)
@@ -2164,7 +2198,7 @@ class Coordinator:
         path.unlink(missing_ok=True)
         budget = float((opts or {}).get("budget_s", 120.0))
         poses = [(p, int(o), np.asarray(t, float)) for p, o, t in start.poses]
-        fut = self.ladder_pool.submit(free_rotation_job, str(snap), poses, start.id, str(path), budget,
+        fut = self.ladder_pool.submit(formfactor.call_with, formfactor.current(), free_rotation_job, str(snap), poses, start.id, str(path), budget,
                                       int((opts or {}).get("seed", 20261022)))
         self.ladders["__free_rotation__"] = {"future": fut, "path": path, "mtime": None, "status": "PENDING",
                                              "progress": 0.0, "study": "free_rotation"}
@@ -2189,6 +2223,124 @@ class Coordinator:
             return {"status": "RUNNING"}
         return None
 
+    # =========================================================================================== V2 brackets
+    CONTEST_RESULTS = Path(__file__).resolve().parents[4] / "data" / "gd_contest" / "results.json"
+
+    def gd_contest(self) -> dict | None:
+        """Generative-design contest results (run offline with scripts/gd_contest.py; shipped with the app)."""
+        try:
+            return json.loads(self.CONTEST_RESULTS.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            return None
+
+    def start_bracket_design(self, layout_id: str) -> dict:
+        """Design every metal-AM and cradle bracket of a Stage 2 layout inside its reserved box (contest winner for
+        metal AM, rule-based cradles), each checked with CalculiX and NGSolve; the designed solids replace the
+        estimates in the layout's physics and fit proof."""
+        import pickle
+        from ..gd.design import design_job
+        e = self.archive.get(layout_id)
+        if e is None:
+            raise KeyError(layout_id)
+        brs = (e.meta or {}).get("brackets") or []
+        if e.stage != 2 or not any(b["kind"] in ("metal_am", "cradle") for b in brs):
+            raise ValueError("this layout has no metal-AM or cradle bracket to design")
+        L = self.ladders.get("__bracket_design__")
+        if L is not None and not L.get("finalised"):
+            raise ValueError("a bracket design run is already in progress")
+        recs = self.layout_records(e)
+        phys = self._phys(e.part_scale)
+        pad_o = (e.meta or {}).get("pad_orients", {})
+        poses = {pid: (int(pad_o.get(pid, o)), np.asarray(t, float)) for pid, o, t in e.poses}
+        out = self.store.cache / "items" / e.id
+        snap = out / "bracket_design.pkl"
+        out.mkdir(parents=True, exist_ok=True)
+        snap.write_bytes(pickle.dumps({"layout_id": e.id, "brackets": brs, "records": recs, "poses": poses,
+                                       "masses": {p: (x.mass_kg if x is not None else None) for p, x in phys.items()},
+                                       "results_path": str(self.CONTEST_RESULTS)}, protocol=pickle.HIGHEST_PROTOCOL))
+        (out / "progress.json").unlink(missing_ok=True)
+        fut = self.ladder_pool.submit(formfactor.call_with, formfactor.current(), design_job, str(snap), str(out))
+        self.ladders["__bracket_design__"] = {"future": fut, "path": out / "progress.json", "mtime": None,
+                                              "status": "PENDING", "progress": 0.0, "study": "bracket_design"}
+        wf = asyncio.wrap_future(fut, loop=self.loop)
+        wf.add_done_callback(lambda f, lid=e.id, o=out: self._on_bracket_design(f, lid, o))
+        self.broadcast("study.update", {"study": "bracket_design", "progress": 0.0,
+                                        "partial": {"status": "RUNNING", "layout_id": e.id}})
+        return {"status": "RUNNING", "layout_id": e.id,
+                "brackets": sum(1 for b in brs if b["kind"] in ("metal_am", "cradle"))}
+
+    def _on_bracket_design(self, fut, lid: str, out: Path) -> None:
+        L = self.ladders.get("__bracket_design__")
+        try:
+            if fut.cancelled():
+                return
+            if fut.exception() is not None:
+                self._error(f"bracket design failed: {fut.exception()!r}")
+                return
+            res = json.loads((out / "progress.json").read_text(encoding="utf-8"))
+            e = self.archive.get(lid)
+            if e is None:
+                return
+            meta = dict(e.meta or {})
+            meta["bracket_designs"] = res.get("designs", {})
+            e.meta = jsonable(meta)
+            self._compute_physics(e)                  # designed masses replace the estimates
+            self._score_entry(e)
+            self._persist(e)
+            for k in [k for k in self.proof_cache if k[0] == lid]:
+                self.proof_cache.pop(k, None)
+            self.broadcast("study.update", {"study": "bracket_design", "progress": 1.0,
+                                            "partial": {"status": "DONE", "layout_id": lid}})
+        except Exception as exc:  # noqa: BLE001
+            self._error(f"bracket designs could not be applied: {exc!r}")
+        finally:
+            if L is not None:
+                L["finalised"] = True
+
+    # =========================================================================================== largest size (V2)
+    def _largest_size_path(self) -> Path:
+        full = parts_signature({pid: self.records[pid] for pid in self._active_records()})
+        return self.store.cache / (f"largest_size_{full}_{self._stage2_mode()}_{int(self._am_allowed())}_"
+                                   f"{formfactor.current()}.json")
+
+    def start_largest_size(self, opts: dict | None = None) -> dict:
+        """Bisection on the part-size factor: the largest size at which a fixed-effort Stage 2 search finds a
+        certified layout (search-based)."""
+        import pickle
+        from ..bench.largest_size import largest_size_job
+        if self.ctx is None:
+            raise ValueError("no packable parts")
+        L = self.ladders.get("__largest_size__")
+        if L is not None and not L["future"].done():
+            raise ValueError("a largest-size search is already running")
+        recs = {pid: self.rec_at(pid, 1.0) for pid in self._active_records()}       # full size
+        snap = self.store.cache / "largest_size_records.pkl"
+        snap.write_bytes(pickle.dumps(recs, protocol=pickle.HIGHEST_PROTOCOL))
+        path = self._largest_size_path()
+        path.unlink(missing_ok=True)
+        fut = self.ladder_pool.submit(formfactor.call_with, formfactor.current(), largest_size_job, str(snap),
+                                      self._stage2_mode(), dict(self.store.settings["sliders"]), str(path),
+                                      self._am_allowed(), dict(opts or {}))
+        self.ladders["__largest_size__"] = {"future": fut, "path": path, "mtime": None, "status": "PENDING",
+                                            "progress": 0.0, "study": "largest_size"}
+        return {"status": "PENDING"}
+
+    def largest_size(self) -> dict | None:
+        if self.ctx is None:
+            return None
+        p = self._largest_size_path()
+        L = self.ladders.get("__largest_size__")
+        if L is not None and L["future"].done() and L["future"].exception() is not None:
+            return {"status": "ERROR", "detail": repr(L["future"].exception())}
+        if p.exists():
+            try:
+                return json.loads(p.read_text(encoding="utf-8"))
+            except (OSError, json.JSONDecodeError):
+                return {"status": "RUNNING", "rows": []}
+        if L is not None and not L["future"].done():
+            return {"status": "PENDING", "rows": []}
+        return None
+
     # =========================================================================================== attribution
     def _attribution_path(self) -> Path:
         return self.store.cache / f"attribution_{self.ctx.parts_sig}_{self._stage2_mode()}.json"
@@ -2203,7 +2355,7 @@ class Coordinator:
         snap.write_bytes(pickle.dumps(recs, protocol=pickle.HIGHEST_PROTOCOL))
         path = self._attribution_path()
         path.unlink(missing_ok=True)
-        fut = self.ladder_pool.submit(attribution_job, str(snap), self._stage2_mode(),
+        fut = self.ladder_pool.submit(formfactor.call_with, formfactor.current(), attribution_job, str(snap), self._stage2_mode(),
                                       dict(self.store.settings["sliders"]), str(path), dict(opts or self.attribution_opts))
         self.ladders["__attribution__"] = {"future": fut, "path": path, "mtime": None, "status": "PENDING",
                                            "progress": 0.0, "study": "attribution"}

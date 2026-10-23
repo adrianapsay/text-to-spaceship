@@ -7,8 +7,9 @@ import sys
 
 import numpy as np
 import pytest
-
 from conftest import DATA
+from test_proof import CHECKER
+
 from t2s.collision.geom import part_geom_from_record
 from t2s.collision.validate import Validator, box_gap
 from t2s.constraints.stage2_model import Stage2Model
@@ -16,7 +17,6 @@ from t2s.mfg.brackets import cert_entry, v2_bracket
 from t2s.mfg.rules import BRACKET_CLEARANCE, MFG_REACH
 from t2s.optimise.scalarize import slider_weights
 from t2s.proof.certificate import build_certificate, proof_markdown
-from test_proof import CHECKER
 
 SMALL = ("battery_pack", "payload_electronics_box", "reaction_wheel", "magnetorquer_rod")
 

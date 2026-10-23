@@ -62,6 +62,91 @@ export interface ExtraItem {
   material?: string;
   /** optional extension */
   label?: string;
+  /** V2 Stage 2 bracket: direct | machined | sheet | clamp | cradle | metal_am */
+  bracket_kind?: string;
+  /** V2: false = mass estimated from the reserved box (cradle / metal-AM bracket not designed yet) */
+  exact?: boolean;
+  /** V2: the reserved box (lo xyz, hi xyz) */
+  box_mm?: number[];
+  target?: string;
+}
+
+/** V2 Stage 2: one modelled bracket. Its reserved box is part of the packing and of the fit proof (Lemma 4). */
+export interface BracketInfo {
+  name: string;
+  pid: string;
+  kind: string;
+  mount_type: string;
+  process: string;
+  fasteners: number;
+  gap_mm: number;
+  target: string;
+  reserve: number[];
+  depth_mm: number;
+  mass_kg: number;
+  cost_rel: number;
+  material: string;
+  label: string;
+  exact: boolean;
+}
+
+/** V2: a cradle / metal-AM bracket designed by the generative-design winner and checked with two FEA solvers */
+export interface BracketDesign {
+  pid: string;
+  generator: string;
+  mass_kg: number;
+  cost_rel: number;
+  label: string;
+  passed: boolean;
+  reason: string;
+  sigma_mpa: number | null;
+  ms_yield: number | null;
+  ms_ult: number | null;
+  f1_hz: number | null;
+  agreement?: Record<string, number | null>;
+  solvers?: Record<string, { solver: string; f1_hz: number | null; seconds: number }>;
+  fallback?: string | null;
+}
+
+/** V2: generative-design contest results (endpoint /api/gd/contest) */
+export interface ContestRow {
+  problem: string;
+  generator: string;
+  ok: boolean;
+  passed: boolean;
+  reason: string;
+  mass_g: number | null;
+  sigma_mpa: number | null;
+  ms_yield: number | null;
+  ms_ult: number | null;
+  f1_hz: number | null;
+  max_disp_mm: number | null;
+  gen_seconds: number | null;
+  fea_seconds: number | null;
+  overhang_fraction: number | null;
+  agreement?: Record<string, number | null>;
+}
+
+/** V2 "Find largest size that fits" (endpoint /api/studies/largest-size): search-based bisection */
+export interface LargestSize {
+  status: string;
+  largest_pct: number | null;
+  verdict?: string;
+  note?: string;
+  progress?: number;
+  detail?: string;
+  rows: { pct: number; found: boolean; search_feasible: boolean; certified: boolean; cv: number; unmounted: number; seconds: number }[];
+}
+
+export interface ContestResults {
+  created: string;
+  status: string;
+  criteria: string[];
+  problems: { name: string; description: string; part_mass_kg: number; reserve_mm: number[] }[];
+  entrants: { name: string; source: string; available: boolean; note?: string }[];
+  rows: ContestRow[];
+  standings: { generator: string; passed: number; problems: number; total_mass_g: number | null; rank: number }[];
+  winner: { generator: string; why: string } | null;
 }
 
 export interface Metrics {
@@ -88,9 +173,11 @@ export interface Metrics {
   hardware_cost_rel?: number | null;
   insertion_order?: string[] | null;
   interlocked?: [string, string][] | null;
+  /** V2: optional parts this layout left out (they did not fit) */
+  optional_left_out?: string[] | null;
 }
 
-export type ScoreKey = 'L' | 'D' | 'I' | 'G' | 'H' | 'C';
+export type ScoreKey = 'L' | 'D' | 'I' | 'G' | 'H' | 'C' | 'O';
 
 export interface Scores {
   normalised: Partial<Record<ScoreKey, number | null>>;
@@ -168,6 +255,10 @@ export interface Stage2View {
   insertion_order: string[] | null;
   com_shift_mm?: number | null;
   com_z_unshifted_mm?: number | null;
+  /** V2 Stage 2 brackets and their relative cost */
+  brackets?: BracketInfo[];
+  hardware_cost_rel?: number | null;
+  bracket_designs?: Record<string, BracketDesign>;
   assumed: string[];
 }
 
@@ -180,7 +271,8 @@ export type SliderKey =
   | 'cable'
   | 'cost'
   | 'speed_quality'
-  | 'bracket_budget';
+  | 'bracket_budget'
+  | 'optional_parts';
 export type Sliders = Record<SliderKey, number>;
 
 export interface Settings {
@@ -191,6 +283,8 @@ export interface Settings {
   show_frame_mass_in_com: boolean;
   /** V2 part-size slider (Stage 2): 50 … 100 % of full size */
   part_scale_pct?: number;
+  /** V2: CubeSat size (CDS Rev 14.1): 3U 100 × 100 × 340.5, 6U 226.3 × 100 × 366, 12U 226.3 × 226.3 × 366 mm */
+  form_factor?: '3U' | '6U' | '12U';
 }
 
 export interface Revs {

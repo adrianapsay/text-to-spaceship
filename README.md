@@ -1,12 +1,13 @@
 # TEXT-TO-SPACESHIP V2
 
-> **V2 (in development)** builds on [V1](https://github.com/ss394/TTS-V1): a part-size slider, modelled
-> brackets in Stage 2 (simple ↔ metal 3D-printed, part of the packing and of the fit proof), an exploded view,
-> a Mounting Hardware tab, 6U / 12U envelopes and optional parts. V2 runs on port 8766, so V1 and V2 can run
-> side by side.
+> **V2** builds on [V1](https://github.com/ss394/TTS-V1): a part-size slider with "find largest size that fits",
+> modelled brackets in Stage 2 (simple ↔ metal 3D-printed, part of the packing and of the fit proof), an exploded
+> view, a Mounting Hardware tab, two independent FEA solvers (CalculiX, NGSolve), a generative-design contest for
+> 3D-printed brackets, 3U / 6U / 12U envelopes and optional parts — see [docs/V2.md](docs/V2.md). V2 runs on port
+> 8766, so V1 and V2 can run side by side.
 
-A physics-aware packaging optimiser for a 3U CubeSat. Give it any STL parts: it analyses and classifies them, packs
-them into the 100 × 100 × 340.5 mm envelope with several search algorithms, certifies every reported layout on the
+A physics-aware packaging optimiser for a 3U CubeSat (6U and 12U in V2). Give it any STL parts: it analyses and
+classifies them, packs them into the 100 × 100 × 340.5 mm envelope (or the 6U / 12U one) with several search algorithms, certifies every reported layout on the
 exact meshes (with an independently checkable proof), computes mass properties and inertia, and explains which
 algorithm it chose and why. Sliders change the priorities live.
 
@@ -46,6 +47,7 @@ the next search. `start.cmd --add part.stl` / `bash start.sh --add part.stl` que
 
 ## Documentation
 
+* [docs/V2.md](docs/V2.md) — what V2 adds; [docs/V2-GD-CONTEST.md](docs/V2-GD-CONTEST.md) — the bracket contest
 * [docs/FINAL-REPORT.md](docs/FINAL-REPORT.md) — what is built and tested, key results, limitations, deferred work
 * [docs/STATUS.md](docs/STATUS.md) — every measured number, deviations from the protocol
 * [docs/api-contract.md](docs/api-contract.md) — REST and WebSocket interface

@@ -29,9 +29,12 @@ def _orientations(rec):
     return [(np.array(e), o) for e, o in seen.items()]
 
 
-def solve_box_proxy(records: dict, width=(100.0, 100.0), length_cap: float = 340.5, time_limit_s: float = 60.0,
+def solve_box_proxy(records: dict, width=None, length_cap: float | None = None, time_limit_s: float = 60.0,
                     workers: int = 8, seed: int = 0) -> dict:
     from ortools.sat.python import cp_model
+    from ..core.formfactor import ENVELOPE          # defaults: the active form factor (3U 100 × 100 × 340.5 mm)
+    width = (float(ENVELOPE[0]), float(ENVELOPE[1])) if width is None else width
+    length_cap = float(ENVELOPE[2]) if length_cap is None else length_cap
     ids = list(records)
     m = cp_model.CpModel()
     W = [int(np.floor(w / GRID)) for w in width]

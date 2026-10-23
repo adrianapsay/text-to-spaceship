@@ -19,6 +19,8 @@ export interface SliderDef extends Explainer {
   notInGoals?: boolean;
   /** what the ends of the slider mean, instead of "priority" */
   ends?: [string, string];
+  /** only listed when at least one part is marked optional */
+  needsOptional?: boolean;
 }
 
 export const SLIDERS: SliderDef[] = [
@@ -76,6 +78,14 @@ export const SLIDERS: SliderDef[] = [
     why: '3D-printed brackets are thinner and follow the part, so parts fit more closely, but they cost more.',
     stage2Only: true,
     ends: ['simple brackets', 'metal 3D-printed'],
+  },
+  {
+    key: 'optional_parts',
+    label: 'Include optional parts',
+    plain: 'How hard the search tries to fit the parts you marked optional. Optional parts that do not fit are left out instead of making the layout fail.',
+    technical: 'weight of O, the share of optional parts left out of a layout (0 = all included).',
+    why: 'a nice-to-have part should not block a layout that fits everything essential.',
+    needsOptional: true,
   },
   {
     key: 'mass_symmetry',

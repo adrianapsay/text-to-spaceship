@@ -52,7 +52,7 @@ test('app loads in mock mode with a WebGL2 viewport and labelled metrics', async
   expect(errors).toEqual([]);
 });
 
-test('all 11 tabs switch and keep the MOCK DATA banner', async ({ page }) => {
+test('all 12 tabs switch and keep the MOCK DATA banner', async ({ page }) => {
   const errors = await openApp(page);
   const tabs: [string, string][] = [
     ['components', 'tab-components'],
@@ -62,6 +62,7 @@ test('all 11 tabs switch and keep the MOCK DATA banner', async ({ page }) => {
     ['size', 'tab-size'],
     ['explain', 'tab-explain'],
     ['engineering', 'tab-engineering'],
+    ['hardware', 'tab-hardware'],
     ['manufacturable', 'tab-manufacturable'],
     ['cad', 'tab-cad'],
     ['results', 'tab-results'],

@@ -2,7 +2,12 @@
 import numpy as np
 
 
-def lower_bounds(records: list, cross_section_mm2: float = 100.0 * 100.0, z_cap: float = 340.5) -> list[dict]:
+def lower_bounds(records: list, cross_section_mm2: float | None = None, z_cap: float | None = None,
+                 width_mm: float | None = None) -> list[dict]:
+    """Defaults: the active form factor's envelope (3U 100 × 100 × 340.5 mm)."""
+    from ..core.formfactor import ENVELOPE
+    cross_section_mm2 = float(ENVELOPE[0] * ENVELOPE[1]) if cross_section_mm2 is None else cross_section_mm2
+    z_cap = float(ENVELOPE[2]) if z_cap is None else z_cap
     solid = sum(r.volume_mm3 or 0.0 for r in records)
     boxes = sum(float(np.prod(r.boxes[:, 3:] - r.boxes[:, :3], axis=1).sum()) for r in records)
     hulls = sum(r.hull_volume_mm3 or 0.0 for r in records)
@@ -17,8 +22,9 @@ def lower_bounds(records: list, cross_section_mm2: float = 100.0 * 100.0, z_cap:
         {"name": "compound-box volume", "value_mm": boxes / cross_section_mm2, "valid_for": "box proxies only",
          "why": "valid only for the box-proxy problem the decoder solves"},
     ]
-    # clique bound (box proxies): parts whose smallest dimensions pairwise sum to more than the 100 mm width
-    width = np.sqrt(cross_section_mm2)
+    # clique bound (box proxies): parts whose smallest dimensions pairwise sum to more than the widest side of the
+    # cross-section cannot share a Z slab (3U: 100 mm)
+    width = float(max(ENVELOPE[:2])) if width_mm is None else width_mm
     order = np.argsort(mins)[::-1]
     clique = []
     for i in order:

@@ -277,6 +277,7 @@ def island_main(worker_id: int, role: str, cmd_q, res_q, base_seed: int) -> None
     from ..collision.validate import Validator
     from ..optimise.brkga import Evaluator
     from ..optimise.compact import compactor_from_records
+    from ..core.formfactor import set_form_factor
     from ..optimise.scalarize import Normaliser
     from .context import load_context
 
@@ -295,6 +296,7 @@ def island_main(worker_id: int, role: str, cmd_q, res_q, base_seed: int) -> None
             if kind == "context":
                 _, new_id, path, mass_rev, phys, target, warm, pop_size, counter, plan = cmd
                 ctx = load_context(path)
+                set_form_factor(getattr(ctx, "form_factor", "3U"))     # V2: this context's envelope and COM box
                 ctx_id = new_id
                 if role == "validator":
                     validator = Validator({pid: part_geom_from_record(r) for pid, r in ctx.records.items()})
@@ -304,7 +306,8 @@ def island_main(worker_id: int, role: str, cmd_q, res_q, base_seed: int) -> None
                 t0 = time.perf_counter()
                 dec, dec_kind = make_decoder(ctx, plan.get("decoder", "box"), plan.get("h", 2.0))
                 ev = Evaluator(dec, ctx.ids, _phys_from_wire(phys), ctx.orient_bounds, ctx.z0, target=target,
-                               com_box=ctx.com_box)
+                               com_box=ctx.com_box,
+                               optional=[p for p, r in ctx.records.items() if "optional" in (r.tags or [])])
                 rng = np.random.default_rng(base_seed + 7919 * worker_id + 104729 * counter)
                 seeds = constructive_seeds(ctx, dec, None if plan.get("all_seeds") else worker_id)
                 seeds += [_keys_from_poses(ctx, dec, p, rng, ev.dim) for p in warm or []]

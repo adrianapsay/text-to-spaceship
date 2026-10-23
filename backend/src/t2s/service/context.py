@@ -39,7 +39,9 @@ def constraint_signature(records: dict, stage: int, extra: dict | None = None) -
         if not packable(r):
             continue
         lp = r.lock_pose if r.locked else None
-        items.append((pid, list(r.allowed_orients), sorted(r.tags) if stage == 2 else [], lp))
+        # Stage 2 rules read every tag; Stage 1 only the V2 "optional" tag (a part the search may leave out)
+        tags = sorted(r.tags) if stage == 2 else (["optional"] if "optional" in (r.tags or []) else [])
+        items.append((pid, list(r.allowed_orients), tags, lp))
     return hashlib.sha256(json.dumps([stage, items, extra or {}], default=str).encode()).hexdigest()[:16]
 
 
@@ -77,6 +79,7 @@ class SearchContext:
     stage2_mode: str | None = None                            # default | soft | continuous (cable slider)
     part_scale: float = 1.0                                   # V2 part-size slider (Stage 2): records are scaled
     am_allowed: bool = True                                   # V2 bracket budget > 0: metal-AM brackets allowed
+    form_factor: str = "3U"                                   # V2: 3U / 6U / 12U envelope (core.formfactor)
 
     def decoder(self):
         if self.stage == 2:
@@ -109,13 +112,15 @@ def stage2_config(records: dict) -> s2.Stage2Config:
 
 
 def build_context(records: dict, stage: int, reps: dict | None = None, stage2_mode: str = "default",
-                  part_scale: float = 1.0, am_allowed: bool = True) -> SearchContext:
+                  part_scale: float = 1.0, am_allowed: bool = True, form_factor: str | None = None) -> SearchContext:
     """reps: part_id -> {algorithm id: Representation} from finished detail ladders (Addendum 4).
     stage2_mode: cable-slider mode for Stage 2 (default | soft | continuous).
     part_scale: V2 part-size factor, Stage 2 only (the detail-ladder proxies belong to the full-size parts, so they
     are not used for scaled parts).
     am_allowed: V2 bracket budget above 0 — metal-AM brackets may stand in where no simple bracket fits."""
     am_allowed = bool(am_allowed) if stage == 2 else True
+    from ..core import formfactor as ff
+    form_factor = ff.set_form_factor(form_factor or ff.current())     # the envelope arrays follow it
     from ..parts.scale import scale_part
     part_scale = float(part_scale) if stage == 2 else 1.0
     recs = {pid: scale_part(r, part_scale) for pid, r in records.items() if packable(r)}
@@ -151,10 +156,12 @@ def build_context(records: dict, stage: int, reps: dict | None = None, stage2_mo
         spec = StageSpec(2, lo + s2.C_WALL, hi - s2.C_WALL, s2.C_PP, s2.C_WALL)
         dec = dict(dec_lo=lo, dec_hi=hi, gap_pp=s2.C_PP + QUANT_SLACK, wall_gap=s2.C_WALL + QUANT_SLACK / 2,
                    obstacles=np.zeros((0, 6)), obstacle_gap=s2.C_WALL + QUANT_SLACK)
-        com_box = np.array([20.0, 20.0, 70.0])
+        from ..core.formfactor import COM_BOX
+        com_box = COM_BOX.copy()
     psig = parts_signature(recs, part_scale)
-    csig = constraint_signature(recs, stage, {"stage2_mode": stage2_mode, "am_allowed": am_allowed}
-                                if stage == 2 else None)
+    csig = constraint_signature(recs, stage, {"stage2_mode": stage2_mode, "am_allowed": am_allowed,
+                                              "form_factor": form_factor} if stage == 2 else
+                                ({"form_factor": form_factor} if form_factor != "3U" else None))
     lsig = hashlib.sha256(json.dumps(levels, sort_keys=True).encode()).hexdigest()[:8]
     if stage == 2:
         from ..constraints import stage2_model as s2m
@@ -163,7 +170,8 @@ def build_context(records: dict, stage: int, reps: dict | None = None, stage2_mo
         ssig = hashlib.sha256(json.dumps([2, stage2_mode, pcb, s2.WALL, s2.RAIL, s2.C_PP, s2.C_WALL, s2.HARNESS_W,
                                           s2.PCB_PITCH, s2m.PAD, s2m.STANDOFF_INSET, s2m.STANDOFF_SIDE,
                                           mr.BRACKET_MODEL_VERSION, mr.BRACKET_CLEARANCE, mr.MFG_REACH,
-                                          am_allowed]).encode()).hexdigest()[:16]
+                                          am_allowed] + ([form_factor] if form_factor != "3U" else [])).encode()
+                              ).hexdigest()[:16]
     else:
         ssig = spec_signature(spec)
     return SearchContext(ctx_id=f"{psig}-{csig}-{lsig}", stage=stage, parts_sig=psig, constraint_sig=csig,
@@ -171,7 +179,7 @@ def build_context(records: dict, stage: int, reps: dict | None = None, stage2_mo
                          proxies=proxies, orient_bounds={pid: recs[pid].orient_bounds for pid in ids}, fixed=fixed,
                          spec=spec, z0=float(ENCLOSURE_LO[2]), com_box=com_box, records=recs, hm_meshes=hm_meshes,
                          levels=levels, stage2_mode=stage2_mode if stage == 2 else None, part_scale=part_scale,
-                         am_allowed=am_allowed, **dec)
+                         am_allowed=am_allowed, form_factor=form_factor, **dec)
 
 
 def write_context(ctx: SearchContext, folder: Path) -> Path:

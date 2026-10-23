@@ -2,7 +2,8 @@
 
 Raw objectives (all minimised): L length used (mm), D COM error (mm), T inertia trace (kg·m²), P products-of-inertia
 norm (kg·m²), G feasibility margin in [0, 1] (Stage 2 only), H blocked cable-corridor fraction (Stage 2), C hardware
-cost (relative units; V2 Stage 2 brackets, and the Manufacturable Design tab). The inertia objective is I = α·T̂ + (1 − α)·P̂.
+cost (relative units; V2 Stage 2 brackets, and the Manufacturable Design tab), O share of the optional parts left
+out (V2). The inertia objective is I = α·T̂ + (1 − α)·P̂.
 Hard constraints never enter g: candidates are compared by (CV, g).
 """
 from __future__ import annotations
@@ -12,7 +13,7 @@ from dataclasses import dataclass, field
 import numpy as np
 
 RHO = 1e-3
-FLOORS = {"L": 1.0, "D": 0.5, "T": None, "P": None, "G": 0.05, "H": 0.05, "C": 1.0}
+FLOORS = {"L": 1.0, "D": 0.5, "T": None, "P": None, "G": 0.05, "H": 0.05, "C": 1.0, "O": 0.05}
 
 PRESETS = {
     "max_packing": {"space": 70, "balance": 10, "inertia": 10, "feasibility": 10},
@@ -29,7 +30,7 @@ class Normaliser:
     nadir: dict = field(default_factory=dict)
     provisional: bool = True
 
-    def update_from(self, raws: list[dict], keys=("L", "D", "T", "P", "G", "H", "C")) -> None:
+    def update_from(self, raws: list[dict], keys=("L", "D", "T", "P", "G", "H", "C", "O")) -> None:
         """New epoch from a set of validated raw objective vectors (payoff table ∪ archive)."""
         self.epoch += 1
         for k in keys:
@@ -37,7 +38,7 @@ class Normaliser:
             if len(vals) == 0:
                 continue
             lo, hi = float(vals.min()), float(vals.max())
-            if k in ("D", "P", "G", "H", "C"):
+            if k in ("D", "P", "G", "H", "C", "O"):
                 lo = 0.0
             else:
                 lo = lo - 0.01 * max(hi - lo, 1e-12)
@@ -56,7 +57,7 @@ class Normaliser:
         return out
 
 
-def slider_weights(sliders: dict, stage: int, mode: str = "default") -> dict:
+def slider_weights(sliders: dict, stage: int, mode: str = "default", optional: bool = False) -> dict:
     """Map 0..100 sliders to strictly positive objective weights (w = (s+1)/Σ(s+1))."""
     active = {"L": sliders.get("space", 25), "D": sliders.get("balance", 25), "I": sliders.get("inertia", 25)}
     if stage == 2:
@@ -69,6 +70,8 @@ def slider_weights(sliders: dict, stage: int, mode: str = "default") -> dict:
         # V2: the bracket budget (0 = simple brackets only, 100 = metal-AM brackets where needed) sets the weight
         # of the hardware cost: full weight at 0, the least weight at 100
         active["C"] = 100 - float(np.clip(sliders.get("bracket_budget", 50), 0, 100))
+    if optional:               # V2 optional parts: share of them left out
+        active["O"] = float(np.clip(sliders.get("optional_parts", 75), 0, 100))
     tot = sum(s + 1 for s in active.values())
     return {k: (s + 1) / tot for k, s in active.items()}
 

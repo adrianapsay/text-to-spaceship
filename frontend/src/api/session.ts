@@ -220,6 +220,13 @@ export class Session {
     this.store.getState().setLockEdit(id, locked, seq);
   }
 
+  /** V2: mark a part optional (tag "optional"): the search may leave it out when it does not fit. */
+  setOptional(id: string, optional: boolean): void {
+    const part = this.store.getState().dataset.project?.parts.find((p) => p.id === id);
+    const tags = (part?.tags ?? []).filter((t) => t !== 'optional');
+    this.sendPart(id, { tags: optional ? [...tags, 'optional'] : tags });
+  }
+
   // --------------------------------------------------------------------------------------------- run
   async run(action: RunAction): Promise<void> {
     if (!this.ws.send('run.control', { action })) {

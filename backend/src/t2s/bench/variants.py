@@ -120,7 +120,8 @@ def make_setup(instance, preset: str, seed: int = 99) -> Setup:
         from ..constraints.stage2_model import Stage2Model
         decoders["box"] = Stage2Model(recs, "default")
         z0 = float(decoders["box"].inner[0][2])
-        com_box = np.array([20.0, 20.0, 70.0])
+        from ..core.formfactor import COM_BOX
+        com_box = COM_BOX.copy()
     else:
         decoders["box"] = BoxDecoder([ProxyPart(i, recs[i].boxes, recs[i].allowed_orients) for i in ids], ENCLOSURE_LO,
                                      ENCLOSURE_HI, PLACEMENT_GAP_STAGE1)

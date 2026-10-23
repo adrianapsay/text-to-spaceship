@@ -14,6 +14,7 @@ from pathlib import Path
 import numpy as np
 
 from ..core.fileio import atomic_write_text
+from ..core.formfactor import COM_BOX
 from ..objectives.metrics import part_phys
 from ..optimise.brkga import Evaluator, IslandState, best_candidates, run_island, seed_keys
 from ..optimise.scalarize import Normaliser, alpha_from, slider_weights
@@ -36,7 +37,7 @@ def _run_one(records, mode, relax, sliders, generations, pop, seed, com_box=True
     n = len(ids)
     lo = float(model.inner[0][2])
     ev = Evaluator(model, ids, {i: part_phys(records[i]) for i in ids}, {i: records[i].orient_bounds for i in ids},
-                   lo, com_box=None if relax == "com_box" or not com_box else np.array([20.0, 20.0, 70.0]))
+                   lo, com_box=None if relax == "com_box" or not com_box else COM_BOX.copy())
     rng = np.random.default_rng(seed)
     seeds = []
     for order in (np.argsort([-(records[i].volume_mm3 or 0) for i in ids]),

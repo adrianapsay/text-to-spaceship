@@ -106,7 +106,10 @@ def inertia_metrics(inertia: np.ndarray) -> dict:
     }
 
 
-def com_box_check(com_mm: np.ndarray, target_mm=(0.0, 0.0, 0.0), box_mm=(20.0, 20.0, 70.0)) -> dict:
+def com_box_check(com_mm: np.ndarray, target_mm=(0.0, 0.0, 0.0), box_mm=None) -> dict:
+    if box_mm is None:                       # the CDS box of the active form factor (3U: ±20 / ±20 / ±70 mm)
+        from ..core.formfactor import COM_BOX
+        box_mm = COM_BOX
     d = np.asarray(com_mm, float) - np.asarray(target_mm, float)
     margin = np.asarray(box_mm, float) - np.abs(np.asarray(com_mm, float))
     return {"com_error_mm": float(np.linalg.norm(d)), "com_box_ok": bool(np.all(margin >= 0)),

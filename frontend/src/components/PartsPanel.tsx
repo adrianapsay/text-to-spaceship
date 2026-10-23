@@ -294,6 +294,10 @@ export function PartInspector() {
             <input type="checkbox" checked={locked} onChange={(e) => session().setLocked(part.id, e.target.checked)} data-testid="lock-position" disabled={!canEditMass} />
             Lock position
           </label>
+          <label className="check" title="The search may leave an optional part out when it does not fit; the “Include optional parts” goal sets how hard it tries.">
+            <input type="checkbox" checked={(part.tags ?? []).includes('optional')} onChange={(e) => session().setOptional(part.id, e.target.checked)} data-testid="optional-part" disabled={!canEditMass} />
+            Optional
+          </label>
           <span style={{ flex: 1 }} />
           <Button size="small" onClick={() => void session().removePart(part.id)}>
             Remove part

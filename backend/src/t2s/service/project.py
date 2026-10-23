@@ -29,11 +29,12 @@ DATASET = REPO / "data" / "synthetic"
 DEFAULT_SETTINGS = {
     "stage": 1,
     "sliders": {"space": 25, "balance": 25, "inertia": 25, "feasibility": 25, "mass_symmetry": 50, "cable": 0, "cost": 0,
-                "speed_quality": 50, "bracket_budget": 50},
+                "speed_quality": 50, "bracket_budget": 50, "optional_parts": 75},
     "target_com_mm": [0.0, 0.0, 0.0],
     "compactness_definition": "one_end",
     "show_frame_mass_in_com": False,
     "part_scale_pct": 100,          # V2: part-size slider (Stage 2), 50 … 100 %
+    "form_factor": "3U",            # V2: 3U / 6U / 12U envelope (CDS Rev 14.1)
 }
 
 

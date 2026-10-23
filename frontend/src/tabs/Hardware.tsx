@@ -1,0 +1,310 @@
+import { useMemo, useState } from 'react';
+import type { BracketDesign, BracketInfo, ContestResults, LayoutSummary } from '../api/types';
+import { session } from '../api/session';
+import { useApp } from '../store/store';
+import { useAsync, useParts } from '../hooks';
+import { GoalSlider } from '../components/GoalsPanel';
+import { itemsFor, useLayoutList } from '../components/LayoutCompare';
+import { MainViewport } from '../components/viewport/Viewport';
+import { Badge, Button, EmptyState, MockTag, Notice, Panel } from '../components/ui';
+import { DISCLAIMER_STAGE2, SLIDERS } from '../lib/copy';
+import { extraItemStyle } from '../lib/colors';
+import { fmt } from '../lib/fmt';
+
+const KIND_LABEL: Record<string, string> = {
+  direct: 'Direct (M3 + spacer washers)',
+  machined: 'Machined spacer block',
+  sheet: 'Sheet-metal Z-bracket',
+  clamp: 'Tube clamp',
+  cradle: 'Machined cradle',
+  metal_am: 'Metal 3D-printed bracket',
+};
+
+function latestStage2(list: LayoutSummary[] | null): LayoutSummary | null {
+  const c = (list ?? []).filter((l) => l.stage === 2 && (l.status === 'VALIDATED' || l.status === 'FINAL'));
+  c.sort((a, b) => ((a.created ?? '') < (b.created ?? '') ? 1 : -1));
+  return c[0] ?? null;
+}
+
+function boxSize(r: number[]): string {
+  if (r.length !== 6) return '—';
+  return [0, 1, 2].map((k) => fmt(r[k + 3] - r[k], 'mm', { unit: false })).join(' × ') + ' mm';
+}
+
+function Margin({ v }: { v: number | null | undefined }) {
+  if (v == null) return <span className="muted">—</span>;
+  return <Badge tone={v >= 0 ? 'ok' : 'err'}>{(v >= 0 ? '+' : '') + v.toFixed(2)}</Badge>;
+}
+
+/** Mass cell: exact (built solid), ESTIMATE (reserved box only) or the designed, FEA-checked solid. */
+function MassCell({ b, d }: { b: BracketInfo; d?: BracketDesign }) {
+  if (d) {
+    return (
+      <span>
+        {fmt(d.mass_kg, 'kg')} <Badge tone="ok">designed</Badge>
+      </span>
+    );
+  }
+  return (
+    <span>
+      {fmt(b.mass_kg, 'kg')} {b.exact ? <Badge>exact</Badge> : <Badge tone="warn">ESTIMATE</Badge>}
+    </span>
+  );
+}
+
+function BracketTable({ brackets, designs, names }: { brackets: BracketInfo[]; designs: Record<string, BracketDesign>; names: Record<string, string> }) {
+  return (
+    <table className="data" data-testid="bracket-table">
+      <thead>
+        <tr>
+          <th>Part</th>
+          <th>Bracket</th>
+          <th>Fixed to</th>
+          <th className="num">Gap</th>
+          <th>Reserved box</th>
+          <th>Material</th>
+          <th className="num">Mass</th>
+          <th className="num">Rel. cost</th>
+          <th className="num">MS yield</th>
+          <th className="num">MS ult.</th>
+          <th className="num">f1</th>
+        </tr>
+      </thead>
+      <tbody>
+        {brackets.map((b) => {
+          const d = designs[b.pid];
+          const st = extraItemStyle(b.process);
+          return (
+            <tr key={b.name}>
+              <td>{names[b.pid] ?? b.pid}</td>
+              <td>
+                <span className="row" style={{ gap: 6 }}>
+                  <span className={`swatch ${st.hatch ? 'hatch' : ''}`} style={{ background: st.color }} />
+                  {KIND_LABEL[b.kind] ?? b.mount_type}
+                  {st.badge ? <Badge tone="accent">{st.badge}</Badge> : null}
+                </span>
+                {d ? <div className="small muted">{d.generator}</div> : null}
+              </td>
+              <td className="small">{b.target}</td>
+              <td className="num">{fmt(b.gap_mm, 'mm')}</td>
+              <td className="small">{boxSize(b.reserve)}</td>
+              <td className="small">{b.material}</td>
+              <td className="num">
+                <MassCell b={b} d={d} />
+              </td>
+              <td className="num">{fmt(d ? d.cost_rel : b.cost_rel, 'rel')}</td>
+              <td className="num">
+                <Margin v={d?.ms_yield} />
+              </td>
+              <td className="num">
+                <Margin v={d?.ms_ult} />
+              </td>
+              <td className="num">{d?.f1_hz != null ? `${Math.round(d.f1_hz)} Hz` : '—'}</td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  );
+}
+
+function ContestPanel({ c, notAvailable }: { c: ContestResults | null; notAvailable: boolean }) {
+  if (!c || notAvailable) {
+    return (
+      <Panel title="Generative-design contest" caption="open-source generators, each design checked with CalculiX and NGSolve">
+        <EmptyState title="No contest results yet">The contest results are published by the backend once the contest has run.</EmptyState>
+      </Panel>
+    );
+  }
+  const problems = c.problems.map((p) => p.name);
+  return (
+    <Panel title="Generative-design contest" caption={`${c.entrants.length} entrants × ${c.problems.length} bracket problems · ${c.created}`}>
+      {c.winner ? (
+        <Notice tone="info">
+          <strong data-testid="contest-winner">Winner: {c.winner.generator}</strong> — {c.winner.why}
+        </Notice>
+      ) : null}
+      <table className="data" data-testid="contest-standings">
+        <thead>
+          <tr>
+            <th className="num">Rank</th>
+            <th>Generator</th>
+            <th className="num">Passed</th>
+            <th className="num">Total mass (passing)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {c.standings.map((s) => (
+            <tr key={s.generator}>
+              <td className="num">{s.rank}</td>
+              <td>{s.generator}</td>
+              <td className="num">
+                {s.passed}/{s.problems}
+              </td>
+              <td className="num">{s.total_mass_g != null ? `${s.total_mass_g.toFixed(1)} g` : '—'}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {problems.map((p) => (
+        <div key={p} style={{ marginTop: 10 }}>
+          <div className="small">
+            <strong>{p}</strong> — {c.problems.find((x) => x.name === p)?.description}
+          </div>
+          <table className="data">
+            <thead>
+              <tr>
+                <th>Generator</th>
+                <th className="num">Mass</th>
+                <th className="num">Peak stress</th>
+                <th className="num">MS yield</th>
+                <th className="num">MS ult.</th>
+                <th className="num">f1 (with part)</th>
+                <th className="num">Solver agreement</th>
+                <th className="num">Time</th>
+                <th>Result</th>
+              </tr>
+            </thead>
+            <tbody>
+              {c.rows
+                .filter((r) => r.problem === p)
+                .map((r) => (
+                  <tr key={r.generator}>
+                    <td>{r.generator}</td>
+                    <td className="num">{r.mass_g != null ? `${r.mass_g.toFixed(1)} g` : '—'}</td>
+                    <td className="num">{r.sigma_mpa != null ? `${r.sigma_mpa.toFixed(0)} MPa` : '—'}</td>
+                    <td className="num">
+                      <Margin v={r.ms_yield} />
+                    </td>
+                    <td className="num">
+                      <Margin v={r.ms_ult} />
+                    </td>
+                    <td className="num">{r.f1_hz != null ? `${Math.round(r.f1_hz)} Hz` : '—'}</td>
+                    <td className="num small">{r.agreement?.sigma_rel != null ? `σ ${(100 * r.agreement.sigma_rel).toFixed(3)} %` : '—'}</td>
+                    <td className="num">{fmt((r.gen_seconds ?? 0) + (r.fea_seconds ?? 0), 's')}</td>
+                    <td>{r.passed ? <Badge tone="ok">PASS</Badge> : <Badge tone="err">{r.ok ? 'FAIL' : 'NO DESIGN'}</Badge>}{r.reason ? <div className="small muted">{r.reason}</div> : null}</td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
+      ))}
+      <div className="small muted" style={{ marginTop: 8 }}>
+        Criteria (ASSUMED): {c.criteria.join(' · ')}. Entrants: {c.entrants.map((e) => `${e.name}${e.available ? '' : ' (not run: ' + (e.note ?? 'unavailable') + ')'}`).join('; ')}.
+      </div>
+    </Panel>
+  );
+}
+
+export function HardwareTab() {
+  const settings = useApp((s) => s.goals.settings);
+  const newest = useApp((s) => s.conn.newest);
+  const study = useApp((s) => s.solver.studies['bracket_design']);
+  const infeasible = useApp((s) => s.solver.infeasible);
+  const parts = useParts();
+  const list = useLayoutList();
+  const s2v = latestStage2(list.data);
+  const s2 = s2v ?? (infeasible && infeasible.stage === 2 ? (infeasible as unknown as LayoutSummary) : null);
+  // reloaded when a bracket-design run reports progress (designed solids replace the estimates)
+  const layout = useAsync(s2?.id ? () => session().api.layout(s2.id) : null, [s2?.id, study?.progress, study?.at]);
+  const contest = useAsync(() => session().api.gdContest(), []);
+  const [msg, setMsg] = useState<string | null>(null);
+  const items = useMemo(() => itemsFor(layout.data, newest), [layout.data, newest]);
+  const names = useMemo(() => Object.fromEntries(parts.map((p) => [p.id, p.name])), [parts]);
+  const view = layout.data?.stage2;
+  const brackets = view?.brackets ?? [];
+  const designs = view?.bracket_designs ?? {};
+  const budgetDef = SLIDERS.find((s) => s.key === 'bracket_budget')!;
+  const byKind = useMemo(() => {
+    const m: Record<string, number> = {};
+    brackets.forEach((b) => (m[b.kind] = (m[b.kind] ?? 0) + 1));
+    return m;
+  }, [brackets]);
+  const mass = brackets.reduce((s, b) => s + (designs[b.pid]?.mass_kg ?? b.mass_kg), 0);
+  const estimates = brackets.filter((b) => !b.exact && !designs[b.pid]).length;
+  const design = async () => {
+    if (!layout.data) return;
+    setMsg(null);
+    try {
+      await session().api.designBrackets(layout.data.id);
+      setMsg('Bracket design started: the contest winner designs every metal-AM and cradle bracket inside its reserved box; each design is checked with CalculiX and NGSolve.');
+    } catch (e) {
+      setMsg(`Could not start: ${(e as Error).message}`);
+    }
+  };
+  return (
+    <div className="tab-scroll" data-testid="tab-hardware">
+      <Notice tone="warn" role="note">
+        Stage 2 only. Every part except the PC/104 boards is held by a bracket whose reserved box is part of the packing: it keeps 1.2 mm from every other part, bracket and keep-out, and the fit proof certifies it (Lemma 4). Costs are relative and ASSUMED; cradle and metal 3D-printed bracket masses are ESTIMATES until designed. {DISCLAIMER_STAGE2}
+      </Notice>
+      <div className="grid-2" style={{ marginTop: 10 }}>
+        <Panel title="Bracket budget" right={<MockTag />}>
+          {settings ? (
+            <div style={{ border: '1px solid var(--border-subtle)' }}>
+              <GoalSlider
+                def={budgetDef}
+                value={settings.sliders.bracket_budget ?? 50}
+                onChange={(v, c) => session().setSlider('bracket_budget', v, c)}
+                note={settings.stage !== 2 ? 'Brackets are modelled in Stage 2 only.' : undefined}
+              />
+            </div>
+          ) : null}
+          <div className="small" style={{ marginTop: 6 }} data-testid="budget-mode">
+            {(settings?.sliders.bracket_budget ?? 50) <= 0
+              ? 'Budget 0: simple brackets only (direct, machined, sheet metal, clamps, machined cradles).'
+              : 'Metal 3D-printed brackets allowed where no cheaper bracket fits; hardware cost weighted by ' + (100 - (settings?.sliders.bracket_budget ?? 50)).toFixed(0) + ' / 100.'}
+          </div>
+        </Panel>
+        <Panel title="Totals" caption={s2 ? `layout ${s2.id}` : undefined}>
+          {brackets.length ? (
+            <div className="small" data-testid="hardware-totals">
+              <div>
+                {brackets.length} brackets · hardware mass {fmt(mass, 'kg')}
+                {estimates ? ` (${estimates} estimated)` : ''} · relative cost {fmt(view?.hardware_cost_rel ?? null, 'rel')}
+              </div>
+              <div style={{ marginTop: 4 }}>
+                {Object.entries(byKind).map(([k, n]) => (
+                  <Badge key={k} tone={k === 'metal_am' ? 'accent' : 'neutral'}>
+                    {n} × {KIND_LABEL[k] ?? k}
+                  </Badge>
+                ))}
+              </div>
+              <div className="row" style={{ marginTop: 8 }}>
+                <Button variant="primary" onClick={design} disabled={!layout.data || !brackets.some((b) => !b.exact)} data-testid="design-brackets">
+                  Design the 3D-printed and cradle brackets
+                </Button>
+                {study ? <span className="small muted">progress {fmt((study.progress ?? 0) * 100, 'pct100')}</span> : null}
+              </div>
+              {msg ? <Notice tone={msg.startsWith('Could not') ? 'err' : 'info'}>{msg}</Notice> : null}
+            </div>
+          ) : (
+            <span className="muted small">{s2 ? 'This layout has no brackets (all parts on the PC/104 stack, or mounting relaxed).' : 'No Stage 2 layout yet.'}</span>
+          )}
+        </Panel>
+      </div>
+      {!s2 ? (
+        <EmptyState title="No ENGINEERING-CONSTRAINED layout yet">Switch to Stage 2 and optimise: every layout found there carries its brackets.</EmptyState>
+      ) : (
+        <>
+          <Panel title={`Layout ${s2.id} with its brackets`} caption="metal 3D-printed brackets: hatched, AM badge; reserved boxes of undesigned brackets shown as boxes">
+            <div style={{ height: 420, display: 'flex' }}>
+              <MainViewport items={items} metrics={layout.data?.metrics ?? null} stage={2} testId="hardware-viewport" />
+            </div>
+          </Panel>
+          <Panel title="Brackets" caption="one per part; mass exact for built solids, ESTIMATE from the reserved box until designed; margins from two FEA solvers once designed">
+            {brackets.length ? <BracketTable brackets={brackets} designs={designs} names={names} /> : <EmptyState title="No brackets in this layout" />}
+          </Panel>
+        </>
+      )}
+      <ContestPanel c={contest.data ?? null} notAvailable={!!contest.notAvailable} />
+      <Panel title="Bracket rules (ASSUMED)">
+        <ul className="small" style={{ margin: '0 0 0 16px' }}>
+          <li>Reach: a bracket bridges up to 40 mm from the part's mounting side (its 3 mm layer side) to a wall, end plate, corner rail or the PC/104 deck.</li>
+          <li>Cheapest bracket that fits: direct (≤ 3.5 mm), machined block (≤ 15 mm), sheet Z-bracket, tube clamp for cylindrical parts, machined cradle for curved or irregular sides; metal 3D-printed only with a budget above 0.</li>
+          <li>Clearance: each reserved box keeps 1.2 mm from every other part, bracket and keep-out except the one it is fixed to.</li>
+          <li>Loads: 68 g quasi-static in each axis separately; factors of safety 1.25 (yield) and 1.4 (ultimate); AlSi10Mg 170 / 280 MPa, E 65 GPa; first frequency with the part ≥ 100 Hz (target 200 Hz).</li>
+        </ul>
+      </Panel>
+    </div>
+  );
+}

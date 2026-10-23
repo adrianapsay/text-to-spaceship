@@ -184,6 +184,31 @@
       "blas": "netlib reference BLAS/LAPACK (the variant the calculix build used), single-threaded",
       "threads": "OMP_NUM_THREADS, NUMBER_OF_CPUS, CCX_NPROC_EQUATION_SOLVER, CCX_NPROC_STIFFNESS, CCX_NPROC_RESULTS (set by t2s.fea.ccx)",
       "check": "ccx.exe -v prints 'This is Version 2.23'; the package's smoketest.inp solves to u = -4.761905E-04"
+    },
+    "beso": {
+      "project": "BESO (Bi-directional Evolutionary Structural Optimization) for CalculiX",
+      "source": "https://github.com/calculix/beso",
+      "commit": "5056d301c2675df9ac1af771af4f1cbea642e4ad",
+      "commit_date": "2025-04-03T21:56:23Z",
+      "commit_message": "fix reading density",
+      "release": "none: the repository has no tags or releases; this commit is the head of master (last push 2025-04-03), checked through the GitHub API on 2026-10-22",
+      "url": "https://codeload.github.com/calculix/beso/zip/5056d301c2675df9ac1af771af4f1cbea642e4ad",
+      "sha256": "4988ccb39079163972cd312fd544381627313f75346a483db52c933e2dd3af3a",
+      "bytes": 22214958,
+      "hash_source": "computed at download (codeload archives have no published digest); the git blob SHA-1 of every extracted file equals the commit's tree from the GitHub API (31 of 31)",
+      "licence": "LGPL-3.0 (LICENSE file: GNU Lesser General Public License, Version 3, 29 June 2007; README: LGPLv3; GitHub: LGPL-3.0; no per-file headers, so -only / -or-later is not stated)",
+      "install_dir": "tools/beso",
+      "layout": "archive kept as tools/beso/beso-<commit>.zip, extracted to tools/beso/beso-<commit>/",
+      "requires": "python3, numpy, matplotlib (its shell.nix): all already in the project venv, nothing installed",
+      "used_files": [
+        "beso_main.py",
+        "beso_lib.py",
+        "beso_filters.py",
+        "beso_plots.py",
+        "beso_separate.py"
+      ],
+      "not_used": "beso_conf.py (the driver writes its own), beso_fc_gui.py (FreeCAD GUI), wiki_files/ (examples)",
+      "driver": "t2s.gd.entrants.beso_ccx runs beso_main.py unmodified under python -I with the project's ccx.exe"
     }
   }
 }

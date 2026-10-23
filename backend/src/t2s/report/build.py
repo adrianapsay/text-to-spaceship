@@ -21,7 +21,7 @@ from ..geometry.stl_io import stl_bytes
 from ..objectives.metrics import ENCLOSURE_HI, ENCLOSURE_LO
 
 FUSION_STATUS = "FUSION 360 VALIDATION: NOT CONFIGURED"
-STAGE_LABEL = {1: "IDEALIZED — geometry-only packing in the 3U envelope; not an engineering design",
+STAGE_LABEL = {1: "IDEALIZED — geometry-only packing in the CubeSat envelope; not an engineering design",
                2: "ENGINEERING-CONSTRAINED — ASSUMED frame and rules; not flight-qualified"}
 MFG_LABEL = "manufacturing concept — assumed cost model, not a quote; brackets not stress-analysed"
 DEFERRED_FUSION = [
@@ -42,6 +42,27 @@ HW_COLOUR = {"metal_am": "#c2185b", "sheet": "#607d8b", "machined": "#8d6e63", "
 
 def _now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+
+
+def _ff():
+    from ..core import formfactor
+    return formfactor
+
+
+def _env_text() -> str:
+    """The active form factor's envelope, e.g. "100 × 100 × 340.5 mm" (3U)."""
+    return " × ".join(f"{v:g}" for v in _ff().ENVELOPE) + " mm"
+
+
+def _com_text() -> str:
+    return "/".join(f"±{v:g}" for v in _ff().COM_BOX)
+
+
+def _frame_text(ascii_only: bool = False) -> str:
+    lo, hi = ENCLOSURE_LO, ENCLOSURE_HI
+    if ascii_only:
+        return f"x in [{lo[0]:g}, {hi[0]:g}], y in [{lo[1]:g}, {hi[1]:g}], z in [{lo[2]:g}, {hi[2]:g}]"
+    return f"x ∈ [{lo[0]:g}, {hi[0]:g}] mm, y ∈ [{lo[1]:g}, {hi[1]:g}] mm, z ∈ [{lo[2]:g}, {hi[2]:g}] mm"
 
 
 def _n(x, nd: int = 1, unit: str = "") -> str:
@@ -104,7 +125,7 @@ def report_blocks(c, e, version: str, proof: dict | None = None, proof_error: st
         ["Free length at the +Z end", _n(m.get("free_length_mm"), 1, "mm"), ""],
         ["Parts placed", str(m.get("parts_placed", "—")), ""],
         ["Space used (solid volume / envelope)", _n(100 * m["space_used"], 1, "%") if m.get("space_used") is not None
-         else "—", "envelope 100 × 100 × 340.5 mm"],
+         else "—", f"envelope {_env_text()}"],
         ["Minimum clearance (exact meshes)", _n(m.get("min_clearance_mm"), 3, "mm"),
          f"required {_n(m.get('required_clearance_mm'), 1, 'mm')}"],
         ["Mass of the parts", _n(m.get("mass_kg"), 3, "kg"), m.get("mass_note", "")],
@@ -176,7 +197,7 @@ def report_blocks(c, e, version: str, proof: dict | None = None, proof_error: st
 
     # ---- placements
     B.append(("h2", "4  Placements"))
-    B.append(("p", "World frame: origin at the envelope centre; x, y ∈ [−50, 50] mm, z ∈ [−170.25, 170.25] mm. "
+    B.append(("p", f"World frame: origin at the envelope centre; {_frame_text()}. "
                    "Each part's canonical vertices v map to world as R·v + t."))
     rows = []
     for pid, o, t in e.poses:
@@ -253,8 +274,8 @@ def report_blocks(c, e, version: str, proof: dict | None = None, proof_error: st
     # ---- limitations and deferred work
     B.append(("h2", "8  Assumptions and limitations"))
     lim = [
-        "CubeSat Design Specification Rev 14.1 for 3U: 100 × 100 × 340.5 mm envelope; COM box ±20/±20/±70 mm "
-        "(“shall”); 6.00 kg is a “Note”.",
+        f"CubeSat Design Specification Rev 14.1 for {_ff().current()}: {_env_text()} envelope; COM box "
+        f"{_com_text()} mm (“shall”); {_ff().info()['mass_note_kg']:.2f} kg is a “Note”.",
         "Parts are rigid STL solids in millimetres; masses use the ASSUMED density 2,700 kg/m³ unless entered.",
         "Search orientations are the 24 axis-aligned ones (the protocol's free-rotation experiment is not "
         "implemented).",
@@ -539,8 +560,8 @@ def stl_zip(c, e, version: str) -> bytes:
         z.writestr("README.txt", "\n".join([
             f"TEXT-TO-SPACESHIP {version} — placed STL files for layout {e.id} (hash {e.hash})",
             STAGE_LABEL.get(e.stage, ""), (MFG_LABEL if e.mode == "manufacturable" else ""),
-            f"Status: {e.status}. Units: millimetres. World frame: origin at the 3U envelope centre, "
-            f"x,y in [-50, 50], z in [-170.25, 170.25].",
+            f"Status: {e.status}. Units: millimetres. World frame: origin at the {_ff().current()} envelope centre, "
+            f"{_frame_text(ascii_only=True)}.",
             "Metal 3D-printed brackets are the files hardware/AM_*.stl.",
             FUSION_STATUS, "", "Files:", *names, ""]))
     return buf.getvalue()
@@ -630,7 +651,7 @@ def fusion_package(c, e, version: str, report_md: str, proof: dict | None, check
             "format": "t2s-fusion-package/1", "app_version": version, "generated": _now(), "status": FUSION_STATUS,
             "layout": {"id": e.id, "hash": e.hash, "stage": e.stage, "mode": e.mode, "status": e.status,
                        "label": STAGE_LABEL.get(e.stage)},
-            "units": "mm", "frame": {"origin": "3U envelope centre", "envelope_min_mm": ENCLOSURE_LO.tolist(),
+            "units": "mm", "frame": {"origin": f"{_ff().current()} envelope centre", "envelope_min_mm": ENCLOSURE_LO.tolist(),
                                      "envelope_max_mm": ENCLOSURE_HI.tolist()},
             "parts": parts, "hardware": hardware,
             "app_results": {k: m.get(k) for k in ("mass_kg", "hardware_mass_kg", "com_mm", "inertia_kgm2",

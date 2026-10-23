@@ -17,6 +17,7 @@ import numpy as np
 from ..collision.geom import part_geom_from_record
 from ..collision.validate import Validator
 from ..constraints.stage2_model import Stage2Model
+from ..core.formfactor import COM_BOX
 from ..geometry.stl_io import write_binary_stl
 from ..objectives.metrics import part_phys
 from ..optimise.brkga import (Evaluator, IslandState, LahcState, best_candidates, run_island, run_lahc, seed_keys,
@@ -51,7 +52,7 @@ def search(records, mode, sliders, budget_s, seed):
     model = Stage2Model(records, mode, mfg=True)
     ids = list(records)
     ev = Evaluator(model, ids, {i: part_phys(records[i]) for i in ids}, {i: records[i].orient_bounds for i in ids},
-                   float(model.inner[0][2]), com_box=np.array([20.0, 20.0, 70.0]))
+                   float(model.inner[0][2]), com_box=COM_BOX.copy())
     w = slider_weights(sliders, 2, "manufacturable")
     alpha = alpha_from(sliders)
     rng = np.random.default_rng(seed)

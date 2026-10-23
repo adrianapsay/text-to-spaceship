@@ -285,6 +285,37 @@ def create_app(coord: Coordinator | None = None, project: str = "default", **coo
         except ValueError as exc:
             raise HTTPException(409, str(exc)) from exc
 
+    # ------------------------------------------------------------------------------- V2 brackets
+    @app.get("/api/gd/contest")
+    async def gd_contest(request: Request):
+        c = C(request).gd_contest()
+        if c is None:
+            raise HTTPException(404, "no generative-design contest results (run scripts/gd_contest.py)")
+        return c
+
+    @app.get("/api/studies/largest-size")
+    async def largest_size(request: Request):
+        r = C(request).largest_size()
+        if r is None:
+            raise HTTPException(404, "the largest-size search has not been run (POST /api/studies/largest-size/run)")
+        return r
+
+    @app.post("/api/studies/largest-size/run")
+    async def largest_size_run(request: Request):
+        try:
+            return C(request).start_largest_size()
+        except ValueError as exc:
+            raise HTTPException(409, str(exc)) from exc
+
+    @app.post("/api/layouts/{layout_id}/design-brackets")
+    async def design_brackets(layout_id: str, request: Request):
+        try:
+            return C(request).start_bracket_design(layout_id)
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown layout {layout_id}") from exc
+        except ValueError as exc:
+            raise HTTPException(409, str(exc)) from exc
+
     # ------------------------------------------------------------------------------------------- studies
     @app.get("/api/benchmarks")
     async def benchmarks(request: Request, instance: str | None = None, preset: str | None = None):

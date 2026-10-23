@@ -13,6 +13,7 @@ const ComparisonTab = lazy(() => import('./tabs/Comparison').then((m) => ({ defa
 const SizeStudyTab = lazy(() => import('./tabs/SizeStudy').then((m) => ({ default: m.SizeStudyTab })));
 const ExplainTab = lazy(() => import('./tabs/Explain').then((m) => ({ default: m.ExplainTab })));
 const EngineeringTab = lazy(() => import('./tabs/Engineering').then((m) => ({ default: m.EngineeringTab })));
+const HardwareTab = lazy(() => import('./tabs/Hardware').then((m) => ({ default: m.HardwareTab })));
 const ManufacturableTab = lazy(() => import('./tabs/Manufacturable').then((m) => ({ default: m.ManufacturableTab })));
 const CadValidationTab = lazy(() => import('./tabs/CadValidation').then((m) => ({ default: m.CadValidationTab })));
 const ResultsTab = lazy(() => import('./tabs/Results').then((m) => ({ default: m.ResultsTab })));
@@ -26,6 +27,7 @@ export const TABS: { id: TabId; label: string }[] = [
   { id: 'size', label: 'Size Study' },
   { id: 'explain', label: 'Explain' },
   { id: 'engineering', label: 'Engineering Constraints' },
+  { id: 'hardware', label: 'Mounting Hardware' },
   { id: 'manufacturable', label: 'Manufacturable Design' },
   { id: 'cad', label: 'CAD Validation' },
   { id: 'results', label: 'Results & Export' },
@@ -49,6 +51,8 @@ function TabBody({ id }: { id: TabId }) {
       return <ExplainTab />;
     case 'engineering':
       return <EngineeringTab />;
+    case 'hardware':
+      return <HardwareTab />;
     case 'manufacturable':
       return <ManufacturableTab />;
     case 'cad':

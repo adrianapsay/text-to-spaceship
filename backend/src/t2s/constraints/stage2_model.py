@@ -190,6 +190,7 @@ class Stage2Model:
         self.mode = mode
         self.relax = frozenset(relax)
         self.pcb = [] if "pcb_stack" in self.relax else [pid for pid in self.ids if "pcb" in records[pid].tags]
+        self.optional = frozenset(pid for pid in self.ids if "optional" in (records[pid].tags or []))
         lo, hi = s2.inner_box()
         if "frame" in self.relax:                      # no walls, no rails: the bare 100 × 100 × 340.5 envelope
             lo, hi = -s2.ENVELOPE / 2, s2.ENVELOPE / 2
@@ -397,13 +398,29 @@ class Stage2Model:
                 res = dec.decode(order, orient_keys, rk, extra_obstacles=extra_obs, skip=skip)
                 pre_poses = poses
         poses = pre_poses + [(pid, int(o), np.round(np.asarray(t, float) * 1000.0) / 1000.0) for pid, o, t in res.poses]
-        shift, poses, meta, (penalty, mounts, extras) = self._com_shift(poses, meta, extra[2], bool(res.unplaced))
+        dropped = []
+        if self.optional:          # V2: an optional part that would overflow the end plate is left out
+            limit = self.inner[1][2] - s2.C_WALL
+            over = [pid for pid, o, t in poses if pid in self.optional and pid not in self.pcb
+                    and t[2] + self.records[pid].orient_bounds[o][5] > limit + 1e-9]
+            dropped += over
+            poses = [p for p in poses if p[0] not in over]
+        partial = any(p not in self.optional for p in res.unplaced)
+        shift, poses, meta, (penalty, mounts, extras) = self._com_shift(poses, meta, extra[2], partial)
         placed_boxes, length_top = res.placed_boxes, res.length_top
         if shift:
             placed_boxes = np.asarray(placed_boxes, float).copy()
             if placed_boxes.size:
                 placed_boxes[:, [2, 5]] += shift
             length_top = length_top + shift
+        if self.optional:          # … and so is one that no bracket / standoff can hold
+            gone = [p for p, v in mounts.items() if not v["ok"] and p in self.optional]
+            for p in gone:
+                mounts.pop(p)
+            penalty -= len(gone)
+            poses = [p for p in poses if p[0] not in gone]
+            dropped += gone
+        meta["dropped"] = dropped
         meta["mounts"] = mounts
         meta["unmounted"] = [p for p, v in mounts.items() if not v["ok"]]
         top = max((t[2] + self.records[pid].orient_bounds[o][5] for pid, o, t in poses), default=self.inner[0][2])

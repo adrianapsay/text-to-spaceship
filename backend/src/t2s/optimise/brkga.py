@@ -42,7 +42,7 @@ class Evaluator:
     """Decode + raw objectives, all geometry-only except the physics terms (which use current masses)."""
 
     def __init__(self, decoder: BoxDecoder, ids: list[str], phys: dict[str, PartPhys | None], orient_bounds: dict,
-                 z0: float, target=(0.0, 0.0, 0.0), com_box=None):
+                 z0: float, target=(0.0, 0.0, 0.0), com_box=None, optional=()):
         self.dec = decoder
         self.ids = ids
         self.phys = phys
@@ -50,6 +50,8 @@ class Evaluator:
         self.z0 = z0
         self.target = np.asarray(target, float)
         self.com_box = com_box                 # (3,) half-widths when the CDS box is hard (Stage 2)
+        # V2 optional parts: may be left out when they do not fit (no violation); objective O = share left out
+        self.optional = frozenset(optional)
 
     @property
     def dim(self) -> int:
@@ -88,13 +90,21 @@ class Evaluator:
         penalty = float(getattr(res, "penalty", 0.0))
         extra_mass = list(getattr(res, "extra_mass", []))
         raw_extra = dict(getattr(res, "raw_extra", {}))
-        raw, cv = self.raw_from_poses(poses, res.unplaced, penalty, extra_mass, raw_extra)
-        return Candidate(keys.copy(), poses, raw, cv, unplaced=list(res.unplaced), meta=getattr(res, "meta", None),
-                         penalty=penalty, extra_mass=extra_mass)
+        meta = getattr(res, "meta", None)
+        unplaced = list(res.unplaced)
+        if self.optional:
+            dropped = [p for p in unplaced if p in self.optional] + list((meta or {}).get("dropped", []))
+            unplaced = [p for p in unplaced if p not in self.optional]
+            meta = dict(meta or {})
+            meta["dropped"] = sorted(set(dropped))
+            meta["O"] = raw_extra["O"] = len(meta["dropped"]) / len(self.optional)
+        raw, cv = self.raw_from_poses(poses, unplaced, penalty, extra_mass, raw_extra)
+        return Candidate(keys.copy(), poses, raw, cv, unplaced=unplaced, meta=meta, penalty=penalty,
+                         extra_mass=extra_mass)
 
     def refresh(self, c: Candidate) -> None:
         """Recompute the physics terms after a mass edit (geometry unchanged)."""
-        raw_extra = {k: c.raw[k] for k in ("H", "C") if k in c.raw}
+        raw_extra = {k: c.raw[k] for k in ("H", "C", "O") if k in c.raw}
         c.raw, c.cv = self.raw_from_poses(c.poses, c.unplaced, c.penalty, c.extra_mass, raw_extra)
 
 

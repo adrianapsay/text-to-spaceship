@@ -9,7 +9,7 @@ import numpy as np
 from ..collision.geom import to_world
 from ..physics.assembly import PartPhys, assembly, com_box_check, inertia_metrics
 
-ENCLOSURE_LO = np.array([-50.0, -50.0, -170.25])
+ENCLOSURE_LO = np.array([-50.0, -50.0, -170.25])     # 3U; V2 6U / 12U change these arrays in place (core.formfactor)
 ENCLOSURE_HI = np.array([50.0, 50.0, 170.25])
 
 
@@ -21,9 +21,10 @@ def part_phys(rec) -> PartPhys | None:
     return PartPhys(rec.mass_kg, rec.com_can_mm, rec.inertia_com_kgm2())
 
 
-def layout_metrics(records: dict, geoms: dict, poses, z0: float = ENCLOSURE_LO[2],
+def layout_metrics(records: dict, geoms: dict, poses, z0: float | None = None,
                    target=(0.0, 0.0, 0.0), extras: list[tuple] = (), min_clearance: float | None = None,
                    required_clearance: float = 0.0, enclosure_volume: float | None = None) -> dict:
+    z0 = float(ENCLOSURE_LO[2]) if z0 is None else z0
     tops, bottoms = [], []
     for pid, o, t in poses:
         hw = to_world(geoms[pid].hull_pts, o, np.asarray(t, float))
@@ -64,3 +65,7 @@ def raw_objectives(m: dict, alpha: float = 0.5) -> dict:
     return {"L": m["length_used_mm"], "D": m.get("com_error_mm", np.nan), "T": m.get("trace_kgm2", np.nan),
             "P": m.get("products_norm_kgm2", np.nan), "G": m.get("margin_objective", np.nan),
             "lambda_max": m.get("lambda_max_kgm2", np.nan), "kappa": m.get("kappa", np.nan)}
+
+
+from ..core import formfactor as _ff   # noqa: E402  (a subprocess study inherits the form factor through the environment)
+_ff._init_from_env()

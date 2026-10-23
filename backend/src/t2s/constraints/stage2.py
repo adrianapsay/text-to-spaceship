@@ -16,8 +16,7 @@ from dataclasses import dataclass, field
 import numpy as np
 
 from ..collision.validate import StageSpec, StaticItem
-
-ENVELOPE = np.array([100.0, 100.0, 340.5])
+from ..core.formfactor import ENVELOPE      # shared array: 3U 100 × 100 × 340.5 mm unless 6U / 12U is chosen (V2)
 WALL = 2.0
 RAIL = 8.5
 C_PP = 2.2

@@ -44,11 +44,12 @@ def bounds_for(records: dict, stage: int) -> list[dict]:
     """Bounds drawn on the chart: rigorous volume bound (L ≥ c·s³) and the axis-aligned fit bound."""
     from ..constraints import stage2 as s2
     vol = sum(r.volume_mm3 or 0 for r in records.values())
+    E = s2.ENVELOPE                                    # the active form factor (3U 100 × 100 × 340.5 mm)
     if stage == 1:
-        area, width, length = 100.0 * 100.0, 100.0, 340.5
+        area, width, length = float(E[0] * E[1]), float(max(E[:2])), float(E[2])
     else:
-        w = s2.ENVELOPE[0] - 2 * s2.WALL - 2 * s2.C_WALL
-        area, width, length = w * w, w, s2.ENVELOPE[2] - 2 * s2.WALL - 2 * s2.C_WALL
+        wx, wy = (E[:2] - 2 * s2.WALL - 2 * s2.C_WALL)
+        area, width, length = float(wx * wy), float(max(wx, wy)), float(E[2] - 2 * s2.WALL - 2 * s2.C_WALL)
     c = vol / area
     mid = max(sorted(r.obb_extents_mm)[1] for r in records.values())
     return [{"id": "volume", "label": f"volume bound {c:.1f}·s³ mm", "kind": "rigorous", "coeff_mm": c, "exponent": 3,

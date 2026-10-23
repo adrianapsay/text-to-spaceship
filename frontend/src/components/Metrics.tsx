@@ -41,7 +41,9 @@ export function MetricStrip() {
         k="Space used"
         tipKey="space"
         v={fmt(m?.space_used ?? null, 'pct')}
-        n={`${mock}length ${fmt(m?.length_used_mm ?? null, 'mm', { unit: false })} / ${fmt(total, 'mm')} · same for every layout`}
+        n={`${mock}length ${fmt(m?.length_used_mm ?? null, 'mm', { unit: false })} / ${fmt(total, 'mm')} · same for every layout${
+          m?.optional_left_out?.length ? ` · optional part${m.optional_left_out.length > 1 ? 's' : ''} left out: ${m.optional_left_out.length}` : ''
+        }`}
         testId="metric-space"
       />
       <Metric k="Total mass" tipKey="mass" v={fmt(m?.mass_kg ?? null, 'kg')} n={`${mock}CDS note ${fmt(note, 'kg')} (typical maximum, not a limit)${src}`} testId="metric-mass" />

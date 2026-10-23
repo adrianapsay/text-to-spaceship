@@ -4,6 +4,8 @@ import type {
   Attribution,
   Benchmarks,
   CadStatus,
+  ContestResults,
+  LargestSize,
   FidelityResult,
   FidelitySummary,
   FreeRotationResult,
@@ -227,6 +229,18 @@ export class ApiClient {
   }
   runAttribution() {
     return this.send<unknown>('POST', '/api/stage2/attribution/run', {});
+  }
+  gdContest() {
+    return this.json<ContestResults>('/api/gd/contest');
+  }
+  largestSize() {
+    return this.json<LargestSize>('/api/studies/largest-size');
+  }
+  runLargestSize() {
+    return this.send<unknown>('POST', '/api/studies/largest-size/run', {});
+  }
+  designBrackets(layoutId: string) {
+    return this.send<unknown>('POST', `/api/layouts/${encodeURIComponent(layoutId)}/design-brackets`, {});
   }
   cadStatus() {
     return this.json<CadStatus>('/api/cad/status');
