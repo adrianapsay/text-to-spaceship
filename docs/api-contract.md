@@ -97,6 +97,9 @@ height before it.
 - Slider values are 0..100.
 - `feasibility` is ignored in Stage 1; the UI greys it out.
 - `cable` and `cost` matter only in Stage 2 and the Manufacturable Design tab.
+- `speed_quality` is kept for compatibility but changes nothing since the search runs until Pause (it only set how
+  long the search waited without improvement before stopping itself): the UI no longer shows it, and moving it does
+  not count as a settings change for the saved bracket STL files.
 
 ## 3. REST endpoints
 
@@ -112,7 +115,7 @@ height before it.
 | GET | `/api/parts/{id}/proxy?level=G1\|G2\|G3` | JSON `{boxes: [[minx..maxz]...]}` or `{hulls: [{positions, indices}]}` |
 | PUT | `/api/settings` | Settings object (also possible over WebSocket) |
 | POST | `/api/run` `{action: "start"\|"pause"\|"resume"\|"reset"\|"rerun"}` | Optimiser control |
-| GET | `/api/layouts?status=&limit=` | Archive list (metrics only) |
+| GET | `/api/layouts?status=&limit=` | Archive list (metrics only), newest first by layout number; layouts kept on disk only (bounded memory) are read back for the answer |
 | GET | `/api/layouts/{id}` | Full layout |
 | POST | `/api/layouts/{id}/final` | Freeze as FINAL (full re-validation) |
 | GET | `/api/layouts/{id}/proof` | `{markdown, certificate}` |
@@ -160,7 +163,7 @@ height before it.
 **Server → client**
 | Message | Payload / behaviour |
 |---|---|
-| `state.snapshot` | `{project, best_validated: Layout\|null, candidate: Layout\|null, run_status, selector, least_violating: Layout\|null}` |
+| `state.snapshot` | `{project, best_validated: Layout\|null, candidate: Layout\|null, run_status, selector, least_violating: Layout\|null, progress}` — `progress` as in the `progress` message, so the running time shows while paused too |
 | `edit.ack` | `{client_seq}` |
 | `metrics.update` | `{layout_id, metrics}`, sent immediately after a mass edit |
 | `layout.validated` | `{layout: Layout, source: "archive"\|"search"}` |
@@ -168,11 +171,11 @@ height before it.
 | `layout.stale` | `{layout_id, reason}` |
 | `layout.infeasible` | `{layout, verdict}` — Stage 2 with no feasible layout: the least-violating candidate, status `INFEASIBLE` (geometry certified under its rules; `violations_engineering` lists what it breaks). Never drawn as VALIDATED |
 | `project.changed` | `{reason}` — parts or part data changed; revisions in the envelope tell the client to re-fetch the project |
-| `progress` | `{status, evaluations, best_g, elapsed_s, islands:[...]}`, ≤ 10 Hz |
+| `progress` | `{status, evaluations, best_g, best_length_mm, elapsed_s, recommended_min_s, recommended_note, validation_queue, validating, archive, islands:[...]}`, ≤ 10 Hz while searching, and once on every status change. `elapsed_s` is the running time: seconds spent SEARCHING for the current inputs (search context); pauses do not count, a return to inputs searched before adds to their time, Re-run and Reset start it again. `recommended_min_s`: recommended minimum search time for the current CubeSat size — search-based and provisional (`backend/src/t2s/bench/convergence_table.py`), `null` where none has been measured (6U, 12U); `recommended_note` says what it is based on, or that none exists. `archive`: archived layouts of the current inputs |
 | `selector.changed` | `{algorithm, reasons}` |
 | `pareto.update` | `{points}` |
 | `study.update` | `{study: "size"\|"benchmark"\|"mfg", progress, partial}` |
-| `status` | `{run_status: IDLE\|SEARCHING\|CONVERGED\|PAUSED\|REVALIDATING\|ERROR, detail}` |
+| `status` | `{run_status: IDLE\|SEARCHING\|PAUSED\|REVALIDATING\|ERROR, detail}` — the search runs until Pause (`run.control` `pause`); it never stops on its own (V2: no CONVERGED status). Pause also starts the automatic bracket design of the best Stage 2 layout |
 | `error` | `{message}` |
 | `pong` | — |
 

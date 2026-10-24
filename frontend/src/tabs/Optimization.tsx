@@ -11,6 +11,7 @@ import { fmt } from '../lib/fmt';
 import { normalisedWeights } from '../lib/physics';
 import { activeGoalSliders } from '../store/presets';
 import { NOT_OPTIMAL } from '../lib/copy';
+import { runTime } from '../lib/runTime';
 
 export function OptimizationTab() {
   const settings = useApp((s) => s.goals.settings);
@@ -33,13 +34,14 @@ export function OptimizationTab() {
   const chartOpts = useMemo<Omit<uPlot.Options, 'width' | 'height'>>(
     () => ({
       scales: { x: { time: false } },
-      series: [{ label: 'elapsed (s)' }, { label: 'best g', stroke: '#5D96F0', width: 1.5, points: { show: false } }],
-      axes: [chartAxis('elapsed time (s)'), chartAxis('best scalarised score g (lower is better)')],
+      series: [{ label: 'searching (s)' }, { label: 'best g', stroke: '#5D96F0', width: 1.5, points: { show: false } }],
+      axes: [chartAxis('searching time (s), pauses not counted'), chartAxis('best scalarised score g (lower is better)')],
       legend: { show: true },
     }),
     [],
   );
   const searching = runStatus === 'SEARCHING' || runStatus === 'REVALIDATING';
+  const rt = runTime(progress, runStatus);
   return (
     <div className="tab-scroll" data-testid="tab-optimization">
       <div className="grid-2">
@@ -87,12 +89,24 @@ export function OptimizationTab() {
                   ['Layout algorithm', best?.algorithm ? `${best.algorithm.label}${best.algorithm.reason ? ` — ${best.algorithm.reason}` : ''}` : '—'],
                   ['Selector reasons', selector?.reasons?.join('; ') || '—'],
                   ['Seed', '— (not reported in the contract yet)'],
-                  ['Budget', settings ? `speed ↔ quality ${settings.sliders.speed_quality} (compute budget only)` : '—'],
                   ['Status', `${runStatus}${detail ? ` — ${detail}` : ''}`],
+                  [
+                    'Run time',
+                    rt ? (
+                      <span title={rt.title} data-testid="optimization-run-time">
+                        {rt.text}
+                      </span>
+                    ) : (
+                      '—'
+                    ),
+                  ],
                   ['Evaluations', fmt(progress?.evaluations ?? null, 'int')],
-                  ['Elapsed', fmt(progress?.elapsed_s ?? null, 's')],
                 ]}
               />
+              <div className="small muted" style={{ marginTop: 6 }}>
+                The search keeps looking for a better layout until you press Pause; it never stops on its own. Pause
+                also starts the automatic bracket design of the best Stage 2 layout.
+              </div>
             </div>
             <div className="row" style={{ marginTop: 8 }}>
               <Button variant="primary" onClick={() => session().run('start')} disabled={searching}>

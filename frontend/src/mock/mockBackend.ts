@@ -118,7 +118,9 @@ export class MockBackend {
   private runStatus = 'IDLE';
   private runDetail = 'MOCK backend: no optimiser. "Optimise" runs a placeholder AABB layer packer.';
   private evaluations = 0;
-  private searchStart = 0;
+  /** running time: milliseconds spent searching (pauses do not count), as the real backend reports it */
+  private searchedMs = 0;
+  private searchingSince: number | null = null;
   private searchTimer: ReturnType<typeof setInterval> | null = null;
   private attemptsLeft = 0;
   private layoutCounter = 1;
@@ -508,19 +510,25 @@ export class MockBackend {
           return;
         }
         if (action !== 'resume' || this.attemptsLeft <= 0) this.attemptsLeft = this.opts.searchBudget;
+        this.stopClock();
         if (action !== 'resume') {
           this.evaluations = 0;
-          this.searchStart = Date.now();
+          this.searchedMs = 0;
         }
+        this.searchingSince = Date.now();
         this.setStatus('SEARCHING', 'MOCK placeholder search (seeded AABB layer packer) — not an optimiser');
         this.startSearchTimer();
         break;
       case 'pause':
         this.stopSearchTimer();
+        this.stopClock();
         this.setStatus('PAUSED', 'MOCK placeholder search paused');
+        this.broadcast('progress', this.progressPayload());
         break;
       case 'reset':
         this.stopSearchTimer();
+        this.stopClock();
+        this.searchedMs = 0;
         this.archive.clear();
         this.revs.epoch += 1;
         for (const L of this.fixtureLayouts) this.admit(structuredClone(L));
@@ -539,10 +547,29 @@ export class MockBackend {
     if (this.searchTimer) clearInterval(this.searchTimer);
     this.searchTimer = null;
   }
+  private stopClock() {
+    if (this.searchingSince != null) this.searchedMs += Date.now() - this.searchingSince;
+    this.searchingSince = null;
+  }
+  private progressPayload() {
+    const b = this.best();
+    return {
+      status: this.runStatus,
+      evaluations: this.evaluations,
+      best_g: b?.scores?.g ?? null,
+      elapsed_s: (this.searchedMs + (this.searchingSince != null ? Date.now() - this.searchingSince : 0)) / 1000,
+      recommended_min_s: null,
+      recommended_note: 'MOCK backend: no recommended minimum run time (the real backend shows one where it was measured).',
+      islands: [],
+    };
+  }
   private searchStep() {
     if (this.attemptsLeft <= 0) {
+      // the placeholder packer has a fixed attempt budget; the real optimiser never stops on its own (only Pause)
       this.stopSearchTimer();
-      this.setStatus('CONVERGED', `MOCK placeholder search finished after ${this.evaluations} attempts — not an optimiser, nothing is proven`);
+      this.stopClock();
+      this.setStatus('PAUSED', `MOCK placeholder search paused after ${this.evaluations} attempts (the mock has a fixed attempt budget; the real optimiser searches until you press Pause) — not an optimiser, nothing is proven`);
+      this.broadcast('progress', this.progressPayload());
       return;
     }
     this.attemptsLeft -= 1;
@@ -579,14 +606,7 @@ export class MockBackend {
         }
       }, Math.min(200, this.opts.searchIntervalMs / 2));
     }
-    const b = this.best();
-    this.broadcast('progress', {
-      status: 'SEARCHING',
-      evaluations: this.evaluations,
-      best_g: b?.scores?.g ?? null,
-      elapsed_s: (Date.now() - this.searchStart) / 1000,
-      islands: [],
-    });
+    this.broadcast('progress', this.progressPayload());
   }
 
   private paretoPoints() {
@@ -603,6 +623,7 @@ export class MockBackend {
       candidate: sock.wantCandidates ? this.candidate : null,
       run_status: this.runStatus,
       selector: this.selectorPayload(),
+      progress: this.searchedMs || this.searchingSince != null ? this.progressPayload() : null,
     });
     this.sendTo(sock, 'status', { run_status: this.runStatus, detail: this.runDetail });
   }

@@ -9,6 +9,9 @@
 * A layout belongs to the inputs it was validated for: its parts signature (ids, file hashes, units) and its
   constraint signature (stage, locks, allowed orientations, tags). When the current inputs return to those
   signatures, the layout is current again and is re-stamped with the current revisions.
+* V2: the search runs until the user presses Pause (no automatic stop). Memory stays bounded however long it runs:
+  every layout stays in archive.jsonl, only some stay in memory, and the choices over all layouts of the current
+  inputs use one small row of objective values per layout (service/archive.py, _enforce_memory).
 """
 from __future__ import annotations
 
@@ -20,12 +23,14 @@ import multiprocessing as mp
 import os
 import threading
 import time
+from collections import OrderedDict
 from concurrent.futures import ProcessPoolExecutor
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
 import numpy as np
 
+from ..bench.convergence_table import recommended_minimum
 from ..collision.geom import part_geom_from_record, to_world
 from ..collision.validate import Validator
 from ..constraints import stage2 as s2
@@ -35,9 +40,10 @@ from ..core.rotations import ROTATIONS_F, as_lists
 from ..geometry.stl_io import UNIT_TO_MM, read_stl_bytes
 from ..objectives.metrics import ENCLOSURE_HI, ENCLOSURE_LO
 from ..optimise.brkga import Evaluator
-from ..optimise.scalarize import Normaliser, alpha_from, dominates, scalarise, slider_weights
+from ..optimise.scalarize import RHO, Normaliser, alpha_from, scalarise, slider_weights
 from ..optimise.selector import ALGORITHMS, AlgorithmChoice, grid_map, part_stats, select_algorithm, sweep
 from ..physics.assembly import PartPhys, assembly, com_box_check, inertia_metrics
+from .archive import OK_STATUSES, LayoutArchive, ObjectiveTable, ParetoFront
 from .context import SearchContext, build_context, packable, parts_signature, stage2_config, write_context
 from .project import PartEntry, ProjectStore, build_record_file, now_iso, part_json, quick_inspect
 
@@ -58,6 +64,11 @@ SLIDER_LABELS = {"space": "Use Space Efficiently", "balance": "Balance the Space
                  "speed_quality": "Computation: speed / quality"}
 SETTING_LABELS = {"form_factor": "CubeSat size", "stage": "Stage", "part_scale_pct": "Part size",
                   "target_com_mm": "COM target", "compactness_definition": "Compactness definition"}
+# Sliders that do not change what a search finds. speed_quality only ever set how long the search waited without
+# improvement before it stopped itself; the search now runs until Pause, so it changes nothing (the selector and the
+# workers never read it) and moving it keeps the saved bracket STL files.
+NOT_SEARCH_SLIDERS = ("speed_quality",)
+REV_KEYS = ("parts_rev", "constraint_rev", "mass_rev", "weights_rev")
 
 
 def settings_change_text(before: dict, after: dict) -> str:
@@ -149,7 +160,19 @@ POP_SIZE = 60
 SLICE_S = 0.5
 PROGRESS_EVERY_S = 0.5
 CANDIDATE_EVERY_S = 0.25
-MAX_SEARCH_S = 6 * 3600.0
+# Bounded memory (_enforce_memory): layouts kept in memory beyond the pinned ones (best, least-violating, FINAL, a
+# bracket design or STL save under way, the last ones read on request)
+TOP_K = 500                 # the best-scoring layouts of the current inputs
+NEWEST_KEEP = 200           # the newest layouts (the layout lists show the newest 200)
+HOT_SLACK = 100             # eviction runs once this many more are in memory
+MEMORY_CHECK_S = 5.0
+TABLE_CACHE = 4             # objective tables of recently searched inputs kept for a return to them
+
+
+def _layout_order(lid: str) -> tuple:
+    """Sort key of layout ids by number ("L-10000" after "L-9999"; a plain string sort puts it before)."""
+    num = lid[2:] if lid.startswith("L-") else ""
+    return (1, int(num), lid) if num.isdigit() else (0, 0, lid)
 
 
 def _f(x):
@@ -260,7 +283,7 @@ class Coordinator:
         self.quick: dict[str, dict] = {}
         self.build_errors: dict[str, str] = {}
         self.builds: dict[tuple[str, str], asyncio.Future] = {}
-        self.archive: dict[str, LayoutEntry] = {}
+        self.archive = LayoutArchive(store.archive_path, LayoutEntry.from_store, on_load=self._hydrate)
         self.by_hash: dict[str, str] = {}
         self.norms: dict[str, Normaliser] = {}
         self.raw_pool: dict[str, list] = {}
@@ -280,8 +303,15 @@ class Coordinator:
         self.pending_hashes: set[str] = set()
         self.best_id: str | None = None
         self.best_g_hist: list[tuple[float, float]] = []
-        self.search_t0: float | None = None
-        self.last_improve = time.monotonic()
+        self._searched: dict[str | None, float] = {}   # search context -> seconds spent SEARCHING (closed spells)
+        self._search_since: float | None = None        # start of the current SEARCHING spell
+        self._search_ctx: str | None = None            # the search context that spell counts for
+        self._table: ObjectiveTable | None = None      # one row per layout of the current inputs (archive.py)
+        self._tables: OrderedDict = OrderedDict()      # tables of recently searched inputs, for a return to them
+        self._fam_ver: dict[tuple, int] = {}           # (stage, parts_sig, spec_sig) -> changes to its layouts
+        self._dfront: dict | None = None               # the Pareto plot's front (pareto, _display_front)
+        self._design_lid: str | None = None            # layout of the bracket design run under way
+        self.last_memory = 0.0
         self.evaluations = 0
         self.last_progress = 0.0
         self.last_candidate = 0.0
@@ -437,12 +467,17 @@ class Coordinator:
         settle = self.__dict__.get("_settle_at")
         if settle is not None and now >= settle:
             self._settle_at = None                     # the sliders have stopped: design / save the best layout now
-            if self.run_status in ("PAUSED", "CONVERGED"):
+            if self.run_status == "PAUSED":
                 self._maybe_auto_design()
         if (self.ladders or self.studies) and now - self.last_ladder_poll > 1.0:
             self.last_ladder_poll = now
             self._poll_ladders()
             self._poll_studies()
+        if now - self.last_memory > MEMORY_CHECK_S:
+            self.last_memory = now
+            self._enforce_memory()
+        # V2: no automatic stop (it used to stop after 15 + 6 × speed/quality s without improvement, or after 6 h):
+        # the search runs until Pause; the progress messages carry the running time and a recommended minimum
         if self.run_status == "SEARCHING":
             self._dispatch()
             self._dispatch_validation()
@@ -455,15 +490,9 @@ class Coordinator:
             if now - self.last_progress > PROGRESS_EVERY_S:
                 self.last_progress = now
                 self.broadcast("progress", self._progress())
-            stall = 15.0 + 6.0 * float(self.store.settings["sliders"].get("speed_quality", 50))
-            if self.best_id is not None and now - self.last_improve > stall:
-                self._set_status("CONVERGED", f"no improvement for {stall:.0f} s (speed/quality slider)")
-            elif self.search_t0 is not None and now - self.search_t0 > MAX_SEARCH_S:
-                self._set_status("CONVERGED", "6 h time limit reached")
         elif self.val_queue or self.val_pending:
             self._dispatch_validation()
-        elif self.__dict__.get("_auto_design_due") and self.run_status in ("PAUSED", "CONVERGED") \
-                and self._search_settled():
+        elif self.__dict__.get("_auto_design_due") and self.run_status == "PAUSED" and self._search_settled():
             self._auto_design_due = False              # the last search jobs and validations are done: the best is
             self._maybe_auto_design()                  # settled
 
@@ -659,7 +688,11 @@ class Coordinator:
             self.ctx_counter += 1
             self.ctx_path = write_context(ctx, self.store.cache / "contexts")
             self.norms.setdefault(ctx.ctx_id, Normaliser())
-            self.raw_pool.setdefault(ctx.ctx_id, [])
+            self.raw_pool[ctx.ctx_id] = self.raw_pool.pop(ctx.ctx_id, [])
+            for k in list(self.raw_pool)[:-TABLE_CACHE]:     # candidate pools of inputs left long ago (≤ 2000 each)
+                del self.raw_pool[k]
+            self._qual = {k: v for k, v in self._qual.items() if k[1] == ctx.ctx_id}
+            self._clock_context(ctx.ctx_id)
             self.val_queue = []
             warm = []
             best = self.archive.get(self.best_id) if self.best_id else None
@@ -669,13 +702,11 @@ class Coordinator:
             for w in self.workers:
                 self._send_context(w, warm)
             self._start_cpsat()
-            self.last_improve = time.monotonic()
-            self.search_t0 = time.monotonic()
-            if self.run_status in ("CONVERGED", "IDLE") and (self.auto_start or self.search_requested):
+            if self.run_status == "IDLE" and (self.auto_start or self.search_requested):
                 self._set_status("SEARCHING", f"inputs changed: {reason}")
         self.ev = Evaluator(None, ctx.ids, self._phys(ctx.part_scale), ctx.orient_bounds, ctx.z0, target=self._target(),
                             com_box=ctx.com_box, optional=self._optional_ids())
-        self._restamp_and_rescore(physics=True)
+        self._restamp_and_rescore()
         self.broadcast("project.changed", {"reason": reason})
         self._publish_best("archive", force=True)
         if self.best_id is None and self.least_id is not None:
@@ -775,15 +806,223 @@ class Coordinator:
             return False
         return all(pose[pid] == (int(o), um(t)) for pid, o, t in ctx.fixed)
 
-    def _restamp_and_rescore(self, physics: bool) -> None:
+    def _restamp_and_rescore(self) -> None:
+        """Re-stamp and re-score the layouts of the current inputs and choose the best. Their physics is recomputed
+        when the inputs, the masses or the COM target changed (_ensure_table: the table key)."""
+        self._ensure_table()
         for e in self.archive.values():
             if not self._current(e) or e.status not in ("VALIDATED", "FINAL", "INFEASIBLE"):
                 continue
-            if physics:
-                self._compute_physics(e)
-            e.revs = {k: self.store.revs[k] for k in ("parts_rev", "constraint_rev", "mass_rev", "weights_rev")}
+            e.revs = {k: self.store.revs[k] for k in REV_KEYS}
             self._score_entry(e)
         self._select_best()
+
+    # ------------------------------------------------------------------------------ bounded archive (V2)
+    def _hydrate(self, e: LayoutEntry) -> None:
+        """A layout read back from archive.jsonl, brought up to date for the current inputs like the layouts in
+        memory (physics with the current masses, revisions, score); a layout of other inputs stays as it was saved."""
+        if self.__dict__.get("ctx") is None or e.status not in ("VALIDATED", "FINAL", "INFEASIBLE") \
+                or not self._current(e):
+            return
+        self._compute_physics(e)
+        e.revs = {k: self.store.revs[k] for k in REV_KEYS}
+        self._score_entry(e)
+        self.archive.note_status(e.id, e.status)    # the COM-box verdict can change with the masses
+
+    def _table_key(self) -> tuple:
+        """What the objective rows depend on besides the layouts: the inputs, the masses and the COM target."""
+        return (self.ctx.ctx_id, self.store.revs.get("mass_rev", 0), tuple(float(x) for x in self._target()))
+
+    def _ensure_table(self) -> ObjectiveTable | None:
+        """The objective table of the current inputs (archive.py). It is kept up to date as layouts arrive; on a
+        change of inputs, masses or COM target it is taken from the cache of recently searched inputs (if none of
+        their layouts changed meanwhile) or rebuilt, and the physics of every layout of the current inputs is
+        recomputed — in memory or read back one at a time."""
+        if self.ctx is None:
+            self._table = None
+            return None
+        key = self._table_key()
+        t = self._table
+        if t is not None and t.key == key:
+            return t
+        if t is not None:
+            self._tables[t.key] = t
+            while len(self._tables) > TABLE_CACHE:
+                self._tables.popitem(last=False)
+        fam = (self.ctx.stage, self.ctx.parts_sig, self.ctx.spec_sig)
+        c = self._tables.pop(key, None)
+        if c is not None and c.fam_ver == self._fam_ver.get(fam, 0):
+            self._table = c                         # its rows are right; layouts in memory may have been recomputed
+            for e in self.archive.values():         # for other masses or another COM target meanwhile
+                if e.id in c and e.status in ("VALIDATED", "FINAL", "INFEASIBLE"):
+                    self._compute_physics(e)
+        else:
+            self._table = self._build_table(key, fam)
+        self._dfront = None
+        return self._table
+
+    def _build_table(self, key: tuple, fam: tuple) -> ObjectiveTable:
+        """Rows for every layout of the current inputs: those in memory, then the others read back from archive.jsonl
+        one at a time (brought up to date for the current inputs and dropped again: memory stays bounded)."""
+        t = ObjectiveTable(key)
+        t.fam_ver = self._fam_ver.get(fam, 0)
+        ids = self.archive.ids_of(*fam)
+        phys: dict = {}                             # part mass properties per part-size factor, once
+        for lid in ids:
+            if self.archive.is_hot(lid):
+                self._table_row(t, self.archive[lid], phys)
+        for _, e in self.archive.read_many(ids):
+            self._table_row(t, e, phys)
+        return t
+
+    def _table_row(self, t: ObjectiveTable, e: LayoutEntry, phys: dict) -> None:
+        if not self._current(e):
+            return
+        if e.status in ("VALIDATED", "FINAL", "INFEASIBLE"):
+            if e.part_scale not in phys:
+                phys[e.part_scale] = self._phys(e.part_scale)
+            self._compute_physics(e, phys[e.part_scale])
+            e.revs = {k: self.store.revs[k] for k in REV_KEYS}
+            self._score_entry(e)
+            self.archive.note_status(e.id, e.status)
+        t.put(e.id, e.status, e.cv, e.raw)
+
+    def _table_put(self, e: LayoutEntry) -> None:
+        """A new or changed layout of the current inputs: its row in the table (and on the Pareto plot)."""
+        t = self._table
+        if t is None or self.ctx is None or t.key != self._table_key() or not self._current(e):
+            return
+        replaced = t.put(e.id, e.status, e.cv, e.raw)
+        t.fam_ver = self._fam_ver.get((e.stage, e.parts_sig, e.spec_sig), 0)
+        if replaced:
+            self._dfront = None                     # a changed point can uncover others: the plot is recomputed
+        elif e.status in OK_STATUSES:
+            self._dfront_add(e.id, e.raw)
+
+    def _g_rows(self, keys: tuple, m: np.ndarray) -> np.ndarray:
+        """_score_raw for a block of table rows (columns 1… = keys), vectorised: the same arithmetic, equal up to the
+        rounding of the final max/sum (the choices re-score their shortlist with _score_raw itself)."""
+        norm = self._norm()
+        if not norm.utopia:
+            return m[:, 1 + keys.index("L")].copy() if "L" in keys else np.full(len(m), math.inf)
+        nrm = {k: (m[:, 1 + j] - norm.utopia[k]) / (norm.nadir[k] - norm.utopia[k])
+               for j, k in enumerate(keys) if k in norm.utopia}
+        alpha = alpha_from(self.store.settings["sliders"])
+        terms = []
+        for k, w in self._weights().items():
+            if k == "I":
+                if "T" in nrm and "P" in nrm:
+                    terms.append(w * (alpha * nrm["T"] + (1 - alpha) * nrm["P"]))
+            elif k in nrm:
+                terms.append(w * nrm[k])
+        if not terms:
+            return np.full(len(m), math.inf)
+        a = np.vstack(terms)
+        return a.max(axis=0) + RHO * a.sum(axis=0)
+
+    def _pick(self, t: ObjectiveTable | None, cls: str) -> str | None:
+        """The best layout of a class over every row of the table, in the order the archive scan used: (cv, g, L, id)
+        for "ok" (VALIDATED / FINAL), (cv, g, id) for "inf" (INFEASIBLE). g is computed for all rows at once, then the
+        near-ties are re-scored exactly."""
+        if t is None:
+            return None
+        blocks = [(keys, ids, m, self._g_rows(keys, m)) for keys, ids, m in t.blocks(cls)]
+        if not blocks:
+            return None
+        cv_min = min(float(m[:, 0].min()) for _, _, m, _ in blocks)
+        g_min = min(float(g[m[:, 0] == cv_min].min()) for _, _, m, g in blocks if np.any(m[:, 0] == cv_min))
+        tol = 1e-9 * max(1.0, abs(g_min)) if math.isfinite(g_min) else 0.0
+        best = None
+        for keys, ids, m, g in blocks:
+            for i in np.flatnonzero((m[:, 0] == cv_min) & ((g <= g_min + tol) | (g == g_min))):
+                raw = dict(zip(keys, m[i, 1:].tolist()))
+                gx = self._score_raw(raw)[0]
+                key = (cv_min, gx, raw.get("L", math.inf), ids[i]) if cls == "ok" else (cv_min, gx, ids[i])
+                if best is None or key < best:
+                    best = key
+        return best[-1] if best is not None else None
+
+    def _pick_loaded(self, cls: str) -> str | None:
+        """_pick, skipping a layout whose archive line can no longer be read (it is dropped from the table)."""
+        t = self._ensure_table()
+        while True:
+            lid = self._pick(t, cls)
+            if lid is None or self.archive.get(lid) is not None:
+                return lid
+            t.discard(lid)
+
+    def _enforce_memory(self) -> None:
+        """Bounded memory for a search that never stops: once more than TOP_K + NEWEST_KEEP + HOT_SLACK layouts are in
+        memory, keep only the pinned ones (best, least-violating, FINAL, the layout of a bracket design run or STL save
+        under way, the last ones read on request), the TOP_K best-scoring layouts of the current inputs and the
+        NEWEST_KEEP newest. The others stay in archive.jsonl, read back when asked for (archive.py)."""
+        a = self.archive
+        if not isinstance(a, LayoutArchive) or a.n_hot <= TOP_K + NEWEST_KEEP + HOT_SLACK:
+            return
+        keep = {self.best_id, self.least_id, self.__dict__.get("_stl_pending"), self._design_lid}
+        keep |= {lid for lid, e in a.items() if e.status == "FINAL"}
+        keep |= set(a.recent_ids()) | set(a.newest_ids(NEWEST_KEEP))
+        cur = [e for e in a.values() if e.status in ("VALIDATED", "FINAL", "INFEASIBLE") and self._current(e)]
+        cur.sort(key=lambda e: (e.cv, e.g, e.raw.get("L", math.inf), e.id))
+        keep |= {e.id for e in cur[:TOP_K]}
+        for lid in a.hot_ids():
+            if lid not in keep:
+                a.evict(lid)
+
+    # ------------------------------------------------------------------------------ Pareto plot
+    def _dfront_key(self) -> tuple:
+        return (self._table.uid, self._table.changes, self._norm().epoch, alpha_from(self.store.settings["sliders"]))
+
+    def _dpoint(self, raw: dict) -> tuple[float, float, float] | None:
+        """(L̂, D̂, Î) of a layout under the current normaliser (what _score_raw reports as its normalised values)."""
+        norm = self._norm()
+        if not all(k in raw and k in norm.utopia for k in ("L", "D", "T", "P")):
+            return None
+        n = norm.norm({k: raw[k] for k in ("L", "D", "T", "P")})
+        if len(n) < 4:
+            return None
+        alpha = alpha_from(self.store.settings["sliders"])
+        return n["L"], n["D"], alpha * n["T"] + (1 - alpha) * n["P"]
+
+    def _dfront_add(self, lid: str, raw: dict) -> None:
+        d = self._dfront
+        if d is None or self._table is None or d["key"] != self._dfront_key():
+            return
+        p = self._dpoint(raw)
+        if p is None:
+            return
+        added, removed = d["front"].insert(lid, p)
+        for k in removed:
+            d["raw"].pop(k, None)
+        if added:
+            d["raw"][lid] = {k: raw[k] for k in raw if k in ("L", "D", "T", "P", "G", "H", "C", "O")}
+
+    def _display_front(self) -> dict | None:
+        """The non-dominated layouts of the current inputs in (L̂, D̂, Î): kept up to date as layouts arrive and
+        recomputed from the objective table (O(N · front)) only when the normaliser, the mass-symmetry slider or a
+        layout's values change."""
+        t = self._ensure_table()
+        if t is None:
+            return None
+        key = self._dfront_key()
+        if self._dfront is not None and self._dfront["key"] == key:
+            return self._dfront
+        d = self._dfront = {"key": key, "front": ParetoFront(3), "raw": {}}
+        pts = []
+        for keys, ids, m in t.blocks("ok"):
+            for i, lid in enumerate(ids):
+                raw = dict(zip(keys, m[i, 1:].tolist()))
+                p = self._dpoint(raw)
+                if p is not None:
+                    pts.append((p, lid, raw))
+        pts.sort(key=lambda x: x[0])                # in L̂ order a later point never removes an earlier one
+        for p, lid, raw in pts:
+            added, removed = d["front"].insert(lid, p)
+            for k in removed:
+                d["raw"].pop(k, None)
+            if added:
+                d["raw"][lid] = raw
+        return d
 
     # =========================================================================================== scoring
     def _weights(self) -> dict:
@@ -817,8 +1056,18 @@ class Coordinator:
         e.g, e.normalised = self._score_raw(e.raw)
         e.norm_epoch = self._norm().epoch
 
-    def _compute_physics(self, e: LayoutEntry) -> None:
-        phys = self._phys(e.part_scale)
+    def _frame_mass(self) -> float:
+        """Mass of the ASSUMED frame of the current CubeSat size (s2.frame_mass_props, once per size)."""
+        cache = self.__dict__.setdefault("_frame_mass_cache", {})
+        ff = formfactor.current()
+        if ff not in cache:
+            cache[ff] = s2.frame_mass_props()[0]
+        return cache[ff]
+
+    def _compute_physics(self, e: LayoutEntry, phys: dict | None = None) -> None:
+        """Mass properties, objectives, cv and (Stage 2) status of a layout for the current masses and COM target.
+        phys: self._phys(e.part_scale), when the caller has it already (the objective table, layout after layout)."""
+        phys = self._phys(e.part_scale) if phys is None else phys
         items, excluded = [], []
         for pid, o, t in e.poses:
             p = phys.get(pid)
@@ -860,8 +1109,7 @@ class Coordinator:
             cb = com_box_check(a.com_mm, self._target())
             m.update({"mass_kg": a.mass_kg, "com_mm": a.com_mm.tolist(), "inertia_kgm2": a.inertia_kgm2.tolist(), **im, **cb})
             if e.stage == 2:
-                fm, fc, fi = s2.frame_mass_props()
-                m["frame_mass_kg"] = fm
+                m["frame_mass_kg"] = self._frame_mass()
                 m["com_box_note"] = "CDS COM box checked on the parts only (frame mass excluded, decision U7)"
             raw.update({"D": cb["com_error_mm"], "T": im["trace_kgm2"], "P": im["products_norm_kgm2"],
                         "lambda_max": im["lambda_max_kgm2"], "com": a.com_mm.tolist()})
@@ -884,7 +1132,9 @@ class Coordinator:
                 ev_.append("COM box NOT ASSESSABLE: mass properties withheld for " + ", ".join(excluded))
             m["violations"] = ev_
             m["cable_blocked_fraction"] = e.meta.get("H")
-            m["mounting"] = e.meta.get("mounts")
+            # e.meta["mounts"] itself, set below: already JSON-safe, and running jsonable over it again took most of
+            # this function's time
+            m["mounting"] = None
             if e.status in ("VALIDATED", "INFEASIBLE"):
                 if not e.validation.get("certified"):
                     e.status = "REJECTED"
@@ -897,28 +1147,26 @@ class Coordinator:
         m.setdefault("cable_blocked_fraction", None)
         m.setdefault("hardware_cost_rel", e.meta.get("hardware_cost_rel"))
         e.metrics = jsonable(m)
+        if e.stage == 2:
+            e.metrics["mounting"] = e.meta.get("mounts")
         e.raw = raw
 
     def _select_best(self) -> None:
-        cur = [e for e in self.archive.values() if self._current(e) and e.status in ("VALIDATED", "FINAL")]
-        if not cur:
+        """The best VALIDATED / FINAL layout of the current inputs by (cv, g, L, id), over every layout of them — in
+        memory or not (the objective table); the chosen one is read back into memory if it was not."""
+        lid = self._pick_loaded("ok")
+        if lid is None:
             self.best_id = None
-        else:
-            best = min(cur, key=lambda e: (e.cv, e.g, e.raw.get("L", math.inf), e.id))
-            if best.id != self.best_id:
-                self.best_id = best.id
-                if self.run_status in ("PAUSED", "CONVERGED"):    # a late validation while paused: design it too
-                    self._maybe_auto_design()
+        elif lid != self.best_id:
+            self.best_id = lid
+            if self.run_status == "PAUSED":            # a late validation while paused: design it too
+                self._maybe_auto_design()
         self._select_least(publish=False)
 
     def _select_least(self, publish: bool = True) -> None:
         """Stage 2 with no feasible layout: the least-violating certified candidate (shown, never as VALIDATED)."""
         prev = self.least_id
-        if self.best_id is not None:
-            self.least_id = None
-        else:
-            inf = [e for e in self.archive.values() if self._current(e) and e.status == "INFEASIBLE"]
-            self.least_id = min(inf, key=lambda e: (e.cv, e.g, e.id)).id if inf else None
+        self.least_id = None if self.best_id is not None else self._pick_loaded("inf")
         if publish and self.least_id is not None and self.least_id != prev:
             self.broadcast("layout.infeasible", {"layout": self.layout_json(self.archive[self.least_id]),
                                                  "verdict": "NO FEASIBLE LAYOUT FOUND (not proven infeasible)"})
@@ -927,21 +1175,23 @@ class Coordinator:
         if self.ctx is None:
             return
         norm = self._norm()
-        raws = [e.raw for e in self.archive.values() if self._current(e) and e.status in ("VALIDATED", "FINAL")]
-        raws += self.raw_pool.get(self.ctx.ctx_id, [])[-300:]
-        raws = [r for r in raws if "D" in r]
-        if len(raws) < 10:
+        # the archived layouts count through their smallest and largest values (all the normaliser takes from them)
+        t = self._ensure_table()
+        lo, hi, n = t.extremes("D") if t is not None else ({}, {}, 0)
+        pool = [r for r in self.raw_pool.get(self.ctx.ctx_id, [])[-300:] if "D" in r]
+        if n + len(pool) < 10:
             return
+        raws = ([lo, hi] if n else []) + pool
         if not force and norm.utopia:
             # only when some value fell outside the current range by > 5 % of it
             out = False
             for k in ("L", "D", "T", "P"):
                 if k not in norm.utopia:
                     continue
-                lo, hi = norm.utopia[k], norm.nadir[k]
-                span = hi - lo
+                lo_k, hi_k = norm.utopia[k], norm.nadir[k]
+                span = hi_k - lo_k
                 vals = [r[k] for r in raws if k in r]
-                if vals and (min(vals) < lo - 0.05 * span or max(vals) > hi + 0.05 * span):
+                if vals and (min(vals) < lo_k - 0.05 * span or max(vals) > hi_k + 0.05 * span):
                     out = True
             if not out:
                 return
@@ -959,14 +1209,46 @@ class Coordinator:
     def _set_status(self, status: str, detail: str = "") -> None:
         if status == self.run_status and detail == self.status_detail:
             return
-        if status == "SEARCHING" and self.run_status != "SEARCHING":
-            self.last_improve = time.monotonic()
-            if self.search_t0 is None:
-                self.search_t0 = time.monotonic()
+        self._clock(status)
         self.run_status, self.status_detail = status, detail
         self.broadcast("status", {"run_status": status, "detail": detail})
-        if status in ("PAUSED", "CONVERGED"):
+        if self.clients:
+            self.broadcast("progress", self._progress())    # the running time as it stands (it stops while paused)
+        if status == "PAUSED":                              # Pause is the only stop: it starts the bracket design
             self._maybe_auto_design()
+
+    def _clock(self, status: str) -> None:
+        """The running time: time spent SEARCHING, per search context (pauses do not count)."""
+        now = time.monotonic()
+        if self._search_since is not None and status != "SEARCHING":
+            self._searched[self._search_ctx] = self._searched.get(self._search_ctx, 0.0) + now - self._search_since
+            self._search_since = None
+        elif self._search_since is None and status == "SEARCHING":
+            self._search_since = now
+            self._search_ctx = self.ctx.ctx_id if self.ctx is not None else None
+
+    def _clock_context(self, ctx_id: str | None) -> None:
+        """New inputs: the time searched so far counts for the old ones; a running clock goes on for the new ones (and
+        on a return to inputs searched before, adds to their time)."""
+        if self._search_since is not None:
+            now = time.monotonic()
+            self._searched[self._search_ctx] = self._searched.get(self._search_ctx, 0.0) + now - self._search_since
+            self._search_since = now
+        self._search_ctx = ctx_id
+
+    def _clock_restart(self) -> None:
+        """Re-run / reset: the running time of the current inputs starts again from zero."""
+        self._searched.pop(self._search_ctx, None)
+        if self._search_since is not None:
+            self._search_since = time.monotonic()
+
+    def searching_s(self) -> float:
+        """Seconds spent SEARCHING for the current inputs (the "running M min" of the status bar)."""
+        ctx_id = self.ctx.ctx_id if self.ctx is not None else None
+        s = self._searched.get(ctx_id, 0.0)
+        if self._search_since is not None and self._search_ctx == ctx_id:
+            s += time.monotonic() - self._search_since
+        return s
 
     def _dispatch(self) -> None:
         if self.ctx is None:
@@ -1041,7 +1323,8 @@ class Coordinator:
         best_g_now = self.archive[self.best_id].g if self.best_id else math.inf
         least = self.archive.get(self.least_id) if self.least_id else None
         pool = self.raw_pool.setdefault(ctx_id, [])
-        cur = [e for e in self.archive.values() if self._current(e) and e.status in ("VALIDATED", "FINAL")]
+        table = self._ensure_table()                 # every validated layout of these inputs, in memory or not
+        has_cur = table is not None and table.count("ok") > 0
         sigs = (self.ctx.parts_sig, self.ctx.constraint_sig, self.ctx.stage, self.ctx.spec_sig)
         for c in cands:
             if c["unplaced"]:
@@ -1057,7 +1340,7 @@ class Coordinator:
                     "compact": False, "meta": c.get("meta"), "kind": "search"}
             if cv > 0:
                 # Stage 2 without a feasible layout yet: certify the least-violating candidate (protocol §F.2)
-                if self.ctx.stage == 2 and not cur and h not in self.by_hash and h not in self.pending_hashes and \
+                if self.ctx.stage == 2 and not has_cur and h not in self.by_hash and h not in self.pending_hashes and \
                         (least is None or (cv, g) < (least.cv, least.g)) and \
                         not any(x["kind"] == "least" for x in self.val_queue) and \
                         not any(x["kind"] == "least" for x in self.val_pending.values()):
@@ -1073,8 +1356,7 @@ class Coordinator:
             if h in self.by_hash or h in self.pending_hashes:
                 continue
             keys3 = ("L", "D", "T")
-            nondom = all(k in raw for k in keys3) and not any(
-                all(k in e.raw for k in keys3) and dominates(e.raw, raw, keys3) for e in cur)
+            nondom = all(k in raw for k in keys3) and not (table is not None and table.dominated(raw, keys3))
             if g < best_g_now - 1e-12 or nondom:
                 self.pending_hashes.add(h)
                 # a would-be new best from the box decoder also gets certified drop compaction (Stage 1)
@@ -1099,8 +1381,8 @@ class Coordinator:
 
     def _continue_search(self) -> None:
         """Give the island that just reported its next job — only while searching. (It used to dispatch whatever the
-        status, so after Pause or CONVERGED the islands kept searching forever: CPU busy, new layouts arriving, the
-        best changing under a paused search.)"""
+        status, so after a stop the islands kept searching: CPU busy, new layouts arriving, the best changing under a
+        paused search.)"""
         if self.run_status == "SEARCHING":
             self._dispatch()
 
@@ -1146,12 +1428,17 @@ class Coordinator:
                         keys=keys, spec_sig=sigs[3], meta=jsonable(meta), part_scale=scale)
         if not summary["valid"]:
             self._error(f"validator rejected decoder layout {e.id}: {summary['violations'][:3]}")
+        self._admit(e, (h, decoded_hash))
+
+    def _admit(self, e: LayoutEntry, hashes: tuple = ()) -> None:
+        """A newly validated layout: scored, archived (memory and archive.jsonl, its objective row if it belongs to
+        the current inputs), then the best or least-violating layout is chosen again."""
         self._compute_physics(e)
-        e.revs = {k: self.store.revs[k] for k in ("parts_rev", "constraint_rev", "mass_rev", "weights_rev")}
+        e.revs = {k: self.store.revs[k] for k in REV_KEYS}
         self._score_entry(e)
         self.archive[e.id] = e
-        self.by_hash[h] = e.id
-        self.by_hash[decoded_hash] = e.id
+        for h in hashes or (e.hash,):
+            self.by_hash[h] = e.id
         self._persist(e)
         if self._current(e) and e.status == "INFEASIBLE":
             self._select_least()
@@ -1159,14 +1446,12 @@ class Coordinator:
         if not self._current(e) or e.status != "VALIDATED":
             return
         prev = self.best_id
-        prev_g = self.archive[prev].g if prev else math.inf
         self._select_best()
         if self.best_id != prev:
-            if e.g < prev_g - 1e-9 * max(1.0, abs(prev_g)):
-                self.last_improve = time.monotonic()
             self._publish_best("search")
             self.best_g_hist.append((time.monotonic(), e.g))
-            if self.best_id == e.id and "slab" not in algo.get("detail", ""):
+            del self.best_g_hist[:-1000]
+            if self.best_id == e.id and "slab" not in e.algorithm.get("detail", ""):
                 self._slab_polish(e)
         if time.monotonic() - self.last_pareto > 2.0:
             self.last_pareto = time.monotonic()
@@ -1250,13 +1535,21 @@ class Coordinator:
         self.broadcast("layout.validated", {"layout": self.layout_json(e), "source": source})
 
     def _progress(self) -> dict:
+        """Progress message. elapsed_s is the running time: seconds spent SEARCHING for the current inputs (pauses
+        do not count); recommended_min_s the provisional, search-based minimum for this CubeSat size (None where
+        nothing was measured yet; bench/convergence_table.py)."""
         best = self.archive.get(self.best_id) if self.best_id else None
+        ff = formfactor.current()
+        rec = recommended_minimum(ff)
+        t = self._table if self.ctx is not None else None
         return jsonable({
             "status": self.run_status, "evaluations": self.evaluations, "best_g": best.g if best else None,
             "best_length_mm": best.raw.get("L") if best else None,
-            "elapsed_s": time.monotonic() - self.search_t0 if self.search_t0 else 0.0,
+            "elapsed_s": self.searching_s(),
+            "recommended_min_s": rec["minimum_s"] if rec else None,
+            "recommended_note": rec["note"] if rec else f"No recommended minimum has been measured for {ff} yet.",
             "validation_queue": len(self.val_queue), "validating": len(self.val_pending),
-            "archive": sum(1 for e in self.archive.values() if self._current(e)),
+            "archive": len(t) if t is not None else 0,
             "islands": [{"id": w.id, "kind": "brkga", "evaluations": w.evaluations, "generations": w.generations,
                          "best_g": w.best_g, "ready": w.ready and self.ctx is not None and w.ctx_id == self.ctx.ctx_id}
                         for w in self.workers if w.role == "island"],
@@ -1269,6 +1562,20 @@ class Coordinator:
 
     def pose_json(self, poses) -> list[dict]:
         return [{"part_id": pid, "orient": int(o), "t_um": [int(round(v * 1000)) for v in t]} for pid, o, t in poses]
+
+    def layout_list(self, status: str | None = None, limit: int = 200, current: bool | None = None) -> list:
+        """The newest archived layouts (GET /api/layouts), newest first by layout number; layouts not in memory are
+        read back for this answer only."""
+        ids = sorted((lid for lid in self.archive if not status or self.archive.status_of(lid) == status),
+                     key=_layout_order, reverse=True)
+        out = []
+        for lid in ids:
+            if len(out) >= limit:
+                break
+            e = self.archive.load(lid, keep=False)
+            if e is not None and (not status or e.status == status) and (current is None or self._current(e) == current):
+                out.append(e)
+        return out
 
     def layout_json(self, e: LayoutEntry, full: bool = True) -> dict:
         d = {
@@ -1456,7 +1763,8 @@ class Coordinator:
         least = self.archive.get(self.least_id) if self.least_id else None
         return {"project": self.project_json(), "best_validated": self.layout_json(best) if best else None,
                 "candidate": self.candidate, "run_status": self.run_status, "selector": self.selector(),
-                "least_violating": self.layout_json(least) if least else None}
+                "least_violating": self.layout_json(least) if least else None,
+                "progress": self._progress()}       # the running time also while paused (no progress messages then)
 
     def selector(self) -> dict:
         c = self.choice or (self._compute_choice() if self.ctx is not None else None)
@@ -1706,21 +2014,15 @@ class Coordinator:
                     self.choice_pending = (self._compute_choice(), 0.0)
 
     def pareto(self) -> dict:
-        cur = [e for e in self.archive.values() if self._current(e) and e.status in ("VALIDATED", "FINAL")
-               and e.normalised.get("L") is not None and e.normalised.get("D") is not None
-               and e.normalised.get("I") is not None]
+        """The non-dominated VALIDATED / FINAL layouts of the current inputs in (L̂, D̂, Î) — every layout of them
+        counts, in memory or not — from the incremental front (_display_front) instead of the N × N comparison."""
+        d = self._display_front() if self.ctx is not None else None
         pts = []
-        if cur:
-            a = np.array([[e.normalised["L"], e.normalised["D"], e.normalised["I"]] for e in cur], float)
-            le = np.all(a[None, :, :] <= a[:, None, :], axis=2)       # [i, j]: j is no worse than i everywhere
-            lt = np.any(a[None, :, :] < a[:, None, :], axis=2)
-            dominated = np.any(le & lt, axis=1)
-            for e, d in zip(cur, dominated):
-                if d:
-                    continue
-                pts.append({"layout_id": e.id, "L": e.raw.get("L"), "D": e.raw.get("D"), "I": e.normalised["I"],
-                            "T": e.raw.get("T"), "P": e.raw.get("P"), "L_norm": e.normalised["L"],
-                            "D_norm": e.normalised["D"], "g": e.g})
+        for lid in (d["front"].ids if d is not None else []):
+            raw = d["raw"][lid]
+            g, nrm = self._score_raw(raw)
+            pts.append({"layout_id": lid, "L": raw.get("L"), "D": raw.get("D"), "I": nrm["I"], "T": raw.get("T"),
+                        "P": raw.get("P"), "L_norm": nrm["L"], "D_norm": nrm["D"], "g": g})
         hv = None
         if pts:
             try:
@@ -1732,29 +2034,22 @@ class Coordinator:
         return jsonable({"points": pts, "hv": hv, "norm_epoch": self._norm().epoch})
 
     # =========================================================================================== archive I/O
-    def _persist(self, e: LayoutEntry) -> None:
-        with open(self.store.archive_path, "a", encoding="utf-8") as fh:
-            fh.write(json.dumps(e.to_store()) + "\n")
-
-    def _rewrite_archive(self) -> None:
-        tmp = self.store.archive_path.with_suffix(".tmp")
-        with open(tmp, "w", encoding="utf-8") as fh:
-            for e in self.archive.values():
-                fh.write(json.dumps(e.to_store()) + "\n")
-        tmp.replace(self.store.archive_path)
+    def _persist(self, e: LayoutEntry, row: bool = True) -> None:
+        """Append the layout to archive.jsonl (its last line wins) and, with row, update its objective row."""
+        self.archive.append(e)
+        fam = (e.stage, e.parts_sig, e.spec_sig)
+        self._fam_ver[fam] = self._fam_ver.get(fam, 0) + 1
+        if row:
+            self._table_put(e)
 
     def _load_archive(self) -> None:
-        if not self.store.archive_path.exists():
-            return
-        for line in self.store.archive_path.read_text(encoding="utf-8").splitlines():
-            if not line.strip():
-                continue
-            try:
-                e = LayoutEntry.from_store(json.loads(line))
-            except Exception:  # noqa: BLE001 - an entry from an older format: skip it
-                continue
-            self.archive[e.id] = e
-            self.by_hash[e.hash] = e.id
+        """Index archive.jsonl (layouts are read back when needed: service/archive.py) and compact it when at least
+        200 lines, and a fifth of all its lines, are superseded by later lines of the same layout (designed brackets,
+        FINAL)."""
+        self.archive = LayoutArchive(self.store.archive_path, LayoutEntry.from_store, on_load=self._hydrate)
+        self.archive.scan(self.by_hash)
+        if self.archive.should_compact():
+            self.archive.rewrite()
         # the layout counter is saved with the project only now and then, the archive with every layout: after the
         # server was stopped the counter can lag behind, and new layouts would reuse ids and shadow archived ones
         top = max((int(k[2:]) for k in self.archive if k.startswith("L-") and k[2:].isdigit()), default=0)
@@ -1815,7 +2110,7 @@ class Coordinator:
                     if w.role == "island" and self.ctx is not None:
                         w.cmd_q.put(("phys", self.ctx.ctx_id, self.store.revs["mass_rev"], self._phys_wire(),
                                      self._target()))
-            self._restamp_and_rescore(physics=list(s.get("target_com_mm")) != old_target)
+            self._restamp_and_rescore()             # a new COM target: the table key changes, physics recomputed
             self._publish_best("archive")
             if self.ctx is not None:
                 nc = self._compute_choice()
@@ -1828,9 +2123,8 @@ class Coordinator:
                     self.choice = nc
                     if nc.reasons != old_reasons:
                         self.broadcast("selector.changed", self.selector())
-        if self.run_status == "CONVERGED" and self.ctx is not None:
-            self._set_status("SEARCHING", "goals changed")
-        if new.get("auto_design_brackets") and self.run_status in ("PAUSED", "CONVERGED"):
+        # a running search goes on with the new settings; a paused one stays paused (Pause is the only stop)
+        if new.get("auto_design_brackets") and self.run_status == "PAUSED":
             self._maybe_auto_design()
 
     def lock_pose_for(self, pid: str) -> dict | None:
@@ -1896,16 +2190,14 @@ class Coordinator:
                 if w.role == "island" and self.ctx is not None:
                     w.cmd_q.put(("phys", self.ctx.ctx_id, self.store.revs["mass_rev"], self._phys_wire(), self._target()))
             prev = self.best_id
-            self._restamp_and_rescore(physics=True)
+            self._restamp_and_rescore()             # a new mass revision: the table key changes, physics recomputed
             if prev is not None and prev in self.archive:
                 self.broadcast("metrics.update", {"layout_id": prev, "metrics": self.archive[prev].metrics})
             if self.best_id != prev:
                 self._publish_best("archive")
-            if self.run_status == "CONVERGED":
-                self._set_status("SEARCHING", "masses changed")
         else:
             self._bump("parts_rev")
-            self._restamp_and_rescore(physics=False)
+            self._restamp_and_rescore()
             self.broadcast("project.changed", {"reason": f"{e.name} updated"})
             self._publish_best("archive")
         return self.part_json(pid)
@@ -2258,11 +2550,14 @@ class Coordinator:
         if L is not None and not L["future"].done():
             raise ValueError("the free-rotation experiment is already running")
         pids = set(self.ctx.records)
-        starts = [e for e in self.archive.values() if e.stage == 1 and e.parts_sig == self.ctx.parts_sig
-                  and e.status in ("VALIDATED", "FINAL") and {p for p, _, _ in e.poses} == pids]
-        if not starts:
+        start = None                                 # the shortest, read one at a time (most are not in memory)
+        for lid in self.archive.ids_of(1, self.ctx.parts_sig):
+            e = self.archive.load(lid, keep=False) if self.archive.status_of(lid) in ("VALIDATED", "FINAL") else None
+            if e is not None and {p for p, _, _ in e.poses} == pids and (
+                    start is None or e.geo.get("length_used_mm", math.inf) < start.geo.get("length_used_mm", math.inf)):
+                start = e
+        if start is None:
             raise ValueError("no validated Stage 1 layout of the current parts yet")
-        start = min(starts, key=lambda e: e.geo.get("length_used_mm", math.inf))
         snap = self.store.cache / f"freerot_records_{self.ctx.parts_sig}.pkl"
         snap.write_bytes(pickle.dumps(self._active_records(), protocol=pickle.HIGHEST_PROTOCOL))
         path = self._free_rotation_path()
@@ -2334,6 +2629,7 @@ class Coordinator:
         self.ladders["__bracket_design__"] = {"future": fut, "path": out / "progress.json", "mtime": None,
                                               "status": "PENDING", "progress": 0.0, "study": "bracket_design",
                                               "settings": self._settings_view()}
+        self._design_lid = e.id                      # kept in memory until the run has finished (_enforce_memory)
         wf = asyncio.wrap_future(fut, loop=self.loop)
         wf.add_done_callback(lambda f, lid=e.id, o=out: self._on_bracket_design(f, lid, o))
         rows = [{"k": k, "pid": b["pid"], "kind": b["kind"], "status": "queued"}
@@ -2357,9 +2653,9 @@ class Coordinator:
         return not any(w.busy for w in getattr(self, "workers", []) if getattr(w, "role", None) == "island")
 
     def _maybe_auto_design(self) -> None:
-        """V2 (setting auto_design_brackets, on by default): when the search pauses or converges, design the brackets
-        of the best Stage 2 layout that are still estimates or catalogue envelopes, so its 3D views and exports show
-        the real bracket shapes. It waits until the validations still queued at the pause have finished (the best
+        """V2 (setting auto_design_brackets, on by default): when the search is paused (Pause is its only stop),
+        design the brackets of the best Stage 2 layout that are still estimates or catalogue envelopes, so its 3D
+        views and exports show the real bracket shapes. It waits until the validations still queued at the pause have finished (the best
         can change until then), runs one design job at a time, and designs each layout once (a bracket already
         designed or tried is not designed again; the button can always start a run)."""
         from ..gd.design import DESIGNED_KINDS
@@ -2425,7 +2721,8 @@ class Coordinator:
         finally:
             if L is not None:
                 L["finalised"] = True
-        if self.run_status in ("PAUSED", "CONVERGED"):        # the best may have changed while this one ran
+            self._design_lid = None
+        if self.run_status == "PAUSED":                       # the best may have changed while this one ran
             self._maybe_auto_design()
 
     # =========================================================================================== saved STL files (V2)
@@ -2462,10 +2759,11 @@ class Coordinator:
 
     def _settings_view(self) -> dict:
         """The settings a search result depends on: sliders, part size, CubeSat size, stage, COM target and the
-        compactness definition (not display options or the automatic design switch)."""
+        compactness definition (not display options, the automatic design switch or the speed/quality slider, which
+        changes nothing since the search runs until Pause: NOT_SEARCH_SLIDERS)."""
         s = self.store.settings
         v = {k: s.get(k) for k in ("form_factor", "stage", "part_scale_pct", "target_com_mm", "compactness_definition")}
-        v["sliders"] = dict(s.get("sliders") or {})
+        v["sliders"] = {k: x for k, x in (s.get("sliders") or {}).items() if k not in NOT_SEARCH_SLIDERS}
         return json.loads(json.dumps(v))
 
     def _stl_items(self, e: LayoutEntry) -> tuple[list, list, list]:
@@ -2674,12 +2972,14 @@ class Coordinator:
             if self.ctx is not None:
                 for w in self.workers:
                     self._send_context(w)
-                self.search_t0 = time.monotonic()
+                self._clock_restart()
                 self._set_status("SEARCHING", "re-run with new random seeds")
         elif action == "reset":
-            self.archive = {k: v for k, v in self.archive.items() if v.status == "FINAL"}
-            self.by_hash = {v.hash: k for k, v in self.archive.items()}
-            self._rewrite_archive()
+            self.archive.rewrite(keep=lambda lid, status: status == "FINAL")
+            self.by_hash = self.archive.hashes()
+            self._table, self._dfront = None, None
+            self._tables.clear()
+            self._fam_ver.clear()
             if self.ctx is not None:
                 self.norms[self.ctx.ctx_id] = Normaliser()
                 self.raw_pool[self.ctx.ctx_id] = []
@@ -2737,6 +3037,8 @@ class Coordinator:
         md = proof_markdown(cert, rep, metrics)
         out = {"markdown": md, "certificate": cert, "valid": rep.valid}
         self.proof_cache[key] = out
+        for k in list(self.proof_cache)[:-32]:          # an open proof view asks again at every new best: bounded
+            self.proof_cache.pop(k, None)
         return out
 
     def _bracket_cert(self, e: LayoutEntry) -> list[dict]:
@@ -2763,7 +3065,7 @@ class Coordinator:
             raise ValueError("full re-validation failed; the layout was not frozen")
         e.status = "FINAL"
         e.validation["final_checked_at"] = now_iso()
-        self._rewrite_archive()
+        self._persist(e, row=False)       # appended: its last line wins (its objective row stays the same, "ok")
         return self.layout_json(e)
 
     # =========================================================================================== meshes

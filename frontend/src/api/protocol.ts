@@ -212,6 +212,7 @@ export function reduceEnvelope(conn: ConnProto, solver: SolverState, env: Envelo
       prevBest: solver.best && incoming && solver.best.id !== incoming.id ? solver.best : solver.prevBest,
       candidate: p.candidate ?? null,
       runStatus: p.run_status ?? solver.runStatus,
+      progress: p.progress ?? solver.progress,
       selector: p.selector ?? solver.selector,
       log: pushLog(solver.log, { at, kind: 'info', text: `snapshot received (epoch ${env.epoch})` }),
     };

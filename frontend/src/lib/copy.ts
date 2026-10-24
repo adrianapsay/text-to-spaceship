@@ -96,12 +96,15 @@ export const SLIDERS: SliderDef[] = [
     expertOnly: true,
   },
   {
+    // V2: no longer shown. Its only effect was how long the search waited without improvement before it stopped
+    // itself; the search now runs until Pause (the status bar shows a recommended minimum run time instead).
     key: 'speed_quality',
     label: 'Computation: speed ↔ quality',
-    plain: 'Trades answer speed for search thoroughness.',
-    technical: 'changes the compute budget only (population, generations per tick, islands, validation depth), not the objectives.',
-    why: 'faster settings answer sooner; slower ones search harder.',
+    plain: 'No effect: the search runs until you press Pause.',
+    technical: 'it used to set how long the search waited without improvement before it stopped itself (15 + 6 × value s); the backend’s algorithm selector and search never read it.',
+    why: 'the status bar shows a recommended minimum run time instead.',
     expertOnly: true,
+    notInGoals: true,
   },
 ];
 

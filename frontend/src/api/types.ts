@@ -423,7 +423,8 @@ export interface ProjectSnapshot {
   dataset_sha256?: string;
 }
 
-export type RunStatus = 'IDLE' | 'SEARCHING' | 'CONVERGED' | 'PAUSED' | 'REVALIDATING' | 'ERROR';
+/** The search runs until the user presses Pause (V2): it never stops on its own, so there is no CONVERGED status. */
+export type RunStatus = 'IDLE' | 'SEARCHING' | 'PAUSED' | 'REVALIDATING' | 'ERROR';
 export type RunAction = 'start' | 'pause' | 'resume' | 'reset' | 'rerun';
 
 export interface SelectorEvidence {
@@ -714,7 +715,13 @@ export interface ProgressPayload {
   status: RunStatus | string;
   evaluations: number | null;
   best_g: number | null;
+  /** the running time: seconds spent SEARCHING for the current inputs (pauses do not count) */
   elapsed_s: number | null;
+  /** recommended minimum search time for this CubeSat size (search-based, provisional); null where not measured */
+  recommended_min_s?: number | null;
+  /** what the recommendation is based on, or why there is none (shown as a tooltip) */
+  recommended_note?: string | null;
+  best_length_mm?: number | null;
   islands?: unknown[];
 }
 
@@ -726,6 +733,8 @@ export interface SnapshotPayload {
   selector: SelectorChoice | null;
   /** Stage 2 without a feasible layout: the least-violating certified candidate */
   least_violating?: Layout | null;
+  /** the progress as it stands (the running time also while paused, when no progress messages come) */
+  progress?: ProgressPayload | null;
 }
 
 export interface StudyUpdatePayload {
