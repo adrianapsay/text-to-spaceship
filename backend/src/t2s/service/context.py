@@ -177,7 +177,9 @@ def build_context(records: dict, stage: int, reps: dict | None = None, stage2_mo
         ssig = hashlib.sha256(json.dumps([2, stage2_mode, pcb, s2.WALL, s2.RAIL, s2.C_PP, s2.C_WALL, s2.HARNESS_W,
                                           s2.PCB_PITCH, s2m.PAD, s2m.STANDOFF_INSET, s2m.STANDOFF_SIDE,
                                           mr.BRACKET_MODEL_VERSION, mr.BRACKET_CLEARANCE, mr.MFG_REACH,
-                                          am_allowed, am_level] + ([form_factor] if form_factor != "3U" else [])).encode()
+                                          am_allowed, am_level] + ([form_factor] if form_factor != "3U" else [])
+                                         # v2.5: the PC/104 rod model (stack anchored at its end plate)
+                                         + [s2m.ROD_MODEL, s2.ROD_KEEP, s2m.STACK_OFFSET_MAX]).encode()
                               ).hexdigest()[:16]
     else:
         ssig = spec_signature(spec)

@@ -3,10 +3,11 @@
 Frame: 2.0 mm walls, four 8.5 x 8.5 mm full-length corner rails inside the 100 x 100 mm envelope (CDS rail width).
 Clearances: 2.2 mm part-part, 1.2 mm part-wall/rail (2.0/1.0 + 0.2 mm tolerance per gap, decision U4).
 Harness (U5): 10 mm channel along the +X wall between the rails, interrupted across the PCB stack's Z span.
-PC/104 stack: PCB-tagged parts parallel to XY, XY-centred, 15.24 mm pitch; 4 rod keep-outs spanning only the stack.
+PC/104 stack: PCB-tagged parts parallel to XY, XY-centred, 15.24 mm pitch; 4 rods with spacer tubes (5 mm square
+  keep-outs) run from the stack's end plate through every board (v2.5; before: rods spanning only the stack).
   Rod positions are ASSUMED at (±35, ±35) mm (inside the boards' notched corners): no cited PC/104 source yet (DD-20).
-Mounting layer (U6): 3 mm on an optimiser-chosen face touching a wall or rail; replaces the 1.2 mm wall clearance on
-  that face; reach is ASSUMED <= 5 mm beyond the layer.
+Mounting layer (U6): 3 mm on an optimiser-chosen face; replaces the 1.2 mm wall clearance on that face (the V2 bracket
+  model in stage2_model.py decides where it is fixed).
 Frame mass (U7): computed from this geometry at 2,700 kg/m^3; excluded from the hard COM check by default.
 """
 from __future__ import annotations
@@ -24,9 +25,9 @@ C_WALL = 1.2
 HARNESS_W = 10.0
 PCB_PITCH = 15.24
 ROD_XY = 35.0
-ROD_D = 3.2               # M3 clearance keep-out (square of this side)
+ROD_D = 3.2               # M3 clearance keep-out (square of this side): rods of layouts decoded before v2.5
+ROD_KEEP = 5.0            # v2.5 rod keep-out: the spacer-tube envelope around each rod (as mfg.brackets.spacer_set)
 MOUNT_LAYER = 3.0
-MOUNT_REACH = 5.0
 AL_DENSITY = 2700.0
 
 
@@ -42,6 +43,7 @@ class Stage2Config:
     pcb_ids: list[str] = field(default_factory=list)
     stack_z: tuple[float, float] | None = None   # Z span of the PCB stack (for harness interruption and rods)
     include_frame_mass: bool = False
+    rod_end: str | None = None                   # "-z" / "+z": rods run from that end plate (v2.5); None: stack only
 
 
 def inner_box():
@@ -79,14 +81,26 @@ def harness_items(cfg: Stage2Config) -> list[StaticItem]:
     return out
 
 
+def pc104_rods(rod_xy: float, z0: float, z1: float, side: float = ROD_KEEP) -> list[tuple[str, np.ndarray]]:
+    """The four PC/104 rod keep-outs (name, box lo + hi) at (±rod_xy, ±rod_xy) from z0 to z1, `side` mm square: the one
+    rod builder behind the decoder's obstacles, the validation rules, the insertion check and the display."""
+    h = side / 2
+    return [(f"rod{'+' if sx > 0 else '-'}{'+' if sy > 0 else '-'}",
+             np.array([sx * rod_xy - h, sy * rod_xy - h, z0, sx * rod_xy + h, sy * rod_xy + h, z1], float))
+            for sx in (1, -1) for sy in (1, -1)]
+
+
 def rod_items(cfg: Stage2Config) -> list[StaticItem]:
+    """Rods of a stack at cfg.stack_z: from the end plate cfg.rod_end through the stack (v2.5), or over the stack only."""
     if not cfg.pcb_ids or cfg.stack_z is None:
         return []
     z0, z1 = cfg.stack_z
-    h = ROD_D / 2
-    return [StaticItem(f"rod{'+' if sx > 0 else '-'}{'+' if sy > 0 else '-'}",
-                       box_corners([sx * ROD_XY - h, sy * ROD_XY - h, z0], [sx * ROD_XY + h, sy * ROD_XY + h, z1]), "rod")
-            for sx in (1, -1) for sy in (1, -1)]
+    lo, hi = inner_box()
+    if cfg.rod_end is None:
+        rods = pc104_rods(ROD_XY, z0, z1, ROD_D)
+    else:
+        rods = pc104_rods(ROD_XY, lo[2], z1) if cfg.rod_end == "-z" else pc104_rods(ROD_XY, z0, hi[2])
+    return [StaticItem(name, box_corners(b[:3], b[3:]), "rod") for name, b in rods]
 
 
 def stage2_spec(cfg: Stage2Config) -> StageSpec:
@@ -131,79 +145,63 @@ def frame_mass_props():
     return m, c, inertia
 
 
-# ----------------------------------------------------------------------------------- mounting (U6)
-def mount_check(hull_world: np.ndarray, spec: StageSpec, deck_planes: list[tuple[int, float, float]] = ()):
-    """Find a face of the part's AABB that can carry the 3 mm mounting layer to a wall, rail or deck.
-
-    Returns (ok, description, distance_mm). A face qualifies when its distance to the target surface lies in
-    [MOUNT_LAYER, MOUNT_LAYER + MOUNT_REACH]; walls are at the inner box (spec bounds + C_WALL).
-    """
-    lo, hi = hull_world.min(axis=0), hull_world.max(axis=0)
-    wall_lo = spec.lo - C_WALL
-    wall_hi = spec.hi + C_WALL
-    best = None
-    for ax in range(3):
-        for side, d in (("-", lo[ax] - wall_lo[ax]), ("+", wall_hi[ax] - hi[ax])):
-            if MOUNT_LAYER - 1e-9 <= d <= MOUNT_LAYER + MOUNT_REACH:
-                cand = (d, f"face {side}{'xyz'[ax]} to wall ({d:.2f} mm)")
-                if best is None or d < best[0]:
-                    best = cand
-    for ax, z_face, sign in deck_planes:
-        d = (lo[ax] - z_face) if sign > 0 else (z_face - hi[ax])
-        if MOUNT_LAYER - 1e-9 <= d <= MOUNT_LAYER + MOUNT_REACH:
-            cand = (d, f"face to deck at {z_face:.1f} mm ({d:.2f} mm)")
-            if best is None or d < best[0]:
-                best = cand
-    if best is None:
-        return False, "no face within mounting reach of a wall, rail or deck", None
-    return True, best[1], best[0]
-
-
 # ----------------------------------------------------------------------------------- insertion (±Z)
-def blocking_matrix(world_hulls: dict[str, np.ndarray], world_pieces: dict[str, list[np.ndarray]],
-                    z_extent: tuple[float, float], c_ins: float = 0.2):
+def blocking_matrix(world_hulls: dict, world_pieces: dict[str, list[np.ndarray]],
+                    z_extent: tuple[float, float], c_ins: float = 0.2, fixed: dict | None = None):
     """B[u][i][j] = True when part i, swept straight along u (+Z or -Z) out of the enclosure, comes within
-    c_ins of part j. Sweeps of convex hulls are convex (hull of V and V + L·u), so plane certificates apply.
-    Non-convex blockers use their certified cover pieces."""
+    c_ins of part j. world_hulls[i]: the convex point set that moves (the part's hull), or a list of them (the hull
+    and what moves with it: standoffs, a bracket's reserved box), each swept on its own. Sweeps of convex sets are
+    convex (hull of V and V + L·u), so plane certificates apply. Non-convex blockers use their certified cover
+    pieces. fixed: {name: (corners, exempt part ids)} — items that are never removed (the PC/104 rods on their end
+    plate); B[u][i][name] says whether one blocks part i (B["fixed"] lists their names)."""
     from ..collision.validate import plane_certificate
-    ids = list(world_hulls)
+    moving = {i: (list(h) if isinstance(h, (list, tuple)) else [h]) for i, h in world_hulls.items()}
+    ids = list(moving)
+    span = {i: np.vstack(m) for i, m in moving.items()}
+    fixed = fixed or {}
     zlo, zhi = z_extent
-    out = {"+z": {}, "-z": {}}
+    out = {"+z": {}, "-z": {}, "fixed": sorted(fixed)}
     for u, sign in (("+z", 1.0), ("-z", -1.0)):
         for i in ids:
-            h = world_hulls[i]
-            length = (zhi - h[:, 2].min()) if sign > 0 else (h[:, 2].max() - zlo)
-            sweep = np.vstack([h, h + np.array([0, 0, sign * (length + 1.0)])])
+            length = (zhi - span[i][:, 2].min()) if sign > 0 else (span[i][:, 2].max() - zlo)
+            sweeps = [np.vstack([h, h + np.array([0, 0, sign * (length + 1.0)])]) for h in moving[i]]
+            boxes = [(s.min(0), s.max(0)) for s in sweeps]
             row = {}
-            for j in ids:
-                if i == j:
-                    continue
+            blockers = [(j, span[j], world_pieces[j]) for j in ids if j != i]
+            blockers += [(name, c, [c]) for name, (c, exempt) in fixed.items() if i not in exempt]
+            for j, pts_j, pieces_j in blockers:
                 blocked = False
-                lo_s, hi_s = sweep.min(0), sweep.max(0)
-                lo_j, hi_j = world_hulls[j].min(0), world_hulls[j].max(0)
-                if np.any(hi_s < lo_j - c_ins) or np.any(lo_s > hi_j + c_ins):
-                    row[j] = False
-                    continue
-                for piece in world_pieces[j]:
-                    _, gap, _, _ = plane_certificate(sweep, piece)
-                    if gap < c_ins:
-                        blocked = True
+                lo_j, hi_j = pts_j.min(0), pts_j.max(0)
+                for sweep, (lo_s, hi_s) in zip(sweeps, boxes):
+                    if np.any(hi_s < lo_j - c_ins) or np.any(lo_s > hi_j + c_ins):
+                        continue
+                    for piece in pieces_j:
+                        _, gap, _, _ = plane_certificate(sweep, piece)
+                        if gap < c_ins:
+                            blocked = True
+                            break
+                    if blocked:
                         break
                 row[j] = blocked
             out[u][i] = row
     return out
 
 
-def assembly_order(block) -> tuple[list[tuple[str, str]] | None, list[str]]:
+def assembly_order(block, allowed: dict | None = None) -> tuple[list[tuple[str, str]] | None, list[str]]:
     """Greedy disassembly (complete for single-part straight-line removal): repeatedly remove any part with no
-    remaining blocker in some direction. Returns (insertion order [(part, direction)], stuck parts)."""
+    remaining blocker (fixed items always remain) in some direction it may leave in (allowed: part -> directions,
+    default both). Returns (insertion order [(part, direction)], stuck parts)."""
     remaining = set(block["+z"])
+    fixed = list(block.get("fixed", []))
+    allowed = allowed or {}
     removal = []
     while remaining:
         progress = False
         for i in sorted(remaining):
             for u in ("+z", "-z"):
-                if not any(block[u][i].get(j, False) for j in remaining if j != i):
+                if u not in allowed.get(i, ("+z", "-z")):
+                    continue
+                if not any(block[u][i].get(j, False) for j in [*remaining, *fixed] if j != i):
                     removal.append((i, u))
                     remaining.discard(i)
                     progress = True

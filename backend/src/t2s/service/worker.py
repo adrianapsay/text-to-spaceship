@@ -231,25 +231,39 @@ class Nsga2Island:
 
 def insertion_check(ctx, poses, meta) -> dict:
     """±Z insertion order (exact blocking matrix of swept hulls + greedy removal, complete for straight lines).
-    Edge boards move with their standoffs."""
+    Each part moves as one piece with what holds it: edge boards with their standoffs, every other part with its
+    bracket's reserved box (ASSUMED: a part goes in already fixed to its bracket). The PC/104 rods stay on their end
+    plate: they block every part but the stack boards, and a board comes off only along its rods, away from that
+    end plate (ASSUMED). Layouts decoded before v2.5 (no rod_end) keep the free stack."""
     from ..collision.geom import to_world
-    from ..constraints.stage2 import assembly_order, blocking_matrix, inner_box
+    from ..constraints.stage2 import assembly_order, blocking_matrix, box_corners, inner_box
+    from ..constraints.stage2_model import stack_rods
+    meta = meta or {}
     hulls, pieces = {}, {}
-    stand = {}
-    for pid, b in (meta or {}).get("standoffs", []):
+    held = {}
+    for pid, b in meta.get("standoffs", []):
         b = np.asarray(b, float)
-        corners = np.array([[x, y, z] for x in (b[0], b[3]) for y in (b[1], b[4]) for z in (b[2], b[5])])
-        stand.setdefault(pid, []).append(corners)
+        held.setdefault(pid, []).append(box_corners(b[:3], b[3:]))
+    for b in meta.get("brackets", []):
+        r = np.asarray(b["reserve"], float)
+        for pid in b.get("held_parts") or [b["pid"]]:
+            held.setdefault(pid, []).append(box_corners(r[:3], r[3:]))
     for pid, o, t in poses:
         r = ctx.records[pid]
         h = to_world(r.v[r.hull.vertex_ids], o, t)
         ps = [to_world(p.vertices, o, t) for p in r.cover.pieces] if r.cover.certified and r.cover.pieces else [h]
-        extra = stand.get(pid, [])
-        hulls[pid] = np.vstack([h] + extra) if extra else h
+        extra = held.get(pid, [])
+        hulls[pid] = [h] + extra                 # each convex piece is swept on its own
         pieces[pid] = ps + extra
     lo, hi = inner_box()
-    block = blocking_matrix(hulls, pieces, (float(lo[2]), float(hi[2])))
-    order, stuck = assembly_order(block)
+    fixed, allowed = {}, {}
+    if meta.get("rod_end") in ("-z", "+z"):
+        boards = frozenset(meta.get("stack_ids") or [])
+        fixed = {name: (box_corners(b[:3], b[3:]), boards) for name, b in stack_rods(meta, (lo, hi))}
+        away = "+z" if meta["rod_end"] == "-z" else "-z"
+        allowed = {pid: (away,) for pid in boards}
+    block = blocking_matrix(hulls, pieces, (float(lo[2]), float(hi[2])), fixed=fixed)
+    order, stuck = assembly_order(block, allowed)
     return {"order": order, "stuck": stuck}
 
 

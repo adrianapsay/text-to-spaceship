@@ -105,7 +105,9 @@ FILL = {"cradle": (0.6, 0.3), "metal_am": (0.25, 0.15)}
 # v2.2: bracket-aware placement, PC/104 rods scaled with the boards, the bracket budget's metal-AM preference steps
 # v2.3: metal-AM brackets wrap the part like the cradle they replace
 # v2.4: the wrap region is reserved during placement; compact pads only after every other option; 1 µm tolerance
-BRACKET_MODEL_VERSION = "v2.4"                # part of the search signature: layouts decoded under other rules differ
+# v2.5: the PC/104 stack anchored at its end plate (rods with spacer tubes from the plate through every board; the COM
+# shift moves the other parts only)
+BRACKET_MODEL_VERSION = "v2.5"                # part of the search signature: layouts decoded under other rules differ
 # bracket budget step → how much more a metal-AM bracket may cost than the cheapest simple bracket that fits and
 # still be chosen (am_level)
 AM_FACTOR = {1: 1.0, 2: 2.0, 3: 10.0, 4: float("inf")}
