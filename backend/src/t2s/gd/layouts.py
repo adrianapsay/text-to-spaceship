@@ -30,8 +30,19 @@ import numpy as np
 
 MODES = ("per_part", "combined", "one_piece")
 MODE_NAMES = {"per_part": "one bracket per part", "combined": "combined per wall", "one_piece": "one piece"}
-MEM_RESERVE_MB = 2000.0       # a solve must leave this much memory available (the user's machine, 16 GB)
-MB_PER_KDOF = {"NGSolve": 6.0, "CalculiX": 9.0}    # ASSUMED until measured (docs/notes/m4.md): memory per 1000 dofs
+# a solve must leave this much memory available (the user's machine has 16 GB); T2S_MEM_RESERVE_MB overrides it
+MEM_RESERVE_MB = float(os.environ.get("T2S_MEM_RESERVE_MB", "2000"))
+# memory per 1000 dofs, measured on a combined bracket of L-2002 (p17 + p10, 67 023 tet10 nodes, 201 069 dofs;
+# docs/notes/m4.md): the whole job process peaked at 1099 MB with NGSolve's 18 cases (5.5 MB / kdof), CalculiX's
+# ccx.exe at 742 MB (3.7 MB / kdof, 4.5 taken: fill-in grows faster than the dofs)
+MB_PER_KDOF = {"NGSolve": 5.5, "CalculiX": 4.5,
+               # CalculiX's iterative Cholesky on the same mesh: 441 MB for the whole process tree, 201 MB before
+               # (1.2 MB / kdof; 2.0 taken)
+               "CalculiX-iterative": 2.0,
+               # the optimiser's fine level (gd.simp): measured on the one piece of L-2002's coarse level, 39 828 dofs,
+               # about 5.1 MB / kdof above the domain; 9.0 ASSUMED at ~270 k dofs (the factorisation's fill grows
+               # faster than the dofs)
+               "SIMP": 9.0}
 COMBINED_H_MAX = 1.5          # mm: a combined bracket's voxel (as a per-part bracket's, design_h)
 COMBINED_MAX_VOXELS = 400_000
 
@@ -148,14 +159,23 @@ def _design_ladder(dom, vol_frac, rmin_mm: float, budget_s: float, threads: int,
     from .simp import solve
     ladder = (float(vol_frac),) if vol_frac is not None else VOL_LADDER
     best, rungs = None, []
+    empty = [p.pid for p in dom.parts if p.contact is None or not p.contact.any()]
+    if empty:                                       # no material use can hold a part with no contact voxel
+        h = np.round(np.asarray(dom.h, float), 3).tolist()
+        reason = (f"no contact voxels for {', '.join(empty)} on {h} mm voxels (the part's side is too close to its "
+                  "neighbours or to the wall at this voxel size)")
+        return {"passed": False, "reason": reason}, [{"vol_frac": None, "passed": False, "reason": reason}]
     for vf in ladder:
         t0 = time.perf_counter()
         F = [dom.contact_voxel_forces(c) for c in dom.load_cases()]
         try:
             s = solve(~dom.void, dom.passive_solid(), dom.fixed, F, dom.h, float(dom.material["nu"]), vf,
-                      rmin_mm=rmin_mm, budget_s=budget_s, threads=threads,
+                      rmin_mm=rmin_mm, budget_s=budget_s, threads=threads, mem_check=mem_guard,
                       progress=None if progress is None else
                       (lambda lv, i, c, d, vf=vf: progress("simp", vf, lv, i)))
+        except MemoryError as exc:                  # the optimiser itself would not fit (no coarse level to keep)
+            rungs.append({"vol_frac": vf, "passed": False, "reason": f"not solved: optimiser: {exc}"[:200]})
+            break
         except Exception as exc:  # noqa: BLE001
             rungs.append({"vol_frac": vf, "passed": False, "reason": f"optimiser failed: {exc!r}"[:200]})
             break
@@ -198,7 +218,9 @@ def _record(dom, ev: dict, rungs: list, settings: dict, kind_label: str) -> dict
                                    "n_nodes", "n_tets", "volume_cm3", "parts_detail", "accel3_g_parts", "load_path",
                                    "held_part_distance_mm", "vol_frac", "simp", "joins", "checks", "bolt_checks",
                                    "factor_sources", "axes", "ccx_skipped", "ccx_failed", "triangles_per_box",
-                                   "trial_cases")}
+                                   "trial_cases", "ccx_solver", "ngs_seconds", "ccx_seconds", "mesh_seconds",
+                                   "fea_seconds", "surface_pieces", "islands_dropped_voxels", "pulled_back",
+                                   "subtracted_parts")}
     rec.update(name=dom.name, kind=dom.kind, label=kind_label, parts=[p.pid for p in dom.parts],
                generator="active-element SIMP (gd.simp: the contest winner's method on the free voxels only)",
                material=dom.material.get("id"), material_name=mats.material(dom.material.get("id"))["name"],
@@ -247,25 +269,34 @@ def combined_h(group: dict) -> float:
 
 def design_combined(group: dict, snap: dict, settings: dict, threads: int = 4, budget_s: float = 300.0,
                     log=print, progress=None) -> tuple[dict, tuple | None, object]:
-    from .multi import combined_domain
-    from .simp import (
-        solve,  # noqa: F401 - imported here so a missing dependency fails before the domain is built
-    )
+    """One combined bracket: its domain, the ladder, its record. When the FE check would not fit the memory left
+    (MEM_RESERVE_MB), the bracket is designed again on voxels 0.25 mm larger (up to gd.multi.H_PRE), and every attempt
+    is listed in the record (voxel_attempts)."""
+    from .multi import H_PRE, combined_domain
     mat = settings.get("material") or snap.get("material")
-    h = combined_h(group)
-    dom = combined_domain(group, snap["records"], snap["poses"], snap["masses"], h, material=mat,
-                          name=group["name"])
     mm = settings.get("min_member_mm")
-    plate = skin = h
-    if mm not in (None, "auto"):
-        plate, skin = thicken(dom, float(mm))
-    rmin = 0.5 * float(mm) if mm not in (None, "auto") else 3.0
     vf = settings.get("vol_frac")
-    ev, rungs = _design_ladder(dom, None if vf in (None, "auto") else float(vf), rmin, budget_s, threads,
-                               snap.get("environment"), log, progress=progress)
+    rmin = 0.5 * float(mm) if mm not in (None, "auto") else 3.0
+    h = combined_h(group)
+    attempts = []
+    while True:
+        dom = combined_domain(group, snap["records"], snap["poses"], snap["masses"], h, material=mat,
+                              name=group["name"])
+        plate = skin = h
+        if mm not in (None, "auto"):
+            plate, skin = thicken(dom, float(mm))
+        ev, rungs = _design_ladder(dom, None if vf in (None, "auto") else float(vf), rmin, budget_s, threads,
+                                   snap.get("environment"), log, progress=progress)
+        memory = str(ev.get("reason") or "").startswith("not solved")
+        attempts.append({"voxel_mm": h, "result": "memory: " + str(ev.get("reason")) if memory else
+                         ("passed" if ev.get("passed") else str(ev.get("reason") or "failed"))})
+        if not memory or h + 0.25 > H_PRE + 1e-9:
+            break
+        h += 0.25
     st = {"material": dom.material.get("id"), "vol_frac": "auto" if vf in (None, "auto") else float(vf),
           "min_member_mm": "auto" if mm in (None, "auto") else float(mm)}
     rec = _record(dom, ev, rungs, st, "combined metal-AM bracket")
+    rec["voxel_attempts"] = attempts
     rec.update(voxel_mm=h, plate_mm=plate, skin_mm=skin, target=group["target"], target_kind=group["target_kind"],
                axis=group["axis"], neg=group["neg"], plane_mm=group["plane_mm"],
                target_statics=group["target_statics"], members=[m["name"] for m in group["members"]],

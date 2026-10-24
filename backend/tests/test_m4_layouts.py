@@ -116,6 +116,34 @@ def test_corner_erosion_puts_every_block_in_one_box():
     assert sum(info["triangles_per_box"].values()) == len(sol[1]) and multi_eval.closed_mesh(sol[1])
 
 
+def test_surface_pulled_back_from_a_part_at_a_cut_corner():
+    """An L of solid voxels around a void voxel that holds a part's corner: marching cubes cuts the voxel corner
+    through the part; lowering the void corners of those cubes pulls the surface back into the solid voxels (no
+    boolean, no slivers), the voxels keep their side and the surface stays closed."""
+    d = np.zeros((4, 4, 3))
+    d[:3, :3, :2] = 1.0
+    d[2, 2, :] = 0.0
+    part = box_part([2.1, 2.1, 0.2], [3.5, 3.5, 1.8], 0.1)
+    dom = SimpleNamespace(h=np.ones(3), origin=np.zeros(3), parts=[SimpleNamespace(pid="P", v=part.v, f=part.f)])
+    P = np.pad(d, 1)
+    planes = [(2, 0.0)]
+    v, f, good = multi_eval._surface(dom, P, planes)
+    assert len(good) == 1 and multi_eval.closed_mesh(f)
+    hit = multi_eval._part_hit_triangles(dom, v, f)
+    assert len(hit) > 0                                                 # the cut corner reaches into the part
+    rounds = 0
+    while len(hit) and rounds < multi_eval.PULL_ROUNDS:
+        assert multi_eval._pull_back(dom, P, v, f, hit) > 0
+        v, f, good = multi_eval._surface(dom, P, planes)
+        hit = multi_eval._part_hit_triangles(dom, v, f)
+        rounds += 1
+    assert len(hit) == 0 and 1 <= rounds < multi_eval.PULL_ROUNDS
+    assert len(good) == 1 and multi_eval.closed_mesh(f)
+    assert np.all((P[1:-1, 1:-1, 1:-1] >= 0.5) == (d >= 0.5))              # no voxel changed side
+    dist = multi_eval.held_part_distances(dom, v, f)["P"]
+    assert not dist["intersects"] and dist["distance_mm"] > 0.0
+
+
 def test_load_path_rule_refuses_a_part_held_only_through_another(pair):
     recs, _, poses, masses, groups = pair
     dom = multi.combined_domain(groups[0], recs, poses, masses, 1.0)
@@ -137,6 +165,42 @@ def test_load_path_rule_refuses_a_part_held_only_through_another(pair):
     assert lp["A"]["ok"] and not lp["B"]["ok"] and lp["B"]["loose"] == lp["B"]["contact"]
     sol, info = multi_eval.solid_from_density(bad, np.zeros(bad.shape))
     assert sol is None and "never only by another part" in info["reason"] and "B:" in info["reason"]
+
+
+def test_simp_fine_level_skipped_when_memory_is_short(pair):
+    """mem_check refusing the fine level: the coarse level's densities on the fine grid are the design (passive solid
+    1, nothing outside the active voxels, a fine design voxel in a coarse block that was passive or absent gets 0 —
+    not its block's 1), and the levels say so. Without a coarse level (a grid under 8 voxels across) the MemoryError
+    reaches the caller."""
+    calls = []
+
+    def short(ndof, what):
+        calls.append((ndof, what))
+        raise MemoryError("test: not enough memory")
+    recs, _, poses, masses, groups = pair                                  # 7 voxels across: no coarse level
+    dom = multi.combined_domain(groups[0], recs, poses, masses, 1.0)
+    F = [dom.contact_voxel_forces(c) for c in dom.load_cases()]
+    with pytest.raises(MemoryError):
+        simp.solve(~dom.void, dom.passive_solid(), dom.fixed, F, dom.h, 0.33, 0.05, budget_s=30, threads=2,
+                   mem_check=short)
+    gap = 10.0                                                             # 14 voxels across: a coarse level
+    recs = {"A": box_part([gap, -18, -8], [gap + 20, -2, 8], 0.15),
+            "B": box_part([gap, 0.2, -4], [gap + 20, 16.2, 12], 0.2)}
+    brs = [am_bracket("A", [0, -18, -8], [gap + 4, -2, 8], gap), am_bracket("B", [0, 0.2, -4], [gap + 4, 16.2, 12], gap)]
+    groups = multi.combine_groups(brs, {p: r.boxes for p, r in recs.items()}, [])
+    dom = multi.combined_domain(groups[0], recs, {p: (0, np.zeros(3)) for p in recs}, {"A": 0.15, "B": 0.2}, 1.0)
+    F = [dom.contact_voxel_forces(c) for c in dom.load_cases()]
+    active, solid = ~dom.void, dom.passive_solid()
+    calls.clear()
+    s = simp.solve(active, solid, dom.fixed, F, dom.h, 0.33, 0.05, budget_s=30, threads=2, mem_check=short)
+    assert calls == [(int(3 * 1.15 * int(active.sum())), "SIMP")]
+    assert [lv["level"] for lv in s["levels"]] == ["coarse", "fine"] and "memory" in s["levels"][1]["skipped"]
+    rho = s["density"]
+    assert rho.shape == active.shape and np.all(rho[~active] == 0.0) and np.all(rho[solid & active] == 1.0)
+    assert rho.min() >= 0.0 and rho.max() <= 1.0
+    design = active & ~solid
+    print(f"\nmean density of the design voxels {rho[design].mean():.4f} (volume fraction 0.05)")
+    assert rho[design].mean() < 0.15
 
 
 def test_two_part_combined_design_checked_by_both_solvers(pair):

@@ -354,11 +354,15 @@ def coarsen(a: np.ndarray, how: str) -> np.ndarray:
 
 
 def solve(active, solid, fixed, forces, h, nu: float, volfrac: float, rmin_mm: float = 3.0, budget_s: float = 300.0,
-          threads: int = 4, continuation: bool = True, max_iter: int = MAX_ITER, progress=None) -> dict:
+          threads: int = 4, continuation: bool = True, max_iter: int = MAX_ITER, progress=None,
+          mem_check=None) -> dict:
     """SIMP with coarse-to-fine continuation: on 2 × 2 × 2 blocks first (a block exists where at least half its voxels
     do; it is passive solid or fixed where any voxel is; loads summed), then on the given grid starting from the coarse
     densities. A third of the budget goes to the coarse level; each level's iteration cap comes from the cost model.
-    Returns the density on the grid (1 on passive solid, 0 outside the active voxels), the levels and notes."""
+    mem_check(dofs, "SIMP") raises MemoryError when the fine level would not fit the memory left: the coarse level's
+    densities on the fine grid are then the result (said in the notes and levels); without a coarse level the
+    MemoryError reaches the caller. Returns the density on the grid (1 on passive solid, 0 outside the active voxels),
+    the levels and notes."""
     from threadpoolctl import threadpool_limits
     t0 = time.perf_counter()
     h = np.asarray(h, float).reshape(3)
@@ -377,10 +381,27 @@ def solve(active, solid, fixed, forces, h, nu: float, volfrac: float, rmin_mm: f
                 levels.append({"level": "coarse", "h_mm": (2 * h).tolist(), "elements": pc.ne, "dofs": pc.ndof,
                                "iterations": rc["iterations"], "stop": rc["stop"],
                                "seconds_per_iteration": rc["seconds_per_iteration"]})
-                xc = to_grid(pc, rc["x"])
-                x0 = np.repeat(np.repeat(np.repeat(xc, 2, 0), 2, 1), 2, 2)[:active.shape[0], :active.shape[1],
+                # the coarse design densities on the fine grid; a fine design voxel in a coarse block that was passive
+                # or absent starts at the volume fraction (continuation) and has no density of its own (skip)
+                xc = to_grid(pc, np.where(pc.is_design, rc["x"], -1.0))
+                xc[to_grid(pc, np.ones(pc.ne)) <= 0.0] = -1.0          # not an element of the coarse problem
+                up = np.repeat(np.repeat(np.repeat(xc, 2, 0), 2, 1), 2, 2)[:active.shape[0], :active.shape[1],
                                                                             :active.shape[2]]
+                x0 = np.where(up >= 0.0, up, float(volfrac))
+                x_skip = np.where(up >= 0.0, up, 0.0)
                 del pc, rc
+        if mem_check is not None:
+            try:
+                mem_check(int(3 * 1.15 * int(active.sum())), "SIMP")
+            except MemoryError as exc:           # the coarse design, on the fine grid (none: the caller is told)
+                if x0 is None:
+                    raise
+                rho = np.where(active, np.clip(x_skip, 0.0, 1.0), 0.0)
+                rho[solid & active] = 1.0
+                levels.append({"level": "fine", "h_mm": h.tolist(), "skipped": f"memory: {exc}"})
+                return {"density": rho, "seconds": time.perf_counter() - t0, "levels": levels, "history": [],
+                        "notes": [(f"fine level skipped ({exc}): the coarse level's densities ({2 * h} mm voxels) are "
+                                   "the design")], "ndof": None, "elements": int(active.sum())}
         p = SimpProblem(h, active, solid, fixed, forces, nu=nu, rmin_mm=rmin_mm)
         left = budget_s - (time.perf_counter() - t0)
         cap = int(max(3, min(max_iter, left / seconds_per_iteration(p.ndof, threads))))

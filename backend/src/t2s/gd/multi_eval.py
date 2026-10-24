@@ -4,9 +4,11 @@ Same method as gd.evaluate (one part), extended to several parts:
 
 1. Solid: passives imposed; the user's rule first — every held part's contact voxels must lie in a 6-connected piece
    of solid that contains bolted voxels (gd.multi.load_path); islands without bolted voxels are dropped; marching
-   cubes (iso 0.5) on the voxel grid. Combined brackets: every triangle is assigned to one certified box (gd.multi:
-   the region is eroded so that this holds) and its vertices clamped into it (1 µm at most, float rounding). The solid
-   must touch no held part (FCL), the minimum distance to each is recorded (numeric).
+   cubes (iso 0.5) on the voxel grid. Where a triangle cuts a held part (FCL; a cut voxel corner can reach into a void
+   voxel next to the part), the void corners of its cube are lowered until it no longer does (the surface moves back
+   into the solid voxels; up to PULL_ROUNDS times), else the part is subtracted. Combined brackets: every triangle is
+   assigned to one certified box (gd.multi: the region is eroded so that this holds) and its vertices clamped into it
+   (1 µm at most, float rounding). The minimum distance to each held part is recorded (FCL, numeric).
 2. FE problem on exactly that surface (gmsh, quadratic tets): bolted faces = the faces on the bolted plane (combined)
    or on each part's target plane under its own footprint (one piece); per part its load faces = the faces next to its
    surface inside its own reserved box. Cases: the three 68 g cases with every part loaded at once at its centre of
@@ -103,7 +105,6 @@ def solid_from_density(dom: MultiDomain, density: np.ndarray, joined: np.ndarray
     """((v, f), info) of the solid, or (None, info with the reason). `joined`: a solid mask that replaces the
     thresholded density (one piece, after gd.multi.join): voxels in it get density max(d, 1)."""
     from scipy import ndimage
-    from skimage.measure import marching_cubes
     d = np.clip(np.asarray(density, float), 0.0, 1.0).copy()
     if d.shape != tuple(dom.shape):
         return None, {"reason": f"density shape {d.shape} ≠ grid {tuple(dom.shape)}"}
@@ -126,34 +127,53 @@ def solid_from_density(dom: MultiDomain, density: np.ndarray, joined: np.ndarray
     d = np.where(np.isin(lab, keep) | (d < 0.5), d, 0.0)
     info["islands_dropped_voxels"] = int((solid & ~np.isin(lab, keep)).sum())
     P = np.pad(d, 1)
-    verts, faces, _, _ = marching_cubes(P, level=0.5, spacing=tuple(float(x) for x in dom.h), allow_degenerate=False)
-    v = np.asarray(verts, float) + dom.origin - 0.5 * dom.h
-    f = np.asarray(faces, np.int64)
-    tv = v[f]
-    if np.einsum("ij,ij->i", tv[:, 0], np.cross(tv[:, 1], tv[:, 2])).sum() < 0:
-        f = f[:, ::-1]
-    # keep the surface pieces that touch a bolted plane (islands at voxel-edge contacts can remain after MC)
     planes = _bolted_planes(dom)
-    n, labf = _components(f, len(v))
-    good = []
-    for c in range(n):
-        fc = f[labf == c]
-        pv = v[np.unique(fc)]
-        if any(np.any(np.abs(pv[:, ax] - pl) < 1e-6) for ax, pl in planes):
-            good.append(c)
+    v, f, good = _surface(dom, P, planes)
     if not good:
         info["reason"] = "the solid does not reach the bolted face"
         return None, info
-    f = f[np.isin(labf, good)]
-    used, inv = np.unique(f, return_inverse=True)
-    v, f = v[used], inv.reshape(-1, 3).astype(np.int64)
+    if not closed_mesh(f):
+        info["reason"] = "the marching-cubes surface is not closed"
+        return None, info
+    # a marching-cubes surface can reach into a void voxel next to a part (the cut corners of a voxel). Where it cuts
+    # a held part, the void corners of those cubes are lowered (the vertices on their edges move towards the solid
+    # voxel's centre; no voxel changes side) until it no longer does; failing that the part is subtracted (as the
+    # per-part designs do, gd.evaluate)
+    rounds = corners = 0
+    while rounds < PULL_ROUNDS:
+        hit = _part_hit_triangles(dom, v, f)
+        if not len(hit):
+            break
+        rounds += 1
+        corners += _pull_back(dom, P, v, f, hit)
+        v, f, good = _surface(dom, P, planes)
+        if not good or not closed_mesh(f):
+            info["reason"] = "the marching-cubes surface is not closed after pulling it back from a held part"
+            return None, info
+    if rounds:
+        info["pulled_back"] = {"rounds": rounds, "voxel_corners": corners}
+    touching = [p for p in dom.parts if held_part_distances(dom, v, f, [p])[p.pid]["intersects"]]
+    if touching:
+        try:
+            v, f = _subtract(v, f, touching)
+        except Exception as exc:  # noqa: BLE001 - a boolean that fails is that design's result
+            info["reason"] = f"the solid touches held part(s) {', '.join(p.pid for p in touching)} and subtracting " \
+                             f"them failed ({exc!r})"
+            return None, info
+        info["subtracted_parts"] = [p.pid for p in touching]
+        n, labf = _components(f, len(v))
+        good = [c for c in range(n) if any(np.any(np.abs(v[np.unique(f[labf == c])][:, ax] - pl) < 1e-6)
+                                           for ax, pl in planes)]
+        f = f[np.isin(labf, good)]
+        used, inv = np.unique(f, return_inverse=True)
+        v, f = v[used], inv.reshape(-1, 3).astype(np.int64)
+        if not good or not closed_mesh(f):
+            info["reason"] = "the solid with the held parts subtracted is not a closed solid on the bolted face"
+            return None, info
     info["surface_pieces"] = len(good)
     if len(good) > 1:                             # one print: the bracket must be one connected solid
         info["reason"] = (f"not one piece: {len(good)} separate solids (the region between them does not connect "
                           "them)")
-        return None, info
-    if not closed_mesh(f):
-        info["reason"] = "the marching-cubes surface is not closed"
         return None, info
     if dom.kind == "combined":
         try:
@@ -166,12 +186,84 @@ def solid_from_density(dom: MultiDomain, density: np.ndarray, joined: np.ndarray
         lo, hi = dom.origin, dom.origin + np.asarray(dom.shape) * dom.h
         v = np.clip(v, lo, hi)                                    # the grid lies on the inner planes
     hits = held_part_distances(dom, v, f)
-    info["held_part_distance_mm"] = {p: x["distance_mm"] for p, x in hits.items()}
-    touching = [p for p, x in hits.items() if x["intersects"]]
-    if touching:
-        info["reason"] = f"the solid touches held part(s) {', '.join(touching)} (finer voxels needed)"
-        return None, info
+    info["held_part_distance_mm"] = {p: (0.0 if x["intersects"] else x["distance_mm"]) for p, x in hits.items()}
     return (v, f), info
+
+
+PULL_ROUNDS = 6          # times the void corners of the cubes whose triangles cut a held part are lowered (0 → −1 →
+#                          −3 …: the vertex on a solid–void edge moves to 1/4, 1/8 … of the edge from the solid centre)
+_CUBE = np.array([[i, j, k] for i in (0, 1) for j in (0, 1) for k in (0, 1)])
+
+
+def _surface(dom: MultiDomain, P: np.ndarray, planes):
+    """Marching cubes (iso 0.5) on the padded field P; the pieces that touch a bolted plane (islands at voxel-edge
+    contacts can remain). Returns (v, f, list of the pieces kept)."""
+    from skimage.measure import marching_cubes
+    verts, faces, _, _ = marching_cubes(P, level=0.5, spacing=tuple(float(x) for x in dom.h), allow_degenerate=False)
+    v = np.asarray(verts, float) + dom.origin - 0.5 * dom.h
+    f = np.asarray(faces, np.int64)
+    tv = v[f]
+    if np.einsum("ij,ij->i", tv[:, 0], np.cross(tv[:, 1], tv[:, 2])).sum() < 0:
+        f = f[:, ::-1]
+    n, labf = _components(f, len(v))
+    good = [c for c in range(n) if any(np.any(np.abs(v[np.unique(f[labf == c])][:, ax] - pl) < 1e-6)
+                                       for ax, pl in planes)]
+    f = f[np.isin(labf, good)]
+    used, inv = np.unique(f, return_inverse=True)
+    return v[used], inv.reshape(-1, 3).astype(np.int64), good
+
+
+def _part_hit_triangles(dom: MultiDomain, v, f) -> np.ndarray:
+    """Indices of the surface triangles that cut a held part (FCL triangle–triangle contacts)."""
+    import fcl
+    s = _fcl_object(v, f)
+    lo, hi = v.min(0), v.max(0)
+    req = fcl.CollisionRequest(num_max_contacts=10 ** 6, enable_contact=True)
+    hit = set()
+    for p in dom.parts:
+        if np.any(p.v.min(0) > hi + 1.0) or np.any(p.v.max(0) < lo - 1.0):
+            continue
+        res = fcl.CollisionResult()
+        if fcl.collide(s, _fcl_object(p.v, p.f), req, res):
+            hit.update(int(c.b1) for c in res.contacts)
+    return np.array(sorted(hit), np.int64)
+
+
+def _pull_back(dom: MultiDomain, P: np.ndarray, v, f, tris) -> int:
+    """Lower the void corners (value < 0.5) of the grid cubes holding the given triangles: 0 → −1, −1 → −3 … (in
+    place). Returns the number of corners lowered."""
+    h = np.asarray(dom.h, float).reshape(3)
+    q = (v[f[tris]].mean(axis=1) - dom.origin) / h + 0.5            # padded index coordinates of the centroids
+    cube = np.floor(q).astype(np.int64)
+    c = np.unique((cube[:, None, :] + _CUBE[None]).reshape(-1, 3), axis=0)
+    c = c[np.all((c >= 0) & (c < np.array(P.shape)), axis=1)]
+    val = P[tuple(c.T)]
+    low = val < 0.5
+    P[tuple(c[low].T)] = 2.0 * np.minimum(val[low], 0.0) - 1.0
+    return int(low.sum())
+
+
+def _subtract(v, f, parts):
+    """The solid minus the given held parts (manifold3d, float64 meshes). The last resort when pulling the surface
+    back did not clear a part: the cut can leave slivers that the tetrahedral mesher then refuses (said so)."""
+    import manifold3d as m3
+
+    def man(vv, ff):
+        return m3.Manifold(m3.Mesh64(np.ascontiguousarray(vv, np.float64), np.ascontiguousarray(ff, np.uint64)))
+    s = man(v, f)
+    for p in parts:
+        s = s - man(p.v, p.f)
+    mesh = s.to_mesh64()
+    return np.asarray(mesh.vert_properties, float)[:, :3].copy(), np.asarray(mesh.tri_verts).astype(np.int64)
+
+
+def _fcl_object(vv, ff):
+    import fcl
+    m = fcl.BVHModel()
+    m.beginModel(len(vv), len(ff))
+    m.addSubModel(np.ascontiguousarray(vv, float), np.ascontiguousarray(ff, np.int32))
+    m.endModel()
+    return fcl.CollisionObject(m, fcl.Transform())
 
 
 def _bolted_planes(dom: MultiDomain) -> list[tuple[int, float]]:
@@ -180,25 +272,19 @@ def _bolted_planes(dom: MultiDomain) -> list[tuple[int, float]]:
     return sorted({(p.axis, p.plane) for p in dom.parts})
 
 
-def held_part_distances(dom: MultiDomain, v, f) -> dict:
-    """Per held part: does the solid intersect it (FCL), and the minimum distance (FCL; numeric, not a proof)."""
+def held_part_distances(dom: MultiDomain, v, f, parts=None) -> dict:
+    """Per held part (all, or `parts`): does the solid intersect or touch it (FCL), and the minimum distance (FCL;
+    numeric, not a proof)."""
     import fcl
-
-    def obj(vv, ff):
-        m = fcl.BVHModel()
-        m.beginModel(len(vv), len(ff))
-        m.addSubModel(np.ascontiguousarray(vv, float), np.ascontiguousarray(ff, np.int32))
-        m.endModel()
-        return fcl.CollisionObject(m, fcl.Transform())
-    s = obj(v, f)
+    s = _fcl_object(v, f)
     out = {}
     lo, hi = v.min(0), v.max(0)
-    for p in dom.parts:
+    for p in (dom.parts if parts is None else parts):
         plo, phi = p.v.min(0), p.v.max(0)
         if np.any(plo > hi + 5.0) or np.any(phi < lo - 5.0):
             out[p.pid] = {"intersects": False, "distance_mm": None}
             continue
-        o = obj(p.v, p.f)
+        o = _fcl_object(p.v, p.f)
         hit = fcl.collide(s, o, fcl.CollisionRequest(), fcl.CollisionResult()) > 0
         d = None if hit else float(fcl.distance(s, o, fcl.DistanceRequest(), fcl.DistanceResult()))
         out[p.pid] = {"intersects": bool(hit), "distance_mm": d}
@@ -500,9 +586,14 @@ def dynamics_multi(dom: MultiDomain, rz: RitzMulti, vox_c, vox_t, B_trial, stati
 # =================================================================================================== evaluate
 def evaluate(dom: MultiDomain, density: np.ndarray, threads: int = 4, env: str | None = None,
              h_fea: float | None = None, joined: np.ndarray | None = None, run_ccx: bool = True,
-             mem_guard=None) -> dict:
+             mem_guard=None, ccx_solver: str | None = None) -> dict:
     """The full check of a multi-part design (module docstring). Returns a JSON-ready record (plus "mesh": (v, f) and
-    "region scores" per part). `mem_guard(n_dofs, what)`: raises MemoryError to skip a solve that would not fit."""
+    "region scores" per part). `mem_guard(n_dofs, what)`: raises MemoryError when a solve would not fit: the design is
+    then "not solved" (NGSolve: its direct factorisation is the leanest NGSolve solver here, measured), CalculiX
+    solves with its iterative Cholesky-preconditioned solver if that fits (measured: 441 instead of 742 MB on 201 k
+    dofs, within 9e-6 of the direct solution there — but 3.8e-3 on a slender test cantilever: its stopping rule is
+    looser on ill-conditioned problems; the agreement with NGSolve is recorded, and the static stress is the larger of
+    the two solvers' either way), else it is skipped and said so. ccx_solver forces a choice."""
     from ..fea import ccx, ngs
     t0 = time.perf_counter()
     out = {"name": dom.name, "kind": dom.kind, "ok": False, "passed": False, "material": dom.material.get("id"),
@@ -524,9 +615,10 @@ def evaluate(dom: MultiDomain, density: np.ndarray, threads: int = 4, env: str |
     out["volume_cm3"] = prob.volume_mm3() / 1e3
     out["mass_g"] = prob.mass_t() * 1e6
     out["mesh_seconds"] = time.perf_counter() - t0
+    ndof = 3 * len(prob.nodes)
     if mem_guard is not None:
         try:
-            mem_guard(3 * len(prob.nodes), "NGSolve")
+            mem_guard(ndof, "NGSolve")
         except MemoryError as exc:
             out["reason"] = f"not solved: {exc}"
             return out
@@ -554,13 +646,19 @@ def evaluate(dom: MultiDomain, density: np.ndarray, threads: int = 4, env: str |
     ccx_vm, agreement, res_ccx = None, {}, None
     if run_ccx and ccx.available():
         try:
-            if mem_guard is not None:
-                mem_guard(3 * len(prob.nodes), "CalculiX")
+            solver = ccx_solver or "SPOOLES"
+            if mem_guard is not None and ccx_solver is None:
+                try:
+                    mem_guard(ndof, "CalculiX")
+                except MemoryError:
+                    mem_guard(ndof, "CalculiX-iterative")
+                    solver = "ITERATIVE CHOLESKY"
+            out["ccx_solver"] = solver
             gp = global_problem(prob)
             t2 = time.perf_counter()
             for attempt in (1, 2):
                 try:
-                    res_ccx, fc = ccx.run(gp, threads=threads)
+                    res_ccx, fc = ccx.run(gp, threads=threads, solver=solver)
                     break
                 except Exception as exc:    # ccx occasionally exits early; the same deck solves when run again
                     if attempt == 2:

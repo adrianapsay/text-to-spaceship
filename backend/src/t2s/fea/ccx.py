@@ -123,7 +123,12 @@ def added_nodal_masses(problem: FeaProblem) -> dict[int, float]:
     return out
 
 
-def write_deck(problem: FeaProblem, path: Path) -> None:
+STATIC_SOLVERS = ("SPOOLES", "ITERATIVE CHOLESKY")   # direct (default); preconditioned CG (M4: memory-light)
+
+
+def write_deck(problem: FeaProblem, path: Path, solver: str = "SPOOLES") -> None:
+    if solver not in STATIC_SOLVERS:
+        raise ValueError(f"unknown CalculiX static solver {solver!r} ({', '.join(STATIC_SOLVERS)})")
     nodes, tets = np.asarray(problem.nodes, float), np.asarray(problem.tets, np.int64)
     mat = problem.material
     fixed = problem.fixed_nodes()
@@ -157,7 +162,7 @@ def write_deck(problem: FeaProblem, path: Path) -> None:
         # first, so that no output request of a static step carries over into it
         out += ["*STEP", "*FREQUENCY, SOLVER=SPOOLES", str(int(problem.n_modes)), "*END STEP"]
     for k, case in enumerate(problem.load_cases):
-        out += ["*STEP", "*STATIC, SOLVER=SPOOLES", "*CLOAD, OP=NEW"]
+        out += ["*STEP", f"*STATIC, SOLVER={solver}", "*CLOAD, OP=NEW"]
         loads = case_nodal_loads(problem, case)
         lines = [f"{n + 1},{d + 1},{_num(f[d])}" for n, f in sorted(loads.items()) for d in range(3) if f[d] != 0.0]
         out += lines or ["1,1,0."]
@@ -331,8 +336,10 @@ def _field(ids, values, n: int, width: int, what: str) -> np.ndarray:
     return out
 
 
-def run(problem: FeaProblem, threads: int = 2, workdir: str | None = None) -> tuple[FeaResult, CcxFields]:
-    """Solve and also return the nodal fields. Work files are kept in `workdir` if given, else deleted."""
+def run(problem: FeaProblem, threads: int = 2, workdir: str | None = None,
+        solver: str = "SPOOLES") -> tuple[FeaResult, CcxFields]:
+    """Solve and also return the nodal fields. Work files are kept in `workdir` if given, else deleted. `solver`: the
+    static steps' solver, SPOOLES (direct, default) or ITERATIVE CHOLESKY (M4: when the direct one would not fit)."""
     t0 = time.perf_counter()
     nodes, tets = np.asarray(problem.nodes, float), np.asarray(problem.tets, np.int64)
     n = len(nodes)
@@ -347,7 +354,7 @@ def run(problem: FeaProblem, threads: int = 2, workdir: str | None = None) -> tu
         wd = Path(workdir)
         wd.mkdir(parents=True, exist_ok=True)
     try:
-        write_deck(problem, wd / f"{JOB}.inp")
+        write_deck(problem, wd / f"{JOB}.inp", solver)
         t_ccx = time.perf_counter()
         log = run_ccx(wd, threads)
         t_ccx = time.perf_counter() - t_ccx
@@ -366,7 +373,7 @@ def run(problem: FeaProblem, threads: int = 2, workdir: str | None = None) -> tu
                            f"expected {len(problem.load_cases)}")
 
     notes = [(f"ccx {CCX_EXE} with {threads} thread(s); {n} nodes, {len(tets)} C3D10 elements, "
-              f"{len(fixed)} fixed nodes; ccx run {t_ccx:.2f} s"),
+              f"{len(fixed)} fixed nodes; ccx run {t_ccx:.2f} s; static solver {solver}"),
              ("nodal stress: CalculiX frd (Gauss-point stresses extrapolated per element, tensor averaged over the "
               "elements sharing the node), von Mises of the averaged tensor"),
              "reaction = CalculiX RF total at the fixed nodes minus the external load applied directly at them"]
