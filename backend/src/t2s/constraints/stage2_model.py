@@ -18,11 +18,13 @@ All dimensions ASSUMED unless the CDS gives them (see stage2.py). The model wrap
   (Addendum 2.3 option b; card guides are not implemented). A board whose standoffs do not reach a wall is not
   mounted, and the layout is infeasible — boards are never left floating.
 * **Brackets (V2):** every other part is held by a bracket from its mounting side (the side with the 3 mm layer) to
-  a wall, end plate, corner rail or the stack deck up to 40 mm away. The bracket owns a reserved box from the target
-  to the part side (reaching into the part's bounding box where it wraps the part); the box keeps 1.2 mm from every
-  other part, bracket and keep-out except its target, so brackets are part of the packing and of the proof. The
-  cheapest bracket that fits is used (direct, machined block, sheet Z-bracket, tube clamp, machined cradle); with a
-  bracket budget above 0 a metal-AM bracket stands in where no simple one fits. A part with no bracket is unmounted.
+  chassis structure only — a wall, an end plate or a corner rail — up to 40 mm away; never to another part or to
+  the PC/104 stack (v2.5; before, the stack's top and underside were targets too). The bracket owns a reserved box
+  from the target to the part side (reaching into the part's bounding box where it wraps the part); the box keeps
+  1.2 mm from every other part, bracket and keep-out except the rail it is fixed to, so brackets are part of the
+  packing and of the proof. The cheapest bracket that fits is used (direct, machined block, sheet Z-bracket, tube
+  clamp, machined cradle); with a bracket budget above 0 a metal-AM bracket stands in where no simple one fits. A
+  part with no bracket is unmounted.
 * **COM-centring shift:** the decoder packs from the −Z end plate, so a short layout has its centre of mass far
   below the middle. After decoding, every part except the PC/104 boards moves along Z (the stack, its rods, the
   harness breaks and the reserved block stay at their end plate): at least far enough to bring the COM inside the CDS
@@ -36,7 +38,7 @@ validator rebuilds exactly the rules the layout was decoded under.
 """
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 import numpy as np
 
@@ -185,6 +187,14 @@ class Stage2Config:
     mode: str                  # default | soft | continuous
     pcb_ids: list
     threshold: float = 70.0
+
+
+@dataclass
+class Stage2Spec(StageSpec):
+    """One layout's Stage 2 rules plus what its fit certificate states about the frame: the mounting rules ("v2.5"
+    chassis-only, or "legacy" for a layout decoded before), the true inner planes, the PC/104 stack boards and the end
+    plate their rods run to, the harness wall. The validator reads only the StageSpec fields."""
+    frame: dict = field(default_factory=dict)
 
 
 def mode_for(cable: float, threshold: float = 70.0) -> str:
@@ -407,13 +417,16 @@ class Stage2Model:
             out.append(StaticItem(b["name"], s2.box_corners(r[:3], r[3:]), "bracket"))
         return out
 
-    def spec(self, meta: dict, relaxed: bool = False) -> StageSpec:
-        """Validation rules of one layout. V2 brackets: parts keep 1.2 mm from every reserved box except their own
-        (and the boards from one landing on the stack deck); `static_pairs` keep the boxes 1.2 mm from each other and
-        from every keep-out except their target (box arithmetic)."""
+    def spec(self, meta: dict, relaxed: bool = False) -> Stage2Spec:
+        """Validation rules of one layout. V2 brackets: parts keep 1.2 mm from every reserved box except the bracket
+        holding them; `static_pairs` keep the boxes 1.2 mm from each other and from every keep-out except the corner
+        rail a bracket is fixed to (box arithmetic). A layout decoded before v2.5 (no rod_model in its meta) keeps its
+        rules: a bracket on the PC/104 deck may touch the stack boards, the stack block and the rods."""
         from ..mfg.rules import BRACKET_CLEARANCE
         lo, hi = self.inner[0], (self.dec_hi if relaxed else self.inner[1])
         st = self.statics(meta, relaxed)
+        kinds = {s.name: s.kind for s in st}
+        legacy = "rod_model" not in meta
         exempt = set()
         for s in st:
             if s.kind in ("rod", "stack"):
@@ -424,11 +437,23 @@ class Stage2Model:
         brs = meta.get("brackets", [])
         names = [s.name for s in st if s.kind != "bracket"]
         for i, b in enumerate(brs):
-            exempt.add((b["pid"], b["name"]))
-            exempt |= {(p, b["name"]) for p in b.get("target_parts", [])}
-            pairs += [(b["name"], n, BRACKET_CLEARANCE) for n in names if n not in b.get("target_statics", [])]
+            exempt |= {(p, b["name"]) for p in b.get("held_parts") or [b["pid"]]}
+            if legacy:
+                exempt |= {(p, b["name"]) for p in b.get("target_parts", [])}
+                touches = set(b.get("target_statics", []))
+            else:                                   # chassis only: a bracket may touch its corner rail, nothing else
+                touches = {n for n in b.get("target_statics", []) if kinds.get(n) == "rail"}
+            pairs += [(b["name"], n, BRACKET_CLEARANCE) for n in names if n not in touches]
             pairs += [(b["name"], o["name"], BRACKET_CLEARANCE) for o in brs[i + 1:]]
-        return StageSpec(2, lo + s2.C_WALL, hi - s2.C_WALL, s2.C_PP, s2.C_WALL, st, exempt, pairs)
+        stacked = meta.get("stack_span") is not None and bool(self.pcb)
+        frame = {"rules": "legacy" if legacy else "v2.5", "rod_model": meta.get("rod_model"), "mode": meta.get("mode"),
+                 "planes_mm": {"xyz"[k]: [float(self.inner[0][k]), float(self.inner[1][k])] for k in range(3)},
+                 "stack_ids": list(meta.get("stack_ids") or self.pcb) if stacked else [],
+                 "rod_end": meta.get("rod_end") if stacked else None,
+                 "harness_wall": ("+x" if meta.get("mode") == "default" else meta.get("corridor"))
+                 if self.harness_on and meta.get("mode") in ("default", "continuous") else None,
+                 "harness_break_mm": HARNESS_BREAK, "relaxed": bool(relaxed)}
+        return Stage2Spec(2, lo + s2.C_WALL, hi - s2.C_WALL, s2.C_PP, s2.C_WALL, st, exempt, pairs, frame=frame)
 
     def feasible(self, meta: dict) -> bool:
         """Engineering feasibility beyond geometry (validated separately): inside the enclosure, every part
@@ -474,8 +499,9 @@ class Stage2Model:
                 extra_obs = dec.inflate_obstacles(plain, self.obs_gap)
                 extra_obs = np.vstack([extra_obs.reshape(-1, 6), self._stack_obstacle(dec, block)[None]])
                 skip = {idx[p] for p in self.pcb}
+                # chassis-only mounting: no bracket lands on the harness, a rod or the stack (v2.5)
                 res = dec.decode(order, orient_keys, rk, extra_obstacles=extra_obs, skip=skip,
-                                 extra_targets=[False] * len(plain) + [True])       # the stack deck is a target
+                                 extra_targets=[False] * (len(plain) + 1))
                 pre_poses = poses
                 stack_top = float(block[5] + dec.half - dec.lo[2])     # the decoder's length measure of the stack
         poses = pre_poses + [(pid, int(o), np.round(np.asarray(t, float) * 1000.0) / 1000.0) for pid, o, t in res.poses]
@@ -513,7 +539,11 @@ class Stage2Model:
             meta["standoffs"] = extras
         if self.mode == "soft":
             meta["H"] = self.blocked_fraction(poses, meta)
-        hardware = self.standoff_mass(extras) + [(m, c, i) for _, m, c, i in self.stack_hardware(meta)]
+        stack_hw = self.stack_hardware(meta)
+        if stack_hw:                # PC/104 rods and spacer tubes: in the physics like brackets and standoffs
+            meta["stack_hardware"] = [{"name": n, "mass_kg": m, "com_mm": c.tolist(), "inertia_kgm2": i.tolist()}
+                                      for n, m, c, i in stack_hw]
+        hardware = self.standoff_mass(extras) + [(m, c, i) for _, m, c, i in stack_hw]
         if not self.mfg:
             meta["brackets"] = self.brackets(mounts)
             hardware += [(b["mass_kg"], np.asarray(b["com_mm"]), np.asarray(b["inertia_kgm2"])) for b in meta["brackets"]]
@@ -534,7 +564,8 @@ class Stage2Model:
 
     @staticmethod
     def brackets(mounts: dict) -> list[dict]:
-        """V2 Stage 2 bracket list (reserved box, target, mass properties, cost) from the mount check."""
+        """V2 Stage 2 bracket list (reserved box, target, mass properties, cost) from the mount check. held_parts:
+        the parts the bracket holds (one today; a list so that shared brackets keep the format)."""
         from ..mfg.brackets import v2_bracket
         out = []
         for pid, v in mounts.items():
@@ -542,8 +573,8 @@ class Stage2Model:
                 continue
             br = v2_bracket(f"bracket:{pid}", pid, v)
             out.append({"name": f"bracket:{pid}", "pid": pid, **{k: v[k] for k in (
-                "kind", "mount_type", "process", "fasteners", "gap_mm", "target", "target_statics", "target_parts",
-                "reserve", "axis", "neg", "part_side_mm", "plane_mm", "depth_mm")},
+                "kind", "mount_type", "process", "fasteners", "gap_mm", "target", "target_kind", "target_statics",
+                "held_parts", "reserve", "axis", "neg", "part_side_mm", "plane_mm", "depth_mm")},
                 "mass_kg": br.mass_kg, "com_mm": np.asarray(br.com_mm).tolist(),
                 "inertia_kgm2": np.asarray(br.inertia_kgm2).tolist(), "cost_rel": br.cost_rel,
                 "material": br.material, "label": br.label, "exact": not br.estimate})
@@ -742,10 +773,6 @@ class Stage2Model:
         """Boards: PC/104 rods to the stack's end plate, or standoff contact for edge boards. Every other part: a
         bracket (V2 Stage 2, a reserved box that is part of the packing) or, in the V1 Manufacturable Design tab, a
         bracket envelope. Returns (failures, info, standoffs); a bracket's reserved box travels in its part's info."""
-        decks = []
-        if meta.get("stack_block") is not None:
-            blk = meta["stack_block"]
-            decks = [(2, blk[5], +1), (2, blk[2], -1)]
         fails, info, standoffs = 0, {}, []
         world_boxes = {}
         for pid, o, t in poses:
@@ -773,7 +800,7 @@ class Stage2Model:
                 rest.append((pid, o, t))
         if self.mfg:
             for pid, o, t in rest:
-                info[pid] = self._mfg_mount(pid, o, t, decks, world_boxes, keepouts)
+                info[pid] = self._mfg_mount(pid, o, t, world_boxes, keepouts)
                 fails += 0 if info[pid]["ok"] else 1
             return fails, info, standoffs
         m = {k: v for k, v in meta.items() if k != "brackets"}
@@ -805,9 +832,10 @@ class Stage2Model:
         return {"ok": True, "how": f"PC/104 rods with spacer tubes to the {end} end plate ({length:.1f} mm)"}
 
     def _bracket_mount(self, pid, o, t, meta, world_boxes, keep, reserved) -> dict:
-        """V2 Stage 2: the cheapest bracket whose reserved box reaches a wall, end plate, corner rail or the PC/104
-        deck in front of the part's mounting side (within MFG_REACH) and keeps BRACKET_CLEARANCE from every other
-        part, every keep-out except its own target, and every bracket reserved before it."""
+        """V2 Stage 2: the cheapest bracket whose reserved box reaches chassis structure — a wall, an end plate or a
+        corner rail — in front of the part's mounting side (within MFG_REACH) and keeps BRACKET_CLEARANCE from every
+        other part, every keep-out except the rail it is fixed to, and every bracket reserved before it. Never
+        another part: the PC/104 stack is no target (v2.5). The bracket holds `held_parts` (this part)."""
         from ..mfg.rules import MFG_REACH, bracket_estimate, bracket_options, face_profile
         lo, hi = self.inner
         pad, a, sgn = self.pads[pid]
@@ -823,19 +851,13 @@ class Stage2Model:
         side_mm = float(pw[3 + ax] if neg else pw[ax])        # the part's mounting side (its bounding-box face)
         side = f"{'-' if neg else '+'}{'xyz'[ax]}"
         b, cc = [k for k in range(3) if k != ax]
-        # targets: (gap part side → target surface, target plane, label, keep-outs it may touch, parts it may touch,
-        # lateral extent of the target or None for a whole wall)
+        # targets: (gap part side → target surface, target plane, label, kind, keep-outs it may touch, lateral extent
+        # of the target or None for a whole wall)
         wall = float(lo[ax] if neg else hi[ax])
         targets = []
         if (side_mm - wall if neg else wall - side_mm) >= 0:     # an overflowing part may be beyond the end plate
-            targets.append((abs(side_mm - wall), wall, f"{side} {'end plate' if ax == 2 else 'wall'}", (), (), None))
-        if meta.get("stack_block") is not None and ax == 2:
-            blk = np.asarray(meta["stack_block"], float)
-            z = float(blk[5] if neg else blk[2])
-            if (side_mm - z if neg else z - side_mm) >= 0:
-                deck = ("stack_reserve", "rod++", "rod+-", "rod-+", "rod--")
-                targets.append((abs(side_mm - z), z, f"PC/104 stack {'top' if neg else 'underside'}", deck,
-                                tuple(self.pcb), blk))
+            kind = "end_plate" if ax == 2 else "wall"
+            targets.append((abs(side_mm - wall), wall, f"{side} {kind.replace('_', ' ')}", kind, (), None))
         for name, rb in keep:
             if not name.startswith("rail"):
                 continue
@@ -843,9 +865,9 @@ class Stage2Model:
                 plane = float(rb[3 + ax] if neg else rb[ax])
                 dist = (side_mm - plane) if neg else (plane - side_mm)
                 if dist >= 0:
-                    targets.append((dist, plane, f"corner rail {name[4:]} ({side})", (name,), (), rb))
+                    targets.append((dist, plane, f"corner rail {name[4:]} ({side})", "rail", (name,), rb))
         cands = []
-        for gap, plane, label, tkeep, tparts, tbox in targets:
+        for gap, plane, label, tkind, tkeep, tbox in targets:
             if gap > MFG_REACH + 1e-9:
                 continue
             for opt in bracket_options(prof, gap, self.am_allowed):
@@ -857,29 +879,29 @@ class Stage2Model:
                 # budget's preference factor (am_level), and a direct mount (fasteners to the wall) always first;
                 # a fallback (the compact metal-AM pad) only after every other option to every target
                 key = -1.0 if opt.kind == "direct" else (cost / self.am_factor if opt.kind == "metal_am" else cost)
-                cands.append((int(opt.fallback), key, gap, len(cands), opt, r, depth, plane, label, tkeep, tparts,
+                cands.append((int(opt.fallback), key, gap, len(cands), opt, r, depth, plane, label, tkind, tkeep,
                               cost))
         blocked = None
-        for _, _, gap, _, opt, r, depth, plane, label, tkeep, tparts, cost in sorted(cands, key=lambda x: x[:4]):
-            hit = self._clear(r, pid, world_boxes, keep, reserved, tkeep, tparts)
+        for _, _, gap, _, opt, r, depth, plane, label, tkind, tkeep, cost in sorted(cands, key=lambda x: x[:4]):
+            hit = self._clear(r, pid, world_boxes, keep, reserved, tkeep)
             if hit is not None:
                 blocked = blocked or (opt.kind, label, hit)
                 continue
             return {"ok": True, "how": f"{opt.mount_type} to the {label} ({gap:.1f} mm)", "kind": opt.kind,
                     "mount_type": opt.mount_type, "process": opt.process, "fasteners": opt.fasteners,
-                    "cost_est": float(cost), "gap_mm": float(gap), "target": label, "target_statics": list(tkeep),
-                    "target_parts": list(tparts), "reserve": r.tolist(), "axis": ax, "neg": neg,
-                    "part_side_mm": side_mm, "plane_mm": float(plane), "depth_mm": float(depth)}
+                    "cost_est": float(cost), "gap_mm": float(gap), "target": label, "target_kind": tkind,
+                    "target_statics": list(tkeep), "held_parts": [pid], "reserve": r.tolist(), "axis": ax,
+                    "neg": neg, "part_side_mm": side_mm, "plane_mm": float(plane), "depth_mm": float(depth)}
         if blocked:
             return {"ok": False, "how": f"every bracket path is blocked (cheapest: {blocked[0]} to the {blocked[1]}, "
                                         f"blocked by {blocked[2]})"}
-        return {"ok": False, "how": f"no wall, rail or deck within {MFG_REACH:.0f} mm in front of its mounting side "
-                                    f"({side}) — not within reach"}
+        return {"ok": False, "how": f"no wall, end plate or corner rail within {MFG_REACH:.0f} mm in front of its "
+                                    f"mounting side ({side}) — not within reach"}
 
     @staticmethod
     def _reserve(pw, ax, neg, plane, side_mm, opt, extent, tbox):
         """Reserved box of one bracket option: from the target plane to the part side, `depth` into the part's
-        bounding box, over a share of the mounting-side footprint (centred, or moved toward a rail or deck and
+        bounding box, over a share of the mounting-side footprint (centred, or moved toward a corner rail and
         clipped to it). Returns (box, depth) or (None, 0) when the clipped flange is too narrow."""
         from ..mfg.rules import BRACKET_MIN_W
         r = np.asarray(pw, float).copy()
@@ -903,15 +925,15 @@ class Stage2Model:
         return r, depth
 
     @staticmethod
-    def _clear(r, pid, world_boxes, keep, reserved, tkeep, tparts):
+    def _clear(r, pid, world_boxes, keep, reserved, tkeep):
         """None if the box keeps BRACKET_CLEARANCE (+ rounding allowance) from every other part's boxes, every
-        keep-out except the target's and every reserved bracket; else the name of the first obstacle. A box that
+        keep-out except the target rail and every reserved bracket; else the name of the first obstacle. A box that
         shares the part's footprint sits exactly at that distance from whatever the part was packed flush against
         (a rail, a neighbour): compared with a 1 µm tolerance, as the decoder does — the proof needs 1.2 mm."""
         from ..mfg.rules import BRACKET_CLEARANCE
         g = BRACKET_CLEARANCE + SLACK - 1e-6
         for qid, boxes in world_boxes.items():
-            if qid == pid or qid in tparts:
+            if qid == pid:
                 continue
             if np.max(np.maximum(boxes[:, :3] - r[3:], r[:3] - boxes[:, 3:]), axis=1).min() < g:
                 return qid
@@ -923,9 +945,10 @@ class Stage2Model:
                 return name
         return None
 
-    def _mfg_mount(self, pid, o, t, decks, world_boxes, keepouts) -> dict:
-        """Manufacturable Design: the nearest wall / end plate / deck / rail in front of the mounting side, a clear
-        bracket envelope to it, and the cheapest mount type the rules allow for that gap and side shape."""
+    def _mfg_mount(self, pid, o, t, world_boxes, keepouts) -> dict:
+        """Manufacturable Design: the nearest wall / end plate / corner rail in front of the mounting side, a clear
+        bracket envelope to it (no part, rail, PC/104 rod or cable corridor in the way), and the cheapest mount type
+        the rules allow for that gap and side shape."""
         from ..mfg.rules import MFG_REACH, choose_mount, face_profile
         lo, hi = self.inner
         pad, a, sgn = self.pads[pid]
@@ -942,9 +965,6 @@ class Stage2Model:
         b, cc = [k for k in range(3) if k != ax]
         targets = [((face - lo[ax]) if neg else (hi[ax] - face), lo[ax] if neg else hi[ax],
                     f"{side} {'end plate' if ax == 2 else 'wall'}")]
-        for dax, z, sgn in decks:
-            if dax == ax and ((sgn > 0 and neg) or (sgn < 0 and not neg)):
-                targets.append(((face - z) if neg else (z - face), z, "PC/104 stack deck"))
         for rb in self._statics_rails:
             if rb[b] < pw[3 + b] and rb[3 + b] > pw[b] and rb[cc] < pw[3 + cc] and rb[3 + cc] > pw[cc]:
                 plane = rb[3 + ax] if neg else rb[ax]
@@ -972,15 +992,15 @@ class Stage2Model:
             if blocked:
                 continue
             if any(np.all(kb[:3] < env[3:] - 1e-6) and np.all(kb[3:] > env[:3] + 1e-6) for kb in keepouts):
-                continue                             # the bracket would cross a rail or the cable corridor
+                continue                             # the bracket would cross a rail, a rod or the cable corridor
             ch = choose_mount(self.profiles[pid], gap)
             if ch is None:
                 break
             return {"ok": True, "how": f"{ch.mount_type} to the {label} ({gap:.1f} mm)", "mount_type": ch.mount_type,
                     "process": ch.process, "fasteners": ch.fasteners, "cost_est": ch.cost_est, "gap_mm": gap,
                     "target": label, "envelope": env.tolist(), "axis": ax, "neg": bool(neg), "reason": ch.reason}
-        return {"ok": False, "how": f"no wall, rail or deck within {MFG_REACH:.0f} mm in front of its mounting side "
-                                    f"({side}), or the bracket path is blocked"}
+        return {"ok": False, "how": f"no wall, end plate or corner rail within {MFG_REACH:.0f} mm in front of its "
+                                    f"mounting side ({side}), or the bracket path is blocked"}
 
     def _standoffs(self, pid, o, t, world_boxes, keepouts):
         """Lengthen the board's 3 mm standoffs to the wall they face (≤ 50 mm) if the path is clear."""

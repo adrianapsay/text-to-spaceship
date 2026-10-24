@@ -79,12 +79,25 @@ def test_every_bracket_keeps_its_clearances_and_lies_in_its_box(recs):
                 for o in brs[i + 1:]:
                     assert box_gap(*(np.array([x[:3], x[3:]]) for x in (res, np.asarray(o["reserve"])))) \
                         >= BRACKET_CLEARANCE - 1e-9
-            # every mounted non-board part has exactly one bracket
+            # every mounted non-board part has exactly one bracket, fixed to chassis structure
             held = {b["pid"] for b in brs}
             for pid, info in r.meta["mounts"].items():
                 if info["ok"] and pid in m.pads:
                     assert pid in held
-    assert {"machined", "metal_am"} <= seen
+            assert all(b["target_kind"] in ("wall", "end_plate", "rail") and b["held_parts"] == [b["pid"]]
+                       for b in brs)
+    # the random decodes pack parts against their walls (direct mounts, cradles, clamps); machined blocks and sheet
+    # brackets bridge longer gaps, so their solids are checked on a box of their own
+    assert {"direct", "cradle", "clamp", "metal_am"} <= seen
+    for kind, gap in (("direct", 3.0), ("machined", 9.0), ("sheet", 25.0), ("clamp", 25.0)):
+        side = -40.0 + gap                                   # target: the -x wall at x = -40
+        res = [-40.0, -10.0, -20.0, side + 6.0, 12.0, 20.0]
+        info = {"reserve": res, "axis": 0, "neg": True, "kind": kind, "fasteners": 4, "part_side_mm": side,
+                "plane_mm": -40.0, "depth_mm": 6.0, "mount_type": kind, "process": kind}
+        br = v2_bracket("b", "p", info)
+        v = np.vstack([m[0] for m in br.meshes])
+        assert np.all(v >= np.array(res[:3]) - 1e-9) and np.all(v <= np.array(res[3:]) + 1e-9), kind
+        assert v[:, 0].min() == pytest.approx(-40.0), kind                   # the solid sits on its wall
 
 
 def test_bracket_budget_zero_uses_simple_brackets_only(recs):

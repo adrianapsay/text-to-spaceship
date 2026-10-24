@@ -4,7 +4,7 @@
 Every bracket is a real solid: it gets mass properties, is checked against every other part at the exact-mesh
 level (FCL distance + containment probe), and is exported as STL. Metal-AM brackets are conformal: a 2 mm shell
 that follows the part surface at a 0.3 mm gap inside the mounting zone, joined by ribs to a 2 mm plate on the wall,
-end plate, rail or deck (a signed-distance level set meshed with manifold3d).
+end plate or corner rail (a signed-distance level set meshed with manifold3d).
 """
 from __future__ import annotations
 
@@ -270,7 +270,7 @@ def am_bracket(bid, pid, rec, o, t, mount, h: float = 1.0, obstacles=None, clear
     if cand.any():
         inside[cand] = ray_parity_inside((G[cand] - t) @ R, rec.v, rec.f) > 0.5
     s = np.ascontiguousarray(np.where(inside, -dist, dist).reshape([len(a) for a in axes]))   # >0 outside the part
-    target = env[ax] if neg else env[3 + ax]                                  # wall / rail / deck plane
+    target = env[ax] if neg else env[3 + ax]                                  # wall / end plate / rail plane
     b = [k for k in range(3) if k != ax][0]
     rib1 = reg_lo[b] + 0.25 * (reg_hi[b] - reg_lo[b])
     rib2 = reg_lo[b] + 0.75 * (reg_hi[b] - reg_lo[b])
@@ -427,9 +427,25 @@ def v2_bracket(bid, pid, info) -> Bracket:
                    m2, c2, i2, float(cost), nf, r.tolist(), label=label, estimate=estimate)
 
 
+def target_kind(b: dict) -> str:
+    """What a V2 bracket is fixed to: "wall", "end_plate" or "rail" — "deck" (the PC/104 stack) only in a layout
+    decoded before v2.5, whose bracket entries carry no target_kind."""
+    if b.get("target_kind"):
+        return b["target_kind"]
+    ts = [str(t) for t in b.get("target_statics") or []]
+    if any(t.startswith("rail") for t in ts):
+        return "rail"
+    if "stack_reserve" in ts or b.get("target_parts"):
+        return "deck"
+    return "end_plate" if int(b["axis"]) == 2 else "wall"
+
+
 def cert_entry(b: dict, designed_vertices=None) -> dict:
     """Certificate entry of one V2 bracket (Lemma 4): its reserved box and every vertex of its solid — the designed
-    solid when given, else the simple solid; a cradle or metal-AM bracket not designed yet has only its box."""
+    solid when given, else the simple solid; a cradle or metal-AM bracket not designed yet has only its box. It states
+    what the bracket is fixed to (the target face lies on plane_mm along axis, on the box's low side when neg;
+    target_kind, the keep-outs it may touch) and the parts it holds: exempt_parts = held_parts (a layout decoded
+    before v2.5 adds the stack boards of a bracket on the PC/104 deck)."""
     br = v2_bracket(b["name"], b["pid"], b)
     if designed_vertices is not None:
         verts, estimate = np.asarray(designed_vertices, float), False
@@ -437,10 +453,13 @@ def cert_entry(b: dict, designed_vertices=None) -> dict:
         verts, estimate = np.zeros((0, 3)), True
     else:
         verts, estimate = np.vstack([np.asarray(v, float) for v, _ in br.meshes]), False
+    held = list(b.get("held_parts") or [b["pid"]])
     return {"name": b["name"], "part": b["pid"], "kind": b["kind"], "target": b["target"],
-            "reserve": [round(float(x), 9) for x in b["reserve"]],
-            "solid_vertices": np.round(verts, 9).tolist(), "estimate": estimate,
-            "exempt_parts": [b["pid"], *b.get("target_parts", [])], "target_statics": list(b.get("target_statics", []))}
+            "target_kind": target_kind(b), "axis": int(b["axis"]), "neg": bool(b["neg"]),
+            "plane_mm": round(float(b["plane_mm"]), 9), "reserve": [round(float(x), 9) for x in b["reserve"]],
+            "solid_vertices": np.round(verts, 9).tolist(), "estimate": estimate, "held_parts": held,
+            "exempt_parts": held + [p for p in b.get("target_parts", []) if p not in held],
+            "target_statics": list(b.get("target_statics", []))}
 
 
 def _fcl_obj(v, f):

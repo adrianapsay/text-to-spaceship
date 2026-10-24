@@ -329,7 +329,7 @@ export function HardwareTab() {
                   onChange={(ev) => session().patchSettings({ auto_design_brackets: ev.target.checked })}
                   data-testid="auto-design"
                 />
-                Design them automatically when the search pauses or converges (best Stage 2 layout)
+                Design them automatically when the search pauses (best Stage 2 layout)
               </label>
               {msg ? <Notice tone={msg.startsWith('Could not') ? 'err' : 'info'}>{msg}</Notice> : null}
             </div>
@@ -369,7 +369,7 @@ export function HardwareTab() {
       <ContestPanel c={contest.data ?? null} notAvailable={!!contest.notAvailable} />
       <Panel title="Bracket rules (ASSUMED)">
         <ul className="small" style={{ margin: '0 0 0 16px' }}>
-          <li>Reach: a bracket bridges up to 40 mm from the part's mounting side (its 3 mm layer side) to a wall, end plate, corner rail or the PC/104 deck.</li>
+          <li>Reach: a bracket bridges up to 40 mm from the part's mounting side (its 3 mm layer side) to chassis structure only: a wall, an end plate or a corner rail, never another part. The PC/104 boards hang on four rods with spacer tubes from the nearest end plate.</li>
           <li>Cheapest bracket that fits: direct (≤ 3.5 mm), machined block (≤ 15 mm), sheet Z-bracket, tube clamp for cylindrical parts, machined cradle for curved or irregular sides. Metal 3D-printed brackets need a budget above 0, and the budget sets how much more they may cost than the simple bracket they replace (steps at 34, 67 and 100).</li>
           <li>Clearance: each reserved box keeps 1.2 mm from every other part, bracket and keep-out except the one it is fixed to.</li>
           <li>Loads: 68 g quasi-static in each axis separately; factors of safety 1.25 (yield) and 1.4 (ultimate); AlSi10Mg 170 / 280 MPa, E 65 GPa; random vibration (Miles 3σ on the GEVS acceptance spectrum, factors 1.6 / 1.8) where it is larger; first natural frequency with the part, any mode including twisting, ≥ 100 Hz (target 200 Hz).</li>

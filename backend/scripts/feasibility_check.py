@@ -2,6 +2,7 @@
 feasibility runs: BRKGA + local search from two constructive seeds, budget in generations, not seconds).
 
     python scripts/feasibility_check.py <3U|6U|12U> <scale> <seed> [--gens 25] [--pop 30] [--label x] [--out f.jsonl]
+                                        [--dump folder]     (the best layout's poses and meta, pickled)
     python scripts/feasibility_check.py <3U|6U|12U> <scale> <seed> --decode-bench 100 [--label x] [--out f.jsonl]
 
 It runs against whichever `t2s` comes first on PYTHONPATH, so the same script measures the code before and after a
@@ -44,7 +45,11 @@ def layout_facts(model, recs, poses, meta) -> dict:
     """Engineering facts of one decoded layout: mounting, deck and end-plate brackets, the stack, the COM shift."""
     brs = meta.get("brackets", [])
     mounts = meta.get("mounts", {})
-    return {"unmounted": len(meta.get("unmounted", [])),
+    gap = None
+    if meta.get("rod_end") and meta.get("stack_span") is not None:      # the stack's distance from its end plate
+        lo, hi = model.inner
+        gap = float(meta["stack_span"][0] - lo[2]) if meta["rod_end"] == "-z" else float(hi[2] - meta["stack_span"][1])
+    return {"unmounted": len(meta.get("unmounted", [])), "stack_gap_mm": gap,
             "unmounted_why": {p: mounts.get(p, {}).get("how", "") for p in meta.get("unmounted", [])},
             "overflow_mm": float(meta.get("overflow_mm", 0.0)), "brackets": len(brs),
             "deck_brackets": sum(1 for b in brs if "PC/104" in str(b.get("target", ""))),
@@ -60,7 +65,7 @@ def insertion(recs, poses, meta) -> dict:
     return {"insertion_ok": ins["order"] is not None, "stuck": ins["stuck"]}
 
 
-def search(ff, scale, seed, gens, pop) -> dict:
+def search(ff, scale, seed, gens, pop, dump: str = "", label: str = "") -> dict:
     from t2s.collision.geom import part_geom_from_record
     from t2s.collision.validate import Validator
     from t2s.constraints.stage2_model import Stage2Model
@@ -110,6 +115,11 @@ def search(ff, scale, seed, gens, pop) -> dict:
             plain = {k: v for k, v in meta.items() if k not in ("brackets", "rod_end", "rod_model")}
             out["insertion_ok_parts_only"] = insertion(recs, b.poses, plain)["insertion_ok"]
     out["feasible"] = bool(out["search_feasible"] and out["valid"] and out["insertion_ok"])
+    if dump:
+        import pickle
+        Path(dump).mkdir(parents=True, exist_ok=True)
+        (Path(dump) / f"{label}_{ff}_{scale}_{seed}_{gens}.pkl").write_bytes(
+            pickle.dumps({"poses": b.poses, "meta": meta, "raw": b.raw, "cv": b.cv, "unplaced": b.unplaced}))
     return out
 
 
@@ -146,6 +156,7 @@ def main() -> None:
     ap.add_argument("--decode-bench", type=int, default=0)
     ap.add_argument("--label", default="")
     ap.add_argument("--out", default="")
+    ap.add_argument("--dump", default="")
     a = ap.parse_args()
     from t2s.core.formfactor import set_form_factor
     set_form_factor(a.ff)
@@ -157,7 +168,7 @@ def main() -> None:
         row.update(decode_bench(a.ff, a.scale, a.seed, a.decode_bench))
     else:
         row.update(gens=a.gens, pop=a.pop)
-        row.update(search(a.ff, a.scale, a.seed, a.gens, a.pop))
+        row.update(search(a.ff, a.scale, a.seed, a.gens, a.pop, a.dump, a.label))
     line = json.dumps(row, default=float)
     print(line)
     if a.out:

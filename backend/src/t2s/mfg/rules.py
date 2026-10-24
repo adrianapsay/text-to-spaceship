@@ -84,10 +84,11 @@ def choose_mount(profile: dict, gap: float) -> MountChoice | None:
 
 
 # ================================================================================================================
-# V2 Stage 2: modelled brackets, part of the packing. Each bracket owns a RESERVED BOX from its target surface (wall,
-# end plate, rail or PC/104 deck) to the part's mounting side, reaching `depth` mm into the part's bounding box where
-# the bracket has to wrap the part. The box must keep BRACKET_CLEARANCE from every part it does not hold, from every
-# other bracket's box and from every keep-out except its own target. All values below are ASSUMED.
+# V2 Stage 2: modelled brackets, part of the packing. Each bracket owns a RESERVED BOX from its target surface — chassis
+# structure only: a wall, an end plate or a corner rail (v2.5; never another part or the PC/104 stack) — to the part's
+# mounting side, reaching `depth` mm into the part's bounding box where the bracket has to wrap the part. The box must
+# keep BRACKET_CLEARANCE from every part it does not hold, from every other bracket's box and from every keep-out
+# except the rail it is fixed to. All values below are ASSUMED.
 # ================================================================================================================
 BRACKET_CLEARANCE = 1.2                       # mm (U4 part-to-frame clearance)
 CRADLE_DEPTH_FRAC, CRADLE_DEPTH_MAX = 0.3, 15.0   # machined cradle wraps this share of the part's depth (≤ 15 mm)
@@ -99,14 +100,15 @@ CLAMP_DEPTH_FRAC, CLAMP_DEPTH_MAX = 0.5, 15.0     # tube-clamp band
 AM_DEPTH, AM_DEPTH_FRAC, AM_DEPTH_MAX = 4.0, 0.3, 15.0
 AM_FOOTPRINT, AM_COMPACT_FOOTPRINT = 1.0, 0.8   # share of the mounting-side footprint (wrapping / compact)
 CRADLE_5AXIS = 3.0                            # relative cost surcharge: cradle machined to the part's shape
-BRACKET_MIN_W = 6.0                           # mm: narrowest flange where a bracket is clipped to a rail or deck
+BRACKET_MIN_W = 6.0                           # mm: narrowest flange where a bracket is clipped to a corner rail
 # estimated solid share of the reserved box: (between part and target, wrap region inside the part's bounding box)
 FILL = {"cradle": (0.6, 0.3), "metal_am": (0.25, 0.15)}
 # v2.2: bracket-aware placement, PC/104 rods scaled with the boards, the bracket budget's metal-AM preference steps
 # v2.3: metal-AM brackets wrap the part like the cradle they replace
 # v2.4: the wrap region is reserved during placement; compact pads only after every other option; 1 µm tolerance
-# v2.5: the PC/104 stack anchored at its end plate (rods with spacer tubes from the plate through every board; the COM
-# shift moves the other parts only)
+# v2.5: chassis-only mounting — brackets fixed to walls, end plates and corner rails, no longer to the PC/104 deck
+# (held_parts replaces target_parts); the PC/104 stack anchored at its end plate (rods with spacer tubes from the plate
+# through every board; the COM shift moves the other parts only)
 BRACKET_MODEL_VERSION = "v2.5"                # part of the search signature: layouts decoded under other rules differ
 # bracket budget step → how much more a metal-AM bracket may cost than the cheapest simple bracket that fits and
 # still be chosen (am_level)
