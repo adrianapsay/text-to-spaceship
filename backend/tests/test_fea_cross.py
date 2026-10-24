@@ -86,3 +86,48 @@ def test_calculix_and_ngsolve_agree_on_an_l_bracket():
         assert ca.max_disp_mm == pytest.approx(cb.max_disp_mm, rel=0.01), ca.name
         assert ca.max_vm_filtered_mpa == pytest.approx(cb.max_vm_filtered_mpa, rel=0.05), ca.name
     assert a.frequencies_hz[0] == pytest.approx(b.frequencies_hz[0], rel=0.01)
+
+
+@pytest.mark.skipif(not ccx.available(), reason="CalculiX not installed (tools/ccx)")
+def test_per_node_support_forces_agree_and_balance_the_loads():
+    """Per supported node: CalculiX's RF (*NODE PRINT, NSET=NFIX without TOTALS=ONLY) and NGSolve's internal force
+    K u (tet10 element forces of its displacement, mesh.tet10_internal_forces) agree node by node; minus the external
+    load at each node (consistent body load, surface load on support nodes) they sum to the total reaction =
+    −applied. The tet10 internal forces equal the external loads at every free node (equilibrium), and the consistent
+    mass Gram matrix of a rigid translation is the mass."""
+    from t2s.fea.mesh import face_set_moments, tet10_internal_forces, tet10_mass_gram
+    nodes, tets = l_bracket()
+    faces = boundary_faces(tets)
+    p = nodes[faces[:, :3]]
+    fixed = faces[np.all(np.abs(p[:, :, 0]) < 1e-9, axis=1)]
+    top = faces[np.all(np.abs(p[:, :, 2] - 3.0) < 1e-9, axis=1) & np.all(p[:, :, 0] > 25.0, axis=1)]
+    _, c, _ = face_set_moments(nodes, top)
+    F = np.array([0.0, -40.0, -120.0])
+    M = np.cross(np.array([50.0, 10.0, 20.0]) - c, F)                    # force acting off the faces (RBE3-like)
+    cases = [LoadCase("offset + 68 g", [SurfaceLoad(top, F, M)], -G68 * np.array([0.0, 0.6, 0.8])),
+             LoadCase("torque", [SurfaceLoad(top, np.zeros(3), np.array([500.0, 0.0, 0.0]))], np.zeros(3))]
+    prob = FeaProblem(nodes, tets, AL, fixed, cases, n_modes=0)
+    ra, _ = ccx.run(prob, threads=2)
+    rb, fb = ngs.solve_with_fields(prob, threads=2)
+    w = ccx.body_load_weights(nodes, tets)
+    fixed_nodes = prob.fixed_nodes()
+    for k, case in enumerate(cases):
+        ext = np.zeros((len(nodes), 3))
+        for n, f in ccx.case_nodal_loads(prob, case).items():
+            ext[n] += f
+        if case.body_accel_mm_s2 is not None:
+            ext += AL.rho_t_mm3 * w[:, None] * np.asarray(case.body_accel_mm_s2, float)
+        ca, cb = ra.cases[k], rb.cases[k]
+        assert np.array_equal(ca.support_nodes, fixed_nodes) and np.array_equal(cb.support_nodes, fixed_nodes)
+        scale = np.abs(cb.support_forces_n).max()
+        assert np.abs(ca.support_forces_n - cb.support_forces_n).max() < 1e-4 * scale, case.name
+        for c_, sup in ((ca, ca.support_forces_n), (cb, cb.support_forces_n)):
+            per_node = sup - ext[fixed_nodes]
+            assert np.allclose(per_node.sum(0), c_.reaction_n, atol=1e-6 * max(np.abs(c_.applied_n).max(), 1.0))
+            assert np.allclose(per_node.sum(0), -c_.applied_n, atol=1e-5 * max(np.abs(c_.applied_n).max(), 1.0))
+        fint = tet10_internal_forces(nodes, tets, fb.displacement[k], AL.E_mpa, AL.nu)
+        free = np.setdiff1d(np.arange(len(nodes)), fixed_nodes)
+        assert np.abs(fint[free] - ext[free]).max() < 1e-6 * scale
+    trans = [np.tile(np.eye(3)[d], (len(nodes), 1)) for d in range(3)]
+    G = tet10_mass_gram(nodes, tets, AL.rho_t_mm3, trans)
+    assert np.allclose(G, prob.mass_t() * np.eye(3), rtol=1e-12, atol=1e-12 * prob.mass_t())

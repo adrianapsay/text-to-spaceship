@@ -203,7 +203,7 @@ def build(domain: DesignDomain) -> SimpleNamespace:
     mat = domain.material
     vf = float(domain.vol_frac)
     void = np.asarray(domain.void, bool)
-    solid = (np.asarray(domain.fixed, bool) | np.asarray(domain.contact, bool)) & ~void
+    solid = np.asarray(domain.passive_solid(), bool) & ~void
     design = domain.design()
     contact = np.asarray(domain.contact, bool) & ~void
     if not domain.fixed.any():
@@ -275,7 +275,7 @@ def generate(domain: DesignDomain, budget_s: float = 120.0, threads: int = 2) ->
 
 def _run(domain: DesignDomain, budget_s: float, t0: float) -> GenResult:
     if not domain.design().any():                           # nothing to optimise: the passives are the bracket
-        rho = ((domain.fixed | domain.contact) & ~domain.void).astype(float)
+        rho = (domain.passive_solid() & ~domain.void).astype(float)
         return GenResult(rho, time.perf_counter() - t0, NAME, notes=["no design voxels: passives only"],
                          iterations=0, history=[])
     P = build(domain)

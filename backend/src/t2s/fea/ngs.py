@@ -14,7 +14,8 @@ Set-up (independent of the CalculiX module; the two are cross-checked):
 * Reactions: R_d = sum over the Dirichlet dofs of (K u - f)_i * c_d,i, with c_d the coefficient vector of the rigid
   translation e_d (the virtual work of the residual under a unit translation = the total support force; with a nodal
   basis this is the plain sum of the nodal reactions). Sign: the force exerted BY the supports ON the part, so in
-  equilibrium reaction_n = -applied_n.
+  equilibrium reaction_n = -applied_n. Per supported node (for bolt loads) the internal force K u in the tet10 nodal
+  basis is computed from the displacement with exact element forces (mesh.tet10_internal_forces), as CalculiX's RF.
 * Modes: K x = lambda M x on the free dofs, ARPACK (scipy eigsh) in shift-invert mode with OPinv = NGSolve's sparse
   Cholesky of K - sigma M (sigma = 0 for a supported part, reusing the static factorisation; a small negative shift
   for a free part, whose K is singular). M = rho u.v dx plus, for every `added_masses` entry, the non-structural mass
@@ -265,6 +266,11 @@ def _run(problem: FeaProblem, notes: list[str]) -> tuple[list[CaseResult], NgsFi
     cases: list[CaseResult] = []
     fields = NgsFields([], [], [], np.zeros(0))
     mass = problem.mass_t()
+    # per supported node: the internal force K u (the tet10 nodal basis; NGSolve's own basis is hierarchical), from the
+    # elements that touch the support — the NGSolve counterpart of CalculiX's per-node RF
+    from .mesh import tet10_internal_forces
+    fixed_nodes = problem.fixed_nodes()
+    near_support = np.flatnonzero(np.isin(tets, fixed_nodes).any(axis=1)) if len(fixed_nodes) else np.zeros(0, int)
     for ci, case in enumerate(problem.load_cases):
         f = ngs.LinearForm(fes)
         applied = np.zeros(3)
@@ -323,6 +329,9 @@ def _run(problem: FeaProblem, notes: list[str]) -> tuple[list[CaseResult], NgsFi
         vm = _von_mises(s_avg)
         used = cnt > 0
         vm_f = vm[used & ~exclude]
+        support = None
+        if len(fixed_nodes):
+            support = tet10_internal_forces(nodes, tets, np.nan_to_num(disp), E, nu, near_support)[fixed_nodes]
         cases.append(CaseResult(
             name=case.name,
             max_disp_mm=float(np.linalg.norm(disp[used], axis=1).max()),
@@ -330,6 +339,8 @@ def _run(problem: FeaProblem, notes: list[str]) -> tuple[list[CaseResult], NgsFi
             max_vm_filtered_mpa=float(vm_f.max()) if len(vm_f) else float("nan"),
             reaction_n=reaction,
             applied_n=applied,
+            support_nodes=fixed_nodes.copy() if len(fixed_nodes) else None,
+            support_forces_n=support,
         ))
         fields.displacement.append(disp)
         fields.stress.append(s_avg)

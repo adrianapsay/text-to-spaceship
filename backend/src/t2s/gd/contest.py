@@ -22,11 +22,10 @@ from pathlib import Path
 
 import numpy as np
 
+from . import environment as _env
 from .domain import (
     F1_PASS,
     F1_TARGET,
-    FOS_ULT,
-    FOS_YIELD,
     LIMIT_G,
     MATERIAL,
     box_part_domain,
@@ -44,20 +43,37 @@ REFERENCES = {
     "sheet": ("t2s.gd.entrants.baseline_shell", "sheet_bracket", "reference: 1.5 mm sheet Z-bracket"),
 }
 VOL_LADDER = (0.03, 0.05, 0.08, 0.12, 0.2, 0.3, 0.45)   # lightest first: the first passing rung is the result
-CRITERIA = [f"{LIMIT_G:.0f} g quasi-static in X, Y, Z separately: the part's inertia acting at its centre of mass "
-            "(force + moment on the contact faces, RBE3-like) + the bracket's self-weight",
-            "natural modes by Rayleigh–Ritz on six static deflections (the three 68 g cases and three pure torques on "
-            "the contact faces), the part a rigid mass with its inertia at its centre of mass",
-            "random vibration: Miles 3σ load on the GEVS acceptance spectrum, Q = 10; per axis the larger of Miles at "
-            "the mode with the largest effective mass along it and the SRSS of all modes' base forces",
-            f"design loads: yield max({FOS_YIELD} × {LIMIT_G:.0f} g, 1.6 × 3σ), ultimate max({FOS_ULT} × {LIMIT_G:.0f} g, "
-            f"1.8 × 3σ) on {MATERIAL['yield_mpa']:.0f} / {MATERIAL['ultimate_mpa']:.0f} MPa (AlSi10Mg L-PBF stress-relieved)",
-            f"first frequency (the lowest mode of any kind, a twisting part included) ≥ {F1_PASS:.0f} Hz "
-            f"(target {F1_TARGET:.0f} Hz), E = {MATERIAL['E_mpa'] / 1000:.0f} GPa",
-            "stress for the margins: von Mises of the stress averaged over each design voxel (peak over the voxels, "
-            "the cases and both solvers); raw nodal peaks sit at singular sharp corners and grow with mesh "
-            "refinement, so they are reported, not used",
+
+
+def criteria(env: str | None = None) -> list[str]:
+    """The pass criteria of a launch environment preset (gd.environment), as text for results.json and the docs."""
+    E = _env.get(env)
+    st, rd, q = E.factors["static"], E.factors["random"], E.qual_factors
+    return [(f"launch environment: {E.name} — {E.random_limit.grms():.1f} Grms limit, {E.random_qual.grms():.1f} Grms "
+             f"qualification ({E.random_qual.source})"),
+            (f"quasi-static: GSFC mass acceleration curve ({LIMIT_G:.0f} g at ≤ 1 kg) in X, Y, Z separately — the part's "
+             "inertia acting at its centre of mass (force + moment on the contact faces, RBE3-like) + the bracket's "
+             f"self-weight; factors yield {st.yield_}, ultimate {st.ult} ({st.source})"),
+            ("natural modes by Rayleigh–Ritz on six static deflections (the three 68 g cases and three pure torques on "
+             "the contact faces), consistent bracket mass, the part a rigid mass with its inertia at its centre of mass"),
+            ("random vibration by modal superposition: full CQC modal covariance over the defined 20–2000 Hz band "
+             f"(Q = {E.q:g}), RMS von Mises per voxel (Segalman 2000), 3σ; (a) limit level × yield {rd.yield_}, "
+             f"ultimate {rd.ult}; (b) qualification level × yield {q.yield_}, ultimate {q.ult} — never added to the "
+             "quasi-static case; Miles at the dominant mode reported as a cross-check"),
+            f"bolts: {_BOLT_NOTE}",
+            (f"material: {MATERIAL['name']}, Fty {MATERIAL['yield_mpa']:.0f} / Ftu {MATERIAL['ultimate_mpa']:.0f} MPa, "
+             f"E = {MATERIAL['E_mpa'] / 1000:.0f} GPa — {MATERIAL['allowables']}"),
+            (f"first frequency (the lowest mode of any kind, a twisting part included) ≥ {F1_PASS:.0f} Hz "
+             f"(target {F1_TARGET:.0f} Hz; {E.f1_source})"),
+            ("stress for the margins: von Mises of the stress averaged over each design voxel (peak over the voxels, "
+             "the cases and both solvers); raw nodal peaks sit at singular sharp corners and grow with mesh "
+             "refinement, so they are reported, not used"),
             "solid inside the reserved box, joined to the wall, with the whole contact layer joined to the wall"]
+
+
+_BOLT_NOTE = ("M3 A2-70 at the corners of the bolted face (pattern ASSUMED), per-bolt tension and shear from the per-node "
+              "support reactions, fitting factor 1.15, flange bearing and head pull-through in the bracket material")
+CRITERIA = criteria()
 
 
 def _load_part(name: str):
@@ -239,8 +255,10 @@ def contest_markdown(res: dict) -> str:
         for r in [x for x in res["rows"] if x["problem"] == p["name"]]:
             ag = (r.get("agreement") or {}).get("sigma_rel")
             t = (r.get("gen_seconds") or 0) + (r.get("fea_seconds") or 0)
+            g = r.get("governing")
             gov = min(r["axes"], key=lambda a: a["ms_yield"]) if r.get("axes") else None
-            gtxt = (f"{gov['case']}, {gov['governs']} ({gov['yield_factor_g']:.0f} g)" if gov else "—")
+            gtxt = (f"{g['case']}, {g['axis']} ({g['check']})" if g else
+                    f"{gov['case']}, {gov['governs']} ({gov['yield_factor_g']:.0f} g)" if gov else "—")
             mode = (r.get("modes") or [{}])[0].get("motion")
             L.append(f"| {r['generator']} | {n(r.get('vol_frac'), '.2f')} | {n(r.get('mass_g'), '.1f', ' g')} | "
                      f"{n(r.get('sigma_mpa'), '.0f', ' MPa')} | {n(r.get('sigma_peak_mpa'), '.0f', ' MPa')} | {gtxt} | "
@@ -288,13 +306,18 @@ def contest_markdown(res: dict) -> str:
         L.append("")
     rc = res.get("reevaluation")
     if rc:
-        L += ["## Re-check with the modal analysis", "", rc["note"], "",
+        L += [f"## Re-check{' — ' + rc['environment_name'] if rc.get('environment_name') else ' with the modal analysis'}",
+              "", rc["note"], "",
               "| Design | f1 before → now (first mode now) | axis frequencies before → now | MS yield before → now | "
-              "Result before → now |", "|---|---|---|---|---|"]
+              "MS ult. before → now | MS bolt now | governing now | Result before → now |",
+              "|---|---|---|---|---|---|---|---|"]
         for c in rc["changes"]:
             fa = " / ".join(f"{n(a, '.0f')}→{n(b, '.0f')}" for a, b in zip(c["axis_f_old"], c["axis_f_new"]))
+            gv = c.get("governing")
             L.append(f"| {c['design']} | {n(c['f1_old'], '.0f')} → {n(c['f1_new'], '.0f')} Hz ({c.get('mode') or '—'}) | "
                      f"{fa} Hz | {n(c['ms_yield_old'], '+.2f')} → {n(c['ms_yield_new'], '+.2f')} | "
+                     f"{n(c.get('ms_ult_old'), '+.2f')} → {n(c.get('ms_ult_new'), '+.2f')} | {n(c.get('ms_bolt'), '+.2f')} | "
+                     f"{(gv['case'] + ', ' + gv['axis'] + ' (' + gv['check'] + ')') if gv else '—'} | "
                      f"{'PASS' if c['passed_old'] else 'fail'} → {'PASS' if c['passed_new'] else 'fail'} |")
         if rc.get("ladder"):
             L += ["", *[f"* {x}" for x in rc["ladder"]]]
@@ -316,8 +339,12 @@ def contest_markdown(res: dict) -> str:
           f"singular, so the raw nodal peak grows each time the mesh is refined — {measured}. The voxel is the "
           "resolution of the design; fillets and local details belong to the detailed design, where the peak "
           "stresses must be checked again.",
-          "* Fasteners, bearing and the part–bracket interface are not modelled (hand calculations per the research "
-          "note). Nodes on the bolted face are excluded.",
+          "* Bolts: the bolted face is clamped in the FE model; each node's support reaction is given to the nearest "
+          "bolt of the ASSUMED pattern (gd.bolts), which gives per-bolt tension and shear (fitting factor 1.15, M3 "
+          "A2-70, flange bearing and head pull-through). Preload, prying and the part–bracket interface are not "
+          "modelled. Nodes on the bolted face are excluded from the stress.",
+          "* Designs made before the bolt bosses existed (the saved contest STLs) are checked as they are: their "
+          "flange is the 1.5 mm bolted layer, and the bearing and pull-through checks use that thickness.",
           "* Generators get the same time budget per run; their own settings are in their module docstrings. "
           "The volume-fraction ladder stops at the first passing design, so the reported design is the lightest "
           "passing one on that ladder.",

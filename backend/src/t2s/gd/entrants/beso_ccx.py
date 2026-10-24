@@ -109,7 +109,7 @@ def split_domain(dom: DesignDomain, r_mm: float) -> tuple[np.ndarray, np.ndarray
     """(design, passive, isolated): design voxels BESO optimises, passive solid voxels (fixed + contact + isolated
     design voxels), and the isolated design voxels (no other design voxel closer than r_mm)."""
     design = dom.design()
-    passive = (dom.fixed | dom.contact) & ~dom.void
+    passive = dom.passive_solid() & ~dom.void
     isolated = np.zeros(dom.shape, bool)
     idx = np.argwhere(design)
     if len(idx):

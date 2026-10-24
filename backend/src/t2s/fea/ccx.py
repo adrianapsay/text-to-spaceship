@@ -18,11 +18,12 @@ Results:
   integration-point stresses to the element's nodes (C3D10: exact linear extrapolation from the 4 Gauss points to the
   corners, mid-nodes the mean of their two corners, i.e. the element's linear stress field evaluated at the node)
   and averages the tensor component-wise over the elements sharing the node; von Mises of that averaged tensor,
-- reaction totals at the fixed nodes: CalculiX's RF total (*NODE PRINT TOTALS=ONLY) is the internal nodal force at
-  the constrained nodes, which leaves out external load applied directly AT those nodes (the consistent body load of
-  the elements touching the support, and any *CLOAD on a fixed node). The reported reaction is therefore RF minus
-  that load, computed exactly here (straight 10-node tet: integral of N_i over the element = -V/20 at corners,
-  V/5 at mid-nodes, which CalculiX's 4-point rule integrates exactly), so reaction + applied = 0,
+- reactions at the fixed nodes (*NODE PRINT, NSET=NFIX, TOTALS=YES: every node's RF and the total): RF is the
+  internal nodal force at the constrained nodes, which leaves out external load applied directly AT those nodes (the
+  consistent body load of the elements touching the support, and any *CLOAD on a fixed node). The reported total
+  reaction is therefore RF minus that load, computed exactly here (straight 10-node tet: integral of N_i over the
+  element = -V/20 at corners, V/5 at mid-nodes, which CalculiX's 4-point rule integrates exactly), so reaction +
+  applied = 0; the per-node RF is kept (CaseResult.support_forces_n) for the bolt loads (gd.bolts),
 - total mass (*EL PRINT TOTALS=ONLY EMAS),
 - eigenfrequencies in cycles per second (the units mm, N, t, s are consistent).
 
@@ -168,7 +169,7 @@ def write_deck(problem: FeaProblem, path: Path) -> None:
         else:
             out.append("EALL,GRAV,0.,0.,0.,-1.")
         out += ["*NODE PRINT, NSET=NALL", "U",
-                "*NODE PRINT, NSET=NFIX, TOTALS=ONLY", "RF",
+                "*NODE PRINT, NSET=NFIX, TOTALS=YES", "RF",
                 "*EL PRINT, ELSET=EALL, TOTALS=ONLY", "EMAS",
                 "*EL FILE", "S",
                 "*END STEP"]
@@ -210,6 +211,8 @@ _EIG_ROW = re.compile(rf"^\s*(\d+)\s+({_FLOAT})\s+({_FLOAT})\s+({_FLOAT})\s+({_F
 class _DatStep:
     disp_ids: list[int] = field(default_factory=list)            # node ids (1-based)
     disp: list[tuple[float, float, float]] = field(default_factory=list)
+    rf_ids: list[int] = field(default_factory=list)              # supported node ids (1-based)
+    rf: list[tuple[float, float, float]] = field(default_factory=list)
     rf_total: np.ndarray | None = None
     mass: float | None = None
     eig_hz: list[float] = field(default_factory=list)
@@ -242,6 +245,15 @@ def parse_dat(text: str) -> list[_DatStep]:
                 t = lines[j].split()
                 st.disp_ids.append(int(t[0]))
                 st.disp.append((float(t[1]), float(t[2]), float(t[3])))
+                j += 1
+            i = j
+            continue
+        if s.lstrip().startswith("forces (fx,fy,fz) for set NFIX"):
+            j = next_data(i + 1)
+            while j < n and lines[j].strip():
+                t = lines[j].split()
+                st.rf_ids.append(int(t[0]))
+                st.rf.append((float(t[1]), float(t[2]), float(t[3])))
                 j += 1
             i = j
             continue
@@ -400,6 +412,11 @@ def run(problem: FeaProblem, threads: int = 2, workdir: str | None = None) -> tu
         applied = applied + mass_geom * a
         at_fixed = at_fixed + rho * a * w_fixed
         reaction = st.rf_total - at_fixed
+        rf_ids = np.asarray(st.rf_ids, np.int64) - 1
+        if len(rf_ids) != len(fixed) or not np.array_equal(np.sort(rf_ids), fixed):
+            raise RuntimeError(f"CalculiX .dat has {len(rf_ids)} nodal reactions for case {case.name!r}, expected "
+                               f"{len(fixed)} supported nodes")
+        support = np.asarray(st.rf, float).reshape(-1, 3)[np.argsort(rf_ids)]   # fixed_nodes() order (sorted)
         fields.displacement.append(u)
         fields.stress.append(s)
         fields.von_mises.append(vm)
@@ -409,7 +426,9 @@ def run(problem: FeaProblem, threads: int = 2, workdir: str | None = None) -> tu
             max_vm_mpa=float(vm.max()),
             max_vm_filtered_mpa=float(vm[keep].max()) if keep.any() else 0.0,
             reaction_n=reaction,
-            applied_n=applied))
+            applied_n=applied,
+            support_nodes=fixed.copy(),
+            support_forces_n=support))
     if not keep.any():
         notes.append("every node is in exclude_nodes: filtered peak stress set to 0")
 
