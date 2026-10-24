@@ -260,9 +260,14 @@ class Stage2Model:
         if self.mfg or "mounting" in self.relax or not (self.pads or self.macro):
             return None
         from ..decoders.box_decoder import PEN_END, PEN_END_SHIFTED, MountSpec
-        from ..mfg.rules import BRACKET_CLEARANCE, BRACKET_MIN_W, MFG_REACH
+        from ..mfg.rules import BRACKET_CLEARANCE, BRACKET_MIN_W, MFG_REACH, face_profile, wrap_depth
         lo, hi = self.inner
         n_rails = len(self._statics_rails)
+        wrap = {}
+        for pid, (_, a, sgn) in self.pads.items():         # where a cradle, clamp or metal-AM bracket wraps the part
+            if pid not in self.profiles:
+                self.profiles[pid] = face_profile(self.records[pid], a, sgn)
+            wrap[pid] = wrap_depth(self.profiles[pid])
         pads = dict(self.pads)
         for pid, m in self.macro.items():
             st = np.asarray(m["stand"], float)
@@ -273,7 +278,8 @@ class Stage2Model:
                          reach=MFG_REACH, clearance=BRACKET_CLEARANCE + SLACK,
                          targets=[i < n_rails for i in range(n_obstacles)], min_width=BRACKET_MIN_W,
                          end_plate_cost=PEN_END_SHIFTED if self.com_shift_on else PEN_END,
-                         part_reach={pid: STANDOFF_MAX for pid in self.macro}, walls_only=frozenset(self.macro))
+                         part_reach={pid: STANDOFF_MAX for pid in self.macro}, walls_only=frozenset(self.macro),
+                         wrap=wrap)
 
     def rod_boxes(self, span) -> list[tuple[str, np.ndarray]]:
         """The four PC/104 rods (keep-outs) over the stack span, at ±rod_xy."""
@@ -765,11 +771,13 @@ class Stage2Model:
                     continue
                 cost, vol = bracket_estimate(opt.kind, r, ax, gap, depth, opt.fasteners)
                 # the order the options are tried in: the cheapest first, with metal AM's cost divided by the
-                # budget's preference factor (am_level), and a direct mount (fasteners to the wall) always first
+                # budget's preference factor (am_level), and a direct mount (fasteners to the wall) always first;
+                # a fallback (the compact metal-AM pad) only after every other option to every target
                 key = -1.0 if opt.kind == "direct" else (cost / self.am_factor if opt.kind == "metal_am" else cost)
-                cands.append((key, gap, len(cands), opt, r, depth, plane, label, tkeep, tparts, cost))
+                cands.append((int(opt.fallback), key, gap, len(cands), opt, r, depth, plane, label, tkeep, tparts,
+                              cost))
         blocked = None
-        for _, gap, _, opt, r, depth, plane, label, tkeep, tparts, cost in sorted(cands, key=lambda x: x[:3]):
+        for _, _, gap, _, opt, r, depth, plane, label, tkeep, tparts, cost in sorted(cands, key=lambda x: x[:4]):
             hit = self._clear(r, pid, world_boxes, keep, reserved, tkeep, tparts)
             if hit is not None:
                 blocked = blocked or (opt.kind, label, hit)
@@ -814,9 +822,11 @@ class Stage2Model:
     @staticmethod
     def _clear(r, pid, world_boxes, keep, reserved, tkeep, tparts):
         """None if the box keeps BRACKET_CLEARANCE (+ rounding allowance) from every other part's boxes, every
-        keep-out except the target's and every reserved bracket; else the name of the first obstacle."""
+        keep-out except the target's and every reserved bracket; else the name of the first obstacle. A box that
+        shares the part's footprint sits exactly at that distance from whatever the part was packed flush against
+        (a rail, a neighbour): compared with a 1 µm tolerance, as the decoder does — the proof needs 1.2 mm."""
         from ..mfg.rules import BRACKET_CLEARANCE
-        g = BRACKET_CLEARANCE + SLACK
+        g = BRACKET_CLEARANCE + SLACK - 1e-6
         for qid, boxes in world_boxes.items():
             if qid == pid or qid in tparts:
                 continue

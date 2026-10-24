@@ -176,15 +176,23 @@ def write_deck(problem: FeaProblem, path: Path) -> None:
 
 
 # ---------------------------------------------------------------------------------------------------- running
-def run_ccx(workdir: Path, threads: int = 2, job: str = JOB) -> str:
+CCX_TIMEOUT_S = 900.0   # a safeguard (no run has hung so far): a bracket solve takes seconds to minutes, so one still
+#                         running after 15 min is killed and fails like any other run (evaluate.py tries it once more)
+
+
+def run_ccx(workdir: Path, threads: int = 2, job: str = JOB, timeout_s: float | None = None) -> str:
     if not available():
         raise FileNotFoundError(f"CalculiX not found at {CCX_EXE} (see tools/toolchain.lock.json, 'ccx')")
     env = dict(os.environ)
     for v in THREAD_VARS:
         env[v] = str(int(threads))
     env["PATH"] = str(CCX_EXE.parent) + os.pathsep + env.get("PATH", "")
-    proc = subprocess.run([str(CCX_EXE), "-i", job], cwd=str(workdir), env=env, capture_output=True, text=True,
-                          errors="replace", check=False)
+    limit = CCX_TIMEOUT_S if timeout_s is None else float(timeout_s)
+    try:
+        proc = subprocess.run([str(CCX_EXE), "-i", job], cwd=str(workdir), env=env, capture_output=True, text=True,
+                              errors="replace", check=False, timeout=limit)
+    except subprocess.TimeoutExpired as exc:          # subprocess.run has killed it
+        raise RuntimeError(f"ccx did not finish within {limit:.0f} s in {workdir} (killed)") from exc
     log = proc.stdout + proc.stderr
     (workdir / f"{job}.log").write_text(log, encoding="utf-8")
     if proc.returncode != 0 or "*ERROR" in log or "Job finished" not in log:

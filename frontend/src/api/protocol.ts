@@ -256,6 +256,17 @@ export function reduceEnvelope(conn: ConnProto, solver: SolverState, env: Envelo
       if (!s.prevBest || s.prevBest.id !== L.id) effects.push({ type: 'announce', text: `New validated layout ${L.id}` });
       break;
     }
+    case 'layout.updated': {
+      // the same layout with new derived data (e.g. its brackets designed: new meshes and masses) — replaced where it
+      // is shown, without counting as a new layout
+      const p = env.payload as { layout: Layout; reason?: string };
+      const L = p?.layout;
+      if (!L) break;
+      if (s.best && s.best.id === L.id) s = { ...s, best: s.best.status === 'STALE' ? { ...L, status: 'STALE' } : L };
+      if (s.infeasible && s.infeasible.id === L.id) s = { ...s, infeasible: L };
+      s = { ...s, log: pushLog(s.log, { at, kind: 'info', text: `${L.id} updated${p.reason ? ` (${p.reason})` : ''}` }) };
+      break;
+    }
     case 'layout.infeasible': {
       const L = (env.payload as { layout: Layout })?.layout;
       if (!L || L.status !== 'INFEASIBLE') break;

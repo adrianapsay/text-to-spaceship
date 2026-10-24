@@ -15,7 +15,9 @@ export function useLayoutList(status?: string, limit = 200) {
 }
 
 export function useFullLayout(id: string | null) {
-  return useAsync(id ? () => session().api.layout(id) : null, [id]);
+  // fetched again when a bracket-design run finishes: designed solids replace the boxes (new mesh URLs, masses)
+  const designed = useApp((s) => s.solver.studies['bracket_design']?.at);
+  return useAsync(id ? () => session().api.layout(id) : null, [id, designed]);
 }
 
 export function itemsFor(layout: Layout | null, newest: Revs): RenderItem[] {

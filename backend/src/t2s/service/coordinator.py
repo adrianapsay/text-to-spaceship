@@ -436,9 +436,10 @@ class Coordinator:
                 self._set_status("CONVERGED", "6 h time limit reached")
         elif self.val_queue or self.val_pending:
             self._dispatch_validation()
-        elif self.__dict__.get("_auto_design_due") and self.run_status in ("PAUSED", "CONVERGED"):
-            self._auto_design_due = False              # the validation backlog has drained: the best is settled
-            self._maybe_auto_design()
+        elif self.__dict__.get("_auto_design_due") and self.run_status in ("PAUSED", "CONVERGED") \
+                and self._search_settled():
+            self._auto_design_due = False              # the last search jobs and validations are done: the best is
+            self._maybe_auto_design()                  # settled
 
     # =========================================================================================== records
     def _set_record(self, rec) -> None:
@@ -1067,8 +1068,15 @@ class Coordinator:
             g, h, c, raw, nrm = best_cand
             self.candidate = self._candidate_json(h, c["poses"], raw, g, nrm)
             self.broadcast("layout.candidate", {"layout": self.candidate}, only=lambda cl: cl.want_candidates)
-        self._dispatch()
+        self._continue_search()
         self._dispatch_validation()
+
+    def _continue_search(self) -> None:
+        """Give the island that just reported its next job — only while searching. (It used to dispatch whatever the
+        status, so after Pause or CONVERGED the islands kept searching forever: CPU busy, new layouts arriving, the
+        best changing under a paused search.)"""
+        if self.run_status == "SEARCHING":
+            self._dispatch()
 
     def _on_validated(self, wid, job, ctx_id, summary, extra=None) -> None:
         w = self.workers[wid]
@@ -1721,6 +1729,11 @@ class Coordinator:
                 continue
             self.archive[e.id] = e
             self.by_hash[e.hash] = e.id
+        # the layout counter is saved with the project only now and then, the archive with every layout: after the
+        # server was stopped the counter can lag behind, and new layouts would reuse ids and shadow archived ones
+        top = max((int(k[2:]) for k in self.archive if k.startswith("L-") and k[2:].isdigit()), default=0)
+        if top > int(self.store.counters.get("layout", 0)):
+            self.store.counters["layout"] = top
 
     # =========================================================================================== edits
     def apply_settings(self, new: dict) -> None:
@@ -2293,6 +2306,12 @@ class Coordinator:
         return {"status": "RUNNING", "layout_id": e.id,
                 "brackets": sum(1 for b in brs if b["kind"] in DESIGNED_KINDS)}
 
+    def _search_settled(self) -> bool:
+        """No island job in flight and no validation queued or running: the best layout can no longer change."""
+        if self.val_queue or self.val_pending:
+            return False
+        return not any(w.busy for w in getattr(self, "workers", []) if getattr(w, "role", None) == "island")
+
     def _maybe_auto_design(self) -> None:
         """V2 (setting auto_design_brackets, on by default): when the search pauses or converges, design the brackets
         of the best Stage 2 layout that are still estimates or catalogue envelopes, so its 3D views and exports show
@@ -2302,8 +2321,8 @@ class Coordinator:
         from ..gd.design import DESIGNED_KINDS
         if not self.store.settings.get("auto_design_brackets", True):
             return
-        if self.val_queue or self.val_pending:       # validations still running after the pause: the best may still
-            self._auto_design_due = True             # change — run when they have drained (_tick)
+        if not self._search_settled():               # search jobs or validations still running after the pause: the
+            self._auto_design_due = True             # best may still change — run when they have finished (_tick)
             return
         if self.best_id is None:
             return
@@ -2345,6 +2364,9 @@ class Coordinator:
             self._persist(e)
             for k in [k for k in self.proof_cache if k[0] == lid]:
                 self.proof_cache.pop(k, None)
+            # clients showing this layout (the Overview's best, a least-violating candidate) get it again, with the
+            # designed solids' mesh URLs and masses — they keep a copy and would otherwise draw the boxes
+            self.broadcast("layout.updated", {"layout": self.layout_json(e), "reason": "brackets designed"})
             self.broadcast("study.update", {"study": "bracket_design", "progress": 1.0,
                                             "partial": {"status": "DONE", "layout_id": lid}})
         except Exception as exc:  # noqa: BLE001

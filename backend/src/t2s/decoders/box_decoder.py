@@ -131,12 +131,13 @@ def _corridor_blocked(box, skip_g, obs, gs, ge, gb, gkind, n_grp, cg_part, cg_ot
 def _mount_cost(t, prel, d, walls, mp, obs, gs, ge, gb, gkind, n_grp, cg_part, cg_other, corr):
     """Cost of the cheapest bracket for a part at translation t whose mounting layer (prel, relative to t) faces
     direction d (2·axis + 1 if negative), with the part's mp = (reach, narrowest flange on a rail or deck, end-plate
-    cost, side walls only): 0 (+10 per mm of gap) for a wall, rail or deck, the end-plate cost for an end plate,
-    PEN_NONE when nothing is reachable through a clear corridor. The corridor (the layer's footprint, clipped to a
-    box target, from the part side to the target plane) is written to corr[:6]; corr[6] = 1 for a wall, rail or deck,
-    2 for an end plate, 0 if none was found."""
+    cost, side walls only, wrap depth): 0 (+10 per mm of gap) for a wall, rail or deck, the end-plate cost for an
+    end plate, PEN_NONE when nothing is reachable through a clear corridor. The corridor (the layer's footprint,
+    clipped to a box target, from the target plane to the part side and `wrap` mm on around the part, where a cradle,
+    clamp or wrapping metal-AM bracket holds it) is written to corr[:6]; corr[6] = 1 for a wall, rail or deck, 2 for
+    an end plate, 0 if none was found."""
     corr[6] = 0.0
-    reach, min_w, pen_end, walls_only = mp[0], mp[1], mp[2], mp[3] > 0.5
+    reach, min_w, pen_end, walls_only, wrap = mp[0], mp[1], mp[2], mp[3] > 0.5, mp[4]
     ax = d // 2
     if walls_only and ax == 2:              # edge-on board standoffs: side walls only
         return PEN_NONE
@@ -174,10 +175,10 @@ def _mount_cost(t, prel, d, walls, mp, obs, gs, ge, gb, gkind, n_grp, cg_part, c
         cost = cost0 + 10.0 * dist
         if cost >= best:
             continue
-        if neg:
-            box[ax], box[3 + ax] = plane, side
+        if neg:                             # from the target plane to the part side, and `wrap` mm around the part
+            box[ax], box[3 + ax] = plane, side + wrap
         else:
-            box[ax], box[3 + ax] = side, plane
+            box[ax], box[3 + ax] = side - wrap, plane
         box[b], box[3 + b], box[c], box[3 + c] = lb, hb, lc, hc
         if _corridor_blocked(box, k, obs, gs, ge, gb, gkind, n_grp, cg_part, cg_other):
             continue
@@ -341,7 +342,7 @@ def _decode_kernel(seq, okeys, rules, all_orient, allowed, n_allowed, tb, toff, 
                    pad_rel, pad_dir, walls, mp, cg_part, cg_other, is_corr):
     """lo_p / hi_p: (n, 3) per-part containment bounds (parts may keep different wall gaps).
     pad_rel / pad_dir: (n, 24, 6) mounting-layer box per orientation (relative to the translation) and its
-    direction (2·axis + 1 if negative; -1: no bracket needed); mp: (n, 4) per-part mount parameters (_mount_cost).
+    direction (2·axis + 1 if negative; -1: no bracket needed); mp: (n, 5) per-part mount parameters (_mount_cost).
     is_corr marks the obs rows that are corridors."""
     zs = np.empty(eps.shape[0])
     t = np.zeros(3)
@@ -391,6 +392,8 @@ def _decode_kernel(seq, okeys, rules, all_orient, allowed, n_allowed, tb, toff, 
                     best_t[0], best_t[1], best_t[2] = cand_t[0], cand_t[1], cand_t[2]
                     for a in range(7):
                         best_corr[a] = cand_corr[a]
+                if rnd == 1 and abs(best_corr[6] - 1.0) < 0.5:
+                    break                       # the first other orientation with a wall, rail or deck bracket
         if best_o < 0:
             continue
         out_o[p] = best_o
@@ -459,6 +462,7 @@ class MountSpec:
     end_plate_cost: float = 5e4
     part_reach: dict = field(default_factory=dict)
     walls_only: frozenset = frozenset()
+    wrap: dict = field(default_factory=dict)    # per part: mm the bracket reaches around the part (kept free too)
 
 
 class BoxDecoder:
@@ -531,12 +535,13 @@ class BoxDecoder:
                 ax = int(np.argmax(np.abs(d)))
                 self.pad_dir[p_i, o] = 2 * ax + (1 if d[ax] < 0 else 0)
         self.walls = np.asarray(mt.walls, float) if mt is not None else np.zeros(6)
-        # per part: (reach, narrowest flange on a rail or deck, end-plate cost, 1 = side walls only)
-        self.mp = np.zeros((n, 4))
+        # per part: (reach, narrowest flange on a rail or deck, end-plate cost, 1 = side walls only, wrap depth)
+        self.mp = np.zeros((n, 5))
         if mt is not None:
             for p_i, part in enumerate(parts):
                 self.mp[p_i] = (float(mt.part_reach.get(part.id, mt.reach)), float(mt.min_width),
-                                float(mt.end_plate_cost), 1.0 if part.id in mt.walls_only else 0.0)
+                                float(mt.end_plate_cost), 1.0 if part.id in mt.walls_only else 0.0,
+                                float(mt.wrap.get(part.id, 0.0)))
         # corridors keep the bracket clearance: from part boxes (inflated by half the part gap) and from keep-outs
         # and other corridors (inflated by the static growth / stored grown by cg_part)
         clr = float(mt.clearance) if mt is not None else 0.0

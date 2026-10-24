@@ -310,3 +310,30 @@ describe('Stage 2 least-violating candidate (INFEASIBLE)', () => {
     expect(solver.infeasible?.id).toBe('L-0001');
   });
 });
+
+describe('V2: layout.updated (brackets designed after validation)', () => {
+  const revs: Revs = { epoch: 3, parts_rev: 2, constraint_rev: 5, mass_rev: 1, weights_rev: 1 };
+  const env = (type: string, payload: unknown, seq: number): Envelope => ({
+    v: 1, type, seq, ...revs, applied_client_seq: 0, ts: new Date(0).toISOString(), payload,
+  });
+  const bracket = (url: string) => ({ id: 'L-0042-br0', kind: 'bracket', process: 'metal_am', mesh_url: url, mass_kg: 0.01 });
+  it('replaces the layout on screen in place: new bracket meshes, no "new layout", earlier best kept', () => {
+    let conn = initialConn();
+    let solver = initialSolver();
+    const prev = { ...layout('L-0041', 'VALIDATED', revs), stage: 2 as const };
+    const box = { ...layout('L-0042', 'VALIDATED', revs), stage: 2 as const, extra_items: [bracket('/api/items/L-0042-br0/mesh')] } as Layout;
+    ({ conn, solver } = reduceEnvelope(conn, solver, env('layout.validated', { layout: prev, source: 'search' }, 1)));
+    ({ conn, solver } = reduceEnvelope(conn, solver, env('layout.validated', { layout: box, source: 'search' }, 2)));
+    expect(solver.prevBest?.id).toBe('L-0041');
+    const designed = { ...box, extra_items: [bracket('/api/items/L-0042-br0/mesh?v=d1')] } as Layout;
+    const r = reduceEnvelope(conn, solver, env('layout.updated', { layout: designed, reason: 'brackets designed' }, 3));
+    expect(r.solver.best?.extra_items[0].mesh_url).toBe('/api/items/L-0042-br0/mesh?v=d1');
+    expect(r.solver.prevBest?.id).toBe('L-0041');
+    expect(r.effects.some((e) => e.type === 'announce')).toBe(false);
+    const plan = renderPlan(r.solver, r.conn.newest, { expert: false, showGhost: false });
+    expect(plan[0].layout.extra_items[0].mesh_url).toContain('?v=d1');
+    // an update for a layout that is not on screen changes nothing
+    const other = reduceEnvelope(r.conn, r.solver, env('layout.updated', { layout: { ...designed, id: 'L-0099' } }, 4));
+    expect(other.solver.best?.id).toBe('L-0042');
+  });
+});

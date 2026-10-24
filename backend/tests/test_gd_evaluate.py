@@ -38,6 +38,27 @@ def test_solid_is_inside_the_box_and_disconnected_designs_fail(dom):
     assert sol is None and "no solid path" in why
 
 
+def test_contact_voxels_no_solid_can_reach_are_dropped(dom):
+    """A pocket that the part (void) cuts off from the bolted layer: its contact voxels are dropped — they carry no
+    load, and with them every design, the solid block included, would be refused — while reachable ones stay."""
+    import copy
+
+    from t2s.gd.domain import drop_unreachable_contact
+    d = copy.copy(dom)
+    d.void, d.contact, d.fixed = dom.void.copy(), dom.contact.copy(), dom.fixed.copy()
+    nx = d.shape[0]
+    wall = nx // 2
+    d.void[wall] = True                                    # the part closes the box across the middle …
+    d.contact[wall + 1] = True                             # … with contact voxels behind it (a pocket)
+    d.contact[wall + 1] &= ~d.void[wall + 1]
+    d.contact[wall - 1] = ~d.void[wall - 1]                # and some in front of it
+    behind, front = int(d.contact[wall + 1:].sum()), int(d.contact[:wall].sum())
+    assert behind > 0 and front > 0
+    assert drop_unreachable_contact(d) == behind
+    assert not d.contact[wall + 1:].any() and int(d.contact[:wall].sum()) == front
+    assert drop_unreachable_contact(dom) == 0              # the plain test domain has no pocket
+
+
 def test_rayleigh_frequency_of_a_cantilever_with_a_tip_mass():
     """Rayleigh's quotient on the static deflection under inertia load (beam self-weight + a rigid tip mass acting at
     the tip-face centroid) against the exact Euler–Bernoulli frequency equation with a tip mass."""

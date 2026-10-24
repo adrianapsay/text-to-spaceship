@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import importlib
 import json
+import os
 import pickle
 import time
 from pathlib import Path
@@ -129,9 +130,30 @@ def design_bracket(b: dict, rec, orient: int, t, part_mass_kg: float, key: str, 
     return d, (v, f)
 
 
-def design_job(snapshot: str, out_dir: str, threads: int = 2) -> str:
+def _design_one(k: int, b: dict, rec, pose, mass: float, key: str, out_dir: str, lid: str, threads: int) -> dict:
+    """One bracket (its own process when the job runs brackets in parallel): design it and write its mesh files."""
+    o, t = pose
+    d, mesh = design_bracket(b, rec, o, t, mass, key, threads=threads, log=lambda m: None)
+    if mesh is not None:
+        out = Path(out_dir)
+        (out / f"{lid}-br{k}.bin").write_bytes(_mesh_bin(*mesh))
+        np.save(out / f"{lid}-br{k}.npy", np.asarray(mesh[0], float))
+        d["vertices_file"] = f"{lid}-br{k}.npy"
+        d["mesh_file"] = f"{lid}-br{k}.bin"
+    return d
+
+
+def design_workers(n_todo: int, threads: int) -> int:
+    """Brackets designed at the same time: independent, so several processes (each `threads` threads) — at most 4,
+    and at most half the logical cores between them."""
+    return max(1, min(4, n_todo, (os.cpu_count() or 4) // (2 * max(int(threads), 1))))
+
+
+def design_job(snapshot: str, out_dir: str, threads: int = 2, workers: int | None = None) -> str:
     """Process-pool job. snapshot: pickle {layout_id, brackets, records, poses {pid: (orient, t)}, masses {pid: kg},
-    results_path}. Writes progress.json, and per bracket <layout>-br<k>.bin (mesh) and .npy (vertices)."""
+    results_path}. Writes progress.json (after every bracket), and per bracket <layout>-br<k>.bin (mesh) and .npy
+    (vertices). The brackets are designed `workers` at a time in separate processes (design_workers); if a process
+    dies (BrokenProcessPool), the brackets left are designed one by one in this process."""
     snap = pickle.loads(Path(snapshot).read_bytes())
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
@@ -141,21 +163,38 @@ def design_job(snapshot: str, out_dir: str, threads: int = 2) -> str:
     designs, t0 = {}, time.perf_counter()
     prog = out / "progress.json"
 
-    def write(status, i):
-        prog.write_text(json.dumps({"status": status, "progress": i / max(len(todo), 1), "layout_id": lid,
+    def write(status):
+        prog.write_text(json.dumps({"status": status, "progress": len(designs) / max(len(todo), 1), "layout_id": lid,
                                     "generator_key": key, "designs": designs, "seconds": time.perf_counter() - t0},
                                    default=float), encoding="utf-8")
-    write("RUNNING", 0)
-    for i, (k, b) in enumerate(todo):
-        o, t = snap["poses"][b["pid"]]
-        d, mesh = design_bracket(b, snap["records"][b["pid"]], o, t, snap["masses"].get(b["pid"]) or 0.2, key,
-                                 threads=threads)
-        if mesh is not None:
-            (out / f"{lid}-br{k}.bin").write_bytes(_mesh_bin(*mesh))
-            np.save(out / f"{lid}-br{k}.npy", np.asarray(mesh[0], float))
-            d["vertices_file"] = f"{lid}-br{k}.npy"
-            d["mesh_file"] = f"{lid}-br{k}.bin"
-        designs[b["pid"]] = d
-        write("RUNNING", i + 1)
-    write("DONE", len(todo))
+
+    def args(k, b):
+        return (k, b, snap["records"][b["pid"]], snap["poses"][b["pid"]], snap["masses"].get(b["pid"]) or 0.2, key,
+                str(out), lid, threads)
+    write("RUNNING")
+    n = design_workers(len(todo), threads) if workers is None else max(1, int(workers))
+    left = list(todo)
+    if n > 1 and len(todo) > 1:
+        from concurrent.futures import ProcessPoolExecutor, as_completed
+        from concurrent.futures.process import BrokenProcessPool
+        try:
+            with ProcessPoolExecutor(max_workers=n) as ex:
+                futs = {ex.submit(_design_one, *args(k, b)): (k, b) for k, b in todo}
+                for f in as_completed(futs):
+                    k, b = futs[f]
+                    try:
+                        designs[b["pid"]] = f.result()
+                    except BrokenProcessPool:
+                        raise
+                    except Exception as exc:  # noqa: BLE001 - one bracket's failure is that bracket's result
+                        designs[b["pid"]] = {"pid": b["pid"], "generator": key, "passed": False,
+                                             "reason": f"design failed: {exc!r}"[:300]}
+                    left.remove((k, b))
+                    write("RUNNING")
+        except BrokenProcessPool:
+            pass                                        # the brackets left: one by one below
+    for k, b in left:
+        designs[b["pid"]] = _design_one(*args(k, b))
+        write("RUNNING")
+    write("DONE")
     return str(prog)

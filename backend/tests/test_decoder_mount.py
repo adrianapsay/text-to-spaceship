@@ -113,6 +113,22 @@ def test_stage2_bracket_aware_decoding_mounts_far_more_parts_and_rods_follow_the
     assert min(counts[True]) == 0 < min(counts[False])
 
 
+def test_metal_am_bracket_wraps_the_part_and_falls_back_to_a_compact_pad():
+    """v2.3: the metal-AM bracket first takes the cradle's envelope (whole side, 30 % of the part's depth, 4–15 mm),
+    so its design holds the part; only where that is blocked, the compact 4 mm pad over 80 % of the side."""
+    from t2s.mfg.rules import AM_DEPTH, bracket_options
+    prof = {"flat_share": 0.1, "symmetric": False, "elongated": False, "curved": True, "face_mm": (40.0, 30.0),
+            "extent_mm": 40.0}
+    am = [o for o in bracket_options(prof, 3.0, True) if o.kind == "metal_am"]
+    assert [o.fallback for o in am] == [False, True]
+    assert am[0].lateral == (1.0, 1.0) and am[0].depth == pytest.approx(12.0)
+    assert am[1].lateral == (0.8, 0.8) and am[1].depth == AM_DEPTH
+    big = dict(prof, extent_mm=100.0)
+    small = dict(prof, extent_mm=5.0)
+    assert bracket_options(big, 3.0, True)[1].depth == 15.0 and bracket_options(small, 3.0, True)[1].depth == AM_DEPTH
+    assert [o.kind for o in bracket_options(prof, 3.0, False)] == ["cradle"]
+
+
 def test_bracket_budget_steps():
     from t2s.mfg.rules import AM_FACTOR, am_level
     assert [am_level(b) for b in (0, 1, 33, 34, 50, 66, 67, 99, 100)] == [0, 1, 1, 2, 2, 2, 3, 3, 4]
@@ -126,7 +142,7 @@ def test_a_higher_bracket_budget_chooses_more_metal_am_brackets_but_keeps_direct
     recs = _synthetic(0.5)
     rng = np.random.default_rng(11)
     keys = [rng.random(3 * len(recs) + 3) for _ in range(6)]
-    am, direct = {}, {}
+    am, direct, wrapping = {}, {}, {}
     for level in (0, 1, 2, 4):
         model = Stage2Model(recs, "default", am_level=level)
         n = model.n
@@ -134,7 +150,10 @@ def test_a_higher_bracket_budget_chooses_more_metal_am_brackets_but_keeps_direct
         for k in keys:
             res = model.decode(list(np.argsort(k[:n])), k[n:2 * n], k[2 * n:])
             kinds += [b["kind"] for b in res.meta["brackets"]]
+            wrapping[level] = wrapping.get(level, 0) + sum(1 for b in res.meta["brackets"] if b["kind"] == "metal_am"
+                                                           and "compact" not in b["mount_type"])
         am[level], direct[level] = kinds.count("metal_am"), kinds.count("direct")
     assert am[0] == 0
     assert am[1] <= am[2] < am[4]
     assert direct[4] > 0 and abs(direct[4] - direct[1]) <= 0.2 * direct[1]
+    assert wrapping[4] > am[4] / 2                    # most metal-AM brackets wrap the part (the pad is the fallback)

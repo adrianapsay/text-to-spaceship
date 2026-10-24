@@ -92,14 +92,20 @@ def choose_mount(profile: dict, gap: float) -> MountChoice | None:
 BRACKET_CLEARANCE = 1.2                       # mm (U4 part-to-frame clearance)
 CRADLE_DEPTH_FRAC, CRADLE_DEPTH_MAX = 0.3, 15.0   # machined cradle wraps this share of the part's depth (≤ 15 mm)
 CLAMP_DEPTH_FRAC, CLAMP_DEPTH_MAX = 0.5, 15.0     # tube-clamp band
-AM_DEPTH = 4.0                                # metal-AM bracket hugs the part this far into its bounding box
-AM_FOOTPRINT = 0.8                            # share of the mounting-side footprint a metal-AM bracket uses
+# metal-AM bracket: first the envelope of the machined cradle it replaces — the whole mounting side, reaching 30 % of
+# the part's depth around it (4 … 15 mm), so that the design holds the part; where that is blocked, the compact pad
+# (4 mm over 80 % of the side — the only envelope before v2.3: with the parts 3 mm from their walls a 7 mm slab, whose
+# designs were pads, not brackets that hold the part).
+AM_DEPTH, AM_DEPTH_FRAC, AM_DEPTH_MAX = 4.0, 0.3, 15.0
+AM_FOOTPRINT, AM_COMPACT_FOOTPRINT = 1.0, 0.8   # share of the mounting-side footprint (wrapping / compact)
 CRADLE_5AXIS = 3.0                            # relative cost surcharge: cradle machined to the part's shape
 BRACKET_MIN_W = 6.0                           # mm: narrowest flange where a bracket is clipped to a rail or deck
 # estimated solid share of the reserved box: (between part and target, wrap region inside the part's bounding box)
 FILL = {"cradle": (0.6, 0.3), "metal_am": (0.25, 0.15)}
 # v2.2: bracket-aware placement, PC/104 rods scaled with the boards, the bracket budget's metal-AM preference steps
-BRACKET_MODEL_VERSION = "v2.2"                # part of the search signature: layouts decoded under other rules differ
+# v2.3: metal-AM brackets wrap the part like the cradle they replace
+# v2.4: the wrap region is reserved during placement; compact pads only after every other option; 1 µm tolerance
+BRACKET_MODEL_VERSION = "v2.4"                # part of the search signature: layouts decoded under other rules differ
 # bracket budget step → how much more a metal-AM bracket may cost than the cheapest simple bracket that fits and
 # still be chosen (am_level)
 AM_FACTOR = {1: 1.0, 2: 2.0, 3: 10.0, 4: float("inf")}
@@ -123,6 +129,7 @@ class BracketOption:
     fasteners: int
     lateral: tuple                # footprint shares of the mounting side the reserved box covers (longer, shorter side)
     depth: float                  # mm the reserved box reaches into the part's bounding box
+    fallback: bool = False        # tried right after the option before it (same kind) when that one is blocked
 
 
 def bracket_options(profile: dict, gap: float, am_allowed: bool) -> list[BracketOption]:
@@ -149,8 +156,24 @@ def bracket_options(profile: dict, gap: float, am_allowed: bool) -> list[Bracket
                                  min(CRADLE_DEPTH_MAX, CRADLE_DEPTH_FRAC * ext)))
     if am_allowed:
         out.append(BracketOption("metal_am", "conformal metal-AM bracket", "metal_am", 3, (AM_FOOTPRINT, AM_FOOTPRINT),
-                                 AM_DEPTH))
+                                 max(AM_DEPTH, min(AM_DEPTH_MAX, AM_DEPTH_FRAC * ext))))
+        out.append(BracketOption("metal_am", "metal-AM pad (compact)", "metal_am", 3,
+                                 (AM_COMPACT_FOOTPRINT, AM_COMPACT_FOOTPRINT), AM_DEPTH, fallback=True))
     return out
+
+
+def wrap_depth(profile: dict) -> float:
+    """How far a bracket for this mounting side reaches around the part (mm): 0 for a flat side (direct, block,
+    sheet bracket), the clamp band for a tube, the cradle / wrapping metal-AM envelope otherwise. The bracket-aware
+    placement keeps this region free of other parts, so that the wrapping bracket fits."""
+    w, h = profile["face_mm"]
+    ext = float(profile.get("extent_mm", 30.0))
+    if profile["flat_share"] >= 0.6:
+        return 0.0
+    if profile["symmetric"] and (profile["elongated"] or profile["curved"]) and min(w, h) > 0 \
+            and max(w, h) / min(w, h) > 1.3:
+        return min(CLAMP_DEPTH_MAX, CLAMP_DEPTH_FRAC * ext)
+    return max(AM_DEPTH, min(AM_DEPTH_MAX, AM_DEPTH_FRAC * ext))
 
 
 def estimate_cradle_am(kind: str, reserve: np.ndarray, ax: int, gap_len: float, wrap_len: float, density: float):

@@ -190,8 +190,11 @@ def build_context(records: dict, stage: int, reps: dict | None = None, stage2_mo
 
 
 def write_context(ctx: SearchContext, folder: Path) -> Path:
+    """The pickled context the workers load. Named by the context id AND the spec signature: the id does not cover
+    every validation rule (e.g. the bracket model version), and a cached file under the same id with older rules
+    would make the workers stamp their layouts with the old signature — never current, never shown."""
     folder.mkdir(parents=True, exist_ok=True)
-    path = folder / f"ctx_{ctx.ctx_id}.pkl"
+    path = folder / f"ctx_{ctx.ctx_id}_{str(ctx.spec_sig)[:16]}.pkl"
     if not path.exists():
         tmp = path.with_suffix(".tmp")
         tmp.write_bytes(pickle.dumps(ctx, protocol=pickle.HIGHEST_PROTOCOL))

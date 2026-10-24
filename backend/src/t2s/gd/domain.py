@@ -128,6 +128,22 @@ class GenResult:
     mesh: tuple | None = None        # optional (v, f) world-mm solid instead of a density (reference entrants)
 
 
+def drop_unreachable_contact(dom: DesignDomain) -> int:
+    """Remove contact voxels that no solid can reach: those in a pocket the part's own shape cuts off from the
+    bolted layer within the reserved box (e.g. under a wedge-shaped part on the PC/104 deck). Such voxels can carry
+    no load, and a design must join every contact voxel to the wall (evaluate.solid_from_density), so with them no
+    design — not even the solid block — could pass. 6-connected, as the solid check. Returns how many were dropped."""
+    from scipy import ndimage
+    free = ~dom.void
+    lab, _ = ndimage.label(free)
+    reach = np.unique(lab[dom.fixed & free])
+    reach = reach[reach > 0]
+    keep = dom.contact & np.isin(lab, reach)
+    n = int(dom.contact.sum() - keep.sum())
+    dom.contact = keep
+    return n
+
+
 def domain_from_bracket(b: dict, rec, orient: int, t, h: float = 1.0, part_mass_kg: float | None = None,
                         vol_frac: float = 0.25, name: str | None = None) -> DesignDomain:
     """Design domain of one V2 bracket (`b` from Stage2Model.brackets) holding part `rec` at pose (orient, t)."""
@@ -169,6 +185,7 @@ def domain_from_bracket(b: dict, rec, orient: int, t, h: float = 1.0, part_mass_
     dom.void = void.reshape(shape)
     dom.contact = contact.reshape(shape) & ~fixed
     dom.fixed = fixed
+    drop_unreachable_contact(dom)
     # where the part's inertia acts: its centre of mass, and its inertia about it (uniform density)
     from ..massprops.core import integrate
     up = integrate(np.asarray(vw, float), np.asarray(rec.f, np.int64))
