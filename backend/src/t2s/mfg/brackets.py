@@ -462,6 +462,44 @@ def cert_entry(b: dict, designed_vertices=None) -> dict:
             "target_statics": list(b.get("target_statics", []))}
 
 
+def cert_entry_combined(rec: dict, vertices, faces) -> dict:
+    """Certificate entry of a combined bracket (M4, gd.layouts): one solid in several column boxes on one target plane
+    — its members' reserved boxes and its bridging boxes, each a frame item. The checker proves the solid inside the
+    union of the boxes (every triangle in one box, the surface closed, every box starting on the plane), so Lemma 4's
+    box arithmetic carries over. A member's part is exempt from its own box, a bridge's two end parts from the bridge;
+    exempt_parts = held_parts."""
+    held = list(rec["parts"])
+    boxes = [{"name": b["name"], "role": b["role"], "part": b.get("part"), "ends": list(b.get("ends") or []),
+              "box": [round(float(x), 9) for x in b["box"]]} for b in rec["boxes"]]
+    lo = np.min([b["box"][:3] for b in boxes], axis=0)
+    hi = np.max([b["box"][3:] for b in boxes], axis=0)
+    return {"name": rec["name"], "part": held[0], "kind": "combined", "target": rec.get("target"),
+            "target_kind": rec.get("target_kind"), "axis": int(rec["axis"]), "neg": bool(rec["neg"]),
+            "plane_mm": round(float(rec["plane_mm"]), 9), "reserve": [round(float(x), 9) for x in [*lo, *hi]],
+            "boxes": boxes, "solid_vertices": np.round(np.asarray(vertices, float), 9).tolist(),
+            "solid_faces": np.asarray(faces, np.int64).tolist(), "estimate": False, "held_parts": held,
+            "exempt_parts": list(held), "target_statics": list(rec.get("target_statics") or []), "multi": True}
+
+
+def cert_entry_one_piece(rec: dict, vertices, faces) -> dict:
+    """Certificate entry of the one piece (M4, exploratory): its solid (vertices and faces), the parts it holds and
+    where it is bolted (each held part's target plane, under that part's footprint). The checker proves the solid
+    inside the inner planes, clear of every frame item and every part it does not hold by 1.2 mm (no triangle meets
+    the item's box grown by 1.2 mm; the item is not inside the solid: winding number), and bolted to walls / end
+    plates. The held parts' distances are numeric (FCL), listed, not proven."""
+    held = list(rec["parts"])
+    return {"name": "one_piece", "part": held[0] if held else None, "kind": "one_piece", "one_piece": True,
+            "target": "walls and end plates (each part's own target)", "target_kind": "wall",
+            "bolted": [{"part": b["part"], "axis": int(b["axis"]), "neg": bool(b["neg"]),
+                        "plane_mm": round(float(b["plane_mm"]), 9),
+                        "footprint": [round(float(x), 9) for x in b["footprint"]]} for b in rec.get("bolted") or []],
+            "solid_vertices": np.round(np.asarray(vertices, float), 9).tolist(),
+            "solid_faces": np.asarray(faces, np.int64).tolist(), "estimate": False, "held_parts": held,
+            "exempt_parts": list(held), "target_statics": [], "clearance_mm": 1.2,
+            "numeric": {"held_part_distance_mm": rec.get("held_part_distance_mm") or {},
+                        "method": "FCL minimum distance between the solid and each held part (numeric, not proven)"}}
+
+
 def _fcl_obj(v, f):
     import fcl
     m = fcl.BVHModel()

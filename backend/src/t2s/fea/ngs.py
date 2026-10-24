@@ -201,7 +201,11 @@ class _Clock:
         return "timings: " + ", ".join(f"{k} {v:.2f}s" for k, v in self.parts.items())
 
 
-def _run(problem: FeaProblem, notes: list[str]) -> tuple[list[CaseResult], NgsFields]:
+def _run(problem: FeaProblem, notes: list[str], on_case=None, keep_fields: bool = True
+         ) -> tuple[list[CaseResult], NgsFields]:
+    """on_case(k, displacement (n, 3), nodal stress (n, 3, 3)): called after each load case (M4: brackets holding
+    several parts reduce every trial case to voxel tensors at once); keep_fields=False then drops the case's nodal
+    fields instead of keeping them in NgsFields (memory)."""
     import ngsolve as ngs
 
     clock = _Clock()
@@ -342,9 +346,12 @@ def _run(problem: FeaProblem, notes: list[str]) -> tuple[list[CaseResult], NgsFi
             support_nodes=fixed_nodes.copy() if len(fixed_nodes) else None,
             support_forces_n=support,
         ))
-        fields.displacement.append(disp)
-        fields.stress.append(s_avg)
-        fields.von_mises.append(vm)
+        if on_case is not None:
+            on_case(ci, disp, s_avg)
+        if keep_fields:
+            fields.displacement.append(disp)
+            fields.stress.append(s_avg)
+            fields.von_mises.append(vm)
         notes.append(f"{case.name}: max |K u - f| over free dofs {free_res:.3g} N")
         clock("load cases")
 
@@ -434,8 +441,10 @@ def _modes(problem: FeaProblem, fes, a, inv, free: np.ndarray, stress, regions: 
     return lam
 
 
-def solve_with_fields(problem: FeaProblem, threads: int = 2) -> tuple[FeaResult, NgsFields]:
-    """`solve` plus the nodal displacement / stress fields and the raw eigenvalues."""
+def solve_with_fields(problem: FeaProblem, threads: int = 2, on_case=None,
+                      keep_fields: bool = True) -> tuple[FeaResult, NgsFields]:
+    """`solve` plus the nodal displacement / stress fields and the raw eigenvalues. on_case / keep_fields: see _run
+    (one factorisation for every load case either way)."""
     import ngsolve as ngs
     from threadpoolctl import threadpool_limits
 
@@ -448,7 +457,7 @@ def solve_with_fields(problem: FeaProblem, threads: int = 2) -> tuple[FeaResult,
     notes = [(f"linear netgen tets from the tet10 corners + VectorH1(order=2) (= tet10 space); static solver: "
               f"direct {_DIRECT}; BLAS capped at {threads} threads, NGSolve TaskManager {tm}")]
     with threadpool_limits(limits=threads), (ngs.TaskManager() if use_tm else contextlib.nullcontext()):
-        cases, fields = _run(problem, notes)
+        cases, fields = _run(problem, notes, on_case, keep_fields)
     freqs = [float(np.sqrt(max(lam, 0.0)) / (2.0 * np.pi)) for lam in fields.eigenvalues]
     result = FeaResult(
         solver=f"NGSolve {ngs.__version__}",

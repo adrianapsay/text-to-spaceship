@@ -23,6 +23,18 @@ It does not import or trust any part of the application. It:
      corner rail it overlaps, and its solid touches that plane; brackets touch rails only; every part except the
      boards is held by a bracket, exempt_parts == held_parts; the PC/104 rods end on the true end plane, cover every
      stack board in z and stand inside each board's outline box; edge-on boards' standoffs reach a side wall,
+ 10. M4 brackets that hold several parts:
+     a combined bracket (several column boxes on one target plane: its members' reserved boxes and its bridging
+     boxes, each a frame item) — its solid's surface is closed (every edge in exactly two triangles, once each way),
+     every triangle has its three vertices in one of its boxes, and every box starts on the target plane and extends
+     to the same side; then no point outside the boxes is enclosed by them, so the solid lies in their union and the
+     box arithmetic of 7 holds for it. A member box is exempt for its own part only, a bridge for its two end parts;
+     every box is apart from every other bracket's boxes and the keep-outs;
+     the one piece (exploratory) — its surface is closed, every vertex lies within the inner planes, no triangle
+     meets any frame item or any part it does not hold grown by 1.2 mm (exact triangle–box separation, the part by
+     its bounding box re-derived from its STL file) and none of them lies inside the solid (winding number), it
+     touches every bolted plane it states (walls and end plates only) under that part's footprint. Its distance to
+     the parts it holds is numeric (the app's FCL distance), listed, not re-checked,
 and prints PASS/FAIL per lemma. Exit code 0 only if everything passes. Certificates of version 1 (before the frame
 block) and layouts found under the mounting rules before v2.5 skip 8–9 / 9, with a NOTE.
 """
@@ -233,6 +245,149 @@ def same_corners(ca, cb):
     return len(ca) == len(cb) and all(abs(a - b) <= 1e-9 for p, q in zip(ca, cb) for a, b in zip(p, q))
 
 
+def bracket_boxes(b):
+    """The boxes of a bracket entry: [(static name, lo, hi, role, parts it is exempt for)] — one reserved box, or the
+    boxes of a combined bracket (M4); none for the one piece."""
+    if b.get("one_piece"):
+        return []
+    if b.get("multi"):
+        out = []
+        for bx in b.get("boxes", []):
+            ex = [bx.get("part")] if bx.get("role") == "member" else list(bx.get("ends") or [])
+            out.append((bx["name"], bx["box"][:3], bx["box"][3:], bx.get("role"), [p for p in ex if p]))
+        return out
+    return [(b["name"], b["reserve"][:3], b["reserve"][3:], "reserve", list(b.get("exempt_parts", [])))]
+
+
+def closed_surface(faces):
+    """Every undirected edge in exactly two triangles, used once in each direction."""
+    und, dire = {}, set()
+    for f in faces:
+        for a, b in ((f[0], f[1]), (f[1], f[2]), (f[2], f[0])):
+            if (a, b) in dire:
+                return False
+            dire.add((a, b))
+            k = (a, b) if a < b else (b, a)
+            und[k] = und.get(k, 0) + 1
+    return all(c == 2 for c in und.values())
+
+
+def in_box(v, lo, hi, eps=EPS):
+    return all(lo[k] - eps <= v[k] <= hi[k] + eps for k in range(3))
+
+
+def tri_box_separated(tri, lo, hi, eps=EPS):
+    """True when the triangle does not enter the open box (lo, hi) — touching its boundary counts as separated
+    (separating-axis test: the 3 box axes, the triangle normal and the 9 edge × axis directions)."""
+    c = [(lo[k] + hi[k]) / 2 for k in range(3)]
+    e = [(hi[k] - lo[k]) / 2 for k in range(3)]
+    v = [sub(p, c) for p in tri]
+    for k in range(3):
+        if min(p[k] for p in v) >= e[k] - eps or max(p[k] for p in v) <= -e[k] + eps:
+            return True
+    f = [sub(v[1], v[0]), sub(v[2], v[1]), sub(v[0], v[2])]
+    axes = [cross3(f[0], f[1])]
+    for k in range(3):
+        u = [0.0, 0.0, 0.0]
+        u[k] = 1.0
+        axes += [cross3(u, fj) for fj in f]
+    for a in axes:
+        na = math.sqrt(dot(a, a))
+        if na < 1e-15:
+            continue
+        p = [dot(a, x) for x in v]
+        r = e[0] * abs(a[0]) + e[1] * abs(a[1]) + e[2] * abs(a[2])
+        if min(p) >= r - eps * na or max(p) <= -r + eps * na:
+            return True
+    return False
+
+
+def multi_solid_checks(b, results, msgs):
+    """Check 10 for a combined bracket: closed surface, every triangle in one of its boxes, boxes are columns on the
+    target plane (the plane check itself is in Lemma 5)."""
+    verts = [tuple(x) for x in b.get("solid_vertices") or []]
+    faces = [tuple(x) for x in b.get("solid_faces") or []]
+    if not verts or not faces:
+        results["bracket_solids_in_boxes"] = False
+        msgs.append(f"FAIL {b['name']}: a combined bracket without its solid's vertices and faces")
+        return
+    if any(not (0 <= i < len(verts)) for f in faces for i in f):
+        results["bracket_solids_in_boxes"] = False
+        msgs.append(f"FAIL {b['name']}: a face refers to no vertex")
+        return
+    if not closed_surface(faces):
+        results["bracket_solids_in_boxes"] = False
+        msgs.append(f"FAIL {b['name']}: its surface is not closed")
+    boxes = [(lo, hi) for _, lo, hi, _, _ in bracket_boxes(b)]
+    ax, neg, plane = b["axis"], b["neg"], b["plane_mm"]
+    for name, lo, hi, _, _ in bracket_boxes(b):
+        face = lo[ax] if neg else hi[ax]
+        if abs(face - plane) > TOL or ((hi[ax] <= plane + TOL) if neg else (lo[ax] >= plane - TOL)):
+            results["bracket_solids_in_boxes"] = False
+            msgs.append(f"FAIL {b['name']}: box {name} is not a column on the target plane")
+    inside = [[in_box(v, lo, hi) for lo, hi in boxes] for v in verts]
+    for f in faces:
+        if not any(inside[f[0]][k] and inside[f[1]][k] and inside[f[2]][k] for k in range(len(boxes))):
+            results["bracket_solids_in_boxes"] = False
+            msgs.append(f"FAIL {b['name']}: triangle {list(f)} lies in none of its boxes")
+            break
+
+
+def one_piece_checks(b, cert, frame, parts, results, msgs):
+    """Check 10 for the one piece."""
+    results["one_piece_clear"] = True
+
+    def fail(text):
+        results["one_piece_clear"] = False
+        msgs.append("FAIL " + text)
+    verts = [tuple(x) for x in b.get("solid_vertices") or []]
+    faces = [tuple(x) for x in b.get("solid_faces") or []]
+    if not verts or not faces or not frame:
+        fail("the one piece without its solid or without the frame block")
+        return
+    if any(not (0 <= i < len(verts)) for f in faces for i in f) or not closed_surface(faces):
+        fail("the one piece's surface is not closed")
+        return
+    planes = frame["planes_mm"]
+    lo, hi = [planes[a][0] for a in "xyz"], [planes[a][1] for a in "xyz"]
+    if any(not in_box(v, lo, hi) for v in verts):
+        fail("a vertex of the one piece lies outside the inner planes")
+    tris = [(verts[f[0]], verts[f[1]], verts[f[2]]) for f in faces]
+    tlo = [[min(t[0][k], t[1][k], t[2][k]) for k in range(3)] for t in tris]
+    thi = [[max(t[0][k], t[1][k], t[2][k]) for k in range(3)] for t in tris]
+    slo, shi = bounds(verts)
+    c = float(b.get("clearance_mm", 1.2))
+    held = set(b.get("held_parts", []))
+    obstacles = [(f"frame item {it['name']}", *bounds(it["corners"])) for it in frame.get("items", [])]
+    obstacles += [(f"part {pid}", *bounds(p["verts"])) for pid, p in parts.items() if pid not in held]
+    for name, olo, ohi in obstacles:
+        glo, ghi = [olo[k] - c for k in range(3)], [ohi[k] + c for k in range(3)]
+        if any(ghi[k] <= slo[k] or glo[k] >= shi[k] for k in range(3)):
+            continue                                       # the grown box misses the solid's bounding box
+        for t, a, z in zip(tris, tlo, thi):
+            if any(z[k] <= glo[k] + EPS or a[k] >= ghi[k] - EPS for k in range(3)):
+                continue
+            if not tri_box_separated(t, glo, ghi):
+                fail(f"the one piece comes within {c} mm of {name}")
+                break
+        else:
+            centre = tuple((glo[k] + ghi[k]) / 2 for k in range(3))
+            if winding(centre, tris) > 0.5:
+                fail(f"{name} lies inside the one piece")
+    for bp in b.get("bolted", []):
+        ax, plane, fp = bp["axis"], bp["plane_mm"], bp["footprint"]
+        want = lo[ax] if bp["neg"] else hi[ax]
+        if abs(plane - want) > TOL:
+            fail(f"the one piece is bolted to {'xyz'[ax]} = {plane:.6f} for {bp['part']}, not a wall or end plate")
+        lat = [k for k in range(3) if k != ax]
+        if not any(abs(v[ax] - plane) <= TOL_SOLID and all(fp[k] - TOL <= v[k] <= fp[3 + k] + TOL for k in lat)
+                   for v in verts):
+            fail(f"the one piece does not touch its bolted plane under {bp['part']}")
+    if results["one_piece_clear"]:
+        msgs.append(f"NOTE one piece: its distance to the {len(held)} parts it holds is numeric "
+                    f"({b.get('numeric', {}).get('method', 'app')}), not re-checked")
+
+
 def frame_checks(cert, frame, parts, results, msgs):
     """Checks 8 and 9 of the module docstring. parts: id -> {"verts": world vertices re-derived from the STL}."""
     planes = frame["planes_mm"]
@@ -263,7 +418,10 @@ def frame_checks(cert, frame, parts, results, msgs):
     # every part against every item: a check, or an exemption that follows from a rule
     checked = {(s["part"], s["static"]) for s in cert["statics"]}
     exempt = {(a, b) for a, b in cert.get("exempt", [])}
-    brackets = {b["name"]: b for b in cert.get("brackets", [])}
+    owner = {}                                 # box name -> (bracket entry, the parts that box may be exempt for)
+    for b in cert.get("brackets", []):
+        for name, _, _, role, ex in bracket_boxes(b):
+            owner[name] = (b, ex if role != "reserve" else None)
     stack_ids = list(frame.get("stack_ids") or [])
     part_ids = [p["id"] for p in cert["parts"]]
     for pid in part_ids:
@@ -274,8 +432,11 @@ def frame_checks(cert, frame, parts, results, msgs):
         it = items.get(name)
         kind = it["kind"] if it else None
         if kind == "bracket":
-            b = brackets.get(name)
-            ok = b is not None and pid in (b.get("held_parts", []) if v25 else b.get("exempt_parts", []))
+            b, ex = owner.get(name, (None, None))
+            if b is not None and ex is not None:        # a box of a combined bracket: its own part / its two ends
+                ok = pid in ex
+            else:
+                ok = b is not None and pid in (b.get("held_parts", []) if v25 else b.get("exempt_parts", []))
         elif kind in ("rod", "stack"):
             ok = pid in stack_ids
         elif kind == "standoff":
@@ -353,14 +514,23 @@ def frame_checks(cert, frame, parts, results, msgs):
     results["stack_rods_to_end_plate"] = True
     held = {}
     for b in cert.get("brackets", []):
+        if b.get("one_piece"):                         # bolted to walls / end plates: checked in one_piece_checks
+            hp = list(b.get("held_parts", []))
+            if not hp or sorted(set(b.get("exempt_parts", []))) != sorted(set(hp)):
+                fail("every_part_held", f"{b['name']}: exempt parts are not its held parts")
+            for p in hp:
+                held.setdefault(p, []).append(b["name"])
+            continue
         name, kind, ax, neg, plane = b["name"], b.get("target_kind"), b.get("axis"), b.get("neg"), b.get("plane_mm")
         if kind not in ("wall", "end_plate", "rail") or ax not in (0, 1, 2) or plane is None or neg is None:
             fail("brackets_fixed_to_chassis", f"{name} is fixed to {kind or 'nothing stated'}, not to the chassis")
             continue
+        for bname, blo, bhi, _, _ in bracket_boxes(b):
+            r = [*blo, *bhi]
+            face = r[ax] if neg else r[3 + ax]
+            if abs(face - plane) > TOL or ((r[3 + ax] <= plane + TOL) if neg else (r[ax] >= plane - TOL)):
+                fail("brackets_fixed_to_chassis", f"{name}: its box {bname} does not start on its target plane")
         r = b["reserve"]
-        face = r[ax] if neg else r[3 + ax]
-        if abs(face - plane) > TOL or ((r[3 + ax] <= plane + TOL) if neg else (r[ax] >= plane - TOL)):
-            fail("brackets_fixed_to_chassis", f"{name}: its reserved box does not start on its target plane")
         ts = list(b.get("target_statics", []))
         if kind in ("wall", "end_plate"):
             want = (lo[ax] if neg else hi[ax])
@@ -373,9 +543,11 @@ def frame_checks(cert, frame, parts, results, msgs):
                 fail("brackets_fixed_to_chassis", f"{name}: fixed to a rail that is not one corner rail ({ts})")
             else:
                 rlo, rhi = bounds(rail["corners"])
-                lap = all(min(r[3 + k], rhi[k]) - max(r[k], rlo[k]) > TOL for k in range(3) if k != ax)
-                if abs((rhi[ax] if neg else rlo[ax]) - plane) > TOL or not lap:
-                    fail("brackets_fixed_to_chassis", f"{name}: not on the face of {ts[0]} it overlaps")
+                for bname, blo, bhi, _, _ in bracket_boxes(b):          # every box of it on the rail's face
+                    rb = [*blo, *bhi]
+                    lap = all(min(rb[3 + k], rhi[k]) - max(rb[k], rlo[k]) > TOL for k in range(3) if k != ax)
+                    if abs((rhi[ax] if neg else rlo[ax]) - plane) > TOL or not lap:
+                        fail("brackets_fixed_to_chassis", f"{name}: {bname} is not on the face of {ts[0]} it overlaps")
         if any(items.get(t, {}).get("kind") != "rail" for t in ts):
             fail("brackets_fixed_to_chassis", f"{name} may touch {ts}: only a corner rail may be touched")
         sv = b.get("solid_vertices") or []
@@ -517,34 +689,42 @@ def main(cert_path, stl_dir):
     exempt = {(a, b) for a, b in cert.get("exempt", [])}
     checked = {(s["part"], s["static"]) for s in cert["statics"]}
     pair_set = {frozenset((sp["a"], sp["b"])) for sp in cert.get("static_pairs", [])}
-    names = [b["name"] for b in cert.get("brackets", [])]
+    names = [x[0] for b in cert.get("brackets", []) for x in bracket_boxes(b)]     # every bracket box
     for b in cert.get("brackets", []):
-        lo, hi = b["reserve"][:3], b["reserve"][3:]
-        c = static_corners.get(b["name"])
-        if c is None or any(abs(min(p[k] for p in c) - lo[k]) > 1e-6 or abs(max(p[k] for p in c) - hi[k]) > 1e-6
-                            for k in range(3)):
-            results["bracket_checks_complete"] = False
-            msgs.append(f"FAIL {b['name']}: its reserved box differs from the box used in the clearance checks")
-        for v in b["solid_vertices"]:
-            if any(v[k] < lo[k] - EPS or v[k] > hi[k] + EPS for k in range(3)):
-                results["bracket_solids_in_boxes"] = False
-                msgs.append(f"FAIL {b['name']}: solid vertex {v} outside its reserved box")
-                break
+        if b.get("one_piece"):
+            continue                                   # check 10, after the frame checks
+        own = bracket_boxes(b)
+        own_names = {x[0] for x in own}
+        for name, lo, hi, role, ex in own:
+            c = static_corners.get(name)
+            if c is None or any(abs(min(p[k] for p in c) - lo[k]) > 1e-6 or abs(max(p[k] for p in c) - hi[k]) > 1e-6
+                                for k in range(3)):
+                results["bracket_checks_complete"] = False
+                msgs.append(f"FAIL {b['name']}: its box {name} differs from the box used in the clearance checks")
+            for p in cert["parts"]:      # every part except those the box may touch is checked against it
+                if p["id"] in ex:
+                    if (p["id"], name) not in exempt:
+                        results["bracket_checks_complete"] = False
+                        msgs.append(f"FAIL {name}: exemption of {p['id']} not declared")
+                elif (p["id"], name) not in checked:
+                    results["bracket_checks_complete"] = False
+                    msgs.append(f"FAIL {p['id']} vs {name}: no clearance check")
+            keepouts = [n for n in static_corners if n not in names and n not in b.get("target_statics", [])]
+            for o in [n for n in names if n not in own_names] + keepouts:
+                if frozenset((o, name)) not in pair_set:
+                    results["bracket_checks_complete"] = False
+                    msgs.append(f"FAIL {name} vs {o}: no box-gap check")
+        if b.get("multi"):
+            multi_solid_checks(b, results, msgs)
+        else:
+            lo, hi = b["reserve"][:3], b["reserve"][3:]
+            for v in b["solid_vertices"]:
+                if any(v[k] < lo[k] - EPS or v[k] > hi[k] + EPS for k in range(3)):
+                    results["bracket_solids_in_boxes"] = False
+                    msgs.append(f"FAIL {b['name']}: solid vertex {v} outside its reserved box")
+                    break
         if b.get("estimate"):
             msgs.append(f"NOTE {b['name']}: {b['kind']} not designed yet — its reserved box is certified, no solid")
-        for p in cert["parts"]:          # every part except those it holds (exempt_parts) is checked against it
-            if p["id"] in b["exempt_parts"]:
-                if (p["id"], b["name"]) not in exempt:
-                    results["bracket_checks_complete"] = False
-                    msgs.append(f"FAIL {b['name']}: exemption of {p['id']} not declared")
-            elif (p["id"], b["name"]) not in checked:
-                results["bracket_checks_complete"] = False
-                msgs.append(f"FAIL {p['id']} vs {b['name']}: no clearance check")
-        keepouts = [n for n in static_corners if n not in names and n not in b.get("target_statics", [])]
-        for o in names + keepouts:
-            if o != b["name"] and frozenset((o, b["name"])) not in pair_set:
-                results["bracket_checks_complete"] = False
-                msgs.append(f"FAIL {b['name']} vs {o}: no box-gap check")
     # Stage 2 frame and Lemma 5 (certificate version 2)
     frame = cert.get("frame")
     if cert.get("stage") == 2 and int(cert.get("certificate_version", 1)) >= 2 and not frame:
@@ -554,6 +734,9 @@ def main(cert_path, stl_dir):
         frame_checks(cert, frame, parts, results, msgs)
     elif cert.get("stage") == 2:
         msgs.append("NOTE  certificate version 1 (no frame block): frame items and bracket attachment not checked")
+    for b in cert.get("brackets", []):                 # check 10: the one piece (M4)
+        if b.get("one_piece"):
+            one_piece_checks(b, cert, frame, parts, results, msgs)
     for k, ok in results.items():
         print(f"{'PASS' if ok else 'FAIL'}  {k}")
     if numeric:
