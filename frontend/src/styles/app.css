@@ -666,6 +666,127 @@ tr.bracket-open > td {
   background: var(--bg-sunken);
 }
 
+/* charts (dataviz skill palette: series-1 blue, recessive grid and ink; dark steps under the app's dark theme) */
+.viz-root {
+  --viz-series-1: #2a78d6;
+  --viz-grid: #e1e0d9;
+  --viz-axis: #c3c2b7;
+  --viz-ink-2: #52514e;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .viz-root {
+    --viz-series-1: #3987e5;
+    --viz-grid: #2c2c2a;
+    --viz-axis: #383835;
+    --viz-ink-2: #c3c2b7;
+  }
+}
+:root[data-theme='dark'] .viz-root {
+  --viz-series-1: #3987e5;
+  --viz-grid: #2c2c2a;
+  --viz-axis: #383835;
+  --viz-ink-2: #c3c2b7;
+}
+
+/* FEA colour maps (Components tab) */
+.fea-legend {
+  margin-top: 6px;
+  max-width: 420px;
+}
+.fea-ramp {
+  height: 10px;
+  border-radius: 2px;
+}
+.fea-ticks {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+.fea-hover {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* utilisation per check: thin bars from one baseline, 4px rounded data-end, the allowable as a line */
+.ubars {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.ubar-row {
+  display: grid;
+  grid-template-columns: minmax(130px, 34%) 1fr 92px;
+  align-items: center;
+  gap: 8px;
+  min-height: 20px;
+  outline-offset: 1px;
+}
+.ubar-row:focus-visible {
+  outline: 2px solid var(--focus);
+}
+.ubar-label {
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ubar-track {
+  position: relative;
+  height: 20px;
+  border-left: 1px solid var(--viz-axis);
+}
+.ubar {
+  position: absolute;
+  left: 0;
+  top: 5px;
+  height: 10px;
+  background: var(--viz-series-1);
+  border-radius: 0 4px 4px 0;
+}
+.ubar-row.estimate .ubar {
+  opacity: 0.45;
+}
+.ubar-allow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  border-left: 1px solid var(--viz-ink-2);
+}
+.ubar-value {
+  color: var(--text);
+  white-space: nowrap;
+}
+.ubar-row.axis .ubar-track {
+  border-left-color: transparent;
+}
+.ubar-tick {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  font-size: var(--fs-11);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.ubar-tick:first-child {
+  transform: none;
+}
+.ubar-tip {
+  position: absolute;
+  left: 0;
+  top: 22px;
+  z-index: 3;
+  padding: 4px 6px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-subtle);
+  color: var(--text);
+  white-space: normal;
+  min-width: 220px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+}
+
 /* metric strip */
 .metric-strip {
   display: grid;

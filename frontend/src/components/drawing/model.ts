@@ -93,8 +93,11 @@ export function buildDrawingModel(layout: Layout, bom: Bom | null, parts: Record
     if (!it.mesh_url) continue;
     items.push({ id: it.id, itemNo: nums.get(it.id) ?? null, name: it.label ?? it.kind, partId: it.for_part ?? null, source: { kind: 'mesh', url: it.mesh_url }, transform: { R: IDENTITY, s: 1, t: [0, 0, 0] } });
   }
+  // older layouts list the PC/104 rods only as frame keep-outs: draw those as boxes; v2.5 layouts have them as items
+  // (the rod through the boards' mounting holes and the spacer tubes between them), drawn above
+  const rodItems = (layout.extra_items ?? []).some((it) => it.kind === 'rod');
   for (const f of layout.stage2?.frame ?? []) {
-    if (f.kind !== 'rod' || !f.id) continue;
+    if (f.kind !== 'rod' || !f.id || rodItems) continue;
     items.push({ id: f.id, itemNo: nums.get(f.id) ?? null, name: 'PC/104 stack rod', partId: null, source: { kind: 'box', min: f.min, max: f.max }, transform: { R: IDENTITY, s: 1, t: [0, 0, 0] } });
   }
   const sheets: SheetSpec[] = [{ key: 'assembly', kind: 'assembly', items }];

@@ -84,10 +84,11 @@ MEMBER_KWARG = {"pytopo3d": "rmin_mm", "beso": "r_mm"}
 def design_bracket(b: dict, rec, orient: int, t, part_mass_kg: float, key: str, h: float | None = None,
                    budget_s: float = 300.0, threads: int = 2, log=print, material: str | None = None,
                    environment: str | None = None, vol_frac: float | None = None,
-                   min_member_mm: float | None = None) -> tuple[dict, tuple | None]:
+                   min_member_mm: float | None = None, fields_out: dict | None = None) -> tuple[dict, tuple | None]:
     """Design one bracket. `material`: the AM material id for a metal-AM bracket (gd.materials; default AlSi10Mg);
     cradles and clamp bands are machined 6061-T6 whatever it says. `environment`: the launch preset
-    (gd.environment; default GEVS).
+    (gd.environment; default GEVS). `fields_out`: filled with the chosen design's result fields per surface vertex
+    of the returned mesh (evaluate.display_fields), for the app's colour maps; the record's `fea_view` describes them.
 
     The user's settings (WS4): `vol_frac` None runs the ladder lightest first and records every rung — its first
     passing rung is the FEA minimum (`min_vol_frac`); a value designs once at that material use. `min_member_mm`
@@ -112,7 +113,7 @@ def design_bracket(b: dict, rec, orient: int, t, part_mass_kg: float, key: str, 
         gen_kw[MEMBER_KWARG[gkey]] = 0.5 * float(min_member_mm)
     topo = am and gkey != "baseline"
     ladder = ((float(vol_frac),) if vol_frac is not None else VOL_LADDER) if topo else (None,)
-    best, best_mesh, best_g, rungs = None, None, None, []
+    best, best_mesh, best_g, best_ev, rungs = None, None, None, None, []
     for vf in ladder:
         if vf is not None:
             dom.vol_frac = vf
@@ -131,7 +132,7 @@ def design_bracket(b: dict, rec, orient: int, t, part_mass_kg: float, key: str, 
         log(f"[design] {b['name']} {name} vf={vf}: mass {row['mass_g']} g, MS {row['ms_yield']}, f1 {row['f1_hz']}")
         if ev.mesh is not None and (best is None or (row["passed"] and not best["passed"]) or
                                     (not best["passed"] and (row["ms_yield"] or -9) > (best["ms_yield"] or -9))):
-            best, best_mesh, best_g = row, ev.mesh, g
+            best, best_mesh, best_g, best_ev = row, ev.mesh, g, ev
         if row["passed"]:
             break
     settings = {"material": mat_id, "vol_frac": "auto" if vol_frac is None else float(vol_frac),
@@ -150,7 +151,7 @@ def design_bracket(b: dict, rec, orient: int, t, part_mass_kg: float, key: str, 
     if best_mesh is None:                                   # no solid at all: the machined block (labelled)
         fn, _ = _gen("block")
         ev = evaluate(dom, fn(dom), threads=threads, env=env.id)
-        best, best_mesh = ev.summary(), ev.mesh
+        best, best_mesh, best_ev = ev.summary(), ev.mesh, ev
         fallback = "no generated solid joined wall and part: machined block used"
         if best_mesh is None:
             return {"pid": b["pid"], "generator": name, "passed": False, "reason": ev.reason, "fallback": fallback,
@@ -188,7 +189,10 @@ def design_bracket(b: dict, rec, orient: int, t, part_mass_kg: float, key: str, 
          "margins": best.get("margins"), "factor_sources": best.get("factor_sources"),
          "checks": best.get("checks"), "bolt_checks": best.get("bolt_checks"),
          "governing": best.get("governing"), "ms_bolt": best.get("ms_bolt"), "flags": best.get("flags"),
-         "bolts": [np.asarray(p, float).tolist() for p in fpts], "vol_frac": best.get("vol_frac"), **user}
+         "bolts": [np.asarray(p, float).tolist() for p in fpts], "vol_frac": best.get("vol_frac"), **user,
+         "fea_view": best_ev.field_info if best_ev is not None else None}
+    if fields_out is not None and best_ev is not None and best_ev.fields:
+        fields_out.update(best_ev.fields)
     if member is not None and member < AM_MIN_WALL_MM:          # printable? flagged, not a pass criterion
         d["flags"] = [*(d.get("flags") or []), {
             "code": "thin_members", "text": f"thinnest member {member:.1f} mm < {AM_MIN_WALL_MM:g} mm, the AM minimum "
@@ -200,16 +204,23 @@ def design_bracket(b: dict, rec, orient: int, t, part_mass_kg: float, key: str, 
 def _design_one(k: int, b: dict, rec, pose, mass: float, key: str, out_dir: str, lid: str, threads: int,
                 material: str | None = None, environment: str | None = None, vol_frac: float | None = None,
                 min_member_mm: float | None = None) -> dict:
-    """One bracket (its own process when the job runs brackets in parallel): design it and write its mesh files."""
+    """One bracket (its own process when the job runs brackets in parallel): design it and write its mesh files and
+    its colour-map fields (per vertex of that mesh)."""
     o, t = pose
+    fields: dict = {}
     d, mesh = design_bracket(b, rec, o, t, mass, key, threads=threads, log=lambda m: None, material=material,
-                             environment=environment, vol_frac=vol_frac, min_member_mm=min_member_mm)
+                             environment=environment, vol_frac=vol_frac, min_member_mm=min_member_mm,
+                             fields_out=fields)
     if mesh is not None:
         out = Path(out_dir)
         (out / f"{lid}-br{k}.bin").write_bytes(_mesh_bin(*mesh))
         np.save(out / f"{lid}-br{k}.npy", np.asarray(mesh[0], float))
         d["vertices_file"] = f"{lid}-br{k}.npy"
         d["mesh_file"] = f"{lid}-br{k}.bin"
+        (out / f"{lid}-br{k}.fea.npz").unlink(missing_ok=True)       # never an older design's fields
+        if fields and all(len(a) == len(mesh[0]) for a in fields.values()):
+            np.savez_compressed(out / f"{lid}-br{k}.fea.npz", **fields)
+            d["fea_file"] = f"{lid}-br{k}.fea.npz"
     return d
 
 

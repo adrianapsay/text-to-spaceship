@@ -458,6 +458,22 @@ def create_app(coord: Coordinator | None = None, project: str = "default", **coo
         except KeyError as exc:
             raise HTTPException(404, f"no item {iid}") from exc
 
+    @app.get("/api/items/{iid}/fea")
+    async def item_fea(request: Request, iid: str):
+        """V2: a designed bracket's FEA colour maps — the fields, their units and maxima (404: not a designed bracket)."""
+        try:
+            return C(request).item_fea(iid)
+        except KeyError as exc:
+            raise HTTPException(404, f"no designed bracket {iid}") from exc
+
+    @app.get("/api/items/{iid}/fea/{field_id}")
+    async def item_fea_field(request: Request, iid: str, field_id: str):
+        """V2: one colour-map field, float32 per vertex of the bracket's mesh."""
+        try:
+            return Response(C(request).item_fea_field(iid, field_id), media_type="application/octet-stream")
+        except KeyError as exc:
+            raise HTTPException(404, f"no field {field_id} for {iid}") from exc
+
     # ------------------------------------------------------------------------------------------- CAD / export
     @app.get("/api/cad/status")
     async def cad_status():

@@ -81,9 +81,11 @@ class Evaluation:
     n_nodes: int | None = None
     overhang_fraction: float | None = None
     mesh: tuple | None = field(default=None, repr=False)
+    fields: dict | None = field(default=None, repr=False)   # display_fields: per surface vertex, for the colour maps
+    field_info: dict | None = field(default=None, repr=False)
 
     def summary(self) -> dict:
-        d = {k: v for k, v in self.__dict__.items() if k != "mesh"}
+        d = {k: v for k, v in self.__dict__.items() if k not in ("mesh", "fields", "field_info")}
         return d
 
 
@@ -623,7 +625,7 @@ def evaluate(dom: DesignDomain, gen: GenResult, solvers=("ccx", "ngs"), threads:
     ev.n_nodes = len(prob.nodes)
     ev.volume_cm3 = prob.volume_mm3() / 1e3
     ev.mass_g = prob.mass_t() * 1e6
-    res, vox, freq, modes, dyn = {}, {}, {}, {}, {}
+    res, vox, freq, modes, dyn, src = {}, {}, {}, {}, {}, {}
     n_ax = len(dom.load_cases())                     # the 68 g cases; the torque cases after them are trial shapes
     rho = float(dom.material["rho_t_mm3"])
     w_body = _body_weights(prob)
@@ -648,6 +650,7 @@ def evaluate(dom: DesignDomain, gen: GenResult, solvers=("ccx", "ngs"), threads:
         rz = ritz(dom, prob, fields.displacement)
         modes[s] = rz.modes
         dyn[s] = dynamics(dom, prob, rz, vc, vt, support_reactions(prob, res[s], F), solid=(v, f))
+        src[s] = (vc, vt, rz, [np.asarray(u, float) for u in fields.displacement[:n_ax]])
     ev.fea_seconds = time.perf_counter() - t0
     if not res:
         ev.reason = "no solver available"
@@ -665,6 +668,10 @@ def evaluate(dom: DesignDomain, gen: GenResult, solvers=("ccx", "ngs"), threads:
                          "dynamics": dyn[s], "notes": list(r.notes)}
     for k, val in score(ev.solvers, dom.material, env).items():
         setattr(ev, k, val)
+    try:
+        ev.fields, ev.field_info = display_fields(dom, prob, v, src, env)
+    except Exception as exc:  # noqa: BLE001 - the colour maps are a view of the check; the check stands without them
+        ev.fields, ev.field_info = None, {"error": f"colour maps not computed: {exc!r}"[:300]}
     ev.sigma_peak_mpa = max(c.max_vm_filtered_mpa for r in res.values() for c in r.cases)
     ev.max_disp_mm = max(c.max_disp_mm for r in res.values() for c in r.cases)
     if len(res) == 2:
@@ -682,6 +689,71 @@ def evaluate(dom: DesignDomain, gen: GenResult, solvers=("ccx", "ngs"), threads:
             "random_rel": abs(q3("ccx") - q3("ngs")) / max(q3("ngs"), 1e-30)}
     ev.ok = True
     return ev
+
+
+def display_fields(dom: DesignDomain, prob, v, src: dict, env=None) -> tuple[dict, dict]:
+    """Result fields on the solid's surface vertices `v` for the app's colour maps, under launch environment `env`,
+    each point the larger of the solvers' values (as the margins take it): von Mises (MPa) at the quasi-static design
+    load and the random limit and qualification 3σ (CQC, Segalman) per axis; the static displacement (mm) per axis;
+    and the utilisation of the bracket body — at each point the largest factor × stress / allowable of those checks,
+    yield and ultimate (1 = zero margin; sine, shock and the bolts are not in it). Stresses are the voxel averages
+    the margins use (a surface vertex takes its nearest voxel's), displacements the nearest FE node's.
+    src: {solver: (voxel centres, voxel tensors of the trial cases, Ritz, displacements of the 68 g cases)}.
+    Returns ({field id: float32 (n_vertices,)}, {fields: [{id, label, unit, kind, case, axis, max, max_all}], …});
+    max_all is the field's maximum over every voxel (or FE node), the value the margins use."""
+    from scipy.spatial import cKDTree
+    E = _env.get(env)
+    mat = dom.material
+    g_s = E.static_g(float(dom.part_mass_kg))
+    vox, disp = {}, {}
+
+    def keep(store, key, val):
+        store[key] = val if key not in store else np.maximum(store[key], val)
+    for vc, vt, rz, U in src.values():
+        S_modal = np.einsum("vic,ik->vck", vt, rz.C)
+        for k, a in enumerate("xyz"):
+            keep(vox, f"vm_static_{a}", von_mises_voigt(vt[:, k]) * g_s / LIMIT_G)
+            for lvl, spec in (("limit", E.random_limit), ("qual", E.random_qual)):
+                cov = modal_covariance(rz.f_hz, rz.gamma[:, k], spec, E.zeta)
+                keep(vox, f"vm_random_{lvl}_{a}", 3.0 * vm_rms(S_modal, cov))
+            keep(disp, f"disp_static_{a}", np.linalg.norm(U[k], axis=1) * g_s / LIMIT_G)
+
+    def util(sig, fac):
+        return np.maximum(fac.yield_ * sig / mat["yield_mpa"], fac.ult * sig / mat["ultimate_mpa"])
+    worst = np.zeros(len(next(iter(vox.values()))))
+    for a in "xyz":
+        worst = np.maximum.reduce([worst, util(vox[f"vm_static_{a}"], E.factors["static"]),
+                                   util(vox[f"vm_random_limit_{a}"], E.factors["random"]),
+                                   util(vox[f"vm_random_qual_{a}"], E.qual_factors)])
+    vox = {"util_body": worst, **vox}
+    vc = next(iter(src.values()))[0]
+    pts = np.asarray(v, float)
+    near_v = cKDTree(vc).query(pts)[1]
+    near_n = cKDTree(prob.nodes).query(pts)[1]
+    out = {k: val[near_v].astype(np.float32) for k, val in vox.items()}
+    out.update({k: val[near_n].astype(np.float32) for k, val in disp.items()})
+    lim, qual = E.random_limit.grms(), E.random_qual.grms()
+    labels = {"util_body": ("Utilisation of the bracket body (worst check)", "", "utilisation", None, None)}
+    for a in "xyz":
+        labels[f"vm_static_{a}"] = (f"von Mises, quasi-static {g_s:.1f} g along {a}", "MPa", "stress", "static", a)
+        labels[f"vm_random_limit_{a}"] = (f"von Mises 3σ, random limit {lim:.1f} Grms along {a}", "MPa", "stress",
+                                          "random limit", a)
+        labels[f"vm_random_qual_{a}"] = (f"von Mises 3σ, random qualification {qual:.1f} Grms along {a}", "MPa",
+                                         "stress", "random qualification", a)
+        labels[f"disp_static_{a}"] = (f"Displacement, quasi-static {g_s:.1f} g along {a}", "mm", "displacement",
+                                      "static", a)
+    full = {**vox, **disp}
+    info = {"fields": [{"id": k, "label": labels[k][0], "unit": labels[k][1], "kind": labels[k][2],
+                        "case": labels[k][3], "axis": labels[k][4], "max": float(out[k].max()),
+                        "max_all": float(full[k].max())} for k in out],
+            "environment": E.id, "environment_name": E.name, "material": mat.get("id"),
+            "yield_mpa": float(mat["yield_mpa"]), "ultimate_mpa": float(mat["ultimate_mpa"]),
+            "solvers": list(src), "n_vertices": len(pts), "voxel_mm": float(dom.h),
+            "note": (f"Stresses are averaged over each {dom.h:g} mm design voxel (what the margins use), the larger of "
+                     "the solvers at each point; each surface point shows its nearest voxel. Utilisation = factor × "
+                     "stress / allowable, the worst of the static and random (limit and qualification) checks, yield "
+                     "and ultimate: 1.00 is zero margin. Sine, shock and the bolts are checked separately.")}
+    return out, info
 
 
 # =================================================================================================== scoring

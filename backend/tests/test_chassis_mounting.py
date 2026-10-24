@@ -282,10 +282,11 @@ def test_rods_are_layout_items_with_mass_and_a_mesh(stacked):
 
     from t2s.constraints.stage2_model import stack_rods
     from t2s.service.coordinator import Coordinator
-    _, r, _, _ = stacked
-    e = SimpleNamespace(id="L-ws1", meta=dict(r.meta))
+    m, r, _, _ = stacked
+    e = SimpleNamespace(id="L-ws1", meta=dict(r.meta), poses=r.poses)
     c = Coordinator.__new__(Coordinator)
     c.archive = {"L-ws1": e}
+    c.layout_records = lambda e: m.records
     hw = r.meta["stack_hardware"]
     rods = [it for it in c._extra_items(e) if it["kind"] == "rod"]
     assert len(rods) == len(hw) == 4 and all(it["mass_kg"] > 0 for it in rods)
@@ -295,12 +296,21 @@ def test_rods_are_layout_items_with_mass_and_a_mesh(stacked):
     assert all(re.fullmatch(r"PC/104 rod at [+−]x [+−]y with spacer tube, to the [+−]Z end plate", it["label"])
                for it in rods), [it["label"] for it in rods]
     boxes = dict(stack_rods(r.meta))
+    boards = c._stack_board_z(e)
+    assert len(boards) == len(r.meta["stack_ids"]) and all(hi > lo for lo, hi in boards)
     for k, it in enumerate(rods):
         buf = c.item_mesh(f"L-ws1-rod{k}")
         nv, nf = (int(x) for x in np.frombuffer(buf[:8], "<u4"))
-        v = np.frombuffer(buf[8:8 + 12 * nv], "<f4").reshape(-1, 3)
-        assert (nv, nf) == (8, 12)
-        assert np.allclose(np.concatenate([v.min(0), v.max(0)]), boxes[hw[k]["name"]], atol=1e-3)
-        assert it["box_mm"] == pytest.approx(list(boxes[hw[k]["name"]]))
+        v = np.frombuffer(buf[8:8 + 12 * nv], "<f4").reshape(-1, 3).astype(float)
+        f = np.frombuffer(buf[8 + 12 * nv:8 + 12 * nv + 12 * nf], "<u4").reshape(-1, 3)
+        box = boxes[hw[k]["name"]]
+        assert np.allclose(np.concatenate([v.min(0), v.max(0)]), box, atol=1e-3)   # fills its keep-out column
+        assert it["box_mm"] == pytest.approx(list(box))
+        assert f.max() < nv
+        # the 3 mm rod passes through the boards' mounting holes; the 5 mm spacer tubes stop at the board faces
+        rad = np.hypot(v[:, 0] - 0.5 * (box[0] + box[3]), v[:, 1] - 0.5 * (box[1] + box[4]))
+        tube = v[rad > 1.6, 2]
+        assert len(tube) and not any(np.any((tube > lo + 1e-4) & (tube < hi - 1e-4)) for lo, hi in boards)
+        assert np.all(rad < 2.5 + 1e-4) and rad.max() > 2.4 and np.isclose(rad[rad > 0.1].min(), 1.5, atol=1e-4)
     with pytest.raises(KeyError):
         c.item_mesh("L-ws1-rod9")

@@ -1693,16 +1693,111 @@ class Coordinator:
         lid, _, k = iid.rpartition("-rod")
         e = self.archive.get(lid)
         if e is not None and k.isdigit() and int(k) < len(e.meta.get("stack_hardware") or []):
-            boxes = dict(self._rod_boxes(e))                 # a rod with its spacer tube: its keep-out box
+            boxes = dict(self._rod_boxes(e))                 # the rod's keep-out column (search and proof)
             b = boxes.get(e.meta["stack_hardware"][int(k)]["name"])
             if b is None:
                 raise KeyError(iid)
-            return self._box_mesh(np.asarray(b, float))
+            return self._rod_mesh(np.asarray(b, float), self._stack_board_z(e))
         lid, _, k = iid.rpartition("-so")
         e = self.archive.get(lid)
         if e is None or not k.isdigit() or int(k) >= len(e.meta.get("standoffs") or []):
             raise KeyError(iid)
         return self._box_mesh(np.asarray(e.meta["standoffs"][int(k)][1], float))
+
+    def _designed_item(self, iid: str) -> tuple[LayoutEntry, int, dict, Path | None]:
+        """A designed bracket's layout, index, design record and its colour-map file (None when the design has none:
+        designed before the maps were saved, or no solid). KeyError when the item is not a designed bracket."""
+        lid, _, k = iid.rpartition("-br")
+        e = self.archive.get(lid)
+        if e is None or not k.isdigit() or int(k) >= len((e.meta or {}).get("brackets") or []):
+            raise KeyError(iid)
+        b = e.meta["brackets"][int(k)]
+        d = (e.meta.get("bracket_designs") or {}).get(b["pid"]) or {}
+        if d.get("mass_kg") is None:
+            raise KeyError(iid)
+        p = self.store.cache / "items" / e.id / str(d["fea_file"]) if d.get("fea_file") else None
+        return e, int(k), d, (p if p is not None and p.is_file() else None)
+
+    def item_fea(self, iid: str) -> dict:
+        """What the colour maps of a designed bracket show (gd.evaluate.display_fields): the fields with their units and
+        maxima, the launch environment, the material and its allowables; `available` false when the design has no
+        maps yet (designed before they were saved: redesign it)."""
+        e, _, d, p = self._designed_item(iid)
+        info = dict(d.get("fea_view") or {})
+        info.update(item_id=iid, layout_id=e.id, part_id=d.get("pid"), available=p is not None and bool(info.get("fields")),
+                    passed=d.get("passed"), governing=d.get("governing"), ms_yield=d.get("ms_yield"),
+                    ms_ult=d.get("ms_ult"), ms_bolt=d.get("ms_bolt"), f1_hz=d.get("f1_hz"))
+        if not info["available"]:
+            info["why"] = info.get("error") or ("no colour maps for this design: it was designed before they were saved "
+                                                "— redesign it in the Mounting Hardware tab")
+        return jsonable(info)
+
+    def item_fea_field(self, iid: str, field_id: str) -> bytes:
+        """One colour-map field of a designed bracket: float32 little-endian, one value per vertex of its mesh
+        (GET /api/items/{iid}/mesh)."""
+        _, _, _, p = self._designed_item(iid)
+        if p is None:
+            raise KeyError(iid)
+        with np.load(p) as z:
+            if field_id not in z.files:
+                raise KeyError(field_id)
+            return np.asarray(z[field_id], "<f4").tobytes()
+
+    def _stack_board_z(self, e: LayoutEntry) -> list[tuple[float, float]]:
+        """z extent (mm) of each PC/104 board of the layout, lowest first."""
+        ids = set((e.meta or {}).get("stack_ids") or [])
+        if not ids:
+            return []
+        recs = self.layout_records(e)
+        out = []
+        for pid, o, t in e.poses:
+            if pid in ids and pid in recs:
+                r = recs[pid]
+                z = to_world(r.v[r.hull.vertex_ids], o, np.asarray(t, float))[:, 2]
+                out.append((float(z.min()), float(z.max())))
+        return sorted(out)
+
+    @staticmethod
+    def _cylinder(cx: float, cy: float, z0: float, z1: float, r: float, n: int = 16) -> tuple[np.ndarray, np.ndarray]:
+        """A closed cylinder along z (n sides; side and caps with their own vertices, so the side shades round and the
+        caps flat), outward-facing triangles."""
+        a = np.linspace(0.0, 2.0 * np.pi, n, endpoint=False)
+        ring = np.column_stack([cx + r * np.cos(a), cy + r * np.sin(a)])
+        lo, hi = np.column_stack([ring, np.full(n, z0)]), np.column_stack([ring, np.full(n, z1)])
+        v = np.vstack([lo, hi, lo, hi, [[cx, cy, z0], [cx, cy, z1]]])
+        f = []
+        for i in range(n):
+            j = (i + 1) % n
+            f += [[i, j, n + j], [i, n + j, n + i], [4 * n, 2 * n + j, 2 * n + i], [4 * n + 1, 3 * n + i, 3 * n + j]]
+        return v, np.asarray(f, np.int64)
+
+    @classmethod
+    def _rod_mesh(cls, b: np.ndarray, boards: list[tuple[float, float]]) -> bytes:
+        """A PC/104 rod as the hardware it stands for: the M3 rod over the whole length, through the boards' corner
+        mounting holes, and the 5 mm spacer tubes only where the boards leave it free (from the end plate to the first
+        board, between boards). `b` is the rod's keep-out column, which stays the full 5 mm everywhere in the search and
+        the proof (nothing else may enter it); `boards` their z extents."""
+        from ..constraints.stage2_model import ROD_DIAMETER
+        cx, cy, z0, z1 = 0.5 * (b[0] + b[3]), 0.5 * (b[1] + b[4]), float(b[2]), float(b[5])
+        gaps, cur = [], z0
+        for lo, hi in boards:
+            lo, hi = max(lo, z0), min(hi, z1)
+            if hi <= lo:
+                continue
+            if lo > cur + 1e-9:
+                gaps.append((cur, lo))
+            cur = max(cur, hi)
+        if z1 > cur + 1e-9:
+            gaps.append((cur, z1))
+        pieces = [cls._cylinder(cx, cy, z0, z1, ROD_DIAMETER / 2.0)]
+        pieces += [cls._cylinder(cx, cy, a, c, s2.ROD_KEEP / 2.0) for a, c in gaps]
+        vs, fs, n = [], [], 0
+        for v, f in pieces:
+            vs.append(v)
+            fs.append(f + n)
+            n += len(v)
+        v, f = np.vstack(vs).astype("<f4"), np.vstack(fs).astype("<u4")
+        return np.array([len(v), len(f)], "<u4").tobytes() + v.tobytes() + f.tobytes()
 
     @staticmethod
     def _box_mesh(b: np.ndarray) -> bytes:

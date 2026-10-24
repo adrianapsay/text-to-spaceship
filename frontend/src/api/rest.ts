@@ -7,6 +7,7 @@ import type {
   CadStatus,
   ContestResults,
   DesignOptions,
+  FeaView,
   LargestSize,
   FidelityResult,
   FidelitySummary,
@@ -151,6 +152,15 @@ export class ApiClient {
   async itemMesh(url: string): Promise<MeshData> {
     const r = await this.req(url);
     return decodeMesh(await r.arrayBuffer());
+  }
+  /** V2: what a designed bracket's FEA colour maps show (fields, units, maxima) */
+  itemFea(itemId: string) {
+    return this.json<FeaView>(`/api/items/${encodeURIComponent(itemId)}/fea`);
+  }
+  /** V2: one colour-map field: one value per vertex of the bracket's mesh */
+  async itemFeaField(itemId: string, field: string): Promise<Float32Array> {
+    const r = await this.req(`/api/items/${encodeURIComponent(itemId)}/fea/${encodeURIComponent(field)}`);
+    return new Float32Array(await r.arrayBuffer());
   }
   putSettings(s: Settings) {
     return this.send<Settings>('PUT', '/api/settings', s);

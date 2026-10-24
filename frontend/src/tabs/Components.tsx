@@ -1,13 +1,49 @@
 import { useMemo, useState } from 'react';
-import type { Part } from '../api/types';
+import type { BracketDesign, Layout, Part } from '../api/types';
 import { useApp } from '../store/store';
 import { useParts } from '../hooks';
 import { fmt, fmtColumn, fmtVec } from '../lib/fmt';
-import { SUBSYSTEM_LABELS, subsystemColor } from '../lib/colors';
+import { SUBSYSTEM_LABELS, extraItemStyle, subsystemColor } from '../lib/colors';
 import { massBadge, statusBadge } from '../components/PartsPanel';
 import { FidelityPanel } from '../components/FidelityPanel';
+import { BracketFeaPanel } from '../components/FeaView';
+import { governingText } from '../components/BracketDesign';
+import { useFullLayout } from '../components/LayoutCompare';
 import { PartPreview } from '../components/viewport/PartPreview';
-import { Panel, MockTag, KV } from '../components/ui';
+import { Badge, Button, EmptyState, Panel, MockTag, KV } from '../components/ui';
+import { session } from '../api/session';
+
+const DESIGNED_KINDS = ['metal_am', 'cradle', 'clamp'];
+const BRACKET_KIND: Record<string, string> = { metal_am: 'Metal 3D-printed bracket', cradle: 'Machined cradle', clamp: 'Tube-clamp band' };
+
+interface DesignedRow {
+  itemId: string;
+  pid: string;
+  kind: string;
+  target: string;
+  meshUrl: string | null;
+  design: BracketDesign | null;
+}
+
+/** The brackets of a Stage 2 layout that the design job builds (metal AM, cradles, clamp bands) with their designs. */
+export function designedRows(layout: Layout | null): DesignedRow[] {
+  const brs = layout?.stage2?.brackets ?? [];
+  const designs = layout?.stage2?.bracket_designs ?? {};
+  const urls = new Map((layout?.extra_items ?? []).map((it) => [it.id, it.mesh_url]));
+  const out: DesignedRow[] = [];
+  brs.forEach((b, k) => {
+    if (!DESIGNED_KINDS.includes(b.kind) || !layout) return;
+    const itemId = `${layout.id}-br${k}`;
+    const d = designs[b.pid];
+    out.push({ itemId, pid: b.pid, kind: b.kind, target: b.target, meshUrl: urls.get(itemId) ?? null, design: d && d.mass_kg != null ? d : null });
+  });
+  return out;
+}
+
+function msBadge(v: number | null | undefined) {
+  if (v == null) return <span className="muted">—</span>;
+  return <Badge tone={v >= 0 ? 'ok' : 'err'}>{(v >= 0 ? '+' : '') + v.toFixed(2)}</Badge>;
+}
 
 type SortKey = 'name' | 'status' | 'subsystem' | 'triangles' | 'volume' | 'mass' | 'density' | 'i1';
 
@@ -47,7 +83,32 @@ export function ComponentsTab() {
   const selected = useApp((s) => s.view.selectedPartId);
   const select = useApp((s) => s.select);
   const massEdits = useApp((s) => s.physical.massEdits);
+  const best = useApp((s) => s.solver.best);
+  const infeasible = useApp((s) => s.solver.infeasible);
   const [sort, setSort] = useState<{ k: SortKey; dir: 1 | -1 }>({ k: 'name', dir: 1 });
+  // the layout whose brackets the app designs: the best Stage 2 layout, else the least-violating Stage 2 candidate
+  const s2id = best && best.stage === 2 ? best.id : infeasible && infeasible.stage === 2 ? infeasible.id : null;
+  const s2 = useFullLayout(s2id);
+  const brackets = useMemo(() => designedRows(s2.data), [s2.data]);
+  const [selBracket, setSelBracket] = useState<string | null>(null);
+  const bracket = brackets.find((b) => b.itemId === selBracket) ?? null;
+  // designs made before the colour maps were saved: one click designs them again (their settings are kept)
+  const noMaps = brackets.filter((b) => b.design && !b.design.fea_file).map((b) => b.pid);
+  const study = useApp((s) => s.solver.studies['bracket_design']);
+  const runStatus = (study?.partial as { status?: string } | undefined)?.status;
+  const running = runStatus === 'PENDING' || runStatus === 'RUNNING';
+  const [mapsMsg, setMapsMsg] = useState<string | null>(null);
+  const addMaps = async () => {
+    if (!s2.data) return;
+    setMapsMsg(null);
+    try {
+      await session().api.designBrackets(s2.data.id, { pids: noMaps });
+      setMapsMsg(`Designing ${noMaps.length} bracket(s) again with their settings, to save their colour maps (progress in the Mounting Hardware tab).`);
+    } catch (e) {
+      setMapsMsg(`Could not start: ${(e as Error).message}`);
+    }
+  };
+  const names = useMemo(() => Object.fromEntries(parts.map((p) => [p.id, p.name])), [parts]);
   const rows = useMemo(() => {
     const r = parts.map((p) => ({ p, m: massEdits[p.id]?.mass_kg ?? p.mass_kg }));
     r.sort((a, b) => {
@@ -90,7 +151,15 @@ export function ComponentsTab() {
             </thead>
             <tbody>
               {rows.map(({ p, m }, i) => (
-                <tr key={p.id} aria-selected={p.id === selected} onClick={() => select(p.id)} style={{ cursor: 'pointer' }}>
+                <tr
+                  key={p.id}
+                  aria-selected={p.id === selected && !bracket}
+                  onClick={() => {
+                    select(p.id);
+                    setSelBracket(null);
+                  }}
+                  style={{ cursor: 'pointer' }}
+                >
                   <td>
                     <span className="swatch" style={{ background: subsystemColor(p.subsystem), display: 'inline-block', marginRight: 6 }} />
                     {p.name}
@@ -120,7 +189,84 @@ export function ComponentsTab() {
           </table>
         </div>
       </Panel>
-      {sel ? (
+      <Panel
+        title={`Designed brackets${s2.data ? ` — layout ${s2.data.id}` : ''}`}
+        caption="the 3D-printed (metal AM), machined cradle and clamp brackets the design job builds; select one for its FEA colour maps"
+      >
+        {!s2id ? (
+          <EmptyState title="No Stage 2 layout yet">Brackets exist in Stage 2: switch to it and run the search.</EmptyState>
+        ) : !brackets.length ? (
+          <span className="muted small">{s2.loading ? 'Loading…' : 'This layout has no bracket that the design job builds.'}</span>
+        ) : (
+          <div className="table-wrap" style={{ maxHeight: 320 }}>
+            {noMaps.length ? (
+              <div className="row small" style={{ marginBottom: 6 }}>
+                <span className="muted">
+                  {noMaps.length} design(s) were made before the colour maps were saved.
+                </span>
+                <Button size="small" onClick={addMaps} disabled={running} data-testid="add-maps">
+                  Design again with colour maps ({noMaps.length})
+                </Button>
+                {mapsMsg ? <span>{mapsMsg}</span> : null}
+              </div>
+            ) : null}
+            <table className="data" aria-label="Designed brackets" data-testid="designed-brackets">
+              <thead>
+                <tr>
+                  <th>Part</th>
+                  <th>Bracket</th>
+                  <th>Material</th>
+                  <th className="num">Mass</th>
+                  <th className="num">MS yield</th>
+                  <th className="num">MS ult.</th>
+                  <th className="num">MS bolts</th>
+                  <th className="num">f1</th>
+                  <th>Governing check</th>
+                  <th>FEA maps</th>
+                </tr>
+              </thead>
+              <tbody>
+                {brackets.map((b) => {
+                  const d = b.design;
+                  const st = extraItemStyle(b.kind === 'metal_am' ? 'metal_am' : 'machined');
+                  return (
+                    <tr key={b.itemId} aria-selected={b.itemId === selBracket} onClick={() => setSelBracket(b.itemId)} style={{ cursor: 'pointer' }} data-testid={`designed-${b.pid}`}>
+                      <td>{names[b.pid] ?? b.pid}</td>
+                      <td>
+                        <span className="row" style={{ gap: 6 }}>
+                          <span className={`swatch ${st.hatch ? 'hatch' : ''}`} style={{ background: st.color }} />
+                          {BRACKET_KIND[b.kind] ?? b.kind}
+                        </span>
+                      </td>
+                      <td className="small">{d?.material ?? '—'}</td>
+                      <td className="num">{d ? fmt(d.mass_kg, 'kg') : <span className="muted">not designed</span>}</td>
+                      <td className="num">{msBadge(d?.ms_yield)}</td>
+                      <td className="num">{msBadge(d?.ms_ult)}</td>
+                      <td className="num">{msBadge(d?.ms_bolt)}</td>
+                      <td className="num">{d?.f1_hz != null ? `${Math.round(d.f1_hz)} Hz` : '—'}</td>
+                      <td className="small">{d?.governing ? governingText(d.governing) : '—'}</td>
+                      <td className="small">{d ? (d.fea_file ? <Badge tone="ok">yes</Badge> : <span className="muted">redesign for maps</span>) : '—'}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </Panel>
+      {bracket ? (
+        bracket.design && bracket.meshUrl ? (
+          <BracketFeaPanel
+            itemId={bracket.itemId}
+            meshUrl={bracket.meshUrl}
+            design={bracket.design}
+            title={`${BRACKET_KIND[bracket.kind] ?? bracket.kind} for ${names[bracket.pid] ?? bracket.pid}`}
+            target={bracket.target}
+          />
+        ) : (
+          <EmptyState title="Not designed yet">Pause the search, or press Design in the Mounting Hardware tab: the design job builds this bracket and checks it.</EmptyState>
+        )
+      ) : sel ? (
         <div className="grid-2">
           <Panel title={`Inspector — ${sel.name}`} caption="local (canonical) frame">
             <PartPreview part={sel} />
@@ -139,7 +285,7 @@ export function ComponentsTab() {
           <FidelityPanel partId={sel.id} />
         </div>
       ) : (
-        <div className="muted">Select a part in the table to inspect it and see its detail-level study.</div>
+        <div className="muted">Select a part to inspect it and see its detail-level study, or a designed bracket for its FEA colour maps.</div>
       )}
     </div>
   );

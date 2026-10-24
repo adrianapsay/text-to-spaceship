@@ -37,9 +37,26 @@ def test_metal_am_bracket_is_designed_inside_its_box(dataset_parts):
     assert design_h([0, 0, 0, 30, 30, 30]) == 1.5 and design_h([0, 0, 0, 100, 100, 100]) > 1.5
     assert design_h([0, 0, 0, 7, 48, 32], axis=0) == 1.0            # a 3 mm gap + 4 mm wrap: six layers across
     # at the app's voxel size for this box (design_h: enough layers across a thin 3 mm gap + wrap)
+    fields = {}
     d, mesh = design_bracket(b, recs[b["pid"]], o, t, 0.3, "baseline", h=design_h(b["reserve"], int(b["axis"])),
-                             threads=2, log=lambda *_: None)
+                             threads=2, log=lambda *_: None, fields_out=fields)
     assert mesh is not None and d["mass_kg"] > 0 and d["generator"]
+    # the colour maps (evaluate.display_fields): one value per surface vertex, and the same numbers as the margins
+    ids = {"util_body"} | {f"{p}_{a}" for p in ("vm_static", "vm_random_limit", "vm_random_qual", "disp_static")
+                           for a in "xyz"}
+    assert set(fields) == ids and all(len(x) == len(mesh[0]) and np.all(np.isfinite(x)) for x in fields.values())
+    info = {f["id"]: f for f in d["fea_view"]["fields"]}
+    assert set(info) == ids and d["fea_view"]["environment"] == "gevs" and d["fea_view"]["n_vertices"] == len(mesh[0])
+    assert all(0 <= f["max"] <= f["max_all"] * (1 + 1e-6) for f in info.values())
+    rows = {(r["case"], r["axis"]): r for r in d["checks"]}
+    for a in "xyz":
+        assert info[f"vm_static_{a}"]["max_all"] == pytest.approx(rows[("static", a)]["sigma_mpa"], rel=1e-6)
+        assert info[f"vm_random_limit_{a}"]["max_all"] == pytest.approx(rows[("random limit", a)]["sigma_mpa"], rel=1e-6)
+        assert info[f"vm_random_qual_{a}"]["max_all"] == pytest.approx(rows[("random qualification", a)]["sigma_mpa"],
+                                                                       rel=1e-6)
+    body = [r for r in d["checks"] if r["case"] in ("static", "random limit", "random qualification")]
+    worst = min(min(r["ms_yield"], r["ms_ult"]) for r in body)
+    assert info["util_body"]["max_all"] == pytest.approx(1.0 / (1.0 + worst), rel=1e-6)   # 1 = zero margin
     v, f = mesh
     res = np.asarray(b["reserve"])
     assert np.all(v >= res[:3] - 1e-5) and np.all(v <= res[3:] + 1e-5)          # inside the certified box

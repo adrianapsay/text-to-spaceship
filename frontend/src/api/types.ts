@@ -140,6 +140,14 @@ export interface BracketDesign {
   /** bolted plate and contact skin thickness, mm */
   plate_mm?: number;
   skin_mm?: number;
+  /** the solid alone (mass_kg includes its fasteners) */
+  solid_mass_kg?: number | null;
+  /** every check per load case and axis (gd.evaluate.score) */
+  checks?: BracketCheck[];
+  bolt_checks?: BoltCheck[];
+  /** what its FEA colour maps show (absent: designed before they were saved) */
+  fea_view?: Omit<FeaView, 'item_id' | 'layout_id' | 'part_id' | 'available'> | null;
+  fea_file?: string;
   am_min_wall_mm?: number;
   member_note?: string | null;
 }
@@ -155,6 +163,70 @@ export interface BracketMargin {
   sigma_mpa?: number;
   /** a pass criterion (shock estimates are reported only) */
   gates: boolean;
+}
+
+/** one check of the bracket body: stress of a load case along an axis against the allowables, with its factors */
+export interface BracketCheck {
+  case: string;
+  axis: string;
+  sigma_mpa: number;
+  factor_yield: number;
+  factor_ult: number;
+  ms_yield: number;
+  ms_ult: number;
+  /** counts toward the pass (shock estimates do not) */
+  gates: boolean;
+  note?: string;
+}
+
+/** one bolt / flange check: the worst bolt of a load case along an axis */
+export interface BoltCheck {
+  case: string;
+  axis: string;
+  check: string;
+  ms: number;
+  bolt?: number;
+  gates: boolean;
+}
+
+/** V2: one colour-map field of a designed bracket */
+export interface FeaField {
+  id: string;
+  label: string;
+  /** '' for utilisation (a ratio: 1 = zero margin) */
+  unit: string;
+  kind: 'utilisation' | 'stress' | 'displacement' | string;
+  case: string | null;
+  axis: string | null;
+  /** largest value on the surface (what the map shows) */
+  max: number;
+  /** largest value over every voxel / FE node (what the margins use) */
+  max_all: number;
+}
+
+/** V2: GET /api/items/{id}/fea — what a designed bracket's colour maps show */
+export interface FeaView {
+  item_id: string;
+  layout_id: string;
+  part_id: string;
+  available: boolean;
+  why?: string;
+  fields?: FeaField[];
+  environment?: string;
+  environment_name?: string;
+  material?: string;
+  yield_mpa?: number;
+  ultimate_mpa?: number;
+  solvers?: string[];
+  n_vertices?: number;
+  voxel_mm?: number;
+  note?: string;
+  passed?: boolean;
+  governing?: BracketDesign['governing'];
+  ms_yield?: number | null;
+  ms_ult?: number | null;
+  ms_bolt?: number | null;
+  f1_hz?: number | null;
 }
 
 export interface BracketFlag {
