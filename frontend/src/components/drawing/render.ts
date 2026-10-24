@@ -16,7 +16,23 @@ import type { DrawItem, DrawSource, DrawTransform } from './model';
 import { boxCentre, type PlacedView, type V3, type ViewId } from './projection';
 
 // ------------------------------------------------------------------------------------------------ meshes
+// Item meshes and boxes, by URL / box: every new best layout brings new ones, so only the DRAW_KEEP most recently used
+// of each are kept (a few layouts' worth) and older ones are freed.
+export const DRAW_KEEP = 200;
+
+/** Map `m` keeps `key` as its most recently used entry; the oldest beyond `keep` go to `free`. */
+export function remember<K, V>(m: Map<K, V>, key: K, value: V, keep: number, free: (v: V) => void): void {
+  m.delete(key);
+  m.set(key, value);
+  while (m.size > keep) {
+    const [k, old] = m.entries().next().value as [K, V];
+    m.delete(k);
+    free(old);
+  }
+}
+
 const itemCache = new Map<string, Promise<THREE.BufferGeometry>>();
+const freeItem = (p: Promise<THREE.BufferGeometry>) => p.then((g) => g.dispose(), () => undefined);
 
 /** An extra item's mesh (world coordinates), cached by URL like the 3D view (a designed bracket gets a new URL). */
 export function loadItemGeometry(url: string): Promise<THREE.BufferGeometry> {
@@ -25,9 +41,12 @@ export function loadItemGeometry(url: string): Promise<THREE.BufferGeometry> {
     p = session()
       .api.itemMesh(url)
       .then((m) => buildGeometry(m).geometry);
-    p.catch(() => itemCache.delete(url));
-    itemCache.set(url, p);
+    const mine = p;
+    p.catch(() => {
+      if (itemCache.get(url) === mine) itemCache.delete(url);
+    });
   }
+  remember(itemCache, url, p, DRAW_KEEP, freeItem);
   return p;
 }
 
@@ -42,8 +61,8 @@ export async function loadSource(src: DrawSource): Promise<THREE.BufferGeometry 
     if (!g) {
       const d = [0, 1, 2].map((k) => src.max[k] - src.min[k]);
       g = new THREE.BoxGeometry(d[0], d[1], d[2]).translate((src.min[0] + src.max[0]) / 2, (src.min[1] + src.max[1]) / 2, (src.min[2] + src.max[2]) / 2);
-      boxCache.set(key, g);
     }
+    remember(boxCache, key, g, DRAW_KEEP, (old) => old.dispose());
     return g;
   } catch {
     return null;

@@ -73,24 +73,79 @@ export function usePartGeometry(p: Part | undefined | null): PartGeometry | null
   return g;
 }
 
-const itemCache = new Map<string, Promise<PartGeometry>>();
+// Extra items' meshes (brackets, standoffs, PC/104 rods), cached by URL. Every new best layout brings new URLs (its own
+// bracket boxes), so during a long search the cache would grow without end: an entry no view shows any more is kept
+// among the ITEM_KEEP most recently used and freed after that (GPU buffers, edges, BVH). An entry a view still shows
+// is never freed.
+export const ITEM_KEEP = 120;
+interface ItemEntry {
+  promise: Promise<PartGeometry>;
+  /** views showing it now */
+  refs: number;
+  /** when it was last taken or given back (a counter) */
+  used: number;
+}
+const itemCache = new Map<string, ItemEntry>();
+let itemClock = 0;
+
+export function disposeGeometry(g: PartGeometry): void {
+  (g.geometry as unknown as { disposeBoundsTree?: () => void }).disposeBoundsTree?.();
+  g.geometry.dispose();
+  g.edges.dispose();
+}
+
+/** Take an item's mesh for a view (loaded once per URL); give it back with releaseItemGeometry. */
+export function acquireItemGeometry(url: string, load: (url: string) => Promise<MeshData> = (u) => session().api.itemMesh(u)): Promise<PartGeometry> {
+  let e = itemCache.get(url);
+  if (!e) {
+    const entry: ItemEntry = { promise: load(url).then((m) => buildGeometry(m)), refs: 0, used: 0 };
+    entry.promise.catch(() => {
+      if (itemCache.get(url) === entry) itemCache.delete(url);
+    });
+    itemCache.set(url, entry);
+    e = entry;
+  }
+  e.refs += 1;
+  e.used = ++itemClock;
+  return e.promise;
+}
+
+export function releaseItemGeometry(url: string): void {
+  const e = itemCache.get(url);
+  if (!e) return;
+  e.refs = Math.max(0, e.refs - 1);
+  e.used = ++itemClock;
+  if (e.refs === 0) trimItemCache();
+}
+
+/** Free the least recently used item meshes that no view shows, beyond `keep`; returns how many were freed. */
+export function trimItemCache(keep = ITEM_KEEP): number {
+  const idle = [...itemCache.entries()].filter(([, e]) => e.refs === 0).sort((a, b) => a[1].used - b[1].used);
+  const drop = idle.slice(0, Math.max(0, idle.length - keep));
+  for (const [url, e] of drop) {
+    itemCache.delete(url);
+    e.promise.then(disposeGeometry, () => undefined);
+  }
+  return drop.length;
+}
+
+/** Test helper: the item cache's size and how many entries a view shows. */
+export function itemCacheStats(): { entries: number; inUse: number } {
+  return { entries: itemCache.size, inUse: [...itemCache.values()].filter((e) => e.refs > 0).length };
+}
+
 export function useItemGeometry(url: string | null | undefined): PartGeometry | null {
   const [g, setG] = useState<PartGeometry | null>(null);
   useEffect(() => {
     if (!url || !hasSession()) return;
     let alive = true;
-    let pr = itemCache.get(url);
-    if (!pr) {
-      pr = session().api.itemMesh(url).then((m) => buildGeometry(m));
-      pr.catch(() => itemCache.delete(url));
-      itemCache.set(url, pr);
-    }
-    pr.then(
+    acquireItemGeometry(url).then(
       (r) => alive && setG(r),
       () => alive && setG(null),
     );
     return () => {
       alive = false;
+      releaseItemGeometry(url);
     };
   }, [url]);
   return g;
@@ -119,5 +174,6 @@ export function poseTRS(pose: Pose, rotations: Mat3[]): { position: THREE.Vector
 /** Test helper: clear caches between projects. */
 export function clearGeometryCache(): void {
   cache.clear();
+  for (const e of itemCache.values()) e.promise.then(disposeGeometry, () => undefined);
   itemCache.clear();
 }
