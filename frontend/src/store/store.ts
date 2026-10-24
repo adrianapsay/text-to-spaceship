@@ -36,6 +36,8 @@ export type TabId =
   | 'explain'
   | 'engineering'
   | 'hardware'
+  | 'bom'
+  | 'drawings'
   | 'manufacturable'
   | 'cad'
   | 'results';
