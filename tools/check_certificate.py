@@ -14,7 +14,17 @@ It does not import or trust any part of the application. It:
   7. V2 brackets (Lemma 4): every solid vertex inside its reserved box, every box apart from the other boxes and the
      keep-outs (box arithmetic), and every part / box / keep-out combination covered by a check or a declared
      exemption,
-and prints PASS/FAIL per lemma. Exit code 0 only if everything passes.
+  8. Stage 2 frame (certificate version 2): every frame item (rails, PC/104 rods, harness, stack reserve, standoffs,
+     bracket boxes) listed once with the same corners wherever it is used, the four rails full length in their
+     corners, the harness on its wall over the whole length except the stack break, every part checked against every
+     item unless the exemption follows from a rule (a bracket's held parts, the stack boards for the rods and the
+     stack reserve, a board for its own standoffs),
+  9. Lemma 5 (v2.5 mounting rules): every bracket's target face lies on a wall or end-plate plane, or on the face of a
+     corner rail it overlaps, and its solid touches that plane; brackets touch rails only; every part except the
+     boards is held by a bracket, exempt_parts == held_parts; the PC/104 rods end on the true end plane, cover every
+     stack board in z and stand inside each board's outline box; edge-on boards' standoffs reach a side wall,
+and prints PASS/FAIL per lemma. Exit code 0 only if everything passes. Certificates of version 1 (before the frame
+block) and layouts found under the mounting rules before v2.5 skip 8–9 / 9, with a NOTE.
 """
 import hashlib
 import itertools
@@ -211,6 +221,203 @@ def box_gap(ca, cb):
                for k in range(3))
 
 
+TOL = 1e-6          # mm: a face "on" a plane (all coordinates are given to 1e-9 mm)
+TOL_SOLID = 1e-5    # mm: a designed solid's bolted face on its plane (voxel grid on the plane)
+
+
+def bounds(points):
+    return [min(p[k] for p in points) for k in range(3)], [max(p[k] for p in points) for k in range(3)]
+
+
+def same_corners(ca, cb):
+    return len(ca) == len(cb) and all(abs(a - b) <= 1e-9 for p, q in zip(ca, cb) for a, b in zip(p, q))
+
+
+def frame_checks(cert, frame, parts, results, msgs):
+    """Checks 8 and 9 of the module docstring. parts: id -> {"verts": world vertices re-derived from the STL}."""
+    planes = frame["planes_mm"]
+    lo, hi = [planes[a][0] for a in "xyz"], [planes[a][1] for a in "xyz"]
+    v25 = frame.get("rules") == "v2.5"
+    items = {}
+    for it in frame.get("items", []):
+        if it["name"] in items:
+            results["frame_items_complete"] = False
+            msgs.append(f"FAIL frame item {it['name']} listed twice")
+        items[it["name"]] = it
+
+    def fail(key, text):
+        results[key] = False
+        msgs.append("FAIL " + text)
+    results["frame_items_complete"] = results.get("frame_items_complete", True)
+    results["exemptions_follow_rules"] = True
+    # --- 8. one set of corners per item, wherever it is used
+    for s in cert["statics"]:
+        if s["method"] == "numeric":           # certified by the app; its corners are not used here
+            continue
+        if s["static"] not in items or not same_corners(items[s["static"]]["corners"], s["corners"]):
+            fail("frame_items_complete", f"{s['part']} vs {s['static']}: corners differ from the frame item")
+    for sp in cert.get("static_pairs", []):
+        for name, c in ((sp["a"], sp["corners_a"]), (sp["b"], sp["corners_b"])):
+            if name not in items or not same_corners(items[name]["corners"], c):
+                fail("frame_items_complete", f"{sp['a']} vs {sp['b']}: corners of {name} differ from the frame item")
+    # every part against every item: a check, or an exemption that follows from a rule
+    checked = {(s["part"], s["static"]) for s in cert["statics"]}
+    exempt = {(a, b) for a, b in cert.get("exempt", [])}
+    brackets = {b["name"]: b for b in cert.get("brackets", [])}
+    stack_ids = list(frame.get("stack_ids") or [])
+    part_ids = [p["id"] for p in cert["parts"]]
+    for pid in part_ids:
+        for name in items:
+            if (pid, name) not in checked and (pid, name) not in exempt:
+                fail("frame_items_complete", f"{pid} vs {name}: no clearance check")
+    for pid, name in sorted(exempt):
+        it = items.get(name)
+        kind = it["kind"] if it else None
+        if kind == "bracket":
+            b = brackets.get(name)
+            ok = b is not None and pid in (b.get("held_parts", []) if v25 else b.get("exempt_parts", []))
+        elif kind in ("rod", "stack"):
+            ok = pid in stack_ids
+        elif kind == "standoff":
+            ok = name.split(":", 1)[-1] == pid
+        else:
+            ok = False
+        if not ok:
+            fail("exemptions_follow_rules", f"exemption of {pid} from {name} ({kind or 'unknown item'}) follows from no rule")
+    # the four rails: full length, each in its own corner
+    rails = [it for it in items.values() if it["kind"] == "rail"]
+    corners_seen = set()
+    for r in rails:
+        rlo, rhi = bounds(r["corners"])
+        if rlo[2] > lo[2] + TOL or rhi[2] < hi[2] - TOL:
+            fail("frame_items_complete", f"rail {r['name']} does not run the full length")
+        side = []
+        for k in (0, 1):
+            if rlo[k] <= lo[k] + TOL and rhi[k] < hi[k]:
+                side.append(-1)
+            elif rhi[k] >= hi[k] - TOL and rlo[k] > lo[k]:
+                side.append(1)
+        if len(side) != 2:
+            fail("frame_items_complete", f"rail {r['name']} is not in a corner of the frame")
+        corners_seen.add(tuple(side))
+    if len(rails) != 4 or len(corners_seen) != 4:
+        fail("frame_items_complete", f"{len(rails)} corner rails in {len(corners_seen)} corners (4 required)")
+    # the stack and its rods
+    board_box = {}
+    for pid in stack_ids:
+        if pid not in parts:
+            fail("frame_items_complete", f"stack board {pid} is not a part of the layout")
+            continue
+        board_box[pid] = bounds(parts[pid]["verts"])
+    rods = [it for it in items.values() if it["kind"] == "rod"]
+    stacks = [it for it in items.values() if it["kind"] == "stack"]
+    if stack_ids:
+        if len(rods) != 4 or len(stacks) != 1:
+            fail("frame_items_complete", f"PC/104 stack with {len(rods)} rods and {len(stacks)} stack reserves (4, 1)")
+        for s in stacks:
+            slo, shi = bounds(s["corners"])
+            for pid, (blo, bhi) in board_box.items():
+                if any(blo[k] < slo[k] - TOL_SOLID or bhi[k] > shi[k] + TOL_SOLID for k in range(3)):
+                    fail("frame_items_complete", f"stack reserve does not contain board {pid}")
+    elif rods or stacks:
+        fail("frame_items_complete", "rods or a stack reserve without stack boards")
+    # the harness on its wall, over the whole length except the break across the stack
+    hw = frame.get("harness_wall")
+    segs = [bounds(it["corners"]) for it in items.values() if it["kind"] == "harness"]
+    if hw:
+        ax = "xyz".index(hw[1])
+        if not segs:
+            fail("frame_items_complete", f"no harness item on the {hw} wall")
+        for slo, shi in segs:
+            if (shi[ax] < hi[ax] - TOL) if hw[0] == "+" else (slo[ax] > lo[ax] + TOL):
+                fail("frame_items_complete", f"a harness segment is off the {hw} wall")
+        brk = None
+        if stacks:
+            slo, shi = bounds(stacks[0]["corners"])
+            g = float(frame.get("harness_break_mm", 0.0))
+            brk = (slo[2] - g - TOL, shi[2] + g + TOL)
+        z = lo[2]
+        for a, b in sorted((s[0][2], s[1][2]) for s in segs) + [(hi[2], hi[2])]:
+            if a > z + TOL and (brk is None or z < brk[0] or a > brk[1]):
+                fail("frame_items_complete", f"the harness leaves z = {z:.3f} … {a:.3f} mm open outside the stack break")
+            z = max(z, b)
+    elif segs:
+        fail("frame_items_complete", "harness items without a harness wall")
+    if not v25:
+        msgs.append(f"NOTE  mounting rules '{frame.get('rules')}' (before v2.5): brackets could be fixed to the PC/104 "
+                    "deck; Lemma 5 (chassis-only attachment, rods to the end plate) is not checked")
+        return
+    # --- 9. Lemma 5
+    results["brackets_fixed_to_chassis"] = True
+    results["every_part_held"] = True
+    results["stack_rods_to_end_plate"] = True
+    held = {}
+    for b in cert.get("brackets", []):
+        name, kind, ax, neg, plane = b["name"], b.get("target_kind"), b.get("axis"), b.get("neg"), b.get("plane_mm")
+        if kind not in ("wall", "end_plate", "rail") or ax not in (0, 1, 2) or plane is None or neg is None:
+            fail("brackets_fixed_to_chassis", f"{name} is fixed to {kind or 'nothing stated'}, not to the chassis")
+            continue
+        r = b["reserve"]
+        face = r[ax] if neg else r[3 + ax]
+        if abs(face - plane) > TOL or ((r[3 + ax] <= plane + TOL) if neg else (r[ax] >= plane - TOL)):
+            fail("brackets_fixed_to_chassis", f"{name}: its reserved box does not start on its target plane")
+        ts = list(b.get("target_statics", []))
+        if kind in ("wall", "end_plate"):
+            want = (lo[ax] if neg else hi[ax])
+            if (kind == "wall") != (ax in (0, 1)) or abs(plane - want) > TOL or ts:
+                fail("brackets_fixed_to_chassis", f"{name}: {'xyz'[ax]} = {plane:.6f} is not the "
+                                                  f"{'-' if neg else '+'}{'xyz'[ax]} {kind.replace('_', ' ')}")
+        else:
+            rail = items.get(ts[0]) if len(ts) == 1 else None
+            if rail is None or rail["kind"] != "rail" or ax == 2:
+                fail("brackets_fixed_to_chassis", f"{name}: fixed to a rail that is not one corner rail ({ts})")
+            else:
+                rlo, rhi = bounds(rail["corners"])
+                lap = all(min(r[3 + k], rhi[k]) - max(r[k], rlo[k]) > TOL for k in range(3) if k != ax)
+                if abs((rhi[ax] if neg else rlo[ax]) - plane) > TOL or not lap:
+                    fail("brackets_fixed_to_chassis", f"{name}: not on the face of {ts[0]} it overlaps")
+        if any(items.get(t, {}).get("kind") != "rail" for t in ts):
+            fail("brackets_fixed_to_chassis", f"{name} may touch {ts}: only a corner rail may be touched")
+        sv = b.get("solid_vertices") or []
+        if sv and min(abs(v[ax] - plane) for v in sv) > TOL_SOLID:
+            fail("brackets_fixed_to_chassis", f"{name}: its solid does not touch its target plane")
+        hp = list(b.get("held_parts", []))
+        if not hp or sorted(set(b.get("exempt_parts", []))) != sorted(set(hp)) or b.get("part") not in hp:
+            fail("every_part_held", f"{name}: exempt parts {b.get('exempt_parts')} are not its held parts {hp}")
+        for p in hp:
+            held.setdefault(p, []).append(name)
+    standoff_parts = set()
+    for it in items.values():
+        if it["kind"] != "standoff":
+            continue
+        pid = it["name"].split(":", 1)[-1]
+        standoff_parts.add(pid)
+        slo, shi = bounds(it["corners"])
+        if not any(slo[k] <= lo[k] + TOL or shi[k] >= hi[k] - TOL for k in (0, 1)):
+            fail("every_part_held", f"{it['name']} does not reach a side wall")
+    for pid in part_ids:
+        if pid not in held and pid not in stack_ids and pid not in standoff_parts:
+            fail("every_part_held", f"{pid} is held by no bracket, rod or standoff")
+    for pid in held:
+        if pid not in part_ids:
+            fail("every_part_held", f"a bracket holds {pid}, which is not a part of the layout")
+    if stack_ids:
+        end = frame.get("rod_end")
+        if end not in ("-z", "+z"):
+            fail("stack_rods_to_end_plate", f"PC/104 rods run to no end plate ({end})")
+            return
+        plane = lo[2] if end == "-z" else hi[2]
+        for r in rods:
+            rlo, rhi = bounds(r["corners"])
+            if abs((rlo[2] if end == "-z" else rhi[2]) - plane) > TOL:
+                fail("stack_rods_to_end_plate", f"{r['name']} ends short of the {end} end plate (z = {plane:.3f})")
+            for pid, (blo, bhi) in board_box.items():
+                if rlo[2] > blo[2] + TOL or rhi[2] < bhi[2] - TOL:
+                    fail("stack_rods_to_end_plate", f"{r['name']} does not cover board {pid} in z")
+                if any(rlo[k] < blo[k] - TOL or rhi[k] > bhi[k] + TOL for k in (0, 1)):
+                    fail("stack_rods_to_end_plate", f"{r['name']} stands outside the outline of board {pid}")
+
+
 def main(cert_path, stl_dir):
     cert = json.load(open(cert_path))
     results = {"files": True, "lemma1_containment": True, "cells_partition": True, "pairs": True, "frame": True}
@@ -325,7 +532,7 @@ def main(cert_path, stl_dir):
                 break
         if b.get("estimate"):
             msgs.append(f"NOTE {b['name']}: {b['kind']} not designed yet — its reserved box is certified, no solid")
-        for p in cert["parts"]:          # every part except its own (and the deck boards) is checked against it
+        for p in cert["parts"]:          # every part except those it holds (exempt_parts) is checked against it
             if p["id"] in b["exempt_parts"]:
                 if (p["id"], b["name"]) not in exempt:
                     results["bracket_checks_complete"] = False
@@ -338,6 +545,15 @@ def main(cert_path, stl_dir):
             if o != b["name"] and frozenset((o, b["name"])) not in pair_set:
                 results["bracket_checks_complete"] = False
                 msgs.append(f"FAIL {b['name']} vs {o}: no box-gap check")
+    # Stage 2 frame and Lemma 5 (certificate version 2)
+    frame = cert.get("frame")
+    if cert.get("stage") == 2 and int(cert.get("certificate_version", 1)) >= 2 and not frame:
+        results["frame_items_complete"] = False
+        msgs.append("FAIL Stage 2 certificate of version 2 without its frame block")
+    elif frame:
+        frame_checks(cert, frame, parts, results, msgs)
+    elif cert.get("stage") == 2:
+        msgs.append("NOTE  certificate version 1 (no frame block): frame items and bracket attachment not checked")
     for k, ok in results.items():
         print(f"{'PASS' if ok else 'FAIL'}  {k}")
     if numeric:

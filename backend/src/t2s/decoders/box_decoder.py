@@ -11,9 +11,10 @@ AABBs give a broad phase), extreme points are deduplicated and pruned as boxes a
 
 Bracket-aware placement (V2 Stage 2, `mount` spec): a part carries its 3 mm mounting-layer box, and every candidate
 position is charged by whether a bracket could hold it there — the wall or end plate the layer faces, or a target
-obstacle (corner rail, PC/104 stack deck) overlapping the layer's footprint, within reach, with a clear corridor
-(1.2 mm from placed parts, keep-outs and other corridors). A position without a bracket costs more than any
-mountable one; an end plate only (the COM shift may carry the part away from it) costs as much as 50 mm of length.
+obstacle (the Stage 2 model marks the corner rails only: brackets are fixed to chassis structure) overlapping the
+layer's footprint, within reach, with a clear corridor (1.2 mm from placed parts, keep-outs and other corridors). A
+position without a bracket costs more than any mountable one; an end plate only (the COM shift may carry the part
+away from it) costs as much as 50 mm of length.
 The chosen corridor is reserved for the rest of the decode, so later parts do not block the bracket. When the
 keyed orientation cannot be mounted anywhere, every allowed orientation is tried. The exact bracket check (reserve
 box, cheapest option, clearances) still runs after decoding; this only steers the placement.
@@ -130,12 +131,12 @@ def _corridor_blocked(box, skip_g, obs, gs, ge, gb, gkind, n_grp, cg_part, cg_ot
 @_jit
 def _mount_cost(t, prel, d, walls, mp, obs, gs, ge, gb, gkind, n_grp, cg_part, cg_other, corr):
     """Cost of the cheapest bracket for a part at translation t whose mounting layer (prel, relative to t) faces
-    direction d (2·axis + 1 if negative), with the part's mp = (reach, narrowest flange on a rail or deck, end-plate
-    cost, side walls only, wrap depth): 0 (+10 per mm of gap) for a wall, rail or deck, the end-plate cost for an
-    end plate, PEN_NONE when nothing is reachable through a clear corridor. The corridor (the layer's footprint,
-    clipped to a box target, from the target plane to the part side and `wrap` mm on around the part, where a cradle,
-    clamp or wrapping metal-AM bracket holds it) is written to corr[:6]; corr[6] = 1 for a wall, rail or deck, 2 for
-    an end plate, 0 if none was found."""
+    direction d (2·axis + 1 if negative), with the part's mp = (reach, narrowest flange on a box target, end-plate
+    cost, side walls only, wrap depth): 0 (+10 per mm of gap) for a side wall or a target obstacle (a corner rail),
+    the end-plate cost for an end plate, PEN_NONE when nothing is reachable through a clear corridor. The corridor
+    (the layer's footprint, clipped to a box target, from the target plane to the part side and `wrap` mm on around
+    the part, where a cradle, clamp or wrapping metal-AM bracket holds it) is written to corr[:6]; corr[6] = 1 for a
+    wall or rail, 2 for an end plate, 0 if none was found."""
     corr[6] = 0.0
     reach, min_w, pen_end, walls_only, wrap = mp[0], mp[1], mp[2], mp[3] > 0.5, mp[4]
     ax = d // 2
@@ -370,7 +371,7 @@ def _decode_kernel(seq, okeys, rules, all_orient, allowed, n_allowed, tb, toff, 
         best_merit, best_o = np.inf, -1
         best_corr[6] = 0.0
         for rnd in range(2):                # round 1: other orientations, if the keyed one cannot be mounted to a
-            if rnd == 1:                    # wall, rail or deck (no bracket, or an end plate only)
+            if rnd == 1:                    # side wall or rail (no bracket, or an end plate only)
                 if all_orient or best_o < 0 or pad_dir[p, best_o] < 0 or abs(best_corr[6] - 1.0) < 0.5:
                     break
                 tried[:] = 0
@@ -393,7 +394,7 @@ def _decode_kernel(seq, okeys, rules, all_orient, allowed, n_allowed, tb, toff, 
                     for a in range(7):
                         best_corr[a] = cand_corr[a]
                 if rnd == 1 and abs(best_corr[6] - 1.0) < 0.5:
-                    break                       # the first other orientation with a wall, rail or deck bracket
+                    break                       # the first other orientation with a side-wall or rail bracket
         if best_o < 0:
             continue
         out_o[p] = best_o
@@ -449,7 +450,8 @@ class MountSpec:
     """Bracket-aware placement (module docstring). pads: part_id -> (canonical layer box (6,), canonical axis,
     sign) for the parts that need a bracket; walls: (6,) inner-wall planes x−, x+, y−, y+, z− (end plate), z+;
     reach: longest bracket (mm); clearance: bracket clearance (mm); targets: per decoder obstacle, True if a bracket
-    may land on it (corner rails, the stack deck); min_width: narrowest flange clipped to such a target (mm);
+    may land on it (the corner rails; v2.5 brackets are fixed to chassis structure only); min_width: narrowest flange
+    clipped to such a target (mm);
     end_plate_cost: merit added for a bracket to an end plate (PEN_END = 50 mm of length; PEN_END_SHIFTED when the
     layout will be shifted along z afterwards, which would carry the part away from the plate). part_reach: per-part
     reach overriding `reach`; walls_only: parts whose mount lands on a side wall only (edge-on boards: standoffs)."""
@@ -535,7 +537,7 @@ class BoxDecoder:
                 ax = int(np.argmax(np.abs(d)))
                 self.pad_dir[p_i, o] = 2 * ax + (1 if d[ax] < 0 else 0)
         self.walls = np.asarray(mt.walls, float) if mt is not None else np.zeros(6)
-        # per part: (reach, narrowest flange on a rail or deck, end-plate cost, 1 = side walls only, wrap depth)
+        # per part: (reach, narrowest flange on a box target, end-plate cost, 1 = side walls only, wrap depth)
         self.mp = np.zeros((n, 5))
         if mt is not None:
             for p_i, part in enumerate(parts):
@@ -572,7 +574,7 @@ class BoxDecoder:
         ends = np.cumsum([len(g) for g in groups]).astype(np.int64)
         gb = np.array([np.concatenate([g[:, :3].min(axis=0), g[:, 3:].max(axis=0)]) for g in groups]).reshape(-1, 6)
         eps = [self.lo.copy()]
-        # extreme points from fixed parts, and from the top face of every obstacle (a deck parts can stand on)
+        # extreme points from fixed parts, and from the top face of every obstacle (a face parts can be packed on)
         for g in groups[len(obstacles):]:
             for x in g:
                 eps += [np.array([x[3], x[1], x[2]]), np.array([x[0], x[4], x[2]]), np.array([x[0], x[1], x[5]])]

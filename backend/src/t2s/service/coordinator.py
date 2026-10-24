@@ -1335,7 +1335,7 @@ class Coordinator:
                 "hardware_cost_rel": meta.get("C"), "bracket_designs": meta.get("bracket_designs", {}),
                 "assumed": ["2 mm walls", "8.5 mm corner rails", "clearances 2.2 / 1.2 mm (U4)",
                             "PC/104 stack, 15.24 mm pitch, rods at (±35, ±35) mm", "3 mm mounting layer (U6)",
-                            "V2 brackets: one per part to a wall, end plate, rail or the stack deck ≤ 40 mm away; "
+                            "V2 brackets: one per part to a wall, end plate or corner rail ≤ 40 mm away; "
                             "each reserved box keeps 1.2 mm from other parts, brackets and keep-outs; relative "
                             "costs, cradle / metal-AM masses estimated until designed",
                             "10 mm harness channel (U5)", "M3 standoffs 5 × 5 mm, 3–50 mm long (Addendum 2.3)",

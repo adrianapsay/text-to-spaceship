@@ -4,6 +4,11 @@ The certificate references the ORIGINAL STL files by SHA-256 and gives, per part
 the pose, and the cut-plane cells of its cover pieces. Each pair carries separating planes. The stand-alone checker
 (tools/check_certificate.py, standard library only) re-derives every vertex set from the STL files and re-evaluates
 every inequality; it never trusts numbers computed by the app.
+
+Version 2 (Stage 2, v2.5): a `frame` block states the true inner planes of the walls and end plates, every frame item
+(name, kind, corners: rails, PC/104 rods, harness, stack reserve, standoffs, bracket boxes), the mounting rules, the
+stack boards and the end plate their rods run to; each bracket entry states its target face (axis, neg, plane_mm,
+target_kind) and the parts it holds. The checker then also proves that every part is fixed to the chassis.
 """
 from __future__ import annotations
 
@@ -15,7 +20,7 @@ import numpy as np
 from ..core.rotations import ROTATIONS
 from ..geometry.proxies import COVER_DELTA
 
-CERT_VERSION = 1
+CERT_VERSION = 2          # 2: Stage 2 frame block and bracket attachment (version 1 certificates still verify)
 
 
 def _r(x, nd=12):
@@ -25,7 +30,9 @@ def _r(x, nd=12):
 def build_certificate(layout_id: str, report, records: dict, poses, spec, files: dict, extra: dict | None = None,
                       brackets: list | None = None):
     """records: part_id -> PartRecord; poses: [(part_id, orient, t_mm)]; files: part_id -> (relative path, sha256).
-    brackets (V2 Stage 2): [{name, part, kind, target, reserve (lo+hi), solid_vertices, estimate, exempt_parts}]."""
+    brackets (V2 Stage 2, mfg.brackets.cert_entry): [{name, part, kind, target, target_kind, axis, neg, plane_mm,
+    reserve (lo+hi), solid_vertices, estimate, held_parts, exempt_parts, target_statics}]. A Stage 2 spec
+    (constraints.stage2_model.Stage2Spec) adds the frame block."""
     parts = []
     for pid, orient, t in poses:
         rec = records[pid]
@@ -73,12 +80,16 @@ def build_certificate(layout_id: str, report, records: dict, poses, spec, files:
     static_pairs = [{"a": p.a, "b": p.b, "corners_a": named[p.a].corners.tolist(),
                      "corners_b": named[p.b].corners.tolist(), "required_mm": p.required_mm, "gap_mm": p.gap_lb_mm}
                     for p in getattr(report, "static_pairs", [])]
+    frame = None
+    if getattr(spec, "frame", None):            # Stage 2: what the frame is, so that attachment can be checked
+        frame = dict(spec.frame)
+        frame["items"] = [{"name": s.name, "kind": s.kind, "corners": s.corners.tolist()} for s in spec.statics]
     return {
         "certificate_version": CERT_VERSION, "layout_id": layout_id, "stage": spec.stage,
         "created": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "enclosure_vertex_bounds_mm": {"lo": _r(spec.lo, 9), "hi": _r(spec.hi, 9)},
         "cover_delta_mm": COVER_DELTA, "parts": parts, "pairs": pairs, "statics": statics,
-        "static_pairs": static_pairs, "brackets": brackets or [],
+        "static_pairs": static_pairs, "brackets": brackets or [], "frame": frame,
         "exempt": sorted([list(x) for x in spec.exempt]),
         "extra": extra or {},
     }
@@ -131,8 +142,8 @@ def proof_markdown(cert: dict, report, metrics: dict | None = None) -> str:
                  "(with the box corners as one point set) shows every part keeps the required gap from every bracket "
                  "it does not belong to. Two axis-aligned boxes are at least g apart when, on some axis, the low face "
                  "of one is at least g beyond the high face of the other; this is checked for every bracket against "
-                 "every other bracket and every keep-out except the one it is fixed to. A bracket touches only its "
-                 "own part (and, for a bracket on the PC/104 deck, the stack boards it is fixed to).\n")
+                 "every other bracket and every keep-out except the corner rail it is fixed to. A bracket touches "
+                 "only the parts it holds and the chassis structure it is fixed to.\n")
         L.append("| Bracket | part | type | fixed to | reserved box (mm) | solid |\n|---|---|---|---|---|---|")
         for b in cert["brackets"]:
             r = np.asarray(b["reserve"], float)
@@ -144,6 +155,7 @@ def proof_markdown(cert: dict, report, metrics: dict | None = None) -> str:
             worst = min(cert["static_pairs"], key=lambda p: p["gap_mm"] - p["required_mm"])
             L.append(f"\n{len(cert['static_pairs'])} box–box conditions hold; the tightest is {worst['a']} – "
                      f"{worst['b']}: {worst['gap_mm']:.4f} mm ≥ {worst['required_mm']:.3f} mm.")
+    L += _mounting_lemma(cert, nm)
     L.append("\n> **Arithmetic.** All inequalities are evaluated in float64 from the original float32 STL vertices and "
              "the integer-µm poses. Rounding allowance: poses are exact multiples of 1 µm; every certified gap above "
              "exceeds the required value by more than the 1e-9 mm comparison tolerance, and cover pieces carry "
@@ -171,6 +183,38 @@ def proof_markdown(cert: dict, report, metrics: dict | None = None) -> str:
              "It uses only the Python standard library, reloads the original STL files, verifies their SHA-256, "
              "re-applies every transform and re-evaluates every inequality above.")
     return "\n".join(L) + "\n"
+
+
+def _mounting_lemma(cert: dict, nm) -> list[str]:
+    """Lemma 5 (Stage 2, v2.5 rules): every part is fixed to chassis structure."""
+    fr = cert.get("frame")
+    if not fr:
+        return []
+    if fr.get("rules") != "v2.5":
+        return ["\n## Mounting\n", ("This layout was found under the mounting rules before v2.5, which let a bracket "
+                                    "be fixed to the PC/104 deck; Lemma 5 (chassis-only mounting) does not apply.")]
+    pl = fr["planes_mm"]
+    out = ["\n## Lemma 5 — every part is fixed to the chassis\n",
+           (f"The inner wall planes are x = {pl['x'][0]:.3f} and {pl['x'][1]:.3f}, y = {pl['y'][0]:.3f} and "
+            f"{pl['y'][1]:.3f} mm; the end plates are at z = {pl['z'][0]:.3f} and {pl['z'][1]:.3f} mm; the corner "
+            "rails are frame items. Every bracket's reserved box has its target face on one of these planes, or on the "
+            "face of a corner rail it overlaps, so each bracket is fixed to chassis structure and never to another "
+            "part. Every part except the PC/104 boards and edge-on boards has a bracket, and a bracket may touch only "
+            "the parts it holds (its exemptions are exactly those parts).")]
+    if fr.get("stack_ids"):
+        z = pl["z"][0] if fr.get("rod_end") == "-z" else pl["z"][1]
+        out.append(f"The PC/104 boards ({', '.join(nm(p) for p in fr['stack_ids'])}) are held by four rods with "
+                   f"spacer tubes that run from the {fr.get('rod_end')} end plate (z = {z:.3f} mm) through every board, "
+                   "inside each board's outline; only the boards are exempt from the rods.")
+    if any(i["kind"] == "standoff" for i in fr.get("items", [])):
+        out.append("Edge-on boards stand on M3 standoffs that reach a side wall.")
+    if cert.get("brackets"):
+        out.append("\n| Bracket | holds | fixed to | target plane (mm) |\n|---|---|---|---|")
+        for b in cert["brackets"]:
+            out.append(f"| {b['name']} | {', '.join(nm(p) for p in b.get('held_parts', [b['part']]))} | "
+                       f"{b.get('target_kind', '?').replace('_', ' ')} ({b['target']}) | "
+                       f"{'xyz'[b['axis']]} = {b['plane_mm']:.3f} |")
+    return out
 
 
 def write_certificate(path, cert):
