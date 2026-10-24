@@ -3,8 +3,9 @@
 //  * ISO A3 landscape (ISO 5457): 420 × 297 mm, 20 mm filing margin on the left and 10 mm elsewhere, 0.7 mm frame,
 //    centring marks, a grid reference of 50 mm fields counted from the centring marks (numbers 1–8 left to right,
 //    letters A–F top to bottom), first-angle projection;
-//  * ANSI B (ASME Y14.1) 17 × 11 in, third-angle projection; its margins (0.5 in) and zones (4 × 2: numbers right to
-//    left, letters bottom to top) follow common CAD templates (ASSUMED, not checked against the standard text);
+//  * ANSI B (ASME Y14.1) 17 × 11 in, third-angle projection; its margins (0.62 in at the sides, 0.38 in at top and
+//    bottom) and zones (4 × 2: numbers right to left, letters bottom to top) follow common CAD templates (ASSUMED, not
+//    checked against the standard text);
 //  * an ISO 7200-style title block (180 mm wide) at the bottom right, a revision block at the top right and the parts
 //    list directly above the title block (ISO 7573: headings next to the title block, items numbered upward).
 
@@ -52,7 +53,7 @@ export const TEMPLATES: Record<TemplateId, SheetTemplate> = {
     size: 'B',
     width: 431.8,
     height: 279.4,
-    margins: { left: 12.7, right: 12.7, top: 12.7, bottom: 12.7 },
+    margins: { left: 15.75, right: 15.75, top: 9.65, bottom: 9.65 },
     projection: 'third',
     zones: { cols: 4, rows: 2, colsRightToLeft: true, rowsBottomToTop: true, fieldFromCentre: null },
     page: '17in 11in',

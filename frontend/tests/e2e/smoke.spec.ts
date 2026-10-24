@@ -125,7 +125,8 @@ test('bill of materials and drawings: a MOCK BOM linked to the 3D view, a sheet 
   expect(balloons.every((n) => n >= 1 && n <= 19)).toBe(true); // numbered like the BOM
   // the alternative template redraws the sheet in third-angle projection
   await page.getByTestId('template-select').selectOption('ansi-b');
-  await expect(sheet.locator('[data-view-label="right"]')).toBeVisible({ timeout: 30_000 });
+  await expect(sheet.locator('image[data-view="right"]')).toHaveCount(1, { timeout: 30_000 });
+  await expect(sheet.locator('image[data-view="left"]')).toHaveCount(0);
   await expect(sheet.locator('[data-field="size"]')).toContainText('B');
   await page.getByTestId('template-select').selectOption('iso-a3');
   expect(errors).toEqual([]);

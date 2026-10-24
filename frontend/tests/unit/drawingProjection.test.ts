@@ -106,6 +106,7 @@ describe('V2 WS6 drawing projection, scales and dimensions', () => {
 
   it('third-angle ANSI B: the plan above the front view, the view from the right to its right', () => {
     const L = arrangeViews({ template: TEMPLATES['ansi-b'], box: U3, partsRows: 19, revRows: 1, margins: viewMargins('assembly') })!;
+    expect(L.scale).toBe(1 / 2);
     const by = Object.fromEntries(L.views.map((v) => [v.view, v]));
     expect(by.right).toBeDefined();
     expect(by.left).toBeUndefined();

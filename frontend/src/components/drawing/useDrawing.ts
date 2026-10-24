@@ -68,7 +68,13 @@ export function useDrawingSet(args: { layout: Layout | null; bom: Bom | null; te
     return () => clearTimeout(t);
   }, [model, args.index, ctxFor]);
 
-  useEffect(() => () => releaseRenderer(), []);
+  useEffect(
+    () => () => {
+      gen.current += 1; // a build still running stops at its next view
+      releaseRenderer();
+    },
+    [],
+  );
 
   const build = useCallback(
     async (index: number) => {

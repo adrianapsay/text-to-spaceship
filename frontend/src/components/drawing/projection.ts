@@ -185,13 +185,13 @@ export function dimText(value: number, reference = false): string {
 
 /**
  * Linear dimension between feature points `a` and `b` (sheet mm) measured along `axis` ('x' horizontal, 'y'
- * vertical), with the dimension line `offset` mm from the features toward `side` (+1: right / down, −1: left / up).
- * The value is the model length (given), not the sheet length.
+ * vertical), with the dimension line `offset` mm from the features toward `side` (+1: right / down, −1: left / up)
+ * — or from `base` (e.g. the view's edge) when given. The value is the model length (given), not the sheet length.
  */
-export function linearDim(a: P2, b: P2, axis: 'x' | 'y', side: 1 | -1, offset: number, value: string, st: DimStyle = DIM_STYLE): LinearDim {
+export function linearDim(a: P2, b: P2, axis: 'x' | 'y', side: 1 | -1, offset: number, value: string, base?: number, st: DimStyle = DIM_STYLE): LinearDim {
   const k = axis === 'x' ? 1 : 0; // the coordinate perpendicular to the measured direction: y for 'x' dims
-  const base = side > 0 ? Math.max(a[k], b[k]) : Math.min(a[k], b[k]);
-  const at = base + side * offset;
+  const from = base ?? (side > 0 ? Math.max(a[k], b[k]) : Math.min(a[k], b[k]));
+  const at = from + side * offset;
   const pt = (p: P2, c: number): P2 => (axis === 'x' ? [p[0], c] : [c, p[1]]);
   const q1 = pt(a, at);
   const q2 = pt(b, at);

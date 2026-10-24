@@ -50,13 +50,15 @@ const today = () => new Date().toISOString().slice(0, 10);
 const dateOf = (iso: string | null | undefined) => (iso && /^\d{4}-\d{2}-\d{2}/.test(iso) ? iso.slice(0, 10) : '—');
 const pad3 = (n: number) => String(n).padStart(3, '0');
 
-/** Space around each view (sheet mm): assembly views get balloon lanes; the front view the height dimensions. */
+/** Space around each view (sheet mm): assembly views get balloon lanes; the front view the height dimensions, the
+ * plan and the side view their width dimension below. The orthographic views are not labelled (views in the
+ * projection arrangement need no label; the projection symbol says which is which); the isometric view is. */
 export function viewMargins(kind: 'assembly' | 'detail'): (v: ViewId) => Margins {
   const lane = kind === 'assembly' ? LANE_W : 6;
   return (v) => {
-    if (v === 'front') return { l: 22 + lane, r: lane, t: 3, b: 8 };
-    if (v === 'iso') return { l: lane, r: lane, t: 3, b: 8 };
-    return { l: lane, r: lane, t: 3, b: 16 };
+    if (v === 'front') return { l: 22 + lane, r: lane, t: 2, b: 2 };
+    if (v === 'iso') return { l: lane, r: lane, t: 2, b: 7 };
+    return { l: lane, r: lane, t: 2, b: 11 };
   };
 }
 
@@ -69,22 +71,23 @@ export function overallDims(views: ViewSlot[], box: Box3, usedLength: number | n
   const side = views.find((v) => v.view === 'left' || v.view === 'right');
   const [x0, y0, z0] = box.min;
   const [x1, y1, z1] = box.max;
+  // dimension lines are measured from the view's edges, so they stay outside the drawn outline
   if (front) {
     const a = project(front, [x0, y0, z0]);
     const b = project(front, [x0, y0, z1]);
     if (usedLength != null && usedLength > 0 && usedLength < z1 - z0 - 1e-6) {
-      out.push(linearDim(a, project(front, [x0, y0, z0 + usedLength]), 'y', -1, 8, dimText(usedLength, true)));
-      out.push(linearDim(a, b, 'y', -1, 16, dimText(z1 - z0)));
-    } else out.push(linearDim(a, b, 'y', -1, 8, dimText(z1 - z0)));
+      out.push(linearDim(a, project(front, [x0, y0, z0 + usedLength]), 'y', -1, 8, dimText(usedLength, true), front.x));
+      out.push(linearDim(a, b, 'y', -1, 16, dimText(z1 - z0), front.x));
+    } else out.push(linearDim(a, b, 'y', -1, 8, dimText(z1 - z0), front.x));
   }
-  if (top) out.push(linearDim(project(top, [x0, y0, z0]), project(top, [x1, y0, z0]), 'x', 1, 8, dimText(x1 - x0)));
+  if (top) out.push(linearDim(project(top, [x0, y0, z0]), project(top, [x1, y0, z0]), 'x', 1, 8, dimText(x1 - x0), top.y + top.h));
   if (side) {
     const ends: [V3, V3] = [
       [x0, y0, z0],
       [x0, y1, z0],
     ];
     const p = ends.map((q) => project(side, q)).sort((m, n) => m[0] - n[0]) as [P2, P2];
-    out.push(linearDim(p[0], p[1], 'x', 1, 8, dimText(y1 - y0)));
+    out.push(linearDim(p[0], p[1], 'x', 1, 8, dimText(y1 - y0), side.y + side.h));
   }
   return out;
 }
@@ -114,7 +117,8 @@ export function sheetBalloons(views: ViewSlot[], renders: ViewRender[]): { ballo
     const refs = [...chosen.values()].filter((c) => c.view === v.view);
     if (!refs.length) continue;
     const lanes = { left: v.x - v.margins.l + BALLOON_R + 0.5, right: v.x + v.w + v.margins.r - BALLOON_R - 0.5 };
-    balloons.push(...placeBalloons(v, lanes, [v.y - v.margins.t, v.y + v.h], refs));
+    // the front view has its height dimensions on the left: most of its balloons go right
+    balloons.push(...placeBalloons(v, lanes, [v.y - v.margins.t, v.y + v.h], refs, undefined, undefined, v.view === 'front' ? 0.2 : 0.5));
   }
   return { balloons, shown: new Set(chosen.keys()) };
 }
@@ -214,7 +218,7 @@ function detailNotes(spec: SheetSpec): string[] {
     n.push(`Designed by ${d.generator}${typeof d.vol_frac === 'number' ? ` (volume fraction ${d.vol_frac})` : ''}; ${d.passed ? 'passed' : `did not pass: ${d.reason || 'see Mounting Hardware'}`}${solvers.length ? ` (checked with ${solvers.join(' and ')})` : ''}.`);
     const ms = [d.ms_yield != null ? `MS yield ${d.ms_yield >= 0 ? '+' : ''}${d.ms_yield.toFixed(2)}` : null, d.ms_ult != null ? `MS ultimate ${d.ms_ult >= 0 ? '+' : ''}${d.ms_ult.toFixed(2)}` : null, d.f1_hz != null ? `first natural frequency ${Math.round(d.f1_hz)} Hz with the part` : null].filter(Boolean);
     if (ms.length) n.push(`${ms.join(', ')} (design record).`);
-    if (typeof d.overhang_fraction === 'number') n.push(`Overhang beyond 45°: ${(100 * d.overhang_fraction).toFixed(1)} % of the surface (supports).`);
+    if (r.bracket_kind === 'metal_am' && typeof d.overhang_fraction === 'number') n.push(`Overhang beyond 45°: ${(100 * d.overhang_fraction).toFixed(1)} % of the surface (support structures).`);
     if (typeof d.voxel_mm === 'number') n.push(`Generated on ${d.voxel_mm} mm voxels: surfaces are faceted.`);
   }
   if (!holesOf(spec).length) n.push('Fastener holes are not modelled in the concept mesh (M3 clearance 3.4 mm, mfg rule); no bolt positions in the design record.');
@@ -246,15 +250,17 @@ export async function buildSheet(spec: SheetSpec, index: number, ctx: SheetConte
   const loaded = await loadItems(spec.items);
   if (!alive()) return null;
   const model = ctx.model;
+  // the box the views are laid out for (envelope / bracket with its reserved box), and the one dimensioned
   let box: Box3 = model.envelope;
+  let solid: Box3 = model.envelope;
   let reserve: Box3 | null = null;
   if (spec.kind === 'detail') {
     const wb = worldBox(loaded);
     if (!wb) return null;
-    box = wb;
+    box = solid = wb;
     const it = model.layout.extra_items.find((x) => x.id === spec.items[0]?.id);
     if (it?.box_mm?.length === 6) reserve = { min: it.box_mm.slice(0, 3) as V3, max: it.box_mm.slice(3) as V3 };
-    if (reserve) box = { min: box.min.map((v, k) => Math.min(v, reserve!.min[k])) as V3, max: box.max.map((v, k) => Math.max(v, reserve!.max[k])) as V3 };
+    if (reserve) box = { min: wb.min.map((v, k) => Math.min(v, reserve!.min[k])) as V3, max: wb.max.map((v, k) => Math.max(v, reserve!.max[k])) as V3 };
   }
   const bom = model.bom && model.bom.layout_id === model.layout.id ? model.bom : null;
   const revisions = revisionsFor(spec, ctx);
@@ -287,7 +293,7 @@ export async function buildSheet(spec: SheetSpec, index: number, ctx: SheetConte
   }
   const { renders, renderError } = hit;
   const phantom = layout.views.flatMap((v) => boxEdges(v, spec.kind === 'assembly' ? model.envelope : (reserve ?? box)));
-  const dims = overallDims(layout.views, spec.kind === 'assembly' ? model.envelope : box, spec.kind === 'assembly' ? model.usedLength : null);
+  const dims = overallDims(layout.views, solid, spec.kind === 'assembly' ? model.usedLength : null);
   const centre = spec.kind === 'assembly' ? centreLines(layout.views, model.envelope) : [];
   const { balloons, shown } = spec.kind === 'assembly' ? sheetBalloons(layout.views, renders) : { balloons: [], shown: new Set<number>() };
   const drawnNos = new Set(spec.items.map((i) => i.itemNo).filter((n): n is number => n != null));

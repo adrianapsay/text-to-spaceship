@@ -47,24 +47,20 @@ const HELP = 'Wheel or + and − zoom about the pointer, drag or the arrow keys 
 function SheetViewport(props: { t: SheetTemplate; vb: ViewBox; setVb: (f: (v: ViewBox) => ViewBox) => void; stale: boolean; status: string | null; children: (viewBox: string) => ReactNode }) {
   const { t, setVb } = props;
   const ref = useRef<HTMLDivElement>(null);
-  const vbRef = useRef(props.vb);
-  vbRef.current = props.vb;
   const drag = useRef<{ x: number; y: number; id: number; moved: boolean } | null>(null);
   const [panning, setPanning] = useState(false);
-  /** sheet mm per screen pixel, and the letterbox offsets of preserveAspectRatio meet */
-  const metrics = useCallback(() => {
-    const el = ref.current;
-    const vb = vbRef.current;
-    if (!el) return null;
-    const r = el.getBoundingClientRect();
-    if (!r.width || !r.height) return null;
+  /** screen pixels per sheet mm for a view box, and the letterbox offsets of preserveAspectRatio meet (computed from
+   * the view box being updated, so that a burst of wheel events zooms about the pointer too) */
+  const fitOf = useCallback((vb: ViewBox) => {
+    const r = ref.current?.getBoundingClientRect();
+    if (!r || !r.width || !r.height) return null;
     const s = Math.min(r.width / vb.w, r.height / vb.h);
     return { r, s, ox: (r.width - vb.w * s) / 2, oy: (r.height - vb.h * s) / 2 };
   }, []);
   const zoom = useCallback(
     (f: number, clientX?: number, clientY?: number) => {
-      const m = metrics();
       setVb((vb) => {
+        const m = fitOf(vb);
         const w = Math.min(t.width * 3, Math.max(t.width / 40, vb.w * f));
         const k = w / vb.w;
         const px = m && clientX != null ? vb.x + (clientX - m.r.left - m.ox) / m.s : vb.x + vb.w / 2;
@@ -72,7 +68,7 @@ function SheetViewport(props: { t: SheetTemplate; vb: ViewBox; setVb: (f: (v: Vi
         return { x: px - (px - vb.x) * k, y: py - (py - vb.y) * k, w, h: vb.h * k };
       });
     },
-    [metrics, setVb, t.width],
+    [fitOf, setVb, t.width],
   );
   useEffect(() => {
     const el = ref.current;
@@ -99,11 +95,12 @@ function SheetViewport(props: { t: SheetTemplate; vb: ViewBox; setVb: (f: (v: Vi
       setPanning(true);
       ref.current?.setPointerCapture?.(e.pointerId);
     }
-    const m = metrics();
-    if (!m) return;
     d.x = e.clientX;
     d.y = e.clientY;
-    setVb((vb) => ({ ...vb, x: vb.x - dx / m.s, y: vb.y - dy / m.s }));
+    setVb((vb) => {
+      const m = fitOf(vb);
+      return m ? { ...vb, x: vb.x - dx / m.s, y: vb.y - dy / m.s } : vb;
+    });
   };
   const up = (e: RPointerEvent<HTMLDivElement>) => {
     if (drag.current?.moved) ref.current?.releasePointerCapture?.(e.pointerId);

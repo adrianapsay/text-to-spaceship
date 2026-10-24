@@ -82,14 +82,15 @@ def _part_row(pid: str, info: dict | None, scale: float, excluded: set) -> dict:
     src = info.get("mass_source") or "ASSUMED"
     m = _f(info.get("mass_kg"))
     d = _f(info.get("density_kg_m3"))
+    # the material of a supplied part is not known: what is known is the density its mass comes from
     if m is None:
-        src, material = "WITHHELD", "unknown (mass properties withheld)"
+        src, material = "WITHHELD", "unknown (mass withheld)"
     elif src == "USER_MASS":
-        material = "unspecified (mass entered by the user)"
+        material = "not specified (mass entered)"
     elif src == "USER_DENSITY":
-        material = f"unspecified, density {d:,.0f} kg/m³ (entered by the user)" if d else "unspecified"
+        material = f"density {d:,.0f} kg/m³ (entered)" if d else "not specified"
     else:
-        material = f"unspecified, density {d:,.0f} kg/m³ (ASSUMED)" if d else "unspecified (ASSUMED density)"
+        material = f"density {d:,.0f} kg/m³ (ASSUMED)" if d else "not specified (ASSUMED density)"
     desc = [SUBSYSTEM.get(info.get("subsystem") or "", info.get("subsystem") or "unknown")]
     if info.get("extents_mm"):
         desc.append(f"bounding box {_dims(info['extents_mm'])} mm" + (f" at {100 * scale:.0f} % size" if scale != 1 else ""))
@@ -120,12 +121,24 @@ def _washer_stacks(b: dict, solid: float) -> list[tuple[tuple, float]] | None:
         for v, _ in br.meshes:
             d = np.asarray(v, float).max(0) - np.asarray(v, float).min(0)
             lat = sorted(float(d[k]) for k in range(3) if k != ax)
-            out.append(((round(lat[1], 3), round(lat[0], 3), round(float(d[ax]), 3)), STEEL * float(np.prod(d)) * 1e-9))
+            # envelopes equal to 0.01 mm are the same item (the gaps differ by float noise below a micrometre)
+            out.append(((round(lat[1], 2), round(lat[0], 2), round(float(d[ax]), 2)), STEEL * float(np.prod(d)) * 1e-9))
     except Exception:  # noqa: BLE001 - an older / newer bracket record: one washer set per mount instead
         return None
     if not out or abs(sum(m for _, m in out) - solid) > 1e-9:
         return None
     return out
+
+
+def _other(groups: dict, key: tuple, it: dict, mass: float | None, pid, mfg: bool) -> None:
+    """Aggregate an item into the row of identical items (same kind, label, material, process and mass to 1 µg);
+    the row's total is the sum of their masses as given."""
+    g = groups.setdefault((*key, None if mass is None else round(mass, 9)),
+                          {"item": it, "n": 0, "total": 0.0, "known": mass is not None, "ids": [], "parts": [], "mfg": mfg})
+    g["n"] += 1
+    g["total"] += mass or 0.0
+    g["ids"].append(it["id"])
+    g["parts"].append(pid)
 
 
 def bom_from_layout(layout: dict, parts: dict, part_order=(), frame_mass_kg: float | None = None) -> dict:
@@ -182,9 +195,10 @@ def bom_from_layout(layout: dict, parts: dict, part_order=(), frame_mass_kg: flo
                 stacks = _washer_stacks(b, solid) if split and solid is not None else None
                 if stacks:
                     for dims, m in stacks:
-                        g = washers.setdefault(("stack", dims, round(m, 12)), {"dims": dims, "mass": m, "n": 0,
-                                                                                "ids": [], "parts": []})
+                        g = washers.setdefault(("stack", dims), {"dims": dims, "total": 0.0, "n": 0, "ids": [],
+                                                                 "parts": []})
                         g["n"] += 1
+                        g["total"] += m
                         g["ids"].append(it["id"])
                         g["parts"].append(pid)
                 else:
@@ -218,11 +232,14 @@ def bom_from_layout(layout: dict, parts: dict, part_order=(), frame_mass_kg: flo
                 fasteners.append((it["id"], pid, nf))
         elif kind == "standoff":
             box = it.get("box_mm") or []
-            dims = tuple(sorted((round(float(box[k + 3]) - float(box[k]), 3) for k in range(3)), reverse=True)) \
+            dims = tuple(sorted((round(float(box[k + 3]) - float(box[k]), 2) for k in range(3)), reverse=True)) \
                 if len(box) == 6 else None
-            g = standoffs.setdefault((dims, round(mass or 0.0, 12), it.get("label")),
-                                     {"dims": dims, "mass": mass, "n": 0, "ids": [], "parts": [], "item": it})
+            g = standoffs.setdefault((dims, it.get("label"), None if dims else round(mass or 0.0, 9)),
+                                     {"dims": dims, "total": 0.0, "known": True, "n": 0, "ids": [], "parts": [],
+                                      "item": it})
             g["n"] += 1
+            g["known"] &= mass is not None
+            g["total"] += mass or 0.0
             g["ids"].append(it["id"])
             g["parts"].append(pid)
         elif it.get("mount_type") is not None:           # Manufacturable Design: real solids, fasteners included
@@ -236,19 +253,10 @@ def bom_from_layout(layout: dict, parts: dict, part_order=(), frame_mass_kg: flo
                                                  "(Manufacturable Design)", item_ids=[it["id"]],
                                      bracket_kind=str(it.get("process")), designed=False, passed=None))
             else:
-                g = others.setdefault((kind, it.get("label") or mt, it.get("material"), it.get("process"),
-                                       round(mass or 0.0, 12)), {"item": it, "n": 0, "ids": [], "parts": [],
-                                                                 "mfg": True})
-                g["n"] += 1
-                g["ids"].append(it["id"])
-                g["parts"].append(pid)
+                _other(others, (kind, it.get("label") or mt, it.get("material"), it.get("process")), it, mass, pid, True)
         else:                                            # kinds a later model adds (rods, spacers …)
             has_rod_items |= "rod" in kind.lower() or "rod" in str(it.get("label") or "").lower()
-            g = others.setdefault((kind, it.get("label"), it.get("material"), it.get("process"), round(mass or 0.0, 12)),
-                                  {"item": it, "n": 0, "ids": [], "parts": [], "mfg": False})
-            g["n"] += 1
-            g["ids"].append(it["id"])
-            g["parts"].append(pid)
+            _other(others, (kind, it.get("label"), it.get("material"), it.get("process")), it, mass, pid, False)
 
     # brackets in the order of the parts they hold
     pos = {pid: i for i, pid in enumerate(order)}
@@ -256,19 +264,19 @@ def bom_from_layout(layout: dict, parts: dict, part_order=(), frame_mass_kg: flo
     hardware = []
     if fasteners:
         n = sum(x[2] for x in fasteners)
+        # no 3D id of their own: the fasteners are not modelled as solids (their mass sits at points of the brackets)
         hardware.append(_row("hardware", "fastener", FASTENER_NAME, qty=n, material="steel (ASSUMED)",
                              process="catalogue", unit_mass_kg=F, mass_source="ASSUMED", in_total=True,
                              for_parts=sorted({x[1] for x in fasteners}, key=lambda p: pos.get(p, len(pos))),
                              description=f"{n} on {len(fasteners)} bracket(s) and direct mounts; "
-                                         f"{1000 * F:g} g each (ASSUMED, mfg.rules)",
-                             item_ids=[x[0] for x in fasteners]))
+                                         f"{1000 * F:g} g each (ASSUMED, mfg.rules); not drawn"))
     for key, g in sorted(washers.items(), key=lambda kv: (kv[0][0], str(kv[0][1]))):
         parts_ = sorted(set(g["parts"]), key=lambda p: pos.get(p, len(pos)))
         if g["dims"] is not None:
             a, b2, h = g["dims"]
             hardware.append(_row("hardware", "washer_stack", f"M3 spacer washer stack {_mm(a)} × {_mm(b2)} × {_mm(h)} mm",
-                                 qty=g["n"], material="steel (ASSUMED)", process="catalogue", unit_mass_kg=g["mass"],
-                                 mass_source="ASSUMED", in_total=True, for_parts=parts_,
+                                 qty=g["n"], material="steel (ASSUMED)", process="catalogue", unit_mass_kg=g["total"] / g["n"],
+                                 total_mass_kg=g["total"], mass_source="ASSUMED", in_total=True, for_parts=parts_,
                                  description=f"{_mm(a)} × {_mm(b2)} mm envelope, {_mm(h)} mm high (ASSUMED model), "
                                              f"under the direct mounts of {', '.join(names.get(p, p) for p in parts_)}",
                                  item_ids=sorted(set(g["ids"]))))
@@ -281,19 +289,20 @@ def bom_from_layout(layout: dict, parts: dict, part_order=(), frame_mass_kg: flo
                                  description="washer stacks of one direct mount" +
                                              (f"; mass includes its {inc} fastener(s)" if inc else ""),
                                  item_ids=g["ids"]))
-    for (dims, _, _), g in sorted(standoffs.items(), key=lambda kv: str(kv[0][0])):
+    for (dims, _, _), g in sorted(standoffs.items(), key=lambda kv: str(kv[0])):
         it = g["item"]
         parts_ = sorted(set(g["parts"]), key=lambda p: pos.get(p, len(pos)))
+        known = g["known"]
         hardware.append(_row("hardware", "standoff", "M3 standoff" + (f" {_dims(dims)} mm" if dims else ""), qty=g["n"],
                              material=it.get("material") or "aluminium (ASSUMED)", process="catalogue",
-                             unit_mass_kg=g["mass"], mass_source="ASSUMED", in_total=g["mass"] is not None,
-                             for_parts=parts_,
+                             unit_mass_kg=g["total"] / g["n"] if known else None,
+                             total_mass_kg=g["total"] if known else None, mass_source="ASSUMED" if known else "not modelled",
+                             in_total=known, for_parts=parts_,
                              description=(f"{_dims(dims)} mm envelope (ASSUMED), " if dims else "") +
                                          f"for {', '.join(names.get(p, p) for p in parts_)}",
                              item_ids=g["ids"]))
     for (kind, label, material, process, _), g in others.items():
-        it = g["item"]
-        m = _f(it.get("mass_kg"))
+        known = g["known"]
         parts_ = sorted({p for p in g["parts"] if p}, key=lambda p: pos.get(p, len(pos)))
         desc = [str(label or kind)]
         if g["mfg"]:
@@ -302,9 +311,10 @@ def bom_from_layout(layout: dict, parts: dict, part_order=(), frame_mass_kg: flo
             desc.append(f"for {', '.join(names.get(p, p) for p in parts_)}")
         hardware.append(_row("hardware", kind or "item", str(label or kind or "item"), qty=g["n"],
                              material=material or "—", process=PROCESS.get(str(process), str(process or "—")),
-                             unit_mass_kg=m, mass_source="exact" if m is not None else "not modelled",
-                             in_total=m is not None, for_parts=parts_, description="; ".join(desc),
-                             item_ids=g["ids"]))
+                             unit_mass_kg=g["total"] / g["n"] if known else None,
+                             total_mass_kg=g["total"] if known else None,
+                             mass_source="exact" if known else "not modelled", in_total=known, for_parts=parts_,
+                             description="; ".join(desc), item_ids=g["ids"]))
     if stage == 2 and not has_rod_items:
         rods = [f for f in s2v.get("frame") or [] if f.get("kind") == "rod"]
         if rods:

@@ -19,6 +19,7 @@
 }
 .bom-table tbody tr {
   cursor: pointer;
+  scroll-margin-top: calc(var(--row) + 4px); /* not under the sticky header when a part picked in 3D scrolls here */
 }
 .bom-table td {
   vertical-align: top;

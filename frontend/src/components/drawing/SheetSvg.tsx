@@ -311,7 +311,8 @@ export function DrawingSheet(props: DrawingSheetProps) {
   const d = props.data;
   const t = d.template;
   const sel = props.selectedPartId ?? null;
-  const viewLabelY = (v: SheetData['layout']['views'][number]) => v.y + v.h + v.margins.b - 2.5;
+  const viewLabelY = (v: SheetData['layout']['views'][number]) => v.y + v.h + v.margins.b - 1.5;
+  const viewName = Object.fromEntries(d.layout.views.map((v) => [v.view, `${v.label.toLowerCase()}, scale ${scaleLabel(v.scale)}`]));
   return (
     <svg
       ref={props.svgRef}
@@ -330,17 +331,21 @@ export function DrawingSheet(props: DrawingSheetProps) {
       <rect x={0} y={0} width={t.width} height={t.height} fill="#fff" />
       <g data-part="views">
         {d.renders.map((r) => (
-          <image key={r.view} href={r.href} x={r.x} y={r.y} width={r.w} height={r.h} preserveAspectRatio="none" data-view={r.view} />
+          <image key={r.view} href={r.href} x={r.x} y={r.y} width={r.w} height={r.h} preserveAspectRatio="none" data-view={r.view} aria-label={viewName[r.view]}>
+            <title>{viewName[r.view]}</title>
+          </image>
         ))}
       </g>
       <path d={segPath(d.phantom)} className="phantom" data-part="outline" />
       <path d={segPath(d.centre)} className="centre" data-part="centre-lines" />
-      {d.layout.views.map((v) => (
-        <text key={v.view} x={v.x + v.w / 2} y={viewLabelY(v)} fontSize={3} textAnchor="middle" data-view-label={v.view}>
-          {v.label}
-          {v.ownScale ? ` (SCALE ${scaleLabel(v.scale)})` : ''}
-        </text>
-      ))}
+      {d.layout.views
+        .filter((v) => v.view === 'iso')
+        .map((v) => (
+          <text key={v.view} x={v.x + v.w / 2} y={viewLabelY(v)} fontSize={3} textAnchor="middle" data-view-label={v.view}>
+            {v.label}
+            {v.ownScale ? ` (SCALE ${scaleLabel(v.scale)})` : ''}
+          </text>
+        ))}
       <g data-part="dimensions">
         {d.dims.map((m, i) => (
           <g key={i}>

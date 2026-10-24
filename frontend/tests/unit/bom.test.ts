@@ -80,6 +80,8 @@ describe('V2 WS6 bill of materials helpers', () => {
     const bom = buildBomClient(layout, parts, ['a', 'b', 'c', 'd']);
     const nums = itemNumbers(bom.items);
     for (const it of layout.extra_items) expect(nums.has(it.id)).toBe(true);
+    const owners = bom.items.flatMap((r) => r.item_ids);
+    expect(new Set(owners).size).toBe(owners.length); // every 3D object belongs to one row (one balloon number)
     for (const p of ['a', 'b', 'c', 'd']) expect(bom.items[nums.get(p)! - 1].part_id).toBe(p);
     const sel = rowsForPart(bom.items, 'b');
     const own = [...sel.own].map((n) => bom.items[n - 1]);

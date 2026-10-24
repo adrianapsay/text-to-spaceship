@@ -118,10 +118,13 @@ def test_parts_plus_hardware_is_the_layout_mass_and_fasteners_are_one_row(recs, 
     for r in b["items"]:
         if r["unit_mass_kg"] is not None:
             assert r["total_mass_kg"] == pytest.approx(r["unit_mass_kg"] * r["qty"])
-    # the 3D render ids: parts by part id, brackets by their extra item id
+    # the 3D render ids: parts by part id, brackets and washer stacks by their extra item id, each in one row only
     ids = {it["id"] for it in c.layout_json(e)["extra_items"]}
     assert all(set(r["item_ids"]) <= ids for r in b["items"] if r["group"] in ("brackets", "hardware"))
     assert all(r["item_ids"] == [r["part_id"]] for r in _rows(b, "parts"))
+    owners = [i for r in b["items"] for i in r["item_ids"]]
+    assert len(owners) == len(set(owners)) and ids <= set(owners)
+    assert fast[0]["item_ids"] == []                       # fasteners are not modelled as solids
 
 
 def test_a_designed_bracket_replaces_its_estimate_and_a_failed_one_keeps_it(recs, mixed):

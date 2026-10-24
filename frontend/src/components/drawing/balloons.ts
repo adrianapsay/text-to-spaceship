@@ -62,7 +62,9 @@ export function spread(desired: number[], d: number, lo: number, hi: number): nu
 
 /**
  * Balloons of one view: `view` is the view's rectangle, `lanes` the x of the lane centres (null: no lane on that
- * side), [top, bottom] the vertical range the lanes may use.
+ * side), [top, bottom] the vertical range the lanes may use. A point left of `split` (share of the view's width)
+ * goes to the left lane: a view with dimensions on its left sends most of its balloons right (split < 0.5), so that
+ * fewer leaders cross the dimensions.
  */
 export function placeBalloons(
   view: Rect,
@@ -71,12 +73,13 @@ export function placeBalloons(
   refs: Visibility[],
   r = BALLOON_R,
   gap = BALLOON_GAP,
+  split = 0.5,
 ): Balloon[] {
   const d = 2 * r + gap;
   const lo = range[0] + r;
   const hi = range[1] - r;
   const cap = Math.max(1, Math.floor((hi - lo) / d) + 1);
-  const cx = view.x + view.w / 2;
+  const cx = view.x + view.w * split;
   const side = { left: [] as Visibility[], right: [] as Visibility[] };
   for (const v of refs) {
     const want = lanes.left == null ? 'right' : lanes.right == null ? 'left' : v.anchor[0] < cx ? 'left' : 'right';

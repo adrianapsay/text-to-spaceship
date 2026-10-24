@@ -198,8 +198,9 @@ export function buildBomClient(layout: Layout, parts: Record<string, Part>, orde
     const p = parts[id];
     const m = p?.mass_kg != null ? (p.mass_source === 'USER_MASS' ? p.mass_kg : p.mass_kg * scale ** 3) : null;
     const src = m == null ? 'WITHHELD' : p.mass_source;
+    // the material of a supplied part is not known: what is known is the density its mass comes from
     const material =
-      m == null ? 'unknown (mass properties withheld)' : src === 'USER_MASS' ? 'unspecified (mass entered by the user)' : `unspecified, density ${(p.density_kg_m3 ?? 2700).toLocaleString('en-US', { maximumFractionDigits: 0 })} kg/m³ (${src === 'USER_DENSITY' ? 'entered by the user' : 'ASSUMED'})`;
+      m == null ? 'unknown (mass withheld)' : src === 'USER_MASS' ? 'not specified (mass entered)' : `density ${(p.density_kg_m3 ?? 2700).toLocaleString('en-US', { maximumFractionDigits: 0 })} kg/m³ (${src === 'USER_DENSITY' ? 'entered' : 'ASSUMED'})`;
     const desc = [SUBSYSTEM[p?.subsystem ?? 'unknown'] ?? p?.subsystem ?? 'Unknown'];
     if (p?.extents_mm) desc.push(`bounding box ${p.extents_mm.map((v) => mmText(v * scale)).join(' × ')} mm${scale !== 1 ? ` at ${Math.round(scale * 100)} % size` : ''}`);
     return row({ group: 'parts', kind: 'part', name: names[id], part_id: id, for_parts: [id], material, process: 'as supplied', unit_mass_kg: m, mass_source: src, in_total: m != null && !excluded.has(id), description: desc.join('; '), item_ids: [id] });
@@ -249,7 +250,8 @@ export function buildBomClient(layout: Layout, parts: Record<string, Part>, orde
   brackets.sort((a, b) => (pos.get(a.part_id ?? '') ?? 1e9) - (pos.get(b.part_id ?? '') ?? 1e9));
   if (fasteners.length) {
     const n = fasteners.reduce((s, f) => s + f.n, 0);
-    hardware.push(row({ group: 'hardware', kind: 'fastener', name: 'M3 × 8 screw with washer', qty: n, material: 'steel (ASSUMED)', process: 'catalogue', unit_mass_kg: FASTENER_MASS_KG, mass_source: 'ASSUMED', in_total: true, for_parts: [...new Set(fasteners.map((f) => f.pid))], description: `${n} on ${fasteners.length} bracket(s) and direct mounts; ${FASTENER_MASS_KG * 1000} g each (ASSUMED)`, item_ids: fasteners.map((f) => f.id) }));
+    // no 3D id of their own: the fasteners are not modelled as solids
+    hardware.push(row({ group: 'hardware', kind: 'fastener', name: 'M3 × 8 screw with washer', qty: n, material: 'steel (ASSUMED)', process: 'catalogue', unit_mass_kg: FASTENER_MASS_KG, mass_source: 'ASSUMED', in_total: true, for_parts: [...new Set(fasteners.map((f) => f.pid))], description: `${n} on ${fasteners.length} bracket(s) and direct mounts; ${FASTENER_MASS_KG * 1000} g each (ASSUMED); not drawn` }));
   }
   hardware.push(...groups.values());
   const structure: BomRow[] = [];
