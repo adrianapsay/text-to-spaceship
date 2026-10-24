@@ -122,7 +122,13 @@ export function BracketLayoutTable({ data, running, names, onRun, onUse }: Layou
                   ? `${data.modes[m]?.summary?.pieces ?? 0} brackets, one each`
                   : held.length
                     ? Object.values(designs)
-                        .map((d) => `${d.name}: ${d.parts.map(nm).join(', ')}`)
+                        .map(
+                          (d) =>
+                            `${d.name}: ${d.parts.map(nm).join(', ')}` +
+                            (d.mass_kg == null
+                              ? ` — no solid${d.reason ? ` (${d.reason})` : ''}: these parts keep their own brackets in the numbers`
+                              : ''),
+                        )
                         .join('; ')
                     : m === 'combined' && data.combined_plan.length
                       ? `plan: ${data.combined_plan.map((g) => `${g.target}: ${g.pids.map(nm).join(', ')}`).join('; ')}`

@@ -523,11 +523,14 @@ def per_part_summary(brackets: list, designs: dict, sizes: dict | None = None) -
 
 def mode_summary(mode: str, brackets: list, per_part_designs: dict, result: dict) -> dict:
     """Combined / one-piece column: the new prints' masses plus every bracket they leave as it was (its per-part design
-    or simple solid), the worst margin over all designed ones, the lowest f1, the print count and the largest print."""
+    or simple solid), the worst margin over all designed ones, the lowest f1, the print count and the largest print.
+    A new print without a solid (failed, or not solved for memory) is listed in `failed` and its parts keep their
+    per-part brackets in the numbers — as the views show them (coordinator._layout_items)."""
     designs = result.get("designs") or {}
     held = set()
     for d in designs.values():
-        held |= set(d.get("parts") or [])
+        if d.get("mass_kg") is not None:
+            held |= set(d.get("parts") or [])
     rest = [b for b in brackets if b["pid"] not in held]
     base = per_part_summary(rest, per_part_designs) if rest else {"bracket_mass_kg": 0.0, "worst": None, "f1": None,
                                                                  "prints": 0, "largest_print_mm": None, "estimates": 0}
@@ -551,8 +554,8 @@ def mode_summary(mode: str, brackets: list, per_part_designs: dict, result: dict
     return {"mode": mode, "bracket_mass_kg": mass, "estimates": base.get("estimates", 0), "worst": worst, "f1": f1,
             "prints": prints, "largest_print_mm": largest,
             "largest_fits": None if largest is None else fits_build_volume(largest),
-            "build_volume_mm": list(build_volume()), "pieces": len(rest) + len(designs), "failed": failed,
-            "passed": all(bool(d.get("passed")) for d in designs.values()) if designs else None,
+            "build_volume_mm": list(build_volume()), "pieces": len(rest) + len(designs) - len(failed),
+            "failed": failed, "passed": all(bool(d.get("passed")) for d in designs.values()) if designs else None,
             "unchanged": [b["pid"] for b in rest]}
 
 

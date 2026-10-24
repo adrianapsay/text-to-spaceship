@@ -128,6 +128,25 @@ def test_a_chosen_layout_without_a_solid_falls_back_to_per_part(tmp_path):
     assert c._active_layout(e) == ("per_part", None)
 
 
+def test_layout_summaries_count_every_bracket_once():
+    """The comparison numbers: per part sums every bracket; a combined print replaces its members' brackets; one
+    without a solid is listed as failed and its parts keep their per-part brackets (as the views show them)."""
+    from t2s.gd.layouts import mode_summary, per_part_summary
+    brs = [_bracket("p1", 0), _bracket("p2", 1), _bracket("p3", 2)]
+    pp = per_part_summary(brs, {})
+    assert pp["bracket_mass_kg"] == pytest.approx(0.06) and pp["prints"] == 3 and pp["estimates"] == 3
+    rec = {"name": "combined:1", "parts": ["p1", "p2"], "passed": True, "mass_kg": 0.05, "size_mm": [7.0, 18.0, 8.0],
+           "governing": {"case": "static", "axis": "z", "check": "yield", "ms": 1.5}, "f1_hz": 900.0}
+    ok = mode_summary("combined", brs, {}, {"designs": {"p1+p2": rec}})
+    assert ok["bracket_mass_kg"] == pytest.approx(0.05 + 0.02) and ok["prints"] == 2 and ok["pieces"] == 2
+    assert ok["unchanged"] == ["p3"] and ok["failed"] == [] and ok["passed"]
+    assert ok["worst"]["ms"] == 1.5 and ok["f1"]["f_hz"] == 900.0 and ok["largest_print_mm"] == [7.0, 18.0, 8.0]
+    bad = mode_summary("combined", brs, {}, {"designs": {"p1+p2": {**rec, "mass_kg": None, "passed": False}}})
+    assert bad["failed"] == ["p1+p2"] and bad["passed"] is False
+    assert bad["bracket_mass_kg"] == pytest.approx(0.06) and bad["prints"] == 3 and bad["pieces"] == 3
+    assert bad["unchanged"] == ["p1", "p2", "p3"]
+
+
 def test_layout_run_settings_are_checked(tmp_path):
     c, _ = _coord(tmp_path)
     assert c._check_layout_settings("one_piece", {"budget_s": 600, "vol_frac": 0.05}) == {"budget_s": 600.0,

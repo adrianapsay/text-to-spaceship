@@ -77,6 +77,24 @@ describe('M4 bracket layout comparison', () => {
     expect(onRun).toHaveBeenCalledWith('one_piece');
   });
 
+  it('a combined bracket without a solid is marked, and its parts keep their own brackets in the numbers', () => {
+    const d = data();
+    d.modes.combined = {
+      ...d.modes.combined,
+      summary: summary({ mode: 'combined', passed: false, failed: ['p06+p07+p10+p12+p17'] }),
+      result: {
+        status: 'designed',
+        designs: {
+          'p06+p07+p10+p12+p17': { name: 'combined:1', kind: 'combined', parts: ['p06', 'p07'], passed: false, mass_kg: null, reason: 'not solved: memory' },
+        },
+      },
+    };
+    const { getByTestId } = render(<BracketLayoutTable data={d} running={false} onUse={vi.fn()} onRun={vi.fn()} />);
+    expect(getByTestId('layout-col-combined').textContent).toContain('1 without a solid');
+    expect(getByTestId('cell-parts-combined').textContent).toContain('no solid (not solved: memory): these parts keep their own brackets');
+    expect((getByTestId('use-combined') as HTMLButtonElement).disabled).toBe(true);
+  });
+
   it('nothing can start or be chosen while a design run is under way; nothing to combine means no combined run', () => {
     const { getByTestId } = render(<BracketLayoutTable data={data({ combined_plan: [] })} running onUse={vi.fn()} onRun={vi.fn()} />);
     for (const id of ['run-combined', 'run-one_piece', 'use-combined']) expect((getByTestId(id) as HTMLButtonElement).disabled).toBe(true);
