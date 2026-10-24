@@ -208,6 +208,37 @@ def layout_hash(stage: int, poses) -> str:
     return hashlib.sha256(json.dumps([stage, items]).encode()).hexdigest()[:16]
 
 
+_HEAVY = ("checks", "bolt_checks", "axes", "factor_sources")      # M4: per-check tables kept in the archive only
+
+
+def _light_design(d: dict) -> dict:
+    """A combined bracket's / the one piece's record without its per-check tables (the app's views)."""
+    out = {k: v for k, v in (d or {}).items() if k not in _HEAVY}
+    if isinstance(out.get("modes"), list):
+        out["modes"] = out["modes"][:6]
+    if out:
+        out.setdefault("generator", "active-element SIMP (gd.simp, the contest winner's method)")
+    return out
+
+
+def _light_result(r: dict | None) -> dict | None:
+    if not r:
+        return r
+    return {**{k: v for k, v in r.items() if k != "designs"},
+            "designs": {k: _light_design(d) for k, d in (r.get("designs") or {}).items()}}
+
+
+def _union_box(d: dict) -> list | None:
+    """The box around a combined bracket's boxes, or around the one piece's solid."""
+    if d.get("bbox_mm"):
+        return list(d["bbox_mm"])
+    boxes = [b["box"] for b in d.get("boxes") or []]
+    if not boxes:
+        return None
+    a = np.asarray(boxes, float)
+    return [*a[:, :3].min(0).tolist(), *a[:, 3:].max(0).tolist()]
+
+
 @dataclass
 class LayoutEntry:
     id: str
@@ -1088,7 +1119,15 @@ class Coordinator:
             from ..constraints.stage2_model import Stage2Model
             hardware = Stage2Model.standoff_mass(e.meta.get("standoffs") or [])
             designs = e.meta.get("bracket_designs") or {}
+            _, res = self._active_layout(e)               # M4: a chosen combined / one-piece layout
+            replaced = set()
+            for d in ((res or {}).get("designs") or {}).values():
+                if d.get("mass_kg") is not None and d.get("com_mm") is not None:
+                    replaced |= set(d.get("parts") or [])
+                    hardware.append((d["mass_kg"], np.asarray(d["com_mm"], float), np.asarray(d["inertia_kgm2"], float)))
             for b in e.meta.get("brackets") or []:                          # V2 Stage 2 brackets
+                if b["pid"] in replaced:
+                    continue
                 d = designs.get(b["pid"]) if designs.get(b["pid"], {}).get("mass_kg") is not None else None
                 src = d or b                                                # a designed solid replaces the estimate
                 hardware.append((src["mass_kg"], np.asarray(src["com_mm"], float), np.asarray(src["inertia_kgm2"], float)))
@@ -1616,7 +1655,10 @@ class Coordinator:
                         "mesh_url": f"/api/items/{e.id}-so{k}/mesh", "mass_kg": m, "cost_rel": None,
                         "material": "aluminium (ASSUMED)", "label": "M3 standoff (ASSUMED 5 × 5 mm envelope)",
                         "box_mm": b})
+        layout_items, replaced = self._layout_items(e)              # M4: the chosen combined / one-piece brackets
         for k, b in enumerate(e.meta.get("brackets") or []):        # V2 Stage 2 brackets (designed solid if any)
+            if b["pid"] in replaced:
+                continue
             d = (e.meta.get("bracket_designs") or {}).get(b["pid"])
             d = d if d and d.get("mass_kg") is not None else None    # a failed design keeps the estimate
             # a designed solid gets its own URL: viewers cache meshes by URL and must not keep showing the box
@@ -1627,6 +1669,7 @@ class Coordinator:
                         "mass_kg": d["mass_kg"] if d else b["mass_kg"], "cost_rel": d["cost_rel"] if d else b["cost_rel"],
                         "material": b["material"], "label": d["label"] if d else b["label"],
                         "exact": True if d else b["exact"], "box_mm": b["reserve"], "target": b["target"]})
+        out += layout_items
         boxes = dict(self._rod_boxes(e))
         board = (e.meta.get("stack_ids") or [None])[0]     # the rods move with the boards in the exploded view
         end = {"-z": "−Z", "+z": "+Z"}.get(e.meta.get("rod_end"), "")
@@ -1666,6 +1709,11 @@ class Coordinator:
                 "brackets": meta.get("brackets", []),
                 "hardware_cost_rel": meta.get("C"), "bracket_designs": meta.get("bracket_designs", {}),
                 "bracket_overrides": meta.get("bracket_overrides", {}),
+                # M4: the bracket layout this layout is shown and saved with, and the records of its prints (drawings)
+                "bracket_layout": self._active_layout(e)[0], "bracket_layout_chosen": self._bracket_mode(e),
+                "bracket_layout_designs": {it["id"]: _light_design(
+                    (((meta.get("bracket_layouts") or {}).get(it["layout_mode"]) or {}).get("designs") or {})
+                    .get(it["layout_key"]) or {}) for it in self._layout_items(e)[0]},
                 "assumed": ["2 mm walls", "8.5 mm corner rails", "clearances 2.2 / 1.2 mm (U4)",
                             ("PC/104 stack, 15.24 mm pitch, rods at (±35, ±35) mm × part size, anchored at the "
                              "nearest end plate (M3 rods in 5 mm spacer tubes)"), "3 mm mounting layer (U6)",
@@ -1690,6 +1738,19 @@ class Coordinator:
         e = self.archive.get(lid)
         if e is not None and k.isdigit() and int(k) < len(e.meta.get("brackets") or []):
             return self._bracket_mesh(e, int(k))
+        for tag, mode in (("-cb", "combined"), ("-op", "one_piece")):     # M4: combined brackets, the one piece
+            lid, sep, k = iid.rpartition(tag)
+            e = self.archive.get(lid) if sep else None
+            if e is None or (mode == "combined" and not k.isdigit()) or (mode == "one_piece" and k):
+                continue
+            res = ((e.meta or {}).get("bracket_layouts") or {}).get(mode) or {}
+            for d in (res.get("designs") or {}).values():
+                if mode == "combined" and int(d.get("index", -1)) != int(k):
+                    continue
+                p = self.store.cache / "items" / e.id / mode / str(d.get("mesh_file") or "")
+                if d.get("mesh_file") and p.is_file():
+                    return p.read_bytes()
+            raise KeyError(iid)
         lid, _, k = iid.rpartition("-rod")
         e = self.archive.get(lid)
         if e is not None and k.isdigit() and int(k) < len(e.meta.get("stack_hardware") or []):
@@ -2834,7 +2895,9 @@ class Coordinator:
         mass, result), how many are done, the time so far and the estimated time left (gd.design.design_job)."""
         return {"status": status, "layout_id": res.get("layout_id"), "brackets": res.get("brackets") or [],
                 "n_total": res.get("n_total"), "n_done": res.get("n_done"), "workers": res.get("workers"),
-                "seconds": res.get("seconds"), "eta_s": res.get("eta_s")}
+                "seconds": res.get("seconds"), "eta_s": res.get("eta_s"),
+                "mode": res.get("mode") or "per_part", "estimate": res.get("estimate"),
+                "peak_rss_mb": res.get("peak_rss_mb")}
 
     def _search_settled(self) -> bool:
         """No island job in flight and no validation queued or running: the best layout can no longer change."""
@@ -2933,6 +2996,260 @@ class Coordinator:
         if self.run_status == "PAUSED":                       # the best may have changed while this one ran
             self._maybe_auto_design()
 
+    # =========================================================================================== bracket layouts (M4)
+    BRACKET_LAYOUT_BUDGET_S = (60.0, 7200.0)      # one piece: the optimiser's time budget the user may set (s)
+
+    def _layout_snapshot(self, e: LayoutEntry, mode: str, settings: dict | None = None,
+                         overrides: dict | None = None) -> dict:
+        """What a layout job needs (gd.layouts.build_snapshot), from a Stage 2 layout of the archive."""
+        from ..gd.layouts import build_snapshot
+        env_id, mat_id = self._design_defaults()
+        recs = self.layout_records(e)
+        phys = self._phys(e.part_scale)
+        masses = {p: (x.mass_kg if x is not None else None) for p, x in phys.items()}
+        budget = (settings or {}).get("budget_s")
+        return build_snapshot(e.id, recs, e.meta or {}, e.poses, masses, mode, env_id, mat_id, settings=settings,
+                              overrides=overrides, budget_s=float(budget) if budget is not None else None)
+
+    @staticmethod
+    def _bracket_mode(e: LayoutEntry) -> str:
+        """The bracket layout a layout is shown and saved with (meta bracket_mode; per_part unless chosen)."""
+        m = (e.meta or {}).get("bracket_mode") or "per_part"
+        return m if m in ("per_part", "combined", "one_piece") else "per_part"
+
+    def _active_layout(self, e: LayoutEntry) -> tuple[str, dict | None]:
+        """(mode, its result) of a layout; a chosen mode without a usable result falls back to per_part."""
+        mode = self._bracket_mode(e)
+        if mode == "per_part":
+            return mode, None
+        res = ((e.meta or {}).get("bracket_layouts") or {}).get(mode)
+        if not res or not any(d.get("mass_kg") is not None for d in (res.get("designs") or {}).values()):
+            return "per_part", None
+        return mode, res
+
+    def _check_layout_settings(self, mode: str, settings: dict | None) -> dict:
+        """A layout run's settings, checked: material (AM), vol_frac, min_member_mm ("auto" or in range) and, for the
+        one piece, budget_s (s). InvalidSetting when out of range."""
+        if not isinstance(settings or {}, dict):
+            raise InvalidSetting("settings is an object {material, vol_frac, min_member_mm, budget_s}")
+        s = dict(settings or {})
+        out = {}
+        if "budget_s" in s:
+            if mode != "one_piece":
+                raise InvalidSetting("budget_s applies to the one piece only")
+            try:
+                b = float(s.pop("budget_s"))
+            except (TypeError, ValueError) as exc:
+                raise InvalidSetting("budget_s must be a number of seconds") from exc
+            lo, hi = self.BRACKET_LAYOUT_BUDGET_S
+            if not (math.isfinite(b) and lo <= b <= hi):
+                raise InvalidSetting(f"budget_s {b:g} is outside {lo:g} … {hi:g} s")
+            out["budget_s"] = b
+        out.update(self._bracket_override({"pid": mode, "kind": "metal_am"}, s))
+        return out
+
+    def bracket_layouts(self, layout_id: str) -> dict:
+        """The three bracket layouts of a Stage 2 layout side by side (Mounting Hardware tab): for each, the bracket
+        mass in total, the worst margin and its check, the system's first frequency, the prints and the largest one
+        (gd.layouts summaries); the chosen one; the combined plan (groups, bridges) and every result's records."""
+        from ..gd.layouts import MODE_NAMES, build_volume, mode_summary, per_part_summary, plan_combined
+        e = self.archive.get(layout_id)
+        if e is None:
+            raise KeyError(layout_id)
+        if e.stage != 2:
+            raise ValueError("only a Stage 2 layout has brackets")
+        meta = e.meta or {}
+        brs = meta.get("brackets") or []
+        designs = meta.get("bracket_designs") or {}
+        sizes = {}
+        for k, b in enumerate(brs):
+            d = designs.get(b["pid"]) or {}
+            p = self.store.cache / "items" / e.id / str(d.get("vertices_file") or "")
+            if d.get("vertices_file") and p.is_file():
+                v = np.load(p)
+                sizes[b["pid"]] = (v.max(0) - v.min(0)).tolist()
+        results = meta.get("bracket_layouts") or {}
+        try:
+            plan = plan_combined(self._layout_snapshot(e, "combined"))
+        except Exception as exc:  # noqa: BLE001 - a layout the plan cannot read: shown, not fatal
+            plan, plan_err = [], repr(exc)
+        else:
+            plan_err = None
+        L = self.ladders.get("__bracket_design__")
+        running = None
+        if L is not None and not L.get("finalised"):
+            running = {"mode": L.get("mode") or "per_part", "layout_id": L.get("layout_id")}
+        modes = {"per_part": {"mode": "per_part", "name": MODE_NAMES["per_part"], "status": "designed" if designs else
+                              "not designed", "summary": per_part_summary(brs, designs, sizes)}}
+        for mode in ("combined", "one_piece"):
+            r = results.get(mode)
+            modes[mode] = {"mode": mode, "name": MODE_NAMES[mode], "status": (r or {}).get("status") or "not run",
+                           "summary": mode_summary(mode, brs, designs, r) if r else None,
+                           "result": _light_result(r) if r else None}
+        active, _ = self._active_layout(e)
+        return jsonable({"layout_id": e.id, "chosen": self._bracket_mode(e), "active": active, "modes": modes,
+                         "combined_plan": [{"name": g["name"], "pids": g["pids"], "target": g["target"],
+                                            "bridges": [{"ends": b["ends"], "gap_mm": b["gap_mm"],
+                                                         "box": b["gap_box"]} for b in g["bridges"]]}
+                                           for g in plan], "combined_plan_error": plan_err,
+                         "build_volume_mm": list(build_volume()), "build_volume_note": (
+                             "ASSUMED: 250 × 250 × 325 mm, a typical metal L-PBF machine (mfg.brackets.BUILD_VOLUME)"),
+                         "running": running, "budget_range_s": list(self.BRACKET_LAYOUT_BUDGET_S),
+                         "exploratory": {"one_piece": True}})
+
+    def one_piece_estimate(self, layout_id: str, settings: dict | None = None) -> dict:
+        """Before a one-piece run: its grid, the optimiser's size and the predicted time and memory (gd.layouts;
+        builds the domain, a few seconds; run in a thread)."""
+        from ..gd.layouts import one_piece_estimate
+        e = self.archive.get(layout_id)
+        if e is None:
+            raise KeyError(layout_id)
+        if e.stage != 2:
+            raise ValueError("only a Stage 2 layout has brackets")
+        st = self._check_layout_settings("one_piece", settings)
+        return jsonable(one_piece_estimate(self._layout_snapshot(e, "one_piece", st), st))
+
+    def start_bracket_layout(self, layout_id: str, mode: str, settings: dict | None = None,
+                             overrides: dict | None = None) -> dict:
+        """Design a layout's brackets as one of the M4 bracket layouts, in the background (one design run at a time,
+        the per-part design job included): "combined" — the combined brackets of the plan (overrides {group key:
+        settings}, the key the member part ids joined by "+"); "one_piece" — the one piece with `settings` (and a
+        time budget). The result goes to the layout's meta bracket_layouts; the per-part designs stay."""
+        import pickle
+
+        from ..gd.layouts import combined_job, one_piece_job, threads_default
+        if mode not in ("combined", "one_piece"):
+            raise InvalidSetting(f"unknown bracket layout {mode!r} (combined, one_piece)")
+        e = self.archive.get(layout_id)
+        if e is None:
+            raise KeyError(layout_id)
+        if e.stage != 2 or not (e.meta or {}).get("brackets"):
+            raise ValueError("this layout has no brackets")
+        st = self._check_layout_settings(mode, settings)
+        ov = {}
+        if mode == "combined":
+            if not isinstance(overrides or {}, dict):
+                raise InvalidSetting("overrides is an object {group key: settings}")
+            ov = {str(k): self._check_layout_settings("combined", v) for k, v in (overrides or {}).items()}
+        L = self.ladders.get("__bracket_design__")
+        if L is not None and not L.get("finalised"):
+            raise ValueError("a bracket design run is already in progress")
+        snapd = self._layout_snapshot(e, mode, st, ov)
+        if mode == "combined":
+            from ..gd.layouts import plan_combined
+            if not plan_combined(snapd):
+                raise ValueError("no two metal 3D-printed brackets of this layout can be joined (same wall, clear "
+                                 "space between them)")
+        out = self.store.cache / "items" / e.id / mode
+        out.mkdir(parents=True, exist_ok=True)
+        snap = out / "snapshot.pkl"
+        snap.write_bytes(pickle.dumps(snapd, protocol=pickle.HIGHEST_PROTOCOL))
+        (out / "progress.json").unlink(missing_ok=True)
+        job = combined_job if mode == "combined" else one_piece_job
+        fut = self.ladder_pool.submit(formfactor.call_with, formfactor.current(), job, str(snap), str(out),
+                                      threads_default())
+        self.ladders["__bracket_design__"] = {"future": fut, "path": out / "progress.json", "mtime": None,
+                                              "status": "PENDING", "progress": 0.0, "study": "bracket_design",
+                                              "mode": mode, "layout_id": e.id, "settings": self._settings_view()}
+        self._design_lid = e.id
+        wf = asyncio.wrap_future(fut, loop=self.loop)
+        wf.add_done_callback(lambda f, lid=e.id, o=out, m=mode, s=st, v=ov: self._on_bracket_layout(f, lid, o, m, s, v))
+        self.broadcast("study.update", {"study": "bracket_design", "progress": 0.0, "partial": self._design_progress(
+            {"layout_id": e.id, "mode": mode, "brackets": [], "n_total": None, "n_done": 0, "seconds": 0.0,
+             "estimate": snapd.get("estimate")}, "PENDING")})
+        return jsonable({"status": "RUNNING", "layout_id": e.id, "mode": mode, "settings": st,
+                         "estimate": snapd.get("estimate")})
+
+    def _on_bracket_layout(self, fut, lid: str, out: Path, mode: str, settings: dict, overrides: dict) -> None:
+        L = self.ladders.get("__bracket_design__")
+        try:
+            if fut.cancelled():
+                return
+            if fut.exception() is not None:
+                self._error(f"{mode} bracket design failed: {fut.exception()!r}")
+                return
+            res = json.loads((out / "progress.json").read_text(encoding="utf-8"))
+            e = self.archive.get(lid)
+            if e is None:
+                return
+            meta = dict(e.meta or {})
+            layouts = dict(meta.get("bracket_layouts") or {})
+            env_id, mat_id = self._design_defaults()
+            layouts[mode] = {"status": "designed", "created": now_iso(), "environment": env_id,
+                             "material": settings.get("material") or mat_id, "settings": settings,
+                             "overrides": overrides, "designs": res.get("designs") or {}, "groups": res.get("groups"),
+                             "seconds": res.get("seconds_total") or res.get("seconds"),
+                             "peak_rss_mb": res.get("peak_rss_mb"), "estimate": res.get("estimate"),
+                             "folder": mode}
+            meta["bracket_layouts"] = layouts
+            e.meta = jsonable(meta)
+            self._compute_physics(e)                  # a chosen layout's masses replace the per-part ones
+            self._score_entry(e)
+            self._persist(e)
+            for k in [k for k in self.proof_cache if k[0] == lid]:
+                self.proof_cache.pop(k, None)
+            self.broadcast("layout.updated", {"layout": self.layout_json(e), "reason": f"{mode} brackets designed"})
+            self.broadcast("study.update", {"study": "bracket_design", "progress": 1.0,
+                                            "partial": self._design_progress(res, "DONE")})
+            if self._bracket_mode(e) == mode and (lid == self.best_id or self.__dict__.get("_saved_lid") == lid):
+                self._save_stl(e, f"{mode} brackets designed")
+        except Exception as exc:  # noqa: BLE001
+            self._error(f"{mode} bracket designs could not be applied: {exc!r}")
+        finally:
+            if L is not None:
+                L["finalised"] = True
+            self._design_lid = None
+
+    def use_bracket_layout(self, layout_id: str, mode: str) -> dict:
+        """Choose the bracket layout the layout is shown and saved with ("Use for saved STL files"): the 3D views, the
+        physics, the bill of materials, the drawings, the fit proof and the saved STL files follow it."""
+        if mode not in ("per_part", "combined", "one_piece"):
+            raise InvalidSetting(f"unknown bracket layout {mode!r} (per_part, combined, one_piece)")
+        e = self.archive.get(layout_id)
+        if e is None:
+            raise KeyError(layout_id)
+        if e.stage != 2:
+            raise ValueError("only a Stage 2 layout has brackets")
+        if mode != "per_part":
+            r = ((e.meta or {}).get("bracket_layouts") or {}).get(mode) or {}
+            if not any(d.get("mass_kg") is not None for d in (r.get("designs") or {}).values()):
+                raise ValueError(f"the {mode.replace('_', ' ')} brackets of {e.id} are not designed (run them first)")
+        e.meta = jsonable({**(e.meta or {}), "bracket_mode": mode})
+        self._compute_physics(e)
+        self._score_entry(e)
+        self._persist(e)
+        for k in [k for k in self.proof_cache if k[0] == layout_id]:
+            self.proof_cache.pop(k, None)
+        self.broadcast("layout.updated", {"layout": self.layout_json(e), "reason": f"bracket layout: {mode}"})
+        self._save_stl(e, f"bracket layout chosen: {mode.replace('_', ' ')}")
+        return {"layout_id": e.id, "chosen": mode, "status": "SAVING"}
+
+    def _layout_items(self, e: LayoutEntry) -> tuple[list[dict], set]:
+        """Extra items of the chosen combined / one-piece brackets, and the part ids whose per-part brackets they
+        replace."""
+        mode, res = self._active_layout(e)
+        if res is None:
+            return [], set()
+        items, held = [], set()
+        for key, d in sorted((res.get("designs") or {}).items(), key=lambda kv: kv[1].get("index", 0)):
+            if d.get("mass_kg") is None or not d.get("mesh_file"):
+                continue
+            parts = list(d.get("parts") or [])
+            held |= set(parts)
+            iid = f"{e.id}-op" if mode == "one_piece" else f"{e.id}-cb{int(d.get('index', 0))}"
+            ver = f"?v={mode[0]}{round(d['mass_kg'] * 1e7)}"
+            box = d.get("size_mm")
+            items.append({"id": iid, "kind": "bracket", "bracket_kind": "combined" if mode == "combined" else
+                          "one_piece", "process": "metal_am", "for_part": parts[0] if parts else None,
+                          "for_parts": parts, "mesh_url": f"/api/items/{iid}/mesh{ver}", "designed": True,
+                          "mass_kg": d["mass_kg"], "cost_rel": None, "material": d.get("material_name") or
+                          d.get("material"), "label": (d.get("label") or mode) + f" ({len(parts)} parts)",
+                          "exact": True, "target": d.get("target") or "walls and end plates",
+                          "box_mm": _union_box(d), "layout_mode": mode, "layout_key": key,
+                          "solid_mass_kg": d.get("solid_mass_kg"), "fastener_mass_kg": d.get("fastener_mass_kg"),
+                          "fasteners": d.get("fasteners"), "passed": bool(d.get("passed")), "size_mm": box})
+        return items, held
+
     # =========================================================================================== saved STL files (V2)
     def _saved_stl_dir(self) -> Path:
         from ..report.saved_stl import FOLDER
@@ -2998,6 +3315,16 @@ class Coordinator:
                     (" (catalogue envelope)" if kind == "clamp" else " (reserved box)")
                 left_out.append({**desc, "why": why})
                 continue
+            if it.get("layout_mode"):                    # M4: a combined bracket or the one piece
+                parts_of = list(it.get("for_parts") or [])
+                desc.update(passed=bool(it.get("passed")), generator="active-element SIMP (gd.simp)",
+                            parts=parts_of, part=", ".join(names.get(p, p) for p in parts_of),
+                            bracket_layout=it["layout_mode"])
+                stem = ("AM_one_piece" if it["layout_mode"] == "one_piece" else
+                        f"AM_combined_{_safe(names.get(pid, str(pid)))}_and_{len(parts_of) - 1}_more")
+                brackets.append((f"{stem}_{it['id'].rsplit('-', 1)[-1]}",
+                                 stl_bytes(v, f, f"t2s {e.id} {it['id']} {kind}"), desc))
+                continue
             if it.get("designed") and designs.get(pid):
                 desc.update(passed=bool(designs[pid].get("passed")), generator=designs[pid].get("generator"))
             stem = f"{'AM' if it.get('process') == 'metal_am' else _safe(str(kind))}_{_safe(names.get(pid, str(pid)))}"
@@ -3009,13 +3336,15 @@ class Coordinator:
         """Write the saved STL set for this layout (in the background, after any file work asked for before)."""
         from ..report.saved_stl import write_set
         folder = self._saved_stl_dir()
+        mode, _ = self._active_layout(e)
         info = {"settings": self._settings_view(), "why": why, "stage": e.stage, "part_scale": e.part_scale,
-                "layout_status": e.status}
+                "layout_status": e.status, "bracket_layout": mode}
 
         def job():
             parts, brackets, left_out = self._stl_items(e)
             return write_set(folder, e.id, parts, brackets, {**info, "left_out": left_out})
         self._stl_pending = e.id
+        self._saved_lid = e.id
         self._stl_submit(job, f"saving the STL files of {e.id}")
 
     def _sync_saved_stl(self, e: LayoutEntry) -> None:
@@ -3026,7 +3355,8 @@ class Coordinator:
             return
         m = read_manifest(self._saved_stl_dir())
         if m and m.get("layout_id") == e.id and m.get("status") == "complete" and \
-                m.get("settings") == self._settings_view():
+                m.get("settings") == self._settings_view() and \
+                (m.get("bracket_layout") or "per_part") == self._active_layout(e)[0]:
             return
         self._save_stl(e, "the search stopped on this layout; its brackets were designed before")
 
@@ -3214,7 +3544,8 @@ class Coordinator:
         from ..collision.validate import StageSpec
         from ..proof.certificate import build_certificate, proof_markdown
         e = self.archive[layout_id]
-        key = (layout_id, e.revs.get("mass_rev"))
+        mode, res = self._active_layout(e) if e.stage == 2 else ("per_part", None)
+        key = (layout_id, e.revs.get("mass_rev"), mode)
         if key in self.proof_cache:
             return self.proof_cache[key]
         if not self._current(e) and any(pid not in self.records for pid, _, _ in e.poses):
@@ -3222,15 +3553,17 @@ class Coordinator:
         records = self.layout_records(e)                  # at the part size the layout was found at
         if e.stage == 2:
             from ..constraints.stage2_model import Stage2Model
+            from ..proof.bracket_layout import spec_for_layout
             model = Stage2Model(records, (e.meta or {}).get("mode", "default"))
-            spec = model.spec(e.meta or {}, relaxed=bool(e.validation.get("relaxed_rules")))
+            spec = spec_for_layout(model, e.meta or {}, mode, res, relaxed=bool(e.validation.get("relaxed_rules")))
         else:
             spec = StageSpec(1, ENCLOSURE_LO.copy(), ENCLOSURE_HI.copy(), 0.0, 0.0)
         geoms = self.layout_geoms(e)
         rep = Validator(geoms).validate(e.poses, spec, want_planes=True)
         cert = build_certificate(e.id, rep, records, e.poses, spec, self._files_for(e.poses),
-                                 extra={"layout_hash": e.hash, "app_version": VERSION, "part_scale": e.part_scale},
-                                 brackets=self._bracket_cert(e))
+                                 extra={"layout_hash": e.hash, "app_version": VERSION, "part_scale": e.part_scale,
+                                        "bracket_layout": mode},
+                                 brackets=self._bracket_cert(e, mode, res))
         from ..optimise.bounds import lower_bounds
         lbs = lower_bounds(list(records.values()))
         metrics = dict(e.metrics)
@@ -3249,20 +3582,27 @@ class Coordinator:
             self.proof_cache.pop(k, None)
         return out
 
-    def _bracket_cert(self, e: LayoutEntry) -> list[dict]:
+    def _bracket_cert(self, e: LayoutEntry, mode: str = "per_part", res: dict | None = None) -> list[dict]:
         """V2 Stage 2 brackets for the certificate: reserved box and every vertex of the solid in it (the designed
-        solid when there is one; a cradle or metal-AM bracket not designed yet has only its box)."""
-        from ..mfg.brackets import cert_entry
-        out = []
-        for b in (e.meta or {}).get("brackets") or []:
+        solid when there is one; a cradle or metal-AM bracket not designed yet has only its box). M4: under a chosen
+        combined / one-piece layout, its brackets' entries (proof.bracket_layout)."""
+        from ..proof.bracket_layout import certificate_brackets
+
+        def per_part(b):
             d = (e.meta.get("bracket_designs") or {}).get(b["pid"])
-            verts = None
             if d and d.get("vertices_file"):
                 p = self.store.cache / "items" / e.id / d["vertices_file"]
                 if p.is_file():
-                    verts = np.load(p)
-            out.append(cert_entry(b, verts))
-        return out
+                    return np.load(p)
+            return None
+
+        def solid_of(d):
+            folder = self.store.cache / "items" / e.id / mode
+            pv, pf = folder / str(d.get("vertices_file") or ""), folder / str(d.get("faces_file") or "")
+            if d.get("vertices_file") and d.get("faces_file") and pv.is_file() and pf.is_file():
+                return np.load(pv), np.load(pf)
+            return None
+        return certificate_brackets(e.meta or {}, mode, res, per_part, solid_of)
 
     def finalize(self, layout_id: str) -> dict:
         e = self.archive[layout_id]

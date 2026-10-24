@@ -323,6 +323,69 @@ def create_app(coord: Coordinator | None = None, project: str = "default", **coo
         except ValueError as exc:
             raise HTTPException(409, str(exc)) from exc
 
+    # ------------------------------------------------------------------------------- M4 bracket layouts
+    @app.get("/api/layouts/{layout_id}/bracket-layouts")
+    async def bracket_layouts(layout_id: str, request: Request):
+        """M4: the layout's three bracket layouts side by side (one per part, combined per wall, one piece)."""
+        try:
+            return C(request).bracket_layouts(layout_id)
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown layout {layout_id}") from exc
+        except ValueError as exc:
+            raise HTTPException(409, str(exc)) from exc
+
+    @app.post("/api/layouts/{layout_id}/bracket-layouts/one_piece/estimate")
+    async def one_piece_estimate(layout_id: str, request: Request):
+        """M4: the one piece's grid, size and predicted time and memory before it is started; body {settings}."""
+        try:
+            body = await request.json()
+        except Exception:  # noqa: BLE001
+            body = {}
+        body = body if isinstance(body, dict) else {}
+        try:
+            return await asyncio.to_thread(C(request).one_piece_estimate, layout_id, body.get("settings"))
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown layout {layout_id}") from exc
+        except InvalidSetting as exc:
+            raise HTTPException(400, str(exc)) from exc
+        except ValueError as exc:
+            raise HTTPException(409, str(exc)) from exc
+
+    @app.post("/api/layouts/{layout_id}/bracket-layouts/{mode}/run")
+    async def bracket_layout_run(layout_id: str, mode: str, request: Request):
+        """M4: design the layout's combined brackets or its one piece in the background; body {settings: {material,
+        vol_frac, min_member_mm, budget_s}, overrides: {group key: settings}} (all optional)."""
+        try:
+            body = await request.json()
+        except Exception:  # noqa: BLE001
+            body = {}
+        body = body if isinstance(body, dict) else {}
+        try:
+            return C(request).start_bracket_layout(layout_id, mode, body.get("settings"), body.get("overrides"))
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown layout {layout_id}") from exc
+        except InvalidSetting as exc:
+            raise HTTPException(400, str(exc)) from exc
+        except ValueError as exc:
+            raise HTTPException(409, str(exc)) from exc
+
+    @app.post("/api/layouts/{layout_id}/bracket-layouts/use")
+    async def bracket_layout_use(layout_id: str, request: Request):
+        """M4: choose the bracket layout the layout is shown and saved with; body {mode}."""
+        try:
+            body = await request.json()
+        except Exception:  # noqa: BLE001
+            body = {}
+        mode = (body or {}).get("mode") if isinstance(body, dict) else None
+        try:
+            return C(request).use_bracket_layout(layout_id, str(mode))
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown layout {layout_id}") from exc
+        except InvalidSetting as exc:
+            raise HTTPException(400, str(exc)) from exc
+        except ValueError as exc:
+            raise HTTPException(409, str(exc)) from exc
+
     @app.get("/api/design-options")
     async def design_options(request: Request):
         """V2: what the bracket designs can be set to — launch environments, AM materials, the ranges of the

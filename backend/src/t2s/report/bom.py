@@ -171,6 +171,33 @@ def bom_from_layout(layout: dict, parts: dict, part_order=(), frame_mass_kg: flo
         kind = str(it.get("kind") or "")
         pid = it.get("for_part")
         mass = _f(it.get("mass_kg"))
+        if kind == "bracket" and it.get("layout_mode"):          # M4: a combined bracket or the one piece
+            held = [str(p) for p in it.get("for_parts") or ([pid] if pid else [])]
+            nf = int(it.get("fasteners") or 0)
+            fast = _f(it.get("fastener_mass_kg"))
+            fast = nf * F if fast is None else fast
+            solid = _f(it.get("solid_mass_kg"))
+            solid = (mass - fast) if solid is None and mass is not None else solid
+            split = solid is not None and solid > 0 and nf > 0
+            if not split:
+                solid = mass
+            one = it["layout_mode"] == "one_piece"
+            title = ("One-piece metal 3D-printed bracket (exploratory)" if one else "Combined metal 3D-printed bracket")
+            label = str(it.get("label") or "")
+            if not it.get("passed", False):
+                label += " — did not pass: see the Mounting Hardware tab"
+            desc = [label, f"holds {', '.join(names.get(p, p) for p in held)}"]
+            if it.get("target"):
+                desc.append(f"fixed to the {it['target']}")
+            brackets.append(_row("brackets", "bracket", f"{title} for {len(held)} parts", part_id=None,
+                                 for_parts=held, material=it.get("material") or MATERIAL["metal_am"][0],
+                                 process=KIND_PROCESS["metal_am"], unit_mass_kg=solid, mass_source="designed",
+                                 in_total=solid is not None, description="; ".join(x for x in desc if x),
+                                 item_ids=[it["id"]], bracket_kind=str(it.get("bracket_kind")), designed=True,
+                                 passed=bool(it.get("passed")), target=it.get("target")))
+            if split:
+                fasteners.append((it["id"], held[0] if held else None, nf))
+            continue
         if kind == "bracket" and it.get("bracket_kind"):                      # V2 Stage 2 bracket
             k = _bracket_index(it.get("id"))
             b = info[k] if k is not None and k < len(info) else next((x for x in info if x.get("pid") == pid), {})

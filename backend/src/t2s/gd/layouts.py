@@ -200,6 +200,7 @@ def _record(dom, ev: dict, rungs: list, settings: dict, kind_label: str) -> dict
                                    "factor_sources", "axes", "ccx_skipped", "ccx_failed", "triangles_per_box",
                                    "trial_cases")}
     rec.update(name=dom.name, kind=dom.kind, label=kind_label, parts=[p.pid for p in dom.parts],
+               generator="active-element SIMP (gd.simp: the contest winner's method on the free voxels only)",
                material=dom.material.get("id"), material_name=mats.material(dom.material.get("id"))["name"],
                settings=settings, ladder=rungs,
                min_vol_frac=(next((r["vol_frac"] for r in rungs if r["passed"]), None)
@@ -210,6 +211,7 @@ def _record(dom, ev: dict, rungs: list, settings: dict, kind_label: str) -> dict
         fpts = [np.asarray(b, float) for b in dom.bolts]
         m2, c2, i2 = _combine([(m, com, inertia)] + _fastener_items(fpts))
         size = (np.asarray(v).max(0) - np.asarray(v).min(0)).tolist()
+        rec["bbox_mm"] = [*np.asarray(v).min(0).tolist(), *np.asarray(v).max(0).tolist()]
         rec.update(mass_kg=float(m2), solid_mass_kg=float(m), com_mm=np.asarray(c2).tolist(),
                    inertia_kgm2=np.asarray(i2).tolist(), fastener_mass_kg=len(fpts) * FASTENER_MASS_KG,
                    fasteners=len(fpts), bolts=[np.asarray(p, float).tolist() for p in fpts], size_mm=size,
@@ -351,9 +353,15 @@ ONE_PIECE_ITER = {"coarse": 40, "fine": 25}
 def one_piece_estimate(snap: dict, settings: dict | None = None) -> dict:
     """Before starting: the grid, the free voxels, the optimiser's dofs at both levels and the predicted time and
     memory of one rung (SIMP coarse + fine, the joins, the FE check), from the cost models (gd.simp, MB_PER_KDOF)."""
-    from .simp import seconds_per_iteration
     t0 = time.perf_counter()
     dom = one_piece_domain_of(snap, settings or {})
+    out = estimate_from_domain(dom, snap, settings)
+    out["domain_seconds"] = time.perf_counter() - t0
+    return out
+
+
+def estimate_from_domain(dom, snap: dict, settings: dict | None = None) -> dict:
+    from .simp import seconds_per_iteration
     free = ~dom.void
     nf = int(free.sum())
     # nodes ≈ elements × 1.15 on a compact region (measured on the grid), dofs = 3 × nodes
@@ -375,8 +383,7 @@ def one_piece_estimate(snap: dict, settings: dict | None = None) -> dict:
             "fe_dofs_estimate": fe_dofs, "seconds_estimate": float(simp_s + fe_s + 20.0),
             "simp_seconds_estimate": float(simp_s), "fe_seconds_estimate": float(fe_s),
             "memory_mb_estimate": float(mem_mb), "available_mb": available_mb(), "budget_s": budget,
-            "domain_seconds": time.perf_counter() - t0, "notes": dom.notes,
-            "model": "ASSUMED cost model until measured (docs/notes/m4.md)"}
+            "notes": dom.notes, "model": "ASSUMED cost model until measured (docs/notes/m4.md)"}
 
 
 def one_piece_job(snapshot: str, out_dir: str, threads: int = 4) -> str:
@@ -410,6 +417,9 @@ def one_piece_job(snapshot: str, out_dir: str, threads: int = 4) -> str:
     with MemWatch() as mw:
         try:
             dom = one_piece_domain_of(snap, st)
+            if not est:
+                est.update(estimate_from_domain(dom, snap, st))
+                est["seconds_estimate"] = float(est["seconds_estimate"]) + (time.perf_counter() - t0)
             row["phase"] = "optimising"
             write("RUNNING", {"peak_rss_mb": mw.peak_mb})
 
