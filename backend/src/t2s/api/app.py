@@ -188,13 +188,8 @@ def create_app(coord: Coordinator | None = None, project: str = "default", **coo
     @app.get("/api/layouts")
     async def layouts(request: Request, status: str | None = None, limit: int = 200, current: bool | None = None):
         c = C(request)
-        items = list(c.archive.values())
-        if status:
-            items = [e for e in items if e.status == status]
-        if current is not None:
-            items = [e for e in items if c._current(e) == current]
-        items.sort(key=lambda e: e.id, reverse=True)
-        return {"layouts": [c.layout_json(e, full=False) for e in items[:limit]], "best_id": c.best_id}
+        items = c.layout_list(status, max(0, limit), current)     # also the layouts kept on disk only
+        return {"layouts": [c.layout_json(e, full=False) for e in items], "best_id": c.best_id}
 
     @app.get("/api/layouts/{lid}")
     async def layout(request: Request, lid: str):

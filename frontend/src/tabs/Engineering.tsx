@@ -8,6 +8,7 @@ import { DualViewport } from '../components/viewport/DualViewport';
 import { Badge, Button, EmptyState, MockTag, Notice, Panel } from '../components/ui';
 import { fmt } from '../lib/fmt';
 import { DISCLAIMER_STAGE2 } from '../lib/copy';
+import { minutesText } from '../lib/runTime';
 
 export interface Check {
   name: string;
@@ -95,9 +96,11 @@ export function EngineeringTab() {
   const cm = cableMode(settings?.sliders.cable ?? 0, threshold);
   const dL = s2default?.metrics?.length_used_mm != null && s2cable?.metrics?.length_used_mm != null ? s2cable.metrics.length_used_mm - s2default.metrics.length_used_mm : null;
   const dD = s2default?.metrics?.com_error_mm != null && s2cable?.metrics?.com_error_mm != null ? s2cable.metrics.com_error_mm - s2default.metrics.com_error_mm : null;
+  // the search never stops on its own (V2): with no feasible Stage 2 layout yet, say for how long it has searched
   const searchedNothing =
-    (settings?.stage === 2 && !s2v && !!infeasible) ||
-    (settings?.stage === 2 && !s2 && (runStatus === 'CONVERGED' || runStatus === 'IDLE') && (progress?.evaluations ?? 0) > 0);
+    (settings?.stage === 2 && !s2v && !!infeasible) || (settings?.stage === 2 && !s2 && (progress?.evaluations ?? 0) > 0);
+  const searchedFor = progress?.elapsed_s != null && Number.isFinite(progress.elapsed_s) ? ` after ${minutesText(progress.elapsed_s)} of search` : '';
+  const stillSearching = runStatus === 'SEARCHING' || runStatus === 'REVALIDATING';
   const infeasibleProven = /INFEASIBLE \(proven\)/i.test(detail);
   const byId = Object.fromEntries(parts.map((p) => [p.id, p.name]));
   const rules: [string, string][] = [
@@ -118,8 +121,15 @@ export function EngineeringTab() {
       </Notice>
       <Panel title="IDEALIZED vs ENGINEERING-CONSTRAINED" caption="synchronised cameras; movement overlay shows per-part arrows and ΔCOM" right={<MockTag />}>
         {searchedNothing || infeasibleProven ? (
-          <Notice tone="err" role="status">
-            <strong data-testid="no-feasible">{infeasibleProven ? 'INFEASIBLE (proven)' : 'NO FEASIBLE LAYOUT FOUND (not proven infeasible)'}</strong> — constraints are never relaxed automatically.
+          <Notice tone={stillSearching && !infeasibleProven ? 'warn' : 'err'} role="status">
+            <strong data-testid="no-feasible">
+              {infeasibleProven
+                ? 'INFEASIBLE (proven)'
+                : stillSearching
+                  ? `No feasible layout yet${searchedFor} (not proven infeasible; still searching)`
+                  : `NO FEASIBLE LAYOUT FOUND${searchedFor} (not proven infeasible)`}
+            </strong>{' '}
+            — constraints are never relaxed automatically.
             {b.data?.status === 'INFEASIBLE' && b.data.violations_engineering?.length ? (
               <span>
                 {' '}

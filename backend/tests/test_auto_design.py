@@ -45,11 +45,12 @@ def test_waits_for_island_jobs_still_in_flight_after_the_pause():
 
 
 def test_islands_get_new_jobs_only_while_searching():
-    """Pause / CONVERGED really stop the search: an island reporting back gets no next job (it used to)."""
+    """Pause really stops the search (the only stop since V2): an island reporting back gets no next job (it used
+    to)."""
     c = _coord()
     calls = []
     c._dispatch = lambda: calls.append(c.run_status)
-    for status in ("PAUSED", "CONVERGED", "IDLE", "SEARCHING"):
+    for status in ("PAUSED", "IDLE", "SEARCHING"):
         c.run_status = status
         c._continue_search()
     assert calls == ["SEARCHING"]

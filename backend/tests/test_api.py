@@ -172,11 +172,11 @@ def test_lock_keeps_current_layout(live):
     # the layout satisfies the new lock exactly, so it stays current (re-stamped with the new constraint_rev)
     lay2 = client.get(f"/api/layouts/{lid}").json()
     assert lay2["current"] and lay2["constraint_rev"] == coord.store.revs["constraint_rev"]
-    # new layouts keep the locked part where it is
-    n0 = len(coord.archive)
-    wait_for(lambda: any(e for e in list(coord.archive.values())[n0:] if coord._current(e)), timeout=60)
-    for e in list(coord.archive.values())[n0:]:
-        if coord._current(e):
+    # new layouts keep the locked part where it is (new layouts are in memory; older ones may be on disk only)
+    known = set(coord.archive)
+    wait_for(lambda: any(e for e in coord.archive.values() if e.id not in known and coord._current(e)), timeout=60)
+    for e in coord.archive.values():
+        if e.id not in known and coord._current(e):
             q = next(p for p in coord.layout_json(e)["poses"] if p["part_id"] == pose["part_id"])
             assert q["t_um"] == pose["t_um"] and q["orient"] == pose["orient"]
     assert client.patch(f"/api/parts/{pose['part_id']}", json={"locked": False}).json()["locked"] is False

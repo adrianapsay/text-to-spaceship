@@ -3,6 +3,7 @@ import { session, hasSession } from '../api/session';
 import { useApp } from '../store/store';
 import { Badge } from './ui';
 import { fmt } from '../lib/fmt';
+import { runTime } from '../lib/runTime';
 
 export function MockBanner() {
   const mode = useApp((s) => s.conn.mode);
@@ -119,6 +120,7 @@ export function StatusBar() {
   const error = useApp((s) => s.solver.lastError);
   const fid = useApp((s) => s.solver.fidelityRuns);
   const running = Object.entries(fid).filter(([, r]) => r.status !== 'DONE').length;
+  const rt = runTime(progress, runStatus);
   const [, force] = useState(0);
   useEffect(() => {
     const t = setInterval(() => force((x) => x + 1), 5000);
@@ -130,6 +132,11 @@ export function StatusBar() {
         Optimiser: <strong>{runStatus}</strong>
         {detail ? ` — ${detail}` : ''}
       </span>
+      {rt ? (
+        <span title={rt.title} data-testid="run-time">
+          {rt.text}
+        </span>
+      ) : null}
       {progress ? <span>evaluations {fmt(progress.evaluations, 'int')}</span> : null}
       {running ? <span data-testid="fidelity-running-status">detail study running for {running} part(s)</span> : null}
       <span>{applied >= sent ? 'in sync' : `updating… (edit ${sent}, applied ${applied})`}</span>
