@@ -148,7 +148,9 @@ def _mesh_surface_once(v, f, h, threads, remesh, algorithm3d):
         loop = gmsh.model.geo.addSurfaceLoop(surfaces)
         gmsh.model.geo.addVolume([loop])
         gmsh.model.geo.synchronize()
-        return _extract_tet10(gmsh)
+        out = _extract_tet10(gmsh)
+        gmsh.clear()                          # the arrays are copies: free gmsh's own model (memory, M4)
+        return out
 
 
 def tet_quality(nodes: np.ndarray, tets: np.ndarray) -> np.ndarray:

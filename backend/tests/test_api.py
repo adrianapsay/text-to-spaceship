@@ -406,6 +406,36 @@ def test_bracket_design_settings_are_listed_and_checked(live):
         assert not (e.meta or {}).get("bracket_overrides")
 
 
+def test_bracket_layout_endpoints(live):
+    """M4: a Stage 2 layout's three bracket layouts side by side (per part by default); a run or a choice is checked
+    before anything changes; the one piece's estimate is available before it is started."""
+    client, coord, _ = live
+    assert client.get("/api/layouts/L-NOPE/bracket-layouts").status_code == 404
+    stage1 = next(x for x in list(coord.archive.values()) if x.stage == 1)
+    assert client.get(f"/api/layouts/{stage1.id}/bracket-layouts").status_code == 409
+    e = next((x for x in list(coord.archive.values()) if x.stage == 2 and (x.meta or {}).get("brackets")), None)
+    assert e is not None, "the Stage 2 test before this one leaves Stage 2 layouts in the archive"
+    v = client.get(f"/api/layouts/{e.id}/bracket-layouts").json()
+    assert v["chosen"] == "per_part" and v["active"] == "per_part"
+    assert set(v["modes"]) == {"per_part", "combined", "one_piece"} and v["build_volume_mm"] == [250.0, 250.0, 325.0]
+    pp = v["modes"]["per_part"]["summary"]
+    assert pp["bracket_mass_kg"] > 0 and pp["pieces"] == len(e.meta["brackets"])
+    assert v["modes"]["combined"]["status"] == "not run" and v["modes"]["one_piece"]["summary"] is None
+    assert client.post(f"/api/layouts/{e.id}/bracket-layouts/everything/run", json={}).status_code == 400
+    r = client.post(f"/api/layouts/{e.id}/bracket-layouts/one_piece/run", json={"settings": {"budget_s": 1}})
+    assert r.status_code == 400 and "budget_s" in r.json()["detail"]
+    assert client.post(f"/api/layouts/{e.id}/bracket-layouts/use", json={"mode": "combined"}).status_code == 409
+    assert client.post(f"/api/layouts/{e.id}/bracket-layouts/use", json={"mode": "x"}).status_code == 400
+    r = client.post(f"/api/layouts/{e.id}/bracket-layouts/use", json={"mode": "per_part"})
+    assert r.status_code == 200 and r.json()["chosen"] == "per_part"
+    if not v["combined_plan"]:                          # nothing to join in this layout: refused, nothing started
+        assert client.post(f"/api/layouts/{e.id}/bracket-layouts/combined/run", json={}).status_code == 409
+        assert coord.ladders.get("__bracket_design__") is None or coord.ladders["__bracket_design__"].get("finalised")
+    est = client.post(f"/api/layouts/{e.id}/bracket-layouts/one_piece/estimate", json={}).json()
+    assert len(est["grid"]) == 3 and est["seconds_estimate"] > 0 and est["held_parts"] >= 1
+    assert all(h <= 4.0 for h in est["h_mm"])
+
+
 def test_size_study_runs_in_the_background(live):
     client, coord, _ = live
     assert client.get("/api/studies/size").status_code == 404

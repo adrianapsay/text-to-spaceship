@@ -7,7 +7,14 @@ import { useApp } from '../store/store';
 import { useAsync, useParts } from '../hooks';
 import { Badge, Button, Notice } from './ui';
 
-const KIND_TEXT: Record<string, string> = { metal_am: 'metal 3D-printed', cradle: 'machined cradle', clamp: 'tube-clamp band' };
+const KIND_TEXT: Record<string, string> = {
+  metal_am: 'metal 3D-printed',
+  cradle: 'machined cradle',
+  clamp: 'tube-clamp band',
+  combined: 'combined, metal 3D-printed',
+  one_piece: 'one piece (exploratory)',
+};
+const RUN_WHAT: Record<string, string> = { per_part: 'the brackets', combined: 'the combined brackets', one_piece: 'the one piece' };
 /** how long the Overview keeps the "designed" / "saved" / "brackets removed" note after the event */
 export const NOTE_MS = 20000;
 
@@ -98,7 +105,7 @@ export function ProgressBar(props: { value: number; label: string; running?: boo
 
 function RowStatus({ r, elapsed }: { r: DesignRow; elapsed: number }) {
   if (r.status === 'queued') return <span className="muted">waiting</span>;
-  if (r.status === 'running') return <span>designing… {secondsText(elapsed - (r.started_s ?? 0))}</span>;
+  if (r.status === 'running') return <span>{r.phase ? `${r.phase}… ` : 'designing… '}{secondsText(elapsed - (r.started_s ?? 0))}</span>;
   if (!r.solid) {
     return (
       <span title={r.reason}>
@@ -120,11 +127,15 @@ function useDesignRun() {
   return { run, at: st?.at };
 }
 
-function headline(v: DesignRunView): string {
+export function headline(v: DesignRunView): string {
   const id = v.run.layout_id ?? '';
-  if (!v.active) return `Brackets of ${id} designed: ${v.total} in ${secondsText(v.elapsed)}`;
+  const what = RUN_WHAT[v.run.mode ?? 'per_part'] ?? 'the brackets';
+  if (!v.active) {
+    const done = { per_part: 'Brackets', combined: 'Combined brackets', one_piece: 'One piece' }[v.run.mode ?? 'per_part'] ?? 'Brackets';
+    return `${done} of ${id} designed: ${v.total} in ${secondsText(v.elapsed)}`;
+  }
   const left = v.eta == null ? 'estimating the time left…' : `about ${secondsText(Math.ceil(v.eta / 5) * 5)} left`;
-  return `Designing the brackets of ${id}: ${v.done} of ${v.total} done · ${secondsText(v.elapsed)} · ${left}`;
+  return `Designing ${what} of ${id}: ${v.done} of ${v.total} done · ${secondsText(v.elapsed)} · ${left}`;
 }
 
 /** Mounting Hardware tab: the whole run, one bar per bracket. */
@@ -155,7 +166,9 @@ export function DesignProgressPanel() {
       <div className="design-rows" style={{ marginTop: 8 }}>
         {v.run.brackets.map((r) => (
           <Fragment key={r.k}>
-            <span>{names[r.pid] ?? r.pid}</span>
+            <span title={r.parts?.map((p) => names[p] ?? p).join(', ')}>
+              {r.parts?.length ? `${r.label?.split(':')[0] ?? r.pid}: ${r.parts.map((p) => names[p] ?? p).join(', ')}` : r.label ?? names[r.pid] ?? r.pid}
+            </span>
             <span className="muted">{KIND_TEXT[r.kind] ?? r.kind}</span>
             <ProgressBar
               value={rowFraction(r, v)}

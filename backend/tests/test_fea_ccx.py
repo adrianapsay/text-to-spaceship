@@ -226,3 +226,26 @@ def test_tip_added_mass_frequency(cantilever, single_thread, mass_ratio):
             assert np.allclose(result.cases[k].applied_n, base_result.cases[k].applied_n, rtol=1e-12, atol=0)
             assert np.linalg.norm(result.cases[k].reaction_n + result.cases[k].applied_n) \
                 <= 1e-6 * np.linalg.norm(result.cases[k].applied_n)
+
+
+def test_iterative_cholesky_static_solver(cantilever, tmp_path):
+    """M4: the static steps can use CalculiX's iterative Cholesky-preconditioned CG (less memory than SPOOLES on big
+    meshes). Its stopping rule is looser than a direct solve on an ill-conditioned problem: on this slender cantilever
+    (200 × 10 × 6 mm) the displacements differ from SPOOLES by 3.8e-3 of max |u| (measured; on a compact 201 k-dof
+    bracket 9e-6), so the bound here is 1e-2 and gd.multi_eval reports its agreement with NGSolve whenever it is used.
+    The frequency step stays on SPOOLES: the same frequency."""
+    problem, _, result, fields = cantilever
+    ccx.write_deck(problem, tmp_path / "deck.inp", "ITERATIVE CHOLESKY")
+    deck = (tmp_path / "deck.inp").read_text()
+    assert deck.count("*STATIC, SOLVER=ITERATIVE CHOLESKY") == len(problem.load_cases)
+    assert "*FREQUENCY, SOLVER=SPOOLES" in deck
+    with pytest.raises(ValueError, match="unknown CalculiX static solver"):
+        ccx.write_deck(problem, tmp_path / "bad.inp", "PARDISO")
+    res_it, f_it = ccx.run(problem, threads=2, solver="ITERATIVE CHOLESKY")
+    assert any("static solver ITERATIVE CHOLESKY" in n for n in res_it.notes)
+    for k, case in enumerate(problem.load_cases):
+        scale = np.abs(fields.displacement[k]).max()
+        diff = np.abs(f_it.displacement[k] - fields.displacement[k]).max()
+        print(f"\ncase {case.name}: max |u(iterative) - u(SPOOLES)| = {diff:.3e} mm = {diff / scale:.2e} of max |u|")
+        assert diff <= 1e-2 * scale
+    assert np.allclose(res_it.frequencies_hz, result.frequencies_hz, rtol=1e-9, atol=0)

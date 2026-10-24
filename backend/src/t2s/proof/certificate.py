@@ -144,10 +144,36 @@ def proof_markdown(cert: dict, report, metrics: dict | None = None) -> str:
                  "of one is at least g beyond the high face of the other; this is checked for every bracket against "
                  "every other bracket and every keep-out except the corner rail it is fixed to. A bracket touches "
                  "only the parts it holds and the chassis structure it is fixed to.\n")
+        if any(b.get("multi") for b in cert["brackets"]):
+            L.append("A **combined bracket** holds several parts and has several boxes: its members' reserved boxes "
+                     "and the bridging boxes between them, each a frame item checked like any reserved box. Every box "
+                     "starts on the target plane and extends to the same side, the solid's surface is closed and "
+                     "every triangle of it lies in one of the boxes; a point outside the boxes cannot be enclosed by "
+                     "them (moving away from the plane leaves every box), so the solid lies in their union and the "
+                     "box arithmetic above holds for it. A member box may touch only its own part, a bridge only the "
+                     "two parts it joins.\n")
+        if any(b.get("one_piece") for b in cert["brackets"]):
+            L.append("The **one piece** (exploratory) holds every part it lists. No triangle of its closed surface "
+                     "meets any frame item, or the bounding box of any part it does not hold, grown by 1.2 mm "
+                     "(separating-axis test, exact), and none of them lies inside it (winding number), so it keeps "
+                     "1.2 mm from all of them; every vertex lies within the inner planes. Its distance to the parts "
+                     "it holds is numeric (FCL), listed below, not proven.\n")
         L.append("| Bracket | part | type | fixed to | reserved box (mm) | solid |\n|---|---|---|---|---|---|")
         for b in cert["brackets"]:
+            if b.get("one_piece"):
+                nd = (b.get("numeric") or {}).get("held_part_distance_mm") or {}
+                dmin = min((x for x in nd.values() if x is not None), default=None)
+                L.append(f"| one piece | {', '.join(nm(p) for p in b['held_parts'])} | one piece | "
+                         f"{len(b.get('bolted') or [])} bolted pads | — | {len(b['solid_faces'])} triangles, clear of "
+                         "every frame item by 1.2 mm" + (f"; nearest held part {dmin:.3f} mm (numeric)" if dmin is not
+                                                       None else "") + " |")
+                continue
             r = np.asarray(b["reserve"], float)
             size = " × ".join(f"{x:.1f}" for x in r[3:] - r[:3])
+            if b.get("multi"):
+                L.append(f"| {b['name']} | {', '.join(nm(p) for p in b['held_parts'])} | combined | {b['target']} | "
+                         f"{len(b['boxes'])} boxes in {size} | {len(b['solid_faces'])} triangles, each inside one box |")
+                continue
             L.append(f"| {b['name']} | {nm(b['part'])} | {b['kind']} | {b['target']} | {size} | "
                      + ("box only — solid not designed yet (estimate)" if b.get("estimate") else
                         f"{len(b['solid_vertices'])} vertices inside the box") + " |")
@@ -214,6 +240,11 @@ def _mounting_lemma(cert: dict, nm) -> list[str]:
     if cert.get("brackets"):
         out.append("\n| Bracket | holds | fixed to | target plane (mm) |\n|---|---|---|---|")
         for b in cert["brackets"]:
+            if b.get("one_piece"):
+                planes = sorted({f"{'xyz'[x['axis']]} = {x['plane_mm']:.3f}" for x in b.get("bolted") or []})
+                out.append(f"| one piece | {', '.join(nm(p) for p in b.get('held_parts', []))} | each part's own wall "
+                           f"or end plate, under its footprint | {', '.join(planes)} |")
+                continue
             out.append(f"| {b['name']} | {', '.join(nm(p) for p in b.get('held_parts', [b['part']]))} | "
                        f"{b.get('target_kind', '?').replace('_', ' ')} ({b['target']}) | "
                        f"{'xyz'[b['axis']]} = {b['plane_mm']:.3f} |")

@@ -3,6 +3,8 @@ import type { Transport } from './transport';
 import type {
   Attribution,
   Benchmarks,
+  BracketLayoutMode,
+  BracketLayouts,
   BracketOverride,
   CadStatus,
   ContestResults,
@@ -14,8 +16,10 @@ import type {
   FreeRotationResult,
   IdeaMap,
   Layout,
+  LayoutRunSettings,
   LayoutSummary,
   MfgResult,
+  OnePieceEstimate,
   Pareto,
   Part,
   ProjectSnapshot,
@@ -259,6 +263,22 @@ export class ApiClient {
   /** V2: launch environments, materials and the ranges of the per-bracket settings */
   designOptions() {
     return this.json<DesignOptions>('/api/design-options');
+  }
+  /** M4: the layout's three bracket layouts side by side (one per part, combined per wall, one piece) */
+  bracketLayouts(layoutId: string) {
+    return this.json<BracketLayouts>(`/api/layouts/${encodeURIComponent(layoutId)}/bracket-layouts`);
+  }
+  /** M4: the one piece's predicted size, time and memory before it is started */
+  onePieceEstimate(layoutId: string, settings: LayoutRunSettings = {}) {
+    return this.send<OnePieceEstimate>('POST', `/api/layouts/${encodeURIComponent(layoutId)}/bracket-layouts/one_piece/estimate`, { settings });
+  }
+  /** M4: design the combined brackets or the one piece in the background */
+  runBracketLayout(layoutId: string, mode: 'combined' | 'one_piece', req: { settings?: LayoutRunSettings; overrides?: Record<string, LayoutRunSettings> } = {}) {
+    return this.send<{ status: string; layout_id: string; mode: string }>('POST', `/api/layouts/${encodeURIComponent(layoutId)}/bracket-layouts/${mode}/run`, req);
+  }
+  /** M4: "Use for saved STL files": the bracket layout the layout is shown and saved with */
+  useBracketLayout(layoutId: string, mode: BracketLayoutMode) {
+    return this.send<{ layout_id: string; chosen: BracketLayoutMode; status: string }>('POST', `/api/layouts/${encodeURIComponent(layoutId)}/bracket-layouts/use`, { mode });
   }
   /** V2: the saved STL files of the designed best layout */
   savedStl() {
