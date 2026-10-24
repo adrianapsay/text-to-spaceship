@@ -482,6 +482,20 @@ def create_app(coord: Coordinator | None = None, project: str = "default", **coo
             raise HTTPException(404, f"no Fusion export package for {lid} (POST /api/cad/package/{lid})")
         return FileResponse(p, media_type="application/zip", filename=p.name)
 
+    @app.get("/api/layouts/{lid}/bom")
+    async def layout_bom(request: Request, lid: str, format: str = "json"):
+        """V2: the layout's bill of materials (report/bom.py); format=csv downloads it."""
+        from ..report.bom import bom, bom_csv
+        c = C(request)
+        e = layout_or_404(c, lid)
+        if format not in ("json", "csv"):
+            raise HTTPException(400, "format must be json or csv")
+        b = bom(c, e)
+        if format == "csv":
+            return Response(bom_csv(b), media_type="text/csv; charset=utf-8",
+                            headers={"Content-Disposition": f'attachment; filename="bom_{lid}.csv"'})
+        return b
+
     @app.get("/api/export/{lid}")
     async def export(request: Request, lid: str, kind: str = "json"):
         c = C(request)

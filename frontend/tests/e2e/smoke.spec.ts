@@ -52,7 +52,7 @@ test('app loads in mock mode with a WebGL2 viewport and labelled metrics', async
   expect(errors).toEqual([]);
 });
 
-test('all 12 tabs switch and keep the MOCK DATA banner', async ({ page }) => {
+test('all 14 tabs switch and keep the MOCK DATA banner', async ({ page }) => {
   const errors = await openApp(page);
   const tabs: [string, string][] = [
     ['components', 'tab-components'],
@@ -63,6 +63,8 @@ test('all 12 tabs switch and keep the MOCK DATA banner', async ({ page }) => {
     ['explain', 'tab-explain'],
     ['engineering', 'tab-engineering'],
     ['hardware', 'tab-hardware'],
+    ['bom', 'tab-bom'],
+    ['drawings', 'tab-drawings'],
     ['manufacturable', 'tab-manufacturable'],
     ['cad', 'tab-cad'],
     ['results', 'tab-results'],
@@ -86,6 +88,47 @@ test('all 12 tabs switch and keep the MOCK DATA banner', async ({ page }) => {
   await expect(page.getByTestId('proof-markdown')).toContainText('Lemma 1');
   await page.getByTestId('tab-trigger-manufacturable').click();
   await expect(page.getByText('manufacturing concept — assumed cost model, not a quote', { exact: false }).first()).toBeVisible();
+  expect(errors).toEqual([]);
+});
+
+test('bill of materials and drawings: a MOCK BOM linked to the 3D view, a sheet with views, balloons and parts list', async ({ page }) => {
+  const errors = await openApp(page);
+  await page.getByTestId('tab-trigger-bom').click();
+  const table = page.getByTestId('bom-table');
+  await expect(table).toBeVisible();
+  await expect(page.getByTestId('tab-bom').getByText('MOCK', { exact: true }).first()).toBeVisible();
+  await expect(table.locator('tbody tr[data-testid^="bom-row-"]')).toHaveCount(19);
+  await expect(page.getByTestId('bom-total')).toContainText('2,916.0'); // the layout's total mass (2.916 kg)
+  await expect(page.getByTestId('bom-totals')).toContainText('= layout mass');
+  await expect(page.getByTestId('bom-viewport').locator('canvas')).toBeVisible();
+  // a row selects its part in the 3D view (the store's selection), and the row is marked selected
+  await page.getByTestId('bom-row-7').click();
+  await expect(page.getByTestId('bom-row-7')).toHaveAttribute('aria-selected', 'true');
+  await expect(page.getByTestId('bom-selection')).toContainText('item 7');
+  const sel = await page.evaluate(() => (window as unknown as { __t2s: { store: { getState: () => { view: { selectedPartId: string | null } } } } }).__t2s.store.getState().view.selectedPartId);
+  expect(sel).toBe('p07');
+  // selecting in the 3D view (store) highlights the row
+  await page.evaluate(() => (window as unknown as { __t2s: { store: { getState: () => { select: (id: string) => void } } } }).__t2s.store.getState().select('p02'));
+  await expect(page.getByTestId('bom-row-2')).toHaveAttribute('aria-selected', 'true');
+  await expect(page.getByTestId('bom-row-7')).toHaveAttribute('aria-selected', 'false');
+
+  await page.getByTestId('tab-trigger-drawings').click();
+  const sheet = page.getByTestId('drawing-sheet');
+  await expect(sheet).toBeVisible({ timeout: 30_000 });
+  await expect(sheet.locator('image[data-view]')).toHaveCount(4, { timeout: 30_000 }); // front, top, left, isometric
+  await expect(sheet.locator('[data-field="drawingNo"]')).toContainText('T2S-L-MOCK-0001-000');
+  await expect(sheet.locator('[data-field="scale"]')).toContainText('1:2');
+  await expect(sheet.locator('[data-testid="drawing-parts-list"] [data-item]')).toHaveCount(19);
+  const balloons = await sheet.locator('[data-testid="drawing-balloons"] [data-item]').evaluateAll((els) => els.map((e) => Number(e.getAttribute('data-item'))));
+  expect(balloons.length).toBeGreaterThan(10);
+  expect(new Set(balloons).size).toBe(balloons.length); // each item once
+  expect(balloons.every((n) => n >= 1 && n <= 19)).toBe(true); // numbered like the BOM
+  // the alternative template redraws the sheet in third-angle projection
+  await page.getByTestId('template-select').selectOption('ansi-b');
+  await expect(sheet.locator('image[data-view="right"]')).toHaveCount(1, { timeout: 30_000 });
+  await expect(sheet.locator('image[data-view="left"]')).toHaveCount(0);
+  await expect(sheet.locator('[data-field="size"]')).toContainText('B');
+  await page.getByTestId('template-select').selectOption('iso-a3');
   expect(errors).toEqual([]);
 });
 

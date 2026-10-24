@@ -29,6 +29,7 @@ import { activeGoalSliders } from '../store/presets';
 import { aabbCheck, packOnce } from './packer';
 import { MOCK_ALGOS, mockFidelity, mockIdeaMap, mockMap, mockProof, mockSelect, mockSweep, partStats } from './content';
 import { canonicalise, checkMesh, massProps, parseStl, UNIT_SCALE, type ParsedMesh } from './stl';
+import { bomCsv, mockBom } from '../lib/bom';
 
 export interface MockFixtures {
   project: ProjectSnapshot;
@@ -744,6 +745,12 @@ export class MockBackend {
         const L = b ? this.archive.get(b) : undefined;
         if (!L) return json(404, { detail: 'unknown layout' });
         if (!c && method === 'GET') return json(200, L);
+        if (c === 'bom' && method === 'GET') {
+          // V2 WS6: the bill of materials, built in the browser from the placeholder layout (tagged mock)
+          const bom = mockBom(L, this.snapshot());
+          if (url.searchParams.get('format') === 'csv') return file(bomCsv(bom), `bom_${L.id}_MOCK.csv`, 'text/csv');
+          return json(200, bom);
+        }
         if (c === 'final' && method === 'POST') {
           if (!this.isCurrent(L)) return json(409, { detail: 'layout is validated for previous inputs; re-run first' });
           const re = this.admit({ ...L, status: 'FINAL' });
