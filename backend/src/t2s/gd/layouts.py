@@ -105,7 +105,7 @@ def available_mb() -> float | None:
 
 def mem_guard(ndof: int, what: str) -> None:
     """Raise MemoryError when a solve of `ndof` degrees of freedom would leave less than MEM_RESERVE_MB available
-    (the predicted need: MB_PER_KDOF, ASSUMED until measured)."""
+    (the predicted need: MB_PER_KDOF — measured for the FE solvers, ASSUMED for the optimiser's fine level)."""
     need = MB_PER_KDOF.get(what, 9.0) * ndof / 1000.0
     avail = available_mb()
     if avail is not None and avail - need < MEM_RESERVE_MB:
