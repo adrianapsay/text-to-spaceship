@@ -69,6 +69,17 @@ export interface ExtraItem {
   /** V2: the reserved box (lo xyz, hi xyz) */
   box_mm?: number[];
   target?: string;
+  /** V2: a designed solid replaces the box / envelope */
+  designed?: boolean;
+  /** M4: a combined bracket or the one piece — every part it holds, the bracket layout and its record key */
+  for_parts?: string[];
+  layout_mode?: 'combined' | 'one_piece';
+  layout_key?: string;
+  passed?: boolean;
+  size_mm?: number[] | null;
+  solid_mass_kg?: number | null;
+  fastener_mass_kg?: number | null;
+  fasteners?: number | null;
 }
 
 /** V2 Stage 2: one modelled bracket. Its reserved box is part of the packing and of the fit proof (Lemma 4). */
@@ -248,6 +259,10 @@ export interface DesignRow {
   /** a solid was built (else: still its box) */
   solid?: boolean;
   reason?: string;
+  /** M4: a combined bracket's or the one piece's row: what it is, the parts it holds, the step under way */
+  label?: string;
+  parts?: string[];
+  phase?: string;
 }
 
 /** V2: what the progress bars show of a bracket design run (study 'bracket_design', partial) */
@@ -263,6 +278,11 @@ export interface DesignProgress {
   seconds: number | null;
   /** estimated seconds left, when this update was written (null until one bracket is done) */
   eta_s: number | null;
+  /** M4: which bracket layout the run designs (per_part: the per-part design job) */
+  mode?: BracketLayoutMode;
+  /** M4: the one piece's estimate (its eta comes from it) */
+  estimate?: OnePieceEstimate | null;
+  peak_rss_mb?: number | null;
 }
 
 export interface SavedStlFile {
@@ -454,7 +474,146 @@ export interface Stage2View {
   bracket_designs?: Record<string, BracketDesign>;
   /** WS4: the user's per-bracket design settings */
   bracket_overrides?: Record<string, BracketOverride>;
+  /** M4: the bracket layout the views use (per_part unless a designed one was chosen), and the one chosen */
+  bracket_layout?: BracketLayoutMode;
+  bracket_layout_chosen?: BracketLayoutMode;
+  /** M4: the records of the combined brackets / the one piece shown, by extra item id */
+  bracket_layout_designs?: Record<string, LayoutDesignRecord>;
   assumed: string[];
+}
+
+/** M4: the three ways to hold a layout's parts */
+export type BracketLayoutMode = 'per_part' | 'combined' | 'one_piece';
+
+/** M4: one bracket layout's comparison numbers (backend gd.layouts summaries) */
+export interface LayoutModeSummary {
+  mode: BracketLayoutMode;
+  /** every bracket of that layout, fasteners included (PC/104 rods and standoffs left out: the same in all) */
+  bracket_mass_kg: number;
+  /** brackets whose mass is still an ESTIMATE from their reserved box */
+  estimates: number;
+  designed?: number;
+  /** the worst gating margin over the designed brackets, its check and bracket */
+  worst: { case: string; axis: string; check: string; ms: number; part?: string; bracket?: string; parts?: string[] } | null;
+  /** the lowest first natural frequency over the brackets with their parts */
+  f1: { f_hz: number; bracket?: string } | null;
+  /** printed pieces (metal 3D-printed brackets) */
+  prints: number;
+  largest_print_mm: number[] | null;
+  /** fits the build volume in some orientation */
+  largest_fits: boolean | null;
+  build_volume_mm: number[];
+  pieces: number;
+  failed?: string[];
+  passed?: boolean | null;
+  /** parts whose per-part bracket the layout keeps */
+  unchanged?: string[];
+}
+
+/** M4: a combined bracket's / the one piece's design record */
+export interface LayoutDesignRecord {
+  name: string;
+  kind: 'combined' | 'one_piece' | string;
+  label?: string;
+  key?: string;
+  parts: string[];
+  passed: boolean;
+  reason?: string;
+  generator?: string;
+  mass_kg?: number | null;
+  solid_mass_kg?: number | null;
+  ms_yield?: number | null;
+  ms_ult?: number | null;
+  ms_bolt?: number | null;
+  f1_hz?: number | null;
+  modes?: BracketMode[] | null;
+  governing?: BracketDesign['governing'];
+  margins?: Record<string, BracketMargin>;
+  flags?: BracketFlag[] | null;
+  size_mm?: number[] | null;
+  fits_build_volume?: boolean;
+  vol_frac?: number | null;
+  min_vol_frac?: number | null;
+  settings?: { material?: string; vol_frac?: number | 'auto'; min_member_mm?: number | 'auto'; budget_s?: number };
+  ladder?: LadderRung[];
+  material?: string;
+  material_name?: string;
+  environment?: string;
+  environment_name?: string;
+  target?: string;
+  voxel_mm?: number | number[];
+  /** per held part: the margins of its own region (its reserved box's voxels and bolts) and its 3σ accelerations */
+  parts_detail?: Record<string, { ms_yield: number; ms_ult: number; ms_bolt?: number | null; governing?: BracketDesign['governing']; passed?: boolean; accel3_g?: number[] }>;
+  held_part_distance_mm?: Record<string, number | null>;
+  agreement?: Record<string, number | null>;
+  solvers?: Record<string, { solver: string; seconds: number; cases?: number }>;
+  bolts?: number[][];
+  joins?: { voxels: number }[];
+  kept_brackets?: string[];
+}
+
+export interface LayoutModeResult {
+  status: string;
+  created?: string;
+  environment?: string;
+  material?: string;
+  settings?: LayoutRunSettings;
+  designs: Record<string, LayoutDesignRecord>;
+  groups?: { name: string; pids: string[]; target: string }[] | null;
+  seconds?: number | null;
+  peak_rss_mb?: number | null;
+  estimate?: OnePieceEstimate | null;
+}
+
+export interface LayoutModeView {
+  mode: BracketLayoutMode;
+  name: string;
+  status: 'designed' | 'not designed' | 'not run' | string;
+  summary: LayoutModeSummary | null;
+  result?: LayoutModeResult | null;
+}
+
+/** M4: GET /api/layouts/{id}/bracket-layouts — the three bracket layouts side by side */
+export interface BracketLayouts {
+  layout_id: string;
+  chosen: BracketLayoutMode;
+  active: BracketLayoutMode;
+  modes: Record<BracketLayoutMode, LayoutModeView>;
+  combined_plan: { name: string; pids: string[]; target: string; bridges: { ends: string[]; gap_mm: number; box: number[] }[] }[];
+  combined_plan_error?: string | null;
+  build_volume_mm: number[];
+  build_volume_note: string;
+  running: { mode: BracketLayoutMode; layout_id: string } | null;
+  budget_range_s: [number, number];
+  exploratory: { one_piece: boolean };
+}
+
+/** M4: the one piece's predicted size, time and memory before it is started */
+export interface OnePieceEstimate {
+  grid: number[];
+  h_mm: number[];
+  free_voxels: number;
+  held_parts: number;
+  kept_brackets: string[];
+  dofs_fine: number;
+  dofs_coarse: number;
+  fe_dofs_estimate: number;
+  seconds_estimate: number;
+  simp_seconds_estimate: number;
+  fe_seconds_estimate: number;
+  memory_mb_estimate: number;
+  available_mb: number | null;
+  budget_s: number;
+  notes: string[];
+  model: string;
+}
+
+/** M4: the settings of a combined / one-piece run (each a value or "auto"; material null = the project default) */
+export interface LayoutRunSettings {
+  material?: string | null;
+  vol_frac?: number | 'auto';
+  min_member_mm?: number | 'auto';
+  budget_s?: number;
 }
 
 export type SliderKey =

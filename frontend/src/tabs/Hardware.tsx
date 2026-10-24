@@ -4,6 +4,7 @@ import { session } from '../api/session';
 import { useApp } from '../store/store';
 import { useAsync, useParts } from '../hooks';
 import { BracketSettings, DesignSettings, governingText, outdatedText } from '../components/BracketDesign';
+import { BracketLayoutsPanel } from '../components/BracketLayouts';
 import { DesignProgressPanel, SavedStlPanel } from '../components/DesignProgress';
 import { GoalSlider } from '../components/GoalsPanel';
 import { itemsFor, useLayoutList } from '../components/LayoutCompare';
@@ -399,8 +400,20 @@ export function HardwareTab() {
       <Panel title="Design settings" caption="the launch loads every bracket is checked under, and the material of the metal 3D-printed ones">
         <DesignSettings options={options.data ?? null} settings={settings ?? null} notAvailable={!!options.notAvailable} />
       </Panel>
+      <Panel
+        title="Bracket layout"
+        caption="three ways to hold the parts, side by side: one bracket per part (the default), combined per wall, one piece; choose the one the views, the bill of materials, the drawings and the saved STL files show"
+      >
+        <BracketLayoutsPanel
+          layoutId={layout.data?.stage === 2 ? layout.data.id : null}
+          options={options.data ?? null}
+          settings={settings ?? null}
+          names={names}
+          onChanged={layout.reload}
+        />
+      </Panel>
       {study ? (
-        <Panel title="Bracket design run" caption="one bar per bracket; up to 4 are designed at the same time, each checked with CalculiX and NGSolve">
+        <Panel title="Bracket design run" caption="one bar per bracket (per part: up to 4 at the same time; combined brackets and the one piece one at a time), each checked with CalculiX and NGSolve">
           <DesignProgressPanel />
         </Panel>
       ) : null}

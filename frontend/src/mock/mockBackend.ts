@@ -745,6 +745,8 @@ export class MockBackend {
         const L = b ? this.archive.get(b) : undefined;
         if (!L) return json(404, { detail: 'unknown layout' });
         if (!c && method === 'GET') return json(200, L);
+        // M4: combined per wall and one piece run only in the real backend (FEA, optimiser)
+        if (c === 'bracket-layouts') return notAvailable('bracket layouts (combined per wall, one piece)');
         if (c === 'bom' && method === 'GET') {
           // V2 WS6: the bill of materials, built in the browser from the placeholder layout (tagged mock)
           const bom = mockBom(L, this.snapshot());

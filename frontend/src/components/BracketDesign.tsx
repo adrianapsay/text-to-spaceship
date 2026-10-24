@@ -172,7 +172,7 @@ export function DesignSettings({ options, settings, notAvailable }: { options: D
 
 // ------------------------------------------------------------------------------------------------ per bracket
 
-function StopSlider(props: {
+export function StopSlider(props: {
   id: string;
   label: string;
   stops: Stop[];

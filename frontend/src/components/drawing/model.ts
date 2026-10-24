@@ -99,11 +99,13 @@ export function buildDrawingModel(layout: Layout, bom: Bom | null, parts: Record
   }
   const sheets: SheetSpec[] = [{ key: 'assembly', kind: 'assembly', items }];
   const designs = (layout.stage2?.bracket_designs ?? {}) as Record<string, BracketDesign & Record<string, unknown>>;
+  // M4: a combined bracket's / the one piece's record, by its item id
+  const layoutDesigns = (layout.stage2?.bracket_layout_designs ?? {}) as unknown as Record<string, BracketDesign & Record<string, unknown>>;
   for (const r of bom && bom.layout_id === layout.id ? bom.items : []) {
     if (r.group !== 'brackets' || !r.designed) continue;
     const it = items.find((x) => x.id === r.item_ids[0]);
     if (!it) continue;
-    sheets.push({ key: `detail:${it.id}`, kind: 'detail', items: [it], row: r, design: designs[r.part_id ?? ''] });
+    sheets.push({ key: `detail:${it.id}`, kind: 'detail', items: [it], row: r, design: layoutDesigns[it.id] ?? designs[r.part_id ?? ''] });
   }
   const enc = project?.enclosure as { form_factor?: string; form?: string } | undefined;
   const ff = enc?.form_factor ?? project?.settings?.form_factor ?? /^(\d+U)\b/.exec(enc?.form ?? '')?.[1] ?? '';
