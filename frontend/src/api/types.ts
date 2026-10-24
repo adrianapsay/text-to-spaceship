@@ -520,6 +520,8 @@ export interface Stage2View {
   insertion_order: string[] | null;
   com_shift_mm?: number | null;
   com_z_unshifted_mm?: number | null;
+  /** V2: found in centre-of-mass-first mode (Balance and Bracket budget both at 100): brackets of any length */
+  com_first?: boolean;
   /** V2 Stage 2 brackets and their relative cost */
   brackets?: BracketInfo[];
   hardware_cost_rel?: number | null;

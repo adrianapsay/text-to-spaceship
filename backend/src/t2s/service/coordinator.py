@@ -682,7 +682,7 @@ class Coordinator:
         ctx = build_context(recs, stage, {pid: self.reps[pid] for pid in recs if pid in self.reps},
                             stage2_mode=self._stage2_mode(), part_scale=self.part_scale(),
                             am_allowed=self._am_allowed(), form_factor=formfactor.current(),
-                            am_level=self._am_level())
+                            am_level=self._am_level(), com_first=self._com_first())
         self._sig_scale[ctx.parts_sig] = ctx.part_scale
         if old is None or ctx.ctx_id != old.ctx_id:
             if old is not None and (ctx.constraint_sig != old.constraint_sig or ctx.stage != old.stage) \
@@ -757,6 +757,13 @@ class Coordinator:
         """V2 bracket budget step (mfg.rules.am_level): how strongly metal AM is preferred over simple brackets."""
         from ..mfg.rules import am_level
         return am_level(float(self.store.settings["sliders"].get("bracket_budget", 50)))
+
+    def _com_first(self) -> bool:
+        """V2 centre-of-mass-first mode (Stage 2, Balance the Spacecraft and the bracket budget both at 100): the
+        parts are placed for the centre of mass and their brackets built to wherever they end up, however long."""
+        from ..constraints.stage2_model import com_first_mode
+        s = self.store.settings
+        return int(s.get("stage", 1)) == 2 and com_first_mode(s["sliders"], self._am_level())
 
     def _compute_choice(self) -> AlgorithmChoice:
         s = self.store.settings
@@ -1669,13 +1676,17 @@ class Coordinator:
                 "assumed": ["2 mm walls", "8.5 mm corner rails", "clearances 2.2 / 1.2 mm (U4)",
                             ("PC/104 stack, 15.24 mm pitch, rods at (±35, ±35) mm × part size, anchored at the "
                              "nearest end plate (M3 rods in 5 mm spacer tubes)"), "3 mm mounting layer (U6)",
-                            ("V2 brackets: one per part to a wall, end plate or corner rail ≤ 40 mm away; "
-                             "each reserved box keeps 1.2 mm from other parts, brackets and keep-outs; relative "
-                             "costs, cradle / metal-AM masses estimated until designed"),
+                            ("V2 brackets: one per part to a wall, end plate or corner rail "
+                             + ("of any length (centre of mass first; beyond 40 mm metal 3D-printed only)"
+                                if meta.get("com_first") else "≤ 40 mm away")
+                             + "; each reserved box keeps 1.2 mm from other parts, brackets and keep-outs; relative "
+                               "costs, cradle / metal-AM masses estimated until designed"),
                             "10 mm harness channel (U5)", "M3 standoffs 5 × 5 mm, 3–50 mm long (Addendum 2.3)",
                             ("every part except the PC/104 stack (anchored at its end plate) shifted along Z toward "
-                             "a centred COM (at least into the CDS box), within the end plates and never at the "
-                             "cost of a mount")]}
+                             + ("the centre (full centring: centre of mass first)" if meta.get("com_first") else
+                                "a centred COM (at least into the CDS box)")
+                             + ", within the end plates and never at the cost of a mount")],
+                "com_first": bool(meta.get("com_first"))}
 
     def item_mesh(self, iid: str) -> bytes:
         lid, _, _ = iid.rpartition("-")
@@ -2202,6 +2213,7 @@ class Coordinator:
         old_s2 = self._stage2_mode()
         old_scale = self.part_scale()
         old_am = self._am_level()
+        old_cf = self._com_first()
         old_ff = s.get("form_factor", formfactor.DEFAULT)
         for k in ("stage", "target_com_mm", "compactness_definition", "show_frame_mass_in_com"):
             if k in new and new[k] is not None:
@@ -2226,7 +2238,8 @@ class Coordinator:
             # whose brackets were designed (a re-score can rank another first: its designed masses changed its score)
             self.store.save()
         else:
-            self._apply_search_settings(before, after, old_stage, old_target, old_s2, old_scale, old_am, old_ff)
+            self._apply_search_settings(before, after, old_stage, old_target, old_s2, old_scale, old_am, old_ff,
+                                        old_cf)
         # a running search goes on with the new settings; a paused one stays paused (Pause is the only stop). Another
         # launch environment or default material: the best layout's brackets designed for the old ones are designed
         # again (_maybe_auto_design), as after a pause
@@ -2234,7 +2247,7 @@ class Coordinator:
             self._maybe_auto_design()
 
     def _apply_search_settings(self, before: dict, after: dict, old_stage, old_target, old_s2, old_scale, old_am,
-                               old_ff) -> None:
+                               old_ff, old_cf=False) -> None:
         """A setting the search depends on moved (apply_settings): new inputs and a new search, or a re-score."""
         s = self.store.settings
         # V2: the saved bracket STL files belong to the layout found at the old settings; the automatic bracket
@@ -2258,6 +2271,9 @@ class Coordinator:
             # V2 bracket budget crossed a step (0 / 34 / 67 / 100): another metal-AM preference — different
             # bracket choices, new islands
             self._refresh_inputs("bracket budget: " + AM_LEVEL_TEXT[self._am_level()], bump_parts=False)
+        elif self._com_first() != old_cf:
+            # Balance the Spacecraft reached or left 100 with the budget at 100: other placement and bracket rules
+            self._refresh_inputs("centre of mass first: " + ("on" if self._com_first() else "off"), bump_parts=False)
         else:
             if list(s.get("target_com_mm", [0, 0, 0])) != old_target and self.ev is not None:
                 self.ev.target = np.asarray(self._target(), float)
@@ -3165,8 +3181,8 @@ class Coordinator:
     # =========================================================================================== largest size (V2)
     def _largest_size_path(self) -> Path:
         full = parts_signature({pid: self.records[pid] for pid in self._active_records()})
-        return self.store.cache / (f"largest_size_{full}_{self._stage2_mode()}_am{self._am_level()}_"
-                                   f"{formfactor.current()}.json")
+        return self.store.cache / (f"largest_size_{full}_{self._stage2_mode()}_am{self._am_level()}"
+                                   f"{'_com' if self._com_first() else ''}_{formfactor.current()}.json")
 
     def start_largest_size(self, opts: dict | None = None) -> dict:
         """Bisection on the part-size factor: the largest size at which a fixed-effort Stage 2 search finds a

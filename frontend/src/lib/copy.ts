@@ -35,7 +35,7 @@ export const SLIDERS: SliderDef[] = [
     key: 'balance',
     label: 'Balance the Spacecraft',
     plain: 'Moves heavy parts so the spacecraft’s balance point sits near the middle.',
-    technical: 'minimises the distance between the assembly centre of mass and the target point (mm).',
+    technical: 'minimises the distance between the assembly centre of mass and the target point (mm). Stage 2 at 100 with the Bracket budget at 100: centre of mass first — the parts are moved along the length until the balance point is centred, and brackets may be any length.',
     why: 'launch rules require the balance point within ±20 mm sideways and ±70 mm lengthwise.',
   },
   {
@@ -135,6 +135,12 @@ export const METRIC_TIPS: Record<string, Explainer> = {
     why: 'an idealized layout in an empty box may not be buildable.',
   },
 };
+
+/** V2 centre-of-mass-first mode (store/presets comFirstOn): shown under Balance the Spacecraft and the bracket budget. */
+export const COM_FIRST_WHAT =
+  'the parts move along the length until the balance point is centred, whatever length that uses, and a bracket may be as long as its part needs (beyond 40 mm only metal 3D-printed). The PC/104 stack stays at its end plate.';
+export const COM_FIRST_NOTE = `Centre of mass first (Balance and Bracket budget both at 100): ${COM_FIRST_WHAT}`;
+export const COM_FIRST_HINT = 'Set the Bracket budget to 100 as well for centre of mass first: the balance point centred along the length, brackets of any length.';
 
 export const PHYSICAL_CAPTION = 'changes the physics';
 export const GOALS_CAPTION = 'never changes the parts';

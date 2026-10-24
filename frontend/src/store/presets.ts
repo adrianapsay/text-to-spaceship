@@ -15,6 +15,12 @@ export function activeGoalSliders(stage: 1 | 2): SliderKey[] {
   return stage === 2 ? ['space', 'balance', 'inertia', 'feasibility'] : ['space', 'balance', 'inertia'];
 }
 
+/** V2 centre-of-mass-first mode (backend constraints/stage2_model.com_first_mode): Stage 2 with Balance the Spacecraft
+ * and the Bracket budget both at 100 — parts placed for the balance point, brackets built to them however long. */
+export function comFirstOn(sliders: Sliders, stage: 1 | 2): boolean {
+  return stage === 2 && (sliders.balance ?? 0) >= 100 && (sliders.bracket_budget ?? 0) >= 100;
+}
+
 /** Apply a preset to the beginner sliders: favoured 70, others 10; Balanced = all active equal. */
 export function applyPreset(sliders: Sliders, preset: PresetId, stage: 1 | 2): Sliders {
   if (preset === 'custom') return sliders;

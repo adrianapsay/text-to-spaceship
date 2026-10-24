@@ -18,9 +18,10 @@ All dimensions ASSUMED unless the CDS gives them (see stage2.py). The model wrap
   (Addendum 2.3 option b; card guides are not implemented). A board whose standoffs do not reach a wall is not
   mounted, and the layout is infeasible — boards are never left floating.
 * **Brackets (V2):** every other part is held by a bracket from its mounting side (the side with the 3 mm layer) to
-  chassis structure only — a wall, an end plate or a corner rail — up to 40 mm away; never to another part or to
-  the PC/104 stack (v2.5; before, the stack's top and underside were targets too). The bracket owns a reserved box
-  from the target to the part side (reaching into the part's bounding box where it wraps the part); the box keeps
+  chassis structure only — a wall, an end plate or a corner rail — up to 40 mm away (no limit in the
+  centre-of-mass-first mode below); never to another part or to the PC/104 stack (v2.5; before, the stack's top and
+  underside were targets too). The bracket owns a reserved box from the target to the part side (reaching into the
+  part's bounding box where it wraps the part); the box keeps
   1.2 mm from every other part, bracket and keep-out except the rail it is fixed to, so brackets are part of the
   packing and of the proof. The cheapest bracket that fits is used (direct, machined block, sheet Z-bracket, tube
   clamp, machined cradle); with a bracket budget above 0 a metal-AM bracket stands in where no simple one fits. A
@@ -32,6 +33,12 @@ All dimensions ASSUMED unless the CDS gives them (see stage2.py). The model wrap
   centring costs used length). Only the moving parts' mass moves the COM, so the shift is scaled by total ÷ moving
   mass. The end plates, the stack, its rods and the harness segments limit the shift, and a shift that would lose a
   mount (e.g. a part fixed to the −Z end plate) is not taken.
+* **Centre-of-mass-first mode** (V2: Balance the Spacecraft and the bracket budget both at 100): the parts are
+  placed for the centre of mass and the brackets are built to wherever they end up. Brackets have no length limit
+  (beyond MFG_REACH only metal-AM brackets exist), and the COM shift always goes for full centring, as far as the
+  room allows. The PC/104 stack stays anchored at its end plate (its frequency on longer rods is not computed).
+  Offering parts the enclosure axis with brackets of any length was measured too and did not lower the COM error
+  (docs/V2.md §2.2), so the placement itself is unchanged.
 
 Layout-specific geometry (stack height, corridor wall, standoffs) travels with each candidate in `meta`, so the
 validator rebuilds exactly the rules the layout was decoded under.
@@ -201,9 +208,15 @@ def mode_for(cable: float, threshold: float = 70.0) -> str:
     return "continuous" if cable >= threshold else ("soft" if cable > 0 else "default")
 
 
+def com_first_mode(sliders: dict, am_level: int | None) -> bool:
+    """V2 centre-of-mass-first mode: Balance the Spacecraft at 100 and the bracket budget's top step (metal AM
+    wherever it fits, mfg.rules.am_level 4)."""
+    return float(sliders.get("balance", 25)) >= 100.0 and am_level == 4
+
+
 class Stage2Model:
     """Decoder + rule builder for one parts set and one mode. Chromosome: 3n keys + 3 extra keys
-    (stack end plate and offset, corridor wall, COM centring)."""
+    (stack end plate and offset, corridor wall, COM centring — unused in centre-of-mass-first mode: full centring)."""
 
     n_extra = 3
     # keys missing from a short chromosome (older keys, constructive passes): the stack against the −Z end plate
@@ -212,19 +225,22 @@ class Stage2Model:
     RELAXABLE = ("clearances", "frame", "pcb_stack", "harness", "mounting", "com_box")
 
     def __init__(self, records: dict, mode: str, fixed: list | None = None, relax=frozenset(), mfg: bool = False,
-                 am_allowed: bool = True, am_level: int | None = None):
+                 am_allowed: bool = True, am_level: int | None = None, com_first: bool = False):
         """relax: constraint families switched off (constraint attribution, protocol §O.3 — never used for the
         layouts the app reports as Stage 2 results). mfg: V1 Manufacturable Design tab — brackets may bridge up to
         MFG_REACH and are synthesised after the search. Otherwise (V2 Stage 2) every part except the boards is held
         by a modelled bracket whose reserved box is part of the packing; am_allowed (bracket budget > 0) lets a
         metal-AM bracket stand in where no simple bracket fits, and am_level (mfg.rules.am_level, from the budget)
         how strongly metal AM is preferred over a cheaper simple bracket. The relative hardware cost C is an
-        objective."""
-        from ..mfg.rules import AM_FACTOR
+        objective. com_first: V2 centre-of-mass-first mode (com_first_mode; module docstring) — brackets of any
+        length, full COM centring."""
+        from ..mfg.rules import AM_FACTOR, MFG_REACH
         self.mfg = bool(mfg)
         self.am_level = (1 if am_allowed else 0) if am_level is None else int(am_level)
         self.am_allowed = self.am_level > 0
         self.am_factor = AM_FACTOR.get(self.am_level, 1.0)
+        self.com_first = bool(com_first) and not self.mfg
+        self.reach = np.inf if self.com_first else MFG_REACH      # the longest bracket (mm)
         self.profiles: dict = {}
         self.records = records
         self.ids = list(records)
@@ -292,13 +308,14 @@ class Stage2Model:
 
     def _mount_spec(self, n_obstacles: int):
         """Bracket-aware placement for the V2 Stage 2 brackets (decoders.box_decoder.MountSpec): every part with a
-        mounting layer, the inner walls, MFG_REACH, the bracket clearance; the corner rails are targets. Edge-on
-        boards (continuous-cable mode) take part too: their 3 mm standoff stubs are the layer, reaching up to the
-        50 mm standoff length to the side wall they face (only a wall: standoffs stand on a wall, Addendum 2.3)."""
+        mounting layer, the inner walls, the reach (MFG_REACH; no limit in centre-of-mass-first mode), the bracket
+        clearance; the corner rails are targets. Edge-on boards (continuous-cable mode) take part too: their 3 mm
+        standoff stubs are the layer, reaching up to the 50 mm standoff length to the side wall they face (only a wall:
+        standoffs stand on a wall, Addendum 2.3)."""
         if self.mfg or "mounting" in self.relax or not (self.pads or self.macro):
             return None
         from ..decoders.box_decoder import PEN_END, PEN_END_SHIFTED, MountSpec
-        from ..mfg.rules import BRACKET_CLEARANCE, BRACKET_MIN_W, MFG_REACH, face_profile, wrap_depth
+        from ..mfg.rules import BRACKET_CLEARANCE, BRACKET_MIN_W, face_profile, wrap_depth
         lo, hi = self.inner
         n_rails = len(self._statics_rails)
         wrap = {}
@@ -313,7 +330,7 @@ class Stage2Model:
         # the decoder packs from the −Z end plate and the COM shift then lifts the layout: a bracket to an end plate
         # would usually be torn off by the shift (which is then not taken, leaving the COM outside the CDS box)
         return MountSpec(pads=pads, walls=np.array([lo[0], hi[0], lo[1], hi[1], lo[2], hi[2]], float),
-                         reach=MFG_REACH, clearance=BRACKET_CLEARANCE + SLACK,
+                         reach=self.reach, clearance=BRACKET_CLEARANCE + SLACK,
                          targets=[i < n_rails for i in range(n_obstacles)], min_width=BRACKET_MIN_W,
                          end_plate_cost=PEN_END_SHIFTED if self.com_shift_on else PEN_END,
                          part_reach={pid: STANDOFF_MAX for pid in self.macro}, walls_only=frozenset(self.macro),
@@ -468,6 +485,8 @@ class Stage2Model:
         extra[:len(given)] = given
         rk = rule_keys[:self.n]
         meta = {"mode": self.mode, "rod_model": ROD_MODEL}
+        if self.com_first:
+            meta["com_first"] = True
         pre_poses, skip, stack_top = [], set(), None
         idx = {pid: i for i, pid in enumerate(self.ids)}
         ztop = self.dec_hi[2]
@@ -513,7 +532,9 @@ class Stage2Model:
             dropped += over
             poses = [p for p in poses if p[0] not in over]
         partial = any(p not in self.optional for p in res.unplaced)
-        shift, poses, meta, (penalty, mounts, extras) = self._com_shift(poses, meta, extra[2], partial)
+        # centre-of-mass-first mode: full centring, whatever the COM key asks
+        u = 1.0 if self.com_first else extra[2]
+        shift, poses, meta, (penalty, mounts, extras) = self._com_shift(poses, meta, u, partial)
         placed_boxes, length_top = res.placed_boxes, res.length_top
         if shift:                  # the decoder's boxes are the moving parts only (the boards are placed above)
             placed_boxes = np.asarray(placed_boxes, float).copy()
@@ -833,10 +854,11 @@ class Stage2Model:
 
     def _bracket_mount(self, pid, o, t, meta, world_boxes, keep, reserved) -> dict:
         """V2 Stage 2: the cheapest bracket whose reserved box reaches chassis structure — a wall, an end plate or a
-        corner rail — in front of the part's mounting side (within MFG_REACH) and keeps BRACKET_CLEARANCE from every
-        other part, every keep-out except the rail it is fixed to, and every bracket reserved before it. Never
-        another part: the PC/104 stack is no target (v2.5). The bracket holds `held_parts` (this part)."""
-        from ..mfg.rules import MFG_REACH, bracket_estimate, bracket_options, face_profile
+        corner rail — in front of the part's mounting side (within the reach: MFG_REACH, no limit in
+        centre-of-mass-first mode) and keeps BRACKET_CLEARANCE from every other part, every keep-out except the rail
+        it is fixed to, and every bracket reserved before it. Never another part: the PC/104 stack is no target
+        (v2.5). The bracket holds `held_parts` (this part)."""
+        from ..mfg.rules import bracket_estimate, bracket_options, face_profile
         lo, hi = self.inner
         pad, a, sgn = self.pads[pid]
         if pid not in self.profiles:
@@ -868,9 +890,9 @@ class Stage2Model:
                     targets.append((dist, plane, f"corner rail {name[4:]} ({side})", "rail", (name,), rb))
         cands = []
         for gap, plane, label, tkind, tkeep, tbox in targets:
-            if gap > MFG_REACH + 1e-9:
+            if gap > self.reach + 1e-9:
                 continue
-            for opt in bracket_options(prof, gap, self.am_allowed):
+            for opt in bracket_options(prof, gap, self.am_allowed, self.reach):
                 r, depth = self._reserve(pw, ax, neg, plane, side_mm, opt, prof["extent_mm"], tbox)
                 if r is None:
                     continue
@@ -895,8 +917,11 @@ class Stage2Model:
         if blocked:
             return {"ok": False, "how": f"every bracket path is blocked (cheapest: {blocked[0]} to the {blocked[1]}, "
                                         f"blocked by {blocked[2]})"}
-        return {"ok": False, "how": f"no wall, end plate or corner rail within {MFG_REACH:.0f} mm in front of its "
-                                    f"mounting side ({side}) — not within reach"}
+        if np.isfinite(self.reach):
+            return {"ok": False, "how": f"no wall, end plate or corner rail within {self.reach:.0f} mm in front of its "
+                                        f"mounting side ({side}) — not within reach"}
+        return {"ok": False, "how": f"no bracket fits between its mounting side ({side}) and the chassis structure in "
+                                    "front of it"}
 
     @staticmethod
     def _reserve(pw, ax, neg, plane, side_mm, opt, extent, tbox):

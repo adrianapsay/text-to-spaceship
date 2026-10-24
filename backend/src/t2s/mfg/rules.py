@@ -136,15 +136,19 @@ class BracketOption:
     fallback: bool = False        # tried right after the option before it (same kind) when that one is blocked
 
 
-def bracket_options(profile: dict, gap: float, am_allowed: bool) -> list[BracketOption]:
+def bracket_options(profile: dict, gap: float, am_allowed: bool, reach: float = MFG_REACH) -> list[BracketOption]:
     """Bracket candidates for a part side `gap` mm from its target, cheapest first. Without metal AM (bracket
-    budget 0) only simple brackets exist; with it, a metal-AM bracket is the fallback where no simple bracket fits."""
-    if gap > MFG_REACH + 1e-9:
+    budget 0) only simple brackets exist; with it, a metal-AM bracket is the fallback where no simple bracket fits.
+    reach: the longest bracket (V2 centre-of-mass-first mode: no limit). Simple brackets bridge MFG_REACH at most;
+    beyond it only metal-AM brackets exist."""
+    if gap > reach + 1e-9:
         return []
     w, h = profile["face_mm"]
     ext = float(profile.get("extent_mm", 30.0))
     out = []
-    if profile["flat_share"] >= 0.6:
+    if gap > MFG_REACH + 1e-9:              # no simple bracket bridges this far: metal AM only
+        pass
+    elif profile["flat_share"] >= 0.6:
         if gap <= DIRECT_MAX:
             out.append(BracketOption("direct", "direct (M3 fasteners + spacer washers)", "direct", 4, (1.0, 1.0), 0.0))
         elif gap <= MACHINED_MAX:

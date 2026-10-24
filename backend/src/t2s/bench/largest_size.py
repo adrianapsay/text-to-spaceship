@@ -22,10 +22,11 @@ NOTE = ("search-based: the largest size at which a fixed-effort search found a l
 
 def _try(records: dict, scale: float, mode: str, sliders: dict, am_allowed: bool | int, generations: int, pop: int,
          seed: int) -> dict:
-    """am_allowed: the bracket budget's metal-AM step (mfg.rules.am_level; True / False = step 1 / 0)."""
+    """am_allowed: the bracket budget's metal-AM step (mfg.rules.am_level; True / False = step 1 / 0). With the
+    sliders asking for it, the search runs in centre-of-mass-first mode (stage2_model.com_first_mode), as the app's."""
     from ..collision.geom import part_geom_from_record
     from ..collision.validate import Validator
-    from ..constraints.stage2_model import Stage2Model
+    from ..constraints.stage2_model import Stage2Model, com_first_mode
     from ..core.formfactor import COM_BOX
     from ..objectives.metrics import part_phys
     from ..optimise.brkga import Evaluator, IslandState, best_candidates, run_island, seed_keys
@@ -33,7 +34,7 @@ def _try(records: dict, scale: float, mode: str, sliders: dict, am_allowed: bool
     from ..parts.scale import scale_part
     t0 = time.perf_counter()
     recs = {pid: scale_part(r, scale) for pid, r in records.items()}
-    model = Stage2Model(recs, mode, am_level=int(am_allowed))
+    model = Stage2Model(recs, mode, am_level=int(am_allowed), com_first=com_first_mode(sliders, int(am_allowed)))
     ids = model.ids
     n = len(ids)
     optional = [p for p in ids if "optional" in (recs[p].tags or [])]

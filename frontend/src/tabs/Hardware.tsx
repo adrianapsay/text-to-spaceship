@@ -9,9 +9,10 @@ import { GoalSlider } from '../components/GoalsPanel';
 import { itemsFor, useLayoutList } from '../components/LayoutCompare';
 import { MainViewport } from '../components/viewport/Viewport';
 import { Badge, Button, EmptyState, MockTag, Notice, Panel } from '../components/ui';
-import { DISCLAIMER_STAGE2, SLIDERS } from '../lib/copy';
+import { COM_FIRST_WHAT, DISCLAIMER_STAGE2, SLIDERS } from '../lib/copy';
 import { extraItemStyle } from '../lib/colors';
 import { fmt } from '../lib/fmt';
+import { comFirstOn } from '../store/presets';
 
 const KIND_LABEL: Record<string, string> = {
   direct: 'Direct (M3 + spacer washers)',
@@ -360,6 +361,11 @@ export function HardwareTab() {
             {amLevelText(settings?.sliders.bracket_budget ?? 50)}
             {(settings?.sliders.bracket_budget ?? 50) > 0 ? ` Hardware cost weighted by ${(100 - (settings?.sliders.bracket_budget ?? 50)).toFixed(0)} / 100.` : ''}
           </div>
+          {settings && comFirstOn(settings.sliders, settings.stage) ? (
+            <div className="small" style={{ marginTop: 6 }} data-testid="com-first">
+              <Badge tone="accent">Centre of mass first</Badge> With Balance at 100 as well, {COM_FIRST_WHAT}
+            </div>
+          ) : null}
         </Panel>
         <Panel title="Totals" caption={s2 ? `layout ${s2.id}` : undefined}>
           {brackets.length ? (
@@ -424,7 +430,7 @@ export function HardwareTab() {
           </Panel>
           <Panel
             title="Brackets"
-            caption={`one per part; mass exact for built solids, ESTIMATE from the reserved box until designed; margins from two FEA solvers once designed, under ${envName} (the smallest over every load case and axis); Adjust sets a bracket's material, material used and member thickness`}
+            caption={`one per part${view?.com_first ? ', found with the centre of mass first: of any length (beyond 40 mm metal 3D-printed only)' : ''}; mass exact for built solids, ESTIMATE from the reserved box until designed; margins from two FEA solvers once designed, under ${envName} (the smallest over every load case and axis); Adjust sets a bracket's material, material used and member thickness`}
           >
             {brackets.length ? (
               <BracketTable
@@ -446,7 +452,7 @@ export function HardwareTab() {
       <ContestPanel c={contest.data ?? null} notAvailable={!!contest.notAvailable} />
       <Panel title="Bracket rules (ASSUMED)">
         <ul className="small" style={{ margin: '0 0 0 16px' }}>
-          <li>Reach: a bracket bridges up to 40 mm from the part's mounting side (its 3 mm layer side) to chassis structure only: a wall, an end plate or a corner rail, never another part. The PC/104 boards hang on four rods with spacer tubes from the nearest end plate.</li>
+          <li>Reach: a bracket bridges up to 40 mm from the part's mounting side (its 3 mm layer side) to chassis structure only: a wall, an end plate or a corner rail, never another part. With Balance and the Bracket budget both at 100 (centre of mass first) there is no limit (beyond 40 mm only metal 3D-printed), and the parts are moved along the length until the balance point is centred. The PC/104 boards hang on four rods with spacer tubes from the nearest end plate.</li>
           <li>Cheapest bracket that fits: direct (≤ 3.5 mm), machined block (≤ 15 mm), sheet Z-bracket, tube clamp for cylindrical parts, machined cradle for curved or irregular sides. Metal 3D-printed brackets need a budget above 0, and the budget sets how much more they may cost than the simple bracket they replace (steps at 34, 67 and 100).</li>
           <li>Clearance: each reserved box keeps 1.2 mm from every other part, bracket and keep-out except the one it is fixed to.</li>
           <li>

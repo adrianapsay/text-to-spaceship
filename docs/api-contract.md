@@ -79,12 +79,15 @@ rule (outside the enclosure, a part not mountable, COM outside the CDS box, no �
 also carry `label` ("ENGINEERING-CONSTRAINED — not flight-qualified"), `violations_engineering: [text]`,
 `verdict` (INFEASIBLE only) and `stage2: {mode, corridor, stack_span_mm, overflow_mm, unmounted, mounts, frame:
 [{kind, id, min, max}], insertion_order, com_shift_mm, com_z_unshifted_mm, rod_end, brackets, hardware_cost_rel,
-bracket_designs, bracket_overrides, assumed}`; mounting hardware (standoffs, V2 brackets, the PC/104 rods with their
-spacer tubes) appears in `extra_items`. `com_shift_mm` is how far every part except the PC/104 boards was moved along
-+Z by the COM-centring shift (0 when there was no room, no need, or a shift would have cost a mount; the boards stay
-on their rods at their end plate, `rod_end` `-z` or `+z`, V2 rules v2.5); `com_z_unshifted_mm` is the parts' COM
-height before it. `bracket_designs` holds each designed bracket's record (mass, margins per load case, governing
-check, flags, its settings and the automatic run's ladder), `bracket_overrides` the user's per-bracket settings.
+bracket_designs, bracket_overrides, assumed, com_first}`; mounting hardware (standoffs, V2 brackets, the PC/104 rods
+with their spacer tubes) appears in `extra_items`. `com_shift_mm` is how far every part except the PC/104 boards was
+moved along +Z by the COM-centring shift (0 when there was no room, no need, or a shift would have cost a mount; the
+boards stay on their rods at their end plate, `rod_end` `-z` or `+z`, V2 rules v2.5); `com_z_unshifted_mm` is the
+parts' COM height before it. `bracket_designs` holds each designed bracket's record (mass, margins per load case,
+governing check, flags, its settings and the automatic run's ladder), `bracket_overrides` the user's per-bracket
+settings. `com_first` is true for a layout found in centre-of-mass-first mode (Stage 2 with `balance` and
+`bracket_budget` both at 100; V2.md §2.2): full centring along Z and brackets of any length (beyond 40 mm metal
+3D-printed only). Reaching or leaving that point restarts the search.
 
 ### Settings
 ```json

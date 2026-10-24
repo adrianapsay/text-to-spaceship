@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react';
 import type { SliderKey } from '../api/types';
 import { session } from '../api/session';
-import { GOALS_CAPTION, SLIDERS, type SliderDef } from '../lib/copy';
+import { COM_FIRST_HINT, COM_FIRST_NOTE, GOALS_CAPTION, SLIDERS, type SliderDef } from '../lib/copy';
 import { normalisedWeights } from '../lib/physics';
-import { activeGoalSliders, PRESETS, type PresetId } from '../store/presets';
+import { activeGoalSliders, comFirstOn, PRESETS, type PresetId } from '../store/presets';
 import { useApp } from '../store/store';
 import { useAsync } from '../hooks';
 import { Button, InfoTip } from './ui';
@@ -259,7 +259,14 @@ export function GoalsPanel(props: { showExpert?: boolean; compact?: boolean }) {
       {visible.map((def) => {
         const disabled = def.key === 'feasibility' && stage === 1;
         const share = weights && (active as string[]).includes(def.key) ? weights[def.key as keyof typeof weights] : null;
-        const note = def.key === 'cable' ? cableModeNote(settings.sliders.cable, (limits?.cable_mode_threshold as number | undefined) ?? 70) : undefined;
+        const note =
+          def.key === 'cable'
+            ? cableModeNote(settings.sliders.cable, (limits?.cable_mode_threshold as number | undefined) ?? 70)
+            : def.key === 'balance' && stage === 2 && settings.sliders.balance >= 100
+              ? comFirstOn(settings.sliders, stage)
+                ? COM_FIRST_NOTE
+                : COM_FIRST_HINT
+              : undefined;
         return <GoalSlider key={def.key} def={def} value={settings.sliders[def.key] ?? (def.key === 'optional_parts' ? 75 : 50)} disabled={disabled} share={share} onChange={onChange(def.key)} note={note} />;
       })}
     </div>

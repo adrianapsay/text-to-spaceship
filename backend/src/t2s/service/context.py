@@ -81,6 +81,7 @@ class SearchContext:
     am_allowed: bool = True                                   # V2 bracket budget > 0: metal-AM brackets allowed
     form_factor: str = "3U"                                   # V2: 3U / 6U / 12U envelope (core.formfactor)
     am_level: int | None = None                               # V2 bracket-budget step (mfg.rules.am_level)
+    com_first: bool = False                                   # V2 centre-of-mass-first mode (stage2_model)
 
     def decoder(self):
         if self.stage == 2:
@@ -93,7 +94,8 @@ class SearchContext:
         if getattr(self, "_s2", None) is None:
             self._s2 = Stage2Model(self.records, self.stage2_mode or "default", self.fixed,
                                    am_allowed=getattr(self, "am_allowed", True),
-                                   am_level=getattr(self, "am_level", None))
+                                   am_level=getattr(self, "am_level", None),
+                                   com_first=getattr(self, "com_first", False))
         return self._s2
 
     def spec_for(self, meta: dict | None, relaxed: bool = False) -> StageSpec:
@@ -115,17 +117,19 @@ def stage2_config(records: dict) -> s2.Stage2Config:
 
 def build_context(records: dict, stage: int, reps: dict | None = None, stage2_mode: str = "default",
                   part_scale: float = 1.0, am_allowed: bool = True, form_factor: str | None = None,
-                  am_level: int | None = None) -> SearchContext:
+                  am_level: int | None = None, com_first: bool = False) -> SearchContext:
     """reps: part_id -> {algorithm id: Representation} from finished detail ladders (Addendum 4).
     stage2_mode: cable-slider mode for Stage 2 (default | soft | continuous).
     part_scale: V2 part-size factor, Stage 2 only (the detail-ladder proxies belong to the full-size parts, so they
     are not used for scaled parts).
     am_allowed: V2 bracket budget above 0 — metal-AM brackets may stand in where no simple bracket fits;
-    am_level: the budget's step (mfg.rules.am_level: how strongly metal AM is preferred); it decides am_allowed."""
+    am_level: the budget's step (mfg.rules.am_level: how strongly metal AM is preferred); it decides am_allowed.
+    com_first: V2 centre-of-mass-first mode (constraints.stage2_model.com_first_mode), Stage 2 only."""
     if am_level is not None:
         am_allowed = int(am_level) > 0
     am_level = (int(am_level) if am_level is not None else (1 if am_allowed else 0)) if stage == 2 else None
     am_allowed = bool(am_allowed) if stage == 2 else True
+    com_first = bool(com_first) and stage == 2
     from ..core import formfactor as ff
     form_factor = ff.set_form_factor(form_factor or ff.current())     # the envelope arrays follow it
     from ..parts.scale import scale_part
@@ -166,8 +170,10 @@ def build_context(records: dict, stage: int, reps: dict | None = None, stage2_mo
         from ..core.formfactor import COM_BOX
         com_box = COM_BOX.copy()
     psig = parts_signature(recs, part_scale)
+    # centre-of-mass-first mode enters the signatures only when on: the other contexts keep theirs (and their archives)
     csig = constraint_signature(recs, stage, {"stage2_mode": stage2_mode, "am_allowed": am_allowed,
-                                              "am_level": am_level, "form_factor": form_factor} if stage == 2 else
+                                              "am_level": am_level, "form_factor": form_factor,
+                                              **({"com_first": True} if com_first else {})} if stage == 2 else
                                 ({"form_factor": form_factor} if form_factor != "3U" else None))
     lsig = hashlib.sha256(json.dumps(levels, sort_keys=True).encode()).hexdigest()[:8]
     if stage == 2:
@@ -179,7 +185,8 @@ def build_context(records: dict, stage: int, reps: dict | None = None, stage2_mo
                                           mr.BRACKET_MODEL_VERSION, mr.BRACKET_CLEARANCE, mr.MFG_REACH,
                                           am_allowed, am_level] + ([form_factor] if form_factor != "3U" else [])
                                          # v2.5: the PC/104 rod model (stack anchored at its end plate)
-                                         + [s2m.ROD_MODEL, s2.ROD_KEEP, s2m.STACK_OFFSET_MAX]).encode()
+                                         + [s2m.ROD_MODEL, s2.ROD_KEEP, s2m.STACK_OFFSET_MAX]
+                                         + (["com_first"] if com_first else [])).encode()
                               ).hexdigest()[:16]
     else:
         ssig = spec_signature(spec)
@@ -188,7 +195,8 @@ def build_context(records: dict, stage: int, reps: dict | None = None, stage2_mo
                          proxies=proxies, orient_bounds={pid: recs[pid].orient_bounds for pid in ids}, fixed=fixed,
                          spec=spec, z0=float(ENCLOSURE_LO[2]), com_box=com_box, records=recs, hm_meshes=hm_meshes,
                          levels=levels, stage2_mode=stage2_mode if stage == 2 else None, part_scale=part_scale,
-                         am_allowed=am_allowed, form_factor=form_factor, am_level=am_level, **dec)
+                         am_allowed=am_allowed, form_factor=form_factor, am_level=am_level, com_first=com_first,
+                         **dec)
 
 
 def write_context(ctx: SearchContext, folder: Path) -> Path:
