@@ -376,6 +376,36 @@ def test_saved_stl_files_of_a_stage2_layout_lose_their_brackets_when_a_slider_mo
     assert struct.unpack_from("<I", (folder / "assembly.stl").read_bytes(), 80)[0] == n_parts
 
 
+def test_bracket_design_settings_are_listed_and_checked(live):
+    """WS4: the launch environments, materials and setting ranges the app offers; unknown values are refused (400)
+    and change nothing."""
+    from t2s.gd.design import DESIGNED_KINDS
+    client, coord, store = live
+    o = client.get("/api/design-options").json()
+    assert {"gevs", "gevs_analysis", "spacex", "nanoracks"} <= {e["id"] for e in o["environments"]}
+    assert o["launch_environment"] == "gevs" and o["bracket_material"] == "AlSi10Mg"
+    assert {m["id"] for m in o["materials"] if m["process"] == "metal_am"} == {"AlSi10Mg", "Ti-6Al-4V"}
+    assert o["min_member_mm"]["am_min_wall_mm"] == 2.0 and o["vol_frac"]["ladder"] == sorted(o["vol_frac"]["ladder"])
+    assert client.put("/api/settings", json={"launch_environment": "ariane"}).status_code == 400
+    assert client.put("/api/settings", json={"bracket_material": "6061-T6"}).status_code == 400
+    assert store.settings["launch_environment"] == "gevs" and store.settings["bracket_material"] == "AlSi10Mg"
+    s = client.put("/api/settings", json={"launch_environment": "spacex", "bracket_material": "Ti-6Al-4V"}).json()
+    try:
+        assert s["launch_environment"] == "spacex" and s["bracket_material"] == "Ti-6Al-4V"
+        assert client.get("/api/design-options").json()["launch_environment"] == "spacex"
+    finally:
+        client.put("/api/settings", json={"launch_environment": "gevs", "bracket_material": "AlSi10Mg"})
+    assert client.post("/api/layouts/L-NOPE/design-brackets", json={}).status_code == 404
+    e = next((x for x in list(coord.archive.values()) if x.stage == 2 and any(
+        b["kind"] in DESIGNED_KINDS for b in (x.meta or {}).get("brackets") or [])), None)
+    if e is not None:                                   # a bracket that is not in the layout, a setting out of range
+        assert client.post(f"/api/layouts/{e.id}/design-brackets", json={"pids": ["nope"]}).status_code == 400
+        pid = next(b["pid"] for b in e.meta["brackets"] if b["kind"] in DESIGNED_KINDS)
+        r = client.post(f"/api/layouts/{e.id}/design-brackets", json={"overrides": {pid: {"vol_frac": 5}}})
+        assert r.status_code == 400 and "outside" in r.json()["detail"]
+        assert not (e.meta or {}).get("bracket_overrides")
+
+
 def test_size_study_runs_in_the_background(live):
     client, coord, _ = live
     assert client.get("/api/studies/size").status_code == 404

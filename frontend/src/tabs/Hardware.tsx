@@ -1,8 +1,9 @@
-import { useMemo, useState } from 'react';
-import type { BracketDesign, BracketInfo, BracketMode, ContestResults, LayoutSummary } from '../api/types';
+import { Fragment, useMemo, useState } from 'react';
+import type { BracketDesign, BracketInfo, BracketMode, BracketOverride, ContestResults, DesignOptions, LayoutSummary, Settings } from '../api/types';
 import { session } from '../api/session';
 import { useApp } from '../store/store';
 import { useAsync, useParts } from '../hooks';
+import { BracketSettings, DesignSettings, governingText, outdatedText } from '../components/BracketDesign';
 import { DesignProgressPanel, SavedStlPanel } from '../components/DesignProgress';
 import { GoalSlider } from '../components/GoalsPanel';
 import { itemsFor, useLayoutList } from '../components/LayoutCompare';
@@ -82,7 +83,21 @@ function MassCell({ b, d }: { b: BracketInfo; d?: BracketDesign }) {
   );
 }
 
-function BracketTable({ brackets, designs, names }: { brackets: BracketInfo[]; designs: Record<string, BracketDesign>; names: Record<string, string> }) {
+function BracketTable(props: {
+  layoutId: string;
+  brackets: BracketInfo[];
+  designs: Record<string, BracketDesign>;
+  overrides: Record<string, BracketOverride>;
+  names: Record<string, string>;
+  options: DesignOptions | null;
+  settings: Settings | null;
+  running: boolean;
+}) {
+  const { brackets, designs, overrides, names, options, settings } = props;
+  const [open, setOpen] = useState<string | null>(null);
+  const env = settings?.launch_environment ?? options?.launch_environment ?? 'gevs';
+  const mat = settings?.bracket_material ?? options?.bracket_material ?? 'AlSi10Mg';
+  const envName = options?.environments.find((e) => e.id === env)?.name;
   return (
     <table className="data" data-testid="bracket-table">
       <thead>
@@ -97,7 +112,10 @@ function BracketTable({ brackets, designs, names }: { brackets: BracketInfo[]; d
           <th className="num">Rel. cost</th>
           <th className="num">MS yield</th>
           <th className="num">MS ult.</th>
+          <th className="num">MS bolts</th>
           <th className="num">f1</th>
+          <th>Governing check</th>
+          <th />
         </tr>
       </thead>
       <tbody>
@@ -106,33 +124,61 @@ function BracketTable({ brackets, designs, names }: { brackets: BracketInfo[]; d
           const failed = !!d0 && d0.mass_kg == null;
           const d = failed ? undefined : d0;
           const st = extraItemStyle(b.process);
+          const designable = DESIGNED_KINDS.includes(b.kind);
+          const isOpen = open === b.pid;
+          const stale = outdatedText(b, d0, overrides[b.pid], env, mat, envName);
           return (
-            <tr key={b.name}>
-              <td>{names[b.pid] ?? b.pid}</td>
-              <td>
-                <span className="row" style={{ gap: 6 }}>
-                  <span className={`swatch ${st.hatch ? 'hatch' : ''}`} style={{ background: st.color }} />
-                  {KIND_LABEL[b.kind] ?? b.mount_type}
-                  {st.badge ? <Badge tone="accent">{st.badge}</Badge> : null}
-                </span>
-                {d ? <div className="small muted">{d.generator}</div> : null}
-              </td>
-              <td className="small">{b.target}</td>
-              <td className="num">{fmt(b.gap_mm, 'mm')}</td>
-              <td className="small">{boxSize(b.reserve)}</td>
-              <td className="small">{b.material}</td>
-              <td className="num">
-                <MassCell b={b} d={d0} />
-              </td>
-              <td className="num">{fmt(d ? d.cost_rel : b.cost_rel, 'rel')}</td>
-              <td className="num">
-                <Margin v={d?.ms_yield} />
-              </td>
-              <td className="num">
-                <Margin v={d?.ms_ult} />
-              </td>
-              <td className="num"><F1Cell f1={d?.f1_hz} modes={d?.modes} /></td>
-            </tr>
+            <Fragment key={b.name}>
+              <tr className={isOpen ? 'bracket-open' : undefined}>
+                <td>{names[b.pid] ?? b.pid}</td>
+                <td>
+                  <span className="row" style={{ gap: 6 }}>
+                    <span className={`swatch ${st.hatch ? 'hatch' : ''}`} style={{ background: st.color }} />
+                    {KIND_LABEL[b.kind] ?? b.mount_type}
+                    {st.badge ? <Badge tone="accent">{st.badge}</Badge> : null}
+                  </span>
+                  {d ? <div className="small muted">{d.generator}</div> : null}
+                  {stale ? (
+                    <div className="small" data-testid={`outdated-${b.pid}`}>
+                      <Badge tone="warn">outdated</Badge> {stale}
+                    </div>
+                  ) : null}
+                </td>
+                <td className="small">{b.target}</td>
+                <td className="num">{fmt(b.gap_mm, 'mm')}</td>
+                <td className="small">{boxSize(b.reserve)}</td>
+                <td className="small">{d0?.material ?? b.material}</td>
+                <td className="num">
+                  <MassCell b={b} d={d0} />
+                </td>
+                <td className="num">{fmt(d ? d.cost_rel : b.cost_rel, 'rel')}</td>
+                <td className="num">
+                  <Margin v={d?.ms_yield} />
+                </td>
+                <td className="num">
+                  <Margin v={d?.ms_ult} />
+                </td>
+                <td className="num">
+                  <Margin v={d?.ms_bolt} />
+                </td>
+                <td className="num"><F1Cell f1={d?.f1_hz} modes={d?.modes} /></td>
+                <td className="small">{d?.governing ? governingText(d.governing) : <span className="muted">—</span>}</td>
+                <td>
+                  {designable ? (
+                    <Button size="small" onClick={() => setOpen(isOpen ? null : b.pid)} aria-expanded={isOpen} data-testid={`bracket-open-${b.pid}`}>
+                      {isOpen ? 'Close' : 'Adjust'}
+                    </Button>
+                  ) : null}
+                </td>
+              </tr>
+              {isOpen ? (
+                <tr className="bracket-open">
+                  <td colSpan={14}>
+                    <BracketSettings layoutId={props.layoutId} b={b} d={d0} ov={overrides[b.pid]} options={options} settings={settings} running={props.running} />
+                  </td>
+                </tr>
+              ) : null}
+            </Fragment>
           );
         })}
       </tbody>
@@ -249,12 +295,17 @@ export function HardwareTab() {
   const doneAt = (study?.partial as { status?: string } | undefined)?.status === 'DONE' ? study?.at : null;
   const layout = useAsync(s2?.id ? () => session().api.layout(s2.id) : null, [s2?.id, doneAt]);
   const contest = useAsync(() => session().api.gdContest(), []);
+  const options = useAsync(() => session().api.designOptions(), []);
   const [msg, setMsg] = useState<string | null>(null);
   const items = useMemo(() => itemsFor(layout.data, newest), [layout.data, newest]);
   const names = useMemo(() => Object.fromEntries(parts.map((p) => [p.id, p.name])), [parts]);
   const view = layout.data?.stage2;
   const brackets = view?.brackets ?? [];
   const designs = view?.bracket_designs ?? {};
+  const runStatus = (study?.partial as { status?: string } | undefined)?.status;
+  const running = runStatus === 'PENDING' || runStatus === 'RUNNING';
+  const envId = settings?.launch_environment ?? options.data?.launch_environment;
+  const envName = options.data?.environments.find((e) => e.id === envId)?.name ?? envId ?? 'the launch environment';
   const budgetDef = SLIDERS.find((s) => s.key === 'bracket_budget')!;
   const byKind = useMemo(() => {
     const m: Record<string, number> = {};
@@ -270,13 +321,20 @@ export function HardwareTab() {
   const estimates = brackets.filter((b) => !b.exact && !designs[b.pid]).length;
   // brackets the design job gives a real solid (metal AM, cradle, clamp band); until then: box / catalogue envelope
   const undesigned = brackets.filter((b) => DESIGNED_KINDS.includes(b.kind) && designs[b.pid]?.mass_kg == null).length;
+  // what the button designs: no solid yet, or designed for another launch environment or material
+  const overrides = view?.bracket_overrides ?? {};
+  const matId = settings?.bracket_material ?? options.data?.bracket_material ?? 'AlSi10Mg';
+  const todo = brackets
+    .filter((b) => DESIGNED_KINDS.includes(b.kind))
+    .filter((b) => designs[b.pid]?.mass_kg == null || outdatedText(b, designs[b.pid], overrides[b.pid], envId ?? 'gevs', matId) != null)
+    .map((b) => b.pid);
   const auto = settings?.auto_design_brackets ?? true;
   const design = async () => {
     if (!layout.data) return;
     setMsg(null);
     try {
-      await session().api.designBrackets(layout.data.id);
-      setMsg('Bracket design started: the contest winner designs every metal-AM bracket, and the rule-based shape every cradle and clamp band, inside its reserved box; each design is checked with CalculiX and NGSolve and replaces the box in the 3D views and exports.');
+      await session().api.designBrackets(layout.data.id, { pids: todo });
+      setMsg(`Bracket design started under ${envName}: the contest winner designs every metal-AM bracket, and the rule-based shape every cradle and clamp band, inside its reserved box; each design is checked with CalculiX and NGSolve and replaces the box in the 3D views and exports.`);
     } catch (e) {
       setMsg(`Could not start: ${(e as Error).message}`);
     }
@@ -318,8 +376,8 @@ export function HardwareTab() {
                 ))}
               </div>
               <div className="row" style={{ marginTop: 8 }}>
-                <Button variant="primary" onClick={design} disabled={!layout.data || !undesigned} data-testid="design-brackets">
-                  Design the 3D-printed, cradle and clamp brackets{undesigned ? ` (${undesigned})` : ''}
+                <Button variant="primary" onClick={design} disabled={!layout.data || !todo.length || running} data-testid="design-brackets">
+                  Design the 3D-printed, cradle and clamp brackets{todo.length ? ` (${todo.length})` : ''}
                 </Button>
               </div>
               <label className="small row" style={{ marginTop: 6, gap: 6 }}>
@@ -338,6 +396,9 @@ export function HardwareTab() {
           )}
         </Panel>
       </div>
+      <Panel title="Design settings" caption="the launch loads every bracket is checked under, and the material of the metal 3D-printed ones">
+        <DesignSettings options={options.data ?? null} settings={settings ?? null} notAvailable={!!options.notAvailable} />
+      </Panel>
       {study ? (
         <Panel title="Bracket design run" caption="one bar per bracket; up to 4 are designed at the same time, each checked with CalculiX and NGSolve">
           <DesignProgressPanel />
@@ -361,8 +422,24 @@ export function HardwareTab() {
               <MainViewport items={items} metrics={layout.data?.metrics ?? null} stage={2} testId="hardware-viewport" />
             </div>
           </Panel>
-          <Panel title="Brackets" caption="one per part; mass exact for built solids, ESTIMATE from the reserved box until designed; margins from two FEA solvers once designed">
-            {brackets.length ? <BracketTable brackets={brackets} designs={designs} names={names} /> : <EmptyState title="No brackets in this layout" />}
+          <Panel
+            title="Brackets"
+            caption={`one per part; mass exact for built solids, ESTIMATE from the reserved box until designed; margins from two FEA solvers once designed, under ${envName} (the smallest over every load case and axis); Adjust sets a bracket's material, material used and member thickness`}
+          >
+            {brackets.length ? (
+              <BracketTable
+                layoutId={s2.id}
+                brackets={brackets}
+                designs={designs}
+                overrides={view?.bracket_overrides ?? {}}
+                names={names}
+                options={options.data ?? null}
+                settings={settings ?? null}
+                running={running}
+              />
+            ) : (
+              <EmptyState title="No brackets in this layout" />
+            )}
           </Panel>
         </>
       )}
@@ -372,7 +449,12 @@ export function HardwareTab() {
           <li>Reach: a bracket bridges up to 40 mm from the part's mounting side (its 3 mm layer side) to chassis structure only: a wall, an end plate or a corner rail, never another part. The PC/104 boards hang on four rods with spacer tubes from the nearest end plate.</li>
           <li>Cheapest bracket that fits: direct (≤ 3.5 mm), machined block (≤ 15 mm), sheet Z-bracket, tube clamp for cylindrical parts, machined cradle for curved or irregular sides. Metal 3D-printed brackets need a budget above 0, and the budget sets how much more they may cost than the simple bracket they replace (steps at 34, 67 and 100).</li>
           <li>Clearance: each reserved box keeps 1.2 mm from every other part, bracket and keep-out except the one it is fixed to.</li>
-          <li>Loads: 68 g quasi-static in each axis separately; factors of safety 1.25 (yield) and 1.4 (ultimate); AlSi10Mg 170 / 280 MPa, E 65 GPa; random vibration (Miles 3σ on the GEVS acceptance spectrum, factors 1.6 / 1.8) where it is larger; first natural frequency with the part, any mode including twisting, ≥ 100 Hz (target 200 Hz).</li>
+          <li>
+            Loads: the launch environment chosen above (default GEVS, GSFC-STD-7000B). Quasi-static: the GSFC mass-acceleration curve by the part&apos;s mass, each axis separately. Random vibration: modal superposition (all
+            modes combined, CQC) over 20–2000 Hz, 3σ von Mises. Two checks: the limit level × the preset&apos;s factors (GEVS 1.25 / 1.4 static, 1.6 / 1.8 random), and the qualification level (limit + 3 dB) against
+            yield × 1.0 and ultimate × 1.25. Bolts: M3 A2-70 with a fitting factor of 1.15, plus flange bearing and head pull-through in the bracket&apos;s bolted flange (at least 2 mm). Shock: an ESTIMATE, reported only. First natural frequency with the part ≥ 100 Hz (GEVS
+            guidance, kept as this project&apos;s rule). Materials: AlSi10Mg or Ti-6Al-4V (metal 3D-printed), 6061-T6 (machined), vendor minimum values, not design allowables.
+          </li>
         </ul>
       </Panel>
     </div>

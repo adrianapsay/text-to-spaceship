@@ -173,8 +173,11 @@ def proof_markdown(cert: dict, report, metrics: dict | None = None) -> str:
                      f"{'satisfied' if abs(com[0]) <= 20 and abs(com[1]) <= 20 and abs(com[2]) <= 70 else 'NOT satisfied'}"
                      + (" (enforced)" if cert["stage"] == 2 else " (reported only in Stage 1)") + ".")
         if metrics.get("insertion_order"):
+            # the layout keeps the part ids in order (coordinator geo); (part, direction) pairs give the direction too
+            def step(x):
+                return f"{nm(x[0])} ({x[1]})" if isinstance(x, (list, tuple)) and len(x) == 2 else nm(x)
             L.append("\nInsertion order (each part slides straight in along ±Z without meeting an installed part): "
-                     + ", ".join(f"{p} ({u})" for p, u in metrics["insertion_order"]) + ".")
+                     + ", ".join(step(x) for x in metrics["insertion_order"]) + ".")
         if metrics.get("lower_bounds"):
             L.append("\n## Why it cannot be much shorter\n")
             for name, val, why in metrics["lower_bounds"]:

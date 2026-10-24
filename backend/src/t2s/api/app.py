@@ -15,7 +15,7 @@ from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile, Web
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 
-from ..service.coordinator import VERSION, Client, Coordinator, jsonable
+from ..service.coordinator import VERSION, Client, Coordinator, InvalidSetting, jsonable
 from ..service.project import REPO, ProjectStore
 
 CHECKER = REPO / "tools" / "check_certificate.py"
@@ -172,7 +172,10 @@ def create_app(coord: Coordinator | None = None, project: str = "default", **coo
     @app.put("/api/settings")
     async def put_settings(request: Request):
         c = C(request)
-        c.apply_settings(await request.json())
+        try:
+            c.apply_settings(await request.json())
+        except InvalidSetting as exc:
+            raise HTTPException(400, str(exc)) from exc
         return c.store.settings
 
     @app.post("/api/run")
@@ -304,12 +307,27 @@ def create_app(coord: Coordinator | None = None, project: str = "default", **coo
 
     @app.post("/api/layouts/{layout_id}/design-brackets")
     async def design_brackets(layout_id: str, request: Request):
+        """Design the layout's brackets; body (optional) {pids: [part ids] to redesign only those, overrides:
+        {part id: {material, vol_frac, min_member_mm}}} (V2 per-bracket settings, "auto" for the run to choose)."""
         try:
-            return C(request).start_bracket_design(layout_id)
+            body = await request.json()
+        except Exception:  # noqa: BLE001
+            body = {}
+        body = body if isinstance(body, dict) else {}
+        try:
+            return C(request).start_bracket_design(layout_id, body.get("pids"), body.get("overrides"))
         except KeyError as exc:
             raise HTTPException(404, f"unknown layout {layout_id}") from exc
+        except InvalidSetting as exc:
+            raise HTTPException(400, str(exc)) from exc
         except ValueError as exc:
             raise HTTPException(409, str(exc)) from exc
+
+    @app.get("/api/design-options")
+    async def design_options(request: Request):
+        """V2: what the bracket designs can be set to — launch environments, AM materials, the ranges of the
+        per-bracket settings — and the project's current choices."""
+        return C(request).design_options()
 
     @app.get("/api/saved-stl")
     async def saved_stl(request: Request):
@@ -567,7 +585,10 @@ def create_app(coord: Coordinator | None = None, project: str = "default", **coo
             elif t == "ping":
                 c.send(client, "pong", {})
             elif t == "edit.settings":
-                c.apply_settings(p.get("settings") or {})
+                try:
+                    c.apply_settings(p.get("settings") or {})
+                except InvalidSetting as exc:               # nothing changed; the edit is still acknowledged
+                    c.send(client, "error", {"message": f"settings refused: {exc}"})
                 client.applied = max(client.applied, int(p.get("client_seq", 0)))
                 c.send(client, "edit.ack", {"client_seq": client.applied})
             elif t == "edit.part":

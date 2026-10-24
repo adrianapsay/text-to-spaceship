@@ -133,6 +133,11 @@ def test_certificate_proves_chassis_mounting(stacked, tmp_path):
                for b in cert["brackets"])
     md = proof_markdown(cert, rep)
     assert "Lemma 5" in md and "PC/104 deck" not in md
+    # as the app calls it: the layout's metrics keep the insertion order as part ids (a pair names the direction)
+    ids = [p["id"] for p in cert["parts"]]
+    md = proof_markdown(cert, rep, {"com_mm": [0, 0, 0], "insertion_order": ids})
+    assert "Insertion order" in md and all(i in md for i in ids)
+    assert f"{ids[0]} " in proof_markdown(cert, rep, {"insertion_order": [[ids[0], "+z"]]})
     code, out = _check(cert, tmp_path)
     assert code == 0 and "OVERALL: PASS" in out, out
     for k in ("frame_items_complete", "exemptions_follow_rules", "brackets_fixed_to_chassis", "every_part_held",
@@ -268,3 +273,34 @@ def test_a_legacy_layout_keeps_its_rules_and_its_proof(recs, files, tmp_path):
     # the same layout under the v2.5 rules: the deck bracket touches the stack, which is not allowed any more
     rep = Validator(geoms).validate(poses, m.spec(dict(meta, rod_model="v2.5-end-plate")), want_planes=False)
     assert not rep.valid and any("stack_reserve" in v or "pcb_" in v for v in rep.violations)
+
+
+def test_rods_are_layout_items_with_mass_and_a_mesh(stacked):
+    """The coordinator lists each PC/104 rod (with its spacer tube) as an item of the layout: its mass for the physics
+    and the bill of materials, its keep-out box as its mesh in the 3D views and drawings."""
+    from types import SimpleNamespace
+
+    from t2s.constraints.stage2_model import stack_rods
+    from t2s.service.coordinator import Coordinator
+    _, r, _, _ = stacked
+    e = SimpleNamespace(id="L-ws1", meta=dict(r.meta))
+    c = Coordinator.__new__(Coordinator)
+    c.archive = {"L-ws1": e}
+    hw = r.meta["stack_hardware"]
+    rods = [it for it in c._extra_items(e) if it["kind"] == "rod"]
+    assert len(rods) == len(hw) == 4 and all(it["mass_kg"] > 0 for it in rods)
+    assert [it["mass_kg"] for it in rods] == [h["mass_kg"] for h in hw]
+    assert all(it["for_part"] in r.meta["stack_ids"] and "end plate" in it["target"] for it in rods)
+    import re
+    assert all(re.fullmatch(r"PC/104 rod at [+−]x [+−]y with spacer tube, to the [+−]Z end plate", it["label"])
+               for it in rods), [it["label"] for it in rods]
+    boxes = dict(stack_rods(r.meta))
+    for k, it in enumerate(rods):
+        buf = c.item_mesh(f"L-ws1-rod{k}")
+        nv, nf = (int(x) for x in np.frombuffer(buf[:8], "<u4"))
+        v = np.frombuffer(buf[8:8 + 12 * nv], "<f4").reshape(-1, 3)
+        assert (nv, nf) == (8, 12)
+        assert np.allclose(np.concatenate([v.min(0), v.max(0)]), boxes[hw[k]["name"]], atol=1e-3)
+        assert it["box_mm"] == pytest.approx(list(boxes[hw[k]["name"]]))
+    with pytest.raises(KeyError):
+        c.item_mesh("L-ws1-rod9")

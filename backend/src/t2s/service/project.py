@@ -36,6 +36,8 @@ DEFAULT_SETTINGS = {
     "part_scale_pct": 100,          # V2: part-size slider (Stage 2), 50 … 100 %
     "form_factor": "3U",            # V2: 3U / 6U / 12U envelope (CDS Rev 14.1)
     "auto_design_brackets": True,   # V2: design the metal-AM / cradle / clamp brackets when the search pauses
+    "launch_environment": "gevs",   # V2: launch loads the brackets are designed for (gd.environment)
+    "bracket_material": "AlSi10Mg", # V2: AM material of a metal-AM bracket with no material of its own (gd.materials)
 }
 
 

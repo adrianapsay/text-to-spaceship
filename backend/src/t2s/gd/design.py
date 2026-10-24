@@ -75,15 +75,28 @@ def design_h(reserve, axis: int | None = None, h_min: float = 1.5, layers: int =
     return h
 
 
+AM_MIN_WALL_MM = 2.0      # L-PBF structural walls (Materialise, docs/research/v2-bracket-loads-materials.md §4)
+# generators whose member size can be set: the filter radius keyword each takes (mm); the radius is half the
+# requested minimum member thickness (a density filter suppresses members thinner than about twice its radius)
+MEMBER_KWARG = {"pytopo3d": "rmin_mm", "beso": "r_mm"}
+
+
 def design_bracket(b: dict, rec, orient: int, t, part_mass_kg: float, key: str, h: float | None = None,
                    budget_s: float = 300.0, threads: int = 2, log=print, material: str | None = None,
-                   environment: str | None = None) -> tuple[dict, tuple | None]:
+                   environment: str | None = None, vol_frac: float | None = None,
+                   min_member_mm: float | None = None) -> tuple[dict, tuple | None]:
     """Design one bracket. `material`: the AM material id for a metal-AM bracket (gd.materials; default AlSi10Mg);
     cradles and clamp bands are machined 6061-T6 whatever it says. `environment`: the launch preset
-    (gd.environment; default GEVS)."""
+    (gd.environment; default GEVS).
+
+    The user's settings (WS4): `vol_frac` None runs the ladder lightest first and records every rung — its first
+    passing rung is the FEA minimum (`min_vol_frac`); a value designs once at that material use. `min_member_mm`
+    thickens the bolted plate and the contact skin to at least that and sets the generator's filter radius to half of
+    it; the thinnest generated member of the result is measured (`member_mm`) and compared with the AM minimum wall."""
     from ..mfg.rules import FASTENER_MASS_KG, bracket_cost
     from . import environment as envs
     from . import materials as mats
+    from .domain import member_thickness_mm, thicken_plate, thicken_skin
     from .evaluate import evaluate
     am = b["kind"] == "metal_am"
     mat_id = mats.for_kind(b["kind"], material)
@@ -92,25 +105,47 @@ def design_bracket(b: dict, rec, orient: int, t, part_mass_kg: float, key: str, 
     fn, name = _gen(gkey)
     h = design_h(b["reserve"], int(b["axis"])) if h is None else h
     dom = domain_from_bracket(b, rec, orient, t, h=h, part_mass_kg=part_mass_kg, material=mat_id)
-    ladder = VOL_LADDER if (am and gkey != "baseline") else (None,)
-    best, best_mesh = None, None
+    plate_mm = thicken_plate(dom, min_member_mm) if min_member_mm else h     # the bolted plate and the contact skin
+    skin_mm = thicken_skin(dom, min_member_mm) if min_member_mm else h       # at least the member thickness
+    gen_kw = {}
+    if min_member_mm and gkey in MEMBER_KWARG:
+        gen_kw[MEMBER_KWARG[gkey]] = 0.5 * float(min_member_mm)
+    topo = am and gkey != "baseline"
+    ladder = ((float(vol_frac),) if vol_frac is not None else VOL_LADDER) if topo else (None,)
+    best, best_mesh, best_g, rungs = None, None, None, []
     for vf in ladder:
         if vf is not None:
             dom.vol_frac = vf
         try:
-            g = fn(dom, budget_s=budget_s, threads=threads)
+            g = fn(dom, budget_s=budget_s, threads=threads, **gen_kw)
         except Exception as exc:  # noqa: BLE001
             log(f"[design] {b['name']}: {name} failed: {exc!r}")
+            rungs.append({"vol_frac": vf, "passed": False, "reason": f"generator failed: {exc!r}"[:200]})
             break
         ev = evaluate(dom, g, threads=threads, env=env.id)
         row = ev.summary()
         row["vol_frac"] = vf
+        rungs.append({"vol_frac": vf, "passed": bool(row.get("passed")), "mass_g": row.get("mass_g"),
+                      "ms_yield": row.get("ms_yield"), "ms_ult": row.get("ms_ult"), "f1_hz": row.get("f1_hz"),
+                      "governing": row.get("governing"), "reason": str(row.get("reason") or "")[:200]})
         log(f"[design] {b['name']} {name} vf={vf}: mass {row['mass_g']} g, MS {row['ms_yield']}, f1 {row['f1_hz']}")
         if ev.mesh is not None and (best is None or (row["passed"] and not best["passed"]) or
                                     (not best["passed"] and (row["ms_yield"] or -9) > (best["ms_yield"] or -9))):
-            best, best_mesh = row, ev.mesh
+            best, best_mesh, best_g = row, ev.mesh, g
         if row["passed"]:
             break
+    settings = {"material": mat_id, "vol_frac": "auto" if vol_frac is None else float(vol_frac),
+                "min_member_mm": "auto" if not min_member_mm else float(min_member_mm)}
+    min_vf = next((r["vol_frac"] for r in rungs if r["passed"]), None) if (topo and vol_frac is None) else None
+    dens = getattr(best_g, "density", None) if best_g is not None else None
+    member = member_thickness_mm(dom, dens) if dens is not None else None
+    member_why = None if member is not None else (
+        "not measured: the generator gives a solid, not a voxel density" if dens is None else
+        "no generated members: the bolted plate, the contact skin and the bosses carry the load")
+    user = {"settings": settings, "ladder": rungs, "min_vol_frac": min_vf, "member_mm": member, "member_why": member_why,
+            "plate_mm": float(plate_mm), "skin_mm": float(skin_mm), "am_min_wall_mm": AM_MIN_WALL_MM,
+            "member_note": (None if not min_member_mm or gkey in MEMBER_KWARG else
+                            f"{name} has no member-size setting: only the bolted plate was thickened")}
     fallback = None
     if best_mesh is None:                                   # no solid at all: the machined block (labelled)
         fn, _ = _gen("block")
@@ -119,7 +154,7 @@ def design_bracket(b: dict, rec, orient: int, t, part_mass_kg: float, key: str, 
         fallback = "no generated solid joined wall and part: machined block used"
         if best_mesh is None:
             return {"pid": b["pid"], "generator": name, "passed": False, "reason": ev.reason, "fallback": fallback,
-                    "environment": env.id, "material": mat_id}, None
+                    "environment": env.id, "material": mat_id, **user}, None
     v, f = best_mesh
     mat = mats.material(mat_id)
     m, com, inertia, vol = solid_props(v, f, mat_id)
@@ -153,16 +188,22 @@ def design_bracket(b: dict, rec, orient: int, t, part_mass_kg: float, key: str, 
          "margins": best.get("margins"), "factor_sources": best.get("factor_sources"),
          "checks": best.get("checks"), "bolt_checks": best.get("bolt_checks"),
          "governing": best.get("governing"), "ms_bolt": best.get("ms_bolt"), "flags": best.get("flags"),
-         "bolts": [np.asarray(p, float).tolist() for p in fpts], "vol_frac": best.get("vol_frac")}
+         "bolts": [np.asarray(p, float).tolist() for p in fpts], "vol_frac": best.get("vol_frac"), **user}
+    if member is not None and member < AM_MIN_WALL_MM:          # printable? flagged, not a pass criterion
+        d["flags"] = [*(d.get("flags") or []), {
+            "code": "thin_members", "text": f"thinnest member {member:.1f} mm < {AM_MIN_WALL_MM:g} mm, the AM minimum "
+                                            "structural wall: thicken (minimum member thickness) before printing",
+            "source": "Materialise L-PBF design guide (docs/research/v2-bracket-loads-materials.md §4)"}]
     return d, (v, f)
 
 
 def _design_one(k: int, b: dict, rec, pose, mass: float, key: str, out_dir: str, lid: str, threads: int,
-                material: str | None = None, environment: str | None = None) -> dict:
+                material: str | None = None, environment: str | None = None, vol_frac: float | None = None,
+                min_member_mm: float | None = None) -> dict:
     """One bracket (its own process when the job runs brackets in parallel): design it and write its mesh files."""
     o, t = pose
     d, mesh = design_bracket(b, rec, o, t, mass, key, threads=threads, log=lambda m: None, material=material,
-                             environment=environment)
+                             environment=environment, vol_frac=vol_frac, min_member_mm=min_member_mm)
     if mesh is not None:
         out = Path(out_dir)
         (out / f"{lid}-br{k}.bin").write_bytes(_mesh_bin(*mesh))
@@ -207,7 +248,9 @@ def design_job(snapshot: str, out_dir: str, threads: int = 2, workers: int | Non
     out.mkdir(parents=True, exist_ok=True)
     key = winner_key(snap.get("results_path"))
     lid = snap["layout_id"]
-    todo = [(k, b) for k, b in enumerate(snap["brackets"]) if b["kind"] in DESIGNED_KINDS]
+    only = set(snap.get("only") or [])             # "redesign this bracket": a subset of the layout's brackets
+    todo = [(k, b) for k, b in enumerate(snap["brackets"])
+            if b["kind"] in DESIGNED_KINDS and (not only or b["pid"] in only)]
     designs, t0 = {}, time.perf_counter()
     prog = out / "progress.json"
     n = design_workers(len(todo), threads) if workers is None else max(1, int(workers))
@@ -239,8 +282,11 @@ def design_job(snapshot: str, out_dir: str, threads: int = 2, workers: int | Non
             "brackets": rows, "eta_s": eta_seconds(rows, slots, now) if status != "DONE" else 0.0}, default=float))
 
     def args(k, b):
+        ov = (snap.get("overrides") or {}).get(b["pid"]) or {}
+        vf, mm = ov.get("vol_frac"), ov.get("min_member_mm")
         return (k, b, snap["records"][b["pid"]], snap["poses"][b["pid"]], snap["masses"].get(b["pid"]) or 0.2, key,
-                str(out), lid, threads, (snap.get("materials") or {}).get(b["pid"]), snap.get("environment"))
+                str(out), lid, threads, (snap.get("materials") or {}).get(b["pid"]), snap.get("environment"),
+                None if vf in (None, "auto") else float(vf), None if mm in (None, "auto") else float(mm))
     left = list(todo)
     if n > 1 and len(todo) > 1:
         from concurrent.futures import ProcessPoolExecutor, as_completed

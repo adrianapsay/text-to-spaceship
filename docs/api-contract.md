@@ -78,10 +78,13 @@ Status `INFEASIBLE` (Stage 2 only): certified collision-free under the layout's 
 rule (outside the enclosure, a part not mountable, COM outside the CDS box, no ±Z insertion order). Stage 2 layouts
 also carry `label` ("ENGINEERING-CONSTRAINED — not flight-qualified"), `violations_engineering: [text]`,
 `verdict` (INFEASIBLE only) and `stage2: {mode, corridor, stack_span_mm, overflow_mm, unmounted, mounts, frame:
-[{kind, id, min, max}], insertion_order, com_shift_mm, com_z_unshifted_mm, assumed}`; mounting hardware (standoffs)
-appears in `extra_items`. `com_shift_mm` is how far the whole layout was moved along +Z by the COM-centring shift
-(0 when there was no room, no need, or a shift would have cost a mount); `com_z_unshifted_mm` is the parts' COM
-height before it.
+[{kind, id, min, max}], insertion_order, com_shift_mm, com_z_unshifted_mm, rod_end, brackets, hardware_cost_rel,
+bracket_designs, bracket_overrides, assumed}`; mounting hardware (standoffs, V2 brackets, the PC/104 rods with their
+spacer tubes) appears in `extra_items`. `com_shift_mm` is how far every part except the PC/104 boards was moved along
++Z by the COM-centring shift (0 when there was no room, no need, or a shift would have cost a mount; the boards stay
+on their rods at their end plate, `rod_end` `-z` or `+z`, V2 rules v2.5); `com_z_unshifted_mm` is the parts' COM
+height before it. `bracket_designs` holds each designed bracket's record (mass, margins per load case, governing
+check, flags, its settings and the automatic run's ladder), `bracket_overrides` the user's per-bracket settings.
 
 ### Settings
 ```json
@@ -100,6 +103,10 @@ height before it.
 - `speed_quality` is kept for compatibility but changes nothing since the search runs until Pause (it only set how
   long the search waited without improvement before stopping itself): the UI no longer shows it, and moving it does
   not count as a settings change for the saved bracket STL files.
+- V2 adds `part_scale_pct` (50–100), `form_factor` (`3U` / `6U` / `12U`), the sliders `bracket_budget` and
+  `optional_parts`, `auto_design_brackets` (default true), `launch_environment` (a `/api/design-options`
+  environment id, default `gevs`) and `bracket_material` (an AM material id, default `AlSi10Mg`). An unknown
+  environment or material is refused: 400 over REST, an `error` message over WebSocket; nothing changes.
 
 ## 3. REST endpoints
 
@@ -131,6 +138,11 @@ height before it.
 | POST | `/api/experiments/free-rotation/run` `{budget_s?, seed?}` | Start it from the shortest validated Stage 1 layout of the current parts (background, default 120 s; progress as `study.update` with `study: "free_rotation"`) |
 | GET | `/api/mfg` | Manufacturable Design result for the current parts: `{status: "RUNNING"\|"DONE"\|"ERROR", label, mode, seconds, evaluations, weights, bracket_reach_mm, algorithm:{id,label,reason}, layout_id, feasible, layout_status, verdict, violations[], com_mm, validation:{parts_valid, pairs, statics, violations, brackets:[{item_id, ok, min_clearance_mm}], bracket_pairs_checked, bracket_conflicts[], relaxed_rules}, items:[{id, item_id, for_part, part_name, mount_type, process, material, mass_kg, cost_rel, fasteners, label}], am_rules:[{item_id, rule, value, limit, pass}], total_cost_rel, hardware_mass_kg, exports:[{kind, url, label, metal_am?}]}`; 404 until run |
 | POST | `/api/mfg/run` `{budget_s?}` | Start it (background, default 90 s search); 409 while one runs. The layout is archived as Stage 2, mode `manufacturable`, with the hardware as `extra_items` |
+| GET | `/api/gd/contest` | V2 generative-design contest results (`data/gd_contest/results.json`) |
+| POST | `/api/layouts/{id}/design-brackets` `{pids?, overrides?}` | V2: design the layout's metal-AM, cradle and clamp brackets (background; progress as `study.update` with `study: "bracket_design"`). `pids`: only these brackets (the others keep their designs); `overrides`: `{part id: {material?, vol_frac?, min_member_mm?}}`, each a value or `"auto"` (material `null`: the project default), kept with the layout. 400: a bracket not in the layout or a value out of range; 404: unknown layout; 409: nothing to design, or a run in progress |
+| GET | `/api/design-options` | V2: `{environments: [preset summary], materials: [{id, name, process, E_mpa, yield_mpa, ultimate_mpa, density_g_cm3, source}], allowables, machined, vol_frac: {range, ladder}, min_member_mm: {range, am_min_wall_mm, generator_sets_member_size}, generator, launch_environment, bracket_material}` |
+| GET / POST | `/api/saved-stl`, `/api/saved-stl` `{layout_id}`, `/api/saved-stl/download` | V2: the saved STL files of the designed best layout (manifest, folder, a save under way); save a layout now; the set as a zip |
+| GET | `/api/layouts/{id}/bom?format=json\|csv` | V2: the layout's bill of materials (`report/bom.py`) |
 | GET | `/api/mfg/download/{file}` | Hardware list (CSV) and bracket STL files; metal 3D-printed brackets are `bracket_AM_<part>.stl` |
 | GET | `/api/items/{id}/mesh` | Binary mesh of an extra item (bracket, spacer set, standoff), in **world frame** |
 | GET | `/api/parts/{id}/fidelity` | Detail-ladder result: `{status: "PENDING"\|"RUNNING"\|"DONE", levels:[{level:"F3-8", family:"F3", label, params, proxy_volume_mm3, overhead, build_s, eval_us_median, results:{<algorithm_id>: {length_used_mm, com_error_mm, score_g, first_valid_s, false_reject_rate}}}], chosen:{<algorithm_id>: level}, reasons:{<algorithm_id>: "plain text"}, stop_reason:"converged"\|"time_budget"\|"max_level"}` |

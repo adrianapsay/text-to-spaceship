@@ -216,18 +216,23 @@ function detailNotes(spec: SheetSpec): string[] {
   if (d) {
     const solvers = Object.values((d.solvers ?? {}) as Record<string, { solver?: string }>).map((s) => s.solver).filter(Boolean);
     n.push(`Designed by ${d.generator}${typeof d.vol_frac === 'number' ? ` (volume fraction ${d.vol_frac})` : ''}; ${d.passed ? 'passed' : `did not pass: ${d.reason || 'see Mounting Hardware'}`}${solvers.length ? ` (checked with ${solvers.join(' and ')})` : ''}.`);
-    const ms = [d.ms_yield != null ? `MS yield ${d.ms_yield >= 0 ? '+' : ''}${d.ms_yield.toFixed(2)}` : null, d.ms_ult != null ? `MS ultimate ${d.ms_ult >= 0 ? '+' : ''}${d.ms_ult.toFixed(2)}` : null, d.f1_hz != null ? `first natural frequency ${Math.round(d.f1_hz)} Hz with the part` : null].filter(Boolean);
+    const sg = (v: number) => `${v >= 0 ? '+' : ''}${v.toFixed(2)}`;
+    if (d.environment_name || d.material_name) n.push(`Checked under ${d.environment_name ?? d.environment ?? 'the launch loads'}; material ${d.material_name ?? d.material ?? '—'} (vendor minimum values, not design allowables).`);
+    const ms = [d.ms_yield != null ? `bracket MS yield ${sg(d.ms_yield)}` : null, d.ms_ult != null ? `MS ultimate ${sg(d.ms_ult)}` : null, d.ms_bolt != null ? `bolts and flange MS ${sg(d.ms_bolt)}` : null, d.f1_hz != null ? `first natural frequency ${Math.round(d.f1_hz)} Hz with the part` : null].filter(Boolean);
     if (ms.length) n.push(`${ms.join(', ')} (design record).`);
+    if (d.governing) n.push(`Governing check: ${d.governing.case}, ${d.governing.axis}, ${d.governing.part === 'bolt' ? `bolt ${d.governing.check}` : d.governing.check}, MS ${sg(d.governing.ms)}.`);
     if (r.bracket_kind === 'metal_am' && typeof d.overhang_fraction === 'number') n.push(`Overhang beyond 45°: ${(100 * d.overhang_fraction).toFixed(1)} % of the surface (support structures).`);
     if (typeof d.voxel_mm === 'number') n.push(`Generated on ${d.voxel_mm} mm voxels: surfaces are faceted.`);
   }
   if (!holesOf(spec).length) n.push('Fastener holes are not modelled in the concept mesh (M3 clearance 3.4 mm, mfg rule); no bolt positions in the design record.');
+  else n.push(`${holesOf(spec).length} × M3 bolt positions from the design record (circles); the holes are not modelled in the concept mesh (M3 clearance 3.4 mm, mfg rule).`);
   n.push(`Mass ${r.unit_mass_kg != null ? `${(r.unit_mass_kg * 1000).toFixed(1)} g` : '—'} is the solid alone; its fasteners are a separate BOM item.`);
   n.push('Phantom outline: the reserved box the bracket was designed in. General tolerances ISO 2768-m (ASSUMED).');
   return n;
 }
 
-/** Bolt / hole centres of a design record, when it has any (world mm). Absent in today's records. */
+/** Bolt / hole centres of a design record, when it has any (world mm): the `bolts` of designs made since the launch
+ * environments (gd.bolts); older records have none. */
 export function holesOf(spec: SheetSpec): V3[] {
   const d = (spec.design ?? {}) as Record<string, unknown>;
   const raw = (d.bolts ?? d.bolt_positions_mm ?? d.holes) as unknown;

@@ -169,7 +169,8 @@ function FitProofView() {
   );
 }
 
-const SWEEP_SLIDERS: SliderKey[] = ['space', 'balance', 'inertia', 'feasibility', 'cable', 'cost', 'mass_symmetry', 'speed_quality'];
+// speed_quality is not swept: since the search runs until Pause (V2) nothing in the backend reads it
+const SWEEP_SLIDERS: SliderKey[] = ['space', 'balance', 'inertia', 'feasibility', 'cable', 'cost', 'mass_symmetry'];
 
 function SelectorExplorer() {
   const settings = useApp((s) => s.goals.settings);
@@ -181,7 +182,7 @@ function SelectorExplorer() {
   const stage = settings?.stage ?? 1;
   const sliders = SWEEP_SLIDERS.filter((k) => {
     if ((k === 'cable' || k === 'cost' || k === 'feasibility') && stage !== 2) return false;
-    if ((k === 'mass_symmetry' || k === 'speed_quality') && !expert) return false;
+    if (k === 'mass_symmetry' && !expert) return false;
     return true;
   });
   const [sweeps, setSweeps] = useState<Record<string, SelectorSweep>>({});

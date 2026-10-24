@@ -634,6 +634,37 @@ table.data tbody tr:hover td {
 .design-strip.warn {
   border-left-color: var(--warn);
 }
+/* per-bracket design settings (Mounting Hardware tab, a Brackets row opened) */
+.bracket-settings {
+  padding: 8px 4px 10px;
+}
+.stop-slider {
+  font-size: var(--fs-12);
+  max-width: 420px;
+}
+.stop-ticks {
+  position: relative;
+  height: 16px;
+  margin: 0 6px;
+  font-size: var(--fs-11);
+  color: var(--text-muted);
+}
+.stop-ticks > span {
+  position: absolute;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+.stop-ticks > span.on {
+  color: var(--text);
+  font-weight: 600;
+}
+.stop-ticks > span.mark {
+  color: var(--accent);
+  border-top: 2px solid var(--accent);
+}
+tr.bracket-open > td {
+  background: var(--bg-sunken);
+}
 
 /* metric strip */
 .metric-strip {

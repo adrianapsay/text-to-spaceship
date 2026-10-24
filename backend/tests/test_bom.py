@@ -108,9 +108,14 @@ def test_parts_plus_hardware_is_the_layout_mass_and_fasteners_are_one_row(recs, 
                                     "catalogue" if x["kind"] == "clamp" else "exact")
         if x["kind"] == "metal_am":
             assert r["process"] == "L-PBF metal AM" and r["material"].startswith("AlSi10Mg")
-    # the hardware rows add up to the brackets' masses in the layout (fasteners included there)
+    # the hardware rows add up to the brackets' masses in the layout (fasteners included there) and, since v2.5, the
+    # PC/104 rods with their spacer tubes (in the layout's physics and listed as their own items)
     hw = sum(r["total_mass_kg"] for r in b["items"] if r["group"] in ("brackets", "hardware") and r["in_total"])
-    assert hw == pytest.approx(sum(x["mass_kg"] for x in brs), abs=1e-12)
+    rods = [h["mass_kg"] for h in e.meta.get("stack_hardware") or []]
+    assert hw == pytest.approx(sum(x["mass_kg"] for x in brs) + sum(rods), abs=1e-12)
+    if rods:
+        rod_rows = [r for r in b["items"] if r["kind"] == "rod" and r["in_total"]]
+        assert sum(r["qty"] for r in rod_rows) == len(rods)
     # item numbers 1…n, parts first in the project's order, every row's total = unit × qty
     assert [r["item_no"] for r in b["items"]] == list(range(1, len(b["items"]) + 1))
     order = [p for p in c.store.entries if p in {q[0] for q in mixed.poses}]

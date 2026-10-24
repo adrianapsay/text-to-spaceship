@@ -3,8 +3,10 @@ import type { Transport } from './transport';
 import type {
   Attribution,
   Benchmarks,
+  BracketOverride,
   CadStatus,
   ContestResults,
+  DesignOptions,
   LargestSize,
   FidelityResult,
   FidelitySummary,
@@ -240,8 +242,13 @@ export class ApiClient {
   runLargestSize() {
     return this.send<unknown>('POST', '/api/studies/largest-size/run', {});
   }
-  designBrackets(layoutId: string) {
-    return this.send<unknown>('POST', `/api/layouts/${encodeURIComponent(layoutId)}/design-brackets`, {});
+  /** design the layout's brackets; `pids` redesigns only those, `overrides` sets their material / thickness (WS4) */
+  designBrackets(layoutId: string, req: { pids?: string[]; overrides?: Record<string, BracketOverride> } = {}) {
+    return this.send<unknown>('POST', `/api/layouts/${encodeURIComponent(layoutId)}/design-brackets`, req);
+  }
+  /** V2: launch environments, materials and the ranges of the per-bracket settings */
+  designOptions() {
+    return this.json<DesignOptions>('/api/design-options');
   }
   /** V2: the saved STL files of the designed best layout */
   savedStl() {

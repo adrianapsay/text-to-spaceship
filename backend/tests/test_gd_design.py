@@ -109,6 +109,41 @@ def test_design_job_designs_brackets_in_parallel_inside_a_pool_worker(dataset_pa
         assert r["mass_g"] == pytest.approx(1000 * d["mass_kg"]) and r["passed"] == d["passed"]
 
 
+@pytest.mark.skipif(not ccx.available(), reason="CalculiX not installed (tools/ccx)")
+def test_a_bracket_designed_with_the_users_settings(dataset_parts):
+    """WS4: a set material use designs once at that value (no FEA minimum of its own), the minimum member thickness
+    thickens the bolted plate and the contact skin, and the material and the rung are recorded."""
+    from t2s.gd.design import design_h
+    recs = {}
+    for n, (p, r) in dataset_parts.items():
+        if p["role"] == "packable":
+            c = copy.copy(r)
+            c.id, c.tags = n, (["pcb"] if n.startswith("pcb") else [])
+            recs[n] = c
+    m = Stage2Model(recs, "soft")
+    rng = np.random.default_rng(1)
+    b = None
+    for _ in range(30):
+        k = rng.random(m.dim)
+        r = m.decode(list(np.argsort(k[:m.n])), k[m.n:2 * m.n], k[2 * m.n:])
+        am = [x for x in r.meta.get("brackets", []) if x["kind"] == "metal_am"]
+        if am:
+            b = min(am, key=lambda x: np.prod(np.subtract(x["reserve"][3:], x["reserve"][:3])))
+            o, t = next((r.meta["pad_orients"].get(p, o), t) for p, o, t in r.poses if p == b["pid"])
+            break
+    assert b is not None, "no metal-AM bracket in 30 random layouts"
+    h = design_h(b["reserve"], int(b["axis"]))
+    d, mesh = design_bracket(b, recs[b["pid"]], o, t, 0.3, "pytopo3d", h=h, budget_s=120.0, threads=2,
+                             log=lambda *_: None, material="Ti-6Al-4V", vol_frac=0.2, min_member_mm=3.0)
+    assert d["settings"] == {"material": "Ti-6Al-4V", "vol_frac": 0.2, "min_member_mm": 3.0}
+    assert [x["vol_frac"] for x in d["ladder"]] == [0.2] and d["min_vol_frac"] is None
+    assert d["material"] == "Ti-6Al-4V" and d["plate_mm"] >= 3.0 and d["skin_mm"] >= 3.0
+    assert d["am_min_wall_mm"] == 2.0 and d["environment"] == "gevs"
+    if mesh is not None and d.get("fallback") is None:
+        assert d["member_mm"] is None or d["member_mm"] >= h          # voxel resolution at best
+        assert d["solid_mass_kg"] > 0 and "Ti-6Al-4V" in d["label"]
+
+
 def test_eta_counts_the_running_and_queued_brackets_shared_among_the_workers():
     from t2s.gd.design import eta_seconds
     rows = [{"status": "done", "seconds": 30.0}, {"status": "done", "seconds": 50.0},     # mean 40 s

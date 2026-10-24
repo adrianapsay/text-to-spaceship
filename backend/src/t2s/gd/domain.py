@@ -4,7 +4,8 @@ A bracket is designed inside its reserved box (the V2 Stage 2 packing reserved i
 The box is cut into cubic voxels of size `h` (the grid is centred in the box and never leaves it). Per voxel:
 
 * `void`    — passive empty: inside the held part, or closer to its surface than the contact gap (the part itself);
-* `fixed`   — passive solid, bolted: the voxel layer on the target plane (wall, end plate, rail or deck);
+* `fixed`   — passive solid, bolted: the voxel layer on the target plane (wall, end plate or corner rail — chassis
+              structure only since v2.5);
 * `contact` — passive solid, loaded: the voxel layer that touches the part (its mounting side, or its surface where
               the bracket wraps it). The part's inertia load enters here;
 * `boss`    — passive solid around each bolt of the bolt pattern (gd.bolts), 2 mm deep from the bolted face;
@@ -71,7 +72,7 @@ class DesignDomain:
     contact: np.ndarray              # bool
     axis: int                        # world axis from the target plane to the part
     neg: bool                        # True: target plane at the low end of `axis`
-    plane_mm: float                  # target plane (wall / end plate / rail / deck)
+    plane_mm: float                  # target plane (wall / end plate / rail; the PC/104 deck only before v2.5)
     reserve: np.ndarray              # (6,) the reserved box (lo, hi) — the solid must stay inside it
     part_mass_kg: float
     vol_frac: float = 0.25           # target solid share of the design space (generators that take one)
@@ -82,11 +83,17 @@ class DesignDomain:
     part_inertia_kgm2: np.ndarray | None = None  # (3, 3) about the part's centre of mass (for the frequency)
     bolts: np.ndarray | None = None             # (n, 3) world mm, bolt centres on the target plane (gd.bolts)
     boss: np.ndarray | None = None              # bool (nx, ny, nz): passive solid around the bolts
+    plate: np.ndarray | None = None             # bool: passive layers behind the bolted one (thicken_plate)
+    skin: np.ndarray | None = None              # bool: passive layers behind the contact one (thicken_skin)
 
     def passive_solid(self) -> np.ndarray:
-        """Voxels that are solid whatever the generator does: the bolted layer, the contact layer, the bosses."""
+        """Voxels that are solid whatever the generator does: the bolted layer (and the plate layers behind it), the
+        contact layer (and the skin layers behind it), the bosses."""
         out = self.fixed | self.contact
-        return out | self.boss if self.boss is not None else out
+        for extra in (self.boss, self.plate, self.skin):
+            if extra is not None:
+                out = out | extra
+        return out
 
     def contact_voxel_forces(self, case: dict) -> np.ndarray:
         """(nx, ny, nz, 3) N on the contact voxels for one load case: the part's force acting at its centre of mass,
@@ -141,7 +148,8 @@ class GenResult:
 
 def drop_unreachable_contact(dom: DesignDomain) -> int:
     """Remove contact voxels that no solid can reach: those in a pocket the part's own shape cuts off from the
-    bolted layer within the reserved box (e.g. under a wedge-shaped part on the PC/104 deck). Such voxels can carry
+    bolted layer within the reserved box (e.g. under a wedge-shaped part; seen on a PC/104-deck bracket before v2.5,
+    possible on any wall whose part's shape overhangs its mounting side). Such voxels can carry
     no load, and a design must join every contact voxel to the wall (evaluate.solid_from_density), so with them no
     design — not even the solid block — could pass. 6-connected, as the solid check. Returns how many were dropped."""
     from scipy import ndimage
@@ -156,6 +164,82 @@ def drop_unreachable_contact(dom: DesignDomain) -> int:
 
 
 DEFAULT_FASTENERS = 3     # a metal-AM bracket's fasteners when the bracket dict has none (mfg.rules, ASSUMED)
+
+
+def _layers_behind(dom: DesignDomain, layer: np.ndarray, n: int, toward_wall: bool) -> np.ndarray:
+    """The n − 1 voxel layers next to `layer` along the bracket axis — away from the wall (toward the part) or
+    toward it — clipped to the grid (np.roll wraps around) and never in the part's void."""
+    ax = dom.axis
+    up = dom.neg != toward_wall                       # toward higher indices along the axis
+    out = np.zeros(dom.shape, bool)
+    for k in range(1, min(n, dom.shape[ax])):
+        shifted = np.roll(layer, k if up else -k, axis=ax)
+        idx = [slice(None)] * 3
+        idx[ax] = slice(0, k) if up else slice(dom.shape[ax] - k, None)
+        shifted[tuple(idx)] = False
+        out |= shifted
+    return out & ~dom.void
+
+
+def _layers(dom: DesignDomain, t_mm: float) -> int:
+    return int(max(1, np.ceil(float(t_mm) / dom.h - 1e-9)))
+
+
+def thicken_plate(dom: DesignDomain, plate_mm: float) -> float:
+    """Make the bolted plate at least `plate_mm` thick: passive solid voxel layers behind the bolted layer, over its
+    footprint (never into the part's void). Returns the plate thickness it now has (whole voxels)."""
+    n = _layers(dom, plate_mm)
+    plate = _layers_behind(dom, dom.fixed, n, toward_wall=False)
+    dom.plate = plate if plate.any() else None
+    return n * dom.h
+
+
+def thicken_skin(dom: DesignDomain, skin_mm: float) -> float:
+    """Make the contact skin (the layer on the part's mounting side, where the part's loads go in) at least
+    `skin_mm` thick: passive solid layers behind it toward the wall. Returns the skin thickness it now has."""
+    n = _layers(dom, skin_mm)
+    skin = _layers_behind(dom, dom.contact, n, toward_wall=True)
+    dom.skin = skin if skin.any() else None
+    return n * dom.h
+
+
+def member_thickness_mm(dom: DesignDomain, density: np.ndarray) -> float | None:
+    """Thinnest members of the generated material (not the prescribed bolted plate, contact skin or bosses), as the
+    5th percentile of the local thickness (2·d − 1)·h on the members' medial ridge: d is the distance (voxels) from a
+    voxel centre to the nearest empty voxel centre, so a 1-voxel plate measures h and a 3-voxel one 3h (an even
+    thickness measures one voxel less: voxel resolution, ASSUMED). The ridge is the skeleton (Lee thinning) together
+    with the local maxima of d, which also covers plates the thinning collapses; skeleton end voxels are left out
+    (a member's free end is not its thickness), the wall continues the bolted layer (a member reaching the plate
+    does not end there), and ridge voxels closer to the plate, skin or bosses than their own d (where a member joins
+    them) count only when no other is left. None when the design has no generated material."""
+    from scipy import ndimage
+    from skimage.morphology import skeletonize
+    d = np.clip(np.asarray(density, float), 0.0, 1.0).copy()
+    if d.shape != tuple(dom.shape):
+        return None
+    d[dom.void] = 0.0
+    passive = dom.passive_solid()
+    d[passive] = 1.0
+    solid = d >= 0.5
+    region = solid & ~passive
+    if not region.any():
+        return None
+    pad = np.pad(solid, 1)
+    wall = [slice(1, -1)] * 3                          # the pad layer behind the bolted face is solid (the wall)
+    wall[dom.axis] = 0 if dom.neg else -1
+    pad[tuple(wall)] = solid.take(0 if dom.neg else -1, axis=dom.axis)
+    dist = ndimage.distance_transform_edt(pad)[1:-1, 1:-1, 1:-1]
+    ridge = solid & (dist >= ndimage.maximum_filter(dist, size=3, mode="constant", cval=0.0))
+    sk = skeletonize(solid) > 0
+    if sk.any():                                      # skeleton end voxels: one skeleton neighbour
+        nb = ndimage.convolve(sk.astype(np.int16), np.ones((3, 3, 3), np.int16), mode="constant") - sk
+        sk &= nb != 1
+    pick = (ridge | sk) & region
+    if not pick.any():
+        return None
+    inner = pick & (ndimage.distance_transform_edt(~passive) > dist)    # away from the junctions
+    pick = inner if inner.any() else pick
+    return float(np.percentile((2.0 * dist[pick] - 1.0) * dom.h, 5))
 
 
 def domain_from_bracket(b: dict, rec, orient: int, t, h: float = 1.0, part_mass_kg: float | None = None,

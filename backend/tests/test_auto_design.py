@@ -14,8 +14,8 @@ def _coord(**settings):
                                         meta={"brackets": [{"pid": "p1", "kind": "metal_am"},
                                                            {"pid": "p2", "kind": "direct"}]})}
     c.best_id = "L-1"
-    c.started, c.synced = [], []
-    c.start_bracket_design = lambda lid: c.started.append(lid)
+    c.started, c.synced, c.pids = [], [], []
+    c.start_bracket_design = lambda lid, pids=None, overrides=None: (c.started.append(lid), c.pids.append(pids))
     c._sync_saved_stl = lambda e: c.synced.append(e.id)     # the saved STL files (test_saved_stl.py)
     c._error = lambda msg: None
     return c
@@ -79,7 +79,8 @@ def test_nothing_to_design_switched_off_or_a_run_in_progress():
     off = _coord(auto_design_brackets=False)
     off._maybe_auto_design()
     designed = _coord()
-    designed.archive["L-1"].meta["bracket_designs"] = {"p1": {"mass_kg": 0.01}}
+    designed.archive["L-1"].meta["bracket_designs"] = {"p1": {"mass_kg": 0.01, "environment": "gevs",
+                                                              "material": "AlSi10Mg"}}
     designed._maybe_auto_design()
     busy = _coord()
     busy.ladders["__bracket_design__"] = {"finalised": False}
@@ -92,6 +93,34 @@ def test_nothing_to_design_switched_off_or_a_run_in_progress():
     busy.ladders["__bracket_design__"]["finalised"] = True            # the running one has finished
     busy._maybe_auto_design()
     assert busy.started == ["L-1"]
+
+
+def test_brackets_designed_for_another_environment_or_material_are_designed_again():
+    """WS4: the automatic design follows the launch environment and the AM material — a design made for others (or
+    before the launch environments) is designed again, once; the current ones are kept."""
+    c = _coord()
+    meta = c.archive["L-1"].meta
+    meta["brackets"].append({"pid": "p3", "kind": "cradle"})
+    meta["bracket_designs"] = {"p1": {"mass_kg": 0.01, "environment": "gevs", "material": "AlSi10Mg"},
+                               "p3": {"mass_kg": 0.02, "environment": "gevs", "material": "6061-T6"}}
+    c._maybe_auto_design()
+    assert c.started == [] and c.synced == ["L-1"]                    # current: nothing to design
+    c.store.settings["launch_environment"] = "spacex"
+    c._maybe_auto_design()
+    assert c.started == ["L-1"] and c.pids[-1] == ["p1", "p3"]        # both were designed for GEVS
+    c._maybe_auto_design()
+    assert len(c.started) == 1                                        # once per layout and environment
+    c.store.settings.update(launch_environment="gevs", bracket_material="Ti-6Al-4V")
+    c._maybe_auto_design()
+    assert c.pids[-1] == ["p1"]                                       # the machined cradle stays 6061-T6
+    meta["bracket_overrides"] = {"p1": {"material": "AlSi10Mg"}}       # its own material: the design is current
+    c._auto_design_tried.clear()
+    c.started.clear()
+    c._maybe_auto_design()
+    assert c.started == []
+    del meta["bracket_designs"]["p1"]["environment"]                  # designed before the launch environments
+    c._maybe_auto_design()
+    assert c.started == ["L-1"] and c.pids[-1] == ["p1"]
 
 
 def test_waits_until_a_moving_slider_has_settled():

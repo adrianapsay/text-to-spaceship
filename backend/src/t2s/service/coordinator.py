@@ -71,6 +71,10 @@ NOT_SEARCH_SLIDERS = ("speed_quality",)
 REV_KEYS = ("parts_rev", "constraint_rev", "mass_rev", "weights_rev")
 
 
+class InvalidSetting(ValueError):
+    """A request's value is unknown or out of range (the API answers 400; other ValueErrors are conflicts, 409)."""
+
+
 def settings_change_text(before: dict, after: dict) -> str:
     """What moved between two Coordinator._settings_view() results, e.g. "Balance the Spacecraft 36 → 40"."""
     def val(x):
@@ -1080,7 +1084,7 @@ class Coordinator:
         if e.meta.get("hardware"):                 # Manufacturable Design: every bracket, spacer and standoff
             hardware = [(m, np.asarray(c, float), np.asarray(i, float)) for m, c, i in e.meta["hardware"]]
             items += hardware
-        elif e.meta.get("standoffs") or e.meta.get("brackets"):
+        elif e.meta.get("standoffs") or e.meta.get("brackets") or e.meta.get("stack_hardware"):
             from ..constraints.stage2_model import Stage2Model
             hardware = Stage2Model.standoff_mass(e.meta.get("standoffs") or [])
             designs = e.meta.get("bracket_designs") or {}
@@ -1088,6 +1092,8 @@ class Coordinator:
                 d = designs.get(b["pid"]) if designs.get(b["pid"], {}).get("mass_kg") is not None else None
                 src = d or b                                                # a designed solid replaces the estimate
                 hardware.append((src["mass_kg"], np.asarray(src["com_mm"], float), np.asarray(src["inertia_kgm2"], float)))
+            for h in e.meta.get("stack_hardware") or []:   # v2.5: PC/104 rods and spacer tubes, as in the search
+                hardware.append((h["mass_kg"], np.asarray(h["com_mm"], float), np.asarray(h["inertia_kgm2"], float)))
             items += hardware
         m = dict(e.geo)
         if hardware:
@@ -1621,7 +1627,25 @@ class Coordinator:
                         "mass_kg": d["mass_kg"] if d else b["mass_kg"], "cost_rel": d["cost_rel"] if d else b["cost_rel"],
                         "material": b["material"], "label": d["label"] if d else b["label"],
                         "exact": True if d else b["exact"], "box_mm": b["reserve"], "target": b["target"]})
+        boxes = dict(self._rod_boxes(e))
+        board = (e.meta.get("stack_ids") or [None])[0]     # the rods move with the boards in the exploded view
+        end = {"-z": "−Z", "+z": "+Z"}.get(e.meta.get("rod_end"), "")
+        for k, h in enumerate(e.meta.get("stack_hardware") or []):   # v2.5: PC/104 rods with their spacer tubes
+            nm = str(h["name"])                                       # "rod+-": the rod at +x, −y
+            where = (f" at {'−' if nm[3] == '-' else '+'}x {'−' if nm[4] == '-' else '+'}y"
+                     if len(nm) == 5 and nm.startswith("rod") else f" {nm}")
+            out.append({"id": f"{e.id}-rod{k}", "kind": "rod", "process": "standoff", "for_part": board,
+                        "mesh_url": f"/api/items/{e.id}-rod{k}/mesh", "mass_kg": h["mass_kg"], "cost_rel": None,
+                        "material": "M3 steel rod, aluminium spacer tube (ASSUMED)",
+                        "label": f"PC/104 rod{where} with spacer tube, to the {end} end plate",
+                        "box_mm": [float(x) for x in boxes.get(h["name"], [])], "target": f"{end} end plate"})
         return out
+
+    @staticmethod
+    def _rod_boxes(e: LayoutEntry) -> list:
+        """The PC/104 rods of a layout as (name, box), in the current frame (stage2_model.stack_rods)."""
+        from ..constraints.stage2_model import stack_rods
+        return stack_rods(e.meta or {}) if (e.meta or {}).get("rod_end") else []
 
     def _stage2_view(self, e: LayoutEntry) -> dict:
         """Rules this layout was decoded under, for display (rails, harness / corridor, rods, stack block)."""
@@ -1638,16 +1662,20 @@ class Coordinator:
                 "overflow_mm": meta.get("overflow_mm"), "unmounted": meta.get("unmounted", []),
                 "mounts": meta.get("mounts", {}), "cable_blocked_fraction": meta.get("H"), "frame": frame,
                 "insertion_order": e.geo.get("insertion_order"), "com_shift_mm": meta.get("com_shift_mm"),
-                "com_z_unshifted_mm": meta.get("com_z_unshifted_mm"), "brackets": meta.get("brackets", []),
+                "com_z_unshifted_mm": meta.get("com_z_unshifted_mm"), "rod_end": meta.get("rod_end"),
+                "brackets": meta.get("brackets", []),
                 "hardware_cost_rel": meta.get("C"), "bracket_designs": meta.get("bracket_designs", {}),
+                "bracket_overrides": meta.get("bracket_overrides", {}),
                 "assumed": ["2 mm walls", "8.5 mm corner rails", "clearances 2.2 / 1.2 mm (U4)",
-                            "PC/104 stack, 15.24 mm pitch, rods at (±35, ±35) mm", "3 mm mounting layer (U6)",
-                            "V2 brackets: one per part to a wall, end plate or corner rail ≤ 40 mm away; "
-                            "each reserved box keeps 1.2 mm from other parts, brackets and keep-outs; relative "
-                            "costs, cradle / metal-AM masses estimated until designed",
+                            ("PC/104 stack, 15.24 mm pitch, rods at (±35, ±35) mm × part size, anchored at the "
+                             "nearest end plate (M3 rods in 5 mm spacer tubes)"), "3 mm mounting layer (U6)",
+                            ("V2 brackets: one per part to a wall, end plate or corner rail ≤ 40 mm away; "
+                             "each reserved box keeps 1.2 mm from other parts, brackets and keep-outs; relative "
+                             "costs, cradle / metal-AM masses estimated until designed"),
                             "10 mm harness channel (U5)", "M3 standoffs 5 × 5 mm, 3–50 mm long (Addendum 2.3)",
-                            "whole layout shifted along Z toward a centred COM (at least into the CDS box), within "
-                            "the end plates and never at the cost of a mount"]}
+                            ("every part except the PC/104 stack (anchored at its end plate) shifted along Z toward "
+                             "a centred COM (at least into the CDS box), within the end plates and never at the "
+                             "cost of a mount")]}
 
     def item_mesh(self, iid: str) -> bytes:
         lid, _, _ = iid.rpartition("-")
@@ -1662,11 +1690,23 @@ class Coordinator:
         e = self.archive.get(lid)
         if e is not None and k.isdigit() and int(k) < len(e.meta.get("brackets") or []):
             return self._bracket_mesh(e, int(k))
+        lid, _, k = iid.rpartition("-rod")
+        e = self.archive.get(lid)
+        if e is not None and k.isdigit() and int(k) < len(e.meta.get("stack_hardware") or []):
+            boxes = dict(self._rod_boxes(e))                 # a rod with its spacer tube: its keep-out box
+            b = boxes.get(e.meta["stack_hardware"][int(k)]["name"])
+            if b is None:
+                raise KeyError(iid)
+            return self._box_mesh(np.asarray(b, float))
         lid, _, k = iid.rpartition("-so")
         e = self.archive.get(lid)
         if e is None or not k.isdigit() or int(k) >= len(e.meta.get("standoffs") or []):
             raise KeyError(iid)
-        b = np.asarray(e.meta["standoffs"][int(k)][1], float)
+        return self._box_mesh(np.asarray(e.meta["standoffs"][int(k)][1], float))
+
+    @staticmethod
+    def _box_mesh(b: np.ndarray) -> bytes:
+        """An axis-aligned box (lo xyz, hi xyz) as the viewers' mesh format."""
         v = np.array([[x, y, z] for z in (b[2], b[5]) for y in (b[1], b[4]) for x in (b[0], b[3])], "<f4")
         f = np.array([[0, 2, 1], [1, 2, 3], [4, 5, 6], [5, 7, 6], [0, 1, 4], [1, 5, 4], [2, 6, 3], [3, 6, 7],
                       [0, 4, 2], [2, 4, 6], [1, 3, 5], [3, 7, 5]], "<u4")
@@ -1678,7 +1718,8 @@ class Coordinator:
         from ..mfg.brackets import v2_bracket
         b = e.meta["brackets"][k]
         p = self.store.cache / "items" / e.id / f"{e.id}-br{k}.bin"
-        if (e.meta.get("bracket_designs") or {}).get(b["pid"]) and p.is_file():
+        d = (e.meta.get("bracket_designs") or {}).get(b["pid"]) or {}
+        if d.get("mass_kg") is not None and p.is_file():   # a redesign without a solid leaves an older file behind
             return p.read_bytes()
         br = v2_bracket(b["name"], b["pid"], b)
         vs, fs, n = [], [], 0
@@ -1745,8 +1786,8 @@ class Coordinator:
                              "rail_mm": [s2.RAIL, s2.RAIL], "boxes": frame_boxes,
                              "walls": {"inner_min": lo.tolist(), "inner_max": hi.tolist()},
                              "frame_mass_kg": fm, "frame_com_mm": fc.tolist(),
-                             "note": "harness channel interrupted across the PCB stack (U5 default); PCB stack macro "
-                                     "and rods arrive with M7"},
+                             "note": "harness channel interrupted across the PCB stack (U5 default); the PCB stack "
+                                     "hangs on four rods with spacer tubes from its end plate (v2.5)"},
             "limits": {"com_box_mm": list(ff["com_box_mm"]), "cds_mass_note_kg": ff["mass_note_kg"],
                        "clearance_part_mm": s2.C_PP, "clearance_wall_mm": s2.C_WALL,
                        "length_mm": float(ff["envelope_mm"][2]), "cable_mode_threshold": 70},
@@ -2058,6 +2099,7 @@ class Coordinator:
 
     # =========================================================================================== edits
     def apply_settings(self, new: dict) -> None:
+        design = self._check_design_settings(new)    # before anything changes (ValueError: unknown preset or material)
         s = self.store.settings
         before = self._settings_view()
         old_stage = int(s.get("stage", 1))
@@ -2075,17 +2117,35 @@ class Coordinator:
             s["part_scale_pct"] = float(np.clip(float(new["part_scale_pct"]), 50.0, 100.0))
         if new.get("auto_design_brackets") is not None:
             s["auto_design_brackets"] = bool(new["auto_design_brackets"])
+        old_design = self._design_defaults()
+        s.update(design)
         if "sliders" in new and isinstance(new["sliders"], dict):
             for k, v in new["sliders"].items():
                 if k in s["sliders"] and v is not None:
                     s["sliders"][k] = float(np.clip(float(v), 0, 100))
         s["stage"] = 2 if int(s.get("stage", 1)) == 2 else 1
         after = self._settings_view()
-        if after != before:
-            # V2: the saved bracket STL files belong to the layout found at the old settings; the automatic bracket
-            # design and STL save wait until the slider has stopped moving (_tick)
-            self._drop_saved_brackets(settings_change_text(before, after))
-            self._settle_at = time.monotonic() + SETTINGS_SETTLE_S
+        if after == before:
+            # nothing the search depends on moved (the launch environment, the bracket material, the automatic design
+            # switch, a display option, the speed/quality slider): no re-scoring, so the best layout stays the one
+            # whose brackets were designed (a re-score can rank another first: its designed masses changed its score)
+            self.store.save()
+        else:
+            self._apply_search_settings(before, after, old_stage, old_target, old_s2, old_scale, old_am, old_ff)
+        # a running search goes on with the new settings; a paused one stays paused (Pause is the only stop). Another
+        # launch environment or default material: the best layout's brackets designed for the old ones are designed
+        # again (_maybe_auto_design), as after a pause
+        if self.run_status == "PAUSED" and (new.get("auto_design_brackets") or self._design_defaults() != old_design):
+            self._maybe_auto_design()
+
+    def _apply_search_settings(self, before: dict, after: dict, old_stage, old_target, old_s2, old_scale, old_am,
+                               old_ff) -> None:
+        """A setting the search depends on moved (apply_settings): new inputs and a new search, or a re-score."""
+        s = self.store.settings
+        # V2: the saved bracket STL files belong to the layout found at the old settings; the automatic bracket
+        # design and STL save wait until the slider has stopped moving (_tick)
+        self._drop_saved_brackets(settings_change_text(before, after))
+        self._settle_at = time.monotonic() + SETTINGS_SETTLE_S
         self._bump("weights_rev")
         if s.get("form_factor", formfactor.DEFAULT) != old_ff:
             # V2 form factor: another envelope and COM box — new context, new search, project re-sent
@@ -2123,9 +2183,6 @@ class Coordinator:
                     self.choice = nc
                     if nc.reasons != old_reasons:
                         self.broadcast("selector.changed", self.selector())
-        # a running search goes on with the new settings; a paused one stays paused (Pause is the only stop)
-        if new.get("auto_design_brackets") and self.run_status == "PAUSED":
-            self._maybe_auto_design()
 
     def lock_pose_for(self, pid: str) -> dict | None:
         if self.best_id is None:
@@ -2599,21 +2656,152 @@ class Coordinator:
         except (OSError, json.JSONDecodeError):
             return None
 
-    def start_bracket_design(self, layout_id: str) -> dict:
+    # what a user may set for one bracket (Mounting Hardware tab): material used, as the volume fraction of its
+    # reserved box, and the minimum member thickness (mm); "auto" lets the design run choose
+    BRACKET_VOL_FRAC = (0.02, 0.8)
+    BRACKET_MEMBER_MM = (1.0, 12.0)
+
+    @staticmethod
+    def _check_design_settings(new: dict) -> dict:
+        """The bracket design settings in a settings change, checked before anything changes: the launch environment
+        (a gd.environment preset id) and the default AM material (gd.materials). InvalidSetting when unknown."""
+        from ..gd import environment as envs
+        from ..gd import materials as mats
+        out = {}
+        try:
+            if new.get("launch_environment") is not None:
+                out["launch_environment"] = envs.get(str(new["launch_environment"])).id
+            if new.get("bracket_material") is not None:
+                out["bracket_material"] = mats.for_kind("metal_am", str(new["bracket_material"]))
+        except (KeyError, ValueError) as exc:
+            raise InvalidSetting(exc.args[0]) from exc
+        return out
+
+    def _design_defaults(self) -> tuple[str, str]:
+        """(launch environment, AM material) the brackets are designed for now: the project settings, or the
+        defaults when a project file holds an id that no longer exists."""
+        from ..gd import environment as envs
+        from ..gd import materials as mats
+        s = self.store.settings
+        try:
+            env_id = envs.get(s.get("launch_environment")).id
+        except KeyError:
+            env_id = envs.DEFAULT
+        try:
+            mat_id = mats.for_kind("metal_am", s.get("bracket_material"))
+        except (KeyError, ValueError):
+            mat_id = mats.DEFAULT_AM
+        return env_id, mat_id
+
+    @classmethod
+    def _bracket_override(cls, b: dict, ov: dict) -> dict:
+        """One bracket's design settings from a request, checked: `material` (an AM material, metal-AM brackets
+        only; None or "default": the project's), `vol_frac` and `min_member_mm` (a number in range, or None /
+        "auto"). Only the keys given are returned. InvalidSetting when one is out of range or unknown."""
+        from ..gd import materials as mats
+        if not isinstance(ov, dict):
+            raise InvalidSetting(f"{b['pid']}: the settings of a bracket are an object")
+        bad = set(ov) - {"material", "vol_frac", "min_member_mm"}
+        if bad:
+            raise InvalidSetting(f"{b['pid']}: unknown bracket setting(s) {', '.join(sorted(bad))}")
+        out = {}
+        if "material" in ov:
+            m = ov["material"]
+            if m in (None, "default", "auto"):
+                out["material"] = None
+            elif b["kind"] != "metal_am":
+                raise InvalidSetting(f"{b['pid']}: cradles and clamp bands are machined {mats.MACHINED}")
+            else:
+                try:
+                    out["material"] = mats.for_kind("metal_am", str(m))
+                except (KeyError, ValueError) as exc:
+                    raise InvalidSetting(exc.args[0]) from exc
+        for k, (lo, hi), what in (("vol_frac", cls.BRACKET_VOL_FRAC, "material used"),
+                                  ("min_member_mm", cls.BRACKET_MEMBER_MM, "minimum member thickness")):
+            if k not in ov:
+                continue
+            v = ov[k]
+            if v in (None, "auto"):
+                out[k] = "auto"
+                continue
+            try:
+                x = float(v)
+            except (TypeError, ValueError) as exc:
+                raise InvalidSetting(f"{b['pid']}: {what} must be a number or \"auto\"") from exc
+            if not (math.isfinite(x) and lo <= x <= hi):
+                raise InvalidSetting(f"{b['pid']}: {what} {x:g} is outside {lo:g} … {hi:g}")
+            out[k] = x
+        return out
+
+    def design_options(self) -> dict:
+        """What the bracket designs can be set to (Mounting Hardware tab): the launch environments, the materials
+        (AM for metal-AM brackets; cradles and clamps are machined), the ranges of the per-bracket settings with the
+        automatic run's ladder and the AM minimum wall, and the project's current environment and material."""
+        from ..gd import environment as envs
+        from ..gd import materials as mats
+        from ..gd.contest import VOL_LADDER
+        from ..gd.design import AM_MIN_WALL_MM, MEMBER_KWARG, winner_key
+        env_id, mat_id = self._design_defaults()
+        key = winner_key(str(self.CONTEST_RESULTS))
+        return {"environments": [e.summary() for e in envs.ENVIRONMENTS.values()],
+                "materials": [{k: m[k] for k in ("id", "name", "process", "E_mpa", "yield_mpa", "ultimate_mpa",
+                                                 "source")} | {"density_g_cm3": m["rho_t_mm3"] * 1e9}
+                              for m in mats.MATERIALS.values()],
+                "allowables": mats.ALLOWABLES, "machined": mats.MACHINED,
+                "vol_frac": {"range": list(self.BRACKET_VOL_FRAC), "ladder": list(VOL_LADDER)},
+                "min_member_mm": {"range": list(self.BRACKET_MEMBER_MM), "am_min_wall_mm": AM_MIN_WALL_MM,
+                                  "generator_sets_member_size": key in MEMBER_KWARG},
+                "generator": key, "launch_environment": env_id, "bracket_material": mat_id}
+
+    def _bracket_outdated(self, e: LayoutEntry, b: dict, d: dict) -> bool:
+        """A design made for another launch environment, or in another AM material than the bracket's own setting
+        or the project default (designs from before the launch environments count as another environment)."""
+        env_id, mat_id = self._design_defaults()
+        if d.get("environment") != env_id:
+            return True
+        if b["kind"] == "metal_am":
+            want = (((e.meta or {}).get("bracket_overrides") or {}).get(b["pid"]) or {}).get("material") or mat_id
+            return d.get("material") != want
+        return False
+
+    def start_bracket_design(self, layout_id: str, pids: list | None = None, overrides: dict | None = None) -> dict:
         """Design every metal-AM, cradle and tube-clamp bracket of a Stage 2 layout inside its reserved box (contest
-        winner for metal AM, rule-based cradles and clamp bands), each checked with CalculiX and NGSolve; the designed
-        solids replace the estimates and envelopes in the layout's 3D views, physics, exports and fit proof."""
+        winner for metal AM, rule-based cradles and clamp bands), each checked with CalculiX and NGSolve under the
+        project's launch environment; the designed solids replace the estimates and envelopes in the layout's 3D
+        views, physics, exports and fit proof.
+
+        `pids`: design only these brackets ("Redesign" in the Mounting Hardware tab); the others keep their designs.
+        `overrides`: {pid: {material, vol_frac, min_member_mm}}, the user's settings for a bracket (_bracket_override),
+        kept with the layout (meta bracket_overrides) for later runs; a metal-AM bracket without a material of its own
+        gets the project's bracket_material."""
         import pickle
         from ..gd.design import DESIGNED_KINDS, design_job
         e = self.archive.get(layout_id)
         if e is None:
             raise KeyError(layout_id)
         brs = (e.meta or {}).get("brackets") or []
-        if e.stage != 2 or not any(b["kind"] in DESIGNED_KINDS for b in brs):
+        designable = {b["pid"]: b for b in brs if b["kind"] in DESIGNED_KINDS}
+        if e.stage != 2 or not designable:
             raise ValueError("this layout has no metal-AM, cradle or clamp bracket to design")
+        if not isinstance(pids or [], list) or not isinstance(overrides or {}, dict):
+            raise InvalidSetting("pids is a list of part ids, overrides an object {part id: settings}")
+        only = list(dict.fromkeys(pids or []))
+        unknown = [str(p) for p in [*only, *(overrides or {})] if p not in designable]
+        if unknown:
+            raise InvalidSetting(f"{e.id} has no designed bracket for {', '.join(dict.fromkeys(unknown))}")
+        cleaned = {p: self._bracket_override(designable[p], ov) for p, ov in (overrides or {}).items()}
         L = self.ladders.get("__bracket_design__")
         if L is not None and not L.get("finalised"):
             raise ValueError("a bracket design run is already in progress")
+        stored = dict((e.meta or {}).get("bracket_overrides") or {})
+        for p, ov in cleaned.items():
+            stored[p] = {**(stored.get(p) or {}), **ov}
+        if cleaned:
+            e.meta = jsonable({**(e.meta or {}), "bracket_overrides": stored})
+            self._persist(e)
+        env_id, mat_id = self._design_defaults()
+        materials = {p: (stored.get(p) or {}).get("material") or mat_id
+                     for p, b in designable.items() if b["kind"] == "metal_am"}
         recs = self.layout_records(e)
         phys = self._phys(e.part_scale)
         pad_o = (e.meta or {}).get("pad_orients", {})
@@ -2623,7 +2811,9 @@ class Coordinator:
         out.mkdir(parents=True, exist_ok=True)
         snap.write_bytes(pickle.dumps({"layout_id": e.id, "brackets": brs, "records": recs, "poses": poses,
                                        "masses": {p: (x.mass_kg if x is not None else None) for p, x in phys.items()},
-                                       "results_path": str(self.CONTEST_RESULTS)}, protocol=pickle.HIGHEST_PROTOCOL))
+                                       "results_path": str(self.CONTEST_RESULTS), "environment": env_id,
+                                       "materials": materials, "overrides": stored, "only": only},
+                                      protocol=pickle.HIGHEST_PROTOCOL))
         (out / "progress.json").unlink(missing_ok=True)
         fut = self.ladder_pool.submit(formfactor.call_with, formfactor.current(), design_job, str(snap), str(out))
         self.ladders["__bracket_design__"] = {"future": fut, "path": out / "progress.json", "mtime": None,
@@ -2633,10 +2823,10 @@ class Coordinator:
         wf = asyncio.wrap_future(fut, loop=self.loop)
         wf.add_done_callback(lambda f, lid=e.id, o=out: self._on_bracket_design(f, lid, o))
         rows = [{"k": k, "pid": b["pid"], "kind": b["kind"], "status": "queued"}
-                for k, b in enumerate(brs) if b["kind"] in DESIGNED_KINDS]
+                for k, b in enumerate(brs) if b["kind"] in DESIGNED_KINDS and (not only or b["pid"] in only)]
         self.broadcast("study.update", {"study": "bracket_design", "progress": 0.0, "partial": self._design_progress(
             {"layout_id": e.id, "brackets": rows, "n_total": len(rows), "n_done": 0, "seconds": 0.0}, "PENDING")})
-        return {"status": "RUNNING", "layout_id": e.id, "brackets": len(rows)}
+        return {"status": "RUNNING", "layout_id": e.id, "brackets": len(rows), "environment": env_id}
 
     @staticmethod
     def _design_progress(res: dict, status: str) -> dict:
@@ -2672,20 +2862,36 @@ class Coordinator:
         if e is None or e.stage != 2 or e.status not in ("VALIDATED", "FINAL"):
             return
         done = (e.meta or {}).get("bracket_designs") or {}
-        if not any(b["kind"] in DESIGNED_KINDS and b["pid"] not in done for b in (e.meta or {}).get("brackets") or []):
+        todo = [b["pid"] for b in (e.meta or {}).get("brackets") or [] if b["kind"] in DESIGNED_KINDS and
+                (b["pid"] not in done or self._bracket_outdated(e, b, done[b["pid"]]))]
+        if not todo:
             self._sync_saved_stl(e)                  # designed before: the saved STL files follow it
             return
         L = self.ladders.get("__bracket_design__")
         if L is not None and not L.get("finalised"):
             return
         tried = self.__dict__.setdefault("_auto_design_tried", set())
-        if e.id in tried:                            # once per layout: a failed run is not repeated on its own
+        key = (e.id, *self._design_defaults())       # once per layout and launch environment / material: a failed
+        if key in tried:                             # run is not repeated on its own
             return
-        tried.add(e.id)
+        tried.add(key)
         try:
-            self.start_bracket_design(e.id)
+            self.start_bracket_design(e.id, pids=todo)
         except (KeyError, ValueError, OSError) as exc:
             self._error(f"automatic bracket design not started: {exc}")
+
+    @staticmethod
+    def _carry_minimum(old: dict | None, new: dict) -> dict:
+        """A bracket designed at a set material use finds no FEA minimum of its own: the minimum an earlier automatic
+        run found (and that run's ladder) is kept when it had the same material, member thickness and environment."""
+        if new.get("min_vol_frac") is not None or not old or old.get("min_vol_frac") is None:
+            return new
+        o, n = old.get("settings") or {}, new.get("settings") or {}
+        if old.get("environment") != new.get("environment") or o.get("material") != n.get("material") or \
+                o.get("min_member_mm") != n.get("min_member_mm"):
+            return new
+        return {**new, "min_vol_frac": old["min_vol_frac"], "min_vol_frac_carried": True,
+                "auto_ladder": old.get("auto_ladder") or old.get("ladder")}
 
     def _on_bracket_design(self, fut, lid: str, out: Path) -> None:
         L = self.ladders.get("__bracket_design__")
@@ -2700,7 +2906,9 @@ class Coordinator:
             if e is None:
                 return
             meta = dict(e.meta or {})
-            meta["bracket_designs"] = res.get("designs", {})
+            old = meta.get("bracket_designs") or {}       # a run of some brackets: the others keep their designs
+            meta["bracket_designs"] = {**old, **{p: self._carry_minimum(old.get(p), d)
+                                                 for p, d in (res.get("designs") or {}).items()}}
             e.meta = jsonable(meta)
             self._compute_physics(e)                  # designed masses replace the estimates
             self._score_entry(e)

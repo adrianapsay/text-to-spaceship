@@ -77,12 +77,13 @@ def _coord(tmp_path, best="L-1", designed=True):
     c.run_status = "PAUSED"
     c.archive = {"L-1": SimpleNamespace(id="L-1", stage=2, status="VALIDATED", part_scale=0.54, meta={
         "brackets": [{"pid": "p1", "kind": "metal_am"}],
-        "bracket_designs": {"p1": {"mass_kg": 0.01, "passed": True}} if designed else {}})}
+        "bracket_designs": {"p1": {"mass_kg": 0.01, "passed": True, "environment": "gevs", "material": "AlSi10Mg"}}
+        if designed else {}})}
     c.best_id = best
     c.saves, c.started, c.sent = [], [], []
     c._stl_items = lambda e: ([("p1_box", cube(0), {"part_id": "p1"})],
                               [("AM_box_br0", cube(2), {"part_id": "p1", "kind": "metal_am"})], [])
-    c.start_bracket_design = lambda lid: c.started.append(lid)
+    c.start_bracket_design = lambda lid, pids=None, overrides=None: c.started.append(lid)
     c.broadcast = lambda kind, payload: c.sent.append((kind, payload))
     c._error = lambda msg: (_ for _ in ()).throw(AssertionError(msg))
     return c

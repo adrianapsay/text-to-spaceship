@@ -170,7 +170,7 @@ export function HardwareItemsList() {
       <li key={i.id} data-process={i.process}>
         <span className={`swatch ${st.hatch ? 'hatch' : ''}`} style={{ background: st.color }} />
         <span className="name">
-          {st.label} — {parts[i.for_part]?.name ?? i.for_part}
+          {i.kind === 'rod' && i.label ? i.label : `${st.label} — ${parts[i.for_part]?.name ?? i.for_part}`}
         </span>
         {st.badge ? <Badge tone="accent">{st.badge}</Badge> : null}
         <span className="num small">{fmt(i.mass_kg, 'kg')}</span>

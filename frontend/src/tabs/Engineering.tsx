@@ -111,8 +111,8 @@ export function EngineeringTab() {
     ['CDS COM box', ((limits.com_box_mm as number[] | undefined) ?? []).map((v) => `±${v}`).join(' / ') + ' mm (standard, HARD in Stage 2)'],
     ['Frame mass in COM check', settings?.show_frame_mass_in_com ? 'included' : 'excluded by default (COM reported both ways)'],
     ['Cable-routing mode threshold', `${threshold}`],
-    ['PCB stack', 'PCB-tagged parts parallel to XY, rail-centred, 15.24 mm PC/104 pitch'],
-    ['COM-centring shift', 'whole layout moved along Z: at least into the COM box, further toward the centre as the search chooses; within the end plates, never at the cost of a mount'],
+    ['PCB stack', 'PCB-tagged parts parallel to XY, rail-centred, 15.24 mm PC/104 pitch, on four rods with spacer tubes from the nearest end plate (anchored there; nothing is fixed to the stack)'],
+    ['COM-centring shift', 'every part except the PC/104 boards moved along Z: at least into the COM box, further toward the centre as the search chooses; within the end plates, never at the cost of a mount'],
   ];
   return (
     <div className="tab-scroll" data-testid="tab-engineering">

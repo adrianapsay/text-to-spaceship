@@ -108,6 +108,121 @@ export interface BracketDesign {
   agreement?: Record<string, number | null>;
   solvers?: Record<string, { solver: string; f1_hz: number | null; seconds: number }>;
   fallback?: string | null;
+  /** launch environment preset the design was checked under (gd.environment id) and its name */
+  environment?: string;
+  environment_name?: string;
+  /** material id (gd.materials) and its name */
+  material?: string;
+  material_name?: string;
+  /** per load case (static, random limit, random qualification, sine, shock … ESTIMATE, bolt: …): the worst axis */
+  margins?: Record<string, BracketMargin>;
+  /** the gating check with the smallest margin */
+  governing?: { case: string; axis: string; check: string; ms: number; bolt?: number | null; part: string } | null;
+  /** bolts and flange: the smallest gating margin */
+  ms_bolt?: number | null;
+  /** reported, not analysed (sine, shock, fatigue, effective mass, thin members) */
+  flags?: BracketFlag[] | null;
+  /** WS4: the settings it was designed with */
+  settings?: { material: string; vol_frac: number | 'auto'; min_member_mm: number | 'auto' };
+  /** every volume fraction tried, lightest first (an automatic run stops at the first passing one) */
+  ladder?: LadderRung[];
+  /** the FEA minimum material use: the lightest passing rung of an automatic run (null: none passed / not run) */
+  min_vol_frac?: number | null;
+  /** min_vol_frac comes from an earlier automatic run with the same material, thickness and environment */
+  min_vol_frac_carried?: boolean;
+  auto_ladder?: LadderRung[] | null;
+  /** the volume fraction of the chosen design (topology-optimised brackets) */
+  vol_frac?: number | null;
+  /** thinnest generated member of the design (5th percentile of the local thickness on its medial ridge), mm */
+  member_mm?: number | null;
+  /** why member_mm is null (no generated members; a generator that gives no density) */
+  member_why?: string | null;
+  /** bolted plate and contact skin thickness, mm */
+  plate_mm?: number;
+  skin_mm?: number;
+  am_min_wall_mm?: number;
+  member_note?: string | null;
+}
+
+export interface BracketMargin {
+  ms_yield?: number;
+  ms_ult?: number;
+  /** bolt rows: the margin and what it checks */
+  ms?: number;
+  check?: string;
+  bolt?: number;
+  axis: string;
+  sigma_mpa?: number;
+  /** a pass criterion (shock estimates are reported only) */
+  gates: boolean;
+}
+
+export interface BracketFlag {
+  code: string;
+  text: string;
+  axis?: string;
+  source?: string;
+}
+
+export interface LadderRung {
+  vol_frac: number | null;
+  passed: boolean;
+  mass_g?: number | null;
+  ms_yield?: number | null;
+  ms_ult?: number | null;
+  f1_hz?: number | null;
+  governing?: BracketDesign['governing'];
+  reason?: string;
+}
+
+/** WS4: a user's settings for one bracket (kept with the layout; "auto" lets the design run choose) */
+export interface BracketOverride {
+  /** AM material id; null: the project's default */
+  material?: string | null;
+  vol_frac?: number | 'auto';
+  min_member_mm?: number | 'auto';
+}
+
+/** GET /api/design-options: what the bracket designs can be set to */
+export interface DesignOptions {
+  environments: LaunchEnvironment[];
+  materials: BracketMaterial[];
+  allowables: string;
+  machined: string;
+  vol_frac: { range: [number, number]; ladder: number[] };
+  min_member_mm: { range: [number, number]; am_min_wall_mm: number; generator_sets_member_size: boolean };
+  generator: string;
+  launch_environment: string;
+  bracket_material: string;
+}
+
+export interface LaunchEnvironment {
+  id: string;
+  name: string;
+  random_limit: { grms: number; source: string };
+  random_qual: { grms: number; source: string };
+  static: string;
+  factors: Record<string, { yield: number; ultimate: number; source: string }>;
+  qual_factors: { yield: number; ultimate: number; source: string };
+  f1_guidance_hz: number;
+  f1_source: string;
+  sine: { f_lo: number; f_hi: number; level_g: number; source: string } | null;
+  sine_note: string;
+  shock: { source: string; qual_db: number } | null;
+  shock_note: string;
+  notes: string[];
+  analysis_only: boolean;
+}
+
+export interface BracketMaterial {
+  id: string;
+  name: string;
+  process: 'metal_am' | 'machined' | string;
+  E_mpa: number;
+  yield_mpa: number;
+  ultimate_mpa: number;
+  density_g_cm3: number;
+  source: string;
 }
 
 export interface BracketMode {
@@ -337,6 +452,8 @@ export interface Stage2View {
   brackets?: BracketInfo[];
   hardware_cost_rel?: number | null;
   bracket_designs?: Record<string, BracketDesign>;
+  /** WS4: the user's per-bracket design settings */
+  bracket_overrides?: Record<string, BracketOverride>;
   assumed: string[];
 }
 
@@ -365,6 +482,10 @@ export interface Settings {
   form_factor?: '3U' | '6U' | '12U';
   /** V2: design the metal-AM / cradle / clamp brackets of the best Stage 2 layout when the search pauses (default on) */
   auto_design_brackets?: boolean;
+  /** V2: launch environment the brackets are designed for (DesignOptions.environments id; default "gevs") */
+  launch_environment?: string;
+  /** V2: AM material of a metal-AM bracket with no material of its own (default "AlSi10Mg") */
+  bracket_material?: string;
 }
 
 export interface Revs {
