@@ -10,6 +10,7 @@ import type { ColorMode } from '../../store/store';
 import { ComMarkers, CompactnessLine, Enclosure, Violations } from './Markers';
 import { ExtraItemMesh, PartObject } from './SceneParts';
 import { explodeOffsets } from '../../lib/explode';
+import { useCadMouse } from './cadMouse';
 
 export interface SceneView {
   colorMode: ColorMode;
@@ -201,9 +202,11 @@ const VIEWS: Record<number, [number, number, number]> = {
   0: [0.75, -1, 0.55], // isometric
 };
 
-/** Z-up camera with drei CameraControls; exposes fit / standard views / orbit for keyboard handling. */
+/** Z-up camera with drei CameraControls (CAD-style middle button: cadMouse.ts); exposes fit / standard views / orbit
+ * for keyboard handling. */
 export const CameraRig = forwardRef<CameraApi, { size: Vec3; fitKey: number; onChange?: () => void }>(function CameraRig(props, ref) {
   const controls = useRef<CameraControls>(null);
+  useCadMouse(controls);
   const camera = useThree((s) => s.camera);
   const invalidate = useThree((s) => s.invalidate);
   // fitToSphere keeps the current viewing direction (fitToBox would snap to an axis view)

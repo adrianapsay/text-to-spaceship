@@ -8,6 +8,7 @@ import { TWEEN_LABEL } from '../../lib/copy';
 import { useApp, displayMass, type ColorMode } from '../../store/store';
 import { useParts, useReducedMotion } from '../../hooks';
 import { CameraRig, SceneContent, viewportKeyHandler, type CameraApi, type SceneSpec } from './Scene';
+import { MOUSE_HELP, stopMiddleClickScroll } from './cadMouse';
 import { TWEEN_MS } from './SceneParts';
 import { Toggle } from '../ui';
 import { LabelContext, LabelHub, LabelLayer, LabelProjector } from './labels';
@@ -113,6 +114,9 @@ export function ViewportToolbar(props: { extra?: ReactNode; onFit: () => void })
       </label>
       <ExplodeControl />
       {props.extra}
+      <span className="small muted" title={MOUSE_HELP} data-testid="mouse-hint">
+        middle-drag pans · Shift orbits
+      </span>
     </div>
   );
 }
@@ -232,9 +236,10 @@ export function MainViewport(props: MainViewportProps) {
         aria-describedby={helpId}
         data-testid={props.testId ?? 'viewport'}
         onKeyDown={onKey}
+        onMouseDown={stopMiddleClickScroll}
       >
         <span id={helpId} className="sr-only">
-          Keyboard: F fit, 1 to 6 standard views, 0 isometric, arrow keys orbit, H hide selected part, I isolate, Shift+H show all, E enclosure. Parts are listed in the parts list.
+          {MOUSE_HELP} Keyboard: F fit, 1 to 6 standard views, 0 isometric, arrow keys orbit, H hide selected part, I isolate, Shift+H show all, E enclosure. Parts are listed in the parts list.
         </span>
         <ErrorBoundary label="The 3D viewport">
         <LabelContext.Provider value={hub}>

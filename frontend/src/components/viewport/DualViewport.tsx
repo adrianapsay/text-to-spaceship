@@ -10,6 +10,7 @@ import { useApp, displayMass } from '../../store/store';
 import { MovementArrows } from './Markers';
 import { SceneContent, type SceneSpec } from './Scene';
 import { ExplodeControl } from './Viewport';
+import { MOUSE_HELP, stopMiddleClickScroll, useCadMouse } from './cadMouse';
 
 export interface DualSide {
   label: string;
@@ -73,6 +74,8 @@ export function DualViewport(props: { left: DualSide; right: DualSide; testId?: 
   const camB = useMemo(makeCamera, []);
   const ctlA = useRef<CameraControls>(null);
   const ctlB = useRef<CameraControls>(null);
+  useCadMouse(ctlA);
+  useCadMouse(ctlB);
   const syncing = useRef(false);
   const link = view.linkCameras;
   const massOf = useCallback((id: string) => displayMass({ physical, dataset } as never, id), [physical, dataset]);
@@ -159,8 +162,11 @@ export function DualViewport(props: { left: DualSide; right: DualSide; testId?: 
         <span className="small muted" style={{ marginLeft: 8 }} data-testid="delta-com">
           ΔCOM {dCom ? `${fmt(norm(dCom), 'mm')} · ${fmtVec(dCom)}` : '—'}
         </span>
+        <span className="small muted" style={{ marginLeft: 8 }} title={MOUSE_HELP}>
+          middle-drag pans · Shift orbits
+        </span>
       </div>
-      <div ref={container} className="dual-views" style={{ position: 'relative' }}>
+      <div ref={container} className="dual-views" style={{ position: 'relative' }} onMouseDown={stopMiddleClickScroll}>
         <div className="view-slot">
           {props.left.items.length ? <View style={{ position: 'absolute', inset: 0 }} index={1}>
             <ViewCamera camera={camA} />
