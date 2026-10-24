@@ -36,7 +36,7 @@ def generate(dom: DesignDomain, budget_s: float = 60.0, threads: int = 2) -> Gen
     for frac in (0.25, 0.75):
         ribs |= np.abs(c[..., b] - (lo + frac * (hi - lo))) <= RIB / 2
     solid = (plate | shell | ribs) & ~dom.void
-    solid |= dom.fixed | dom.contact
+    solid |= dom.passive_solid()
     return GenResult(solid.astype(float), time.perf_counter() - t0, NAME,
                      notes=[f"plate {PLATE} mm, shell {SHELL} mm at {CONTACT_GAP} mm, ribs {RIB} mm at 25 / 75 %"])
 
@@ -61,6 +61,6 @@ def sheet_bracket(dom: DesignDomain, budget_s: float = 0.0, threads: int = 2, t:
     b = [k for k in range(3) if k != ax][0]
     web = np.abs(c[..., b] - dom.reserve[b]) <= max(t, dom.h * 0.51) + 0.5 * dom.h
     solid = (flange_wall | flange_part | web) & ~dom.void
-    solid |= dom.fixed | dom.contact
+    solid |= dom.passive_solid()
     return GenResult(solid.astype(float), time.perf_counter() - t0, "Sheet Z-bracket (reference)",
                      notes=[f"{t} mm sheet at the voxel resolution ({dom.h} mm)"])

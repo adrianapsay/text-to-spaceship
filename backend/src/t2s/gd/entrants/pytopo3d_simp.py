@@ -199,7 +199,7 @@ def problem_from_domain(domain: DesignDomain, rmin_mm: float = RMIN_MM) -> tuple
         assert n_c and np.allclose(f.sum(axis=(0, 1, 2)), lc["contact_force_n"])
         ff.append(np.ascontiguousarray(np.transpose(f, (1, 0, 2, 3))))
     rmin = max(1.5, rmin_mm / domain.h)
-    prob = Pytopo3dProblem(to_p(domain.void), to_p(domain.fixed | domain.contact), to_p(domain.fixed), ff, rmin,
+    prob = Pytopo3dProblem(to_p(domain.void), to_p(domain.passive_solid()), to_p(domain.fixed), ff, rmin,
                            nu=float(domain.material["nu"]))
     prob.rmin = rmin
     # lk_H8 is the unit cube with E = 1; a cube of edge h has stiffness E·h·KE → U scales by 1/(E h)
@@ -244,7 +244,7 @@ def generate(domain: DesignDomain, budget_s: float = 120.0, threads: int = 2, *,
     from threadpoolctl import threadpool_limits
 
     rho = np.zeros(domain.shape)
-    rho[domain.fixed | domain.contact] = 1.0
+    rho[domain.passive_solid()] = 1.0
     des = domain.design()
     if not des.any():
         return GenResult(rho, time.perf_counter() - t0, NAME, notes=["no design voxels: passives only"],
@@ -260,7 +260,7 @@ def generate(domain: DesignDomain, budget_s: float = 120.0, threads: int = 2, *,
 
     rho = np.clip(from_p(res["xPhys"]), 0.0, 1.0)
     rho[domain.void] = 0.0
-    rho[domain.fixed | domain.contact] = 1.0
+    rho[domain.passive_solid()] = 1.0
     vf_c = float(rho[des].mean())
     vf_t = float((rho[des] >= 0.5).mean())
     hist = [c * to_nmm for c in res["history"]] + [res["c_final"] * to_nmm]

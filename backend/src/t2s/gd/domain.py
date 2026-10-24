@@ -7,14 +7,16 @@ The box is cut into cubic voxels of size `h` (the grid is centred in the box and
 * `fixed`   — passive solid, bolted: the voxel layer on the target plane (wall, end plate, rail or deck);
 * `contact` — passive solid, loaded: the voxel layer that touches the part (its mounting side, or its surface where
               the bracket wraps it). The part's inertia load enters here;
+* `boss`    — passive solid around each bolt of the bolt pattern (gd.bolts), 2 mm deep from the bolted face;
 * everything else is design space.
 
-Load cases (all ASSUMED, docs/research/v2-bracket-loads-materials.md): 68 g quasi-static in +X, +Y and +Z
-separately — the part's mass × 68 g acting at the part's CENTRE OF MASS, brought onto the contact layer as a force
-plus the moment about the layer's centroid (RBE3-like: `contact_voxel_forces`), and 68 g body acceleration on the
-bracket itself. Material: AlSi10Mg L-PBF, stress-relieved (E = 65 GPa lower bound, ν = 0.33, ρ = 2680 kg/m³, Fty 170 MPa,
-Ftu 280 MPa). A generator returns a density field on the grid (1 = solid); `gd.evaluate` turns it into a solid,
-meshes it and checks it with CalculiX and NGSolve.
+Load cases: the FE cases are run at the 68 g reference level (the GSFC MAC at ≤ 1 kg) in +X, +Y and +Z separately —
+the part's mass × 68 g acting at the part's CENTRE OF MASS, brought onto the contact layer as a force plus the moment
+about the layer's centroid (RBE3-like: `contact_voxel_forces`), and 68 g body acceleration on the bracket itself. The
+launch environment (gd.environment: quasi-static by mass, random, sine, shock, factors) scales and combines them in
+gd.evaluate. Material: gd.materials (default AlSi10Mg L-PBF stress-relieved: E 65 GPa lower value, ν 0.33,
+ρ 2680 kg/m³, Fty 170 MPa, Ftu 280 MPa — vendor values, not design allowables). A generator returns a density field on
+the grid (1 = solid); `gd.evaluate` turns it into a solid, meshes it and checks it with CalculiX and NGSolve.
 
 Grid indexing: `grid[i, j, k]` is the voxel with centre `origin + (i + 0.5, j + 0.5, k + 0.5) * h` (world mm). The
 grid lies inside the reserved box and starts exactly on the target plane, so the bolted face of a design is a face
@@ -26,34 +28,36 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
-G0 = 9806.65                         # mm/s²
-LIMIT_G = 68.0                       # quasi-static limit load, each axis separately (ASSUMED, GSFC MAC envelope)
-CONTACT_GAP = 0.3                    # mm: the bracket follows the part surface at this gap where it wraps it
-FOS_YIELD, FOS_ULT = 1.25, 1.4       # tested at CubeSat level (GEVS-B Table 2.2-3)
-F1_PASS, F1_TARGET = 100.0, 200.0    # Hz, bracket + part, hard-mounted
-# random vibration (research note §2 LC4–LC6): Miles 3σ load at the bracket's own frequency on the GEVS acceptance
-# spectrum, Q = 10; design factors 1.6 (yield) / 1.8 (ultimate) on it, against 1.25 / 1.4 on the 68 g quasi-static
-Q_MILES = 10.0
-RANDOM_FOS_YIELD, RANDOM_FOS_ULT = 1.6, 1.8
+from . import environment as _env
+from .materials import fea_material
+
+# Kept for the modules and tests that import them; the values come from gd.environment (GEVS preset) and
+# gd.materials, where every number carries its source.
+G0 = _env.G0                                         # mm/s²
+LIMIT_G = _env.MAC_TABLE[0][1]                       # 68 g: the FE reference level (GSFC MAC at ≤ 1 kg)
+CONTACT_GAP = 0.3                                    # mm: the bracket follows the part surface at this gap
+FOS_YIELD, FOS_ULT = _env.GEVS_FACTORS["static"].yield_, _env.GEVS_FACTORS["static"].ult      # 1.25, 1.4
+RANDOM_FOS_YIELD, RANDOM_FOS_ULT = _env.GEVS_FACTORS["random"].yield_, _env.GEVS_FACTORS["random"].ult   # 1.6, 1.8
+F1_PASS = _env.F1_GUIDANCE                           # 100 Hz (GEVS App. B guidance, the project's pass rule)
+F1_TARGET = 200.0                                    # Hz, target (research note §1; octave rule UNVERIFIED)
+Q_MILES = _env.Q_DEFAULT
 
 
 def gevs_acceptance_asd(f_hz: float) -> float:
-    """GEVS component acceptance ASD (g²/Hz): +6 dB/oct from 20 Hz to 0.08 at 50 Hz, flat to 800 Hz, −6 dB/oct to
-    2000 Hz (10.0 grms); continued at −6 dB/oct above 2000 Hz (conservative: the spectrum ends there)."""
-    f = float(f_hz)
-    if f < 50.0:
-        return 0.08 * (max(f, 20.0) / 50.0) ** 2
-    if f <= 800.0:
-        return 0.08
-    return 0.08 * (800.0 / f) ** 2
+    """GEVS component acceptance ASD (g²/Hz), Table 2.4-3: +6 dB/oct from 20 Hz to 0.08 at 50 Hz, flat to 800 Hz,
+    −6 dB/oct to 2000 Hz (10.0 Grms) — and 0 outside 20–2000 Hz: the spectrum is defined there only (the old
+    continuation at −6 dB/oct above 2 kHz was unconservative for stiff modes)."""
+    return float(_env.GEVS_ACCEPTANCE.asd(float(f_hz)))
 
 
 def miles_3sigma_g(f_hz: float) -> float:
-    """3σ quasi-static equivalent (g) of the random input at a single-degree-of-freedom frequency f (Miles)."""
-    import math
-    return 3.0 * math.sqrt(math.pi / 2.0 * f_hz * Q_MILES * gevs_acceptance_asd(f_hz))
-MATERIAL = {"name": "AlSi10Mg L-PBF stress-relieved (ASSUMED)", "E_mpa": 65000.0, "nu": 0.33, "rho_t_mm3": 2.68e-9,
-            "yield_mpa": 170.0, "ultimate_mpa": 280.0}
+    """3σ quasi-static equivalent (g) of the GEVS acceptance input at a single-degree-of-freedom frequency f (Miles,
+    Q = 10) — a cross-check only: the random check is the modal superposition of gd.vibration."""
+    from .vibration import miles_3sigma_g as miles
+    return miles(f_hz, _env.GEVS_ACCEPTANCE, Q_MILES)
+
+
+MATERIAL = fea_material("AlSi10Mg")
 
 
 @dataclass
@@ -76,6 +80,13 @@ class DesignDomain:
     material: dict = field(default_factory=lambda: dict(MATERIAL))
     part_com: np.ndarray | None = None          # world mm: where the part's inertia load acts
     part_inertia_kgm2: np.ndarray | None = None  # (3, 3) about the part's centre of mass (for the frequency)
+    bolts: np.ndarray | None = None             # (n, 3) world mm, bolt centres on the target plane (gd.bolts)
+    boss: np.ndarray | None = None              # bool (nx, ny, nz): passive solid around the bolts
+
+    def passive_solid(self) -> np.ndarray:
+        """Voxels that are solid whatever the generator does: the bolted layer, the contact layer, the bosses."""
+        out = self.fixed | self.contact
+        return out | self.boss if self.boss is not None else out
 
     def contact_voxel_forces(self, case: dict) -> np.ndarray:
         """(nx, ny, nz, 3) N on the contact voxels for one load case: the part's force acting at its centre of mass,
@@ -104,7 +115,7 @@ class DesignDomain:
 
     def design(self) -> np.ndarray:
         """Voxels the generator may choose (not void, not passive solid)."""
-        return ~(self.void | self.fixed | self.contact)
+        return ~(self.void | self.passive_solid())
 
     def load_cases(self) -> list[dict]:
         """[{name, contact_force_n (3,), body_accel_mm_s2 (3,)}] — total force on the contact layer and acceleration
@@ -144,9 +155,14 @@ def drop_unreachable_contact(dom: DesignDomain) -> int:
     return n
 
 
+DEFAULT_FASTENERS = 3     # a metal-AM bracket's fasteners when the bracket dict has none (mfg.rules, ASSUMED)
+
+
 def domain_from_bracket(b: dict, rec, orient: int, t, h: float = 1.0, part_mass_kg: float | None = None,
-                        vol_frac: float = 0.25, name: str | None = None) -> DesignDomain:
-    """Design domain of one V2 bracket (`b` from Stage2Model.brackets) holding part `rec` at pose (orient, t)."""
+                        vol_frac: float = 0.25, name: str | None = None, material: str | None = None,
+                        n_bolts: int | None = None) -> DesignDomain:
+    """Design domain of one V2 bracket (`b` from Stage2Model.brackets) holding part `rec` at pose (orient, t), in
+    `material` (a gd.materials id; default AlSi10Mg), with `n_bolts` bolts (default: the bracket's fastener count)."""
     from scipy.spatial import cKDTree
 
     from ..core.rotations import ROTATIONS_F
@@ -185,7 +201,10 @@ def domain_from_bracket(b: dict, rec, orient: int, t, h: float = 1.0, part_mass_
     dom.void = void.reshape(shape)
     dom.contact = contact.reshape(shape) & ~fixed
     dom.fixed = fixed
+    dom.material = fea_material(material)
     drop_unreachable_contact(dom)
+    from .bolts import layout
+    dom.bolts, dom.boss = layout(dom, int(n_bolts if n_bolts is not None else b.get("fasteners", DEFAULT_FASTENERS)))
     # where the part's inertia acts: its centre of mass, and its inertia about it (uniform density)
     from ..massprops.core import integrate
     up = integrate(np.asarray(vw, float), np.asarray(rec.f, np.int64))

@@ -91,6 +91,11 @@ class CaseResult:
     max_vm_filtered_mpa: float        # max nodal von Mises over nodes not in exclude_nodes
     reaction_n: np.ndarray            # (3,) force exerted BY the supports ON the part: reaction_n = -applied_n
     applied_n: np.ndarray             # (3,) sum of applied forces incl. body load
+    # per supported node (problem.fixed_nodes() order): the internal force K u there (CalculiX's RF; NGSolve: the
+    # tet10 element forces of its displacement, mesh.tet10_internal_forces). The support's reaction on the part at
+    # a node is this minus the external load applied at that node (body load, surface load on the node).
+    support_nodes: np.ndarray | None = None
+    support_forces_n: np.ndarray | None = None
 
 
 @dataclass

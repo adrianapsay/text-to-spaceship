@@ -47,6 +47,18 @@ def test_metal_am_bracket_is_designed_inside_its_box(dataset_parts):
     assert set(d["solvers"]) == {"ccx", "ngs"}
     e = cert_entry(b, v)
     assert not e["estimate"] and len(e["solid_vertices"]) == len(v)
+    # WS3 record: environment, material (one density for FE and mass), every check, the governing one, bolts
+    from t2s.gd.materials import density_kg_m3
+    assert d["environment"] == "gevs" and d["material"] == "AlSi10Mg" and "not design allowables" in d[
+        "material_allowables"]
+    assert d["solid_mass_kg"] == pytest.approx(density_kg_m3("AlSi10Mg") * d["volume_cm3"] * 1e-6, rel=1e-9)
+    assert {"static", "random limit", "random qualification"} <= set(d["margins"])
+    assert any(k.startswith("bolt: ") for k in d["margins"]) and d["ms_bolt"] is not None
+    assert d["governing"]["ms"] == pytest.approx(min(d["ms_yield"], d["ms_ult"], d["ms_bolt"]))
+    assert len(d["bolts"]) == int(b["fasteners"]) and all(abs(p[int(b["axis"])] - b["plane_mm"]) < 1e-9
+                                                        for p in d["bolts"])
+    assert all("random_miles_g" in a and "random_3sigma_g" in a for a in d["axes"])
+    assert any(f["code"] == "fatigue" for f in d["flags"])
 
 
 @pytest.mark.skipif(not ccx.available(), reason="CalculiX not installed (tools/ccx)")

@@ -1,21 +1,27 @@
-"""Turn a generator's density field into a certified-ready solid and check it with two FEA solvers.
+"""Turn a generator's density field into a certified-ready solid and check it with two FEA solvers under a launch
+environment (gd.environment; default: GEVS with the qualification check).
 
-1. Passives are imposed (void 0, fixed/contact 1); the solid (density ≥ 0.5) keeps only the voxel islands that join
-   the bolted layer to the part (6-connected); a design with no such island fails.
+1. Passives are imposed (void 0, fixed/contact/bosses 1); the solid (density ≥ 0.5) keeps only the voxel islands that
+   join the bolted layer to the part (6-connected); a design with no such island fails.
 2. Surface: marching cubes on the density (iso 0.5). The voxel grid lies inside the reserved box and starts on the
    target plane, so the solid is inside the box the fit proof certifies and its bolted face lies exactly on the
    plane, meshed with ordinary marching-cubes triangles (a boolean cut there would leave a few huge triangles and a
    coarse mesh at the bracket root, where bending stress peaks). The held part is subtracted as a safety net.
 3. Quadratic tets on exactly that surface; the bolted face is fixed; the faces within the contact zone of the part
-   carry the part's 68 g inertia load (each axis separately) acting at the part's centre of mass — force plus moment
-   as a linear traction (RBE3-like); the bracket carries its own 68 g body load. Three pure torques on the same faces
-   add trial shapes in which the part twists. The modes follow by Rayleigh–Ritz on all six deflections with the part
-   as a rigid mass (and inertia) at its centre of mass; f1 is the lowest. Per axis the random-vibration load
-   (Miles, GEVS acceptance, Q = 10) is the largest over the modes carrying a real share of the effective mass along
-   that axis; it sets the design factor when it exceeds the quasi-static one (research note §2; see score).
-4. CalculiX and NGSolve solve the same problem. Margins use the larger of the two solvers' peak VOXEL-AVERAGED von
-   Mises (the stress averaged over each design voxel — nodal peaks at the sharp corners of a voxel-built solid are
-   singular and do not converge, see voxel_stress) and the lower first frequency; the raw nodal peak is reported.
+   carry the part's inertia load at the 68 g reference level (each axis separately) acting at the part's centre of
+   mass — force plus moment as a linear traction (RBE3-like); the bracket carries its own body load. Three pure
+   torques on the same faces add trial shapes in which the part twists. The modes follow by Rayleigh–Ritz on all six
+   deflections (consistent bracket mass; the part a rigid mass and inertia at its centre of mass); f1 is the lowest.
+4. CalculiX and NGSolve solve the same problem. Per solver: the voxel-averaged stress tensors of all six trial cases
+   (voxel_tensors), modal stress tensors S⁽ᵏ⁾ = Σᵢ Cᵢₖ Sᵢ, the per-node support reactions given to the bolts
+   (gd.bolts), and the random (CQC, Segalman RMS von Mises), sine and shock (ESTIMATE) responses for every preset
+   (gd.vibration). Margins use the larger of the two solvers' stresses and loads and the lower first frequency.
+5. score() applies the design policy of gd.environment: (a) the limit level × the preset's factors, (b) the
+   qualification test level against yield (no extra factor) and ultimate (1.25); the quasi-static MAC case and the
+   random case are separate checks, never added; bolts with the fitting factor 1.15.
+
+Voxel-averaged stress: nodal peaks at the sharp corners of a voxel-built solid are singular and do not converge
+(voxel_tensors); the raw nodal peak is reported only.
 """
 from __future__ import annotations
 
@@ -24,17 +30,20 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
-from .domain import (
-    CONTACT_GAP,
-    F1_PASS,
-    FOS_ULT,
-    FOS_YIELD,
-    LIMIT_G,
-    RANDOM_FOS_ULT,
-    RANDOM_FOS_YIELD,
-    DesignDomain,
-    GenResult,
+from . import bolts as _bolts
+from . import environment as _env
+from .domain import CONTACT_GAP, F1_PASS, LIMIT_G, DesignDomain, GenResult
+from .vibration import (
+    G0,
     miles_3sigma_g,
+    modal_covariance,
+    pseudo_accel,
+    shock_response,
+    sine_response,
+    vector_cov,
+    vm_rms,
+    voigt,
+    von_mises_voigt,
 )
 
 
@@ -43,19 +52,29 @@ class Evaluation:
     name: str
     generator: str
     ok: bool                              # a solid exists, joins wall and part, both solvers ran
-    passed: bool = False                  # ok, margins ≥ 0 and f1 ≥ F1_PASS
+    passed: bool = False                  # ok, every gating margin ≥ 0 and f1 ≥ F1_PASS
     reason: str = ""
     mass_g: float | None = None
     volume_cm3: float | None = None
-    sigma_mpa: float | None = None        # max over cases and solvers of the voxel-averaged von Mises (margins)
+    sigma_mpa: float | None = None        # max over axes and solvers of the voxel-averaged von Mises at 68 g
     sigma_peak_mpa: float | None = None   # max nodal von Mises (bolted face excluded): mesh-dependent at corners
-    ms_yield: float | None = None         # governing axis: quasi-static 68 g or random vibration (research note §2)
+    ms_yield: float | None = None         # bracket body, the governing gating check (score)
     ms_ult: float | None = None
+    ms_bolt: float | None = None          # bolts and flange, the governing gating check
     f1_hz: float | None = None            # lowest natural frequency (Rayleigh–Ritz, part at its CG), lower solver
     modes: list = field(default_factory=list)  # Ritz modes of the lower solver: f, effective-mass fractions, motion
-    axes: list = field(default_factory=list)   # per axis: σ at 68 g, frequency, random 3σ load, factors, margins
+    axes: list = field(default_factory=list)   # per axis: σ at 68 g, frequency, random 3σ (CQC, Miles), margins
+    checks: list = field(default_factory=list)       # per case and axis: stress, factors, margins, gating
+    bolt_checks: list = field(default_factory=list)  # per case and axis: the worst bolt / flange margin
+    margins: dict = field(default_factory=dict)      # per case (static, random limit, …, bolt: …): the worst axis
+    factor_sources: dict = field(default_factory=dict)   # per case: where its factors come from
+    governing: dict | None = None         # the gating check with the smallest margin
+    flags: list = field(default_factory=list)        # reported, not analysed (sine, shock, fatigue, mass share)
+    environment: str | None = None
+    environment_name: str | None = None
+    material: str | None = None
     max_disp_mm: float | None = None
-    solvers: dict = field(default_factory=dict)   # per solver: cases, f1, seconds
+    solvers: dict = field(default_factory=dict)   # per solver: cases, f1, seconds, modes, dynamics
     agreement: dict = field(default_factory=dict)
     gen_seconds: float | None = None
     fea_seconds: float | None = None
@@ -87,7 +106,7 @@ def solid_from_density(dom: DesignDomain, density: np.ndarray):
     if d.shape != tuple(dom.shape):
         return None, f"density shape {d.shape} ≠ grid {tuple(dom.shape)}"
     d[dom.void] = 0.0
-    d[dom.fixed | dom.contact] = 1.0
+    d[dom.passive_solid()] = 1.0
     lab, n = ndimage.label(d >= 0.5)
     keep = sorted(set(np.unique(lab[dom.fixed & (lab > 0)])) & set(np.unique(lab[dom.contact & (lab > 0)])))
     if not keep:
@@ -274,33 +293,49 @@ def fea_problem(dom: DesignDomain, v, f, h_fea: float | None = None, n_modes: in
     return prob
 
 
+def _body_weights(prob) -> np.ndarray:
+    """Per node: ∫ Nᵢ dV (straight tet10: −V/20 at corners, V/5 at mid-side nodes) — the consistent body load of a
+    unit acceleration and density, = the row sums of the consistent mass matrix."""
+    vol = _tet_volumes(prob)
+    w = np.zeros(len(prob.nodes))
+    np.add.at(w, prob.tets[:, :4].ravel(), np.repeat(-vol / 20.0, 4))
+    np.add.at(w, prob.tets[:, 4:].ravel(), np.repeat(vol / 5.0, 6))
+    return w
+
+
+def _mass_products(dom: DesignDomain, prob, U: list) -> tuple[np.ndarray, np.ndarray, list]:
+    """(M (k, k) Gram matrix of the shapes in the consistent bracket mass + the part as a rigid mass and inertia at
+    its CG moving with the contact faces' RBE3 average, L (k, 3) = Φᵀ M r — the work of the shapes under a unit
+    base acceleration along x, y, z, the same body load the solvers apply —, part motions [(u_cg, θ)] per shape)."""
+    from ..fea.mesh import tet10_mass_gram
+    rho = float(dom.material["rho_t_mm3"])
+    m_p = dom.part_mass_kg * 1e-3                                # t
+    I_p = np.asarray(dom.part_inertia_kgm2, float) * 1e3         # kg·m² → t·mm²
+    Phi = [np.asarray(u, float) for u in U]
+    mot = [_part_motion(dom, prob, u) for u in Phi]
+    M = tet10_mass_gram(prob.nodes, prob.tets, rho, Phi)
+    M = M + np.array([[m_p * (mi[0] @ mj[0]) + mi[1] @ I_p @ mj[1] for mj in mot] for mi in mot])
+    w = rho * _body_weights(prob)
+    L = np.array([[float(w @ u[:, j] + m_p * mi[0][j]) for j in range(3)] for u, mi in zip(Phi, mot)])
+    return 0.5 * (M + M.T), L, mot
+
+
 def rayleigh_frequency(dom: DesignDomain, prob, u: np.ndarray, accel) -> tuple[float, np.ndarray]:
     """First natural frequency (Hz) along one axis by Rayleigh's quotient on the static deflection u under that
-    axis's inertia load (bracket self-weight + the part's force at its centre of mass): ω² = uᵀf / uᵀMu. The bracket
-    mass is lumped to the nodes; the part is a rigid mass at its centre of mass with its inertia, moving with the
+    axis's inertia load (bracket self-weight + the part's force at its centre of mass): ω² = uᵀf / uᵀMu, M the
+    consistent bracket mass plus the part as a rigid mass at its centre of mass with its inertia, moving with the
     contact faces' RBE3 average (translation u_c and rotation θ from an area-weighted least-squares fit). Rayleigh's
     quotient is an upper bound; with the part's mass dominating it is close. Returns (f, displacement of the part's
     centre of mass)."""
-    m_node = _node_masses(dom, prob)
-    u_p, theta = _part_motion(dom, prob, u)
-    m_p = dom.part_mass_kg * 1e-3                                # t
-    I_p = np.asarray(dom.part_inertia_kgm2, float) * 1e3         # kg·m² → t·mm²
-    acc = np.asarray(accel, float)
-    num = float(m_node @ (u @ acc) + m_p * (u_p @ acc))          # uᵀ f  (N·mm)
-    den = float(m_node @ np.sum(u * u, axis=1) + m_p * (u_p @ u_p) + theta @ I_p @ theta)   # uᵀ M u (t·mm²)
-    return float(np.sqrt(max(num, 0.0) / den) / (2 * np.pi)) if den > 0 else float("nan"), u_p
+    M, L, mot = _mass_products(dom, prob, [u])
+    num = float(L[0] @ np.asarray(accel, float))                  # uᵀ f  (N·mm)
+    den = float(M[0, 0])                                         # uᵀ M u (t·mm²)
+    return float(np.sqrt(max(num, 0.0) / den) / (2 * np.pi)) if den > 0 else float("nan"), mot[0][0]
 
 
 def _tet_volumes(prob) -> np.ndarray:
     pt = prob.nodes[prob.tets[:, :4]]
     return np.abs(np.einsum("ij,ij->i", pt[:, 1] - pt[:, 0], np.cross(pt[:, 2] - pt[:, 0], pt[:, 3] - pt[:, 0]))) / 6.0
-
-
-def _node_masses(dom: DesignDomain, prob) -> np.ndarray:
-    """Bracket mass lumped to the nodes (each tet's mass shared equally by its 10 nodes), t."""
-    m_node = np.zeros(len(prob.nodes))
-    np.add.at(m_node, prob.tets.ravel(), np.repeat(float(dom.material["rho_t_mm3"]) * _tet_volumes(prob) / 10.0, 10))
-    return m_node
 
 
 def _part_motion(dom: DesignDomain, prob, u: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
@@ -339,48 +374,80 @@ def _load_vector(prob, case, rho: float, w_body: np.ndarray) -> np.ndarray:
     return f
 
 
-def ritz_modes(dom: DesignDomain, prob, U: list) -> list[dict]:
+RITZ_CUTOFF = 1e-10  # drop trial directions whose share of the M-normalised Gram matrix is below this (see ritz)
+
+
+@dataclass
+class Ritz:
+    """Rayleigh–Ritz modes of bracket + part (ritz)."""
+    modes: list                          # [{f_hz, eff_mass_frac (x, y, z), motion}], lowest first
+    C: np.ndarray                        # (n_trial, n_m): mode k = Σᵢ C[i, k] × trial shape i, Cᵀ M C = I
+    f_hz: np.ndarray                     # (n_m,)
+    gamma: np.ndarray                    # (n_m, 3) participation factors Γ_kj = c_kᵀ L_j (√t)
+    part_t: np.ndarray                   # (n_m, 3) part CG translation per unit modal coordinate
+    part_r: np.ndarray                   # (n_m, 3) part rotation per unit modal coordinate
+    m_tot: float                         # bracket + part (t)
+    kept: int                            # independent trial directions kept
+
+    @property
+    def omega(self) -> np.ndarray:
+        return 2.0 * np.pi * self.f_hz
+
+    def eff_mass_sum(self) -> np.ndarray:
+        """Σ_k Γ_kj² / m_tot per axis: the share of the mass the modes carry along each axis."""
+        return (self.gamma ** 2).sum(axis=0) / self.m_tot
+
+
+def ritz(dom: DesignDomain, prob, U: list, cutoff: float = RITZ_CUTOFF) -> Ritz:
     """Natural modes of bracket + part by Rayleigh–Ritz on the static deflections U of all load cases (three
-    translations, three torques): stiffness Kᵢⱼ = uᵢᵀ fⱼ (exact — K uⱼ = fⱼ), mass Mᵢⱼ = bracket (lumped) + the part
-    as a rigid mass and inertia at its centre of mass moving with the contact faces' RBE3 average. Each Ritz
-    frequency is an upper bound of the corresponding true one (Poincaré). Per mode: frequency, effective-mass
-    fraction along x, y, z (base excitation; of bracket + part) and the dominant motion of the part. Sorted by
-    frequency."""
+    translations, three torques): stiffness Kᵢⱼ = uᵢᵀ fⱼ (exact — K uⱼ = fⱼ), mass Mᵢⱼ = consistent bracket mass +
+    the part as a rigid mass and inertia at its centre of mass moving with the contact faces' RBE3 average
+    (_mass_products). Each Ritz frequency is an upper bound of the corresponding true one (Poincaré).
+
+    Dependent shapes: the trial shapes are first scaled to unit modal mass (before, the 1e-10 cutoff applied to the
+    unscaled Gram matrix, so it depended on the arbitrary size of the torque cases), then directions whose eigenvalue
+    of the scaled Gram matrix is below `cutoff` × the largest are dropped. Measured
+    (test_ritz_cutoff_is_scale_free_and_above_the_noise_floor): with displacements rounded to CalculiX's 7
+    significant digits, a near-dependent direction perturbs the modes by < 1e-4 down to 2e-10 and by ~1e-3 near
+    5e-12 — while a cutoff of 1e-8 (planned) would drop a genuine mode found at 2e-10. So 1e-10 stays."""
     rho = float(dom.material["rho_t_mm3"])
-    vol = _tet_volumes(prob)
-    w_body = np.zeros(len(prob.nodes))
-    np.add.at(w_body, prob.tets[:, :4].ravel(), np.repeat(-vol / 20.0, 4))
-    np.add.at(w_body, prob.tets[:, 4:].ravel(), np.repeat(vol / 5.0, 6))
-    m_node = _node_masses(dom, prob)
-    m_p = dom.part_mass_kg * 1e-3
-    I_p = np.asarray(dom.part_inertia_kgm2, float) * 1e3
+    w_body = _body_weights(prob)
     Phi = [np.asarray(u, float) for u in U]
-    mot = [_part_motion(dom, prob, u) for u in Phi]
-    F = [_load_vector(prob, c, rho, w_body) for c in prob.load_cases]
+    M, L, mot = _mass_products(dom, prob, Phi)
+    F = [_load_vector(prob, c, rho, w_body) for c in prob.load_cases[:len(Phi)]]
     n = len(Phi)
     K = np.array([[float(np.sum(Phi[i] * F[j])) for j in range(n)] for i in range(n)])
-    M = np.array([[float(m_node @ np.sum(Phi[i] * Phi[j], axis=1) + m_p * (mot[i][0] @ mot[j][0])
-                         + mot[i][1] @ I_p @ mot[j][1]) for j in range(n)] for i in range(n)])
-    L = np.array([[float(m_node @ Phi[i][:, k] + m_p * mot[i][0][k]) for k in range(3)] for i in range(n)])  # Φᵀ M r
-    K, M = 0.5 * (K + K.T), 0.5 * (M + M.T)
-    s, V = np.linalg.eigh(M)                       # M-orthonormal basis of the trial space (drops dependent shapes)
-    keep = s > 1e-10 * s.max()
+    K = 0.5 * (K + K.T)
+    d = 1.0 / np.sqrt(np.maximum(np.diag(M), 1e-300))           # unit modal mass per trial shape
+    Ms, Ks = d[:, None] * M * d[None, :], d[:, None] * K * d[None, :]
+    s, V = np.linalg.eigh(Ms)
+    keep = s > cutoff * s.max()
     T = V[:, keep] / np.sqrt(s[keep])
-    lam, W = np.linalg.eigh(T.T @ K @ T)
-    C = T @ W                                      # columns: modes as combinations of the trial shapes, Cᵀ M C = I
-    m_tot = float(m_node.sum() + m_p)
+    lam, W = np.linalg.eigh(T.T @ Ks @ T)
+    C = d[:, None] * (T @ W)                                     # columns: modes in the trial shapes, Cᵀ M C = I
+    m_tot = float(rho * _tet_volumes(prob).sum() + dom.part_mass_kg * 1e-3)
+    I_p = np.asarray(dom.part_inertia_kgm2, float) * 1e3
     sq = np.sqrt(np.diag(I_p))
+    m_p = dom.part_mass_kg * 1e-3
+    ut = np.array([mi[0] for mi in mot])                         # (n_trial, 3)
+    th = np.array([mi[1] for mi in mot])
+    part_t, part_r = C.T @ ut, C.T @ th
+    gamma = C.T @ L
     modes = []
     for k in range(C.shape[1]):
-        c = C[:, k]
-        up = sum(ci * mi[0] for ci, mi in zip(c, mot))
-        th = sum(ci * mi[1] for ci, mi in zip(c, mot))
-        rot = float(th @ I_p @ th) > m_p * float(up @ up)
-        kind = (f"part rotates about {'xyz'[int(np.argmax(np.abs(th) * sq))]}" if rot
+        up, tk = part_t[k], part_r[k]
+        rot = float(tk @ I_p @ tk) > m_p * float(up @ up)
+        kind = (f"part rotates about {'xyz'[int(np.argmax(np.abs(tk) * sq))]}" if rot
                 else f"part moves along {'xyz'[int(np.argmax(np.abs(up)))]}")
         modes.append({"f_hz": float(np.sqrt(max(lam[k], 0.0)) / (2 * np.pi)),
-                      "eff_mass_frac": ((c @ L) ** 2 / m_tot).tolist(), "motion": kind})
-    return modes
+                      "eff_mass_frac": (gamma[k] ** 2 / m_tot).tolist(), "motion": kind})
+    return Ritz(modes, C, np.array([m["f_hz"] for m in modes]), gamma, part_t, part_r, m_tot, int(keep.sum()))
+
+
+def ritz_modes(dom: DesignDomain, prob, U: list, cutoff: float = RITZ_CUTOFF) -> list[dict]:
+    """The modes of ritz() as dicts: frequency, effective-mass fraction along x, y, z (base excitation; of bracket +
+    part) and the dominant motion of the part. Sorted by frequency."""
+    return ritz(dom, prob, U, cutoff).modes
 
 
 def _tensor(S) -> np.ndarray:
@@ -398,17 +465,17 @@ def _vm(S: np.ndarray) -> np.ndarray:
     return np.sqrt(1.5 * np.sum(d * d, axis=(-2, -1)))
 
 
-def voxel_stress(dom: DesignDomain, prob, S: np.ndarray) -> float:
-    """Peak von Mises of the stress averaged over each design voxel (cube of side h, the resolution of the design).
+def voxel_tensors(dom: DesignDomain, prob, stresses: list) -> tuple[np.ndarray, np.ndarray]:
+    """The stress averaged over each design voxel (cube of side h, the resolution of the design), for every given
+    nodal stress field: (voxel centres (n_v, 3), tensors (n_v, n_fields, 6) in Voigt order xx, yy, zz, xy, yz, zx).
     Nodal peaks of voxel-built solids sit at sharp corners — the staircase of the voxels, the edge of the clamped face,
     the edge of the uniform load patch — and grow without bound as the mesh is refined (linear-elastic corner
     singularities, measured +30 … +70 % per refinement). The voxel average is a fixed physical volume, so it converges
     with the mesh and is what a design resolved to h can claim; features finer than h (fillets) are for the detailed
-    design. Volume-weighted average of the nodal tensors (each tet's volume shared over its 10 nodes), then von
-    Mises; nodes on the bolted face are excluded as before."""
+    design. Volume-weighted average of the nodal tensors (each tet's volume shared over its 10 nodes); nodes on the
+    bolted face are excluded."""
     nodes, tets = prob.nodes, prob.tets
-    p = nodes[tets[:, :4]]
-    vol = np.abs(np.einsum("ij,ij->i", p[:, 1] - p[:, 0], np.cross(p[:, 2] - p[:, 0], p[:, 3] - p[:, 0]))) / 6.0
+    vol = _tet_volumes(prob)
     w = np.zeros(len(nodes))
     np.add.at(w, tets.ravel(), np.repeat(vol / 10.0, 10))
     if prob.exclude_nodes is not None and len(prob.exclude_nodes):
@@ -418,16 +485,117 @@ def voxel_stress(dom: DesignDomain, prob, S: np.ndarray) -> float:
     key = np.ravel_multi_index(idx.T, dom.shape)
     n = int(np.prod(dom.shape))
     W = np.bincount(key, weights=w, minlength=n)
-    acc = np.zeros((n, 9))
-    np.add.at(acc, key, (S.reshape(-1, 9) * w[:, None]))
     ok = W > 0
-    return float(_vm((acc[ok] / W[ok, None]).reshape(-1, 3, 3)).max())
+    out = []
+    for S in stresses:
+        acc = np.zeros((n, 9))
+        np.add.at(acc, key, (_tensor(S).reshape(-1, 9) * w[:, None]))
+        out.append(voigt((acc[ok] / W[ok, None]).reshape(-1, 3, 3)))
+    cen = dom.origin + (np.argwhere(ok.reshape(dom.shape)) + 0.5) * dom.h
+    return cen, np.stack(out, axis=1)
+
+
+def voxel_stress(dom: DesignDomain, prob, S: np.ndarray) -> float:
+    """Peak von Mises of the voxel-averaged stress (voxel_tensors) of one nodal stress field."""
+    return float(von_mises_voigt(voxel_tensors(dom, prob, [S])[1][:, 0]).max())
+
+
+def support_reactions(prob, res, F: list) -> list:
+    """Per load case (node ids, reaction on the part per supported node (n, 3) = the solver's internal force there
+    minus the external load applied at that node, internal force K u (n, 3)); None when the solver gave no per-node
+    forces."""
+    out = []
+    for k, c in enumerate(res.cases):
+        if c.support_nodes is None or c.support_forces_n is None:
+            out.append(None)
+            continue
+        ids = np.asarray(c.support_nodes, np.int64)
+        rf = np.asarray(c.support_forces_n, float)
+        out.append((ids, rf - F[k][ids], rf))
+    return out
+
+
+def dynamics(dom: DesignDomain, prob, rz: Ritz, vox_c: np.ndarray, vox_t: np.ndarray, supports: list,
+             solid=None, envs=None) -> dict:
+    """Responses of one solver's solution for every launch environment (JSON-ready): per preset and axis the random
+    3σ von Mises (limit and qualification spectra; largest voxel and where), the part's 3σ pseudo-acceleration (CQC)
+    and Miles' 3σ at the dominant mode (cross-check), the bolts' 3σ tension and shear, and — where the preset has
+    them — the sine peak and the shock ESTIMATE (limit and qualification). Static bolt forces of the 68 g cases are
+    kept for score(). vox_t: (n_v, n_trial, 6) voxel-averaged stress of every trial case."""
+    envs = list(_env.ENVIRONMENTS.values()) if envs is None else [_env.get(e) for e in envs]
+    envs = [e for e in envs if e.response_of is None]           # presets that differ only in factors share these
+    S_modal = np.einsum("vic,ik->vck", vox_t, rz.C)            # (n_v, 6, n_m)
+    out = {"part_mass_kg": float(dom.part_mass_kg), "n_modes": int(rz.C.shape[1]), "trial_kept": rz.kept,
+           "eff_mass_sum": rz.eff_mass_sum().tolist(), "presets": {}}
+    B_modal, bolt_info = None, None
+    bolts = getattr(dom, "bolts", None)
+    if bolts is not None and len(bolts) and supports and all(s is not None for s in supports):
+        ids = supports[0][0]
+        owner = _bolts.assign_nodes(prob.nodes[ids], np.asarray(bolts, float), dom.axis)
+        nb = len(bolts)
+        B = np.stack([_bolts.bolt_forces(s[2], owner, nb) for s in supports[:rz.C.shape[0]]], axis=1)  # elastic K u
+        B_modal = np.einsum("bic,ik->bck", B, rz.C)                 # (n_b, 3, n_m)
+        n_out = _bolts.outward(dom.axis, dom.neg)
+        static = [_bolts.bolt_forces(s[1], owner, nb).tolist() for s in supports[:3]]   # reactions, 68 g cases
+        thick = (_bolts.thickness_at(solid[0], solid[1], bolts, dom.axis, dom.neg) if solid is not None
+                 else np.full(nb, _bolts.FLANGE_T))
+        bolt_info = {"positions_mm": np.asarray(bolts, float).tolist(), "n_out": n_out.tolist(),
+                     "nodes_per_bolt": np.bincount(owner, minlength=nb).tolist(), "static_68g_n": static,
+                     "thickness_mm": np.asarray(thick, float).tolist()}
+        out["bolts"] = bolt_info
+    P = pseudo_accel(rz.part_t, rz.omega)                        # (3, n_m)
+    for E in envs:
+        z = E.zeta
+        axes = []
+        for j in range(3):
+            g = rz.gamma[:, j]
+            ax = {}
+            rnd = {}
+            for lvl, spec in (("limit", E.random_limit), ("qual", E.random_qual)):
+                I = modal_covariance(rz.f_hz, g, spec, z)
+                vm = vm_rms(S_modal, I)
+                v = int(np.argmax(vm))
+                r = {"sigma3_mpa": 3.0 * float(vm[v]), "voxel_mm": vox_c[v].tolist(),
+                     "accel3_g": 3.0 * float(np.sqrt(max(P[j] @ I @ P[j], 0.0))) / G0, "grms_in": spec.grms()}
+                if B_modal is not None:
+                    t3, s3 = _bolts.tension_shear_3sigma(vector_cov(B_modal, I), n_out)
+                    r["bolt_tension3_n"], r["bolt_shear3_n"] = t3.tolist(), s3.tolist()
+                rnd[lvl] = r
+            ax["random"] = rnd
+            dom_k = int(np.argmax(g ** 2))
+            ax["dominant_f_hz"] = float(rz.f_hz[dom_k])
+            ax["dominant_eff_mass_frac"] = float(g[dom_k] ** 2 / rz.m_tot)
+            ax["miles_g"] = miles_3sigma_g(rz.f_hz[dom_k], E.random_limit, E.q)
+            ax["miles_qual_g"] = miles_3sigma_g(rz.f_hz[dom_k], E.random_qual, E.q)
+            if E.sine is not None:
+                sr = sine_response(S_modal, g, rz.f_hz, z, E.sine.f_lo, E.sine.f_hi, E.sine.level_g, rz.part_t, j,
+                                   B_modal)
+                sr["voxel_mm"] = vox_c[sr.pop("voxel")].tolist()
+                if B_modal is not None:
+                    amp = np.asarray(sr.pop("bolt_force_amp_n"))
+                    sr["bolt_tension_n"] = np.abs(amp @ n_out).tolist()
+                    sr["bolt_shear_n"] = np.linalg.norm(amp - np.outer(amp @ n_out, n_out), axis=1).tolist()
+                ax["sine"] = sr
+            if E.shock is not None:
+                sh = {}
+                for lvl, srs in (("limit", E.shock), ("qual", E.shock.scaled_db(E.shock_qual_db))):
+                    r = shock_response(S_modal, g, rz.f_hz, z, srs, rz.part_t, j, B_modal)
+                    r["voxel_mm"] = vox_c[r.pop("voxel")].tolist()
+                    if B_modal is not None:
+                        t3, s3 = _bolts.tension_shear_3sigma(r.pop("bolt_force_cov"), n_out)
+                        r["bolt_tension_n"], r["bolt_shear_n"] = (t3 / 3.0).tolist(), (s3 / 3.0).tolist()
+                    sh[lvl] = r
+                ax["shock"] = sh
+            axes.append(ax)
+        out["presets"][E.id] = {"axes": axes}
+    return out
 
 
 def evaluate(dom: DesignDomain, gen: GenResult, solvers=("ccx", "ngs"), threads: int = 2,
-             h_fea: float | None = None) -> Evaluation:
+             h_fea: float | None = None, env: str | None = None) -> Evaluation:
     from ..fea import ccx, ngs
-    ev = Evaluation(dom.name, gen.generator, False, gen_seconds=gen.seconds)
+    ev = Evaluation(dom.name, gen.generator, False, gen_seconds=gen.seconds,
+                    material=(dom.material or {}).get("id"))
     if gen.mesh is not None:
         v, f = gen.mesh
         r = dom.reserve
@@ -455,8 +623,11 @@ def evaluate(dom: DesignDomain, gen: GenResult, solvers=("ccx", "ngs"), threads:
     ev.n_nodes = len(prob.nodes)
     ev.volume_cm3 = prob.volume_mm3() / 1e3
     ev.mass_g = prob.mass_t() * 1e6
-    res, vox, freq, modes = {}, {}, {}, {}
+    res, vox, freq, modes, dyn = {}, {}, {}, {}, {}
     n_ax = len(dom.load_cases())                     # the 68 g cases; the torque cases after them are trial shapes
+    rho = float(dom.material["rho_t_mm3"])
+    w_body = _body_weights(prob)
+    F = [_load_vector(prob, c, rho, w_body) for c in prob.load_cases]
     runner = {"ccx": lambda p: ccx.run(p, threads=threads), "ngs": lambda p: ngs.solve_with_fields(p, threads=threads)}
     for s in solvers:
         if s == "ccx" and not ccx.available():
@@ -470,10 +641,13 @@ def evaluate(dom: DesignDomain, gen: GenResult, solvers=("ccx", "ngs"), threads:
                     ev.reason = f"{s} failed twice: {exc}"
                     return ev
                 ev.solvers.setdefault("retries", []).append(f"{s}: {str(exc)[:200]}")
-        vox[s] = [voxel_stress(dom, prob, _tensor(S)) for S in fields.stress[:n_ax]]
+        vc, vt = voxel_tensors(dom, prob, fields.stress)
+        vox[s] = [float(von_mises_voigt(vt[:, k]).max()) for k in range(n_ax)]
         freq[s] = [rayleigh_frequency(dom, prob, np.asarray(U, float), c.body_accel_mm_s2)
                    for U, c in zip(fields.displacement[:n_ax], prob.load_cases[:n_ax])]
-        modes[s] = ritz_modes(dom, prob, fields.displacement)
+        rz = ritz(dom, prob, fields.displacement)
+        modes[s] = rz.modes
+        dyn[s] = dynamics(dom, prob, rz, vc, vt, support_reactions(prob, res[s], F), solid=(v, f))
     ev.fea_seconds = time.perf_counter() - t0
     if not res:
         ev.reason = "no solver available"
@@ -488,70 +662,212 @@ def evaluate(dom: DesignDomain, gen: GenResult, solvers=("ccx", "ngs"), threads:
                                     "balance": float(np.linalg.norm(c.reaction_n + c.applied_n) /
                                                      max(np.linalg.norm(c.applied_n), 1.0))}
                                    for k, c in enumerate(r.cases)],
-                         "notes": list(r.notes)}
-    for k, v in score(ev.solvers, dom.material).items():
-        setattr(ev, k, v)
+                         "dynamics": dyn[s], "notes": list(r.notes)}
+    for k, val in score(ev.solvers, dom.material, env).items():
+        setattr(ev, k, val)
     ev.sigma_peak_mpa = max(c.max_vm_filtered_mpa for r in res.values() for c in r.cases)
     ev.max_disp_mm = max(c.max_disp_mm for r in res.values() for c in r.cases)
     if len(res) == 2:
         a, b = res["ccx"], res["ngs"]
+        E = _env.get(env)
+
+        def q3(s):
+            return max(x["random"]["qual"]["sigma3_mpa"] for x in dyn[s]["presets"][E.response_id]["axes"])
         ev.agreement = {
             "disp_rel": max(abs(x.max_disp_mm - y.max_disp_mm) / max(y.max_disp_mm, 1e-30) for x, y in zip(a.cases, b.cases)),
             "sigma_rel": max(abs(x - y) / max(y, 1e-30) for x, y in zip(vox["ccx"], vox["ngs"])),
             "sigma_peak_rel": max(abs(x.max_vm_filtered_mpa - y.max_vm_filtered_mpa) / max(y.max_vm_filtered_mpa, 1e-30)
                                   for x, y in zip(a.cases, b.cases)),
-            "f1_rel": max(abs(x["f_hz"] - y["f_hz"]) / max(y["f_hz"], 1e-30) for x, y in zip(modes["ccx"], modes["ngs"]))}
+            "f1_rel": max(abs(x["f_hz"] - y["f_hz"]) / max(y["f_hz"], 1e-30) for x, y in zip(modes["ccx"], modes["ngs"])),
+            "random_rel": abs(q3("ccx") - q3("ngs")) / max(q3("ngs"), 1e-30)}
     ev.ok = True
     return ev
 
 
-def random_load_g(modes: list[dict], k: int) -> tuple[float, dict, float, float]:
-    """Random-vibration 3σ load factor (g) along axis k for the whole mass: the larger of
-    * Miles at the dominant mode (the one with the largest effective mass along k) — the usual practice, applied to
-      the full mass although that mode carries only part of it, and
-    * the SRSS of the modal base forces, √Σ (mₑ,ᵢ/m · 3σ(fᵢ))² — every mode with its own Miles response; it exceeds
-      the first only when modes share the axis, e.g. above 800 Hz, where the GEVS spectrum rolls off and a lower
-      mode with much of the mass responds more strongly.
-    Returns (load, dominant mode, Miles at it, SRSS)."""
-    top = max(modes, key=lambda md: md["eff_mass_frac"][k])
-    n_dom = miles_3sigma_g(top["f_hz"])
-    n_srss = float(np.sqrt(sum((md["eff_mass_frac"][k] * miles_3sigma_g(md["f_hz"])) ** 2 for md in modes)))
-    return max(n_dom, n_srss), top, n_dom, n_srss
+# =================================================================================================== scoring
+def _row(case, axis, sigma, fac, material, gates, note=""):
+    s = max(float(sigma), 1e-12)
+    return {"case": case, "axis": axis, "sigma_mpa": float(sigma), "factor_yield": fac.yield_, "factor_ult": fac.ult,
+            "ms_yield": material["yield_mpa"] / (fac.yield_ * s) - 1.0,
+            "ms_ult": material["ultimate_mpa"] / (fac.ult * s) - 1.0, "gates": bool(gates), "note": note}
 
 
-def score(solvers: dict, material: dict) -> dict:
+def _bolt_row(case, axis, tension, shear, cap, fac, gates, note=""):
+    m = _bolts.margins(tension, shear, cap, fac.yield_, fac.ult)
+    return {"case": case, "axis": axis, "ms": m["ms"], "check": m["check"], "bolt": m["bolt"],
+            "tension_n": np.asarray(tension, float).tolist(), "shear_n": np.asarray(shear, float).tolist(),
+            "factor_yield": fac.yield_, "factor_ult": fac.ult, "fitting_factor": _bolts.FITTING_FACTOR,
+            "gates": bool(gates), "note": note}
+
+
+def score(solvers: dict, material: dict, env=None) -> dict:
     """Margins and pass/fail from the solver results (Evaluation.solvers: per solver its 68 g cases with the
-    voxel-averaged stress, and its Ritz modes), so a saved evaluation can be scored again without the FE runs.
+    voxel-averaged stress, its Ritz modes and its `dynamics`), so a saved evaluation can be scored again — under
+    another preset too — without the FE runs.
 
-    Per axis: σ is the larger solver's voxel average at 68 g; the random-vibration load (research note §2;
-    random_load_g) is the larger of the two solvers'. Design factors: yield max(1.25·68 g, 1.6·3σ), ultimate
-    max(1.4·68 g, 1.8·3σ); stresses scale linearly from the 68 g analysis. f1 is the lowest mode of any kind (lower
-    solver)."""
+    Checks per axis (each gating unless noted), stress = the larger solver's:
+    * static — the preset's quasi-static limit (MAC by the part's mass) × its static factors; the FE cases are run at
+      the 68 g reference and scale linearly;
+    * random limit — the 3σ von Mises (CQC, Segalman) on the LIMIT spectrum × the random factors;
+    * random qualification — the 3σ on the QUALIFICATION spectrum × (1.0 yield, 1.25 ultimate);
+    * sine — the peak over the preset's sine band × its sine factors (presets with a sine environment);
+    * shock limit / qualification — ESTIMATE (modal SRS, CQC), reported, NOT gating (presets with a shock SRS that
+      the random check does not cover);
+    * bolts — the same cases on the per-bolt forces (fitting factor 1.15), M3 A2-70 and the flange.
+    Static and random are separate load cases (never added). f1 ≥ F1_PASS (100 Hz guidance, the project's rule)
+    and ≥ the preset's own requirement."""
+    E = _env.get(env)
     sv = {s: d for s, d in solvers.items() if isinstance(d, dict) and d.get("modes")}
-    names = [c["name"] for c in next(iter(sv.values()))["cases"] if c.get("voxel_vm_mpa") is not None]
-    axes = []
+    if not sv:
+        raise ValueError("no solver results to score")
+    dyn = {s: d.get("dynamics") or {} for s, d in sv.items()}
+    rid = E.response_id
+    if any(rid not in (x.get("presets") or {}) for x in dyn.values()):
+        raise ValueError(f"the saved evaluation has no {rid!r} response: evaluate the solid again")
+    first = next(iter(sv.values()))
+    names = [c["name"] for c in first["cases"] if c.get("voxel_vm_mpa") is not None]
+    m_part = float(next(iter(dyn.values()))["part_mass_kg"])
+    g_s = E.static_g(m_part)
+    low = min(sv, key=lambda s: sv[s]["modes"][0]["f_hz"])
+    f1 = float(sv[low]["modes"][0]["f_hz"])
+    covered, shock_text = _env.shock_covered_by_random(E)
+    shock_gates = False                                          # an ESTIMATE: reported, not a pass criterion
+    binfo = [x.get("bolts") for x in dyn.values()]
+    has_bolts = all(b is not None for b in binfo)
+    cap = _bolts.capacities(material, np.min([b["thickness_mm"] for b in binfo], axis=0)) if has_bolts else None
+    n_out = np.asarray(binfo[0]["n_out"], float) if has_bolts else None
+    rows, brows, axes, flags = [], [], [], []
     for k, name in enumerate(names):
-        sig = max(d["cases"][k]["voxel_vm_mpa"] for d in sv.values())
-        n3, md, n_dom, n_srss = max((random_load_g(d["modes"], k) for d in sv.values()), key=lambda x: x[0])
-        ny, nu = max(FOS_YIELD * LIMIT_G, RANDOM_FOS_YIELD * n3), max(FOS_ULT * LIMIT_G, RANDOM_FOS_ULT * n3)
-        axes.append({"case": name, "sigma_68g_mpa": sig, "f_hz": md["f_hz"], "eff_mass_frac": md["eff_mass_frac"][k],
-                     "random_dominant_g": n_dom, "random_srss_g": n_srss,
+        a = "xyz"[k]
+        sig68 = max(d["cases"][k]["voxel_vm_mpa"] for d in sv.values())
+        pa = [x["presets"][rid]["axes"][k] for x in dyn.values()]
+        mine = []
+        mine.append(_row("static", a, sig68 * g_s / LIMIT_G, E.factors["static"], material, True,
+                         f"{g_s:.1f} g quasi-static"))
+        mine.append(_row("random limit", a, max(p["random"]["limit"]["sigma3_mpa"] for p in pa), E.factors["random"],
+                         material, True, f"3σ, {E.random_limit.grms():.2f} Grms limit spectrum"))
+        mine.append(_row("random qualification", a, max(p["random"]["qual"]["sigma3_mpa"] for p in pa),
+                         E.qual_factors, material, True, f"3σ, {E.random_qual.grms():.2f} Grms qualification spectrum"))
+        if E.sine is not None:
+            mine.append(_row("sine", a, max(p["sine"]["sigma_peak_mpa"] for p in pa), E.factors["sine"], material, True,
+                             f"{E.sine.level_g} g {E.sine.f_lo:.0f}–{E.sine.f_hi:.0f} Hz"))
+        if E.shock is not None and not covered:
+            mine.append(_row("shock limit (ESTIMATE)", a, max(p["shock"]["limit"]["sigma_peak_mpa"] for p in pa),
+                             E.factors["shock"], material, shock_gates, "SRS × participation, CQC"))
+            mine.append(_row("shock qualification (ESTIMATE)", a, max(p["shock"]["qual"]["sigma_peak_mpa"] for p in pa),
+                             E.qual_factors, material, shock_gates, f"SRS + {E.shock_qual_db:g} dB"))
+        rows += mine
+        if has_bolts:
+            st = np.max([np.abs(np.asarray(b["static_68g_n"][k], float)) for b in binfo], axis=0)   # per component
+            t_s, s_s = _bolts.tension_shear_static(st * g_s / LIMIT_G, n_out)
+            brows.append(_bolt_row("static", a, t_s, s_s, cap, E.factors["static"], True))
+            for lvl, case, fac in (("limit", "random limit", E.factors["random"]),
+                                   ("qual", "random qualification", E.qual_factors)):
+                t3 = np.max([p["random"][lvl]["bolt_tension3_n"] for p in pa], axis=0)
+                s3 = np.max([p["random"][lvl]["bolt_shear3_n"] for p in pa], axis=0)
+                brows.append(_bolt_row(case, a, t3, s3, cap, fac, True))
+            if E.sine is not None:
+                brows.append(_bolt_row("sine", a, np.max([p["sine"]["bolt_tension_n"] for p in pa], axis=0),
+                                       np.max([p["sine"]["bolt_shear_n"] for p in pa], axis=0), cap,
+                                       E.factors["sine"], True))
+            if E.shock is not None and not covered:
+                for lvl, case, fac in (("limit", "shock limit (ESTIMATE)", E.factors["shock"]),
+                                       ("qual", "shock qualification (ESTIMATE)", E.qual_factors)):
+                    brows.append(_bolt_row(case, a, np.max([p["shock"][lvl]["bolt_tension_n"] for p in pa], axis=0),
+                                           np.max([p["shock"][lvl]["bolt_shear_n"] for p in pa], axis=0), cap, fac,
+                                           shock_gates))
+        gate = [r for r in mine if r["gates"]]
+        gy = min(gate, key=lambda r: r["ms_yield"])
+        gu = min(gate, key=lambda r: r["ms_ult"])
+        sy = max(r["factor_yield"] * r["sigma_mpa"] for r in gate)
+        su = max(r["factor_ult"] * r["sigma_mpa"] for r in gate)
+        p0 = max(pa, key=lambda p: p["random"]["limit"]["sigma3_mpa"])
+        eff = min(x["eff_mass_sum"][k] for x in dyn.values())
+        axes.append({"case": name, "sigma_68g_mpa": sig68, "static_g": g_s,
+                     "f_hz": p0["dominant_f_hz"], "eff_mass_frac": p0["dominant_eff_mass_frac"], "eff_mass_sum": eff,
                      "f_rayleigh_hz": min((d["cases"][k]["f_rayleigh_hz"] for d in sv.values()
                                            if d["cases"][k].get("f_rayleigh_hz")), default=None),
-                     "random_3sigma_g": n3, "yield_factor_g": ny, "ult_factor_g": nu,
-                     "governs": "random" if RANDOM_FOS_YIELD * n3 > FOS_YIELD * LIMIT_G else "quasi-static",
-                     "ms_yield": material["yield_mpa"] / (sig * ny / LIMIT_G) - 1.0,
-                     "ms_ult": material["ultimate_mpa"] / (sig * nu / LIMIT_G) - 1.0})
-    low = min(sv, key=lambda s: sv[s]["modes"][0]["f_hz"])
-    out = {"axes": axes, "sigma_mpa": max(a["sigma_68g_mpa"] for a in axes),
-           "f1_hz": sv[low]["modes"][0]["f_hz"], "modes": sv[low]["modes"],
-           "ms_yield": min(a["ms_yield"] for a in axes), "ms_ult": min(a["ms_ult"] for a in axes)}
+                     "random_3sigma_g": max(p["random"]["limit"]["accel3_g"] for p in pa),
+                     "random_qual_3sigma_g": max(p["random"]["qual"]["accel3_g"] for p in pa),
+                     "random_miles_g": max(p["miles_g"] for p in pa),
+                     "random_miles_qual_g": max(p["miles_qual_g"] for p in pa),
+                     "sigma3_limit_mpa": mine[1]["sigma_mpa"], "sigma3_qual_mpa": mine[2]["sigma_mpa"],
+                     "yield_factor_g": LIMIT_G * sy / max(sig68, 1e-12), "ult_factor_g": LIMIT_G * su / max(sig68, 1e-12),
+                     "governs": gy["case"], "governs_ult": gu["case"],
+                     "ms_yield": gy["ms_yield"], "ms_ult": gu["ms_ult"]})
+        if eff < 0.9:
+            flags.append({"code": "effective_mass", "axis": a,
+                          "text": f"{a}: the modes carry {100 * eff:.0f} % of the mass (< 90 %): the random response of "
+                                  "the rest is not amplified in this model"})
+    body = [r for r in rows if r["gates"]]
+    out = {"environment": E.id, "environment_name": E.name, "axes": axes, "checks": rows, "bolt_checks": brows,
+           "sigma_mpa": max(x["sigma_68g_mpa"] for x in axes), "f1_hz": f1, "modes": sv[low]["modes"],
+           "ms_yield": min(r["ms_yield"] for r in body), "ms_ult": min(r["ms_ult"] for r in body),
+           "ms_bolt": min((r["ms"] for r in brows if r["gates"]), default=None)}
+    cand = [(r["ms_yield"], r, "yield") for r in body] + [(r["ms_ult"], r, "ultimate") for r in body]
+    cand += [(r["ms"], r, r["check"]) for r in brows if r["gates"]]
+    ms, r, kind = min(cand, key=lambda x: x[0])
+    out["governing"] = {"case": r["case"], "axis": r["axis"], "check": kind, "ms": ms,
+                        "bolt": r.get("bolt"), "part": "bolt" if "check" in r else "bracket"}
+    # per case: the worst axis (what the app shows as the margins table)
+    margins = {}
+    for r in rows:
+        m = margins.get(r["case"])
+        if m is None or min(r["ms_yield"], r["ms_ult"]) < min(m["ms_yield"], m["ms_ult"]):
+            margins[r["case"]] = {"ms_yield": r["ms_yield"], "ms_ult": r["ms_ult"], "axis": r["axis"],
+                                  "sigma_mpa": r["sigma_mpa"], "gates": r["gates"]}
+    for r in brows:
+        key = f"bolt: {r['case']}"
+        if key not in margins or r["ms"] < margins[key]["ms"]:
+            margins[key] = {"ms": r["ms"], "check": r["check"], "bolt": r["bolt"], "axis": r["axis"],
+                            "gates": r["gates"]}
+    out["margins"] = margins
+    src = {"static": E.factors["static"].source, "random limit": E.factors["random"].source,
+           "random qualification": E.qual_factors.source, "bolts": f"{_bolts.FF_SOURCE}; {_bolts.M3_A2_70['source']}"}
+    if E.sine is not None:
+        src["sine"] = E.factors["sine"].source
+    if E.shock is not None:
+        src["shock limit (ESTIMATE)"], src["shock qualification (ESTIMATE)"] = E.factors["shock"].source, \
+            E.qual_factors.source
+    out["factor_sources"] = src
+    # flags: reported, not analysed
+    if E.sine_flag_hz is not None and f1 < E.sine_flag_hz:
+        flags.append({"code": "sine", "text": f"f1 {f1:.0f} Hz < {E.sine_flag_hz:.0f} Hz: a sine test or analysis is "
+                                              "needed", "source": E.sine_note})
+    if E.shock is None:
+        from .environment import random_equivalent_srs
+        srs = random_equivalent_srs(E.random_qual, [100.0, 1000.0, 2000.0], E.q)
+        flags.append({"code": "shock", "text": "no shock spec in this preset: the qualification random level covers a "
+                      f"shock SRS (Q = {E.q:g}) up to {srs[0]:.0f} g at 100 Hz, {srs[1]:.0f} g at 1 kHz, "
+                      f"{srs[2]:.0f} g at 2 kHz", "source": E.shock_note})
+    else:
+        flags.append({"code": "shock", "text": shock_text, "source": E.shock_note})
+        sh = [r for r in rows if r["case"].startswith("shock")] + [r for r in brows if r["case"].startswith("shock")]
+        worst = min((min(r.get("ms_yield", r.get("ms")), r.get("ms_ult", r.get("ms"))) for r in sh), default=None)
+        if worst is not None and worst < 0:
+            flags.append({"code": "shock_estimate", "text": f"shock ESTIMATE margin {worst:+.2f} (< 0): the interface "
+                          "SRS applied at the bracket base without attenuation — refine or test"})
+    sig1 = max(r["sigma_mpa"] for r in rows if r["case"] == "random limit") / 3.0
+    flags.append({"code": "fatigue", "text": f"random fatigue not analysed (1σ von Mises up to {sig1:.0f} MPa at the "
+                                             "limit level)"})
+    if E.id == "nanoracks":
+        flags.append({"code": "source", "text": "NR-NRCSD-S0003 Table 4.3.1-1 note (RSS of Ny and Nz ±1.8 g) is "
+                                                "inconsistent with its ±4.0 / ±4.0 g", "source": E.static_source})
+    if not has_bolts:
+        flags.append({"code": "bolts", "text": "no bolt pattern or per-node reactions: bolts not checked"})
+    out["flags"] = flags
     fails = []
     if out["ms_yield"] < 0:
-        fails.append(f"MS yield {out['ms_yield']:+.2f}")
+        g = min(body, key=lambda r: r["ms_yield"])
+        fails.append(f"MS yield {out['ms_yield']:+.2f} ({g['case']}, {g['axis']})")
     if out["ms_ult"] < 0:
-        fails.append(f"MS ultimate {out['ms_ult']:+.2f}")
-    if out["f1_hz"] < F1_PASS:
-        fails.append(f"f1 {out['f1_hz']:.0f} Hz < {F1_PASS:.0f}")
+        g = min(body, key=lambda r: r["ms_ult"])
+        fails.append(f"MS ultimate {out['ms_ult']:+.2f} ({g['case']}, {g['axis']})")
+    if out["ms_bolt"] is not None and out["ms_bolt"] < 0:
+        g = min((r for r in brows if r["gates"]), key=lambda r: r["ms"])
+        fails.append(f"bolt MS {out['ms_bolt']:+.2f} ({g['check']}, {g['case']}, {g['axis']})")
+    f_req = max(F1_PASS, E.f1_guidance_hz)
+    if f1 < f_req:
+        fails.append(f"f1 {f1:.0f} Hz < {f_req:.0f}")
     out["passed"], out["reason"] = not fails, "; ".join(fails)
     return out

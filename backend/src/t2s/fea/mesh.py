@@ -244,3 +244,77 @@ def consistent_surface_load(nodes: np.ndarray, faces: np.ndarray, total_force, m
 
 def nodes_where(nodes: np.ndarray, mask_fn) -> np.ndarray:
     return np.flatnonzero(mask_fn(nodes))
+
+
+# ------------------------------------------------------------------------------------- straight 10-node tetrahedra
+# Barycentric shape functions in gmsh order: corners N_a = L_a (2 L_a − 1), mid-side nodes of GMSH_TET10_EDGES
+# N_ab = 4 L_a L_b. Both helpers below are exact for straight-sided elements.
+_GAUSS4_A, _GAUSS4_B = 0.5854101966249685, 0.1381966011250105      # 4-point rule, degree 2, weights V/4
+
+
+def _tet_geometry(nodes: np.ndarray, tets: np.ndarray):
+    """(volume (m,), barycentric gradients (m, 4, 3)) of the corner tetrahedra."""
+    p = nodes[tets[:, :4]].astype(float)
+    J = np.stack([p[:, 1] - p[:, 0], p[:, 2] - p[:, 0], p[:, 3] - p[:, 0]], axis=2)    # columns: edge vectors
+    vol = np.linalg.det(J) / 6.0
+    Ji = np.linalg.inv(J)                                       # rows: ∇L1, ∇L2, ∇L3
+    g = np.concatenate([-Ji.sum(axis=1, keepdims=True), Ji], axis=1)
+    return np.abs(vol), g
+
+
+def tet10_shape_gradients(L: np.ndarray, g: np.ndarray) -> np.ndarray:
+    """∇N (m, 10, 3) at one barycentric point L (4,) for elements with barycentric gradients g (m, 4, 3)."""
+    out = [(4.0 * L[a] - 1.0) * g[:, a] for a in range(4)]
+    out += [4.0 * (L[b] * g[:, a] + L[a] * g[:, b]) for a, b in GMSH_TET10_EDGES]
+    return np.stack(out, axis=1)
+
+
+def tet10_internal_forces(nodes: np.ndarray, tets: np.ndarray, u: np.ndarray, E: float, nu: float,
+                          elems: np.ndarray | None = None) -> np.ndarray:
+    """Nodal internal forces f = K u (n, 3) of linear-elastic isotropic tet10 elements — the force each node needs
+    for the displacement u; at a supported node it is the support's (internal) reaction, CalculiX's RF. Assembled
+    over `elems` only (default all): the element stresses are linear, so the 4-point rule is exact."""
+    nodes, tets = np.asarray(nodes, float), np.asarray(tets, np.int64)
+    sel = tets if elems is None else tets[np.asarray(elems, np.int64)]
+    vol, g = _tet_geometry(nodes, sel)
+    lam, mu = E * nu / ((1 + nu) * (1 - 2 * nu)), E / (2 * (1 + nu))
+    ue = np.asarray(u, float)[sel]                              # (m, 10, 3)
+    fe = np.zeros_like(ue)
+    for q in range(4):
+        L = np.full(4, _GAUSS4_B)
+        L[q] = _GAUSS4_A
+        dN = tet10_shape_gradients(L, g)                        # (m, 10, 3)
+        grad = np.einsum("mai,maj->mij", ue, dN)                # ∂u_i/∂x_j
+        eps = 0.5 * (grad + np.swapaxes(grad, 1, 2))
+        sig = lam * np.trace(eps, axis1=1, axis2=2)[:, None, None] * np.eye(3) + 2 * mu * eps
+        fe += (vol / 4.0)[:, None, None] * np.einsum("mij,maj->mai", sig, dN)
+    f = np.zeros((len(nodes), 3))
+    np.add.at(f, sel.ravel(), fe.reshape(-1, 3))
+    return f
+
+
+def _tet10_mass_pattern() -> np.ndarray:
+    """Consistent scalar mass matrix of a straight tet10 / (ρ V): ∫ N_a N_b dV / V (exact; × 1/420)."""
+    m = np.zeros((10, 10))
+    edges = [set(e) for e in GMSH_TET10_EDGES]
+    for a in range(4):
+        for b in range(4):
+            m[a, b] = 6.0 if a == b else 1.0
+        for k, e in enumerate(edges):
+            m[a, 4 + k] = m[4 + k, a] = -4.0 if a in e else -6.0
+    for i, ei in enumerate(edges):
+        for j, ej in enumerate(edges):
+            m[4 + i, 4 + j] = 32.0 if i == j else (16.0 if ei & ej else 8.0)
+    return m / 420.0
+
+
+def tet10_mass_gram(nodes: np.ndarray, tets: np.ndarray, rho: float, fields: list) -> np.ndarray:
+    """Gram matrix Gᵢⱼ = ∫ ρ uᵢ·uⱼ dV (consistent mass) of nodal vector fields (each (n, 3)) over the mesh."""
+    vol, _ = _tet_geometry(np.asarray(nodes, float), np.asarray(tets, np.int64))
+    m = _tet10_mass_pattern()
+    U = np.stack([np.asarray(u, float)[tets] for u in fields], axis=-1)        # (m, 10, 3, k)
+    U = U.reshape(len(tets), 10, -1)                                           # (m, 10, 3k)
+    MU = np.einsum("ab,ebk->eak", m, U)
+    G = np.einsum("e,eai,eaj->ij", rho * vol, U, MU)                          # (3k, 3k): (node comp, field)
+    k = len(fields)
+    return G.reshape(3, k, 3, k).trace(axis1=0, axis2=2)
