@@ -3,6 +3,7 @@ import type { BracketDesign, BracketInfo, BracketMode, ContestResults, LayoutSum
 import { session } from '../api/session';
 import { useApp } from '../store/store';
 import { useAsync, useParts } from '../hooks';
+import { DesignProgressPanel, SavedStlPanel } from '../components/DesignProgress';
 import { GoalSlider } from '../components/GoalsPanel';
 import { itemsFor, useLayoutList } from '../components/LayoutCompare';
 import { MainViewport } from '../components/viewport/Viewport';
@@ -244,8 +245,9 @@ export function HardwareTab() {
       ? (best as unknown as LayoutSummary)
       : latestStage2(list.data);
   const s2 = s2v ?? (infeasible && infeasible.stage === 2 ? (infeasible as unknown as LayoutSummary) : null);
-  // reloaded when a bracket-design run reports progress (designed solids replace the estimates)
-  const layout = useAsync(s2?.id ? () => session().api.layout(s2.id) : null, [s2?.id, study?.progress, study?.at]);
+  // reloaded when a bracket-design run has finished (designed solids replace the estimates)
+  const doneAt = (study?.partial as { status?: string } | undefined)?.status === 'DONE' ? study?.at : null;
+  const layout = useAsync(s2?.id ? () => session().api.layout(s2.id) : null, [s2?.id, doneAt]);
   const contest = useAsync(() => session().api.gdContest(), []);
   const [msg, setMsg] = useState<string | null>(null);
   const items = useMemo(() => itemsFor(layout.data, newest), [layout.data, newest]);
@@ -319,7 +321,6 @@ export function HardwareTab() {
                 <Button variant="primary" onClick={design} disabled={!layout.data || !undesigned} data-testid="design-brackets">
                   Design the 3D-printed, cradle and clamp brackets{undesigned ? ` (${undesigned})` : ''}
                 </Button>
-                {study ? <span className="small muted">progress {fmt((study.progress ?? 0) * 100, 'pct100')}</span> : null}
               </div>
               <label className="small row" style={{ marginTop: 6, gap: 6 }}>
                 <input
@@ -337,6 +338,17 @@ export function HardwareTab() {
           )}
         </Panel>
       </div>
+      {study ? (
+        <Panel title="Bracket design run" caption="one bar per bracket; up to 4 are designed at the same time, each checked with CalculiX and NGSolve">
+          <DesignProgressPanel />
+        </Panel>
+      ) : null}
+      <Panel
+        title="Saved STL files"
+        caption="the designed assembly as STL files (world coordinates, mm): written when a bracket design run finishes; moving a slider removes the brackets from them"
+      >
+        <SavedStlPanel layoutId={layout.data?.stage === 2 ? layout.data.id : null} />
+      </Panel>
       {!s2 ? (
         <EmptyState title="No ENGINEERING-CONSTRAINED layout yet">Switch to Stage 2 and optimise: every layout found there carries its brackets.</EmptyState>
       ) : (

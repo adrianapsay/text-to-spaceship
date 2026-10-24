@@ -316,6 +316,37 @@ def create_app(coord: Coordinator | None = None, project: str = "default", **coo
         except ValueError as exc:
             raise HTTPException(409, str(exc)) from exc
 
+    @app.get("/api/saved-stl")
+    async def saved_stl(request: Request):
+        """V2: the saved STL files of the designed best layout (manifest, folder, a save under way)."""
+        return C(request).saved_stl()
+
+    @app.post("/api/saved-stl")
+    async def save_stl(request: Request):
+        try:
+            body = await request.json()
+        except Exception:  # noqa: BLE001
+            body = {}
+        c = C(request)
+        lid = (body or {}).get("layout_id") or c.best_id
+        if not lid:
+            raise HTTPException(409, "no layout to save")
+        try:
+            return c.save_stl(lid)
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown layout {lid}") from exc
+        except ValueError as exc:
+            raise HTTPException(409, str(exc)) from exc
+
+    @app.get("/api/saved-stl/download")
+    async def saved_stl_download(request: Request):
+        try:
+            data = await asyncio.to_thread(C(request).saved_stl_zip)
+        except KeyError as exc:
+            raise HTTPException(404, "no saved STL files yet") from exc
+        return Response(data, media_type="application/zip",
+                        headers={"Content-Disposition": 'attachment; filename="saved_stl.zip"'})
+
     # ------------------------------------------------------------------------------------------- studies
     @app.get("/api/benchmarks")
     async def benchmarks(request: Request, instance: str | None = None, preset: str | None = None):

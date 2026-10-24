@@ -9,6 +9,7 @@ import type {
   ProgressPayload,
   ProjectSnapshot,
   Revs,
+  SavedStl,
   SelectorChoice,
   SnapshotPayload,
   StudyUpdatePayload,
@@ -71,6 +72,9 @@ export interface SolverState {
   pareto: ParetoPoint[] | null;
   studies: Record<string, StudyState>;
   fidelityRuns: Record<string, FidelityRun>;
+  /** V2: the saved STL files as last pushed (saved_stl.updated); null until a push — the UI fetches them on mount */
+  savedStl: SavedStl | null;
+  savedStlAt: string | null;
   log: LogEntry[];
   lastError: string | null;
   metricsConfirmedAt: string | null;
@@ -105,6 +109,8 @@ export function initialSolver(): SolverState {
     pareto: null,
     studies: {},
     fidelityRuns: {},
+    savedStl: null,
+    savedStlAt: null,
     log: [],
     lastError: null,
     metricsConfirmedAt: null,
@@ -265,6 +271,17 @@ export function reduceEnvelope(conn: ConnProto, solver: SolverState, env: Envelo
       if (s.best && s.best.id === L.id) s = { ...s, best: s.best.status === 'STALE' ? { ...L, status: 'STALE' } : L };
       if (s.infeasible && s.infeasible.id === L.id) s = { ...s, infeasible: L };
       s = { ...s, log: pushLog(s.log, { at, kind: 'info', text: `${L.id} updated${p.reason ? ` (${p.reason})` : ''}` }) };
+      break;
+    }
+    case 'saved_stl.updated': {
+      // V2: the saved STL files were written, or their brackets removed after a slider moved
+      const m = (env.payload as { saved_stl?: SavedStl })?.saved_stl;
+      if (!m) break;
+      const text =
+        m.status === 'brackets_removed'
+          ? `saved STL files: brackets removed (${m.brackets_removed?.reason ?? 'settings changed'})`
+          : `saved STL files: ${m.layout_id} with ${m.brackets?.length ?? 0} bracket(s)`;
+      s = { ...s, savedStl: m, savedStlAt: at, log: pushLog(s.log, { at, kind: 'info', text }) };
       break;
     }
     case 'layout.infeasible': {

@@ -50,6 +50,25 @@ AM_LEVEL_TEXT = {0: "simple brackets only", 1: "metal AM only where no simple br
                  2: "metal AM where it costs at most 2x the simple bracket",
                  3: "metal AM where it costs at most 10x the simple bracket", 4: "metal AM wherever it fits"}
 SELECTOR_SETTLE_S = 1.0
+SETTINGS_SETTLE_S = 1.5      # V2: the automatic bracket design / STL save waits until a slider has stopped moving
+SLIDER_LABELS = {"space": "Use Space Efficiently", "balance": "Balance the Spacecraft",
+                 "inertia": "Reduce Rotational Inertia", "feasibility": "Improve Physical Feasibility",
+                 "cable": "Keep cable path clear", "cost": "Keep hardware cost low", "bracket_budget": "Bracket budget",
+                 "optional_parts": "Include optional parts", "mass_symmetry": "Mass-distribution symmetry",
+                 "speed_quality": "Computation: speed / quality"}
+SETTING_LABELS = {"form_factor": "CubeSat size", "stage": "Stage", "part_scale_pct": "Part size",
+                  "target_com_mm": "COM target", "compactness_definition": "Compactness definition"}
+
+
+def settings_change_text(before: dict, after: dict) -> str:
+    """What moved between two Coordinator._settings_view() results, e.g. "Balance the Spacecraft 36 → 40"."""
+    def val(x):
+        return f"{x:g}" if isinstance(x, (int, float)) and not isinstance(x, bool) else str(x)
+    out = [f"{SLIDER_LABELS.get(k, k)} {val((before.get('sliders') or {}).get(k))} → {val(v)}"
+           for k, v in (after.get("sliders") or {}).items() if (before.get("sliders") or {}).get(k) != v]
+    out += [f"{label} {val(before.get(k))} → {val(after.get(k))}" for k, label in SETTING_LABELS.items()
+            if before.get(k) != after.get(k)]
+    return ", ".join(out) or "settings changed"
 
 
 def _kill_tree(pid: int | None) -> None:
@@ -370,6 +389,8 @@ class Coordinator:
                 pass
         if self.build_pool:
             self.build_pool.shutdown(wait=False, cancel_futures=True)
+        if self.__dict__.get("_stl_io") is not None:
+            self._stl_io.shutdown(wait=True)        # saved STL files: short writes, never left half-done
         for pool in (self.ladder_pool, self.cpsat_pool):
             if not pool:
                 continue
@@ -413,6 +434,11 @@ class Coordinator:
                 self.broadcast("project.changed", {"reason": f"{len(new)} file(s) picked up from the inbox"})
         if self.choice_pending is not None and now - self.choice_pending[1] >= SELECTOR_SETTLE_S:
             self._apply_choice(self.choice_pending[0], restart=True)
+        settle = self.__dict__.get("_settle_at")
+        if settle is not None and now >= settle:
+            self._settle_at = None                     # the sliders have stopped: design / save the best layout now
+            if self.run_status in ("PAUSED", "CONVERGED"):
+                self._maybe_auto_design()
         if (self.ladders or self.studies) and now - self.last_ladder_poll > 1.0:
             self.last_ladder_poll = now
             self._poll_ladders()
@@ -979,8 +1005,8 @@ class Coordinator:
         if self.ctx is None or self.best_id is None:
             return
         best = self.archive[self.best_id]
-        if best.keys is None:
-            return
+        if best.keys is None or not self._current(best):  # only a chromosome of this context (the islands also skip
+            return                                       # one of another length: worker.fitting_keys)
         for w in self.workers:
             if w.role == "island" and w.ctx_id == self.ctx.ctx_id:
                 w.cmd_q.put(("inject", self.ctx.ctx_id, [best.keys]))
@@ -1738,6 +1764,7 @@ class Coordinator:
     # =========================================================================================== edits
     def apply_settings(self, new: dict) -> None:
         s = self.store.settings
+        before = self._settings_view()
         old_stage = int(s.get("stage", 1))
         old_target = list(s.get("target_com_mm", [0, 0, 0]))
         old_s2 = self._stage2_mode()
@@ -1753,13 +1780,17 @@ class Coordinator:
             s["part_scale_pct"] = float(np.clip(float(new["part_scale_pct"]), 50.0, 100.0))
         if new.get("auto_design_brackets") is not None:
             s["auto_design_brackets"] = bool(new["auto_design_brackets"])
-            if s["auto_design_brackets"] and self.run_status in ("PAUSED", "CONVERGED"):
-                self._maybe_auto_design()
         if "sliders" in new and isinstance(new["sliders"], dict):
             for k, v in new["sliders"].items():
                 if k in s["sliders"] and v is not None:
                     s["sliders"][k] = float(np.clip(float(v), 0, 100))
         s["stage"] = 2 if int(s.get("stage", 1)) == 2 else 1
+        after = self._settings_view()
+        if after != before:
+            # V2: the saved bracket STL files belong to the layout found at the old settings; the automatic bracket
+            # design and STL save wait until the slider has stopped moving (_tick)
+            self._drop_saved_brackets(settings_change_text(before, after))
+            self._settle_at = time.monotonic() + SETTINGS_SETTLE_S
         self._bump("weights_rev")
         if s.get("form_factor", formfactor.DEFAULT) != old_ff:
             # V2 form factor: another envelope and COM box — new context, new search, project re-sent
@@ -1799,6 +1830,8 @@ class Coordinator:
                         self.broadcast("selector.changed", self.selector())
         if self.run_status == "CONVERGED" and self.ctx is not None:
             self._set_status("SEARCHING", "goals changed")
+        if new.get("auto_design_brackets") and self.run_status in ("PAUSED", "CONVERGED"):
+            self._maybe_auto_design()
 
     def lock_pose_for(self, pid: str) -> dict | None:
         if self.best_id is None:
@@ -2001,8 +2034,9 @@ class Coordinator:
                                                 "partial": {"status": L["status"], "largest_pct": res.get("largest_pct")}})
                 continue
             if L.get("study") == "bracket_design":     # finished through _on_bracket_design
-                self.broadcast("study.update", {"study": "bracket_design", "progress": L["progress"],
-                                                "partial": {"status": L["status"], "layout_id": res.get("layout_id")}})
+                if L["status"] != "DONE":
+                    self.broadcast("study.update", {"study": "bracket_design", "progress": L["progress"],
+                                                    "partial": self._design_progress(res, L["status"])})
                 continue
             self.broadcast("study.update", {"study": "fidelity", "progress": L["progress"],
                                             "partial": {"part_id": pid, "status": L["status"], "progress": L["progress"],
@@ -2298,13 +2332,23 @@ class Coordinator:
         (out / "progress.json").unlink(missing_ok=True)
         fut = self.ladder_pool.submit(formfactor.call_with, formfactor.current(), design_job, str(snap), str(out))
         self.ladders["__bracket_design__"] = {"future": fut, "path": out / "progress.json", "mtime": None,
-                                              "status": "PENDING", "progress": 0.0, "study": "bracket_design"}
+                                              "status": "PENDING", "progress": 0.0, "study": "bracket_design",
+                                              "settings": self._settings_view()}
         wf = asyncio.wrap_future(fut, loop=self.loop)
         wf.add_done_callback(lambda f, lid=e.id, o=out: self._on_bracket_design(f, lid, o))
-        self.broadcast("study.update", {"study": "bracket_design", "progress": 0.0,
-                                        "partial": {"status": "RUNNING", "layout_id": e.id}})
-        return {"status": "RUNNING", "layout_id": e.id,
-                "brackets": sum(1 for b in brs if b["kind"] in DESIGNED_KINDS)}
+        rows = [{"k": k, "pid": b["pid"], "kind": b["kind"], "status": "queued"}
+                for k, b in enumerate(brs) if b["kind"] in DESIGNED_KINDS]
+        self.broadcast("study.update", {"study": "bracket_design", "progress": 0.0, "partial": self._design_progress(
+            {"layout_id": e.id, "brackets": rows, "n_total": len(rows), "n_done": 0, "seconds": 0.0}, "PENDING")})
+        return {"status": "RUNNING", "layout_id": e.id, "brackets": len(rows)}
+
+    @staticmethod
+    def _design_progress(res: dict, status: str) -> dict:
+        """What the progress bars show of a bracket design run: one row per bracket (queued / running / done, time,
+        mass, result), how many are done, the time so far and the estimated time left (gd.design.design_job)."""
+        return {"status": status, "layout_id": res.get("layout_id"), "brackets": res.get("brackets") or [],
+                "n_total": res.get("n_total"), "n_done": res.get("n_done"), "workers": res.get("workers"),
+                "seconds": res.get("seconds"), "eta_s": res.get("eta_s")}
 
     def _search_settled(self) -> bool:
         """No island job in flight and no validation queued or running: the best layout can no longer change."""
@@ -2321,6 +2365,8 @@ class Coordinator:
         from ..gd.design import DESIGNED_KINDS
         if not self.store.settings.get("auto_design_brackets", True):
             return
+        if self.__dict__.get("_settle_at") is not None:   # a slider is still moving: once it has settled (_tick)
+            return
         if not self._search_settled():               # search jobs or validations still running after the pause: the
             self._auto_design_due = True             # best may still change — run when they have finished (_tick)
             return
@@ -2331,6 +2377,7 @@ class Coordinator:
             return
         done = (e.meta or {}).get("bracket_designs") or {}
         if not any(b["kind"] in DESIGNED_KINDS and b["pid"] not in done for b in (e.meta or {}).get("brackets") or []):
+            self._sync_saved_stl(e)                  # designed before: the saved STL files follow it
             return
         L = self.ladders.get("__bracket_design__")
         if L is not None and not L.get("finalised"):
@@ -2368,7 +2415,11 @@ class Coordinator:
             # designed solids' mesh URLs and masses — they keep a copy and would otherwise draw the boxes
             self.broadcast("layout.updated", {"layout": self.layout_json(e), "reason": "brackets designed"})
             self.broadcast("study.update", {"study": "bracket_design", "progress": 1.0,
-                                            "partial": {"status": "DONE", "layout_id": lid}})
+                                            "partial": self._design_progress(res, "DONE")})
+            # the designed assembly as STL files — unless a slider moved during the run and this layout is no longer
+            # the best: its brackets would belong to the old settings (the next pause saves the new best)
+            if lid == self.best_id or (L is not None and L.get("settings") == self._settings_view()):
+                self._save_stl(e, "bracket design run finished")
         except Exception as exc:  # noqa: BLE001
             self._error(f"bracket designs could not be applied: {exc!r}")
         finally:
@@ -2376,6 +2427,139 @@ class Coordinator:
                 L["finalised"] = True
         if self.run_status in ("PAUSED", "CONVERGED"):        # the best may have changed while this one ran
             self._maybe_auto_design()
+
+    # =========================================================================================== saved STL files (V2)
+    def _saved_stl_dir(self) -> Path:
+        from ..report.saved_stl import FOLDER
+        return self.store.folder / FOLDER
+
+    def saved_stl(self) -> dict:
+        """The saved STL files (report/saved_stl.py): their manifest, the folder, and the layout being saved now."""
+        from ..report.saved_stl import read_manifest
+        m = read_manifest(self._saved_stl_dir()) or {"status": "none"}
+        m["folder"] = str(self._saved_stl_dir())
+        m["saving"] = self.__dict__.get("_stl_pending")
+        return m
+
+    def saved_stl_zip(self) -> bytes:
+        """The saved set as one zip, read on the saved-STL thread (never half-written)."""
+        from ..report.saved_stl import read_manifest, zip_set
+        folder = self._saved_stl_dir()
+        if read_manifest(folder) is None:
+            raise KeyError("no saved STL files yet")
+        ex = self.__dict__.get("_stl_io")
+        return ex.submit(zip_set, folder).result() if ex is not None else zip_set(folder)
+
+    def save_stl(self, layout_id: str) -> dict:
+        """Save a Stage 2 layout's STL files now (Mounting Hardware tab); written in the background."""
+        e = self.archive.get(layout_id)
+        if e is None:
+            raise KeyError(layout_id)
+        if e.stage != 2:
+            raise ValueError("only a Stage 2 layout has brackets to save")
+        self._save_stl(e, "saved from the Mounting Hardware tab")
+        return {"status": "SAVING", "layout_id": e.id, "folder": str(self._saved_stl_dir())}
+
+    def _settings_view(self) -> dict:
+        """The settings a search result depends on: sliders, part size, CubeSat size, stage, COM target and the
+        compactness definition (not display options or the automatic design switch)."""
+        s = self.store.settings
+        v = {k: s.get(k) for k in ("form_factor", "stage", "part_scale_pct", "target_com_mm", "compactness_definition")}
+        v["sliders"] = dict(s.get("sliders") or {})
+        return json.loads(json.dumps(v))
+
+    def _stl_items(self, e: LayoutEntry) -> tuple[list, list, list]:
+        """Binary STL (world mm) of every placed part and of every bracket with a real solid — built (direct mount,
+        machined block, sheet bracket, standoff) or designed; a bracket still drawn as its reserved box or catalogue
+        envelope is left out and listed."""
+        from ..geometry.stl_io import stl_bytes
+        from ..report.build import _hardware_meshes, _placed_parts, _safe
+        names, parts = {}, []
+        for pid, r, o, t in _placed_parts(self, e):
+            names[pid] = r.name
+            parts.append((f"{_safe(pid)}_{_safe(r.name)}", stl_bytes(to_world(r.v, o, t), r.f, f"t2s {e.id} {r.name} "
+                                                                     "world mm"), {"part_id": pid, "part": r.name}))
+        designs = (e.meta or {}).get("bracket_designs") or {}
+        brackets, left_out = [], []
+        for it, _, v, f in _hardware_meshes(self, e):
+            pid = it.get("for_part")
+            kind = it.get("bracket_kind") or it.get("kind")
+            desc = {"part_id": pid, "part": names.get(pid, pid), "kind": kind, "process": it.get("process"),
+                    "item": it["id"], "mass_kg": it.get("mass_kg"), "designed": bool(it.get("designed"))}
+            if it.get("kind") == "bracket" and not it.get("designed") and not it.get("exact"):
+                d = designs.get(pid)
+                why = (f"design failed: {d.get('reason') or 'no solid'}" if d else "not designed yet") + \
+                    (" (catalogue envelope)" if kind == "clamp" else " (reserved box)")
+                left_out.append({**desc, "why": why})
+                continue
+            if it.get("designed") and designs.get(pid):
+                desc.update(passed=bool(designs[pid].get("passed")), generator=designs[pid].get("generator"))
+            stem = f"{'AM' if it.get('process') == 'metal_am' else _safe(str(kind))}_{_safe(names.get(pid, str(pid)))}"
+            brackets.append((f"{stem}_{it['id'].rsplit('-', 1)[-1]}", stl_bytes(v, f, f"t2s {e.id} {it['id']} {kind}"),
+                             desc))
+        return parts, brackets, left_out
+
+    def _save_stl(self, e: LayoutEntry, why: str) -> None:
+        """Write the saved STL set for this layout (in the background, after any file work asked for before)."""
+        from ..report.saved_stl import write_set
+        folder = self._saved_stl_dir()
+        info = {"settings": self._settings_view(), "why": why, "stage": e.stage, "part_scale": e.part_scale,
+                "layout_status": e.status}
+
+        def job():
+            parts, brackets, left_out = self._stl_items(e)
+            return write_set(folder, e.id, parts, brackets, {**info, "left_out": left_out})
+        self._stl_pending = e.id
+        self._stl_submit(job, f"saving the STL files of {e.id}")
+
+    def _sync_saved_stl(self, e: LayoutEntry) -> None:
+        """The saved STL files follow the best layout once its brackets are designed: written again unless they hold
+        this layout with its brackets at the current settings already, or a save of it is under way."""
+        from ..report.saved_stl import read_manifest
+        if self.__dict__.get("_stl_pending") == e.id:
+            return
+        m = read_manifest(self._saved_stl_dir())
+        if m and m.get("layout_id") == e.id and m.get("status") == "complete" and \
+                m.get("settings") == self._settings_view():
+            return
+        self._save_stl(e, "the search stopped on this layout; its brackets were designed before")
+
+    def _drop_saved_brackets(self, reason: str) -> None:
+        """A slider (or another search setting) moved: the saved bracket files belong to the layout found at the old
+        settings — delete them and write the assembly again without them."""
+        from ..report.saved_stl import remove_brackets
+        folder = self._saved_stl_dir()
+        self._stl_submit(lambda: remove_brackets(folder, reason), "removing the saved bracket STL files")
+
+    def _stl_submit(self, fn, what: str) -> None:
+        """Saved-STL file work runs on one background thread, in the order it was asked for; the clients hear when
+        something changed (saved_stl.updated)."""
+        from concurrent.futures import Future, ThreadPoolExecutor
+        self._stl_queued = self.__dict__.get("_stl_queued", 0) + 1
+        loop = self.__dict__.get("loop")
+        if loop is None:                             # no event loop (tests): do it here
+            fut: Future = Future()
+            try:
+                fut.set_result(fn())
+            except Exception as exc:  # noqa: BLE001 - reported by _on_stl_done
+                fut.set_exception(exc)
+            self._on_stl_done(fut, what)
+            return
+        ex = self.__dict__.get("_stl_io")
+        if ex is None:
+            ex = self._stl_io = ThreadPoolExecutor(max_workers=1, thread_name_prefix="saved-stl")
+        ex.submit(fn).add_done_callback(lambda f: loop.call_soon_threadsafe(self._on_stl_done, f, what))
+
+    def _on_stl_done(self, fut, what: str) -> None:
+        self._stl_queued = max(0, self.__dict__.get("_stl_queued", 1) - 1)
+        if not self._stl_queued:
+            self._stl_pending = None
+        exc = fut.exception()
+        if exc is not None:
+            self._error(f"{what} failed: {exc!r} (is a file in {self._saved_stl_dir()} open in another program?)")
+            return
+        if fut.result() is not None:                 # None: nothing changed (no saved brackets to remove)
+            self.broadcast("saved_stl.updated", {"saved_stl": self.saved_stl()})
 
     # =========================================================================================== largest size (V2)
     def _largest_size_path(self) -> Path:

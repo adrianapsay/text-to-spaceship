@@ -757,6 +757,7 @@ export class MockBackend {
       if (a === 'studies' && b === 'size') return c === 'run' ? notImplemented('the Size Study') : notAvailable('Size Study results');
       if (a === 'mfg') return b === 'run' ? notImplemented('Manufacturable Design') : notAvailable('Manufacturable Design results');
       if (a === 'items') return notAvailable('extra-item meshes');
+      if (a === 'saved-stl') return notAvailable('saved STL files');
       if (a === 'fidelity') {
         if (b === 'run' && method === 'POST') {
           const ids = ((await body()).part_ids as string[] | undefined) ?? this.packable().map((p) => p.id);

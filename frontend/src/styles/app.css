@@ -564,6 +564,77 @@ table.data tbody tr:hover td {
   background-image: repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.55) 0 2px, transparent 2px 4px) !important;
 }
 
+/* V2 bracket design run: progress bars (overall and one per bracket) */
+.pbar {
+  position: relative;
+  height: 8px;
+  min-width: 60px;
+  background: var(--bg-sunken);
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+}
+.pbar > .fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--accent);
+  transition: width 400ms linear;
+}
+.pbar.ok > .fill {
+  background: var(--ok);
+}
+.pbar.err > .fill {
+  background: var(--err);
+}
+.pbar.running > .fill {
+  background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.35) 0 6px, transparent 6px 12px);
+  background-size: 17px 17px;
+  animation: pbar-stripes 0.8s linear infinite;
+}
+@keyframes pbar-stripes {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 17px 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pbar > .fill {
+    transition: none;
+  }
+  .pbar.running > .fill {
+    animation: none;
+  }
+}
+.design-rows {
+  display: grid;
+  grid-template-columns: minmax(120px, 1.2fr) minmax(100px, 0.8fr) minmax(80px, 2fr) minmax(150px, 1.2fr);
+  gap: 4px 10px;
+  align-items: center;
+  font-size: var(--fs-12);
+}
+.design-strip {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 4px 8px;
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--accent);
+  font-size: var(--fs-12);
+  flex-wrap: wrap;
+}
+.design-strip .pbar {
+  flex: 1 1 160px;
+  max-width: 360px;
+}
+.design-strip.ok {
+  border-left-color: var(--ok);
+}
+.design-strip.warn {
+  border-left-color: var(--warn);
+}
+
 /* metric strip */
 .metric-strip {
   display: grid;

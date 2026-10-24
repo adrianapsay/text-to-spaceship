@@ -336,6 +336,46 @@ def test_stage2_default_then_continuous_cable(live):
     wait_for(lambda: coord.ctx is not None and coord.ctx.stage == 1 and best(client), timeout=60)
 
 
+def test_saved_stl_files_of_a_stage2_layout_lose_their_brackets_when_a_slider_moves(live):
+    """V2 saved STL files: every part and every bracket with a real solid as STL in world coordinates plus the
+    assembly; moving a slider deletes the bracket files and writes the assembly again from the parts alone."""
+    import io
+    import struct
+    import zipfile
+    client, coord, store = live
+    assert client.get("/api/saved-stl").json()["status"] == "none"
+    assert client.get("/api/saved-stl/download").status_code == 404
+    e = next((x for x in list(coord.archive.values()) if x.stage == 2 and x.status in ("VALIDATED", "INFEASIBLE")), None)
+    assert e is not None, "the Stage 2 test before this one leaves Stage 2 layouts in the archive"
+    stage1 = next(x for x in list(coord.archive.values()) if x.stage == 1)
+    assert client.post("/api/saved-stl", json={"layout_id": stage1.id}).status_code == 409
+    assert client.post("/api/saved-stl", json={"layout_id": e.id}).json()["status"] == "SAVING"
+    m = wait_for(lambda: (x := client.get("/api/saved-stl").json())["status"] == "complete" and not x["saving"] and x,
+                 timeout=60)
+    folder = Path(m["folder"])
+    assert m["layout_id"] == e.id and folder == store.folder / "saved_stl"
+    assert len(m["parts"]) == len(e.poses) and all((folder / r["file"]).is_file() for r in m["parts"] + m["brackets"])
+    assert m["brackets"], "a Stage 2 layout has at least one bracket with a real solid (direct mount, block, …)"
+    left = {r["item"] for r in m["left_out"]}           # brackets still drawn as a box: not saved
+    assert all(r["item"] not in left for r in m["brackets"])
+    asm = (folder / "assembly.stl").read_bytes()
+    n_all = sum(r["triangles"] for r in m["parts"] + m["brackets"])
+    assert struct.unpack_from("<I", asm, 80)[0] == n_all and len(asm) == 84 + 50 * n_all
+    z = zipfile.ZipFile(io.BytesIO(client.get("/api/saved-stl/download").content))
+    assert "assembly.stl" in z.namelist() and m["brackets"][0]["file"] in z.namelist()
+    space = store.settings["sliders"]["space"]
+    client.put("/api/settings", json={"sliders": {"space": space + 1}})
+    try:
+        m2 = wait_for(lambda: (x := client.get("/api/saved-stl").json())["status"] == "brackets_removed" and x,
+                      timeout=30)
+    finally:
+        client.put("/api/settings", json={"sliders": {"space": space}})
+    assert m2["brackets"] == [] and m2["brackets_removed"]["reason"] == f"Use Space Efficiently {space:g} → {space + 1:g}"
+    assert not any((folder / r["file"]).exists() for r in m2["removed_brackets"])
+    n_parts = sum(r["triangles"] for r in m2["parts"])
+    assert struct.unpack_from("<I", (folder / "assembly.stl").read_bytes(), 80)[0] == n_parts
+
+
 def test_size_study_runs_in_the_background(live):
     client, coord, _ = live
     assert client.get("/api/studies/size").status_code == 404

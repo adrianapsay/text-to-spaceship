@@ -16,7 +16,10 @@ export function useLayoutList(status?: string, limit = 200) {
 
 export function useFullLayout(id: string | null) {
   // fetched again when a bracket-design run finishes: designed solids replace the boxes (new mesh URLs, masses)
-  const designed = useApp((s) => s.solver.studies['bracket_design']?.at);
+  const designed = useApp((s) => {
+    const st = s.solver.studies['bracket_design'];
+    return (st?.partial as { status?: string } | undefined)?.status === 'DONE' ? st?.at : null;
+  });
   return useAsync(id ? () => session().api.layout(id) : null, [id, designed]);
 }
 

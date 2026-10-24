@@ -4,6 +4,7 @@ import { session } from '../api/session';
 import { useApp } from '../store/store';
 import { useDisplayMetrics, useParts } from '../hooks';
 import { MainViewport } from '../components/viewport/Viewport';
+import { DesignStrip } from '../components/DesignProgress';
 import { GoalsPanel } from '../components/GoalsPanel';
 import { HardwareItemsList, PartInspector, PartsList } from '../components/PartsPanel';
 import { MetricStrip, WhatChanged } from '../components/Metrics';
@@ -65,6 +66,7 @@ export function OverviewTab() {
           <span className="muted small">{NOT_OPTIMAL}</span>
         </div>
         <RerunBar />
+        <DesignStrip />
         {showingInfeasible ? (
           <div className="notice err" role="status" style={{ margin: 0 }} data-testid="infeasible-violations">
             <strong>NO FEASIBLE LAYOUT FOUND (not proven infeasible).</strong> Constraints are never relaxed automatically. The

@@ -118,6 +118,70 @@ export interface BracketMode {
   motion: string;
 }
 
+/** V2: one bracket of a running bracket design run (study 'bracket_design', partial.brackets) */
+export interface DesignRow {
+  k: number;
+  pid: string;
+  kind: string;
+  status: 'queued' | 'running' | 'done';
+  /** seconds after the run started that this bracket started */
+  started_s?: number;
+  /** how long it took (done) */
+  seconds?: number;
+  passed?: boolean;
+  mass_g?: number | null;
+  /** a solid was built (else: still its box) */
+  solid?: boolean;
+  reason?: string;
+}
+
+/** V2: what the progress bars show of a bracket design run (study 'bracket_design', partial) */
+export interface DesignProgress {
+  status: 'PENDING' | 'RUNNING' | 'DONE' | string;
+  layout_id: string | null;
+  brackets: DesignRow[];
+  n_total: number | null;
+  n_done: number | null;
+  /** brackets designed at the same time */
+  workers: number | null;
+  /** seconds since the run started, when this update was written */
+  seconds: number | null;
+  /** estimated seconds left, when this update was written (null until one bracket is done) */
+  eta_s: number | null;
+}
+
+export interface SavedStlFile {
+  file: string;
+  part_id: string;
+  part?: string;
+  kind?: string;
+  triangles: number;
+  designed?: boolean;
+  passed?: boolean;
+  mass_kg?: number | null;
+}
+
+/** V2: the saved STL files of the designed best layout (GET /api/saved-stl, pushed as saved_stl.updated) */
+export interface SavedStl {
+  status: 'none' | 'complete' | 'brackets_removed';
+  /** absolute folder on the backend machine */
+  folder: string;
+  /** layout whose files are being written now */
+  saving: string | null;
+  layout_id?: string;
+  saved_at?: string;
+  why?: string;
+  settings?: { form_factor?: string; stage?: number; part_scale_pct?: number; sliders?: Record<string, number> };
+  assembly?: string;
+  parts?: SavedStlFile[];
+  brackets?: SavedStlFile[];
+  /** bracket files deleted when a slider moved */
+  removed_brackets?: SavedStlFile[];
+  /** brackets with no real solid yet (box / envelope): not saved */
+  left_out?: { part_id: string; part?: string; kind?: string; why?: string }[];
+  brackets_removed?: { at: string; reason: string } | null;
+}
+
 /** V2: generative-design contest results (endpoint /api/gd/contest) */
 export interface ContestRow {
   problem: string;

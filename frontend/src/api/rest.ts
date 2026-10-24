@@ -18,6 +18,7 @@ import type {
   ProjectSnapshot,
   Proof,
   RunAction,
+  SavedStl,
   SelectorChoice,
   SelectorMap,
   SelectorSweep,
@@ -241,6 +242,16 @@ export class ApiClient {
   }
   designBrackets(layoutId: string) {
     return this.send<unknown>('POST', `/api/layouts/${encodeURIComponent(layoutId)}/design-brackets`, {});
+  }
+  /** V2: the saved STL files of the designed best layout */
+  savedStl() {
+    return this.json<SavedStl>('/api/saved-stl');
+  }
+  saveStl(layoutId: string) {
+    return this.send<{ status: string; layout_id: string; folder: string }>('POST', '/api/saved-stl', { layout_id: layoutId });
+  }
+  savedStlZipPath() {
+    return '/api/saved-stl/download';
   }
   cadStatus() {
     return this.json<CadStatus>('/api/cad/status');

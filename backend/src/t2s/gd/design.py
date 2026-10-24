@@ -149,11 +149,28 @@ def design_workers(n_todo: int, threads: int) -> int:
     return max(1, min(4, n_todo, (os.cpu_count() or 4) // (2 * max(int(threads), 1))))
 
 
+def eta_seconds(rows: list[dict], workers: int, now_s: float) -> float | None:
+    """Time left (s) from the brackets designed so far: each one still running needs the mean design time less what
+    it has had, each queued one the mean time, shared among the workers. None until one bracket is done."""
+    done = [r["seconds"] for r in rows if r["status"] == "done" and r.get("seconds") is not None]
+    if not done:
+        return None
+    mean = float(np.mean(done))
+    running = [max(0.0, mean - (now_s - r["started_s"])) for r in rows if r["status"] == "running"]
+    queued = sum(1 for r in rows if r["status"] == "queued")
+    if not running and not queued:
+        return 0.0
+    return max(max(running, default=0.0), (sum(running) + mean * queued) / max(1, workers))
+
+
 def design_job(snapshot: str, out_dir: str, threads: int = 2, workers: int | None = None) -> str:
     """Process-pool job. snapshot: pickle {layout_id, brackets, records, poses {pid: (orient, t)}, masses {pid: kg},
-    results_path}. Writes progress.json (after every bracket), and per bracket <layout>-br<k>.bin (mesh) and .npy
-    (vertices). The brackets are designed `workers` at a time in separate processes (design_workers); if a process
+    results_path}. Writes progress.json when it starts and after every bracket — with one row per bracket (queued /
+    running / done, its time, mass and result) for the progress bars — and per bracket <layout>-br<k>.bin (mesh) and
+    .npy (vertices). The brackets are designed `workers` at a time in separate processes (design_workers), in order
+    (the pool takes them first in, first out: the first `workers` not yet done are the running ones); if a process
     dies (BrokenProcessPool), the brackets left are designed one by one in this process."""
+    from ..core.fileio import atomic_write_text
     snap = pickle.loads(Path(snapshot).read_bytes())
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
@@ -162,21 +179,42 @@ def design_job(snapshot: str, out_dir: str, threads: int = 2, workers: int | Non
     todo = [(k, b) for k, b in enumerate(snap["brackets"]) if b["kind"] in DESIGNED_KINDS]
     designs, t0 = {}, time.perf_counter()
     prog = out / "progress.json"
+    n = design_workers(len(todo), threads) if workers is None else max(1, int(workers))
+    rows = [{"k": k, "pid": b["pid"], "kind": b["kind"], "status": "queued"} for k, b in todo]
+    by_k = {r["k"]: r for r in rows}
 
-    def write(status):
-        prog.write_text(json.dumps({"status": status, "progress": len(designs) / max(len(todo), 1), "layout_id": lid,
-                                    "generator_key": key, "designs": designs, "seconds": time.perf_counter() - t0},
-                                   default=float), encoding="utf-8")
+    def start_next(slots: int) -> None:
+        """Mark the next queued brackets as running, up to `slots` at a time."""
+        now = time.perf_counter() - t0
+        for r in rows:
+            if sum(1 for x in rows if x["status"] == "running") >= slots:
+                return
+            if r["status"] == "queued":
+                r.update(status="running", started_s=now)
+
+    def finish(k: int, d: dict) -> None:
+        r = by_k[k]
+        now = time.perf_counter() - t0
+        r.update(status="done", seconds=now - r.get("started_s", now), passed=bool(d.get("passed")),
+                 mass_g=(1000.0 * d["mass_kg"]) if d.get("mass_kg") is not None else None,
+                 solid=d.get("mass_kg") is not None, reason=str(d.get("reason") or "")[:160])
+
+    def write(status, slots):
+        now = time.perf_counter() - t0
+        atomic_write_text(prog, json.dumps({
+            "status": status, "progress": len(designs) / max(len(todo), 1), "layout_id": lid, "generator_key": key,
+            "designs": designs, "seconds": now, "workers": slots, "n_total": len(todo), "n_done": len(designs),
+            "brackets": rows, "eta_s": eta_seconds(rows, slots, now) if status != "DONE" else 0.0}, default=float))
 
     def args(k, b):
         return (k, b, snap["records"][b["pid"]], snap["poses"][b["pid"]], snap["masses"].get(b["pid"]) or 0.2, key,
                 str(out), lid, threads)
-    write("RUNNING")
-    n = design_workers(len(todo), threads) if workers is None else max(1, int(workers))
     left = list(todo)
     if n > 1 and len(todo) > 1:
         from concurrent.futures import ProcessPoolExecutor, as_completed
         from concurrent.futures.process import BrokenProcessPool
+        start_next(n)
+        write("RUNNING", n)
         try:
             with ProcessPoolExecutor(max_workers=n) as ex:
                 futs = {ex.submit(_design_one, *args(k, b)): (k, b) for k, b in todo}
@@ -189,12 +227,18 @@ def design_job(snapshot: str, out_dir: str, threads: int = 2, workers: int | Non
                     except Exception as exc:  # noqa: BLE001 - one bracket's failure is that bracket's result
                         designs[b["pid"]] = {"pid": b["pid"], "generator": key, "passed": False,
                                              "reason": f"design failed: {exc!r}"[:300]}
+                    finish(k, designs[b["pid"]])
                     left.remove((k, b))
-                    write("RUNNING")
+                    start_next(n)
+                    write("RUNNING", n)
         except BrokenProcessPool:
-            pass                                        # the brackets left: one by one below
+            for r in rows:                              # the brackets left: one by one below
+                if r["status"] == "running":
+                    r["status"] = "queued"
     for k, b in left:
+        start_next(1)
+        write("RUNNING", 1)
         designs[b["pid"]] = _design_one(*args(k, b))
-        write("RUNNING")
-    write("DONE")
+        finish(k, designs[b["pid"]])
+    write("DONE", n)
     return str(prog)

@@ -14,8 +14,9 @@ def _coord(**settings):
                                         meta={"brackets": [{"pid": "p1", "kind": "metal_am"},
                                                            {"pid": "p2", "kind": "direct"}]})}
     c.best_id = "L-1"
-    c.started = []
+    c.started, c.synced = [], []
     c.start_bracket_design = lambda lid: c.started.append(lid)
+    c._sync_saved_stl = lambda e: c.synced.append(e.id)     # the saved STL files (test_saved_stl.py)
     c._error = lambda msg: None
     return c
 
@@ -86,6 +87,27 @@ def test_nothing_to_design_switched_off_or_a_run_in_progress():
     stage1.archive["L-1"].stage = 1
     stage1._maybe_auto_design()
     assert off.started == designed.started == busy.started == stage1.started == []
+    assert designed.synced == ["L-1"] and off.synced == stage1.synced == []   # designed: its STL files follow it
     busy.ladders["__bracket_design__"]["finalised"] = True            # the running one has finished
     busy._maybe_auto_design()
     assert busy.started == ["L-1"]
+
+
+def test_waits_until_a_moving_slider_has_settled():
+    c = _coord()
+    c._settle_at = 123.0                                              # set by apply_settings, cleared by _tick
+    c._maybe_auto_design()
+    assert c.started == []
+    c._settle_at = None
+    c._maybe_auto_design()
+    assert c.started == ["L-1"]
+
+
+def test_islands_skip_migrants_of_another_chromosome_length():
+    """A Stage 2 chromosome (3 extra keys) sent to a Stage 1 island broke every later crossover of that island."""
+    import numpy as np
+
+    from t2s.service.worker import fitting_keys
+    keys = fitting_keys([np.full(60, 0.5), np.full(57, 0.25), [0.1] * 57], 57)
+    assert [k.shape for k in keys] == [(57,), (57,)] and keys[0][0] == 0.25
+    assert fitting_keys(None, 57) == [] and fitting_keys([np.zeros(57)], 60) == []

@@ -337,3 +337,26 @@ describe('V2: layout.updated (brackets designed after validation)', () => {
     expect(other.solver.best?.id).toBe('L-0042');
   });
 });
+
+describe('V2: saved STL files (saved_stl.updated)', () => {
+  const revs: Revs = { epoch: 3, parts_rev: 2, constraint_rev: 5, mass_rev: 1, weights_rev: 1 };
+  const env = (payload: unknown, seq: number, ts: string): Envelope => ({
+    v: 1, type: 'saved_stl.updated', seq, ...revs, applied_client_seq: 0, ts, payload,
+  });
+  const file = (f: string) => ({ file: f, part_id: 'p1', triangles: 12 });
+  it('keeps the latest manifest and when it came, and logs what happened', () => {
+    let conn = initialConn();
+    let solver = initialSolver();
+    const saved = { status: 'complete', folder: 'D:/p/saved_stl', saving: null, layout_id: 'L-0042', parts: [file('parts/a.stl')], brackets: [file('brackets/AM_a_br0.stl')] };
+    ({ conn, solver } = reduceEnvelope(conn, solver, env({ saved_stl: saved }, 1, '2026-10-24T06:00:00Z')));
+    expect(solver.savedStl?.layout_id).toBe('L-0042');
+    expect(solver.savedStlAt).toBe('2026-10-24T06:00:00Z');
+    expect(solver.log.at(-1)?.text).toBe('saved STL files: L-0042 with 1 bracket(s)');
+    const removed = { ...saved, status: 'brackets_removed', brackets: [], brackets_removed: { at: 'x', reason: 'Balance the Spacecraft 36 → 40' } };
+    ({ conn, solver } = reduceEnvelope(conn, solver, env({ saved_stl: removed }, 2, '2026-10-24T06:01:00Z')));
+    expect(solver.savedStl?.status).toBe('brackets_removed');
+    expect(solver.log.at(-1)?.text).toBe('saved STL files: brackets removed (Balance the Spacecraft 36 → 40)');
+    const same = reduceEnvelope(conn, solver, env({}, 3, '2026-10-24T06:02:00Z'));      // no manifest: ignored
+    expect(same.solver.savedStl?.status).toBe('brackets_removed');
+  });
+});

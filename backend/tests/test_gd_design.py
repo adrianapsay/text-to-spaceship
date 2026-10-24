@@ -88,3 +88,22 @@ def test_design_job_designs_brackets_in_parallel_inside_a_pool_worker(dataset_pa
     for b in todo:
         d = res["designs"][b["pid"]]
         assert d["mass_kg"] > 0 and (tmp_path / "out" / d["mesh_file"]).is_file(), d.get("reason")
+    # the progress bars' rows: every bracket done, with its time, mass and result
+    assert res["n_total"] == res["n_done"] == 2 and res["workers"] == 2 and res["eta_s"] == 0.0
+    assert [r["pid"] for r in res["brackets"]] == [b["pid"] for b in todo]
+    for r in res["brackets"]:
+        d = res["designs"][r["pid"]]
+        assert r["status"] == "done" and 0 < r["seconds"] <= res["seconds"] and r["solid"]
+        assert r["mass_g"] == pytest.approx(1000 * d["mass_kg"]) and r["passed"] == d["passed"]
+
+
+def test_eta_counts_the_running_and_queued_brackets_shared_among_the_workers():
+    from t2s.gd.design import eta_seconds
+    rows = [{"status": "done", "seconds": 30.0}, {"status": "done", "seconds": 50.0},     # mean 40 s
+            {"status": "running", "started_s": 50.0}, {"status": "running", "started_s": 70.0},
+            {"status": "queued"}, {"status": "queued"}]
+    # at 80 s: the running ones need 10 s and 30 s more, the two queued 40 s each, on 2 workers
+    assert eta_seconds(rows, 2, 80.0) == pytest.approx((10 + 30 + 80) / 2)
+    assert eta_seconds(rows[2:], 2, 80.0) is None                                       # nothing done yet
+    assert eta_seconds(rows[:2], 2, 80.0) == 0.0
+    assert eta_seconds([rows[0], {"status": "running", "started_s": 0.0}], 4, 5.0) == pytest.approx(25.0)
