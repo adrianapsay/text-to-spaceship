@@ -92,6 +92,11 @@ def test_the_frame_bracing_one_piece_job(snap, tmp_path, monkeypatch):
     assert rec["brace_frame"] is True and rec["settings"]["brace_frame"] is True
     assert all(n % 2 == 0 for n in rec["grid"])
     assert rec.get("mass_kg") is not None, rec.get("reason")
+    # its colour maps, one value per vertex of its mesh, next to it
+    assert rec.get("fea_file") == "L-fr-op.fea.npz", rec.get("fea_view")
+    n = len(np.load(tmp_path / "out" / rec["vertices_file"]))
+    with np.load(tmp_path / "out" / rec["fea_file"]) as z:
+        assert set(z.files) == {f["id"] for f in rec["fea_view"]["fields"]} and all(len(z[k]) == n for k in z.files)
     fc = out["frame_check"]
     assert fc is not None and "error" not in fc, fc
     assert fc["f1_hz"] > 0 and fc["groups"]["brackets"]["mass_kg"] > 0

@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
-import type { BracketDesign, Layout, Part } from '../api/types';
+import type { BracketDesign, BracketLayouts, Layout, LayoutDesignRecord, LayoutRunSettings, Part } from '../api/types';
 import { useApp } from '../store/store';
-import { useParts } from '../hooks';
+import { useAsync, useParts } from '../hooks';
 import { fmt, fmtColumn, fmtVec } from '../lib/fmt';
 import { SUBSYSTEM_LABELS, extraItemStyle, subsystemColor } from '../lib/colors';
 import { massBadge, statusBadge } from '../components/PartsPanel';
@@ -37,6 +37,45 @@ export function designedRows(layout: Layout | null): DesignedRow[] {
     const d = designs[b.pid];
     out.push({ itemId, pid: b.pid, kind: b.kind, target: b.target, meshUrl: urls.get(itemId) ?? null, design: d && d.mass_kg != null ? d : null });
   });
+  return out;
+}
+
+/** M4: a combined bracket or the one piece of the layout (Mounting Hardware → Bracket layout), when it has a solid. */
+export interface PieceRow {
+  itemId: string;
+  mode: 'combined' | 'one_piece';
+  key: string;
+  title: string;
+  meshUrl: string;
+  design: LayoutDesignRecord;
+  /** why it has no colour maps: designed before they were saved ('old'), or its two-solver check did not run */
+  noMaps: 'old' | 'not solved' | null;
+}
+
+export function pieceRows(data: BracketLayouts | null | undefined): PieceRow[] {
+  if (!data) return [];
+  const out: PieceRow[] = [];
+  for (const mode of ['one_piece', 'combined'] as const) {
+    const designs = data.modes[mode]?.result?.designs ?? {};
+    for (const [key, d] of Object.entries(designs)) {
+      if (d.mass_kg == null || !d.mesh_file) continue;
+      const itemId = mode === 'one_piece' ? `${data.layout_id}-op` : `${data.layout_id}-cb${d.index ?? 0}`;
+      const n = d.parts?.length ?? 0;
+      const title =
+        mode === 'one_piece' ? `One piece for ${n} parts${d.brace_frame ? ', bracing the frame' : ''}` : `Combined bracket ${d.name} for ${n} parts`;
+      const noMaps = d.fea_file ? null : (d.reason ?? '').startsWith('not solved') ? 'not solved' : 'old';
+      out.push({ itemId, mode, key, title, meshUrl: `/api/items/${itemId}/mesh?v=${mode[0]}${Math.round(d.mass_kg * 1e7)}`, design: d, noMaps });
+    }
+  }
+  return out;
+}
+
+/** The settings a combined bracket or the one piece was designed with, to design it again the same way. */
+export function rerunSettings(d: LayoutDesignRecord): LayoutRunSettings {
+  const s = d.settings ?? {};
+  const out: LayoutRunSettings = { material: s.material ?? null, vol_frac: s.vol_frac ?? 'auto', min_member_mm: s.min_member_mm ?? 'auto' };
+  if (s.budget_s != null) out.budget_s = s.budget_s;
+  if (s.brace_frame) out.brace_frame = true;
   return out;
 }
 
@@ -90,13 +129,17 @@ export function ComponentsTab() {
   const s2id = best && best.stage === 2 ? best.id : infeasible && infeasible.stage === 2 ? infeasible.id : null;
   const s2 = useFullLayout(s2id);
   const brackets = useMemo(() => designedRows(s2.data), [s2.data]);
-  const [selBracket, setSelBracket] = useState<string | null>(null);
-  const bracket = brackets.find((b) => b.itemId === selBracket) ?? null;
-  // designs made before the colour maps were saved: one click designs them again (their settings are kept)
-  const noMaps = brackets.filter((b) => b.design && !b.design.fea_file).map((b) => b.pid);
   const study = useApp((s) => s.solver.studies['bracket_design']);
   const runStatus = (study?.partial as { status?: string } | undefined)?.status;
   const running = runStatus === 'PENDING' || runStatus === 'RUNNING';
+  // M4: the layout's combined brackets and its one piece (fetched again when a design run finishes)
+  const layouts = useAsync(s2id ? () => session().api.bracketLayouts(s2id) : null, [s2id, runStatus === 'DONE' ? study?.at : null]);
+  const pieces = useMemo(() => pieceRows(layouts.data), [layouts.data]);
+  const [selBracket, setSelBracket] = useState<string | null>(null);
+  const bracket = brackets.find((b) => b.itemId === selBracket) ?? null;
+  const piece = pieces.find((p) => p.itemId === selBracket) ?? null;
+  // designs made before the colour maps were saved: one click designs them again (their settings are kept)
+  const noMaps = brackets.filter((b) => b.design && !b.design.fea_file).map((b) => b.pid);
   const [mapsMsg, setMapsMsg] = useState<string | null>(null);
   const addMaps = async () => {
     if (!s2.data) return;
@@ -104,6 +147,19 @@ export function ComponentsTab() {
     try {
       await session().api.designBrackets(s2.data.id, { pids: noMaps });
       setMapsMsg(`Designing ${noMaps.length} bracket(s) again with their settings, to save their colour maps (progress in the Mounting Hardware tab).`);
+    } catch (e) {
+      setMapsMsg(`Could not start: ${(e as Error).message}`);
+    }
+  };
+  const pieceMaps = async (p: PieceRow) => {
+    if (!s2.data) return;
+    setMapsMsg(null);
+    try {
+      const all = layouts.data?.modes[p.mode]?.result?.designs ?? {};
+      const req =
+        p.mode === 'one_piece' ? { settings: rerunSettings(p.design) } : { overrides: Object.fromEntries(Object.entries(all).map(([k, d]) => [k, rerunSettings(d)])) };
+      await session().api.runBracketLayout(s2.data.id, p.mode, req);
+      setMapsMsg(`Designing the ${p.mode === 'one_piece' ? 'one piece' : 'combined brackets'} again with the same settings, to save the colour maps (progress in the Mounting Hardware tab).`);
     } catch (e) {
       setMapsMsg(`Could not start: ${(e as Error).message}`);
     }
@@ -191,22 +247,24 @@ export function ComponentsTab() {
       </Panel>
       <Panel
         title={`Designed brackets${s2.data ? ` — layout ${s2.data.id}` : ''}`}
-        caption="the 3D-printed (metal AM), machined cradle and clamp brackets the design job builds; select one for its FEA colour maps"
+        caption="the 3D-printed (metal AM), machined cradle and clamp brackets the design job builds, and the layout's combined brackets and one piece once designed (Mounting Hardware → Bracket layout); select one for its FEA colour maps"
       >
         {!s2id ? (
           <EmptyState title="No Stage 2 layout yet">Brackets exist in Stage 2: switch to it and run the search.</EmptyState>
-        ) : !brackets.length ? (
+        ) : !brackets.length && !pieces.length ? (
           <span className="muted small">{s2.loading ? 'Loading…' : 'This layout has no bracket that the design job builds.'}</span>
         ) : (
           <div className="table-wrap" style={{ maxHeight: 320 }}>
-            {noMaps.length ? (
+            {noMaps.length || mapsMsg ? (
               <div className="row small" style={{ marginBottom: 6 }}>
-                <span className="muted">
-                  {noMaps.length} design(s) were made before the colour maps were saved.
-                </span>
-                <Button size="small" onClick={addMaps} disabled={running} data-testid="add-maps">
-                  Design again with colour maps ({noMaps.length})
-                </Button>
+                {noMaps.length ? (
+                  <>
+                    <span className="muted">{noMaps.length} design(s) were made before the colour maps were saved.</span>
+                    <Button size="small" onClick={addMaps} disabled={running} data-testid="add-maps">
+                      Design again with colour maps ({noMaps.length})
+                    </Button>
+                  </>
+                ) : null}
                 {mapsMsg ? <span>{mapsMsg}</span> : null}
               </div>
             ) : null}
@@ -249,12 +307,64 @@ export function ComponentsTab() {
                     </tr>
                   );
                 })}
+                {pieces.map((p) => {
+                  const d = p.design;
+                  const st = extraItemStyle('metal_am');
+                  return (
+                    <tr key={p.itemId} aria-selected={p.itemId === selBracket} onClick={() => setSelBracket(p.itemId)} style={{ cursor: 'pointer' }} data-testid={`designed-${p.mode}-${p.key}`}>
+                      <td title={d.parts.map((x) => names[x] ?? x).join(', ')}>{d.parts.length} parts</td>
+                      <td>
+                        <span className="row" style={{ gap: 6 }}>
+                          <span className={`swatch ${st.hatch ? 'hatch' : ''}`} style={{ background: st.color }} />
+                          {p.mode === 'one_piece' ? 'One piece (metal 3D-printed)' : `Combined bracket ${d.name}`}
+                          {d.brace_frame ? <Badge tone="accent">braces the frame</Badge> : null}
+                        </span>
+                      </td>
+                      <td className="small">{d.material_name ?? d.material ?? '—'}</td>
+                      <td className="num">{fmt(d.mass_kg, 'kg')}</td>
+                      <td className="num">{msBadge(d.ms_yield)}</td>
+                      <td className="num">{msBadge(d.ms_ult)}</td>
+                      <td className="num">{msBadge(d.ms_bolt)}</td>
+                      <td className="num">{d.f1_hz != null ? `${Math.round(d.f1_hz)} Hz` : '—'}</td>
+                      <td className="small">{d.governing ? governingText(d.governing) : '—'}</td>
+                      <td className="small">
+                        {p.noMaps === null ? (
+                          <Badge tone="ok">yes</Badge>
+                        ) : p.noMaps === 'not solved' ? (
+                          <span className="muted" title={d.reason}>
+                            check did not run (memory)
+                          </span>
+                        ) : (
+                          <Button
+                            size="small"
+                            disabled={running}
+                            onClick={(ev) => {
+                              ev.stopPropagation();
+                              void pieceMaps(p);
+                            }}
+                            data-testid={`maps-${p.mode}`}
+                          >
+                            Design again with maps
+                          </Button>
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
         )}
       </Panel>
-      {bracket ? (
+      {piece ? (
+        <BracketFeaPanel
+          itemId={piece.itemId}
+          meshUrl={piece.meshUrl}
+          design={piece.design}
+          title={piece.title}
+          target={piece.design.target ?? (piece.mode === 'one_piece' ? 'the walls and end plates, where the per-part brackets were bolted' : undefined)}
+        />
+      ) : bracket ? (
         bracket.design && bracket.meshUrl ? (
           <BracketFeaPanel
             itemId={bracket.itemId}

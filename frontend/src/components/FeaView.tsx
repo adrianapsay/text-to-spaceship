@@ -1,11 +1,12 @@
-// V2: a designed bracket's FEA results as colour maps (Components tab). The mesh is the designed solid itself
-// (GET /api/items/{id}/mesh), coloured per vertex by one result field (GET /api/items/{id}/fea/{field}): unlit, so
-// shading never reads as a value, with its feature edges for the shape. Beside it: the legend, every check as a
-// utilisation bar (1 = zero margin) and the margins table (the table view of the same numbers).
+// V2: a designed bracket's FEA results as colour maps (Components tab): a per-part bracket, a combined bracket or the
+// one piece. The mesh is the designed solid itself (GET /api/items/{id}/mesh), coloured per vertex by one result field
+// (GET /api/items/{id}/fea/{field}): unlit, so shading never reads as a value, with its feature edges for the shape.
+// Beside it: the legend, every check as a utilisation bar (1 = zero margin) and the margins table (the table view of
+// the same numbers).
 import * as THREE from 'three';
 import { Canvas, useThree, type ThreeEvent } from '@react-three/fiber';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import type { BracketDesign, FeaField, FeaView, Vec3 } from '../api/types';
+import type { BoltCheck, BracketCheck, BracketDesign, BracketMargin, BracketMode, FeaField, FeaView, Vec3 } from '../api/types';
 import { session } from '../api/session';
 import { useAsync } from '../hooks';
 import { CRITICAL, VIEWPORT_BG, checkBars, fieldValueText, rampGradient, scaleFor, vertexColors } from '../lib/feaColors';
@@ -15,6 +16,32 @@ import { MarginsTable, governingText } from './BracketDesign';
 import { Badge, Button, KV, Notice, Panel } from './ui';
 
 const KIND_GROUP: Record<string, string> = { utilisation: 'Utilisation', stress: 'Stress (von Mises)', displacement: 'Displacement' };
+
+/** What the FEA panel reads of a design: a per-part bracket's record (BracketDesign) or a combined bracket's / the one
+ * piece's (LayoutDesignRecord, whose per-check tables come with its colour maps instead). */
+export interface FeaDesign {
+  passed: boolean;
+  reason?: string;
+  governing?: BracketDesign['governing'];
+  ms_yield?: number | null;
+  ms_ult?: number | null;
+  ms_bolt?: number | null;
+  f1_hz?: number | null;
+  modes?: BracketMode[] | null;
+  mass_kg?: number | null;
+  solid_mass_kg?: number | null;
+  settings?: { material?: string; vol_frac?: number | 'auto'; min_member_mm?: number | 'auto' };
+  vol_frac?: number | null;
+  generator?: string;
+  margins?: Record<string, BracketMargin>;
+  environment?: string;
+  environment_name?: string;
+  material?: string;
+  material_name?: string;
+  checks?: BracketCheck[] | null;
+  bolt_checks?: BoltCheck[] | null;
+  fea_file?: string;
+}
 
 function groups(fields: FeaField[]): [string, FeaField[]][] {
   const m = new Map<string, FeaField[]>();
@@ -53,8 +80,8 @@ export function FeaLegend({ field, darkSurface = true }: { field: FeaField; dark
 
 /** Every check as a bar of its utilisation (factor × stress / allowable, or bolt load / capacity; 1 = zero margin),
  * largest first; a line marks the allowable. Labels: the largest and any failing one; the rest on hover / focus. */
-export function UtilisationChart({ design, limit = 8 }: { design: BracketDesign; limit?: number }) {
-  const bars = useMemo(() => checkBars(design.checks, design.bolt_checks), [design.checks, design.bolt_checks]);
+export function UtilisationChart({ design, limit = 8 }: { design: Pick<FeaDesign, 'checks' | 'bolt_checks'>; limit?: number }) {
+  const bars = useMemo(() => checkBars(design.checks ?? undefined, design.bolt_checks ?? undefined), [design.checks, design.bolt_checks]);
   const [all, setAll] = useState(false);
   const [hover, setHover] = useState<string | null>(null);
   if (!bars.length) return <span className="muted small">No per-check results (designed before the launch environments).</span>;
@@ -190,16 +217,28 @@ function ms(v: number | null | undefined) {
   return <Badge tone={v >= 0 ? 'ok' : 'err'}>{(v >= 0 ? '+' : '') + v.toFixed(2)}</Badge>;
 }
 
+function settingsText(d: FeaDesign): string {
+  const s = d.settings;
+  if (!s) return d.generator ?? '—';
+  const used =
+    s.vol_frac === 'auto' ? `automatic${d.vol_frac != null ? ` (${Math.round(100 * d.vol_frac)} %)` : ''}` : s.vol_frac != null ? `${Math.round(100 * s.vol_frac)} %` : '—';
+  const member = s.min_member_mm === 'auto' || s.min_member_mm == null ? 'automatic' : `${s.min_member_mm} mm`;
+  return `${s.material ?? d.material ?? '—'}; material used ${used}; member ${member}`;
+}
+
+const grams = (kg: number | null | undefined) => (kg != null ? `${(1000 * kg).toFixed(1)} g` : '—');
+
 /** A designed bracket in the Components tab: its colour maps, its numbers, every check as a bar and the margins. */
-export function BracketFeaPanel(props: { itemId: string; meshUrl: string; design: BracketDesign; title: string; target?: string }) {
+export function BracketFeaPanel(props: { itemId: string; meshUrl: string; design: FeaDesign; title: string; target?: string }) {
   const { design: d } = props;
   const view = useAsync(() => session().api.itemFea(props.itemId), [props.itemId, d.mass_kg, d.fea_file]);
-  const settings = d.settings;
+  // a combined bracket's / the one piece's per-check tables come with its colour maps
+  const checks = { checks: d.checks ?? view.data?.checks, bolt_checks: d.bolt_checks ?? view.data?.bolt_checks };
   return (
     <div className="grid-2" data-testid="bracket-fea">
       <Panel title={`FEA colour map — ${props.title}`} caption={`${d.environment_name ?? d.environment ?? 'launch loads'} · ${d.material_name ?? d.material ?? ''}`}>
         {view.data?.available ? (
-          <FeaViewer view={view.data} meshUrl={props.meshUrl} initialField={governingField(d)} />
+          <FeaViewer view={view.data} meshUrl={props.meshUrl} initialField={governingField({ checks: checks.checks ?? undefined })} />
         ) : (
           <Notice tone="info">{view.loading ? 'Loading the colour maps…' : view.data?.why ?? view.error ?? 'No colour maps for this bracket.'}</Notice>
         )}
@@ -211,15 +250,15 @@ export function BracketFeaPanel(props: { itemId: string; meshUrl: string; design
             ['Governing check', d.governing ? `${governingText(d.governing)} — MS ${(d.governing.ms >= 0 ? '+' : '') + d.governing.ms.toFixed(2)}` : '—'],
             ['MS yield / ultimate / bolts', <span className="row" style={{ gap: 4 }}>{ms(d.ms_yield)}{ms(d.ms_ult)}{ms(d.ms_bolt)}</span>],
             ['First natural frequency', d.f1_hz != null ? `${Math.round(d.f1_hz)} Hz${d.modes?.[0] ? ` (${d.modes[0].motion})` : ''}` : '—'],
-            ['Solid / with fasteners', `${d.solid_mass_kg != null ? `${(1000 * d.solid_mass_kg).toFixed(1)} g` : '—'} / ${(1000 * d.mass_kg).toFixed(1)} g`],
-            ['Designed with', settings ? `${settings.material}; material used ${settings.vol_frac === 'auto' ? `automatic${d.vol_frac != null ? ` (${Math.round(100 * d.vol_frac)} %)` : ''}` : `${Math.round(100 * settings.vol_frac)} %`}; member ${settings.min_member_mm === 'auto' ? 'automatic' : `${settings.min_member_mm} mm`}` : d.generator],
+            ['Solid / with fasteners', `${grams(d.solid_mass_kg)} / ${grams(d.mass_kg)}`],
+            ['Designed with', settingsText(d)],
             ['Fixed to', props.target ?? '—'],
           ]}
         />
         <h4 className="small" style={{ margin: '10px 0 4px' }}>
           Utilisation per check
         </h4>
-        <UtilisationChart design={d} />
+        <UtilisationChart design={checks} />
         {d.margins ? (
           <>
             <h4 className="small" style={{ margin: '10px 0 4px' }}>

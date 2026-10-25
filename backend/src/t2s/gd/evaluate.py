@@ -701,9 +701,7 @@ def display_fields(dom: DesignDomain, prob, v, src: dict, env=None) -> tuple[dic
     src: {solver: (voxel centres, voxel tensors of the trial cases, Ritz, displacements of the 68 g cases)}.
     Returns ({field id: float32 (n_vertices,)}, {fields: [{id, label, unit, kind, case, axis, max, max_all}], …});
     max_all is the field's maximum over every voxel (or FE node), the value the margins use."""
-    from scipy.spatial import cKDTree
     E = _env.get(env)
-    mat = dom.material
     g_s = E.static_g(float(dom.part_mass_kg))
     vox, disp = {}, {}
 
@@ -717,6 +715,23 @@ def display_fields(dom: DesignDomain, prob, v, src: dict, env=None) -> tuple[dic
                 cov = modal_covariance(rz.f_hz, rz.gamma[:, k], spec, E.zeta)
                 keep(vox, f"vm_random_{lvl}_{a}", 3.0 * vm_rms(S_modal, cov))
             keep(disp, f"disp_static_{a}", np.linalg.norm(U[k], axis=1) * g_s / LIMIT_G)
+    note = (f"Stresses are averaged over each {dom.h:g} mm design voxel (what the margins use), the larger of the "
+            "solvers at each point; each surface point shows its nearest voxel. Utilisation = factor × stress / "
+            "allowable, the worst of the static and random (limit and qualification) checks, yield and ultimate: 1.00 "
+            "is zero margin. Sine, shock and the bolts are checked separately.")
+    return fields_on_surface(vox, disp, next(iter(src.values()))[0], prob.nodes, v, E, dom.material, g_s, list(src),
+                             float(dom.h), note)
+
+
+def fields_on_surface(vox: dict, disp: dict, vc, nodes, v, E, mat: dict, g_s: float, solvers: list, voxel_mm,
+                      note: str) -> tuple[dict, dict]:
+    """The colour-map fields on the surface vertices `v` (display_fields; gd.multi_eval for a bracket that holds
+    several parts): `vox` the per-voxel stresses (MPa) at the voxel centres `vc` — vm_static_{a},
+    vm_random_limit_{a}, vm_random_qual_{a} — and `disp` the per-node displacements (mm) at `nodes` —
+    disp_static_{a}. Adds the utilisation of the body (the worst factor × stress / allowable of those checks, yield
+    and ultimate, under environment E); each vertex takes its nearest voxel's stress and its nearest node's
+    displacement. Returns (fields, info) as display_fields."""
+    from scipy.spatial import cKDTree
 
     def util(sig, fac):
         return np.maximum(fac.yield_ * sig / mat["yield_mpa"], fac.ult * sig / mat["ultimate_mpa"])
@@ -726,10 +741,9 @@ def display_fields(dom: DesignDomain, prob, v, src: dict, env=None) -> tuple[dic
                                    util(vox[f"vm_random_limit_{a}"], E.factors["random"]),
                                    util(vox[f"vm_random_qual_{a}"], E.qual_factors)])
     vox = {"util_body": worst, **vox}
-    vc = next(iter(src.values()))[0]
     pts = np.asarray(v, float)
     near_v = cKDTree(vc).query(pts)[1]
-    near_n = cKDTree(prob.nodes).query(pts)[1]
+    near_n = cKDTree(nodes).query(pts)[1]
     out = {k: val[near_v].astype(np.float32) for k, val in vox.items()}
     out.update({k: val[near_n].astype(np.float32) for k, val in disp.items()})
     lim, qual = E.random_limit.grms(), E.random_qual.grms()
@@ -748,11 +762,7 @@ def display_fields(dom: DesignDomain, prob, v, src: dict, env=None) -> tuple[dic
                         "max_all": float(full[k].max())} for k in out],
             "environment": E.id, "environment_name": E.name, "material": mat.get("id"),
             "yield_mpa": float(mat["yield_mpa"]), "ultimate_mpa": float(mat["ultimate_mpa"]),
-            "solvers": list(src), "n_vertices": len(pts), "voxel_mm": float(dom.h),
-            "note": (f"Stresses are averaged over each {dom.h:g} mm design voxel (what the margins use), the larger of "
-                     "the solvers at each point; each surface point shows its nearest voxel. Utilisation = factor × "
-                     "stress / allowable, the worst of the static and random (limit and qualification) checks, yield "
-                     "and ultimate: 1.00 is zero margin. Sine, shock and the bolts are checked separately.")}
+            "solvers": list(solvers), "n_vertices": len(pts), "voxel_mm": voxel_mm, "note": note}
     return out, info
 
 

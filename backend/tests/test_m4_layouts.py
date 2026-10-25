@@ -221,6 +221,23 @@ def test_two_part_combined_design_checked_by_both_solvers(pair):
     if ccx.available():
         assert ev["agreement"]["disp_rel"] < 1e-4 and ev["agreement"]["sigma_rel"] < 1e-3
     assert ev["passed"], ev.get("reason")
+    # its colour maps (multi_eval.display_fields): one value per surface vertex, the numbers of the whole bracket's
+    # margins (every part loaded at once at the lightest one's quasi-static level)
+    ids = {"util_body"} | {f"{p}_{a}" for p in ("vm_static", "vm_random_limit", "vm_random_qual", "disp_static")
+                           for a in "xyz"}
+    fields, info = ev["fields"], {f["id"]: f for f in ev["field_info"]["fields"]}
+    assert set(fields) == ids and set(info) == ids
+    assert all(len(x) == len(ev["mesh"][0]) and np.all(np.isfinite(x)) for x in fields.values())
+    assert all(0 <= f["max"] <= f["max_all"] * (1 + 1e-6) for f in info.values())
+    rows = {(r["case"], r["axis"]): r for r in ev["checks"]}
+    for a in "xyz":
+        for fid, case in (("vm_static", "static"), ("vm_random_limit", "random limit"),
+                          ("vm_random_qual", "random qualification")):
+            assert info[f"{fid}_{a}"]["max_all"] == pytest.approx(rows[(case, a)]["sigma_mpa"], rel=1e-6)
+    body = [r for r in ev["checks"] if r["case"] in ("static", "random limit", "random qualification")]
+    worst = min(min(r["ms_yield"], r["ms_ult"]) for r in body)
+    assert info["util_body"]["max_all"] == pytest.approx(1.0 / (1.0 + worst), rel=1e-6)          # 1 = zero margin
+    assert ev["field_info"]["solvers"] == list(ev["solvers"]) and len(ev["field_info"]["voxel_mm"]) == 3
 
 
 # ------------------------------------------------------------------------------------------------ certificates

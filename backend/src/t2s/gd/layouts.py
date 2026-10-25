@@ -233,7 +233,8 @@ def _record(dom, ev: dict, rungs: list, settings: dict, kind_label: str) -> dict
                material=dom.material.get("id"), material_name=mats.material(dom.material.get("id"))["name"],
                settings=settings, ladder=rungs,
                min_vol_frac=(next((r["vol_frac"] for r in rungs if r["passed"]), None)
-                             if settings.get("vol_frac") == "auto" else None))
+                             if settings.get("vol_frac") == "auto" else None),
+               fea_view=ev.get("field_info"))           # what its colour maps show (the fields go to a file)
     if ev.get("mesh") is not None:
         v, f = ev["mesh"]
         m, com, inertia, _ = solid_props(v, f, dom.material.get("id"))
@@ -275,10 +276,11 @@ def combined_h(group: dict) -> float:
 
 
 def design_combined(group: dict, snap: dict, settings: dict, threads: int = 4, budget_s: float = 300.0,
-                    log=print, progress=None) -> tuple[dict, tuple | None, object]:
-    """One combined bracket: its domain, the ladder, its record. When the FE check would not fit the memory left
-    (MEM_RESERVE_MB), the bracket is designed again on voxels 0.25 mm larger (up to gd.multi.H_PRE), and every attempt
-    is listed in the record (voxel_attempts)."""
+                    log=print, progress=None) -> tuple[dict, tuple | None, dict | None]:
+    """One combined bracket: its domain, the ladder; returns its record, its mesh and its colour-map fields (per
+    vertex of that mesh). When the FE check would not fit the memory left (MEM_RESERVE_MB), the bracket is designed
+    again on voxels 0.25 mm larger (up to gd.multi.H_PRE), and every attempt is listed in the record
+    (voxel_attempts)."""
     from .multi import H_PRE, combined_domain
     mat = settings.get("material") or snap.get("material")
     mm = settings.get("min_member_mm")
@@ -310,15 +312,22 @@ def design_combined(group: dict, snap: dict, settings: dict, threads: int = 4, b
                boxes=[{"name": b["name"], "role": b["role"], "part": b.get("part"), "ends": b.get("ends"),
                        "box": np.asarray(b["box"], float).tolist()} for b in dom.boxes],
                domain_notes=dom.notes, key=group_key(group["pids"]))
-    return rec, ev.get("mesh"), dom
+    return rec, ev.get("mesh"), ev.get("fields")
 
 
-def _write_mesh(out: Path, stem: str, mesh) -> dict:
+def _write_mesh(out: Path, stem: str, mesh, fields: dict | None = None) -> dict:
+    """A designed solid's files: the app's binary mesh, its vertices and faces, and its colour-map fields — one value
+    per vertex (gd.multi_eval.display_fields), when its check made them."""
     v, f = mesh
     (out / f"{stem}.bin").write_bytes(_mesh_bin(v, f))
     np.save(out / f"{stem}.npy", np.asarray(v, float))
     np.save(out / f"{stem}.faces.npy", np.asarray(f, np.int64))
-    return {"mesh_file": f"{stem}.bin", "vertices_file": f"{stem}.npy", "faces_file": f"{stem}.faces.npy"}
+    files = {"mesh_file": f"{stem}.bin", "vertices_file": f"{stem}.npy", "faces_file": f"{stem}.faces.npy"}
+    (out / f"{stem}.fea.npz").unlink(missing_ok=True)               # never an older design's fields
+    if fields and all(len(a) == len(v) for a in fields.values()):
+        np.savez_compressed(out / f"{stem}.fea.npz", **fields)
+        files["fea_file"] = f"{stem}.fea.npz"
+    return files
 
 
 def combined_job(snapshot: str, out_dir: str, threads: int = 4) -> str:
@@ -358,9 +367,9 @@ def combined_job(snapshot: str, out_dir: str, threads: int = 4) -> str:
             key = group_key(g["pids"])
             st = dict((snap.get("overrides") or {}).get(key) or {})
             try:
-                rec, mesh, _ = design_combined(g, snap, st, threads=threads, log=lambda m: None)
+                rec, mesh, fields = design_combined(g, snap, st, threads=threads, log=lambda m: None)
                 if mesh is not None:
-                    rec.update(_write_mesh(out, f"{lid}-cb{k}", mesh))
+                    rec.update(_write_mesh(out, f"{lid}-cb{k}", mesh, fields))
                     solids[key] = {"parts": g["pids"], "material": rec.get("material"), "mesh": mesh,
                                    "label": g["name"]}
             except Exception as exc:  # noqa: BLE001 - one bracket's failure is that bracket's result
@@ -556,7 +565,7 @@ def one_piece_job(snapshot: str, out_dir: str, threads: int = 4) -> str:
                        bolted=[{"part": p.pid, "axis": p.axis, "neg": p.neg, "plane_mm": p.plane,
                                 "footprint": [float(x) for x in p.box]} for p in dom.parts])
             if ev.get("mesh") is not None:
-                rec.update(_write_mesh(out, f"{lid}-op", ev["mesh"]))
+                rec.update(_write_mesh(out, f"{lid}-op", ev["mesh"], ev.get("fields")))
                 if snap.get("bracket_meshes") is not None:     # the whole satellite with this piece
                     fc = run_frame_check(snap, {"one_piece": {"parts": [p.pid for p in dom.parts],
                                                               "material": dom.material.get("id"),

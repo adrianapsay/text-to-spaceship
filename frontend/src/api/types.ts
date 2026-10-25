@@ -215,11 +215,15 @@ export interface FeaField {
   max_all: number;
 }
 
-/** V2: GET /api/items/{id}/fea — what a designed bracket's colour maps show */
+/** V2: GET /api/items/{id}/fea — what a designed bracket's colour maps show (a per-part bracket, a combined bracket
+ * or the one piece) */
 export interface FeaView {
   item_id: string;
   layout_id: string;
-  part_id: string;
+  /** the part a per-part bracket holds; null for a combined bracket and the one piece (see parts) */
+  part_id: string | null;
+  parts?: string[] | null;
+  kind?: string | null;
   available: boolean;
   why?: string;
   fields?: FeaField[];
@@ -230,7 +234,8 @@ export interface FeaView {
   ultimate_mpa?: number;
   solvers?: string[];
   n_vertices?: number;
-  voxel_mm?: number;
+  /** mm; per axis for a bracket that holds several parts */
+  voxel_mm?: number | number[];
   note?: string;
   passed?: boolean;
   governing?: BracketDesign['governing'];
@@ -238,6 +243,9 @@ export interface FeaView {
   ms_ult?: number | null;
   ms_bolt?: number | null;
   f1_hz?: number | null;
+  /** the checks the maps belong to (a combined bracket's or the one piece's record leaves them out) */
+  checks?: BracketCheck[] | null;
+  bolt_checks?: BoltCheck[] | null;
 }
 
 export interface BracketFlag {
@@ -610,7 +618,7 @@ export interface LayoutDesignRecord {
   fits_build_volume?: boolean;
   vol_frac?: number | null;
   min_vol_frac?: number | null;
-  settings?: { material?: string; vol_frac?: number | 'auto'; min_member_mm?: number | 'auto'; budget_s?: number };
+  settings?: { material?: string; vol_frac?: number | 'auto'; min_member_mm?: number | 'auto'; budget_s?: number; brace_frame?: boolean };
   ladder?: LadderRung[];
   material?: string;
   material_name?: string;
@@ -626,6 +634,13 @@ export interface LayoutDesignRecord {
   bolts?: number[][];
   joins?: { voxels: number }[];
   kept_brackets?: string[];
+  /** a combined bracket's number in its layout (item <layout>-cb<index>) */
+  index?: number;
+  mesh_file?: string;
+  /** its FEA colour maps (absent: designed before they were saved, or its check did not run) */
+  fea_file?: string;
+  fea_view?: Omit<FeaView, 'item_id' | 'layout_id' | 'part_id' | 'available'> | null;
+  brace_frame?: boolean;
 }
 
 export interface LayoutModeResult {

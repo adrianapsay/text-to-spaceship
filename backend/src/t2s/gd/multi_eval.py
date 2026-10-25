@@ -590,6 +590,42 @@ def dynamics_multi(dom: MultiDomain, rz: RitzMulti, vox_c, vox_t, B_trial, stati
     return out
 
 
+def display_fields(dom: MultiDomain, prob, v, vox_c, vm_static: list, vox_t, rz: RitzMulti, U: list,
+                   part_mass_kg: float, solvers: list, env=None, chunk: int = 4096) -> tuple[dict, dict]:
+    """Result fields on the solid's surface vertices `v` for the app's colour maps (gd.evaluate.display_fields for a
+    bracket that holds several parts), the numbers the whole bracket's margins use: von Mises (MPa) at the
+    quasi-static level of the lightest held part with every part loaded at once — `vm_static`: the 68 g cases' voxel
+    von Mises, the larger solver's — and the random limit and qualification 3σ (CQC, Segalman: NGSolve's trial
+    stresses `vox_t` through the Ritz modes) per axis; the static displacement (mm; `U`: NGSolve's 68 g cases) per
+    axis; the utilisation of the body (gd.evaluate.fields_on_surface). The modal stresses are formed a chunk of
+    voxels at a time."""
+    from .evaluate import fields_on_surface
+    E = _env.get(env)
+    g_s = E.static_g(float(part_mass_kg))
+    covs = [[(lvl, modal_covariance(rz.f_hz, rz.gamma[:, k], spec, E.zeta))
+             for lvl, spec in (("limit", E.random_limit), ("qual", E.random_qual))] for k in range(3)]
+    rnd = {(lvl, k): np.zeros(len(vox_c)) for k in range(3) for lvl in ("limit", "qual")}
+    for s0 in range(0, len(vox_c), chunk):
+        S_modal = np.einsum("vic,ik->vck", vox_t[s0:s0 + chunk], rz.C)
+        for k in range(3):
+            for lvl, cov in covs[k]:
+                rnd[(lvl, k)][s0:s0 + chunk] = 3.0 * vm_rms(S_modal, cov)
+    vox, disp = {}, {}
+    for k, a in enumerate("xyz"):
+        vox[f"vm_static_{a}"] = np.asarray(vm_static[k], float) * g_s / LIMIT_G
+        vox[f"vm_random_limit_{a}"] = rnd[("limit", k)]
+        vox[f"vm_random_qual_{a}"] = rnd[("qual", k)]
+        disp[f"disp_static_{a}"] = np.linalg.norm(np.asarray(U[k], float), axis=1) * g_s / LIMIT_G
+    h = np.asarray(dom.h, float).reshape(-1)
+    note = (f"Stresses are averaged over each {' × '.join(f'{x:.2f}' for x in h)} mm design voxel (what the margins "
+            "use): static the larger of the two solvers, random NGSolve's through the Ritz modes. Every held part is "
+            f"loaded at once at the lightest one's quasi-static level ({g_s:.1f} g, as the margins: ASSUMED). Each "
+            "surface point shows its nearest voxel. Utilisation = factor × stress / allowable, the worst of the static "
+            "and random (limit and qualification) checks, yield and ultimate: 1.00 is zero margin. Sine, shock and the "
+            "bolts are checked separately.")
+    return fields_on_surface(vox, disp, vox_c, prob.nodes, v, E, dom.material, g_s, solvers, h.round(3).tolist(), note)
+
+
 # =================================================================================================== evaluate
 def evaluate(dom: MultiDomain, density: np.ndarray, threads: int = 4, env: str | None = None,
              h_fea: float | None = None, joined: np.ndarray | None = None, run_ccx: bool = True,
@@ -746,6 +782,11 @@ def evaluate(dom: MultiDomain, density: np.ndarray, threads: int = 4, env: str |
         out["solvers"]["ccx"] = {"solver": res_ccx.solver, "seconds": res_ccx.seconds, "cases": 3}
     out["accel3_g_parts"] = {p.pid: [ax["random"]["limit"]["accel3_g_parts"][p.pid]
                                      for ax in dyn_all["presets"][E.response_id]["axes"]] for p in dom.parts}
+    try:                        # the colour maps (per surface vertex; the job writes them next to the mesh)
+        out["fields"], out["field_info"] = display_fields(dom, prob, v, vox_c, vm_g, vox_t, rz, U[:3],
+                                                          dyn_all["part_mass_kg"], list(out["solvers"]), E.id)
+    except Exception as exc:  # noqa: BLE001 - the colour maps are a view of the check; the check stands without them
+        out["fields"], out["field_info"] = None, {"error": f"colour maps not computed: {exc!r}"[:300]}
     out["fea_seconds"] = time.perf_counter() - t1
     out["ok"] = True
     out["environment"] = E.id

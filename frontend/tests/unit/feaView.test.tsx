@@ -1,10 +1,14 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { fireEvent, render } from '@testing-library/react';
 import * as THREE from 'three';
-import type { BracketDesign, FeaField, Layout } from '../../src/api/types';
+import type { BracketDesign, BracketLayouts, FeaField, FeaView, Layout, LayoutDesignRecord } from '../../src/api/types';
 import { BLUE_RAMP, CRITICAL, checkBars, fieldValueText, rampRgb, rampSteps, scaleFor, vertexColors } from '../../src/lib/feaColors';
-import { FeaLegend, UtilisationChart, governingField } from '../../src/components/FeaView';
-import { designedRows } from '../../src/tabs/Components';
+import { BracketFeaPanel, FeaLegend, UtilisationChart, governingField } from '../../src/components/FeaView';
+import { designedRows, pieceRows, rerunSettings } from '../../src/tabs/Components';
+
+// the FEA panel reads its colour-map view through the session's API
+const stub = vi.hoisted(() => ({ view: null as unknown }));
+vi.mock('../../src/api/session', () => ({ session: () => ({ api: { itemFea: async () => stub.view, itemFeaField: async () => new Float32Array(0) } }) }));
 
 const util: FeaField = { id: 'util_body', label: 'Utilisation', unit: '', kind: 'utilisation', case: null, axis: null, max: 0.6, max_all: 0.7 };
 const stress: FeaField = { id: 'vm_static_x', label: 'von Mises, static x', unit: 'MPa', kind: 'stress', case: 'static', axis: 'x', max: 40, max_all: 50 };
@@ -104,5 +108,61 @@ describe('designed brackets in the Components tab', () => {
       ['L-5-br2', 'p3', '/api/items/L-5-br2/mesh', false], // a failed design (no solid) counts as not designed
     ]);
     expect(designedRows(null)).toEqual([]);
+  });
+
+  it('lists the one piece and the combined brackets once designed, with their item, mesh and whether they have maps', () => {
+    const rec = (over: Partial<LayoutDesignRecord>): LayoutDesignRecord => ({ name: 'one piece', kind: 'one_piece', parts: ['p1', 'p2', 'p3'], passed: true, mass_kg: 0.4246501, mesh_file: 'L-5-op.bin', ...over });
+    const data = {
+      layout_id: 'L-5',
+      modes: {
+        per_part: { mode: 'per_part', name: '', status: 'designed', summary: null },
+        one_piece: { mode: 'one_piece', name: '', status: 'designed', summary: null, result: { status: 'designed', designs: { one_piece: rec({ fea_file: 'L-5-op.fea.npz', brace_frame: true }) } } },
+        combined: {
+          mode: 'combined',
+          name: '',
+          status: 'designed',
+          summary: null,
+          result: {
+            status: 'designed',
+            designs: {
+              'p1+p2': rec({ name: 'combined:1', kind: 'combined', parts: ['p1', 'p2'], index: 0, mass_kg: 0.05, mesh_file: 'L-5-cb0.bin', reason: 'not solved: NGSolve …' }),
+              'p3+p4': rec({ name: 'combined:2', kind: 'combined', parts: ['p3', 'p4'], index: 1, mass_kg: 0.06, mesh_file: 'L-5-cb1.bin' }),
+              'p5+p6': rec({ name: 'combined:3', kind: 'combined', parts: ['p5', 'p6'], index: 2, mass_kg: null, mesh_file: undefined }),
+            },
+          },
+        },
+      },
+    } as unknown as BracketLayouts;
+    const rows = pieceRows(data);
+    expect(rows.map((r) => [r.itemId, r.meshUrl, r.noMaps])).toEqual([
+      ['L-5-op', '/api/items/L-5-op/mesh?v=o4246501', null],
+      ['L-5-cb0', '/api/items/L-5-cb0/mesh?v=c500000', 'not solved'], // its two-solver check did not run (memory)
+      ['L-5-cb1', '/api/items/L-5-cb1/mesh?v=c600000', 'old'], // designed before the maps were saved
+    ]);
+    expect(rows[0].title).toBe('One piece for 3 parts, bracing the frame');
+    expect(pieceRows(null)).toEqual([]);
+    // designing it again keeps its settings
+    expect(rerunSettings(rec({ settings: { material: 'AlSi10Mg', vol_frac: 0.12, min_member_mm: 'auto', budget_s: 900, brace_frame: true } }))).toEqual({
+      material: 'AlSi10Mg', vol_frac: 0.12, min_member_mm: 'auto', budget_s: 900, brace_frame: true,
+    });
+    expect(rerunSettings(rec({}))).toEqual({ material: null, vol_frac: 'auto', min_member_mm: 'auto' });
+  });
+
+  it('the one piece in the FEA panel: its checks come with its colour-map view; without maps it says why', async () => {
+    const view: FeaView = {
+      item_id: 'L-5-op', layout_id: 'L-5', part_id: null, parts: ['p1', 'p2'], kind: 'one_piece', available: false,
+      why: 'no colour maps: its two-solver check did not run (not solved: NGSolve …)', checks: design().checks, bolt_checks: design().bolt_checks,
+    };
+    stub.view = view;
+    const d: LayoutDesignRecord = {
+      name: 'one piece', kind: 'one_piece', parts: ['p1', 'p2'], passed: true, mass_kg: 0.42, solid_mass_kg: 0.4, vol_frac: 0.03,
+      settings: { material: 'AlSi10Mg', vol_frac: 'auto', min_member_mm: 'auto', budget_s: 900 },
+    };
+    const { findByText, getByTestId } = render(<BracketFeaPanel itemId="L-5-op" meshUrl="/api/items/L-5-op/mesh" design={d} title="One piece for 2 parts" />);
+    expect(await findByText(/its two-solver check did not run/)).toBeTruthy();
+    expect(getByTestId('utilisation-chart').textContent).toContain('random limit, y'); // the checks from the view
+    const text = getByTestId('bracket-fea').textContent ?? '';
+    expect(text).toContain('AlSi10Mg; material used automatic (3 %); member automatic');
+    expect(text).toContain('400.0 g / 420.0 g');
   });
 });

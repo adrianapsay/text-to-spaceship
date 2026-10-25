@@ -1778,30 +1778,48 @@ class Coordinator:
 
     def _designed_item(self, iid: str) -> tuple[LayoutEntry, int, dict, Path | None]:
         """A designed bracket's layout, index, design record and its colour-map file (None when the design has none:
-        designed before the maps were saved, or no solid). KeyError when the item is not a designed bracket."""
+        designed before the maps were saved, or its check did not run): a per-part bracket (<layout>-br<k>), a combined
+        bracket (<layout>-cb<k>) or the one piece (<layout>-op). KeyError when the item is not a designed bracket."""
         lid, _, k = iid.rpartition("-br")
         e = self.archive.get(lid)
-        if e is None or not k.isdigit() or int(k) >= len((e.meta or {}).get("brackets") or []):
-            raise KeyError(iid)
-        b = e.meta["brackets"][int(k)]
-        d = (e.meta.get("bracket_designs") or {}).get(b["pid"]) or {}
-        if d.get("mass_kg") is None:
-            raise KeyError(iid)
-        p = self.store.cache / "items" / e.id / str(d["fea_file"]) if d.get("fea_file") else None
-        return e, int(k), d, (p if p is not None and p.is_file() else None)
+        if e is not None and k.isdigit() and int(k) < len((e.meta or {}).get("brackets") or []):
+            b = e.meta["brackets"][int(k)]
+            d = (e.meta.get("bracket_designs") or {}).get(b["pid"]) or {}
+            if d.get("mass_kg") is None:
+                raise KeyError(iid)
+            p = self.store.cache / "items" / e.id / str(d["fea_file"]) if d.get("fea_file") else None
+            return e, int(k), d, (p if p is not None and p.is_file() else None)
+        for tag, mode in (("-cb", "combined"), ("-op", "one_piece")):     # M4: combined brackets, the one piece
+            lid, sep, k = iid.rpartition(tag)
+            e = self.archive.get(lid) if sep else None
+            if e is None or (mode == "combined" and not k.isdigit()) or (mode == "one_piece" and k):
+                continue
+            res = ((e.meta or {}).get("bracket_layouts") or {}).get(mode) or {}
+            for d in (res.get("designs") or {}).values():
+                if d.get("mass_kg") is None or (mode == "combined" and int(d.get("index", -1)) != int(k)):
+                    continue
+                p = self.store.cache / "items" / e.id / mode / str(d["fea_file"]) if d.get("fea_file") else None
+                return e, int(k or 0), d, (p if p is not None and p.is_file() else None)
+        raise KeyError(iid)
 
     def item_fea(self, iid: str) -> dict:
-        """What the colour maps of a designed bracket show (gd.evaluate.display_fields): the fields with their units and
-        maxima, the launch environment, the material and its allowables; `available` false when the design has no
-        maps yet (designed before they were saved: redesign it)."""
+        """What the colour maps of a designed bracket show (gd.evaluate.display_fields; gd.multi_eval for a combined
+        bracket and the one piece): the fields with their units and maxima, the launch environment, the material and its
+        allowables, and the checks they belong to; `available` false when the design has no maps (designed before
+        they were saved: design it again; or its two-solver check did not run)."""
         e, _, d, p = self._designed_item(iid)
         info = dict(d.get("fea_view") or {})
-        info.update(item_id=iid, layout_id=e.id, part_id=d.get("pid"), available=p is not None and bool(info.get("fields")),
-                    passed=d.get("passed"), governing=d.get("governing"), ms_yield=d.get("ms_yield"),
-                    ms_ult=d.get("ms_ult"), ms_bolt=d.get("ms_bolt"), f1_hz=d.get("f1_hz"))
+        info.update(item_id=iid, layout_id=e.id, part_id=d.get("pid"), parts=d.get("parts"), kind=d.get("kind"),
+                    available=p is not None and bool(info.get("fields")), passed=d.get("passed"),
+                    governing=d.get("governing"), ms_yield=d.get("ms_yield"), ms_ult=d.get("ms_ult"),
+                    ms_bolt=d.get("ms_bolt"), f1_hz=d.get("f1_hz"), checks=d.get("checks"),
+                    bolt_checks=d.get("bolt_checks"))
         if not info["available"]:
-            info["why"] = info.get("error") or ("no colour maps for this design: it was designed before they were saved "
-                                                "— redesign it in the Mounting Hardware tab")
+            reason = str(d.get("reason") or "")
+            info["why"] = info.get("error") or (
+                f"no colour maps: its two-solver check did not run ({reason})" if reason.startswith("not solved") else
+                "no colour maps for this design: it was designed before they were saved — redesign it in the Mounting "
+                "Hardware tab" + (" (Bracket layout)" if d.get("parts") else ""))
         return jsonable(info)
 
     def item_fea_field(self, iid: str, field_id: str) -> bytes:
