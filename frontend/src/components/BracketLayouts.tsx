@@ -30,6 +30,13 @@ export const MODE_TITLE: Record<BracketLayoutMode, string> = {
   one_piece: 'One piece',
 };
 
+/** "Checking the whole satellite with …" */
+const CHECK_WITH: Record<BracketLayoutMode, string> = {
+  per_part: 'one bracket per part',
+  combined: 'the combined brackets',
+  one_piece: 'the one piece',
+};
+
 export function sizeText(s: number[] | null | undefined): string {
   if (!s || s.length !== 3) return '—';
   return s.map((x) => x.toFixed(0)).join(' × ') + ' mm';
@@ -56,6 +63,22 @@ export function columnCells(v: LayoutModeView | undefined): Record<string, strin
   };
 }
 
+/** The whole-satellite cells of one column (the frame held at its rail ends with this layout's brackets). */
+export function frameCells(v: LayoutModeView | undefined): Record<string, string> {
+  const fc = v?.frame_check;
+  const none = { sat_f1: '—', sat_defl: '—', sat_frame: '—', sat_mass: '—' };
+  if (!fc) return none;
+  if (fc.error) return { ...none, sat_f1: `not checked: ${fc.error}` };
+  const fr = fc.groups?.frame;
+  const guide = fc.f1_guidance_hz ?? 100;
+  return {
+    sat_f1: fc.f1_hz == null ? '—' : `${Math.round(fc.f1_hz)} Hz${fc.f1_hz < guide ? ` — below ${guide} Hz` : ''}`,
+    sat_defl: fc.max_deflection_mm == null ? '—' : `${fc.max_deflection_mm.toFixed(3)} mm (${(fc.static_g ?? 0).toFixed(0)} g along ${fc.max_deflection_axis ?? '?'})`,
+    sat_frame: fr ? `MS ${signed(Math.min(fr.ms_yield, fr.ms_ult))} — ${fr.governing}` : '—',
+    sat_mass: fc.total_mass_kg == null ? '—' : `${fc.total_mass_kg.toFixed(3)} kg${fc.estimated?.length ? ` (${fc.estimated.length} bracket${fc.estimated.length > 1 ? 's' : ''} as reserved boxes, ESTIMATE)` : ''}`,
+  };
+}
+
 function statusBadge(v: LayoutModeView | undefined, mode: BracketLayoutMode) {
   if (!v) return <Badge>—</Badge>;
   if (v.status === 'not run') return <Badge>not run</Badge>;
@@ -72,17 +95,23 @@ export interface LayoutTableProps {
   names?: Record<string, string>;
   onRun?: (mode: 'combined' | 'one_piece') => void;
   onUse?: (mode: BracketLayoutMode) => void;
+  /** V2: check the whole satellite with this layout's brackets */
+  onCheck?: (mode: BracketLayoutMode) => void;
 }
 
 /** The three columns side by side. */
-export function BracketLayoutTable({ data, running, names, onRun, onUse }: LayoutTableProps) {
-  const cells = MODES.map((m) => columnCells(data.modes[m]));
+export function BracketLayoutTable({ data, running, names, onRun, onUse, onCheck }: LayoutTableProps) {
+  const cells = MODES.map((m) => ({ ...columnCells(data.modes[m]), ...frameCells(data.modes[m]) }));
   const rows: [string, string, string][] = [
     ['mass', 'Bracket mass (all brackets, fasteners included)', 'the PC/104 rods and standoffs are the same in every layout and left out'],
     ['worst', 'Worst margin and its check', 'the smallest gating margin over the designed brackets'],
     ['f1', 'System first natural frequency', 'the lowest over the brackets with the parts they hold (≥ 100 Hz required)'],
     ['prints', 'Printed pieces', 'metal 3D-printed brackets'],
     ['largest', 'Largest print', `bounding box; build volume ${sizeText(data.build_volume_mm)} (ASSUMED)`],
+    ['sat_f1', 'Whole satellite: first natural frequency', 'the frame with these brackets and every part, held at the ends of its rails (≥ 100 Hz guidance)'],
+    ['sat_defl', 'Whole satellite: largest deflection', 'under the launch quasi-static load for the satellite’s mass, each axis in turn'],
+    ['sat_frame', 'Frame (walls, end plates, rails): worst margin', 'static, random limit and qualification, yield and ultimate'],
+    ['sat_mass', 'Whole satellite mass', 'frame, brackets and parts as modelled'],
   ];
   const nm = (p: string) => names?.[p] ?? p;
   return (
@@ -94,6 +123,7 @@ export function BracketLayoutTable({ data, running, names, onRun, onUse }: Layou
             <th key={m} data-testid={`layout-col-${m}`}>
               {MODE_TITLE[m]}
               {m === 'one_piece' && data.exploratory?.one_piece ? <Badge tone="warn">exploratory</Badge> : null}
+              {data.modes[m]?.brace_frame ? <Badge tone="accent">braces the frame</Badge> : null}
               {data.chosen === m ? <Badge tone="accent">chosen</Badge> : null}
               <div className="small">{statusBadge(data.modes[m], m)}</div>
             </th>
@@ -162,6 +192,11 @@ export function BracketLayoutTable({ data, running, names, onRun, onUse }: Layou
                   >
                     {data.chosen === m ? 'Used for the saved STL files' : 'Use for saved STL files'}
                   </Button>
+                  {onCheck ? (
+                    <Button size="small" onClick={() => onCheck(m)} disabled={running || !designed} data-testid={`check-${m}`}>
+                      {v?.frame_check ? 'Check the whole satellite again' : 'Check the whole satellite'}
+                    </Button>
+                  ) : null}
                 </div>
               </td>
             );
@@ -188,10 +223,14 @@ export function LayoutRunForm(props: {
   const [vfI, setVfI] = useState(0);
   const [mmI, setMmI] = useState(0);
   const [budgetMin, setBudgetMin] = useState(15);
+  const [brace, setBrace] = useState(false);
   const defMat = props.settings?.bracket_material ?? props.options?.bracket_material ?? 'AlSi10Mg';
+  // the frame-bracing one piece needs the Bracket budget at its maximum (backend: refused below 100)
+  const budgetMax = (props.settings?.sliders.bracket_budget ?? 0) >= 100;
   const out = (): LayoutRunSettings => {
     const s: LayoutRunSettings = { material: mat || null, vol_frac: stops[vfI], min_member_mm: MEMBER_STOPS[mmI] };
     if (props.mode === 'one_piece') s.budget_s = Math.round(budgetMin * 60);
+    if (props.mode === 'one_piece' && brace && budgetMax) s.brace_frame = true;
     return s;
   };
   const one = props.mode === 'one_piece';
@@ -213,6 +252,25 @@ export function LayoutRunForm(props: {
             ))}
         </select>
       </div>
+      {one ? (
+        <label className="row" style={{ gap: 6, marginTop: 6, alignItems: 'flex-start', flexWrap: 'nowrap' }}>
+          <input
+            type="checkbox"
+            checked={brace && budgetMax}
+            disabled={!budgetMax || props.running}
+            onChange={(ev) => setBrace(ev.target.checked)}
+            data-testid="brace-frame"
+          />
+          <span>
+            <strong>Brace the whole frame</strong>{' '}
+            <span className="muted">
+              {budgetMax
+                ? 'members may run across the satellite and join the walls and end plates anywhere; the optimiser stiffens the whole frame, held at the ends of its rails, under the launch load. More material used = more weight allowed for bracing.'
+                : 'needs the Bracket budget at 100.'}
+            </span>
+          </span>
+        </label>
+      ) : null}
       <StopSlider
         id={`layout-vf-${props.mode}`}
         label={one ? 'Material used (share of the free space)' : 'Material used (share of the design space)'}
@@ -318,6 +376,12 @@ export function BracketLayoutsPanel({
         names={names}
         onRun={(m) => setOpen(open === m ? null : m)}
         onUse={(m) => act(() => session().api.useBracketLayout(layoutId, m), `${MODE_TITLE[m]} is now used for the 3D views, the bill of materials, the drawings, the fit proof and the saved STL files.`)}
+        onCheck={(m) =>
+          act(
+            () => session().api.frameCheck(layoutId, m),
+            `Checking the whole satellite with ${CHECK_WITH[m]}: the frame held at the ends of its rails, static, modes and random vibration (about a minute).`,
+          )
+        }
       />
       {open ? (
         <div className="bracket-settings" style={{ marginTop: 8 }}>
@@ -357,6 +421,14 @@ export function BracketLayoutsPanel({
         <li>
           One piece (exploratory): one print in the free space of the enclosure, bolted where the per-part brackets were (each part&apos;s wall or end plate, under its footprint), on voxels of about
           2.7 mm; the PC/104 boards stay on their rods. Its distance to the parts it holds is numeric (FCL), not proven.
+        </li>
+        <li>
+          Brace the whole frame (Bracket budget 100): the one piece is optimised together with the frame — walls, end plates and rails, held at the ends of the rails (ASSUMED) — so members across the
+          satellite that stiffen the frame pay off; it joins the walls and end plates wherever it meets them (bonded in the analysis; the fasteners there are not designed) and keeps 1.2 mm from the rails.
+        </li>
+        <li>
+          Whole satellite: the frame with a layout&apos;s brackets and every part (rigid masses), held at the rail ends — first natural frequency, deflection at the launch quasi-static level for the
+          satellite&apos;s mass, and the margins of the walls, end plates and rails (static, random limit and qualification; voxel model, cross-checked against NGSolve on the bare frame).
         </li>
         <li>{d.build_volume_note}.</li>
       </ul>

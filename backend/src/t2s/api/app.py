@@ -354,7 +354,7 @@ def create_app(coord: Coordinator | None = None, project: str = "default", **coo
     @app.post("/api/layouts/{layout_id}/bracket-layouts/{mode}/run")
     async def bracket_layout_run(layout_id: str, mode: str, request: Request):
         """M4: design the layout's combined brackets or its one piece in the background; body {settings: {material,
-        vol_frac, min_member_mm, budget_s}, overrides: {group key: settings}} (all optional)."""
+        vol_frac, min_member_mm, budget_s, brace_frame}, overrides: {group key: settings}} (all optional)."""
         try:
             body = await request.json()
         except Exception:  # noqa: BLE001
@@ -362,6 +362,18 @@ def create_app(coord: Coordinator | None = None, project: str = "default", **coo
         body = body if isinstance(body, dict) else {}
         try:
             return C(request).start_bracket_layout(layout_id, mode, body.get("settings"), body.get("overrides"))
+        except KeyError as exc:
+            raise HTTPException(404, f"unknown layout {layout_id}") from exc
+        except InvalidSetting as exc:
+            raise HTTPException(400, str(exc)) from exc
+        except ValueError as exc:
+            raise HTTPException(409, str(exc)) from exc
+
+    @app.post("/api/layouts/{layout_id}/bracket-layouts/{mode}/frame-check")
+    async def bracket_layout_frame_check(layout_id: str, mode: str, request: Request):
+        """The whole-satellite check (frame held at the rail ends) of one bracket layout, in the background."""
+        try:
+            return C(request).start_frame_check(layout_id, mode)
         except KeyError as exc:
             raise HTTPException(404, f"unknown layout {layout_id}") from exc
         except InvalidSetting as exc:

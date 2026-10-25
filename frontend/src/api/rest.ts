@@ -276,6 +276,10 @@ export class ApiClient {
   runBracketLayout(layoutId: string, mode: 'combined' | 'one_piece', req: { settings?: LayoutRunSettings; overrides?: Record<string, LayoutRunSettings> } = {}) {
     return this.send<{ status: string; layout_id: string; mode: string }>('POST', `/api/layouts/${encodeURIComponent(layoutId)}/bracket-layouts/${mode}/run`, req);
   }
+  /** V2: the whole-satellite check (frame held at the rail ends) of one bracket layout, in the background */
+  frameCheck(layoutId: string, mode: BracketLayoutMode) {
+    return this.send<{ status: string; layout_id: string; mode: string }>('POST', `/api/layouts/${encodeURIComponent(layoutId)}/bracket-layouts/${mode}/frame-check`, {});
+  }
   /** M4: "Use for saved STL files": the bracket layout the layout is shown and saved with */
   useBracketLayout(layoutId: string, mode: BracketLayoutMode) {
     return this.send<{ layout_id: string; chosen: BracketLayoutMode; status: string }>('POST', `/api/layouts/${encodeURIComponent(layoutId)}/bracket-layouts/use`, { mode });

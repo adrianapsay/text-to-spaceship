@@ -13,6 +13,7 @@ const KIND_TEXT: Record<string, string> = {
   clamp: 'tube-clamp band',
   combined: 'combined, metal 3D-printed',
   one_piece: 'one piece (exploratory)',
+  frame_check: 'frame, brackets and parts',
 };
 const RUN_WHAT: Record<string, string> = { per_part: 'the brackets', combined: 'the combined brackets', one_piece: 'the one piece' };
 /** how long the Overview keeps the "designed" / "saved" / "brackets removed" note after the event */
@@ -107,9 +108,10 @@ function RowStatus({ r, elapsed }: { r: DesignRow; elapsed: number }) {
   if (r.status === 'queued') return <span className="muted">waiting</span>;
   if (r.status === 'running') return <span>{r.phase ? `${r.phase}… ` : 'designing… '}{secondsText(elapsed - (r.started_s ?? 0))}</span>;
   if (!r.solid) {
+    // a whole-satellite check that did not run (memory) has no result; a design without a solid failed
     return (
       <span title={r.reason}>
-        <Badge tone="err">no solid</Badge> {secondsText(r.seconds)}
+        {r.kind === 'frame_check' ? <Badge tone="warn">not checked</Badge> : <Badge tone="err">no solid</Badge>} {secondsText(r.seconds)}
       </span>
     );
   }
@@ -130,6 +132,12 @@ function useDesignRun() {
 export function headline(v: DesignRunView): string {
   const id = v.run.layout_id ?? '';
   const what = RUN_WHAT[v.run.mode ?? 'per_part'] ?? 'the brackets';
+  if (v.run.mode === 'frame_check') {
+    if (v.active) return `Checking the whole satellite of ${id} · ${secondsText(v.elapsed)}`;
+    return v.run.brackets.some((r) => r.solid)
+      ? `Whole satellite of ${id} checked in ${secondsText(v.elapsed)}`
+      : `Whole satellite of ${id} not checked (${secondsText(v.elapsed)})`;
+  }
   if (!v.active) {
     const done = { per_part: 'Brackets', combined: 'Combined brackets', one_piece: 'One piece' }[v.run.mode ?? 'per_part'] ?? 'Brackets';
     return `${done} of ${id} designed: ${v.total} in ${secondsText(v.elapsed)}`;
@@ -154,10 +162,12 @@ export function DesignProgressPanel() {
       <div className="small" style={{ marginBottom: 4 }}>
         <strong>{headline(v)}</strong>
         {!v.active ? (
-          <span>
-            {' '}
-            · {passed} passed{failed ? `, ${failed} failed` : ''}
-          </span>
+          v.run.mode === 'frame_check' ? null : (
+            <span>
+              {' '}
+              · {passed} passed{failed ? `, ${failed} failed` : ''}
+            </span>
+          )
         ) : v.run.workers ? (
           <span className="muted"> · {v.run.workers} at a time</span>
         ) : null}
@@ -173,7 +183,7 @@ export function DesignProgressPanel() {
             <ProgressBar
               value={rowFraction(r, v)}
               running={v.active && r.status === 'running'}
-              tone={r.status === 'done' ? (r.solid && r.passed ? 'ok' : 'err') : undefined}
+              tone={r.status === 'done' ? (r.solid && r.passed ? 'ok' : r.kind === 'frame_check' && !r.solid ? undefined : 'err') : undefined}
               label={`${names[r.pid] ?? r.pid}: ${r.status}`}
             />
             <RowStatus r={r} elapsed={v.elapsed} />

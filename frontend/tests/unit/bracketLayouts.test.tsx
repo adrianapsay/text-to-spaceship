@@ -1,8 +1,14 @@
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { fireEvent, render } from '@testing-library/react';
-import type { BracketLayouts, DesignOptions, OnePieceEstimate } from '../../src/api/types';
-import { BracketLayoutTable, columnCells, LayoutRunForm, sizeText } from '../../src/components/BracketLayouts';
-import { designRunView, headline } from '../../src/components/DesignProgress';
+import { initialSolver } from '../../src/api/protocol';
+import type { BracketLayouts, DesignOptions, OnePieceEstimate, Settings } from '../../src/api/types';
+import { BracketLayoutTable, columnCells, frameCells, LayoutRunForm, MODES, sizeText } from '../../src/components/BracketLayouts';
+import { DesignProgressPanel, designRunView, headline } from '../../src/components/DesignProgress';
+import { appStore, initialState } from '../../src/store/store';
+
+afterEach(() => appStore.setState(initialState()));
+
+const frameCellsOf = (d: BracketLayouts) => Object.fromEntries(MODES.map((m) => [m, frameCells(d.modes[m])]));
 
 const summary = (over: Record<string, unknown> = {}) => ({
   mode: 'per_part' as const,
@@ -124,6 +130,66 @@ describe('M4 bracket layout comparison', () => {
     fireEvent.change(getByTestId('layout-budget'), { target: { value: '20' } });
     fireEvent.click(getByTestId('start-one_piece'));
     expect(onStart).toHaveBeenCalledWith({ material: null, vol_frac: 'auto', min_member_mm: 'auto', budget_s: 1200 });
+  });
+
+  it('the whole satellite with each layout: f1 against the guidance, deflection, frame margin, mass; a check button per column', () => {
+    const d = data();
+    d.modes.one_piece = {
+      ...d.modes.one_piece,
+      status: 'designed',
+      brace_frame: true,
+      summary: summary({ mode: 'one_piece', passed: true, failed: [] }),
+      frame_check: {
+        f1_hz: 87.6, f1_guidance_hz: 100, static_g: 54.1, max_deflection_mm: 0.1234, max_deflection_axis: 'y', total_mass_kg: 3.456,
+        groups: { frame: { ms_yield: 11.29, ms_ult: 12.2, governing: 'random limit', checks: [], mass_kg: 0.97, elements: 100 } }, estimated: [],
+      },
+    };
+    d.modes.per_part = { ...d.modes.per_part, frame_check: { error: 'not solved: memory' } };
+    const fc = frameCellsOf(d);
+    expect(fc.one_piece.sat_f1).toBe('88 Hz — below 100 Hz');
+    expect(fc.one_piece.sat_defl).toBe('0.123 mm (54 g along y)');
+    expect(fc.one_piece.sat_frame).toBe('MS +11.29 — random limit');
+    expect(fc.one_piece.sat_mass).toBe('3.456 kg');
+    expect(fc.per_part.sat_f1).toBe('not checked: not solved: memory');
+    expect(fc.combined.sat_f1).toBe('—');
+    const onCheck = vi.fn();
+    const { getByTestId } = render(<BracketLayoutTable data={d} running={false} onUse={vi.fn()} onRun={vi.fn()} onCheck={onCheck} />);
+    expect(getByTestId('layout-col-one_piece').textContent).toContain('braces the frame');
+    expect(getByTestId('check-one_piece').textContent).toBe('Check the whole satellite again');
+    fireEvent.click(getByTestId('check-per_part'));
+    expect(onCheck).toHaveBeenCalledWith('per_part');
+  });
+
+  it('bracing the frame needs the Bracket budget at 100 and goes with the run settings', () => {
+    const onStart = vi.fn();
+    const base = { mode: 'one_piece' as const, options: null, budgetRange: [60, 7200] as [number, number], running: false, onStart, onEstimate: vi.fn() };
+    const settings = (budget: number) => ({ stage: 2, sliders: { bracket_budget: budget } }) as unknown as Settings;
+    const est = { grid: [36, 36, 86], h_mm: [2.667, 2.667, 3.913], free_voxels: 1, held_parts: 1, kept_brackets: [], dofs_fine: 1, dofs_coarse: 1, fe_dofs_estimate: 1, seconds_estimate: 60, simp_seconds_estimate: 30, fe_seconds_estimate: 30, memory_mb_estimate: 100, available_mb: 4096, budget_s: 900, notes: [], model: '' } as OnePieceEstimate;
+    const { getByTestId, rerender } = render(<LayoutRunForm {...base} settings={settings(50)} estimate={est} />);
+    const box = getByTestId('brace-frame') as HTMLInputElement;
+    expect(box.disabled).toBe(true);
+    rerender(<LayoutRunForm {...base} settings={settings(100)} estimate={est} />);
+    fireEvent.click(getByTestId('brace-frame'));
+    fireEvent.click(getByTestId('start-one_piece'));
+    expect(onStart).toHaveBeenCalledWith(expect.objectContaining({ brace_frame: true }));
+  });
+
+  it('a whole-satellite check that did not fit in memory is "not checked", not failed', () => {
+    const reason = 'not solved: whole satellite with 110829 dofs needs about 451 MB; 2300 MB available, 2000 MB must stay free';
+    const row = { k: 0, pid: 'whole satellite', kind: 'frame_check', label: 'whole satellite (per part)', status: 'done' as const, started_s: 0, seconds: 25, passed: false, solid: false, reason };
+    const run = { status: 'DONE', layout_id: 'L-2163', mode: 'frame_check' as const, brackets: [row], n_total: 1, n_done: 1, workers: 1, seconds: 25, eta_s: null };
+    appStore.setState({ solver: { ...initialSolver(), studies: { bracket_design: { progress: 1, partial: run, at: new Date().toISOString() } } } });
+    const { getByTestId } = render(<DesignProgressPanel />);
+    const text = getByTestId('design-progress').textContent ?? '';
+    expect(text).toContain('Whole satellite of L-2163 not checked (25 s)');
+    expect(text).toContain('not checked 25 s');                                 // the row's badge and time
+    expect(text).not.toContain('failed');
+    expect(text).not.toContain('passed');
+    const ok = { ...run, brackets: [{ ...row, solid: true, passed: true, reason: '' }] };
+    appStore.setState({ solver: { ...initialSolver(), studies: { bracket_design: { progress: 1, partial: ok, at: new Date().toISOString() } } } });
+    const again = render(<DesignProgressPanel />).getAllByTestId('design-progress').at(-1)?.textContent ?? '';
+    expect(again).toContain('Whole satellite of L-2163 checked in 25 s');
+    expect(again).toContain('passed');
   });
 
   it('the progress headline names the layout being designed', () => {

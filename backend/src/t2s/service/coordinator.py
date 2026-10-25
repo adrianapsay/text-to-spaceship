@@ -3111,16 +3111,36 @@ class Coordinator:
     BRACKET_LAYOUT_BUDGET_S = (60.0, 7200.0)      # one piece: the optimiser's time budget the user may set (s)
 
     def _layout_snapshot(self, e: LayoutEntry, mode: str, settings: dict | None = None,
-                         overrides: dict | None = None) -> dict:
-        """What a layout job needs (gd.layouts.build_snapshot), from a Stage 2 layout of the archive."""
+                         overrides: dict | None = None, with_meshes: bool = False) -> dict:
+        """What a layout job needs (gd.layouts.build_snapshot), from a Stage 2 layout of the archive. with_meshes: also
+        every per-part bracket's solid for the whole-satellite check (gd.layouts.frame_items) — the designed solid, or
+        the exact solid of a simple bracket; none for an estimate (its reserved box stands in) — and its material."""
         from ..gd.layouts import build_snapshot
         env_id, mat_id = self._design_defaults()
         recs = self.layout_records(e)
         phys = self._phys(e.part_scale)
         masses = {p: (x.mass_kg if x is not None else None) for p, x in phys.items()}
         budget = (settings or {}).get("budget_s")
-        return build_snapshot(e.id, recs, e.meta or {}, e.poses, masses, mode, env_id, mat_id, settings=settings,
+        snap = build_snapshot(e.id, recs, e.meta or {}, e.poses, masses, mode, env_id, mat_id, settings=settings,
                               overrides=overrides, budget_s=float(budget) if budget is not None else None)
+        if with_meshes:
+            from ..gd import materials as mats
+            designs = (e.meta or {}).get("bracket_designs") or {}
+            overrides_pp = (e.meta or {}).get("bracket_overrides") or {}
+            meshes, materials = {}, {}
+            for k, b in enumerate((e.meta or {}).get("brackets") or []):
+                d = designs.get(b["pid"]) or {}
+                p = self.store.cache / "items" / e.id / f"{e.id}-br{k}.bin"
+                if (d.get("mass_kg") is not None and p.is_file()) or b.get("exact"):
+                    raw = self._bracket_mesh(e, k)
+                    nv, nt = np.frombuffer(raw, "<u4", 2)
+                    v = np.frombuffer(raw, "<f4", int(nv) * 3, 8).reshape(-1, 3).astype(float)
+                    f = np.frombuffer(raw, "<u4", int(nt) * 3, 8 + 12 * int(nv)).reshape(-1, 3).astype(np.int64)
+                    meshes[b["pid"]] = (v, f)
+                am = d.get("material") or (overrides_pp.get(b["pid"]) or {}).get("material") or mat_id
+                materials[b["pid"]] = mats.for_kind(b["kind"], am)
+            snap["bracket_meshes"], snap["bracket_materials"] = meshes, materials
+        return snap
 
     @staticmethod
     def _bracket_mode(e: LayoutEntry) -> str:
@@ -3142,9 +3162,18 @@ class Coordinator:
         """A layout run's settings, checked: material (AM), vol_frac, min_member_mm ("auto" or in range) and, for the
         one piece, budget_s (s). InvalidSetting when out of range."""
         if not isinstance(settings or {}, dict):
-            raise InvalidSetting("settings is an object {material, vol_frac, min_member_mm, budget_s}")
+            raise InvalidSetting("settings is an object {material, vol_frac, min_member_mm, budget_s, brace_frame}")
         s = dict(settings or {})
         out = {}
+        if "brace_frame" in s:                       # the one piece that braces the frame (Bracket budget at 100)
+            bf = s.pop("brace_frame")
+            if not isinstance(bf, bool):
+                raise InvalidSetting("brace_frame is true or false")
+            if bf and mode != "one_piece":
+                raise InvalidSetting("brace_frame applies to the one piece only")
+            if bf and self._am_level() != 4:
+                raise InvalidSetting("Brace the whole frame needs the Bracket budget at 100")
+            out["brace_frame"] = bf
         if "budget_s" in s:
             if mode != "one_piece":
                 raise InvalidSetting("budget_s applies to the one piece only")
@@ -3196,7 +3225,11 @@ class Coordinator:
             r = results.get(mode)
             modes[mode] = {"mode": mode, "name": MODE_NAMES[mode], "status": (r or {}).get("status") or "not run",
                            "summary": mode_summary(mode, brs, designs, r) if r else None,
-                           "result": _light_result(r) if r else None}
+                           "result": _light_result(r) if r else None,
+                           "brace_frame": bool((r or {}).get("brace_frame"))}
+        checks = meta.get("frame_checks") or {}
+        for mode, m in modes.items():                  # the whole satellite with each layout's brackets
+            m["frame_check"] = checks.get(mode)
         active, _ = self._active_layout(e)
         return jsonable({"layout_id": e.id, "chosen": self._bracket_mode(e), "active": active, "modes": modes,
                          "combined_plan": [{"name": g["name"], "pids": g["pids"], "target": g["target"],
@@ -3245,7 +3278,7 @@ class Coordinator:
         L = self.ladders.get("__bracket_design__")
         if L is not None and not L.get("finalised"):
             raise ValueError("a bracket design run is already in progress")
-        snapd = self._layout_snapshot(e, mode, st, ov)
+        snapd = self._layout_snapshot(e, mode, st, ov, with_meshes=True)
         if mode == "combined":
             from ..gd.layouts import plan_combined
             if not plan_combined(snapd):
@@ -3291,8 +3324,13 @@ class Coordinator:
                              "overrides": overrides, "designs": res.get("designs") or {}, "groups": res.get("groups"),
                              "seconds": res.get("seconds_total") or res.get("seconds"),
                              "peak_rss_mb": res.get("peak_rss_mb"), "estimate": res.get("estimate"),
-                             "folder": mode}
+                             "folder": mode, "brace_frame": bool(settings.get("brace_frame"))}
             meta["bracket_layouts"] = layouts
+            if res.get("frame_check") is not None:      # the whole satellite with these brackets (gd.frame_eval)
+                checks = dict(meta.get("frame_checks") or {})
+                checks[mode] = {**res["frame_check"], "created": now_iso(),
+                                "brace_frame": bool(settings.get("brace_frame"))}
+                meta["frame_checks"] = checks
             e.meta = jsonable(meta)
             self._compute_physics(e)                  # a chosen layout's masses replace the per-part ones
             self._score_entry(e)
@@ -3310,6 +3348,85 @@ class Coordinator:
             if L is not None:
                 L["finalised"] = True
             self._design_lid = None
+
+    def start_frame_check(self, layout_id: str, mode: str) -> dict:
+        """The whole-satellite check (gd.frame_eval) of one bracket layout of a Stage 2 layout, in the background (the
+        bracket design runs' slot: one at a time): per part with its brackets as they are (designed solids, exact
+        simple brackets, reserved boxes for estimates), combined / one piece with their designed solids. Combined and
+        one-piece runs make this check themselves; this is for the per-part brackets and for older results."""
+        import pickle
+
+        from ..gd.layouts import MODES, frame_check_job, threads_default
+        if mode not in MODES:
+            raise InvalidSetting(f"unknown bracket layout {mode!r} ({', '.join(MODES)})")
+        e = self.archive.get(layout_id)
+        if e is None:
+            raise KeyError(layout_id)
+        if e.stage != 2 or not (e.meta or {}).get("brackets"):
+            raise ValueError("this layout has no brackets")
+        L = self.ladders.get("__bracket_design__")
+        if L is not None and not L.get("finalised"):
+            raise ValueError("a bracket design run is already in progress")
+        snapd = self._layout_snapshot(e, mode, with_meshes=True)
+        if mode != "per_part":
+            res = ((e.meta or {}).get("bracket_layouts") or {}).get(mode) or {}
+            folder = self.store.cache / "items" / e.id / mode
+            designs = {}
+            for key, d in (res.get("designs") or {}).items():
+                pv, pf = folder / str(d.get("vertices_file") or ""), folder / str(d.get("faces_file") or "")
+                if d.get("mass_kg") is not None and d.get("vertices_file") and pv.is_file() and pf.is_file():
+                    designs[key] = {"parts": d.get("parts") or [], "material": d.get("material"),
+                                    "mesh": (np.load(pv), np.load(pf)), "label": d.get("name") or key}
+            if not designs:
+                raise ValueError(f"the {mode.replace('_', ' ')} brackets of {e.id} are not designed (run them first)")
+            snapd["frame_designs"] = designs
+        snapd["frame_mode"] = mode
+        out = self.store.cache / "items" / e.id / "frame_check" / mode
+        out.mkdir(parents=True, exist_ok=True)
+        snap = out / "snapshot.pkl"
+        snap.write_bytes(pickle.dumps(snapd, protocol=pickle.HIGHEST_PROTOCOL))
+        (out / "progress.json").unlink(missing_ok=True)
+        fut = self.ladder_pool.submit(formfactor.call_with, formfactor.current(), frame_check_job, str(snap), str(out),
+                                      threads_default())
+        self.ladders["__bracket_design__"] = {"future": fut, "path": out / "progress.json", "mtime": None,
+                                              "status": "PENDING", "progress": 0.0, "study": "bracket_design",
+                                              "mode": "frame_check", "frame_mode": mode, "layout_id": e.id,
+                                              "settings": self._settings_view()}
+        wf = asyncio.wrap_future(fut, loop=self.loop)
+        wf.add_done_callback(lambda f, lid=e.id, o=out, m=mode: self._on_frame_check(f, lid, o, m))
+        self.broadcast("study.update", {"study": "bracket_design", "progress": 0.0, "partial": self._design_progress(
+            {"layout_id": e.id, "mode": "frame_check", "brackets": [], "n_total": 1, "n_done": 0, "seconds": 0.0},
+            "PENDING")})
+        return {"status": "RUNNING", "layout_id": e.id, "mode": mode}
+
+    def _on_frame_check(self, fut, lid: str, out: Path, mode: str) -> None:
+        L = self.ladders.get("__bracket_design__")
+        try:
+            if fut.cancelled():
+                return
+            if fut.exception() is not None:
+                self._error(f"whole-satellite check failed: {fut.exception()!r}")
+                return
+            res = json.loads((out / "progress.json").read_text(encoding="utf-8"))
+            e = self.archive.get(lid)
+            if e is None:
+                return
+            meta = dict(e.meta or {})
+            checks = dict(meta.get("frame_checks") or {})
+            prev = (meta.get("bracket_layouts") or {}).get(mode) or {}
+            checks[mode] = {**(res.get("frame_check") or {}), "created": now_iso(),
+                            "brace_frame": bool(prev.get("brace_frame"))}
+            meta["frame_checks"] = checks
+            e.meta = jsonable(meta)
+            self._persist(e)
+            self.broadcast("layout.updated", {"layout": self.layout_json(e), "reason": "whole satellite checked"})
+            self.broadcast("study.update", {"study": "bracket_design", "progress": 1.0,
+                                            "partial": self._design_progress(res, "DONE")})
+        except Exception as exc:  # noqa: BLE001
+            self._error(f"the whole-satellite check could not be applied: {exc!r}")
+        finally:
+            if L is not None:
+                L["finalised"] = True
 
     def use_bracket_layout(self, layout_id: str, mode: str) -> dict:
         """Choose the bracket layout the layout is shown and saved with ("Use for saved STL files"): the 3D views, the

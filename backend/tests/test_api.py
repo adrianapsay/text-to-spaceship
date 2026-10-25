@@ -434,6 +434,16 @@ def test_bracket_layout_endpoints(live):
     est = client.post(f"/api/layouts/{e.id}/bracket-layouts/one_piece/estimate", json={}).json()
     assert len(est["grid"]) == 3 and est["seconds_estimate"] > 0 and est["held_parts"] >= 1
     assert all(h <= 4.0 for h in est["h_mm"])
+    # the frame-bracing one piece needs the bracket budget at 100; the whole-satellite check needs a known layout,
+    # a known mode and, but for per part, its designs
+    budget = coord.store.settings["sliders"].get("bracket_budget")
+    if budget != 100:
+        r = client.post(f"/api/layouts/{e.id}/bracket-layouts/one_piece/run", json={"settings": {"brace_frame": True}})
+        assert r.status_code == 400 and "Bracket budget at 100" in r.json()["detail"]
+    assert all(v["modes"][m]["frame_check"] is None for m in v["modes"])
+    assert client.post("/api/layouts/L-NOPE/bracket-layouts/per_part/frame-check").status_code == 404
+    assert client.post(f"/api/layouts/{e.id}/bracket-layouts/everything/frame-check").status_code == 400
+    assert client.post(f"/api/layouts/{e.id}/bracket-layouts/combined/frame-check").status_code == 409
 
 
 def test_size_study_runs_in_the_background(live):

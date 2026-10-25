@@ -24,6 +24,11 @@ The method is the winner's (pytopo3d 0.3.0, Kim & Kang), re-implemented on the a
   guard stops earlier, and the notes say so).
 
 Not modelled in the optimisation (as in the winner's entrant): the bracket's own weight (the FE check adds it).
+
+Frame-bracing one piece (a `frame`, gd.frame.FrameSpec): the CubeSat frame joins the problem as passive elements —
+the walls and end plates as a layer of incompatible-mode bricks outside the grid (an extended node numbering), the
+rails as grid voxels of their own modulus — the supports are the frame's rail-end nodes instead of clamped voxels, and
+every load case also carries the frame's own weight. Without a frame nothing changes.
 Units: mm, N, MPa.
 """
 from __future__ import annotations
@@ -80,7 +85,11 @@ def hex8_stiffness(h, E: float = 1.0, nu: float = 0.3) -> np.ndarray:
 class SimpProblem:
     """One SIMP problem on the active voxels of a grid (nx, ny, nz): `active` voxels exist (not void); `solid` is the
     passive solid; `fixed` voxels have their 8 nodes clamped; `forces`: per load case (nx, ny, nz, 3) N per voxel,
-    spread 1/8 to its nodes (as pytopo3d spreads an element force)."""
+    spread 1/8 to its nodes (as pytopo3d spreads an element force).
+    Frame-bracing (module docstring): `frame` a gd.frame.FrameLayer of this grid — its cells are extra passive elements
+    (stiffness × frame_escale, frame_forces per case (m, 3) N spread 1/8), its supports clamped, and the voxels kept
+    are those joined to the grid's boundary (where the walls are) or to a fixed voxel; `escale` (grid array): the
+    modulus scale of each voxel (default 1)."""
     h: np.ndarray
     active: np.ndarray
     solid: np.ndarray
@@ -89,15 +98,28 @@ class SimpProblem:
     nu: float = 0.3
     rmin_mm: float = 3.0
     notes: list = field(default_factory=list)
+    frame: object | None = None
+    escale: np.ndarray | None = None
+    frame_escale: float = 1.0
+    frame_forces: list | None = None
+    frame_nu: float | None = None
 
     def __post_init__(self):
         from scipy import ndimage
         self.h = np.asarray(self.h, float).reshape(3)
         self.shape = tuple(int(x) for x in self.active.shape)
         # only voxels joined through shared faces to a fixed voxel can carry load: any other piece (or one hanging on
-        # an edge or a corner) would be a mechanism and make K singular
+        # an edge or a corner) would be a mechanism and make K singular; with a frame, the walls hold every voxel on
+        # the grid's boundary
         lab, _ = ndimage.label(self.active & True)
-        keep = np.unique(lab[self.fixed & self.active])
+        seeds = self.fixed & self.active
+        if self.frame is not None:
+            bnd = np.zeros(self.shape, bool)
+            bnd[[0, -1], :, :] = True
+            bnd[:, [0, -1], :] = True
+            bnd[:, :, [0, -1]] = True
+            seeds = seeds | (bnd & self.active)
+        keep = np.unique(lab[seeds])
         keep = keep[keep > 0]
         reach = np.isin(lab, keep)
         self.dropped = int((self.active & ~reach).sum())
@@ -108,30 +130,56 @@ class SimpProblem:
         idx = np.argwhere(self.active)
         self.elems = idx
         self.ne = len(idx)
-        if not self.fixed.any():
+        if not self.fixed.any() and self.frame is None:
             raise ValueError("no fixed voxels: the problem has no support")
         nx, ny, _ = self.shape
         corners = idx[:, None, :] + LOCAL[None, :, :]
-        gid = corners[..., 0] + (nx + 1) * (corners[..., 1] + (ny + 1) * corners[..., 2])
+        if self.frame is None:
+            gid = corners[..., 0] + (nx + 1) * (corners[..., 1] + (ny + 1) * corners[..., 2])
+            self.nf = 0
+        else:
+            fcells = self.frame.cell_enodes()
+            gid = np.vstack([self.frame.node_id(corners + 1), fcells])
+            self.nf = len(fcells)
         used, inv = np.unique(gid, return_inverse=True)
-        self.enodes = inv.reshape(-1, 8).astype(np.int64)        # compact node ids per element
+        self.node_ids = used                                     # (extended) grid node id of every compact node
+        self.enodes = inv.reshape(-1, 8).astype(np.int64)        # compact node ids per element (grid, then frame)
         self.nn = len(used)
         self.ndof = 3 * self.nn
-        self.edof = (3 * self.enodes[:, :, None] + np.arange(3)[None, None, :]).reshape(-1, 24)
-        fixed_nodes = np.unique(self.enodes[self.fixed[tuple(idx.T)]])
+        self.edof_all = (3 * self.enodes[:, :, None] + np.arange(3)[None, None, :]).reshape(-1, 24)
+        self.edof = self.edof_all[:self.ne]
+        fixed_nodes = np.unique(self.enodes[:self.ne][self.fixed[tuple(idx.T)]])
+        if self.frame is not None:
+            sup = np.asarray(self.frame.supports, np.int64)
+            pos = np.searchsorted(used, sup)
+            ok = (pos < len(used)) & (used[np.minimum(pos, len(used) - 1)] == sup)
+            fixed_nodes = np.union1d(fixed_nodes, pos[ok])
+            if not len(fixed_nodes):
+                raise ValueError("the frame has no supports on this grid")
         self.fixed_dofs = (3 * fixed_nodes[:, None] + np.arange(3)[None, :]).ravel()
         cons = np.zeros(self.ndof, bool)
         cons[self.fixed_dofs] = True
         self.cons = cons
         self.loads = []
-        for F in self.forces:
+        for c, F in enumerate(self.forces):
             fe = np.asarray(F, float)[tuple(idx.T)] / 8.0
             f = np.zeros(self.ndof)
             for k in range(3):
                 np.add.at(f, self.edof[:, k::3].ravel(), np.repeat(fe[:, k], 8))
+            if self.nf and self.frame_forces is not None:
+                ff = np.asarray(self.frame_forces[c], float) / 8.0
+                for k in range(3):
+                    np.add.at(f, self.edof_all[self.ne:, k::3].ravel(), np.repeat(ff[:, k], 8))
             f[cons] = 0.0
             self.loads.append(f)
+        self.escale_e = None if self.escale is None else np.asarray(self.escale, float)[tuple(idx.T)]
         self.KE = hex8_stiffness(self.h, 1.0, self.nu)
+        if self.nf:
+            from .frame import hex8_im_stiffness
+            nu_f = self.nu if self.frame_nu is None else float(self.frame_nu)
+            self.KE_cls = np.stack([hex8_im_stiffness(d, float(self.frame_escale), nu_f)
+                                    for d in self.frame.class_dims()])
+            self.fcls = np.asarray(self.frame.cls, np.int64)
         self._pattern()
         self._filter()
         self.is_design = self.design[tuple(idx.T)]
@@ -165,7 +213,7 @@ class SimpProblem:
         self.indptr, self.indices = indptr, cols
         # element entries → positions
         iu, ju = np.triu_indices(24)
-        P = np.empty((self.ne, len(iu)), np.int32)
+        P = np.empty((len(self.enodes), len(iu)), np.int32)          # every element (the frame's cells too)
         na, da, nb, db = iu // 3, iu % 3, ju // 3, ju % 3
         for k in range(len(iu)):
             A = self.enodes[:, na[k]]
@@ -185,6 +233,10 @@ class SimpProblem:
         self.P = P
         self.KEu = self.KE[iu, ju]
         self.nnz = int(indptr[-1])
+        self.frame_data = None
+        if self.nf:                                                # the frame's entries never change: once
+            w = self.KE_cls[:, iu, ju][self.fcls]
+            self.frame_data = np.bincount(P[self.ne:].ravel(), weights=w.ravel(), minlength=self.nnz)
         # entries that couple a clamped dof to anything (zeroed), and the clamped diagonals (set to 1)
         row = np.repeat(np.arange(len(indptr) - 1), np.diff(indptr))
         self.zero = self.cons[row] | self.cons[cols]
@@ -223,13 +275,19 @@ class SimpProblem:
         return self.H.T @ z
 
     def stiffness(self, xphys: np.ndarray, penal: float, chunk: int = 20000):
-        """Upper-triangle CSR of K (all active dofs; clamped dofs are identity rows) for physical densities xphys."""
+        """Upper-triangle CSR of K (all active dofs; clamped dofs are identity rows) for physical densities xphys
+        (the grid's elements; the frame's are passive)."""
         import scipy.sparse as sp
         Ee = EMIN + xphys ** penal * (1.0 - EMIN)
+        if self.escale_e is not None:
+            Ee = Ee * self.escale_e
         data = np.zeros(self.nnz)
         for s in range(0, self.ne, chunk):
-            w = (Ee[s:s + chunk, None] * self.KEu[None, :]).ravel()
-            data += np.bincount(self.P[s:s + chunk].ravel(), weights=w, minlength=self.nnz)
+            e = min(s + chunk, self.ne)
+            w = (Ee[s:e, None] * self.KEu[None, :]).ravel()
+            data += np.bincount(self.P[s:e].ravel(), weights=w, minlength=self.nnz)
+        if self.frame_data is not None:
+            data += self.frame_data
         data[self.zero] = 0.0
         data[self.cdiag] = 1.0
         return sp.csr_matrix((data, self.indices, self.indptr), shape=(self.ndof, self.ndof))
@@ -298,7 +356,10 @@ def run_oc(p: SimpProblem, volfrac: float, penal: float = PENAL, maxloop: int = 
             ue = U[p.edof]                                             # (ne, 24, n_cases)
             ce = np.einsum("eac,ab,ebc->e", ue, p.KE, ue)              # Σ over the cases of u_eᵀ KE u_e
             del ue
-            c = float(((EMIN + xphys ** penal * (1 - EMIN)) * ce).sum())
+            if p.escale_e is not None:                                 # voxels of another modulus (frame rails)
+                ce = ce * p.escale_e
+            # the compliance Σ Fᵀu (with a frame its passive elements hold part of the strain energy)
+            c = float(((EMIN + xphys ** penal * (1 - EMIN)) * ce).sum()) if not p.nf else float(np.sum(F * U))
             hist.append(c)
             dc = p.filt_t(np.where(p.is_design, -penal * xphys ** (penal - 1) * (1 - EMIN) * ce, 0.0))
             xd, dcd, dvd = x[p.is_design], dc[p.is_design], dv[p.is_design]
@@ -353,28 +414,50 @@ def coarsen(a: np.ndarray, how: str) -> np.ndarray:
     raise ValueError(how)
 
 
+def framed_problem(h, active, solid, fixed, forces, nu: float, rmin_mm: float, frame=None) -> SimpProblem:
+    """The SIMP problem of one level; with a frame (gd.frame.FrameSpec) the level's frame layer joins it: its rails
+    as passive voxels of their own modulus and weight, its walls and end plates as passive cells with their weight,
+    its rail-end supports."""
+    if frame is None:
+        return SimpProblem(h, active, solid, fixed, forces, nu=nu, rmin_mm=rmin_mm)
+    h = np.asarray(h, float).reshape(3)
+    L = frame.layer(h, active.shape)
+    rail = L.rail
+    es = np.ones(active.shape)
+    es[rail] = frame.e_ratio * L.rail_scale
+    m_r = L.rail_voxel_mass_t()
+    acc = [np.asarray(a, float) for a in frame.accel]
+    forces = [np.asarray(F, float) + rail[..., None] * (m_r * a)[None, None, None, :] for F, a in zip(forces, acc)]
+    ff = [L.cell_masses_t()[:, None] * a[None, :] for a in acc]
+    return SimpProblem(h, active | rail, solid | rail, fixed, forces, nu=nu, rmin_mm=rmin_mm, frame=L, escale=es,
+                       frame_escale=frame.e_ratio, frame_forces=ff, frame_nu=frame.nu)
+
+
 def solve(active, solid, fixed, forces, h, nu: float, volfrac: float, rmin_mm: float = 3.0, budget_s: float = 300.0,
           threads: int = 4, continuation: bool = True, max_iter: int = MAX_ITER, progress=None,
-          mem_check=None) -> dict:
+          mem_check=None, frame=None) -> dict:
     """SIMP with coarse-to-fine continuation: on 2 × 2 × 2 blocks first (a block exists where at least half its voxels
     do; it is passive solid or fixed where any voxel is; loads summed), then on the given grid starting from the coarse
     densities. A third of the budget goes to the coarse level; each level's iteration cap comes from the cost model.
     mem_check(dofs, "SIMP") raises MemoryError when the fine level would not fit the memory left: the coarse level's
     densities on the fine grid are then the result (said in the notes and levels); without a coarse level the
     MemoryError reaches the caller. Returns the density on the grid (1 on passive solid, 0 outside the active voxels),
-    the levels and notes."""
+    the levels and notes. frame: a gd.frame.FrameSpec (the frame-bracing one piece, framed_problem): the frame joins
+    every level, rebuilt for that level's grid (the grid's counts must be even); its rails are not in the density."""
     from threadpoolctl import threadpool_limits
     t0 = time.perf_counter()
     h = np.asarray(h, float).reshape(3)
     levels, x0 = [], None
+    if frame is not None and any(n % 2 for n in active.shape):
+        raise ValueError(f"a framed problem needs even voxel counts (the coarse level's planes), not {active.shape}")
     with threadpool_limits(limits=int(threads)):
         if continuation and min(active.shape) >= 8:
             act_c = coarsen(active, "count") >= 4
             sol_c = coarsen(solid & active, "any") & act_c
             fix_c = coarsen(fixed & active, "any") & act_c
             f_c = [coarsen(np.asarray(F, float), "sum") for F in forces]
-            if fix_c.any() and int(act_c.sum()) > 8 and int((act_c & ~sol_c).sum()) > 0:
-                pc = SimpProblem(2 * h, act_c, sol_c, fix_c, f_c, nu=nu, rmin_mm=max(rmin_mm, 3.0 * float(h.max())))
+            if (fix_c.any() or frame is not None) and int(act_c.sum()) > 8 and int((act_c & ~sol_c).sum()) > 0:
+                pc = framed_problem(2 * h, act_c, sol_c, fix_c, f_c, nu, max(rmin_mm, 3.0 * float(h.max())), frame)
                 cap = int(max(5, min(max_iter, (budget_s / 3.0) / seconds_per_iteration(pc.ndof, threads))))
                 rc = run_oc(pc, volfrac, maxloop=cap, deadline=t0 + budget_s / 3.0,
                             progress=None if progress is None else (lambda i, c, d: progress("coarse", i, c, d)))
@@ -392,7 +475,11 @@ def solve(active, solid, fixed, forces, h, nu: float, volfrac: float, rmin_mm: f
                 del pc, rc
         if mem_check is not None:
             try:
-                mem_check(int(3 * 1.15 * int(active.sum())), "SIMP")
+                extra = 0
+                if frame is not None:                                  # the frame's cells and rails (estimate)
+                    n = np.asarray(active.shape)
+                    extra = int(np.prod(n + 2) - np.prod(n)) + int(0.05 * np.prod(n))
+                mem_check(int(3 * 1.15 * (int(active.sum()) + extra)), "SIMP")
             except MemoryError as exc:           # the coarse design, on the fine grid (none: the caller is told)
                 if x0 is None:
                     raise
@@ -402,7 +489,7 @@ def solve(active, solid, fixed, forces, h, nu: float, volfrac: float, rmin_mm: f
                 return {"density": rho, "seconds": time.perf_counter() - t0, "levels": levels, "history": [],
                         "notes": [(f"fine level skipped ({exc}): the coarse level's densities ({2 * h} mm voxels) are "
                                    "the design")], "ndof": None, "elements": int(active.sum())}
-        p = SimpProblem(h, active, solid, fixed, forces, nu=nu, rmin_mm=rmin_mm)
+        p = framed_problem(h, active, solid, fixed, forces, nu, rmin_mm, frame)
         left = budget_s - (time.perf_counter() - t0)
         cap = int(max(3, min(max_iter, left / seconds_per_iteration(p.ndof, threads))))
         r = run_oc(p, volfrac, maxloop=cap, x0=None if x0 is None else x0[tuple(p.elems.T)], deadline=t0 + budget_s,

@@ -82,6 +82,29 @@ def mesh_box(lo, hi, h: float, threads: int = 1):
         return _extract_tet10(gmsh)
 
 
+def mesh_frame(envelope, wall: float, rail: float, h: float, threads: int = 1):
+    """The CubeSat frame centred on the origin: the envelope box minus its inner box (walls and end plates `wall`
+    thick) with four `rail` × `rail` corner rails (constraints.stage2's geometry: the rails' inner parts fused to the
+    walls)."""
+    with _LOCK:
+        gmsh = _start(h, threads)
+        env = np.asarray(envelope, float)
+        half = env / 2.0
+        occ = gmsh.model.occ
+        outer = occ.addBox(*(-half), *env)
+        inner = occ.addBox(*(-half + wall), *(env - 2.0 * wall))
+        shell, _ = occ.cut([(3, outer)], [(3, inner)])
+        rails = []
+        for sx in (-1, 1):
+            for sy in (-1, 1):
+                x0 = half[0] - rail if sx > 0 else -half[0] + wall
+                y0 = half[1] - rail if sy > 0 else -half[1] + wall
+                rails.append((3, occ.addBox(x0, y0, -half[2] + wall, rail - wall, rail - wall, env[2] - 2.0 * wall)))
+        occ.fuse(shell, rails)
+        occ.synchronize()
+        return _extract_tet10(gmsh)
+
+
 def mesh_hollow_cylinder(ri: float, ro: float, length: float, h: float, threads: int = 1):
     """Axis along +z from z = 0 to z = length."""
     with _LOCK:

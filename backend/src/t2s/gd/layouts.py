@@ -103,10 +103,11 @@ def available_mb() -> float | None:
         return None
 
 
-def mem_guard(ndof: int, what: str) -> None:
+def mem_guard(ndof: int, what: str, need_mb: float | None = None) -> None:
     """Raise MemoryError when a solve of `ndof` degrees of freedom would leave less than MEM_RESERVE_MB available
-    (the predicted need: MB_PER_KDOF — measured for the FE solvers, ASSUMED for the optimiser's fine level)."""
-    need = MB_PER_KDOF.get(what, 9.0) * ndof / 1000.0
+    (the predicted need: `need_mb` when the solver forecasts it — the whole-satellite check, from PARDISO's analysis
+    — else MB_PER_KDOF: measured for the FE solvers, ASSUMED for the optimiser's fine level)."""
+    need = MB_PER_KDOF.get(what, 9.0) * ndof / 1000.0 if need_mb is None else float(need_mb)
     avail = available_mb()
     if avail is not None and avail - need < MEM_RESERVE_MB:
         raise MemoryError(f"{what} with {ndof} dofs needs about {need:.0f} MB; {avail:.0f} MB available, "
@@ -165,14 +166,20 @@ def _design_ladder(dom, vol_frac, rmin_mm: float, budget_s: float, threads: int,
         reason = (f"no contact voxels for {', '.join(empty)} on {h} mm voxels (the part's side is too close to its "
                   "neighbours or to the wall at this voxel size)")
         return {"passed": False, "reason": reason}, [{"vol_frac": None, "passed": False, "reason": reason}]
+    frame = None
+    fixed = dom.fixed
+    if getattr(dom, "brace_frame", False):        # the frame joins the optimisation; the pads are not clamped
+        from .frame import frame_spec
+        frame = frame_spec(dom.origin, [c["body_accel_mm_s2"] for c in dom.load_cases()], dom.material)
+        fixed = np.zeros_like(dom.fixed)
     for vf in ladder:
         t0 = time.perf_counter()
         F = [dom.contact_voxel_forces(c) for c in dom.load_cases()]
         try:
-            s = solve(~dom.void, dom.passive_solid(), dom.fixed, F, dom.h, float(dom.material["nu"]), vf,
+            s = solve(~dom.void, dom.passive_solid(), fixed, F, dom.h, float(dom.material["nu"]), vf,
                       rmin_mm=rmin_mm, budget_s=budget_s, threads=threads, mem_check=mem_guard,
                       progress=None if progress is None else
-                      (lambda lv, i, c, d, vf=vf: progress("simp", vf, lv, i)))
+                      (lambda lv, i, c, d, vf=vf: progress("simp", vf, lv, i)), frame=frame)
         except MemoryError as exc:                  # the optimiser itself would not fit (no coarse level to keep)
             rungs.append({"vol_frac": vf, "passed": False, "reason": f"not solved: optimiser: {exc}"[:200]})
             break
@@ -343,6 +350,7 @@ def combined_job(snapshot: str, out_dir: str, threads: int = 4) -> str:
             "eta_s": (mean * left if mean is not None else None) if status != "DONE" else 0.0, **(extra or {})},
             default=float))
     write("RUNNING")
+    solids = {}
     with MemWatch() as mw:
         for k, g in enumerate(groups):
             rows[k].update(status="running", started_s=time.perf_counter() - t0)
@@ -353,6 +361,8 @@ def combined_job(snapshot: str, out_dir: str, threads: int = 4) -> str:
                 rec, mesh, _ = design_combined(g, snap, st, threads=threads, log=lambda m: None)
                 if mesh is not None:
                     rec.update(_write_mesh(out, f"{lid}-cb{k}", mesh))
+                    solids[key] = {"parts": g["pids"], "material": rec.get("material"), "mesh": mesh,
+                                   "label": g["name"]}
             except Exception as exc:  # noqa: BLE001 - one bracket's failure is that bracket's result
                 rec = {"name": g["name"], "kind": "combined", "parts": g["pids"], "passed": False,
                        "reason": f"design failed: {exc!r}"[:300], "key": key, "target": g["target"]}
@@ -363,7 +373,9 @@ def combined_job(snapshot: str, out_dir: str, threads: int = 4) -> str:
                            mass_g=1000.0 * rec["mass_kg"] if rec.get("mass_kg") is not None else None,
                            solid=rec.get("mass_kg") is not None, reason=str(rec.get("reason") or "")[:160])
             write("RUNNING", {"peak_rss_mb": mw.peak_mb})
-    write("DONE", {"peak_rss_mb": mw.peak_mb, "seconds_total": time.perf_counter() - t0})
+        # the whole satellite with these brackets (a group without a solid keeps its parts' own brackets)
+        fc = run_frame_check(snap, solids, threads) if snap.get("bracket_meshes") is not None else None
+    write("DONE", {"peak_rss_mb": mw.peak_mb, "seconds_total": time.perf_counter() - t0, "frame_check": fc})
     return str(prog)
 
 
@@ -373,7 +385,73 @@ def one_piece_domain_of(snap: dict, settings: dict):
     return one_piece_domain(snap["brackets"], snap["records"], snap["poses"], snap["masses"], snap["inner"],
                             [(n, k, np.asarray(b, float)) for n, k, b in snap["keepouts"]],
                             {p: np.asarray(b, float) for p, b in snap["nonheld_boxes"].items()},
-                            material=settings.get("material") or snap.get("material"))
+                            material=settings.get("material") or snap.get("material"),
+                            brace_frame=bool(settings.get("brace_frame")))
+
+
+# =================================================================================================== whole satellite
+def frame_items(snap: dict, designs: dict | None = None) -> list:
+    """The brackets of one bracket layout for gd.frame_eval.layout_frame_check: the given designs ({key: {"parts",
+    "material", "mesh": (v, f)}} — combined brackets or the one piece) for the parts they hold, and every other part's
+    own bracket — its designed or estimated solid (snap["bracket_meshes"]), its reserved box as the fallback."""
+    from . import materials as mats
+    meshes = snap.get("bracket_meshes") or {}
+    mat_of = snap.get("bracket_materials") or {}
+    items, replaced = [], set()
+    for key, d in (designs or {}).items():
+        if d.get("mesh") is None:
+            continue
+        items.append({"label": str(d.get("label") or key), "material": d.get("material") or snap.get("material")
+                      or mats.DEFAULT_AM, "mesh": d["mesh"], "box": None})
+        replaced |= set(d.get("parts") or [])
+    for b in snap.get("brackets") or []:
+        if b["pid"] in replaced:
+            continue
+        m = mat_of.get(b["pid"]) or mats.for_kind(b["kind"], snap.get("material"))
+        items.append({"label": b["name"], "material": m, "mesh": meshes.get(b["pid"]),
+                      "box": np.asarray(b["reserve"], float)})
+    return items
+
+
+def run_frame_check(snap: dict, designs: dict | None, threads: int, progress=None) -> dict:
+    """The whole-satellite check of a bracket layout (gd.frame_eval.layout_frame_check) under the memory guard; a
+    failure is that check's result ({"error": …})."""
+    from .frame_eval import layout_frame_check
+    if progress is not None:
+        progress()
+    try:
+        return layout_frame_check(snap, frame_items(snap, designs), threads=threads, mem_guard=mem_guard)
+    except MemoryError as exc:
+        return {"error": f"not solved: {exc}"}
+    except Exception as exc:  # noqa: BLE001 - the check's failure is its result, not the design's
+        return {"error": f"whole-satellite check failed: {exc!r}"[:300]}
+
+
+def frame_check_job(snapshot: str, out_dir: str, threads: int = 4) -> str:
+    """The whole-satellite check of one bracket layout on its own (the per-part brackets, or a combined / one-piece
+    result whose designs the snapshot carries as `frame_designs`), writing progress.json."""
+    from ..core.fileio import atomic_write_text
+    snap = pickle.loads(Path(snapshot).read_bytes())
+    out = Path(out_dir)
+    out.mkdir(parents=True, exist_ok=True)
+    prog = out / "progress.json"
+    t0 = time.perf_counter()
+    mode = snap.get("frame_mode") or "per_part"
+    row = {"k": 0, "pid": "whole satellite", "kind": "frame_check", "label": f"whole satellite ({mode.replace('_', ' ')})",
+           "status": "running", "started_s": 0.0, "phase": "checking the whole satellite"}
+
+    def write(status, extra=None):
+        atomic_write_text(prog, json.dumps({
+            "status": status, "mode": "frame_check", "frame_mode": mode, "progress": 1.0 if status == "DONE" else 0.5,
+            "layout_id": snap["layout_id"], "brackets": [row], "n_total": 1, "n_done": int(status == "DONE"),
+            "seconds": time.perf_counter() - t0, "workers": 1, "eta_s": None, **(extra or {})}, default=float))
+    write("RUNNING")
+    with MemWatch() as mw:
+        fc = run_frame_check(snap, snap.get("frame_designs"), threads)
+    row.update(status="done", seconds=time.perf_counter() - t0, passed=bool(fc.get("passed")), phase="done",
+               solid="error" not in fc, reason=str(fc.get("error") or "")[:160])      # solid: the check has a result
+    write("DONE", {"frame_check": fc, "peak_rss_mb": mw.peak_mb, "seconds_total": time.perf_counter() - t0})
+    return str(prog)
 
 
 # measured model of the one piece's run time and memory (docs/notes/m4.md): per SIMP iteration (gd.simp) and per FE
@@ -445,6 +523,7 @@ def one_piece_job(snapshot: str, out_dir: str, threads: int = 4) -> str:
             "n_total": 1, "n_done": 1 if status == "DONE" else 0, "brackets": [row], "eta_s": eta if status != "DONE"
             else 0.0, "estimate": est, **(extra or {})}, default=float))
     write("RUNNING")
+    fc = None
     with MemWatch() as mw:
         try:
             dom = one_piece_domain_of(snap, st)
@@ -467,14 +546,23 @@ def one_piece_job(snapshot: str, out_dir: str, threads: int = 4) -> str:
             ev, rungs = _design_ladder(dom, None if vf in (None, "auto") else float(vf), rmin, budget, threads,
                                        snap.get("environment"), lambda m: None, join_width=width, progress=progress)
             settings = {"material": dom.material.get("id"), "vol_frac": "auto" if vf in (None, "auto") else float(vf),
-                        "min_member_mm": "auto" if mm in (None, "auto") else float(mm), "budget_s": budget}
-            rec = _record(dom, ev, rungs, settings, "one-piece metal-AM bracket (exploratory)")
+                        "min_member_mm": "auto" if mm in (None, "auto") else float(mm), "budget_s": budget,
+                        "brace_frame": bool(dom.brace_frame)}
+            label = ("one-piece metal-AM bracket bracing the frame (exploratory)" if dom.brace_frame else
+                     "one-piece metal-AM bracket (exploratory)")
+            rec = _record(dom, ev, rungs, settings, label)
             rec.update(voxel_mm=dom.h.tolist(), grid=list(dom.shape), domain_notes=dom.notes,
-                       kept_brackets=getattr(dom, "kept_brackets", []), key="one_piece",
+                       kept_brackets=getattr(dom, "kept_brackets", []), key="one_piece", brace_frame=dom.brace_frame,
                        bolted=[{"part": p.pid, "axis": p.axis, "neg": p.neg, "plane_mm": p.plane,
                                 "footprint": [float(x) for x in p.box]} for p in dom.parts])
             if ev.get("mesh") is not None:
                 rec.update(_write_mesh(out, f"{lid}-op", ev["mesh"]))
+                if snap.get("bracket_meshes") is not None:     # the whole satellite with this piece
+                    fc = run_frame_check(snap, {"one_piece": {"parts": [p.pid for p in dom.parts],
+                                                              "material": dom.material.get("id"),
+                                                              "mesh": ev["mesh"], "label": "one piece"}},
+                                         threads, progress=lambda: (row.update(phase="checking the whole satellite"),
+                                                                    write("RUNNING", {"peak_rss_mb": mw.peak_mb})))
         except Exception as exc:  # noqa: BLE001
             rec = {"name": "one piece", "kind": "one_piece", "passed": False, "reason": f"design failed: {exc!r}"[:300],
                    "key": "one_piece"}
@@ -483,7 +571,7 @@ def one_piece_job(snapshot: str, out_dir: str, threads: int = 4) -> str:
         row.update(status="done", seconds=now, passed=bool(rec.get("passed")), phase="done",
                    mass_g=1000.0 * rec["mass_kg"] if rec.get("mass_kg") is not None else None,
                    solid=rec.get("mass_kg") is not None, reason=str(rec.get("reason") or "")[:160])
-    write("DONE", {"peak_rss_mb": mw.peak_mb, "seconds_total": time.perf_counter() - t0})
+    write("DONE", {"peak_rss_mb": mw.peak_mb, "seconds_total": time.perf_counter() - t0, "frame_check": fc})
     return str(prog)
 
 

@@ -162,7 +162,8 @@ def test_layout_run_settings_are_checked(tmp_path):
 def test_starting_a_layout_run_sends_one_job_at_a_time(tmp_path, monkeypatch):
     c, e = _coord(tmp_path)
     snap = {"layout_id": "L-9", "brackets": e.meta["brackets"]}
-    monkeypatch.setattr(Coordinator, "_layout_snapshot", lambda self, e, mode, st=None, ov=None: dict(snap, mode=mode))
+    monkeypatch.setattr(Coordinator, "_layout_snapshot",
+                        lambda self, e, mode, st=None, ov=None, with_meshes=False: dict(snap, mode=mode))
     import t2s.gd.layouts as L
     monkeypatch.setattr(L, "plan_combined", lambda s: [{"name": "combined:1"}])
     fut = Future()

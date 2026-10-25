@@ -37,6 +37,10 @@ One piece (exploratory)
 * Contact zone and pad: the voxels in the part's reserved box next to its surface; the first voxel layer on its
   target plane under it is bolted. The optimiser (gd.simp) fills the free space; the solid is then joined into one
   piece by shortest paths through the free space (gd.multi.join).
+* Bracing the frame (brace_frame, V2 with the bracket budget at 100): the same domain on a grid with even counts; the
+  frame (gd.frame: walls, end plates and rails, held at the rail ends) joins the optimisation, the walls and end plates
+  hold the piece wherever it meets them, the pads stay as passive solid on their walls, and every load case also
+  carries the frame's weight — so members that stiffen the frame across the satellite pay off.
 """
 from __future__ import annotations
 
@@ -232,6 +236,9 @@ class MultiDomain:
     plane_mm: float | None = None
     notes: list = field(default_factory=list)
     kept_brackets: list = field(default_factory=list)   # one piece: parts that keep their own bracket (corner rail)
+    # one piece that braces the frame (gd.frame): the walls and end plates hold it wherever it meets them, the frame is
+    # held at its rail ends, and the pads (`fixed`) are passive solid joined to their walls instead of clamped
+    brace_frame: bool = False
 
     # -- the DesignDomain interface the FE helpers use
     @property
@@ -567,14 +574,18 @@ def load_path(dom: MultiDomain, solid: np.ndarray) -> dict:
 
 
 # ------------------------------------------------------------------------------------------------- one piece
-def one_piece_grid(inner_lo, inner_hi, end_plate_parts: bool) -> tuple[np.ndarray, np.ndarray, tuple]:
+def one_piece_grid(inner_lo, inner_hi, end_plate_parts: bool, even: bool = False) -> tuple[np.ndarray, np.ndarray,
+                                                                                            tuple]:
     """(origin, h (3,), shape) of a grid lying exactly on all six inner planes: h_k = L_k / n_k with n_k the fewest
     voxels keeping h ≤ 2.7 mm across the side walls (x, y) and ≤ 4 mm along z (≤ 2.7 mm if a part is mounted on an
-    end plate)."""
+    end plate). even: every n_k even (the frame-bracing one piece: its 2 × 2 × 2 coarse level then lies on the same
+    planes, where the frame is)."""
     lo, hi = np.asarray(inner_lo, float), np.asarray(inner_hi, float)
     L = hi - lo
     hmax = np.array([ONE_PIECE_H_WALL, ONE_PIECE_H_WALL, ONE_PIECE_H_WALL if end_plate_parts else ONE_PIECE_H_LONG])
     n = np.ceil(L / hmax - 1e-9).astype(int)
+    if even:
+        n = n + n % 2
     return lo.copy(), L / n, tuple(int(x) for x in n)
 
 
@@ -597,14 +608,15 @@ def _cube_near_boxes(origin, h, shape, boxes, clear: float) -> np.ndarray:
 
 def one_piece_domain(brackets: list[dict], records: dict, poses: dict, masses: dict, inner, keepouts: list,
                      nonheld_boxes: dict, material: str | None = None, vol_frac: float = 0.05,
-                     name: str = "one piece") -> MultiDomain:
+                     name: str = "one piece", brace_frame: bool = False) -> MultiDomain:
     """Design domain of the one piece: every part with a bracket on a wall or an end plate is held (a part on a corner
     rail keeps its own bracket, which then is a keep-out). `keepouts`: [(name, kind, box)] of the layout (rails, rods,
     stack reserve, harness, standoffs); `nonheld_boxes`: {pid: (6,) bounding box} of every part the piece does not hold
-    (the PC/104 boards, rail-mounted parts). See the module docstring for the rules."""
+    (the PC/104 boards, rail-mounted parts). See the module docstring for the rules. brace_frame: the one piece that
+    braces the frame (MultiDomain.brace_frame; its grid has even counts, the frame's coarse level)."""
     held_b = [b for b in brackets if (b.get("target_kind") or "wall") in ("wall", "end_plate")]
     kept_b = [b for b in brackets if b not in held_b]
-    origin, h, shape = one_piece_grid(inner[0], inner[1], any(int(b["axis"]) == 2 for b in held_b))
+    origin, h, shape = one_piece_grid(inner[0], inner[1], any(int(b["axis"]) == 2 for b in held_b), even=brace_frame)
     clear = CLEAR + SLACK
     obstacles = [np.asarray(r, float) for _, _, r in keepouts]
     obstacles += [np.asarray(b["reserve"], float) for b in kept_b]
@@ -653,7 +665,7 @@ def one_piece_domain(brackets: list[dict], records: dict, poses: dict, masses: d
         p.contact &= ~fixed | p.fixed                         # a pad voxel is bolted and holds its part
         contact |= p.contact
     dom = MultiDomain(name, "one_piece", origin, h, shape, region, void | ~region, fixed, contact, parts,
-                      fea_material(material), vol_frac)
+                      fea_material(material), vol_frac, brace_frame=bool(brace_frame))
     dropped = drop_unreachable(dom)
     boss = np.zeros(shape, bool)
     for p in parts:

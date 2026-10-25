@@ -310,6 +310,13 @@ def fea_problem(dom: MultiDomain, v, f, h_fea: float | None = None):
     fixed_mask = np.zeros(len(faces), bool)
     if dom.kind == "combined":
         fixed_mask = np.all(np.abs(p3[:, :, dom.axis] - dom.plane_mm) < 1e-4, axis=1)
+    elif getattr(dom, "brace_frame", False):
+        # the frame-bracing piece is held wherever it meets a wall or an end plate (the grid's six planes); the frame
+        # itself is checked in gd.frame_eval
+        lo, hi = dom.origin, dom.origin + np.asarray(dom.shape) * dom.h
+        for ax in range(3):
+            for pl in (lo[ax], hi[ax]):
+                fixed_mask |= np.all(np.abs(p3[:, :, ax] - pl) < 1e-4, axis=1)
     else:
         for p in dom.parts:
             lat = [a for a in range(3) if a != p.axis]

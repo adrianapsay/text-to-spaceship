@@ -350,8 +350,10 @@ export interface DesignProgress {
   seconds: number | null;
   /** estimated seconds left, when this update was written (null until one bracket is done) */
   eta_s: number | null;
-  /** M4: which bracket layout the run designs (per_part: the per-part design job) */
-  mode?: BracketLayoutMode;
+  /** M4: which bracket layout the run designs (per_part: the per-part design job; V2 frame_check: the whole-satellite
+   * check of one layout, frame_mode) */
+  mode?: BracketLayoutMode | 'frame_check';
+  frame_mode?: BracketLayoutMode;
   /** M4: the one piece's estimate (its eta comes from it) */
   estimate?: OnePieceEstimate | null;
   peak_rss_mb?: number | null;
@@ -639,12 +641,63 @@ export interface LayoutModeResult {
   estimate?: OnePieceEstimate | null;
 }
 
+/** V2: one margin check of the whole-satellite model (static, random limit, random qualification) */
+export interface FrameMarginCheck {
+  check: string;
+  ms_yield: number;
+  ms_ult: number;
+  sigma_mpa: number;
+  factors: number[];
+  where_mm?: number[];
+}
+
+/** V2: a group of the whole-satellite model (the frame: walls, end plates, rails; or the brackets / piece) */
+export interface FrameGroup {
+  ms_yield: number;
+  ms_ult: number;
+  governing: string;
+  checks: FrameMarginCheck[];
+  mass_kg: number;
+  elements: number;
+}
+
+/** V2: the whole satellite held at its rail ends with one bracket layout's brackets (backend gd/frame_eval.py) */
+export interface FrameCheck {
+  environment?: string;
+  static_g?: number;
+  f1_hz?: number | null;
+  f1_guidance_hz?: number;
+  modes?: { f_hz: number; eff_mass_frac: number[] }[];
+  n_modes?: number;
+  highest_mode_hz?: number | null;
+  eff_mass_captured?: number[];
+  residual_mass_frac?: number[];
+  max_deflection_mm?: number;
+  max_deflection_axis?: string;
+  part_deflection_mm?: Record<string, number>;
+  groups?: { frame?: FrameGroup; brackets?: FrameGroup };
+  total_mass_kg?: number;
+  frame_mass_kg?: number;
+  estimated?: string[];
+  notes?: string[];
+  assumed?: string[];
+  passed?: boolean;
+  brace_frame?: boolean;
+  created?: string;
+  error?: string;
+  model?: { h_mm: number[]; elements: number; frame_cells: number; dofs: number; seconds: number };
+}
+
 export interface LayoutModeView {
   mode: BracketLayoutMode;
   name: string;
   status: 'designed' | 'not designed' | 'not run' | string;
   summary: LayoutModeSummary | null;
   result?: LayoutModeResult | null;
+  /** V2: the one piece was designed to brace the frame */
+  brace_frame?: boolean;
+  /** V2: the whole satellite with this layout's brackets (none until checked) */
+  frame_check?: FrameCheck | null;
 }
 
 /** M4: GET /api/layouts/{id}/bracket-layouts — the three bracket layouts side by side */
@@ -657,7 +710,7 @@ export interface BracketLayouts {
   combined_plan_error?: string | null;
   build_volume_mm: number[];
   build_volume_note: string;
-  running: { mode: BracketLayoutMode; layout_id: string } | null;
+  running: { mode: BracketLayoutMode | 'frame_check'; layout_id: string } | null;
   budget_range_s: [number, number];
   exploratory: { one_piece: boolean };
 }
@@ -688,6 +741,8 @@ export interface LayoutRunSettings {
   vol_frac?: number | 'auto';
   min_member_mm?: number | 'auto';
   budget_s?: number;
+  /** V2: the one piece braces the whole frame (needs the Bracket budget at 100) */
+  brace_frame?: boolean;
 }
 
 export type SliderKey =
