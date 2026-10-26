@@ -310,12 +310,28 @@ async def cad_list(request: Request):
 @router.post("/cad/{cid}/import")
 async def cad_import(request: Request, cid: str, file: Annotated[UploadFile, File()],
                      origin: Annotated[str, Form()] = "manufacturer",
-                     source_url: Annotated[str | None, Form()] = None):
-    """Import the user's CAD file for a part: STEP (preferred), IGES, BREP, STL, or a .zip of one."""
+                     source_url: Annotated[str | None, Form()] = None,
+                     member: Annotated[str | None, Form()] = None):
+    """Import the user's CAD file for a part: STEP (preferred), IGES, BREP, STL, or a .zip holding them (`member`: the
+    model's path in the archive; else the one named for the part, cad.pick_model)."""
     data = await file.read()
     try:
         return await asyncio.to_thread(_cad(request).import_file, cid, file.filename or "part", data, origin,
-                                       source_url)
+                                       source_url, member)
+    except KeyError as exc:
+        raise HTTPException(404, f"no catalog entry {cid}") from exc
+    except CadError as exc:
+        raise HTTPException(400, str(exc)) from exc
+
+
+@router.post("/cad/{cid}/model")
+async def cad_model(request: Request, cid: str):
+    """Use another model of the archive kept at the part's last import: body {"member": its path in the archive}."""
+    member = (await _body(request)).get("member")
+    if not isinstance(member, str) or not member:
+        raise HTTPException(400, "send {\"member\": the model's path in the archive}")
+    try:
+        return await asyncio.to_thread(_cad(request).choose_model, cid, member)
     except KeyError as exc:
         raise HTTPException(404, f"no catalog entry {cid}") from exc
     except CadError as exc:

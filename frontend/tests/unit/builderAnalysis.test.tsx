@@ -200,6 +200,25 @@ describe('V3 Builder: architecture, checks, trade study and catalog', () => {
     expect(onSimplified).toHaveBeenCalledTimes(1);
   });
 
+  it('an imported archive holding several models offers the others', () => {
+    const onModel = vi.fn();
+    const part = pick({}).items[0];
+    const entry = {
+      component: part.id, origin: 'manufacturer' as const, origin_text: 'Manufacturer CAD', file: 'x/x.stl', source_name: 'x.zip', source_url: null,
+      archive_models: ['a/X-PLUS.step', 'a/X.step'], archive_member: 'a/X.step', converter_peak_mb: 120, sha256: 'ab',
+      imported: '2026-10-26T00:00:00', units: 'mm (converted by OpenCASCADE)', scale: 1, extents_mm: [67, 42, 7.5], shift_mm: [0, 0, 0], volume_mm3: 21105, solids: 1, faces: 12,
+      checks: [{ name: 'model', ok: true, detail: 'a/X.step: its name matches X; the archive also holds X-PLUS.step' }], ok: true, licence: 'kept on this computer only',
+    };
+    const { getByTestId } = render(
+      <GeometryCell c={part} entry={entry} offerUrl={null} busy={false} onImport={() => undefined} onSimplified={() => undefined} onDelete={() => undefined} onModel={onModel} />,
+    );
+    const sel = getByTestId(`cad-model-${part.id}`) as HTMLSelectElement;
+    expect(sel.value).toBe('a/X.step');
+    expect(getByTestId(`geometry-${part.id}`).textContent).toContain('model: a/X.step: its name matches X');
+    fireEvent.change(sel, { target: { value: 'a/X-PLUS.step' } });
+    expect(onModel).toHaveBeenCalledWith('a/X-PLUS.step');
+  });
+
   it('the catalog filters by kind, says what is not published, and puts a part in a slot', () => {
     const onUse = vi.fn();
     const catalog: CatalogList = {

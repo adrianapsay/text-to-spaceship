@@ -195,7 +195,8 @@ endpoint that changes a design answers `{design, view}` (the design record and t
 | GET | `/api/builder/catalog?category=` | Component summaries, categories and the analysis references |
 | GET | `/api/builder/catalog/{id}` | The full catalog record (every value with its source) and the budget values it does not publish |
 | GET | `/api/builder/cad` | Each part's geometry `{origin: manufacturer \| reconstructed \| bbox \| placeholder, checks, units, extents_mm, …}` and the CAD the makers offer (links only: the app never downloads) |
-| POST | `/api/builder/cad/{id}/import` (multipart `file`, `origin`, `source_url?`) | Import the user's CAD file (STEP, IGES, BREP, STL or a .zip of one): converted to a millimetre STL by OpenCASCADE in its own process, checked (opens, solids, watertight, volume, size against the catalog). 400 with the reason |
+| POST | `/api/builder/cad/{id}/import` (multipart `file`, `origin`, `source_url?`, `member?`) | Import the user's CAD file (STEP, IGES, BREP, STL or a .zip holding them, a zip of zips included): converted to a millimetre STL by OpenCASCADE in its own process (not started, or stopped, when less than the app's 2 GB memory reserve is available), checked (the archive's model and why, opens, solids, watertight, volume, size against the catalog). `member`: the model's path in the archive; else the one named for the part. The entry lists `archive_models` and `archive_member`. 400 with the reason |
+| POST | `/api/builder/cad/{id}/model` `{member}` | Use another model of the archive kept at the part's last import (one holding several). 400 when there is none or no such model |
 | POST | `/api/builder/cad/{id}/simplified` | A simplified bounding box of the published size (a placeholder cube when none is published) |
 | DELETE | `/api/builder/cad/{id}` | Remove a part's geometry |
 | GET | `/api/builder/cad/{id}/stl` | The part's STL (mm) |

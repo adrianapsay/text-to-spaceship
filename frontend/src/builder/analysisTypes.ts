@@ -189,6 +189,11 @@ export interface CadEntry {
   file: string;
   source_name: string | null;
   source_url: string | null;
+  /** an imported archive's models (paths in it) and the one used; another can be chosen (POST …/model) */
+  archive_models?: string[];
+  archive_member?: string | null;
+  /** the conversion worker's peak memory, MB */
+  converter_peak_mb?: number | null;
   sha256: string | null;
   imported: string;
   units: string;

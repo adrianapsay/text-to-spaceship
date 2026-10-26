@@ -190,6 +190,9 @@ export class ApiClient {
     fd.append('origin', origin);
     return this.json<CadEntry>(`/api/builder/cad/${encodeURIComponent(cid)}/import`, { method: 'POST', body: fd });
   }
+  builderCadModel(cid: string, member: string) {
+    return this.send<CadEntry>('POST', `/api/builder/cad/${encodeURIComponent(cid)}/model`, { member });
+  }
   builderCadSimplified(cid: string) {
     return this.send<CadEntry>('POST', `/api/builder/cad/${encodeURIComponent(cid)}/simplified`);
   }

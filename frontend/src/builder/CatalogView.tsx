@@ -24,9 +24,12 @@ export function GeometryCell(props: {
   onImport: (file: File) => void;
   onSimplified: () => void;
   onDelete: () => void;
+  /** use another model of the imported archive (its path in the archive) */
+  onModel?: (member: string) => void;
 }) {
   const input = useRef<HTMLInputElement>(null);
   const e = props.entry;
+  const models = e?.archive_models ?? [];
   return (
     <div className="stack small" style={{ gap: 3 }} data-testid={`geometry-${props.c.id}`}>
       <span className="muted">
@@ -51,6 +54,26 @@ export function GeometryCell(props: {
             ))}
             <li>units: {e.units}</li>
             {e.source_name ? <li>from {e.source_name}</li> : null}
+            {models.length > 1 && props.onModel ? (
+              <li>
+                model in the archive:{' '}
+                <select
+                  value={e.archive_member ?? ''}
+                  disabled={props.busy}
+                  aria-label={`Model in the archive for ${props.c.product}`}
+                  onChange={(ev) => props.onModel?.(ev.target.value)}
+                  data-testid={`cad-model-${props.c.id}`}
+                >
+                  {models.map((m) => (
+                    <option key={m} value={m}>
+                      {m}
+                    </option>
+                  ))}
+                </select>
+              </li>
+            ) : e.archive_member ? (
+              <li>model in the archive: {e.archive_member}</li>
+            ) : null}
             {e.licence ? <li>{e.licence}</li> : null}
           </ul>
         </details>
@@ -96,6 +119,7 @@ export function CatalogSection(props: {
   onCadImport?: (cid: string, file: File) => void;
   onCadSimplified?: (cid: string) => void;
   onCadDelete?: (cid: string) => void;
+  onCadModel?: (cid: string, member: string) => void;
 }) {
   const [cat, setCat] = useState('');
   const [q, setQ] = useState('');
@@ -162,6 +186,7 @@ export function CatalogSection(props: {
                   onImport={(f) => props.onCadImport?.(c.id, f)}
                   onSimplified={() => props.onCadSimplified?.(c.id)}
                   onDelete={() => props.onCadDelete?.(c.id)}
+                  onModel={props.onCadModel ? (m) => props.onCadModel?.(c.id, m) : undefined}
                 />
               </td>
               <td>

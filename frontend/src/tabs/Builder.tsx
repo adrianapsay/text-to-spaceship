@@ -365,6 +365,7 @@ export function BuilderTab() {
           onCadImport={(cid, f) => void cadAct(() => session().api.builderCadImport(cid, f))}
           onCadSimplified={(cid) => void cadAct(() => session().api.builderCadSimplified(cid))}
           onCadDelete={(cid) => void cadAct(() => session().api.builderCadDelete(cid))}
+          onCadModel={(cid, m) => void cadAct(() => session().api.builderCadModel(cid, m))}
         />
       ) : null}
       {current && !creating && NEEDS_ANALYSIS.includes(section) ? (
