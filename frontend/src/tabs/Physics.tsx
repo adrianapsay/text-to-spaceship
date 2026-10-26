@@ -116,6 +116,12 @@ export function PhysicsTab() {
   return (
     <div className="tab-scroll" data-testid="tab-physics">
       {dm.source === 'local' ? <Notice tone="info">Showing a local recompute after your mass edit; the backend confirmation is pending.</Notice> : null}
+      {dm.infeasible ? (
+        <Notice tone="warn">
+          Showing the least-violating Stage 2 candidate {layout.id} (INFEASIBLE: {(layout.violations_engineering ?? []).join('; ') || 'rules broken'}) — the layout on screen, not a
+          validated layout.
+        </Notice>
+      ) : null}
       <Panel title="Centre of mass vs the CDS box" caption={`layout ${layout.id} · COM ${fmtVec(m.com_mm as Vec3)} · ${settings?.stage === 2 ? 'HARD in Stage 2' : 'displayed, not enforced in Stage 1'}`} right={<MockTag />}>
         <div className="row" style={{ alignItems: 'flex-start', gap: 24 }}>
           <Projection title="Top (XY)" ax={[0, 1]} size={size} box={box} com={(m.com_mm as Vec3) ?? null} target={target} />

@@ -434,6 +434,20 @@ export interface RenderItem {
   style: RenderStyle;
 }
 
+/**
+ * The layout the views show as the main one: the best validated layout, or — in Stage 2 with no feasible layout for
+ * the current inputs — the least-violating candidate (`infeasible`: drawn desaturated with its verdict, never as
+ * VALIDATED). The 3D view, its labels and the metrics all follow this one choice.
+ */
+export function shownLayout(
+  solver: Pick<SolverState, 'best'> & Partial<Pick<SolverState, 'infeasible'>>,
+  newest: Revs,
+): { layout: Layout | null; infeasible: boolean } {
+  const inf = solver.infeasible ?? null;
+  if (inf && isCurrent(inf, newest) && (!solver.best || !isCurrent(solver.best, newest))) return { layout: inf, infeasible: true };
+  return { layout: solver.best ?? null, infeasible: false };
+}
+
 /** What the viewport draws. Candidates are only ever ghosts (rule 3), and only in Expert mode with ghosts enabled. */
 export function renderPlan(
   solver: Pick<SolverState, 'best' | 'candidate'> & Partial<Pick<SolverState, 'infeasible'>>,
@@ -441,11 +455,9 @@ export function renderPlan(
   opts: { expert: boolean; showGhost: boolean },
 ): RenderItem[] {
   const out: RenderItem[] = [];
-  const inf = solver.infeasible ?? null;
-  // Stage 2 with no feasible layout for the current inputs: show the least-violating candidate, desaturated and
-  // labelled with the verdict — never as VALIDATED.
-  if (inf && isCurrent(inf, newest) && (!solver.best || !isCurrent(solver.best, newest))) {
-    out.push({ layout: inf, role: 'best', kind: 'INFEASIBLE', style: 'stale' });
+  const shown = shownLayout(solver, newest);
+  if (shown.infeasible && shown.layout) {
+    out.push({ layout: shown.layout, role: 'best', kind: 'INFEASIBLE', style: 'stale' });
   } else if (solver.best) {
     const kind = displayKind(solver.best, newest, 'best');
     out.push({ layout: solver.best, role: 'best', kind, style: styleFor(kind) });

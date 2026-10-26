@@ -11,6 +11,7 @@ import {
   reduceEnvelope,
   renderPlan,
   scoresVisible,
+  shownLayout,
   type ConnProto,
   type SolverState,
 } from '../../src/api/protocol';
@@ -298,6 +299,22 @@ describe('Stage 2 least-violating candidate (INFEASIBLE)', () => {
     plan = renderPlan(solver, conn.newest, { expert: false, showGhost: false });
     expect(plan[0].layout.id).toBe('L-0009');
     expect(plan[0].kind).toBe('VALIDATED');
+  });
+  it('the views label the layout they draw: the candidate exactly when it is the one shown', () => {
+    // as found in the app: a Stage 1 layout validated under earlier inputs, and Stage 2's least-violating candidate
+    const s1 = { ...layout('L-0571', 'VALIDATED', { ...revs, constraint_rev: 4 }), metrics: { length_used_mm: 235.4 } };
+    const inf = { ...layout('L-0620', 'INFEASIBLE', revs), stage: 2 as const, metrics: { length_used_mm: 467.7 } };
+    let shown = shownLayout({ best: s1, infeasible: inf }, revs);
+    expect(shown).toEqual({ layout: inf, infeasible: true });
+    expect(renderPlan({ best: s1, infeasible: inf, candidate: null }, revs, { expert: false, showGhost: false })[0].layout.id).toBe('L-0620');
+    expect(shown.layout?.metrics?.length_used_mm).toBe(467.7); // not the Stage 1 layout's 235.4 mm
+    // a validated layout for the current inputs is shown (and labelled) instead
+    const ok = { ...layout('L-0700', 'VALIDATED', revs), stage: 2 as const };
+    shown = shownLayout({ best: ok, infeasible: inf }, revs);
+    expect(shown).toEqual({ layout: ok, infeasible: false });
+    // a candidate for older inputs is never shown over a validated layout, current or not
+    expect(shownLayout({ best: s1, infeasible: { ...inf, constraint_rev: 4 } }, revs)).toEqual({ layout: s1, infeasible: false });
+    expect(shownLayout({ best: null }, revs)).toEqual({ layout: null, infeasible: false });
   });
   it('layout.infeasible updates the candidate but ignores older inputs', () => {
     let conn = initialConn();

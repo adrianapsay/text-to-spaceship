@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useApp, type AppState } from './store/store';
 import type { Layout, Metrics, Part } from './api/types';
 import { computeMetrics } from './lib/physics';
-import { isCurrent, scoresVisible } from './api/protocol';
+import { isCurrent, scoresVisible, shownLayout } from './api/protocol';
 
 export function useParts(): Part[] {
   const parts = useApp((s) => s.dataset.parts);
@@ -32,15 +32,23 @@ export interface DisplayMetrics {
   metrics: Metrics | null;
   /** 'backend' = as published; 'local' = local recompute after a pending physical edit (labelled) */
   source: 'backend' | 'local' | 'none';
-  /** layout whose poses the metrics belong to */
+  /** layout whose poses the metrics belong to: the one the 3D view draws (protocol.shownLayout) */
   layout: Layout | null;
   scoresShown: boolean;
   current: boolean;
+  /** the layout is the least-violating Stage 2 candidate (INFEASIBLE), not a validated layout */
+  infeasible: boolean;
 }
 
-/** Metrics to show for the displayed layout. Never interpolated; a pending mass edit shows a labelled local recompute. */
+/**
+ * Metrics to show for the displayed layout — the one the 3D view draws (protocol.shownLayout): the best validated
+ * layout, or Stage 2's least-violating candidate when no feasible layout exists for the current inputs (before, its
+ * labels showed the last validated layout's numbers, often a Stage 1 one, beside the candidate's parts). Never
+ * interpolated; a pending mass edit shows a labelled local recompute.
+ */
 export function useDisplayMetrics(): DisplayMetrics {
-  const best = useApp((s) => s.solver.best);
+  const validated = useApp((s) => s.solver.best);
+  const infeasible = useApp((s) => s.solver.infeasible);
   const massEdits = useApp((s) => s.physical.massEdits);
   const parts = useApp((s) => s.dataset.parts);
   const rotations = useApp((s) => s.dataset.rotations);
@@ -51,7 +59,9 @@ export function useDisplayMetrics(): DisplayMetrics {
   const sent = useApp((s) => s.conn.lastClientSeqSent);
   return useMemo(() => {
     const scoresShown = scoresVisible({ appliedClientSeq: applied, lastClientSeqSent: sent });
-    if (!best) return { metrics: null, source: 'none', layout: null, scoresShown, current: false };
+    const shown = shownLayout({ best: validated, infeasible }, newest);
+    const best = shown.layout;
+    if (!best) return { metrics: null, source: 'none', layout: null, scoresShown, current: false, infeasible: false };
     const current = isCurrent(best, newest);
     const pending = Object.entries(massEdits).filter(([id, e]) => best.poses.some((p) => p.part_id === id) && parts[id]?.mass_kg !== e.mass_kg);
     if (pending.length && rotations.length && best.poses.every((p) => parts[p.part_id])) {
@@ -87,13 +97,13 @@ export function useDisplayMetrics(): DisplayMetrics {
           kappa: local.kappa,
           tilt_deg: local.tilt_deg,
         };
-        return { metrics: m, source: 'local', layout: best, scoresShown, current };
+        return { metrics: m, source: 'local', layout: best, scoresShown, current, infeasible: shown.infeasible };
       } catch {
         /* fall through to backend metrics */
       }
     }
-    return { metrics: best.metrics, source: 'backend', layout: best, scoresShown, current };
-  }, [best, massEdits, parts, rotations, project, settings, newest, applied, sent]);
+    return { metrics: best.metrics ?? null, source: 'backend', layout: best, scoresShown, current, infeasible: shown.infeasible };
+  }, [validated, infeasible, massEdits, parts, rotations, project, settings, newest, applied, sent]);
 }
 
 export interface AsyncState<T> {
