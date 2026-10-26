@@ -25,7 +25,7 @@ export interface Transport {
 
 export function wsUrl(path = '/ws'): string {
   const loc = typeof window !== 'undefined' ? window.location : null;
-  if (!loc) return `ws://127.0.0.1:8766${path}`;
+  if (!loc) return `ws://127.0.0.1:8768${path}`;
   const proto = loc.protocol === 'https:' ? 'wss:' : 'ws:';
   return `${proto}//${loc.host}${path}`;
 }

@@ -10,7 +10,7 @@ All commands from `frontend/` after `. D:\text-to-spaceship\tools\env.ps1`.
 | Command | What it does |
 |---|---|
 | `npm run fixtures` | (Re)builds `public/mock-fixtures/` from `data/synthetic` (git-ignored; the `pre*` scripts build it if missing) |
-| `npm run dev` | Dev server on :5173, proxies `/api` and `/ws` to `127.0.0.1:8766`; uses the mock until `/api/health` answers |
+| `npm run dev` | Dev server on :5173, proxies `/api` and `/ws` to `127.0.0.1:8768`; uses the mock until `/api/health` answers |
 | `npm run dev:mock` | Dev server forced into MOCK mode (`.env.mock` sets `VITE_MOCK=1`) |
 | `npm test` | Vitest unit tests (jsdom) |
 | `npm run build` | `tsc` (strict) + production build |

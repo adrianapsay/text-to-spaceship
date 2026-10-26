@@ -47,7 +47,7 @@ from .archive import OK_STATUSES, LayoutArchive, ObjectiveTable, ParetoFront
 from .context import SearchContext, build_context, packable, parts_signature, stage2_config, write_context
 from .project import PartEntry, ProjectStore, build_record_file, now_iso, part_json, quick_inspect
 
-VERSION = "2.0.0-dev"
+VERSION = "3.0.0-dev"
 ALGORITHM = {"id": "hybrid_box", "label": "Hybrid BRKGA + box decoder", "reason": "archived layout"}
 SEARCH_LABELS = {"brkga": "BRKGA + memetic local search", "lahc": "late-acceptance hill climbing",
                  "nsga2": "NSGA-II (pymoo)"}

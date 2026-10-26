@@ -1,10 +1,14 @@
-# TEXT-TO-SPACESHIP V2
+# TEXT-TO-SPACESHIP V3
 
+> **V3** adds the **CubeSat Builder** to V2: from a mission idea to an engineering-informed CubeSat design (adaptive
+> mission questions, subsystem sizing with traceable equations, real components with sources, CAD, compatibility
+> checks) and on into V2's packing optimiser — see [docs/V3.md](docs/V3.md). V3 runs on port 8768, so V1 (8765),
+> V2 (8766) and V3 can run side by side.
+>
 > **V2** builds on [V1](https://github.com/ss394/TTS-V1): a part-size slider with "find largest size that fits",
 > modelled brackets in Stage 2 (simple ↔ metal 3D-printed, part of the packing and of the fit proof), an exploded
 > view, a Mounting Hardware tab, two independent FEA solvers (CalculiX, NGSolve), a generative-design contest for
-> 3D-printed brackets, 3U / 6U / 12U envelopes and optional parts — see [docs/V2.md](docs/V2.md). V2 runs on port
-> 8766, so V1 and V2 can run side by side.
+> 3D-printed brackets, 3U / 6U / 12U envelopes and optional parts — see [docs/V2.md](docs/V2.md).
 
 A physics-aware packaging optimiser for a 3U CubeSat (6U and 12U in V2). Give it any STL parts: it analyses and
 classifies them, packs them into the 100 × 100 × 340.5 mm envelope (or the 6U / 12U one) with several search algorithms, certifies every reported layout on the
@@ -23,7 +27,7 @@ algorithm it chose and why. Sliders change the priorities live.
 1. On this repository's GitHub page click **Code → Codespaces → Create codespace on main**. You need a free GitHub account; it uses your Codespaces allowance.
 2. Wait for the first setup to finish (several minutes: it installs Python 3.14, the packages and the user
    interface). Later starts are much faster.
-3. The app starts by itself on port 8766. Open the **Ports** tab and click the globe next to
+3. The app starts by itself on port 8768. Open the **Ports** tab and click the globe next to
    **TEXT-TO-SPACESHIP** (it may also open on its own).
 4. Stop the codespace when you are done, so it stops using your allowance.
 
@@ -38,7 +42,7 @@ Download this repository (**Code → Download ZIP**, or `git clone`), then:
 * **macOS / Linux:** run `bash start.sh` in the folder.
 
 The first start builds the interface and installs the Python packages (a few minutes). The app then opens at
-<http://127.0.0.1:8766>. It only accepts connections from the same computer.
+<http://127.0.0.1:8768>. It only accepts connections from the same computer.
 
 ## Use your own parts
 

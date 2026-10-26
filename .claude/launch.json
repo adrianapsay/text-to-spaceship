@@ -2,22 +2,22 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "app-v2",
+      "name": "app-v3",
       "runtimeExecutable": "cmd",
-      "runtimeArgs": ["/c", "call D:\\text-to-spaceship-v2\\tools\\env.cmd && cd /d D:\\text-to-spaceship-v2\\backend && uv run python run_server.py --project default"],
-      "port": 8766
+      "runtimeArgs": ["/c", "call D:\\text-to-spaceship-v3\\tools\\env.cmd && cd /d D:\\text-to-spaceship-v3\\backend && uv run python run_server.py --project default"],
+      "port": 8768
     },
     {
-      "name": "backend-v2",
+      "name": "app-v3-verify",
       "runtimeExecutable": "cmd",
-      "runtimeArgs": ["/c", "call D:\\text-to-spaceship-v2\\tools\\env.cmd && cd /d D:\\text-to-spaceship-v2\\backend && uv run python run_server.py --project dev --islands 4"],
-      "port": 8766
+      "runtimeArgs": ["/c", "call D:\\text-to-spaceship-v3\\tools\\env.cmd && cd /d D:\\text-to-spaceship-v3\\backend && uv run python run_server.py --project v3verify --port 8769 --islands 3 --no-search"],
+      "port": 8769
     },
     {
-      "name": "frontend-v2",
+      "name": "frontend-v3",
       "runtimeExecutable": "cmd",
-      "runtimeArgs": ["/c", "call D:\\text-to-spaceship-v2\\tools\\env.cmd && cd /d D:\\text-to-spaceship-v2\\frontend && npm run dev -- --port 5174"],
-      "port": 5174
+      "runtimeArgs": ["/c", "call D:\\text-to-spaceship-v3\\tools\\env.cmd && cd /d D:\\text-to-spaceship-v3\\frontend && npm run dev -- --port 5175"],
+      "port": 5175
     }
   ]
 }
