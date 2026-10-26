@@ -77,7 +77,7 @@ def test_a_step_file_round_trips_to_a_millimetre_stl(tmp_path, step_file):
     assert store.manifest()["aac-clyde-space-starbuck-nano"]["sha256"] == e["sha256"]
     # the worker's own memory, not only the launcher's (a venv's python.exe on Windows runs the interpreter as a child)
     assert e["converter_peak_mb"] > 10 and e["archive_models"] == [] and e["archive_member"] is None
-    assert next(c for c in e["checks"] if c["name"] == "repair")["detail"].startswith("none needed")
+    assert next(c for c in e["checks"] if c["name"] == "tessellation")["detail"].startswith("OpenCASCADE's own")
     assert not (tmp_path / "cad" / "aac-clyde-space-starbuck-nano" / "incoming").exists()
 
 
@@ -104,9 +104,28 @@ def test_an_assembly_keeps_its_solids(tmp_path):
     e = CadStore(tmp_path / "cad").import_file("aac-clyde-space-ss200", "pair.step", path.read_bytes())
     checks = {c["name"]: c for c in e["checks"]}
     assert checks["solids"]["ok"] and checks["solids"]["detail"].startswith("2 solid(s)")
-    assert checks["repair"]["detail"].startswith("none needed")
+    assert checks["tessellation"]["ok"] is True
     assert checks["volume"]["ok"] and checks["watertight"]["ok"] is not False
     assert e["volume_mm3"] == pytest.approx(2000.0, rel=1e-3)
+
+
+def test_the_converter_falls_back_to_gmsh(tmp_path, step_file, monkeypatch):
+    """OpenCASCADE's own tessellation first; gmsh's surface mesh when it fails or its volume disagrees."""
+    from t2s.builder import cad_worker as W
+    good = W.convert(str(step_file), str(tmp_path / "a.stl"))
+    assert good["tessellation"] == "occ" and good["faces_without_triangles"] == 0
+    assert good["triangle_volume_mm3"] == pytest.approx(good["volume_mm3"], rel=0.005)
+    assert trimesh.load(tmp_path / "a.stl").is_watertight
+
+    def broken(src, out):
+        raise ValueError("netgen could not read it")
+
+    monkeypatch.setattr(W, "tessellate_occ", broken)
+    f = W.convert(str(step_file), str(tmp_path / "b.stl"))
+    assert f["tessellation"] == "gmsh" and f["repair"] == "as is" and "netgen could not read it" in f["occ_note"]
+    monkeypatch.setattr(W, "tessellate_occ", lambda src, out: {**good, "triangle_volume_mm3": 1.5 * good["volume_mm3"]})
+    f = W.convert(str(step_file), str(tmp_path / "c.stl"))
+    assert f["tessellation"] == "gmsh" and "enclose" in f["occ_note"]
 
 
 def test_surfaces_only_and_unreadable_files_are_reported(tmp_path):

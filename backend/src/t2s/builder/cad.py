@@ -185,11 +185,24 @@ def _rss_mb(pid: int) -> float:
 
 
 def _stop(p: subprocess.Popen) -> None:
-    for q in reversed(_tree(p.pid)):                   # the children first, then the launcher
+    procs = _tree(p.pid)
+    for q in reversed(procs):                          # the children first, then the launcher
         with contextlib.suppress(Exception):
             q.kill()
+    with contextlib.suppress(Exception):               # until they are gone (and their files closed)
+        import psutil
+        psutil.wait_procs(procs, timeout=10)
     if p.poll() is None:
         p.kill()
+
+
+def _remove(path: Path) -> None:
+    """Delete a folder; on Windows a process just stopped may hold its files for a moment, so try a few times."""
+    for _ in range(10):
+        shutil.rmtree(path, ignore_errors=True)
+        if not path.exists():
+            return
+        time.sleep(0.2)
 
 
 def occ_convert(src: Path, out_stl: Path, timeout: float = TIMEOUT_S) -> dict:
@@ -337,7 +350,7 @@ class CadStore:
         try:
             return self._convert(cid, d, work, name, data, origin, source_url, member)
         finally:
-            shutil.rmtree(work, ignore_errors=True)          # the unpacked files go, imported or not
+            _remove(work)                                    # the unpacked files go, imported or not
 
     def choose_model(self, cid: str, member: str) -> dict:
         """Import another model from the archive kept at the part's last import (one that held several)."""
@@ -376,8 +389,20 @@ class CadStore:
             checks.append({"name": "solids", "ok": facts["solids"] > 0,
                            "detail": f"{facts['solids']} solid(s), {facts['surfaces']} surface(s)" +
                                      ("" if facts["solids"] else ": surfaces only, no closed volume")})
-            first = f" (the first mesh failed: {facts['mesh_error']})" if facts.get("mesh_error") else ""
-            checks.append({"name": "repair", "ok": True, "detail": REPAIR_TEXT.get(facts.get("repair"), "—") + first})
+            if facts.get("tessellation") == "occ":
+                gaps = facts.get("faces_without_triangles") or 0
+                checks.append({"name": "tessellation", "ok": None if gaps else True,
+                               "detail": "OpenCASCADE's own tessellation (BRepMesh, as CAD viewers display a model)" +
+                                         (f"; {gaps} of {facts['surfaces']} faces got no triangles (small gaps)"
+                                          if gaps else "")})
+            else:
+                note = facts.get("occ_note")
+                checks.append({"name": "tessellation", "ok": True,
+                               "detail": "gmsh's surface mesh (Delaunay)" +
+                                         (f"; OpenCASCADE's own tessellation was not used: {note}" if note else "")})
+                first = f" (the first mesh failed: {facts['mesh_error']})" if facts.get("mesh_error") else ""
+                checks.append({"name": "repair", "ok": True,
+                               "detail": REPAIR_TEXT.get(facts.get("repair"), "—") + first})
             units, scale = "mm (converted by OpenCASCADE)", 1.0
         else:
             facts = {"solids": None, "volume_mm3": None}
@@ -406,6 +431,7 @@ class CadStore:
             err = abs(mf["volume_mm3"] - facts["volume_mm3"]) / facts["volume_mm3"]
             vol_ok = err <= 0.02
         n = facts.get("solids") or 0
+        gaps = facts.get("faces_without_triangles") or 0
         if mf["watertight"]:
             checks.append({"name": "watertight", "ok": True, "detail": "the surface mesh is closed"})
         elif vol_ok and n > 1:
@@ -413,6 +439,10 @@ class CadStore:
                            "detail": f"not closed as one surface, as usual for an assembly of {n} solids that touch "
                                      "(edges shared by more than two triangles); the volume matches OpenCASCADE's, so "
                                      "the solids' surfaces enclose them"})
+        elif vol_ok and gaps:
+            checks.append({"name": "watertight", "ok": None,
+                           "detail": f"not closed where {gaps} faces got no triangles; the volume matches "
+                                     "OpenCASCADE's, so the gaps are small"})
         else:
             checks.append({"name": "watertight", "ok": False,
                            "detail": "the surface mesh has open edges: its volume and mass properties are not reliable"})
