@@ -1,0 +1,542 @@
+{
+  "earth_mu": {
+    "values": {
+      "GM_WGS84_m3_per_s2": 3.986004418e14,
+      "GM_WGS84_km3_per_s2": 398600.4418,
+      "GM_for_GPS_users_m3_per_s2": 3.986005e14
+    },
+    "units": "m^3/s^2 as published; km^3/s^2 value is a unit conversion (divide by 1e9)",
+    "condition": "WGS 84 defining parameter (geocentric gravitational constant), per NGA.STND.0036_1.0.0_WGS84 (2014-07-08). NGA footnote gives a separate value for GPS users.",
+    "source": {
+      "url": "https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84",
+      "title": "WGS 84 - Defining Parameters",
+      "publisher": "National Geospatial-Intelligence Agency (NGA), Office of Geomatics",
+      "accessed": "2026-10-25"
+    },
+    "quote": "3.986004418 x 10^14 meter^3/second^2",
+    "verified": true,
+    "note": "Primary agency web page (superscripts lost in page text, rendered here with ^). The NGA.STND.0036 PDF itself could not be parsed by WebFetch. GPS-user footnote: 'The value of GM for GPS users is 3.9860050x10^14 m3/sec2'. For comparison only: NASA NSSDCA Earth Fact Sheet lists GM = 0.39860 x 10^6 km^3/s^2; Vallado's companion code (https://raw.githubusercontent.com/CelesTrak/fundamentals-of-astrodynamics/main/software/python/src/valladopy/constants.py) uses MU = 398600.4415 km^3/s^2 labelled EGM-08."
+  },
+  "earth_radius": {
+    "values": {
+      "a_equatorial_m": 6378137.0,
+      "a_equatorial_km": 6378.137,
+      "inverse_flattening": 298.257223563
+    },
+    "units": "m (km by conversion); 1/f dimensionless",
+    "condition": "WGS 84 ellipsoid semi-major axis (defining parameter)",
+    "source": {
+      "url": "https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84",
+      "title": "WGS 84 - Defining Parameters",
+      "publisher": "National Geospatial-Intelligence Agency (NGA), Office of Geomatics",
+      "accessed": "2026-10-25"
+    },
+    "quote": "6378137.0 meters",
+    "verified": true,
+    "note": "NASA NSSDCA Earth Fact Sheet (last updated 15 Nov 2024) also lists 'Equatorial radius (km) 6378.137'. Note Vallado's code uses RE = 6378.1363 km (EGM-08 convention), not the WGS 84 value."
+  },
+  "j2": {
+    "values": {
+      "J2_NSSDCA": 1.08263e-3,
+      "J2_Vallado_EGM08": 1.082626174e-3
+    },
+    "units": "dimensionless (unnormalized second-degree zonal harmonic)",
+    "condition": "NSSDCA Earth Fact Sheet value 1082.63 x 10^-6; Vallado companion-code constant labelled EGM-08",
+    "source": {
+      "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html",
+      "title": "Earth Fact Sheet",
+      "publisher": "NASA Goddard Space Flight Center, NSSDCA (last updated 15 November 2024)",
+      "accessed": "2026-10-25"
+    },
+    "quote": "J2 (x 10-6) 1082.63",
+    "verified": true,
+    "note": "The NGA WGS 84 web page does not list J2, and the WGS 84 standard PDF (normalized C2,0) could not be parsed by WebFetch, so no WGS-84-document J2 is given. Second value from Vallado's official companion repository (linked from celestrak.org/software/vallado-sw.php): 'J2 = 0.001082626174' in https://raw.githubusercontent.com/CelesTrak/fundamentals-of-astrodynamics/main/software/python/src/valladopy/constants.py (comment: EGM-08 constants)."
+  },
+  "omega_earth": {
+    "values": {
+      "omega_rad_per_s": 7.292115e-5
+    },
+    "units": "rad/s",
+    "condition": "WGS 84 nominal mean angular velocity of the Earth (rotation relative to inertial space)",
+    "source": {
+      "url": "https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84",
+      "title": "WGS 84 - Defining Parameters",
+      "publisher": "National Geospatial-Intelligence Agency (NGA), Office of Geomatics",
+      "accessed": "2026-10-25"
+    },
+    "quote": "7292115 x 10-11 radians/second",
+    "verified": true,
+    "note": "Same value used in Vallado's companion code (EARTHROT = 7.292115e-5 rad/s)."
+  },
+  "sidereal_vs_solar_day": {
+    "values": {
+      "mean_solar_day_s": 86400,
+      "length_of_day_h_NSSDCA": 24.0,
+      "sidereal_rotation_period_h_NSSDCA": 23.9345,
+      "sidereal_day_s_Vallado": 86164.090524
+    },
+    "units": "s and h as labelled",
+    "condition": "NSSDCA 'Length of day' (mean solar day) vs 'Sidereal rotation period'; Vallado code constant SIDERALDAY_SEC",
+    "source": {
+      "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html",
+      "title": "Earth Fact Sheet",
+      "publisher": "NASA Goddard Space Flight Center, NSSDCA (last updated 15 November 2024)",
+      "accessed": "2026-10-25"
+    },
+    "quote": "Sidereal rotation period (hrs) 23.9345",
+    "verified": true,
+    "note": "NSSDCA also: 'Length of day (hrs) 24.0000'. The more precise sidereal day 86164.090524 s and DAY2SEC = 86400 come from Vallado's companion code: https://raw.githubusercontent.com/CelesTrak/fundamentals-of-astrodynamics/main/software/python/src/valladopy/constants.py ('SIDERALDAY_SEC = 86164.090524')."
+  },
+  "sso_precession": {
+    "values": {
+      "node_precession_deg_per_day": 0.9856,
+      "node_precession_rad_per_s_derived": 1.991e-7
+    },
+    "units": "deg/day (as published); rad/s derived",
+    "condition": "Sun-synchronous orbit: nodal drift equal to the apparent precession of the mean Sun (i.e. ~360 deg per tropical year, same direction as the Sun's apparent motion)",
+    "source": {
+      "url": "https://ntrs.nasa.gov/citations/19930015517",
+      "title": "Analysis of the effects of mean local node-crossing time on the evolution of Sun-synchronous orbits (Jordan, Blaes, Roszman, Cooley; Flight Mechanics/Estimation Theory Symposium 1992, publ. 1 Feb 1993)",
+      "publisher": "NASA Goddard Space Flight Center / NASA Technical Reports Server",
+      "accessed": "2026-10-25"
+    },
+    "quote": "0.9856-degree-per-day apparent precession of the position of the mean Sun",
+    "verified": true,
+    "note": "rad/s value derived here, not quoted: 0.9856 deg/day x (pi/180) / 86400 s = 1.991e-7 rad/s (1.99097e-7)."
+  },
+  "solar_constant": {
+    "values": {
+      "TSI_W_per_m2": 1360.8,
+      "TSI_uncertainty_W_per_m2": 0.5,
+      "NSSDCA_solar_irradiance_W_per_m2": 1361.0
+    },
+    "units": "W/m^2",
+    "condition": "Total solar irradiance (by definition at 1 AU) during the 2008 solar minimum, SORCE/TIM-based (Kopp & Lean 2011)",
+    "source": {
+      "url": "https://earth.gsfc.nasa.gov/climate/projects/solar-irradiance/missions/sorce",
+      "title": "SORCE | Earth (NASA GSFC solar irradiance project page)",
+      "publisher": "NASA Goddard Space Flight Center",
+      "accessed": "2026-10-25"
+    },
+    "quote": "a value of 1360.8 W/m^2 representative of the 2008 solar minimum",
+    "verified": true,
+    "note": "Paper: Kopp, G. and Lean, J. L. (2011), 'A new, lower value of total solar irradiance: Evidence and climate significance', Geophys. Res. Lett. 38, L01706, doi:10.1029/2010GL045777 (metadata confirmed via api.crossref.org; Wiley/DTIC copies returned HTTP 403, NASA ESPO record refused connection). The +/-0.5 W/m^2 uncertainty (and the older 'canonical' 1365.4 +/- 1.3 W/m^2) come from the paper abstract as surfaced by search indexing of NASA ESPO's record, not from a page fetched directly. NASA NSSDCA Earth Fact Sheet: 'Solar irradiance (W/m2) 1361.0'."
+  },
+  "albedo": {
+    "values": {
+      "average": 0.3,
+      "range_min": 0.05,
+      "range_max": 0.6
+    },
+    "units": "dimensionless (fraction of incident sunlight, total solar spectrum)",
+    "condition": "Earth albedo seen by an orbiting spacecraft: 0.05 over open ocean to 0.6 over high cloud/icecap; varies with surface, cloud cover and solar zenith angle; ECSS warns averages need care for short-duration analyses and Sun-synchronous orbits",
+    "source": {
+      "url": "https://spenvis.oma.be/ecss/e_st_10_04c/ecss_17_05_01.htm",
+      "title": "ECSS-E-ST-10-04C Space environment (15 November 2008), Annex F, clause F.5.1 Earth albedo (SPENVIS hypertext copy)",
+      "publisher": "ECSS (text); hosted by SPENVIS / Royal Belgian Institute for Space Aeronomy (BIRA-IASB)",
+      "accessed": "2026-10-25"
+    },
+    "quote": "The average albedo of the Earth is 0,3.",
+    "verified": true,
+    "note": "Read from SPENVIS mirror, which disclaims any guarantee of identity with the official version; ecss.nl redirected to an ESA status page so the official file was not reachable. Range quote: 'the albedo can vary between 0,05 (open ocean) and 0,6 (high cloud/icecap)'. ECSS-E-ST-10-04C has since been superseded by Rev.1 (15 June 2020); Rev.1 values not checked. Clause also gives a seasonal latitude model (a0 = 0.34, a2 = 0.29, c1 = 0.10). NASA/TM-2001-211221 (Anderson, Justus, Batts) is on NTRS only as a scanned-image PDF that WebFetch could not read, so its inclination/averaging-time design values are NOT verified."
+  },
+  "earth_ir": {
+    "values": {
+      "average_W_per_m2": 230,
+      "range_min_W_per_m2": 150,
+      "range_max_W_per_m2": 350,
+      "blackbody_temperature_K": 288
+    },
+    "units": "W/m^2 (temperature in K)",
+    "condition": "Earth-emitted infrared (outgoing longwave) seen by an orbiting spacecraft; diurnal variation small over oceans, up to ~20% over deserts; spectrum approximated by a 288 K black body",
+    "source": {
+      "url": "https://spenvis.oma.be/ecss/e_st_10_04c/ecss_17_05_02.htm",
+      "title": "ECSS-E-ST-10-04C Space environment (15 November 2008), Annex F, clause F.5.2 Earth infrared (SPENVIS hypertext copy)",
+      "publisher": "ECSS (text); hosted by SPENVIS / Royal Belgian Institute for Space Aeronomy (BIRA-IASB)",
+      "accessed": "2026-10-25"
+    },
+    "quote": "The average infrared radiation emitted by Earth is 230 W m-2.",
+    "verified": true,
+    "note": "Range quote: 'For an orbiting spacecraft, it can vary from 150 W m-2 to 350 W m-2.' Same mirror caveats as 'albedo' (official ecss.nl unreachable; superseded by Rev.1 2020, not checked). SPENVIS help page repeats 230 W/m^2 and 150-350 W/m^2. NASA/TM-2001-211221 values not verified (scanned PDF unreadable)."
+  },
+  "atmosphere_table": {
+    "values": {
+      "rows": [
+        {"h0_km": 300, "rho0_kg_per_m3": 2.418e-11, "H_km": 53.628},
+        {"h0_km": 350, "rho0_kg_per_m3": 9.518e-12, "H_km": 53.298},
+        {"h0_km": 400, "rho0_kg_per_m3": 3.725e-12, "H_km": 58.515},
+        {"h0_km": 450, "rho0_kg_per_m3": 1.585e-12, "H_km": 60.828},
+        {"h0_km": 500, "rho0_kg_per_m3": 6.967e-13, "H_km": 63.822},
+        {"h0_km": 600, "rho0_kg_per_m3": 1.454e-13, "H_km": 71.835},
+        {"h0_km": 700, "rho0_kg_per_m3": 3.614e-14, "H_km": 88.667},
+        {"h0_km": 800, "rho0_kg_per_m3": 1.170e-14, "H_km": 124.64},
+        {"h0_km": 900, "rho0_kg_per_m3": 5.245e-15, "H_km": 181.05},
+        {"h0_km": 1000, "rho0_kg_per_m3": 3.019e-15, "H_km": 268.00}
+      ]
+    },
+    "units": "h0 in km, rho0 in kg/m^3, H in km; rho(h) = rho0 * exp(-(h - h0)/H) using the row with the largest h0 <= h",
+    "condition": "Vallado exponential atmosphere model (static: no solar-flux, geomagnetic or local-time dependence). Underlying basis (stated by secondary sources as U.S. Standard Atmosphere 1976 and CIRA-72) and any exospheric-temperature/solar-activity assumption NOT verified.",
+    "source": {
+      "url": "https://raw.githubusercontent.com/CelesTrak/fundamentals-of-astrodynamics/main/software/misc/pascal/ATMOSEXP.DAT",
+      "title": "ATMOSEXP.DAT (exponential atmosphere data), fundamentals-of-astrodynamics repository - code for Vallado, Fundamentals of Astrodynamics and Applications",
+      "publisher": "CelesTrak / David Vallado (repository linked from celestrak.org/software/vallado-sw.php)",
+      "accessed": "2026-10-25"
+    },
+    "quote": "300.000 2.418E-0011  53.628",
+    "verified": true,
+    "note": "Rows 300-900 km read from Vallado's own data file (no header; it lists 900 km scale height as 181.045, book reproductions give 181.05; file ends at 900 km). Column meaning and the 1000 km row come from two independent secondary reproductions that agree on every 300-1000 km entry: SatelliteToolboxAtmosphericModels.jl constants.jl (https://raw.githubusercontent.com/JuliaSpace/SatelliteToolboxAtmosphericModels.jl/main/src/exponential/constants.jl, cites Vallado 2013, 4th ed.) and arXiv:1610.02156v5 Table 1 (https://arxiv.org/html/1610.02156v5, cites Vallado; units kg/m^3 and km in headers). Book table number (Table 8-4) not confirmed - book not accessible. U.S. Standard Atmosphere 1976 densities were not collected because the Vallado table was found."
+  },
+  "earth_dipole": {
+    "values": {
+      "dipole_moment_A_m2_2025": 7.69e22,
+      "dipole_moment_A_m2_2020": 7.71e22,
+      "dipole_moment_A_m2_1975": 7.94e22,
+      "M_T_m3_2025_derived": 7.69e15,
+      "M_T_m3_2020_derived": 7.71e15,
+      "M_T_m3_1975_derived": 7.94e15,
+      "NSSDCA_dipole_field_strength_gauss_Re3": 0.306
+    },
+    "units": "A*m^2 as published; T*m^3 derived as M = (mu0/4pi) * m with mu0/4pi = 1e-7 T*m/A",
+    "condition": "Centered-dipole moment from IGRF-14 by epoch (Kyoto WDC table; 2030 entry 7.67e22 is a prediction)",
+    "source": {
+      "url": "https://wdc.kugi.kyoto-u.ac.jp/poles/polesexp.html",
+      "title": "Magnetic North, Geomagnetic and Magnetic Poles",
+      "publisher": "World Data Center for Geomagnetism, Kyoto University",
+      "accessed": "2026-10-25"
+    },
+    "quote": "2025 80.8N 72.8W 80.8S 107.2E 85.7N 138.6E 63.9S 135.1E 7.69",
+    "verified": true,
+    "note": "Column header 'Dipole moment 10^22 Am2'; page states values are from IGRF-14. T*m^3 values are a unit conversion done here, not quoted. The SMAD figure '7.96e15 T*m^3' (or 7.8e15) was NOT found in any reachable source - unverified; the 1975 IGRF moment (7.94e15 T*m^3) is close to that classic textbook figure, and current epochs are ~3% lower. NASA NSSDCA Earth Fact Sheet: 'Dipole field strength: 0.306 Gauss-Re3' (about 7.9e15 T*m^3, derived; exact value depends on the Re used)."
+  },
+  "cds": {
+    "values": {
+      "revision": "Rev. 14.1",
+      "document_number": "CP-CDS-R14.1",
+      "date": "February 2022 (file dated 2022-02-09)",
+      "sizes_covered": "1U - 12U"
+    },
+    "units": "n/a",
+    "condition": "Current CubeSat Design Specification as listed by Cal Poly CubeSat Program on cubesat.org",
+    "source": {
+      "url": "https://www.cubesat.org/cubesatinfo",
+      "title": "CubeSat Info",
+      "publisher": "The CubeSat Program, Cal Poly San Luis Obispo",
+      "accessed": "2026-10-25"
+    },
+    "quote": "NEW RELEASE for 1U - 12U: Revision 14.1 - Updated February 2022",
+    "verified": true,
+    "note": "Page links /s/CDS-REV14_1-2022-02-09.pdf (redirects to https://static1.squarespace.com/static/5418c831e4b0fa4ecac1bacd/t/62193b7fc9e72e0053f00910/1645820809779/CDS+REV14_1+2022-02-09.pdf). That 7.6 MB PDF (and the NASA-hosted copy) could not be parsed by WebFetch; the document number CP-CDS-R14.1 and change-history content come from search-engine snippets of the PDF. cubesat.org/cds-announcement still describes the 2020 Rev 14 draft. No newer revision found as of access date."
+  },
+  "cds_mass": {
+    "values": {
+      "1U_kg": 2.0,
+      "1.5U_kg": 3.0,
+      "2U_kg": 4.0,
+      "3U_kg": 6.0,
+      "6U_kg": 12.0,
+      "12U_kg": 24.0
+    },
+    "units": "kg",
+    "condition": "CDS Rev 14.1 Table 1 'CubeSat Mass Specifications' (described in search snippets as typical maximum mass per configuration; dispenser/launch-provider limits govern)",
+    "source": {
+      "url": "https://www.cubesat.org/s/CDS-REV14_1-2022-02-09.pdf",
+      "title": "CubeSat Design Specification Rev. 14.1 (CP-CDS-R14.1)",
+      "publisher": "The CubeSat Program, Cal Poly SLO",
+      "accessed": "2026-10-25"
+    },
+    "quote": "Table 1: CubeSat Mass Specifications",
+    "verified": true,
+    "note": "Verification method: the PDF could not be parsed by WebFetch; 1U/1.5U/2U values (2.00/3.00/4.00) were confirmed from search-engine indexing of the Rev 14.1 PDF text, and 3U/6U/12U (6.00/12.00/24.00) from one search summary of the same PDF plus two secondary reproductions that agree on all six rows: University of Hawaii OER EPET 302 ch. 4.6 (https://pressbooks-dev.oer.hawaii.edu/epet302/chapter/4-6-structural-analysis/, reproduces CDS Rev 14 2020-07-31 draft Table 1) and the cubesat-specs package (https://cubesat-specs.readthedocs.io/en/latest/_modules/cubesat_specs/form_factors.html, cites Rev 14.1 Table 1). Exact 'typical maximum' wording not read verbatim. Rev 13 values (1.33 kg/U) are obsolete."
+  },
+  "cds_dimensions": {
+    "values": {
+      "1U_mm": [100, 100, 113.5],
+      "1.5U_mm": [100, 100, 170.2],
+      "2U_mm": [100, 100, 227],
+      "3U_mm": [100, 100, 340.5],
+      "6U_mm": [100, 226.3, 366],
+      "12U_mm": [226.3, 226.3, 366]
+    },
+    "units": "mm (nominal outer dimensions, order as printed by NASA; axis labels not given)",
+    "condition": "Nominal CubeSat structure dimensions tabulated by NASA from the CubeSat Design Specification (revision not stated in the NASA table)",
+    "source": {
+      "url": "https://www.nasa.gov/smallsat-institute/sst-soa/structures-materials-and-mechanisms/",
+      "title": "6.0 Structures, Materials, and Mechanisms - State-of-the-Art of Small Spacecraft Technology (Table 6-1: CubeSat Standard Structure Dimensions), dated Aug 4, 2026",
+      "publisher": "NASA Small Spacecraft Systems Virtual Institute",
+      "accessed": "2026-10-25"
+    },
+    "quote": "6U 100 x 226.3 x 366",
+    "verified": true,
+    "note": "Agency reproduction, not the CDS drawings themselves (CDS Rev 14.1 refers to Appendix B 'CubeSat Specification Drawings', not readable). Axis assignment not verified: by CDS convention the longest dimension lies along the rails (Z) - inference; the cubesat-specs package (secondary) assigns 6U as X 226.3 / Y 100.0 / Z 366.0 mm, consistent with the larger 6U X-axis CG tolerance. Tolerances not verified (a Rev 14 change-log snippet mentions 1U length 113.5 +/- 0.1 mm). cubesat-specs lists 1.5U length 170.25 mm vs NASA 170.2 mm - unresolved. The NASA table's 'Average Weight (kg)' column (0.118 etc.) is structure mass, not CDS mass limits."
+  },
+  "cds_cg": {
+    "values": {
+      "1U_cm": {"X": 2, "Y": 2, "Z": 2},
+      "1.5U_cm": {"X": 2, "Y": 2, "Z": 3},
+      "2U_cm": {"X": 2, "Y": 2, "Z": 4.5},
+      "3U_cm": {"X": 2, "Y": 2, "Z": 7},
+      "6U_cm": {"X": 4.5, "Y": 2, "Z": 7},
+      "12U_cm": {"X": 4.5, "Y": 4.5, "Z": 7}
+    },
+    "units": "cm, +/- from the geometric center along each axis",
+    "condition": "Acceptable CG ranges per configuration (CDS Table 2); Rev 14.1 section 2.2.11 requires CG within the Table 2 ranges",
+    "source": {
+      "url": "https://pressbooks-dev.oer.hawaii.edu/epet302/chapter/4-6-structural-analysis/",
+      "title": "4.6 Structural Analysis (EPET 302 open textbook), reproducing CDS Rev 14 (2020-07-31 draft) Table 2",
+      "publisher": "University of Hawaii OER (Pressbooks)",
+      "accessed": "2026-10-25"
+    },
+    "quote": "acceptable center of gravity locations as measured from the geometric center",
+    "verified": false,
+    "note": "UNVERIFIED against the Rev 14.1 primary text: a search snippet of the Rev 14.1 PDF shows '2.2.11 The CubeSat center of gravity shall fall within the ranges specified in Table 2' but the table contents could not be read. Values here are from a secondary reproduction of the Rev 14 draft; they agree with the cubesat-specs package (cites Rev 14.1 Table 2), with Rev 13 for 1U-3U and with the 2016/2018 6U CDS for 6U (both via search snippets only)."
+  },
+  "cds_protrusion": {
+    "values": {
+      "max_protrusion_from_rail_plane_mm": 6.5,
+      "RBF_pin_max_protrusion_from_rail_surface_mm": 6.5
+    },
+    "units": "mm",
+    "condition": "Components on the (yellow) shaded sides may not extend more than 6.5 mm normal to the surface measured from the plane of the rails (CDS Rev 14.1 section 2.2.3; CIFP gives measurement technique); RBF pin fully inserted (section 2.3.5.2)",
+    "source": {
+      "url": "https://cubesat-specs.readthedocs.io/en/latest/_modules/cubesat_specs/standards.html",
+      "title": "cubesat_specs.standards (constants traceable to CDS Rev 14.1, CP-CDS-R14.1)",
+      "publisher": "cubesat-specs open-source package (secondary)",
+      "accessed": "2026-10-25"
+    },
+    "quote": "Maximum protrusion of any component from the rail plane [mm] (§2.2.3).",
+    "verified": true,
+    "note": "Secondary source used for the quote; search-engine snippets of the Rev 14.1 PDF confirm the 6.5 mm limit measured from the plane of the rail for components on the shaded sides, the CIFP reference, and the RBF-pin 6.5 mm limit; Rev 12/13 used 'shall not exceed 6.5 mm normal to the surface'. A Studocu copy showing 6 mm appears to be a transcription error. Deployables (from snippets/secondary, not verified verbatim): must be constrained by the CubeSat, not the dispenser; cubesat-specs also lists a 30-minute minimum wait after deployment-switch activation before deploying booms/antennas/panels (section 2.4.4)."
+  },
+  "sentinel2_ltdn": {
+    "values": {
+      "MLST_descending_node": "10:30",
+      "mean_altitude_km": 786,
+      "inclination_deg": 98.62
+    },
+    "units": "local solar time (hh:mm); km; deg",
+    "condition": "Sentinel-2 nominal constellation operations configuration, Sun-synchronous orbit",
+    "source": {
+      "url": "https://sentiwiki.copernicus.eu/web/s2-mission",
+      "title": "S2 Mission | SentiWiki",
+      "publisher": "European Space Agency (Copernicus SentiWiki)",
+      "accessed": "2026-10-25"
+    },
+    "quote": "a 10:30 (am) Mean Local Solar Time (MLST) at the descending node",
+    "verified": true,
+    "note": ""
+  },
+  "landsat": {
+    "values": {
+      "L8_equatorial_crossing": "10:12 a.m. +/- 5 minutes",
+      "L9_equatorial_crossing": "10:12 a.m. +/- 5 minutes",
+      "OLI_multispectral_GSD_m": 30,
+      "OLI_panchromatic_GSD_m": 15,
+      "TIRS_GSD_m": 100,
+      "inclination_deg": 98.2,
+      "altitude_km": 705,
+      "repeat_cycle_days": 16,
+      "swath_km": 185
+    },
+    "units": "local time; m; deg; km; days",
+    "condition": "Landsat 8 (OLI/TIRS) and Landsat 9 (OLI-2/TIRS-2), sun-synchronous near-polar orbit",
+    "source": {
+      "url": "https://www.usgs.gov/landsat-missions/landsat-8",
+      "title": "Landsat 8 | U.S. Geological Survey",
+      "publisher": "U.S. Geological Survey",
+      "accessed": "2026-10-25"
+    },
+    "quote": "equatorial crossing time of 10:12 a.m. +/- 5 minutes",
+    "verified": true,
+    "note": "Landsat 8 page: '15-meter panchromatic and 30-meter multi-spectral spatial resolutions along a 185 km (115 mi) swath'; TIRS bands 10/11 at 100 m. Landsat 9 page (https://www.usgs.gov/landsat-missions/landsat-9): same '10:12 a.m. +/- 5 minutes', 705 km altitude, 98.2 deg inclination, '30-meters ... for all bands except the panchromatic band, which has a 15-meter ... GSD', TIRS-2 100 m. ESA Earth Online lists Landsat 8 as 10:00 a.m. +/- 15 min (older nominal figure, seen in search results only)."
+  },
+  "amateur_435": {
+    "values": {
+      "band_MHz": "435-438",
+      "status": "Not a Table allocation: amateur-satellite service may operate under RR No. 5.282, subject to not causing harmful interference to other services operating in accordance with the Table; administrations authorizing such use must ensure any harmful interference is immediately eliminated (No. 25.11)",
+      "direction": "No direction restriction for 435-438 MHz (5.282 limits only 1260-1270 and 5650-5670 MHz to Earth-to-space)",
+      "Region1_table_432_438_MHz": "AMATEUR, RADIOLOCATION, Earth exploration-satellite (active) 5.279A; footnotes 5.138 5.271 5.276 5.277 5.280 5.281 5.282",
+      "Region2_table_432_438_MHz": "RADIOLOCATION, Amateur, Earth exploration-satellite (active) 5.279A; footnotes 5.271 5.276 5.278 5.279 5.281 5.282"
+    },
+    "units": "MHz",
+    "condition": "ITU Radio Regulations Article 5 footnote 5.282 (also covers 1260-1270, 2400-2450, 3400-3410 MHz in Regions 2 and 3 only, 5650-5670 MHz)",
+    "source": {
+      "url": "https://www.law.cornell.edu/cfr/text/47/2.106",
+      "title": "47 CFR 2.106 Table of Frequency Allocations - international footnote 5.282",
+      "publisher": "Legal Information Institute, Cornell Law School (reproducing the US Code of Federal Regulations)",
+      "accessed": "2026-10-25"
+    },
+    "quote": "the amateur-satellite service may operate subject to not causing harmful interference",
+    "verified": true,
+    "note": "ITU RR PDF not machine-readable via WebFetch (eCFR also blocked), so the footnote text is taken from the CFR copy of the international footnotes (opening: 'In the bands 435-438 MHz, 1260-1270 MHz, 2400-2450 MHz, 3400-3410 MHz (in Regions 2 and 3 only) and 5650-5670 MHz,'). Region 1/2 table cells from the IARU Region 1 wiki reproduction of the ITU table (https://www.iaru-r1.org/wiki/UHF, last edited 20 Jan 2023; RR edition not stated). Same footnote text on ComReg's Irish frequency plan (https://rfpi.comreg.ie/content-item/694,5282). Region 3 cell not checked."
+  },
+  "eess_s": {
+    "values": {
+      "band_MHz": "2200-2290",
+      "international_table_entry": "SPACE OPERATION (space-to-Earth) (space-to-space); EARTH EXPLORATION-SATELLITE (space-to-Earth) (space-to-space); FIXED; MOBILE 5.391; SPACE RESEARCH (space-to-Earth) (space-to-space); 5.392",
+      "EESS_status": "primary (capitals); space-to-Earth and space-to-space"
+    },
+    "units": "MHz",
+    "condition": "ITU international table entry as reproduced from the FCC Table of Frequency Allocations (15 May 2015, 47 CFR 2.106); single international entry shown",
+    "source": {
+      "url": "https://www.nationalacademies.org/read/21774/chapter/7",
+      "title": "Handbook of Frequency Allocations and Spectrum Protection for Scientific Uses, 2nd ed. (2015), Ch. 5 Science Service Allocations, Table 5.1",
+      "publisher": "National Academies of Sciences, Engineering, and Medicine (National Academies Press)",
+      "accessed": "2026-10-25"
+    },
+    "quote": "EARTH EXPLORATION-SATELLITE (space-to-Earth) (space-to-space)",
+    "verified": true,
+    "note": "Reputable secondary reproduction; the ITU RR itself (PDF) was not machine-readable via WebFetch. RR 5.391 (no high-density mobile systems, Rec. ITU-R SA.1154) and 5.392 (space-to-space links of NGSO satellites) text confirmed via the CFR copy at https://www.law.cornell.edu/cfr/text/47/2.106. Changes by WRC-19/WRC-23 after this 2015 reproduction were not checked."
+  },
+  "eess_x": {
+    "values": {
+      "8025-8175_MHz": "EARTH EXPLORATION-SATELLITE (space-to-Earth); FIXED; FIXED-SATELLITE (Earth-to-space); MOBILE 5.463; 5.462A",
+      "8175-8215_MHz": "EARTH EXPLORATION-SATELLITE (space-to-Earth); FIXED; FIXED-SATELLITE (Earth-to-space); METEOROLOGICAL-SATELLITE (Earth-to-space); MOBILE 5.463; 5.462A",
+      "8215-8400_MHz": "EARTH EXPLORATION-SATELLITE (space-to-Earth); FIXED; FIXED-SATELLITE (Earth-to-space); MOBILE 5.463; 5.462A",
+      "EESS_status": "primary (capitals), space-to-Earth, across 8025-8400 MHz"
+    },
+    "units": "MHz",
+    "condition": "ITU international table entries as reproduced from the FCC Table of Frequency Allocations (15 May 2015)",
+    "source": {
+      "url": "https://www.nationalacademies.org/read/21774/chapter/7",
+      "title": "Handbook of Frequency Allocations and Spectrum Protection for Scientific Uses, 2nd ed. (2015), Ch. 5 Science Service Allocations, Table 5.1",
+      "publisher": "National Academies of Sciences, Engineering, and Medicine (National Academies Press)",
+      "accessed": "2026-10-25"
+    },
+    "quote": "EARTH EXPLORATION-SATELLITE (space-to-Earth) FIXED FIXED-SATELLITE (Earth-to-space) MOBILE 5.463 5.462A",
+    "verified": true,
+    "note": "RR 5.462A (ComReg copy, https://rfpi.comreg.ie/content-item/843,5462a) begins 'In Regions 1 and 3 (except for Japan), in the band 8 025-8 400 MHz, the Earth exploration-satellite service using...' geostationary satellites - a pfd limit. Per a search summary of Rec. ITU-R F.1502, EESS was secondary in Regions 1 and 3 before WRC-97. ITU RR PDF not machine-readable; post-2015 WRC changes not checked."
+  },
+  "boltzmann_db": {
+    "values": {
+      "k_J_per_K": 1.380649e-23,
+      "k_dBW_per_K_Hz_derived": -228.599,
+      "k_dBW_per_K_Hz_rounded": -228.6
+    },
+    "units": "J/K (exact, SI 2019); dB(W/(K*Hz)) derived",
+    "condition": "CODATA 2022; dB value = 10*log10(1.380649e-23)",
+    "source": {
+      "url": "https://physics.nist.gov/cgi-bin/cuu/Value?k",
+      "title": "CODATA Value: Boltzmann constant",
+      "publisher": "NIST Physical Measurement Laboratory (2022 CODATA)",
+      "accessed": "2026-10-25"
+    },
+    "quote": "1.380 649 x 10-23 J K-1 ... (exact)",
+    "verified": true,
+    "note": "The dB form is computed here (10*log10(1.380649e-23) = -228.5992), not quoted from an agency page; -228.6 dBW/K/Hz is the conventional rounding (also seen in an FCC IBFS Schedule S filing via search, not used as source)."
+  },
+  "fcc_disposal": {
+    "values": {
+      "max_years_after_end_of_mission": 5,
+      "applies_to": "Space stations ending their mission in or passing through the LEO region below 2000 km altitude and planning disposal by uncontrolled atmospheric re-entry (Part 25 incl. 25.122 small satellites; parallel Part 5 and Part 97 provisions)",
+      "rule": "47 CFR 25.283(e)",
+      "order": "FCC 22-74, Orbital Debris Second Report and Order, IB Docket Nos. 18-313 and 22-271",
+      "applicability": "New licensees and existing applicants with authorized satellites to be launched after September 29, 2024 must comply; satellites already in orbit exempt; two-year grandfathering period beginning September 29, 2022; authorized space stations exceeding five years had to launch before September 30, 2024",
+      "effective_date_25_283": "2024-09-09",
+      "compliance_date_certain_provisions": "2024-09-29"
+    },
+    "units": "years",
+    "condition": "End of mission = time the spacecraft can no longer perform collision-avoidance maneuvers; for spacecraft without that capability, completion of primary mission. Disposal 'as soon as practicable' and no later than five years.",
+    "source": {
+      "url": "https://www.govinfo.gov/content/pkg/FR-2024-08-09/html/2024-17093.htm",
+      "title": "Space Innovation; Mitigation of Orbital Debris in the New Space Age (Federal Register 89 FR 65217, 9 Aug 2024, FR Doc. 2024-17093)",
+      "publisher": "Federal Communications Commission, published in the Federal Register (U.S. GPO govinfo)",
+      "accessed": "2026-10-25"
+    },
+    "quote": "no later than five years after the end of the mission",
+    "verified": true,
+    "note": "FCC orbital-debris FAQ page (fcc.gov/space/faq-orbital-debris) returned HTTP 403; the FCC 22-74 PDF itself was not read. The Federal Register notice summarizes and makes effective the Second Report and Order."
+  },
+  "iadc_25yr": {
+    "values": {
+      "max_post_mission_orbital_lifetime_years": 25,
+      "applies_to": "Spacecraft/orbital stages ending missions in or passing through LEO",
+      "IADC_document": "IADC-02-01 Space Debris Mitigation Guidelines (latest revision Rev. 4, 16 Jan 2025 per UNOOSA A/AC.105/C.1/2025/CRP.9 - seen in search results only)"
+    },
+    "units": "years",
+    "condition": "International (IADC) guideline for post-mission orbital lifetime in LEO; also the U.S. ODMSP/NASA standard maximum",
+    "source": {
+      "url": "https://www.govinfo.gov/content/pkg/FR-2024-08-09/html/2024-17093.htm",
+      "title": "Space Innovation; Mitigation of Orbital Debris in the New Space Age (Federal Register 89 FR 65217, 9 Aug 2024)",
+      "publisher": "Federal Communications Commission, published in the Federal Register (U.S. GPO govinfo)",
+      "accessed": "2026-10-25"
+    },
+    "quote": "the longstanding guideline for deorbiting satellites within 25 years",
+    "verified": true,
+    "note": "Same notice: 'It has been adopted by the space agencies of other nations, the Inter-Agency Space Debris Coordination Committee (IADC)' and 'Both the NASA Standard and ODMSP specify a maximum 25-year post-mission orbital lifetime'. ESA Space Environment Report 2023 page: 'less than the maximum of 25 years stipulated by international guidelines and standards'; ESA has reduced the limit for its own new missions from 25 to 5 years. The IADC guideline PDF (iadc-home.org returned 403; UNOOSA copies are PDF) and ISO 24113:2023 (paywalled) were NOT read, so their exact wording and whether ISO 24113:2023 still states 25 years are unverified."
+  },
+  "bpsk_ebn0": {
+    "values": {
+      "Eb_N0_dB": 9.6,
+      "Eb_N0_dB_computed": 9.59,
+      "Eb_N0_linear_computed": 9.09,
+      "BER": 1e-5
+    },
+    "units": "dB (linear ratio also given)",
+    "condition": "Uncoded, coherently detected BPSK (Gray-coded QPSK has the same Pb) in AWGN, theoretical, no implementation loss: Pb = Q(sqrt(2 Eb/N0))",
+    "source": {
+      "url": "https://www.mathworks.com/help/comm/ug/analytical-expressions-used-in-berawgn-function-and-bit-error-rate-analysis-app.html",
+      "title": "Analytical Expressions Used in berawgn Function and Bit Error Rate Analysis App (BPSK expression cites eq. 5.2-57 of its reference [1], Proakis)",
+      "publisher": "MathWorks (Communications Toolbox documentation)",
+      "accessed": "2026-10-25"
+    },
+    "quote": "Ps = Pb = Q(√(2Eb/N0))",
+    "verified": true,
+    "note": "Numeric value derived here from the quoted textbook expression: Q(x) = 1e-5 at x = 4.2649, so Eb/N0 = x^2/2 = 9.09 = 9.59 dB. Corroborated by a secondary educational source (GaussianWaves, https://www.gaussianwaves.com/?p=40743: 'requiring roughly 9.6 dB of Eb/N0 to achieve a target BER of 10^-5'). No agency page stating 9.6 dB was reachable in machine-readable form (CCSDS/NASA documents are PDF)."
+  },
+  "smad_path_eff": {
+    "values": {
+      "Xe_direct_energy_transfer": null,
+      "Xd_direct_energy_transfer": null,
+      "Xe_peak_power_tracking": null,
+      "Xd_peak_power_tracking": null
+    },
+    "units": "dimensionless path efficiencies",
+    "condition": "SMAD (Wertz & Larson) solar-array sizing: Psa = (Pe*Te/Xe + Pd*Td/Xd)/Td",
+    "source": {
+      "url": "",
+      "title": "Space Mission Analysis and Design (Wertz & Larson) - not accessible",
+      "publisher": "",
+      "accessed": "2026-10-25"
+    },
+    "quote": "",
+    "verified": false,
+    "note": "UNVERIFIED. SMAD is not available online and no reachable source quoted its Xe/Xd values for direct energy transfer or peak-power tracking (exact-value searches returned nothing). A Valispace EPS sizing tutorial PDF (https://www.valispace.com/wp-content/uploads/2018/12/EPS-sizing-tutorial-1.pdf, cites SMAD 3rd ed.; seen via search summary only, not opened) uses the same formula with example efficiencies 0.8 (array-to-load) and 0.6 (array-battery-load) - illustrative, not attributed to a DET/PPT row of SMAD's table. Values deliberately left null rather than filled from memory."
+  },
+  "liion_dod": {
+    "values": {
+      "NASA_GRC_LEO_test_DoD_range_percent": "20-40",
+      "NASA_GRC_LEO_test_DoD_points_percent": [20, 30, 35, 40],
+      "NASA_GRC_target_LEO_cycles": ">30000",
+      "NASA_GRC_cycles_achieved_2005": ">2000 (Lithion and Saft cells)"
+    },
+    "units": "percent depth of discharge; charge/discharge cycles",
+    "condition": "NASA Glenn Li-ion verification/LEO life-test program conditions and goals (not a design rule)",
+    "source": {
+      "url": "https://ntrs.nasa.gov/citations/20050217178",
+      "title": "Lithium-Ion Batteries Being Evaluated for Low-Earth-Orbit Applications (B. I. McKissock, NASA GRC, June 2005)",
+      "publisher": "NASA Glenn Research Center / NASA Technical Reports Server",
+      "accessed": "2026-10-25"
+    },
+    "quote": "more than 30,000 low-Earth-orbit cycles",
+    "verified": false,
+    "note": "Marked unverified because no primary-source DoD-vs-cycle-life GUIDANCE was found in machine-readable form; the values above are verified NASA test conditions/targets only (2005 abstract: 'depth-of-discharges from 20 to 40 percent'; 2004 abstract NTRS 20050185205: 'depth-of-discharges of 20%, 30, 35%, and 40%'; NASA/TM-2008-215154: LEO life testing at ten DoD/temperature/end-of-charge-voltage combinations). NASA/TM-2009-215751 'Guidelines on Lithium-ion Battery Use in Space Applications' is PDF-only and was not read. Secondary (peer-reviewed chapter, JAXA authors Uno & Kukita, IntechOpen 2016, https://www.intechopen.com/chapters/52084): LEO batteries 'are operated with DoD shallower than 40%' 'to meet the typical cycle life requirement of 30,000 cycles'."
+  },
+  "solar_550nm": {
+    "values": {
+      "SSI_550nm_1nm_band_W_per_m2_nm": 1.9063,
+      "uncertainty_W_per_m2_nm": 0.0057,
+      "SSI_550.000nm_0.1nm_band_W_per_m2_nm": 1.9670
+    },
+    "units": "W m^-2 nm^-1",
+    "condition": "Top-of-atmosphere solar spectral irradiance from the TSIS-1 Hybrid Solar Reference Spectrum (HSRS), 1-nm bandwidth version at 550.0 nm; representative of solar minimum between cycles 24 and 25 (TSIS-1 SIM data 1-7 Dec 2019)",
+    "source": {
+      "url": "https://lasp.colorado.edu/lisird/latis/dap/tsis1_hsrs_1nm.csv?&wavelength>=547&wavelength<=553",
+      "title": "TSIS-1 Hybrid Solar Reference Spectrum, 1 nm (LISIRD LaTiS data service; Coddington et al. 2021, GRL 48, e2020GL091709)",
+      "publisher": "LASP, University of Colorado (NASA TSIS-1), LASP Interactive Solar Irradiance Datacenter",
+      "accessed": "2026-10-25"
+    },
+    "quote": "550.0,1.9063098705136299,0.005718929693102837,1.0",
+    "verified": true,
+    "note": "Value depends strongly on binning: the 0.1-nm version (tsis1_hsrs_p1nm) ranges 1.74-2.00 W m^-2 nm^-1 between 549.5 and 550.5 nm because of Fraunhofer lines (1.9670 at 550.000 nm). Paper (https://pmc.ncbi.nlm.nih.gov/articles/PMC8244077/): 202-2730 nm, uncertainty 0.3% for 460-2365 nm; recommended by CEOS WGCV (March 2022) as the solar irradiance reference spectrum. 1 AU normalization is not stated on the pages read. ASTM E-490 and Thuillier (2003) spectra were NOT reached (NREL/RReDC hosts did not resolve; NASA OBPG pages moved), so no E-490/Thuillier value is given."
+  }
+}

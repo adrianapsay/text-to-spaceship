@@ -35,3 +35,6 @@ data/runs/
 data/projects/
 data/gd_contest/*.stl
 *.log
+
+# V3 CubeSat Builder: the user's designs, and manufacturer CAD (licensed by its makers: never committed or pushed)
+data/builder/

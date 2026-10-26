@@ -1,0 +1,408 @@
+[
+  {
+    "id": "bct-xact-15",
+    "category": "adcs_unit",
+    "manufacturer": "Blue Canyon Technologies",
+    "product": "XACT-15",
+    "description": "Integrated 0.5U attitude determination and control module that pairs BCT star-tracker attitude knowledge with reaction wheels, torque rods and coarse sun sensors.",
+    "fits": "0.5U module, 10 x 10 x 5 cm",
+    "dimensions_mm": {"x": 100, "y": 100, "z": 50, "note": "10 x 10 x 5 cm (0.5U)", "source": "S2"},
+    "mass_kg": {"value": 0.89, "note": "stated as '.89 kg'", "source": "S2"},
+    "power_w": {"typical": null, "peak": null, "standby": null, "note": "Power consumption is not published on the product page or the datasheet.", "source": null},
+    "supply_voltage_v": {"value": "12 V", "source": "S2"},
+    "interfaces": {"data": ["RS-422"], "electrical": "12 V supply", "mechanical": "0.5U module (10 x 10 x 5 cm); detailed mechanical interface not published", "source": "S2"},
+    "operating_temp_c": {"min": -20, "max": 60, "note": "Operating -20°C to +60°C; survival -30°C to +70°C", "source": "S2"},
+    "performance": {
+      "pointing_accuracy": {"value": "±10 (2 axes); ±25 (3rd axis)", "unit": "arcsec", "condition": "1-sigma; same figure listed for XACT-15, XACT-50 and XACT-100", "source": "S2"},
+      "pointing_knowledge": {"value": null, "unit": "arcsec", "condition": "not published separately from pointing accuracy", "source": null},
+      "includes": {"value": ["star tracker", "reaction wheels (standard three-wheel system, optional fourth wheel)", "torque rods", "coarse sun sensors"], "unit": null, "condition": "as described for BCT's standard ADCS solutions in the datasheet; the exact XACT-15 bill of components is not itemised", "source": "S2"},
+      "momentum_mNms": {"value": 15, "unit": "mNms", "condition": "per axis", "source": "S2"},
+      "torque_mNm": {"value": 5, "unit": "mNm", "condition": "max torque, stated as 0.005 Nm", "source": "S2"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "No price published; product inquiry form only", "source": "S1"},
+    "availability": {"text": null, "source": null},
+    "cad": {"available": "unknown", "formats": [], "url": null, "source": null},
+    "datasheet_url": "https://www.bluecanyontech.com/wp-content/uploads/ADCS-2026.pdf",
+    "sources": {
+      "S1": {"url": "https://www.bluecanyontech.com/components/xact", "title": "XACT - Blue Canyon Technologies components page", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S2": {"url": "https://www.bluecanyontech.com/wp-content/uploads/ADCS-2026.pdf", "title": "Attitude Determination & Control Systems product description (datasheet), REV 1/2026", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "Slew rate 'Up to 10 deg/sec' is quoted for a 4 kg 3U CubeSat. Slewing error at 1 deg/s (Gen 2 star tracker, 1-sigma): 15 arcsec cross-boresight, 200 arcsec around-boresight. Power consumption not published. US-made (datasheet: 'applicable for DOD applications'); export classification not stated. Datasheet: 'data is for information only and subject to change'."
+  },
+  {
+    "id": "aac-clyde-space-iadcs400",
+    "category": "adcs_unit",
+    "manufacturer": "AAC Clyde Space",
+    "product": "iADCS400",
+    "description": "Autonomous integrated ADCS stack for 6U-12U CubeSats built around the ST200 star tracker, RW400-series wheels and MTQ400-series magnetorquers in a PC104-compatible footprint.",
+    "fits": "PC104-compatible footprint occupying 4 standard CubeSat PCB slots (0.7U); designed for 6-12U platforms",
+    "dimensions_mm": {"x": 95.4, "y": 95.9, "z": 67.3, "note": "Outer dimensions 95.4 x 95.9 x 67.3 mm", "source": "S2"},
+    "mass_kg": {"value": 1.7, "note": "Datasheet lists '1150 / 1300 / 1700 g' (footnote: depends on reaction wheels used); the value given is the largest listed (conservative). Which mass belongs to which configuration is not stated.", "source": "S2"},
+    "power_w": {"typical": 2.0, "peak": 5.0, "standby": 0.9, "note": "Nominal 2000 mW (depends on reaction wheels used; can be tailored). Peak 5000 mW max (marked 'to be confirmed'; peak row footnoted 'not accounting for star trackers and reaction wheels used'); the datasheet text also says '<4 W peak'. Idle 900 mW (to be confirmed), 2400 mW when using the low-drift high-precision gyroscope.", "source": "S2"},
+    "supply_voltage_v": {"value": "4.9 V min / 5.0 V typ (5 V system power pins) / 15 V max (VBAT pin)", "source": "S2"},
+    "interfaces": {"data": ["I2C"], "electrical": "Standard I2C-compatible command interface; RS422, RS485, U(S)ART and CAN are optional; interface for an additional external star tracker; bus logic level referenced to Vsys (3.3 to 5.1 V for I2C)", "mechanical": "PC104-compatible footprint, space of 4 standard CubeSat PCBs (0.7U)", "source": "S2"},
+    "operating_temp_c": {"min": null, "max": null, "note": "Datasheet and product page state '- 45 / - 20 to + 40 / + 85 °C' (footnote: can be tailored) without labelling which pair is the operating range; left null.", "source": "S2"},
+    "performance": {
+      "pointing_accuracy": {"value": "<1", "unit": "deg", "condition": "as stated (table reads '< <1 °'); no sigma given", "source": "S2"},
+      "pointing_knowledge": {"value": 30, "unit": "arcsec", "condition": "attitude determination accuracy, 3-sigma, from the integrated ST200 star tracker", "source": "S1"},
+      "includes": {"value": ["ST200 star tracker (integrated)", "RW400-series reaction wheels, one per axis", "MTQ400-series magnetorquers (three-axis)", "optional: external magnetometer, sun sensors, GNSS receiver, precision gyro, CP400 payload processor"], "unit": null, "condition": "", "source": "S2"},
+      "momentum_mNms": {"value": null, "unit": "mNms", "condition": "Conflicting figures in the manufacturer's documents: the spec table lists ±1.5, ±3.0, ±6.0 mN.m.s per axis (identical to the iADCS200 table), while the datasheet key highlights state ±30 mN.m.s per axis with one reaction wheel per axis. Left null; confirm with vendor.", "source": "S2"},
+      "torque_mNm": {"value": 2, "unit": "mNm", "condition": "spec table 'Maximum torque 2 mN.m'; datasheet key highlights say 2.5 mN.m", "source": "S2"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "No price published; product enquiry form only", "source": "S1"},
+    "availability": {"text": "9 Month Lead Time", "source": "S1"},
+    "cad": {"available": "public", "formats": ["ZIP archive (contents not inspected)"], "url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/IADCS420-ASM-ST-1.0-defeatured-1.0_defeature.zip", "source": "S1"},
+    "datasheet_url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/iADCS400-1.pdf",
+    "sources": {
+      "S1": {"url": "https://www.aac-clyde.space/what-we-do/space-products-components/adcs/iadcs400", "title": "iADCS400 - AAC Clyde Space product page", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S2": {"url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/iADCS400-1.pdf", "title": "iADCS400 Attitude Determination & Control System datasheet (release date 13 February 2023)", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "9-month lead time. Magnetic moment X/Y 0.5 A.m2, Z 0.4 A.m2; slew rate > 1.57 °/s; radiation tolerance > 45 krad (Si) for primary components. Several electrical values are footnoted 'to be confirmed'. Momentum storage conflicts between the spec table and key highlights (see performance); confirm with AAC Clyde Space before use."
+  },
+  {
+    "id": "cubespace-cubewheel-cw0162",
+    "category": "reaction_wheel",
+    "manufacturer": "CubeSpace",
+    "product": "CubeWheel CW0162",
+    "description": "NanoSat-range reaction wheel with integrated drive electronics and speed controller that stores 16.2 mNms at 6000 rpm.",
+    "fits": "Internal mount, 46 x 46 x 24 mm; four mounting holes on each of three orthogonal faces",
+    "dimensions_mm": {"x": 46, "y": 46, "z": 24, "note": "46x46x24 mm [WxLxH] (product description); ICD gives indicative A = 46.2±0.1 mm, B = 24.2±0.2 mm", "source": "S1"},
+    "mass_kg": {"value": 0.144, "note": "144 g", "source": "S1"},
+    "power_w": {"typical": 0.336, "peak": 7.2, "standby": null, "note": "Average power 336 mW at 2000 rpm; peak 7.2 W at nominal torque, including digital power (ICD: maximum power drawn when accelerating through rated-momentum speed at nominal torque). ICD also gives 0.77 W at rated momentum and, on the 3.3 V line, 106 mW average / 261 mW max for all variants.", "source": "S1"},
+    "supply_voltage_v": {"value": "Digital 3.3 V; motor 6.4-16.8 V (nominal 12 V; 11 V for max speed)", "source": "S1"},
+    "interfaces": {"data": ["CAN", "UART", "RS-485", "I2C"], "electrical": "Molex Micro-Lock Plus PCB header 5055671481; RS-485 is a custom option chosen at order and replaces UART; I2C supported on CW0017/CW0057/CW0162 (product description: 'available for custom solutions')", "mechanical": "Four M3x0.5 (4.5 deep) holes on each of three orthogonal faces; recommended screw torque 87 cN.m", "source": "S2"},
+    "operating_temp_c": {"min": -15, "max": 50, "note": "Mounting interface temperature range (ICD Table 15). Qualification levels (product description): thermal vacuum -20 to 80 °C; thermal cold and hot start -35 to 70 °C.", "source": "S2"},
+    "performance": {
+      "momentum_mNms": {"value": 16.2, "unit": "mNms", "condition": "at 6000 rpm and minimum motor supply voltage; higher momentum achievable with higher motor supply voltage", "source": "S1"},
+      "torque_mNm": {"value": 7, "unit": "mNm", "condition": "higher torques possible but change the power characteristics", "source": "S1"},
+      "max_speed_rpm": {"value": 10000, "unit": "rpm", "condition": "", "source": "S1"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "No price published; 'Get a quote' contact form", "source": "S3"},
+    "availability": {"text": "12 weeks lead time", "source": "S3"},
+    "cad": {"available": "on request", "formats": [], "url": null, "source": "S2"},
+    "datasheet_url": "https://www.cubespace.co.za/uploads/14b7921b-25a8-4380-a291-f6062826548f.pdf",
+    "sources": {
+      "S1": {"url": "https://www.cubespace.co.za/uploads/14b7921b-25a8-4380-a291-f6062826548f.pdf", "title": "Product Description: CubeWheel - NanoSat & SmallSat Ranges, CS-DEV.PD.CW-01 v1.03 (20/03/2025)", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S2": {"url": "https://www.cubespace.co.za/uploads/6ada434d-efa5-4ec4-a7dc-57f11a3f2efc.pdf", "title": "Interface Control Document: CubeWheel NanoSat Range, CS-DEV.ICD.CW-01 v1.06 (16/04/2026)", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S3": {"url": "https://www.cubespace.co.za/products/reaction-wheels/", "title": "Reaction Wheels - CubeSpace product page", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S4": {"url": "https://www.cubespace.co.za/uploads/a55e9627-9377-496b-800e-ecde36e3b21e.pdf", "title": "CubeADCS standard Product Description v1.03 (30/10/2023), linked as the Turn-Key ADCS 'Product Specification Sheet'", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "The 12-week lead time is a range-level headline on the product page, not model-specific. ICD: CAD files 'are supplied to customers'. Balance quality grade G0.3; radiation 24 kRad; random vibration 14.16 gRMS (NASA GEVS). CubeSpace guidance (S4): keep magnetometers at least 15 cm from CW0057/CW0162 wheels; S4's sizing table places CW0057-CW0162 at 6U to 12U."
+  },
+  {
+    "id": "rocket-lab-rw-0-01",
+    "category": "reaction_wheel",
+    "manufacturer": "Rocket Lab (formerly Sinclair Interplanetary)",
+    "product": "RW-0.01 (10 mNms reaction wheel)",
+    "description": "Small 10 mNms reaction wheel with a built-in control CPU that accepts speed or torque commands over UART or I2C/SMBus.",
+    "fits": "Internal mount, 50 x 50 x 30 mm",
+    "dimensions_mm": {"x": 50, "y": 50, "z": 30, "note": "Dimensions: 50 mm x 50 mm x 30 mm", "source": "S1"},
+    "mass_kg": {"value": 0.12, "note": "Mass: 120 g (datasheet Version 2, 7 April 2022)", "source": "S1"},
+    "power_w": {"typical": 0.11, "peak": 1.05, "standby": null, "note": "0.11 W @ 0.005 Nms, steady state; 0.25 W @ 0.018 Nms, steady state; 1.05 W @ 0.01 Nms, +1 mNm. The datasheet labels this block 'SUPPLY POWER (28 V IN VACCUM)' even though the stated supply range is 3.4-6.0 V.", "source": "S1"},
+    "supply_voltage_v": {"value": "Nominal: 3.4 V to 6.0 V, Maximum: 8 V", "source": "S1"},
+    "interfaces": {"data": ["UART", "I2C/SMBus"], "electrical": "Speed or torque control mode with built-in control CPU", "mechanical": "Not detailed on the datasheet", "source": "S1"},
+    "operating_temp_c": {"min": -40, "max": 70, "note": "Thermal: −40°C to +70°C (operating)", "source": "S1"},
+    "performance": {
+      "momentum_mNms": {"value": 10, "unit": "mNms", "condition": "nominal 0.01 Nms; peak 0.018 Nms at 5 V supply", "source": "S1"},
+      "torque_mNm": {"value": 1, "unit": "mNm", "condition": "±1 mNm at 0.01 Nms (at 5 V supply)", "source": "S1"},
+      "max_speed_rpm": {"value": null, "unit": "rpm", "condition": "not published on the datasheet", "source": null}
+    },
+    "price": {"value": 20000, "currency": "USD", "kind": "listed", "note": "'US $20,000 each, +US $2,000 for radiation lot-screened parts' per datasheet Version 2 dated 7 April 2022; no VAT/shipping terms shown; may be outdated", "source": "S1"},
+    "availability": {"text": null, "source": null},
+    "cad": {"available": "unknown", "formats": [], "url": null, "source": null},
+    "datasheet_url": "https://www.rocketlab.co.nz/assets/Uploads/10-mNms-RW-0.01-Data-Sheet.pdf",
+    "sources": {
+      "S1": {"url": "https://www.rocketlab.co.nz/assets/Uploads/10-mNms-RW-0.01-Data-Sheet.pdf", "title": "10 mNms RW-0.01 Data Sheet, Version 2, 7 April 2022", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "All values come from datasheet Version 2 (April 2022). A newer 'RW-0.01 Datasheet v3.0' URL exists (rocketlabusa.com/assets/Uploads/RW-0.01-Datasheet-v3.0.pdf, redirecting to rocketlabcorp.com), but it returned HTTP 403 to the fetch tool, so newer mass, temperature or price values could not be checked. Vibration > 12 gRMS; radiation > 20 krad dose; redundant motor windings; hybrid ball bearings; optional radiation lot-screened parts. Heritage: 10 units on-orbit on 4 satellites, first launched June 2014."
+  },
+  {
+    "id": "aac-clyde-space-rw400",
+    "category": "reaction_wheel",
+    "manufacturer": "AAC Clyde Space",
+    "product": "RW400 series",
+    "description": "Reaction wheel family for 6U-12U CubeSats offered in ±15, ±30 and ±50 mNms versions, each with an internal fire-and-forget controller.",
+    "fits": "Internal mount, 50 x 50 x 27 mm; designed for 6-12U CubeSat platforms",
+    "dimensions_mm": {"x": 50, "y": 50, "z": 27, "note": "Outer dimensions 50 x 50 x 27 mm", "source": "S2"},
+    "mass_kg": {"value": 0.375, "note": "'197 / 210 / 375 g' listed for the three momentum versions (the mapping to versions is not stated); the value given is the largest (conservative)", "source": "S2"},
+    "power_w": {"typical": 1.0, "peak": 15.0, "standby": 0.075, "note": "Nominal 1000 mW typ; peak 1900 mW typ / 15000 mW max; idle 75 mW max (footnote: can be tailored). Highlights: '< 1900 mW @ 55 mN.m.s' (datasheet) and '< 1900 mW @ Rated speed' (product page).", "source": "S2"},
+    "supply_voltage_v": {"value": "4.5 / 5.0 / 5.25 V (min/typ/max); logic supply 2.3 / 3.3 / 5.1 V", "source": "S2"},
+    "interfaces": {"data": ["I2C", "RS422"], "electrical": "I2C-compliant interface and bidirectional RS422; other interfaces available on request; bus logic level 3.3-5.1 V", "mechanical": "50 x 50 x 27 mm housing; mounting details not published", "source": "S2"},
+    "operating_temp_c": {"min": -25, "max": 60, "note": "Product page table: -25 to +60 °C. The datasheet (released 15 November 2021) states -40 to +60 °C. The narrower range is used.", "source": "S1"},
+    "performance": {
+      "momentum_mNms": {"value": [15, 30, 50], "unit": "mNms", "condition": "three versions: ±15, ±30, ±50 mN.m.s", "source": "S2"},
+      "torque_mNm": {"value": 8, "unit": "mNm", "condition": "Datasheet table '+/- 8 mN.m' (datasheet text: 'in excess of 8 mN.m'; highlights: '> 12 mN.m (braking)'). The product page table says 2 mN.m and its text says 'Up to 12 mN.m'. The sources conflict; confirm with the vendor.", "source": "S2"},
+      "max_speed_rpm": {"value": 5000, "unit": "rpm", "condition": "maximum rotation speed; control accuracy ±1 % of target rpm", "source": "S2"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "No price published; product enquiry form only", "source": "S1"},
+    "availability": {"text": "24 Week Lead Time", "source": "S1"},
+    "cad": {"available": "unknown", "formats": [], "url": null, "source": null},
+    "datasheet_url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/RW400-1.pdf",
+    "sources": {
+      "S1": {"url": "https://www.aac-clyde.space/what-we-do/space-products-components/adcs/rw400", "title": "RW400 - AAC Clyde Space product page", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S2": {"url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/RW400-1.pdf", "title": "RW400 Reaction Wheels datasheet (release date 15 November 2021)", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "24-week lead time. Radiation tolerance > 36 krad (Si). Used in the iADCS400. Torque and operating-temperature figures differ between the datasheet and the product page (see fields). The product page has no CAD download link (the iADCS400 and SS200 pages do)."
+  },
+  {
+    "id": "bct-rwp015",
+    "category": "reaction_wheel",
+    "manufacturer": "Blue Canyon Technologies",
+    "product": "RWp015",
+    "description": "The smallest wheel in BCT's micro reaction wheel line, rated for 0.015 Nms and normally run from BCT's drive control electronics.",
+    "fits": "Internal mount; envelope not published on the product page",
+    "dimensions_mm": {"x": null, "y": null, "z": null, "note": "Not published on the product page; the full product-line datasheet (>10 MB) could not be read", "source": null},
+    "mass_kg": {"value": 0.13, "note": "0.13 kg", "source": "S1"},
+    "power_w": {"typical": null, "peak": null, "standby": null, "note": "Not published on the product page; the full product-line datasheet could not be read", "source": null},
+    "supply_voltage_v": {"value": null, "source": null},
+    "interfaces": {"data": [], "electrical": "'The DCE is typically used with the RWp015, RWp050 and RWp100 reaction wheels' (BCT Drive Control Electronics)", "mechanical": null, "source": "S1"},
+    "operating_temp_c": {"min": null, "max": null, "source": null},
+    "performance": {
+      "momentum_mNms": {"value": 15, "unit": "mNms", "condition": "max momentum, stated as 0.015 Nms", "source": "S1"},
+      "torque_mNm": {"value": 4, "unit": "mNm", "condition": "max torque, stated as 0.004 Nm", "source": "S1"},
+      "max_speed_rpm": {"value": null, "unit": "rpm", "condition": "not published on the product page", "source": null}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "No price published; product inquiry form only", "source": "S1"},
+    "availability": {"text": null, "source": null},
+    "cad": {"available": "unknown", "formats": [], "url": null, "source": null},
+    "datasheet_url": "https://www.bluecanyontech.com/wp-content/uploads/Reaction-Wheels-Full-Product-Line.pdf",
+    "sources": {
+      "S1": {"url": "https://www.bluecanyontech.com/components/reaction-wheels/", "title": "Reaction Wheels - Blue Canyon Technologies components page", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "Only momentum, torque and mass could be verified. The linked full product-line datasheet exceeded the fetch tool's 10 MB limit and was not read. US-made; export classification not stated."
+  },
+  {
+    "id": "cubespace-magnetorquer-cr0004-g2",
+    "category": "magnetorquer",
+    "manufacturer": "CubeSpace",
+    "product": "Magnetorquer rod CR0004-G2 (CubeTorquer)",
+    "description": "Low-remanence 0.4 Am² torque rod from CubeSpace's NanoSat magnetorquer range, driven directly at 5 V.",
+    "fits": "Rod, 59 mm long, internal mount via two aluminium end brackets; CubeSpace sizing guideline lists it for up to 6U and for 6U-27U satellites",
+    "dimensions_mm": {"x": 59, "y": null, "z": null, "note": "Length 59 mm; cross-section dimensions appear only in the ICD drawing table and were not transcribed", "source": "S1"},
+    "mass_kg": {"value": 0.023, "note": "23 g (ICD: 23 g ±5 %, magnetorquer only, excluding harness)", "source": "S1"},
+    "power_w": {"typical": 0.063, "peak": 0.506, "standby": null, "note": "Average power at 5 V: 63 mW at 10 % on-time (typical wheel desaturation) and 506 mW at 80 % on-time (maximum duty cycle used for detumbling). The values are indicative and exclude DC-DC and harness losses. Nominal current 127 mA at rated voltage.", "source": "S2"},
+    "supply_voltage_v": {"value": "5.0 V rated", "source": "S1"},
+    "interfaces": {"data": [], "electrical": "Passive coil (V+ / V-) driven by an external driver; Molex Pico-Lock 2-pin header 5037630291; resistance 39.5 Ω ±5 % at 20 °C, inductance 180 mH ±30 %, time constant 5 ms", "mechanical": "Two aluminium mounting brackets, mountable on one of three bracket faces; recommended fastening torque about 0.13 Nm", "source": "S2"},
+    "operating_temp_c": {"min": -20, "max": 80, "note": "Qualification thermal-vacuum range -20°C to 80°C (no separate operating range stated); thermal cold & hot start -35°C to 70°C", "source": "S1"},
+    "performance": {
+      "dipole_Am2": {"value": 0.4, "unit": "Am²", "condition": "rated dipole at rated voltage (5 V) and 20 °C, or nominal current; magnetic gain 3.3 Am²/A; linear dipole range < 0.7 Am² (5 % linearity limit)", "source": "S2"},
+      "residual_dipole": {"value": "<0.1% of FSR", "unit": "% of full-scale range", "condition": "", "source": "S1"},
+      "axes": {"value": 1, "unit": "axes", "condition": "single rod; typically three are used per satellite", "source": "S1"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "No price published; 'Get a quote' contact form", "source": "S3"},
+    "availability": {"text": "8 weeks lead time", "source": "S3"},
+    "cad": {"available": "on request", "formats": [], "url": null, "source": "S2"},
+    "datasheet_url": "https://www.cubespace.co.za/uploads/0783c1a0-5c58-4bbe-929f-d72788d03933.pdf",
+    "sources": {
+      "S1": {"url": "https://www.cubespace.co.za/uploads/0783c1a0-5c58-4bbe-929f-d72788d03933.pdf", "title": "Product Description: Magnetorquer, CS-DEV.PD.CR-01 v2.01 (21/08/2026)", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S2": {"url": "https://www.cubespace.co.za/uploads/594a37e9-314a-4833-a66f-fa9a28b3001f.pdf", "title": "Interface Control Document: Magnetorquer NanoSat Range, CS-DEV.ICD.CR-01 v1.04 (21/08/2026)", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S3": {"url": "https://www.cubespace.co.za/products/magnetorquer-rods/", "title": "Magnetorquer Rods - CubeSpace product page", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "The 8-week lead time is a range-level headline on the product page. ICD: CAD files 'are supplied to customers'. Linearity error < 2.0 % of FSR. Qualification: shock 1500 G; vibration 14.16 G RMS (NASA GEVS). Molex Pico-Lock connectors are rated for only 30 mating cycles. Other sizes in the same range: 0.2 to 2.0 Am² (NanoSat) and 5 to 20 Am² (SmallSat)."
+  },
+  {
+    "id": "gomspace-nanotorque-gst-600-mk2",
+    "category": "magnetorquer",
+    "manufacturer": "GomSpace",
+    "product": "NanoTorque GST-600 Mk2",
+    "description": "Three-axis magnetorquer board for 6U CubeSats that combines one air-core torquer (Z) with two torque rods (X, Y) and an on-board temperature sensor.",
+    "fits": "PC104-stack board, 90.5 x 96.9 x 17.2 mm; designed for 6U CubeSats but usable in smaller and larger satellites",
+    "dimensions_mm": {"x": 90.5, "y": 96.9, "z": 17.2, "note": "Size 90.5 x 96.9 x 17.2 mm (datasheet); the product page lists 91 x 97 x 17 mm", "source": "S2"},
+    "mass_kg": {"value": 0.18, "note": "180 g", "source": "S2"},
+    "power_w": {"typical": null, "peak": null, "standby": 0.003, "note": "Standby 3 mW for the whole unit (measured through a NanoMind A3200-ADCS on an ADCS-8 board, 5 V supply). Per coil at 20 °C, 5 V, 80 % duty cycle and 1 Hz loop: Z-axis 720 mW average / 900 mW max; X- and Y-axis 500 mW average / 625 mW max each.", "source": "S2"},
+    "supply_voltage_v": {"value": "Coils driven by PWM: recommended amplitude ±3.3 / ±5.0 / ±5.5 V (min/typ/max); temperature-sensor Vcc absolute max 3.6 V", "source": "S2"},
+    "interfaces": {"data": ["I2C (TMP100 temperature sensor only, address 0x4e)"], "electrical": "Coils driven by an external PWM driver (power figures measured with a NanoMind A3200-ADCS); Molex PicoBlade connectors for Z coil and communication, Molex PicoLock connectors for X and Y coils", "mechanical": "Fits a PC104 stack (stack connector placed over the Y rod)", "source": "S2"},
+    "operating_temp_c": {"min": -35, "max": 70, "note": "Operational temperature range from the absolute maximum ratings table; storage -35 to 70 °C", "source": "S2"},
+    "performance": {
+      "dipole_Am2": {"value": {"x": 0.4, "y": 0.4, "z": 0.5}, "unit": "Am²", "condition": "typical at 20 °C; minimum Z 0.34 Am², X/Y 0.23 Am²", "source": "S2"},
+      "residual_dipole": {"value": null, "unit": "Am²", "condition": "described only as 'low residual dipole'", "source": "S2"},
+      "axes": {"value": 3, "unit": "axes", "condition": "one air torquer (Z) and two magnetorquer rods (X, Y)", "source": "S2"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "No price published; 'Add to quote' button", "source": "S1"},
+    "availability": {"text": null, "source": null},
+    "cad": {"available": "unknown", "formats": [], "url": null, "source": null},
+    "datasheet_url": "https://gomspace.com/wp-content/uploads/2025/09/gs-ds-NanoTorqueGST600mk2-1062432-2-EXT.pdf",
+    "sources": {
+      "S1": {"url": "https://gomspace.com/product/3-axis-magnetorquer/", "title": "NanoTorque GST-600 3-Axis Magnetorquer - GomSpace product page", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S2": {"url": "https://gomspace.com/wp-content/uploads/2025/09/gs-ds-NanoTorqueGST600mk2-1062432-2-EXT.pdf", "title": "Datasheet NanoTorque GST-600 Mk2, DS 1062432 rev 2.0 (17 February 2025)", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "Coils are driven by an external PWM driver (the datasheet's power figures use a NanoMind A3200-ADCS); the board's only data connection is the temperature sensor's I2C. Mk2 uses a right-handed coordinate system (the previous GST600 version was left-handed). Coil resistance at 20 °C: Z 25.5 Ω, X/Y 39.5 Ω."
+  },
+  {
+    "id": "cubespace-cubestar-m3-0e5-3",
+    "category": "star_tracker",
+    "manufacturer": "CubeSpace",
+    "product": "CubeStar (hardware version M3.0E5.3)",
+    "description": "Low-power nanosatellite star tracker with an integrated baffle that outputs full attitude quaternions in lost-in-space and tracking modes.",
+    "fits": "External-facing sensor, 43 x 24 x 63.75 mm with integrated baffle; M2 threaded mounting holes",
+    "dimensions_mm": {"x": 43, "y": 24, "z": 63.75, "note": "43x24x63.75 mm [WxHxL]", "source": "S1"},
+    "mass_kg": {"value": 0.07, "note": "70 g ± 5 % (ICD: excluding harness and lens cap)", "source": "S1"},
+    "power_w": {"typical": 0.192, "peak": 0.363, "standby": null, "note": "Average power 192 mW (ICD: measured over a 1-second loop in tracking mode); maximum power 363 mW", "source": "S1"},
+    "supply_voltage_v": {"value": "3.3 V", "source": "S1"},
+    "interfaces": {"data": ["CAN", "UART", "RS-485"], "electrical": "Molex Micro-Lock Plus connector; 3.3 V supply", "mechanical": "M2 threaded mounting holes; aluminium case with EMI filters", "source": "S1"},
+    "operating_temp_c": {"min": -20, "max": 80, "note": "Qualification thermal vacuum -20 to 80 °C (no separate operating range stated); thermal cold and hot start -35 to 70 °C", "source": "S1"},
+    "performance": {
+      "accuracy_cross_boresight_arcsec": {"value": 35, "unit": "arcsec", "condition": "cross-axis, 3-sigma, dependent on slew", "source": "S1"},
+      "accuracy_roll_arcsec": {"value": 175, "unit": "arcsec", "condition": "roll, 3-sigma, dependent on slew", "source": "S1"},
+      "update_rate_hz": {"value": 1, "unit": "Hz", "condition": "up to 1 Hz", "source": "S1"},
+      "fov_deg": {"value": null, "unit": "deg", "condition": "not stated in the M3.0E5.3 documents", "source": null},
+      "sun_exclusion_deg": {"value": 35, "unit": "deg", "condition": "35° from boresight (stated as 70° total exclusion angle; no Sun, Earth, Moon or structure may enter it)", "source": "S1"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "No price published; 'Get a quote' contact form", "source": "S3"},
+    "availability": {"text": "16 weeks lead time", "source": "S3"},
+    "cad": {"available": "on request", "formats": [], "url": null, "source": "S2"},
+    "datasheet_url": "https://www.cubespace.co.za/uploads/8760d35c-425b-428e-9750-e5498e6bb956.pdf",
+    "sources": {
+      "S1": {"url": "https://www.cubespace.co.za/uploads/8760d35c-425b-428e-9750-e5498e6bb956.pdf", "title": "Product Description: CubeStar CT M3.0E5.3, CS-DEV.PD.CT-M3.0E5.3 v1.00 (21/11/2025)", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S2": {"url": "https://www.cubespace.co.za/uploads/4fef5b7f-d349-426e-b8dd-b163a81384b5.pdf", "title": "Interface Control Document: CubeStar CT M3.0E5.3, CS-DEV.ICD.CT-M3.0E5.3 v1.00 (26/11/2025)", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S3": {"url": "https://www.cubespace.co.za/products/star-trackers/", "title": "Star Trackers - CubeSpace product page", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S4": {"url": "https://www.cubespace.co.za/uploads/a55e9627-9377-496b-800e-ecde36e3b21e.pdf", "title": "CubeADCS standard Product Description v1.03 (30/10/2023)", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "Max slew rate 0.3 °/s; accuracy is slew-dependent. Accuracy is quoted at 3-sigma (the BCT and arcsec star trackers in this catalog quote 1-sigma). Radiation 24 kRad; random vibration 14.16 g RMS (NASA GEVS). ICD: CAD files 'are supplied to customers'. CubeSpace's 2023 CubeADCS product description (S4) gives CubeStar a '42° circular FoV', but that document predates this hardware version and the figure is not repeated for M3.0E5.3."
+  },
+  {
+    "id": "bct-standard-nst",
+    "category": "star_tracker",
+    "manufacturer": "Blue Canyon Technologies",
+    "product": "Standard NST (Nano Star Tracker)",
+    "description": "Compact flight-proven star tracker with an on-board catalog of more than 20,000 stars that outputs quaternions over RS-422 or RS-485.",
+    "fits": "External-facing sensor, 10 x 5.5 x 5 cm",
+    "dimensions_mm": {"x": 100, "y": 55, "z": 50, "note": "10 x 5.5 x 5 cm (datasheet); product page lists 10 x 5 x 5.5 cm", "source": "S2"},
+    "mass_kg": {"value": 0.35, "note": "0.35 kg", "source": "S2"},
+    "power_w": {"typical": null, "peak": 1.5, "standby": null, "note": "Peak power consumption < 1.5 W (5 V) or < 3.5 W (28 V); typical power not published", "source": "S2"},
+    "supply_voltage_v": {"value": "5 V or 28 V", "source": "S2"},
+    "interfaces": {"data": ["RS-485", "RS-422"], "electrical": "5 V or 28 V supply", "mechanical": null, "source": "S2"},
+    "operating_temp_c": {"min": -20, "max": 50, "note": "Operating -20°C to +50°C; survival -30°C to +70°C", "source": "S2"},
+    "performance": {
+      "accuracy_cross_boresight_arcsec": {"value": 6, "unit": "arcsec", "condition": "1-sigma, Gen 2 (the only generation listed for the Standard NST); 15 arcsec when slewing at 1 deg/s", "source": "S2"},
+      "accuracy_roll_arcsec": {"value": 40, "unit": "arcsec", "condition": "about-boresight, 1-sigma, Gen 2; 200 arcsec when slewing at 1 deg/s", "source": "S2"},
+      "update_rate_hz": {"value": 5, "unit": "Hz", "condition": "solution rate", "source": "S2"},
+      "fov_deg": {"value": "10 x 12", "unit": "deg", "condition": "", "source": "S2"},
+      "sun_exclusion_deg": {"value": 45, "unit": "deg", "condition": "baffle sun exclusion angle (earth exclusion 27 deg); half- or full-angle not specified", "source": "S2"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "No price published; product inquiry form only", "source": "S1"},
+    "availability": {"text": null, "source": null},
+    "cad": {"available": "unknown", "formats": [], "url": null, "source": null},
+    "datasheet_url": "https://www.bluecanyontech.com/wp-content/uploads/NST-May-2026.pdf",
+    "sources": {
+      "S1": {"url": "https://www.bluecanyontech.com/components/nano-star-trackers/", "title": "Nano Star Trackers - Blue Canyon Technologies components page", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S2": {"url": "https://www.bluecanyontech.com/wp-content/uploads/NST-May-2026.pdf", "title": "Nano Star Trackers product description (datasheet), REV 1/2026", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "Tracks stars to magnitude 7.5; lost-in-space identification < 4 s (up to 1.5 deg/s); sky coverage > 99 %; max slew rate > 2 deg/s. The Mid- and Full-Extension variants have external baffles and Gen 3 accuracy (1 arcsec cross-boresight), but are larger (17 x 8.5 x 7 cm and 25 x 10 x 10 cm) and heavier. US-made; export classification not stated."
+  },
+  {
+    "id": "arcsec-sagitta",
+    "category": "star_tracker",
+    "manufacturer": "arcsec",
+    "product": "Sagitta star tracker",
+    "description": "CubeSat-sized autonomous star tracker from Belgian company arcsec with a built-in baffle and arcsecond-level cross-boresight accuracy.",
+    "fits": "Fits in a CubeSat; 44 x 50 x 95 mm with built-in baffle and alignment cube",
+    "dimensions_mm": {"x": 44, "y": 50, "z": 95, "note": "44 x 50 x 95 mm (product page); the datasheet drawing shows 44 mm, 50 mm and 95 mm", "source": "S1"},
+    "mass_kg": {"value": 0.27, "note": "270 g", "source": "S2"},
+    "power_w": {"typical": 1.5, "peak": null, "standby": null, "note": "Power consumption nominal 1500 mW", "source": "S2"},
+    "supply_voltage_v": {"value": "+5 V", "source": "S2"},
+    "interfaces": {"data": ["RS485"], "electrical": "+5 V supply", "mechanical": "Alignment cube for integration", "source": "S2"},
+    "operating_temp_c": {"min": null, "max": null, "note": "Not published on the product page or datasheet", "source": null},
+    "performance": {
+      "accuracy_cross_boresight_arcsec": {"value": 2, "unit": "arcsec", "condition": "1-sigma", "source": "S2"},
+      "accuracy_roll_arcsec": {"value": 10, "unit": "arcsec", "condition": "around boresight, 1-sigma", "source": "S2"},
+      "update_rate_hz": {"value": 10, "unit": "Hz", "condition": "", "source": "S2"},
+      "fov_deg": {"value": 25.4, "unit": "deg", "condition": "", "source": "S2"},
+      "sun_exclusion_deg": {"value": 40, "unit": "deg", "condition": "baffle sun rejection angle", "source": "S2"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "No price on the manufacturer's page or datasheet", "source": null},
+    "availability": {"text": null, "source": null},
+    "cad": {"available": "unknown", "formats": [], "url": null, "source": null},
+    "datasheet_url": "https://www.arcsec.space/pdf/Sagitta%20Star%20tracker%20datasheet%20V2.1.pdf",
+    "sources": {
+      "S1": {"url": "https://www.arcsec.space/sagitta", "title": "Sagitta - arcsec product page", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S2": {"url": "https://www.arcsec.space/pdf/Sagitta%20Star%20tracker%20datasheet%20V2.1.pdf", "title": "Sagitta Star Tracker datasheet V2.1", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "Tracks stars up to magnitude 6.2 (up to 64 stars); lost-in-space availability > 99 % of the night sky; radiation-shielded lens; electronics 'radiation tested' (no level stated). Operating temperature is not published."
+  },
+  {
+    "id": "cubespace-cubesense-sun",
+    "category": "sun_sensor",
+    "manufacturer": "CubeSpace",
+    "product": "CubeSense Sun (fine sun sensor)",
+    "description": "CMOS camera-based fine sun sensor with a 170° fisheye lens and albedo immunity that reports a sun vector to the host.",
+    "fits": "External face with a clear hemispherical view; 35 x 22 x 24 mm; M2 threaded mounting holes",
+    "dimensions_mm": {"x": 35, "y": 22, "z": 24, "note": "35x22x24 mm [WxHxL]", "source": "S1"},
+    "mass_kg": {"value": 0.015, "note": "15 g (ICD: 15.0 g ± 5 %, excluding harness)", "source": "S1"},
+    "power_w": {"typical": 0.093, "peak": 0.2, "standby": null, "note": "ICD v1.02 ('current draw values revised'): average 93 mW over a 1-second loop, maximum 200 mW on the 3.3 V line. The older product description (v1.00, 2023) lists 100 mW average and 174 mW peak.", "source": "S2"},
+    "supply_voltage_v": {"value": "3.3 V", "source": "S1"},
+    "interfaces": {"data": ["CAN", "UART", "RS-485", "I2C (custom option)"], "electrical": "Molex Micro-Lock Plus connector; I2C 'available for custom solutions'", "mechanical": "M2 threaded mounting holes", "source": "S1"},
+    "operating_temp_c": {"min": -20, "max": 80, "note": "Qualification thermal vacuum -20 to 80 °C (no separate operating range stated); thermal cold and hot start -35 to 70 °C", "source": "S1"},
+    "performance": {
+      "accuracy_deg": {"value": 0.2, "unit": "deg", "condition": "roll and elevation, 2-sigma, dependent on slew (max slew rate 70 °/s)", "source": "S1"},
+      "fov_deg": {"value": 166, "unit": "deg (full angle)", "condition": "detection FOV, horizontal/vertical; 176° diagonal; 170° FOV lens", "source": "S1"},
+      "type": {"value": "fine; CMOS image-sensor (camera) based with fisheye lens", "unit": null, "condition": "", "source": "S1"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "No price published; 'Get a quote' contact form", "source": "S3"},
+    "availability": {"text": "12 weeks lead time", "source": "S3"},
+    "cad": {"available": "on request", "formats": [], "url": null, "source": "S2"},
+    "datasheet_url": "https://www.cubespace.co.za/uploads/207b824c-ce79-459a-b906-276c2a630d58.pdf",
+    "sources": {
+      "S1": {"url": "https://www.cubespace.co.za/uploads/207b824c-ce79-459a-b906-276c2a630d58.pdf", "title": "CubeSense Sun Product Description v1.00 (26/07/2023)", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S2": {"url": "https://www.cubespace.co.za/uploads/ef058ab7-ccf6-4993-97e2-fd3025567b3d.pdf", "title": "CubeSense Sun Interface Control Document v1.02 (26/02/2025)", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S3": {"url": "https://www.cubespace.co.za/products/fine-sun-sensor/", "title": "Fine Sun Sensor - CubeSpace product page", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "Update rate up to 2 Hz. Radiation 24 kRad; random vibration 14.16 g RMS (NASA GEVS). ICD: CAD files 'are supplied to customers'; RS-485 is a custom option chosen at order and replaces UART. The ICD documents I2C characteristics as a standard interface. The product description is dated 2023; power values were revised in the 2025 ICD."
+  },
+  {
+    "id": "solar-mems-nanossoc-d60",
+    "category": "sun_sensor",
+    "manufacturer": "Solar MEMS Technologies",
+    "product": "nanoSSOC-D60",
+    "description": "Tiny two-axis MEMS sun sensor with an on-board microcontroller that outputs sun incidence angles over UART, I2C or SPI.",
+    "fits": "External face, 43 x 14 x 5.9 mm",
+    "dimensions_mm": {"x": 43, "y": 14, "z": 5.9, "note": "43 x 14 x 5.9 mm", "source": "S2"},
+    "mass_kg": {"value": 0.0065, "note": "6.5 g", "source": "S2"},
+    "power_w": {"typical": null, "peak": null, "standby": null, "note": "Stated only as '< 2mA consumption' at a 3.3 V / 5 V supply; no power in watts is published", "source": "S2"},
+    "supply_voltage_v": {"value": "3.3 V / 5 V", "source": "S2"},
+    "interfaces": {"data": ["UART", "I2C", "SPI"], "electrical": "10-pin micro-connector", "mechanical": "Aluminum 6082 housing, black anodizing", "source": "S2"},
+    "operating_temp_c": {"min": -30, "max": 85, "note": "Operating temperature -30º to 85º Celsius", "source": "S2"},
+    "performance": {
+      "accuracy_deg": {"value": 0.5, "unit": "deg", "condition": "< 0.5º (3sigma); precision < 0.1º", "source": "S2"},
+      "fov_deg": {"value": 60, "unit": "deg (half-angle)", "condition": "stated as ±60º (customization available)", "source": "S2"},
+      "type": {"value": "fine; two-axis digital MEMS sun sensor ('sun sensor on a chip')", "unit": null, "condition": "", "source": "S2"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "No price published; 'Quotation' link to contact page", "source": "S1"},
+    "availability": {"text": null, "source": null},
+    "cad": {"available": "unknown", "formats": [], "url": null, "source": null},
+    "datasheet_url": "https://solar-mems.com/wp-content/uploads/2024/01/nanoSSOC-D60.pdf",
+    "sources": {
+      "S1": {"url": "https://solar-mems.com/space-equipment/nanossoc-d60/", "title": "nanoSSOC D60 - Solar MEMS product page", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S2": {"url": "https://solar-mems.com/wp-content/uploads/2024/01/nanoSSOC-D60.pdf", "title": "NanoSSOC-D60 Sun Sensor for Nano-Satellites brochure", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "Marked 'ITAR FREE' in the brochure. Radiation 30 kRad; random vibration 14,1 g @ 20-2000 Hz; shock 3000 g @ 1-100 ms. Flight heritage since 2016 with hundreds of units in orbit (brochure)."
+  },
+  {
+    "id": "aac-clyde-space-ss200",
+    "category": "sun_sensor",
+    "manufacturer": "AAC Clyde Space",
+    "product": "SS200 digital sun sensor",
+    "description": "Very small 3 g digital sun sensor with a user-adjustable sampling rate and an I2C-compatible interface, calibrated before delivery.",
+    "fits": "External face, 24.66 x 15.00 x 3.50 mm",
+    "dimensions_mm": {"x": 24.66, "y": 15.0, "z": 3.5, "note": "24.66 x 15.00 x 3.50 mm", "source": "S2"},
+    "mass_kg": {"value": 0.003, "note": "3 g", "source": "S2"},
+    "power_w": {"typical": null, "peak": 0.04, "standby": 0.0015, "note": "Power consumption while sampling 2.5-40 mW, depending on sampling rate; idle < 1.5 mW", "source": "S2"},
+    "supply_voltage_v": {"value": "5 V", "source": "S2"},
+    "interfaces": {"data": ["I2C"], "electrical": "I2C-compatible interface", "mechanical": null, "source": "S2"},
+    "operating_temp_c": {"min": -45, "max": 85, "note": "Operating temperature (electronics) -45 to +85 °C; sensor -55 to +125 °C", "source": "S2"},
+    "performance": {
+      "accuracy_deg": {"value": 0.3, "unit": "deg", "condition": "< 0.3°, 1-sigma, within the ±45° range", "source": "S2"},
+      "fov_deg": {"value": 110, "unit": "deg (full angle)", "condition": "total field of view", "source": "S2"},
+      "type": {"value": "fine; miniaturised digital sun sensor", "unit": null, "condition": "", "source": "S2"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "No price published; product enquiry form only", "source": "S1"},
+    "availability": {"text": "12 Week Lead Time", "source": "S1"},
+    "cad": {"available": "public", "formats": ["ZIP archive (contents not inspected)"], "url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/SS200-20190325.zip", "source": "S1"},
+    "datasheet_url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/SS200.pdf",
+    "sources": {
+      "S1": {"url": "https://www.aac-clyde.space/what-we-do/space-products-components/adcs/ss200", "title": "SS200 - AAC Clyde Space product page", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S2": {"url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/SS200.pdf", "title": "SS200 Sun Sensors datasheet (release date 15 November 2021)", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "Sampling rate is inconsistent: the datasheet table says 'up to 10 Hz', while the highlights on the datasheet and product page say 'up to 100 Hz'. Radiation tolerance > 36 krad (Si). Flying since 2018. 12-week lead time."
+  }
+]

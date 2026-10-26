@@ -1,0 +1,485 @@
+[
+  {
+    "id": "gomspace-nanopower-p60",
+    "category": "eps",
+    "manufacturer": "GomSpace",
+    "product": "NanoPower P60",
+    "description": "Modular PC-104 power system in which a P60 Dock motherboard carries plug-in solar-conditioning (ACU) and power-distribution (PDU) modules.",
+    "fits": "PC-104 stack; standard configuration is 1 dock + 1 ACU (6 input channels) + 1 PDU (9 output channels)",
+    "dimensions_mm": {"x": 92, "y": 88.9, "z": null, "note": "Stated as '92 mm x 88.9 mm x 19.9 to 28.9 mm (with 3 or 5 modules)'; height depends on module count", "source": "S1"},
+    "mass_kg": {"value": null, "note": "Stated only as a formula: '<80 g + nof ACU * 54 g + nof PDU * 47 g'", "source": "S1"},
+    "power_w": {"typical": null, "peak": null, "standby": null, "note": "Self-consumption of the unit not stated on the product page", "source": "S1"},
+    "supply_voltage_v": {"value": "Solar inputs up to 25 V (ACU); 128 W output figure stated 'with Vbat = 32 V'; 'Max 4A from batteries'", "source": "S1"},
+    "interfaces": {
+      "data": ["CAN", "I2C"],
+      "electrical": "CAN/I2C-enabled CSP and GOSH interfaces. ACU: 6 PV inputs per module, up to 25 V and up to 2 A per input, per-channel current/voltage measurement. PDU: 9 switchable latch-up and over-current protected outputs routed to the PC104 stack and a high-current rated discrete connector. Dock provides regulated 3.3 V and 5 V to the PC-104 stack.",
+      "mechanical": "P60 Dock motherboard holding up to 4 modules (mix of ACU, PDU and one A3200); precision-milled anodized aluminium heat sinks",
+      "source": "S1"
+    },
+    "operating_temp_c": {"min": null, "max": null, "source": "S1"},
+    "performance": {
+      "input_power_max_w": {"value": 128, "unit": "W", "condition": "'Manages up to 128W from solar arrays, with 6 MPPT 25 V solar panel input channels'", "source": "S1"},
+      "outputs": {"value": "PDU: 9 switchable protected outputs; 3 configurable output voltages per module from 3.3 V to 18 V; programmable current limit 1 A to 2 A on protected outputs. Dock: regulated 3.3 V and 5 V to the stack. 'Up to 128W output power (with Vbat = 32 V)'.", "unit": null, "condition": "standard configuration (1 ACU, 1 PDU)", "source": "S1"},
+      "mppt": {"value": "yes", "unit": null, "condition": "individual power point tracking on each ACU input channel", "source": "S1"},
+      "efficiency_pct": {"value": null, "unit": "%", "condition": "not stated on the product page", "source": "S1"},
+      "bus_voltages": {"value": "3.3 V and 5 V regulated (dock); PDU outputs configurable 3.3 V to 18 V; battery bus voltage not stated", "unit": "V", "condition": null, "source": "S1"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "Page offers only 'Add to quote' / quote request", "source": "S1"},
+    "availability": {"text": null, "source": null},
+    "cad": {"available": "unknown", "formats": [], "url": null, "source": null},
+    "datasheet_url": "https://gomspace.com/wp-content/uploads/2025/09/gs-ds-nanopower-p60-dock-3.1.pdf",
+    "sources": {
+      "S1": {"url": "https://gomspace.com/product/nanopower-p60/", "title": "NanoPower P60 product page (GomSpace)", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "Modular product: mass and height depend on the number of ACU/PDU modules. Separate datasheets exist for the Dock, ACU200 and PDU200 (linked from the product page) but they are image-based PDFs that could not be read via WebFetch, so operating temperature, efficiency and self-consumption are left null. Battery is external (page names NanoPower BPX and BP4 as companions)."
+  },
+  {
+    "id": "aac-clyde-space-starbuck-nano",
+    "category": "eps",
+    "manufacturer": "AAC Clyde Space",
+    "product": "STARBUCK-NANO",
+    "description": "Single-card PC104 power conditioning and distribution unit for small CubeSats with body-mounted panels, providing regulated 3.3/5/12 V buses and configurable current-limited outputs.",
+    "fits": "PC104 card; intended for '2U and 3U CubeSat with body panels' (STARBUCK-NANO-PLUS variant for '3- 12U CubeSat with deployable panels')",
+    "dimensions_mm": {"x": 95.89, "y": 90.17, "z": 16.2, "note": "Length 95.89 mm, Width 90.17 mm, 'Height*' 16.2 mm (asterisk footnote not shown on page). NANO-PLUS height 20.82 mm.", "source": "S1"},
+    "mass_kg": {"value": 0.092, "note": "Mass (typical) 92 g; NANO-PLUS 179 g", "source": "S1"},
+    "power_w": {"typical": null, "peak": null, "standby": null, "note": "Self-consumption not stated", "source": "S1"},
+    "supply_voltage_v": {"value": "Max. Battery Voltage: 8.2V (no integrated battery)", "source": "S1"},
+    "interfaces": {
+      "data": ["I2C"],
+      "electrical": "Regulated power buses 3.3V, 5V and 12V; 10 configurable Latching Current Limiters (LCL); supports Lithium Polymer battery configurations; connectors not stated",
+      "mechanical": "Power converters integrated on a single PC104 card",
+      "source": "S1"
+    },
+    "operating_temp_c": {"min": -40, "max": 85, "source": "S1"},
+    "performance": {
+      "input_power_max_w": {"value": null, "unit": "W", "condition": "solar input limits not stated", "source": "S1"},
+      "outputs": {"value": "10 configurable LCL outputs; regulated 3.3V, 5V and 12V buses", "unit": null, "condition": null, "source": "S1"},
+      "mppt": {"value": "yes", "unit": null, "condition": "range-level statement: 'Maximum Power Point Tracking or Direct Energy Transfer'; not specified per variant", "source": "S1"},
+      "efficiency_pct": {"value": null, "unit": "%", "condition": "not stated", "source": "S1"},
+      "bus_voltages": {"value": "3.3V; 5V; and 12V (regulated); battery up to 8.2V", "unit": "V", "condition": null, "source": "S1"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "Product enquiry form only", "source": "S1"},
+    "availability": {"text": null, "source": null},
+    "cad": {"available": "public", "formats": [], "url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/Starbuck-CAD-models.zip", "source": "S1"},
+    "datasheet_url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/AAC_DataSheet_Starbuck-Nano.pdf",
+    "sources": {
+      "S1": {"url": "https://www.aac-clyde.space/what-we-do/space-products-components/pcdu/cubesat-eps-starbuck-nano", "title": "CubeSat EPS - STARBUCK-NANO | AAC Clyde Space", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "Design life '5 years in LEO'; radiation tolerance '10 KRad'; storage -50°C to 100°C; vacuum 10^-5 torr; TRL 9, flown since 2014. CAD is a public ZIP ('Starbuck-Nano CAD models'); file formats inside are not stated and the archive was not downloaded. Datasheet PDF could not be text-extracted; all values come from the product page. Solar input limits and BCR count are not published on the page."
+  },
+  {
+    "id": "isispace-iceps2-type-a",
+    "category": "eps",
+    "manufacturer": "ISISPACE",
+    "product": "ICEPS2 Compact Electrical Power System (Type A)",
+    "description": "Second-generation compact PC104-format EPS with hardware MPPT and, in Type A, an integrated 2-cell Li-ion battery pack.",
+    "fits": "PC104 form factor, 1U-3U platforms (product page: 'typically up to 3UXL')",
+    "dimensions_mm": {"x": 96, "y": 92, "z": 26.45, "note": "Type A volume '96 x 92 x 26.45 mm (PCB and top battery)'. Type B '96 x 92 x 11.34 mm (PCB B only)'; Type C '96 x 92 x 15.95 mm (PCB C only)'; Type B/C 4-cell battery pack '94.4 x 89.3 x 21 mm'.", "source": "S1"},
+    "mass_kg": {"value": 0.184, "note": "Type A '184 ± 5 g'; Type B 310 ± 5 g; Type C 360 ± 5 g", "source": "S1"},
+    "power_w": {"typical": null, "peak": null, "standby": null, "note": "Self-consumption not stated", "source": "S1"},
+    "supply_voltage_v": {"value": "Not stated (main bus organisation: 'Unregulated Bus')", "source": "S1"},
+    "interfaces": {
+      "data": ["I2C"],
+      "electrical": "Output voltage domains: VD0 unregulated (1 channel), VD1 5V (4 channels), VD2 3.3V (4 channels), customisable lines via daughterboard (3 channels, Type C). Over-current/thermal limit on unit input and each output bus channel; reverse current protection; hardware supervisor with watchdog; emergency low power mode. Energy storage 22.5Wh (Type A, integrated 2 Li-ion cell pack).",
+      "mechanical": "PC104 form factor",
+      "source": "S1"
+    },
+    "operating_temp_c": {"min": -20, "max": 70, "source": "S1"},
+    "performance": {
+      "input_power_max_w": {"value": null, "unit": "W", "condition": "solar array input count and limits not stated on product page", "source": "S1"},
+      "outputs": {"value": "VD0 unregulated x1; VD1 5V x4; VD2 3.3V x4; plus 3 customisable lines via daughterboard (Type C only)", "unit": null, "condition": null, "source": "S1"},
+      "mppt": {"value": "yes", "unit": null, "condition": "'hardware-based Maximum Power Point Tracking (MPPT)'; no figures given", "source": "S1"},
+      "efficiency_pct": {"value": null, "unit": "%", "condition": "not stated", "source": "S1"},
+      "bus_voltages": {"value": "Unregulated bus (VD0), 5V (VD1), 3.3V (VD2)", "unit": "V", "condition": null, "source": "S1"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "Only an 'I want to buy' inquiry button", "source": "S1"},
+    "availability": {"text": null, "source": null},
+    "cad": {"available": "unknown", "formats": [], "url": null, "source": null},
+    "datasheet_url": "https://isispace.nl/wp-content/uploads/2025/01/ISIS-ICEPS2-DSH-0001-ICEPS2_Datasheet-01_02.pdf",
+    "sources": {
+      "S1": {"url": "https://isispace.nl/product/compact-electrical-power-system/", "title": "Compact Electrical Power System – ISISPACE", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S2": {"url": "https://isispace.nl/power-subsystems-category/", "title": "Power Subsystems Category – ISISPACE", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "PC104 form factor and '1U-3U' fit are from S2. Energy storage per product page: 22.5Wh (Type A) and 45Wh (Type B/C); Type B/C use a modular 4 Li-ion cell pack. Autonomous battery heating mentioned without figures. The v01.02 datasheet PDF could not be text-extracted via WebFetch; search-engine snippets suggest it may list different energy figures and series configurations than the product page, so confirm capacity with ISISPACE before use."
+  },
+  {
+    "id": "endurosat-cubesat-eps",
+    "category": "eps",
+    "manufacturer": "EnduroSat",
+    "product": "CubeSat Power System (CubeSat EPS)",
+    "description": "Modular EPS for larger CubeSats combining an input stage, a 99 Wh Li-ion battery pack and a power distribution module, with 28 V high-power buses and CAN control.",
+    "fits": "6U-8U CubeSats (1x 4S2P battery pack) or 12U-16U CubeSats (2x 4S2P battery packs)",
+    "dimensions_mm": {"x": null, "y": null, "z": null, "note": "Not stated on product page", "source": "S1"},
+    "mass_kg": {"value": 1.478, "note": "'1478 g (stacked with 4S1P BP)' - the page elsewhere describes packs as 4S2P", "source": "S1"},
+    "power_w": {"typical": null, "peak": null, "standby": null, "note": "Self-consumption not stated", "source": "S1"},
+    "supply_voltage_v": {"value": "Solar input up to 45 V per channel; System bus 14.7-17.5 V from solar panels in sunlight, 14.7-16.4 V from battery in shadow", "source": "S1"},
+    "interfaces": {
+      "data": ["CAN"],
+      "electrical": "2x CAN with 1 Mbps data rate; CSPES. Main buses 3.3V, 5V, 12V and 'System bus'; 2x 28 V regulated high-power buses; 6x payload buses (3.3V, 5V, 12V or System bus each); 3.3V VRTC channel; 27x enable lines with individual control; integrated blocking ideal diode for each solar panel connector; deployment and RBF switches; interface for powering, debugging and programming.",
+      "mechanical": "'PC-104 and dedicated power output connectors'",
+      "source": "S1"
+    },
+    "operating_temp_c": {"min": null, "max": null, "source": "S1"},
+    "performance": {
+      "input_power_max_w": {"value": null, "unit": "W", "condition": "total not stated; 'Peak power input: 75 W per channel', 3 input channels per input stage, up to 45 V and up to 3 A per channel; hero '437 W MAX CONTINUOUS POWER' not specified as input or output", "source": "S1"},
+      "outputs": {"value": "Main buses 3.3V, 5V, 12V, System bus; 2x 28 V regulated; 6x payload buses; max continuous current 5 A per distribution unit for each of the 3.3V, 5V and 12V channel groups and for the 28V channels combined", "unit": null, "condition": null, "source": "S1"},
+      "mppt": {"value": null, "unit": null, "condition": "not stated", "source": "S1"},
+      "efficiency_pct": {"value": null, "unit": "%", "condition": "not stated", "source": "S1"},
+      "bus_voltages": {"value": "3.3 V, 5 V, 12 V, System bus 14.7-17.5 V, 2x 28 V regulated", "unit": "V", "condition": null, "source": "S1"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "Cart shows 'Unit Price' and 'Total' labels with no amounts", "source": "S1"},
+    "availability": {"text": null, "source": null},
+    "cad": {"available": "on request", "formats": [], "url": null, "source": "S1"},
+    "datasheet_url": null,
+    "sources": {
+      "S1": {"url": "https://www.endurosat.com/products/cubesat-eps/", "title": "CubeSat EPS - Electrical Power System & Battery Pack", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "Hero figure '437 W MAX CONTINUOUS POWER' (page does not say whether input or output). Battery: Li-Ion, '99 Wh (4S2P) per pack', 'Passive & active thermal management', '5-year lifespan design'. Datasheet and CAD only via a 'Datasheet & CAD File' request form (name, company email, organisation, phone, project). Includes user manual and 5 h engineering support. EnduroSat's older EPS I Plus / EPS II product URLs no longer lead to product pages."
+  },
+  {
+    "id": "nanoavionics-eps-1-0",
+    "category": "eps",
+    "manufacturer": "NanoAvionics",
+    "product": "CubeSat Electrical Power System 1.0 (EPS 1.0)",
+    "description": "PC/104 CubeSat EPS with four MPPT converters, configurable output channels and an integrated 2S Li-ion battery pack (2S1P to 2S7P) with heaters and balancing.",
+    "fits": "PC/104 standard; nano- and microsatellites",
+    "dimensions_mm": {"x": null, "y": null, "z": null, "note": "Not stated on product page", "source": "S1"},
+    "mass_kg": {"value": null, "note": "Not stated on product page", "source": "S1"},
+    "power_w": {"typical": null, "peak": null, "standby": null, "note": "Self-consumption not stated", "source": "S1"},
+    "supply_voltage_v": {"value": "Solar panel voltage range: 2.6 – 12 V; unregulated voltage rail: 7.0 V – 8.3 V; battery nominal voltage 7.4 V", "source": "S1"},
+    "interfaces": {
+      "data": ["CAN", "USB"],
+      "electrical": "CAN with CSP protocol; EPS configuration through USB interface. Four MPPT converters (8 solar panel input channels) with integrated ideal blocking diodes; up to 18 output channels on configurable rails; current, voltage and temperature logging.",
+      "mechanical": "PC/104 standard",
+      "source": "S1"
+    },
+    "operating_temp_c": {"min": null, "max": null, "source": "S1"},
+    "performance": {
+      "input_power_max_w": {"value": null, "unit": "W", "condition": "total not stated; 'Max input power per MPPT converter: 25 W' (four MPPT converters, 8 solar panel input channels)", "source": "S1"},
+      "outputs": {"value": "Up to 18 output channels (configurable voltage rail); typical output channel current 3.13 A (configurable); max 20 W each for the 3.3 V, 5 V and 3-12 V output converters; 'High output power (up to 175 W)'", "unit": null, "condition": null, "source": "S1"},
+      "mppt": {"value": "yes", "unit": null, "condition": "four MPPT converters", "source": "S1"},
+      "efficiency_pct": {"value": 96, "unit": "%", "condition": "'up to 96 %' for both MPPT converters and output converters", "source": "S1"},
+      "bus_voltages": {"value": "Regulated: 3.3 V; 5 V; configurable 3.3 – 12 V. Unregulated: 7.0 V – 8.3 V", "unit": "V", "condition": null, "source": "S1"}
+    },
+    "price": {"value": 8470, "currency": "EUR", "kind": "listed", "note": "'8,470 - 26,710 EUR per unit' (starting price € 8,470); minimum order quantity 3 pieces; technical support not included; VAT and shipping not stated", "source": "S1"},
+    "availability": {"text": "Lead time: 3-5 months", "source": "S1"},
+    "cad": {"available": "unknown", "formats": [], "url": null, "source": null},
+    "datasheet_url": null,
+    "sources": {
+      "S1": {"url": "https://nanoavionics.com/cubesat-components/electrical-power-system/", "title": "CubeSat Electrical Power System EPS | NanoAvionics", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "Battery pack options 2S1P-2S7P: nominal 7.4 V, 3400 – 23800 mAh, 23 – 161 Wh, max discharge current 3.9 – 27.4 A, max charging power 10 – 70 W; on-board battery heaters and balancing. Price range spans the battery configurations. Accessory boards: Output Channel Expander (4 extra DC/DC converters, 8 output channels) and High Voltage Expander (two 100 W boost converters). Mass, dimensions and operating temperature are not published on the page; no datasheet is linked."
+  },
+  {
+    "id": "gomspace-nanopower-bpx-100wh",
+    "category": "battery",
+    "manufacturer": "GomSpace",
+    "product": "NanoPower BPX 100 Wh",
+    "description": "PC104-sized 18650 Li-ion battery pack with a built-in heater and CAN/I2C telemetry, configurable as 8S-1P or 4S-2P.",
+    "fits": "Standard PC104 stack",
+    "dimensions_mm": {"x": 93, "y": 86, "z": 41, "note": "'93 mm x 86 mm x 41 mm'", "source": "S1"},
+    "mass_kg": {"value": 0.5, "note": "'Approximately 500 grams'", "source": "S1"},
+    "power_w": {"typical": null, "peak": null, "standby": null, "note": "Quiescent and heater power not stated", "source": "S1"},
+    "supply_voltage_v": {"value": "Nominal Voltage: 28.8 V (8S-1P, 24 – 33.6 V); 4S-2P option 12 – 16.8 V (14,4 V nominal)", "source": "S1"},
+    "interfaces": {
+      "data": ["CAN", "I2C"],
+      "electrical": "CubeSat Space Protocol (CSP); voltage and temperature telemetry, heater control; max discharge current 6 A; on-board connectors for parallel connection of two packs",
+      "mechanical": "Fits standard PC104",
+      "source": "S1"
+    },
+    "operating_temp_c": {"min": null, "max": null, "source": "S1"},
+    "performance": {
+      "capacity_wh": {"value": 100, "unit": "Wh", "condition": "'Nominal Wattage of 100 Wh'", "source": "S1"},
+      "capacity_mah": {"value": 3000, "unit": "mAh", "condition": "stated as '3 Ah' for 8S-1P ('24 – 33.6 V & 3 Ah'); 4S-2P: '12 – 16.8 V & 6 Ah'; cells '3500 mAh cell (Nominal)'", "source": "S1"},
+      "nominal_voltage_v": {"value": 28.8, "unit": "V", "condition": "8S-1P configuration (4S-2P: 14,4 V nominal)", "source": "S1"},
+      "cell_config": {"value": "8S-1P or 4S-2P; 18650 Li-Ion cells", "unit": null, "condition": null, "source": "S1"},
+      "heater": {"value": "yes", "unit": null, "condition": "'Autonomous/Manual Heater System included for temperature regulation'", "source": "S1"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "No price on page", "source": "S1"},
+    "availability": {"text": null, "source": null},
+    "cad": {"available": "unknown", "formats": [], "url": null, "source": null},
+    "datasheet_url": "https://gomspace.com/wp-content/uploads/2025/09/gs-ds-nanopower-BPX-100-Wh-1076870-1.1.0.pdf",
+    "sources": {
+      "S1": {"url": "https://gomspace.com/product/nanopower-bpx/", "title": "NanoPower BPX 100 Wh product page (GomSpace)", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "Stated pack Ah figures (3 Ah for 8S-1P, 6 Ah for 4S-2P) are lower than cell count x 3500 mAh would give; confirm with the datasheet. Operating/charge temperature range not on product page. Datasheet PDF not text-extractable via WebFetch."
+  },
+  {
+    "id": "aac-clyde-space-optimus-40",
+    "category": "battery",
+    "manufacturer": "AAC Clyde Space",
+    "product": "OPTIMUS-40",
+    "description": "40 Wh lithium-polymer CubeSat battery on a PC104-format board with thermostatically controlled heaters and I2C telemetry.",
+    "fits": "Standard CubeSat PC104 stack",
+    "dimensions_mm": {"x": 95.89, "y": 90.17, "z": 27.35, "note": "Length 95.89 mm, Width 90.17 mm, 'Height*' 27.35 mm (footnote not shown)", "source": "S1"},
+    "mass_kg": {"value": 0.36, "note": "Mass (typical) 360 g", "source": "S1"},
+    "power_w": {"typical": null, "peak": null, "standby": null, "note": "Quiescent Power Consumption stated as '< 0.1 W (30 Wh & 40 Wh)' (upper bound only); heater power not stated", "source": "S1"},
+    "supply_voltage_v": {"value": "EoC Voltage 8.26 V (typical); Full Discharge Voltage 6.2 V (typical); Charge Voltage Limit 8.4 V (max); Discharge Voltage Limit 6 V (min)", "source": "S1"},
+    "interfaces": {
+      "data": ["I2C"],
+      "electrical": "Power buses listed as '3V3 and 5V'; charge/discharge current 2.6 A (OPTIMUS-40)",
+      "mechanical": "Standard CubeSat PC104",
+      "source": "S1"
+    },
+    "operating_temp_c": {"min": -10, "max": 45, "source": "S1"},
+    "performance": {
+      "capacity_wh": {"value": 40, "unit": "Wh", "condition": null, "source": "S1"},
+      "capacity_mah": {"value": null, "unit": "mAh", "condition": "not stated", "source": "S1"},
+      "nominal_voltage_v": {"value": null, "unit": "V", "condition": "not stated (see voltage limits under supply_voltage_v)", "source": "S1"},
+      "cell_config": {"value": null, "unit": null, "condition": "Lithium Polymer; page mentions 'strings of cells connected in parallel' but gives no S/P count", "source": "S1"},
+      "heater": {"value": "yes", "unit": null, "condition": "'Integrated thermostatically controlled heaters'", "source": "S1"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "Product enquiry form only", "source": "S1"},
+    "availability": {"text": null, "source": null},
+    "cad": {"available": "public", "formats": [], "url": "https://www.aac-clyde.space/wp-content/uploads/2021/10/Optimus-CAD-models.zip", "source": "S1"},
+    "datasheet_url": "https://www.aac-clyde.space/wp-content/uploads/2021/10/AAC_DataSheet_Optimus.pdf",
+    "sources": {
+      "S1": {"url": "https://www.aac-clyde.space/what-we-do/space-products-components/cubesat-batteries", "title": "CubeSat Batteries and Satellite Power Systems | AAC Clyde Space", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "Same page lists OPTIMUS-30 (30 Wh, 288 g, height 21.55 mm, 1.95 A) and OPTIMUS-80 (80 Wh, 720 g, height 58.95 mm, 5.2 A, quiescent < 0.2 W). Storage temperature: recommended -10°C to +10°C. Page states 'Qualified to NASA standards EP-Wi-032'. The page also shows a contradictory 'discharge voltage limit: 3V' in the current-rate row. CAD is a public ZIP; formats inside not stated and not downloaded."
+  },
+  {
+    "id": "isispace-imeps2-battery-pack-pbp",
+    "category": "battery",
+    "manufacturer": "ISISPACE",
+    "product": "IMEPS2 Battery Pack (PBP)",
+    "description": "45 Wh four-cell series Li-ion pack module of ISISPACE's modular IMEPS2 power system, stackable for more capacity or redundancy.",
+    "fits": "PC104-format IMEPS2 stack, for nano- and micro-satellites from 3U upwards",
+    "dimensions_mm": {"x": 90, "y": 96, "z": 21, "note": "'PBP: 90 x 96 x 21 mm'", "source": "S1"},
+    "mass_kg": {"value": 0.252, "note": "'PBP: 252.0g'", "source": "S1"},
+    "power_w": {"typical": null, "peak": null, "standby": null, "note": "Not stated", "source": "S1"},
+    "supply_voltage_v": {"value": "Operating Voltage Vbat: 8V – 16.0V", "source": "S1"},
+    "interfaces": {
+      "data": [],
+      "electrical": "10A fuse per pack. Works with the IMEPS2 Power Battery Unit (PBU: 'Max Output Power: 64W at 16V', battery heating & balancing, cell voltage/temperature telemetry). IMEPS2 system data interfaces: I2C, UART, SPI optional.",
+      "mechanical": "Stackable pack, 90 x 96 mm footprint",
+      "source": "S1"
+    },
+    "operating_temp_c": {"min": -20, "max": 70, "source": "S1"},
+    "performance": {
+      "capacity_wh": {"value": 45, "unit": "Wh", "condition": "per pack (4 cells)", "source": "S1"},
+      "capacity_mah": {"value": null, "unit": "mAh", "condition": "not stated", "source": "S1"},
+      "nominal_voltage_v": {"value": null, "unit": "V", "condition": "not stated (operating range 8V – 16.0V)", "source": "S1"},
+      "cell_config": {"value": "4 cells in series (Lithium-Ion)", "unit": null, "condition": null, "source": "S1"},
+      "heater": {"value": "not on the pack", "unit": null, "condition": "heating is provided by the IMEPS2 PBU ('Battery Heating & Balancing')", "source": "S1"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "Only an 'I want to buy' inquiry link", "source": "S1"},
+    "availability": {"text": null, "source": null},
+    "cad": {"available": "unknown", "formats": [], "url": null, "source": null},
+    "datasheet_url": "https://isispace.nl/wp-content/uploads/2025/01/ISIS-IMEPS2-DSH-0001-Datasheet-02_00.pdf",
+    "sources": {
+      "S1": {"url": "https://isispace.nl/product/modular-electrical-power-system-2/", "title": "Modular Electrical Power System – ISISPACE", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S2": {"url": "https://isispace.nl/power-subsystems-category/", "title": "Power Subsystems Category – ISISPACE", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "Fit statement (PC104 form factor, 3U upwards; configurations of 45Wh, 90Wh, 135Wh and more) is from S2. The pack is a module of the IMEPS2 system (PCU, PBU, PDU, PBP), not a standalone smart battery. Operating temperature is given once for the IMEPS2 system. The page gives Vbat 8V – 16.0V for the pack but 12.8V – 16.0V for the PDU battery-voltage lines."
+  },
+  {
+    "id": "pumpkin-bm2",
+    "category": "battery",
+    "manufacturer": "Pumpkin Space Systems",
+    "product": "Intelligent Protected Lithium Battery Module with SoC Reporting (BM 2)",
+    "description": "High-power 18650 Li-ion battery module with a coulomb-counting supervisor, programmable heater control and SCPI-over-I2C telemetry, offered as 2S4P, 3S2P or 4S2P.",
+    "fits": "Pumpkin SUPERNOVA structures; adaptable to 1U/1.5U/2U/3U CubeSat-class structures",
+    "dimensions_mm": {"x": 100, "y": 100, "z": null, "note": "'100x100mm footprint when its L-shaped mounting brackets are present'; height not stated", "source": "S1"},
+    "mass_kg": {"value": null, "note": "Not stated (page references a 'BM2 Mass Properties' document without a link)", "source": "S1"},
+    "power_w": {"typical": null, "peak": null, "standby": null, "note": "Not stated", "source": "S1"},
+    "supply_voltage_v": {"value": "2S4P (8 cells 5.2-8.4V); 3S2P (6 cells 7.8-12.6V); 4S2P (8 cells 10.4-16.8V)", "source": "S1"},
+    "interfaces": {
+      "data": ["I2C"],
+      "electrical": "Telecommands and telemetry via SCPI over I2C (SupMCU); USB Debug Adapter for debug/firmware; up to 160W; 15A to a load from two identical connectors; minimum 5A during charging; power connector 'Standard (2 x 14-pin)'; 6-signal, 14-wire interface harness to the 104-pin CubeSat bus via adapter; first-level OV, UV, OC and OT protection",
+      "mechanical": "L-shaped mounting brackets; 100x100mm footprint",
+      "source": "S1"
+    },
+    "operating_temp_c": {"min": null, "max": null, "source": "S1"},
+    "performance": {
+      "capacity_wh": {"value": 100, "unit": "Wh", "condition": "'3500mAh (100Wh w/8 cells)'; other options '3000mAh (86Wh w/8 cells)', '2500mAh (72Wh w/8 cells)'; page also says '72Wh for the 3S2P configuration'", "source": "S1"},
+      "capacity_mah": {"value": null, "unit": "mAh", "condition": "pack mAh not stated; per-cell capacity options 2500 / 3000 / 3500 mAh; pack capacity depends on S/P configuration", "source": "S1"},
+      "nominal_voltage_v": {"value": null, "unit": "V", "condition": "not stated (ranges per configuration under supply_voltage_v)", "source": "S1"},
+      "cell_config": {"value": "2S4P, 3S2P or 4S2P; 18650-size Li-Ion cells", "unit": null, "condition": null, "source": "S1"},
+      "heater": {"value": "yes", "unit": null, "condition": "'programmable battery heater control'", "source": "S1"}
+    },
+    "price": {"value": 10500, "currency": "USD", "kind": "listed", "note": "'$10,500.00 - $12,500.00' per item (shown with '$' only; Pumpkin is a US store); options '+$1000: User-provided 18650 cells' and '+$1000: User-provided captive harness'; VAT/shipping not stated", "source": "S1"},
+    "availability": {"text": "Unavailable", "source": "S1"},
+    "cad": {"available": "public", "formats": [], "url": "http://www.pumpkininc.com/space/CAD/710-01552-F%20Battery%20Module%202%20(BM2).zip", "source": "S1"},
+    "datasheet_url": null,
+    "sources": {
+      "S1": {"url": "https://www.pumpkinspace.com/store/p198/Intelligent_Protected_Lithium_Battery_Module_with_SoC_Reporting_%28BM_2%29.html", "title": "Intelligent Protected Lithium Battery Module with SoC Reporting (BM2)", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "Store currently shows 'Unavailable'. Part number 710-01552-F appears in the CAD file names; further CAD ZIPs exist without brackets and with the Battery Switch Module. A datasheet is listed on the page but no URL was exposed. Needs an EPS matching the series cell count. Page states 'Flight Hardware | Flight Qualified | Space Proven'."
+  },
+  {
+    "id": "gomspace-nanopower-dsp",
+    "category": "solar_panel",
+    "manufacturer": "GomSpace",
+    "product": "NanoPower DSP (Deployable Solar Panels)",
+    "description": "Deployable solar wing for the side of a 3U or 6U satellite with spring-loaded hinges, an integrated hold-down release mechanism and triple-junction cells.",
+    "fits": "Deployable wing on the side of a 3U or 6U satellite; versions 135° (three panels), 135° reverse (two panels) and 90° (two panels)",
+    "dimensions_mm": {"x": null, "y": null, "z": null, "note": "Only stated: 'The wingspan of a single deployed wing is 163 mm when mounted on a 6U structure'", "source": "S1"},
+    "mass_kg": {"value": null, "note": "Not stated", "source": "S1"},
+    "power_w": {"typical": null, "peak": null, "standby": null, "note": "Not stated", "source": "S1"},
+    "supply_voltage_v": {"value": null, "source": "S1"},
+    "interfaces": {
+      "data": ["GSSB"],
+      "electrical": "Integrated GomSpace Sensor System Bus (GSSB) modules and GSSB connectors; 135° version carries a coarse sun sensor, an external temperature sensor and two GomSpace Fine Sun Sensors",
+      "mechanical": "Mounting panel attached to the spacecraft structure plus deployable panels on spring-loaded hinges; integrated Hold Down Release Mechanism (HDRM) with redundant panel release; aluminium support structure",
+      "source": "S1"
+    },
+    "operating_temp_c": {"min": -60, "max": 80, "source": "S1"},
+    "performance": {
+      "power_w": {"value": 18, "unit": "W", "condition": "'up to 18W per DSP' for the 135-degree wing; no AM0/temperature/BOL condition stated; per cell 'up to 1.15W per cell in Low Earth Orbit (LEO)'", "source": "S1"},
+      "cell_type": {"value": "Space-qualified triple junction solar cell assemblies, GaInP/GaAs/Ge on Ge substrate, with cover glass", "unit": null, "condition": null, "source": "S1"},
+      "cell_efficiency_pct": {"value": 30, "unit": "%", "condition": "'30% solar panel efficiency'", "source": "S1"},
+      "cells_count": {"value": null, "unit": null, "condition": "not stated", "source": "S1"},
+      "deployable": {"value": "yes", "unit": null, "condition": null, "source": "S1"},
+      "area_cm2": {"value": null, "unit": "cm²", "condition": "panel area not stated; '30cm² effective area per solar cell'", "source": "S1"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "No price on page", "source": "S1"},
+    "availability": {"text": null, "source": null},
+    "cad": {"available": "unknown", "formats": [], "url": null, "source": null},
+    "datasheet_url": "https://gomspace.com/wp-content/uploads/2025/09/Datasheet-NanoPower-Deployable-Solar-Panel.pdf",
+    "sources": {
+      "S1": {"url": "https://gomspace.com/product/nanopower-dsp/", "title": "NanoPower DSP product page (GomSpace)", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "Mass, cell count and stowed dimensions are not on the product page. A Product Change Notice for NanoPower MSP and DSP is linked from the page but its PDF could not be read; check it before ordering."
+  },
+  {
+    "id": "endurosat-3u-solar-panel",
+    "category": "solar_panel",
+    "manufacturer": "EnduroSat",
+    "product": "3U Solar Panel",
+    "description": "Body-mounted 3U CubeSat panel with seven triple-junction cells, bypass diodes and integrated photodiodes, with an optional connector for a magnetorquer and temperature sensor.",
+    "fits": "3U long face, body-mounted ('CubeSat 3U Stationary solar panel')",
+    "dimensions_mm": {"x": null, "y": null, "z": null, "note": "Panel dimensions not stated; Solar Cell Assembly (SCA) thickness 280-300 μm", "source": "S1"},
+    "mass_kg": {"value": 0.147, "note": "147 g", "source": "S1"},
+    "power_w": {"typical": null, "peak": null, "standby": null, "note": "Not stated", "source": "S1"},
+    "supply_voltage_v": {"value": null, "source": "S1"},
+    "interfaces": {
+      "data": [],
+      "electrical": "Max Voltage 17.5V (for 7 cells); Max Current 512 mA; internal bypass diode; supports parallel connections; integrated photodiodes (up to 3); optional connector for external magnetorquer, low-power MCU, up to 2 photodiodes, temperature sensor",
+      "mechanical": null,
+      "source": "S1"
+    },
+    "operating_temp_c": {"min": null, "max": null, "source": "S1"},
+    "performance": {
+      "power_w": {"value": 8.4, "unit": "W", "condition": "'Max Power in LEO'; no AM0/temperature condition stated", "source": "S1"},
+      "cell_type": {"value": "triple-junction photovoltaic solar cells", "unit": null, "condition": null, "source": "S1"},
+      "cell_efficiency_pct": {"value": 30, "unit": "%", "condition": "stated as '30+%' at BOL ('29+%' at EOL)", "source": "S1"},
+      "cells_count": {"value": 7, "unit": null, "condition": null, "source": "S1"},
+      "deployable": {"value": "no", "unit": null, "condition": "stationary (body-mounted) panel", "source": "S1"},
+      "area_cm2": {"value": null, "unit": "cm²", "condition": "not stated", "source": "S1"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "Cart shows 'Unit Price' and 'Total' labels with no amounts", "source": "S1"},
+    "availability": {"text": null, "source": null},
+    "cad": {"available": "on request", "formats": [], "url": null, "source": "S1"},
+    "datasheet_url": null,
+    "sources": {
+      "S1": {"url": "https://www.endurosat.com/products/3u-solar-panel/", "title": "3U CubeSat Solar Panel - 30% Triple-Junction Cells, 8.4W LEO", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "Sensors listed as 'Temperature and Sun, optional Gyroscope'. 'Designed for a 5-year mission lifetime'. Datasheet and CAD only via a 'Datasheet & CAD File' request form. Includes user manual and 1 h engineering support."
+  },
+  {
+    "id": "endurosat-6u-deployable-solar-panel",
+    "category": "solar_panel",
+    "manufacturer": "EnduroSat",
+    "product": "6U Deployable Solar Panel (6U Solar Array)",
+    "description": "Deployable 6U solar panel with 32 triple-junction cells, burn-wire release and a choice of Z or X/Y hinge mounting.",
+    "fits": "Deployable panel for a 6U CubeSat (Single Deployable Z or X/Y; double-deployable version also offered)",
+    "dimensions_mm": {"x": 209, "y": 342, "z": 8.7, "note": "'6U Deployable Solar Panel: 209 mm x 342 mm x 8.7 mm' (stowed/deployed not distinguished); 6U Double Deployable Solar Panel '209 mm x 342 mm x 10 mm'", "source": "S1"},
+    "mass_kg": {"value": null, "note": "'655 g - 770 g' for the 6U Deployable Solar Panel (configuration dependent); Double Deployable '1065 g'", "source": "S1"},
+    "power_w": {"typical": null, "peak": null, "standby": null, "note": "Consumption not stated; 'Single 5V power supply needed for operation'", "source": "S1"},
+    "supply_voltage_v": {"value": "Single 5V power supply needed for operation", "source": "S1"},
+    "interfaces": {
+      "data": [],
+      "electrical": "Max Voltage 39.8 V (16S1P); Max Current 4 A (4S8P); internal bypass diode; supports parallel array connections; integrated photodiodes (up to 3); optional connector for external magnetorquer, low-power MCU, up to 2 photodiodes, temperature sensor",
+      "mechanical": "Burn-wire release mechanism; adjustable Z and X/Y hinge options; accessible RBF inhibition mechanism",
+      "source": "S1"
+    },
+    "operating_temp_c": {"min": null, "max": null, "source": "S1"},
+    "performance": {
+      "power_w": {"value": 38.4, "unit": "W", "condition": "'Max Power in LEO' for Single Deployables and X/Y Double Deployable (29.3 W for Z Double Deployable); banner says '19.2 W OF POWER IN LEO PER SIDE'; no AM0/temperature condition stated", "source": "S1"},
+      "cell_type": {"value": "triple-junction photovoltaic solar cells", "unit": null, "condition": null, "source": "S1"},
+      "cell_efficiency_pct": {"value": 30, "unit": "%", "condition": "stated as '30+%' at BOL ('29+%' at EOL)", "source": "S1"},
+      "cells_count": {"value": 32, "unit": null, "condition": "'32 (Single or Double Deployable)'", "source": "S1"},
+      "deployable": {"value": "yes", "unit": null, "condition": null, "source": "S1"},
+      "area_cm2": {"value": null, "unit": "cm²", "condition": "not stated", "source": "S1"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "Unit Price field blank", "source": "S1"},
+    "availability": {"text": null, "source": null},
+    "cad": {"available": "on request", "formats": [], "url": null, "source": "S1"},
+    "datasheet_url": null,
+    "sources": {
+      "S1": {"url": "https://www.endurosat.com/products/6u-deployable-solar-array/", "title": "6U CubeSat Deployable Solar Array - Satellite Solar Panels", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "Power figures are inconsistent on the page (38.4 W in the spec table vs '19.2 W ... per side' in the banner); the panel may carry cells on both faces, but the page does not say so. Mass is a range, so mass_kg.value is null. 'Designed for a 5-year satellite mission lifetime'. Datasheet and CAD only via a 'Datasheet & CAD File' request form."
+  },
+  {
+    "id": "aac-clyde-space-photon-side-3u",
+    "category": "solar_panel",
+    "manufacturer": "AAC Clyde Space",
+    "product": "PHOTON-SIDE (3U)",
+    "description": "Body-mounted FR4 CubeSat side panel populated with Spectrolab XTJ Prime cells, with temperature and coarse sun sensor telemetry.",
+    "fits": "Body-mounted side panel; '1U; 2U; 3U and 6U face sizes' available (values below are for 3U)",
+    "dimensions_mm": {"x": null, "y": null, "z": 3.5, "note": "Stowed height 3.5mm; length and width not stated", "source": "S1"},
+    "mass_kg": {"value": 0.135, "note": "'Mass (3U)' 135g", "source": "S1"},
+    "power_w": {"typical": null, "peak": null, "standby": null, "note": "Not stated", "source": "S1"},
+    "supply_voltage_v": {"value": null, "source": "S1"},
+    "interfaces": {
+      "data": [],
+      "electrical": "Telemetry available: temperature sensors and coarse sun sensors; connectors not stated",
+      "mechanical": "FR4 substrate; no HDRM ('None')",
+      "source": "S1"
+    },
+    "operating_temp_c": {"min": -40, "max": 80, "source": "S1"},
+    "performance": {
+      "power_w": {"value": 9, "unit": "W", "condition": "'Up to 9W per 3U populated face' (range-level figure for PHOTON; no AM0/temperature condition stated)", "source": "S1"},
+      "cell_type": {"value": "Spectrolab XTJ Prime (others available on request)", "unit": null, "condition": null, "source": "S1"},
+      "cell_efficiency_pct": {"value": 30.7, "unit": "%", "condition": null, "source": "S1"},
+      "cells_count": {"value": null, "unit": null, "condition": "not stated", "source": "S1"},
+      "deployable": {"value": "no", "unit": null, "condition": "PHOTON-SIDE lists HDRM 'None'", "source": "S1"},
+      "area_cm2": {"value": null, "unit": "cm²", "condition": "not stated", "source": "S1"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "No price on page", "source": "S1"},
+    "availability": {"text": null, "source": null},
+    "cad": {"available": "unknown", "formats": [], "url": null, "source": null},
+    "datasheet_url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/AAC_DataSheet_Photon_original.pdf",
+    "sources": {
+      "S1": {"url": "https://www.aac-clyde.space/what-we-do/space-products-components/photon-solar-arrays", "title": "PHOTON CubeSat Solar Panel and Array Solutions | AAC Clyde Space", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "4 mil anti-reflective coated cover glass; 'designed to withstand NASA GEVS qualification testing'; flown since 2014. Deployable variants on the same page: PHOTON-SD (1U/2U/3U, 310g, 7mm stowed, thermal knife/cord), PHOTON-DD (3U only, 330g, 9.55mm, thermal knife/cord), PHOTON-TD (3U only, 330g, 9.5mm, aluminium support structure, thermal screw release)."
+  },
+  {
+    "id": "isispace-solar-panel-3u-xl",
+    "category": "solar_panel",
+    "manufacturer": "ISISPACE",
+    "product": "Satellite Solar Panels – 3U(XL) body-mounted",
+    "description": "Customisable body-mounted CubeSat panel using GaAs triple-junction cell assemblies, with integrated light and temperature sensors and an OMNETICS harness.",
+    "fits": "3U(XL) face, body-mounted (body-mounted panels offered 1U – 8U; deployable panels 3U – 8U)",
+    "dimensions_mm": {"x": null, "y": null, "z": null, "note": "Panel Thickness '1.2 – 2.0 mm (typical value)'; length and width not stated", "source": "S1"},
+    "mass_kg": {"value": 0.15, "note": "3U(XL): 150g ('Mass (depends on configuration)')", "source": "S1"},
+    "power_w": {"typical": null, "peak": null, "standby": null, "note": "Not stated", "source": "S1"},
+    "supply_voltage_v": {"value": "Supply Voltage (BOL): 2.7 V per cell", "source": "S1"},
+    "interfaces": {
+      "data": [],
+      "electrical": "Custom flat inline OMNETICS connector (2mm height); Raychem Spec44 cables (AWG26); harness included; integrated light and temperature sensors",
+      "mechanical": "Body-mounted panel; thickness 1.2 – 2.0 mm (typical)",
+      "source": "S1"
+    },
+    "operating_temp_c": {"min": -40, "max": 80, "source": "S1"},
+    "performance": {
+      "power_w": {"value": null, "unit": "W", "condition": "panel total not stated (cell count not published); per-cell 'Power Delivered (BOL)': '1.23 W per cell (approx.)'", "source": "S1"},
+      "cell_type": {"value": "GaAs triple-junction cell assemblies", "unit": null, "condition": null, "source": "S1"},
+      "cell_efficiency_pct": {"value": 30, "unit": "%", "condition": "BOL", "source": "S1"},
+      "cells_count": {"value": null, "unit": null, "condition": "not stated", "source": "S1"},
+      "deployable": {"value": "no", "unit": null, "condition": "body-mounted; deployable panels 3U – 8U offered separately with ISISPACE hinges and HDRM", "source": "S1"},
+      "area_cm2": {"value": null, "unit": "cm²", "condition": "not stated", "source": "S1"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "Only an 'I want to buy' inquiry button", "source": "S1"},
+    "availability": {"text": null, "source": null},
+    "cad": {"available": "unknown", "formats": [], "url": null, "source": null},
+    "datasheet_url": null,
+    "sources": {
+      "S1": {"url": "https://isispace.nl/product/small-satellite-solar-panels/", "title": "Satellite Solar Panels – ISISPACE", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "Radiation tolerance '2 years minimum in LEO'. Other body-mounted masses: 1U 50g, 2U 100g, 6U(XL) 300g, 8U 400g. No datasheet link on the page; customised per mission, so cell layout and panel power must come from ISISPACE."
+  }
+]

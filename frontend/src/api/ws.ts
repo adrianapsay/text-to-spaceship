@@ -14,6 +14,8 @@ export interface WsClientOptions {
   getContext: () => { epoch: number | null; revs: Revs; appliedClientSeq: number };
   /** whether the client wants layout.candidate messages (Expert ghosts) */
   wantCandidates: () => boolean;
+  /** V3: the server closed with 4001 because the app switched to another project (the page reloads) */
+  onProjectSwitched?: () => void;
   minBackoffMs?: number;
   maxBackoffMs?: number;
   pingIntervalMs?: number;
@@ -30,7 +32,7 @@ export class WsClient {
   private pingTimer: ReturnType<typeof setInterval> | null = null;
   private stopped = false;
   private outSeq = 0;
-  private readonly o: Required<Omit<WsClientOptions, 'transport' | 'onEnvelope' | 'onState' | 'onNewConnection' | 'getContext' | 'wantCandidates'>> &
+  private readonly o: Required<Omit<WsClientOptions, 'transport' | 'onEnvelope' | 'onState' | 'onNewConnection' | 'getContext' | 'wantCandidates' | 'onProjectSwitched'>> &
     WsClientOptions;
 
   constructor(opts: WsClientOptions) {
@@ -111,10 +113,15 @@ export class WsClient {
     s.onerror = () => {
       /* onclose follows */
     };
-    s.onclose = () => {
+    s.onclose = (ev) => {
       if (this.pingTimer) clearInterval(this.pingTimer);
       this.pingTimer = null;
       if (this.sock === s) this.sock = null;
+      if (ev?.code === 4001 && this.o.onProjectSwitched) {
+        this.stopped = true;                            // everything this page holds belongs to the old project
+        this.o.onProjectSwitched();
+        return;
+      }
       this.scheduleReconnect();
     };
   }

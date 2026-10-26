@@ -19,8 +19,10 @@ const DrawingsTab = lazy(() => import('./tabs/Drawings').then((m) => ({ default:
 const ManufacturableTab = lazy(() => import('./tabs/Manufacturable').then((m) => ({ default: m.ManufacturableTab })));
 const CadValidationTab = lazy(() => import('./tabs/CadValidation').then((m) => ({ default: m.CadValidationTab })));
 const ResultsTab = lazy(() => import('./tabs/Results').then((m) => ({ default: m.ResultsTab })));
+const BuilderTab = lazy(() => import('./tabs/Builder').then((m) => ({ default: m.BuilderTab })));
 
 export const TABS: { id: TabId; label: string }[] = [
+  { id: 'builder', label: 'CubeSat Builder' },
   { id: 'overview', label: 'Overview' },
   { id: 'components', label: 'Components' },
   { id: 'optimization', label: 'Optimization' },
@@ -39,6 +41,8 @@ export const TABS: { id: TabId; label: string }[] = [
 
 function TabBody({ id }: { id: TabId }) {
   switch (id) {
+    case 'builder':
+      return <BuilderTab />;
     case 'overview':
       return <OverviewTab />;
     case 'components':

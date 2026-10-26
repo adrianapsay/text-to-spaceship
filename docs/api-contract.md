@@ -171,6 +171,37 @@ piece shown). Their `extra_items` have `kind: "bracket"`, `bracket_kind: "combin
 | GET | `/api/cad/package/{layout_id}/download` | The package ZIP: `parts_world/`, `parts_canonical/`, `hardware/`, `assembly.json` (transforms, densities, the app's mass properties and validation for comparison), report, proof certificate + checker, DRAFT import script (never run), README with the deferred tasks |
 | GET | `/api/export/{layout_id}?kind=report_md\|report_html\|csv\|json\|stl_zip` | Exports. The reports re-run the full proof; the HTML report adds top / front / side views; the ZIP holds every placed part and hardware item as world-frame STL (mm) |
 
+### 3.1 V3: CubeSat Builder (`/api/builder`) and projects
+
+Builder designs live in `data/builder/designs/<id>.json` (earlier versions in `<id>.history/`), CAD in
+`data/builder/cad/` (git-ignored). `?expert=1` on the design endpoints includes the advanced questions. Every
+endpoint that changes a design answers `{design, view}` (the design record and the questionnaire state).
+
+| Method | Path | Purpose |
+|---|---|---|
+| GET | `/api/builder/meta` | Regions, ground stations, question sections, trade sliders, sizes (`sizes`, `packed_sizes`), slots `{id, label, categories, place}`, component categories, engine version |
+| GET / POST | `/api/builder/designs` | List designs; create one `{name?, statement?}` (the statement's findings are stored as answers with source `statement`; answer has `findings`) |
+| GET / PATCH | `/api/builder/designs/{id}` | A design; rename `{name}` |
+| POST | `/api/builder/designs/{id}/statement` `{text}` | Read a new mission statement |
+| POST | `/api/builder/designs/{id}/answer` `{qid, value?, unknown?}` | Answer a question (`unknown: true` = "I don't know": the documented default, ASSUMED). 400 with the reason for a bad value; 404 unknown question |
+| DELETE | `/api/builder/designs/{id}/answer/{qid}` | Forget an answer |
+| POST | `/api/builder/designs/{id}/defaults` | "Use the defaults for the rest" |
+| GET | `/api/builder/designs/{id}/questions` | Every applicable question with its answer |
+| GET | `/api/builder/designs/{id}/analysis` | The architecture and analyses of the design as it is now (cached by its inputs): `{design_version, inputs_hash, size_u, size_label, size_why, orbit, picks: {slot: {items, status, why, alternatives, flags, place, recommended?}}, calcs: {id: Calc}, groups, checks: [{rule, status, title, detail, items, fix}], check_summary, trade: [per size], open_questions, missing_hardware, flags, sliders, refs, geometry, disclaimer}`. A `Calc` is `{id, label, value, unit, equation, inputs: {name: {value, unit, source}}, assumptions, refs, fidelity, explain, missing, …}`; check statuses are `compatible`, `assumptions`, `incompatible`, `unknown` |
+| POST | `/api/builder/designs/{id}/selection` `{slot, component, qty}` | The user's part for a slot (`component: null` leaves it out). 400 wrong kind of part; 404 unknown slot or part |
+| DELETE | `/api/builder/designs/{id}/selection/{slot}` | Back to the architect's recommendation |
+| PATCH | `/api/builder/designs/{id}/prefs` | Trade sliders (0 … 1), `lifetime_years` (or `null`), `size_u` (one of 1, 1.5, 2, 3, 6, 12, or `null` for the recommended size) |
+| POST | `/api/builder/designs/{id}/send` `{switch?}` | Send to Optimization: a new optimiser project `builder-<name>[-n]` (never overwriting one) with the design's internal parts; `switch: true` runs the app on it. Answers the project name, the parts sent (with geometry origin), what was not packed, warnings and the constraints the optimiser does not enforce (also kept as the project's `builder.json`). 400 when the size is not 3U/6U/12U or a part cannot be placed by the optimiser |
+| GET | `/api/builder/catalog?category=` | Component summaries, categories and the analysis references |
+| GET | `/api/builder/catalog/{id}` | The full catalog record (every value with its source) and the budget values it does not publish |
+| GET | `/api/builder/cad` | Each part's geometry `{origin: manufacturer \| reconstructed \| bbox \| placeholder, checks, units, extents_mm, …}` and the CAD the makers offer (links only: the app never downloads) |
+| POST | `/api/builder/cad/{id}/import` (multipart `file`, `origin`, `source_url?`) | Import the user's CAD file (STEP, IGES, BREP, STL or a .zip of one): converted to a millimetre STL by OpenCASCADE in its own process, checked (opens, solids, watertight, volume, size against the catalog). 400 with the reason |
+| POST | `/api/builder/cad/{id}/simplified` | A simplified bounding box of the published size (a placeholder cube when none is published) |
+| DELETE | `/api/builder/cad/{id}` | Remove a part's geometry |
+| GET | `/api/builder/cad/{id}/stl` | The part's STL (mm) |
+| GET | `/api/projects` | The optimiser's projects `{name, parts, form_factor, current, builder: what the Builder sent, or null}` |
+| POST | `/api/projects/switch` `{name}` | Run the app on another project: the coordinator stops and one starts on that project; open pages are closed with WebSocket code 4001 and reload. 404 unknown project |
+
 ## 4. WebSocket `/ws`
 **Envelope (both directions)**
 ```json

@@ -27,7 +27,12 @@ class JSON(JSONResponse):
         return json.dumps(jsonable(content), allow_nan=False, separators=(",", ":")).encode("utf-8")
 
 
-def create_app(coord: Coordinator | None = None, project: str = "default", **coord_kwargs) -> FastAPI:
+def create_app(coord: Coordinator | None = None, project: str = "default", builder_root=None,
+               **coord_kwargs) -> FastAPI:
+    from ..builder.store import BuilderStore
+    from .builder import router as builder_router
+    from .projects import router as projects_router
+
     @asynccontextmanager
     async def lifespan(app: FastAPI):
         c = coord or Coordinator(ProjectStore(project), **coord_kwargs)
@@ -36,9 +41,13 @@ def create_app(coord: Coordinator | None = None, project: str = "default", **coo
         try:
             yield
         finally:
-            await c.stop()
+            await app.state.coord.stop()        # the current one: a project switch replaces it (api/projects.py)
 
     app = FastAPI(title="TEXT-TO-SPACESHIP", version=VERSION, lifespan=lifespan, default_response_class=JSON)
+    # V3: the CubeSat Builder (its designs live in data/builder, outside every optimiser project)
+    app.state.builder = BuilderStore(builder_root) if builder_root is not None else BuilderStore()
+    app.include_router(builder_router)
+    app.include_router(projects_router)          # V3: the project picker (Send to Optimization switches to its project)
 
     def C(request: Request) -> Coordinator:
         return request.app.state.coord

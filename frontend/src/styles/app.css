@@ -1143,3 +1143,78 @@ tr.bracket-open > td {
     border-bottom: 2px solid CanvasText;
   }
 }
+
+/* V3 CubeSat Builder: the mission questionnaire */
+.bq-chat {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.bq-msg.user {
+  align-self: flex-end;
+  max-width: 85%;
+  background: var(--bg-selected);
+  border: 1px solid var(--border-subtle);
+  padding: 8px 10px;
+}
+.bq-card {
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-panel);
+  padding: 10px 12px;
+}
+.bq-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 6px;
+}
+.bq-option {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  text-align: left;
+  padding: 7px 9px;
+  background: var(--bg-sunken);
+  border: 1px solid var(--border-subtle);
+  cursor: pointer;
+}
+.bq-option:hover:not(:disabled) {
+  background: var(--bg-hover);
+  border-color: var(--border);
+}
+.bq-option[aria-pressed='true'] {
+  background: var(--bg-selected);
+  border-color: var(--accent);
+}
+.bq-option:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+.bq-checks {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* V3 CubeSat Builder: analysis, architecture and trade study */
+.bq-calc {
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-sunken);
+  padding: 7px 9px;
+}
+.bq-eq {
+  display: block;
+  white-space: pre-wrap;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  background: var(--bg-panel);
+  border: 1px solid var(--border-subtle);
+  padding: 4px 6px;
+}
+.bq-picker {
+  border-left: 3px solid var(--accent);
+  padding: 6px 8px;
+  background: var(--bg-panel);
+}
+.warn-text {
+  color: var(--warn);
+}

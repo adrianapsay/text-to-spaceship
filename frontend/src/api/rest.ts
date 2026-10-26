@@ -1,5 +1,7 @@
 // Typed REST client for docs/api-contract.md §3.
 import type { Transport } from './transport';
+import type { BuilderMeta, BuilderResponse, BuilderView, DesignSummary, QuestionView } from '../builder/types';
+import type { Analysis, CadEntry, CadList, CatalogList, ProjectInfo, SendResult } from '../builder/analysisTypes';
 import type {
   Attribution,
   Benchmarks,
@@ -125,6 +127,77 @@ export class ApiClient {
       headers: { 'content-type': 'application/json', accept: 'application/json' },
       body: body === undefined ? undefined : JSON.stringify(body),
     });
+  }
+
+  // ------------------------------------------------------------------------------------- V3 CubeSat Builder
+  builderMeta() {
+    return this.json<BuilderMeta>('/api/builder/meta');
+  }
+  builderDesigns() {
+    return this.json<{ designs: DesignSummary[] }>('/api/builder/designs');
+  }
+  builderCreate(req: { name?: string; statement?: string }, expert = false) {
+    return this.send<BuilderResponse>('POST', `/api/builder/designs${expert ? '?expert=1' : ''}`, req);
+  }
+  builderGet(id: string, expert = false) {
+    return this.json<BuilderResponse>(`/api/builder/designs/${encodeURIComponent(id)}${expert ? '?expert=1' : ''}`);
+  }
+  builderRename(id: string, name: string) {
+    return this.send<BuilderResponse>('PATCH', `/api/builder/designs/${encodeURIComponent(id)}`, { name });
+  }
+  builderStatement(id: string, text: string, expert = false) {
+    return this.send<BuilderResponse>('POST', `/api/builder/designs/${encodeURIComponent(id)}/statement${expert ? '?expert=1' : ''}`, { text });
+  }
+  builderAnswer(id: string, qid: string, answer: { value?: unknown; unknown?: boolean }, expert = false) {
+    return this.send<BuilderResponse>('POST', `/api/builder/designs/${encodeURIComponent(id)}/answer${expert ? '?expert=1' : ''}`, { qid, ...answer });
+  }
+  builderUnanswer(id: string, qid: string, expert = false) {
+    return this.send<BuilderResponse>('DELETE', `/api/builder/designs/${encodeURIComponent(id)}/answer/${encodeURIComponent(qid)}${expert ? '?expert=1' : ''}`);
+  }
+  builderDefaults(id: string, expert = false) {
+    return this.send<BuilderResponse>('POST', `/api/builder/designs/${encodeURIComponent(id)}/defaults${expert ? '?expert=1' : ''}`);
+  }
+  builderQuestions(id: string, expert = false) {
+    return this.json<{ questions: QuestionView[]; view: BuilderView }>(`/api/builder/designs/${encodeURIComponent(id)}/questions${expert ? '?expert=1' : ''}`);
+  }
+  builderAnalysis(id: string) {
+    return this.json<Analysis>(`/api/builder/designs/${encodeURIComponent(id)}/analysis`);
+  }
+  builderSelect(id: string, slot: string, component: string | null, qty = 1, expert = false) {
+    return this.send<BuilderResponse>('POST', `/api/builder/designs/${encodeURIComponent(id)}/selection${expert ? '?expert=1' : ''}`, { slot, component, qty });
+  }
+  builderUnselect(id: string, slot: string, expert = false) {
+    return this.send<BuilderResponse>('DELETE', `/api/builder/designs/${encodeURIComponent(id)}/selection/${encodeURIComponent(slot)}${expert ? '?expert=1' : ''}`);
+  }
+  builderPrefs(id: string, prefs: Record<string, number | null>, expert = false) {
+    return this.send<BuilderResponse>('PATCH', `/api/builder/designs/${encodeURIComponent(id)}/prefs${expert ? '?expert=1' : ''}`, prefs);
+  }
+  builderSend(id: string, switchTo = true) {
+    return this.send<SendResult>('POST', `/api/builder/designs/${encodeURIComponent(id)}/send`, { switch: switchTo });
+  }
+  projects() {
+    return this.json<{ projects: ProjectInfo[]; current: string }>('/api/projects');
+  }
+  projectSwitch(name: string) {
+    return this.send<{ project: string; switched: boolean; previous?: string }>('POST', '/api/projects/switch', { name });
+  }
+  builderCad() {
+    return this.json<CadList>('/api/builder/cad');
+  }
+  builderCadImport(cid: string, file: File, origin: 'manufacturer' | 'reconstructed' = 'manufacturer') {
+    const fd = new FormData();
+    fd.append('file', file, file.name);
+    fd.append('origin', origin);
+    return this.json<CadEntry>(`/api/builder/cad/${encodeURIComponent(cid)}/import`, { method: 'POST', body: fd });
+  }
+  builderCadSimplified(cid: string) {
+    return this.send<CadEntry>('POST', `/api/builder/cad/${encodeURIComponent(cid)}/simplified`);
+  }
+  builderCadDelete(cid: string) {
+    return this.send<{ ok: boolean }>('DELETE', `/api/builder/cad/${encodeURIComponent(cid)}`);
+  }
+  builderCatalog(category?: string) {
+    return this.json<CatalogList>(`/api/builder/catalog${category ? `?category=${encodeURIComponent(category)}` : ''}`);
   }
 
   health() {

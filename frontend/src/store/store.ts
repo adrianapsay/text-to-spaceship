@@ -27,6 +27,7 @@ import { normaliseRotations } from '../lib/math3';
 import { applyPreset, detectPreset, type PresetId } from './presets';
 
 export type TabId =
+  | 'builder'
   | 'overview'
   | 'components'
   | 'optimization'

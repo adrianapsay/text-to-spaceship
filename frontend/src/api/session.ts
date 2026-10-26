@@ -47,6 +47,9 @@ export class Session {
         return { epoch: c.epoch, revs: c.newest, appliedClientSeq: c.appliedClientSeq };
       },
       wantCandidates: () => store.getState().view.expert,
+      onProjectSwitched: () => {
+        if (typeof window !== 'undefined') window.location.reload();
+      },
     });
   }
 

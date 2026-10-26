@@ -1,0 +1,579 @@
+[
+  {
+    "id": "endurosat-obc",
+    "category": "obc",
+    "manufacturer": "EnduroSat",
+    "product": "Onboard Computer (OBC)",
+    "description": "ARM Cortex-M7 flight computer with dual 16 GB eSD NAND mass storage, CAN control buses and a broad set of payload interfaces, optionally fitted with a GNSS receiver.",
+    "fits": "CubeSat/SmallSat on-board computer; board form factor not stated on the product page",
+    "dimensions_mm": {"x": null, "y": null, "z": null, "note": "Not published on the product page (datasheet is gated)", "source": null},
+    "mass_kg": {"value": 0.123, "note": "123g; 173g with the optional GNSS receiver", "source": "S1"},
+    "power_w": {"typical": null, "peak": null, "standby": null, "note": "No figures published; page only states 'LOW POWER CONSUMPTION'", "source": null},
+    "supply_voltage_v": {"value": "12 V", "source": "S1"},
+    "interfaces": {
+      "data": ["CAN (2x, 1 Mbps, CSPES protocol) - control", "CAN-FD", "RS-422", "RS-485", "SPI", "I2C", "UART", "100BASE-TX Ethernet"],
+      "electrical": "12 V supply; 16x payload enable/disable/feedback GPIO; 4x digital and 4x analog temperature-reading interfaces; single-ended PPS; real time clock",
+      "mechanical": null,
+      "source": "S1"
+    },
+    "operating_temp_c": {"min": null, "max": null, "source": null},
+    "performance": {
+      "processor": {"value": "ARM Cortex M7", "unit": null, "condition": null, "source": "S1"},
+      "clock_mhz": {"value": null, "unit": "MHz", "condition": "not published", "source": null},
+      "ram": {"value": null, "unit": null, "condition": "not published separately", "source": null},
+      "storage": {"value": "2 MB Flash Memory (program); 2x 16 GB Embedded SD NAND Flash Memory (mass storage); 2x 2MB FRAM with ECC capability", "unit": null, "condition": null, "source": "S1"},
+      "radiation_notes": {"value": null, "unit": null, "condition": "no radiation data published on the product page", "source": null},
+      "os_support": {"value": "FreeRTOS development environment (SDK); MicroPython scripting for time-based tasks; in-orbit firmware updates", "unit": null, "condition": null, "source": "S1"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "'Unit Price' label shown without a value. Listed inclusions: user manual, USB cable, JTAG and debugging cables (with SDK), 5h engineering support, delivery cost, handling and administration costs", "source": "S1"},
+    "availability": {"text": null, "source": null},
+    "cad": {"available": "registration", "formats": [], "url": "https://www.endurosat.com/products/onboard-computer/", "source": "S1"},
+    "datasheet_url": null,
+    "sources": {
+      "S1": {"url": "https://www.endurosat.com/products/onboard-computer/", "title": "SmallSat and CubeSat OBC (Onboard Computer)", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "'Cad file & datasheet' download is behind a request form (name, company email, organisation, country, project type/description). Optional NovAtel OEM 719 GNSS receiver (GPS L1, Galileo E1). Dimensions, power consumption, clock and operating temperature are not published on the product page."
+  },
+  {
+    "id": "gomspace-nanomind-a3200",
+    "category": "obc",
+    "manufacturer": "GomSpace",
+    "product": "NanoMind A3200",
+    "description": "Low-power AVR32 on-board computer daughterboard that also carries a magnetometer, gyroscope and three magnetorquer drivers so it can run attitude control.",
+    "fits": "Daughterboard for GomSpace NanoDock motherboards (NanoDock is standard PC104 board size, 9.0 cm x 9.6 cm, per S2)",
+    "dimensions_mm": {"x": 65, "y": 40, "z": 7.1, "note": "Size 65 x 40 x 7.1 mm", "source": "S1"},
+    "mass_kg": {"value": 0.024, "note": "Mass including shield 24 g", "source": "S1"},
+    "power_w": {"typical": 0.17, "peak": 0.9, "standby": null, "note": "Power consumption VCC_OBC: typ. 0.17 W, max 0.9 W. Current at VCC_OBC = 3.3 V (magnetometer, gyroscope, flash and SDRAM enabled): 42 mA (all clocks 64 MHz, MCU idle), 45 mA (32 MHz, running ADCS), 33 mA (32 MHz, MCU idle), 23 mA (8 MHz, MCU idle)", "source": "S1"},
+    "supply_voltage_v": {"value": "VCC_OBC 3.2 V min / 3.3 V typ / 3.4 V max", "source": "S1"},
+    "interfaces": {
+      "data": ["I2C (2 buses, 400 kbit/s)", "CAN (max 1 Mbit/s)", "USART/UART", "SPI (1 external, 3 chip selects)", "8x ADC channels (configurable as GPIO)", "3x bidirectional PWM outputs (magnetorquer drivers, with current measurement)", "PPS input", "JTAG (software upload)", "CSP (CubeSat Space Protocol)"],
+      "electrical": "Single VCC_OBC 3.3 V supply through main connectors; PWM outputs powered from 3.3 V VCC (part 200284) or from VAUX, max 6 V (part 103409)",
+      "mechanical": "Two 20-position hard-gold plated FSI one-piece connectors mating to SAMTEC FSI-110-D on the motherboard; fastened with 4 screws; 3.0 mm stacking height (3.0 mm spacers)",
+      "source": "S1"
+    },
+    "operating_temp_c": {"min": -30, "max": 85, "source": "S1"},
+    "performance": {
+      "processor": {"value": "Atmel AT32UC3C (32-bit AVR32 MCU) with IEEE 754 FPU", "unit": null, "condition": null, "source": "S1"},
+      "clock_mhz": {"value": 64, "unit": "MHz", "condition": "maximum; range 8 MHz min, 32 MHz typ, 64 MHz max", "source": "S1"},
+      "ram": {"value": "32 MB SDRAM", "unit": null, "condition": "plus 32 kB FRAM for persistent configuration", "source": "S1"},
+      "storage": {"value": "512 KB built-in flash; 128 MB NOR flash (two dies of 64 MB); 32 kB FRAM", "unit": null, "condition": null, "source": "S1"},
+      "radiation_notes": {"value": null, "unit": null, "condition": "no radiation figures in datasheet; environmental test details available from GomSpace on request", "source": null},
+      "os_support": {"value": "FreeRTOS (Board Support Package based on Atmel Software Framework); CSP; optional A3200 Command & Management SDK (purchased separately)", "unit": null, "condition": null, "source": "S1"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "No price on product page; quote request at https://gomspace.com/quote-request/", "source": "S2"},
+    "availability": {"text": null, "source": null},
+    "cad": {"available": "unknown", "formats": [], "url": null, "source": null},
+    "datasheet_url": "https://gomspace.com/wp-content/uploads/2025/09/gs-ds-nanomind-a3200_1006901-2.0.pdf",
+    "sources": {
+      "S1": {"url": "https://gomspace.com/wp-content/uploads/2025/09/gs-ds-nanomind-a3200_1006901-2.0.pdf", "title": "Datasheet NanoMind A3200, DS 1006901 rev 2.0 (26 March 2025)", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S2": {"url": "https://gomspace.com/product/nanomind-a3200/", "title": "NanoMind A3200 - GomSpace", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "Needs a GomSpace NanoDock/motherboard to sit in a PC/104 stack. On-board HMC5843 3-axis magnetometer and MPU-3300 3-axis gyroscope. Two part numbers: 200284 (PWM from 3.3 V) and 103409 (PWM from VAUX). Absolute max supply current 1 A; storage temperature -30 to 85 °C."
+  },
+  {
+    "id": "aac-clyde-space-kryten-m3",
+    "category": "obc",
+    "manufacturer": "AAC Clyde Space",
+    "product": "KRYTEN-M3",
+    "description": "PC104 on-board computer built on a SmartFusion 2 SoC (Cortex-M3) with EDAC-protected MRAM and 4 GB SLC flash, aimed at low-power nanosatellite command and data handling.",
+    "fits": "PC104 form factor board",
+    "dimensions_mm": {"x": 95.89, "y": 90.17, "z": 5.51, "note": "Length 95.89 mm, Width 90.17 mm, Height 5.51 mm (height from top PCB to lowest component)", "source": "S2"},
+    "mass_kg": {"value": 0.07, "note": "70 g on current product page; the datasheet (release date 28 July 2020) states 61.9 g", "source": "S1"},
+    "power_w": {"typical": 0.4, "peak": 1.0, "standby": null, "note": "Nominal Power Consumption 400 mW (typ), 1 W max", "source": "S2"},
+    "supply_voltage_v": {"value": null, "source": null},
+    "interfaces": {
+      "data": ["I2C x2", "SPI x1 (7 chip select lines)", "UART x8 (3.3 V logic)", "RS422 x1 (can be used as 2x RS485)", "CAN x1", "DTMF x1", "JTAG w/ETM support + 1 serial debugging", "LVDS (20x lines, expansion) x1", "QSPI x3 (2x LVDS, 1x 3V3 logic)", "GPIO x17 (3.3 V logic)"],
+      "electrical": "Not all interfaces available simultaneously (per datasheet); supply voltage not published",
+      "mechanical": "PC104 form factor",
+      "source": "S2"
+    },
+    "operating_temp_c": {"min": -40, "max": 80, "source": "S2"},
+    "performance": {
+      "processor": {"value": "Smart Fusion 2 SoC including an ARM Cortex-M3 processor delivering 62.5 DMIPS", "unit": null, "condition": null, "source": "S2"},
+      "clock_mhz": {"value": 50, "unit": "MHz", "condition": "Processor Clock", "source": "S2"},
+      "ram": {"value": "MRAM 16MB", "unit": null, "condition": "spec-table value; the same datasheet's descriptive text says 8 MB MRAM for code storage and execution", "source": "S2"},
+      "storage": {"value": "4 GB SLC flash for bulk data; boot image storage 256 kB eNVM + 8MB MRAM", "unit": null, "condition": null, "source": "S2"},
+      "radiation_notes": {"value": "Radiation (TiD) 20 kRAD; autonomous single event latch-up protection; EDAC-protected MRAM and flash; SECDED", "unit": null, "condition": null, "source": "S2"},
+      "os_support": {"value": null, "unit": null, "condition": "not published", "source": null}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "Enquiry/quotation via enquiries@aac-clydespace.com or product enquiry form", "source": "S2"},
+    "availability": {"text": "readily available solution (no lead time stated)", "source": "S2"},
+    "cad": {"available": "public", "formats": [], "url": "https://www.aac-clyde.space/wp-content/uploads/2021/10/Kryten-OBC-CAD-models.zip", "source": "S1"},
+    "datasheet_url": "https://www.aac-clyde.space/wp-content/uploads/2021/10/AAC_DataSheet_Kryten.pdf",
+    "sources": {
+      "S1": {"url": "https://www.aac-clyde.space/what-we-do/space-products-components/command-data-handling/kryten-m3", "title": "Kryten-M3 - Satellite Command & Data Handling | AAC Clyde Space", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S2": {"url": "https://www.aac-clyde.space/wp-content/uploads/2021/10/AAC_DataSheet_Kryten.pdf", "title": "KRYTEN-M3 Command & Data Handling datasheet (release date 28 July 2020)", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "Mass conflict between sources (70 g page vs 61.9 g datasheet); 70 g recorded. Design life 5 years in LEO. Kryten-M3-PLUS variant adds GPS (<10 m RMS position, <1 m/s RMS velocity). CAD is a public ZIP archive (file formats inside not stated; not downloaded). Supply voltage and OS support not published."
+  },
+  {
+    "id": "xiphos-q7",
+    "category": "obc",
+    "manufacturer": "Xiphos (Epiq Solutions)",
+    "product": "Q7 processor card (flight model Q7S)",
+    "description": "Small Zynq-7020 computer-on-module combining dual Cortex-A9 cores and FPGA fabric with Linux, used as an on-board or payload processor.",
+    "fits": "78 x 43 mm computer-on-module; I/O through a mezzanine connector to a customer or Xiphos daughter board",
+    "dimensions_mm": {"x": 78, "y": 43, "z": 9, "note": "78 mm x 43 mm x 9 mm without RJ45 connector; 78 mm x 43 mm x 19 mm with RJ45 connector", "source": "S1"},
+    "mass_kg": {"value": 0.024, "note": "24 g without RJ45 connector; 32 g with RJ45 connector", "source": "S1"},
+    "power_w": {"typical": 2.0, "peak": null, "standby": null, "note": "Scalable, typ. 2 W", "source": "S1"},
+    "supply_voltage_v": {"value": "6 V to 15 V (5 V to 28 V option)", "source": "S1"},
+    "interfaces": {
+      "data": ["Gigabit Ethernet (RJ45)", "USB 2.0 Host port (Micro AB)", "CAN bus controller (in logic)", "RS-232/422/485 (factory-selectable, mezzanine)", "Up to 24 LVDS pairs / 48 single-ended GPIO", "Up to 58 single-ended GPIO", "23 MIO"],
+      "electrical": "Input voltage range 6-15 V; startup voltage 3.3 V; brownout voltage 3.0 V; hardware over-current limit 1.0 A",
+      "mechanical": "Mezzanine connector; engineering models ship with Product Integration Module (PIM), flight models without",
+      "source": "S1"
+    },
+    "operating_temp_c": {"min": -40, "max": 60, "source": "S1"},
+    "performance": {
+      "processor": {"value": "Xilinx Zynq 7020: dual core ARM Cortex A9 MPCore + programmable logic (106,400 FF, 53,200 LUT, 220 DSP slices); Microchip ProASIC3 control FPGA", "unit": null, "condition": null, "source": "S1"},
+      "clock_mhz": {"value": 766, "unit": "MHz", "condition": "up to 766 MHz", "source": "S1"},
+      "ram": {"value": "1 GB (512 MB with EDAC) DDR3L DRAM", "unit": null, "condition": null, "source": "S1"},
+      "storage": {"value": "2x 128 MB QSPI Flash (NOR); 2 MicroSD slots (max. 32 GB each)", "unit": null, "condition": null, "source": "S1"},
+      "radiation_notes": {"value": "Tested to 25krad TID; radiation effects mitigation suite", "unit": null, "condition": null, "source": "S2"},
+      "os_support": {"value": "Yocto Linux BSP (LTS distribution)", "unit": null, "condition": null, "source": "S1"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "'Request a Quote' on product page", "source": "S2"},
+    "availability": {"text": null, "source": null},
+    "cad": {"available": "registration", "formats": [], "url": null, "source": "S1"},
+    "datasheet_url": "https://xiphos.com/hubfs/Xiphos-2023/PDFs/Xiphos%20-%20Resources/Xiphos%20-%20Spec%20sheets/Xiphos%20-%20Datasheet%20-%20Q7.pdf?hsLang=en",
+    "sources": {
+      "S1": {"url": "https://xiphos.com/hubfs/Xiphos-2023/PDFs/Xiphos%20-%20Resources/Xiphos%20-%20Spec%20sheets/Xiphos%20-%20Datasheet%20-%20Q7.pdf?hsLang=en", "title": "Xiphos Q7 Specifications spec sheet (dated 28 September 2026)", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S2": {"url": "https://xiphos.com/product-details/q7?hsLang=en", "title": "Q7 | Product Details | Xiphos", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "3D models are in the customer Wiki on Xiphos's support portal (access for customers). Operating temperature is stated as 'derated to -40 to +60 °C'. Flight model Q7S in orbit since June 2016. Radiation robustness features: TMR in control FPGA, EDAC-protected RAM, FPGA bitstream scrubbing, watchdog. Product page describes RAM as LPDDR2 in one place; spec-sheet value (DDR3L) recorded. Same spec sheet is also hosted at resources.epiqsolutions.com."
+  },
+  {
+    "id": "kp-labs-leopard-dpu",
+    "category": "obc",
+    "manufacturer": "KP Labs",
+    "product": "Leopard DPU (Data Processing Unit)",
+    "description": "PC/104 payload data processing unit using a Zynq UltraScale+ MPSoC with large redundant flash storage for on-board image processing and AI inference.",
+    "fits": "PC/104 form factor (payload data processor with independent supervisor)",
+    "dimensions_mm": {"x": 95.89, "y": 90.17, "z": 47.2, "note": "Dimensions: 95.89 x 90.17 x 47.2 mm", "source": "S1"},
+    "mass_kg": {"value": 0.725, "note": "Mass: 725 g (2026 datasheet); KP Labs hardware comparison page (S3) lists Non-redundant <900 g / Redundant <1200 g", "source": "S1"},
+    "power_w": {"typical": null, "peak": 20, "standby": null, "note": "Power consumption: 5 W to 20 W - depending on workload (peak = upper bound of stated range)", "source": "S1"},
+    "supply_voltage_v": {"value": "7 to 14 V", "source": "S1"},
+    "interfaces": {
+      "data": ["Supervisor TMTC: CAN with CSP, UART/RS422/485", "3x Gigabit Ethernet 1000BASE-T", "2x SpaceWire", "2x CAN bus", "2x RS422/RS485/UART", "2x PPS input", "CameraLink Base/LVDS", "PL-connected LVDS, GPIOs and QuadGTH transceivers"],
+      "electrical": "Supply voltage 7 to 14 V",
+      "mechanical": "PC/104 form-factor with efficient thermal interface",
+      "source": "S1"
+    },
+    "operating_temp_c": {"min": -25, "max": 75, "source": "S1"},
+    "performance": {
+      "processor": {"value": "AMD Zynq UltraScale+ MPSoC ZU6EG | ZU9EG | ZU15EG; Quad ARM Cortex-A53; Dual ARM Cortex-R5 (lock-step); FPGA", "unit": null, "condition": null, "source": "S1"},
+      "clock_mhz": {"value": 1200, "unit": "MHz", "condition": "Quad ARM Cortex-A53 CPU 1.2 GHz", "source": "S1"},
+      "ram": {"value": "16 GiB PS-DDR4 (with ECC)", "unit": null, "condition": null, "source": "S1"},
+      "storage": {"value": "64 MB Boot flash (NOR) with TMR; 4 GiB SLC NAND flash (with EDAC); 2 x 320 GB pSLC flash-based mass data storage (redundant)", "unit": null, "condition": null, "source": "S1"},
+      "radiation_notes": {"value": "TID > 20 kRad (with enclosure); qualified for launch and space environment at NASA GEVS levels", "unit": null, "condition": null, "source": "S1"},
+      "os_support": {"value": "64-bit Linux (Yocto based); SDK and reference designs; compatible with Vitis AI Deep Learning Accelerator", "unit": null, "condition": null, "source": "S1"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "No price published; datasheet lists sales@kplabs.pl", "source": "S1"},
+    "availability": {"text": null, "source": null},
+    "cad": {"available": "unknown", "formats": [], "url": null, "source": null},
+    "datasheet_url": "https://cdn.prod.website-files.com/667174a549d8e1e151191810/6ac5f9e3220fcdb0d97a88b8_Leopard%20DPU%20Datasheet_2026.pdf",
+    "sources": {
+      "S1": {"url": "https://cdn.prod.website-files.com/667174a549d8e1e151191810/6ac5f9e3220fcdb0d97a88b8_Leopard%20DPU%20Datasheet_2026.pdf", "title": "Leopard DPU Datasheet_2026 (linked from kplabs.space/leopard)", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S2": {"url": "https://kplabs.space/leopard", "title": "Leopard – Advanced Data Processing Unit for Satellites", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S3": {"url": "https://kplabs.space/solutions/hardware", "title": "KP Labs hardware comparison page", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "Payload data processor rather than a platform OBC. Sources disagree: comparison page (S3) gives older figures (90.17 x 95.86 x 50.00 mm non-redundant, 78 mm tall redundant, <900/<1200 g, up to 2x256 GiB storage); product page (S2) says 2 x 320 GiB vs datasheet 2 x 320 GB. 2026 datasheet values recorded. Remote pre-purchase testing offered via Smart Mission Lab."
+  },
+  {
+    "id": "aac-clyde-space-zaphod-3u",
+    "category": "structure",
+    "manufacturer": "AAC Clyde Space",
+    "product": "ZAPHOD 3U Structure",
+    "description": "Lightweight 3U CubeSat structure in 7075/6082 aluminium with anodized rails and four deployment switches, qualified to NASA GEVS.",
+    "fits": "3U CubeSat",
+    "dimensions_mm": {"x": 100, "y": 100, "z": 340.5, "note": "Length 100 mm, Width 100 mm, Height 340.5 mm", "source": "S2"},
+    "mass_kg": {"value": 0.394, "note": "Weight 394 g", "source": "S2"},
+    "power_w": {"typical": null, "peak": null, "standby": null, "note": "Not applicable (passive structure)", "source": null},
+    "supply_voltage_v": {"value": null, "source": null},
+    "interfaces": {
+      "data": [],
+      "electrical": "Four deployment switches, two on the -Z end plate and two on the rails",
+      "mechanical": "Anodized rails; user-definable locating elements and mounting holes for stack and payload configurations; shear panel or standard cut-out pattern",
+      "source": "S2"
+    },
+    "operating_temp_c": {"min": -40, "max": 80, "source": "S2"},
+    "performance": {
+      "size_u": {"value": 3, "unit": "U", "condition": null, "source": "S2"},
+      "mass_kg": {"value": 0.394, "unit": "kg", "condition": "structure weight as stated (394 g)", "source": "S2"},
+      "material": {"value": "Aluminium 7075 & 6082 used for primary structures", "unit": null, "condition": null, "source": "S2"},
+      "rail_standard": {"value": "Anodized rails; compliant with CubeSat design specification", "unit": null, "condition": null, "source": "S1"},
+      "internal_volume_or_payload_space": {"value": null, "unit": null, "condition": "not published", "source": null},
+      "compatible_deployers": {"value": "Compatible with all rail-deployers", "unit": null, "condition": null, "source": "S2"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "Enquiry/quotation via enquiries@aac-clydespace.com", "source": "S2"},
+    "availability": {"text": "Available OTS with a choice of shear panel or standard cut-out pattern", "source": "S2"},
+    "cad": {"available": "unknown", "formats": [], "url": null, "source": null},
+    "datasheet_url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/AAC_DataSheet_Zaphod-2.pdf",
+    "sources": {
+      "S1": {"url": "https://www.aac-clyde.space/what-we-do/space-products-components/cubesat-structures", "title": "CubeSat Structures - AAC Clyde Space", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S2": {"url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/AAC_DataSheet_Zaphod-2.pdf", "title": "ZAPHOD Structures datasheet (release date 26 February 2025)", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "Designed and qualified to NASA GEVS, 14.1 gRMS. Product page: TRL 9, flown since 2014, ISS compatible. The CubeSat structures page offers a public CAD model only for the 6U version."
+  },
+  {
+    "id": "aac-clyde-space-zaphod-6u",
+    "category": "structure",
+    "manufacturer": "AAC Clyde Space",
+    "product": "ZAPHOD 6U Structure",
+    "description": "6U (2x3U) CubeSat structure from the ZAPHOD range in 7075/6082 aluminium with anodized rails and four deployment switches.",
+    "fits": "6U CubeSat",
+    "dimensions_mm": {"x": 100, "y": 226.3, "z": 340.5, "note": "Length 100 mm, Width 226.3 mm, Height 340.5 mm", "source": "S2"},
+    "mass_kg": {"value": 0.674, "note": "Weight 674 g", "source": "S2"},
+    "power_w": {"typical": null, "peak": null, "standby": null, "note": "Not applicable (passive structure)", "source": null},
+    "supply_voltage_v": {"value": null, "source": null},
+    "interfaces": {
+      "data": [],
+      "electrical": "Four deployment switches, two on the -Z end plate and two on the rails",
+      "mechanical": "Anodized rails; user-definable locating elements and mounting holes for stack and payload configurations; shear panel or standard cut-out pattern",
+      "source": "S2"
+    },
+    "operating_temp_c": {"min": -40, "max": 80, "source": "S2"},
+    "performance": {
+      "size_u": {"value": 6, "unit": "U", "condition": null, "source": "S2"},
+      "mass_kg": {"value": 0.674, "unit": "kg", "condition": "structure weight as stated (674 g)", "source": "S2"},
+      "material": {"value": "Aluminium 7075 & 6082 used for primary structures", "unit": null, "condition": null, "source": "S2"},
+      "rail_standard": {"value": "Anodized rails; compliant with CubeSat design specification", "unit": null, "condition": null, "source": "S1"},
+      "internal_volume_or_payload_space": {"value": null, "unit": null, "condition": "not published", "source": null},
+      "compatible_deployers": {"value": "Compatible with all rail-deployers", "unit": null, "condition": null, "source": "S2"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "Enquiry/quotation via enquiries@aac-clydespace.com", "source": "S2"},
+    "availability": {"text": "Available OTS with a choice of shear panel or standard cut-out pattern", "source": "S2"},
+    "cad": {"available": "public", "formats": [], "url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/Zaphod-6U-Structure-CAD-model.zip", "source": "S1"},
+    "datasheet_url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/AAC_DataSheet_Zaphod-2.pdf",
+    "sources": {
+      "S1": {"url": "https://www.aac-clyde.space/what-we-do/space-products-components/cubesat-structures", "title": "CubeSat Structures - AAC Clyde Space", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S2": {"url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/AAC_DataSheet_Zaphod-2.pdf", "title": "ZAPHOD Structures datasheet (release date 26 February 2025)", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "Designed and qualified to NASA GEVS, 14.1 gRMS. Product page: TRL 9, flown since 2014, ISS compatible. CAD is a public ZIP archive (file formats inside not stated; not downloaded)."
+  },
+  {
+    "id": "gomspace-nanostructure-6u",
+    "category": "structure",
+    "manufacturer": "GomSpace",
+    "product": "NanoStructure 6U (NanoStruct 6U, Mk2)",
+    "description": "Two-side-wall, four-corner-bracket 6U frame in 7075-T7351 aluminium with optional mounting rings for PC104 stacks in any axis and four kill switches.",
+    "fits": "6U CubeSat; PC104 stacks via optional mounting rings",
+    "dimensions_mm": {"x": 340.5, "y": 226.3, "z": 100.0, "note": "340.5 x 226.3 x 100.0 mm with deployment switches stowed (outside measurements without kill switches)", "source": "S1"},
+    "mass_kg": {"value": 0.665, "note": "Total mass ~665 g for default delivered structure: 2x frames and 4x corners incl. screw and pin kit (mounting rings optional: A/B ring 14 g, YA/YB ring 24 g each)", "source": "S1"},
+    "power_w": {"typical": null, "peak": null, "standby": null, "note": "Not applicable (passive structure)", "source": null},
+    "supply_voltage_v": {"value": null, "source": null},
+    "interfaces": {
+      "data": [],
+      "electrical": "Four kill switches, configurable normally closed or normally open, wiring per option sheet; 6 N force per switch when pressed flush",
+      "mechanical": "Mounting rings (A+B, YA+YB) for PC104 stacks pointing along any of three axes; threaded holes with screwlock helicoils; MGSE interface; guide-pin interface; flat internal walls",
+      "source": "S1"
+    },
+    "operating_temp_c": {"min": null, "max": null, "source": null},
+    "performance": {
+      "size_u": {"value": 6, "unit": "U", "condition": null, "source": "S1"},
+      "mass_kg": {"value": 0.665, "unit": "kg", "condition": "default structure without mounting rings (~665 g)", "source": "S1"},
+      "material": {"value": "EN AW7075-T7351; surface treatment SurTec 650 chromitAL TCP per MIL-DTL-5541F Type II Class 3", "unit": null, "condition": null, "source": "S1"},
+      "rail_standard": {"value": null, "unit": null, "condition": "not stated", "source": null},
+      "internal_volume_or_payload_space": {"value": "Up to 3U available for Payload", "unit": null, "condition": null, "source": "S2"},
+      "compatible_deployers": {"value": "compatibility with a variety of third-party launch pods (no specific deployer named)", "unit": null, "condition": null, "source": "S2"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "No price on product page", "source": null},
+    "availability": {"text": null, "source": null},
+    "cad": {"available": "unknown", "formats": [], "url": null, "source": null},
+    "datasheet_url": "https://gomspace.com/wp-content/uploads/2025/09/gs-ds-nanostructure-6u-Mk2-1060779-12-EXT.pdf",
+    "sources": {
+      "S1": {"url": "https://gomspace.com/wp-content/uploads/2025/09/gs-ds-nanostructure-6u-Mk2-1060779-12-EXT.pdf", "title": "Datasheet NanoStructure 6U, DS 1060779 rev 1.2 (08 August 2025)", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S2": {"url": "https://gomspace.com/product/nanostruct-6u/", "title": "Nanostruct 6U - GomSpace", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "Qualified per ECSS-E-ST-10-03C incl. NASA GEVS random vibration 14.1 Grms. Datasheet: 'Compatible with GomSpace products'. Side frame incl. kill switches 306 g each, corner bracket 10 g."
+  },
+  {
+    "id": "gomspace-nanostructure-12u",
+    "category": "structure",
+    "manufacturer": "GomSpace",
+    "product": "NanoStructure 12U (NanoStruct 12U)",
+    "description": "Rail-based 12U frame in 7075-T7351 aluminium with hard-anodized rails, two movable secondary structures and four kill switches at the rail ends.",
+    "fits": "12U CubeSat",
+    "dimensions_mm": {"x": 340.5, "y": 226.3, "z": 226.3, "note": "340.5 x 226.3 x 226.3 mm with deployment switches stowed", "source": "S1"},
+    "mass_kg": {"value": 1.496, "note": "Total mass (with 2 secondary structures) ~1496 g; main structure ~1010 g; secondary structure ~230 g each", "source": "S1"},
+    "power_w": {"typical": null, "peak": null, "standby": null, "note": "Not applicable (passive structure)", "source": null},
+    "supply_voltage_v": {"value": null, "source": null},
+    "interfaces": {
+      "data": [],
+      "electrical": "Four kill switches at rail ends with 60 cm flying leads, Normally Open by default; 6 N force per switch when pressed flush",
+      "mechanical": "4 rails, 2 side walls, 4 bridges, Z+ and Z- frames, 2 secondary structure kits; MGSE interface; guide-pin interface; screwlock helicoils",
+      "source": "S1"
+    },
+    "operating_temp_c": {"min": null, "max": null, "source": null},
+    "performance": {
+      "size_u": {"value": 12, "unit": "U", "condition": null, "source": "S1"},
+      "mass_kg": {"value": 1.496, "unit": "kg", "condition": "default delivered structure incl. 2 secondary structures (~1496 g)", "source": "S1"},
+      "material": {"value": "EN AW7075-T7351; rails hard anodized (MIL-A-8625F Type III); other parts SurTec 650 chromitAL TCP (MIL-DTL-5541F Type II Class 3)", "unit": null, "condition": null, "source": "S1"},
+      "rail_standard": {"value": "Rails hard anodized according to MIL-A-8625F Type III", "unit": null, "condition": null, "source": "S1"},
+      "internal_volume_or_payload_space": {"value": "Up to 9U available for payload", "unit": null, "condition": null, "source": "S2"},
+      "compatible_deployers": {"value": null, "unit": null, "condition": "not stated", "source": null}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "No price on product page", "source": null},
+    "availability": {"text": null, "source": null},
+    "cad": {"available": "unknown", "formats": [], "url": null, "source": null},
+    "datasheet_url": "https://gomspace.com/wp-content/uploads/2025/09/gs-ds-NanoStructure_12U_Platform_DataSheet_DS_-_1043916_-_1_-_10_-_1.pdf",
+    "sources": {
+      "S1": {"url": "https://gomspace.com/wp-content/uploads/2025/09/gs-ds-NanoStructure_12U_Platform_DataSheet_DS_-_1043916_-_1_-_10_-_1.pdf", "title": "NanoStructure 12U Platform DataSheet, SP 1043916 rev 1.0 (29 November 2022)", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S2": {"url": "https://gomspace.com/product/nanostruct-12u/", "title": "Nanostruct 12U - GomSpace", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "Qualified per ECSS-E-ST-10-03C with a 20 kg EQM, NASA GEVS random vibration 14.1 Grms. Delivered partly unassembled. Datasheet: 'Compatible with GomSpace products'."
+  },
+  {
+    "id": "endurosat-8u-structure",
+    "category": "structure",
+    "manufacturer": "EnduroSat",
+    "product": "8U CubeSat Structure",
+    "description": "Hard-anodized aluminium 6082 frame for an 8U (2x4U) CubeSat with PC104 compliance and an optional four-kill-switch configuration.",
+    "fits": "8U CubeSat (100 x 226.3 x 454 mm)",
+    "dimensions_mm": {"x": 100, "y": 226.3, "z": 454, "note": "100 x 226.3 x 454 mm", "source": "S1"},
+    "mass_kg": {"value": 0.973, "note": "973 g (including screws, kill switches, 6 mounted rings)", "source": "S1"},
+    "power_w": {"typical": null, "peak": null, "standby": null, "note": "Not applicable (passive structure)", "source": null},
+    "supply_voltage_v": {"value": null, "source": null},
+    "interfaces": {
+      "data": [],
+      "electrical": "Four kill switches option",
+      "mechanical": "PC104 full compliance; 6 mounted rings included in stated mass",
+      "source": "S1"
+    },
+    "operating_temp_c": {"min": null, "max": null, "source": null},
+    "performance": {
+      "size_u": {"value": 8, "unit": "U", "condition": null, "source": "S1"},
+      "mass_kg": {"value": 0.973, "unit": "kg", "condition": "including screws, kill switches, 6 mounted rings", "source": "S1"},
+      "material": {"value": "Aluminum 6082; pearl-finished & hard anodized", "unit": null, "condition": null, "source": "S1"},
+      "rail_standard": {"value": "PC104 full compliance, CubeSat Standard", "unit": null, "condition": "rail details not stated", "source": "S1"},
+      "internal_volume_or_payload_space": {"value": null, "unit": null, "condition": "not published", "source": null},
+      "compatible_deployers": {"value": null, "unit": null, "condition": "not published", "source": null}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "'Unit Price' label shown without a value. Listed inclusions: user manual, 1 hour engineering support, delivery cost, handling and administration costs", "source": "S1"},
+    "availability": {"text": null, "source": null},
+    "cad": {"available": "registration", "formats": [], "url": "https://www.endurosat.com/products/8u-structure/", "source": "S1"},
+    "datasheet_url": null,
+    "sources": {
+      "S1": {"url": "https://www.endurosat.com/products/8u-structure/", "title": "8U CubeSat Structure – Flight-proven Satellite Frame", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "CAD file and datasheet gated behind a request form. EnduroSat's structures category currently lists only 8U and 16U structures (no 3U/6U/12U structure pages found)."
+  },
+  {
+    "id": "endurosat-16u-structure",
+    "category": "structure",
+    "manufacturer": "EnduroSat",
+    "product": "16U CubeSat Structure",
+    "description": "Hard-anodized aluminium 6082 frame for a 16U CubeSat with PC104 compliance and an optional four-kill-switch configuration.",
+    "fits": "16U CubeSat (226.3 x 226.3 x 454 mm)",
+    "dimensions_mm": {"x": 226.3, "y": 226.3, "z": 454, "note": "226.3 x 226.3 x 454 mm", "source": "S1"},
+    "mass_kg": {"value": 2.5, "note": "2.5 kg (including screws, 6 mounted rings)", "source": "S1"},
+    "power_w": {"typical": null, "peak": null, "standby": null, "note": "Not applicable (passive structure)", "source": null},
+    "supply_voltage_v": {"value": null, "source": null},
+    "interfaces": {
+      "data": [],
+      "electrical": "Four kill switches option",
+      "mechanical": "PC104 full compliance; 6 mounted rings included in stated mass",
+      "source": "S1"
+    },
+    "operating_temp_c": {"min": null, "max": null, "source": null},
+    "performance": {
+      "size_u": {"value": 16, "unit": "U", "condition": null, "source": "S1"},
+      "mass_kg": {"value": 2.5, "unit": "kg", "condition": "including screws, 6 mounted rings", "source": "S1"},
+      "material": {"value": "Aluminum 6082; pearl-finished & hard anodized", "unit": null, "condition": null, "source": "S1"},
+      "rail_standard": {"value": "PC104 full compliance, CubeSat Standard", "unit": null, "condition": "rail details not stated", "source": "S1"},
+      "internal_volume_or_payload_space": {"value": null, "unit": null, "condition": "not published", "source": null},
+      "compatible_deployers": {"value": null, "unit": null, "condition": "not published", "source": null}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "'Unit Price' field shown blank. Listed inclusions: user manual, 1 hour engineering support, delivery cost, handling and administration costs", "source": "S1"},
+    "availability": {"text": null, "source": null},
+    "cad": {"available": "registration", "formats": [], "url": "https://www.endurosat.com/products/16u-structure/", "source": "S1"},
+    "datasheet_url": null,
+    "sources": {
+      "S1": {"url": "https://www.endurosat.com/products/16u-structure/", "title": "16U CubeSat Structure - Satellite Frame for LEO Missions", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "CAD file and datasheet gated behind a request form."
+  },
+  {
+    "id": "nanoavionics-cubesat-structural-frame-12u",
+    "category": "structure",
+    "manufacturer": "Kongsberg NanoAvionics",
+    "product": "CubeSat Structural Frame (12U)",
+    "description": "Modular hard-anodized 7075-T7351 aluminium CubeSat frame compliant with the CubeSat Design Specification and PC/104, sold in 6U to 16U sizes at listed prices.",
+    "fits": "12U CubeSat (also offered as 6U, 8U, 16U)",
+    "dimensions_mm": {"x": null, "y": null, "z": null, "note": "Not published", "source": null},
+    "mass_kg": {"value": null, "note": "Not published", "source": null},
+    "power_w": {"typical": null, "peak": null, "standby": null, "note": "Not applicable (passive structure)", "source": null},
+    "supply_voltage_v": {"value": null, "source": null},
+    "interfaces": {
+      "data": [],
+      "electrical": null,
+      "mechanical": "Modular design; threaded holes reinforced with stainless steel inserts; multiple circuit board sizes supported; all materials non-magnetic",
+      "source": "S1"
+    },
+    "operating_temp_c": {"min": null, "max": null, "source": null},
+    "performance": {
+      "size_u": {"value": 12, "unit": "U", "condition": "12U option of the frame family", "source": "S1"},
+      "mass_kg": {"value": null, "unit": "kg", "condition": "not published", "source": null},
+      "material": {"value": "7075-T7351 aluminum, hard anodized (black or natural according to CubeSat standard)", "unit": null, "condition": null, "source": "S1"},
+      "rail_standard": {"value": "Complies with the CubeSat Design Specification and PC/104 stack standard", "unit": null, "condition": null, "source": "S1"},
+      "internal_volume_or_payload_space": {"value": null, "unit": null, "condition": "not published", "source": null},
+      "compatible_deployers": {"value": null, "unit": null, "condition": "not published", "source": null}
+    },
+    "price": {"value": 10000, "currency": "EUR", "kind": "listed", "note": "12U: 10,000 EUR per unit; minimum order quantity 3 pieces; technical support not included; VAT/shipping not stated. Other sizes on same page: 6U 5,040 EUR, 8U 7,470 EUR, 16U 12,750 EUR per unit", "source": "S1"},
+    "availability": {"text": "Lead time: 1-3 months; minimum order quantity 3 pieces", "source": "S1"},
+    "cad": {"available": "unknown", "formats": [], "url": null, "source": null},
+    "datasheet_url": null,
+    "sources": {
+      "S1": {"url": "https://nanoavionics.com/cubesat-components/cubesat-structural-frame/", "title": "CubeSat Structural Frame - NanoAvionics", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "Shock and vibration tested according to NASA GEVS 7000. Mass, dimensions and payload volume not published, so this entry is mainly useful for cost. MOQ of 3 pieces applies."
+  },
+  {
+    "id": "enpulsion-nano-r3",
+    "category": "propulsion",
+    "manufacturer": "ENPULSION",
+    "product": "ENPULSION NANO R³ (Configuration 030)",
+    "description": "Indium-fed FEEP electric thruster module, successor of the IFM Nano Thruster, with throttleable sub-millinewton thrust and very high specific impulse.",
+    "fits": "Module 98.0 x 99.0 x 95.3 mm (excl. protrusions); casing allows side mounting",
+    "dimensions_mm": {"x": 98.0, "y": 99.0, "z": 95.3, "note": "Outside dimensions excluding protrusions; 100.95 x 99.0 x 97.3 mm including protrusions", "source": "S1"},
+    "mass_kg": {"value": 1.5, "note": "WET <1500 g; DRY <1280 g (both stated as upper bounds)", "source": "S1"},
+    "power_w": {"typical": 45, "peak": 50, "standby": 7, "note": "Power at nominal thrust 45 W incl. neutralizer; total system power 30 - 50 W within 150-350 µN operation range (peak = upper bound); hot standby power 4 - 7 W, depends on accommodation and thermal environment (standby = upper bound)", "source": "S1"},
+    "supply_voltage_v": {"value": "12 V", "source": "S1"},
+    "interfaces": {
+      "data": ["RS422", "RS485"],
+      "electrical": "Supply voltage 12 V",
+      "mechanical": "Protective casing allows side mounting",
+      "source": "S1"
+    },
+    "operating_temp_c": {"min": null, "max": null, "source": null},
+    "performance": {
+      "type": {"value": "FEEP electric propulsion", "unit": null, "condition": null, "source": "S1"},
+      "propellant": {"value": "Indium (solid at room temperature); propellant mass 215 g +- 2%", "unit": null, "condition": null, "source": "S1"},
+      "thrust_mN": {"value": 0.35, "unit": "mN", "condition": "nominal thrust 350 µN (guaranteed 75% performance at EOL); operation thrust range 150 - 350 µN", "source": "S1"},
+      "isp_s": {"value": 2500, "unit": "s", "condition": "at 350 µN", "source": "S1"},
+      "total_impulse_Ns": {"value": 5300, "unit": "N·s", "condition": "at 350 µN", "source": "S1"},
+      "delta_v": {"value": null, "unit": "m/s", "condition": "not published", "source": null},
+      "power_w": {"value": 45, "unit": "W", "condition": "at nominal thrust, incl. neutralizer", "source": "S1"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "No price published", "source": null},
+    "availability": {"text": null, "source": null},
+    "cad": {"available": "unknown", "formats": [], "url": null, "source": null},
+    "datasheet_url": "https://www.enpulsion.com/wp-content/uploads/DataSheet_Nano_20260319.pdf",
+    "sources": {
+      "S1": {"url": "https://www.enpulsion.com/wp-content/uploads/DataSheet_Nano_20260319.pdf", "title": "ENPULSION NANO R³ Datasheet, Doc.No DAT-00007_1.00 (March 2026)", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "No liquid/reactive propellant and no pressurised tanks at launch (indium is solid at room temperature). Datasheet heritage claim: >240 ENPULSION NANO and >40 NANO R³ units in space (as per March 2026). Operating temperature not stated in datasheet; the HTML product page could not be read, so operating range, CAD and lead time are unverified."
+  },
+  {
+    "id": "dawn-aerospace-cubedrive-0-8u",
+    "category": "propulsion",
+    "manufacturer": "Dawn Aerospace",
+    "product": "CubeDrive 0.8U",
+    "description": "Green bipropellant CubeSat propulsion module using nitrous oxide and propylene with a single 1 N-class B1 thruster.",
+    "fits": "0.8U module (80 x 96 x 96 mm)",
+    "dimensions_mm": {"x": 80, "y": 96, "z": 96, "note": "80 x 96 x 96 mm", "source": "S1"},
+    "mass_kg": {"value": 1.275, "note": "WET 1275 g; DRY 1080 g", "source": "S1"},
+    "power_w": {"typical": null, "peak": null, "standby": null, "note": "Not published; page states 'Low power demand'", "source": null},
+    "supply_voltage_v": {"value": "Digital: 5 to 5.2 VDC, and Actuators: 14 VDC unregulated", "source": "S1"},
+    "interfaces": {
+      "data": ["CAN bus"],
+      "electrical": "Digital 5 to 5.2 VDC; actuators 14 VDC unregulated",
+      "mechanical": null,
+      "source": "S1"
+    },
+    "operating_temp_c": {"min": -5, "max": 30, "source": "S1"},
+    "performance": {
+      "type": {"value": "Bipropellant chemical propulsion, one B1 thruster", "unit": null, "condition": null, "source": "S1"},
+      "propellant": {"value": "Nitrous oxide (N2O) and Propylene (C3H6)", "unit": null, "condition": "Tanks: Type 1, all metallic, 3D printed", "source": "S1"},
+      "thrust_mN": {"value": 1000, "unit": "mN", "condition": "stated as 'High thrust (1N) in compact volumes'", "source": "S1"},
+      "isp_s": {"value": null, "unit": "s", "condition": "not published", "source": null},
+      "total_impulse_Ns": {"value": 400, "unit": "N·s", "condition": "Total impulse (~) 400 Ns", "source": "S1"},
+      "delta_v": {"value": null, "unit": "m/s", "condition": "not published", "source": null},
+      "power_w": {"value": null, "unit": "W", "condition": "not published", "source": null}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "No price published; contact sales", "source": null},
+    "availability": {"text": "Standard lead time: 6-12 months for recurring systems. (general statement, not CubeDrive-specific)", "source": "S1"},
+    "cad": {"available": "unknown", "formats": [], "url": null, "source": "S3"},
+    "datasheet_url": "https://drive.google.com/file/d/1afEQFKN879E1cIvcmMnTyEITeUR4DtFD/view?usp=drive_link",
+    "sources": {
+      "S1": {"url": "https://www.dawnaerospace.com/green-propulsion", "title": "In-Space Propulsion | Dawn Aerospace", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S2": {"url": "https://www.dawnaerospace.com/thrusters", "title": "Dawn Aerospace thrusters page (B1 / B20)", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S3": {"url": "https://www.dawnaerospace.com/resources-step", "title": "Dawn Aerospace Interactive STEP Files page", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "Survival temperature -30°C to 40°C (S1). B1 thruster: thrust 0.49 to 1.35 N, minimum impulse bit 74 mN·s bi-prop, mass 260 g (S2). Propellants are stored in metallic tanks; storage pressure not stated, so treat as a pressurised, hazardous-propellant system for launch safety review. STEP page lists CubeDrive without a file link (B1/B20 thruster STEP files are on Google Drive). Linked datasheet is a Google Drive file that could not be read. Older/third-party materials quote slightly different mass and impulse figures; current product-page values recorded."
+  },
+  {
+    "id": "busek-bit-3",
+    "category": "propulsion",
+    "manufacturer": "Busek",
+    "product": "BIT-3 RF Ion Thruster system",
+    "description": "Iodine-fuelled 2.5 cm RF gridded ion propulsion system with RF cathode neutralizer and optional 2-axis gimbal for CubeSats.",
+    "fits": "Envelope 180 x 88 x 102 mm; optional integrated 2-axis gimbal",
+    "dimensions_mm": {"x": 180, "y": 88, "z": 102, "note": "Envelope: 180 x 88 x 102 mm", "source": "S1"},
+    "mass_kg": {"value": 1.28, "note": "DRY 1.28 kg w/o gimbal; 1.40 kg w/ gimbal; propellant loads 1.50 kg max; wet mass not stated", "source": "S1"},
+    "power_w": {"typical": null, "peak": 80, "standby": null, "note": "System Power: 56-80 W on current product page (peak = upper bound); datasheet v1.0 (S1) states 56 - 75 W; thermal dissipation load ~35 W max (S1)", "source": "S2"},
+    "supply_voltage_v": {"value": "28 VDC (ambient temp.)", "source": "S1"},
+    "interfaces": {
+      "data": ["RS-485"],
+      "electrical": "Input voltage 28 VDC",
+      "mechanical": "Optional integrated gimbal, 2-axis, ±10° (capable of desaturating reaction wheels)",
+      "source": "S1"
+    },
+    "operating_temp_c": {"min": -15, "max": 45, "source": "S1"},
+    "performance": {
+      "type": {"value": "RF gridded ion thruster (2.5 cm grid, BIT-3) with micro RF cathode neutralizer (BRFC-1)", "unit": null, "condition": null, "source": "S1"},
+      "propellant": {"value": "Iodine, solid storage", "unit": null, "condition": "propellant loads 1.50 kg max", "source": "S1"},
+      "thrust_mN": {"value": 1.25, "unit": "mN", "condition": "up to", "source": "S2"},
+      "isp_s": {"value": 2300, "unit": "s", "condition": "up to", "source": "S2"},
+      "total_impulse_Ns": {"value": null, "unit": "N·s", "condition": "not published", "source": null},
+      "delta_v": {"value": 2.5, "unit": "km/s", "condition": "up to, for a 14 kg CubeSat", "source": "S2"},
+      "power_w": {"value": 80, "unit": "W", "condition": "System Power: 56-80 W (upper bound)", "source": "S2"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "No price published", "source": null},
+    "availability": {"text": null, "source": null},
+    "cad": {"available": "unknown", "formats": [], "url": null, "source": null},
+    "datasheet_url": "https://www.busek.com/s/BIT3_v10.pdf",
+    "sources": {
+      "S1": {"url": "https://www.busek.com/s/BIT3_v10.pdf", "title": "BIT-3 RF Ion Thruster datasheet, Version 1.0, released August 2021 (redirects to static1.squarespace.com)", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S2": {"url": "https://www.busek.com/rf-ion-thrusters", "title": "RF Ion Thrusters — Busek", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "Performance taken from the current web page (S2); the 2021 datasheet (S1) gives lower values: 56 - 75 W, up to 1.1 mN, up to 2,150 s, delta-V up to 2.39 km/s (14 kg CubeSat). Mass, envelope, voltage and temperature come from the 2021 datasheet and may not match the current configuration. Iodine is stored as a solid, so no high-pressure tanks."
+  },
+  {
+    "id": "thrustme-npt30-i2-1u",
+    "category": "propulsion",
+    "manufacturer": "ThrustMe",
+    "product": "NPT30-I2-1U",
+    "description": "Fully integrated 1U iodine gridded-ion propulsion system (thruster, PPU, propellant storage and feed) delivered pre-filled.",
+    "fits": "1U format factor",
+    "dimensions_mm": {"x": 96, "y": 96, "z": 113, "note": "96x96x113 mm", "source": "S1"},
+    "mass_kg": {"value": 1.2, "note": "WET: total wet mass 1.2 kg; dry mass not stated", "source": "S1"},
+    "power_w": {"typical": null, "peak": 65, "standby": null, "note": "Total power 35 – 65 W (peak = upper bound)", "source": "S1"},
+    "supply_voltage_v": {"value": "12 – 28 V", "source": "S1"},
+    "interfaces": {
+      "data": ["I2C", "CAN"],
+      "electrical": "Input voltage 12 – 28 V",
+      "mechanical": null,
+      "source": "S1"
+    },
+    "operating_temp_c": {"min": null, "max": null, "source": null},
+    "performance": {
+      "type": {"value": "Gridded ion thruster (integrated system with PPU, propellant storage and feed system)", "unit": null, "condition": null, "source": "S1"},
+      "propellant": {"value": "Solid iodine, delivered pre-filled, non-pressurized during launch", "unit": null, "condition": null, "source": "S1"},
+      "thrust_mN": {"value": 1.1, "unit": "mN", "condition": "maximum of stated range 0.3 – 1.1 mN", "source": "S1"},
+      "isp_s": {"value": 2400, "unit": "s", "condition": "up to", "source": "S1"},
+      "total_impulse_Ns": {"value": 5500, "unit": "N·s", "condition": "up to", "source": "S1"},
+      "delta_v": {"value": null, "unit": "m/s", "condition": "not published", "source": null},
+      "power_w": {"value": 65, "unit": "W", "condition": "Total power 35 – 65 W (upper bound)", "source": "S1"}
+    },
+    "price": {"value": null, "currency": null, "kind": "quote", "note": "'Get a quote' via contact@thrustme.fr", "source": "S2"},
+    "availability": {"text": null, "source": null},
+    "cad": {"available": "unknown", "formats": [], "url": null, "source": null},
+    "datasheet_url": "https://thrustme.fr/base/stock/ProductBannerFiles/2_thrustme-npt30-i2.pdf",
+    "sources": {
+      "S1": {"url": "https://thrustme.fr/base/stock/ProductBannerFiles/2_thrustme-npt30-i2.pdf", "title": "NPT30-I2-1U / NPT30-I2-1.5U Smart Iodine Electric Propulsion System datasheet (© 2021)", "publisher": "manufacturer", "accessed": "2026-10-25"},
+      "S2": {"url": "https://www.thrustme.fr/products/npt30-i2", "title": "NPT30-I2 - ThrustMe: Advanced In-Orbit Propulsion Systems", "publisher": "manufacturer", "accessed": "2026-10-25"}
+    },
+    "notes": "Thermally passive; loads <19 W of power to the satellite structure, possibly less depending on integration (S2). Thrust vector accuracy < 1°. 1.5U variant on same datasheet: up to 9500 Ns, 93x93x155 mm, total wet mass 1.7 kg, same thrust/Isp/power. Datasheet is dated 2021."
+  }
+]
