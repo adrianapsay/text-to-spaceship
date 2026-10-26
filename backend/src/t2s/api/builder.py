@@ -183,8 +183,8 @@ async def analysis(request: Request, did: str):
     a = await asyncio.to_thread(engine.analyse, d)
     manifest = _cad(request).manifest()
     used = {i["id"] for p in a["picks"].values() for i in p["items"]}
-    return {**a, "geometry": {cid: {k: manifest[cid].get(k) for k in ("origin", "origin_text", "ok", "extents_mm")}
-                              for cid in used if cid in manifest}}
+    keys = ("origin", "origin_text", "ok", "extents_mm", "faces", "imported")
+    return {**a, "geometry": {cid: {k: manifest[cid].get(k) for k in keys} for cid in used if cid in manifest}}
 
 
 @router.post("/designs/{did}/selection")

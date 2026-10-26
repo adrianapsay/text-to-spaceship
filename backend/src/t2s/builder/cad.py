@@ -22,6 +22,7 @@ origin (the shift is recorded: the maker's frame can be restored).
 """
 from __future__ import annotations
 
+import contextlib
 import hashlib
 import json
 import re
@@ -50,6 +51,9 @@ UNIT_SCALES = {"mm": 1.0, "cm": 10.0, "m": 1000.0, "in": 25.4}
 PLACEHOLDER_MM = 20.0
 LICENCE = "the maker's licence terms apply; kept on this computer only (data/builder is git-ignored)"
 ARCHIVE = "archive.zip"           # an imported archive holding several models, kept so another can be chosen
+REPAIR_TEXT = {"as is": "none needed: the file's solids were meshed as they are",
+               "fixed": "OpenCASCADE fixed small edges and faces (no sewing) before the surface mesh",
+               "sewn": "OpenCASCADE sewed the surfaces into solids where it could before the surface mesh"}
 KIND_ORDER = {".step": 0, ".stp": 0, ".iges": 1, ".igs": 1, ".brep": 1, ".stl": 2}
 _WORD = re.compile(r"[a-z0-9]+")
 
@@ -161,12 +165,31 @@ def pick_model(models: list[tuple[str, int]], product: str | None, member: str |
     return i, {"name": "model", "ok": True, "detail": f"{names[i]}: its name matches {label}{also(i)}"}
 
 
-def _rss_mb(pid: int) -> float:
+def _tree(pid: int) -> list:
+    """The process and its children: in a virtual environment on Windows, python.exe is a launcher that runs the real
+    interpreter as its child, so the worker's memory is the child's and stopping it must reach the child."""
     try:
         import psutil
-        return psutil.Process(pid).memory_info().rss / 2 ** 20
-    except Exception:  # noqa: BLE001 - no psutil, or the process just ended: no measurement
-        return 0.0
+        p = psutil.Process(pid)
+        return [p, *p.children(recursive=True)]
+    except Exception:  # noqa: BLE001 - no psutil, or the process just ended
+        return []
+
+
+def _rss_mb(pid: int) -> float:
+    total = 0
+    for q in _tree(pid):
+        with contextlib.suppress(Exception):          # a process that just ended
+            total += q.memory_info().rss
+    return total / 2 ** 20
+
+
+def _stop(p: subprocess.Popen) -> None:
+    for q in reversed(_tree(p.pid)):                   # the children first, then the launcher
+        with contextlib.suppress(Exception):
+            q.kill()
+    if p.poll() is None:
+        p.kill()
 
 
 def occ_convert(src: Path, out_stl: Path, timeout: float = TIMEOUT_S) -> dict:
@@ -202,7 +225,7 @@ def occ_convert(src: Path, out_stl: Path, timeout: float = TIMEOUT_S) -> dict:
                 time.sleep(0.25)
         finally:
             if p.poll() is None:
-                p.kill()
+                _stop(p)
             p.wait()
     if why:
         raise CadError(why)
@@ -224,7 +247,11 @@ def mesh_facts(stl: Path) -> dict:
     if m.is_empty:
         raise CadError("the mesh is empty")
     lo, hi = m.bounds
-    return {"watertight": bool(m.is_watertight), "volume_mm3": float(abs(m.volume)) if m.is_watertight else None,
+    # the volume by the divergence theorem: right for a closed mesh, and for an assembly whose solids' surfaces are
+    # each closed even where they touch (the merged mesh is then not "watertight"); a flat sheet has none
+    with np.errstate(invalid="ignore", divide="ignore"):
+        vol = float(abs(m.volume))
+    return {"watertight": bool(m.is_watertight), "volume_mm3": vol,
             "bbox_mm": [lo.tolist(), hi.tolist()], "faces": len(m.faces), "mesh": m}
 
 
@@ -349,8 +376,8 @@ class CadStore:
             checks.append({"name": "solids", "ok": facts["solids"] > 0,
                            "detail": f"{facts['solids']} solid(s), {facts['surfaces']} surface(s)" +
                                      ("" if facts["solids"] else ": surfaces only, no closed volume")})
-            checks.append({"name": "healing", "ok": facts["healed"], "detail": "OpenCASCADE shape healing ran"
-                           if facts["healed"] else "shape healing could not run"})
+            first = f" (the first mesh failed: {facts['mesh_error']})" if facts.get("mesh_error") else ""
+            checks.append({"name": "repair", "ok": True, "detail": REPAIR_TEXT.get(facts.get("repair"), "—") + first})
             units, scale = "mm (converted by OpenCASCADE)", 1.0
         else:
             facts = {"solids": None, "volume_mm3": None}
@@ -374,12 +401,23 @@ class CadStore:
         final = d / f"{cid}.stl"
         mesh.export(final)
         extents = (hi - lo).tolist()
-        checks.append({"name": "watertight", "ok": mf["watertight"],
-                       "detail": "the surface mesh is closed" if mf["watertight"] else
-                       "the surface mesh has open edges: its volume and mass properties are not reliable"})
+        vol_ok, err = None, None
         if facts.get("volume_mm3") and mf["volume_mm3"]:
             err = abs(mf["volume_mm3"] - facts["volume_mm3"]) / facts["volume_mm3"]
-            checks.append({"name": "volume", "ok": err <= 0.02,
+            vol_ok = err <= 0.02
+        n = facts.get("solids") or 0
+        if mf["watertight"]:
+            checks.append({"name": "watertight", "ok": True, "detail": "the surface mesh is closed"})
+        elif vol_ok and n > 1:
+            checks.append({"name": "watertight", "ok": None,
+                           "detail": f"not closed as one surface, as usual for an assembly of {n} solids that touch "
+                                     "(edges shared by more than two triangles); the volume matches OpenCASCADE's, so "
+                                     "the solids' surfaces enclose them"})
+        else:
+            checks.append({"name": "watertight", "ok": False,
+                           "detail": "the surface mesh has open edges: its volume and mass properties are not reliable"})
+        if vol_ok is not None:
+            checks.append({"name": "volume", "ok": vol_ok,
                            "detail": f"mesh {mf['volume_mm3']:.0f} mm³ vs OpenCASCADE {facts['volume_mm3']:.0f} mm³ "
                                      f"({100 * err:.2f} %)"})
         sm = size_match(extents, dims)
@@ -399,7 +437,7 @@ class CadStore:
                  "archive_models": models, "archive_member": chosen,
                  "sha256": _sha256(data), "imported": now_iso(), "units": units, "scale": scale,
                  "extents_mm": extents, "shift_mm": (shift * 1.0).tolist(),
-                 "volume_mm3": float(abs(mesh.volume)) if mf["watertight"] else None,
+                 "volume_mm3": float(abs(mesh.volume)) if mf["watertight"] or vol_ok else None,
                  "solids": facts.get("solids"), "faces": mf["faces"], "converter_peak_mb": facts.get("peak_mb"),
                  "checks": checks, "ok": all(ch["ok"] is not False for ch in checks), "licence": LICENCE}
         self._put(cid, entry)

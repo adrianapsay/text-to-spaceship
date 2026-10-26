@@ -170,7 +170,7 @@ export interface Analysis {
   /** questions not answered yet: the analysis used their documented defaults (ASSUMED) */
   open_questions: { qid: string; prompt: string; advanced: boolean; default: string; why: string }[];
   /** the geometry of the picked parts that have one (CAD or simplified shapes), by catalog id */
-  geometry?: Record<string, { origin: CadOrigin; origin_text: string; ok: boolean; extents_mm: number[] }>;
+  geometry?: Record<string, { origin: CadOrigin; origin_text: string; ok: boolean; extents_mm: number[]; faces?: number; imported?: string }>;
 }
 
 export interface CatalogList {

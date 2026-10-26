@@ -226,6 +226,8 @@ export function BuilderTab() {
       setBusy(false);
     }
   };
+  /** a part's imported model for the 3D preview (stable: the preview keeps one parse per model) */
+  const loadStl = useCallback((cid: string, v?: string) => session().api.builderCadStl(cid, v), []);
   /** a CAD change: then the geometry list and the analysis's geometry labels are read again */
   const cadAct = async (fn: () => Promise<unknown>) => {
     setBusy(true);
@@ -379,7 +381,7 @@ export function BuilderTab() {
               {section === 'architecture' ? (
                 <ArchitectureSection a={shown} stale={stale} busy={busy} catalog={catalog} slots={slots} onSelect={select} onUnselect={unselect} />
               ) : null}
-              {section === 'preview' ? <PreviewSection a={shown} stale={stale} /> : null}
+              {section === 'preview' ? <PreviewSection a={shown} stale={stale} loadStl={loadStl} /> : null}
               {section === 'analysis' ? <AnalysisSection a={shown} stale={stale} expert={expert} /> : null}
               {section === 'trade' ? <TradeSection a={shown} stale={stale} busy={busy} onPrefs={prefs} /> : null}
               {section === 'summary' ? <SummarySection r={current} a={shown} stale={stale} /> : null}

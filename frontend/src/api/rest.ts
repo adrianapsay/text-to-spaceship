@@ -190,6 +190,11 @@ export class ApiClient {
     fd.append('origin', origin);
     return this.json<CadEntry>(`/api/builder/cad/${encodeURIComponent(cid)}/import`, { method: 'POST', body: fd });
   }
+  /** a part's STL (mm, centred); `v` (the import time) keeps a re-imported model from being served from a cache */
+  async builderCadStl(cid: string, v?: string): Promise<ArrayBuffer> {
+    const r = await this.req(`/api/builder/cad/${encodeURIComponent(cid)}/stl${v ? `?v=${encodeURIComponent(v)}` : ''}`);
+    return r.arrayBuffer();
+  }
   builderCadModel(cid: string, member: string) {
     return this.send<CadEntry>('POST', `/api/builder/cad/${encodeURIComponent(cid)}/model`, { member });
   }

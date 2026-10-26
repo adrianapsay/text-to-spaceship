@@ -75,7 +75,9 @@ def test_a_step_file_round_trips_to_a_millimetre_stl(tmp_path, step_file):
     assert e["shift_mm"] == pytest.approx([-BOARD[0] / 2, -BOARD[1] / 2, -BOARD[2] / 2], abs=1e-3)
     assert (tmp_path / "cad" / e["source_file"]).read_bytes() == step_file.read_bytes()
     assert store.manifest()["aac-clyde-space-starbuck-nano"]["sha256"] == e["sha256"]
-    assert e["converter_peak_mb"] > 0 and e["archive_models"] == [] and e["archive_member"] is None
+    # the worker's own memory, not only the launcher's (a venv's python.exe on Windows runs the interpreter as a child)
+    assert e["converter_peak_mb"] > 10 and e["archive_models"] == [] and e["archive_member"] is None
+    assert next(c for c in e["checks"] if c["name"] == "repair")["detail"].startswith("none needed")
     assert not (tmp_path / "cad" / "aac-clyde-space-starbuck-nano" / "incoming").exists()
 
 
@@ -89,6 +91,22 @@ def test_an_stl_without_units_is_matched_against_the_catalog(tmp_path):
     e = store.import_file("aac-clyde-space-starbuck-nano", "odd.stl", odd.export(file_type="stl"))
     assert e["scale"] == 1.0 and "ASSUMED" in e["units"]
     assert next(c for c in e["checks"] if c["name"] == "size")["ok"] is False and not e["ok"]
+
+
+def test_an_assembly_keeps_its_solids(tmp_path):
+    """Two solids that touch, as in a maker's assembly, are meshed as they are: OpenCASCADE's sewing used to merge
+    such solids into loose shells (a maker's sun sensor lost all three)."""
+    path = tmp_path / "pair.step"
+    code = ("import gmsh\ngmsh.initialize(interruptible=False)\ngmsh.option.setNumber('General.Terminal', 0)\n"
+            "gmsh.model.occ.addBox(0, 0, 0, 10, 10, 10)\ngmsh.model.occ.addBox(10, 0, 0, 10, 10, 10)\n"
+            f"gmsh.model.occ.synchronize()\ngmsh.write(r'{path}')\ngmsh.finalize()\n")
+    subprocess.run([sys.executable, "-c", code], check=True, capture_output=True, timeout=120)
+    e = CadStore(tmp_path / "cad").import_file("aac-clyde-space-ss200", "pair.step", path.read_bytes())
+    checks = {c["name"]: c for c in e["checks"]}
+    assert checks["solids"]["ok"] and checks["solids"]["detail"].startswith("2 solid(s)")
+    assert checks["repair"]["detail"].startswith("none needed")
+    assert checks["volume"]["ok"] and checks["watertight"]["ok"] is not False
+    assert e["volume_mm3"] == pytest.approx(2000.0, rel=1e-3)
 
 
 def test_surfaces_only_and_unreadable_files_are_reported(tmp_path):

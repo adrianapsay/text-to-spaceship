@@ -39,6 +39,48 @@ function orient(d: number[], w: number, h: number): [number, number, number] {
   return fit.sort((a, b) => a[2] - b[2])[0];              // shortest along Z: thin parts lie flat
 }
 
+/** The catalog id of a placed box (boxes of one part are `<id>#<n>`). */
+export const componentOf = (b: PlacedBox) => b.id.split('#')[0];
+
+/** A model with more triangles than this stays a box in the preview (the browser would stall on it). */
+export const MESH_MAX_FACES = 400_000;
+
+type Geometry = NonNullable<Analysis['geometry']>[string];
+
+/**
+ * How each placed part is drawn: with its imported model (the maker's CAD or a reconstruction) when it has one light
+ * enough for the browser, else as its box. Body solar panels are drawn as panels whatever their geometry.
+ */
+export function drawPlan(boxes: PlacedBox[], geometry: Analysis['geometry']): { box: PlacedBox; cid: string; model: Geometry | null; heavy: boolean }[] {
+  return boxes.map((b) => {
+    const cid = componentOf(b);
+    const g = geometry?.[cid];
+    const imported = !!g && (g.origin === 'manufacturer' || g.origin === 'reconstructed') && b.slot !== 'solar' && !b.unsized;
+    const heavy = imported && (g.faces ?? 0) > MESH_MAX_FACES;
+    return { box: b, cid, model: imported && !heavy ? g : null, heavy };
+  });
+}
+
+/**
+ * The rotation (3×3, rows = world axes) that turns a part's mesh so its longest side lies along the box's longest side,
+ * and so on: the maker's model drawn where the arrangement put the part's box. Always a turn, never a mirror (when the
+ * axis swap alone would mirror the part, the shortest axis is reversed).
+ */
+export function axisTurn(extents: number[], size: number[]): number[][] {
+  const byE = [0, 1, 2].sort((i, j) => extents[j] - extents[i]);
+  const byS = [0, 1, 2].sort((i, j) => size[j] - size[i]);
+  const m = [
+    [0, 0, 0],
+    [0, 0, 0],
+    [0, 0, 0],
+  ];
+  for (let k = 0; k < 3; k++) m[byS[k]][byE[k]] = 1;
+  const det =
+    m[0][0] * (m[1][1] * m[2][2] - m[1][2] * m[2][1]) - m[0][1] * (m[1][0] * m[2][2] - m[1][2] * m[2][0]) + m[0][2] * (m[1][0] * m[2][1] - m[1][1] * m[2][0]);
+  if (det < 0) m[byS[2]] = m[byS[2]].map((v) => (v ? -v : 0));
+  return m;
+}
+
 export function arrange(a: Analysis): { outer: [number, number, number]; boxes: PlacedBox[] } {
   const outer = OUTER_MM[a.size_u] ?? OUTER_MM[3];
   const inner: [number, number, number] = [outer[0] - 2 * WALL, outer[1] - 2 * WALL, outer[2] - 2 * WALL];

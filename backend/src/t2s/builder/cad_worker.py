@@ -4,14 +4,22 @@ builder.cad runs it with a time limit, so a malformed file cannot take the app d
 standard library (it runs isolated, by path, outside the t2s package).
 
 Units: OpenCASCADE converts the file's length unit to millimetres on import (Geometry.OCCTargetUnit = "MM").
-Facts: solids and surfaces found, the solids' volume and centre (uniform density), the bounding box, whether shape
-healing ran, and the surface mesh size used for the STL.
+Facts: solids and surfaces found, the solids' volume and centre (uniform density), the bounding box, the repair used
+(REPAIRS), and the surface mesh size used for the STL.
+
+Repairs only where needed: OpenCASCADE's shape healing changes good files — sewing merges an assembly's touching solids
+into loose shells (a maker's sun sensor lost all 3 of its solids, a patch antenna all 21), and removing small edges
+left a GNSS receiver's faces with open boundary loops that no surface mesh could close. So a file is meshed as it is
+first; the small-edge/face fixes run only when that mesh fails, and sewing only for a file of surfaces without solids.
 """
 from __future__ import annotations
 
 import json
 import math
 import sys
+
+# the repairs tried in turn: the file as it is, then OpenCASCADE's fixes without sewing, then sewing into solids
+REPAIRS = (("as is", None), ("fixed", {"sewFaces": False, "makeSolids": False}), ("sewn", {}))
 
 
 def convert(src: str, out: str) -> dict:
@@ -20,40 +28,50 @@ def convert(src: str, out: str) -> dict:
     try:
         gmsh.option.setNumber("General.Terminal", 0)
         gmsh.option.setNumber("General.NumThreads", 1)
-        gmsh.option.setString("Geometry.OCCTargetUnit", "MM")
-        try:
-            gmsh.model.occ.importShapes(src)
-        except Exception as exc:  # noqa: BLE001 - any reader failure is the file's
-            return {"error": f"OpenCASCADE could not read the file ({exc})"}
-        healed = True
-        try:
-            gmsh.model.occ.healShapes()
-        except Exception:  # noqa: BLE001 - healing is best effort; say it did not run
-            healed = False
-        gmsh.model.occ.synchronize()
-        solids = gmsh.model.getEntities(3)
-        surfaces = gmsh.model.getEntities(2)
-        if not solids and not surfaces:
-            return {"error": "the file holds no geometry (no solids or surfaces)"}
-        vol, com = 0.0, [0.0, 0.0, 0.0]
-        for d, t in solids:
-            m = gmsh.model.occ.getMass(d, t)
-            c = gmsh.model.occ.getCenterOfMass(d, t)
-            vol += m
-            com = [com[i] + m * c[i] for i in range(3)]
-        com = [x / vol for x in com] if vol > 0 else None
-        box = gmsh.model.getBoundingBox(-1, -1)
-        lo, hi = list(box[:3]), list(box[3:])
-        diag = math.dist(lo, hi)
-        h = max(diag / 60.0, 0.3)
-        gmsh.option.setNumber("Mesh.MeshSizeMax", h)
-        gmsh.option.setNumber("Mesh.MeshSizeMin", h / 10.0)
-        gmsh.option.setNumber("Mesh.MeshSizeFromCurvature", 16)
-        gmsh.option.setNumber("Mesh.Binary", 1)
-        gmsh.model.mesh.generate(2)
-        gmsh.write(out)
-        return {"solids": len(solids), "surfaces": len(surfaces), "volume_mm3": vol, "com_mm": com,
-                "bbox_mm": [lo, hi], "healed": healed, "mesh_h_mm": h}
+        failed = None
+        for repair, heal in REPAIRS:
+            gmsh.clear()
+            gmsh.option.setString("Geometry.OCCTargetUnit", "MM")
+            try:
+                gmsh.model.occ.importShapes(src)
+            except Exception as exc:  # noqa: BLE001 - any reader failure is the file's
+                return {"error": f"OpenCASCADE could not read the file ({exc})"}
+            if heal is not None:
+                try:
+                    gmsh.model.occ.healShapes(**heal)
+                except Exception:  # noqa: BLE001 - this repair could not run: try the next (the last meshes as is)
+                    if repair != "sewn":
+                        continue
+            gmsh.model.occ.synchronize()
+            solids = gmsh.model.getEntities(3)
+            surfaces = gmsh.model.getEntities(2)
+            if not solids and not surfaces:
+                return {"error": "the file holds no geometry (no solids or surfaces)"}
+            if not solids and repair != "sewn":
+                continue                                   # surfaces only: sewing may make them solids
+            box = gmsh.model.getBoundingBox(-1, -1)
+            lo, hi = list(box[:3]), list(box[3:])
+            h = max(math.dist(lo, hi) / 60.0, 0.3)
+            gmsh.option.setNumber("Mesh.MeshSizeMax", h)
+            gmsh.option.setNumber("Mesh.MeshSizeMin", h / 10.0)
+            gmsh.option.setNumber("Mesh.MeshSizeFromCurvature", 16)
+            gmsh.option.setNumber("Mesh.Binary", 1)
+            try:
+                gmsh.model.mesh.generate(2)
+            except Exception as exc:  # noqa: BLE001 - a surface that cannot be meshed: try the next repair
+                failed = str(exc)
+                continue
+            vol, com = 0.0, [0.0, 0.0, 0.0]
+            for d, t in solids:
+                m = gmsh.model.occ.getMass(d, t)
+                c = gmsh.model.occ.getCenterOfMass(d, t)
+                vol += m
+                com = [com[i] + m * c[i] for i in range(3)]
+            com = [x / vol for x in com] if vol > 0 else None
+            gmsh.write(out)
+            return {"solids": len(solids), "surfaces": len(surfaces), "volume_mm3": vol, "com_mm": com,
+                    "bbox_mm": [lo, hi], "repair": repair, "mesh_error": failed, "mesh_h_mm": h}
+        return {"error": f"no surface mesh could be made, even after OpenCASCADE's repairs ({failed})"}
     finally:
         gmsh.finalize()
 
