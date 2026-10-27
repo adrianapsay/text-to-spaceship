@@ -1,0 +1,145 @@
+{
+ "about": "The makers' CAD files the Builder was checked with (docs/V3.md section 5.4): each file's source, size and SHA-256 as downloaded, and the model the importer took from its archive. get_cad.py fetches them; the files themselves are the makers' and never part of the repository.",
+ "files": [
+  {
+   "id": "aac-clyde-space-iadcs400",
+   "name": "AAC Clyde Space iADCS400",
+   "url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/IADCS420-ASM-ST-1.0-defeatured-1.0_defeature.zip",
+   "file": "IADCS420-ASM-ST-1.0-defeatured-1.0_defeature.zip",
+   "bytes": 32737620,
+   "sha256": "dfe498ee5b11eba8766cf594e16fea62d975e8d9f07c3e5c4bb66218ee6b83d8",
+   "model": "IADCS420-ASM-ST-1.0-defeatured-1.0_defeature.STEP",
+   "fetched": "2026-10-26"
+  },
+  {
+   "id": "aac-clyde-space-ss200",
+   "name": "AAC Clyde Space SS200 digital sun sensor",
+   "url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/SS200-20190325.zip",
+   "file": "SS200-20190325.zip",
+   "bytes": 163514,
+   "sha256": "651a3ac46107be46148efbc7b62e9446c59ed32ccb93f653afc0fb172c39d4b7",
+   "model": "SS200 20190325/DEFEATURED SS200.STP",
+   "fetched": "2026-10-26"
+  },
+  {
+   "id": "aac-clyde-space-kryten-m3",
+   "name": "AAC Clyde Space KRYTEN-M3",
+   "url": "https://www.aac-clyde.space/wp-content/uploads/2021/10/Kryten-OBC-CAD-models.zip",
+   "file": "Kryten-OBC-CAD-models.zip",
+   "bytes": 8528004,
+   "sha256": "1c0156fd259bd90a63c7c1fe3bbc70a2e5759f0dce4c2675f0e79cd941aa36b9",
+   "model": "Kryten OBC CAD models/3D-25-02927 RevJ Assembly_defeature.STEP",
+   "fetched": "2026-10-26"
+  },
+  {
+   "id": "aac-clyde-space-zaphod-6u",
+   "name": "AAC Clyde Space ZAPHOD 6U Structure",
+   "url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/Zaphod-6U-Structure-CAD-model.zip",
+   "file": "Zaphod-6U-Structure-CAD-model.zip",
+   "bytes": 4746079,
+   "sha256": "9eda93dc24180a3bee7a9ed2fd8520f4f22d8e30e8c8b7903c8c4b42cb5a7d1b",
+   "model": "Zaphod 6U Structure CAD model/3D-01-02747 RevC.STEP",
+   "fetched": "2026-10-26"
+  },
+  {
+   "id": "aac-clyde-space-pulsar-utrx",
+   "name": "AAC Clyde Space PULSAR-UTRX (UTRX-C commercial / UTRX-A amateur)",
+   "url": "https://www.aac-clyde.space/wp-content/uploads/2021/10/PULSAR-UTRX-1.zip",
+   "file": "PULSAR-UTRX-1.zip",
+   "bytes": 6003916,
+   "sha256": "c6baca2bbb5496677252dce4ba3d910461269eadc0bbafb9b91bb6f1085cf6ba",
+   "model": "PULSAR-UTRX/CAD-01-00097 UTRX Rev B sanitised(Amateur).zip/CAD-01-00097 UTRX Rev B sanitised.stp",
+   "fetched": "2026-10-26"
+  },
+  {
+   "id": "satlab-srs-4",
+   "name": "Satlab SRS-4 Full-duplex High-speed S-band Transceiver",
+   "url": "https://www.satlab.com/resources/SatlabSRS4v2_0_step.zip",
+   "file": "SatlabSRS4v2_0_step.zip",
+   "bytes": 2684180,
+   "sha256": "21a16bb0b16a34cb8968660131c00f69c2dbc6b28932625fc654e1c7de475752",
+   "model": "SatlabSRS4v2_0.STEP",
+   "fetched": "2026-10-26"
+  },
+  {
+   "id": "aac-clyde-space-pulsar-stx",
+   "name": "AAC Clyde Space PULSAR-STX (STX-C commercial / STX-A amateur)",
+   "url": "https://www.aac-clyde.space/wp-content/uploads/2021/10/CAD-01-00017-Rev-C.zip",
+   "file": "CAD-01-00017-Rev-C.zip",
+   "bytes": 13247395,
+   "sha256": "90639e223552e19521b0dc293e1b202b9494cdb8aec3b2b0197c84d20200266e",
+   "model": "CAD-01-00017 Rev C.STEP",
+   "fetched": "2026-10-26"
+  },
+  {
+   "id": "satlab-srx-8",
+   "name": "Satlab SRX-8 X-band Transmitter",
+   "url": "https://www.satlab.com/resources/SatlabSRX8_v1_0_step.zip",
+   "file": "SatlabSRX8_v1_0_step.zip",
+   "bytes": 20926151,
+   "sha256": "2018216f90e46e690f5acaf3139eac06c2715442099aff3b8e171d23365096ba",
+   "model": "SatlabSRX8_v1_0.STEP",
+   "fetched": "2026-10-26"
+  },
+  {
+   "id": "satlab-sas-2",
+   "name": "Satlab SAS-2 Dual S-band Patch Antenna",
+   "url": "https://www.satlab.com/resources/Satlab_SAS-2_v1.0_step.zip",
+   "file": "Satlab_SAS-2_v1.0_step.zip",
+   "bytes": 318474,
+   "sha256": "bea2ebad3ed3f093fe3023750c73aa9864e8e2b00092f287c84b86d356017a39",
+   "model": "Satlab_SAS-2_v1.0.STEP",
+   "fetched": "2026-10-26"
+  },
+  {
+   "id": "skyfox-labs-pinav-ng-fm",
+   "name": "SkyFox Labs piNAV-NG/FM (Flight Model)",
+   "url": "https://www.skyfoxlabs.com/pdf/piNAV-NG_Integration_Model.stp",
+   "file": "piNAV-NG_Integration_Model.stp",
+   "bytes": 9803466,
+   "sha256": "20e17497c8323b486c441144da74e264f4b7a5d6217db7be878e99bb75a51e43",
+   "model": null,
+   "fetched": "2026-10-26"
+  },
+  {
+   "id": "spacemanic-celeste",
+   "name": "Spacemanic Celeste",
+   "url": "https://spacemanic.com/wp-content/uploads/2025/12/cadmodel-celeste.zip",
+   "file": "cadmodel-celeste.zip",
+   "bytes": 1284923,
+   "sha256": "6c17de93cb87194ce9601449f7bb6deadfb102635e7998708e05e8d7bff40a99",
+   "model": "celeste_gnss_rx_V3b_low_detail.step",
+   "fetched": "2026-10-26"
+  },
+  {
+   "id": "aac-clyde-space-starbuck-nano",
+   "name": "AAC Clyde Space STARBUCK-NANO",
+   "url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/Starbuck-CAD-models.zip",
+   "file": "Starbuck-CAD-models.zip",
+   "bytes": 12275978,
+   "sha256": "b4587e8b01e8db2ff5fd057915a206168ff5a86200d5e0fcc7607d57ad56019e",
+   "model": "Starbuck-Nano CAD models/Starbuck-Nano-3D-25-02452RevF_18_10_22_defeature_2.STEP",
+   "fetched": "2026-10-26"
+  },
+  {
+   "id": "aac-clyde-space-optimus-40",
+   "name": "AAC Clyde Space OPTIMUS-40",
+   "url": "https://www.aac-clyde.space/wp-content/uploads/2021/10/Optimus-CAD-models.zip",
+   "file": "Optimus-CAD-models.zip",
+   "bytes": 32419460,
+   "sha256": "036d71d28bb4c62da33f2567ba57f79b29139c558f181a37557eb28b6809787e",
+   "model": "Optimus CAD models/Optimus-40-3D-01-02686_RevA_defeature.STEP",
+   "fetched": "2026-10-26"
+  },
+  {
+   "id": "pumpkin-bm2",
+   "name": "Pumpkin Space Systems Intelligent Protected Lithium Battery Module with SoC Reporting (BM 2)",
+   "url": "https://www.pumpkininc.com/space/CAD/710-01552-F%20Battery%20Module%202%20(BM2).zip",
+   "file": "710-01552-F Battery Module 2 (BM2).zip",
+   "bytes": 3592234,
+   "sha256": "bf656360b3feb77e73f1c7de5ebfb6762f03f362c092b498b52e7e0c4ac388f7",
+   "model": "710-01552-F Battery Module 2 (BM2).step",
+   "fetched": "2026-10-26"
+  }
+ ]
+}

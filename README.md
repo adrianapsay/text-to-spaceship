@@ -22,27 +22,65 @@ algorithm it chose and why. Sliders change the priorities live.
   a relative cost model (a concept, not a quote; not stress-analysed).
 * **FUSION 360 VALIDATION: NOT CONFIGURED.** The app prepares an export package but never calls Fusion 360.
 
+## Run it on a Windows PC
+
+1. Download this repository: **Code → Download ZIP** on its GitHub page, and unzip it into a short path such as
+   `C:\TTS-V3` (or `git clone` it).
+2. Double-click **`setup.cmd`**. It lists what it will download, asks, then puts everything inside the folder:
+   - uv, Node.js and CPython;
+   - the Python and JavaScript packages pinned in the lock files;
+   - CalculiX and BESO.
+
+   Each file comes from its official site and is checked against the hash recorded in the repository. It needs no
+   administrator rights and writes nothing to the registry or your user profile. It takes about 2.5 GB, and the first
+   run takes several minutes. At the end it offers to fetch the makers' CAD (see below).
+3. Double-click **`start.cmd`**. The app opens at <http://127.0.0.1:8768>; only this computer can reach it.
+
+If Windows warns that a script comes from the internet, choose **Run** (or **More info → Run anyway**). Running
+`setup.cmd` again, for example after an update, checks what is already in place and keeps it.
+
+## Run it on macOS or Linux
+
+You need [uv](https://docs.astral.sh/uv/getting-started/installation/) and [Node.js 24](https://nodejs.org/). Run
+`bash start.sh` in the folder. The first start installs the Python packages and builds the interface, which takes a
+few minutes. CalculiX is set up on Windows only; without it the FEA runs on NGSolve alone.
+
 ## Run it in your browser — any device (GitHub Codespaces)
 
-1. On this repository's GitHub page click **Code → Codespaces → Create codespace on main**. You need a free GitHub account; it uses your Codespaces allowance.
-2. Wait for the first setup to finish (several minutes: it installs Python 3.14, the packages and the user
-   interface). Later starts are much faster.
+1. On this repository's GitHub page click **Code → Codespaces → Create codespace on main**. You need a free GitHub
+   account; it uses your Codespaces allowance.
+2. Wait for the first setup to finish. It takes several minutes, because it installs Python 3.14, the packages and the
+   user interface; later starts are much faster.
 3. The app starts by itself on port 8768. Open the **Ports** tab and click the globe next to
    **TEXT-TO-SPACESHIP** (it may also open on its own).
-4. Stop the codespace when you are done, so it stops using your allowance.
+4. For the makers' CAD, run `bash get-cad.sh` in the codespace's terminal.
+5. Stop the codespace when you are done, so it stops using your allowance.
 
 Each codespace is a private copy: changes you make there do not affect anyone else.
 
-## Run it on your own computer
+## The makers' CAD
 
-You need [uv](https://docs.astral.sh/uv/getting-started/installation/) and [Node.js 24](https://nodejs.org/).
-Download this repository (**Code → Download ZIP**, or `git clone`), then:
+The Builder uses the makers' own CAD for 14 of its parts ([docs/V3.md §5.4](docs/V3.md)): in its 3D preview, in its
+checks and when a design is sent to the optimiser. Those files belong to their makers, so they are not in this
+repository. **`get-cad.cmd`** (`bash get-cad.sh` on macOS, Linux and Codespaces) fetches and imports them:
+1. It lists the files and asks before downloading.
+2. It downloads each file from its maker's website (148.7 MB in all).
+3. It checks each file's SHA-256 against the one recorded here.
+4. It imports each file through the app's checks, so you get the same STL models as the computer they were first
+   imported on.
 
-* **Windows:** double-click `start.cmd`.
-* **macOS / Linux:** run `bash start.sh` in the folder.
+`--list` lists the files, and `--only PART` takes only some of them.
 
-The first start builds the interface and installs the Python packages (a few minutes). The app then opens at
-<http://127.0.0.1:8768>. It only accepts connections from the same computer.
+Already have the files on another computer? Copy its `data\builder\cad\downloads` folder over and run
+`get-cad.cmd --from <that folder>`: nothing is downloaded.
+
+## Bring your work from another computer
+
+Your work is not in the repository; it lives in two folders under `data`:
+* `data\builder`: your Builder designs and the imported CAD with its STL files;
+* `data\projects`: your optimiser projects.
+
+Stop the app on both computers, then copy those two folders into the new copy's `data` folder.
 
 ## Use your own parts
 
@@ -51,6 +89,7 @@ the next search. `start.cmd --add part.stl` / `bash start.sh --add part.stl` que
 
 ## Documentation
 
+* [docs/V3.md](docs/V3.md) — the CubeSat Builder: how it works, its tests, its limits and the makers' CAD
 * [docs/V2.md](docs/V2.md) — what V2 adds; [docs/V2-GD-CONTEST.md](docs/V2-GD-CONTEST.md) — the bracket contest
 * [docs/FINAL-REPORT.md](docs/FINAL-REPORT.md) — what is built and tested, key results, limitations, deferred work
 * [docs/STATUS.md](docs/STATUS.md) — every measured number, deviations from the protocol
@@ -64,5 +103,6 @@ the next search. `start.cmd --add part.stl` / `bash start.sh --add part.stl` que
 
 ## Licence
 
-[MIT](LICENSE) © 2026 Sebastian Shunda. The Python and JavaScript packages that uv and npm install are not part of
-this repository and keep their own licences.
+[MIT](LICENSE) © 2026 Sebastian Shunda. The Python and JavaScript packages that uv and npm install, the tools that
+`setup.cmd` fetches and the makers' CAD that `get-cad` fetches are not part of this repository and keep their own
+licences.

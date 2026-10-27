@@ -1,2 +1,4 @@
 # shell scripts must keep LF line endings to run on Linux / macOS / Codespaces
 *.sh text eol=lf
+# Windows batch files get CRLF (cmd.exe can miss a label in a file with LF line endings)
+*.cmd text eol=crlf

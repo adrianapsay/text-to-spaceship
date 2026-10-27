@@ -11,3 +11,4 @@ fi
 (cd backend && uv sync --frozen)
 (cd frontend && npm ci && npm run build)
 echo "Setup done. The app starts on port 8768 (Ports tab: TEXT-TO-SPACESHIP)."
+echo "The makers' CAD for 14 parts is not in the repository: 'bash get-cad.sh' fetches it (148.7 MB, asks first)."
