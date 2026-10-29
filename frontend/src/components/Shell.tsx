@@ -67,7 +67,7 @@ export function TopBar() {
         {project?.name ?? 'Loading project…'}
       </span>
       <span className="sep" />
-      <Badge tone="neutral">3U</Badge>
+      <Badge tone="neutral">{settings?.form_factor ?? '3U'}</Badge>
       <label className="row" style={{ gap: 4 }}>
         <span className="sr-only">Stage</span>
         <select

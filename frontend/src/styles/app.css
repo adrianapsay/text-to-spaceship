@@ -176,7 +176,16 @@ th.num {
   display: flex;
   flex-direction: column;
   min-height: 0;
+  overflow-y: auto;
   background: var(--bg-panel);
+}
+/* a layout's hardware list (20+ items in 6U / 12U) scrolls in its own share, not over the parts list */
+.overview > .left > .hardware-items {
+  flex: 0 1 auto;
+  min-height: 0;
+  max-height: 40%;
+  overflow-y: auto;
+  border-top: 1px solid var(--border-subtle);
 }
 .overview > .centre {
   grid-row: 1;

@@ -83,7 +83,7 @@ export function PartsList() {
   const setError = useApp((s) => s.setDatasetError);
   const input = useRef<HTMLInputElement>(null);
   return (
-    <div className="stack" style={{ gap: 0, minHeight: 0, flex: 1 }}>
+    <div className="stack" style={{ gap: 0, minHeight: 160, flex: 1, overflow: 'hidden' }}>
       <div className="panel-head">
         <h2>Parts ({parts.length})</h2>
         <div className="right">
@@ -178,7 +178,7 @@ export function HardwareItemsList() {
     );
   };
   return (
-    <div data-testid="hardware-items">
+    <div className="hardware-items" data-testid="hardware-items">
       {am.length ? (
         <>
           <div className="panel-head">
