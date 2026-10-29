@@ -27,6 +27,7 @@ def _start(h: float, threads: int):
     gmsh.option.setNumber("Mesh.CharacteristicLengthMax", h)
     gmsh.option.setNumber("Mesh.SecondOrderLinear", 1)
     gmsh.option.setNumber("Mesh.Algorithm3D", 1)       # Delaunay
+    gmsh.option.setNumber("Mesh.OptimizeNetgen", 0)    # gmsh's default; options outlive gmsh.clear() (mesh_surface)
     return gmsh
 
 
@@ -123,7 +124,9 @@ def mesh_surface(v: np.ndarray, f: np.ndarray, h: float, threads: int = 1, remes
     brackets, whose surface is the certified one). gmsh 3D algorithms are tried in turn until no tetrahedron is
     degenerate: HXT (10) first — on marching-cubes surfaces gmsh's Delaunay (1) left zero-volume slivers that
     CalculiX rejects — then Frontal (4), then Delaunay. A mesh whose worst tetrahedron has quality ≥ 1e-3 is taken at
-    once; otherwise the best one, if its worst element is still ≥ 1e-5 (CalculiX rejected elements near 1e-6)."""
+    once; otherwise the best one, if its worst element is still ≥ 1e-5 (CalculiX rejected elements near 1e-6). Only
+    when none is: Delaunay once more with gmsh's Netgen optimiser, which keeps the given surface and removed the slivers
+    a frame-bracing one piece left on macOS (worst element 3.6e-6 → 6.1e-4, the same 22 226 boundary triangles)."""
     best, err = None, None
     for alg in algorithms:
         try:
@@ -137,10 +140,20 @@ def mesh_surface(v: np.ndarray, f: np.ndarray, h: float, threads: int = 1, remes
             return nodes, tets
         if best is None or q > best[0]:
             best = (q, nodes, tets)
+    if best is not None and best[0] >= 1e-5:
+        return best[1], best[2]
+    try:                                                        # last resort (docstring)
+        nodes, tets = _mesh_surface_once(v, f, h, threads, remesh, 1, optimize_netgen=True)
+        q = float(tet_quality(nodes, tets).min())
+        if q >= 1e-5:
+            return nodes, tets
+        if best is None or q > best[0]:
+            best = (q, nodes, tets)
+    except (OSError, RuntimeError, ValueError) as exc:
+        err = exc
+        _reset_gmsh()
     if best is None:
         raise ValueError(f"gmsh failed with every algorithm ({err!r})")
-    if best[0] >= 1e-5:
-        return best[1], best[2]
     raise ValueError(f"degenerate tetrahedra with every gmsh algorithm (best min quality {best[0]:.2e})")
 
 
@@ -153,13 +166,15 @@ def _reset_gmsh():
         pass
 
 
-def _mesh_surface_once(v, f, h, threads, remesh, algorithm3d):
+def _mesh_surface_once(v, f, h, threads, remesh, algorithm3d, optimize_netgen: bool = False):
     import os
     import tempfile
     from ..geometry.stl_io import write_binary_stl
     with _LOCK:
         gmsh = _start(h, threads)
         gmsh.option.setNumber("Mesh.Algorithm3D", algorithm3d)
+        if optimize_netgen:
+            gmsh.option.setNumber("Mesh.OptimizeNetgen", 1)
         with tempfile.TemporaryDirectory() as d:
             p = os.path.join(d, "surface.stl")
             write_binary_stl(p, np.asarray(v, float), np.asarray(f, np.int64))

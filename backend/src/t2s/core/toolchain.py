@@ -10,6 +10,8 @@ uv, Node.js and CPython come first, from setup.cmd (curl, certutil and tar ship 
 from __future__ import annotations
 
 import json
+import os
+import platform
 import shutil
 import subprocess
 import sys
@@ -42,10 +44,14 @@ def setup_ccx(spec: dict, ccx_dir: Path, out=print) -> list[str]:
     for f, v in files.items():
         if problem(ccx_dir / f, v["sha256"], v["bytes"]) is None:
             continue
-        found = [c for c in (ccx_dir / "x" / v["from"]).rglob(f) if c.is_file() and sha256_of(c) == v["sha256"]]
+        found = [c for c in (ccx_dir / "x" / v["from"]).rglob(Path(f).name)
+                 if c.is_file() and sha256_of(c) == v["sha256"]]
         if not found:
             raise FetchError(f"{f}: no file with the lock's SHA-256 in package {v['from']}")
+        (ccx_dir / f).parent.mkdir(parents=True, exist_ok=True)     # macOS: bin/ and lib/ (the binary's rpath)
         shutil.copyfile(found[0], ccx_dir / f)
+        if os.name != "nt":
+            shutil.copymode(found[0], ccx_dir / f)                  # keeps ccx executable
         placed.append(f)
     return placed
 
@@ -71,21 +77,32 @@ def ccx_version(exe: Path) -> str:
     return next((ln.strip() for ln in r.stdout.splitlines() if ln.strip()), "")
 
 
+def ccx_key() -> str | None:
+    """The lock's CalculiX entry for this machine: 'ccx' (win-64), 'ccx-osx-arm64', or None (no build locked)."""
+    if sys.platform == "win32":
+        return "ccx"
+    if sys.platform == "darwin" and platform.machine() == "arm64":
+        return "ccx-osx-arm64"
+    return None
+
+
 def main(argv: list[str] | None = None) -> int:
     from ..fea import ccx
     from ..gd.entrants import beso_ccx
 
-    if sys.platform != "win32":
-        print("CalculiX and BESO: the lock holds Windows builds only; skipped (the app runs without them: "
-              "NGSolve does the FEA, and the CalculiX cross-check and the BESO contest entrant are left out).")
+    key = ccx_key()
+    if key is None:
+        print("CalculiX and BESO: the lock holds Windows and Apple-silicon macOS builds only; skipped (the app runs "
+              "without them: NGSolve does the FEA, and the CalculiX cross-check and the BESO contest entrant are left "
+              "out).")
         return 0
     tools = lock()
     print("CalculiX 2.23 (conda-forge packages, checked against tools/toolchain.lock.json):")
-    placed = setup_ccx(tools["ccx"], ccx.CCX_EXE.parent)
+    placed = setup_ccx(tools[key], ccx.CCX_DIR)
     print(f"  {len(placed)} file(s) put in place" if placed else "  already in place")
     version = ccx_version(ccx.CCX_EXE)
-    if f"Version {tools['ccx']['version']}" not in version:
-        print(f"  ccx -v printed {version!r}, not version {tools['ccx']['version']}")
+    if f"Version {tools[key]['version']}" not in version:
+        print(f"  ccx -v printed {version!r}, not version {tools[key]['version']}")
         return 1
     print(f"  ccx -v: {version}")
     print("BESO (checked against tools/toolchain.lock.json):")

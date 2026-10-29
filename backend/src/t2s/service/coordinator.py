@@ -399,7 +399,8 @@ class Coordinator:
         self.store.save()
         self._load_archive()
         self._load_evidence()
-        for var in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "NUMBA_NUM_THREADS"):
+        for var in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "VECLIB_MAXIMUM_THREADS",
+                    "NUMBA_NUM_THREADS"):
             os.environ[var] = "1"
         spawn = mp.get_context("spawn")
         self.build_pool = ProcessPoolExecutor(max_workers=2, mp_context=spawn)

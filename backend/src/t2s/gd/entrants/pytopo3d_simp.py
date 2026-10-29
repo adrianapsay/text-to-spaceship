@@ -39,6 +39,7 @@ import warnings
 import numpy as np
 
 from ..domain import DesignDomain, GenResult
+from ..sparse import Spsolve, backend, speed_factor
 
 # Set before MKL loads (pypardiso loads it on first import), unless the user set them:
 # MKL_CBWR=AUTO makes multi-threaded PARDISO bitwise repeatable (measured: without it, 2-thread runs differ by
@@ -58,8 +59,9 @@ EMIN = 1e-9          # pytopo3d's Emin / E0
 def iteration_seconds(ndof: int) -> float:
     """Cost model of one iteration (3-case FE solve, nonsymmetric PARDISO factorisation, 2 threads), fitted on the
     dev machine: measured 0.13 s (0.3–0.4 s when the shared machine throttles us) at 8 k DOF (h = 2 box domain),
-    5 s throttled at 58 k DOF (h = 1); one thread is up to 2× slower."""
-    return 0.2 * (ndof / 8151.0) ** 1.6
+    5 s throttled at 58 k DOF (h = 1); one thread is up to 2× slower. Without PARDISO, × the solver's measured speed
+    relative to it (gd.sparse.speed_factor)."""
+    return 0.2 * (ndof / 8151.0) ** 1.6 * speed_factor()
 
 
 def iteration_cap(ndof: int, budget_s: float, max_iter: int = MAX_ITER) -> int:
@@ -129,6 +131,9 @@ class Pytopo3dProblem:
         i_u, j_u, dup2uniq = _make_scatter_map(iK - 1, jK - 1, self.ndof)
         K = sp.csr_matrix((np.zeros(len(i_u)), (i_u, j_u)), shape=(self.ndof, self.ndof))
         solver, self.solver_name = get_solver(False)
+        if backend() != "pardiso":            # no MKL (macOS): a sparse Cholesky, not pytopo3d's single-core SuperLU
+            solver = Spsolve()
+            self.solver_name = f"{solver.chol.name} (factorisation shared by the load cases)"
         self.evaluators = [ComplianceEvaluator(KE=KE, dup2uniq=dup2uniq, K=K, freedofs0=self.freedofs0, F=F,
                                                ndof=self.ndof, solver_func=solver, edofMat=edofMat, shape=self.shape,
                                                H=self.H, Hs=self.Hs, obstacle_mask=self.passive, E0=1.0, Emin=EMIN)
@@ -236,7 +241,7 @@ def generate(domain: DesignDomain, budget_s: float = 120.0, threads: int = 2, *,
     MKL's conditional numerical reproducibility is on (MKL_CBWR, set at import of this module — too late if MKL
     was loaded earlier by someone else), otherwise on one thread."""
     t0 = time.perf_counter()
-    for v in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS"):
+    for v in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS", "VECLIB_MAXIMUM_THREADS"):
         os.environ.setdefault(v, str(threads))
     from importlib.metadata import version
 

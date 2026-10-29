@@ -10,6 +10,7 @@ import json
 import multiprocessing as mp
 import os
 import pickle
+import sys
 import time
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from datetime import datetime, timezone
@@ -27,8 +28,22 @@ STAGE2_VARIANTS = ("V1", "V4", "V5", "V6")
 _W: dict = {}
 
 
+def _peak_mb(mem) -> float:
+    """The process's peak memory (MB): Windows' peak working set; elsewhere getrusage's maximum resident set
+    (bytes on macOS, KB on Linux); else the current resident set."""
+    if hasattr(mem, "peak_wset"):
+        return mem.peak_wset / 2 ** 20
+    try:
+        import resource
+        peak = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+        return peak / 2 ** 20 if sys.platform == "darwin" else peak / 2 ** 10
+    except Exception:  # noqa: BLE001
+        return getattr(mem, "rss", 0) / 2 ** 20
+
+
 def _init(instances_path: str) -> None:
-    for var in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "NUMBA_NUM_THREADS"):
+    for var in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "VECLIB_MAXIMUM_THREADS",
+                "NUMBA_NUM_THREADS"):
         os.environ[var] = "1"
     _W["instances"] = {i.id: i for i in pickle.loads(Path(instances_path).read_bytes())}
     _W["setups"] = {}
@@ -66,7 +81,7 @@ def _job(inst_id: str, preset: str, variant: str, seed: int, budget: float) -> d
             "raw": {k: v for k, v in b.raw.items() if k != "com"}, "com": b.raw.get("com"), "cv": b.cv,
             "g_internal": b.g, "unplaced": len(b.unplaced), "feasible": bool(feasible), "valid": valid,
             "violations": violations, "front": res["front"], "trace": res["trace"],
-            "peak_rss_mb": getattr(mem, "peak_wset", getattr(mem, "rss", 0)) / 2 ** 20,
+            "peak_rss_mb": _peak_mb(mem),
             "poses": [(p, int(o), [int(round(v * 1000)) for v in t]) for p, o, t in b.poses],
             "meta": {k: (b.meta or {}).get(k) for k in ("overflow_mm", "unmounted")} if inst.stage == 2 else None}
 

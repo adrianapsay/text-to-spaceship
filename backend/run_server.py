@@ -25,6 +25,12 @@ def main() -> None:
                     help="test projects only (name starts with 'e2e' or 'test'): forget parts, settings and layouts "
                          "but keep the analysis cache")
     a = ap.parse_args()
+    if sys.platform == "darwin":       # macOS allows 256 open files by default; the pools and queues need more
+        import resource
+        soft, hard = resource.getrlimit(resource.RLIMIT_NOFILE)
+        want = 4096 if hard == resource.RLIM_INFINITY else min(4096, hard)
+        if soft != resource.RLIM_INFINITY and soft < want:
+            resource.setrlimit(resource.RLIMIT_NOFILE, (want, hard))
 
     import uvicorn
 

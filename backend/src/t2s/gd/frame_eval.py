@@ -94,6 +94,33 @@ class Factor:
             self.s._call_pardiso(sp.csr_matrix(np.ones((1, 1))), np.zeros((1, 1)))
 
 
+class CholeskyFactor:
+    """Factor's interface on gd.sparse's Cholesky (CHOLMOD or NGSolve's), where MKL does not exist (macOS on Apple
+    silicon); forecast_mb is gd.sparse's model of the factor, as neither gives one before factorising."""
+
+    def __init__(self, A, threads: int = 1):
+        from .sparse import cholesky, forecast_mb
+        self.c = cholesky(upper=True, threads=threads)
+        self.A = A
+        self.forecast_mb = forecast_mb(A.shape[0])
+
+    def factorise(self) -> None:                   # after the memory guard, as PARDISO's phase 22
+        self.c.set(self.A)
+        self.c.factorise()
+
+    def solve(self, B: np.ndarray) -> np.ndarray:
+        return self.c.solve(B)
+
+    def free(self) -> None:
+        self.c.free()
+
+
+def make_factor(A, threads: int = 1):
+    """PARDISO's Factor, or CholeskyFactor where MKL does not exist (gd.sparse.backend)."""
+    from .sparse import backend
+    return Factor(A) if backend() == "pardiso" else CholeskyFactor(A, threads)
+
+
 def _vectors_mb(n: int, count: int) -> float:
     """MB of `count` vectors of n dofs (float64)."""
     return count * n * 8 / 2 ** 20
@@ -268,7 +295,7 @@ def frame_check(origin, h, shape, solids: list, parts: list, env: str | None = N
         n = p.ndof
         k_max = int(max(1, n - p.cons.sum() - 1))
         k = int(min(n_modes, k_max))
-        fac = Factor(K)                                # ordering and symbolic factorisation: PARDISO's memory forecast
+        fac = make_factor(K, threads)                  # ordering and symbolic factorisation: PARDISO's memory forecast
         try:
             if mem_guard is not None:                  # the factor, the Lanczos basis, the modes and the static vectors
                 mem_guard(n, "whole satellite", need_mb=fac.forecast_mb + _vectors_mb(n, 3 * k + 19))

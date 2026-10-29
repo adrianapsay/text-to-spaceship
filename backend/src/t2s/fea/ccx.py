@@ -38,6 +38,7 @@ from __future__ import annotations
 import os
 import re
 import subprocess
+import sys
 import tempfile
 import time
 from dataclasses import dataclass, field
@@ -49,7 +50,9 @@ from .mesh import consistent_surface_load
 from .problem import CaseResult, FeaProblem, FeaResult
 
 ROOT = Path(__file__).resolve().parents[4]
-CCX_EXE = ROOT / "tools" / "ccx" / "ccx.exe"
+CCX_DIR = ROOT / "tools" / "ccx"
+# Windows: ccx.exe with its DLLs beside it; macOS: bin/ccx, its dylibs in lib/ (its rpath; core.toolchain)
+CCX_EXE = CCX_DIR / "ccx.exe" if sys.platform == "win32" else CCX_DIR / "bin" / "ccx"
 SOLVER = "CalculiX 2.23"
 JOB = "job"
 

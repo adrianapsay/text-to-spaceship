@@ -5,6 +5,6 @@
 # Usage: bash get-cad.sh [--from FOLDER] [--only PART ...] [--list] [--yes]                Needs uv.
 set -euo pipefail
 here="$(cd "$(dirname "$0")" && pwd)"
-export PATH="$HOME/.local/bin:$PATH"
-command -v uv >/dev/null || { echo "uv is required: https://docs.astral.sh/uv/getting-started/installation/"; exit 1; }
+. "$here/tools/env.sh"
+command -v uv >/dev/null || { echo "First run bash setup.sh (macOS), or install uv: https://docs.astral.sh/uv/"; exit 1; }
 exec uv run --frozen --project "$here/backend" python "$here/backend/get_cad.py" "$@"

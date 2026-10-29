@@ -46,6 +46,7 @@ from pymoto.solvers import SolverSparsePardiso
 from threadpoolctl import threadpool_limits
 
 from ..domain import DesignDomain, GenResult
+from ..sparse import backend
 
 NAME = "pyMOTO SIMP"
 PENAL = 3.0                     # SIMP exponent
@@ -156,6 +157,24 @@ class _Pardiso(SolverSparsePardiso):
         return self
 
 
+class CholeskySolver(pym.solvers.LinearSolver):
+    """gd.sparse's Cholesky (CHOLMOD or NGSolve's) as a pyMOTO solver, where MKL does not exist (macOS on Apple
+    silicon): the symbolic analysis once, then a refactorisation per update — as _Pardiso keeps its phase 11."""
+
+    def __init__(self, A=None):
+        from ..sparse import cholesky
+        self.chol = cholesky(upper=False)
+        super().__init__(A)
+
+    def update(self, A):
+        self.chol.set(A)
+        self.chol.factorise()
+        return self
+
+    def solve(self, rhs, x0=None, trans="N"):
+        return self.chol.solve(rhs)
+
+
 def _link(mods: list, module, sig_in, tag: str):
     """Connect `module` (computes its response once) without touching pyMOTO's global default network."""
     module.connect(sig_in, pym.Signal(tag))
@@ -236,8 +255,8 @@ def build(domain: DesignDomain) -> SimpleNamespace:
     F0 = F0.reshape(3 * dom.nnodes, len(cases))
     m_vox = float(mat["rho_t_mm3"]) * h ** 3                              # t; t·mm/s² = N
 
-    use_pardiso = SolverSparsePardiso.defined
-    solver = _Pardiso(symmetric=True, hermitian=True, positive_definite=True) if use_pardiso else None
+    use_pardiso = SolverSparsePardiso.defined and backend() == "pardiso"
+    solver = _Pardiso(symmetric=True, hermitian=True, positive_definite=True) if use_pardiso else CholeskySolver()
 
     mods: list = []
     sx = pym.Signal("x", state=np.full(design_el.size, vf))

@@ -19,8 +19,8 @@ def sha(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
-def fake_conda(files: dict) -> bytes:
-    """A .conda package: a zip holding pkg-<name>.tar.zst with these files."""
+def fake_conda(files: dict, executable: tuple = ()) -> bytes:
+    """A .conda package: a zip holding pkg-<name>.tar.zst with these files (`executable` ones mode 755)."""
     from compression import zstd
 
     tar_buf = io.BytesIO()
@@ -28,6 +28,7 @@ def fake_conda(files: dict) -> bytes:
         for name, data in files.items():
             info = tarfile.TarInfo(name)
             info.size = len(data)
+            info.mode = 0o755 if name in executable else 0o644
             tar.addfile(info, io.BytesIO(data))
     buf = io.BytesIO()
     with zipfile.ZipFile(buf, "w") as z:
@@ -135,3 +136,36 @@ def test_the_lock_names_a_package_for_every_calculix_file():
     names = {p["name"] for p in ccx["packages"]}
     assert "ccx.exe" in ccx["files"] and all(v["from"] in names for v in ccx["files"].values())
     assert all(p["url"].startswith("https://conda.anaconda.org/conda-forge/win-64/") for p in ccx["packages"])
+
+
+def test_the_macos_calculix_is_the_windows_build_for_apple_silicon():
+    """Same version and build number as win-64, osx-arm64 packages only, ccx in bin/ and its dylibs in lib/ (its
+    rpath), every file from a listed package."""
+    lock = T.lock()
+    mac, win = lock["ccx-osx-arm64"], lock["ccx"]
+    names = {p["name"] for p in mac["packages"]}
+    assert mac["version"] == win["version"]
+    assert mac["packages"][0]["build"].rsplit("_", 1)[1] == win["packages"][0]["build"].rsplit("_", 1)[1]
+    assert all(p["url"].startswith("https://conda.anaconda.org/conda-forge/osx-arm64/") for p in mac["packages"])
+    assert "bin/ccx" in mac["files"] and all(v["from"] in names for v in mac["files"].values())
+    assert all(f == "bin/ccx" or (f.startswith("lib/") and f.endswith(".dylib")) for f in mac["files"])
+
+
+def test_setup_ccx_keeps_the_macos_layout(tmp_path):
+    """bin/ and lib/ under the install folder, the binary still executable."""
+    import os
+    exe, lib = b"ccx binary", b"a dylib"
+    conda = fake_conda({"bin/ccx": exe, "lib/libfake.1.0.dylib": lib}, executable=("bin/ccx",))
+    ccx_dir = tmp_path / "ccx"
+    (ccx_dir / "pkgs").mkdir(parents=True)
+    (ccx_dir / "pkgs" / "fake-1.0-0.conda").write_bytes(conda)
+    spec = {"packages": [{"name": "fake", "version": "1.0", "url": "https://example.invalid/m/fake-1.0-0.conda",
+                          "sha256": sha(conda), "bytes": len(conda)}],
+            "files": {"bin/ccx": {"from": "fake", "sha256": sha(exe), "bytes": len(exe)},
+                      "lib/libfake.1.0.dylib": {"from": "fake", "sha256": sha(lib), "bytes": len(lib)}}}
+    assert sorted(T.setup_ccx(spec, ccx_dir, out=lambda *a: None)) == ["bin/ccx", "lib/libfake.1.0.dylib"]
+    assert (ccx_dir / "bin" / "ccx").read_bytes() == exe
+    assert (ccx_dir / "lib" / "libfake.1.0.dylib").read_bytes() == lib
+    if os.name != "nt":
+        assert os.access(ccx_dir / "bin" / "ccx", os.X_OK)
+    assert T.setup_ccx(spec, ccx_dir, out=lambda *a: None) == []                # in place: nothing to do

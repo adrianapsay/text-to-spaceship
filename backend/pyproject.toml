@@ -25,6 +25,8 @@ dependencies = [
     "ngsolve>=6.2.2608",
     "pymoto>=2.0.1",
     "pytopo3d>=0.3.0",
+    # CHOLMOD (GPL-3, installed from PyPI, not shipped here): the Mac's stand-in for Intel MKL's PARDISO, gd.sparse
+    "cvxopt>=1.3.2; sys_platform == 'darwin' and platform_release >= '24'",  # its wheels need macOS 15+
 ]
 
 [dependency-groups]
@@ -39,7 +41,10 @@ dev = [
 package = false
 no-build = true
 exclude-newer = "2026-10-08T00:00:00Z"
-required-environments = ["sys_platform == 'win32' and platform_machine == 'AMD64'"]
+required-environments = ["sys_platform == 'win32' and platform_machine == 'AMD64'",
+                         "sys_platform == 'darwin' and platform_machine == 'arm64'"]
+# Intel MKL has no macOS build: pypardiso installs there without it, fails at import, and gd.sparse uses CHOLMOD
+override-dependencies = ["mkl!=2024.0; sys_platform != 'darwin'"]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]

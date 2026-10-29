@@ -322,22 +322,46 @@ class Pardiso:
             self.s._call_pardiso(sp.csr_matrix(np.ones((1, 1))), np.zeros((1, 1)))
 
 
+class CholeskySolver:
+    """Pardiso's interface on gd.sparse's Cholesky (CHOLMOD or NGSolve's), where MKL does not exist (macOS on Apple
+    silicon): the symbolic analysis once for the fixed pattern, then the values and a refactorisation per call."""
+
+    def __init__(self, threads: int = 1):
+        from .sparse import cholesky
+        self.c = cholesky(upper=True, threads=threads)
+
+    def solve(self, A, B: np.ndarray) -> np.ndarray:
+        self.c.set(A)
+        return self.c.solve(B)
+
+    def free(self):
+        self.c.free()
+
+
+def make_solver(threads: int = 1):
+    """PARDISO, or a sparse Cholesky where MKL does not exist (gd.sparse.backend)."""
+    from .sparse import backend
+    return Pardiso() if backend() == "pardiso" else CholeskySolver(threads)
+
+
 SECONDS_AT_50K = 0.25        # cost model of one iteration at 50 k dofs (ASSUMED until measured, docs/notes/m4.md)
 GROWTH = 1.4
 
 
 def seconds_per_iteration(ndof: int, threads: int = 4) -> float:
     """Cost model of one OC iteration (assembly, factorisation with three right-hand sides, sensitivities, filter,
-    update): SECONDS_AT_50K at 50 k dofs, growing as dofs^GROWTH; fewer than 4 threads: 1.6 × (ASSUMED)."""
+    update): SECONDS_AT_50K at 50 k dofs, growing as dofs^GROWTH; fewer than 4 threads: 1.6 × (ASSUMED); without
+    PARDISO, × the solver's measured speed relative to it (gd.sparse.speed_factor)."""
+    from .sparse import speed_factor
     t = SECONDS_AT_50K * (max(int(ndof), 1) / 5.0e4) ** GROWTH
-    return float(t * (1.0 if threads >= 4 else 1.6))
+    return float(t * (1.0 if threads >= 4 else 1.6) * speed_factor())
 
 
 def run_oc(p: SimpProblem, volfrac: float, penal: float = PENAL, maxloop: int = MAX_ITER, tolx: float = TOLX,
-           x0: np.ndarray | None = None, deadline: float | None = None, progress=None) -> dict:
+           x0: np.ndarray | None = None, deadline: float | None = None, progress=None, threads: int = 1) -> dict:
     """The OC loop (top3d's update, as in the winner's entrant) on the active elements. x0: start densities on the
     active elements (continuation); else the volume fraction on every design voxel."""
-    solver = Pardiso()
+    solver = make_solver(threads)
     x = np.full(p.ne, float(volfrac)) if x0 is None else np.clip(np.asarray(x0, float), 0.0, 1.0).copy()
     x[~p.is_design] = 1.0
     xphys = p.filt(x)
@@ -460,7 +484,8 @@ def solve(active, solid, fixed, forces, h, nu: float, volfrac: float, rmin_mm: f
                 pc = framed_problem(2 * h, act_c, sol_c, fix_c, f_c, nu, max(rmin_mm, 3.0 * float(h.max())), frame)
                 cap = int(max(5, min(max_iter, (budget_s / 3.0) / seconds_per_iteration(pc.ndof, threads))))
                 rc = run_oc(pc, volfrac, maxloop=cap, deadline=t0 + budget_s / 3.0,
-                            progress=None if progress is None else (lambda i, c, d: progress("coarse", i, c, d)))
+                            progress=None if progress is None else (lambda i, c, d: progress("coarse", i, c, d)),
+                            threads=threads)
                 levels.append({"level": "coarse", "h_mm": (2 * h).tolist(), "elements": pc.ne, "dofs": pc.ndof,
                                "iterations": rc["iterations"], "stop": rc["stop"],
                                "seconds_per_iteration": rc["seconds_per_iteration"]})
@@ -493,7 +518,7 @@ def solve(active, solid, fixed, forces, h, nu: float, volfrac: float, rmin_mm: f
         left = budget_s - (time.perf_counter() - t0)
         cap = int(max(3, min(max_iter, left / seconds_per_iteration(p.ndof, threads))))
         r = run_oc(p, volfrac, maxloop=cap, x0=None if x0 is None else x0[tuple(p.elems.T)], deadline=t0 + budget_s,
-                   progress=None if progress is None else (lambda i, c, d: progress("fine", i, c, d)))
+                   progress=None if progress is None else (lambda i, c, d: progress("fine", i, c, d)), threads=threads)
         levels.append({"level": "fine", "h_mm": h.tolist(), "elements": p.ne, "dofs": p.ndof,
                        "iterations": r["iterations"], "stop": r["stop"],
                        "seconds_per_iteration": r["seconds_per_iteration"]})

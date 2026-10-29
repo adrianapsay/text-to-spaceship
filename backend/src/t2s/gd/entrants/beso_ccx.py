@@ -58,6 +58,7 @@ from pathlib import Path
 
 import numpy as np
 
+from ...fea import ccx as _ccx
 from ..domain import DesignDomain, GenResult
 
 NAME = "BESO + CalculiX"
@@ -66,7 +67,7 @@ BESO_COMMIT = "5056d301c2675df9ac1af771af4f1cbea642e4ad"
 BESO_DATE = "2025-04-03"
 BESO_DIR = ROOT / "tools" / "beso" / f"beso-{BESO_COMMIT}"
 BESO_FILES = ("beso_main.py", "beso_lib.py", "beso_filters.py", "beso_plots.py", "beso_separate.py")
-CCX_EXE = ROOT / "tools" / "ccx" / "ccx.exe"
+CCX_EXE = _ccx.CCX_EXE                  # tools/ccx/ccx.exe (Windows) or tools/ccx/bin/ccx (macOS)
 THREAD_VARS = ("OMP_NUM_THREADS", "NUMBER_OF_CPUS", "CCX_NPROC_EQUATION_SOLVER", "CCX_NPROC_STIFFNESS",
                "CCX_NPROC_RESULTS", "CCX_NPROC_CFD", "CCX_NPROC_SENS", "CCX_NPROC_VIEWFACTOR",
                "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS")

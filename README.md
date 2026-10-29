@@ -39,11 +39,24 @@ algorithm it chose and why. Sliders change the priorities live.
 If Windows warns that a script comes from the internet, choose **Run** (or **More info → Run anyway**). Running
 `setup.cmd` again, for example after an update, checks what is already in place and keeps it.
 
-## Run it on macOS or Linux
+## Run it on a Mac (Apple silicon: M1 or later)
+
+1. Download or `git clone` this repository.
+2. In Terminal, in the folder, run **`bash setup.sh`**. It does what `setup.cmd` does on Windows, with the Mac builds of
+   the same tools: uv, Node.js and CPython 3.14.8, the pinned Python and JavaScript packages, CalculiX 2.23 and BESO.
+   Each file is checked against the hash recorded in the repository, and everything stays inside the folder.
+3. Run **`bash start.sh`**. The app opens at <http://127.0.0.1:8768>.
+
+Intel's MKL, whose PARDISO solver the optimisers use on Windows, has no Mac build: on a Mac they use a sparse
+Cholesky solver instead, with the same results to round-off ([docs/V3.md §5.6](docs/V3.md)). It is about half as
+fast on macOS 15 or later (CHOLMOD) and much slower on older versions (NGSolve), so an optimisation with the same
+time budget gets fewer iterations.
+
+## Run it on Linux
 
 You need [uv](https://docs.astral.sh/uv/getting-started/installation/) and [Node.js 24](https://nodejs.org/). Run
 `bash start.sh` in the folder. The first start installs the Python packages and builds the interface, which takes a
-few minutes. CalculiX is set up on Windows only; without it the FEA runs on NGSolve alone.
+few minutes. CalculiX is set up on Windows and macOS only; without it the FEA runs on NGSolve alone.
 
 ## Run it in your browser — any device (GitHub Codespaces)
 
@@ -72,7 +85,7 @@ repository. **`get-cad.cmd`** (`bash get-cad.sh` on macOS, Linux and Codespaces)
 `--list` lists the files, and `--only PART` takes only some of them.
 
 Already have the files on another computer? Copy its `data\builder\cad\downloads` folder over and run
-`get-cad.cmd --from <that folder>`: nothing is downloaded.
+`get-cad.cmd --from <that folder>` (`bash get-cad.sh --from <that folder>` on a Mac): nothing is downloaded.
 
 ## Bring your work from another computer
 

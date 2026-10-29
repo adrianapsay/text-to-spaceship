@@ -21,6 +21,7 @@ import json
 import multiprocessing as mp
 import os
 import pickle
+import sys
 import time
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from dataclasses import replace
@@ -62,7 +63,8 @@ _W: dict = {}
 
 
 def _init(records_path: str) -> None:
-    for var in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "NUMBA_NUM_THREADS"):
+    for var in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "VECLIB_MAXIMUM_THREADS",
+                "NUMBA_NUM_THREADS"):
         os.environ[var] = "1"
     _W["records"] = pickle.loads(Path(records_path).read_bytes())
     _W["setups"] = {}
@@ -290,12 +292,18 @@ class SizeStudy:
 
 
 def size_study_main(records_path: str, out_path: str, opts: dict) -> None:
-    """Entry point of the background process (holds a keep-awake request on Windows while it runs)."""
+    """Entry point of the background process (holds a keep-awake request on Windows and macOS while it runs)."""
     try:
         import ctypes
         ES_CONTINUOUS, ES_SYSTEM_REQUIRED = 0x80000000, 0x00000001
         ctypes.windll.kernel32.SetThreadExecutionState(ES_CONTINUOUS | ES_SYSTEM_REQUIRED)
     except Exception:  # noqa: BLE001 - not on Windows
         pass
+    if sys.platform == "darwin":                       # caffeinate -i: no idle sleep until this process ends
+        import shutil
+        import subprocess
+        if shutil.which("caffeinate"):
+            subprocess.Popen(["caffeinate", "-i", "-w", str(os.getpid())], stdout=subprocess.DEVNULL,
+                             stderr=subprocess.DEVNULL)
     records = pickle.loads(Path(records_path).read_bytes())
     SizeStudy(records, Path(out_path), **opts).run()
