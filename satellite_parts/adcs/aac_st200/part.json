@@ -1,0 +1,164 @@
+{
+ "id": "aac_st200",
+ "name": "AAC Clyde Space ST200 star tracker (without baffle)",
+ "category": "adcs",
+ "subcategory": "star_tracker",
+ "vendor": "AAC Clyde Space (AAC Hyperion)",
+ "model": "ST200",
+ "dimensions_mm": {
+  "x": 29,
+  "y": 29,
+  "z": 38.1
+ },
+ "mass_g": 42,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/ST200.pdf",
+  "document": {
+   "title": "AAC Clyde Space ST200 datasheet (release 2021-11-15)",
+   "revision": null,
+   "date": "2021-11-15"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "adcs",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "29 x 29 x 38.1 mm and 42 g without baffle; 30 arcsec pitch/yaw, 200 arcsec roll (3 sigma); 5 Hz; 3.6-34 V; 0.37/0.7/1.0 W; TTL UART (RS-422/485, I2C options); -20 to 40 C; optional 30 or 45 deg baffles. CAD zip on the product page."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "Sweden / Netherlands (Hyperion Technologies, Delft)",
+ "distributors": [
+  "direct",
+  "satsearch"
+ ],
+ "adcs": {
+  "accuracy_arcsec_cross": 30,
+  "accuracy_arcsec_roll": 200,
+  "update_rate_Hz": 5
+ },
+ "electrical": {
+  "voltage_V": {
+   "min": 3.6,
+   "nominal": 5.0,
+   "max": 34
+  },
+  "power_W": {
+   "idle": 0.37,
+   "nominal": 0.7,
+   "peak": 1.0
+  },
+  "interfaces": [
+   "UART (TTL)",
+   "RS-422 (option)",
+   "RS-485 (option)",
+   "I2C (option)"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -20,
+   "max": 40
+  }
+ },
+ "cad_downloads": [
+  {
+   "format": "CAD (product page)",
+   "url": "https://www.aac-clyde.space/what-we-do/space-products-components/adcs/st200",
+   "notes": "ST200 CAD MODEL link on the product page"
+  }
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   29.0,
+   29.0,
+   38.1
+  ],
+  "mesh_volume_mm3": 27765.2,
+  "watertight": true,
+  "render_kind": "camera_box_lens",
+  "effective_density_g_cm3": 1.513,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    },
+    {
+     "name": "lens_barrel",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__lens_barrel.stl"
+    },
+    {
+     "name": "glass",
+     "color": [
+      0.45,
+      0.65,
+      0.85
+     ],
+     "file": "bodies/part__glass.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 180
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "I2C",
+   "RS-422",
+   "RS-485",
+   "UART"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 5.0
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/st200.jpg",
+  "photo_source": "vendor",
+  "photo_page": "https://www.aac-clyde.space/what-we-do/space-products-components/adcs/st200",
+  "photo_file": "reference_photo",
+  "datasheet_url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/ST200.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "gomspace_nanostruct_6u_mk2",
+ "name": "GomSpace NanoStruct 6U Mk2 structure (Al 7075, 665 g)",
+ "category": "structures",
+ "subcategory": "frame",
+ "vendor": "GomSpace",
+ "model": "NanoStruct 6U Mk2",
+ "dimensions_mm": {
+  "x": 226.3,
+  "y": 100,
+  "z": 340.5
+ },
+ "mass_g": 665,
+ "source": {
+  "type": "datasheet",
+  "url": "https://gomspace.com/wp-content/uploads/2025/09/gs-ds-nanostructure-6u-Mk2-1060779-12-EXT.pdf",
+  "document": {
+   "title": "GomSpace NanoStruct 6U Mk2 datasheet DS 1060779",
+   "revision": "1.2",
+   "date": "2025-08-08"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "material"
+  ],
+  "notes": "340.5 x 226.3 x 100 mm with deployment switches stowed; ~665 g default (2 side frames at 306 g each with kill switches, 4 corner brackets at 10 g, screw/pin kit); mounting rings 14 g (A/B) and 24 g (YA/YB); M3 threaded rod 0.0495 g/mm. EN AW-7075-T7351, SurTec 650 chromitAL TCP MIL-DTL-5541F Type II Class 3, Helicoil inserts."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Denmark",
+ "distributors": [
+  "direct"
+ ],
+ "material": "aluminium EN AW-7075-T7351, SurTec 650 TCP finish, Helicoil inserts",
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   226.3,
+   100.0,
+   340.5
+  ],
+  "mesh_volume_mm3": 7705515.1,
+  "watertight": true,
+  "render_kind": "box",
+  "effective_density_g_cm3": 0.086,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 12
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://gomspace.com/wp-content/uploads/2025/09/NanoStruct-6U-Featured.png",
+  "photo_source": "vendor",
+  "photo_page": "https://gomspace.com/product/nanostruct-6u/",
+  "photo_file": "reference_photo",
+  "datasheet_url": "https://gomspace.com/wp-content/uploads/2025/09/gs-ds-nanostructure-6u-Mk2-1060779-12-EXT.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

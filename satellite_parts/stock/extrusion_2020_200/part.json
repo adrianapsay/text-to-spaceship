@@ -1,0 +1,89 @@
+{
+ "id": "extrusion_2020_200",
+ "name": "20 x 20 mm T-slot aluminium extrusion, 200 mm",
+ "category": "stock",
+ "subcategory": "extrusion",
+ "vendor": "generic",
+ "model": "2020 T-slot",
+ "dimensions_mm": {
+  "x": 20,
+  "y": 20,
+  "z": 200
+ },
+ "mass_g": 84.0,
+ "source": {
+  "type": "derived",
+  "url": "https://www.mcmaster.com",
+  "document": {
+   "title": "2020 T-slot profile (about 0.42 kg/m typical)",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm"
+  ],
+  "notes": "Simplified profile (four slots, no center bore)."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "material": "aluminium 6063-T5",
+ "mass_note": "derived",
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "unknown",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   20.0,
+   20.0,
+   200.0
+  ],
+  "mesh_volume_mm3": 51200.0,
+  "watertight": true,
+  "render_kind": "extrusion_2020",
+  "effective_density_g_cm3": 1.641,
+  "bodies": {
+   "part": [
+    {
+     "name": "extrusion",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__extrusion.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 76
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

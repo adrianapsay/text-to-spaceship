@@ -1,0 +1,124 @@
+{
+ "id": "lensrd_bison64_et",
+ "name": "Lens R&D BiSon64-ET sun sensor (64 deg FOV)",
+ "category": "adcs",
+ "subcategory": "sun_sensor",
+ "vendor": "Lens R&D",
+ "model": "BiSon64-ET",
+ "dimensions_mm": {
+  "x": 34,
+  "y": 34,
+  "z": 14
+ },
+ "mass_g": 23,
+ "source": {
+  "type": "unverified",
+  "url": "https://satcatalog.com/component/bison64-et",
+  "document": {
+   "title": "satcatalog and satsearch listings of the BiSon64-ET",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "mass_g",
+   "adcs"
+  ],
+  "notes": "23 g (satcatalog), 64 deg diagonal FOV (satsearch). Dimensions NOT on either listing; 34 x 34 x 14 mm is from memory and UNVERIFIED. Datasheet: https://satcatalog.s3.amazonaws.com/components/371/SatCatalog_-_Lens_RD_-_BiSon64-ET_-_Datasheet.pdf ; STEP CAD on the satsearch listing (request)."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Netherlands",
+ "distributors": [
+  "direct",
+  "satsearch"
+ ],
+ "dimensions_note": "unverified",
+ "adcs": {
+  "field_of_view_deg": 64,
+  "accuracy_deg": 1.0,
+  "output": "analog (4 photodiode currents)"
+ },
+ "cad_downloads": [
+  {
+   "format": "STEP (via satsearch listing)",
+   "url": "https://satsearch.co/products/lens-rnd-bi-son64-et",
+   "notes": "CAD model listed on the satsearch page"
+  }
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   34.0,
+   34.0,
+   14.0
+  ],
+  "mesh_volume_mm3": 16160.3,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.423,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://satcatalog.s3.amazonaws.com/components/371/featured_image.jpg",
+  "photo_source": "satcatalog",
+  "photo_page": "https://satcatalog.com/component/bison64-et",
+  "photo_file": "reference_photo",
+  "datasheet_url": "https://satcatalog.s3.amazonaws.com/components/371/SatCatalog_-_Lens_RD_-_BiSon64-ET_-_Datasheet.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

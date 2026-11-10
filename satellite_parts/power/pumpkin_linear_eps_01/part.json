@@ -1,0 +1,144 @@
+{
+ "id": "pumpkin_linear_eps_01",
+ "name": "Pumpkin CubeSat Kit Linear EPS /01 (22 Wh, USB charged)",
+ "category": "power",
+ "subcategory": "eps",
+ "vendor": "Pumpkin Space Systems",
+ "model": "Linear EPS Rev D /01 (711-00338)",
+ "dimensions_mm": {
+  "x": 96,
+  "y": 90,
+  "z": 27.6
+ },
+ "mass_g": 210,
+ "source": {
+  "type": "datasheet",
+  "url": "https://cubesatkit.com/docs/datasheet/DS_CSK_Linear_EPS_711-00338-D.pdf",
+  "document": {
+   "title": "Pumpkin Linear EPS datasheet 711-00338 Rev F",
+   "revision": "F",
+   "date": "2012-07-20"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "thermal",
+   "interfaces"
+  ],
+  "notes": "PCB 96 x 90 x 1.6 mm, 24 mm above (/01) and 2 mm below, 210 g, two 7.4 V 1500 mAh batteries (22 Wh), outputs VBATT 6-8.2 V / 5 V / 3.3 V with 1500/1000/500 mA trips, no solar input (USB or external 5 V charge only), Hirose DF13 battery connectors, -40 to 85 C."
+ },
+ "status": "unknown",
+ "fidelity": "envelope",
+ "vendor_country": "USA",
+ "distributors": [
+  "direct (Pumpkin)"
+ ],
+ "status_note": "2012 design; educational / lab EPS, no solar charging",
+ "electrical": {
+  "energy_Wh": 22,
+  "voltage_V": {
+   "min": 6.0,
+   "nominal": 7.4,
+   "max": 8.2
+  },
+  "outputs": [
+   "VBATT 6-8.2 V 1.5 A",
+   "5 V 1 A",
+   "3.3 V 0.5 A"
+  ],
+  "solar_inputs": 0,
+  "interfaces": [
+   "CubeSat Kit Bus",
+   "USB"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -40,
+   "max": 85
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   96.0,
+   90.0,
+   25.6
+  ],
+  "mesh_volume_mm3": 133644.1,
+  "watertight": true,
+  "render_kind": "pc104_board",
+  "effective_density_g_cm3": 1.571,
+  "bodies": {
+   "part": [
+    {
+     "name": "pcb",
+     "color": [
+      0.09,
+      0.42,
+      0.24
+     ],
+     "file": "bodies/part__pcb.stl"
+    },
+    {
+     "name": "stack_header",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__stack_header.stl"
+    },
+    {
+     "name": "components",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__components.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 732
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "USB"
+  ],
+  "mechanical": "PC/104 stack",
+  "electrical_connectors": [
+   "CubeSat Kit Bus 104-pin (2 x 26-pin headers)",
+   "Hirose DF13 (batteries)",
+   "USB"
+  ],
+  "rf_connectors": [],
+  "power_bus_V": 7.4
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_nhobuk_pumpkin_linear_eps_module.jpeg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/pumpkin-linear-eps-module",
+  "photo_file": "reference_photo",
+  "datasheet_url": "https://cubesatkit.com/docs/datasheet/DS_CSK_Linear_EPS_711-00338-D.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

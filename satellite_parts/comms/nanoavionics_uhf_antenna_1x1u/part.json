@@ -1,0 +1,124 @@
+{
+ "id": "nanoavionics_uhf_antenna_1x1u",
+ "name": "NanoAvionics UHF antenna 1x1U deployable UHF antenna (99.6 x 99.6 x 7.7 mm)",
+ "category": "comms",
+ "subcategory": "antenna",
+ "vendor": "NanoAvionics (Kongsberg NanoAvionics)",
+ "model": "UHF antenna 1x1U",
+ "dimensions_mm": {
+  "x": 99.6,
+  "y": 99.6,
+  "z": 7.7
+ },
+ "mass_g": 33,
+ "source": {
+  "type": "datasheet",
+  "url": "https://nanoavionics.com/cubesat-components/cubesat-uhf-antenna/",
+  "document": {
+   "title": "NanoAvionics UHF antenna product page (spec table and list price)",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "rf",
+   "cost"
+  ],
+  "notes": "Dimensions by configuration from the page (stowed/deployed not stated; treated as stowed), 33 g, 400-500 MHz, 1.37 dB peak, MCX 50 ohm, monopole deploys 90 deg, EUR 5300, 2-4 months (MOQ 4)."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Lithuania",
+ "distributors": [
+  "direct (nanoavionics.com)"
+ ],
+ "lead_time": "2-4 months",
+ "dimensions_note": "page does not say stowed or deployed",
+ "rf": {
+  "band": "UHF",
+  "frequency_MHz": [
+   400,
+   500
+  ],
+  "gain_dBi": 1.37
+ },
+ "cost": {
+  "value": 5300,
+  "currency": "EUR",
+  "basis": "list_price",
+  "source": "https://nanoavionics.com/cubesat-components/cubesat-uhf-antenna/"
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   99.6,
+   99.6,
+   7.7
+  ],
+  "mesh_volume_mm3": 76364.6,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 0.432,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [
+   "MCX"
+  ],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://nanoavionics.com/wp-content/uploads/2020/07/uhf3-1024x946rez.png",
+  "photo_source": "vendor",
+  "photo_page": "https://nanoavionics.com/cubesat-components/cubesat-uhf-antenna/",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

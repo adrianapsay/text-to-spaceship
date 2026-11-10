@@ -1,0 +1,90 @@
+{
+ "id": "pc104_standoff_m3_15p24",
+ "name": "PC/104 stack standoff M3 hex, 15.24 mm",
+ "category": "structures",
+ "subcategory": "standoff",
+ "vendor": "generic",
+ "model": "M3 hex standoff 15.24 mm",
+ "dimensions_mm": {
+  "x": 5.5,
+  "y": 5.5,
+  "z": 15.24
+ },
+ "mass_g": 0.5,
+ "source": {
+  "type": "standard",
+  "url": "https://ereding.etsi.us.es/bibing/proyectos/use/abreproy/10654/fichero/DOCUMENTOS%252FPC104SPECV246.pdf",
+  "document": {
+   "title": "PC/104 Specification (stack spacing 0.600 in)",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm"
+  ],
+  "notes": "15.24 mm = PC/104 stack pitch; 23.5 mm = GomSpace P31u/BP4 stack height (BP4 datasheet); 30.48 mm = two pitches. 5.5 mm across flats M3 female-female brass standoff is the common COTS size (DERIVED, not a spec value). Mass derived from brass volume."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "material": "brass or aluminium (COTS)",
+ "mass_note": "derived",
+ "cost": {
+  "value": 0.5,
+  "currency": "USD",
+  "basis": "list_price",
+  "source": null
+ },
+ "cost_note": "typical COTS price, approximate",
+ "geometry": {
+  "measured_bbox_mm": [
+   6.35,
+   5.5,
+   15.24
+  ],
+  "mesh_volume_mm3": 324.7,
+  "watertight": true,
+  "render_kind": "standoff",
+  "effective_density_g_cm3": 1.54,
+  "bodies": {
+   "part": [
+    {
+     "name": "standoff",
+     "color": [
+      0.78,
+      0.62,
+      0.28
+     ],
+     "file": "bodies/part__standoff.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 192
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": "https://ereding.etsi.us.es/bibing/proyectos/use/abreproy/10654/fichero/DOCUMENTOS%252FPC104SPECV246.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

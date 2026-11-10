@@ -1,0 +1,114 @@
+{
+ "id": "samtec_esq_pc104_stack_64",
+ "name": "Samtec ESQ-132-12-G-D PC/104 stack-through connector (64 positions)",
+ "category": "harness",
+ "subcategory": "connector",
+ "vendor": "Samtec",
+ "model": "ESQ-132-12-G-D",
+ "dimensions_mm": {
+  "x": 82.5,
+  "y": 5.1,
+  "z": 15.2
+ },
+ "mass_g": 10,
+ "source": {
+  "type": "unverified",
+  "url": "https://www.mouser.in/new/samtec/samtec-pc-104-connectors/",
+  "document": {
+   "title": "Samtec PC/104 connectors page (Mouser)",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "electrical"
+  ],
+  "notes": "Part number, 0.1 in pitch, 5.7 A per pin and 0.6 in stack spacing from the page; outline dimensions are only in the drawings: 2 x 32 positions at 2.54 mm = 81.3 mm plus ends (DERIVED), 5.1 mm wide, 15.2 mm stack height. Mass derived."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "USA",
+ "distributors": [
+  "Mouser",
+  "Digi-Key",
+  "direct"
+ ],
+ "mass_note": "derived",
+ "electrical": {
+  "rating": "5.7 A per pin, 550 VAC"
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -55,
+   "max": 125
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   82.5,
+   5.1,
+   15.2
+  ],
+  "mesh_volume_mm3": 6395.4,
+  "watertight": true,
+  "render_kind": "connector_block",
+  "effective_density_g_cm3": 1.564,
+  "bodies": {
+   "part": [
+    {
+     "name": "shell",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__shell.stl"
+    },
+    {
+     "name": "contacts",
+     "color": [
+      0.85,
+      0.66,
+      0.22
+     ],
+     "file": "bodies/part__contacts.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 12
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [
+   "PC/104 bus J1 (mates with ESQ/TSW headers; CubeSat Kit bus)"
+  ],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

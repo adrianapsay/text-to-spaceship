@@ -1,0 +1,89 @@
+{
+ "id": "al_bracket_l_30x30x20",
+ "name": "Aluminium L-bracket 30x30x20 mm, 2 mm wall",
+ "category": "stock",
+ "subcategory": "bracket",
+ "vendor": "generic",
+ "model": "L-bracket",
+ "dimensions_mm": {
+  "x": 30,
+  "y": 20,
+  "z": 30
+ },
+ "mass_g": 6.5,
+ "source": {
+  "type": "derived",
+  "url": "https://www.mcmaster.com",
+  "document": {
+   "title": "generic angle bracket",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm"
+  ],
+  "notes": ""
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "material": "aluminium 6061",
+ "mass_note": "derived",
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "unknown",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   30.0,
+   20.0,
+   30.0
+  ],
+  "mesh_volume_mm3": 2320.0,
+  "watertight": true,
+  "render_kind": "l_bracket",
+  "effective_density_g_cm3": 2.802,
+  "bodies": {
+   "part": [
+    {
+     "name": "bracket",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__bracket.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 20
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

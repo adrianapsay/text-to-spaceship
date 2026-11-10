@@ -1,0 +1,110 @@
+{
+ "id": "pumpkin_cubesatkit_1u",
+ "name": "Pumpkin CubeSat Kit 1U Skeletonized Chassis",
+ "category": "structures",
+ "subcategory": "frame",
+ "vendor": "Pumpkin Space Systems",
+ "model": "CubeSat Kit 1U Skeletonized Chassis",
+ "dimensions_mm": {
+  "x": 100,
+  "y": 100,
+  "z": 113.5
+ },
+ "mass_g": 155,
+ "source": {
+  "type": "unverified",
+  "url": "https://www.cubesatkit.com/content/design.html",
+  "document": {
+   "title": "Pumpkin CubeSat Kit design page (material, CAD links)",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "material"
+  ],
+  "notes": "Envelope per CDS Rev 14.1; chassis mass is FROM MEMORY of the CubeSat Kit datasheets (skeletonized chassis + cover plates) and must be checked. CAD: http://www.cubesatkit.com/files/CAD/"
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "USA",
+ "distributors": [
+  "direct (Pumpkin Space Systems)"
+ ],
+ "first_available_year": 2003,
+ "material": "aluminium 5052-H32 sheet, alodine 1200 finish (CubeSat Kit)",
+ "mass_note": "unverified",
+ "cad_downloads": [
+  {
+   "format": "STEP/IGES/SolidWorks zips",
+   "url": "http://www.cubesatkit.com/files/CAD/",
+   "notes": "public CAD folder on cubesatkit.com"
+  }
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   100.0,
+   100.0,
+   113.5
+  ],
+  "mesh_volume_mm3": 80775.5,
+  "watertight": true,
+  "render_kind": "cubesat_frame",
+  "effective_density_g_cm3": 1.919,
+  "bodies": {
+   "part": [
+    {
+     "name": "rails",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__rails.stl"
+    },
+    {
+     "name": "rings",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__rings.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 96
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_k8q82o_pumpkin_cubesat-kit-pro-chassis-walls.jpg",
+  "photo_source": "satsearch (CubeSat Kit Pro chassis walls photo; family)",
+  "photo_page": "https://satsearch.co/products/pumpkin-cube-sat-kit-pro-chassis-walls-1u",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

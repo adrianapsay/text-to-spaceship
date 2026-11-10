@@ -1,0 +1,120 @@
+{
+ "id": "ebad_frangibolt_fc3",
+ "name": "EBAD TiNi Frangibolt FC3 shape-memory release actuator",
+ "category": "mechanisms",
+ "subcategory": "release_actuator",
+ "vendor": "Ensign-Bickford Aerospace & Defense (EBAD)",
+ "model": "TiNi Frangibolt FC3",
+ "dimensions_mm": {
+  "x": 19.3,
+  "y": 19.3,
+  "z": 30.7
+ },
+ "mass_g": 40,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.ebad.com/wp-content/uploads/2021/10/TiNi_Frangibolt_Actuator_8-18-21.pdf",
+  "document": {
+   "title": "TiNi Frangibolt Actuator datasheet",
+   "revision": null,
+   "date": "2021-11-29"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "mechanism",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "Dimensions converted from inches. Electrical rows in the datasheet are not clearly mapped to models; the first three rows assumed for FC2/FC3/FC4 (25/49/80 W at 28 V, 30/35/35 s). Verify with EBAD."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "USA",
+ "distributors": [
+  "direct"
+ ],
+ "material": "NiTi shape-memory alloy actuator, titanium fastener",
+ "mechanism": {
+  "actuator_type": "shape_memory_alloy (Frangibolt)",
+  "fastener": "#10 titanium",
+  "max_load_N": 6227,
+  "actuation_time_s": 35,
+  "cycles": 60,
+  "cycles_note": "60 or 32 cycles min depending on model (not mapped)"
+ },
+ "electrical": {
+  "voltage_V": {
+   "min": 22,
+   "nominal": 28,
+   "max": 36
+  },
+  "power_W": {
+   "peak": 49
+  }
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -65,
+   "max": 80
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   19.3,
+   19.25,
+   30.7
+  ],
+  "mesh_volume_mm3": 8371.1,
+  "watertight": true,
+  "render_kind": "tube",
+  "effective_density_g_cm3": 4.778,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 336
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 28
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": "https://www.ebad.com/wp-content/uploads/2021/10/TiNi_Frangibolt_Actuator_8-18-21.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

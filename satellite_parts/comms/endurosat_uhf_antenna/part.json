@@ -1,0 +1,154 @@
+{
+ "id": "endurosat_uhf_antenna",
+ "name": "EnduroSat UHF antenna (deployable, 1U face)",
+ "category": "comms",
+ "subcategory": "antenna",
+ "vendor": "EnduroSat",
+ "model": "UHF Antenna",
+ "dimensions_mm": {
+  "x": 98,
+  "y": 98,
+  "z": 8
+ },
+ "mass_g": 85,
+ "source": {
+  "type": "unverified",
+  "url": "https://endurosat.com/wp-content/uploads/2022/02/Endurosat_Product_Catalogue_02_22.pdf",
+  "document": {
+   "title": "EnduroSat Product Catalogue 02/2022",
+   "revision": null,
+   "date": "2022-02"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "mass_g",
+   "rf"
+  ],
+  "notes": "Mass and RF from the catalogue; dimensions NOT published. Catalogue 85 g; the 2026 '2U' product page lists 210 g."
+ },
+ "status": "legacy",
+ "fidelity": "envelope",
+ "vendor_country": "Bulgaria",
+ "distributors": [
+  "direct (endurosat.com shop)"
+ ],
+ "rf": {
+  "band": "UHF",
+  "frequency_MHz": [
+   435,
+   438
+  ],
+  "gain_dBi": 0,
+  "polarization": "circular",
+  "tx_power_W": 2
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "mechanism": {
+  "actuator_type": "burn_wire",
+  "redundancy": "triple redundant burn wire with feedback (product page)"
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   98.0,
+   98.0,
+   8.0
+  ],
+  "mesh_volume_mm3": 76811.1,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.107,
+  "deployed_measured_bbox_mm": [
+   434.0,
+   434.0,
+   8.0
+  ],
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ],
+   "part_deployed": [
+    {
+     "name": "base",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part_deployed__base.stl"
+    },
+    {
+     "name": "tapes",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part_deployed__tapes.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40,
+   "part_deployed": 76
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://www.endurosat.com/wp-content/uploads/2025/01/UHF-Antenna-2U.webp",
+  "photo_source": "vendor (2U antenna page)",
+  "photo_page": "https://www.endurosat.com/products/uhf-antenna-2u/",
+  "photo_file": "reference_photo",
+  "datasheet_url": "https://endurosat.com/wp-content/uploads/2022/02/Endurosat_Product_Catalogue_02_22.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ],
+  "part_deployed": [
+   "part_deployed.step",
+   "part_deployed.stl"
+  ]
+ }
+}

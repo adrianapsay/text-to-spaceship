@@ -1,0 +1,110 @@
+{
+ "id": "tai_cuts_ufii_4x1",
+ "name": "Technology Applications Inc CuTS copper thermal strap, UltraFlex II 4x1 (0.20 in rope), 100 mm",
+ "category": "thermal",
+ "subcategory": "thermal_strap",
+ "vendor": "Technology Applications, Inc. (TAI)",
+ "model": "CuTS UltraFlex II 4x1 (0.20 in rope)",
+ "dimensions_mm": {
+  "x": 138,
+  "y": 27.336000000000002,
+  "z": 6.4
+ },
+ "mass_g": 172,
+ "source": {
+  "type": "datasheet",
+  "url": "https://wiki.nikhef.nl/vuv/images/1/14/2022_CuTS%C2%AE_Catalog_-_TAI%281139%29.pdf",
+  "document": {
+   "title": "TAI CuTS Catalog 2022 Edition",
+   "revision": null,
+   "date": "2022"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "mass_g",
+   "thermal"
+  ],
+  "notes": "Mass and conductance (300 K, 100 mm rope length) from the catalog. Overall envelope DERIVED: rope length 100 mm plus two 0.75 in compact end fittings, 0.25 in thick; width from rope count x rope diameter."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "USA",
+ "distributors": [
+  "direct"
+ ],
+ "material": "OFHC copper rope with copper end fittings",
+ "thermal": {
+  "conductance_W_per_K": 0.18,
+  "min_bend_radius_mm": 12.5
+ },
+ "dimensions_note": "derived envelope",
+ "mounting": {
+  "pattern": "end fittings with bolt holes (sizes per order)"
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   138.0,
+   27.34,
+   6.4
+  ],
+  "mesh_volume_mm3": 17844.9,
+  "watertight": true,
+  "render_kind": "thermal_strap",
+  "effective_density_g_cm3": 9.639,
+  "bodies": {
+   "part": [
+    {
+     "name": "rope",
+     "color": [
+      0.72,
+      0.45,
+      0.2
+     ],
+     "file": "bodies/part__rope.stl"
+    },
+    {
+     "name": "fittings",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__fittings.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 44
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": "end fittings with bolt holes (sizes per order)",
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": "https://wiki.nikhef.nl/vuv/images/1/14/2022_CuTS%C2%AE_Catalog_-_TAI%281139%29.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

@@ -1,0 +1,137 @@
+{
+ "id": "novatel_oem719",
+ "name": "NovAtel OEM719 multi-frequency GNSS receiver card",
+ "category": "adcs",
+ "subcategory": "gnss_receiver",
+ "vendor": "NovAtel (Hexagon)",
+ "model": "OEM719",
+ "dimensions_mm": {
+  "x": 71,
+  "y": 46,
+  "z": 11
+ },
+ "mass_g": 31,
+ "source": {
+  "type": "datasheet",
+  "url": "https://docs.novatel.com/OEM7/Content/Technical_Specs_Receiver/OEM719_Specifications.htm",
+  "document": {
+   "title": "NovAtel OEM7 documentation, OEM719 technical specifications",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "46 x 71 x 11 mm, 31 g from the NovAtel docs page. Electrical, connector and performance tables are on sibling pages not read this session. Used as the GNSS option inside the EnduroSat OBC and many CubeSat avionics stacks; form-fit compatible with OEM615/617."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Canada",
+ "distributors": [
+  "NovAtel direct",
+  "satsearch",
+  "GNSS.ca"
+ ],
+ "adcs": {
+  "gnss": "multi-frequency GPS/GLONASS/Galileo/BeiDou (per model options)"
+ },
+ "electrical": {
+  "voltage_V": {
+   "nominal": 3.3
+  },
+  "voltage_note": "3.3 V per OEM7 family, not confirmed on the page read",
+  "interfaces": [
+   "UART x3 (OEM7 family)",
+   "USB",
+   "CAN",
+   "PPS",
+   "event inputs"
+  ]
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   71.0,
+   46.0,
+   11.0
+  ],
+  "mesh_volume_mm3": 35901.9,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 0.863,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "CAN",
+   "PPS",
+   "UART",
+   "USB"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [
+   "20-pin 2 mm header (OEM7 family, not confirmed on the page read)"
+  ],
+  "rf_connectors": [
+   "MMCX (OEM7 family, not confirmed on the page read)"
+  ],
+  "power_bus_V": 3.3
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://gomspace.com/wp-content/uploads/2025/09/NanoSense-GPS-Kit.png",
+  "photo_source": "vendor (GomSpace GPS-Kit photo shows the OEM719)",
+  "photo_page": "https://gomspace.com/product/gsp-receiver/",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

@@ -1,0 +1,114 @@
+{
+ "id": "honeywell_zm10_switch",
+ "name": "Honeywell MICRO SWITCH ZM10 (logic level, gold contacts) subminiature basic switch (CubeSat deployment switch)",
+ "category": "harness",
+ "subcategory": "switch",
+ "vendor": "Honeywell",
+ "model": "ZM10",
+ "dimensions_mm": {
+  "x": 19.8,
+  "y": 10.6,
+  "z": 6.4
+ },
+ "mass_g": 1.5,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.farnell.com/datasheets/2012629.pdf",
+  "document": {
+   "title": "Honeywell MICRO SWITCH ZM Series datasheet 004991-1-EN",
+   "revision": null,
+   "date": "2015-01"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mechanism",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "Body 19.80 x 10.60 x 6.40 mm (pin plunger; levers add length). Mass not stated: 1.5 g DERIVED."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "USA",
+ "distributors": [
+  "Digi-Key",
+  "Mouser",
+  "Farnell"
+ ],
+ "mass_note": "derived",
+ "mechanism": {
+  "actuator_type": "microswitch",
+  "actuation_force_N": 1.02,
+  "stroke_mm": null
+ },
+ "electrical": {
+  "rating": "0.1 A at 30 Vdc"
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -40,
+   "max": 125
+  }
+ },
+ "cost": {
+  "value": 3,
+  "currency": "USD",
+  "basis": "list_price",
+  "source": null
+ },
+ "cost_note": "distributor single-piece price, approximate",
+ "geometry": {
+  "measured_bbox_mm": [
+   19.8,
+   10.6,
+   6.4
+  ],
+  "mesh_volume_mm3": 1343.2,
+  "watertight": true,
+  "render_kind": "box",
+  "effective_density_g_cm3": 1.117,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 12
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [
+   "solder terminals"
+  ],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": "https://www.farnell.com/datasheets/2012629.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

@@ -1,0 +1,134 @@
+{
+ "id": "endurosat_cubesat_eps_2026",
+ "name": "EnduroSat CubeSat EPS (6U-8U configuration, one 4S2P 99 Wh pack)",
+ "category": "power",
+ "subcategory": "eps",
+ "vendor": "EnduroSat",
+ "model": "CubeSat EPS",
+ "dimensions_mm": {
+  "x": 96,
+  "y": 90,
+  "z": 70
+ },
+ "mass_g": 1478,
+ "source": {
+  "type": "unverified",
+  "url": "https://www.endurosat.com/products/cubesat-eps/",
+  "document": {
+   "title": "EnduroSat CubeSat EPS product page",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "mass_g",
+   "electrical",
+   "interfaces"
+  ],
+  "notes": "Mass 1478 g (stacked with a 4S1P pack), 99 Wh 4S2P Li-ion, 3 input channels per stage (45 V, 3 A), 6 payload buses, 2x CAN + CSPES, 27 enable lines, PC-104 and dedicated power connectors from the page. Dimensions not published; PC/104 footprint and 70 mm stack height assumed."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Bulgaria",
+ "distributors": [
+  "direct (endurosat.com shop)"
+ ],
+ "electrical": {
+  "energy_Wh": 99,
+  "cells": "4S2P Li-ion",
+  "solar_inputs": 3,
+  "input_voltage_max_V": 45,
+  "input_current_A": 3,
+  "outputs": [
+   "3.3 V",
+   "5 V",
+   "12 V",
+   "system bus",
+   "6 payload buses"
+  ],
+  "interfaces": [
+   "CAN x2 (1 Mbps, CSPES)"
+  ]
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   96.0,
+   90.0,
+   70.0
+  ],
+  "mesh_volume_mm3": 604766.5,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 2.444,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "CAN",
+   "CSP"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [
+   "PC/104 stack",
+   "dedicated power output connectors"
+  ],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://www.endurosat.com/wp-content/uploads/2025/07/endurosat-cubesat-eps-thumbnail-connector-panel.png",
+  "photo_source": "vendor",
+  "photo_page": "https://www.endurosat.com/products/cubesat-eps/",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

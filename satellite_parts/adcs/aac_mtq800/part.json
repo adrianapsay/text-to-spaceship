@@ -1,0 +1,150 @@
+{
+ "id": "aac_mtq800",
+ "name": "AAC Clyde Space MTQ800 magnetorquer set (3-axis rods, 15 Am2 design dipole)",
+ "category": "adcs",
+ "subcategory": "magnetorquer",
+ "vendor": "AAC Clyde Space (AAC Hyperion)",
+ "model": "MTQ800",
+ "dimensions_mm": {
+  "x": 250,
+  "y": 67,
+  "z": 35
+ },
+ "mass_g": 489,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/MTQ800.pdf",
+  "document": {
+   "title": "AAC Clyde Space MTQ800 datasheet (released 2021-11-15)",
+   "revision": null,
+   "date": "2021-11-15"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "adcs",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "Torquer rod assembly 250 x 67 x 35 mm plus a separate 60 x 70 x 14 mm driver enclosure (modelled here as the rod assembly only). 489 g total."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Sweden / Netherlands",
+ "distributors": [
+  "direct (aac-clyde.space product enquiry)"
+ ],
+ "first_flight_year": 2020,
+ "lead_time": "16-20 weeks",
+ "adcs": {
+  "dipole_Am2": 15,
+  "peak_dipole_Am2": 30
+ },
+ "electrical": {
+  "voltage_V": {
+   "min": 8,
+   "nominal": 12,
+   "max": 12.5
+  },
+  "power_W": {
+   "idle": 0.156,
+   "nominal": 1.5,
+   "peak": 13.2
+  },
+  "interfaces": [
+   "RS-422/RS-485"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -45,
+   "max": 45
+  }
+ },
+ "cad_downloads": [
+  {
+   "format": "CAD (defeatured zip)",
+   "url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/MTQ800_Defeatured_CAD_20221116-1.zip",
+   "notes": "direct link on the product page"
+  }
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   250.0,
+   67.0,
+   35.0
+  ],
+  "mesh_volume_mm3": 586216.5,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 0.834,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "RS-422",
+   "RS-485"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 12
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/mtq800.jpg",
+  "photo_source": "vendor",
+  "photo_page": "https://www.aac-clyde.space/what-we-do/space-products-components/adcs/mtq800-10",
+  "photo_file": "reference_photo",
+  "datasheet_url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/MTQ800.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

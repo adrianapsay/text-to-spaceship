@@ -1,0 +1,153 @@
+{
+ "id": "aac_rw210_1p5",
+ "name": "AAC Clyde Space RW210.1.5 reaction wheel",
+ "category": "adcs",
+ "subcategory": "reaction_wheel",
+ "vendor": "AAC Clyde Space (AAC Hyperion)",
+ "model": "RW210.1.5",
+ "dimensions_mm": {
+  "x": 25,
+  "y": 25,
+  "z": 15
+ },
+ "mass_g": 21,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/RW210.pdf",
+  "document": {
+   "title": "RW210 datasheet",
+   "revision": null,
+   "date": "2021-11-15"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "adcs",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "Three momentum variants share one housing; masses 21/32/48 g by variant. Power reference values are for RW210.15."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "Sweden / Netherlands (Hyperion Technologies, Delft)",
+ "distributors": [
+  "direct",
+  "satsearch"
+ ],
+ "first_flight_year": 2017,
+ "flight_heritage": "first flown 2017 (datasheet)",
+ "adcs": {
+  "momentum_mNms": 1.5,
+  "torque_mNm": 0.1,
+  "max_speed_rpm": 10000
+ },
+ "electrical": {
+  "voltage_V": {
+   "min": 3.25,
+   "nominal": 3.3,
+   "max": 3.5
+  },
+  "power_W": {
+   "idle": 0.065,
+   "nominal": 0.4,
+   "peak": 0.8
+  },
+  "interfaces": [
+   "I2C",
+   "UART (3.3 to 5.1 V logic)"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -20,
+   "max": 60
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "cad_downloads": [
+  {
+   "format": "CAD model (request form)",
+   "url": "https://www.aac-clyde.space/?p=1535",
+   "notes": "vendor page offers a CAD model behind a product enquiry form"
+  }
+ ],
+ "geometry": {
+  "measured_bbox_mm": [
+   25.0,
+   25.0,
+   15.0
+  ],
+  "mesh_volume_mm3": 6810.8,
+  "watertight": true,
+  "render_kind": "reaction_wheel",
+  "effective_density_g_cm3": 3.083,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "flywheel",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__flywheel.stl"
+    },
+    {
+     "name": "motor_cap",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__motor_cap.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 348
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "I2C",
+   "UART"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 3.3
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/rw210b.jpg",
+  "photo_source": "vendor (RW222 page photo, same family)",
+  "photo_page": "https://www.aac-clyde.space/what-we-do/space-products-components/adcs/rw222",
+  "photo_file": "reference_photo",
+  "datasheet_url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/RW210.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

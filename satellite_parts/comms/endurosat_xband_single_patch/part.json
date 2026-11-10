@@ -1,0 +1,113 @@
+{
+ "id": "endurosat_xband_single_patch",
+ "name": "EnduroSat X-band single patch antenna (24 x 24 x 5.62 mm)",
+ "category": "comms",
+ "subcategory": "antenna",
+ "vendor": "EnduroSat",
+ "model": "X-Band Patch Antenna (single)",
+ "dimensions_mm": {
+  "x": 24,
+  "y": 24,
+  "z": 5.62
+ },
+ "mass_g": 2.2,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.endurosat.com/products/x-band-patch-antenna/",
+  "document": {
+   "title": "EnduroSat X-Band Patch Antenna product page (spec table)",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "rf"
+  ],
+  "notes": "24 x 24 x 5.62 mm, 2.2 g, 6 dBi, 74 deg HPBW, 8025-8400 MHz, SMP connector from the page table."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Bulgaria",
+ "distributors": [
+  "direct (endurosat.com shop)"
+ ],
+ "rf": {
+  "band": "X",
+  "frequency_MHz": [
+   8025,
+   8400
+  ],
+  "gain_dBi": 6,
+  "beamwidth_deg": 74
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   24.0,
+   24.0,
+   5.6
+  ],
+  "mesh_volume_mm3": 2905.6,
+  "watertight": true,
+  "render_kind": "patch_antenna",
+  "effective_density_g_cm3": 0.757,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "patch",
+     "color": [
+      0.72,
+      0.45,
+      0.2
+     ],
+     "file": "bodies/part__patch.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 28
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [
+   "SMP"
+  ],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://www.endurosat.com/wp-content/uploads/2025/01/X-Band-Patch-Antenna.webp",
+  "photo_source": "vendor",
+  "photo_page": "https://www.endurosat.com/products/x-band-patch-antenna/",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

@@ -1,0 +1,144 @@
+{
+ "id": "sensonor_stim277h",
+ "name": "Sensonor STIM277H 3-axis gyro module (hermetic, Micro-D)",
+ "category": "adcs",
+ "subcategory": "gyroscope",
+ "vendor": "Safran Sensonor",
+ "model": "STIM277H",
+ "dimensions_mm": {
+  "x": 45,
+  "y": 39,
+  "z": 22
+ },
+ "mass_g": 52,
+ "source": {
+  "type": "datasheet",
+  "url": "https://sensonor.azurewebsites.net/media/pb4jwe4t/2022-04-06-product-brief-stim277h-a4_high-quality-print.pdf",
+  "document": {
+   "title": "Sensonor STIM277H product brief Ed. 2",
+   "revision": "Ed. 2",
+   "date": "2022-04"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "adcs",
+   "electrical",
+   "thermal",
+   "interfaces"
+  ],
+  "notes": "39 x 45 x 22 mm, 52 g, 0.3 deg/h bias instability, 0.15 deg/sqrt(h) ARW, +/-400 deg/s, 5 V, 1.2-1.5 W, RS-422 up to 3.75 Mbit/s, glass-to-metal sealed Micro-D, -40 to 85 C, AOCS and launcher applications."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Norway",
+ "distributors": [
+  "direct",
+  "NovAtel (OEM variants)"
+ ],
+ "adcs": {
+  "bias_stability_deg_h": 0.3,
+  "arw_deg_sqrt_h": 0.15,
+  "range_deg_s": 400
+ },
+ "electrical": {
+  "voltage_V": {
+   "min": 4.5,
+   "nominal": 5.0,
+   "max": 5.5
+  },
+  "power_W": {
+   "nominal": 1.2,
+   "peak": 1.5
+  },
+  "interfaces": [
+   "RS-422"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -40,
+   "max": 85
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   45.0,
+   39.0,
+   22.0
+  ],
+  "mesh_volume_mm3": 38577.2,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.348,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "RS-422"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [
+   "Micro-D (glass-to-metal sealed)"
+  ],
+  "rf_connectors": [],
+  "power_bus_V": 5.0
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": "https://sensonor.azurewebsites.net/media/pb4jwe4t/2022-04-06-product-brief-stim277h-a4_high-quality-print.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

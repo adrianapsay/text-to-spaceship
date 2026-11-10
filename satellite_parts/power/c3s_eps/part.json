@@ -1,0 +1,129 @@
+{
+ "id": "c3s_eps",
+ "name": "C3S EPS with battery (90 W peak, milled aluminium case)",
+ "category": "power",
+ "subcategory": "eps",
+ "vendor": "C3S Electronics Development",
+ "model": "EPS",
+ "dimensions_mm": {
+  "x": 96,
+  "y": 88.5,
+  "z": 86
+ },
+ "mass_g": 860,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.co/products/c3s-electrical-power-system-eps",
+  "document": {
+   "title": "satsearch listing of the C3S EPS datasheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "thermal",
+   "interfaces"
+  ],
+  "notes": "88.5 x 96 x 86 mm, 860 g, 90 W peak output, redundant CAN, battery heater and balancing, aluminium milled case (listed as T-7070), circuits -40 to 80 C, battery 0 to 50 C. Battery capacity and bus voltage not on the listing."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Hungary",
+ "distributors": [
+  "direct",
+  "satsearch"
+ ],
+ "material": "aluminium case",
+ "electrical": {
+  "max_power_W": 90,
+  "interfaces": [
+   "CAN redundant"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -40,
+   "max": 80
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   96.0,
+   88.5,
+   86.0
+  ],
+  "mesh_volume_mm3": 730622.5,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.177,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "CAN"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_eaer1u_c3s_electrical-power-system-eps.jpg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/c3s-electrical-power-system-eps",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

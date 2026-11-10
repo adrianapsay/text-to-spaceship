@@ -1,0 +1,139 @@
+{
+ "id": "gomspace_nanopower_bpx_100wh",
+ "name": "GomSpace NanoPower BPX 100 Wh battery pack (8 x 18650)",
+ "category": "power",
+ "subcategory": "battery_pack",
+ "vendor": "GomSpace",
+ "model": "NanoPower BPX 100 Wh",
+ "dimensions_mm": {
+  "x": 93,
+  "y": 86,
+  "z": 41
+ },
+ "mass_g": 500,
+ "source": {
+  "type": "datasheet",
+  "url": "https://gomspace.com/wp-content/uploads/2026/01/gs-ds-NanoPower-BPX-100-Wh-DS-1076870-1-1.0-1.pdf",
+  "document": {
+   "title": "NanoPower BPX 100 Wh datasheet DS 1076870",
+   "revision": "1.0.0",
+   "date": "2026-01-16"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "4S2P (14.4 V nominal, 7.0 Ah) or 8S1P (28.8 V nominal, 3.5 Ah); 100 Wh nominal, 86-89 Wh in the recommended range. Four heater elements, 6 W max."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Denmark",
+ "distributors": [
+  "direct (gomspace.com shop)"
+ ],
+ "first_available_year": 2026,
+ "material": "aluminium frame with eight 18650 Li-ion cells",
+ "electrical": {
+  "voltage_V": {
+   "min": 12.0,
+   "nominal": 14.4,
+   "max": 33.6
+  },
+  "voltage_note": "4S2P 12-16.8 V or 8S1P 24-33.6 V",
+  "energy_Wh": 100,
+  "capacity_Ah": 7.0,
+  "cells": "8 x 18650 Li-ion 3500 mAh",
+  "heater_W": 6,
+  "interfaces": [
+   "PC/104 stack"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -20,
+   "max": 60
+  },
+  "charge_temperature_C": {
+   "min": 0,
+   "max": 45
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   93.0,
+   86.0,
+   41.0
+  ],
+  "mesh_volume_mm3": 327884.5,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.525,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": "PC/104 stack",
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 14.4
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://gomspace.com/wp-content/uploads/2025/09/NanoPower-BPX-Featured-Image.png",
+  "photo_source": "vendor",
+  "photo_page": "https://gomspace.com/product/nanopower-bpx/",
+  "photo_file": "reference_photo",
+  "datasheet_url": "https://gomspace.com/wp-content/uploads/2026/01/gs-ds-NanoPower-BPX-100-Wh-DS-1076870-1-1.0-1.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

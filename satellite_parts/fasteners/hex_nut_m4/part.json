@@ -1,0 +1,89 @@
+{
+ "id": "hex_nut_m4",
+ "name": "Hex nut M4 (ISO 4032)",
+ "category": "fasteners",
+ "subcategory": "nut",
+ "vendor": "generic (ISO 4032)",
+ "model": "ISO 4032 M4",
+ "dimensions_mm": {
+  "x": 8.0829,
+  "y": 7.0,
+  "z": 3.2
+ },
+ "mass_g": 0.75,
+ "source": {
+  "type": "standard",
+  "url": "https://www.fasten.it/norms/norm/din_en_iso_4762",
+  "document": {
+   "title": "ISO 4032 hexagon regular nuts, style 1 (dimension table values s = across flats, m = thickness)",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm"
+  ],
+  "notes": "s and m per ISO 4032 as commonly tabulated (M2 4/1.6, M2.5 5/2, M3 5.5/2.4, M4 7/3.2, M5 8/4.7, M6 10/5.2). URL given is the fastener-standards site used for ISO 4762; the ISO 4032 page there was not fetched in this session, so treat as a standard value to be double-checked. Mass derived."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "material": "stainless steel A2 (typical)",
+ "mass_note": "derived",
+ "cost": {
+  "value": 0.05,
+  "currency": "USD",
+  "basis": "list_price",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   8.08,
+   7.0,
+   3.2
+  ],
+  "mesh_volume_mm3": 95.7,
+  "watertight": true,
+  "render_kind": "hex_nut",
+  "effective_density_g_cm3": 7.835,
+  "bodies": {
+   "part": [
+    {
+     "name": "nut",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__nut.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 192
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

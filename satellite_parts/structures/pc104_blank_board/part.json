@@ -1,0 +1,90 @@
+{
+ "id": "pc104_blank_board",
+ "name": "PC/104 blank module PCB (90.2 x 95.9 x 1.6 mm)",
+ "category": "structures",
+ "subcategory": "pcb",
+ "vendor": "generic (PC/104 Consortium spec)",
+ "model": "PC/104 module outline",
+ "dimensions_mm": {
+  "x": 95.9,
+  "y": 90.2,
+  "z": 1.6
+ },
+ "mass_g": 22,
+ "source": {
+  "type": "standard",
+  "url": "https://ereding.etsi.us.es/bibing/proyectos/use/abreproy/10654/fichero/DOCUMENTOS%252FPC104SPECV246.pdf",
+  "document": {
+   "title": "PC/104 Specification v2.4/2.6 (PC/104 Consortium)",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mounting"
+  ],
+  "notes": "Module 3.550 x 3.775 in (90.2 x 95.9 mm); four mounting holes 0.125 in (3.2 mm); stack spacing 0.600 in (15.24 mm). Hole positions modelled 4.57 mm from the edges (common CubeSat Kit practice; the spec drawing coordinates were not extractable). Mass DERIVED from FR4 at 1.85 g/cm^3 for a 1.6 mm board (about 22 g)."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "material": "FR4 1.6 mm",
+ "mass_note": "derived (FR4 volume)",
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "unknown",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   95.9,
+   90.2,
+   1.6
+  ],
+  "mesh_volume_mm3": 13789.0,
+  "watertight": true,
+  "render_kind": "pc104_board",
+  "effective_density_g_cm3": 1.595,
+  "bodies": {
+   "part": [
+    {
+     "name": "pcb",
+     "color": [
+      0.09,
+      0.42,
+      0.24
+     ],
+     "file": "bodies/part__pcb.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 700
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": "PC/104 stack",
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": "https://ereding.etsi.us.es/bibing/proyectos/use/abreproy/10654/fichero/DOCUMENTOS%252FPC104SPECV246.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

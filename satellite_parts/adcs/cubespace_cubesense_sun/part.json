@@ -1,0 +1,151 @@
+{
+ "id": "cubespace_cubesense_sun",
+ "name": "CubeSpace CubeSense Sun fine sun sensor (Gen 2)",
+ "category": "adcs",
+ "subcategory": "sun_sensor",
+ "vendor": "CubeSpace Satellite Systems",
+ "model": "CubeSense Sun",
+ "dimensions_mm": {
+  "x": 35,
+  "y": 24,
+  "z": 22
+ },
+ "mass_g": 15,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.cubesatshop.com/wp-content/uploads/2023/06/CubeSpace-SENSORS-2023.pdf",
+  "document": {
+   "title": "CubeSpace Sensors 2023 brochure",
+   "revision": "2023",
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "adcs",
+   "electrical",
+   "interfaces"
+  ],
+  "notes": "35 x 22 x 24 mm, 15 g, 0.2 deg (2 sigma), 166/176 deg FOV, 2 Hz, 70 deg/s slew, 3.3 V, 174 mW peak / 100 mW avg, CAN/UART/RS-485, Molex Micro-Lock Plus. Brochure columns matched by product order."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "South Africa",
+ "distributors": [
+  "CubeSatShop",
+  "satsearch",
+  "direct"
+ ],
+ "lead_time": "12 weeks (CubeSatShop)",
+ "adcs": {
+  "accuracy_deg": 0.2,
+  "field_of_view_deg": 166,
+  "update_rate_Hz": 2,
+  "max_slew_deg_s": 70
+ },
+ "electrical": {
+  "voltage_V": {
+   "nominal": 3.3
+  },
+  "power_W": {
+   "nominal": 0.1,
+   "peak": 0.174
+  },
+  "interfaces": [
+   "CAN",
+   "UART",
+   "RS-485"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -20,
+   "max": 80
+  }
+ },
+ "environment": {
+  "radiation_krad": 24
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   35.0,
+   24.0,
+   22.0
+  ],
+  "mesh_volume_mm3": 18457.9,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 0.813,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "CAN",
+   "RS-485",
+   "UART"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [
+   "Molex Micro-Lock Plus"
+  ],
+  "rf_connectors": [],
+  "power_bus_V": 3.3
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/image-cubespace-gen2-cubesense-sun-dtqnp7.jpg",
+  "photo_source": "satsearch (Sun sensor photo)",
+  "photo_page": "https://satsearch.co/products/cubespace-gen2-cubesense-sun",
+  "photo_file": "reference_photo",
+  "datasheet_url": "https://www.cubesatshop.com/wp-content/uploads/2023/06/CubeSpace-SENSORS-2023.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

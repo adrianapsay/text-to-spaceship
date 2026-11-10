@@ -1,0 +1,149 @@
+{
+ "id": "rocketlab_st16rt2_nobaffle",
+ "name": "Rocket Lab ST-16RT2 (no baffle) star tracker",
+ "category": "adcs",
+ "subcategory": "star_tracker",
+ "vendor": "Rocket Lab (Sinclair Interplanetary)",
+ "model": "ST-16RT2 (no baffle)",
+ "dimensions_mm": {
+  "x": 62,
+  "y": 56,
+  "z": 38
+ },
+ "mass_g": 158,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.rocketlab.co.nz/assets/Uploads/ST-16RT2-Datasheet-v3.pdf",
+  "document": {
+   "title": "Rocket Lab ST-16RT2 Datasheet v3",
+   "revision": "3",
+   "date": "2023-04-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "adcs",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "62 x 56 x 38 mm / 158 g (no baffle), 62 x 56 x 68 mm / 185 g (short), 99 dia x 120 mm / 235 g (large); 5 arcsec cross / 55 about boresight RMS; 2 Hz (5 Hz option); 9-34 V; <0.5 W avg / 1 W peak; dual RS-485; -40 to 50 C."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "Canada / USA",
+ "distributors": [
+  "direct",
+  "satsearch"
+ ],
+ "adcs": {
+  "accuracy_arcsec_cross": 5,
+  "accuracy_arcsec_roll": 55,
+  "update_rate_Hz": 2
+ },
+ "electrical": {
+  "voltage_V": {
+   "min": 9,
+   "max": 34
+  },
+  "power_W": {
+   "nominal": 0.5,
+   "peak": 1.0
+  },
+  "interfaces": [
+   "RS-485 x2 (half duplex)"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -40,
+   "max": 50
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   62.0,
+   56.0,
+   38.0
+  ],
+  "mesh_volume_mm3": 109793.8,
+  "watertight": true,
+  "render_kind": "camera_box_lens",
+  "effective_density_g_cm3": 1.439,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    },
+    {
+     "name": "lens_barrel",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__lens_barrel.stl"
+    },
+    {
+     "name": "glass",
+     "color": [
+      0.45,
+      0.65,
+      0.85
+     ],
+     "file": "bodies/part__glass.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 180
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "RS-485"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_1glhv0_rocketlab_st-16rt2-star-tracker.png",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/rocketlab-st-16rt2-star-tracker",
+  "photo_file": "reference_photo",
+  "datasheet_url": "https://www.rocketlab.co.nz/assets/Uploads/ST-16RT2-Datasheet-v3.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

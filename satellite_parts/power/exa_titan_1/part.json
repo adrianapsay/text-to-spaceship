@@ -1,0 +1,137 @@
+{
+ "id": "exa_titan_1",
+ "name": "EXA TITAN-1 350 Wh battery matrix (1U, 7 x 50 Wh arrays)",
+ "category": "power",
+ "subcategory": "battery",
+ "vendor": "EXA (Ecuadorian Civilian Space Agency)",
+ "model": "TITAN-1",
+ "dimensions_mm": {
+  "x": 100,
+  "y": 100,
+  "z": 100
+ },
+ "mass_g": 1050,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.cubesatshop.com/wp-content/uploads/2020/05/EXA-TITAN-Brochure-v1.2.pdf",
+  "document": {
+   "title": "EXA TITAN brochure v1.2 (CubeSatShop) plus the CubeSatShop page for price",
+   "revision": "1.2",
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "mass_g",
+   "electrical",
+   "thermal",
+   "interfaces",
+   "cost"
+  ],
+  "notes": "1U-sized, 1050 g full unit (150 g per module), 350 Wh / 84 Ah from 7 x 50 Wh modules, 4.2 or 8.4 V selectable (up to 52 V on request), 2C 30 min / 4C 10 min / 10C 2 s discharge, 2C charge, -30 to 80 C (-60 to 120 with CN/TTB), Molex PicoBlade/PicoSpox or Samtec, AWG 22-24 PTFE leads. EUR 50000-62500, 6-8 weeks (CubeSatShop). Exact dimensions NOT stated: 100 mm cube assumed."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Ecuador",
+ "distributors": [
+  "CubeSatShop",
+  "satsearch",
+  "direct"
+ ],
+ "lead_time": "6-8 weeks",
+ "dimensions_note": "assumed 1U",
+ "electrical": {
+  "chemistry": "Li-polymer",
+  "energy_Wh": 350,
+  "capacity_mAh": 84000,
+  "voltage_V": {
+   "nominal": 8.4
+  },
+  "voltage_note": "4.2 or 8.4 V selectable",
+  "max_discharge_C": 10,
+  "charge_C": 2
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -30,
+   "max": 80
+  }
+ },
+ "cost": {
+  "value": 50000,
+  "currency": "EUR",
+  "basis": "list_price",
+  "source": "https://www.cubesatshop.com/product/titan-1-high-energy-density-battery-matrix/"
+ },
+ "cost_note": "EUR 50000-62500 range on CubeSatShop",
+ "geometry": {
+  "measured_bbox_mm": [
+   100.0,
+   100.0,
+   100.0
+  ],
+  "mesh_volume_mm3": 999966.5,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.05,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [
+   "Molex PicoBlade / PicoSpox or Samtec multi-pin"
+  ],
+  "rf_connectors": [],
+  "power_bus_V": 8.4
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/image-ecuadorian-space-agency-exa-titan-1-350whr-power-bank-module-tc5g1s.jpg",
+  "photo_source": "satsearch",
+  "photo_page": "https://www.cubesatshop.com/product/titan-1-high-energy-density-battery-matrix/",
+  "photo_file": "reference_photo",
+  "datasheet_url": "https://www.cubesatshop.com/wp-content/uploads/2020/05/EXA-TITAN-Brochure-v1.2.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

@@ -1,0 +1,145 @@
+{
+ "id": "epson_m_g370pds",
+ "name": "Epson M-G370PDS 6-axis IMU (COTS, widely used on CubeSats)",
+ "category": "adcs",
+ "subcategory": "imu",
+ "vendor": "Seiko Epson",
+ "model": "M-G370PDS0",
+ "dimensions_mm": {
+  "x": 24,
+  "y": 24,
+  "z": 10
+ },
+ "mass_g": 10,
+ "source": {
+  "type": "datasheet",
+  "url": "https://texim-europe.com/Cmsfile/EPS-M-G370PDS-DS-211001-TE.pdf",
+  "document": {
+   "title": "Epson M-G370PDS datasheet Rev. 20211001 (Texim Europe mirror)",
+   "revision": "20211001",
+   "date": "2021-10"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "adcs",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "24 x 24 x 10 mm, 10 g, 0.8 deg/h bias stability, 0.03 deg/sqrt(h) ARW, +/-200 deg/s, +/-10 g, 3.3 V, 16 mA, SPI/UART, -40 to 85 C. Industrial COTS, not radiation rated."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Japan",
+ "distributors": [
+  "Texim Europe",
+  "Digi-Key",
+  "Mouser"
+ ],
+ "adcs": {
+  "bias_stability_deg_h": 0.8,
+  "arw_deg_sqrt_h": 0.03,
+  "range_deg_s": 200,
+  "accel_range_g": 10
+ },
+ "electrical": {
+  "voltage_V": {
+   "min": 3.15,
+   "nominal": 3.3,
+   "max": 3.45
+  },
+  "current_mA": {
+   "nominal": 16
+  },
+  "interfaces": [
+   "SPI",
+   "UART"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -40,
+   "max": 85
+  }
+ },
+ "cost": {
+  "value": 400,
+  "currency": "USD",
+  "basis": "list_price",
+  "source": null
+ },
+ "cost_note": "approximate distributor price",
+ "geometry": {
+  "measured_bbox_mm": [
+   24.0,
+   24.0,
+   10.0
+  ],
+  "mesh_volume_mm3": 5745.2,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.741,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "SPI",
+   "UART"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 3.3
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "",
+  "photo_source": "",
+  "photo_page": "https://global.epson.com/products_and_drivers/sensing_system/imu/g370",
+  "photo_file": null,
+  "datasheet_url": "https://texim-europe.com/Cmsfile/EPS-M-G370PDS-DS-211001-TE.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

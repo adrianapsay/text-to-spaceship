@@ -1,0 +1,121 @@
+{
+ "id": "isis_ieps_battery_4cell",
+ "name": "ISISPACE iEPS 4-cell battery pack",
+ "category": "power",
+ "subcategory": "battery_pack",
+ "vendor": "ISISPACE",
+ "model": "iEPS 4-cell battery",
+ "dimensions_mm": {
+  "x": 94,
+  "y": 89,
+  "z": 21
+ },
+ "mass_g": 126,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.isispace.nl/wp-content/uploads/2019/04/ISIS-iEPS2_0-DS-00001-iEPS_Datasheet-1_0.pdf.",
+  "document": {
+   "title": "ISIS-iEPS2_0-DS-00001 iEPS Datasheet",
+   "revision": "1.0",
+   "date": "2019-08-15"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm"
+  ],
+  "notes": "Mass of the pack alone not stated (Type B minus Type A difference suggests about 126 g; not recorded as a value)."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Netherlands",
+ "distributors": [
+  "CubeSatShop",
+  "direct"
+ ],
+ "mass_note": "estimate: 126 g = Type B (310 g) minus Type A (184 g) in the datasheet; the pack alone is not stated",
+ "electrical": {
+  "cells": "4S Li-ion 3200 mAh 3.6 V",
+  "energy_Wh": 45,
+  "voltage_V": {
+   "min": 12.8,
+   "nominal": 14.4,
+   "max": 16.0
+  },
+  "max_discharge_A": 4
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   94.0,
+   89.0,
+   21.0
+  ],
+  "mesh_volume_mm3": 175652.5,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 0.717,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 14.4
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_4exljs_isis_i_eps_electrical_power_system.png",
+  "photo_source": "satsearch (iEPS family photo)",
+  "photo_page": "https://satsearch.co/products/isis-i-eps-electrical-power-system",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

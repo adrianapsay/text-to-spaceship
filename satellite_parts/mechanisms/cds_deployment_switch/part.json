@@ -1,0 +1,92 @@
+{
+ "id": "cds_deployment_switch",
+ "name": "Generic CubeSat deployment switch (CDS 2.3.2)",
+ "category": "mechanisms",
+ "subcategory": "deployment_switch",
+ "vendor": "generic (per CDS Rev 14.1)",
+ "model": "deployment switch",
+ "dimensions_mm": {
+  "x": 12.8,
+  "y": 6.5,
+  "z": 5.8
+ },
+ "mass_g": 1.5,
+ "source": {
+  "type": "derived",
+  "url": "https://www.nasa.gov/wp-content/uploads/2018/01/cubesatdesignspecificationrev14_12022-02-09.pdf",
+  "document": {
+   "title": "CDS Rev 14.1 section 2.3.2 (requirement, not a part)",
+   "revision": "14.1",
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "mechanism"
+  ],
+  "notes": "CDS requires at least one deployment switch actuated in the dispenser, at or below the rail surface. Envelope 12.8 x 6.5 x 5.8 mm is a subminiature microswitch body size (DERIVED, no datasheet fetched); mass derived."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "mass_note": "derived",
+ "mechanism": {
+  "actuator_type": "microswitch",
+  "stroke_mm": 1.0
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "unknown",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   12.8,
+   6.5,
+   5.8
+  ],
+  "mesh_volume_mm3": 482.6,
+  "watertight": true,
+  "render_kind": "box",
+  "effective_density_g_cm3": 3.108,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 12
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": "https://www.nasa.gov/wp-content/uploads/2018/01/cubesatdesignspecificationrev14_12022-02-09.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

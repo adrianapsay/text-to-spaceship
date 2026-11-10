@@ -1,0 +1,151 @@
+{
+ "id": "gomspace_nanopower_p31u",
+ "name": "GomSpace NanoPower P31u EPS board",
+ "category": "power",
+ "subcategory": "eps",
+ "vendor": "GomSpace",
+ "model": "NanoPower P31u",
+ "dimensions_mm": {
+  "x": 92.9,
+  "y": 89.3,
+  "z": 15.3
+ },
+ "mass_g": 100,
+ "source": {
+  "type": "datasheet",
+  "url": "https://gomspace.com/UserFiles/Subsystems/datasheet/gs-ds-nanopower-p31u-32_(1).pdf",
+  "document": {
+   "title": "NanoPower P31u datasheet DS 1009525",
+   "revision": "32",
+   "date": "2023-09-01"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "Mass with low stack connector. No onboard battery; battery is a separate pack."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Denmark",
+ "distributors": [
+  "direct (gomspace.com shop)"
+ ],
+ "electrical": {
+  "voltage_V": {
+   "min": 0,
+   "nominal": 7.2,
+   "max": 8.5
+  },
+  "voltage_note": "PV input 0-8.5 V (0-17 V on 16 V version); battery bus 7.2 V (2S) or 14.4 V (4S)",
+  "power_W": {
+   "idle": 0.16,
+   "nominal": null,
+   "peak": 30
+  },
+  "power_note": "30 W input capacity; 160 mW self consumption",
+  "outputs": [
+   "3.3 V 5 A",
+   "5 V 4 A",
+   "latch-up protected 3.3/5 V"
+  ],
+  "interfaces": [
+   "I2C",
+   "PC/104 stack"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -40,
+   "max": 85
+  }
+ },
+ "mounting": {
+  "face": "PC/104 stack",
+  "pattern": "PC/104",
+  "fasteners": "M3"
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   92.9,
+   89.3,
+   15.3
+  ],
+  "mesh_volume_mm3": 79839.5,
+  "watertight": true,
+  "render_kind": "pc104_board",
+  "effective_density_g_cm3": 1.253,
+  "bodies": {
+   "part": [
+    {
+     "name": "pcb",
+     "color": [
+      0.09,
+      0.42,
+      0.24
+     ],
+     "file": "bodies/part__pcb.stl"
+    },
+    {
+     "name": "stack_header",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__stack_header.stl"
+    },
+    {
+     "name": "components",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__components.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 732
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "I2C"
+  ],
+  "mechanical": "PC/104",
+  "electrical_connectors": [
+   "PC/104 stack-through header (low stack connector)",
+   "photovoltaic inputs and output channels on board connectors"
+  ],
+  "rf_connectors": [],
+  "power_bus_V": 7.2
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": "https://gomspace.com/UserFiles/Subsystems/datasheet/gs-ds-nanopower-p31u-32_(1).pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

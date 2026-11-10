@@ -1,0 +1,187 @@
+{
+ "id": "isis_antenna_system",
+ "name": "ISISPACE deployable VHF/UHF antenna system (AntS)",
+ "category": "comms",
+ "subcategory": "antenna",
+ "vendor": "ISISPACE",
+ "model": "AntS (ISIS-ANTS)",
+ "dimensions_mm": {
+  "x": 98,
+  "y": 98,
+  "z": 7
+ },
+ "mass_g": 89,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.isispace.nl/wp-content/uploads/2021/01/ISIS-ANTS-DSH-0001-Antenna_System_Datasheet-04_00.pdf",
+  "document": {
+   "title": "ISIS-ANTS-DSH-0001 Antenna System Datasheet",
+   "revision": "4.0",
+   "date": "2020-12-23"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "deployed_dimensions_mm",
+   "mass_g",
+   "rf",
+   "mechanism",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "Stowed 98 x 98 x 7 mm envelope (6 mm external height). Deployed: up to 55 cm VHF or 17 cm UHF tape antennas; deployed geometry modelled with four 170 mm UHF tapes."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "deployed_dimensions_mm": {
+  "x": 438,
+  "y": 438,
+  "z": 7.3
+ },
+ "vendor_country": "Netherlands",
+ "distributors": [
+  "CubeSatShop",
+  "direct"
+ ],
+ "rf": {
+  "band": "VHF/UHF",
+  "antenna_type": "deployable tape dipole/monopole set",
+  "tx_power_W": null
+ },
+ "mechanism": {
+  "actuator_type": "burn_wire",
+  "actuation_time_s": 3,
+  "actuation_time_note": "typically under 3 s at 20 C; under 20 s at -40 C; 30 s limit",
+  "redundancy": "two heating elements per Dyneema wire, two microcontrollers, deployment feedback switches"
+ },
+ "electrical": {
+  "voltage_V": {
+   "min": 3.0,
+   "nominal": 3.3,
+   "max": 3.6
+  },
+  "power_W": {
+   "idle": 0.04,
+   "nominal": null,
+   "peak": 2.0
+  },
+  "deployment_current_A": 0.55
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -20,
+   "max": 60
+  }
+ },
+ "deployed_dimensions_note": "VHF elements up to 550 mm, UHF up to 170 mm",
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   98.0,
+   98.0,
+   7.0
+  ],
+  "mesh_volume_mm3": 67208.1,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.324,
+  "deployed_measured_bbox_mm": [
+   434.0,
+   434.0,
+   7.0
+  ],
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ],
+   "part_deployed": [
+    {
+     "name": "base",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part_deployed__base.stl"
+    },
+    {
+     "name": "tapes",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part_deployed__tapes.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40,
+   "part_deployed": 76
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [
+   "Omnetics Bi-Lobe A29100-009 9-pin (power, GND, I2C, redundant A/B)"
+  ],
+  "rf_connectors": [
+   "MMCX female (J2/J3, turnstile and dipole)",
+   "SSMCX female (monopole flex)"
+  ],
+  "power_bus_V": 3.3
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_9vbvol_isis_cube_sat_antenna_system_for_1u_3u.png",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/isis-cube-sat-antenna-system-for-1u-3u",
+  "photo_file": "reference_photo",
+  "datasheet_url": "https://www.isispace.nl/wp-content/uploads/2021/01/ISIS-ANTS-DSH-0001-Antenna_System_Datasheet-04_00.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ],
+  "part_deployed": [
+   "part_deployed.step",
+   "part_deployed.stl"
+  ]
+ }
+}

@@ -1,0 +1,141 @@
+{
+ "id": "nanoavionics_payload_controller_2p0",
+ "name": "NanoAvionics Payload Controller 2.0 (FPGA SoC + ARM, 32 GB NAND)",
+ "category": "avionics",
+ "subcategory": "payload_processor",
+ "vendor": "NanoAvionics (Kongsberg NanoAvionics)",
+ "model": "PC 2.0",
+ "dimensions_mm": {
+  "x": 96,
+  "y": 90,
+  "z": 15
+ },
+ "mass_g": 150,
+ "source": {
+  "type": "unverified",
+  "url": "https://nanoavionics.com/cubesat-components/payload-controller-1-5/",
+  "document": {
+   "title": "NanoAvionics payload controller product page",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "compute",
+   "electrical",
+   "cost"
+  ],
+  "notes": "FPGA SoC with ARM up to 667 MHz, 512 MB DDR3 ECC, 32 GB NAND, 32 MB NOR, Ethernet, CAN, RS-422/UART, SPI, I2C, USB 2.0, up to 20 LVDS, 40 GPIO, 5 SpaceWire, EUR 11890 (MOQ 3), 3-5 months. Dimensions and mass NOT listed: PC/104 and 150 g are ESTIMATES."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Lithuania",
+ "distributors": [
+  "direct (nanoavionics.com)"
+ ],
+ "lead_time": "3-5 months",
+ "dimensions_note": "estimate",
+ "mass_note": "estimate",
+ "compute": {
+  "processor": "FPGA SoC with ARM (Zynq class)",
+  "clock_GHz": 0.667,
+  "ram_MB": 512,
+  "storage_GB": 32
+ },
+ "electrical": {
+  "interfaces": [
+   "Ethernet",
+   "CAN",
+   "RS-422",
+   "UART",
+   "SPI",
+   "I2C",
+   "USB 2.0",
+   "LVDS",
+   "SpaceWire"
+  ]
+ },
+ "cost": {
+  "value": 11890,
+  "currency": "EUR",
+  "basis": "list_price",
+  "source": "https://nanoavionics.com/cubesat-components/payload-controller-1-5/"
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   96.0,
+   90.0,
+   15.0
+  ],
+  "mesh_volume_mm3": 82616.5,
+  "watertight": true,
+  "render_kind": "pc104_board",
+  "effective_density_g_cm3": 1.816,
+  "bodies": {
+   "part": [
+    {
+     "name": "pcb",
+     "color": [
+      0.09,
+      0.42,
+      0.24
+     ],
+     "file": "bodies/part__pcb.stl"
+    },
+    {
+     "name": "stack_header",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__stack_header.stl"
+    },
+    {
+     "name": "components",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__components.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 732
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "CAN",
+   "Ethernet",
+   "I2C",
+   "RS-422",
+   "SPI",
+   "UART",
+   "USB"
+  ],
+  "mechanical": "PC/104 stack",
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://nanoavionics.com/wp-content/uploads/2018/07/kongsberg-nanoavionics-cubesat-small-satellite-smallsat-data-storage-payload-controller-2-top-1.jpg",
+  "photo_source": "vendor",
+  "photo_page": "https://nanoavionics.com/cubesat-components/payload-controller-1-5/",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

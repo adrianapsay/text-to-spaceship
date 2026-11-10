@@ -1,0 +1,131 @@
+{
+ "id": "syrlinks_ewc27",
+ "name": "Syrlinks EWC27 X-band transmitter (PC/104, up to 140 Mbps)",
+ "category": "comms",
+ "subcategory": "transmitter",
+ "vendor": "Syrlinks (Safran)",
+ "model": "EWC27",
+ "dimensions_mm": {
+  "x": 96,
+  "y": 90,
+  "z": 27
+ },
+ "mass_g": 220,
+ "source": {
+  "type": "unverified",
+  "url": "https://satsearch.co/products/syrlinks-ewc27-x-band-transmitter",
+  "document": {
+   "title": "satsearch and satcatalog listings of the Syrlinks EWC27",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "rf",
+   "first_flight_year"
+  ],
+  "notes": "PC/104 form factor, up to 140 Mbps, TRL 9, flown since 2016 (GOMX-3 2015 precursor) from the listing. Dimensions, mass and power NOT on the listings: 96 x 90 x 27 mm and 220 g are from memory of the EWC27 datasheet (UNVERIFIED). Datasheet: https://satcatalog.s3.amazonaws.com/components/646/SatCatalog_-_Syrlinks_-_EWC27_-_X-Band_Transmitter_-_Datasheet.pdf"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "France",
+ "distributors": [
+  "direct",
+  "satsearch"
+ ],
+ "first_flight_year": 2016,
+ "dimensions_note": "from memory, unverified",
+ "mass_note": "from memory, unverified",
+ "rf": {
+  "band": "X",
+  "tx_frequency_MHz": [
+   8025,
+   8400
+  ],
+  "data_rate_Mbps": 140
+ },
+ "electrical": {
+  "interfaces": [
+   "PC/104 stack"
+  ]
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   96.0,
+   90.0,
+   27.0
+  ],
+  "mesh_volume_mm3": 140383.6,
+  "watertight": true,
+  "render_kind": "pc104_board",
+  "effective_density_g_cm3": 1.567,
+  "bodies": {
+   "part": [
+    {
+     "name": "pcb",
+     "color": [
+      0.09,
+      0.42,
+      0.24
+     ],
+     "file": "bodies/part__pcb.stl"
+    },
+    {
+     "name": "stack_header",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__stack_header.stl"
+    },
+    {
+     "name": "components",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__components.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 732
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": "PC/104 stack",
+  "electrical_connectors": [
+   "PC/104 stack-through header"
+  ],
+  "rf_connectors": [
+   "SMA (assumed)"
+  ],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_vqau3i_syrlinks_ewc27_x_band_transmitter.jpg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/syrlinks-ewc27-x-band-transmitter",
+  "photo_file": "reference_photo",
+  "datasheet_url": "https://satcatalog.s3.amazonaws.com/components/646/SatCatalog_-_Syrlinks_-_EWC27_-_X-Band_Transmitter_-_Datasheet.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

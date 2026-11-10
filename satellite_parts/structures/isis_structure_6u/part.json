@@ -1,0 +1,94 @@
+{
+ "id": "isis_structure_6u",
+ "name": "ISISPACE 6-Unit CubeSat structure",
+ "category": "structures",
+ "subcategory": "frame",
+ "vendor": "ISISPACE",
+ "model": "6-Unit CubeSat structure",
+ "dimensions_mm": {
+  "x": 226.3,
+  "y": 100,
+  "z": 340.5
+ },
+ "mass_g": 900,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.cubesatshop.com/wp-content/uploads/2016/06/ISIS-CubeSat-Structures-Brochure-v1.pdf",
+  "document": {
+   "title": "ISIS CubeSat Structures Brochure v1",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Primary structure mass 900 g; primary + secondary 1100 g. Supports PC/104 and 94 x 94 mm PCBs. Material not stated in the brochure. ISIS lists the 6U envelope as 340.5 mm long (older 6U standard), not 366 mm."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Netherlands",
+ "distributors": [
+  "CubeSatShop",
+  "direct"
+ ],
+ "mass_with_secondary_g": 1100,
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   226.3,
+   100.0,
+   340.5
+  ],
+  "mesh_volume_mm3": 7705515.1,
+  "watertight": true,
+  "render_kind": "box",
+  "effective_density_g_cm3": 0.117,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 12
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_ro4gi8_isis_1u_cube_sat_platform.png",
+  "photo_source": "satsearch (1U platform photo; family)",
+  "photo_page": "https://satsearch.co/products/isis-1u-cube-sat-platform",
+  "photo_file": "reference_photo",
+  "datasheet_url": "https://www.cubesatshop.com/wp-content/uploads/2016/06/ISIS-CubeSat-Structures-Brochure-v1.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

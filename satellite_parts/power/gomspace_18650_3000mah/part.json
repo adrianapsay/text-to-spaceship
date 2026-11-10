@@ -1,0 +1,123 @@
+{
+ "id": "gomspace_18650_3000mah",
+ "name": "GomSpace NanoPower 3000 mAh 18650 Li-ion cell",
+ "category": "power",
+ "subcategory": "battery_cell",
+ "vendor": "GomSpace",
+ "model": "NanoPower Battery 3000 mAh",
+ "dimensions_mm": {
+  "x": 18.4,
+  "y": 18.4,
+  "z": 65.1
+ },
+ "mass_g": 48,
+ "source": {
+  "type": "datasheet",
+  "url": "https://gomspace.com/UserFiles/Subsystems/datasheet/gs-ds-nanopower-battery-3000mah-cell-21.pdf",
+  "document": {
+   "title": "NanoPower Battery 3000 mAh datasheet DS 1022248",
+   "revision": "2.1",
+   "date": "2024-08-13"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "electrical",
+   "thermal"
+  ],
+  "notes": "Datasheet gives '18650 form factor' but no dimensions or mass; 18.4 x 65.1 mm and 48 g are the IEC 18650 nominal envelope and a typical cell mass (derived, not from this datasheet). Nominal capacity 2050-2150 mAh at 2.95 V cut-off; 2700-3000 mAh at 2.0 V cut-off."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Denmark",
+ "distributors": [
+  "direct (gomspace.com shop)"
+ ],
+ "material": "Li-ion 18650 (manufacturer not named)",
+ "electrical": {
+  "voltage_V": {
+   "min": 2.95,
+   "nominal": 3.6,
+   "max": 4.2
+  },
+  "capacity_Ah": 3.0,
+  "energy_Wh": 10.8,
+  "max_charge_A": 4.0,
+  "max_discharge_A": 6.0
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -20,
+   "max": 75
+  },
+  "charge_temperature_C": {
+   "min": 0,
+   "max": 50
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   18.4,
+   18.35,
+   65.1
+  ],
+  "mesh_volume_mm3": 16882.2,
+  "watertight": true,
+  "render_kind": "cell_18650",
+  "effective_density_g_cm3": 2.843,
+  "bodies": {
+   "part": [
+    {
+     "name": "can",
+     "color": [
+      0.85,
+      0.72,
+      0.3
+     ],
+     "file": "bodies/part__can.stl"
+    },
+    {
+     "name": "positive_cap",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__positive_cap.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 332
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 3.6
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": "https://gomspace.com/UserFiles/Subsystems/datasheet/gs-ds-nanopower-battery-3000mah-cell-21.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

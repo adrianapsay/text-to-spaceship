@@ -1,0 +1,116 @@
+{
+ "id": "npc_spacemind_sm_sp3x",
+ "name": "NPC SPACEMIND SM-SP3X 3U XY solar panel (8 W)",
+ "category": "power",
+ "subcategory": "solar_panel",
+ "vendor": "NPC SPACEMIND",
+ "model": "SM-SP3X",
+ "dimensions_mm": {
+  "x": 325,
+  "y": 82,
+  "z": 2.0
+ },
+ "mass_g": 63,
+ "source": {
+  "type": "unverified",
+  "url": "https://satsearch.co/products/npcspacemind-sm-sp3x",
+  "document": {
+   "title": "satsearch listing of the NPC SPACEMIND SM-SP3X",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "mass_g",
+   "electrical",
+   "interfaces"
+  ],
+  "notes": "63 g, 8 W peak, 460 mA, 18.2 V open circuit, UTJ cells, 4 parallel Picoblade connectors. Dimensions NOT listed: 3U face assumed; datasheet on the listing."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Italy",
+ "distributors": [
+  "direct",
+  "satsearch"
+ ],
+ "dimensions_note": "assumed from 3U face",
+ "electrical": {
+  "power_W": {
+   "peak": 8.0
+  },
+  "voltage_V": {
+   "open_circuit": 18.2
+  },
+  "current_A": 0.46
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   325.0,
+   82.0,
+   2.0
+  ],
+  "mesh_volume_mm3": 51600.0,
+  "watertight": true,
+  "render_kind": "solar_panel",
+  "effective_density_g_cm3": 1.221,
+  "bodies": {
+   "part": [
+    {
+     "name": "substrate",
+     "color": [
+      0.3,
+      0.3,
+      0.32
+     ],
+     "file": "bodies/part__substrate.stl"
+    },
+    {
+     "name": "cells",
+     "color": [
+      0.16,
+      0.26,
+      0.62
+     ],
+     "file": "bodies/part__cells.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 124
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [
+   "Molex PicoBlade x4 (parallel power)",
+   "external communication port"
+  ],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_u1pngt_npcspacemind_sm-sp3x.png",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/npcspacemind-sm-sp3x",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

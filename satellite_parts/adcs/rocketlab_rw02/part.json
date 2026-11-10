@@ -1,0 +1,142 @@
+{
+ "id": "rocketlab_rw02",
+ "name": "Rocket Lab RW-0.2 reaction wheel (200 mNms)",
+ "category": "adcs",
+ "subcategory": "reaction_wheel",
+ "vendor": "Rocket Lab (Sinclair Interplanetary)",
+ "model": "RW-0.2",
+ "dimensions_mm": {
+  "x": 105,
+  "y": 103,
+  "z": 46
+ },
+ "mass_g": 600,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.co/products/rocketlab-200-mnms-reaction-wheel",
+  "document": {
+   "title": "satsearch listing of the Rocket Lab RW-0.2 datasheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "adcs",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "105 x 103 x 46 mm, 600 g, 200 mNms nominal / 200 peak, 100.0 mNm. Peak power listed as 112 W on the page (likely 11.2 W). 50 krad, 20.16 Grms, static imbalance 2 g mm."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Canada / USA",
+ "distributors": [
+  "direct",
+  "satsearch"
+ ],
+ "adcs": {
+  "momentum_mNms": 200,
+  "peak_momentum_mNms": 200,
+  "max_torque_mNm": 100.0
+ },
+ "electrical": {
+  "voltage_V": {
+   "min": 24,
+   "nominal": 28,
+   "max": 34
+  },
+  "power_W": {
+   "nominal": 2.8,
+   "peak": 11.2
+  },
+  "interfaces": [
+   "RS-485 redundant"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -30,
+   "max": 85
+  }
+ },
+ "mounting": null,
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   105.0,
+   103.0,
+   46.0
+  ],
+  "mesh_volume_mm3": 347646.5,
+  "watertight": true,
+  "render_kind": "reaction_wheel",
+  "effective_density_g_cm3": 1.726,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "flywheel",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__flywheel.stl"
+    },
+    {
+     "name": "motor_cap",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__motor_cap.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 348
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "RS-485"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 28
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_cxkxv5_rocketlab_rw200.png",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/rocketlab-200-mnms-reaction-wheel",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

@@ -1,0 +1,160 @@
+{
+ "id": "aac_photon_sd_3u",
+ "name": "AAC Clyde Space PHOTON-SD 3U single deployable solar array",
+ "category": "power",
+ "subcategory": "solar_array_deployable",
+ "vendor": "AAC Clyde Space",
+ "model": "PHOTON-SD 3U",
+ "dimensions_mm": {
+  "x": 325,
+  "y": 83,
+  "z": 7
+ },
+ "mass_g": 310,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.aac-clyde.space/what-we-do/space-products-components/photon-solar-arrays",
+  "document": {
+   "title": "AAC Clyde Space PHOTON solar arrays product page",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "mass_g",
+   "electrical",
+   "mechanism",
+   "thermal"
+  ],
+  "notes": "7 mm stowed height, 310 g (3U), thermal knife / cord HDRM, up to 9 W per populated 3U face (2 faces deployed). Face dimensions assumed per CDS."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Sweden / UK",
+ "distributors": [
+  "direct",
+  "satsearch"
+ ],
+ "dimensions_note": "face assumed per CDS",
+ "electrical": {
+  "power_W": {
+   "peak": 18.0
+  },
+  "cell_type": "Spectrolab XTJ Prime"
+ },
+ "mechanism": {
+  "actuator_type": "thermal_knife",
+  "hdrm": "thermal knife / cord"
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -40,
+   "max": 80
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   325.0,
+   83.0,
+   7.0
+  ],
+  "mesh_volume_mm3": 188805.1,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.642,
+  "deployed_measured_bbox_mm": [
+   326.75,
+   83.0,
+   325.0
+  ],
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ],
+   "part_deployed": [
+    {
+     "name": "body_panel",
+     "color": [
+      0.16,
+      0.26,
+      0.62
+     ],
+     "file": "bodies/part_deployed__body_panel.stl"
+    },
+    {
+     "name": "wings",
+     "color": [
+      0.16,
+      0.26,
+      0.62
+     ],
+     "file": "bodies/part_deployed__wings.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40,
+   "part_deployed": 28
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/sp_product_detail.jpg",
+  "photo_source": "vendor",
+  "photo_page": "https://www.aac-clyde.space/what-we-do/space-products-components/photon-solar-arrays",
+  "photo_file": "reference_photo",
+  "datasheet_url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/AAC_DataSheet_Photon_original.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ],
+  "part_deployed": [
+   "part_deployed.step",
+   "part_deployed.stl"
+  ]
+ }
+}

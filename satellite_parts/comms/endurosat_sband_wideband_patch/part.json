@@ -1,0 +1,118 @@
+{
+ "id": "endurosat_sband_wideband_patch",
+ "name": "EnduroSat S-band wideband patch antenna",
+ "category": "comms",
+ "subcategory": "antenna",
+ "vendor": "EnduroSat",
+ "model": "S-Band Wideband Antenna",
+ "dimensions_mm": {
+  "x": 98,
+  "y": 98,
+  "z": 12
+ },
+ "mass_g": 115,
+ "source": {
+  "type": "unverified",
+  "url": "https://endurosat.com/wp-content/uploads/2022/02/Endurosat_Product_Catalogue_02_22.pdf",
+  "document": {
+   "title": "EnduroSat Product Catalogue 02/2022",
+   "revision": null,
+   "date": "2022-02"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "mass_g",
+   "rf"
+  ],
+  "notes": "Mass and RF from the catalogue; dimensions NOT published. Dimensions assumed."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Bulgaria",
+ "distributors": [
+  "direct (endurosat.com shop)"
+ ],
+ "rf": {
+  "band": "S",
+  "frequency_MHz": [
+   [
+    2025,
+    2110
+   ],
+   [
+    2200,
+    2290
+   ]
+  ],
+  "gain_dBi": 5,
+  "beamwidth_deg": 70,
+  "polarization": "RHCP",
+  "tx_power_W": 4
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   98.0,
+   98.0,
+   12.0
+  ],
+  "mesh_volume_mm3": 112368.0,
+  "watertight": true,
+  "render_kind": "patch_antenna",
+  "effective_density_g_cm3": 1.023,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "patch",
+     "color": [
+      0.72,
+      0.45,
+      0.2
+     ],
+     "file": "bodies/part__patch.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 28
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://www.endurosat.com/wp-content/uploads/2025/01/S-Band-Atenna-Wideband.webp",
+  "photo_source": "vendor",
+  "photo_page": "https://www.endurosat.com/products/s-band-antenna-wideband/",
+  "photo_file": "reference_photo",
+  "datasheet_url": "https://endurosat.com/wp-content/uploads/2022/02/Endurosat_Product_Catalogue_02_22.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

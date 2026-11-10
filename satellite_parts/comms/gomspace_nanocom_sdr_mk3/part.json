@@ -1,0 +1,147 @@
+{
+ "id": "gomspace_nanocom_sdr_mk3",
+ "name": "GomSpace NanoCom SDR MK3 software defined radio (3x TR600 transceivers)",
+ "category": "comms",
+ "subcategory": "sdr",
+ "vendor": "GomSpace",
+ "model": "NanoCom SDR MK3",
+ "dimensions_mm": {
+  "x": 95,
+  "y": 95,
+  "z": 31.5
+ },
+ "mass_g": 240,
+ "source": {
+  "type": "datasheet",
+  "url": "https://gomspace.com/wp-content/uploads/2025/09/Data-Sheet-NanoCom-SDR-MK3-1.pdf",
+  "document": {
+   "title": "GomSpace NanoCom SDR MK3 data sheet (values from the product page; PDF not opened)",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "rf",
+   "interfaces"
+  ],
+  "notes": "95 x 95 x 31.5 mm with three TR600 MK3 transceivers, 240 g, 70 MHz-6 GHz, 0.2-56 MHz channel bandwidth, SpaceWire x3, USB, CAN, SPI, RS-422/485, PPS, SMPM RF connectors, PicoBlade front-end control. Power and data rate not on the page."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Denmark",
+ "distributors": [
+  "direct"
+ ],
+ "first_available_year": 2025,
+ "status_note": "current product on gomspace.com (2026-11-08)",
+ "rf": {
+  "band": "70 MHz to 6 GHz (SDR)",
+  "channel_bandwidth_MHz": [
+   0.2,
+   56
+  ]
+ },
+ "compute": {
+  "processor": "FPGA + ARM (Zynq class)"
+ },
+ "electrical": {
+  "interfaces": [
+   "SpaceWire x3",
+   "USB",
+   "CAN",
+   "SPI",
+   "RS-422",
+   "RS-485",
+   "PPS",
+   "LVDS"
+  ]
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   95.0,
+   95.0,
+   31.5
+  ],
+  "mesh_volume_mm3": 171222.6,
+  "watertight": true,
+  "render_kind": "pc104_board",
+  "effective_density_g_cm3": 1.402,
+  "bodies": {
+   "part": [
+    {
+     "name": "pcb",
+     "color": [
+      0.09,
+      0.42,
+      0.24
+     ],
+     "file": "bodies/part__pcb.stl"
+    },
+    {
+     "name": "stack_header",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__stack_header.stl"
+    },
+    {
+     "name": "components",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__components.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 732
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "CAN",
+   "PPS",
+   "RS-422",
+   "RS-485",
+   "SPI",
+   "USB"
+  ],
+  "mechanical": "PC/104 stack",
+  "electrical_connectors": [
+   "Molex PicoBlade (front-end control)"
+  ],
+  "rf_connectors": [
+   "SMPM"
+  ],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://gomspace.com/wp-content/uploads/2025/09/NanoCom_SDRMK3-Featured-Image.png",
+  "photo_source": "vendor",
+  "photo_page": "https://gomspace.com/product/software-defined-radio/",
+  "photo_file": "reference_photo",
+  "datasheet_url": "https://gomspace.com/wp-content/uploads/2025/09/Data-Sheet-NanoCom-SDR-MK3-1.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

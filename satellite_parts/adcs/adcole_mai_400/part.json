@@ -1,0 +1,126 @@
+{
+ "id": "adcole_mai_400",
+ "name": "Adcole Maryland Aerospace MAI-400 ADACS (1/2U: 3 wheels, 3 rods, magnetometer, horizon sensors)",
+ "category": "adcs",
+ "subcategory": "integrated_adcs",
+ "vendor": "Adcole Maryland Aerospace (now Redwire)",
+ "model": "MAI-400",
+ "dimensions_mm": {
+  "x": 100,
+  "y": 100,
+  "z": 51.6
+ },
+ "mass_g": 694,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satcatalog.com/component/mai-400",
+  "document": {
+   "title": "satcatalog listing of the MAI-400 datasheet (CubeSatShop page for contents and lead time)",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical"
+  ],
+  "notes": "10 x 10 x 5.16 cm, 694 g, 1.1 W average (satcatalog); 3 reaction wheels, 3-axis magnetometer, 2-camera Earth horizon sensor, 3 torque rods, ADACS computer, 90 day lead (CubeSatShop). Datasheet: https://satcatalog.s3.amazonaws.com/components/87/SatCatalog_-_Adcole_Maryland_Aerospace_-_MAI-400_-_Datasheet.pdf"
+ },
+ "status": "unknown",
+ "fidelity": "envelope",
+ "vendor_country": "USA",
+ "distributors": [
+  "CubeSatShop",
+  "satsearch",
+  "Redwire"
+ ],
+ "status_note": "Adcole Maryland Aerospace became part of Redwire (2020); product line continuation not verified",
+ "lead_time": "90 days",
+ "adcs": {
+  "wheels": 3,
+  "torquers": 3,
+  "sensors": "3-axis magnetometer, 2-camera Earth horizon sensor",
+  "pointing_accuracy_deg": 0.1
+ },
+ "electrical": {
+  "power_W": {
+   "nominal": 1.1
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   100.0,
+   100.0,
+   51.6
+  ],
+  "mesh_volume_mm3": 515966.5,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.345,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://satcatalog.s3.amazonaws.com/components/87/featured_image.jpg",
+  "photo_source": "satcatalog",
+  "photo_page": "https://satcatalog.com/component/mai-400",
+  "photo_file": "reference_photo",
+  "datasheet_url": "https://satcatalog.s3.amazonaws.com/components/87/SatCatalog_-_Adcole_Maryland_Aerospace_-_MAI-400_-_Datasheet.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

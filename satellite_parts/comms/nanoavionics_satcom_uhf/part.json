@@ -1,0 +1,134 @@
+{
+ "id": "nanoavionics_satcom_uhf",
+ "name": "NanoAvionics SatCOM UHF digital radio transceiver module (56 x 33 x 6.6 mm)",
+ "category": "comms",
+ "subcategory": "transceiver",
+ "vendor": "NanoAvionics (Kongsberg NanoAvionics)",
+ "model": "SatCOM UHF",
+ "dimensions_mm": {
+  "x": 56.1,
+  "y": 32.9,
+  "z": 6.56
+ },
+ "mass_g": 7.5,
+ "source": {
+  "type": "datasheet",
+  "url": "https://nanoavionics.com/cubesat-components/satcom-uhf/",
+  "document": {
+   "title": "NanoAvionics SatCOM UHF product page (spec table and list price)",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "rf",
+   "electrical",
+   "interfaces",
+   "cost"
+  ],
+  "notes": "56.1 x 32.9 x 6.56 mm, 7.5 g, 395-440 MHz, 2400 baud, 2 W RF, 3.3 V, CAN, EUR 6350, 3-5 months. RF connector not stated."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Lithuania",
+ "distributors": [
+  "direct (nanoavionics.com)"
+ ],
+ "lead_time": "3-5 months",
+ "rf": {
+  "band": "UHF",
+  "frequency_MHz": [
+   395,
+   440
+  ],
+  "data_rate_kbps": 2.4,
+  "tx_power_W": 2
+ },
+ "electrical": {
+  "voltage_V": {
+   "nominal": 3.3
+  },
+  "interfaces": [
+   "CAN"
+  ]
+ },
+ "cost": {
+  "value": 6350,
+  "currency": "EUR",
+  "basis": "list_price",
+  "source": "https://nanoavionics.com/cubesat-components/satcom-uhf/"
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   56.1,
+   32.9,
+   6.56
+  ],
+  "mesh_volume_mm3": 12091.5,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 0.62,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "CAN"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 3.3
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://nanoavionics.com/wp-content/uploads/2018/07/uhf-top.jpg",
+  "photo_source": "vendor",
+  "photo_page": "https://nanoavionics.com/cubesat-components/satcom-uhf/",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

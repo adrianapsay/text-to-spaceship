@@ -1,0 +1,147 @@
+{
+ "id": "gomspace_nanotorque_gsw600",
+ "name": "GomSpace NanoTorque GSW-600 reaction wheel (single, 19 mNms)",
+ "category": "adcs",
+ "subcategory": "reaction_wheel",
+ "vendor": "GomSpace",
+ "model": "NanoTorque GSW-600",
+ "dimensions_mm": {
+  "x": 44,
+  "y": 44,
+  "z": 27
+ },
+ "mass_g": 180,
+ "source": {
+  "type": "datasheet",
+  "url": "https://gomspace.com/wp-content/uploads/2025/09/gs-ds-nanotorque-gsw-600-25-1.pdf",
+  "document": {
+   "title": "GomSpace NanoTorque GSW-600 datasheet DS 1013128",
+   "revision": "2.5",
+   "date": "2025-11-05"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "adcs",
+   "electrical",
+   "thermal",
+   "interfaces"
+  ],
+  "notes": "44 x 44 x 27 mm, 180 g, 19 mNms at 6000 rpm, +/-1.5 mNm continuous, 5 V, 0.5 A at max torque / 0.13 A at 4500 rpm, SPI (recommended) and I2C, Molex PicoBlade 53261-1371 13-pin, -40 to 80 C."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Denmark",
+ "distributors": [
+  "direct"
+ ],
+ "status_note": "current product on gomspace.com (2026-11-08)",
+ "adcs": {
+  "momentum_mNms": 19,
+  "max_torque_mNm": 1.5,
+  "max_speed_rpm": 6000,
+  "flywheel_inertia_gcm2": 300
+ },
+ "electrical": {
+  "voltage_V": {
+   "min": 4.9,
+   "nominal": 5.0,
+   "max": 5.1
+  },
+  "power_W": {
+   "nominal": 0.65,
+   "peak": 2.5
+  },
+  "interfaces": [
+   "SPI",
+   "I2C"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -40,
+   "max": 80
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   44.0,
+   44.0,
+   27.0
+  ],
+  "mesh_volume_mm3": 39121.7,
+  "watertight": true,
+  "render_kind": "reaction_wheel",
+  "effective_density_g_cm3": 4.601,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "flywheel",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__flywheel.stl"
+    },
+    {
+     "name": "motor_cap",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__motor_cap.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 348
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "I2C",
+   "SPI"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [
+   "Molex PicoBlade 53261-1371 (13-pin, right angle)"
+  ],
+  "rf_connectors": [],
+  "power_bus_V": 5.0
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://gomspace.com/wp-content/uploads/2025/09/NanoTorque-GSW600-Featured-Image-1.png",
+  "photo_source": "vendor",
+  "photo_page": "https://gomspace.com/product/reaction-wheels/",
+  "photo_file": "reference_photo",
+  "datasheet_url": "https://gomspace.com/wp-content/uploads/2025/09/gs-ds-nanotorque-gsw-600-25-1.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

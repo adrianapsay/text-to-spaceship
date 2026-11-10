@@ -1,0 +1,142 @@
+{
+ "id": "cua_chips_180",
+ "name": "CU Aerospace CHIPS-180 warm-gas propulsion unit",
+ "category": "propulsion",
+ "subcategory": "cold_warm_gas_module",
+ "vendor": "CU Aerospace",
+ "model": "CHIPS-180",
+ "dimensions_mm": {
+  "x": 100,
+  "y": 90,
+  "z": 60
+ },
+ "mass_g": 1027,
+ "source": {
+  "type": "datasheet",
+  "url": "https://cuaerospace.com/Portals/0/SiteContent/assets/PDF/CHIPS-Data-Sheet-240726.pdf",
+  "document": {
+   "title": "CHIPS Data Sheet",
+   "revision": null,
+   "date": "2024-07-26"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "propulsion"
+  ],
+  "notes": "Wet mass from the datasheet; dry mass = wet minus propellant (derived). Warm-gas values; cold-gas mode in datasheet brackets. Tank pressure and voltage not specified."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "USA",
+ "distributors": [
+  "direct"
+ ],
+ "dry_mass_g": 750,
+ "propulsion": {
+  "propellant": "R-134a (baseline) or R-236fa, self-pressurizing",
+  "thrust_mN": {
+   "nominal": 15
+  },
+  "isp_s": 67,
+  "total_impulse_Ns": 176,
+  "propellant_mass_g": 277,
+  "power_W": 20,
+  "tank_pressure_MPa": null,
+  "mode": "warm gas (resistojet) with cold-gas fallback"
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   100.0,
+   90.0,
+   60.0
+  ],
+  "mesh_volume_mm3": 468934.8,
+  "watertight": true,
+  "render_kind": "thruster_box_nozzle",
+  "effective_density_g_cm3": 2.19,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    },
+    {
+     "name": "flange",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__flange.stl"
+    },
+    {
+     "name": "nozzle",
+     "color": [
+      0.55,
+      0.55,
+      0.58
+     ],
+     "file": "bodies/part__nozzle.stl"
+    },
+    {
+     "name": "valve",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__valve.stl"
+    },
+    {
+     "name": "tank_dome",
+     "color": [
+      0.55,
+      0.55,
+      0.58
+     ],
+     "file": "bodies/part__tank_dome.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 490
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": "https://cuaerospace.com/Portals/0/SiteContent/assets/PDF/CHIPS-Data-Sheet-240726.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

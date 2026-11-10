@@ -1,0 +1,165 @@
+{
+ "id": "cubespace_cubewheel_cw0162",
+ "name": "CubeSpace CubeWheel CW0162 reaction wheel",
+ "category": "adcs",
+ "subcategory": "reaction_wheel",
+ "vendor": "CubeSpace Satellite Systems",
+ "model": "CW0162",
+ "dimensions_mm": {
+  "x": 46,
+  "y": 46,
+  "z": 24
+ },
+ "mass_g": 144,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.cubesatshop.com/wp-content/uploads/2023/05/CubeSpace-GEN-2-ACTUATORS-2023.pdf",
+  "document": {
+   "title": "CubeSpace Gen 2 Actuators brochure",
+   "revision": "2023",
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "adcs.momentum_mNms",
+   "adcs.torque_mNm",
+   "adcs.max_speed_rpm",
+   "electrical.voltage_V"
+  ],
+  "notes": "Brochure columns are jumbled in the PDF text; values matched by order."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "South Africa",
+ "distributors": [
+  "CubeSatShop",
+  "satsearch",
+  "direct"
+ ],
+ "material": "aluminium housing (vendor does not state alloy)",
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -20,
+   "max": 80
+  }
+ },
+ "environment": {
+  "radiation_krad": 24,
+  "random_vibration_grms": 14.16
+ },
+ "adcs": {
+  "momentum_mNms": 16.2,
+  "torque_mNm": 7.0,
+  "max_speed_rpm": 10000,
+  "dipole_Am2": null,
+  "accuracy_deg": null,
+  "fov_deg": null
+ },
+ "electrical": {
+  "voltage_V": {
+   "min": null,
+   "nominal": 12,
+   "max": null
+  },
+  "power_W": {
+   "idle": null,
+   "nominal": 0.336,
+   "peak": 16.5
+  },
+  "interfaces": [
+   "I2C",
+   "CAN",
+   "UART (per CubeSpace Gen 2 family)"
+  ]
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "first_available_year": 2022,
+ "first_available_year_note": "Gen 2 family announced 2022-2023 (brochure dated 2023); not stated in the datasheet",
+ "mounting": {
+  "face": "-z (base)",
+  "pattern": "not stated in brochure",
+  "fasteners": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   46.0,
+   46.0,
+   24.0
+  ],
+  "mesh_volume_mm3": 37656.0,
+  "watertight": true,
+  "render_kind": "reaction_wheel",
+  "effective_density_g_cm3": 3.824,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "flywheel",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__flywheel.stl"
+    },
+    {
+     "name": "motor_cap",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__motor_cap.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 348
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "CAN",
+   "I2C",
+   "UART"
+  ],
+  "mechanical": "not stated in brochure",
+  "electrical_connectors": [
+   "Molex Pico-Lock"
+  ],
+  "rf_connectors": [],
+  "power_bus_V": 12
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/image-cubespace-gen2-cubewheel-cw0162-ofzwp1.jpg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/cubespace-gen2-cube-wheel-cw0162",
+  "photo_file": "reference_photo",
+  "datasheet_url": "https://www.cubesatshop.com/wp-content/uploads/2023/05/CubeSpace-GEN-2-ACTUATORS-2023.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

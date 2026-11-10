@@ -1,0 +1,321 @@
+<title>Satellite Parts Catalog</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: fixed top bar, filter rail on the left, card grid; a detail drawer slides over the grid with the 3D viewer and the full record. */
+:root {
+  --bg: #f5f6f8; --panel: #ffffff; --line: #d9dde3; --fg: #1b2129; --fg2: #4b5563; --fg3: #7b8591;
+  --accent: #1f6f8b; --accent-soft: #e2eff4; --warn: #b7791f; --warn-soft: #fbf1dc; --ok: #2f7a4d; --ok-soft: #e4f2e9; --bad: #b3423a; --bad-soft: #f8e4e2;
+  --sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif; --mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #14181d; --panel: #1c2229; --line: #313a44; --fg: #e6eaef; --fg2: #aeb7c2; --fg3: #7f8a97; --accent: #6fb6d2; --accent-soft: #1d3540; --warn: #e0b35a; --warn-soft: #3a2f16; --ok: #7cc89a; --ok-soft: #1c3426; --bad: #e6867f; --bad-soft: #3f2321; color-scheme: dark; } }
+:root[data-theme="dark"] { --bg: #14181d; --panel: #1c2229; --line: #313a44; --fg: #e6eaef; --fg2: #aeb7c2; --fg3: #7f8a97; --accent: #6fb6d2; --accent-soft: #1d3540; --warn: #e0b35a; --warn-soft: #3a2f16; --ok: #7cc89a; --ok-soft: #1c3426; --bad: #e6867f; --bad-soft: #3f2321; color-scheme: dark; }
+html, body { height: 100%; }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 14px; line-height: 1.45; }
+* { box-sizing: border-box; }
+button, input, select { font: inherit; color: inherit; }
+a { color: var(--accent); }
+header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--panel); border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; padding-block: 10px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--panel); }
+header h1 { font-size: 16px; font-weight: 600; margin: 0; letter-spacing: 0.01em; }
+header .count { font-family: var(--mono); font-size: 12px; color: var(--fg3); }
+header input[type=search] { flex: 1 1 220px; min-width: 0; max-width: 420px; padding: 7px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); }
+header select { padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); }
+main { display: grid; grid-template-columns: 230px 1fr; gap: 0; min-height: 0; }
+aside { border-right: 1px solid var(--line); padding-block: 14px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: 12px; font-size: 13px; }
+aside h2 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--fg3); margin: 14px 0 6px; font-weight: 600; }
+aside h2:first-child { margin-top: 0; }
+aside label { display: flex; align-items: center; gap: 6px; padding: 2px 0; cursor: pointer; }
+aside label .n { margin-left: auto; font-family: var(--mono); font-size: 11px; color: var(--fg3); }
+aside .range { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+aside .range input { width: 100%; min-width: 0; padding: 4px 6px; border: 1px solid var(--line); border-radius: 5px; background: var(--bg); font-family: var(--mono); font-size: 12px; }
+aside button.clear { margin-top: 12px; background: none; border: 1px solid var(--line); border-radius: 6px; padding: 5px 10px; cursor: pointer; color: var(--fg2); }
+#grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; padding-block: 14px; padding-left: 14px; padding-right: max(16px, env(safe-area-inset-right, 0px)); align-content: start; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; min-width: 0; }
+.card:hover, .card:focus-visible { border-color: var(--accent); outline: none; }
+.card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: #fff; display: block; }
+.card .body { padding: 8px 10px 10px; display: grid; gap: 3px; }
+.card .name { font-weight: 500; font-size: 13px; line-height: 1.3; }
+.card .meta { font-family: var(--mono); font-size: 11px; color: var(--fg2); }
+.badges { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 2px; }
+.badge { font-size: 10px; font-family: var(--mono); padding: 1px 6px; border-radius: 4px; background: var(--accent-soft); color: var(--accent); }
+.badge.derived, .badge.unverified { background: var(--warn-soft); color: var(--warn); }
+.badge.datasheet, .badge.standard { background: var(--ok-soft); color: var(--ok); }
+.badge.discontinued { background: var(--bad-soft); color: var(--bad); }
+.empty { color: var(--fg3); padding: 40px 14px; grid-column: 1 / -1; }
+#drawer { position: fixed; top: env(safe-area-inset-top, 0px); right: 0; bottom: 0; width: min(720px, 100%); background: var(--panel); border-left: 1px solid var(--line); z-index: 20; overflow-y: auto; box-shadow: -8px 0 24px rgba(0,0,0,0.12); padding-block: 14px; padding-left: 18px; padding-right: max(18px, env(safe-area-inset-right, 0px)); }
+#drawer[hidden] { display: none !important; }
+#scrim { position: fixed; inset: 0; background: rgba(0,0,0,0.25); z-index: 15; }
+#scrim[hidden] { display: none !important; }
+#drawer .top { display: flex; align-items: flex-start; gap: 10px; }
+#drawer h2 { font-size: 17px; font-weight: 600; margin: 0; text-wrap: balance; flex: 1; }
+#drawer .close { background: none; border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; cursor: pointer; color: var(--fg2); }
+#drawer .sub { font-family: var(--mono); font-size: 12px; color: var(--fg2); margin: 4px 0 10px; }
+#viewer { position: relative; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; height: 320px; overflow: hidden; }
+#viewer canvas { width: 100%; height: 100%; display: block; cursor: grab; touch-action: none; }
+#viewer .hint { position: absolute; left: 10px; bottom: 8px; font-size: 11px; color: var(--fg3); pointer-events: none; }
+#viewer .tools { position: absolute; right: 8px; top: 8px; display: flex; gap: 6px; }
+#viewer .tools button { font-size: 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 3px 9px; cursor: pointer; }
+#viewer .tools button.on { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); }
+.links { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+.links a, .links span { font-size: 12px; padding: 5px 10px; border: 1px solid var(--line); border-radius: 6px; text-decoration: none; }
+.links span { color: var(--fg3); }
+.section { margin-top: 14px; }
+.section h3 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--fg3); margin: 0 0 6px; font-weight: 600; }
+table.facts { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+table.facts td { padding: 3px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.facts td:first-child { color: var(--fg2); width: 38%; font-family: var(--mono); font-size: 11.5px; }
+table.facts td:last-child { font-variant-numeric: tabular-nums; word-break: break-word; }
+.note { font-size: 12.5px; color: var(--fg2); background: var(--bg); border-left: 3px solid var(--warn); padding: 6px 10px; border-radius: 0 6px 6px 0; }
+.similar { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.similar .card img { aspect-ratio: 4 / 3; }
+.similar .card .name { font-size: 12px; }
+@media (max-width: 760px) { main { grid-template-columns: 1fr; } aside { border-right: 0; border-bottom: 1px solid var(--line); padding-right: max(16px, env(safe-area-inset-right, 0px)); } aside .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; } #grid { padding-left: max(16px, env(safe-area-inset-left, 0px)); } }
+@media (prefers-reduced-motion: no-preference) { #drawer { animation: slide 0.18s ease-out; } @keyframes slide { from { transform: translateX(24px); opacity: 0; } to { transform: none; opacity: 1; } } }
+</style>
+
+<header>
+  <h1>Satellite Parts Catalog</h1>
+  <span class="count" id="count"></span>
+  <input type="search" id="search" placeholder="search name, vendor, model, id">
+  <select id="sort">
+    <option value="name">sort: name</option>
+    <option value="mass">sort: mass</option>
+    <option value="volume">sort: volume</option>
+    <option value="vendor">sort: vendor</option>
+    <option value="year">sort: first available</option>
+    <option value="cost">sort: price (listed first)</option>
+  </select>
+</header>
+<main>
+  <aside>
+    <div class="cols">
+      <div><h2>Category</h2><div id="f-category"></div></div>
+      <div><h2>Source quality</h2><div id="f-source"></div>
+        <h2>Vendor</h2><select id="f-vendor" style="width:100%;padding:5px;border:1px solid var(--line);border-radius:5px;background:var(--bg)"><option value="">all vendors</option></select>
+        <h2>Mass (g)</h2><div class="range"><input id="mass-min" placeholder="min" inputmode="decimal"><input id="mass-max" placeholder="max" inputmode="decimal"></div>
+        <h2>Longest side (mm)</h2><div class="range"><input id="side-min" placeholder="min" inputmode="decimal"><input id="side-max" placeholder="max" inputmode="decimal"></div>
+        <h2>Options</h2><label><input type="checkbox" id="f-deployed"> has deployed state</label><label><input type="checkbox" id="f-photo"> has supplier photo link</label><label><input type="checkbox" id="f-cad"> vendor CAD link</label><label><input type="checkbox" id="f-price"> has a price</label>
+        <button class="clear" id="clear">clear filters</button>
+      </div>
+    </div>
+  </aside>
+  <div id="grid"></div>
+</main>
+<div id="scrim" hidden></div>
+<section id="drawer" hidden aria-live="polite"></section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const DATA = /*__DATA__*/;
+const PARTS = DATA.parts;
+const MESHES = DATA.meshes;
+const byId = {};
+PARTS.forEach(p => { byId[p.id] = p; });
+const dims = p => [p.dimensions_mm.x, p.dimensions_mm.y, p.dimensions_mm.z];
+const volume = p => dims(p).reduce((a, b) => a * b, 1);
+const longest = p => Math.max(...dims(p));
+const fmt = v => v === null || v === undefined ? "" : (typeof v === "number" ? (Number.isInteger(v) ? String(v) : String(+v.toFixed(3))) : String(v));
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+// ---------- filters
+const state = { q: "", categories: new Set(), sources: new Set(), vendor: "", massMin: null, massMax: null, sideMin: null, sideMax: null, deployed: false, photo: false, cad: false, price: false, sort: "name" };
+function counts(key) { const c = {}; PARTS.forEach(p => { const v = key(p) || "?"; c[v] = (c[v] || 0) + 1; }); return c; }
+function renderFilterList(container, countMap, set) {
+  container.innerHTML = Object.keys(countMap).sort().map(k => '<label><input type="checkbox" value="' + esc(k) + '"' + (set.has(k) ? " checked" : "") + '> ' + esc(k) + '<span class="n">' + countMap[k] + "</span></label>").join("");
+  container.querySelectorAll("input").forEach(box => box.addEventListener("change", () => { box.checked ? set.add(box.value) : set.delete(box.value); render(); }));
+}
+renderFilterList(document.getElementById("f-category"), counts(p => p.category), state.categories);
+renderFilterList(document.getElementById("f-source"), counts(p => (p.source || {}).type), state.sources);
+const vendorSelect = document.getElementById("f-vendor");
+Object.keys(counts(p => p.vendor)).sort().forEach(v => { const o = document.createElement("option"); o.value = v; o.textContent = v; vendorSelect.appendChild(o); });
+vendorSelect.addEventListener("change", () => { state.vendor = vendorSelect.value; render(); });
+document.getElementById("search").addEventListener("input", e => { state.q = e.target.value.trim().toLowerCase(); render(); });
+document.getElementById("sort").addEventListener("change", e => { state.sort = e.target.value; render(); });
+[["mass-min", "massMin"], ["mass-max", "massMax"], ["side-min", "sideMin"], ["side-max", "sideMax"]].forEach(([id, key]) => document.getElementById(id).addEventListener("input", e => { const v = parseFloat(e.target.value); state[key] = isNaN(v) ? null : v; render(); }));
+[["f-deployed", "deployed"], ["f-photo", "photo"], ["f-cad", "cad"], ["f-price", "price"]].forEach(([id, key]) => document.getElementById(id).addEventListener("change", e => { state[key] = e.target.checked; render(); }));
+document.getElementById("clear").addEventListener("click", () => { state.q = ""; state.categories.clear(); state.sources.clear(); state.vendor = ""; state.massMin = state.massMax = state.sideMin = state.sideMax = null; state.deployed = state.photo = state.cad = state.price = false; document.getElementById("search").value = ""; vendorSelect.value = ""; ["mass-min", "mass-max", "side-min", "side-max"].forEach(id => document.getElementById(id).value = ""); ["f-deployed", "f-photo", "f-cad", "f-price"].forEach(id => document.getElementById(id).checked = false); document.querySelectorAll("#f-category input, #f-source input").forEach(b => b.checked = false); render(); });
+
+function matches(p) {
+  if (state.q) { const hay = (p.id + " " + p.name + " " + p.vendor + " " + p.model + " " + p.subcategory).toLowerCase(); if (!state.q.split(/\s+/).every(w => hay.includes(w))) return false; }
+  if (state.categories.size && !state.categories.has(p.category)) return false;
+  if (state.sources.size && !state.sources.has((p.source || {}).type)) return false;
+  if (state.vendor && p.vendor !== state.vendor) return false;
+  const m = p.mass_g; if (state.massMin !== null && !(m >= state.massMin)) return false; if (state.massMax !== null && !(m <= state.massMax)) return false;
+  const s = longest(p); if (state.sideMin !== null && s < state.sideMin) return false; if (state.sideMax !== null && s > state.sideMax) return false;
+  if (state.deployed && !p.has_deployed) return false;
+  if (state.photo && !(p.reference_images || {}).photo_url) return false;
+  if (state.cad && !(p.cad_downloads || []).length) return false;
+  if (state.price && !(p.cost && p.cost.value)) return false;
+  return true;
+}
+function sortParts(list) {
+  const key = { name: p => p.name.toLowerCase(), mass: p => p.mass_g || 0, volume: p => volume(p), vendor: p => (p.vendor + p.name).toLowerCase(), year: p => p.first_available_year || 9999, cost: p => (p.cost && p.cost.value) ? p.cost.value : 1e12 }[state.sort];
+  return list.sort((a, b) => key(a) < key(b) ? -1 : key(a) > key(b) ? 1 : 0);
+}
+function badgeHtml(p) {
+  const out = ['<span class="badge ' + esc((p.source || {}).type || "") + '">' + esc((p.source || {}).type || "no source") + "</span>"];
+  if (p.status && p.status !== "unknown") out.push('<span class="badge ' + esc(p.status) + '">' + esc(p.status.replace(/_/g, " ")) + "</span>");
+  if (p.has_deployed) out.push('<span class="badge">deployable</span>');
+  if ((p.cad_downloads || []).length) out.push('<span class="badge">vendor CAD</span>');
+  if ((p.reference_images || {}).photo_url) out.push('<span class="badge">photo</span>');
+  return out.join("");
+}
+function cardHtml(p) {
+  const d = dims(p);
+  return '<div class="card" tabindex="0" data-id="' + esc(p.id) + '">' + (p.thumbnail ? '<img src="' + p.thumbnail + '" alt="">' : "") + '<div class="body"><div class="name">' + esc(p.name) + '</div><div class="meta">' + esc(p.vendor) + '</div><div class="meta">' + d.map(fmt).join(" x ") + " mm &middot; " + fmt(p.mass_g) + ' g' + ((p.cost && p.cost.value) ? " &middot; " + fmt(p.cost.value) + " " + esc(p.cost.currency || "") : "") + '</div><div class="badges">' + badgeHtml(p) + "</div></div></div>";
+}
+function render() {
+  const list = sortParts(PARTS.filter(matches));
+  document.getElementById("count").textContent = list.length + " of " + PARTS.length + " parts";
+  const grid = document.getElementById("grid");
+  grid.innerHTML = list.length ? list.map(cardHtml).join("") : '<div class="empty">No parts match these filters.</div>';
+}
+document.getElementById("grid").addEventListener("click", e => { const card = e.target.closest(".card"); if (card) openPart(card.dataset.id); });
+document.getElementById("grid").addEventListener("keydown", e => { if (e.key === "Enter") { const card = e.target.closest(".card"); if (card) openPart(card.dataset.id); } });
+render();
+
+// ---------- detail drawer
+function flatten(obj, prefix, out) {
+  Object.keys(obj).forEach(k => {
+    const v = obj[k];
+    if (v === null || v === undefined || v === "" || (Array.isArray(v) && !v.length)) return;
+    if (Array.isArray(v)) { out.push([prefix + k, v.map(x => typeof x === "object" ? JSON.stringify(x) : fmt(x)).join(", ")]); }
+    else if (typeof v === "object") flatten(v, prefix + k + ".", out);
+    else out.push([prefix + k, fmt(v)]);
+  });
+  return out;
+}
+const SKIP = new Set(["id", "name", "category", "subcategory", "vendor", "model", "thumbnail", "has_deployed", "source", "reference_images", "files", "image", "cad_downloads", "interfaces", "geometry"]);
+function similar(p) {
+  const lv = Math.log(volume(p) + 1);
+  const lm = Math.log((p.mass_g || 1) + 1);
+  const score = q => (q.subcategory === p.subcategory ? 0 : 1.5) + (q.category === p.category ? 0 : 3) + Math.abs(Math.log(volume(q) + 1) - lv) * 0.5 + Math.abs(Math.log((q.mass_g || 1) + 1) - lm) * 0.5;
+  return PARTS.filter(q => q.id !== p.id).map(q => [score(q), q]).sort((a, b) => a[0] - b[0]).slice(0, 6).map(x => x[1]);
+}
+function openPart(id) {
+  const p = byId[id];
+  if (!p) return;
+  const drawer = document.getElementById("drawer");
+  const ref = p.reference_images || {};
+  const src = p.source || {};
+  const facts = flatten(Object.fromEntries(Object.entries(p).filter(([k]) => !SKIP.has(k))), "", []);
+  const geometry = flatten(p.geometry || {}, "", []);
+  const interfaces = flatten(p.interfaces || {}, "", []);
+  const links = [];
+  if (src.url) links.push('<a href="' + esc(src.url) + '" target="_blank" rel="noopener">source document</a>');
+  if (ref.datasheet_url && ref.datasheet_url !== src.url) links.push('<a href="' + esc(ref.datasheet_url) + '" target="_blank" rel="noopener">datasheet PDF</a>');
+  if (ref.photo_url) links.push('<a href="' + esc(ref.photo_url) + '" target="_blank" rel="noopener">supplier photo</a>');
+  if (ref.photo_page) links.push('<a href="' + esc(ref.photo_page) + '" target="_blank" rel="noopener">product page</a>');
+  (p.cad_downloads || []).forEach(c => links.push('<a href="' + esc(c.url) + '" target="_blank" rel="noopener">vendor CAD (' + esc(c.format || "") + ")</a>"));
+  if (!links.length) links.push("<span>no external links</span>");
+  drawer.innerHTML = '<div class="top"><h2>' + esc(p.name) + '</h2><button class="close" id="close">close</button></div>'
+    + '<div class="sub">' + esc(p.id) + " &middot; " + esc(p.category) + " / " + esc(p.subcategory) + " &middot; " + esc(p.vendor) + (p.model ? " &middot; " + esc(p.model) : "") + "</div>"
+    + '<div id="viewer"><div class="tools">' + (p.has_deployed ? '<button id="v-stowed" class="on">stowed</button><button id="v-deployed">deployed</button>' : "") + '<button id="v-box">box</button></div><span class="hint">drag to rotate &middot; wheel to zoom &middot; shift-drag to pan</span></div>'
+    + '<div class="links">' + links.join("") + "</div>"
+    + '<div class="badges">' + badgeHtml(p) + "</div>"
+    + (src.notes ? '<div class="section"><h3>Source notes</h3><div class="note">' + esc(src.notes) + "</div></div>" : "")
+    + '<div class="section"><h3>Source</h3><table class="facts">' + flatten({ type: src.type, document: src.document, accessed: src.accessed, fields_from_source: src.fields_from_source }, "", []).map(([k, v]) => "<tr><td>" + esc(k) + "</td><td>" + esc(v) + "</td></tr>").join("") + "</table></div>"
+    + '<div class="section"><h3>Record</h3><table class="facts">' + facts.map(([k, v]) => "<tr><td>" + esc(k) + "</td><td>" + esc(v) + "</td></tr>").join("") + "</table></div>"
+    + (interfaces.length ? '<div class="section"><h3>Interfaces</h3><table class="facts">' + interfaces.map(([k, v]) => "<tr><td>" + esc(k) + "</td><td>" + esc(v) + "</td></tr>").join("") + "</table></div>" : "")
+    + '<div class="section"><h3>Geometry as generated</h3><table class="facts">' + geometry.map(([k, v]) => "<tr><td>" + esc(k) + "</td><td>" + esc(v) + "</td></tr>").join("") + "</table></div>"
+    + '<div class="section"><h3>Similar parts</h3><div class="similar">' + similar(p).map(cardHtml).join("") + "</div></div>";
+  drawer.hidden = false;
+  document.getElementById("scrim").hidden = false;
+  drawer.scrollTop = 0;
+  document.getElementById("close").addEventListener("click", closeDrawer);
+  drawer.querySelectorAll(".similar .card").forEach(card => card.addEventListener("click", () => openPart(card.dataset.id)));
+  const boxButton = document.getElementById("v-box");
+  let showBox = false;
+  let variant = "part";
+  const show = () => showMesh(variant === "part" ? MESHES[p.id] : MESHES[p.id + "__deployed"], showBox);
+  boxButton.addEventListener("click", () => { showBox = !showBox; boxButton.classList.toggle("on", showBox); show(); });
+  if (p.has_deployed) {
+    document.getElementById("v-stowed").addEventListener("click", () => { variant = "part"; document.getElementById("v-stowed").classList.add("on"); document.getElementById("v-deployed").classList.remove("on"); show(); });
+    document.getElementById("v-deployed").addEventListener("click", () => { variant = "deployed"; document.getElementById("v-deployed").classList.add("on"); document.getElementById("v-stowed").classList.remove("on"); show(); });
+  }
+  mountViewer(document.getElementById("viewer"));
+  show();
+  try { history.replaceState(null, "", "#" + p.id.replace(/_/g, "-")); } catch (e) {}
+}
+function closeDrawer() { document.getElementById("drawer").hidden = true; document.getElementById("scrim").hidden = true; try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {} }
+document.getElementById("scrim").addEventListener("click", closeDrawer);
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeDrawer(); });
+
+// ---------- three.js viewer
+let renderer = null, scene = null, camera = null, group = null, canvas = null;
+let orbit = { theta: 0.8, phi: 1.05, radius: 200, target: null };
+function mountViewer(container) {
+  if (typeof THREE === "undefined") { container.insertAdjacentHTML("afterbegin", '<div class="empty">3D viewer unavailable (three.js did not load).</div>'); return; }
+  if (!renderer) {
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    scene = new THREE.Scene();
+    camera = new THREE.PerspectiveCamera(40, 4 / 3, 0.1, 100000);
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x778899, 0.9));
+    const sun = new THREE.DirectionalLight(0xffffff, 0.7); sun.position.set(1, 2, 3); scene.add(sun);
+    const sun2 = new THREE.DirectionalLight(0xffffff, 0.3); sun2.position.set(-2, -1, 1); scene.add(sun2);
+    group = new THREE.Group(); scene.add(group);
+    orbit.target = new THREE.Vector3();
+    canvas = renderer.domElement;
+    let dragging = false, pan = false, last = [0, 0];
+    canvas.addEventListener("pointerdown", event => { dragging = true; pan = event.shiftKey; last = [event.clientX, event.clientY]; canvas.setPointerCapture(event.pointerId); });
+    canvas.addEventListener("pointerup", () => { dragging = false; });
+    canvas.addEventListener("pointermove", event => {
+      if (!dragging) return;
+      const dx = event.clientX - last[0], dy = event.clientY - last[1]; last = [event.clientX, event.clientY];
+      if (pan) { const right = new THREE.Vector3().setFromMatrixColumn(camera.matrix, 0), up = new THREE.Vector3().setFromMatrixColumn(camera.matrix, 1); orbit.target.addScaledVector(right, -dx * orbit.radius * 0.0015).addScaledVector(up, dy * orbit.radius * 0.0015); }
+      else { orbit.theta -= dx * 0.008; orbit.phi = Math.min(Math.PI - 0.05, Math.max(0.05, orbit.phi - dy * 0.008)); }
+      draw();
+    });
+    canvas.addEventListener("wheel", event => { event.preventDefault(); orbit.radius *= Math.exp(event.deltaY * 0.0015); draw(); }, { passive: false });
+    window.addEventListener("resize", () => { resize(); draw(); });
+  }
+  container.insertBefore(canvas, container.firstChild);
+  resize();
+}
+function resize() { if (!renderer || !canvas.parentElement) return; const w = canvas.parentElement.clientWidth, h = canvas.parentElement.clientHeight; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
+function draw() {
+  if (!renderer) return;
+  camera.position.set(orbit.target.x + orbit.radius * Math.sin(orbit.phi) * Math.cos(orbit.theta), orbit.target.y + orbit.radius * Math.sin(orbit.phi) * Math.sin(orbit.theta), orbit.target.z + orbit.radius * Math.cos(orbit.phi));
+  camera.up.set(0, 0, 1);
+  camera.lookAt(orbit.target);
+  renderer.render(scene, camera);
+}
+function showMesh(mesh, showBox) {
+  if (!renderer || !mesh) return;
+  while (group.children.length) group.remove(group.children[0]);
+  const dark = matchMedia("(prefers-color-scheme: dark)").matches && document.documentElement.dataset.theme !== "light" || document.documentElement.dataset.theme === "dark";
+  const pieces = mesh.bodies ? mesh.bodies : [mesh];
+  const bb = new THREE.Box3();
+  pieces.forEach(piece => {
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute("position", new THREE.Float32BufferAttribute(piece.v, 3));
+    geometry.setIndex(piece.f);
+    geometry.computeVertexNormals();
+    geometry.computeBoundingBox();
+    bb.union(geometry.boundingBox);
+    const color = piece.c ? new THREE.Color(piece.c[0], piece.c[1], piece.c[2]) : new THREE.Color(dark ? 0x7fb3cc : 0x4e79a7);
+    group.add(new THREE.Mesh(geometry, new THREE.MeshStandardMaterial({ color: color, roughness: 0.5, metalness: 0.15, flatShading: true })));
+  });
+  const size = new THREE.Vector3().subVectors(bb.max, bb.min);
+  if (showBox) {
+    const box = new THREE.Mesh(new THREE.BoxGeometry(size.x, size.y, size.z));
+    box.position.copy(bb.min).add(size.clone().multiplyScalar(0.5));
+    box.updateMatrix();
+    const edges = new THREE.LineSegments(new THREE.EdgesGeometry(box.geometry), new THREE.LineBasicMaterial({ color: dark ? 0xe0b35a : 0xb7791f }));
+    edges.position.copy(box.position);
+    group.add(edges);
+  }
+  const axes = new THREE.AxesHelper(Math.max(size.x, size.y, size.z) * 0.35);
+  axes.position.copy(bb.min);
+  group.add(axes);
+  orbit.target.copy(bb.min).add(size.clone().multiplyScalar(0.5));
+  orbit.radius = Math.max(size.x, size.y, size.z) * 2.2 + 1;
+  resize();
+  draw();
+}
+// deep link
+const hash = (location.hash || "").slice(1);
+if (hash) { const id = Object.keys(byId).find(k => k.replace(/_/g, "-") === hash); if (id) openPart(id); }
+</script>

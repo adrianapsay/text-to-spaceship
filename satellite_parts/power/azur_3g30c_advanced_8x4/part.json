@@ -1,0 +1,99 @@
+{
+ "id": "azur_3g30c_advanced_8x4",
+ "name": "AZUR SPACE 3G30C-Advanced bare solar cell (80 x 40 mm)",
+ "category": "power",
+ "subcategory": "solar_cell",
+ "vendor": "AZUR SPACE Solar Power GmbH",
+ "model": "3G30C-Advanced 8 x 4 cm",
+ "dimensions_mm": {
+  "x": 80,
+  "y": 40,
+  "z": 0.15
+ },
+ "mass_g": 2.75,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.co/products/azur-space-triple-junction-solar-cell-3g30c-advanced-8-by-4-cm",
+  "document": {
+   "title": "satsearch listing of the AZUR SPACE 3G30C-Advanced 8 x 4 cm cell (vendor datasheet linked there)",
+   "revision": null,
+   "date": "2024-11-27"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical"
+  ],
+  "notes": "Weight <= 86 mg/cm2 per the listing; 2.75 g DERIVED for 32 cm2. Thickness not stated on the listing (150 um assumed, typical for the 80 um/150 um 3G30 variants). Efficiency 30%. Vmp/Imp not on the listing."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Germany",
+ "distributors": [
+  "direct",
+  "satsearch"
+ ],
+ "material": "GaInP/GaAs/Ge triple junction",
+ "electrical": {
+  "efficiency_bol_pct": 30.0
+ },
+ "mass_note": "derived from the mg/cm2 figure",
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   80.0,
+   40.0,
+   0.15
+  ],
+  "mesh_volume_mm3": 480.0,
+  "watertight": true,
+  "render_kind": "box",
+  "effective_density_g_cm3": 5.729,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 12
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

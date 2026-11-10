@@ -1,0 +1,100 @@
+{
+ "id": "shcs_m4x10",
+ "name": "Socket head cap screw M4 x 10 (ISO 4762)",
+ "category": "fasteners",
+ "subcategory": "screw",
+ "vendor": "generic (ISO 4762)",
+ "model": "ISO 4762 M4x10",
+ "dimensions_mm": {
+  "x": 7.0,
+  "y": 7.0,
+  "z": 14.0
+ },
+ "mass_g": 2.19,
+ "source": {
+  "type": "standard",
+  "url": "https://engineersedge.com/iso_socket_head_screw.htm",
+  "document": {
+   "title": "ISO 4762 / DIN 912 hexagon socket head cap screws, dimension table",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm"
+  ],
+  "notes": "dk (max head dia.) 7.0, k (head height) 4.0, s (socket) 3.08, pitch 0.7 from the table; length 10 is a standard length listed there. Mass DERIVED from steel at 7.85 g/cm^3 on the simplified geometry (no threads)."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "material": "stainless steel A2/A4 or alloy steel 12.9 (typical for spaceflight: A286 or titanium)",
+ "thread_pitch_mm": 0.7,
+ "mass_note": "derived",
+ "cost": {
+  "value": 0.1,
+  "currency": "USD",
+  "basis": "list_price",
+  "source": null
+ },
+ "cost_note": "typical COTS price per piece, approximate",
+ "geometry": {
+  "measured_bbox_mm": [
+   7.0,
+   6.98,
+   14.0
+  ],
+  "mesh_volume_mm3": 262.1,
+  "watertight": true,
+  "render_kind": "screw",
+  "effective_density_g_cm3": 8.355,
+  "bodies": {
+   "part": [
+    {
+     "name": "head",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__head.stl"
+    },
+    {
+     "name": "shank",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__shank.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 356
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

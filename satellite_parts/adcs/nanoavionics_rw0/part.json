@@ -1,0 +1,139 @@
+{
+ "id": "nanoavionics_rw0",
+ "name": "NanoAvionics RW0 reaction wheel (20 mNms, sealed)",
+ "category": "adcs",
+ "subcategory": "reaction_wheel",
+ "vendor": "NanoAvionics (Kongsberg NanoAvionics)",
+ "model": "RW0",
+ "dimensions_mm": {
+  "x": 43.5,
+  "y": 43.5,
+  "z": 24
+ },
+ "mass_g": 137,
+ "source": {
+  "type": "datasheet",
+  "url": "https://nanoavionics.com/cubesat-components/cubesat-reaction-wheels-control-system-satbus-4rw/",
+  "document": {
+   "title": "NanoAvionics RW0 / 4RW0 product page (spec table and list price)",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "adcs",
+   "electrical",
+   "thermal",
+   "cost"
+  ],
+  "notes": "43.5 x 43.5 x 24 mm, 137 g, 20 mNms, 3.2 mNm, 6500 rpm, 45 mW idle / 150 mW at 1000 rpm, SPI/UART, -40 to 85 C, EUR 4100 (MOQ 4), 2-4 months."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Lithuania",
+ "distributors": [
+  "direct (nanoavionics.com)"
+ ],
+ "lead_time": "2-4 months",
+ "adcs": {
+  "momentum_mNms": 20,
+  "max_torque_mNm": 3.2,
+  "max_speed_rpm": 6500
+ },
+ "electrical": {
+  "power_W": {
+   "idle": 0.045,
+   "nominal": 0.15
+  },
+  "interfaces": [
+   "SPI",
+   "UART"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -40,
+   "max": 85
+  }
+ },
+ "cost": {
+  "value": 4100,
+  "currency": "EUR",
+  "basis": "list_price",
+  "source": "https://nanoavionics.com/cubesat-components/cubesat-reaction-wheels-control-system-satbus-4rw/"
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   43.5,
+   43.5,
+   24.0
+  ],
+  "mesh_volume_mm3": 33555.5,
+  "watertight": true,
+  "render_kind": "reaction_wheel",
+  "effective_density_g_cm3": 4.083,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "flywheel",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__flywheel.stl"
+    },
+    {
+     "name": "motor_cap",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__motor_cap.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 348
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "SPI",
+   "UART"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://nanoavionics.com/wp-content/uploads/2018/07/SatBus-4RW0-1-new.jpg",
+  "photo_source": "vendor",
+  "photo_page": "https://nanoavionics.com/cubesat-components/cubesat-reaction-wheels-control-system-satbus-4rw/",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

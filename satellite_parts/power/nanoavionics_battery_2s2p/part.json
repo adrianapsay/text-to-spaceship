@@ -1,0 +1,128 @@
+{
+ "id": "nanoavionics_battery_2s2p",
+ "name": "NanoAvionics CubeSat battery pack 2S2P (EPS 1.0), 46 Wh in-line 18650 pack",
+ "category": "power",
+ "subcategory": "battery",
+ "vendor": "NanoAvionics (Kongsberg NanoAvionics)",
+ "model": "CubeSat battery pack 2S2P (EPS 1.0)",
+ "dimensions_mm": {
+  "x": 82,
+  "y": 70,
+  "z": 22
+ },
+ "mass_g": 240,
+ "source": {
+  "type": "derived",
+  "url": "https://nanoavionics.com/cubesat-components/cubesat-smallsat-battery-pack/",
+  "document": {
+   "title": "NanoAvionics battery pack product page (capacity, voltage, currents, prices)",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "electrical",
+   "cost"
+  ],
+  "notes": "Capacity/voltage/current from the page tables (2S: 7.4 V, 23-161 Wh family; 4S: 12.8-16.6 V, 100-600 Wh family). Dimensions and mass NOT listed: DERIVED from an in-line row of 4 18650 cells (18.5 x 65 mm) with a housing allowance, 48 g per cell plus 50 g. Price EUR 2750 is the family starting price."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Lithuania",
+ "distributors": [
+  "direct (nanoavionics.com)"
+ ],
+ "lead_time": "3-5 months",
+ "dimensions_note": "derived from cell count",
+ "mass_note": "derived",
+ "electrical": {
+  "chemistry": "Li-ion 18650",
+  "cells": "4",
+  "energy_Wh": 46,
+  "voltage_V": {
+   "nominal": 7.4
+  },
+  "max_discharge_A": 7.8,
+  "heater": "integrated",
+  "interfaces": [
+   "I2C (temperature sensors)"
+  ]
+ },
+ "cost": {
+  "value": 2750,
+  "currency": "EUR",
+  "basis": "list_price",
+  "source": "https://nanoavionics.com/cubesat-components/cubesat-smallsat-battery-pack/"
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   82.0,
+   70.0,
+   22.0
+  ],
+  "mesh_volume_mm3": 126246.5,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.901,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "I2C"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 7.4
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://nanoavionics.com/wp-content/uploads/2025/05/kongsberg-nanoavionics-cubesat-nanosatellite-small-satellite-eps-in-line-18650-battery-pack-2s.jpg",
+  "photo_source": "vendor",
+  "photo_page": "https://nanoavionics.com/cubesat-components/cubesat-smallsat-battery-pack/",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

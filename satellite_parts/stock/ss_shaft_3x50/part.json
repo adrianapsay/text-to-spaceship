@@ -1,0 +1,89 @@
+{
+ "id": "ss_shaft_3x50",
+ "name": "Stainless steel shaft 3 mm x 50 mm (h6)",
+ "category": "stock",
+ "subcategory": "shaft",
+ "vendor": "generic",
+ "model": "303 stainless shaft",
+ "dimensions_mm": {
+  "x": 50,
+  "y": 3,
+  "z": 3
+ },
+ "mass_g": 2.8,
+ "source": {
+  "type": "derived",
+  "url": "https://www.mcmaster.com",
+  "document": {
+   "title": "standard ground shaft sizes",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm"
+  ],
+  "notes": ""
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "material": "stainless steel 303",
+ "mass_note": "derived",
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "unknown",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   50.0,
+   2.99,
+   3.0
+  ],
+  "mesh_volume_mm3": 352.1,
+  "watertight": true,
+  "render_kind": "cylinder",
+  "effective_density_g_cm3": 7.952,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 164
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

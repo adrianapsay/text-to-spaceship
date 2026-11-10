@@ -1,0 +1,124 @@
+{
+ "id": "gomspace_msp_a_3_1",
+ "name": "GomSpace NanoPower MSP assembly A-3-1 (3 dual-cell modules, 1.5 mm plate)",
+ "category": "power",
+ "subcategory": "solar_panel",
+ "vendor": "GomSpace",
+ "model": "NanoPower MSP A-3-1",
+ "dimensions_mm": {
+  "x": 268,
+  "y": 83,
+  "z": 4.5
+ },
+ "mass_g": 81,
+ "source": {
+  "type": "datasheet",
+  "url": "https://gomspace.com/wp-content/uploads/2026/01/gs-ds-nanopower-msp_1016340_32.pdf",
+  "document": {
+   "title": "GomSpace NanoPower MSP datasheet 1016340",
+   "revision": "3.2",
+   "date": "2024-02-23"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "mass_g",
+   "electrical",
+   "material",
+   "thermal",
+   "interfaces"
+  ],
+  "notes": "Assembly mass 81 g from the datasheet mass table. Dual-cell PCB 81 x 88 mm; plate length DERIVED as 3 x 88 mm + 4 mm, width 83 mm (rail-to-rail), 4.5 mm total thickness assumed (1.5 mm plate + PCB + cells). AL5005-H14 clear anodised plate, Molex Pico-Lock 504050-0491 connectors, -55 to 150 C."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "Denmark",
+ "distributors": [
+  "direct"
+ ],
+ "dimensions_note": "derived from module count",
+ "material": "AL5005-H14 plate, PCB modules, AZUR 3G30A or CESI CTJ-LC cells",
+ "electrical": {
+  "cells": 6,
+  "cell_type": "AZUR 3G30A (2.41 V, 503 mA) or CESI CTJ-LC",
+  "power_W": {
+   "peak": 7.3
+  },
+  "voltage_V": {
+   "nominal": 14.5
+  }
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -55,
+   "max": 150
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   268.0,
+   83.0,
+   4.5
+  ],
+  "mesh_volume_mm3": 90966.0,
+  "watertight": true,
+  "render_kind": "solar_panel",
+  "effective_density_g_cm3": 0.89,
+  "bodies": {
+   "part": [
+    {
+     "name": "substrate",
+     "color": [
+      0.3,
+      0.3,
+      0.32
+     ],
+     "file": "bodies/part__substrate.stl"
+    },
+    {
+     "name": "cells",
+     "color": [
+      0.16,
+      0.26,
+      0.62
+     ],
+     "file": "bodies/part__cells.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 108
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [
+   "Molex Pico-Lock 504050-0491 (1.5 mm pitch)"
+  ],
+  "rf_connectors": [],
+  "power_bus_V": 14.5
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://gomspace.com/wp-content/uploads/2025/09/MSP-Solar-Panels-Featured-Image.png",
+  "photo_source": "vendor",
+  "photo_page": "https://gomspace.com/product/nanopower-msp/",
+  "photo_file": "reference_photo",
+  "datasheet_url": "https://gomspace.com/wp-content/uploads/2026/01/gs-ds-nanopower-msp_1016340_32.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

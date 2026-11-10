@@ -1,0 +1,135 @@
+{
+ "id": "dawn_cubedrive_2u",
+ "name": "Dawn Aerospace CubeDrive 2U (200 x 96 x 96 mm, in development)",
+ "category": "propulsion",
+ "subcategory": "bipropellant_module",
+ "vendor": "Dawn Aerospace",
+ "model": "CubeDrive 2U",
+ "dimensions_mm": {
+  "x": 96,
+  "y": 96,
+  "z": 200
+ },
+ "mass_g": 2700,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.dawnaerospace.com/green-propulsion-cubedrives",
+  "document": {
+   "title": "Dawn Aerospace CubeDrive product page",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "propulsion"
+  ],
+  "notes": "2050 g dry / 2700 g wet, about 1450 N s."
+ },
+ "status": "in_development",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "New Zealand / Netherlands",
+ "distributors": [
+  "direct"
+ ],
+ "dry_mass_g": 2050,
+ "propulsion": {
+  "propellant": "N2O / C3H6",
+  "total_impulse_Ns": 1450,
+  "propellant_mass_g": 650
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   96.0,
+   96.0,
+   200.0
+  ],
+  "mesh_volume_mm3": 1752990.9,
+  "watertight": true,
+  "render_kind": "thruster_box_nozzle",
+  "effective_density_g_cm3": 1.54,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    },
+    {
+     "name": "flange",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__flange.stl"
+    },
+    {
+     "name": "nozzle",
+     "color": [
+      0.55,
+      0.55,
+      0.58
+     ],
+     "file": "bodies/part__nozzle.stl"
+    },
+    {
+     "name": "valve",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__valve.stl"
+    },
+    {
+     "name": "tank_dome",
+     "color": [
+      0.55,
+      0.55,
+      0.58
+     ],
+     "file": "bodies/part__tank_dome.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 448
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

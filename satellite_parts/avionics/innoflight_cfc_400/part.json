@@ -1,0 +1,145 @@
+{
+ "id": "innoflight_cfc_400",
+ "name": "Innoflight CFC-400 CHAMPS flight computer (Zynq MPSoC)",
+ "category": "avionics",
+ "subcategory": "obc",
+ "vendor": "Innoflight",
+ "model": "CFC-400",
+ "dimensions_mm": {
+  "x": 82,
+  "y": 82,
+  "z": 29
+ },
+ "mass_g": 250,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.co/products/innoflight-champs-flight-computer-mpso-c-cfc-400",
+  "document": {
+   "title": "satsearch listing of the Innoflight CFC-400 datasheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "compute",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "82 x 82 x 29 mm, <250 g, Cortex-R5F 600 MHz + quad A53 1 GHz, 2 GB LPDDR4, 16 GB SLC NAND, 3.3 V reg or 28 V unreg, 0.6-12 W, -40 to 85 C."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "USA",
+ "distributors": [
+  "direct",
+  "satsearch"
+ ],
+ "compute": {
+  "processor": "Xilinx Zynq UltraScale+ MPSoC (quad Cortex-A53 + Cortex-R5F)",
+  "clock_GHz": 1.0,
+  "ram_MB": 2048,
+  "storage_GB": 16
+ },
+ "electrical": {
+  "voltage_V": {
+   "nominal": 3.3,
+   "max": 28
+  },
+  "voltage_note": "3.3 V regulated or 28 V unregulated",
+  "power_W": {
+   "idle": 0.6,
+   "peak": 12
+  },
+  "interfaces": [
+   "SPI",
+   "I2C",
+   "MIL-STD-1553"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -40,
+   "max": 85
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   82.0,
+   82.0,
+   29.0
+  ],
+  "mesh_volume_mm3": 194962.5,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.282,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "I2C",
+   "SPI"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 3.3
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_6qmt4o_innoflight_champs_flight_computer_mpso_c_cfc_400.png",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/innoflight-champs-flight-computer-mpso-c-cfc-400",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

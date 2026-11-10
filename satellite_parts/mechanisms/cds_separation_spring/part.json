@@ -1,0 +1,93 @@
+{
+ "id": "cds_separation_spring",
+ "name": "Generic CubeSat separation spring plunger (CDS 2.2.14)",
+ "category": "mechanisms",
+ "subcategory": "separation_spring",
+ "vendor": "generic (per CDS Rev 14.1)",
+ "model": "separation spring",
+ "dimensions_mm": {
+  "x": 8,
+  "y": 8,
+  "z": 12
+ },
+ "mass_g": 3,
+ "source": {
+  "type": "standard",
+  "url": "https://www.nasa.gov/wp-content/uploads/2018/01/cubesatdesignspecificationrev14_12022-02-09.pdf",
+  "document": {
+   "title": "CDS Rev 14.1 section 2.2.14",
+   "revision": "14.1",
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "mechanism"
+  ],
+  "notes": "CDS guidance: max force below 6.7 N (1.5 lbf), stroke above 2.5 mm, centred on the -Z standoff ends. Envelope 8 x 8 x 12 mm is DERIVED (typical spring plunger inside an 8.5 mm rail end)."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "mass_note": "derived",
+ "mechanism": {
+  "actuator_type": "spring",
+  "actuation_force_N": 6.7,
+  "stroke_mm": 2.5
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "unknown",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   8.0,
+   7.98,
+   12.0
+  ],
+  "mesh_volume_mm3": 600.9,
+  "watertight": true,
+  "render_kind": "cylinder",
+  "effective_density_g_cm3": 4.992,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 164
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": "https://www.nasa.gov/wp-content/uploads/2018/01/cubesatdesignspecificationrev14_12022-02-09.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

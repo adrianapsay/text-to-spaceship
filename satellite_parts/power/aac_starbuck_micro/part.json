@@ -1,0 +1,147 @@
+{
+ "id": "aac_starbuck_micro",
+ "name": "AAC Clyde Space STARBUCK-MICRO PCDU (28 V bus, 120 W peak, microsat)",
+ "category": "power",
+ "subcategory": "eps",
+ "vendor": "AAC Clyde Space",
+ "model": "STARBUCK-MICRO",
+ "dimensions_mm": {
+  "x": 267,
+  "y": 167,
+  "z": 89
+ },
+ "mass_g": 2450,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/AAC_DataSheet_Starbuck-Micro.pdf",
+  "document": {
+   "title": "AAC Clyde Space STARBUCK-MICRO datasheet (release 2020-07-28)",
+   "revision": null,
+   "date": "2020-07-28"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "thermal",
+   "environment",
+   "interfaces"
+  ],
+  "notes": "267 x 167 x 89 mm, 2450 g, 28 V primary bus with 17 LCL/RLCL outputs, 5 V isolated bus with 12 outputs, 3 magnetorquer drivers, S3R array regulation, 80 W avg / 120 W peak, 4 W idle, RS-485 TM/TC, -30 to 60 C, 20 krad (qualified >30)."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Sweden / UK",
+ "distributors": [
+  "direct",
+  "satsearch"
+ ],
+ "electrical": {
+  "voltage_V": {
+   "nominal": 28
+  },
+  "outputs": [
+   "28 V x17 (LCL/RLCL)",
+   "5 V isolated x12",
+   "3 magnetorquer drivers"
+  ],
+  "max_power_W": 120,
+  "power_W": {
+   "idle": 4.0,
+   "nominal": 80
+  },
+  "interfaces": [
+   "RS-485",
+   "RS-422 (reset pulse)",
+   "thermistor inputs x13"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -30,
+   "max": 60
+  }
+ },
+ "environment": {
+  "radiation_krad": 20
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   267.0,
+   167.0,
+   89.0
+  ],
+  "mesh_volume_mm3": 3968387.5,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 0.617,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "RS-422",
+   "RS-485"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 28
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/image-aac-clyde-space-starbuck-mini-k55c9u.jpg",
+  "photo_source": "satsearch (STARBUCK-MINI photo; family)",
+  "photo_page": "https://satsearch.co/products/aac-clyde-starbuck-micro",
+  "photo_file": "reference_photo",
+  "datasheet_url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/AAC_DataSheet_Starbuck-Micro.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

@@ -1,0 +1,141 @@
+{
+ "id": "sensonor_stim300",
+ "name": "Sensonor STIM300 tactical-grade IMU",
+ "category": "adcs",
+ "subcategory": "imu",
+ "vendor": "Sensonor (Safran)",
+ "model": "STIM300",
+ "dimensions_mm": {
+  "x": 45,
+  "y": 39,
+  "z": 22
+ },
+ "mass_g": 55,
+ "source": {
+  "type": "datasheet",
+  "url": "https://sensonor.azurewebsites.net/media/vl4jeya3/2022-04-06-product-brief-stim300-a4_high-quality-print.pdf",
+  "document": {
+   "title": "STIM300 product brief",
+   "revision": "edition 2",
+   "date": "2022-04"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "adcs",
+   "electrical",
+   "thermal"
+  ],
+  "notes": ""
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Norway",
+ "distributors": [
+  "direct",
+  "NovAtel (OEM-IMU-STIM300)"
+ ],
+ "adcs": {
+  "gyro_bias_instability_deg_per_h": 0.3,
+  "gyro_range_deg_per_s": 400,
+  "accel_range_g": 10
+ },
+ "electrical": {
+  "voltage_V": {
+   "min": 4.5,
+   "nominal": 5.0,
+   "max": 5.5
+  },
+  "power_W": {
+   "nominal": 1.5,
+   "peak": 2.0
+  },
+  "interfaces": [
+   "RS-422 up to 5.18 Mbit/s"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -40,
+   "max": 85
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   45.0,
+   39.0,
+   22.0
+  ],
+  "mesh_volume_mm3": 38577.2,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.426,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "RS-422"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 5.0
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": "https://sensonor.azurewebsites.net/media/vl4jeya3/2022-04-06-product-brief-stim300-a4_high-quality-print.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

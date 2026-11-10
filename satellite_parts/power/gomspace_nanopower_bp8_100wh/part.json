@@ -1,0 +1,147 @@
+{
+ "id": "gomspace_nanopower_bp8_100wh",
+ "name": "GomSpace NanoPower BP8 100 Wh battery (8S1P, 28.8 V)",
+ "category": "power",
+ "subcategory": "battery",
+ "vendor": "GomSpace",
+ "model": "NanoPower BP8 100 Wh",
+ "dimensions_mm": {
+  "x": 95,
+  "y": 94.8,
+  "z": 42
+ },
+ "mass_g": 486,
+ "source": {
+  "type": "datasheet",
+  "url": "https://gomspace.com/wp-content/uploads/2025/08/gs-ds-nanopower-bp8_100_Wh.pdf",
+  "document": {
+   "title": "GomSpace NanoPower BP8 100 Wh datasheet DS 1069134",
+   "revision": "1.0.0",
+   "date": "2026-01-16"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "thermal",
+   "interfaces"
+  ],
+  "notes": "94.8 x 95 x 42 mm, 486 g, 8S1P, 100 Wh nominal (86 Wh recommended range), 23.6-32 V (28.8 typ), 4 A charge/discharge, 6 W heaters, Harwin G125 battery connectors, CAN and I2C with CSP, -10 to 50 C."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Denmark",
+ "distributors": [
+  "direct"
+ ],
+ "first_available_year": 2025,
+ "electrical": {
+  "chemistry": "Li-ion 8S1P",
+  "energy_Wh": 100,
+  "capacity_mAh": 3500,
+  "voltage_V": {
+   "min": 23.6,
+   "nominal": 28.8,
+   "max": 33.6
+  },
+  "charge_A": 4,
+  "max_discharge_A": 4,
+  "heater_W": 6,
+  "interfaces": [
+   "CAN (CSP)",
+   "I2C (CSP)",
+   "UART (debug)"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -10,
+   "max": 50
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   95.0,
+   94.8,
+   42.0
+  ],
+  "mesh_volume_mm3": 378218.5,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.285,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "CAN",
+   "CSP",
+   "I2C",
+   "UART"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [
+   "Harwin Gecko G125-FS13405L0R x2 (battery)",
+   "Harwin Gecko G125-FS11005L0R (ground breaker)",
+   "Molex PicoBlade 53398-0871 (debug)"
+  ],
+  "rf_connectors": [],
+  "power_bus_V": 28.8
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://gomspace.com/wp-content/uploads/2025/09/NanoPower-BP8-Featured-Image-N.png",
+  "photo_source": "vendor",
+  "photo_page": "https://gomspace.com/product/nanopower-bp8/",
+  "photo_file": "reference_photo",
+  "datasheet_url": "https://gomspace.com/wp-content/uploads/2025/08/gs-ds-nanopower-bp8_100_Wh.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

@@ -1,0 +1,160 @@
+{
+ "id": "cubespace_cubestar",
+ "name": "CubeSpace CubeStar star tracker (Gen 2)",
+ "category": "adcs",
+ "subcategory": "star_tracker",
+ "vendor": "CubeSpace Satellite Systems",
+ "model": "CubeStar",
+ "dimensions_mm": {
+  "x": 35,
+  "y": 24,
+  "z": 49
+ },
+ "mass_g": 47,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.co/products/cubespace-gen2-cubestar-miniature-star-tracker",
+  "document": {
+   "title": "satsearch listing of the CubeStar datasheet, cross-checked with the CubeSpace Sensors 2023 brochure (https://www.cubesatshop.com/wp-content/uploads/2023/06/CubeSpace-SENSORS-2023.pdf)",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "adcs",
+   "electrical",
+   "interfaces"
+  ],
+  "notes": "35 x 49 x 24 mm, 47 g, 0.02 deg cross / 0.06 deg roll (3 sigma, brochure), 42 deg FOV (59.4 diagonal), <1 Hz, 0.3 deg/s max slew, 3.3 V, 271 mW peak / 165 mW avg, CAN/UART/RS-485, Molex Micro-Lock Plus. Earlier record had the brochure columns swapped; corrected 2026-11-08."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "South Africa",
+ "distributors": [
+  "CubeSatShop",
+  "satsearch",
+  "direct"
+ ],
+ "adcs": {
+  "accuracy_arcsec_cross": 72,
+  "accuracy_arcsec_roll": 216,
+  "field_of_view_deg": 42,
+  "update_rate_Hz": 1,
+  "max_slew_deg_s": 0.3
+ },
+ "electrical": {
+  "voltage_V": {
+   "nominal": 3.3
+  },
+  "power_W": {
+   "nominal": 0.165,
+   "peak": 0.271
+  },
+  "interfaces": [
+   "CAN",
+   "UART",
+   "RS-485"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -20,
+   "max": 80
+  }
+ },
+ "environment": {
+  "radiation_krad": 24
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   35.0,
+   24.0,
+   49.0
+  ],
+  "mesh_volume_mm3": 34835.9,
+  "watertight": true,
+  "render_kind": "camera_box_lens",
+  "effective_density_g_cm3": 1.349,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    },
+    {
+     "name": "lens_barrel",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__lens_barrel.stl"
+    },
+    {
+     "name": "glass",
+     "color": [
+      0.45,
+      0.65,
+      0.85
+     ],
+     "file": "bodies/part__glass.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 180
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "CAN",
+   "RS-485",
+   "UART"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [
+   "Molex Micro-Lock Plus"
+  ],
+  "rf_connectors": [],
+  "power_bus_V": 3.3
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/image-cubespace-gen2-cubestar-r2ehz3.jpg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/cubespace-gen2-cubestar-miniature-star-tracker",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

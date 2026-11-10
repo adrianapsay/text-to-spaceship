@@ -1,0 +1,102 @@
+{
+ "id": "2ndspace_verse_03",
+ "name": "2NDSpace VERSE-03 3U CubeSat Structure",
+ "category": "structures",
+ "subcategory": "frame",
+ "vendor": "2NDSpace",
+ "model": "VERSE-03 3U CubeSat Structure",
+ "dimensions_mm": {
+  "x": 100,
+  "y": 100,
+  "z": 340.5
+ },
+ "mass_g": 290,
+ "source": {
+  "type": "unverified",
+  "url": "https://satsearch.co/products/2ndspace-verse-03-3u-structure",
+  "document": {
+   "title": "satsearch structures overview (mass) and listing",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "mass_g"
+  ],
+  "notes": "Approximate mass from the satsearch overview; envelope assumed per CDS Rev 14.1 (not stated on the overview). Listing has the datasheet."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "Italy",
+ "distributors": [
+  "direct",
+  "satsearch"
+ ],
+ "dimensions_note": "assumed per CDS",
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   100.0,
+   100.0,
+   340.5
+  ],
+  "mesh_volume_mm3": 163310.5,
+  "watertight": true,
+  "render_kind": "cubesat_frame",
+  "effective_density_g_cm3": 1.776,
+  "bodies": {
+   "part": [
+    {
+     "name": "rails",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__rails.stl"
+    },
+    {
+     "name": "rings",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__rings.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 224
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_jpm3ai_2ndspace_3u-structure.png",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/2ndspace-verse-03-3u-structure",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

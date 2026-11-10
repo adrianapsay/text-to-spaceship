@@ -1,0 +1,138 @@
+{
+ "id": "tensortech_adcs_mtq",
+ "name": "Tensor Tech ADCS-MTQ integrated ADCS (0.2U, sun sensor + magnetometer + magnetorquers)",
+ "category": "adcs",
+ "subcategory": "integrated_adcs",
+ "vendor": "Tensor Tech",
+ "model": "TensorADCS-MTQ",
+ "dimensions_mm": {
+  "x": 90,
+  "y": 90,
+  "z": 25
+ },
+ "mass_g": 140,
+ "source": {
+  "type": "unverified",
+  "url": "https://satsearch.co/products/tensortech-adcs-mtq-integrated-attitude-determination-and-control-system-with-magnetorquers",
+  "document": {
+   "title": "satsearch listing of the Tensor Tech ADCS-MTQ",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "mass_g",
+   "adcs",
+   "electrical",
+   "interfaces"
+  ],
+  "notes": "0.2U, 127-207 g (140 g highlight), FSS-15M + magnetometer + 3-axis magnetorquer, 0.3 deg knowledge, 5 deg control (sunlit), 3.3 and 5 V, <1 W, UART or RS-422/485. Dimensions NOT listed: 90 x 90 x 25 mm (0.2U) assumed."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Taiwan",
+ "distributors": [
+  "direct",
+  "satsearch",
+  "CubeSatShop"
+ ],
+ "dimensions_note": "assumed from 0.2U",
+ "adcs": {
+  "pointing_accuracy_deg": 5,
+  "determination_accuracy_deg": 0.3,
+  "torquers": "3-axis",
+  "sensors": "FSS-15M sun sensor, magnetometer"
+ },
+ "electrical": {
+  "voltage_V": {
+   "nominal": 5.0
+  },
+  "voltage_note": "3.3 V and 5 V",
+  "power_W": {
+   "peak": 1.0
+  },
+  "interfaces": [
+   "UART",
+   "RS-422/RS-485 (option)"
+  ]
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   90.0,
+   90.0,
+   25.0
+  ],
+  "mesh_volume_mm3": 202466.5,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 0.691,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "RS-422",
+   "RS-485",
+   "UART"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 5.0
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/image-tensor-tech-tensoradcs-mtq-integrated-attitude-determination-and-control-system-with-magnetorquers-hpimg7.jpg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/tensortech-adcs-mtq-integrated-attitude-determination-and-control-system-with-magnetorquers",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

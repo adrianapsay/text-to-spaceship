@@ -1,0 +1,100 @@
+{
+ "id": "calian_tw1322_gnss_antenna",
+ "name": "Calian (Tallysman) TW1322 dual-frequency GNSS antenna (as in the GomSpace GPS-Kit)",
+ "category": "comms",
+ "subcategory": "antenna",
+ "vendor": "Calian (Tallysman)",
+ "model": "TW1322",
+ "dimensions_mm": {
+  "x": 35,
+  "y": 35,
+  "z": 7.7
+ },
+ "mass_g": 54,
+ "source": {
+  "type": "datasheet",
+  "url": "https://gomspace.com/product/gsp-receiver/",
+  "document": {
+   "title": "GomSpace NanoSense GPS-Kit product page (antenna line: dia 35 x 7.7 mm, 54 g)",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Dimensions and mass from the GomSpace GPS-Kit page; the Calian datasheet was not read. 54 g seems high for a 35 mm puck and may include the mount; verify. GPS-Kit datasheet: https://gomspace.com/wp-content/uploads/2025/09/gs-ds-nanosense-gpskit-26.pdf"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Canada",
+ "distributors": [
+  "GomSpace (kit)",
+  "Calian direct",
+  "Digi-Key"
+ ],
+ "mass_note": "verify (may include mount)",
+ "rf": {
+  "band": "GNSS L1/L2 (dual frequency)"
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   35.0,
+   34.9,
+   7.7
+  ],
+  "mesh_volume_mm3": 7380.7,
+  "watertight": true,
+  "render_kind": "cylinder",
+  "effective_density_g_cm3": 7.316,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 164
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [
+   "SMA or MCX (per Calian variant; not confirmed)"
+  ],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://gomspace.com/wp-content/uploads/2025/09/NanoSense-GPS-Kit.png",
+  "photo_source": "vendor (GomSpace GPS-Kit photo)",
+  "photo_page": "https://gomspace.com/product/gsp-receiver/",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

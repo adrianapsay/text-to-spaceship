@@ -1,0 +1,117 @@
+{
+ "id": "samsung_inr18650_35e",
+ "name": "Samsung SDI INR18650-35E Li-ion cell",
+ "category": "power",
+ "subcategory": "battery_cell",
+ "vendor": "Samsung SDI",
+ "model": "INR18650-35E",
+ "dimensions_mm": {
+  "x": 18.4,
+  "y": 18.4,
+  "z": 65.2
+ },
+ "mass_g": 50,
+ "source": {
+  "type": "datasheet",
+  "url": "https://cdn.shopify.com/s/files/1/0613/3327/4870/files/35eDatasheet.pdf",
+  "document": {
+   "title": "Samsung INR18650-35E specification (retailer-hosted copy)",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical"
+  ],
+  "notes": "Values from the Samsung specification sheet as hosted by a retailer; verify against Samsung SDI. Typical: 3500 mAh, 3.6 V nominal, 18.4 mm max dia, 65.2 mm max height, about 50 g."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "South Korea",
+ "distributors": [
+  "18650batterystore",
+  "nkon",
+  "many retailers"
+ ],
+ "first_available_year": 2015,
+ "material": "Li-ion NCA 18650",
+ "electrical": {
+  "voltage_V": {
+   "min": 2.65,
+   "nominal": 3.6,
+   "max": 4.2
+  },
+  "capacity_Ah": 3.5,
+  "energy_Wh": 12.6,
+  "max_discharge_A": 8.0
+ },
+ "cost": {
+  "value": 5,
+  "currency": "USD",
+  "basis": "list_price",
+  "source": "https://www.18650batterystore.com/products/samsung-35e-18650-3500mah-8a-battery"
+ },
+ "cost_note": "retail single-cell price, approximate",
+ "geometry": {
+  "measured_bbox_mm": [
+   18.4,
+   18.35,
+   65.2
+  ],
+  "mesh_volume_mm3": 16908.7,
+  "watertight": true,
+  "render_kind": "cell_18650",
+  "effective_density_g_cm3": 2.957,
+  "bodies": {
+   "part": [
+    {
+     "name": "can",
+     "color": [
+      0.85,
+      0.72,
+      0.3
+     ],
+     "file": "bodies/part__can.stl"
+    },
+    {
+     "name": "positive_cap",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__positive_cap.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 332
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 3.6
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": "https://cdn.shopify.com/s/files/1/0613/3327/4870/files/35eDatasheet.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

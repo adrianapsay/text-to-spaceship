@@ -1,0 +1,153 @@
+{
+ "id": "aac_trx_u",
+ "name": "AAC Clyde Space (SpaceQuest) TRX-U UHF transceiver",
+ "category": "comms",
+ "subcategory": "transceiver",
+ "vendor": "AAC Clyde Space (AAC SpaceQuest)",
+ "model": "TRX-U",
+ "dimensions_mm": {
+  "x": 83,
+  "y": 57,
+  "z": 16
+ },
+ "mass_g": 125,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/TRX-U-datasheet.pdf",
+  "document": {
+   "title": "AAC Clyde Space TRX-U datasheet 2024-04-09",
+   "revision": null,
+   "date": "2024-04-09"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "rf",
+   "electrical",
+   "thermal",
+   "interfaces"
+  ],
+  "notes": "83 x 57 x 16 mm, 125 g, 370-470 MHz, 2.4-19.2 kbps, 0.25-5 W RF, 3.3-42 V, 0.23 W RX / 8 W TX, 3.3 V CMOS clock+data, 15-pin Micro-D, MCX RF, -35 to 80 C."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "USA",
+ "distributors": [
+  "direct",
+  "satsearch"
+ ],
+ "rf": {
+  "band": "UHF",
+  "frequency_MHz": [
+   370,
+   470
+  ],
+  "data_rate_kbps": [
+   2.4,
+   19.2
+  ],
+  "tx_power_W": [
+   0.25,
+   5
+  ]
+ },
+ "electrical": {
+  "voltage_V": {
+   "min": 3.3,
+   "max": 42
+  },
+  "power_W": {
+   "idle": 0.23,
+   "peak": 8.0
+  },
+  "interfaces": [
+   "3.3 V CMOS clock and data"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -35,
+   "max": 80
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   83.0,
+   57.0,
+   16.0
+  ],
+  "mesh_volume_mm3": 75666.7,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.652,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [
+   "Micro-D 15-pin socket"
+  ],
+  "rf_connectors": [
+   "MCX"
+  ],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_ehxvve_aac-clyde_trx-u.jpeg",
+  "photo_source": "satsearch",
+  "photo_page": "https://aac-clyde.space/what-we-do/space-products-components/communications/trx-u",
+  "photo_file": "reference_photo",
+  "datasheet_url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/TRX-U-datasheet.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

@@ -1,0 +1,145 @@
+{
+ "id": "endurosat_sband_transmitter",
+ "name": "EnduroSat S-band Transmitter",
+ "category": "comms",
+ "subcategory": "transmitter",
+ "vendor": "EnduroSat",
+ "model": "S-Band Transmitter",
+ "dimensions_mm": {
+  "x": 96,
+  "y": 90,
+  "z": 20
+ },
+ "mass_g": 250,
+ "source": {
+  "type": "unverified",
+  "url": "https://endurosat.com/wp-content/uploads/2022/02/Endurosat_Product_Catalogue_02_22.pdf",
+  "document": {
+   "title": "EnduroSat Product Catalogue 02/2022",
+   "revision": null,
+   "date": "2022-02"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "mass_g",
+   "rf",
+   "electrical"
+  ],
+  "notes": "Dimensions not published; PC/104 footprint and 20 mm height assumed. "
+ },
+ "status": "legacy",
+ "fidelity": "envelope",
+ "vendor_country": "Bulgaria",
+ "distributors": [
+  "direct (endurosat.com shop)"
+ ],
+ "status_note": "Not on endurosat.com product list as of 2026-11-08 (2022 catalogue item); current replacements are listed as separate parts.",
+ "rf": {
+  "band": "S",
+  "tx_frequency_MHz": [
+   [
+    2200,
+    2290
+   ],
+   [
+    2400,
+    2450
+   ]
+  ],
+  "data_rate_Mbps": 20,
+  "tx_power_W": [
+   0.5,
+   2.0
+  ],
+  "storage_GB": 32
+ },
+ "electrical": {
+  "voltage_V": {
+   "nominal": 5.0,
+   "max": 24.5
+  },
+  "voltage_note": "5 V or 10-24.5 V"
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "cad_downloads": [
+  {
+   "format": "CAD + datasheet (request form)",
+   "url": "https://www.endurosat.com/products/uhf-transceiver-ii/",
+   "notes": "gated download"
+  }
+ ],
+ "geometry": {
+  "measured_bbox_mm": [
+   96.0,
+   90.0,
+   20.0
+  ],
+  "mesh_volume_mm3": 106686.2,
+  "watertight": true,
+  "render_kind": "pc104_board",
+  "effective_density_g_cm3": 2.343,
+  "bodies": {
+   "part": [
+    {
+     "name": "pcb",
+     "color": [
+      0.09,
+      0.42,
+      0.24
+     ],
+     "file": "bodies/part__pcb.stl"
+    },
+    {
+     "name": "stack_header",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__stack_header.stl"
+    },
+    {
+     "name": "components",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__components.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 732
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": "PC/104 stack",
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 5.0
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": "https://endurosat.com/wp-content/uploads/2022/02/Endurosat_Product_Catalogue_02_22.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

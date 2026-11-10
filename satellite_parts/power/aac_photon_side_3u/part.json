@@ -1,0 +1,119 @@
+{
+ "id": "aac_photon_side_3u",
+ "name": "AAC Clyde Space PHOTON-SIDE 3U body-mounted solar panel (XTJ Prime, 9 W)",
+ "category": "power",
+ "subcategory": "solar_panel",
+ "vendor": "AAC Clyde Space",
+ "model": "PHOTON-SIDE 3U",
+ "dimensions_mm": {
+  "x": 325,
+  "y": 83,
+  "z": 3.5
+ },
+ "mass_g": 135,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.aac-clyde.space/what-we-do/space-products-components/photon-solar-arrays",
+  "document": {
+   "title": "AAC Clyde Space PHOTON solar arrays product page (datasheet: https://www.aac-clyde.space/wp-content/uploads/2021/11/AAC_DataSheet_Photon_original.pdf)",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "mass_g",
+   "electrical",
+   "thermal",
+   "material"
+  ],
+  "notes": "3.5 mm stowed height, 135 g (3U), FR4 substrate, XTJ-Prime cells 30.7 %, up to 9 W per 3U face, 4 mil coverglass, -40 to 80 C. Face length/width not stated: 325 x 83 mm assumed from the CDS 3U face."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Sweden / UK",
+ "distributors": [
+  "direct",
+  "satsearch"
+ ],
+ "dimensions_note": "face assumed per CDS",
+ "material": "FR4 substrate, Spectrolab XTJ Prime cells",
+ "electrical": {
+  "cells": 7,
+  "cell_type": "Spectrolab XTJ Prime",
+  "power_W": {
+   "peak": 9.0
+  }
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -40,
+   "max": 80
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   325.0,
+   83.0,
+   3.5
+  ],
+  "mesh_volume_mm3": 79868.0,
+  "watertight": true,
+  "render_kind": "solar_panel",
+  "effective_density_g_cm3": 1.69,
+  "bodies": {
+   "part": [
+    {
+     "name": "substrate",
+     "color": [
+      0.3,
+      0.3,
+      0.32
+     ],
+     "file": "bodies/part__substrate.stl"
+    },
+    {
+     "name": "cells",
+     "color": [
+      0.16,
+      0.26,
+      0.62
+     ],
+     "file": "bodies/part__cells.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 124
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/3U-min_product_detail.jpg",
+  "photo_source": "vendor",
+  "photo_page": "https://www.aac-clyde.space/what-we-do/space-products-components/photon-solar-arrays",
+  "photo_file": "reference_photo",
+  "datasheet_url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/AAC_DataSheet_Photon_original.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

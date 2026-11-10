@@ -1,0 +1,113 @@
+{
+ "id": "gomspace_nanocom_ant2150",
+ "name": "GomSpace NanoCom ANT2150 S-band patch antenna",
+ "category": "comms",
+ "subcategory": "antenna",
+ "vendor": "GomSpace",
+ "model": "NanoCom ANT2150",
+ "dimensions_mm": {
+  "x": 98,
+  "y": 98,
+  "z": 20.1
+ },
+ "mass_g": 110,
+ "source": {
+  "type": "datasheet",
+  "url": "https://gomspace.com/UserFiles/Subsystems/datasheet/gs-ds-nanocom-ant2150_1010651-22.pdf",
+  "document": {
+   "title": "NanoCom ANT2150 datasheet DS 1010651",
+   "revision": "2.2",
+   "date": "2023-10-13"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "rf"
+  ],
+  "notes": "Mass approximately 110 g depending on mounting. ISL (TX/RX 2200-2290) or DUP (TX 2200-2290, RX 2025-2110/2120) variants."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "Denmark",
+ "distributors": [
+  "direct (gomspace.com shop)"
+ ],
+ "rf": {
+  "band": "S",
+  "frequency_MHz": [
+   2200,
+   2290
+  ],
+  "gain_dBi": 8,
+  "polarization": "circular (LHCP ISL / RHCP DUP)",
+  "max_input_power_dBm": 5
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "status_note": "2026-11-08: not found on the current gomspace.com product pages (site now lists SDR, P60/P80, BPX/BP8, NanoStruct kits); datasheet still served, verify availability before design-in.",
+ "geometry": {
+  "measured_bbox_mm": [
+   98.0,
+   98.0,
+   20.1
+  ],
+  "mesh_volume_mm3": 184371.6,
+  "watertight": true,
+  "render_kind": "patch_antenna",
+  "effective_density_g_cm3": 0.597,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "patch",
+     "color": [
+      0.72,
+      0.45,
+      0.2
+     ],
+     "file": "bodies/part__patch.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 28
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": "https://gomspace.com/UserFiles/Subsystems/datasheet/gs-ds-nanocom-ant2150_1010651-22.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

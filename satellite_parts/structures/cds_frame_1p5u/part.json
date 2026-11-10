@@ -1,0 +1,102 @@
+{
+ "id": "cds_frame_1p5u",
+ "name": "Generic 1.5U CubeSat skeleton frame (CDS envelope)",
+ "category": "structures",
+ "subcategory": "frame",
+ "vendor": "generic (per CDS Rev 14.1)",
+ "model": "1P5U skeleton",
+ "dimensions_mm": {
+  "x": 100.0,
+  "y": 100.0,
+  "z": 170.25
+ },
+ "mass_g": 150,
+ "source": {
+  "type": "standard",
+  "url": "https://www.nasa.gov/wp-content/uploads/2018/01/cubesatdesignspecificationrev14_12022-02-09.pdf",
+  "document": {
+   "title": "CubeSat Design Specification (CDS) Rev 14.1, Cal Poly, 2022-02-09",
+   "revision": "14.1",
+   "date": "2022-02-09"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mounting"
+  ],
+  "notes": "Envelope: CDS Rev 14.1; 6U/12U widths 226.3 mm per cubesat-specs summary of CDS (https://cubesat-specs.readthedocs.io). Rails 8.5 mm square (CDS 2.2.5 minimum). Mass is DERIVED: typical vendor primary-structure masses (ISIS 1U 100 g, EnduroSat 1U 120 g, 3U 243-290 g, 6U 850-900 g); 1.5U, 2U, 12U interpolated. 6U/12U drawn as envelope boxes only."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": null,
+ "distributors": [],
+ "material": "aluminium 6061/6082 (typical; CDS requires 7075, 6061, 5005 or 5052 for rails)",
+ "mass_note": "derived from vendor structures, see source.notes",
+ "max_satellite_mass_kg": 3.0,
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "unknown",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   100.0,
+   100.0,
+   170.25
+  ],
+  "mesh_volume_mm3": 105642.2,
+  "watertight": true,
+  "render_kind": "cubesat_frame",
+  "effective_density_g_cm3": 1.42,
+  "bodies": {
+   "part": [
+    {
+     "name": "rails",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__rails.stl"
+    },
+    {
+     "name": "rings",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__rings.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 160
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": "https://www.nasa.gov/wp-content/uploads/2018/01/cubesatdesignspecificationrev14_12022-02-09.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

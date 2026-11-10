@@ -1,0 +1,158 @@
+{
+ "id": "gomspace_nanocom_ax100",
+ "name": "GomSpace NanoCom AX100 UHF/VHF transceiver",
+ "category": "comms",
+ "subcategory": "transceiver",
+ "vendor": "GomSpace",
+ "model": "NanoCom AX100",
+ "dimensions_mm": {
+  "x": 65,
+  "y": 40,
+  "z": 6.5
+ },
+ "mass_g": 24.5,
+ "source": {
+  "type": "datasheet",
+  "url": "https://gomspace.com/UserFiles/Subsystems/datasheet/gs-ds-nanocom-ax100-33.pdf",
+  "document": {
+   "title": "NanoCom AX100 datasheet",
+   "revision": "3.3",
+   "date": "2016-08-12"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "rf",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "Daughterboard form factor (mounts on NanoDock). Variants AX100U 430-440 MHz, AX100UL 395-405 MHz, AX100V 140-150 MHz."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Denmark",
+ "distributors": [
+  "direct (gomspace.com shop)"
+ ],
+ "rf": {
+  "band": "UHF or VHF",
+  "frequency_MHz": [
+   [
+    430,
+    440
+   ],
+   [
+    395,
+    405
+   ],
+   [
+    140,
+    150
+   ]
+  ],
+  "data_rate_kbps": [
+   0.1,
+   115.2
+  ],
+  "tx_power_dBm": 30,
+  "tx_power_W": 1.0
+ },
+ "electrical": {
+  "voltage_V": {
+   "nominal": 3.3,
+   "max": 3.4
+  },
+  "power_W": {
+   "idle": 0.18,
+   "peak": 2.8
+  },
+  "power_note": "RX 55 mA typ, TX 800 mA typ at 3.3 V"
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -30,
+   "max": 85
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "status_note": "2026-11-08: not found on the current gomspace.com product pages (site now lists SDR, P60/P80, BPX/BP8, NanoStruct kits); datasheet still served, verify availability before design-in.",
+ "geometry": {
+  "measured_bbox_mm": [
+   65.0,
+   40.0,
+   6.5
+  ],
+  "mesh_volume_mm3": 16880.7,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.451,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [
+   "GomSpace daughterboard header (mounts on NanoDock DMC)"
+  ],
+  "rf_connectors": [
+   "MCX (datasheet)"
+  ],
+  "power_bus_V": 3.3
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://satcatalog.s3.amazonaws.com/components/582/featured_image.jpg",
+  "photo_source": "satcatalog",
+  "photo_page": "https://satcatalog.com/component/nanocom-ax100-transceiver",
+  "photo_file": "reference_photo",
+  "datasheet_url": "https://gomspace.com/UserFiles/Subsystems/datasheet/gs-ds-nanocom-ax100-33.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

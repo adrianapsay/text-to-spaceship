@@ -1,0 +1,166 @@
+{
+ "id": "simera_triscape100",
+ "name": "Simera Sense TriScape100 RGB imager (1U x 2U, 4.75 m GSD)",
+ "category": "payload",
+ "subcategory": "camera",
+ "vendor": "Simera Sense",
+ "model": "TriScape100",
+ "dimensions_mm": {
+  "x": 98,
+  "y": 98,
+  "z": 176
+ },
+ "mass_g": 1100,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.co/products/simera-sense-triscape100",
+  "document": {
+   "title": "satsearch listing of the Simera Sense TriScape100 datasheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "payload",
+   "electrical",
+   "thermal",
+   "interfaces"
+  ],
+  "notes": "98 x 98 x 176 mm, 1.1 kg +/-5 %, 12.6 MP RGB CMOS, 4.75 m GSD at 500 km, 5 V, 2.5 W idle / 5.8 W imaging, 128 GB, -10 to 50 C, 15 krad, I2C/SPI (optional SpaceWire, RS-422/485, CAN), CubeSat Kit Bus connector option."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "South Africa",
+ "distributors": [
+  "direct",
+  "satsearch"
+ ],
+ "payload": {
+  "type": "RGB snapshot imager",
+  "sensor": "12.6 MP CMOS, RGB Bayer",
+  "gsd_m_at_500km": 4.75,
+  "frame_rate_fps": 150,
+  "storage_GB": 128
+ },
+ "electrical": {
+  "voltage_V": {
+   "nominal": 5.0
+  },
+  "power_W": {
+   "idle": 2.5,
+   "peak": 5.8
+  },
+  "interfaces": [
+   "I2C",
+   "SPI",
+   "SpaceWire (option)",
+   "RS-422 (option)",
+   "RS-485 (option)",
+   "CAN 2.0B (option)"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -10,
+   "max": 50
+  }
+ },
+ "environment": {
+  "radiation_krad": 15
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   98.0,
+   98.0,
+   176.0
+  ],
+  "mesh_volume_mm3": 1572728.8,
+  "watertight": true,
+  "render_kind": "camera_box_lens",
+  "effective_density_g_cm3": 0.699,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    },
+    {
+     "name": "lens_barrel",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__lens_barrel.stl"
+    },
+    {
+     "name": "glass",
+     "color": [
+      0.45,
+      0.65,
+      0.85
+     ],
+     "file": "bodies/part__glass.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 180
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "CAN",
+   "I2C",
+   "RS-422",
+   "RS-485",
+   "SPI"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [
+   "CubeSat Kit Bus (CSKB) compatible connector (configurable)",
+   "wirable connector (configurable)"
+  ],
+  "rf_connectors": [],
+  "power_bus_V": 5.0
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/image-simera-sense-triscape100-tujf4r.jpg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/simera-sense-triscape100",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

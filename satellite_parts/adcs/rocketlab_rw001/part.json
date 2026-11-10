@@ -1,0 +1,148 @@
+{
+ "id": "rocketlab_rw001",
+ "name": "Rocket Lab RW-0.01 reaction wheel (10 mNms)",
+ "category": "adcs",
+ "subcategory": "reaction_wheel",
+ "vendor": "Rocket Lab (Sinclair Interplanetary)",
+ "model": "RW-0.01",
+ "dimensions_mm": {
+  "x": 50,
+  "y": 50,
+  "z": 30
+ },
+ "mass_g": 122,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.co/products/rocketlab-10-mnms-reaction-wheel",
+  "document": {
+   "title": "satsearch listing of the Rocket Lab RW-0.01 datasheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "adcs",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "50 x 50 x 30 mm, 122 g, 10 mNms nominal / 18 peak, 1.0 mNm. 24 krad board level, 12.87 Grms."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Canada / USA",
+ "distributors": [
+  "direct",
+  "satsearch"
+ ],
+ "adcs": {
+  "momentum_mNms": 10,
+  "peak_momentum_mNms": 18,
+  "max_torque_mNm": 1.0
+ },
+ "electrical": {
+  "voltage_V": {
+   "min": 3.4,
+   "nominal": 5.0,
+   "max": 6.0
+  },
+  "power_W": {
+   "idle": 0.11,
+   "nominal": 0.25,
+   "peak": 1.05
+  },
+  "interfaces": [
+   "UART"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -30,
+   "max": 85
+  }
+ },
+ "mounting": {
+  "pattern": "M3x0.5 threaded holes on bottom, front, back and top (ICD Rev 2.0)",
+  "fasteners": "M3"
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   50.0,
+   50.0,
+   30.0
+  ],
+  "mesh_volume_mm3": 52845.2,
+  "watertight": true,
+  "render_kind": "reaction_wheel",
+  "effective_density_g_cm3": 2.309,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "flywheel",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__flywheel.stl"
+    },
+    {
+     "name": "motor_cap",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__motor_cap.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 348
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "UART"
+  ],
+  "mechanical": "M3x0.5 threaded holes on bottom, front, back and top (ICD Rev 2.0)",
+  "electrical_connectors": [
+   "Harwin Datamate M80-8420442 4-pin plug (mates M80-8450445)"
+  ],
+  "rf_connectors": [],
+  "power_bus_V": 5.0
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_afo1rg_rocketlab_10_mnms_rw.png",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/rocketlab-10-mnms-reaction-wheel",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

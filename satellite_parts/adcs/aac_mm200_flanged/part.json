@@ -1,0 +1,135 @@
+{
+ "id": "aac_mm200_flanged",
+ "name": "AAC Clyde Space MM200 magnetometer (flanged housing)",
+ "category": "adcs",
+ "subcategory": "magnetometer",
+ "vendor": "AAC Clyde Space (AAC Hyperion)",
+ "model": "MM200",
+ "dimensions_mm": {
+  "x": 33,
+  "y": 20,
+  "z": 11.3
+ },
+ "mass_g": 12,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.aac-clyde.space/what-we-do/space-products-components/adcs/mm200",
+  "document": {
+   "title": "AAC Clyde Space MM200 product page / datasheet MM200.pdf",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "adcs",
+   "electrical"
+  ],
+  "notes": "Flanged 33 x 20 x 11.3 mm 12 g; minimal 20 x 20 x 11.3 mm 10 g. Flown since 2022. Datasheet https://www.aac-clyde.space/wp-content/uploads/2021/11/MM200.pdf"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Sweden / Netherlands",
+ "distributors": [
+  "direct (aac-clyde.space product enquiry)"
+ ],
+ "first_flight_year": 2022,
+ "adcs": {
+  "range_uT": 800,
+  "noise_nT_sqrtHz": 1.18
+ },
+ "electrical": {
+  "current_mA": {
+   "min": 0.5,
+   "max": 10
+  },
+  "interfaces": [
+   "I2C"
+  ]
+ },
+ "cad_downloads": [
+  {
+   "format": "CAD zip (flanged)",
+   "url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/Defeatured_MM200_flanged.zip",
+   "notes": "direct link on the product page"
+  }
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   33.0,
+   20.0,
+   11.3
+  ],
+  "mesh_volume_mm3": 7444.4,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.612,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "I2C"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/MM200.jpg",
+  "photo_source": "vendor",
+  "photo_page": "https://www.aac-clyde.space/what-we-do/space-products-components/adcs/mm200",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

@@ -1,0 +1,113 @@
+{
+ "id": "molicel_inr21700_p42a",
+ "name": "Molicel (E-One Moli) INR21700-P42A Li-ion cell (21700, 4200 mAh)",
+ "category": "power",
+ "subcategory": "cell",
+ "vendor": "Molicel (E-One Moli)",
+ "model": "INR21700-P42A",
+ "dimensions_mm": {
+  "x": 21.4,
+  "y": 21.4,
+  "z": 70.15
+ },
+ "mass_g": 70.0,
+ "source": {
+  "type": "unverified",
+  "url": "https://cdn.shopify.com/s/files/1/0481/9678/0183/files/Molicel-INR21700-P42A-data-sheet-v1.7.pdf",
+  "document": {
+   "title": "Molicel (E-One Moli) INR21700-P42A datasheet (mirror indexed at https://www.18650batterystore.com/pages/data-sheets)",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [],
+  "notes": "Datasheet link recorded but not opened from this session; diameter, length, mass, capacity and current are from memory of the datasheet and must be checked against the PDF (max dimensions, typical mass)."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Taiwan",
+ "distributors": [
+  "18650batterystore",
+  "Digi-Key (some)",
+  "cell distributors"
+ ],
+ "electrical": {
+  "chemistry": "Li-ion 21700",
+  "capacity_mAh": 4200,
+  "energy_Wh": 15.1,
+  "voltage_V": {
+   "min": 2.5,
+   "nominal": 3.6,
+   "max": 4.2
+  },
+  "max_discharge_A": 45
+ },
+ "cost": {
+  "value": 6,
+  "currency": "USD",
+  "basis": "list_price",
+  "source": "https://www.18650batterystore.com/pages/data-sheets"
+ },
+ "cost_note": "typical single-cell retail, approximate",
+ "cost_basis_note": "approximate",
+ "geometry": {
+  "measured_bbox_mm": [
+   21.4,
+   21.34,
+   70.15
+  ],
+  "mesh_volume_mm3": 24645.7,
+  "watertight": true,
+  "render_kind": "cell_18650",
+  "effective_density_g_cm3": 2.84,
+  "bodies": {
+   "part": [
+    {
+     "name": "can",
+     "color": [
+      0.85,
+      0.72,
+      0.3
+     ],
+     "file": "bodies/part__can.stl"
+    },
+    {
+     "name": "positive_cap",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__positive_cap.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 332
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 3.6
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": "https://cdn.shopify.com/s/files/1/0481/9678/0183/files/Molicel-INR21700-P42A-data-sheet-v1.7.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

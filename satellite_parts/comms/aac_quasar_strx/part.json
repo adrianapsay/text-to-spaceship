@@ -1,0 +1,153 @@
+{
+ "id": "aac_quasar_strx",
+ "name": "AAC Clyde Space Quasar-STRX S-band transceiver (PC/104, enclosed)",
+ "category": "comms",
+ "subcategory": "transceiver",
+ "vendor": "AAC Clyde Space",
+ "model": "Quasar-STRX",
+ "dimensions_mm": {
+  "x": 96,
+  "y": 90,
+  "z": 23
+ },
+ "mass_g": 270,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.aac-clyde.space/wp-content/uploads/2021/10/Quasar-STRX-Datasheet-1.pdf",
+  "document": {
+   "title": "AAC Clyde Space Quasar-STRX datasheet 2024-07-05",
+   "revision": null,
+   "date": "2024-07-05"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "rf",
+   "electrical",
+   "thermal",
+   "interfaces"
+  ],
+  "notes": "96 x 90 x 23 mm with enclosure, <270 g, TX 2200-2290 / RX 2025-2110 MHz, up to 5 Msps, -10 to 33 dBm (TBC), 3.5 W RX, CAN/SPI/I2C, SMP, -25 to 60 C."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Sweden / UK",
+ "distributors": [
+  "direct",
+  "satsearch"
+ ],
+ "rf": {
+  "band": "S",
+  "tx_frequency_MHz": [
+   2200,
+   2290
+  ],
+  "rx_frequency_MHz": [
+   2025,
+   2110
+  ],
+  "symbol_rate_Msps": 5,
+  "tx_power_dBm": 33
+ },
+ "electrical": {
+  "power_W": {
+   "idle": 3.5
+  },
+  "interfaces": [
+   "CAN",
+   "SPI",
+   "I2C",
+   "PC/104 stack"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -25,
+   "max": 60
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   96.0,
+   90.0,
+   23.0
+  ],
+  "mesh_volume_mm3": 121127.9,
+  "watertight": true,
+  "render_kind": "pc104_board",
+  "effective_density_g_cm3": 2.229,
+  "bodies": {
+   "part": [
+    {
+     "name": "pcb",
+     "color": [
+      0.09,
+      0.42,
+      0.24
+     ],
+     "file": "bodies/part__pcb.stl"
+    },
+    {
+     "name": "stack_header",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__stack_header.stl"
+    },
+    {
+     "name": "components",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__components.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 732
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "CAN",
+   "I2C",
+   "SPI"
+  ],
+  "mechanical": "PC/104 stack",
+  "electrical_connectors": [
+   "PC/104 stack-through header"
+  ],
+  "rf_connectors": [
+   "SMP"
+  ],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "",
+  "photo_source": "",
+  "photo_page": "https://www.aac-clyde.space/wp-content/uploads/2021/10/Quasar-STRX-Datasheet-1.pdf",
+  "photo_file": null,
+  "datasheet_url": "https://www.aac-clyde.space/wp-content/uploads/2021/10/Quasar-STRX-Datasheet-1.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

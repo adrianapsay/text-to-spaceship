@@ -1,0 +1,139 @@
+{
+ "id": "nanoavionics_satbus_3c2",
+ "name": "NanoAvionics SatBus 3C2 main bus unit (OBC + ADCS + UHF)",
+ "category": "avionics",
+ "subcategory": "obc",
+ "vendor": "NanoAvionics (Kongsberg NanoAvionics)",
+ "model": "SatBus 3C2",
+ "dimensions_mm": {
+  "x": 96,
+  "y": 90,
+  "z": 20
+ },
+ "mass_g": 200,
+ "source": {
+  "type": "unverified",
+  "url": "https://nanoavionics.com/cubesat-components/satbus-3c2/",
+  "document": {
+   "title": "NanoAvionics SatBus 3C2 product page",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "compute",
+   "electrical",
+   "cost"
+  ],
+  "notes": "Up to 400 MHz, 1 MB RAM, 2 MB flash, 2 x 512 kB FRAM, 256 MB NOR, CAN/SPI/I2C/UART, EUR 4460 (MOQ 3), 3-5 months from the page. Dimensions and mass NOT listed: PC/104 outline, 20 mm and 200 g are ESTIMATES."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Lithuania",
+ "distributors": [
+  "direct (nanoavionics.com)"
+ ],
+ "lead_time": "3-5 months",
+ "dimensions_note": "estimate",
+ "mass_note": "estimate",
+ "compute": {
+  "processor": "not named (ARM class)",
+  "clock_GHz": 0.4,
+  "ram_MB": 1,
+  "storage_GB": 0.256
+ },
+ "electrical": {
+  "interfaces": [
+   "CAN",
+   "SPI",
+   "I2C",
+   "UART",
+   "PWM",
+   "GPIO",
+   "USB (debug)"
+  ]
+ },
+ "cost": {
+  "value": 4460,
+  "currency": "EUR",
+  "basis": "list_price",
+  "source": "https://nanoavionics.com/cubesat-components/satbus-3c2/"
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   96.0,
+   90.0,
+   20.0
+  ],
+  "mesh_volume_mm3": 106686.2,
+  "watertight": true,
+  "render_kind": "pc104_board",
+  "effective_density_g_cm3": 1.875,
+  "bodies": {
+   "part": [
+    {
+     "name": "pcb",
+     "color": [
+      0.09,
+      0.42,
+      0.24
+     ],
+     "file": "bodies/part__pcb.stl"
+    },
+    {
+     "name": "stack_header",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__stack_header.stl"
+    },
+    {
+     "name": "components",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__components.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 732
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "CAN",
+   "GPIO",
+   "I2C",
+   "PWM",
+   "SPI",
+   "UART",
+   "USB"
+  ],
+  "mechanical": "PC/104 stack",
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://nanoavionics.com/wp-content/uploads/2018/07/kongsberg-nanoavionics-cubesat-small-satellite-smallsat-on-board-computer-obs-flight-computer-top.jpg",
+  "photo_source": "vendor",
+  "photo_page": "https://nanoavionics.com/cubesat-components/satbus-3c2/",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

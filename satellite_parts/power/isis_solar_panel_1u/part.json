@@ -1,0 +1,113 @@
+{
+ "id": "isis_solar_panel_1u",
+ "name": "ISISPACE 1U solar panel set (body mounted)",
+ "category": "power",
+ "subcategory": "solar_panel",
+ "vendor": "ISISPACE",
+ "model": "1U solar panel set (body mounted)",
+ "dimensions_mm": {
+  "x": 98,
+  "y": 83,
+  "z": 2.5
+ },
+ "mass_g": 50,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.cubesatshop.com/wp-content/uploads/2016/06/ISIS-Solar-Panels-Brochure-v1.pdf",
+  "document": {
+   "title": "ISIS Solar Panels Brochure v1",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "mass_g",
+   "electrical"
+  ],
+  "notes": "Mass and peak power from the brochure (mass depends on configuration); side panel thickness 2.5 mm, top panels 1.8 mm. Outline dimensions are not in the brochure: lengths DERIVED from CDS rail-to-rail sizes. Cell count DERIVED from 30% GaAs 80 x 40 mm cells at the stated power."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "Netherlands",
+ "distributors": [
+  "CubeSatShop",
+  "direct"
+ ],
+ "electrical": {
+  "power_W": {
+   "nominal": 2.3
+  },
+  "voltage_V": {
+   "nominal": 3.0
+  },
+  "voltage_note": "3 V (5 V or 8 V on demand)",
+  "cells": "GaAs triple junction 30%"
+ },
+ "dimensions_note": "derived outline",
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   98.0,
+   83.0,
+   2.5
+  ],
+  "mesh_volume_mm3": 18345.4,
+  "watertight": true,
+  "render_kind": "solar_panel",
+  "effective_density_g_cm3": 2.725,
+  "bodies": {
+   "part": [
+    {
+     "name": "substrate",
+     "color": [
+      0.3,
+      0.3,
+      0.32
+     ],
+     "file": "bodies/part__substrate.stl"
+    },
+    {
+     "name": "cells",
+     "color": [
+      0.16,
+      0.26,
+      0.62
+     ],
+     "file": "bodies/part__cells.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 44
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 3.0
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_deg9bl_isis_1u_cube_sat_solar_panel.png",
+  "photo_source": "satsearch (one photo for the 1U-6U family)",
+  "photo_page": "https://satsearch.co/products/isis-1u-cube-sat-solar-panel",
+  "photo_file": "reference_photo",
+  "datasheet_url": "https://www.cubesatshop.com/wp-content/uploads/2016/06/ISIS-Solar-Panels-Brochure-v1.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

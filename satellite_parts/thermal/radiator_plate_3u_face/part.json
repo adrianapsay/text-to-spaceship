@@ -1,0 +1,89 @@
+{
+ "id": "radiator_plate_3u_face",
+ "name": "Radiator plate 3u face (aluminium, white paint or OSR)",
+ "category": "thermal",
+ "subcategory": "radiator",
+ "vendor": "generic",
+ "model": "radiator 3u_face",
+ "dimensions_mm": {
+  "x": 325,
+  "y": 83,
+  "z": 1.5
+ },
+ "mass_g": 109,
+ "source": {
+  "type": "derived",
+  "url": "https://www.nasa.gov/wp-content/uploads/2018/01/cubesatdesignspecificationrev14_12022-02-09.pdf",
+  "document": {
+   "title": "CDS Rev 14.1 face sizes (rail-to-rail 83 mm) and generic aluminium plate",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm"
+  ],
+  "notes": "No vendor part: a flat aluminium plate sized to a CubeSat face. Mass derived from 2.7 g/cm3."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "material": "aluminium 6061, emissive coating",
+ "mass_note": "derived",
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "unknown",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   325.0,
+   83.0,
+   1.5
+  ],
+  "mesh_volume_mm3": 40462.5,
+  "watertight": true,
+  "render_kind": "box",
+  "effective_density_g_cm3": 2.694,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 12
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": "https://www.nasa.gov/wp-content/uploads/2018/01/cubesatdesignspecificationrev14_12022-02-09.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

@@ -1,0 +1,141 @@
+{
+ "id": "aac_pg400",
+ "name": "AAC Clyde Space PG400 3-axis gyroscope",
+ "category": "adcs",
+ "subcategory": "gyroscope",
+ "vendor": "AAC Clyde Space (AAC Hyperion)",
+ "model": "PG400",
+ "dimensions_mm": {
+  "x": 30.8,
+  "y": 25.7,
+  "z": 17
+ },
+ "mass_g": 25,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.aac-clyde.space/what-we-do/space-products-components/adcs/pg400-gyroscope",
+  "document": {
+   "title": "AAC Clyde Space PG400 product page / datasheet PG400.pdf",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "adcs",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "30.8 x 25.7 x 17 mm from the page; mass not listed, 25 g is an ESTIMATE. Datasheet https://www.aac-clyde.space/wp-content/uploads/2023/03/PG400.pdf"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Sweden / Netherlands",
+ "distributors": [
+  "direct (aac-clyde.space product enquiry)"
+ ],
+ "first_flight_year": 2023,
+ "mass_note": "estimate",
+ "adcs": {
+  "bias_stability_deg_h": 1.0,
+  "arw_deg_sqrt_h": 0.23,
+  "range_deg_s": 125
+ },
+ "electrical": {
+  "voltage_V": {
+   "min": 3.65,
+   "nominal": 5.0,
+   "max": 5.5
+  },
+  "power_W": {
+   "nominal": 0.375,
+   "peak": 0.5
+  },
+  "interfaces": [
+   "RS-422 (AAC Hyperion protocol)"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -40,
+   "max": 85
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   30.8,
+   25.7,
+   17.0
+  ],
+  "mesh_volume_mm3": 13435.5,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.861,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "RS-422"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 5.0
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://www.aac-clyde.space/wp-content/uploads/2023/03/pg400.png",
+  "photo_source": "vendor",
+  "photo_page": "https://www.aac-clyde.space/what-we-do/space-products-components/adcs/pg400-gyroscope",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

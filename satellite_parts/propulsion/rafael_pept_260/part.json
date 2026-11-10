@@ -1,0 +1,108 @@
+{
+ "id": "rafael_pept_260",
+ "name": "Rafael PEPT-260 spherical diaphragm propellant tank (9.3 L)",
+ "category": "propulsion",
+ "subcategory": "tank",
+ "vendor": "Rafael Advanced Defense Systems",
+ "model": "PEPT-260",
+ "dimensions_mm": {
+  "x": 260,
+  "y": 260,
+  "z": 260
+ },
+ "mass_g": 1800,
+ "source": {
+  "type": "derived",
+  "url": "https://satsearch.co/products/rafael-pept-260",
+  "document": {
+   "title": "satsearch tank overview and PEPT listings",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "propulsion"
+  ],
+  "notes": "Diameter DERIVED from the model number (PEPT-nnn = nnn mm sphere, consistent with the stated 6 L for PEPT-230). 9.3 L from the overview; mass ESTIMATE. EPDM diaphragm; hydrazine, ADN-based green propellant, IPA, water, GN2, GHe compatible."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Israel",
+ "distributors": [
+  "direct",
+  "satsearch"
+ ],
+ "dimensions_note": "derived from model number",
+ "mass_note": "estimate",
+ "propulsion": {
+  "type": "propellant tank",
+  "volume_L": 9.3,
+  "expulsion": "EPDM elastomeric diaphragm",
+  "propellants": [
+   "hydrazine",
+   "ADN-based green",
+   "IPA",
+   "water",
+   "GN2",
+   "GHe"
+  ],
+  "mounting": "equatorial"
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   260.0,
+   260.0,
+   260.0
+  ],
+  "mesh_volume_mm3": 9123571.6,
+  "watertight": true,
+  "render_kind": "sphere",
+  "effective_density_g_cm3": 0.197,
+  "bodies": {
+   "part": [
+    {
+     "name": "shell",
+     "color": [
+      0.55,
+      0.55,
+      0.58
+     ],
+     "file": "bodies/part__shell.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 1280
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_yms78y_rafael_pept-230.jpg",
+  "photo_source": "satsearch (PEPT-230 photo; family)",
+  "photo_page": "https://satsearch.co/products/rafael-pept-260",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

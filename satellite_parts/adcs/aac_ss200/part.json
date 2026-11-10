@@ -1,0 +1,141 @@
+{
+ "id": "aac_ss200",
+ "name": "AAC Clyde Space SS200 fine sun sensor",
+ "category": "adcs",
+ "subcategory": "sun_sensor",
+ "vendor": "AAC Clyde Space (AAC Hyperion)",
+ "model": "SS200",
+ "dimensions_mm": {
+  "x": 24.66,
+  "y": 15.0,
+  "z": 3.5
+ },
+ "mass_g": 3,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.aac-clyde.space/what-we-do/space-products-components/adcs/ss200",
+  "document": {
+   "title": "AAC Clyde Space SS200 product page / datasheet SS200.pdf",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "adcs",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "Datasheet https://www.aac-clyde.space/wp-content/uploads/2021/11/SS200.pdf; flying since 2018; sampling rate stated as both 10 and 100 Hz on the page."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Sweden / Netherlands",
+ "distributors": [
+  "direct (aac-clyde.space product enquiry)"
+ ],
+ "first_flight_year": 2018,
+ "lead_time": "12 weeks",
+ "adcs": {
+  "field_of_view_deg": 110,
+  "accuracy_deg": 0.3
+ },
+ "electrical": {
+  "voltage_V": {
+   "nominal": 5.0
+  },
+  "power_W": {
+   "idle": 0.0015,
+   "nominal": 0.02,
+   "peak": 0.04
+  },
+  "interfaces": [
+   "I2C"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -45,
+   "max": 85
+  }
+ },
+ "environment": {
+  "radiation_krad": 36
+ },
+ "cad_downloads": [
+  {
+   "format": "CAD zip",
+   "url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/SS200-20190325.zip",
+   "notes": "direct link on the product page"
+  }
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   24.66,
+   15.0,
+   3.5
+  ],
+  "mesh_volume_mm3": 1294.6,
+  "watertight": true,
+  "render_kind": "sun_sensor",
+  "effective_density_g_cm3": 2.317,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    },
+    {
+     "name": "aperture",
+     "color": [
+      0.45,
+      0.65,
+      0.85
+     ],
+     "file": "bodies/part__aperture.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 12
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "I2C"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 5.0
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_yhr8lz_hyperion_technologies_ss200.jpg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/aac-clyde-ss200-sun-sensor",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

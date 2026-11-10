@@ -1,0 +1,106 @@
+{
+ "id": "azur_3g30c_advanced_hp",
+ "name": "AZUR SPACE 3G30C-Advanced HP bare solar cell (145.9 x 60.7 mm)",
+ "category": "power",
+ "subcategory": "solar_cell",
+ "vendor": "AZUR SPACE Solar Power GmbH",
+ "model": "3G30C-Advanced HP, part 82942",
+ "dimensions_mm": {
+  "x": 145.9,
+  "y": 60.69,
+  "z": 0.245
+ },
+ "mass_g": 10.4,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.azurspace.com/media/uploads/file_links/file/bdb_00010894-02-00_3g30-advanced_hp.pdf",
+  "document": {
+   "title": "AZUR SPACE 3G30C-Advanced HP datasheet DB 00010894-02",
+   "revision": "02",
+   "date": "2026-03-24"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical"
+  ],
+  "notes": "Cell area 77.55 cm2; thickness 245 +/- 25 um; weight <= 134 mg/cm2, 10.4 g average. BOL 29.0%: Voc 2700 mV, Isc 1317 mA, Vmp 2395 mV, Imp 1284 mA."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Germany",
+ "distributors": [
+  "direct",
+  "satsearch"
+ ],
+ "material": "GaInP/GaAs/Ge triple junction on Ge substrate",
+ "electrical": {
+  "efficiency_bol_pct": 29.0,
+  "efficiency_eol_pct_1e15": 25.8,
+  "voc_V": 2.7,
+  "isc_A": 1.317,
+  "vmp_V": 2.395,
+  "imp_A": 1.284,
+  "power_W": {
+   "nominal": 3.075
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   145.9,
+   60.69,
+   0.25
+  ],
+  "mesh_volume_mm3": 2169.4,
+  "watertight": true,
+  "render_kind": "box",
+  "effective_density_g_cm3": 4.794,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 12
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": "https://www.azurspace.com/media/uploads/file_links/file/bdb_00010894-02-00_3g30-advanced_hp.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

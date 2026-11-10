@@ -1,0 +1,119 @@
+{
+ "id": "harwin_gecko_g125_12",
+ "name": "Harwin Gecko G125 12-way male PCB connector (1.25 mm pitch)",
+ "category": "harness",
+ "subcategory": "connector",
+ "vendor": "Harwin",
+ "model": "G125-MH11205-0300",
+ "dimensions_mm": {
+  "x": 11.45,
+  "y": 5.0,
+  "z": 4.6
+ },
+ "mass_g": 4.5,
+ "source": {
+  "type": "derived",
+  "url": "https://www.harwin.com/connectors/gecko/",
+  "document": {
+   "title": "Harwin Gecko product family page (read 2026-11-08: 1.25 mm pitch, 2.8 A per contact, -65 to 150 C)",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "electrical",
+   "thermal"
+  ],
+  "notes": "Outline derived: (pins/2 - 1) x 1.25 mm + 5.2 mm housing, 5.0 x 4.6 mm section; mass derived (0.35 g per contact). Exact outline is in the Harwin G125 drawing."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "UK",
+ "distributors": [
+  "Digi-Key",
+  "Mouser",
+  "Farnell",
+  "direct"
+ ],
+ "mass_note": "derived",
+ "dimensions_note": "derived",
+ "electrical": {
+  "rating": "2.8 A per contact, 1.25 mm pitch",
+  "contacts": 12
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -65,
+   "max": 150
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "list_price",
+  "source": null
+ },
+ "cost_note": "a few USD each at distributors",
+ "geometry": {
+  "measured_bbox_mm": [
+   11.45,
+   5.0,
+   4.6
+  ],
+  "mesh_volume_mm3": 263.3,
+  "watertight": true,
+  "render_kind": "connector_block",
+  "effective_density_g_cm3": 17.088,
+  "bodies": {
+   "part": [
+    {
+     "name": "shell",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__shell.stl"
+    },
+    {
+     "name": "contacts",
+     "color": [
+      0.85,
+      0.66,
+      0.22
+     ],
+     "file": "bodies/part__contacts.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 12
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [
+   "Gecko G125 12-way (mates with G125 female cable connector)"
+  ],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

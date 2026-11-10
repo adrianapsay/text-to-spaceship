@@ -1,0 +1,89 @@
+{
+ "id": "washer_m4",
+ "name": "Plain washer M4 (ISO 7089)",
+ "category": "fasteners",
+ "subcategory": "washer",
+ "vendor": "generic (ISO 7089)",
+ "model": "ISO 7089 M4",
+ "dimensions_mm": {
+  "x": 9.0,
+  "y": 9.0,
+  "z": 0.8
+ },
+ "mass_g": 0.308,
+ "source": {
+  "type": "standard",
+  "url": "https://www.fasten.it/norms/norm/din_en_iso_4762",
+  "document": {
+   "title": "ISO 7089 plain washers, normal series (d1, d2, h)",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm"
+  ],
+  "notes": "Values per ISO 7089 as commonly tabulated (M2 2.2/5/0.3, M2.5 2.7/6/0.5, M3 3.2/7/0.5, M4 4.3/9/0.8, M5 5.3/10/1.0, M6 6.4/12/1.6). Not fetched this session; treat as standard values to double-check. Mass derived."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "material": "stainless steel A2 (typical)",
+ "mass_note": "derived",
+ "cost": {
+  "value": 0.03,
+  "currency": "USD",
+  "basis": "list_price",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   9.0,
+   8.97,
+   0.8
+  ],
+  "mesh_volume_mm3": 39.1,
+  "watertight": true,
+  "render_kind": "washer",
+  "effective_density_g_cm3": 7.871,
+  "bodies": {
+   "part": [
+    {
+     "name": "washer",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__washer.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 336
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

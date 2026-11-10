@@ -1,0 +1,103 @@
+{
+ "id": "spectrolab_xtj_prime_27cm2",
+ "name": "Spectrolab XTJ Prime triple-junction solar cell 27 cm2 (69.1 x 39.7 mm, bare)",
+ "category": "power",
+ "subcategory": "solar_cell",
+ "vendor": "Spectrolab (Boeing)",
+ "model": "XTJ Prime 27 cm2",
+ "dimensions_mm": {
+  "x": 69.1,
+  "y": 39.7,
+  "z": 0.14
+ },
+ "mass_g": 2.3,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.spectrolab.com/photovoltaics/XTJ-Prime_Data_Sheet _07.27.22.pdf",
+  "document": {
+   "title": "Spectrolab XTJ Prime data sheet 2022-07-27",
+   "revision": null,
+   "date": "2022-07-27"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical"
+  ],
+  "notes": "69.1 x 39.7 mm, 27 cm2, 140-225 um thick, 84-130 mg/cm2 (84 at 140 um used: 2.3 g), 30.7 % BOL, Voc 2.72 V, Vmp 2.406 V, Jsc 18.0, Jmp 17.5 mA/cm2. Sizes 27-84 cm2 available."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "USA",
+ "distributors": [
+  "direct"
+ ],
+ "material": "InGaP/GaAs/Ge on Ge",
+ "electrical": {
+  "efficiency_pct": 30.7,
+  "voc_V": 2.72,
+  "vmp_V": 2.406,
+  "imp_A": 0.473,
+  "power_W": {
+   "peak": 1.14
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   69.1,
+   39.7,
+   0.14
+  ],
+  "mesh_volume_mm3": 384.1,
+  "watertight": true,
+  "render_kind": "box",
+  "effective_density_g_cm3": 5.989,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 12
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": "https://www.spectrolab.com/photovoltaics/XTJ-Prime_Data_Sheet _07.27.22.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

@@ -1,0 +1,89 @@
+{
+ "id": "al_bar_8p5x8p5_rail",
+ "name": "Aluminium 6061 rectangular bar 8.5 x 8.5 x 113.5 mm",
+ "category": "stock",
+ "subcategory": "bar",
+ "vendor": "generic",
+ "model": "6061-T6 bar",
+ "dimensions_mm": {
+  "x": 113.5,
+  "y": 8.5,
+  "z": 8.5
+ },
+ "mass_g": 22.1,
+ "source": {
+  "type": "derived",
+  "url": "https://www.mcmaster.com",
+  "document": {
+   "title": "standard metric bar stock sizes (no datasheet needed; mass from 2.70 g/cm3)",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm"
+  ],
+  "notes": "Generic stock; the 8.5 x 8.5 x 113.5 mm bar is a 1U rail blank per CDS rail width."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "material": "aluminium 6061-T6",
+ "mass_note": "derived",
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "unknown",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   113.5,
+   8.5,
+   8.5
+  ],
+  "mesh_volume_mm3": 8200.4,
+  "watertight": true,
+  "render_kind": "box",
+  "effective_density_g_cm3": 2.695,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 12
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

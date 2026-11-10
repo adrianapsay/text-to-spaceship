@@ -1,0 +1,153 @@
+{
+ "id": "endurosat_obc",
+ "name": "EnduroSat OBC (ARM Cortex-M7)",
+ "category": "avionics",
+ "subcategory": "obc",
+ "vendor": "EnduroSat",
+ "model": "Onboard Computer",
+ "dimensions_mm": {
+  "x": 96,
+  "y": 90,
+  "z": 15
+ },
+ "mass_g": 123,
+ "source": {
+  "type": "unverified",
+  "url": "https://www.endurosat.com/products/onboard-computer/",
+  "document": {
+   "title": "EnduroSat OBC product page",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "mass_g",
+   "compute",
+   "electrical",
+   "interfaces"
+  ],
+  "notes": "Mass 123 g (173 g with NovAtel OEM719 GNSS). Dimensions and clock not published; PC/104 footprint assumed. CAD behind a request form."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Bulgaria",
+ "distributors": [
+  "direct"
+ ],
+ "compute": {
+  "processor": "ARM Cortex-M7",
+  "clock_GHz": null,
+  "ram_MB": null,
+  "storage_GB": 32,
+  "storage_note": "2 MB program flash, 2 x 2 MB FRAM, 2 x 16 GB SD NAND"
+ },
+ "electrical": {
+  "voltage_V": {
+   "nominal": 12
+  },
+  "interfaces": [
+   "2 x CAN",
+   "CAN-FD",
+   "RS-422",
+   "RS-485",
+   "SPI",
+   "I2C",
+   "UART",
+   "Ethernet 100BASE-TX",
+   "GPIO x16",
+   "PPS"
+  ]
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "cad_downloads": [
+  {
+   "format": "CAD + datasheet (request form)",
+   "url": "https://www.endurosat.com/products/onboard-computer/",
+   "notes": "gated"
+  }
+ ],
+ "geometry": {
+  "measured_bbox_mm": [
+   96.0,
+   90.0,
+   15.0
+  ],
+  "mesh_volume_mm3": 82616.5,
+  "watertight": true,
+  "render_kind": "pc104_board",
+  "effective_density_g_cm3": 1.489,
+  "bodies": {
+   "part": [
+    {
+     "name": "pcb",
+     "color": [
+      0.09,
+      0.42,
+      0.24
+     ],
+     "file": "bodies/part__pcb.stl"
+    },
+    {
+     "name": "stack_header",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__stack_header.stl"
+    },
+    {
+     "name": "components",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__components.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 732
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "CAN",
+   "Ethernet",
+   "GPIO",
+   "I2C",
+   "PPS",
+   "RS-422",
+   "RS-485",
+   "SPI",
+   "UART"
+  ],
+  "mechanical": "PC/104 stack",
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 12
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://www.endurosat.com/wp-content/uploads/2025/08/Onboard-Computer-thunmb-1.webp",
+  "photo_source": "vendor",
+  "photo_page": "https://www.endurosat.com/products/onboard-computer/",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

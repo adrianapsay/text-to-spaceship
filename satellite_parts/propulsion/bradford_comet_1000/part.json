@@ -1,0 +1,143 @@
+{
+ "id": "bradford_comet_1000",
+ "name": "Bradford Space Comet-1000 water electrothermal propulsion (1U class, 17 mN)",
+ "category": "propulsion",
+ "subcategory": "resistojet",
+ "vendor": "Bradford Space (Deep Space Industries heritage)",
+ "model": "Comet",
+ "dimensions_mm": {
+  "x": 100,
+  "y": 100,
+  "z": 100
+ },
+ "mass_g": 1500,
+ "source": {
+  "type": "unverified",
+  "url": "https://satsearch.co/products/bradford-comet",
+  "document": {
+   "title": "satsearch listing of the Bradford Comet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "propulsion",
+   "electrical"
+  ],
+  "notes": "17 mN, Isp 175 s, 8-34 V, TRL 9, about 4 months lead time from the listing. Dimensions and mass are NOT on the listing: 1U envelope and 1.5 kg are ESTIMATES (Comet-1000 class); datasheet is downloadable from the listing."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "USA / Netherlands",
+ "distributors": [
+  "direct",
+  "satsearch"
+ ],
+ "mass_note": "estimate",
+ "dimensions_note": "estimate",
+ "propulsion": {
+  "type": "water electrothermal",
+  "propellant": "water",
+  "thrust_mN": 17,
+  "isp_s": 175
+ },
+ "electrical": {
+  "voltage_V": {
+   "min": 8,
+   "max": 34
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   100.0,
+   100.0,
+   100.0
+  ],
+  "mesh_volume_mm3": 881775.2,
+  "watertight": true,
+  "render_kind": "thruster_box_nozzle",
+  "effective_density_g_cm3": 1.701,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    },
+    {
+     "name": "flange",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__flange.stl"
+    },
+    {
+     "name": "nozzle",
+     "color": [
+      0.55,
+      0.55,
+      0.58
+     ],
+     "file": "bodies/part__nozzle.stl"
+    },
+    {
+     "name": "valve",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__valve.stl"
+    },
+    {
+     "name": "tank_dome",
+     "color": [
+      0.55,
+      0.55,
+      0.58
+     ],
+     "file": "bodies/part__tank_dome.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 490
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/image-bradford-space-comet-6riv5t.jpg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/bradford-comet",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

@@ -1,0 +1,130 @@
+{
+ "id": "ibeos_b14_m45",
+ "name": "Ibeos B14-M45 14 V modular battery (45 Wh)",
+ "category": "power",
+ "subcategory": "battery",
+ "vendor": "Ibeos",
+ "model": "B14-M45",
+ "dimensions_mm": {
+  "x": 94.5,
+  "y": 84.1,
+  "z": 23.1
+ },
+ "mass_g": 375,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.co/products/ibeos-14v-modular-smallsat-battery",
+  "document": {
+   "title": "satsearch listing of the Ibeos B14-M45 datasheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "94.5 x 84.1 x 23.1 mm, <375 g, 45 Wh, 13.2-16.8 V, 1.6 A charge, 6.5 A discharge, cell temperature 10-45 C operating. ISS compliant."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "USA",
+ "distributors": [
+  "direct",
+  "satsearch"
+ ],
+ "electrical": {
+  "chemistry": "Li-ion",
+  "energy_Wh": 45,
+  "voltage_V": {
+   "min": 13.2,
+   "nominal": 14.8,
+   "max": 16.8
+  },
+  "charge_A": 1.6,
+  "max_discharge_A": 6.5
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": 10,
+   "max": 45
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   94.5,
+   84.1,
+   23.1
+  ],
+  "mesh_volume_mm3": 183552.6,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 2.043,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 14.8
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_7day3i_ibeos_45wh-modular-smallsat-battery.jpg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/ibeos-14v-modular-smallsat-battery",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

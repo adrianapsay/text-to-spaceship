@@ -1,0 +1,103 @@
+{
+ "id": "sunpower_cryotel_ds_mini",
+ "name": "SunPower (Ametek) CryoTel DS Mini cryocooler",
+ "category": "thermal",
+ "subcategory": "cryocooler",
+ "vendor": "SunPower (Ametek)",
+ "model": "CryoTel DS Mini cryocooler",
+ "dimensions_mm": {
+  "x": 100,
+  "y": 100,
+  "z": 200
+ },
+ "mass_g": 1200,
+ "source": {
+  "type": "unverified",
+  "url": "https://nasa.gov/smallsat-institute/sst-soa/thermal-control",
+  "document": {
+   "title": "NASA SmallSat State-of-the-Art, Thermal Control chapter, cryocooler table",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "mass_g",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "Mass, input power, cooling performance and TRL from the SOA table (manufacturer supplied, not NASA verified). Dimensions NOT given: envelope assumed from the '~1U' / '<2U' form factor column."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "USA",
+ "distributors": [
+  "direct"
+ ],
+ "dimensions_note": "assumed from form factor",
+ "thermal": {
+  "cooling_performance": "1.8 W at 77 K",
+  "trl": "6"
+ },
+ "electrical": {
+  "power_W": {
+   "nominal": 45
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   100.0,
+   100.0,
+   200.0
+  ],
+  "mesh_volume_mm3": 2000000.0,
+  "watertight": true,
+  "render_kind": "box",
+  "effective_density_g_cm3": 0.6,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 12
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

@@ -1,0 +1,121 @@
+{
+ "id": "anywaves_compact_sband_ttc",
+ "name": "Anywaves compact S-band TT&C antenna (dual CP, 2 x SMA)",
+ "category": "comms",
+ "subcategory": "antenna",
+ "vendor": "Anywaves",
+ "model": "Compact S-Band TT&C Antenna",
+ "dimensions_mm": {
+  "x": 70.9,
+  "y": 70.9,
+  "z": 10.3
+ },
+ "mass_g": 106,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.co/products/anywaves-compact-s-band-ttc-antenna",
+  "document": {
+   "title": "satsearch listing of the Anywaves compact S-band TT&C antenna datasheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "rf",
+   "thermal"
+  ],
+  "notes": "70.9 x 70.9 x 10.3 mm, <106 g, 1.98-2.29 GHz, >5.4 dBi, LHCP and/or RHCP, 2 x SMA female, -120 to 120 C."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "France",
+ "distributors": [
+  "direct",
+  "satsearch"
+ ],
+ "rf": {
+  "band": "S",
+  "frequency_MHz": [
+   1980,
+   2290
+  ],
+  "gain_dBi": 5.4,
+  "polarization": "dual circular"
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -120,
+   "max": 120
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   70.9,
+   70.9,
+   10.3
+  ],
+  "mesh_volume_mm3": 46904.1,
+  "watertight": true,
+  "render_kind": "patch_antenna",
+  "effective_density_g_cm3": 2.26,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "patch",
+     "color": [
+      0.72,
+      0.45,
+      0.2
+     ],
+     "file": "bodies/part__patch.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 28
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [
+   "SMA female x2"
+  ],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_acrunr_anywaves_compact-s-band-ttc-antenna.jpg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/anywaves-compact-s-band-ttc-antenna",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

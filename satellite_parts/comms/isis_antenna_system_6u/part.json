@@ -1,0 +1,185 @@
+{
+ "id": "isis_antenna_system_6u",
+ "name": "ISISPACE deployable VHF/UHF antenna system for 6U/12U (98 x 98 x 6.6 mm)",
+ "category": "comms",
+ "subcategory": "antenna",
+ "vendor": "ISISPACE",
+ "model": "AntS 6U/12U",
+ "dimensions_mm": {
+  "x": 98,
+  "y": 98,
+  "z": 6.6
+ },
+ "mass_g": 100,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.co/products/isis-antenna-system-for-6u-12u-cube-sats",
+  "document": {
+   "title": "satsearch listing of the ISIS 6U/12U antenna system datasheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "rf",
+   "electrical",
+   "thermal",
+   "interfaces"
+  ],
+  "notes": "98 x 98 x 6.6 mm stowed, 90-115 g by configuration (100 g used), UHF ~17 cm / VHF ~55 cm deployed, 0 dBi, 2 W max, MMCX female (MCX/SMA harness options), 9-pin Omnetics + I2C, 4-17 V, <30 mW nominal / <2.3 W deploying, -20 to 80 C."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Netherlands",
+ "distributors": [
+  "CubeSatShop",
+  "direct",
+  "satsearch"
+ ],
+ "rf": {
+  "band": "UHF/VHF",
+  "gain_dBi": 0,
+  "tx_power_W": 2
+ },
+ "electrical": {
+  "voltage_V": {
+   "min": 4,
+   "max": 17
+  },
+  "power_W": {
+   "idle": 0.03,
+   "peak": 2.3
+  },
+  "interfaces": [
+   "I2C"
+  ]
+ },
+ "mechanism": {
+  "actuator_type": "burn_wire",
+  "deployment_time_s": 3
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -20,
+   "max": 80
+  }
+ },
+ "deployed_dimensions_mm": {
+  "x": 438,
+  "y": 438,
+  "z": 6.9
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   98.0,
+   98.0,
+   6.6
+  ],
+  "mesh_volume_mm3": 63367.0,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.578,
+  "deployed_measured_bbox_mm": [
+   434.0,
+   434.0,
+   6.6
+  ],
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ],
+   "part_deployed": [
+    {
+     "name": "base",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part_deployed__base.stl"
+    },
+    {
+     "name": "tapes",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part_deployed__tapes.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40,
+   "part_deployed": 76
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "I2C"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [
+   "Omnetics 9-pin"
+  ],
+  "rf_connectors": [
+   "MMCX female (MCX or SMA harness options)"
+  ],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_pn7f47_isis_antenna_system_for_6u_12u_cube_sats.png",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/isis-antenna-system-for-6u-12u-cube-sats",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ],
+  "part_deployed": [
+   "part_deployed.step",
+   "part_deployed.stl"
+  ]
+ }
+}

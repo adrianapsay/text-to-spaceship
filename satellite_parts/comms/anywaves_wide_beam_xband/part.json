@@ -1,0 +1,122 @@
+{
+ "id": "anywaves_wide_beam_xband",
+ "name": "Anywaves wide beam X-band antenna (100 x 100 x 6.5 mm)",
+ "category": "comms",
+ "subcategory": "antenna",
+ "vendor": "Anywaves",
+ "model": "Wide Beam X-Band Antenna",
+ "dimensions_mm": {
+  "x": 100,
+  "y": 100,
+  "z": 16
+ },
+ "mass_g": 70,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.co/products/anywaves-wide-beam-x-band-antenna",
+  "document": {
+   "title": "satsearch listing of the Anywaves wide beam X-band antenna datasheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "rf",
+   "thermal"
+  ],
+  "notes": "100 x 100 x 6.5 mm (16 mm with the SMA connector, modelled as a raised block), 70 g (<80 g with connector), 8.025-8.4 GHz, >5 dBi, LHCP or RHCP, 20 W, -120 to 120 C, TRL 8."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "France",
+ "distributors": [
+  "direct",
+  "satsearch"
+ ],
+ "rf": {
+  "band": "X",
+  "frequency_MHz": [
+   8025,
+   8400
+  ],
+  "gain_dBi": 5.0,
+  "polarization": "circular (LHCP or RHCP)",
+  "power_handling_W": 20
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -120,
+   "max": 120
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   100.0,
+   100.0,
+   16.0
+  ],
+  "mesh_volume_mm3": 99200.0,
+  "watertight": true,
+  "render_kind": "patch_antenna",
+  "effective_density_g_cm3": 0.706,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "patch",
+     "color": [
+      0.72,
+      0.45,
+      0.2
+     ],
+     "file": "bodies/part__patch.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 28
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [
+   "SMA female"
+  ],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/image-anywaves-wide-beam-x-band-antenna-wn6ikb.jpg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/anywaves-wide-beam-x-band-antenna",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

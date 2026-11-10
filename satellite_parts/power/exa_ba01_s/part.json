@@ -1,0 +1,134 @@
+{
+ "id": "exa_ba01_s",
+ "name": "EXA BA01/S high energy density Li-polymer battery array (26.6 Wh, 7 mm thick)",
+ "category": "power",
+ "subcategory": "battery",
+ "vendor": "EXA (Ecuadorian Civilian Space Agency)",
+ "model": "BA01/S",
+ "dimensions_mm": {
+  "x": 95,
+  "y": 85,
+  "z": 7
+ },
+ "mass_g": 85,
+ "source": {
+  "type": "unverified",
+  "url": "https://www.cubesatshop.com/wp-content/uploads/2016/11/EXA-BA0x-Brochure.pdf",
+  "document": {
+   "title": "EXA BA0x brochure (CubeSatShop)",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "mass_g",
+   "electrical",
+   "thermal",
+   "interfaces"
+  ],
+  "notes": "Thickness 7 mm, 85 g, 26.6 Wh / 7200 mAh, 3.7 V (D models 3.7 or 7.4 V), 8 cells, 20C peak discharge, 3C charge, -30 to 80 C (-60 to 120 with CN/TTB), Molex PicoBlade/PicoSpox connectors. Length and width NOT stated: 95 x 85 mm assumed for a 1U array."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Ecuador",
+ "distributors": [
+  "CubeSatShop",
+  "satsearch",
+  "direct"
+ ],
+ "dimensions_note": "length and width assumed",
+ "electrical": {
+  "chemistry": "Li-polymer",
+  "cells": 8,
+  "energy_Wh": 26.6,
+  "capacity_mAh": 7200,
+  "voltage_V": {
+   "nominal": 3.7
+  },
+  "max_discharge_C": 20,
+  "charge_C": 3
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -30,
+   "max": 80
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   95.0,
+   85.0,
+   7.0
+  ],
+  "mesh_volume_mm3": 56505.1,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.504,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [
+   "Molex PicoBlade / PicoSpox 2- or 4-pin"
+  ],
+  "rf_connectors": [],
+  "power_bus_V": 3.7
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_5taiaq_exa_ba01-s-high-energy-density-li-po-battery-array.jpg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/exa-50-whr-high-energy-density-li-po-battery-array",
+  "photo_file": "reference_photo",
+  "datasheet_url": "https://www.cubesatshop.com/wp-content/uploads/2016/11/EXA-BA0x-Brochure.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

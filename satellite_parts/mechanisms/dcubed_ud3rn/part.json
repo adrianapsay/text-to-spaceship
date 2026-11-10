@@ -1,0 +1,131 @@
+{
+ "id": "dcubed_ud3rn",
+ "name": "DCUBED uD3RN micro release nut (4-6 kN)",
+ "category": "mechanisms",
+ "subcategory": "release_nut",
+ "vendor": "DCUBED (Deployables Cubed GmbH)",
+ "model": "uD3RN",
+ "dimensions_mm": {
+  "x": 25,
+  "y": 25,
+  "z": 25
+ },
+ "mass_g": 38,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.co/products/dcubed-micro-release-nut-u-d3rn",
+  "document": {
+   "title": "satsearch listing of the DCUBED uD3RN / uD3RN+",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "mechanism",
+   "thermal",
+   "material"
+  ],
+  "notes": "25 x 25 x 25 mm, 38 g, 4 or 6 kN axial release load, 4.5 kN proof (7 kN for the + variant), resettable 40-100x on ground, -65 to 75 C, 7075-T7351 body with Ti grade 5 nut, ITAR free."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Germany",
+ "distributors": [
+  "direct",
+  "satsearch"
+ ],
+ "mechanism": {
+  "actuator_type": "SMA",
+  "release_load_N": [
+   4000,
+   6000
+  ],
+  "proof_load_N": 4500,
+  "resettable": true,
+  "reset_cycles": 100
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -65,
+   "max": 75
+  }
+ },
+ "material": "7075-T7351 aluminium body, Ti-6Al-4V nut",
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   25.0,
+   25.0,
+   25.0
+  ],
+  "mesh_volume_mm3": 15602.2,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 2.436,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/image-dcubed-micro-release-nut-ud3rn-sfq8ga.jpg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/dcubed-micro-release-nut-u-d3rn",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

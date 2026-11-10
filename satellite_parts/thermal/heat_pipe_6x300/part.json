@@ -1,0 +1,89 @@
+{
+ "id": "heat_pipe_6x300",
+ "name": "Copper-water miniature heat pipe 6 mm x 300 mm",
+ "category": "thermal",
+ "subcategory": "heat_pipe",
+ "vendor": "generic",
+ "model": "heat pipe 6x300",
+ "dimensions_mm": {
+  "x": 300,
+  "y": 6,
+  "z": 6
+ },
+ "mass_g": 34.0,
+ "source": {
+  "type": "derived",
+  "url": "https://www.nasa.gov/smallsat-institute/sst-soa/thermal-control",
+  "document": {
+   "title": "NASA State-of-the-Art Small Spacecraft Technology, thermal control chapter (generic sizes; not fetched this session)",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm"
+  ],
+  "notes": "Generic COTS sintered copper-water heat pipe sizes; mass DERIVED (45% solid copper fraction). No vendor datasheet fetched; UNVERIFIED sizes."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "material": "copper envelope, sintered wick, water",
+ "mass_note": "derived",
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "unknown",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   300.0,
+   5.98,
+   6.0
+  ],
+  "mesh_volume_mm3": 8450.7,
+  "watertight": true,
+  "render_kind": "cylinder",
+  "effective_density_g_cm3": 4.023,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 164
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

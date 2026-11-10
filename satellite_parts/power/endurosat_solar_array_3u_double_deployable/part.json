@@ -1,0 +1,160 @@
+{
+ "id": "endurosat_solar_array_3u_double_deployable",
+ "name": "EnduroSat 3U deployable solar array (double deployable, 21 cells)",
+ "category": "power",
+ "subcategory": "solar_array_deployable",
+ "vendor": "EnduroSat",
+ "model": "3U Deployable Solar Array (double)",
+ "dimensions_mm": {
+  "x": 325,
+  "y": 82,
+  "z": 12
+ },
+ "mass_g": 468,
+ "source": {
+  "type": "unverified",
+  "url": "https://satsearch.co/products/endurosat-3u-deployable-solar-array",
+  "document": {
+   "title": "satsearch listing of the EnduroSat 3U Deployable Solar Array",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "mass_g",
+   "electrical",
+   "mechanism"
+  ],
+  "notes": "See single-deployable record; 468 g, 21 cells, 25.2 W. Stowed 12 mm stack is an assumption."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Bulgaria",
+ "distributors": [
+  "direct (endurosat.com shop)"
+ ],
+ "dimensions_note": "assumed from 3U face",
+ "electrical": {
+  "cells": 21,
+  "power_W": {
+   "peak": 25.2
+  },
+  "voltage_V": {
+   "nominal": 16.8
+  },
+  "current_A": 0.504,
+  "supply_V": 5
+ },
+ "mechanism": {
+  "actuator_type": "burn_wire",
+  "deployment_angle_deg": [
+   90,
+   135
+  ]
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   325.0,
+   82.0,
+   12.0
+  ],
+  "mesh_volume_mm3": 319774.9,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.464,
+  "deployed_measured_bbox_mm": [
+   326.25,
+   82.0,
+   325.0
+  ],
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ],
+   "part_deployed": [
+    {
+     "name": "body_panel",
+     "color": [
+      0.16,
+      0.26,
+      0.62
+     ],
+     "file": "bodies/part_deployed__body_panel.stl"
+    },
+    {
+     "name": "wings",
+     "color": [
+      0.16,
+      0.26,
+      0.62
+     ],
+     "file": "bodies/part_deployed__wings.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40,
+   "part_deployed": 28
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 16.8
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/image-endurosat-3u-deployable-solar-panel-cip807.jpg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/endurosat-3u-deployable-solar-array",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ],
+  "part_deployed": [
+   "part_deployed.step",
+   "part_deployed.stl"
+  ]
+ }
+}

@@ -1,0 +1,101 @@
+{
+ "id": "micro_d_15",
+ "name": "Micro-D 15-contact connector (MIL-DTL-83513 class, e.g. Omnetics / Glenair MDM)",
+ "category": "harness",
+ "subcategory": "connector",
+ "vendor": "generic (Omnetics, Glenair, TE)",
+ "model": "MDM-15",
+ "dimensions_mm": {
+  "x": 24.1,
+  "y": 8.0,
+  "z": 6.0
+ },
+ "mass_g": 6.0,
+ "source": {
+  "type": "unverified",
+  "url": "https://www.omnetics.com/wp-content/uploads/2024/02/MICRO-D_Omnetics.pdf",
+  "document": {
+   "title": "Omnetics Micro-D catalogue (fetch failed this session)",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [],
+  "notes": "1.27 mm contact pitch per MIL-DTL-83513; shell length 24.1 mm and 8 x 6 mm section are typical values from memory, UNVERIFIED; mass derived."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "material": "aluminium shell, gold-plated contacts",
+ "mass_note": "derived",
+ "electrical": {
+  "rating": "3 A per contact (MIL-DTL-83513 typical)"
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   24.1,
+   8.0,
+   6.0
+  ],
+  "mesh_volume_mm3": 1156.8,
+  "watertight": true,
+  "render_kind": "connector_block",
+  "effective_density_g_cm3": 5.187,
+  "bodies": {
+   "part": [
+    {
+     "name": "shell",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__shell.stl"
+    },
+    {
+     "name": "contacts",
+     "color": [
+      0.85,
+      0.66,
+      0.22
+     ],
+     "file": "bodies/part__contacts.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 12
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [
+   "Micro-D 15 (mates with MDM-15 of the opposite gender)"
+  ],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": "https://www.omnetics.com/wp-content/uploads/2024/02/MICRO-D_Omnetics.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

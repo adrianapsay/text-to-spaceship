@@ -1,0 +1,117 @@
+{
+ "id": "gomspace_nanopower_p110uc",
+ "name": "GomSpace NanoPower P110UC 1U solar panel (2 cells, with magnetorquer)",
+ "category": "power",
+ "subcategory": "solar_panel",
+ "vendor": "GomSpace",
+ "model": "NanoPower P110UC",
+ "dimensions_mm": {
+  "x": 98,
+  "y": 83,
+  "z": 2.1
+ },
+ "mass_g": 65,
+ "source": {
+  "type": "datasheet",
+  "url": "https://gomspace.com/UserFiles/Subsystems/datasheet/gs-ds-nanopower-p110-210.pdf",
+  "document": {
+   "title": "NanoPower P110 datasheet DS 1014192",
+   "revision": "2.10",
+   "date": "2018-10-22"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "mass_g",
+   "electrical"
+  ],
+  "notes": "Mass and PCB thickness from the datasheet. Outline dimensions are in the datasheet drawings only (not extractable); 98 x 83 mm is the 1U side-panel size between CDS rails (DERIVED). Two Azur Space 3G30A cells."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "Denmark",
+ "distributors": [
+  "direct (gomspace.com shop)"
+ ],
+ "material": "FR4 PCB with 2 x 3G30A cells",
+ "electrical": {
+  "voltage_V": {
+   "min": 4.64,
+   "max": 4.84
+  },
+  "current_A": 0.5,
+  "power_W": {
+   "nominal": 2.3
+  },
+  "cells": "2 x Azur Space 3G30A, 30%"
+ },
+ "adcs": {
+  "dipole_Am2": null
+ },
+ "dimensions_note": "derived outline",
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   98.0,
+   83.0,
+   2.0
+  ],
+  "mesh_volume_mm3": 14278.4,
+  "watertight": true,
+  "render_kind": "solar_panel",
+  "effective_density_g_cm3": 4.552,
+  "bodies": {
+   "part": [
+    {
+     "name": "substrate",
+     "color": [
+      0.3,
+      0.3,
+      0.32
+     ],
+     "file": "bodies/part__substrate.stl"
+    },
+    {
+     "name": "cells",
+     "color": [
+      0.16,
+      0.26,
+      0.62
+     ],
+     "file": "bodies/part__cells.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 44
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": "https://gomspace.com/UserFiles/Subsystems/datasheet/gs-ds-nanopower-p110-210.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

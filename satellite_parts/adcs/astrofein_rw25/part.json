@@ -1,0 +1,124 @@
+{
+ "id": "astrofein_rw25",
+ "name": "Astro- und Feinwerktechnik Adlershof RW25 reaction wheel",
+ "category": "adcs",
+ "subcategory": "reaction_wheel",
+ "vendor": "Astro- und Feinwerktechnik Adlershof GmbH (Astrofein)",
+ "model": "RW25",
+ "dimensions_mm": {
+  "x": 50,
+  "y": 50,
+  "z": 25
+ },
+ "mass_g": 200,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.astrofein.com/wp-content/uploads/2023/04/ASTROFEIN-Reaction-Wheel-Family_20230425.pdf",
+  "document": {
+   "title": "ASTROFEIN Reaction Wheel Family brochure",
+   "revision": null,
+   "date": "2023-04-25"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "adcs",
+   "thermal"
+  ],
+  "notes": "Mass given as 'less than or equal'. Power and voltage not in the brochure."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "Germany",
+ "distributors": [
+  "direct"
+ ],
+ "adcs": {
+  "momentum_mNms": 30,
+  "torque_mNm": 2,
+  "nominal_speed_rpm": 5000
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -20,
+   "max": 50
+  }
+ },
+ "lifetime_years": 2,
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   50.0,
+   50.0,
+   25.0
+  ],
+  "mesh_volume_mm3": 44037.7,
+  "watertight": true,
+  "render_kind": "reaction_wheel",
+  "effective_density_g_cm3": 4.542,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "flywheel",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__flywheel.stl"
+    },
+    {
+     "name": "motor_cap",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__motor_cap.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 348
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_38ujpk_astrofein_reaction-wheel-rw25.jpg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/astrofein-reaction-wheel-rw25",
+  "photo_file": "reference_photo",
+  "datasheet_url": "https://www.astrofein.com/wp-content/uploads/2023/04/ASTROFEIN-Reaction-Wheel-Family_20230425.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

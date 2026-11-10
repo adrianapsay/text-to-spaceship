@@ -1,0 +1,147 @@
+{
+ "id": "isis_ieps_type_a",
+ "name": "ISISPACE iEPS Type A power system",
+ "category": "power",
+ "subcategory": "eps",
+ "vendor": "ISISPACE",
+ "model": "iEPS Type A",
+ "dimensions_mm": {
+  "x": 96,
+  "y": 92,
+  "z": 26.5
+ },
+ "mass_g": 184,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.isispace.nl/wp-content/uploads/2019/04/ISIS-iEPS2_0-DS-00001-iEPS_Datasheet-1_0.pdf.",
+  "document": {
+   "title": "ISIS-iEPS2_0-DS-00001 iEPS Datasheet",
+   "revision": "1.0",
+   "date": "2019-08-15"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "Type B/C dimensions are the PCB only; the 4-cell battery (94 x 89 x 21 mm) is separate. Capacity 22.5-45 Wh across types; the datasheet's 32 W / 64 W pack figures do not match, confirm with ISIS."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Netherlands",
+ "distributors": [
+  "CubeSatShop",
+  "direct"
+ ],
+ "first_flight_year": 2016,
+ "flight_heritage": "PEASSS 2016, Hiber 1 and 2 2018 (datasheet)",
+ "electrical": {
+  "voltage_V": {
+   "min": 6.5,
+   "nominal": null,
+   "max": 8.0
+  },
+  "energy_Wh": 22.5,
+  "cells": "2S 3200 mAh 3.6 V",
+  "outputs": [
+   "5 V x4 (4 A total)",
+   "3.3 V x4 (3.95 A total)",
+   "unregulated battery"
+  ],
+  "power_W": {
+   "idle": 0.09,
+   "nominal": null,
+   "peak": null
+  },
+  "heater_W": 1.2,
+  "interfaces": [
+   "I2C",
+   "PC/104 stack"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -40,
+   "max": 70
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   96.0,
+   92.0,
+   26.5
+  ],
+  "mesh_volume_mm3": 141869.4,
+  "watertight": true,
+  "render_kind": "pc104_board",
+  "effective_density_g_cm3": 1.297,
+  "bodies": {
+   "part": [
+    {
+     "name": "pcb",
+     "color": [
+      0.09,
+      0.42,
+      0.24
+     ],
+     "file": "bodies/part__pcb.stl"
+    },
+    {
+     "name": "stack_header",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__stack_header.stl"
+    },
+    {
+     "name": "components",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__components.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 732
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "I2C"
+  ],
+  "mechanical": "PC/104 stack",
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_4exljs_isis_i_eps_electrical_power_system.png",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/isis-i-eps-electrical-power-system",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

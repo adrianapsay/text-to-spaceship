@@ -1,0 +1,142 @@
+{
+ "id": "gomspace_nanopower_bp4",
+ "name": "GomSpace NanoPower BP4 battery pack (4 x 18650)",
+ "category": "power",
+ "subcategory": "battery_pack",
+ "vendor": "GomSpace",
+ "model": "NanoPower BP4",
+ "dimensions_mm": {
+  "x": 94,
+  "y": 84,
+  "z": 23
+ },
+ "mass_g": 258,
+ "source": {
+  "type": "datasheet",
+  "url": "https://gomspace.com/UserFiles/Subsystems/datasheet/gs-ds-nanopower-bp4_(DS_-_1013024_-_1_-_31)_-_1.pdf",
+  "document": {
+   "title": "NanoPower BP4 datasheet DS 1013024",
+   "revision": "3.1",
+   "date": "2023-09-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "mounting"
+  ],
+  "notes": "Mass 258 g in section 6, 270 g in the features list. Two configurations: 2P-2S 6.0 Ah 43 Wh 6.0-8.4 V, or 1P-4S 3.0 Ah 43 Wh 12.0-16.8 V. Heater about 6 W typical."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Denmark",
+ "distributors": [
+  "direct (gomspace.com shop)"
+ ],
+ "material": "aluminium frame with four 18650 Li-ion cells",
+ "electrical": {
+  "voltage_V": {
+   "min": 6.0,
+   "nominal": 7.4,
+   "max": 16.8
+  },
+  "energy_Wh": 43,
+  "capacity_Ah": 6.0,
+  "capacity_note": "6.0 Ah in 2P-2S, 3.0 Ah in 1P-4S",
+  "cells": "4 x 18650 Li-ion, 3000 mAh nominal",
+  "heater_W": 6,
+  "interfaces": [
+   "PC/104 stack (CubeSat Kit modified PC-104 plus)"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": null,
+   "max": null
+  },
+  "note": "depends on cell; see GomSpace battery datasheet"
+ },
+ "mounting": {
+  "face": "PC/104 stack",
+  "pattern": "PC/104 (stacks with P31u at 23.5 mm)",
+  "fasteners": "M3"
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   94.0,
+   84.0,
+   23.0
+  ],
+  "mesh_volume_mm3": 181574.5,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.421,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": "PC/104 (stacks with P31u at 23.5 mm)",
+  "electrical_connectors": [
+   "PC/104 stack-through header (CubeSat Kit modified PC-104 plus bus)"
+  ],
+  "rf_connectors": [],
+  "power_bus_V": 7.4
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": "https://gomspace.com/UserFiles/Subsystems/datasheet/gs-ds-nanopower-bp4_(DS_-_1013024_-_1_-_31)_-_1.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

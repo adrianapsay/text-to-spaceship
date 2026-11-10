@@ -1,0 +1,111 @@
+{
+ "id": "enpulsion_micro_r3_ppu",
+ "name": "ENPULSION MICRO R3 power processing unit",
+ "category": "propulsion",
+ "subcategory": "ppu",
+ "vendor": "ENPULSION",
+ "model": "MICRO R3 (PPU)",
+ "dimensions_mm": {
+  "x": 140,
+  "y": 120,
+  "z": 34
+ },
+ "mass_g": 600,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.co/products/enpulsion-enpulsion-micro-r3",
+  "document": {
+   "title": "satsearch listing of the ENPULSION MICRO R3 datasheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm"
+  ],
+  "notes": "140 x 120 x 34 mm from the listing; mass is an ESTIMATE (see thruster head record)."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Austria",
+ "distributors": [
+  "direct",
+  "satsearch"
+ ],
+ "mass_note": "estimate",
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   140.0,
+   120.0,
+   34.0
+  ],
+  "mesh_volume_mm3": 571166.5,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.05,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_jxjdue_enpulsion_enpulsion-micro-r3.jpg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/enpulsion-enpulsion-micro-r3",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

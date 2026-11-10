@@ -1,0 +1,149 @@
+{
+ "id": "cubespace_cubemag_deployable",
+ "name": "CubeSpace CubeMag deployable magnetometer (boom)",
+ "category": "adcs",
+ "subcategory": "magnetometer",
+ "vendor": "CubeSpace Satellite Systems",
+ "model": "CubeMag Deployable",
+ "dimensions_mm": {
+  "x": 82,
+  "y": 17,
+  "z": 9.5
+ },
+ "mass_g": 16,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.cubesatshop.com/wp-content/uploads/2023/06/CubeSpace-SENSORS-2023.pdf",
+  "document": {
+   "title": "CubeSpace Sensors brochure",
+   "revision": "2023",
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "adcs",
+   "electrical",
+   "interfaces"
+  ],
+  "notes": "17 x 6.5 x 82 mm (9.5 mm with protrusion) stowed, 16 g, 50 nT noise (3 sigma), 0.6 % FS linearity, 2.35 W during deployment, CAN/UART/RS-485, Molex Micro-Lock Plus. Deployed length not stated."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "South Africa",
+ "distributors": [
+  "CubeSatShop",
+  "satsearch",
+  "direct"
+ ],
+ "adcs": {
+  "noise_nT": 50,
+  "linearity_pct_fs": 0.6,
+  "update_rate_Hz": 50
+ },
+ "electrical": {
+  "voltage_V": {
+   "nominal": 3.3
+  },
+  "power_W": {
+   "peak": 2.35
+  },
+  "interfaces": [
+   "CAN",
+   "UART",
+   "RS-485"
+  ]
+ },
+ "mechanism": {
+  "actuator_type": "deployable boom (release method not stated)",
+  "deployment_power_W": 2.35
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -20,
+   "max": 80
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   82.0,
+   17.0,
+   9.5
+  ],
+  "mesh_volume_mm3": 13232.0,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.209,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "CAN",
+   "RS-485",
+   "UART"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [
+   "Molex Micro-Lock Plus"
+  ],
+  "rf_connectors": [],
+  "power_bus_V": 3.3
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/image-cubespace-gen2-cubemag-compact-deployable-uw9m9o.jpg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/cubespace-gen2-cubemag-compact-and-deployable",
+  "photo_file": "reference_photo",
+  "datasheet_url": "https://www.cubesatshop.com/wp-content/uploads/2023/06/CubeSpace-SENSORS-2023.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

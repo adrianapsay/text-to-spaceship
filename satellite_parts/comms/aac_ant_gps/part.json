@@ -1,0 +1,124 @@
+{
+ "id": "aac_ant_gps",
+ "name": "AAC Clyde Space ANT-GPS L1 active patch antenna",
+ "category": "comms",
+ "subcategory": "antenna",
+ "vendor": "AAC Clyde Space (AAC Hyperion)",
+ "model": "ANT-GPS",
+ "dimensions_mm": {
+  "x": 50.8,
+  "y": 50.8,
+  "z": 21.03
+ },
+ "mass_g": 80,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.aac-clyde.space/what-we-do/space-products-components/adcs/ant-gps-antenna",
+  "document": {
+   "title": "AAC Clyde Space ANT-GPS product page / datasheet ANT-GPS-2.pdf",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "rf",
+   "thermal"
+  ],
+  "notes": "21.03 x 50.8 x 50.8 mm including connector, 80 g, SMA female, LNA 33 dB."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Sweden / Netherlands",
+ "distributors": [
+  "direct (aac-clyde.space product enquiry)"
+ ],
+ "rf": {
+  "band": "GNSS L1",
+  "frequency_MHz": 1575.42,
+  "gain_dBi": 5.0,
+  "lna_gain_dB": 33
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -55,
+   "max": 85
+  }
+ },
+ "cad_downloads": [
+  {
+   "format": "CAD zip",
+   "url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/ANT-GNSS.zip",
+   "notes": "direct link on the product page"
+  }
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   50.8,
+   50.8,
+   21.0
+  ],
+  "mesh_volume_mm3": 51454.2,
+  "watertight": true,
+  "render_kind": "patch_antenna",
+  "effective_density_g_cm3": 1.555,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "patch",
+     "color": [
+      0.72,
+      0.45,
+      0.2
+     ],
+     "file": "bodies/part__patch.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 28
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [
+   "SMA female"
+  ],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/ANT-GPS-A-600x350-002.png",
+  "photo_source": "vendor",
+  "photo_page": "https://www.aac-clyde.space/what-we-do/space-products-components/adcs/ant-gps-antenna",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

@@ -1,0 +1,128 @@
+{
+ "id": "spaceinventor_bat_14_p4",
+ "name": "Space Inventor BAT-14-P4 battery (50 Wh, 14.4 V)",
+ "category": "power",
+ "subcategory": "battery",
+ "vendor": "Space Inventor",
+ "model": "BAT-14-P4",
+ "dimensions_mm": {
+  "x": 93,
+  "y": 93,
+  "z": 23.0
+ },
+ "mass_g": 314,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.co/products/space-inventor-bat-14-p4",
+  "document": {
+   "title": "satsearch listing of the Space Inventor BAT-14/28-P4 datasheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "interfaces"
+  ],
+  "notes": "93 x 93 x 23 mm (14.4 V) or 93 x 93 x 46.55 mm (28.8 V); 314 g / 544 g; CAN bus with CSP, daisy-chained battery bus, redundant MCUs. The listing mixes the two variants; confirm with the supplier."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Denmark",
+ "distributors": [
+  "direct",
+  "satsearch"
+ ],
+ "electrical": {
+  "chemistry": "Li-ion 18650",
+  "cells": "4 x 18650",
+  "energy_Wh": 50,
+  "voltage_V": {
+   "nominal": 14.4
+  },
+  "max_power_W": 200,
+  "interfaces": [
+   "CAN (CSP)"
+  ]
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   93.0,
+   93.0,
+   23.0
+  ],
+  "mesh_volume_mm3": 198893.5,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.579,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "CAN",
+   "CSP"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 14.4
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/image-space-inventor--battery-bat-14-p4-rupxy3.jpg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/space-inventor-bat-14-p4",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

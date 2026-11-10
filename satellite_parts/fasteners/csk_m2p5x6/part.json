@@ -1,0 +1,104 @@
+{
+ "id": "csk_m2p5x6",
+ "name": "Countersunk socket screw M2.5 x 6 (ISO 10642)",
+ "category": "fasteners",
+ "subcategory": "screw",
+ "vendor": "generic (ISO 10642)",
+ "model": "M2.5x6 ISO 10642",
+ "dimensions_mm": {
+  "x": 5.5,
+  "y": 5.5,
+  "z": 6
+ },
+ "mass_g": 0.225,
+ "source": {
+  "type": "standard",
+  "url": "https://www.engineersedge.com/hardware/iso_10642_countersunk_socket_screws_14764.htm",
+  "document": {
+   "title": "ISO 10642 hexagon socket countersunk head screws, dimension table (values from memory of the table; page not fetched this session)",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm"
+  ],
+  "notes": "dk theoretical max 5.5, k 1.5; mass derived from steel 7.85 g/cm3 (cone + shank volume). Overall length includes the head per ISO 10642."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "material": "steel 10.9 or A2 stainless",
+ "mass_note": "derived",
+ "distributors": [
+  "McMaster-Carr",
+  "Fabory",
+  "Bossard"
+ ],
+ "cost": {
+  "value": 0.1,
+  "currency": "USD",
+  "basis": "list_price",
+  "source": null
+ },
+ "cost_note": "approximate bulk price",
+ "geometry": {
+  "measured_bbox_mm": [
+   5.5,
+   5.48,
+   6.0
+  ],
+  "mesh_volume_mm3": 41.5,
+  "watertight": true,
+  "render_kind": "countersunk_screw",
+  "effective_density_g_cm3": 5.415,
+  "bodies": {
+   "part": [
+    {
+     "name": "head",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__head.stl"
+    },
+    {
+     "name": "shank",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__shank.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 332
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

@@ -1,0 +1,133 @@
+{
+ "id": "c3s_obc",
+ "name": "C3S on-board computer (Cortex-M7, backplane connector)",
+ "category": "avionics",
+ "subcategory": "obc",
+ "vendor": "C3S Electronics Development",
+ "model": "OBC",
+ "dimensions_mm": {
+  "x": 92,
+  "y": 89.5,
+  "z": 12.3
+ },
+ "mass_g": 65,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.co/products/c3s-on-board-computer-obc",
+  "document": {
+   "title": "satsearch listing of the C3S OBC datasheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "compute",
+   "electrical",
+   "interfaces"
+  ],
+  "notes": "89.5 x 92 x 12.3 mm (13.6 with daughterboard), 65 g (100 g with daughterboard), Cortex-M7 <300 MHz, 384 kB RAM, 2 MB flash, CAN and M-LVDS, space-grade backplane connector, 0.46 W."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Hungary",
+ "distributors": [
+  "direct",
+  "satsearch"
+ ],
+ "compute": {
+  "processor": "ARM Cortex-M7",
+  "clock_GHz": 0.3,
+  "ram_MB": 0.384,
+  "storage_GB": 0.002
+ },
+ "electrical": {
+  "power_W": {
+   "nominal": 0.46
+  },
+  "interfaces": [
+   "CAN",
+   "M-LVDS"
+  ]
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   92.0,
+   89.5,
+   12.3
+  ],
+  "mesh_volume_mm3": 65411.7,
+  "watertight": true,
+  "render_kind": "pc104_board",
+  "effective_density_g_cm3": 0.994,
+  "bodies": {
+   "part": [
+    {
+     "name": "pcb",
+     "color": [
+      0.09,
+      0.42,
+      0.24
+     ],
+     "file": "bodies/part__pcb.stl"
+    },
+    {
+     "name": "stack_header",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__stack_header.stl"
+    },
+    {
+     "name": "components",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__components.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 732
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "CAN"
+  ],
+  "mechanical": "PC/104 stack",
+  "electrical_connectors": [
+   "space-grade backplane connector (C3S bus)"
+  ],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_9pbao7_c3s_on-board-computer-obc.jpg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/c3s-on-board-computer-obc",
+  "photo_file": "reference_photo",
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

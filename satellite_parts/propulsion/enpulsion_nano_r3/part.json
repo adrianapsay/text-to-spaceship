@@ -1,0 +1,130 @@
+{
+ "id": "enpulsion_nano_r3",
+ "name": "ENPULSION NANO R3 FEEP thruster",
+ "category": "propulsion",
+ "subcategory": "electric_thruster",
+ "vendor": "ENPULSION",
+ "model": "NANO R3 (configuration 030)",
+ "dimensions_mm": {
+  "x": 98.0,
+  "y": 99.0,
+  "z": 95.3
+ },
+ "mass_g": 1500,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.enpulsion.com/wp-content/uploads/DataSheet_Nano_20260319.pdf",
+  "document": {
+   "title": "ENPULSION NANO R3 data sheet",
+   "revision": null,
+   "date": "2026-03-19"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "propulsion",
+   "electrical"
+  ],
+  "notes": "98.0 x 99.0 x 95.3 mm excluding protrusions (100.95 x 99.0 x 97.3 with). Mass under 1280 g dry, under 1500 g wet."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Austria",
+ "distributors": [
+  "direct",
+  "CubeSatShop (earlier IFM Nano)"
+ ],
+ "first_flight_year": 2018,
+ "flight_heritage": "IFM Nano first flown 2018 (vendor); count not in this datasheet",
+ "dry_mass_g": 1280,
+ "propulsion": {
+  "propellant": "indium (solid, 215 g)",
+  "thrust_mN": {
+   "min": 0.15,
+   "nominal": 0.35,
+   "max": 0.35
+  },
+  "isp_s": null,
+  "total_impulse_Ns": null,
+  "propellant_mass_g": 215,
+  "tank_pressure_MPa": 0,
+  "power_W": 45,
+  "power_note": "30-50 W total, 45 W at nominal thrust incl. neutralizer; hot standby 4-7 W"
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   98.0,
+   99.0,
+   95.3
+  ],
+  "mesh_volume_mm3": 840106.4,
+  "watertight": true,
+  "render_kind": "electric_thruster",
+  "effective_density_g_cm3": 1.785,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    },
+    {
+     "name": "emitter",
+     "color": [
+      0.85,
+      0.66,
+      0.22
+     ],
+     "file": "bodies/part__emitter.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 348
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_yfkkll_enpulsion_enpulsion-nano-r3.jpg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/enpulsion-enpulsion-nano-r3",
+  "photo_file": "reference_photo",
+  "datasheet_url": "https://www.enpulsion.com/wp-content/uploads/DataSheet_Nano_20260319.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

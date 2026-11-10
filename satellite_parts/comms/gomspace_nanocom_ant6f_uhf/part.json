@@ -1,0 +1,170 @@
+{
+ "id": "gomspace_nanocom_ant6f_uhf",
+ "name": "GomSpace NanoCom ANT-6F UHF deployable antenna (6U face)",
+ "category": "comms",
+ "subcategory": "antenna",
+ "vendor": "GomSpace",
+ "model": "NanoCom ANT-6F UHF",
+ "dimensions_mm": {
+  "x": 221.7,
+  "y": 116.7,
+  "z": 5.3
+ },
+ "mass_g": 90,
+ "source": {
+  "type": "datasheet",
+  "url": "https://gomspace.com/wp-content/uploads/2025/09/gs-ds-nanocom-ant6f-uhf-3.0.pdf",
+  "document": {
+   "title": "NanoCom ANT-6F UHF datasheet DS 1010785",
+   "revision": "3.0",
+   "date": "2026-08-12"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "rf",
+   "mechanism",
+   "electrical"
+  ],
+  "notes": "System size excluding rods 221.7 x 116.7 x 5.3 mm; rods 163 mm hinge to tip, released to 45 degrees above the PCB. Deployed geometry modelled with four 163 mm rods flat (approximation)."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "Denmark",
+ "distributors": [
+  "direct (gomspace.com shop)"
+ ],
+ "rf": {
+  "band": "UHF",
+  "frequency_MHz": [
+   [
+    390,
+    410
+   ],
+   [
+    425,
+    445
+   ],
+   [
+    460,
+    480
+   ]
+  ],
+  "gain_dBi": 2.05,
+  "polarization": "circular",
+  "tx_power_W": 2,
+  "max_rf_power_W": 5
+ },
+ "mechanism": {
+  "actuator_type": "burn_wire",
+  "actuation_time_s": null,
+  "burn_limit_s": 20,
+  "activations_max": 5,
+  "spring_torque_Nmm": {
+   "stowed": 5.31,
+   "deployed": 1.32
+  },
+  "redundancy": "two burn resistors per Dyneema filament, deployment switches"
+ },
+ "electrical": {
+  "voltage_V": {
+   "nominal": 3.3,
+   "max": 3.4
+  },
+  "burn_voltage_V": 5.0,
+  "burn_current_A": 0.5,
+  "power_W": {
+   "idle": 0.165,
+   "peak": 2.5
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "status_note": "2026-11-08: not found on the current gomspace.com product pages (site now lists SDR, P60/P80, BPX/BP8, NanoStruct kits); datasheet still served, verify availability before design-in.",
+ "geometry": {
+  "measured_bbox_mm": [
+   221.7,
+   116.7,
+   5.3
+  ],
+  "mesh_volume_mm3": 137123.7,
+  "watertight": true,
+  "render_kind": "box",
+  "effective_density_g_cm3": 0.656,
+  "deployed_measured_bbox_mm": [
+   543.7,
+   438.7,
+   5.3
+  ],
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ],
+   "part_deployed": [
+    {
+     "name": "base",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part_deployed__base.stl"
+    },
+    {
+     "name": "tapes",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part_deployed__tapes.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 12,
+   "part_deployed": 76
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 3.3
+ },
+ "reference_images": {
+  "stl_preview": "preview.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "datasheet_url": "https://gomspace.com/wp-content/uploads/2025/09/gs-ds-nanocom-ant6f-uhf-3.0.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ],
+  "part_deployed": [
+   "part_deployed.step",
+   "part_deployed.stl"
+  ]
+ }
+}
