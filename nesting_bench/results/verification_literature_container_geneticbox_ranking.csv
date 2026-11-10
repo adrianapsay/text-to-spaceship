@@ -1,0 +1,2 @@
+rank,algorithm,runs,ratio_mean,ratio_ci99_low,ratio_ci99_high,solved_rate,valid_rate
+1,genetic_box,40,0.8202,0.7539,0.8865,0.125,1.000

@@ -1,0 +1,7 @@
+rank,algorithm,runs,ratio_mean,ratio_ci99_low,ratio_ci99_high,solved_rate,valid_rate
+1,best_of_fast,40,1.0073,0.9290,1.0855,0.750,1.000
+2,genetic_algorithm,40,0.9909,0.9184,1.0634,0.750,1.000
+3,simulated_annealing,40,0.9839,0.9058,1.0620,0.750,1.000
+4,voxel_bottom_left,40,0.9761,0.8935,1.0586,0.750,1.000
+5,genetic_heightfield,40,0.7545,0.6806,0.8283,0.125,1.000
+6,heightfield_drop,40,0.7088,0.6229,0.7947,0.125,1.000

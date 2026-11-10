@@ -1,0 +1,249 @@
+[
+ {
+  "name": "gomspace_nanostruct_6u_mk2",
+  "part_id": "gomspace_nanostruct_6u_mk2",
+  "category": "structures",
+  "vendor": "GomSpace",
+  "mass_g": "665",
+  "dimensions_mm": [
+   "226.3",
+   "100",
+   "340.5"
+  ],
+  "effective_density_g_cm3": 0.086
+ },
+ {
+  "name": "gomspace_nanomind_a3200",
+  "part_id": "gomspace_nanomind_a3200",
+  "category": "avionics",
+  "vendor": "GomSpace",
+  "mass_g": "24",
+  "dimensions_mm": [
+   "65",
+   "40",
+   "7.1"
+  ],
+  "effective_density_g_cm3": 1.3
+ },
+ {
+  "name": "gomspace_nanopower_p60_dock",
+  "part_id": "gomspace_nanopower_p60_dock",
+  "category": "power",
+  "vendor": "GomSpace",
+  "mass_g": "80",
+  "dimensions_mm": [
+   "96",
+   "90",
+   "20"
+  ],
+  "effective_density_g_cm3": 0.716
+ },
+ {
+  "name": "gomspace_nanopower_bp8_100wh",
+  "part_id": "gomspace_nanopower_bp8_100wh",
+  "category": "power",
+  "vendor": "GomSpace",
+  "mass_g": "486",
+  "dimensions_mm": [
+   "95",
+   "94.8",
+   "42"
+  ],
+  "effective_density_g_cm3": 1.285
+ },
+ {
+  "name": "gomspace_nanocom_ax100",
+  "part_id": "gomspace_nanocom_ax100",
+  "category": "comms",
+  "vendor": "GomSpace",
+  "mass_g": "24.5",
+  "dimensions_mm": [
+   "65",
+   "40",
+   "6.5"
+  ],
+  "effective_density_g_cm3": 1.45
+ },
+ {
+  "name": "gomspace_nanocom_ant6f_uhf",
+  "part_id": "gomspace_nanocom_ant6f_uhf",
+  "category": "comms",
+  "vendor": "GomSpace",
+  "mass_g": "90",
+  "dimensions_mm": [
+   "221.7",
+   "116.7",
+   "5.3"
+  ],
+  "effective_density_g_cm3": 0.656
+ },
+ {
+  "name": "gomspace_nanotorque_gst600_mk2",
+  "part_id": "gomspace_nanotorque_gst600_mk2",
+  "category": "adcs",
+  "vendor": "GomSpace",
+  "mass_g": "180",
+  "dimensions_mm": [
+   "96.9",
+   "90.5",
+   "17.2"
+  ],
+  "effective_density_g_cm3": 1.826
+ },
+ {
+  "name": "gomspace_nanotorque_gsw600_pyramid",
+  "part_id": "gomspace_nanotorque_gsw600_pyramid",
+  "category": "adcs",
+  "vendor": "GomSpace",
+  "mass_g": "940",
+  "dimensions_mm": [
+   "95",
+   "95",
+   "61.6"
+  ],
+  "effective_density_g_cm3": 1.691
+ },
+ {
+  "name": "aac_st400",
+  "part_id": "aac_st400",
+  "category": "adcs",
+  "vendor": "AAC Clyde Space (AAC Hyperion)",
+  "mass_g": "280",
+  "dimensions_mm": [
+   "53.8",
+   "53.8",
+   "90.5"
+  ],
+  "effective_density_g_cm3": 1.322
+ },
+ {
+  "name": "aac_ss200",
+  "part_id": "aac_ss200",
+  "category": "adcs",
+  "vendor": "AAC Clyde Space (AAC Hyperion)",
+  "mass_g": "3",
+  "dimensions_mm": [
+   "24.66",
+   "15.0",
+   "3.5"
+  ],
+  "effective_density_g_cm3": 2.317
+ },
+ {
+  "name": "aac_ss200_2",
+  "part_id": "aac_ss200",
+  "category": "adcs",
+  "vendor": "AAC Clyde Space (AAC Hyperion)",
+  "mass_g": "3",
+  "dimensions_mm": [
+   "24.66",
+   "15.0",
+   "3.5"
+  ],
+  "effective_density_g_cm3": 2.317
+ },
+ {
+  "name": "aac_gnss_701",
+  "part_id": "aac_gnss_701",
+  "category": "adcs",
+  "vendor": "AAC Clyde Space (AAC Hyperion)",
+  "mass_g": "188",
+  "dimensions_mm": [
+   "103.51",
+   "55.88",
+   "26.98"
+  ],
+  "effective_density_g_cm3": 1.205
+ },
+ {
+  "name": "aac_ant_gps",
+  "part_id": "aac_ant_gps",
+  "category": "comms",
+  "vendor": "AAC Clyde Space (AAC Hyperion)",
+  "mass_g": "80",
+  "dimensions_mm": [
+   "50.8",
+   "50.8",
+   "21.03"
+  ],
+  "effective_density_g_cm3": 1.555
+ },
+ {
+  "name": "enpulsion_nano_r3",
+  "part_id": "enpulsion_nano_r3",
+  "category": "propulsion",
+  "vendor": "ENPULSION",
+  "mass_g": "1500",
+  "dimensions_mm": [
+   "98.0",
+   "99.0",
+   "95.3"
+  ],
+  "effective_density_g_cm3": 1.622
+ },
+ {
+  "name": "simera_triscape100",
+  "part_id": "simera_triscape100",
+  "category": "payload",
+  "vendor": "Simera Sense",
+  "mass_g": "1100",
+  "dimensions_mm": [
+   "98",
+   "98",
+   "176"
+  ],
+  "effective_density_g_cm3": 0.699
+ },
+ {
+  "name": "gomspace_msp_a_6_1",
+  "part_id": "gomspace_msp_a_6_1",
+  "category": "power",
+  "vendor": "GomSpace",
+  "mass_g": "162",
+  "dimensions_mm": [
+   "532",
+   "83",
+   "4.5"
+  ],
+  "effective_density_g_cm3": 0.893
+ },
+ {
+  "name": "gomspace_msp_a_6_1_2",
+  "part_id": "gomspace_msp_a_6_1",
+  "category": "power",
+  "vendor": "GomSpace",
+  "mass_g": "162",
+  "dimensions_mm": [
+   "532",
+   "83",
+   "4.5"
+  ],
+  "effective_density_g_cm3": 0.893
+ },
+ {
+  "name": "endurosat_xband_transmitter_2026",
+  "part_id": "endurosat_xband_transmitter_2026",
+  "category": "comms",
+  "vendor": "EnduroSat",
+  "mass_g": "396",
+  "dimensions_mm": [
+   "96",
+   "90",
+   "30"
+  ],
+  "effective_density_g_cm3": 2.402
+ },
+ {
+  "name": "endurosat_xband_4x4_patch",
+  "part_id": "endurosat_xband_4x4_patch",
+  "category": "comms",
+  "vendor": "EnduroSat",
+  "mass_g": "52.85",
+  "dimensions_mm": [
+   "98",
+   "82.6",
+   "7"
+  ],
+  "effective_density_g_cm3": 0.978
+ }
+]

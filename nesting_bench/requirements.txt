@@ -1,0 +1,8 @@
+numpy>=1.26
+scipy>=1.11
+trimesh>=4.4
+pyvista>=0.43
+matplotlib>=3.7
+# only for generate_datasets.py and check_exact.py (not needed to run viewer.py or benchmark.py):
+# manifold3d>=2.5
+# fast-simplification>=0.1.7

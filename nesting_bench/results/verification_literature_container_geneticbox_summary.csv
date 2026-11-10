@@ -1,0 +1,9 @@
+group,algorithm,runs,ratio_mean,ratio_ci99_low,ratio_ci99_high,ratio_best,solved_rate,valid_rate,aspect_ratio_mean,seconds_mean
+cylinders_10,genetic_box,5,0.9000,0.9000,0.9000,0.9000,0.000,1.000,2.996,5.051
+cylinders_17,genetic_box,5,0.9412,0.9412,0.9412,0.9412,0.000,1.000,3.995,5.102
+cylinders_5,genetic_box,5,0.8000,0.8000,0.8000,0.8000,0.000,1.000,1.998,5.025
+slothouber_graatsma,genetic_box,5,0.8889,0.8889,0.8889,0.8889,0.000,1.000,1.000,5.062
+soma,genetic_box,5,0.5714,0.5714,0.5714,0.5714,0.000,1.000,1.000,5.034
+spheres_14,genetic_box,5,0.5714,0.5714,0.5714,0.5714,0.000,1.000,1.002,5.070
+spheres_8,genetic_box,5,1.0000,1.0000,1.0000,1.0000,1.000,1.000,1.002,5.076
+spheres_9,genetic_box,5,0.8889,0.8889,0.8889,0.8889,0.000,1.000,1.002,5.072

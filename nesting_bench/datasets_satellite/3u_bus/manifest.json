@@ -1,0 +1,327 @@
+[
+ {
+  "name": "isis_structure_3u",
+  "part_id": "isis_structure_3u",
+  "category": "structures",
+  "vendor": "ISISPACE",
+  "mass_g": "243",
+  "dimensions_mm": [
+   "100",
+   "100",
+   "340.5"
+  ],
+  "effective_density_g_cm3": 1.488
+ },
+ {
+  "name": "isis_iobc",
+  "part_id": "isis_iobc",
+  "category": "avionics",
+  "vendor": "ISISPACE",
+  "mass_g": "100",
+  "dimensions_mm": [
+   "96",
+   "90",
+   "12.4"
+  ],
+  "effective_density_g_cm3": 1.404
+ },
+ {
+  "name": "isis_ieps_type_b",
+  "part_id": "isis_ieps_type_b",
+  "category": "power",
+  "vendor": "ISISPACE",
+  "mass_g": "310",
+  "dimensions_mm": [
+   "96",
+   "92",
+   "11.3"
+  ],
+  "effective_density_g_cm3": 4.616
+ },
+ {
+  "name": "isis_ieps_battery_4cell",
+  "part_id": "isis_ieps_battery_4cell",
+  "category": "power",
+  "vendor": "ISISPACE",
+  "mass_g": "126",
+  "dimensions_mm": [
+   "94",
+   "89",
+   "21"
+  ],
+  "effective_density_g_cm3": 0.717
+ },
+ {
+  "name": "isis_trxvu",
+  "part_id": "isis_trxvu",
+  "category": "comms",
+  "vendor": "ISISPACE",
+  "mass_g": "75",
+  "dimensions_mm": [
+   "96",
+   "90",
+   "15"
+  ],
+  "effective_density_g_cm3": 0.882
+ },
+ {
+  "name": "isis_antenna_system",
+  "part_id": "isis_antenna_system",
+  "category": "comms",
+  "vendor": "ISISPACE",
+  "mass_g": "89",
+  "dimensions_mm": [
+   "98",
+   "98",
+   "7"
+  ],
+  "effective_density_g_cm3": 1.324
+ },
+ {
+  "name": "isis_imtq",
+  "part_id": "isis_imtq",
+  "category": "adcs",
+  "vendor": "ISISPACE",
+  "mass_g": "196",
+  "dimensions_mm": [
+   "95.9",
+   "90.1",
+   "17"
+  ],
+  "effective_density_g_cm3": 2.048
+ },
+ {
+  "name": "cubespace_cubewheel_cw0057",
+  "part_id": "cubespace_cubewheel_cw0057",
+  "category": "adcs",
+  "vendor": "CubeSpace Satellite Systems",
+  "mass_g": "115",
+  "dimensions_mm": [
+   "35",
+   "35",
+   "24"
+  ],
+  "effective_density_g_cm3": 5.013
+ },
+ {
+  "name": "cubespace_cubewheel_cw0057_2",
+  "part_id": "cubespace_cubewheel_cw0057",
+  "category": "adcs",
+  "vendor": "CubeSpace Satellite Systems",
+  "mass_g": "115",
+  "dimensions_mm": [
+   "35",
+   "35",
+   "24"
+  ],
+  "effective_density_g_cm3": 5.013
+ },
+ {
+  "name": "cubespace_cubewheel_cw0057_3",
+  "part_id": "cubespace_cubewheel_cw0057",
+  "category": "adcs",
+  "vendor": "CubeSpace Satellite Systems",
+  "mass_g": "115",
+  "dimensions_mm": [
+   "35",
+   "35",
+   "24"
+  ],
+  "effective_density_g_cm3": 5.013
+ },
+ {
+  "name": "cubespace_cubestar",
+  "part_id": "cubespace_cubestar",
+  "category": "adcs",
+  "vendor": "CubeSpace Satellite Systems",
+  "mass_g": "18",
+  "dimensions_mm": [
+   "20",
+   "35",
+   "24"
+  ],
+  "effective_density_g_cm3": 1.356
+ },
+ {
+  "name": "cubespace_cubesense_sun",
+  "part_id": "cubespace_cubesense_sun",
+  "category": "adcs",
+  "vendor": "CubeSpace Satellite Systems",
+  "mass_g": "47",
+  "dimensions_mm": [
+   "24",
+   "35",
+   "49"
+  ],
+  "effective_density_g_cm3": 1.142
+ },
+ {
+  "name": "novatel_oem719",
+  "part_id": "novatel_oem719",
+  "category": "adcs",
+  "vendor": "NovAtel (Hexagon)",
+  "mass_g": "31",
+  "dimensions_mm": [
+   "71",
+   "46",
+   "11"
+  ],
+  "effective_density_g_cm3": 0.863
+ },
+ {
+  "name": "calian_tw1322_gnss_antenna",
+  "part_id": "calian_tw1322_gnss_antenna",
+  "category": "comms",
+  "vendor": "Calian (Tallysman)",
+  "mass_g": "54",
+  "dimensions_mm": [
+   "35",
+   "35",
+   "7.7"
+  ],
+  "effective_density_g_cm3": 7.316
+ },
+ {
+  "name": "gomspace_nanocam_c1u_35mm",
+  "part_id": "gomspace_nanocam_c1u_35mm",
+  "category": "payload",
+  "vendor": "GomSpace",
+  "mass_g": "169",
+  "dimensions_mm": [
+   "86.0",
+   "91.7",
+   "57.9"
+  ],
+  "effective_density_g_cm3": 0.515
+ },
+ {
+  "name": "isis_solar_panel_3u",
+  "part_id": "isis_solar_panel_3u",
+  "category": "power",
+  "vendor": "ISISPACE",
+  "mass_g": "150",
+  "dimensions_mm": [
+   "325",
+   "83",
+   "2.5"
+  ],
+  "effective_density_g_cm3": 2.597
+ },
+ {
+  "name": "isis_solar_panel_3u_2",
+  "part_id": "isis_solar_panel_3u",
+  "category": "power",
+  "vendor": "ISISPACE",
+  "mass_g": "150",
+  "dimensions_mm": [
+   "325",
+   "83",
+   "2.5"
+  ],
+  "effective_density_g_cm3": 2.597
+ },
+ {
+  "name": "pc104_standoff_m3_15p24",
+  "part_id": "pc104_standoff_m3_15p24",
+  "category": "structures",
+  "vendor": "generic",
+  "mass_g": "0.5",
+  "dimensions_mm": [
+   "5.5",
+   "5.5",
+   "15.24"
+  ],
+  "effective_density_g_cm3": 1.54
+ },
+ {
+  "name": "pc104_standoff_m3_15p24_2",
+  "part_id": "pc104_standoff_m3_15p24",
+  "category": "structures",
+  "vendor": "generic",
+  "mass_g": "0.5",
+  "dimensions_mm": [
+   "5.5",
+   "5.5",
+   "15.24"
+  ],
+  "effective_density_g_cm3": 1.54
+ },
+ {
+  "name": "pc104_standoff_m3_15p24_3",
+  "part_id": "pc104_standoff_m3_15p24",
+  "category": "structures",
+  "vendor": "generic",
+  "mass_g": "0.5",
+  "dimensions_mm": [
+   "5.5",
+   "5.5",
+   "15.24"
+  ],
+  "effective_density_g_cm3": 1.54
+ },
+ {
+  "name": "pc104_standoff_m3_15p24_4",
+  "part_id": "pc104_standoff_m3_15p24",
+  "category": "structures",
+  "vendor": "generic",
+  "mass_g": "0.5",
+  "dimensions_mm": [
+   "5.5",
+   "5.5",
+   "15.24"
+  ],
+  "effective_density_g_cm3": 1.54
+ },
+ {
+  "name": "shcs_m3x8",
+  "part_id": "shcs_m3x8",
+  "category": "fasteners",
+  "vendor": "generic (ISO 4762)",
+  "mass_g": "1.0",
+  "dimensions_mm": [
+   "5.5",
+   "5.5",
+   "11.0"
+  ],
+  "effective_density_g_cm3": 8.425
+ },
+ {
+  "name": "shcs_m3x8_2",
+  "part_id": "shcs_m3x8",
+  "category": "fasteners",
+  "vendor": "generic (ISO 4762)",
+  "mass_g": "1.0",
+  "dimensions_mm": [
+   "5.5",
+   "5.5",
+   "11.0"
+  ],
+  "effective_density_g_cm3": 8.425
+ },
+ {
+  "name": "shcs_m3x8_3",
+  "part_id": "shcs_m3x8",
+  "category": "fasteners",
+  "vendor": "generic (ISO 4762)",
+  "mass_g": "1.0",
+  "dimensions_mm": [
+   "5.5",
+   "5.5",
+   "11.0"
+  ],
+  "effective_density_g_cm3": 8.425
+ },
+ {
+  "name": "shcs_m3x8_4",
+  "part_id": "shcs_m3x8",
+  "category": "fasteners",
+  "vendor": "generic (ISO 4762)",
+  "mass_g": "1.0",
+  "dimensions_mm": [
+   "5.5",
+   "5.5",
+   "11.0"
+  ],
+  "effective_density_g_cm3": 8.425
+ }
+]

@@ -1,0 +1,1878 @@
+[Adrian Apsay] 16:14:08
+If you're to open it in more and then go to transcript. It says save, save transcript.
+
+[Dadmehr Ghasemfar] 16:14:09
+Let me see here. Yes.
+
+[Adrian Apsay] 16:14:12
+You guys are able to see that
+
+[Dadmehr Ghasemfar] 16:14:13
+Yes, I have that setting.
+
+[Adrian Apsay] 16:14:15
+Fantastic. Okay.
+
+[Dadmehr Ghasemfar] 16:14:16
+Awesome. That's perfect. We have to remember to save that
+
+[Adrian Apsay] 16:14:17
+All right.
+
+[Adrian Apsay] 16:14:19
+Yeah, I'll save it.
+
+[Sebastian Shunda] 16:14:21
+It's
+
+[Adrian Apsay] 16:14:22
+Alright, feel free.
+
+[Dadmehr Ghasemfar] 16:14:22
+Okay
+
+[Dadmehr Ghasemfar] 16:14:23
+Let me request again here. Share. Yep, here you go.
+
+[Dadmehr Ghasemfar] 16:14:27
+Alright, so a little context, one of the artifacts is, I guess we'll go in order. The first artifact is a continuation of the work I was going to said I was going to do where essentially I one thing I did is I went up in N. So I
+
+[Sebastian Shunda] 16:14:32
+I guess
+
+[Adrian Apsay] 16:14:38
+-
+
+[Dadmehr Ghasemfar] 16:14:42
+For everything that you… I've already done, I did a lot more of it
+
+[Dadmehr Ghasemfar] 16:14:47
+Another thing is I added 99% confidence bars so that we would have an idea of how spread
+
+[Dadmehr Ghasemfar] 16:14:53
+Like the results are, so that we can, like, draw more
+
+[Dadmehr Ghasemfar] 16:14:58
+Have statistical significance when we draw conclusions.
+
+[Adrian Apsay] 16:15:02
+Yeah.
+
+[Dadmehr Ghasemfar] 16:15:02
+And then the next stuff
+
+[Dadmehr Ghasemfar] 16:15:05
+I'll talk about in a moment. Let me make sure I pull up the right artifact. I think all my artifacts are up here.
+
+[Dadmehr Ghasemfar] 16:15:15
+Let's see
+
+[Dadmehr Ghasemfar] 16:15:17
+Yeah, I think that was the right one. There's two. There's only two.
+
+[Adrian Apsay] 16:15:19
+You can also pull it up in if you just go to artifacts on the left side, the left tab
+
+[Adrian Apsay] 16:15:25
+Should be there as well if you also need to locate it.
+
+[Dadmehr Ghasemfar] 16:15:25
+Hmm.
+
+[Dadmehr Ghasemfar] 16:15:28
+Oh, no, this is the first artifact I wanted to show you. So the artifacts, I want to clarify, the artifacts don't do anything but visualize.
+
+[Adrian Apsay] 16:15:32
+Okay.
+
+[Adrian Apsay] 16:15:36
+Mmhm.
+
+[Dadmehr Ghasemfar] 16:15:37
+All the data is stored in a 90 megabyte solutions packet. And the way it's organized is
+
+[Dadmehr Ghasemfar] 16:15:45
+the way, like, in a way that makes sense, like, each part's position and orientation as the solution of that algorithm, and, like, tens and thousands of those
+
+[Dadmehr Ghasemfar] 16:15:55
+But this helps us kind of go through this space. So, so far, these are the algorithms we've been testing. We can choose the category that we care about.
+
+[Dadmehr Ghasemfar] 16:16:04
+We can choose the number of parts that we care about, and we can choose what measure it is that we want, we care about. So
+
+[Dadmehr Ghasemfar] 16:16:12
+contacts per part, for example, we talked density has been the one that comes up a lot. Aspect ratio
+
+[Dadmehr Ghasemfar] 16:16:19
+Yeah, the goal here is really only one thing. It's just here to
+
+[Dadmehr Ghasemfar] 16:16:24
+help you
+
+[Dadmehr Ghasemfar] 16:16:27
+Like, see everything and then it has a 3D viewer. So you can visualize the different solutions.
+
+[Adrian Apsay] 16:16:35
+Like, are you able to run that live?
+
+[Dadmehr Ghasemfar] 16:16:38
+Yes, I am. I think this is, like, a newer version of the artifact, though, so
+
+[Dadmehr Ghasemfar] 16:16:43
+Give me one second, because it's kind of showing like the next part of the results.
+
+[Adrian Apsay] 16:16:47
+-H
+
+[Dadmehr Ghasemfar] 16:16:48
+that I want to talk about in a moment
+
+[Adrian Apsay] 16:16:52
+Yeah, no worries. If not, I'm just curious.
+
+[Dadmehr Ghasemfar] 16:16:55
+No, you can't. I just want to go in a certain order, because
+
+[Dadmehr Ghasemfar] 16:16:59
+It'll make more sense why I went the route I went after
+
+[Dadmehr Ghasemfar] 16:17:03
+Oh yeah, it's way up here
+
+[Dadmehr Ghasemfar] 16:17:18
+Adrian, you said all my artifacts, I can see them somewhere?
+
+[Adrian Apsay] 16:17:22
+Yeah, let's add.
+
+[Adrian Apsay] 16:17:25
+Or, yeah, and then go to artifacts down there.
+
+[Adrian Apsay] 16:17:28
+should say artifacts on the left, under projects, yeah.
+
+[Dadmehr Ghasemfar] 16:17:28
+Zoom stuff is
+
+[Adrian Apsay] 16:17:34
+And scroll down, should be there somewhere.
+
+[Dadmehr Ghasemfar] 16:17:36
+Okay, okay, okay. So I'm not tripping. I'm sorry. This is everything for the in terms of this artifact. And then there's the next one. Yeah, you can see the animations live, but
+
+[Dadmehr Ghasemfar] 16:17:45
+where I took this next was
+
+[Dadmehr Ghasemfar] 16:17:48
+I didn't feel like this was very clear to me, because it was just comparing the benchmark is where we're seeing all that stuff. It was just essentially I didn't have like a measure of what the perfect solution was. It didn't mean anything to me. Like, obviously a density of one
+
+[Dadmehr Ghasemfar] 16:18:05
+Would be perfect, right?
+
+[Adrian Apsay] 16:18:06
+-H
+
+[Dadmehr Ghasemfar] 16:18:07
+But
+
+[Dadmehr Ghasemfar] 16:18:08
+What if you really can't
+
+[Dadmehr Ghasemfar] 16:18:11
+What if, for example, you get a solution down here, 40%, but you really can't
+
+[Dadmehr Ghasemfar] 16:18:16
+Fit them any better than 40% like
+
+[Dadmehr Ghasemfar] 16:18:19
+This data is meaningful, but it's a lot less meaningful than it could be if we had a benchmark of what success looks like.
+
+[Adrian Apsay] 16:18:26
+Mmhm.
+
+[Dadmehr Ghasemfar] 16:18:27
+Before I should go into that part, let's look at
+
+[Dadmehr Ghasemfar] 16:18:31
+Simple concave, which tends to throw them off
+
+[Dadmehr Ghasemfar] 16:18:36
+We can look at aspect ratio. As you can see, that's one of the ones I've noticed aspect ratio is one of the big ones where they differentiate.
+
+[Adrian Apsay] 16:18:45
+Hmm.
+
+[Dadmehr Ghasemfar] 16:18:46
+Off-mass
+
+[Dadmehr Ghasemfar] 16:18:49
+But anyway, the next part I came up with two unique ways of testing this. And testing here is really nice because it's low key like
+
+[Dadmehr Ghasemfar] 16:18:58
+Well, I'll show you. The Scrabble test is take a known existing shape like I'm using sphere and cube and cut it up into pieces
+
+[Dadmehr Ghasemfar] 16:19:10
+And those are your inputs to the algorithm. So the perfect algorithm will create a perfect sphere again, or a perfect cube again from those pieces.
+
+[Dadmehr Ghasemfar] 16:19:21
+So that gives you like a known upper limit, like a known success. Like you cannot pack it better than if the jigsaw fits perfectly.
+
+[Adrian Apsay] 16:19:21
+Hmm.
+
+[Dadmehr Ghasemfar] 16:19:32
+And the good thing about that is you can, you know, this is all
+
+[Dadmehr Ghasemfar] 16:19:37
+generated. You can change the number of parts that you test with, so I could have a sphere that I cut in a certain way. Guillotine is the traditional
+
+[Adrian Apsay] 16:19:40
+Mmhm.
+
+[Dadmehr Ghasemfar] 16:19:47
+merged is harder. It's guillotine parts combined.
+
+[Dadmehr Ghasemfar] 16:19:50
+So you can see now that we're actually scaling, it makes the data to me makes a little more sense that like none of these algorithms are
+
+[Dadmehr Ghasemfar] 16:19:59
+that good
+
+[Dadmehr Ghasemfar] 16:20:02
+Frankly
+
+[Adrian Apsay] 16:20:03
+Hmm,
+
+[Dadmehr Ghasemfar] 16:20:04
+I mean, they're not bad
+
+[Dadmehr Ghasemfar] 16:20:07
+And let's visualize what that looks like.
+
+[Dadmehr Ghasemfar] 16:20:11
+So… let's go to Scrabble test for 9 pieces. Let's do
+
+[Dadmehr Ghasemfar] 16:20:16
+You have 9 pieces. Let's do sphere with merged.
+
+[Dadmehr Ghasemfar] 16:20:20
+So what that looks like is like this. If I were to explode that, it looks like this
+
+[Dadmehr Ghasemfar] 16:20:25
+Right?
+
+[Adrian Apsay] 16:20:26
+Yeah.
+
+[Dadmehr Ghasemfar] 16:20:26
+I don't know about you guys, but if I got these pieces, I think I would relatively quickly figure out how to make a circle out of it.
+
+[Dadmehr Ghasemfar] 16:20:35
+But these algorithms are not figuring that out. So like random rejection
+
+[Dadmehr Ghasemfar] 16:20:39
+Well, this has exploded, but still terrible, terrible job.
+
+[Adrian Apsay] 16:20:43
+Hmm.
+
+[Dadmehr Ghasemfar] 16:20:44
+Both random rejection, we expect it to be terrible. That one is, like, the bare minimum
+
+[Adrian Apsay] 16:20:48
+Mmhm.
+
+[Dadmehr Ghasemfar] 16:20:48
+One of the good ones tends to be genetic and genetic height field
+
+[Dadmehr Ghasemfar] 16:20:53
+And you can see like comparatively it did better, I guess, but
+
+[Dadmehr Ghasemfar] 16:20:58
+It's lowkey like failing terribly.
+
+[Adrian Apsay] 16:20:59
+Wait, which one's the original one that was able to get it to
+
+[Dadmehr Ghasemfar] 16:21:04
+The sphere
+
+[Adrian Apsay] 16:21:05
+In actuals here, yeah.
+
+[Dadmehr Ghasemfar] 16:21:06
+That was just the solution. None of
+
+[Adrian Apsay] 16:21:07
+Oh, 0, never mind. I see.
+
+[Dadmehr Ghasemfar] 16:21:09
+That's like the ideal, that's the perfect answer of this test.
+
+[Dadmehr Ghasemfar] 16:21:14
+Anyway, that's not the only way I verify. There's a completely other another way I verify. So that's the Scrabble test and all results you can check out here. And there's also two modes. One is just
+
+[Dadmehr Ghasemfar] 16:21:27
+Optimizing, like, the density that's container. One is trying to put it in a square specifically.
+
+[Adrian Apsay] 16:21:31
+Mmhm.
+
+[Dadmehr Ghasemfar] 16:21:35
+But something that I know I talked about before that I take really seriously is like where is the data being stored? Where is the data running? And what are like
+
+[Dadmehr Ghasemfar] 16:21:46
+What are the algorithms? So, like, again, this is just the visualizing end. If you want to check out the data, I'll put it on GitHub too, but it's also in the chat and Claude. But it's a giant zip.
+
+[Sebastian Shunda] 16:22:02
+Wait, real quick, real quick. If you are, if you have a circle and you're trying to optimize how to fit these parts
+
+[Dadmehr Ghasemfar] 16:22:02
+Right, and then
+
+[Sebastian Shunda] 16:22:12
+into as a space that's a cube as tightly as possible, although it might not make a circle, the algorithms don't actually need
+
+[Sebastian Shunda] 16:22:23
+to fit… or a sphere, the algorithm doesn't need to fit the parts to be a sphere in order for it to be as efficient as possible.
+
+[Dadmehr Ghasemfar] 16:22:30
+I thought about this, but it does. No, no, no, I… that was my first thought, Sebastian, you're absolutely locked in. But I did the math, and, like, the optimum
+
+[Dadmehr Ghasemfar] 16:22:40
+I'm pretty okay okay I'm not like 100%, but I thought about this a lot.
+
+[Dadmehr Ghasemfar] 16:22:44
+I'm down to… I'm down to, like, think about it more, or, like, break it down. I think the optimum would mean that it ends up being a sphere.
+
+[Sebastian Shunda] 16:22:53
+Well, okay. The space
+
+[Sebastian Shunda] 16:22:57
+Used
+
+[Sebastian Shunda] 16:23:00
+The problem is, if you have a certain… if you have a sphere of a certain size and you're putting it into a square of a certain size, your space used is always going to be the same no matter how you orient the parts
+
+[Sebastian Shunda] 16:23:15
+Unless the shape of the container can also change to a sphere, or you're continuing space used as space used by a singular object. And if you do that, then your algorithm is going to put your objects together, but you have to tell the algorithm
+
+[Dadmehr Ghasemfar] 16:23:29
+Mmhm.
+
+[Sebastian Shunda] 16:23:31
+that two separate objects touching counts as one object, and only then will it actually optimize for objects to touch each other as much as possible, because then it's going to take all the flat sides and try to touch those together
+
+[Dadmehr Ghasemfar] 16:23:39
+-H
+
+[Sebastian Shunda] 16:23:46
+So that, I think, is maybe a major adjustment you'd have to do
+
+[Sebastian Shunda] 16:23:51
+To make that algorithm work like you want it to
+
+[Sebastian Shunda] 16:23:54
+If you see what I'm saying
+
+[Dadmehr Ghasemfar] 16:23:55
+Let me know if this addresses your issue, because I foresaw this problem coming, so that's why I ran it for both optimum container
+
+[Sebastian Shunda] 16:23:59
+Okay.
+
+[Dadmehr Ghasemfar] 16:24:04
+And, like, maximum density. So that's why we have the mode here. So one of them. You're just optimizing for filling the maximum percent, and you don't care if it's a weird shape
+
+[Sebastian Shunda] 16:24:19
+Okay. Okay.
+
+[Dadmehr Ghasemfar] 16:24:21
+It's like a sphere, but something I want to add is if you have 20 parts that fit into a sphere and now you're asking a new question, how do I minimize these in a box or a cuboid? The answer is still
+
+[Sebastian Shunda] 16:24:34
+The new question
+
+[Dadmehr Ghasemfar] 16:24:35
+It's a new question, but the answer is the same, that it's putting them in a sphere optimizes it. And that's something that I looked into. I asked Claude to look into.
+
+[Sebastian Shunda] 16:24:46
+Okay, okay.
+
+[Dadmehr Ghasemfar] 16:24:48
+So it's not exactly obvious, but the optimum, if those pieces like guillotine fit into a sphere and you ask, okay, what about the minimum square?
+
+[Sebastian Shunda] 16:24:48
+Never.
+
+[Dadmehr Ghasemfar] 16:24:58
+At least 99.9999, like, it would have to be an extremely weird scenario where the optimum is not also them in a sphere.
+
+[Sebastian Shunda] 16:25:07
+Okay.
+
+[Dadmehr Ghasemfar] 16:25:07
+And then the cube would be the cube that fits around that sphere.
+
+[Sebastian Shunda] 16:25:11
+But the problem is when you start changing the shape of the components, because if you have a sphere spitting into a sphere versus a cube, yeah, it might not change, but some of these other components that would change, no
+
+[Sebastian Shunda] 16:25:25
+Like, if you have some weird-looking L-bracket, that's gonna be easier to fit into a square than a circle with taking up space, right? If you have a bunch of square shapes in a square
+
+[Sebastian Shunda] 16:25:37
+Like, if you do multiple shapes versus one
+
+[Dadmehr Ghasemfar] 16:25:38
+Well, we're not married to the sphere. We're not married to the sphere. The sphere is just one way to test how well these are performing. So yes, a unique bracket might not behave anything like this, but you could say that for any shape
+
+[Sebastian Shunda] 16:25:41
+Okay.
+
+[Dadmehr Ghasemfar] 16:25:53
+There's an infinite number of shapes. So as we test, like I agree right now we have cube 3 tests, sphere three tests. You can have pyramid 3 tests. You can have L-shaped three tests. And for example, cube guillotine
+
+[Dadmehr Ghasemfar] 16:26:06
+They all performed significantly better, and we can look at why cubed guillotine is a simpler fitting task
+
+[Sebastian Shunda] 16:26:14
+Okay.
+
+[Dadmehr Ghasemfar] 16:26:15
+And this would be random every single time.
+
+[Dadmehr Ghasemfar] 16:26:17
+But there is a known optimum
+
+[Sebastian Shunda] 16:26:20
+Gotchaun
+
+[Dadmehr Ghasemfar] 16:26:26
+So I think there are some questions, but I moved on.
+
+[Adrian Apsay] 16:26:30
+Hmm.
+
+[Sebastian Shunda] 16:26:31
+I think you answered everything for me.
+
+[Dadmehr Ghasemfar] 16:26:33
+Okay.
+
+[Dadmehr Ghasemfar] 16:26:34
+Okay, then moving on, this is one way of testing it. It's still not like I wasn't fully fulfilled. I wanted another way of testing it. So there's known literature and I did a study on that. So the known literature is like mathematically solved scenarios
+
+[Dadmehr Ghasemfar] 16:26:51
+That
+
+[Dadmehr Ghasemfar] 16:26:53
+Someone has proven is the best. So 5 cylinders, 10 cylinders, 17 cylinders. These correspond to kind of like a 17 circle packing
+
+[Dadmehr Ghasemfar] 16:27:06
+This is like a famous problem that someone solved
+
+[Dadmehr Ghasemfar] 16:27:10
+Like, this is the optimal way to fit 17 circles in a And then you can just make that 3D.
+
+[Dadmehr Ghasemfar] 16:27:17
+Anyway, there's quite a few mathematically solved optimal packings. I could have picked more, but
+
+[Dadmehr Ghasemfar] 16:27:23
+I left it at these and I tested across these. So all of these have relatively high end, so they come from thousands of tests and you can see the mean and the standard deviations.
+
+[Dadmehr Ghasemfar] 16:27:33
+But you can see for some problems, some algorithms actually
+
+[Dadmehr Ghasemfar] 16:27:39
+Seem to optimize, which is pretty cool.
+
+[Dadmehr Ghasemfar] 16:27:43
+Spheres 14, I'd say, is the hardest.
+
+[Dadmehr Ghasemfar] 16:27:47
+14 spheres. And
+
+[Dadmehr Ghasemfar] 16:27:50
+Interestingly, they all cap out. But you can also check out what that looks like in the viewer, right? So let's go to
+
+[Dadmehr Ghasemfar] 16:27:58
+Literature test
+
+[Dadmehr Ghasemfar] 16:28:00
+Cylinders 5, let's go to cylinder 17.
+
+[Dadmehr Ghasemfar] 16:28:03
+This is the proven solution. Let's see how, for example, random rejection did. Very, very poorly. In fact, it seems like it didn't succeed.
+
+[Adrian Apsay] 16:28:12
+Yeah
+
+[Dadmehr Ghasemfar] 16:28:13
+Extremely poorly.
+
+[Dadmehr Ghasemfar] 16:28:16
+Versus bottom left placement, almost got it
+
+[Dadmehr Ghasemfar] 16:28:21
+Genetic algorithm
+
+[Dadmehr Ghasemfar] 16:28:24
+Not quite
+
+[Dadmehr Ghasemfar] 16:28:27
+So maybe none of them got it then. They only got to 16 out of 17 at best.
+
+[Adrian Apsay] 16:28:35
+What's the original solution
+
+[Adrian Apsay] 16:28:40
+Hmm.
+
+[Adrian Apsay] 16:28:42
+I see.
+
+[Dadmehr Ghasemfar] 16:28:45
+And I think that both of these tests are very interesting. To me, the Scrabble test is like
+
+[Dadmehr Ghasemfar] 16:28:50
+The best verification for a pragmatic, realistic use case, a more pragmatic. And this one is more like mathematical. Well, obviously, because it's mathematical, but
+
+[Dadmehr Ghasemfar] 16:29:00
+It's that, like, last 5% of good that we won't be able to really get easily. But I don't think that necessarily matters, honestly. But it's good that we're looking into it.
+
+[Adrian Apsay] 16:29:06
+Mmhm.
+
+[Dadmehr Ghasemfar] 16:29:12
+So we can see this is the ideal way to fit 714 spheres in a cube or sorry, a cube void
+
+[Dadmehr Ghasemfar] 16:29:20
+Actually, no, a cube
+
+[Dadmehr Ghasemfar] 16:29:23
+And we can see
+
+[Dadmehr Ghasemfar] 16:29:26
+That the others try, but they don't quite manage it.
+
+[Dadmehr Ghasemfar] 16:29:32
+So the most they can do is typically four
+
+[Dadmehr Ghasemfar] 16:29:36
+But once you try to add a fifth one, they fail.
+
+[Adrian Apsay] 16:29:39
+-H
+
+[Dadmehr Ghasemfar] 16:29:42
+Anyway, this data is also visualizable through
+
+[Dadmehr Ghasemfar] 16:29:45
+as, like, plots through here. So we can go to 1 millimeter voxel grid
+
+[Dadmehr Ghasemfar] 16:29:51
+Or we can go to 2 millimeter standard grid. I'll be honest, actually, I'm not exactly sure about this.
+
+[Dadmehr Ghasemfar] 16:29:57
+Everything else, I think
+
+[Sebastian Shunda] 16:29:58
+So
+
+[Sebastian Shunda] 16:30:01
+I'm looking here, shelf packing, bottom left. Some of these results are exactly the same.
+
+[Dadmehr Ghasemfar] 16:30:09
+Oh, where's
+
+[Sebastian Shunda] 16:30:09
+What's our shelf packing versus bottom left in this
+
+[Dadmehr Ghasemfar] 16:30:14
+-H
+
+[Sebastian Shunda] 16:30:16
+How do you pick which one is better? Because it might be based off your end. Like I know if some algorithms are
+
+[Dadmehr Ghasemfar] 16:30:16
+Right, because some of the algorithms
+
+[Dadmehr Ghasemfar] 16:30:23
+Really, really, it won't end up mattering. Really? It won't end up mattering because most of them are just simply worse. Like what's what's coming through is that there are few that if you have those few, you never need the others because the others are simply slower and worse
+
+[Sebastian Shunda] 16:30:26
+Will it not?
+
+[Dadmehr Ghasemfar] 16:30:39
+For every task
+
+[Sebastian Shunda] 16:30:40
+Okay.
+
+[Sebastian Shunda] 16:30:42
+Okay.
+
+[Dadmehr Ghasemfar] 16:30:43
+But to answer your question
+
+[Sebastian Shunda] 16:30:43
+How is the
+
+[Sebastian Shunda] 16:30:45
+Sorry, sorry, yeah, continue.
+
+[Dadmehr Ghasemfar] 16:30:47
+They can be exactly the same here, right?
+
+[Dadmehr Ghasemfar] 16:30:51
+But they may not be exactly the same by another benchmark. So every test, we measure these things. So although they might show up exactly the same, for example, for density
+
+[Sebastian Shunda] 16:30:51
+Yeah.
+
+[Sebastian Shunda] 16:31:02
+So which benchmarks do we care about the most, then?
+
+[Dadmehr Ghasemfar] 16:31:02
+In terms of aspect ratio
+
+[Sebastian Shunda] 16:31:05
+Because that leads another question.
+
+[Dadmehr Ghasemfar] 16:31:05
+That's an open question
+
+[Dadmehr Ghasemfar] 16:31:07
+That's an open question
+
+[Sebastian Shunda] 16:31:08
+Okay.
+
+[Sebastian Shunda] 16:31:08
+And then another question I have is how are these algorithms actually getting modified for density? Like, can we see the actually
+
+[Adrian Apsay] 16:31:09
+Hmm…
+
+[Sebastian Shunda] 16:31:21
+Like the actual math that has changed from the original packing algorithm to applying the density.
+
+[Sebastian Shunda] 16:31:30
+Like, that's why I'm still trying to figure out how it works, because even my algorithm, like, yeah, you can adjust for density, but I genuinely, like, don't know how it does it.
+
+[Sebastian Shunda] 16:31:37
+So I'm just asking if you know how yours does it
+
+[Dadmehr Ghasemfar] 16:31:40
+I don't have a, like, known answer, but my best guess is
+
+[Dadmehr Ghasemfar] 16:31:45
+they'll end up looking like is if packing is your number one priority.
+
+[Dadmehr Ghasemfar] 16:31:50
+like, you essentially put your priorities in a list, and you put your algorithms
+
+[Dadmehr Ghasemfar] 16:31:56
+You essentially use like a
+
+[Dadmehr Ghasemfar] 16:31:59
+optimal solution based on what your priorities are. So rank
+
+[Dadmehr Ghasemfar] 16:32:04
+the top five best density algorithms. Now what's your second priority? Let's say it's aspect ratio. Take that five and rank it based on aspect ratio. Now, the number one
+
+[Sebastian Shunda] 16:32:13
+So do we need another algorithm for densities now?
+
+[Sebastian Shunda] 16:32:16
+Do we need to find another set of algorithms in that case?
+
+[Dadmehr Ghasemfar] 16:32:19
+Well, here's the thing, for every… we choose an algorithm, and we measure it across these things. So the work is done. If anything, we just need to add more algorithms and
+
+[Sebastian Shunda] 16:32:30
+Yeah
+
+[Dadmehr Ghasemfar] 16:32:30
+Keep testing algorithms, but for each algorithm, we test it across every measure. So I think
+
+[Dadmehr Ghasemfar] 16:32:36
+The worst case scenario for us would be, oh, there's a measure that we forgot about that's important, because now we need to redo everything. If there's an algorithm we forgot about, no worries, we'll just run it.
+
+[Dadmehr Ghasemfar] 16:32:47
+But if there's a measure we forgot about, well, I'm gonna have to go through and
+
+[Dadmehr Ghasemfar] 16:32:51
+you know, redo all that testing
+
+[Sebastian Shunda] 16:32:52
+Well, here's another measure for the transcript is where one algorithm will pack each component together as tightly as possible
+
+[Sebastian Shunda] 16:33:02
+An algorithm for thermal efficiency is going to do the exact opposite.
+
+[Dadmehr Ghasemfar] 16:33:06
+Mmm… oh, okay, I think I see your question.
+
+[Sebastian Shunda] 16:33:06
+And it's gonna pack it as far away as possible, but still within the same box
+
+[Dadmehr Ghasemfar] 16:33:12
+I misunderstood until right now. All of these algorithms are optimizing for density for yes, yes, yes.
+
+[Sebastian Shunda] 16:33:20
+Okay, okay.
+
+[Dadmehr Ghasemfar] 16:33:21
+But some of them happen to do better in other aspects as well, but they are all density
+
+[Dadmehr Ghasemfar] 16:33:26
+Is the focus, yes, of these algorithms
+
+[Sebastian Shunda] 16:33:26
+Oh, I see.
+
+[Sebastian Shunda] 16:33:29
+Okay, okay.
+
+[Adrian Apsay] 16:33:29
+Hmm.
+
+[Dadmehr Ghasemfar] 16:33:30
+And something else to notice is as the number of parts increases, obviously the difference matters a lot more.
+
+[Dadmehr Ghasemfar] 16:33:39
+So
+
+[Sebastian Shunda] 16:33:39
+Okay
+
+[Dadmehr Ghasemfar] 16:33:40
+A good algorithm is way better for 30 parts than for 10. That kind of makes sense. And then we can also take a quick look at the seconds per packing, which is the cost. So you can see the genetic algorithms, extremely heavy cost
+
+[Adrian Apsay] 16:33:55
+-H
+
+[Dadmehr Ghasemfar] 16:33:55
+Versus everything else comparatively, still extremely heavy.
+
+[Dadmehr Ghasemfar] 16:34:00
+It might change for real shapes.
+
+[Adrian Apsay] 16:34:00
+I'm like a real world example
+
+[Adrian Apsay] 16:34:04
+But no, sorry, go ahead, my bad.
+
+[Dadmehr Ghasemfar] 16:34:06
+No, honestly, that's about it for me for this artifact. And then I have another one that's kind of completely different.
+
+[Adrian Apsay] 16:34:12
+Okay. Before we get to that, this is awesome. I was just going to say like in a real world example for using multiple different shapes, right? If we're putting things together
+
+[Adrian Apsay] 16:34:23
+Like, would we want
+
+[Adrian Apsay] 16:34:26
+like, this whole like application to choose an algorithm after it's like
+
+[Adrian Apsay] 16:34:31
+like put together all these parts using one algorithm and maybe use a different algorithm using what the last algorithm had used to pack these parts
+
+[Adrian Apsay] 16:34:41
+like, let's say like
+
+[Sebastian Shunda] 16:34:41
+Or package part per algorithm
+
+[Adrian Apsay] 16:34:44
+Oh yeah, or like, yeah, or have like a per
+
+[Dadmehr Ghasemfar] 16:34:46
+Like sequence them
+
+[Adrian Apsay] 16:34:47
+Yeah, or like either like have one algorithm that puts everything together and then run, like, the algorithm, like, another algorithm that like
+
+[Sebastian Shunda] 16:34:48
+Yeah.
+
+[Sebastian Shunda] 16:34:53
+Oh, my God, way idea. I'm sorry. I have to say this for the transcript before I forget.
+
+[Adrian Apsay] 16:34:56
+That like Pat.
+
+[Adrian Apsay] 16:35:00
+Okay. Okay.
+
+[Sebastian Shunda] 16:35:01
+What if we automatically have it pack
+
+[Sebastian Shunda] 16:35:05
+square and rectangular-shaped things first, because those are the easiest to pack, and it can put those in the corner and against walls. And then we can sequence it to do, like, the more complex the object, the later in the sequence it goes. So it's going to do a convex or concave object
+
+[Sebastian Shunda] 16:35:21
+After all the square objects have already been placed, thoughts
+
+[Dadmehr Ghasemfar] 16:35:23
+So, and similarly, bigger and similarly bigger. I completely agree. Similarly, bigger objects should be prioritized
+
+[Adrian Apsay] 16:35:24
+Hmm.
+
+[Sebastian Shunda] 16:35:28
+Yeah.
+
+[Sebastian Shunda] 16:35:29
+Because then because then if you have
+
+[Sebastian Shunda] 16:35:34
+If you have a like 15 squares within your satellite, then you can take the end point of each one of those squares, turn it into a convex shape, right? Like
+
+[Sebastian Shunda] 16:35:46
+Like, you know, you can make a circle out of a bunch of small cubes, right? Like, it's Minecraft, basically, and you can have it take that information using the furthest out points, and then it'll use a convex or a concave algorithm to pack a convex or concave part
+
+[Sebastian Shunda] 16:36:02
+Against what is actually a bunch of squares, but modeled as a convex way. Do you see what I'm saying?
+
+[Dadmehr Ghasemfar] 16:36:07
+Absolutely. And funny enough, that's the direction I went ahead with this thread of work is
+
+[Adrian Apsay] 16:36:07
+Mmm…
+
+[Sebastian Shunda] 16:36:13
+Okay.
+
+[Dadmehr Ghasemfar] 16:36:13
+I've looked at the algorithms out there. There's a few more, but not many more
+
+[Dadmehr Ghasemfar] 16:36:18
+But I'm beginning to think that where the solution is going to be is, like you said. the kind of metadata for the algorithm. So what order are we putting them in? Because a lot of most of these algorithms the order is not something they choose
+
+[Adrian Apsay] 16:36:27
+Yeah.
+
+[Sebastian Shunda] 16:36:32
+Hmm
+
+[Adrian Apsay] 16:36:32
+It's like random. Yeah, exactly. I feel that that was like another thing I was going to bring up. I feel like order plays a very important role as like as to how you pack certain things in the space, right?
+
+[Dadmehr Ghasemfar] 16:36:33
+You know?
+
+[Dadmehr Ghasemfar] 16:36:34
+Mmhm.
+
+[Dadmehr Ghasemfar] 16:36:42
+I could do a quick study on that where I essentially run 10,000 tests or so of the same parts in different orders for every algorithm to see how much every algorithm is affected by order.
+
+[Sebastian Shunda] 16:36:45
+Yeah
+
+[Huai-Yi Wang] 16:36:55
+So, it's more like to set priority to each item to pack into the box
+
+[Adrian Apsay] 16:36:55
+Yeah, exactly.
+
+[Huai-Yi Wang] 16:37:02
+Like, we have an agreement to determine agrees. Okay
+
+[Adrian Apsay] 16:37:03
+Yeah, I think like each
+
+[Dadmehr Ghasemfar] 16:37:04
+Hmm.
+
+[Adrian Apsay] 16:37:05
+Like each type of item, yeah, like for like to have priority, right? Because I feel like it wouldn't be
+
+[Adrian Apsay] 16:37:11
+as optimal, just to have like if you're if you're getting some sort of random part from like a manufacturing process, and then using whatever algorithm is best suited for like, I don't know, density or like thermal
+
+[Adrian Apsay] 16:37:23
+I think it would be better to, like, prioritize, okay, what type of item it is
+
+[Adrian Apsay] 16:37:27
+Because it seems like these items are
+
+[Dadmehr Ghasemfar] 16:37:28
+Mmhm.
+
+[Dadmehr Ghasemfar] 16:37:30
+-H
+
+[Adrian Apsay] 16:37:31
+Or it seems like these algorithms are much better suited to the type of
+
+[Adrian Apsay] 16:37:36
+part you're working with, not necessarily like what kind of variable parameter like density, thermal, etc.
+
+[Adrian Apsay] 16:37:45
+I mean, you could probably do like a way of like, is it possible to like create some sort of weighted algorithm where like depending on the weights of how much you want to prioritize
+
+[Adrian Apsay] 16:37:58
+like a variable when adding a part.
+
+[Adrian Apsay] 16:38:01
+Can that be factored into like an algorithm, for example?
+
+[Dadmehr Ghasemfar] 16:38:05
+-H
+
+[Dadmehr Ghasemfar] 16:38:07
+Guys, these are excellent questions. And I think what I'm going to do, I don't have an answer. I'm going to rerun all these algorithms
+
+[Adrian Apsay] 16:38:07
+Because I
+
+[Dadmehr Ghasemfar] 16:38:16
+With an ideal order and the ideal being, let's prioritize big and simple and convex shapes and see if that helps.
+
+[Adrian Apsay] 16:38:25
+Hmm. Okay.
+
+[Sebastian Shunda] 16:38:25
+I mean, you'd have to run it in any order. I think you should run it in a random order, because that's the only way we're gonna know if something's ideal
+
+[Dadmehr Ghasemfar] 16:38:34
+Here's something I can do. I can run every algorithm in every order
+
+[Sebastian Shunda] 16:38:39
+Yeah.
+
+[Dadmehr Ghasemfar] 16:38:39
+a few times, and then I can use that as a benchmark, but I can't do that for many times for everything, because that's just too much compute. But
+
+[Adrian Apsay] 16:38:46
+Yeah, it's a lot of compute.
+
+[Dadmehr Ghasemfar] 16:38:48
+Yeah.
+
+[Dadmehr Ghasemfar] 16:38:49
+But I can… it's okay, let's leave… let's leave this.
+
+[Sebastian Shunda] 16:38:51
+Run the top, like, 5 algorithms
+
+[Dadmehr Ghasemfar] 16:38:54
+Yeah, yeah, yeah, yeah. A lot of these genuinely, a lot of these really don't matter.
+
+[Sebastian Shunda] 16:38:56
+Now that you've now that you've figured this out. Yeah, exactly. Now that you've figured this out, you can run the top
+
+[Sebastian Shunda] 16:39:03
+3 to 5 algorithms in any order, and then it's not, you know, still some compute, but not as much as running 9.
+
+[Dadmehr Ghasemfar] 16:39:07
+Mmhm.
+
+[Adrian Apsay] 16:39:11
+Hmm.
+
+[Dadmehr Ghasemfar] 16:39:12
+Yeah, and like I was saying, a lot of them are just bad. Like a lot of them, there's no reason to keep. They don't even have a niche of their own.
+
+[Sebastian Shunda] 16:39:12
+And also
+
+[Adrian Apsay] 16:39:12
+That's true.
+
+[Sebastian Shunda] 16:39:15
+Yeah
+
+[Sebastian Shunda] 16:39:19
+Yeah. And also, for efficiency's sake, if we have
+
+[Sebastian Shunda] 16:39:27
+If we have this program and you run all these algorithms, right, a certain order as well
+
+[Sebastian Shunda] 16:39:34
+Do you need to have it like save components and their positions because like, let's say an engineer changes one component and then hits rerun algorithm, right? You don't want it to rerun
+
+[Sebastian Shunda] 16:39:48
+all other 100 components, like, again, right? Like, is there a way to give it like memory, I guess, like to know like so you're not rerunning from stage 0 every time
+
+[Dadmehr Ghasemfar] 16:39:49
+Mmhm, mmhm.
+
+[Dadmehr Ghasemfar] 16:39:52
+Yes.
+
+[Dadmehr Ghasemfar] 16:39:53
+-H
+
+[Adrian Apsay] 16:39:58
+If you were to move like a component in the current space
+
+[Dadmehr Ghasemfar] 16:39:59
+Oh, that's a good question.
+
+[Sebastian Shunda] 16:40:00
+Yeah, if you… yeah, if you were to move one component, or if you were to change one or change one singular component
+
+[Dadmehr Ghasemfar] 16:40:04
+Or change one component. Yeah.
+
+[Sebastian Shunda] 16:40:07
+I guess there's
+
+[Adrian Apsay] 16:40:08
+You could probably create a, like have a way of like.
+
+[Adrian Apsay] 16:40:12
+like notifying, like, okay, like, I don't want to change this item in space. Keep it fixed, and then it'll keep note of that like there should be a toggle for that
+
+[Dadmehr Ghasemfar] 16:40:20
+Mmhm.
+
+[Sebastian Shunda] 16:40:21
+Like, yeah, it'll just make it a part of the bounding box, basically.
+
+[Dadmehr Ghasemfar] 16:40:26
+I think there's two types of algorithms. I think there's algorithms that are stochastic and gradient descenty, where they you start somewhere and you move somewhere. And then there's algorithms that are like not like that, that are deterministic and mathematical
+
+[Dadmehr Ghasemfar] 16:40:44
+The ones that are not like that, like you won't get that behavior naturally. What will happen is
+
+[Dadmehr Ghasemfar] 16:40:49
+If you change one component, even a little bit, there's a chance that there's a new
+
+[Dadmehr Ghasemfar] 16:40:56
+maximum new, you know, extreme
+
+[Sebastian Shunda] 16:40:58
+Yeah…
+
+[Dadmehr Ghasemfar] 16:40:59
+Minimum. So only some of these algorithms will behave the way you're describing naturally. And you can enforce, like, constrictions, like Adrian is saying, where you say, okay, force these parts not to move. But the way from experience, like
+
+[Dadmehr Ghasemfar] 16:41:13
+If you force a deterministic algorithm, like, I just foresee a lot of issues, like, with that.
+
+[Adrian Apsay] 16:41:19
+Yeah, I was going to add on to that
+
+[Sebastian Shunda] 16:41:20
+Yeah
+
+[Adrian Apsay] 16:41:22
+like what you said, like stochastic gradient descent, like, I think it's a lot better if like you can have other parts that revolve around this one part or parts that you want fixed. Because, like, yeah, it might expose like some sort of different optima that actually might be better, right?
+
+[Dadmehr Ghasemfar] 16:41:38
+Mmm…
+
+[Dadmehr Ghasemfar] 16:41:40
+Like, for example, most of the time your chassis and your battery and a few other things are fixed.
+
+[Adrian Apsay] 16:41:46
+-H
+
+[Dadmehr Ghasemfar] 16:41:48
+Honestly, guys, I think we need to think about this a little bit more before we act, but that more data will help us act. But that's not an easy question so far. Like
+
+[Adrian Apsay] 16:41:49
+Yeah, but then
+
+[Adrian Apsay] 16:42:02
+That is very difficult.
+
+[Dadmehr Ghasemfar] 16:42:05
+Yeah.
+
+[Adrian Apsay] 16:42:06
+But I think
+
+[Adrian Apsay] 16:42:08
+I think, I guess for next steps then, for now, it's maybe try like
+
+[Adrian Apsay] 16:42:14
+For one, you already know, like, what algorithms are, like, worthy to test upon in any order.
+
+[Dadmehr Ghasemfar] 16:42:19
+Mmhm.
+
+[Dadmehr Ghasemfar] 16:42:20
+-H
+
+[Adrian Apsay] 16:42:20
+See what kind of order makes sense for that algorithm because it will be useful for us because I feel like order is a very important thing for like just packing in general
+
+[Dadmehr Ghasemfar] 16:42:30
+Yeah, I've taken the data, I've processed the data, but I haven't interpreted the data yet, so I will try to do that, and if you guys can, play with this, and any, like, takeaways, like, okay, this one is objectively not one to keep
+
+[Dadmehr Ghasemfar] 16:42:45
+Let me know. I don't know what that is yet.
+
+[Adrian Apsay] 16:42:48
+-H
+
+[Sebastian Shunda] 16:42:49
+I do have to get going here, actually, guys, so is there anything
+
+[Dadmehr Ghasemfar] 16:42:53
+Well, let me show you something
+
+[Sebastian Shunda] 16:42:53
+I yeah, show me anything else you have
+
+[Dadmehr Ghasemfar] 16:42:57
+Yeah, I think this is going to be very good, but this is more for later. But I made a real life parts catalog. So every single part that you might need as you design a
+
+[Adrian Apsay] 16:43:06
+Whoa
+
+[Dadmehr Ghasemfar] 16:43:09
+satellite. Every single part, every single parameter. So its voltage, its current, its capacitance, its maximum allowable temperature. All of this is documented and compiled here, along with a 3D shape for each.
+
+[Adrian Apsay] 16:43:23
+Holy , wait, this is, this is like what you would use in like actual satellites too? Like, is there realistic parts for satellites?
+
+[Dadmehr Ghasemfar] 16:43:28
+This is all currently available with a link on either Amazon or Adafruit or somewhere on the internet. All these you can buy.
+
+[Sebastian Shunda] 16:43:33
+Yeah
+
+[Sebastian Shunda] 16:43:36
+I do
+
+[Adrian Apsay] 16:43:36
+Holy shit.
+
+[Sebastian Shunda] 16:43:38
+My program also had the same parts catalog, it just didn't display it. But the problem I realized is NASA's end goal is not CubeSats. So this is like a good starting point for sure. But a lot of their compliance are fully custom
+
+[Dadmehr Ghasemfar] 16:43:41
+Mmhm.
+
+[Dadmehr Ghasemfar] 16:43:50
+Mmhm.
+
+[Adrian Apsay] 16:43:51
+What would their end goal be? It's just like a telescope, right?
+
+[Sebastian Shunda] 16:43:54
+Their end goal, like, instead of like finding a component online and grabbing the CAD. The end goal should be that they can make a CAD of a completely one of one unique component
+
+[Adrian Apsay] 16:44:02
+Yeah.
+
+[Sebastian Shunda] 16:44:08
+Drag that cat into our program, multiple of those CADs, and then our program will do the rest for them. But
+
+[Sebastian Shunda] 16:44:16
+Like, that's what I'm assuming, because it's for the HWO, the Habitable Worlds Observatory.
+
+[Adrian Apsay] 16:44:21
+Hmm…
+
+[Dadmehr Ghasemfar] 16:44:21
+Wait, but… but I'll be honest, though
+
+[Dadmehr Ghasemfar] 16:44:24
+I do think that our program should have a catalog
+
+[Dadmehr Ghasemfar] 16:44:29
+I understand that like it may, I think it's going to be a lot of customization
+
+[Dadmehr Ghasemfar] 16:44:35
+But there should be a catalog. And
+
+[Dadmehr Ghasemfar] 16:44:39
+It had to start at CubeSat, but
+
+[Dadmehr Ghasemfar] 16:44:42
+I see it being much bigger
+
+[Adrian Apsay] 16:44:44
+Okay, well, well, I agree, I agree, because you're able to drop these into like, let's say we can just have like a drag and drop, right?
+
+[Sebastian Shunda] 16:44:45
+That's
+
+[Adrian Apsay] 16:44:51
+And then I have it
+
+[Sebastian Shunda] 16:44:51
+Yeah.
+
+[Adrian Apsay] 16:44:52
+Just have it, like, re-optimize. I don't know the space given like a new part you decided to add. But I was also going to ask, like, how would that work? How would that work with, like, a design process? Like, I feel like down the line, eventually, like, there's a design process that we have to feed it into
+
+[Dadmehr Ghasemfar] 16:44:58
+I just, I'm not gonna
+
+[Adrian Apsay] 16:45:07
+Like, how would it optimize for like we also have a catalog alongside that, like, how would that
+
+[Adrian Apsay] 16:45:13
+How would that work?
+
+[Dadmehr Ghasemfar] 16:45:15
+I'm not sure, but right now, my biggest priority has been… not my biggest, but separating them very clearly so that we can independently improve one without affecting the other.
+
+[Dadmehr Ghasemfar] 16:45:25
+I don't want this catalog to have any algorithms in it. I don't want this catalog to have any visualization in it. I want it to be purely a catalog
+
+[Adrian Apsay] 16:45:35
+Okay, okay.
+
+[Dadmehr Ghasemfar] 16:45:38
+I don't know if we're gonna need it, though. I'll be I'll be really honest
+
+[Adrian Apsay] 16:45:38
+For the sole purpose of like
+
+[Adrian Apsay] 16:45:41
+Is it just for
+
+[Adrian Apsay] 16:45:42
+Oh, sorry, sorry, I keep cutting you off for this.
+
+[Dadmehr Ghasemfar] 16:45:43
+Like, I'm not sure. No, no, it's okay. It's the connection. I'm not sure if we're gonna need this like
+
+[Dadmehr Ghasemfar] 16:45:49
+It's there in case we do
+
+[Sebastian Shunda] 16:45:52
+Thank you.
+
+[Dadmehr Ghasemfar] 16:45:54
+But I agree with Sebastian that like in the ideal world, we don't need to buy a CubeSat structure. We can metal 3D print our own custom genetically like fitted. But if the prompt says I can only use
+
+[Dadmehr Ghasemfar] 16:46:08
+$500, $400, $1,000 worth of parts. Then
+
+[Adrian Apsay] 16:46:13
+Hmm.
+
+[Dadmehr Ghasemfar] 16:46:14
+At the end of the day, the goal is prompt. So
+
+[Dadmehr Ghasemfar] 16:46:17
+The prompt could be, hey, I need a custom
+
+[Sebastian Shunda] 16:46:19
+That's
+
+[Dadmehr Ghasemfar] 16:46:22
+And all of these have a cost saved as well.
+
+[Adrian Apsay] 16:46:26
+Hmm.
+
+[Sebastian Shunda] 16:46:28
+That's fair to think about that, but also like this program is for NASA. Their budget isn't going to be like
+
+[Sebastian Shunda] 16:46:37
+Like they're not gonna use a singular pre-existing component.
+
+[Sebastian Shunda] 16:46:41
+I would be very surprised
+
+[Dadmehr Ghasemfar] 16:46:44
+Well
+
+[Sebastian Shunda] 16:46:44
+But do you see the importance of it? I just feel like that's something we need to worry about right now, really
+
+[Dadmehr Ghasemfar] 16:46:51
+Well, I'm not so sure that the end user is NASA. NASA's funding it. NASA wants it to happen. The end user is like a university like wanting to send something to space or NASA, like anyone
+
+[Adrian Apsay] 16:47:03
+I think this is also a good question to raise, Douglas, too
+
+[Dadmehr Ghasemfar] 16:47:07
+It is, it is because the answer does change our work and how we're going to approach it.
+
+[Adrian Apsay] 16:47:12
+Yeah.
+
+[Adrian Apsay] 16:47:13
+But this is good, though.
+
+[Adrian Apsay] 16:47:16
+This is good.
+
+[Dadmehr Ghasemfar] 16:47:18
+All right.
+
+[Dadmehr Ghasemfar] 16:47:18
+That is it for me. There's a lot more to do
+
+[Dadmehr Ghasemfar] 16:47:23
+I'm going to take the session notes. I'm gonna get working a little bit more, but
+
+[Dadmehr Ghasemfar] 16:47:28
+I guess for this path, I know what to do. It's check order, check a couple more algorithms if we can, and then check how order affects things and then check what an optimal order looks like.
+
+[Dadmehr Ghasemfar] 16:47:40
+And then we can have a meet up again on Wednesday.
+
+[Dadmehr Ghasemfar] 16:47:44
+For this thread
+
+[Dadmehr Ghasemfar] 16:47:47
+I can grow the catalog more
+
+[Dadmehr Ghasemfar] 16:47:49
+I can check it a little more, but I think I'm going to let this be for now from my end.
+
+[Dadmehr Ghasemfar] 16:47:54
+and focus on this this work
+
+[Sebastian Shunda] 16:47:57
+Okay, one thing I also want to point out is
+
+[Adrian Apsay] 16:47:57
+Awesome.
+
+[Sebastian Shunda] 16:48:03
+While having a catalog is good. Wouldn't it be better to just scan websites that you're getting this component information from? Because as components update
+
+[Sebastian Shunda] 16:48:14
+They're gonna update it on the website. So wouldn't it kind of be better to just like
+
+[Dadmehr Ghasemfar] 16:48:20
+Yes
+
+[Sebastian Shunda] 16:48:20
+Not have a fixed catalog and instead just reference a certain website and have the the agent pipeline do that automatically.
+
+[Dadmehr Ghasemfar] 16:48:29
+Yes, for internet search and internet scan, and it just is not reliable enough where I wouldn't trust it. Like as an engineer, I need the basis to be rock proof, like foolproof rather before I can move further. I need to know that like these parts are real
+
+[Dadmehr Ghasemfar] 16:48:44
+that they have the
+
+[Dadmehr Ghasemfar] 16:48:47
+What they say they have
+
+[Adrian Apsay] 16:48:48
+You can have an agent like converse with, well, that's another major downside, which is going to be like the branch of what I was going to say, but essentially we don't have an API where like there can be an agent that is specifically baked into our application specifically
+
+[Dadmehr Ghasemfar] 16:48:48
+So
+
+[Adrian Apsay] 16:49:03
+But I do think it would be very good to have because, for instances like that, the agent's able to reliably
+
+[Sebastian Shunda] 16:49:09
+Yeah, I don't know how we're supposed to do this without
+
+[Adrian Apsay] 16:49:12
+I was going to say like
+
+[Dadmehr Ghasemfar] 16:49:13
+I think long term, yes, but for the sake of our research
+
+[Dadmehr Ghasemfar] 16:49:18
+We don't need someone browsing the internet for live parts, but eventually we need to show that that's something we can do.
+
+[Adrian Apsay] 16:49:24
+Yeah, I think maybe
+
+[Sebastian Shunda] 16:49:25
+Well, like.
+
+[Adrian Apsay] 16:49:28
+Okay, go ahead.
+
+[Sebastian Shunda] 16:49:28
+Adrian, make your point
+
+[Adrian Apsay] 16:49:30
+No, I was going to say like I was going to say like an agent can just like easily
+
+[Sebastian Shunda] 16:49:31
+I'm sorry
+
+[Adrian Apsay] 16:49:35
+like, verify for you, like, or just give you the link in front of you.
+
+[Dadmehr Ghasemfar] 16:49:39
+And to be honest, that's what this agent did.
+
+[Sebastian Shunda] 16:49:40
+Yeah, and the other thing it can do is
+
+[Sebastian Shunda] 16:49:45
+If we, okay, think about this. If we have multiple algorithms, instead of having to pick the one and like look for the highest output because
+
+[Adrian Apsay] 16:49:45
+Yeah.
+
+[Sebastian Shunda] 16:49:54
+How… how do we know a certain algorithm is the best for a certain
+
+[Sebastian Shunda] 16:49:58
+I guess, set of parameters for a certain set of objects. We don't. We'd have to run
+
+[Sebastian Shunda] 16:50:06
+Studies like multiple, multiple times, even if one component changes. But if we have an agent baked in, we can have it run like
+
+[Sebastian Shunda] 16:50:14
+We can say, run enough tests for 90% accuracy, or whatever, and then it will determine, you know, maybe maybe one algorithm is obviously better after 5 runs, and we don't need to run 100 times. But the only way we can do that is if we have an agent baked in
+
+[Adrian Apsay] 16:50:26
+Mmhm.
+
+[Sebastian Shunda] 16:50:32
+That's gonna know to check that. Otherwise, it's a set value, like, oh, run every
+
+[Sebastian Shunda] 16:50:38
+algorithm 1,000 times, like, yeah, that's gonna be accurate, and we're going to have a certain accuracy every time, but it's going to take way too long. Versus if you have an agent, like, if one algorithm is 90% better than all the others in three runs, like, you don't need the other
+
+[Adrian Apsay] 16:50:40
+Yeah.
+
+[Adrian Apsay] 16:50:41
+That's… it's gonna be deterministic. But it's not live.
+
+[Adrian Apsay] 16:50:47
+Yeah.
+
+[Sebastian Shunda] 16:50:53
+997 runs. You can just call it a day like within 10, and you're gonna cut your compute time down, and then you could have a baked in algorithm go, Okay, he changed one component from a hundred others.
+
+[Dadmehr Ghasemfar] 16:50:56
+Mmm…
+
+[Sebastian Shunda] 16:51:07
+Let's look at this component. The algorithm goes in, looks at it, goes, wow, it's almost exactly the same
+
+[Sebastian Shunda] 16:51:13
+I don't even need to rerun all these different algorithms. I'll rerun the same algorithm I already checked a thousand times, but just with the new component. And then you're saving even more compute time, because you're just running one algorithm that's already been picked. But that's what we need the API for now
+
+[Adrian Apsay] 16:51:28
+Yes, but unfortunately, it just seems like, at least for now
+
+[Adrian Apsay] 16:51:34
+We're not going to have access to that unless we pitch that idea, which I think is a great idea. I mean, like, there's no way
+
+[Sebastian Shunda] 16:51:40
+How do we prove we need that as quick as possible?
+
+[Adrian Apsay] 16:51:42
+There's like literally no way Douglas is not going to give us an API. I generally feel like down the line he's going to give us an API to work with eventually.
+
+[Sebastian Shunda] 16:51:45
+This looks cool
+
+[Adrian Apsay] 16:51:51
+But for now, like, what I was going to say is that, you know, branching off of, like, what was talked about last meeting is like I have to create some sort of MCP that's able to like communicate
+
+[Adrian Apsay] 16:52:02
+Like, what I'm saying on, like, Claude desktop or Claude Code, feed it into my browser somehow
+
+[Adrian Apsay] 16:52:08
+And make some sort of tool calls, and then fetch what I said within Claude to output whatever was given in the browser, like the application for me
+
+[Adrian Apsay] 16:52:19
+That's like the only, like, way
+
+[Sebastian Shunda] 16:52:20
+But it's… we're doing all that
+
+[Sebastian Shunda] 16:52:22
+Like, just to have to change it all once we get the API, which is, like, the point, the part I don't understand. Like, that's why I'm saying we should try and figure out a way to like prove we need this as quickly as possible. But then we don't waste 3 months developing like an MCP and all that.
+
+[Adrian Apsay] 16:52:37
+I think… I think… I think it'd be really easy. Like a custom MCP or CLI
+
+[Sebastian Shunda] 16:52:38
+Just do
+
+[Sebastian Shunda] 16:52:38
+Straight in.
+
+[Sebastian Shunda] 16:52:39
+Okay.
+
+[Adrian Apsay] 16:52:43
+won't take that long if it's like if if we just make like some basic tool calling
+
+[Adrian Apsay] 16:52:48
+It shouldn't be too bad at all, but I do agree with the sentiment of, like, okay, let's do this really fast and we'll quickly show how limited it is, because it's going to be very limited.
+
+[Sebastian Shunda] 16:52:59
+Yes
+
+[Adrian Apsay] 16:53:01
+Because down the line, like, we do need an Api because the the 2 limits the 2 main limits of not having an Api is that the conversation you're going to have with like an AI is going to happen within cloud code or desktop, not inside our own like
+
+[Adrian Apsay] 16:53:18
+Apps UI, which is like
+
+[Adrian Apsay] 16:53:21
+Obviously, a major downside, right? You're gonna have to talk through, like… it's gonna assume that the user has some sort of subscription, or, like, Claude desktop app or whatnot, right? And then the other limit is that
+
+[Adrian Apsay] 16:53:32
+The Claude web app can, like, if you're using like a web app to talk through To use our application, like
+
+[Adrian Apsay] 16:53:41
+It only connects like remote MCP servers. So like you're everything is running locally on a back end on your local on your local setup. So like, if a user's
+
+[Adrian Apsay] 16:53:53
+I don't know, computer rig isn't that good
+
+[Adrian Apsay] 16:53:55
+It's not going to work well
+
+[Adrian Apsay] 16:53:58
+So I don't know, I think
+
+[Sebastian Shunda] 16:53:59
+Exactly. It's computer-based in that case, which is like so limited because that means each person's getting a different output based on how expensive their computer is
+
+[Adrian Apsay] 16:54:09
+Exactly. So we're going to have to do that. But that's what I'm going to be testing before Thursday. See if I can create like a simple MCP
+
+[Adrian Apsay] 16:54:20
+at CLI where we're able to interact with our subscription, like our cloud subscription based account, whether through cloud code or cloud desktop. And then see how far we can get with that. But
+
+[Adrian Apsay] 16:54:32
+I do think it's going to be pretty limited.
+
+[Adrian Apsay] 16:54:36
+But we'll see. I'm going to play around with it for Thursday. So
+
+[Adrian Apsay] 16:54:42
+But that's those are my thoughts.
+
+[Dadmehr Ghasemfar] 16:54:46
+Honestly, guys, we have so much work that we need to like briefly text about how we're going to compress that frame. For Douglas, I think.
+
+[Adrian Apsay] 16:54:55
+Yes.
+
+[Adrian Apsay] 16:54:57
+I think I'll make
+
+[Adrian Apsay] 16:54:59
+Maybe brief slides
+
+[Adrian Apsay] 16:55:01
+And then I'll just show, like, a live demo showing the MCP CLI
+
+[Adrian Apsay] 16:55:06
+And how it works
+
+[Dadmehr Ghasemfar] 16:55:06
+You just want to make individual slides, I think I can go through what I just presented in like half the time and whatever I do now.
+
+[Adrian Apsay] 16:55:14
+Sure. Yeah, we can do that.
+
+[Dadmehr Ghasemfar] 16:55:15
+Okay.
+
+[Sebastian Shunda] 16:55:16
+What do you guys want me to do, is my question, before I have to leave, because at this point
+
+[Sebastian Shunda] 16:55:23
+You know, we can ask people more UI.
+
+[Dadmehr Ghasemfar] 16:55:23
+Bro, create the perfect catalog of parts
+
+[Sebastian Shunda] 16:55:26
+You want me to create a perfect catalog
+
+[Dadmehr Ghasemfar] 16:55:29
+Bro, a perfect catalog means everything though. Every voltage, every value, max temp, because what I'm imagining is eventually our agent
+
+[Sebastian Shunda] 16:55:29
+That's
+
+[Sebastian Shunda] 16:55:37
+I think that's
+
+[Sebastian Shunda] 16:55:38
+I think that's getting ahead of ourselves, bro.
+
+[Dadmehr Ghasemfar] 16:55:39
+Our agent just needs a
+
+[Dadmehr Ghasemfar] 16:55:41
+I don't know, I don't know if it is yes and no. But I just want to know it's possible because eventually our agent needs certainty, like
+
+[Dadmehr Ghasemfar] 16:55:50
+These parts aren't
+
+[Dadmehr Ghasemfar] 16:55:52
+I don't know, man, like
+
+[Dadmehr Ghasemfar] 16:55:54
+A web search doesn't work well if it hasn't been filtered and like really
+
+[Dadmehr Ghasemfar] 16:56:00
+Examined. And I'm not saying, like, we have to do that. Claude can do that.
+
+[Adrian Apsay] 16:56:05
+Mmhm.
+
+[Dadmehr Ghasemfar] 16:56:08
+But
+
+[Sebastian Shunda] 16:56:08
+Okay, but… but the real question there, too, is like, how many websites are really selling satellite parts? Because if it's like four, bro, we just tell Claude to do it
+
+[Adrian Apsay] 16:56:08
+Yeah.
+
+[Dadmehr Ghasemfar] 16:56:17
+Oh
+
+[Dadmehr Ghasemfar] 16:56:19
+Wait, wait, Sebastian, I have something crazy. I have something crazy.
+
+[Sebastian Shunda] 16:56:19
+Like, how hard is it to scan for a website?
+
+[Sebastian Shunda] 16:56:23
+Okay.
+
+[Dadmehr Ghasemfar] 16:56:24
+Can you answer the question, hey, how much power do we need? Like
+
+[Dadmehr Ghasemfar] 16:56:29
+from the prompt, the prompt being, hey, I want a satellite that does XYZ. What is the best battery and how much like
+
+[Dadmehr Ghasemfar] 16:56:36
+Both power and capacity
+
+[Dadmehr Ghasemfar] 16:56:39
+Does that battery need
+
+[Sebastian Shunda] 16:56:41
+The problem with that is it depends on every other component, and it depends on your budget. I'm sure you can get the same battery that's rated for just as long as another one, but weighs half as much as the other one. So
+
+[Sebastian Shunda] 16:56:57
+You know, I guess there's not really a
+
+[Sebastian Shunda] 16:56:59
+a defined answer
+
+[Dadmehr Ghasemfar] 16:57:00
+I feel like… I feel like we can refine the answer with more information, but there must be like a high level generic range for most types of satellites. Like Hubble can't operate. Okay, I don't know, like, I agree. You need to know the parts to know the overall use, but
+
+[Sebastian Shunda] 16:57:14
+I mean
+
+[Dadmehr Ghasemfar] 16:57:16
+Maybe you can put like a… when you have a design team, like the management will give you, like, we need the power to be between 400 and 500
+
+[Sebastian Shunda] 16:57:27
+The problem is
+
+[Sebastian Shunda] 16:57:29
+that's, like, all good for the final version of our app that is expanded to CubeSats
+
+[Sebastian Shunda] 16:57:35
+But
+
+[Sebastian Shunda] 16:57:37
+NASA's whole mission will
+
+[Sebastian Shunda] 16:57:42
+have a team that is… they will have a dedicated systems of systems team
+
+[Sebastian Shunda] 16:57:48
+That is, figuring out how each component works with each other, and that's not something
+
+[Sebastian Shunda] 16:57:54
+that I believe
+
+[Sebastian Shunda] 16:57:56
+One program can do by itself because
+
+[Sebastian Shunda] 16:58:00
+I've done some systems of systems classes, and it's ridiculous, like, how big the teams are, because you need to talk between every team of every subsystem of a certain satellite. So if you're building the Hwl, you're gonna have, like, I don't even know
+
+[Sebastian Shunda] 16:58:15
+How many teams do you think there are in a satellite like that? 30 different teams
+
+[Dadmehr Ghasemfar] 16:58:19
+It honestly, countless people, countless people. But
+
+[Adrian Apsay] 16:58:21
+Probably a shit ton, dude.
+
+[Sebastian Shunda] 16:58:22
+So you have like
+
+[Sebastian Shunda] 16:58:26
+5 people from each team, let's say it's 30 teams, that are all working into an app like QCenter
+
+[Sebastian Shunda] 16:58:33
+or there's just some Siemens app that does the same thing. And they're all inputting. Bro, you never heard of Siemens, Bill? Come on. This guy
+
+[Dadmehr Ghasemfar] 16:58:37
+What up? Whoa
+
+[Dadmehr Ghasemfar] 16:58:41
+No, I'm kidding, bro, I'm kidding.
+
+[Sebastian Shunda] 16:58:45
+You have… you have,
+
+[Sebastian Shunda] 16:58:48
+each person, like, if I'm assigned the solar panel design, right, I'm gonna be putting all my solar panel info into… into Teamcenter while looking at everyone else's info on what they need. So the camera guy put down how many volts his camera has. Okay, well, I'm the solar panel guy.
+
+[Sebastian Shunda] 16:59:07
+So now I need to look at the battery guy, see how much energy the battery can store, how much energy my solar panel needs to produce, how many volts everything else is taking. And that's literally like
+
+[Sebastian Shunda] 16:59:19
+A multi… this is like a 100-person project. That's why companies use Teamcenter
+
+[Dadmehr Ghasemfar] 16:59:21
+Well, Sebastian, Sebastian, we don't need a perfect answer at any stage. Just like a rough range because it is
+
+[Sebastian Shunda] 16:59:28
+But I think it's like
+
+[Sebastian Shunda] 16:59:30
+I think it's unnecessary to think about that right now when NASA just wants each person to be able to take the component they've already considered to be good and slap it into our program, and our program does all the all the combining for them, basically.
+
+[Sebastian Shunda] 16:59:46
+I think that's more important right now.
+
+[Dadmehr Ghasemfar] 16:59:46
+We should also ask Douglas, who is the user of this text to prompt
+
+[Sebastian Shunda] 16:59:52
+It's NASA. It's directly for HWL
+
+[Dadmehr Ghasemfar] 16:59:53
+Application
+
+[Dadmehr Ghasemfar] 16:59:57
+Then I'll be honest, that's not the best user
+
+[Sebastian Shunda] 16:59:58
+And NASA.
+
+[Sebastian Shunda] 17:00:02
+No, absolutely not, but it's who's sponsoring our , so
+
+[Dadmehr Ghasemfar] 17:00:03
+Because
+
+[Dadmehr Ghasemfar] 17:00:04
+And you just put it best. You just put it best. It's because like
+
+[Dadmehr Ghasemfar] 17:00:08
+Simply put, like, NASA is meant to be at the forefront. The forefront is not going to be where the AI text-to-speech generator is going to be. Like the way I saw it is the way I saw it is in 10 years, 20 years time, space is way more accessible
+
+[Sebastian Shunda] 17:00:17
+It might be, though
+
+[Dadmehr Ghasemfar] 17:00:24
+Individual teams of 1 or 5 people can sense satellites to space. Now there's people that want to send satellites to space that are honestly not qualified, and this is that gap between them and what they need.
+
+[Sebastian Shunda] 17:00:38
+I think our program will be completely outdated in 5 to 10 years. And the goal is more
+
+[Dadmehr Ghasemfar] 17:00:38
+But like
+
+[Sebastian Shunda] 17:00:46
+NASA's using funding to figure out if there's a way they can cut out tedious parts of the design process. For example, you have 15 people trying to pack these parts together, you can eliminate all 15 by just having
+
+[Sebastian Shunda] 17:01:01
+a program that only packs the parks and does nothing else, as long as that's verified and validated, boom, you've just saved 15 people's engineering costs. Right?
+
+[Sebastian Shunda] 17:01:10
+So I think that's more where they're going there is like cutting time
+
+[Dadmehr Ghasemfar] 17:01:13
+Guys, I do have to get going. I'm sorry, I forget I have a tutoring session right now.
+
+[Adrian Apsay] 17:01:19
+It's all good
+
+[Sebastian Shunda] 17:01:21
+I do have to leave it to low
+
+[Dadmehr Ghasemfar] 17:01:21
+Let me save this transcript
+
+[Adrian Apsay] 17:01:24
+But there is a lot of work that needs to be done. I think these are great questions, though.
+
+[Dadmehr Ghasemfar] 17:01:24
+Well
+
+[Dadmehr Ghasemfar] 17:01:26
+Doing a lot of work. I think we should try to text about like or present separately, but get all the work we've done and get it to Douglas. But let's try to text before we meet him.
+
+[Sebastian Shunda] 17:01:37
+We need to fill out the tasks in
+
+[Dadmehr Ghasemfar] 17:01:41
+I haven't done that
+
+[Sebastian Shunda] 17:01:42
+Someone can do that.
+
+[Adrian Apsay] 17:01:43
+What tasks?
+
+[Adrian Apsay] 17:01:45
+Wait, what tasks
+
+[Sebastian Shunda] 17:01:47
+For Douglas, there's like the objectives and tasks in Slack. He wants us to do
+
+[Dadmehr Ghasemfar] 17:01:48
+I was
+
+[Sebastian Shunda] 17:01:53
+And there was something else he asked us to do last meeting where he was like, I'm not going to say this again, guys. What was that
+
+[Dadmehr Ghasemfar] 17:01:57
+Oh, oh, a third brain. There's something in there. I don't know what it is
+
+[Adrian Apsay] 17:02:02
+I think it was more like just like random stuff that you just had to like look over
+
+[Sebastian Shunda] 17:02:03
+Okay
+
+[Dadmehr Ghasemfar] 17:02:08
+Yeah, but like we need to go like we need to go through a third brain, look at the last couple things he said and like basically make sure that like we take a look at what that source is
+
+[Adrian Apsay] 17:02:20
+Hmm.
+
+[Sebastian Shunda] 17:02:20
+Yeah.
+
+[Dadmehr Ghasemfar] 17:02:20
+Just from what I got from that
+
+[Adrian Apsay] 17:02:23
+Yeah.
+
+[Sebastian Shunda] 17:02:24
+Well, I'll look it over.
+
+[Dadmehr Ghasemfar] 17:02:25
+-H
+
+[Adrian Apsay] 17:02:29
+All right. Wait, I'm trying to locate where that
+
+[Adrian Apsay] 17:02:32
+I'll just see where the objectives are. I'll
+

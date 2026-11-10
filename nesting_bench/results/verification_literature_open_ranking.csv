@@ -1,0 +1,14 @@
+rank,algorithm,runs,ratio_mean,ratio_ci99_low,ratio_ci99_high,solved_rate,valid_rate
+1,box_extreme_points,40,1.0073,0.9290,1.0855,0.750,1.000
+2,best_of_fast,40,1.0073,0.9290,1.0855,0.750,1.000
+3,genetic_algorithm,40,0.9698,0.8968,1.0428,0.500,1.000
+4,simulated_annealing,40,0.9667,0.8917,1.0417,0.500,1.000
+5,voxel_bottom_left,40,0.9585,0.8771,1.0399,0.500,1.000
+6,empty_maximal_spaces,40,0.9023,0.7969,1.0077,0.500,1.000
+7,box_bottom_left,40,0.8575,0.7589,0.9561,0.250,1.000
+8,shelf_packing,40,0.8368,0.7344,0.9392,0.250,1.000
+9,genetic_heightfield,40,0.7543,0.6743,0.8343,0.125,1.000
+10,heightfield_drop,40,0.7213,0.6387,0.8040,0.125,1.000
+11,force_based,40,0.7128,0.5879,0.8377,0.350,1.000
+12,force_based_v2,40,0.4744,0.3733,0.5754,0.000,1.000
+13,random_rejection,40,0.2957,0.2430,0.3485,0.000,1.000

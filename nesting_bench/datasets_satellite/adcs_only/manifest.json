@@ -1,0 +1,210 @@
+[
+ {
+  "name": "cubespace_cubewheel_cw0017",
+  "part_id": "cubespace_cubewheel_cw0017",
+  "category": "adcs",
+  "vendor": "CubeSpace Satellite Systems",
+  "mass_g": "60",
+  "dimensions_mm": [
+   "28",
+   "28",
+   "26"
+  ],
+  "effective_density_g_cm3": 3.772
+ },
+ {
+  "name": "cubespace_cubewheel_cw0162",
+  "part_id": "cubespace_cubewheel_cw0162",
+  "category": "adcs",
+  "vendor": "CubeSpace Satellite Systems",
+  "mass_g": "144",
+  "dimensions_mm": [
+   "46",
+   "46",
+   "24"
+  ],
+  "effective_density_g_cm3": 3.634
+ },
+ {
+  "name": "cubespace_cubetorquer_cr0006",
+  "part_id": "cubespace_cubetorquer_cr0006",
+  "category": "adcs",
+  "vendor": "CubeSpace Satellite Systems",
+  "mass_g": "31",
+  "dimensions_mm": [
+   "77",
+   "10.5",
+   "10.5"
+  ],
+  "effective_density_g_cm3": 3.652
+ },
+ {
+  "name": "cubespace_cubetorquer_cr0006_2",
+  "part_id": "cubespace_cubetorquer_cr0006",
+  "category": "adcs",
+  "vendor": "CubeSpace Satellite Systems",
+  "mass_g": "31",
+  "dimensions_mm": [
+   "77",
+   "10.5",
+   "10.5"
+  ],
+  "effective_density_g_cm3": 3.652
+ },
+ {
+  "name": "cubespace_cubetorquer_cr0006_3",
+  "part_id": "cubespace_cubetorquer_cr0006",
+  "category": "adcs",
+  "vendor": "CubeSpace Satellite Systems",
+  "mass_g": "31",
+  "dimensions_mm": [
+   "77",
+   "10.5",
+   "10.5"
+  ],
+  "effective_density_g_cm3": 3.652
+ },
+ {
+  "name": "cubespace_cubestar",
+  "part_id": "cubespace_cubestar",
+  "category": "adcs",
+  "vendor": "CubeSpace Satellite Systems",
+  "mass_g": "18",
+  "dimensions_mm": [
+   "20",
+   "35",
+   "24"
+  ],
+  "effective_density_g_cm3": 1.356
+ },
+ {
+  "name": "aac_rw400_15",
+  "part_id": "aac_rw400_15",
+  "category": "adcs",
+  "vendor": "AAC Clyde Space (AAC Hyperion)",
+  "mass_g": "197",
+  "dimensions_mm": [
+   "50",
+   "50",
+   "27"
+  ],
+  "effective_density_g_cm3": 3.66
+ },
+ {
+  "name": "aac_mtq800",
+  "part_id": "aac_mtq800",
+  "category": "adcs",
+  "vendor": "AAC Clyde Space (AAC Hyperion)",
+  "mass_g": "489",
+  "dimensions_mm": [
+   "250",
+   "67",
+   "35"
+  ],
+  "effective_density_g_cm3": 0.834
+ },
+ {
+  "name": "aac_mag3",
+  "part_id": "aac_mag3",
+  "category": "adcs",
+  "vendor": "AAC Clyde Space (AAC Hyperion)",
+  "mass_g": "100",
+  "dimensions_mm": [
+   "82.6",
+   "35.1",
+   "32.3"
+  ],
+  "effective_density_g_cm3": 1.068
+ },
+ {
+  "name": "aac_pg400",
+  "part_id": "aac_pg400",
+  "category": "adcs",
+  "vendor": "AAC Clyde Space (AAC Hyperion)",
+  "mass_g": "25",
+  "dimensions_mm": [
+   "30.8",
+   "25.7",
+   "17"
+  ],
+  "effective_density_g_cm3": 1.858
+ },
+ {
+  "name": "nss_aquila_h01",
+  "part_id": "nss_aquila_h01",
+  "category": "adcs",
+  "vendor": "NewSpace Systems",
+  "mass_g": "37",
+  "dimensions_mm": [
+   "34",
+   "40",
+   "20"
+  ],
+  "effective_density_g_cm3": 1.36
+ },
+ {
+  "name": "rocketlab_rw006",
+  "part_id": "rocketlab_rw006",
+  "category": "adcs",
+  "vendor": "Rocket Lab (Sinclair Interplanetary)",
+  "mass_g": "233",
+  "dimensions_mm": [
+   "77",
+   "65",
+   "38"
+  ],
+  "effective_density_g_cm3": 1.785
+ },
+ {
+  "name": "rocketlab_st16rt2",
+  "part_id": "rocketlab_st16rt2",
+  "category": "adcs",
+  "vendor": "Rocket Lab (Sinclair Interplanetary)",
+  "mass_g": "185",
+  "dimensions_mm": [
+   "62",
+   "56",
+   "68"
+  ],
+  "effective_density_g_cm3": 1.091
+ },
+ {
+  "name": "arcsec_sagitta",
+  "part_id": "arcsec_sagitta",
+  "category": "adcs",
+  "vendor": "arcsec",
+  "mass_g": "270",
+  "dimensions_mm": [
+   "50",
+   "45",
+   "95"
+  ],
+  "effective_density_g_cm3": 1.584
+ },
+ {
+  "name": "sensonor_stim277h",
+  "part_id": "sensonor_stim277h",
+  "category": "adcs",
+  "vendor": "Safran Sensonor",
+  "mass_g": "52",
+  "dimensions_mm": [
+   "45",
+   "39",
+   "22"
+  ],
+  "effective_density_g_cm3": 1.347
+ },
+ {
+  "name": "epson_m_g370pds",
+  "part_id": "epson_m_g370pds",
+  "category": "adcs",
+  "vendor": "Seiko Epson",
+  "mass_g": "10",
+  "dimensions_mm": [
+   "24",
+   "24",
+   "10"
+  ],
+  "effective_density_g_cm3": 1.736
+ }
+]

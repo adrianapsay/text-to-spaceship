@@ -1,0 +1,5 @@
+group,algorithm,runs,ratio_mean,ratio_ci99_low,ratio_ci99_high,ratio_best,solved_rate,valid_rate,aspect_ratio_mean,seconds_mean
+cube_guillotine_k12,genetic_box,50,0.8302,0.8146,0.8459,0.9105,0.000,1.000,4.831,5.138
+cube_guillotine_k15,genetic_box,50,0.7980,0.7831,0.8128,0.9172,0.000,1.000,6.116,5.175
+cube_guillotine_k6,genetic_box,50,0.9340,0.9132,0.9548,1.0000,0.340,1.000,2.498,5.087
+cube_guillotine_k9,genetic_box,50,0.8400,0.8218,0.8582,0.9638,0.000,1.000,4.546,5.107

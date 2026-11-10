@@ -1,0 +1,642 @@
+<title>Nesting Bench Explorer</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* layout: a fixed top bar with tabs; each tab is a control row over a table and a chart; the viewer is a canvas beside a metrics column */
+:root {
+  --bg: #f6f7f4; --panel: #ffffff; --fg: #15191e; --fg2: #566069; --fg3: #8b949c; --line: #dfe3e0; --accent: #2b6cb0;
+  --baseline: #9a9a94; --box: #2a78d6; --shape: #1baf7a; --search: #eb6834; --ref: #15191e;
+  --sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif; --mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #14171a; --panel: #1c2024; --fg: #e8ebe7; --fg2: #aab2ba; --fg3: #7b848c; --line: #2d3338; --accent: #6ea8e8; --ref: #e8ebe7; color-scheme: dark } }
+:root[data-theme="dark"] { --bg: #14171a; --panel: #1c2024; --fg: #e8ebe7; --fg2: #aab2ba; --fg3: #7b848c; --line: #2d3338; --accent: #6ea8e8; --ref: #e8ebe7; color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 14px; line-height: 1.45; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 32px; }
+header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 20px; padding-block: 18px 10px; border-bottom: 1px solid var(--line); }
+header h1 { font-size: 18px; font-weight: 600; margin: 0; letter-spacing: -0.01em; }
+header .sub { color: var(--fg2); font-size: 13px; }
+nav { display: flex; gap: 4px; flex-wrap: wrap; margin-left: auto; }
+nav button { font: inherit; font-weight: 500; background: none; border: 1px solid transparent; color: var(--fg2); padding: 6px 12px; border-radius: 6px; cursor: pointer; }
+nav button[aria-selected="true"] { background: var(--panel); border-color: var(--line); color: var(--fg); }
+nav button:focus-visible, select:focus-visible, .viewer button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+section.tab { padding-top: 16px; }
+.controls { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: end; margin-bottom: 14px; }
+.controls label { display: flex; flex-direction: column; gap: 4px; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--fg3); }
+select { font: inherit; font-size: 13px; color: var(--fg); background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 5px 8px; min-width: 150px; }
+.grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; }
+@media (max-width: 900px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; min-width: 0; }
+.card h2 { font-size: 13px; font-weight: 600; margin: 0 0 4px; }
+.card .meta { color: var(--fg2); font-size: 12px; margin-bottom: 10px; }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; font-size: 13px; }
+th { text-align: left; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--fg3); font-weight: 500; padding: 4px 8px 6px 0; border-bottom: 1px solid var(--line); }
+td { padding: 5px 8px 5px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td.num, th.num { text-align: right; font-family: var(--mono); font-size: 12px; }
+tr.best td { font-weight: 600; }
+.swatch { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 7px; vertical-align: 1px; }
+.tablewrap { overflow-x: auto; }
+svg.chart { width: 100%; height: auto; display: block; }
+svg.chart text { font-family: var(--sans); fill: var(--fg2); }
+svg.chart .axis { stroke: var(--line); }
+svg.chart .ci { stroke: var(--fg); stroke-width: 1; }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; color: var(--fg2); margin-top: 8px; }
+.viewer { display: grid; grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr); gap: 18px; }
+@media (max-width: 900px) { .viewer { grid-template-columns: minmax(0, 1fr); } }
+#canvas-wrap { position: relative; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; aspect-ratio: 4 / 3; max-width: 100%; overflow: hidden; }
+#canvas-wrap canvas { width: 100% !important; height: 100% !important; display: block; cursor: grab; }
+#canvas-wrap .hint { position: absolute; left: 10px; bottom: 8px; font-size: 11px; color: var(--fg3); pointer-events: none; }
+.metrics dl { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; margin: 0; font-size: 13px; }
+.metrics dt { color: var(--fg3); }
+.metrics dd { margin: 0; font-family: var(--mono); font-size: 12px; }
+.viewer .toggles { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+.viewer .toggles button { font: inherit; font-size: 12px; background: var(--panel); color: var(--fg); border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; cursor: pointer; }
+.viewer .toggles button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+p.note { color: var(--fg2); font-size: 13px; max-width: 70ch; margin: 0 0 12px; }
+section.tab[hidden] { display: none !important; }
+.algo-layout { display: grid; grid-template-columns: 220px 1fr; gap: 14px; padding: 0 16px 16px; }
+.algo-list { display: flex; flex-direction: column; gap: 4px; }
+.algo-list button { text-align: left; padding: 6px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); color: var(--fg); cursor: pointer; font: inherit; font-size: 13px; display: flex; align-items: center; gap: 8px; }
+.algo-list button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); }
+.algo-list .fam { font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--fg3); margin: 8px 0 2px 2px; }
+.algo-card { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.algo-card h2 { grid-column: 1 / -1; margin-bottom: 0; }
+.algo-card .what { grid-column: 1 / -1; font-size: 15px; color: var(--fg); margin: 0 0 4px; }
+.algo-card img { width: 100%; border: 1px solid var(--line); border-radius: 6px; background: #fff; }
+.algo-card h3 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--fg3); margin: 10px 0 4px; }
+.algo-card p, .algo-card li { font-size: 13.5px; line-height: 1.45; margin: 0; }
+.algo-card ul { margin: 0; padding-left: 18px; }
+.algo-card .replay { position: relative; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); height: 300px; overflow: hidden; }
+.algo-card .replay canvas { width: 100%; height: 100%; display: block; }
+.algo-card .replay .bar { position: absolute; left: 8px; right: 8px; bottom: 8px; display: flex; gap: 8px; align-items: center; font-size: 12px; color: var(--fg2); }
+.algo-card .replay .bar button { font: inherit; font-size: 12px; padding: 3px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); color: var(--fg); cursor: pointer; }
+.algo-card .replay .bar select { font: inherit; font-size: 12px; padding: 2px 6px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); color: var(--fg); }
+.algo-card .replay progress { flex: 1; height: 6px; }
+@media (max-width: 760px) { .algo-layout, .algo-card { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<header>
+  <h1>Nesting Bench Explorer</h1>
+  <span class="sub">19 packing algorithms, 4 studies, 99% confidence intervals, saved packings in 3D</span>
+  <nav role="tablist">
+    <button role="tab" data-tab="benchmark" aria-selected="true">Benchmark</button>
+    <button role="tab" data-tab="scrabble" aria-selected="false">Scrabble test</button>
+    <button role="tab" data-tab="literature" aria-selected="false">Literature test</button>
+    <button role="tab" data-tab="order" aria-selected="false">Order study</button>
+    <button role="tab" data-tab="viewer" aria-selected="false">3D viewer</button>
+    <button role="tab" data-tab="algorithms" aria-selected="false">Algorithms</button>
+  </nav>
+</header>
+
+<section class="tab" id="tab-benchmark">
+  <p class="note">Random part sets from the 60-part categories, open mode (minimize the bounding box), clearance 0.5 mm. Fast methods n = 300 per bar, search methods n = 100. Error bars are 99% confidence intervals of the mean.</p>
+  <div class="controls">
+    <label>Category <select id="b-dataset"></select></label>
+    <label>Parts k <select id="b-k"></select></label>
+    <label>Measure <select id="b-metric">
+      <option value="score">Density (parts volume / box volume)</option>
+      <option value="aspect">Aspect ratio (longest / shortest side)</option>
+      <option value="com">Center of mass offset (% of diagonal)</option>
+      <option value="seconds">Seconds per packing</option>
+      <option value="contacts">Contacts per part</option>
+      <option value="isolated">Isolated parts</option>
+    </select></label>
+  </div>
+  <div class="grid">
+    <div class="card"><h2 id="b-chart-title">Density</h2><div class="meta" id="b-chart-meta"></div><div id="b-chart"></div><div class="legend"><span><i class="swatch" style="background: var(--baseline)"></i>baseline</span><span><i class="swatch" style="background: var(--box)"></i>box based</span><span><i class="swatch" style="background: var(--shape)"></i>shape based</span><span><i class="swatch" style="background: var(--search)"></i>search</span></div></div>
+    <div class="card"><h2>Leaderboard</h2><div class="meta" id="b-table-meta"></div><div class="tablewrap"><table id="b-table"></table></div></div>
+  </div>
+</section>
+
+<section class="tab" id="tab-scrabble" hidden>
+  <p class="note">A 60 mm cube or sphere cut into k pieces (guillotine, tilted or merged cuts), 25 instances per group, clearance 0, every run checked with exact mesh booleans. Open mode: ratio = density / the solid's own box (1.0 = the known optimum). Container mode: the box is the solid's own; ratio = fraction of pieces that fit. Solved = valid, all placed, within 2% of the optimum.</p>
+  <div class="controls">
+    <label>Mode <select id="s-mode"><option value="open">open (ratio to optimum)</option><option value="container">container (fraction that fits)</option></select></label>
+    <label>Solid and cut <select id="s-group"></select></label>
+    <label>Parts k <select id="s-k"></select></label>
+  </div>
+  <div class="grid">
+    <div class="card"><h2 id="s-chart-title">Ratio to the known optimum</h2><div class="meta" id="s-chart-meta"></div><div id="s-chart"></div><div class="legend"><span><i class="swatch" style="background: var(--baseline)"></i>baseline</span><span><i class="swatch" style="background: var(--box)"></i>box based</span><span><i class="swatch" style="background: var(--shape)"></i>shape based</span><span><i class="swatch" style="background: var(--search)"></i>search</span></div></div>
+    <div class="card"><h2>Leaderboard</h2><div class="meta" id="s-table-meta"></div><div class="tablewrap"><table id="s-table"></table></div></div>
+  </div>
+</section>
+
+<section class="tab" id="tab-literature" hidden>
+  <p class="note">Eight packings with proven optima: 5 / 10 / 17 equal circles in a square as cylinders, 8 / 9 / 14 equal spheres in a cube, the Soma cube and the Slothouber–Graatsma puzzle. Container mode is the real test (does everything fit the proven box). In open mode a row of cylinders legitimately beats the square arrangement, so ratios above 1 appear there. 5 repeats per algorithm.</p>
+  <div class="controls">
+    <label>Mode <select id="l-mode"><option value="container">container (fraction that fits)</option><option value="open">open (ratio to reference)</option></select></label>
+    <label>Grid <select id="l-pitch"><option value="2">2 mm voxel grid (standard)</option><option value="1">1 mm voxel grid (grid and search methods only)</option></select></label>
+    <label>Case <select id="l-group"></select></label>
+  </div>
+  <div class="grid">
+    <div class="card"><h2 id="l-chart-title">Fraction of parts that fit</h2><div class="meta" id="l-chart-meta"></div><div id="l-chart"></div><div class="legend"><span><i class="swatch" style="background: var(--baseline)"></i>baseline</span><span><i class="swatch" style="background: var(--box)"></i>box based</span><span><i class="swatch" style="background: var(--shape)"></i>shape based</span><span><i class="swatch" style="background: var(--search)"></i>search</span></div></div>
+    <div class="card"><h2>Leaderboard</h2><div class="meta" id="l-table-meta"></div><div class="tablewrap"><table id="l-table"></table></div></div>
+  </div>
+</section>
+
+
+<section class="tab" id="tab-order" hidden>
+  <p class="note">Same part sets as the benchmark (10 sets per category and k), each packed by every algorithm under its default order (largest box first), five heuristic orders and random permutations (20 per set for constructive methods, 8 for the search methods, where the order is only the starting point). Error bars are 99% confidence intervals. "Spread" is the mean gap between the best and worst random order of the same part set.</p>
+  <div class="controls">
+    <label>Category <select id="o-dataset"></select></label>
+    <label>Parts k <select id="o-k"></select></label>
+    <label>Algorithm <select id="o-algorithm"></select></label>
+  </div>
+  <div class="grid">
+    <div class="card"><h2 id="o-chart-title">Density by placement order</h2><div class="meta" id="o-chart-meta"></div><div id="o-chart"></div><div class="legend"><span><i class="swatch" style="background: var(--fg3)"></i>default</span><span><i class="swatch" style="background: var(--box)"></i>heuristic orders</span><span><i class="swatch" style="background: var(--search)"></i>random orders (mean)</span></div></div>
+    <div class="card"><h2>Orders for this algorithm</h2><div class="meta" id="o-table-meta"></div><div class="tablewrap"><table id="o-table"></table></div></div>
+  </div>
+  <div class="grid">
+    <div class="card"><h2>Order sensitivity by algorithm</h2><div class="meta" id="o2-chart-meta">mean best-minus-worst density across random orders of the same part set</div><div id="o2-chart"></div></div>
+    <div class="card"><h2>Best order per algorithm</h2><div class="meta" id="o3-table-meta"></div><div class="tablewrap"><table id="o3-table"></table></div></div>
+  </div>
+</section>
+
+<section class="tab" id="tab-algorithms" hidden>
+  <p class="note">What each packer does, how it places parts, where it is strong and weak, and what it costs. The replay animates a saved benchmark packing (k = 10, trial 0) in the order the algorithm placed the parts; for the force-based methods, which move all parts at once, the parts converge together.</p>
+  <div class="algo-layout">
+    <div class="algo-list" id="a-list"></div>
+    <div class="card algo-card" id="a-card"></div>
+  </div>
+</section>
+
+<section class="tab viewer" id="tab-viewer" hidden>
+  <div>
+    <div class="controls">
+      <label>Collection <select id="v-collection"><option value="literature">Literature test (proven box)</option><option value="scrabble">Scrabble test (k = 9)</option><option value="benchmark">Benchmark (k = 10, trial 0)</option></select></label>
+      <label>Instance <select id="v-instance"></select></label>
+      <label>Algorithm <select id="v-algorithm"></select></label>
+    </div>
+    <div id="canvas-wrap"><span class="hint">drag to rotate · wheel to zoom · shift-drag to pan</span></div>
+    <div class="toggles">
+      <button id="v-box" aria-pressed="true">bounding box</button>
+      <button id="v-container" aria-pressed="true">container</button>
+      <button id="v-order" aria-pressed="false">color by placement order</button>
+      <button id="v-explode" aria-pressed="false">explode</button>
+    </div>
+  </div>
+  <div class="card metrics">
+    <h2 id="v-title"></h2>
+    <div class="meta" id="v-note"></div>
+    <dl id="v-metrics"></dl>
+  </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const DATA = /*__DATA__*/;
+const FAMILY_COLOR = { baseline: "var(--baseline)", box: "var(--box)", shape: "var(--shape)", search: "var(--search)" };
+const PART_COLORS = [0x4e79a7, 0xf28e2b, 0xe15759, 0x76b7b2, 0x59a14f, 0xedc948, 0xb07aa1, 0xff9da7, 0x9c755f, 0xbab0ac, 0x1f77b4, 0xd62728, 0x2ca02c, 0x9467bd, 0x8c564b, 0xe377c2, 0x17becf];
+const pretty = name => name.replace(/_/g, " ");
+const fmt = (value, digits) => Number.isFinite(value) ? value.toFixed(digits) : "–";
+
+function fill(select, values, labels) {
+  select.innerHTML = "";
+  values.forEach((value, index) => { const option = document.createElement("option"); option.value = value; option.textContent = labels ? labels[index] : value; select.appendChild(option); });
+}
+
+function barChart(container, rows, valueKey, loKey, hiKey, yLabel, reference, maxY) {
+  const width = 640, height = 300, left = 44, right = 10, top = 14, bottom = 54;
+  const values = rows.map(row => row[valueKey]);
+  const highs = rows.map(row => row[hiKey] ?? row[valueKey]);
+  let yMax = maxY != null ? maxY : Math.max(...highs, reference ?? 0) * 1.08;
+  if (!(yMax > 0)) yMax = 1;
+  const plotW = width - left - right, plotH = height - top - bottom;
+  const band = plotW / rows.length;
+  const y = value => top + plotH - (value / yMax) * plotH;
+  let svg = `<svg class="chart" viewBox="0 0 ${width} ${height}" role="img" aria-label="${yLabel} by algorithm">`;
+  const ticks = 5;
+  for (let i = 0; i <= ticks; i++) {
+    const value = yMax * i / ticks;
+    svg += `<line class="axis" x1="${left}" x2="${width - right}" y1="${y(value)}" y2="${y(value)}"/><text x="${left - 6}" y="${y(value) + 4}" font-size="10" text-anchor="end">${value >= 10 ? value.toFixed(0) : value.toFixed(value >= 1 ? 1 : 2)}</text>`;
+  }
+  if (reference != null) svg += `<line x1="${left}" x2="${width - right}" y1="${y(reference)}" y2="${y(reference)}" stroke="var(--fg3)" stroke-dasharray="4 3"/>`;
+  rows.forEach((row, index) => {
+    const x = left + index * band + band * 0.15, w = band * 0.7;
+    const value = Math.min(row[valueKey], yMax);
+    svg += `<rect x="${x}" y="${y(value)}" width="${w}" height="${Math.max(0, y(0) - y(value))}" fill="${FAMILY_COLOR[DATA.family[row.algorithm] || "baseline"]}" rx="1"><title>${pretty(row.algorithm)}: ${fmt(row[valueKey], 3)}</title></rect>`;
+    if (row[loKey] != null && row[hiKey] != null && row[hiKey] > row[loKey]) {
+      const cx = x + w / 2;
+      svg += `<line class="ci" x1="${cx}" x2="${cx}" y1="${y(Math.min(row[hiKey], yMax))}" y2="${y(Math.max(row[loKey], 0))}"/><line class="ci" x1="${cx - 4}" x2="${cx + 4}" y1="${y(Math.min(row[hiKey], yMax))}" y2="${y(Math.min(row[hiKey], yMax))}"/><line class="ci" x1="${cx - 4}" x2="${cx + 4}" y1="${y(Math.max(row[loKey], 0))}" y2="${y(Math.max(row[loKey], 0))}"/>`;
+    }
+    const label = pretty(row.algorithm).split(" ");
+    label.forEach((word, line) => { svg += `<text x="${x + w / 2}" y="${height - bottom + 14 + line * 11}" font-size="9" text-anchor="middle">${word}</text>`; });
+  });
+  svg += `<text x="${left}" y="${top - 3}" font-size="10">${yLabel}</text></svg>`;
+  container.innerHTML = svg;
+}
+
+function table(element, columns, rows, bestKey, bestHigh) {
+  let best = null;
+  rows.forEach(row => { if (row[bestKey] != null && (best == null || (bestHigh ? row[bestKey] > best : row[bestKey] < best))) best = row[bestKey]; });
+  let html = "<thead><tr>" + columns.map(column => `<th class="${column.num ? "num" : ""}">${column.label}</th>`).join("") + "</tr></thead><tbody>";
+  rows.forEach(row => {
+    html += `<tr class="${row[bestKey] === best ? "best" : ""}">` + columns.map(column => `<td class="${column.num ? "num" : ""}">${column.render(row)}</td>`).join("") + "</tr>";
+  });
+  element.innerHTML = html + "</tbody>";
+}
+const nameCell = row => `<i class="swatch" style="background:${FAMILY_COLOR[DATA.family[row.algorithm] || "baseline"]}"></i>${pretty(row.algorithm)}`;
+const ciCell = (row, lo, hi) => `${fmt(row[lo], 3)} – ${fmt(row[hi], 3)}`;
+
+// ---------------- benchmark tab
+const bDataset = document.getElementById("b-dataset"), bK = document.getElementById("b-k"), bMetric = document.getElementById("b-metric");
+fill(bDataset, DATA.datasets, DATA.datasets.map(pretty));
+fill(bK, [...new Set(DATA.benchmark.map(row => row.k))].sort((a, b) => a - b));
+const METRIC = { score: ["score", "lo", "hi", "Density", 3, true, 1.0], aspect: ["aspect", "aspect_lo", "aspect_hi", "Aspect ratio", 2, false, null], com: ["com", "com_lo", "com_hi", "COM offset, % of diagonal", 1, false, null], seconds: ["seconds", null, null, "Seconds per packing", 2, false, null], contacts: ["contacts", null, null, "Contacts per part", 2, true, null], isolated: ["isolated", null, null, "Isolated parts", 2, false, null] };
+function renderBenchmark() {
+  const [key, lo, hi, label, digits, higherBetter, maxY] = METRIC[bMetric.value];
+  const rows = DATA.benchmark.filter(row => row.dataset === bDataset.value && row.k === Number(bK.value)).sort((a, b) => DATA.algorithms.indexOf(a.algorithm) - DATA.algorithms.indexOf(b.algorithm));
+  document.getElementById("b-chart-title").textContent = label;
+  document.getElementById("b-chart-meta").textContent = pretty(bDataset.value) + ", k = " + bK.value + (lo ? ", error bars = 99% CI" : "");
+  barChart(document.getElementById("b-chart"), rows, key, lo, hi, label, null, maxY);
+  const sorted = [...rows].sort((a, b) => higherBetter ? b[key] - a[key] : a[key] - b[key]);
+  document.getElementById("b-table-meta").textContent = "sorted by " + label.toLowerCase();
+  table(document.getElementById("b-table"), [
+    { label: "algorithm", render: nameCell },
+    { label: label, num: true, render: row => fmt(row[key], digits) },
+    { label: "99% CI", num: true, render: row => lo ? ciCell(row, lo, hi) : "–" },
+    { label: "density", num: true, render: row => fmt(row.score, 3) },
+    { label: "aspect", num: true, render: row => fmt(row.aspect, 2) },
+    { label: "COM %", num: true, render: row => fmt(row.com, 1) },
+    { label: "s", num: true, render: row => fmt(row.seconds, 2) },
+    { label: "n", num: true, render: row => row.n }
+  ], sorted, key, higherBetter);
+}
+[bDataset, bK, bMetric].forEach(element => element.addEventListener("change", renderBenchmark));
+
+// ---------------- scrabble tab
+const sMode = document.getElementById("s-mode"), sGroup = document.getElementById("s-group"), sK = document.getElementById("s-k");
+const scrabbleGroups = [...new Set(DATA.verification.filter(row => row.test === "scrabble" && !row.run.includes("geneticbox")).map(row => row.group.split("_k")[0]))].sort();
+fill(sGroup, scrabbleGroups, scrabbleGroups.map(pretty));
+fill(sK, [...new Set(DATA.verification.filter(row => row.test === "scrabble").map(row => Number(row.group.split("_k")[1])))].sort((a, b) => a - b));
+function renderScrabble() {
+  const group = sGroup.value + "_k" + sK.value;
+  const rows = DATA.verification.filter(row => row.test === "scrabble" && row.mode === sMode.value && row.group === group).sort((a, b) => DATA.algorithms.indexOf(a.algorithm) - DATA.algorithms.indexOf(b.algorithm));
+  const label = sMode.value === "open" ? "density / known optimum" : "fraction of pieces that fit";
+  document.getElementById("s-chart-title").textContent = sMode.value === "open" ? "Ratio to the known optimum" : "Fraction of pieces that fit the solid's box";
+  document.getElementById("s-chart-meta").textContent = pretty(group) + ", 25 instances" + (sMode.value === "open" ? " × 2 repeats" : "") + ", dashed = optimum, error bars = 99% CI";
+  barChart(document.getElementById("s-chart"), rows, "ratio", "lo", "hi", label, 1.0, Math.max(1.05, ...rows.map(row => row.hi)));
+  const sorted = [...rows].sort((a, b) => b.ratio - a.ratio);
+  document.getElementById("s-table-meta").textContent = "genetic box (exact box decoder) was run only on cube guillotine, open mode";
+  table(document.getElementById("s-table"), [
+    { label: "algorithm", render: nameCell },
+    { label: "mean ratio", num: true, render: row => fmt(row.ratio, 3) },
+    { label: "99% CI", num: true, render: row => ciCell(row, "lo", "hi") },
+    { label: "best", num: true, render: row => fmt(row.best, 3) },
+    { label: "solved", num: true, render: row => (100 * row.solved).toFixed(0) + "%" },
+    { label: "valid", num: true, render: row => (100 * row.valid).toFixed(0) + "%" },
+    { label: "aspect", num: true, render: row => fmt(row.aspect, 2) },
+    { label: "s", num: true, render: row => fmt(row.seconds, 2) }
+  ], sorted, "ratio", true);
+}
+[sMode, sGroup, sK].forEach(element => element.addEventListener("change", renderScrabble));
+
+// ---------------- literature tab
+const lMode = document.getElementById("l-mode"), lPitch = document.getElementById("l-pitch"), lGroup = document.getElementById("l-group");
+const literatureCases = ["cylinders_5", "cylinders_10", "cylinders_17", "spheres_8", "spheres_9", "spheres_14", "soma", "slothouber_graatsma"];
+fill(lGroup, literatureCases, literatureCases.map(pretty));
+function renderLiterature() {
+  const rows = DATA.verification.filter(row => row.test === "literature" && row.mode === lMode.value && row.pitch === Number(lPitch.value) && row.group === lGroup.value).sort((a, b) => DATA.algorithms.indexOf(a.algorithm) - DATA.algorithms.indexOf(b.algorithm));
+  const label = lMode.value === "open" ? "density / proven reference" : "fraction of parts that fit";
+  document.getElementById("l-chart-title").textContent = lMode.value === "open" ? "Ratio to the proven arrangement (reference only)" : "Fraction of parts that fit the proven box";
+  document.getElementById("l-chart-meta").textContent = pretty(lGroup.value) + ", " + lPitch.value + " mm grid, 5 repeats, dashed = optimum, error bars = 99% CI";
+  barChart(document.getElementById("l-chart"), rows, "ratio", "lo", "hi", label, 1.0, Math.max(1.05, ...rows.map(row => row.hi)));
+  const sorted = [...rows].sort((a, b) => b.ratio - a.ratio);
+  document.getElementById("l-table-meta").textContent = "solved = everything fits with no overlap (container) or within 2% of the reference (open)";
+  table(document.getElementById("l-table"), [
+    { label: "algorithm", render: nameCell },
+    { label: "mean ratio", num: true, render: row => fmt(row.ratio, 3) },
+    { label: "99% CI", num: true, render: row => ciCell(row, "lo", "hi") },
+    { label: "best", num: true, render: row => fmt(row.best, 3) },
+    { label: "solved", num: true, render: row => (100 * row.solved).toFixed(0) + "%" },
+    { label: "s", num: true, render: row => fmt(row.seconds, 2) }
+  ], sorted, "ratio", true);
+}
+[lMode, lPitch, lGroup].forEach(element => element.addEventListener("change", renderLiterature));
+
+// ---------------- 3D viewer
+const vCollection = document.getElementById("v-collection"), vInstance = document.getElementById("v-instance"), vAlgorithm = document.getElementById("v-algorithm");
+const toggles = { box: true, container: true, order: false, explode: false };
+let renderer, scene, camera, group, geometryCache = {}, animating = false;
+let orbit = { theta: 0.8, phi: 1.05, radius: 200, target: null };
+function initThree() {
+  const wrap = document.getElementById("canvas-wrap");
+  if (typeof THREE === "undefined") { wrap.querySelector(".hint").textContent = "The 3D library did not load (no network access to cdnjs). Tables and charts still work."; return; }
+  orbit.target = new THREE.Vector3();
+  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  wrap.insertBefore(renderer.domElement, wrap.firstChild);
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(40, 4 / 3, 1, 5000);
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x778899, 0.9));
+  const sun = new THREE.DirectionalLight(0xffffff, 0.7); sun.position.set(1, 2, 3); scene.add(sun);
+  const sun2 = new THREE.DirectionalLight(0xffffff, 0.3); sun2.position.set(-2, -1, 1); scene.add(sun2);
+  group = new THREE.Group(); scene.add(group);
+  let dragging = false, last = null, pan = false;
+  const canvas = renderer.domElement;
+  canvas.addEventListener("pointerdown", event => { dragging = true; pan = event.shiftKey; last = [event.clientX, event.clientY]; canvas.setPointerCapture(event.pointerId); canvas.style.cursor = "grabbing"; });
+  canvas.addEventListener("pointerup", event => { dragging = false; canvas.style.cursor = "grab"; });
+  canvas.addEventListener("pointermove", event => {
+    if (!dragging) return;
+    const dx = event.clientX - last[0], dy = event.clientY - last[1]; last = [event.clientX, event.clientY];
+    if (pan) { const right = new THREE.Vector3().setFromMatrixColumn(camera.matrix, 0), up = new THREE.Vector3().setFromMatrixColumn(camera.matrix, 1); orbit.target.addScaledVector(right, -dx * orbit.radius * 0.0015).addScaledVector(up, dy * orbit.radius * 0.0015); }
+    else { orbit.theta -= dx * 0.008; orbit.phi = Math.min(Math.PI - 0.05, Math.max(0.05, orbit.phi - dy * 0.008)); }
+    draw();
+  });
+  canvas.addEventListener("wheel", event => { event.preventDefault(); orbit.radius *= Math.exp(event.deltaY * 0.0012); draw(); }, { passive: false });
+  new ResizeObserver(() => { resize(); draw(); }).observe(wrap);
+  resize();
+}
+function resize() {
+  if (!renderer) return;
+  const wrap = document.getElementById("canvas-wrap");
+  const w = wrap.clientWidth, h = wrap.clientHeight;
+  if (w === 0 || h === 0) return;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h; camera.updateProjectionMatrix();
+}
+function draw() {
+  if (!renderer) return;
+  camera.position.set(orbit.target.x + orbit.radius * Math.sin(orbit.phi) * Math.cos(orbit.theta), orbit.target.y + orbit.radius * Math.sin(orbit.phi) * Math.sin(orbit.theta), orbit.target.z + orbit.radius * Math.cos(orbit.phi));
+  camera.up.set(0, 0, 1); camera.lookAt(orbit.target);
+  renderer.render(scene, camera);
+}
+function geometryFor(key) {
+  if (!geometryCache[key]) {
+    const mesh = DATA.meshes[key];
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute("position", new THREE.Float32BufferAttribute(mesh.v, 3));
+    geometry.setIndex(mesh.f);
+    geometry.computeVertexNormals();
+    geometryCache[key] = geometry;
+  }
+  return geometryCache[key];
+}
+function boxLines(min, max, color) {
+  const geometry = new THREE.BoxGeometry(max[0] - min[0], max[1] - min[1], max[2] - min[2]);
+  const edges = new THREE.LineSegments(new THREE.EdgesGeometry(geometry), new THREE.LineBasicMaterial({ color: color }));
+  edges.position.set((min[0] + max[0]) / 2, (min[1] + max[1]) / 2, (min[2] + max[2]) / 2);
+  return edges;
+}
+function currentPacking() {
+  return DATA.packings.find(packing => packing.collection === vCollection.value && packing.instance === vInstance.value && packing.algorithm === vAlgorithm.value);
+}
+function showPacking(fit) {
+  const packing = currentPacking();
+  if (!group || !packing) return;
+  while (group.children.length) group.remove(group.children[0]);
+  if (!packing) return;
+  const dark = matchMedia("(prefers-color-scheme: dark)").matches && document.documentElement.dataset.theme !== "light" || document.documentElement.dataset.theme === "dark";
+  const min = [Infinity, Infinity, Infinity], max = [-Infinity, -Infinity, -Infinity];
+  const centers = [];
+  packing.placements.forEach((placement, index) => {
+    const geometry = geometryFor(placement.m);
+    const color = toggles.order ? new THREE.Color().setHSL(0.65 - 0.65 * index / Math.max(1, packing.placements.length - 1), 0.75, 0.5) : new THREE.Color(PART_COLORS[index % PART_COLORS.length]);
+    const mesh = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial({ color: color, roughness: 0.55, metalness: 0.05, flatShading: true }));
+    const r = placement.r;
+    mesh.matrixAutoUpdate = false;
+    mesh.matrix.set(r[0], r[1], r[2], placement.t[0], r[3], r[4], r[5], placement.t[1], r[6], r[7], r[8], placement.t[2], 0, 0, 0, 1);
+    geometry.computeBoundingBox();
+    const corners = [];
+    for (let i = 0; i < 8; i++) corners.push(new THREE.Vector3(i & 1 ? geometry.boundingBox.max.x : geometry.boundingBox.min.x, i & 2 ? geometry.boundingBox.max.y : geometry.boundingBox.min.y, i & 4 ? geometry.boundingBox.max.z : geometry.boundingBox.min.z).applyMatrix4(mesh.matrix));
+    corners.forEach(corner => { for (let axis = 0; axis < 3; axis++) { min[axis] = Math.min(min[axis], corner.getComponent(axis)); max[axis] = Math.max(max[axis], corner.getComponent(axis)); } });
+    centers.push(corners.reduce((sum, corner) => sum.add(corner), new THREE.Vector3()).multiplyScalar(1 / 8));
+    group.add(mesh);
+  });
+  const center = new THREE.Vector3((min[0] + max[0]) / 2, (min[1] + max[1]) / 2, (min[2] + max[2]) / 2);
+  if (toggles.explode) {
+    group.children.forEach((mesh, index) => { const offset = centers[index].clone().sub(center).multiplyScalar(0.6); const m = mesh.matrix.clone(); m.elements[12] += offset.x; m.elements[13] += offset.y; m.elements[14] += offset.z; mesh.matrix.copy(m); });
+  } else {
+    if (toggles.box) group.add(boxLines(min, max, dark ? 0xe8ebe7 : 0x15191e));
+    if (toggles.container && packing.container) group.add(boxLines([0, 0, 0], packing.container, 0xe34948));
+  }
+  const diagonal = Math.hypot(max[0] - min[0], max[1] - min[1], max[2] - min[2]);
+  if (fit) { orbit.target.copy(center); orbit.radius = Math.max(diagonal, 20) * 1.9; }
+  draw();
+  document.getElementById("v-title").textContent = pretty(packing.instance) + " · " + pretty(packing.algorithm);
+  document.getElementById("v-note").textContent = packing.note;
+  const size = [max[0] - min[0], max[1] - min[1], max[2] - min[2]];
+  const rows = [["parts placed", packing.placed + " / " + packing.k], [packing.collection === "benchmark" ? "density" : "score", fmt(packing.ratio, 3)], ["valid (exact check)", packing.valid ? "yes" : "no"], ["bounding box", size.map(v => v.toFixed(1)).join(" × ") + " mm"], ["aspect ratio", fmt(Math.max(...size) / Math.max(1e-9, Math.min(...size)), 2)]];
+  if (packing.container) rows.push(["container", packing.container.map(v => v.toFixed(1)).join(" × ") + " mm"]);
+  document.getElementById("v-metrics").innerHTML = rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("");
+}
+function fillViewerSelects(keepInstance) {
+  const instances = [...new Set(DATA.packings.filter(packing => packing.collection === vCollection.value).map(packing => packing.instance))];
+  const order = vCollection.value === "literature" ? literatureCases : (vCollection.value === "benchmark" ? DATA.datasets : instances);
+  instances.sort((a, b) => order.indexOf(a) - order.indexOf(b));
+  const previous = vInstance.value;
+  fill(vInstance, instances, instances.map(pretty));
+  if (keepInstance && instances.includes(previous)) vInstance.value = previous;
+  const algorithms = [...new Set(DATA.packings.filter(packing => packing.collection === vCollection.value && packing.instance === vInstance.value).map(packing => packing.algorithm))];
+  algorithms.sort((a, b) => { const ia = DATA.algorithms.indexOf(a), ib = DATA.algorithms.indexOf(b); return (ia < 0 ? -1 : ia) - (ib < 0 ? -1 : ib); });
+  const previousAlgorithm = vAlgorithm.value;
+  fill(vAlgorithm, algorithms, algorithms.map(pretty));
+  if (algorithms.includes(previousAlgorithm)) vAlgorithm.value = previousAlgorithm;
+}
+vCollection.addEventListener("change", () => { fillViewerSelects(false); showPacking(true); });
+vInstance.addEventListener("change", () => { fillViewerSelects(true); showPacking(true); });
+vAlgorithm.addEventListener("change", () => showPacking(true));
+[["v-box", "box"], ["v-container", "container"], ["v-order", "order"], ["v-explode", "explode"]].forEach(([id, key]) => {
+  const button = document.getElementById(id);
+  button.addEventListener("click", () => { toggles[key] = !toggles[key]; button.setAttribute("aria-pressed", String(toggles[key])); showPacking(false); });
+});
+
+
+// ---------------- order study tab
+const ORDER_SPECS = ["default", "volume_desc", "volume_asc", "convexity_desc", "combined", "flatness_desc", "random"];
+const ORDER_LABEL = { default: "default (largest first)", volume_desc: "volume descending", volume_asc: "volume ascending", convexity_desc: "most convex first", combined: "big and convex first", flatness_desc: "compact first, flat last", random: "random (mean)" };
+const oDataset = document.getElementById("o-dataset"), oK = document.getElementById("o-k"), oAlgorithm = document.getElementById("o-algorithm");
+const orderDatasets = DATA.datasets.filter(name => DATA.order.some(row => row.dataset === name));
+fill(oDataset, orderDatasets, orderDatasets.map(pretty));
+fill(oK, [...new Set(DATA.order.map(row => row.k))].sort((a, b) => a - b));
+function fillOrderAlgorithms() {
+  const names = DATA.algorithms.filter(name => DATA.order.some(row => row.dataset === oDataset.value && row.k === Number(oK.value) && row.algorithm === name));
+  const previous = oAlgorithm.value;
+  fill(oAlgorithm, names, names.map(pretty));
+  if (names.includes(previous)) oAlgorithm.value = previous;
+}
+function orderColor(spec) { return spec === "default" ? "var(--fg3)" : (spec === "random" ? "var(--search)" : "var(--box)"); }
+function orderBarChart(container, rows) {
+  const width = 640, height = 300, left = 44, right = 10, top = 14, bottom = 54;
+  const yMax = Math.max(0.05, ...rows.map(row => row.hi)) * 1.08;
+  const plotW = width - left - right, plotH = height - top - bottom, band = plotW / Math.max(1, rows.length);
+  const y = value => top + plotH - (value / yMax) * plotH;
+  let svg = `<svg class="chart" viewBox="0 0 ${width} ${height}" role="img" aria-label="density by order">`;
+  for (let i = 0; i <= 5; i++) { const value = yMax * i / 5; svg += `<line class="axis" x1="${left}" x2="${width - right}" y1="${y(value)}" y2="${y(value)}"/><text x="${left - 6}" y="${y(value) + 4}" font-size="10" text-anchor="end">${value.toFixed(2)}</text>`; }
+  rows.forEach((row, index) => {
+    const x = left + index * band + band * 0.15, w = band * 0.7;
+    svg += `<rect x="${x}" y="${y(row.score)}" width="${w}" height="${Math.max(0, y(0) - y(row.score))}" fill="${orderColor(row.order)}" rx="1"><title>${ORDER_LABEL[row.order]}: ${fmt(row.score, 3)} (n = ${row.n})</title></rect>`;
+    if (row.hi > row.lo) { const cx = x + w / 2; svg += `<line class="ci" x1="${cx}" x2="${cx}" y1="${y(Math.min(row.hi, yMax))}" y2="${y(Math.max(row.lo, 0))}"/><line class="ci" x1="${cx - 4}" x2="${cx + 4}" y1="${y(Math.min(row.hi, yMax))}" y2="${y(Math.min(row.hi, yMax))}"/><line class="ci" x1="${cx - 4}" x2="${cx + 4}" y1="${y(Math.max(row.lo, 0))}" y2="${y(Math.max(row.lo, 0))}"/>`; }
+    if (row.order === "random") { svg += `<line x1="${x}" x2="${x + w}" y1="${y(row.best)}" y2="${y(row.best)}" stroke="var(--fg)" stroke-dasharray="3 2"/><line x1="${x}" x2="${x + w}" y1="${y(row.worst)}" y2="${y(row.worst)}" stroke="var(--fg)" stroke-dasharray="3 2"/>`; }
+    ORDER_LABEL[row.order].replace(" (mean)", "").split(" ").forEach((word, line) => { svg += `<text x="${x + w / 2}" y="${height - bottom + 14 + line * 11}" font-size="9" text-anchor="middle">${word}</text>`; });
+  });
+  svg += `<text x="${left}" y="${top - 3}" font-size="10">density; dashed = best and worst random order</text></svg>`;
+  container.innerHTML = svg;
+}
+function renderOrder() {
+  if (!DATA.order.length) { document.getElementById("o-chart").innerHTML = "<p class='meta'>No order study results yet.</p>"; return; }
+  fillOrderAlgorithms();
+  const k = Number(oK.value);
+  const rows = ORDER_SPECS.map(spec => DATA.order.find(row => row.dataset === oDataset.value && row.k === k && row.algorithm === oAlgorithm.value && row.order === spec)).filter(Boolean);
+  document.getElementById("o-chart-meta").textContent = pretty(oDataset.value) + ", k = " + k + ", " + pretty(oAlgorithm.value) + (rows.length ? ", " + rows[0].sets + " part sets" : "");
+  orderBarChart(document.getElementById("o-chart"), rows);
+  const base = rows.find(row => row.order === "default");
+  document.getElementById("o-table-meta").textContent = "gain = mean density minus the default order's";
+  table(document.getElementById("o-table"), [
+    { label: "order", render: row => ORDER_LABEL[row.order] },
+    { label: "density", num: true, render: row => fmt(row.score, 3) },
+    { label: "99% CI", num: true, render: row => ciCell(row, "lo", "hi") },
+    { label: "gain", num: true, render: row => base ? (row.score - base.score >= 0 ? "+" : "") + fmt(row.score - base.score, 3) : "–" },
+    { label: "best", num: true, render: row => fmt(row.best, 3) },
+    { label: "worst", num: true, render: row => fmt(row.worst, 3) },
+    { label: "aspect", num: true, render: row => fmt(row.aspect, 2) },
+    { label: "n", num: true, render: row => row.n }
+  ], [...rows].sort((a, b) => b.score - a.score), "score", true);
+  // sensitivity across algorithms
+  const randomRows = DATA.algorithms.map(name => DATA.order.find(row => row.dataset === oDataset.value && row.k === k && row.algorithm === name && row.order === "random")).filter(Boolean).map(row => ({ algorithm: row.algorithm, spread: row.spread ?? 0 }));
+  barChart(document.getElementById("o2-chart"), randomRows, "spread", null, null, "best minus worst random order, density", null, null);
+  const bestRows = DATA.algorithms.map(name => {
+    const candidates = DATA.order.filter(row => row.dataset === oDataset.value && row.k === k && row.algorithm === name && row.order !== "random");
+    if (!candidates.length) return null;
+    const best = candidates.reduce((a, b) => b.score > a.score ? b : a);
+    const def = candidates.find(row => row.order === "default");
+    const random = DATA.order.find(row => row.dataset === oDataset.value && row.k === k && row.algorithm === name && row.order === "random");
+    return { algorithm: name, bestOrder: best.order, bestScore: best.score, defaultScore: def ? def.score : NaN, randomScore: random ? random.score : NaN, spread: random ? random.spread : NaN };
+  }).filter(Boolean);
+  document.getElementById("o3-table-meta").textContent = "which fixed order gives the highest mean density for each algorithm";
+  table(document.getElementById("o3-table"), [
+    { label: "algorithm", render: nameCell },
+    { label: "best order", render: row => ORDER_LABEL[row.bestOrder] },
+    { label: "density", num: true, render: row => fmt(row.bestScore, 3) },
+    { label: "default", num: true, render: row => fmt(row.defaultScore, 3) },
+    { label: "random mean", num: true, render: row => fmt(row.randomScore, 3) },
+    { label: "spread", num: true, render: row => fmt(row.spread, 3) }
+  ], bestRows.sort((a, b) => b.bestScore - a.bestScore), "bestScore", true);
+}
+[oDataset, oK].forEach(element => element.addEventListener("change", () => { renderOrder(); }));
+oAlgorithm.addEventListener("change", renderOrder);
+
+// ---------------- algorithms tab (cards + replay)
+const aList = document.getElementById("a-list"), aCard = document.getElementById("a-card");
+let replay = { renderer: null, scene: null, camera: null, group: null, timer: null, meshes: [], finals: [], starts: [], step: 0 };
+function buildAlgorithmList() {
+  const families = ["baseline", "box", "shape", "search"];
+  const familyLabel = { baseline: "baseline", box: "box based", shape: "shape based", search: "search" };
+  aList.innerHTML = "";
+  families.forEach(family => {
+    const names = DATA.algorithms.filter(name => (DATA.family[name] || "baseline") === family && DATA.cards[name]);
+    if (!names.length) return;
+    const head = document.createElement("div"); head.className = "fam"; head.textContent = familyLabel[family]; aList.appendChild(head);
+    names.forEach(name => {
+      const button = document.createElement("button");
+      button.innerHTML = `<i class="swatch" style="background:${FAMILY_COLOR[family]}"></i>${pretty(name)}`;
+      button.setAttribute("aria-pressed", "false");
+      button.addEventListener("click", () => showAlgorithm(name));
+      button.dataset.name = name;
+      aList.appendChild(button);
+    });
+  });
+}
+function benchmarkNumbers(name) {
+  const rows = DATA.benchmark.filter(row => row.algorithm === name && row.k === 10);
+  if (!rows.length) return "no benchmark numbers yet";
+  return "k = 10 density: " + rows.map(row => pretty(row.dataset) + " " + fmt(row.score, 2)).join(", ") + " · " + fmt(rows.reduce((sum, row) => sum + row.seconds, 0) / rows.length, 2) + " s per packing";
+}
+function showAlgorithm(name) {
+  aList.querySelectorAll("button").forEach(button => button.setAttribute("aria-pressed", String(button.dataset.name === name)));
+  const card = DATA.cards[name];
+  const instances = DATA.packings.filter(packing => packing.collection === "benchmark" && packing.algorithm === name).map(packing => packing.instance);
+  aCard.innerHTML = `<h2><i class="swatch" style="background:${FAMILY_COLOR[DATA.family[name] || "baseline"]}"></i>${pretty(name)} <span class="meta" style="font-weight:normal">${(DATA.family[name] || "baseline")} family · ${card.cost}</span></h2>
+    <p class="what">${card.what}</p>
+    <div><img src="${card.image}" alt="sketch of ${pretty(name)}"><h3>How it places</h3><p>${card.how}</p></div>
+    <div><div class="replay" id="a-replay"><span class="hint" style="position:absolute;left:8px;top:6px;font-size:11px;color:var(--fg3)">replay of a saved packing</span><div class="bar"><button id="a-play">play</button><select id="a-instance">${instances.map(instance => `<option value="${instance}">${pretty(instance)}</option>`).join("")}</select><progress id="a-progress" value="0" max="1"></progress><span id="a-count"></span></div></div>
+      <h3>Strengths</h3><ul>${card.strengths.map(item => `<li>${item}</li>`).join("")}</ul><h3>Weaknesses</h3><ul>${card.weaknesses.map(item => `<li>${item}</li>`).join("")}</ul><h3>Numbers</h3><p class="meta">${benchmarkNumbers(name)}</p></div>`;
+  setupReplay(name);
+  try { localStorage.setItem("nesting-algorithm", name); } catch (error) {}
+}
+function setupReplay(name) {
+  const wrap = document.getElementById("a-replay");
+  if (replay.timer) { clearInterval(replay.timer); replay.timer = null; }
+  if (typeof THREE === "undefined") { wrap.querySelector(".hint").textContent = "The 3D library did not load (no network access to cdnjs)."; return; }
+  if (!replay.renderer) {
+    replay.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    replay.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    replay.scene = new THREE.Scene();
+    replay.camera = new THREE.PerspectiveCamera(40, 4 / 3, 1, 5000);
+    replay.scene.add(new THREE.HemisphereLight(0xffffff, 0x778899, 0.9));
+    const sun = new THREE.DirectionalLight(0xffffff, 0.7); sun.position.set(1, 2, 3); replay.scene.add(sun);
+    replay.group = new THREE.Group(); replay.scene.add(replay.group);
+  }
+  wrap.insertBefore(replay.renderer.domElement, wrap.firstChild);
+  const select = document.getElementById("a-instance");
+  const load = () => {
+    const packing = DATA.packings.find(item => item.collection === "benchmark" && item.algorithm === name && item.instance === select.value);
+    while (replay.group.children.length) replay.group.remove(replay.group.children[0]);
+    replay.meshes = []; replay.finals = []; replay.starts = []; replay.step = 0;
+    if (!packing) { document.getElementById("a-count").textContent = "no saved packing"; return; }
+    const min = [Infinity, Infinity, Infinity], max = [-Infinity, -Infinity, -Infinity];
+    packing.placements.forEach((placement, index) => {
+      const geometry = geometryFor(placement.m);
+      const mesh = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial({ color: new THREE.Color().setHSL(0.65 - 0.65 * index / Math.max(1, packing.placements.length - 1), 0.75, 0.5), roughness: 0.55, metalness: 0.05, flatShading: true, transparent: true, opacity: 0 }));
+      const r = placement.r;
+      mesh.matrixAutoUpdate = false;
+      const final = new THREE.Matrix4().set(r[0], r[1], r[2], placement.t[0], r[3], r[4], r[5], placement.t[1], r[6], r[7], r[8], placement.t[2], 0, 0, 0, 1);
+      mesh.matrix.copy(final);
+      geometry.computeBoundingBox();
+      for (let i = 0; i < 8; i++) { const corner = new THREE.Vector3(i & 1 ? geometry.boundingBox.max.x : geometry.boundingBox.min.x, i & 2 ? geometry.boundingBox.max.y : geometry.boundingBox.min.y, i & 4 ? geometry.boundingBox.max.z : geometry.boundingBox.min.z).applyMatrix4(final); for (let axis = 0; axis < 3; axis++) { min[axis] = Math.min(min[axis], corner.getComponent(axis)); max[axis] = Math.max(max[axis], corner.getComponent(axis)); } }
+      replay.group.add(mesh); replay.meshes.push(mesh); replay.finals.push(final);
+    });
+    const center = new THREE.Vector3((min[0] + max[0]) / 2, (min[1] + max[1]) / 2, (min[2] + max[2]) / 2);
+    const diagonal = Math.hypot(max[0] - min[0], max[1] - min[1], max[2] - min[2]);
+    replay.meshes.forEach((mesh, index) => { const start = replay.finals[index].clone(); const offset = new THREE.Vector3(start.elements[12], start.elements[13], start.elements[14]).sub(center).normalize().multiplyScalar(diagonal * 0.9); start.elements[12] += offset.x; start.elements[13] += offset.y; start.elements[14] += offset.z + diagonal * 0.3; replay.starts.push(start); });
+    replay.camera.position.set(center.x + diagonal * 1.6, center.y + diagonal * 1.4, center.z + diagonal * 1.1);
+    replay.camera.up.set(0, 0, 1); replay.camera.lookAt(center);
+    const w = wrap.clientWidth, h = wrap.clientHeight; replay.renderer.setSize(w, h, false); replay.camera.aspect = w / h; replay.camera.updateProjectionMatrix();
+    replay.box = boxLines(min, max, 0x888888); replay.group.add(replay.box);
+    replay.allAtOnce = ["force_based", "force_based_v2"].includes(name);
+    drawReplayFrame(0);
+  };
+  const drawReplayFrame = progress => {
+    const count = replay.meshes.length;
+    replay.meshes.forEach((mesh, index) => {
+      let local = replay.allAtOnce ? progress : Math.min(1, Math.max(0, progress * count - index));
+      local = local * local * (3 - 2 * local);
+      const m = new THREE.Matrix4();
+      const a = replay.starts[index].elements, b = replay.finals[index].elements;
+      const e = m.elements;
+      for (let i = 0; i < 16; i++) e[i] = b[i];
+      e[12] = a[12] + (b[12] - a[12]) * local; e[13] = a[13] + (b[13] - a[13]) * local; e[14] = a[14] + (b[14] - a[14]) * local;
+      mesh.matrix.copy(m);
+      mesh.material.opacity = local > 0 ? 0.35 + 0.65 * local : 0;
+    });
+    document.getElementById("a-progress").value = progress;
+    document.getElementById("a-count").textContent = Math.round(progress * count) + " / " + count + " placed";
+    replay.renderer.render(replay.scene, replay.camera);
+  };
+  document.getElementById("a-play").addEventListener("click", () => {
+    if (replay.timer) { clearInterval(replay.timer); replay.timer = null; document.getElementById("a-play").textContent = "play"; return; }
+    let progress = 0;
+    document.getElementById("a-play").textContent = "pause";
+    replay.timer = setInterval(() => { progress += 0.006; if (progress >= 1) { progress = 1; clearInterval(replay.timer); replay.timer = null; document.getElementById("a-play").textContent = "replay"; } drawReplayFrame(progress); }, 30);
+  });
+  select.addEventListener("change", load);
+  load();
+}
+
+// ---------------- tabs
+let threeReady = false;
+document.querySelectorAll("nav [role=tab]").forEach(button => button.addEventListener("click", () => {
+  document.querySelectorAll("nav [role=tab]").forEach(other => other.setAttribute("aria-selected", String(other === button)));
+  document.querySelectorAll("section.tab").forEach(section => { section.hidden = section.id !== "tab-" + button.dataset.tab; });
+  if (button.dataset.tab === "viewer") { if (!threeReady) { initThree(); threeReady = true; fillViewerSelects(false); } resize(); showPacking(true); }
+  if (button.dataset.tab === "algorithms") { if (!aList.children.length) { buildAlgorithmList(); let first = DATA.algorithms.find(name => DATA.cards[name]); try { first = localStorage.getItem("nesting-algorithm") || first; } catch (error) {} if (DATA.cards[first]) showAlgorithm(first); } }
+  try { localStorage.setItem("nesting-tab", button.dataset.tab); } catch (error) {}
+}));
+renderBenchmark();
+renderScrabble();
+renderLiterature();
+renderOrder();
+let startTab = "benchmark";
+try { startTab = localStorage.getItem("nesting-tab") || "benchmark"; } catch (error) {}
+if (location.hash && ["benchmark", "scrabble", "literature", "order", "viewer", "algorithms"].includes(location.hash.slice(1))) startTab = location.hash.slice(1);
+document.querySelector(`nav [data-tab="${startTab}"]`).click();
+</script>
