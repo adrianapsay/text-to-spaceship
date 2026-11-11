@@ -90,3 +90,7 @@ python benchmark.py --datasets_folder datasets_satellite --datasets 3u_bus_inner
 ```
 
 Leave the structure out of the part set and use its interior as the container (a 3U frame leaves roughly 90 x 90 x 320 mm). Large flat parts (solar panels, 325 mm long) make the voxel point clouds slow at 2 mm pitch; use `--voxel_pitch 4` or pack them separately. Smoke test on 2026-11-08: 8 inner parts of the 3U preset, empty_maximal_spaces, container mode, 0.355 density, all valid, 0.05 s per trial.
+
+## Local catalog explorer (same page as the published artifact, from the part folders on your machine)
+    python catalog_local.py           (Windows: double-click OPEN_CATALOG.bat)
+Rebuilds `catalog_local.html` from catalog.csv and the part folders only when something changed (seconds), then opens it in the browser. Works offline for everything in the page (records, renders, photos, datasheet thumbnails, 3D viewer; three.js r128 is bundled from vendor/, MIT); links to vendor pages and datasheet PDFs need the internet. `--rebuild` forces a build, `--no-open` builds without opening. After changing parts in parts_data/, run `generate_parts.py --render` first. `make_catalog_explorer.py` (no flags) still writes `catalog_explorer.html`, the page published as the artifact. Needs numpy, trimesh and pillow (requirements.txt).

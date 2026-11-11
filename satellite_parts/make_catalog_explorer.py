@@ -1,9 +1,11 @@
 """
 Builds catalog_explorer.html: a self-contained page with every part (facts, STL thumbnail, 3D mesh, photo and datasheet links, similar parts).
-    python make_catalog_explorer.py
+    python make_catalog_explorer.py                                               the page published as the artifact (3D library from the CDN)
+    python make_catalog_explorer.py --offline --output catalog_local.html         the local page (3D library bundled; catalog_local.py does this for you)
 """
 import os
 import io
+import argparse
 import csv
 import json
 import base64
@@ -12,12 +14,16 @@ import trimesh
 from PIL import Image
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-rows = list(csv.DictReader(open(os.path.join(HERE, "catalog.csv"))))
+parser = argparse.ArgumentParser()
+parser.add_argument("--offline", action="store_true", help="bundle vendor/three.r128.min.js into the page instead of loading it from the CDN")
+parser.add_argument("--output", default="catalog_explorer.html")
+arguments = parser.parse_args()
+rows = list(csv.DictReader(open(os.path.join(HERE, "catalog.csv"), encoding="utf-8")))
 parts = []
 meshes = {}
 for row in rows:
     folder = os.path.join(HERE, row["category"], row["id"])
-    record = json.load(open(os.path.join(folder, "part.json")))
+    record = json.load(open(os.path.join(folder, "part.json"), encoding="utf-8"))
     def mesh_entry(path, color=None):
         mesh = trimesh.load(path)
         if len(mesh.faces) > 1200:
@@ -69,12 +75,17 @@ for row in rows:
         if image:
             record["datasheet_images"].append({"image": image, "url": sheet.get("url"), "title": sheet.get("title"), "kind": sheet.get("kind")})
     record["drawing"] = embed(os.path.join(folder, "drawing.png"), (330, 115), 60) if not record["photo"] else ""
-    record["photo_note"] = open(os.path.join(folder, "photo_source.txt")).read() if os.path.exists(os.path.join(folder, "photo_source.txt")) else ""
+    record["photo_note"] = open(os.path.join(folder, "photo_source.txt"), encoding="utf-8").read() if os.path.exists(os.path.join(folder, "photo_source.txt")) else ""
     record["has_deployed"] = os.path.exists(deployed_path)
     parts.append(record)
 
 payload = json.dumps({"parts": parts, "meshes": meshes}, separators=(",", ":"))
-template = open(os.path.join(HERE, "catalog_explorer_template.html")).read()
+template = open(os.path.join(HERE, "catalog_explorer_template.html"), encoding="utf-8").read()
 page = template.replace("/*__DATA__*/", payload)
-open(os.path.join(HERE, "catalog_explorer.html"), "w").write(page)
+if arguments.offline:
+    cdn_tag = '<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>'
+    if cdn_tag not in page:
+        raise SystemExit("the template no longer loads three.js r128 from the CDN tag this script replaces; update make_catalog_explorer.py")
+    page = page.replace(cdn_tag, "<script>" + open(os.path.join(HERE, "vendor", "three.r128.min.js"), encoding="utf-8").read() + "</script>")
+open(os.path.join(HERE, arguments.output), "w", encoding="utf-8").write(page)
 print(str(len(parts)) + " parts, " + format(len(page) / 1e6, ".1f") + " MB")

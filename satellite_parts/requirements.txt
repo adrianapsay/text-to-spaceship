@@ -1,0 +1,10 @@
+numpy>=1.26
+trimesh>=4.4
+pillow>=10
+# only to regenerate geometry and renders (generate_parts.py, make_drawings.py), not needed for catalog_local.py:
+# build123d>=0.7
+# pyvista>=0.43
+# shapely>=2.0
+# matplotlib>=3.7
+# optional, smaller 3D meshes in the explorer page:
+# fast-simplification>=0.1.7
