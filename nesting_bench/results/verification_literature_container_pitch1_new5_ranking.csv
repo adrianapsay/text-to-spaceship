@@ -1,0 +1,2 @@
+rank,algorithm,runs,ratio_mean,ratio_ci99_low,ratio_ci99_high,solved_rate,valid_rate
+1,dblf_24,40,0.5269,0.4286,0.6253,0.000,1.000

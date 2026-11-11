@@ -1,13 +1,16 @@
 """
 Builds explorer.html: a self-contained page with the result summaries (leaderboards and charts with 99% CIs) and a 3D viewer for a curated set of saved packings.
-    python make_explorer.py
+    python make_explorer.py                                              the page published as the artifact (3D library from the CDN)
+    python make_explorer.py --offline --output explorer_local.html       the local page (3D library bundled; explorer_local.py does this for you)
 """
 
 import os
 import csv
+import gzip
 import json
 import glob
 import hashlib
+import argparse
 import numpy as np
 import trimesh
 import nesting_core
@@ -19,8 +22,23 @@ FAMILY = {"random_rejection": "baseline", "shelf_packing": "box", "box_bottom_le
 DATASET_ORDER = ["cuboids", "simple_convex", "complex_convex", "simple_concave", "complex_concave", "real_shapes"]
 
 
+parser = argparse.ArgumentParser()
+parser.add_argument("--offline", action="store_true", help="bundle vendor/three.r128.min.js into the page instead of loading it from the CDN")
+parser.add_argument("--output", default="explorer.html")
+arguments = parser.parse_args()
+
+
 def read_csv(path):
-    return list(csv.DictReader(open(path)))
+    return list(csv.DictReader(open(path, encoding="utf-8")))
+
+
+def open_lines(path):
+    """Lines of a results file that may be stored gzipped in the repository (files over 100 MB are)."""
+    if os.path.exists(path):
+        return open(path, encoding="utf-8")
+    if os.path.exists(path + ".gz"):
+        return gzip.open(path + ".gz", "rt", encoding="utf-8")
+    return []
 
 
 # ---------------- summaries
@@ -58,12 +76,18 @@ def register_mesh(mesh, max_faces=700):
     return key
 
 
+loaded_instances = {}
+
+
 def load_instance_parts(folder, instance_name):
+    if (folder, instance_name) in loaded_instances:
+        return loaded_instances[(folder, instance_name)]
     nesting_core.DATASETS_FOLDER = folder
     parts = nesting_core.load_parts(instance_name, 2.0, 1.0)
     keys = {}
     for part in parts:
         keys[part["name"]] = register_mesh(part["mesh"])
+    loaded_instances[(folder, instance_name)] = (parts, keys)
     return parts, keys
 
 
@@ -76,9 +100,9 @@ def pack_record(record, keys, extra):
 
 packings = []
 # literature: container mode, best repeat per algorithm, plus the proven reference
-for path in [os.path.join(RESULTS, "verification_literature_container_solutions.jsonl"), os.path.join(RESULTS, "verification_literature_container_geneticbox_solutions.jsonl")]:
+for path in [os.path.join(RESULTS, "verification_literature_container_solutions.jsonl"), os.path.join(RESULTS, "verification_literature_container_geneticbox_solutions.jsonl"), os.path.join(RESULTS, "verification_literature_container_new5_solutions.jsonl")]:
     best = {}
-    for line in open(path):
+    for line in open_lines(path):
         record = json.loads(line)
         key = (record["instance"], record["algorithm"])
         if key not in best or record["ratio"] > best[key]["ratio"]:
@@ -108,7 +132,9 @@ for instance_name in sorted(os.listdir(os.path.join(HERE, "datasets_literature")
 # scrabble: six instances (k = 9, seed 0 of each solid x style), open mode, best repeat per algorithm, plus the original solid as reference
 scrabble_instances = [name for name in sorted(os.listdir(os.path.join(HERE, "datasets_scrabble"))) if name.endswith("_k9_s0")]
 best = {}
-for line in open(os.path.join(RESULTS, "verification_scrabble_open_solutions.jsonl")):
+for line in list(open_lines(os.path.join(RESULTS, "verification_scrabble_open_solutions.jsonl"))) + list(open_lines(os.path.join(RESULTS, "verification_scrabble_open_new5_solutions.jsonl"))):
+    if "_k9_s0\"" not in line:
+        continue
     record = json.loads(line)
     if record["instance"] not in scrabble_instances:
         continue
@@ -130,7 +156,9 @@ for instance_name in scrabble_instances:
 # benchmark: one trial (trial 0) per category at k = 10, every algorithm
 best = {}
 for path in sorted(glob.glob(os.path.join(RESULTS, "solutions_large_*_k10_n*.jsonl"))):
-    for line in open(path):
+    for line in open_lines(path):
+        if '"trial": 0,' not in line:
+            continue
         record = json.loads(line)
         if record["trial"] == 0:
             best[(record["dataset"], record["algorithm"])] = record
@@ -163,16 +191,18 @@ import base64
 cards = {}
 cards_folder = os.path.join(RESULTS, "algorithm_cards")
 if os.path.exists(os.path.join(cards_folder, "cards.json")):
-    cards = json.load(open(os.path.join(cards_folder, "cards.json")))
+    cards = json.load(open(os.path.join(cards_folder, "cards.json"), encoding="utf-8"))
     for name, card in cards.items():
         image_path = os.path.join(cards_folder, card["image"])
         card["image"] = "data:image/png;base64," + base64.b64encode(open(image_path, "rb").read()).decode() if os.path.exists(image_path) else None
 
 # order study: set 0 of each category at k = 10, for three algorithms: default order, the best and the worst random order (the 3D viewer shows what order alone changes)
 order_solutions_path = os.path.join(RESULTS, "order_solutions_k10_k20.jsonl")
-if os.path.exists(order_solutions_path):
+if os.path.exists(order_solutions_path) or os.path.exists(order_solutions_path + ".gz"):
     chosen = {}
-    for line in open(order_solutions_path):
+    for line in open_lines(order_solutions_path):
+        if '"k": 10,' not in line or '"set": 0,' not in line:
+            continue
         record = json.loads(line)
         if record["k"] != 10 or record["set"] != 0 or record["algorithm"] not in ("empty_maximal_spaces", "heightfield_drop", "genetic_heightfield", "grasp_ems", "box_extreme_points"):
             continue
@@ -195,7 +225,12 @@ if os.path.exists(order_solutions_path):
 
 data = {"order": order_rows, "cards": cards, "benchmark": benchmark_rows, "verification": verification_rows, "packings": packings, "meshes": meshes, "algorithms": ALGORITHM_ORDER, "family": FAMILY, "datasets": DATASET_ORDER}
 payload = json.dumps(data, separators=(",", ":"))
-template = open(os.path.join(HERE, "explorer_template.html")).read()
-page = template.replace("/*__DATA__*/", payload).replace("/*__ANIM__*/", open(os.path.join(HERE, "explorer_animations.js")).read())
-open(os.path.join(HERE, "explorer.html"), "w").write(page)
+template = open(os.path.join(HERE, "explorer_template.html"), encoding="utf-8").read()
+page = template.replace("/*__DATA__*/", payload).replace("/*__ANIM__*/", open(os.path.join(HERE, "explorer_animations.js"), encoding="utf-8").read())
+if arguments.offline:
+    cdn_tag = '<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>'
+    if cdn_tag not in page:
+        raise SystemExit("the template no longer loads three.js r128 from the CDN tag this script replaces; update make_explorer.py")
+    page = page.replace(cdn_tag, "<script>" + open(os.path.join(HERE, "vendor", "three.r128.min.js"), encoding="utf-8").read() + "</script>")
+open(os.path.join(HERE, arguments.output), "w", encoding="utf-8").write(page)
 print("meshes " + str(len(meshes)) + ", packings " + str(len(packings)) + ", page " + format(len(page) / 1e6, ".1f") + " MB")

@@ -3,7 +3,7 @@
 cd "$(dirname "$0")"
 run() {
   for attempt in $(seq 1 20); do
-    python3 order_study.py --name k10_k20 --k 10 20 --sets 10 --random_orders 20 --random_orders_search 8 --workers 2 --algorithms "$@" >> results/order_study_k10_k20.log 2>&1 && return 0
+    nice -n 19 python3 order_study.py --name k10_k20 --k 10 20 --sets 10 --random_orders 20 --random_orders_search 8 --workers 2 --algorithms "$@" >> results/order_study_k10_k20.log 2>&1 && return 0
     sleep 20
   done
 }

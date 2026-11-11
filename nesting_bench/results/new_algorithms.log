@@ -958,3 +958,36 @@ Loading complex_convex ...
 Loading cuboids ...
   dblf_24              kept from the previous run
 Loading real_shapes ...
+  dblf_24                60/300   about 36.9 min left overall
+  dblf_24               120/300   about 52.9 min left overall
+  dblf_24               180/300   about 64.3 min left overall
+  dblf_24               240/300   about 73.1 min left overall
+  dblf_24               300/300   about 77.6 min left overall
+Loading simple_concave ...
+  dblf_24                60/300   about 81.5 min left overall
+  dblf_24               120/300   about 82.2 min left overall
+  dblf_24               180/300   about 79.5 min left overall
+  dblf_24               240/300   about 73.9 min left overall
+  dblf_24               300/300   about 64.4 min left overall
+Loading simple_convex ...
+  dblf_24                60/300   about 52.6 min left overall
+  dblf_24               120/300   about 41.2 min left overall
+  dblf_24               180/300   about 28.4 min left overall
+  dblf_24               240/300   about 14.5 min left overall
+  dblf_24               300/300   about 0.0 min left overall
+Solutions:         /home/claude/nb/nesting_bench/results/solutions_large_new_dblf_k20_n300.jsonl
+
+mode=open  k=20  n=300  clearance t=0.5 mm  restarts=3  voxel_pitch=2.0
+dens = % volume utilized (mean), AR = aspect ratio, COM% = COM to COV distance as % of box diagonal, gap = min gap mm, cont = part pairs in contact (within t + 0.5 mm), clr = share of trials meeting t
+dataset          algorithm             score   dens  valid        box x*y*z mm    AR  COM%  Izz/Ixx   gap  cont   clr  s/trial
+complex_concave  dblf_24               0.258  0.258   1.00            83x83x59  1.43   5.3     1.55  1.17   0.4  1.00   14.814
+complex_convex   dblf_24               0.370  0.370   1.00            82x82x68  1.21   5.9     1.37  0.78   2.3  1.00   12.906
+cuboids          dblf_24               0.533  0.533   1.00            77x77x76  1.06   8.7     1.19  0.60  12.2  1.00    8.795
+real_shapes      dblf_24               0.199  0.199   1.00            85x85x61  1.41   7.0     1.44  1.06   0.6  1.00   31.001
+simple_concave   dblf_24               0.409  0.409   1.00            90x90x76  1.20   6.7     1.30  0.62   8.3  1.00   33.306
+simple_convex    dblf_24               0.337  0.337   1.00            83x82x56  1.51   6.1     1.58  0.69   2.9  1.00   24.165
+
+Total time: 443.0 min
+Per-trial results: /home/claude/nb/nesting_bench/results/trials_large_new_dblf_k20_n300.csv
+Summary:           /home/claude/nb/nesting_bench/results/summary_large_new_dblf_k20_n300.csv
+Loading complex_concave ...

@@ -31,10 +31,10 @@ YELLOW = "#eda100"
 MAGENTA = "#e87ba4"
 VIOLET = "#6250d6"
 DATASET_ORDER = ["cuboids", "simple_convex", "complex_convex", "simple_concave", "complex_concave", "real_shapes"]
-ALGORITHM_ORDER = ["random_rejection", "shelf_packing", "box_bottom_left", "box_extreme_points", "empty_maximal_spaces", "force_based", "force_based_v2", "voxel_bottom_left", "heightfield_drop", "best_of_fast", "simulated_annealing", "genetic_algorithm", "genetic_heightfield"]
-FAMILY = {"random_rejection": "baseline", "shelf_packing": "box", "box_bottom_left": "box", "box_extreme_points": "box", "empty_maximal_spaces": "box", "force_based": "box", "force_based_v2": "box", "voxel_bottom_left": "shape", "heightfield_drop": "shape", "best_of_fast": "shape", "simulated_annealing": "search", "genetic_algorithm": "search", "genetic_heightfield": "search"}
+ALGORITHM_ORDER = ["random_rejection", "shelf_packing", "box_bottom_left", "box_extreme_points", "empty_maximal_spaces", "skyline_3d", "wall_building", "force_based", "force_based_v2", "voxel_bottom_left", "heightfield_drop", "dblf_24", "best_of_fast", "simulated_annealing", "genetic_algorithm", "genetic_heightfield", "beam_search", "grasp_ems"]
+FAMILY = {"random_rejection": "baseline", "shelf_packing": "box", "box_bottom_left": "box", "box_extreme_points": "box", "empty_maximal_spaces": "box", "force_based": "box", "force_based_v2": "box", "voxel_bottom_left": "shape", "heightfield_drop": "shape", "best_of_fast": "shape", "simulated_annealing": "search", "genetic_algorithm": "search", "genetic_heightfield": "search", "skyline_3d": "box", "wall_building": "box", "dblf_24": "shape", "beam_search": "search", "grasp_ems": "search"}
 FAMILY_COLOR = {"baseline": INK3, "box": BLUE, "shape": AQUA, "search": ORANGE}
-SHORT = {"random_rejection": "random", "shelf_packing": "shelf", "box_bottom_left": "bottom\nleft", "box_extreme_points": "extreme\npoints", "empty_maximal_spaces": "EMS", "force_based": "force", "force_based_v2": "force\nv2", "voxel_bottom_left": "voxel", "heightfield_drop": "height\nfield", "best_of_fast": "best of\nfast", "simulated_annealing": "anneal", "genetic_algorithm": "genetic", "genetic_heightfield": "genetic\nhfield"}
+SHORT = {"random_rejection": "random", "shelf_packing": "shelf", "box_bottom_left": "bottom\nleft", "box_extreme_points": "extreme\npoints", "empty_maximal_spaces": "EMS", "force_based": "force", "force_based_v2": "force\nv2", "voxel_bottom_left": "voxel", "heightfield_drop": "height\nfield", "best_of_fast": "best of\nfast", "simulated_annealing": "anneal", "genetic_algorithm": "genetic", "genetic_heightfield": "genetic\nhfield", "skyline_3d": "skyline", "wall_building": "wall", "dblf_24": "DBLF\n24", "beam_search": "beam", "grasp_ems": "GRASP"}
 plt.rcParams["font.family"] = "DejaVu Sans"
 plt.rcParams["axes.edgecolor"] = LIGHT
 plt.rcParams["axes.labelcolor"] = INK2
@@ -68,7 +68,7 @@ def bars_by_category(k, metric, scale, y_label, title, y_limit=None, higher_is_b
     figure.text(0.05, 0.94, title, fontsize=20, weight="bold", color=INK, va="center")
     figure.text(0.05, 0.895, "k = " + str(k) + ", open mode, 60-part categories (23 real shapes); error bars = 99% confidence interval of the mean; n per bar in the leaderboard CSV", fontsize=11, color=INK2, va="center")
     for number, dataset_name in enumerate(DATASET_ORDER):
-        axes = figure.add_axes([0.06 + (number % 3) * 0.315, 0.50 - (number // 3) * 0.38, 0.26, 0.29])
+        axes = figure.add_axes([0.06 + (number % 3) * 0.315, 0.52 - (number // 3) * 0.40, 0.26, 0.27])
         values = np.array([rows[(dataset_name, k, name)][metric + "_mean" if metric != "score" else "score"] * scale for name in names])
         lows = np.array([rows[(dataset_name, k, name)][(metric if metric != "score" else "score") + "_ci99_low"] * scale for name in names])
         highs = np.array([rows[(dataset_name, k, name)][(metric if metric != "score" else "score") + "_ci99_high"] * scale for name in names])
@@ -76,7 +76,7 @@ def bars_by_category(k, metric, scale, y_label, title, y_limit=None, higher_is_b
         axes.bar(range(len(names)), values, color=colors, width=0.72, yerr=[values - lows, highs - values], capsize=2, error_kw={"linewidth": 0.8, "color": INK})
         axes.set_title(dataset_name.replace("_", " "), fontsize=11, loc="left", color=INK)
         axes.set_xticks(range(len(names)))
-        axes.set_xticklabels([SHORT[name] for name in names], fontsize=6.5)
+        axes.set_xticklabels([SHORT[name].replace("\n", " ") for name in names], fontsize=6.5, rotation=60, ha="right", rotation_mode="anchor")
         axes.tick_params(axis="y", labelsize=8)
         axes.grid(axis="y", color=LIGHT, linewidth=0.6)
         axes.set_axisbelow(True)
@@ -92,7 +92,7 @@ def bars_by_category(k, metric, scale, y_label, title, y_limit=None, higher_is_b
     figure.text(0.70, 0.845, "■ box based", fontsize=9, color=BLUE)
     figure.text(0.79, 0.845, "■ shape based", fontsize=9, color=AQUA)
     figure.text(0.89, 0.845, "■ search", fontsize=9, color=ORANGE)
-    figure.text(0.05, 0.03, "nesting_bench  ·  make_report.py", fontsize=8, color=INK3)
+    figure.text(0.05, 0.012, "nesting_bench  ·  make_report.py", fontsize=8, color=INK3)
     save(figure, metric + "_k" + str(k) + ".png")
 
 
@@ -110,7 +110,7 @@ for k in k_values:
 # density versus k, one panel per category, one line per algorithm present at every k, with 99% CI bands
 if len(k_values) >= 2:
     names = [name for name in ALGORITHM_ORDER if all(all((dataset_name, k, name) in rows for dataset_name in DATASET_ORDER) for k in k_values)]
-    palette = [INK3, BLUE, AQUA, YELLOW, MAGENTA, VIOLET, ORANGE, "#008300", "#8c564b", "#e34948", "#17becf", "#7f7f7f", "#bcbd22"]
+    palette = [INK3, BLUE, AQUA, YELLOW, MAGENTA, VIOLET, ORANGE, "#008300", "#8c564b", "#e34948", "#17becf", "#7f7f7f", "#bcbd22", "#1f3b73", "#b0469a", "#5a8f29", "#c98a00", "#333333"]
     figure = plt.figure(figsize=(13.333, 7.5))
     figure.text(0.05, 0.94, "Density versus part count k", fontsize=20, weight="bold", color=INK, va="center")
     figure.text(0.05, 0.895, "shaded band = 99% confidence interval of the mean", fontsize=11, color=INK2, va="center")

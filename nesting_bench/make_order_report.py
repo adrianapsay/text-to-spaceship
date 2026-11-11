@@ -16,7 +16,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 RESULTS = os.path.join(HERE, "results")
 PLOTS = os.path.join(RESULTS, "plots_order")
 os.makedirs(PLOTS, exist_ok=True)
-ALGORITHM_ORDER = ["random_rejection", "shelf_packing", "box_bottom_left", "box_extreme_points", "empty_maximal_spaces", "voxel_bottom_left", "heightfield_drop", "best_of_fast", "simulated_annealing", "genetic_algorithm", "genetic_heightfield", "genetic_box"]
+ALGORITHM_ORDER = ["random_rejection", "shelf_packing", "box_bottom_left", "box_extreme_points", "empty_maximal_spaces", "skyline_3d", "wall_building", "voxel_bottom_left", "heightfield_drop", "dblf_24", "best_of_fast", "simulated_annealing", "genetic_algorithm", "genetic_heightfield", "genetic_box", "beam_search", "grasp_ems"]
 ORDERS = ["default", "volume_desc", "volume_asc", "convexity_desc", "combined", "flatness_desc", "random"]
 LABEL = {"default": "default (largest first)", "volume_desc": "volume desc", "volume_asc": "volume asc", "convexity_desc": "convex first", "combined": "big+convex first", "flatness_desc": "compact first", "random": "random"}
 
@@ -80,10 +80,11 @@ for name in algorithms:
             best_order = order
             best_ci = benchmark.confidence_interval_99(values)
     random_gain = float(np.mean(random_diffs)) if random_diffs else float("nan")
-    sensitivity.append((name, float(np.mean(spreads)) if spreads else 0.0))
+    if len(default_scores) >= 120:
+        sensitivity.append((name, float(np.mean(spreads)) if spreads else 0.0))
     significant = best_ci is not None and best_ci[0] > 0
     best_random_ci = benchmark.confidence_interval_99(best_random_diffs) if best_random_diffs else (float("nan"), float("nan"))
-    lines.append("| " + name + " | " + str(len(default_scores)) + " | " + format(np.mean(spreads) if spreads else 0.0, ".3f") + " | " + format(np.mean(default_scores), ".3f") + " | " + (LABEL[best_order] if best_order else "-") + " | " + (format(best_gain, "+.3f") + " (" + format(best_ci[0], "+.3f") + " to " + format(best_ci[1], "+.3f") + ")" + (" significant" if significant else "") if best_gain is not None else "-") + " | " + format(random_gain, "+.3f") + " | " + (format(np.mean(best_random_diffs), "+.3f") + " (" + format(best_random_ci[0], "+.3f") + " to " + format(best_random_ci[1], "+.3f") + ")" if best_random_diffs else "-") + " |")
+    lines.append("| " + name + (" (partial, still running)" if len(default_scores) < 120 else "") + " | " + str(len(default_scores)) + " | " + format(np.mean(spreads) if spreads else 0.0, ".3f") + " | " + format(np.mean(default_scores), ".3f") + " | " + (LABEL[best_order] if best_order else "-") + " | " + (format(best_gain, "+.3f") + " (" + format(best_ci[0], "+.3f") + " to " + format(best_ci[1], "+.3f") + ")" + (" significant" if significant else "") if best_gain is not None else "-") + " | " + format(random_gain, "+.3f") + " | " + (format(np.mean(best_random_diffs), "+.3f") + " (" + format(best_random_ci[0], "+.3f") + " to " + format(best_random_ci[1], "+.3f") + ")" if best_random_diffs else "-") + " |")
 lines.append("")
 lines.append("volume desc is the default order itself (same sort key), so it is left out of 'best other fixed order'.")
 lines.append("")
@@ -93,10 +94,10 @@ lines.append("Reading: spread is how much the same parts can change density by o
 open(os.path.join(RESULTS, "order_findings.md"), "w").write("\n".join(lines) + "\n")
 
 # Plot 1: sensitivity (spread) by algorithm
-figure, axes = plt.subplots(figsize=(9, 4))
+figure, axes = plt.subplots(figsize=(11, 4))
 axes.bar([name.replace("_", "\n") for name, _ in sensitivity], [value for _, value in sensitivity], color="#2a78d6")
-axes.set_ylabel("mean best - worst density over random orders of the same set")
-axes.set_title("How much placement order matters, by algorithm (pooled over categories, k = 10 and 20)")
+axes.set_ylabel("best minus worst density\n(random orders, same parts)")
+axes.set_title("How much placement order matters, by algorithm (pooled over categories, k = 10 and 20; complete runs only)")
 axes.tick_params(axis="x", labelsize=7)
 figure.tight_layout()
 figure.savefig(os.path.join(PLOTS, "order_sensitivity.png"), dpi=130)

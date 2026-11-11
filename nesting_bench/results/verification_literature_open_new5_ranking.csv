@@ -1,0 +1,6 @@
+rank,algorithm,runs,ratio_mean,ratio_ci99_low,ratio_ci99_high,solved_rate,valid_rate
+1,beam_search,40,1.0073,0.9290,1.0855,0.750,1.000
+2,wall_building,40,0.9526,0.8764,1.0287,0.500,1.000
+3,grasp_ems,40,0.9024,0.7970,1.0078,0.500,1.000
+4,dblf_24,40,0.6388,0.5834,0.6941,0.000,1.000
+5,skyline_3d,40,0.5079,0.3715,0.6444,0.125,1.000

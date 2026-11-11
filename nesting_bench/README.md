@@ -114,3 +114,17 @@ explorer.html (make_explorer.py): the self-contained explorer with six tabs: Ben
 ## Limits
 
 Overlap check is voxel based and gap measurement is sample based (both approximate); check_exact.py does the exact check on samples. The voxel grid only guarantees clearance along x, y, z (diagonal gaps can be slightly under t). No mounting, support, assemblability or thermal checks yet. Algorithms optimize volume only; COM, inertia and clearance are reported (clearance is also enforced).
+
+## Run queues added 2026-11-10/11 (five new algorithms)
+All are resumable (`--resume`); `ensure_running.sh` relaunches any that stopped and `poll.sh` prints one status line per queue.
+- `run_new_algorithms.sh`: benchmark for skyline_3d, wall_building (n = 300) and dblf_24 (n = 300), k = 10, 20, 30.
+- `run_search_algorithms.sh`: benchmark for beam_search and grasp_ems (n = 100), k = 10, 20, 30.
+- `run_verification_new.sh`: literature test (both modes, plus 1 mm pitch for dblf_24) and Scrabble open mode for the five new algorithms, tag `new5`.
+- `run_verification_container.sh`: Scrabble container mode for the five new algorithms, tag `new5`.
+- `run_order_study.sh`: order study, phased (original 12, skyline/wall, dblf_24, beam/grasp).
+Status on 2026-11-11 08:00 PST: complete for everything except dblf_24 at k = 30, the Scrabble test for the five new algorithms, and the order study for dblf_24, beam_search and grasp_ems (all running; files for those are partial).
+Never rewrite a results file that a run is appending to; repair only by cutting an unfinished last line while the writer is stopped (see ensure_running.sh).
+
+## Local explorer (same page as the published artifact, from your own results/)
+    python explorer_local.py          (Windows: double-click OPEN_EXPLORER.bat)
+Rebuilds `explorer_local.html` from results/ only when a summary, saved-packing file, the template or the build script changed (about a minute), then opens it in the browser. Works offline: three.js r128 is bundled from vendor/ (MIT, license beside it); only the web font falls back to a system font. `--rebuild` forces a build, `--no-open` builds without opening. `make_explorer.py` (no flags) still writes `explorer.html`, the page published as the artifact. Result files stored gzipped in the repository (over 100 MB) are read as they are. With `fast-simplification` installed the 3D meshes are decimated to 700 faces; without it the page is larger but identical in function.
