@@ -113,6 +113,15 @@
      "file": "bodies/part__lid.stl"
     },
     {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
      "name": "connector",
      "color": [
       0.16,
@@ -140,14 +149,25 @@
   "power_bus_V": 3.3
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://gomspace.com/wp-content/uploads/2025/09/gs-ds-nanocom-ax100.pdf",
+    "title": "NanoCom AX100 - GomSpace"
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": "https://satcatalog.s3.amazonaws.com/components/582/featured_image.jpg",
   "photo_source": "satcatalog",
   "photo_page": "https://satcatalog.com/component/nanocom-ax100-transceiver",
-  "photo_file": "reference_photo",
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": "https://gomspace.com/UserFiles/Subsystems/datasheet/gs-ds-nanocom-ax100-33.pdf",
-  "datasheet_page_file": "datasheet_page1.png",
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

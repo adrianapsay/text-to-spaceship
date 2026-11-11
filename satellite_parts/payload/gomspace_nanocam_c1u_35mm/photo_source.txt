@@ -1,0 +1,5 @@
+image: https://cdn.satnow.com/live/113_1210_nanocam_c1u_big_638013334506108037_700.png
+page: https://www.satnow.com/products/satellite-cameras/gomspace/113-1279-nanocam-c1u
+title: NanoCam C1U - GomSpace | Satellite Camera
+query: GomSpace NanoCam C1U 35mm camera
+found by web image search; representative, verify before use

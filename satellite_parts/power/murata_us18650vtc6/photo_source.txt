@@ -1,0 +1,5 @@
+image: https://www.nkon.nl/media/catalog/product/cache/634f00c0cac7a25d9ea011187773489b/s/o/sony_murata_us18650vtc6_3000mah_-_30a_2_1_1.jpg
+page: https://www.nkon.nl/en/sony-murata-us18650-vtc6.html
+title: Murata US18650VTC6 3120mAh - 30A
+query: Murata US18650VTC6 cell
+found by web image search; representative, verify before use

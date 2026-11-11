@@ -1,0 +1,5 @@
+image: https://cdn11.bigcommerce.com/s-uuk5gaaahj/images/stencil/1280x1280/products/1287/1534/CHIPS-180_diagram__81695.1772038093.jpg?c=2
+page: https://catalog.orbitaltransports.com/chips-cubesat-high-impulse-propulsion-system/
+title: CHIPS - CubeSat High Impulse Propulsion System - CU Aerospace ...
+query: CU Aerospace CHIPS-500 cold warm gas module
+found by web image search; representative, verify before use

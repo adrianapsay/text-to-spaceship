@@ -1,0 +1,4 @@
+url: https://satcatalog.s3.amazonaws.com/components/332/SatCatalog_-_NewSpace_Systems_-_NFSS-411_-_Datasheet.pdf?lastmod=20210708045151
+title: NFSS-411 - Sun Sensor - SatCatalog
+query: NewSpace Systems sun sensor datasheet pdf
+found by web search; verify that it is the right part

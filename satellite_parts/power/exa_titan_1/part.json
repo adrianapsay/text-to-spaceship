@@ -69,10 +69,10 @@
    100.0,
    100.0
   ],
-  "mesh_volume_mm3": 999966.5,
+  "mesh_volume_mm3": 964653.7,
   "watertight": true,
-  "render_kind": "module_box",
-  "effective_density_g_cm3": 1.05,
+  "render_kind": "battery_pack",
+  "effective_density_g_cm3": 1.088,
   "bodies": {
    "part": [
     {
@@ -85,27 +85,18 @@
      "file": "bodies/part__housing.stl"
     },
     {
-     "name": "lid",
+     "name": "cells",
      "color": [
-      0.78,
-      0.8,
-      0.82
+      0.85,
+      0.72,
+      0.3
      ],
-     "file": "bodies/part__lid.stl"
-    },
-    {
-     "name": "connector",
-     "color": [
-      0.16,
-      0.16,
-      0.18
-     ],
-     "file": "bodies/part__connector.stl"
+     "file": "bodies/part__cells.stl"
     }
    ]
   },
   "face_counts": {
-   "part": 40
+   "part": 684
   }
  },
  "image": "preview.png",
@@ -119,14 +110,17 @@
   "power_bus_V": 8.4
  },
  "reference_images": {
+  "datasheets": [],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": "https://cdn.satsearch.com/product-images/image-ecuadorian-space-agency-exa-titan-1-350whr-power-bank-module-tc5g1s.jpg",
   "photo_source": "satsearch",
   "photo_page": "https://www.cubesatshop.com/product/titan-1-high-energy-density-battery-matrix/",
-  "photo_file": "reference_photo",
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": "https://www.cubesatshop.com/wp-content/uploads/2020/05/EXA-TITAN-Brochure-v1.2.pdf",
-  "datasheet_page_file": "datasheet_page1.png",
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

@@ -1,0 +1,4 @@
+url: https://www.cubespace.co.za/uploads/a629ddb8-5c60-4846-8dac-034f717b33ad.pdf
+title: CubeSense Earth Gen 2 - CubeSpace
+query: CubeSpace Satellite Systems CubeSense Sun datasheet pdf
+found by web search; verify that it is the right part

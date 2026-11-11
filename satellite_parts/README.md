@@ -2,7 +2,7 @@
 
 A library of 3D parts for CubeSats and small satellites, built for the Text to Spaceship capstone (UC Berkeley MEng #156). Every part has simple watertight geometry (STEP + STL), a structured record with the engineering data a design engine needs (mass, dimensions, electrical, compute, RF, propulsion, ADCS, thermal, interfaces, cost, availability, age), a source record that says where each number came from, an STL preview image, and links to the supplier photo and datasheet.
 
-Status at 2026-11-08 02:47 PST: 397 parts, about 60 vendors, 12 categories. Source quality and flag counts are in catalog.csv and needs_verification.csv (regenerated with every build).
+Status at 2026-11-10: 406 parts (colored multi-body geometry, 222 supplier photos and 118 datasheet pages fetched, drawings for all), about 60 vendors, 12 categories. Source quality and flag counts are in catalog.csv and needs_verification.csv (regenerated with every build).
 
 ## Layout
 
@@ -11,9 +11,11 @@ satellite_parts/
   <category>/<part_id>/part.step, part.stl       geometry as packed (stowed), centered on its bounding box, mm
                         part_deployed.step/.stl  deployed state when one exists (antennas, hinged arrays)
                         part.json                the record (see SCHEMA.md)
-                        preview.png              render of the STL (and the deployed STL)
-                        reference_photo.*        supplier / marketplace photo (written by fetch_reference_images.py)
-                        datasheet.pdf, datasheet_page1.png   datasheet and its first page (same script)
+                        bodies/<stem>__<body>.stl  one STL per colored body (housing, flywheel, nozzle, cells, ...); part.stl is their union
+                        preview.png              colored render of the bodies (and the deployed state)
+                        drawing.png              three-view dimension drawing of part.stl (make_drawings.py)
+                        reference_photo.jpg      supplier / marketplace photo, 400 px (fetch_reference_images.py); photo_source.txt when it came from a web image search (representative)
+                        datasheet_page1.png      first page of the datasheet (same script)
   catalog.csv              one row per part (image, id, category, vendor, model, status, size, mass, material, source type and url, year, cost, faces)
   references.csv           photo url, photo source, product page, datasheet url per part
   needs_verification.csv   parts with unverified or derived sources, estimated masses or assumed dimensions
@@ -26,6 +28,7 @@ satellite_parts/
   generate_parts.py        builds everything above from parts_data
   make_catalog_explorer.py builds catalog_explorer.html
   make_catalog_page.py     builds catalog_images.html
+  make_drawings.py         writes drawing.png for every part
   fetch_reference_images.py downloads photos and datasheets (run on a machine with web access)
   check_library.py         consistency checks (bbox vs declared size, watertight, density, missing fields); exit 1 on problems
   export_nesting_dataset.py writes a nesting_bench dataset folder (STLs + densities.csv + manifest.json) from catalog ids, a preset (3u_bus, 6u_bus, adcs_only) or a category
@@ -38,6 +41,7 @@ satellite_parts/
 pip install build123d trimesh numpy pyvista pillow requests pymupdf
 python generate_parts.py --render        # geometry, records, CSVs, previews (on Linux without a display: xvfb-run python generate_parts.py --render)
 python fetch_reference_images.py         # supplier photos + datasheets into each part folder, then catalog_images.html
+python make_drawings.py                  # drawing.png per part
 python make_catalog_explorer.py          # catalog_explorer.html
 python check_library.py                  # consistency checks, run after every build
 ```

@@ -1,0 +1,4 @@
+url: https://www.pts-uk.com/themes/pts/images/sgs-iso.pdf
+title: Form A Flat Washers DIN 125 - Precision Technology Supplies
+query: generic ISO 7089 M3 datasheet
+found by web search; verify that it is the right part

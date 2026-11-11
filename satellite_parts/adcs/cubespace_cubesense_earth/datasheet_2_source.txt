@@ -1,0 +1,4 @@
+url: https://satcatalog.s3.amazonaws.com/components/1406/SatCatalog_-_CubeSpace_-_Gen2_CubeSense_Earth_-_Datasheet.pdf?lastmod=20260129005255
+title: Gen2: CubeSense Earth - Earth/Horizon Sensor - SatCatalog
+query: CubeSense Earth datasheet
+found by web search; verify that it is the right part

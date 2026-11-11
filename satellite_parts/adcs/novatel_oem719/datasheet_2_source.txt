@@ -1,0 +1,4 @@
+url: https://docs.novatel.com/OEM7/Content/PDFs/PreviousVersions/OEM7_Installation_Operation_Manual_v19.pdf
+title: NovAtel OEM7 Installation and Operations User Manual
+query: NovAtel OEM719 datasheet pdf
+found by web search; verify that it is the right part

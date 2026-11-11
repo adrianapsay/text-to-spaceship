@@ -1,0 +1,5 @@
+image: https://gomspace.com/wp-content/uploads/2025/09/NanoPower-BPX-Featured-Image-1024x762.png
+page: https://gomspace.com/products/power-systems/
+title: Power Systems - GomSpace
+query: GomSpace NanoPower P31u eps
+found by web image search; representative, verify before use

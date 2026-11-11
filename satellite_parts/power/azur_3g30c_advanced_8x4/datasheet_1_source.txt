@@ -1,0 +1,4 @@
+url: https://www.azurspace.com/media/uploads/file_links/file/bdb_00010891-01-00_tj3g30-advanced_4x8.pdf
+title: 30% Triple-Junction (TJ) - III-V Bare Solar Cells & Assemblies
+query: AZUR SPACE Solar Power GmbH 3G30C-Advanced 8 x 4 cm datasheet pdf
+found by web search; verify that it is the right part

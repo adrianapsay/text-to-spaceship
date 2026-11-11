@@ -1,0 +1,5 @@
+image: https://prtimes.jp/i/42912/42/resize/d42912-42-6eaa0d466f43f3624d34-4.jpg
+page: https://prtimes.jp/main/html/rd/p/000000042.000042912.html
+title: 姿勢・制振制御のアプリケーションに最適なIMU『M-G370PDS0』を開発 | セイコーエプソン株式会社のプレスリリース
+query: Seiko Epson M-G370PDS0 imu
+found by web image search; representative, verify before use

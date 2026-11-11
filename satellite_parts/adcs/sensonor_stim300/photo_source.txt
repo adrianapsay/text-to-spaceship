@@ -1,0 +1,5 @@
+image: https://cdn.geo-matching.com/kplVjxRr.jpg?w=1200&s=b230fa898bcf0f989b4717944b99ff7e
+page: https://geo-matching.com/products/stim300-imu
+title: STIM300 Inertial Measurement Unit - Geo-matching
+query: Sensonor STIM300 imu
+found by web image search; representative, verify before use

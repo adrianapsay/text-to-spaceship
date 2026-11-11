@@ -1,0 +1,5 @@
+image: https://www.dold-mechatronik.de/media/image/product/267406/lg/sechskantmutter-din-934-iso-4032,-m6,-edelstahl-a2.jpg
+page: https://www.dold-mechatronik.de/Tuerca-hexagonal-DIN-934-ISO-4032,-M6,-acero-inoxidable-A2
+title: Tuerca hexagonal DIN 934 / ISO 4032, M6, acero inoxidable A2, 0,50
+query: generic ISO 4032 M6 nut
+found by web image search; representative, verify before use

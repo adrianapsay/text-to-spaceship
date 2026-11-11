@@ -1,0 +1,5 @@
+image: https://cdn.satsearch.com/product-images/satsearch_product-image_0xdt3s_azur-space_triple-junction-solar-cell-3g30c-advanced-with-integrated-protection-diode-8-by-4-cm.png
+page: https://blog.satsearch.co/2023-06-14-space-grade-solar-cells-on-the-global-market
+title: Space grade solar cells on the global market | satsearch blog
+query: AZUR SPACE Solar Power GmbH 3G30C-Advanced 8 x 4 cm solar cell
+found by web image search; representative, verify before use

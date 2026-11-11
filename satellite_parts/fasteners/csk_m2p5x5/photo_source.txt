@@ -1,0 +1,5 @@
+image: https://www.novotek.de/shop/images/products/gallery/NV_10642_M25x5_1.jpg
+page: https://www.novotek.de/Vakuumoptimierte-Schrauben/Senkschraube-mit-Innensechskant-ISO-10642-DIN-7991-M25x5-A2-mit-zentr-Entlueftung.html
+title: Senkschraube mit Innensechskant ISO 10642 (DIN 7991) M2,5x5, A2, mit ...
+query: generic M2.5x5 ISO 10642 screw
+found by web image search; representative, verify before use

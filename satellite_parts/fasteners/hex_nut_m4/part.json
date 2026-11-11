@@ -71,14 +71,32 @@
   "power_bus_V": null
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://www.arterychip.com/download/DS/DS_AT32F435_437_V2.12_EN.pdf",
+    "title": "AT32F435/437 Series Datasheet Features - ARTERY Technology"
+   },
+   {
+    "file": "datasheet_2_page1.png",
+    "pdf": "datasheet_2.pdf",
+    "kind": "web_search",
+    "url": "https://www.ti.com/lit/ds/sprs712c/sprs712c.pdf",
+    "title": "TMS320DM8127 DaVinci\u2122 Video Processors datasheet (Rev. C)"
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": null,
   "photo_source": null,
   "photo_page": null,
-  "photo_file": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "web_search_representative",
   "datasheet_url": null,
   "datasheet_page_file": null,
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

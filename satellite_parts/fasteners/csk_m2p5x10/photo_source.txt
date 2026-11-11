@@ -1,0 +1,5 @@
+image: https://www.pipingmaterial.ae/images/fasteners/iso-10642-hexagon-socket-countersunk-head-cap-screws.jpg
+page: https://storage.googleapis.com/dcgsbdycqyipfe/countersunk-socket-head-screw-dimensions.html
+title: Countersunk Socket Head Screw Dimensions at Alex Mckean blog
+query: generic M2.5x10 ISO 10642 screw
+found by web image search; representative, verify before use

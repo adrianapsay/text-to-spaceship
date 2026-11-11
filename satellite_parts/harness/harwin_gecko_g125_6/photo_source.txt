@@ -1,0 +1,5 @@
+image: https://content.harwin.com/transform/65a40ec2-073a-4cc3-9b87-491f7eee4afc/G125-MC10605M3-0300M3-1?io=transform:scale,width:1920
+page: https://www.harwin.com/products/G125-MC10605M3-0300M3
+title: Gecko-SL Male Cable Assy - G125-MC10605M3-0300M3 - Harwin
+query: Harwin G125-MH10605-0300 connector
+found by web image search; representative, verify before use

@@ -121,14 +121,32 @@
   "power_bus_V": 7.4
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_page1.png",
+    "pdf": null,
+    "url": "https://cubesatkit.com/docs/datasheet/DS_CSK_BM_1_710-01006-A.pdf",
+    "kind": "vendor_link",
+    "title": "Pumpkin Battery Module 1 datasheet 710-01006 Rev B"
+   },
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://cubesatkit.com/docs/datasheet/DS_CSK_BM_1_710-01006-A.pdf",
+    "title": null
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": null,
   "photo_source": null,
   "photo_page": null,
-  "photo_file": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "web_search_representative",
   "datasheet_url": "https://cubesatkit.com/docs/datasheet/DS_CSK_BM_1_710-01006-A.pdf",
   "datasheet_page_file": "datasheet_page1.png",
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

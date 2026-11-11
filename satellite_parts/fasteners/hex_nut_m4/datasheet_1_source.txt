@@ -1,0 +1,4 @@
+url: https://www.arterychip.com/download/DS/DS_AT32F435_437_V2.12_EN.pdf
+title: AT32F435/437 Series Datasheet Features - ARTERY Technology
+query: generic ISO 4032 M4 datasheet pdf
+found by web search; verify that it is the right part

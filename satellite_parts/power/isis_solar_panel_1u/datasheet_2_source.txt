@@ -1,0 +1,4 @@
+url: https://www.nasa.gov/wp-content/uploads/2021/10/6.soa_structures_2021.pdf
+title: Structures, Materials, and Mechanisms - NASA
+query: ISISPACE 1U solar panel set (body mounted) datasheet pdf
+found by web search; verify that it is the right part

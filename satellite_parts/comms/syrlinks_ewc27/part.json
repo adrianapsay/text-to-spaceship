@@ -113,14 +113,25 @@
   "power_bus_V": null
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_page1.png",
+    "pdf": null,
+    "url": "https://satcatalog.s3.amazonaws.com/components/646/SatCatalog_-_Syrlinks_-_EWC27_-_X-Band_Transmitter_-_Datasheet.pdf",
+    "kind": "vendor_link",
+    "title": "satsearch and satcatalog listings of the Syrlinks EWC27"
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_vqau3i_syrlinks_ewc27_x_band_transmitter.jpg",
   "photo_source": "satsearch",
   "photo_page": "https://satsearch.co/products/syrlinks-ewc27-x-band-transmitter",
-  "photo_file": "reference_photo",
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": "https://satcatalog.s3.amazonaws.com/components/646/SatCatalog_-_Syrlinks_-_EWC27_-_X-Band_Transmitter_-_Datasheet.pdf",
   "datasheet_page_file": "datasheet_page1.png",
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

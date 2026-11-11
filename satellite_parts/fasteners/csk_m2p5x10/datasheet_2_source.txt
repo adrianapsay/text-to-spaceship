@@ -1,0 +1,4 @@
+url: https://www.govinfo.gov/content/pkg/GOVPUB-C13-69771f6d5d6b56a5a54c8154a0af17c7/pdf/GOVPUB-C13-69771f6d5d6b56a5a54c8154a0af17c7.pdf
+title: OM85 basic properties of optical materials - GovInfo
+query: generic M2.5x10 ISO 10642 datasheet pdf
+found by web search; verify that it is the right part

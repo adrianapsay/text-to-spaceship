@@ -1,0 +1,4 @@
+url: https://space-for-space.com/wp-content/uploads/2018/10/ISIS-VHF-uplink_UHF-downlink-Full-Duplex-Transceiver-Brochure-v1-1.pdf
+title: Communication Systems
+query: ISISPACE TRXUV datasheet pdf
+found by web search; verify that it is the right part

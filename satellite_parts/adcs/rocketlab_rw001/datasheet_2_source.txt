@@ -1,0 +1,4 @@
+url: https://satcatalog.s3.amazonaws.com/components/248/SatCatalog_-_Sinclair_Interplanetary_-_RW-0.01_-_Datasheet.pdf?lastmod=20211207040022
+title: RW-0.01 - Reaction Wheel - SatCatalog
+query: RW-0.01 datasheet
+found by web search; verify that it is the right part

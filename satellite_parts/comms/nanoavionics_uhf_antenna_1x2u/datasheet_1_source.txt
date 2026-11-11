@@ -1,0 +1,4 @@
+url: https://www.nasa.gov/wp-content/uploads/2026/05/9-soa-comm-2025-final.pdf?emrc=6af39c1b1b3dc
+title: 9.0 Communications - NASA
+query: NanoAvionics UHF antenna 1x2U datasheet pdf
+found by web search; verify that it is the right part

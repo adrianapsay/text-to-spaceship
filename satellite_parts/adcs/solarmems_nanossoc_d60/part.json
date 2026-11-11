@@ -119,14 +119,32 @@
   "power_bus_V": 3.3
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://solar-mems.com/wp-content/uploads/2024/01/nanoSSOC-D60.pdf",
+    "title": "NanoSSOC - D60 - SOLAR MEMS Technologies"
+   },
+   {
+    "file": "datasheet_2_page1.png",
+    "pdf": "datasheet_2.pdf",
+    "kind": "web_search",
+    "url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/NSD_60_07_MAN_102_Brochure_SQ_20160525_4036cc7b30.pdf",
+    "title": "nanoSSOC-D60 - AAC Clyde Space"
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_ofo26r_solarmems_nano-ssoc-d60-digital-sun-sensor-for-nanosatellites.jpg",
   "photo_source": "satsearch",
   "photo_page": "https://satsearch.co/products/solarmems-nano-ssoc-d60-digital-sun-sensor-for-nanosatellites",
-  "photo_file": "reference_photo",
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": "https://www.cubesatshop.com/wp-content/uploads/2016/06/nanoSSOC-D60-Technical-Specifications.pdf",
-  "datasheet_page_file": "datasheet_page1.png",
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

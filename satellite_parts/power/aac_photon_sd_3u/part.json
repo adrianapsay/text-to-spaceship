@@ -94,6 +94,15 @@
      "file": "bodies/part__lid.stl"
     },
     {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
      "name": "connector",
      "color": [
       0.16,
@@ -138,14 +147,32 @@
   "power_bus_V": null
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_page1.png",
+    "pdf": null,
+    "url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/AAC_DataSheet_Photon_original.pdf",
+    "kind": "vendor_link",
+    "title": "AAC Clyde Space PHOTON solar arrays product page"
+   },
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/AAC_DataSheet_Photon_original.pdf",
+    "title": null
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/sp_product_detail.jpg",
   "photo_source": "vendor",
   "photo_page": "https://www.aac-clyde.space/what-we-do/space-products-components/photon-solar-arrays",
-  "photo_file": "reference_photo",
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": "https://www.aac-clyde.space/wp-content/uploads/2021/11/AAC_DataSheet_Photon_original.pdf",
   "datasheet_page_file": "datasheet_page1.png",
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

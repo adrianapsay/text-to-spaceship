@@ -1,0 +1,4 @@
+url: https://www.ryanmck.net/croissant2020.pdf
+title: Design and mission planning of Bobcat-1, the Ohio University ...
+query: GomSpace NanoPower P110A datasheet pdf
+found by web search; verify that it is the right part

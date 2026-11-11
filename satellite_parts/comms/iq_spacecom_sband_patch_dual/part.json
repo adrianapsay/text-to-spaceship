@@ -1,0 +1,116 @@
+{
+ "id": "iq_spacecom_sband_patch_dual",
+ "name": "IQ spacecom S-band dual patch antenna",
+ "category": "comms",
+ "subcategory": "antenna",
+ "vendor": "IQ spacecom",
+ "model": "S-Band Antenna (dual patch)",
+ "dimensions_mm": {
+  "x": 80,
+  "y": 100,
+  "z": 3.4
+ },
+ "mass_g": 62,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.co/products/iq-s-band-antenna",
+  "document": {
+   "title": "satsearch listing: IQ spacecom S-band antennas (specification table)",
+   "revision": null,
+   "date": "2026-11-10"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "rf"
+  ],
+  "notes": "Dual patch 80 x 100 x 3.4 mm, 62 g; 1.98-2.5 GHz, circular polarization, SMA female or UMP."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "distributors": [
+  "satsearch",
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "vendor_country": "Germany",
+ "rf": {
+  "band": "S",
+  "frequency_MHz": [
+   1980,
+   2500
+  ],
+  "polarization": "circular"
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   80.0,
+   100.0,
+   3.4
+  ],
+  "mesh_volume_mm3": 24640.0,
+  "watertight": true,
+  "render_kind": "patch_antenna",
+  "effective_density_g_cm3": 2.516,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "patch",
+     "color": [
+      0.72,
+      0.45,
+      0.2
+     ],
+     "file": "bodies/part__patch.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 28
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [
+   "SMA female or UMP"
+  ],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_qrcf2d_iq_s-band-antenna.jpg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/iq-s-band-antenna",
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

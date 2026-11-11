@@ -1,0 +1,5 @@
+image: https://www.maker-kits.com/wp-content/uploads/hexagon-nut-m3_iso-4032.jpg
+page: https://www.maker-kits.com/product/hexagon-nut-m3/
+title: Hexagon Nut M3 - ISO 4032 - MAKER-KITS
+query: generic ISO 4032 M3 nut
+found by web image search; representative, verify before use

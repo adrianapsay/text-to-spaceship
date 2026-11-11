@@ -145,14 +145,32 @@
   "power_bus_V": 5.0
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_page1.png",
+    "pdf": null,
+    "url": "https://www.aac-clyde.space/wp-content/uploads/2021/10/AAC_DataSheet_Pulsar_VUTRX.pdf",
+    "kind": "vendor_link",
+    "title": "AAC Clyde Space PULSAR-VUTRX datasheet (release 2020-07-28)"
+   },
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/satsearch_datasheet_qqgoo8_aac-clyde_pulsar-tmtc.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJLB7IRZ54RAMS36Q%2F20261111%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20261111T031905Z&X-Amz-Expires=86400&X-Amz-Signature=5b356075b7beb13c08eb066643b50d7c8276b962662c6c9562b35a0b17146407&X-Amz-SignedHeaders=host",
+    "title": null
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_4pkeah_aac-clyde_pulsar-tmtc.png",
   "photo_source": "satsearch",
   "photo_page": "https://satsearch.co/products/aac-clyde-pulsar-tmtc",
-  "photo_file": "reference_photo",
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": "https://www.aac-clyde.space/wp-content/uploads/2021/10/AAC_DataSheet_Pulsar_VUTRX.pdf",
   "datasheet_page_file": "datasheet_page1.png",
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

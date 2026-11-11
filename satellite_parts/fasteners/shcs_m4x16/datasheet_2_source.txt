@@ -1,0 +1,4 @@
+url: https://www.politesi.polimi.it/retrieve/3f9d3bf1-79ac-4824-8150-03e1ba7298ab/Thesis.pdf
+title: Realization and control of a 3D printed anthropomorphic Robotic Arm
+query: generic ISO 4762 M4x16 datasheet pdf
+found by web search; verify that it is the right part

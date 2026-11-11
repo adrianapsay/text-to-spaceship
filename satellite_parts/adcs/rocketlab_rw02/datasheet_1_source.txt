@@ -1,0 +1,4 @@
+url: https://rocketlabcorp.com/assets/Uploads/400-MNMS-product-sheet.pdf
+title: Rad-Hard Reaction Wheels (RW4-0.2 / RW4-0.4) - Rocket Lab
+query: Rocket Lab RW-0.2 datasheet pdf
+found by web search; verify that it is the right part

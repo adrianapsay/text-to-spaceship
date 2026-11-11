@@ -1,0 +1,4 @@
+url: https://prod-edam.honeywell.com/content/dam/honeywell-edam/sps/siot/en-us/products/switches/basic-switches/common/documents/sps-ast-applying-precision-switches-technical-note.pdf?download=false
+title: ZM Series Subminiature Switch - Industrial Automation | Honeywell
+query: Honeywell ZM50 datasheet pdf
+found by web search; verify that it is the right part

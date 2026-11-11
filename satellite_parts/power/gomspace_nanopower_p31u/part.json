@@ -133,14 +133,25 @@
   "power_bus_V": 7.2
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://gomspace.com/wp-content/uploads/2026/01/gs-ds-nanopower-msp_1016340_32.pdf",
+    "title": "NanoPower MSP - GomSpace"
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": null,
   "photo_source": null,
   "photo_page": null,
   "photo_file": null,
+  "photo_kind": null,
   "datasheet_url": "https://gomspace.com/UserFiles/Subsystems/datasheet/gs-ds-nanopower-p31u-32_(1).pdf",
-  "datasheet_page_file": "datasheet_page1.png",
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

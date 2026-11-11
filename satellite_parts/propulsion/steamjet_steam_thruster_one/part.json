@@ -1,0 +1,159 @@
+{
+ "id": "steamjet_steam_thruster_one",
+ "name": "SteamJet Steam Thruster One 2U water resistojet propulsion unit",
+ "category": "propulsion",
+ "subcategory": "resistojet",
+ "vendor": "SteamJet Space Systems",
+ "model": "Steam Thruster One (2U)",
+ "dimensions_mm": {
+  "x": 208,
+  "y": 102,
+  "z": 121
+ },
+ "mass_g": 1700,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.co/products/steamjet-space-steam-thruster-one",
+  "document": {
+   "title": "satsearch listing: SteamJet Steam Thruster One (specification table)",
+   "revision": null,
+   "date": "2026-11-10"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "propulsion"
+  ],
+  "notes": "208 x 102 x 121 mm, 1.7 kg wet (700 g water), <19.9 W thrusting, 17-33 V, 5-20 mN, Isp 172 s, 1200 Ns, RS422 / UART."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "distributors": [
+  "satsearch",
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "vendor_country": "Italy",
+ "electrical": {
+  "power_W": {
+   "peak": 19.9,
+   "idle": 0.12
+  },
+  "voltage_V": {
+   "min": 17,
+   "max": 33
+  },
+  "interfaces": [
+   "RS422",
+   "UART"
+  ]
+ },
+ "propulsion": {
+  "thrust_mN": [
+   5,
+   20
+  ],
+  "isp_s": 172,
+  "total_impulse_Ns": 1200,
+  "propellant": "water"
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   208.0,
+   102.0,
+   121.0
+  ],
+  "mesh_volume_mm3": 2229737.3,
+  "watertight": true,
+  "render_kind": "thruster_box_nozzle",
+  "effective_density_g_cm3": 0.762,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    },
+    {
+     "name": "flange",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__flange.stl"
+    },
+    {
+     "name": "nozzle",
+     "color": [
+      0.55,
+      0.55,
+      0.58
+     ],
+     "file": "bodies/part__nozzle.stl"
+    },
+    {
+     "name": "valve",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__valve.stl"
+    },
+    {
+     "name": "tank_dome",
+     "color": [
+      0.55,
+      0.55,
+      0.58
+     ],
+     "file": "bodies/part__tank_dome.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 532
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "UART"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": "https://cdn.satsearch.com/product-images/image-steamjet-space-systems-steam-thruster-one-0ffz93.jpg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/steamjet-space-steam-thruster-one",
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

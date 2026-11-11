@@ -1,0 +1,4 @@
+url: https://www.aac-clyde.space/wp-content/uploads/2021/10/AAC_DataSheet_Pulsar_VUTRX-4.pdf
+title: Pulsar-VUTRX - CubeSat VHF/UHF Transceiver | AAC Clyde Space
+query: UHF Transceiver datasheet
+found by web search; verify that it is the right part

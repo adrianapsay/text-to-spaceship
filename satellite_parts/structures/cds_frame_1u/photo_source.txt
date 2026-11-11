@@ -1,0 +1,5 @@
+image: https://cdn.satsearch.com/product-images/satsearch_product-image_xx83vy_aphelion_1u_cubesat_skeleton_chassis.jpg
+page: https://satsearch.co/products/aphelion-1u-cubesat-skeleton-chassis
+title: 1U Cubesat Skeleton Chassis | satsearch
+query: generic 1U skeleton frame
+found by web image search; representative, verify before use

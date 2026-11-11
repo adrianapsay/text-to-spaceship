@@ -1,0 +1,4 @@
+url: https://catalog.orbitaltransports.com/content/brands/ISIspace/IOBC-Brochure-web-compressed.pdf
+title: ISIS On board computer
+query: ISISPACE iOBC datasheet pdf
+found by web search; verify that it is the right part

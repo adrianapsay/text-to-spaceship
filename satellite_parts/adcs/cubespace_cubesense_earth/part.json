@@ -103,6 +103,15 @@
      "file": "bodies/part__lid.stl"
     },
     {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
      "name": "connector",
      "color": [
       0.16,
@@ -132,14 +141,32 @@
   "power_bus_V": 3.3
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://www.cubespace.co.za/uploads/a629ddb8-5c60-4846-8dac-034f717b33ad.pdf",
+    "title": "CubeSense Earth Gen 2 - CubeSpace"
+   },
+   {
+    "file": "datasheet_2_page1.png",
+    "pdf": "datasheet_2.pdf",
+    "kind": "web_search",
+    "url": "https://satcatalog.s3.amazonaws.com/components/1406/SatCatalog_-_CubeSpace_-_Gen2_CubeSense_Earth_-_Datasheet.pdf?lastmod=20260129005255",
+    "title": "Gen2: CubeSense Earth - Earth/Horizon Sensor - SatCatalog"
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": "https://cdn.satsearch.com/product-images/image-cubespace-gen2-cubesense-sun-dtqnp7.jpg",
   "photo_source": "satsearch (Sun sensor photo)",
   "photo_page": "https://satsearch.co/products/cubespace-gen2-cubesense-sun",
-  "photo_file": "reference_photo",
+  "photo_file": null,
+  "photo_kind": null,
   "datasheet_url": "https://www.cubesatshop.com/wp-content/uploads/2023/06/CubeSpace-SENSORS-2023.pdf",
-  "datasheet_page_file": "datasheet_page1.png",
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

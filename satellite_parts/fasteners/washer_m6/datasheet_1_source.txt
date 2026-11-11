@@ -1,0 +1,4 @@
+url: https://apps.des.wa.gov/contracting/Vactor.parts.pdf
+title: Vactor.parts.pdf
+query: generic ISO 7089 M6 datasheet pdf
+found by web search; verify that it is the right part

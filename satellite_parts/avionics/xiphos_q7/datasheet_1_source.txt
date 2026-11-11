@@ -1,0 +1,4 @@
+url: https://xiphos.com/hubfs/Xiphos-2023/PDFs/XTI-2001-2019-f-Q7-Spec-Sheet.pdf
+title: Q7 SPECIFICATIONS - Xiphos
+query: Xiphos Systems Q7 datasheet pdf
+found by web search; verify that it is the right part

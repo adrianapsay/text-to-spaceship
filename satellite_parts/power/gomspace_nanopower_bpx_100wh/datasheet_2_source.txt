@@ -1,0 +1,2 @@
+url: https://gomspace.com/wp-content/uploads/2026/01/gs-ds-nanopower-bpx-3-2.1-DS-1018161-1-4.1-1.pdf
+found by Claude (web search) on 2026-11-10; downloaded by download_datasheets.py

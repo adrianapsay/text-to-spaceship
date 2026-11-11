@@ -1,0 +1,5 @@
+image: https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/5011/MDM-9SCBR-L61-F222.jpg
+page: https://www.digikey.com/en/products/detail/itt-cannon-llc/MDM-9SCBR-L61-F222/16588462
+title: MDM-9SCBR-L61-F222 ITT Cannon, LLC | Connectors, Interconnects | DigiKey
+query: generic MDM-9 connector
+found by web image search; representative, verify before use

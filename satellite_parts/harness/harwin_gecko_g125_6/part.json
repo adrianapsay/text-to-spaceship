@@ -101,14 +101,39 @@
   "power_bus_V": null
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_page1.png",
+    "pdf": null,
+    "url": null,
+    "kind": "vendor_link",
+    "title": "Harwin Gecko product family page (read 2026-11-08: 1.25 mm pitch, 2.8 A per contact, -65 to 150 C)"
+   },
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://content.harwin.com/asset/85d293be-c09f-4fa0-a334-46b2f60da08c/PD007-Product-Datasheet-Gecko-range-signal-connectors-HRi.pdf",
+    "title": null
+   },
+   {
+    "file": "datasheet_2_page1.png",
+    "pdf": "datasheet_2.pdf",
+    "kind": "web_search",
+    "url": "https://content.harwin.com/m/59c11be7382ae30/original/Harwin-Modern-Slavery-Statement.pdf",
+    "title": null
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": null,
   "photo_source": null,
   "photo_page": null,
-  "photo_file": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "web_search_representative",
   "datasheet_url": null,
-  "datasheet_page_file": null,
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

@@ -22,3 +22,11 @@ source      type (datasheet | standard | derived | unverified), url, document (t
 interfaces  (added for compatibility checks) data_buses [I2C, CAN, SPI, UART, RS-422, RS-485, USB, Ethernet, ...] parsed from the datasheet interface list;
             mechanical (e.g. "PC/104 stack", "M3 x 4 base pattern", "CDS rails"); electrical_connectors [e.g. "Samtec ESQ PC/104 stack-through", "Harwin Gecko G125 2x10", "Micro-D 9", "pigtail"]; rf_connectors [e.g. "SMA female", "MMCX"]; power_bus_V (nominal supply)
             Null or empty means the datasheet did not state it; nothing here is guessed.
+
+## geometry.bodies and geometry.render_kind (added 2026-11-10)
+
+`geometry.bodies.part` (and `.part_deployed`) lists the colored bodies the shape is built from: `{name, color [r, g, b] 0..1, file}` with `file` under `bodies/`. part.step carries the same bodies with colors; part.stl is their union and is the packing geometry. `geometry.render_kind` is the builder actually used (plain `box` records in electronics categories render as `module_box`: body, lid and recessed connector inside the same envelope).
+
+## reference_images (added 2026-11-08, extended 2026-11-10)
+
+`stl_preview` (preview.png), `drawing` (drawing.png), `photo_url` / `photo_source` / `photo_page` (where the supplier photo was read from), `photo_file` (reference_photo.jpg when present), `photo_kind` = `vendor_or_marketplace` (vendor site or a marketplace copy of the vendor's photo) or `web_search_representative` (found by a web image search for the model name; photo_source.txt in the folder names the image URL, page and query; treat as illustrative), `datasheet_url`, `datasheet_page_file` (datasheet_page1.png when present).

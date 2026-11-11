@@ -95,14 +95,17 @@
   "power_bus_V": null
  },
  "reference_images": {
+  "datasheets": [],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": "https://www.endurosat.com/wp-content/uploads/2025/01/X-Band-Patch-Antenna.webp",
   "photo_source": "vendor",
   "photo_page": "https://www.endurosat.com/products/x-band-patch-antenna/",
-  "photo_file": "reference_photo",
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": null,
   "datasheet_page_file": null,
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

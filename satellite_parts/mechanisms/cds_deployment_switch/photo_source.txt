@@ -1,0 +1,5 @@
+image: https://www.2mtechnology.net/wp-content/uploads/2026/05/unifi-enterprise-switch-idf-rack.webp
+page: https://www.2mtechnology.net/unifi-enterprise-switch-deployment-guide/
+title: UniFi Enterprise Switch Deployment Guide | 2M Technology
+query: generic deployment switch deployment switch
+found by web image search; representative, verify before use

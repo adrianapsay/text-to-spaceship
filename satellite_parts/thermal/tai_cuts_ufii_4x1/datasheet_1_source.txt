@@ -1,0 +1,2 @@
+url: https://wiki.nikhef.nl/vuv/images/1/14/2022_CuTS%C2%AE_Catalog_-_TAI%281139%29.pdf
+found by Claude (web search) on 2026-11-10; downloaded by download_datasheets.py

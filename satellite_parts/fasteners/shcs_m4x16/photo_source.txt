@@ -1,0 +1,5 @@
+image: https://www.novotek-vacuum.com/shop/images/products/gallery/detail/NV_4762_M4x16_1.jpg
+page: https://www.novotek-vacuum.com/vacuum-optimized-screws/socket-head-cap-screws-iso-4762-din-912-m4x16-a2-center-vented.html
+title: socket head cap screws ISO 4762 (DIN 912) M4x16, A2, center vented
+query: generic ISO 4762 M4x16 screw
+found by web image search; representative, verify before use

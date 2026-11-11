@@ -1,0 +1,4 @@
+url: https://www.kontakt-simon.com.pl/en/Catalogue/773/11/6781,CR0003_14.pdf
+title: CR0003/14 - Kontakt-Simon
+query: CR0003 datasheet
+found by web search; verify that it is the right part

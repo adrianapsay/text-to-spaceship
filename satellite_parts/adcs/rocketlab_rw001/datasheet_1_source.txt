@@ -1,0 +1,4 @@
+url: https://rocketlabcorp.com/assets/Uploads/RL-RW-0.01-Data-Sheet.pdf
+title: REACTION WHEEL - Rocket Lab
+query: Rocket Lab RW-0.01 datasheet pdf
+found by web search; verify that it is the right part

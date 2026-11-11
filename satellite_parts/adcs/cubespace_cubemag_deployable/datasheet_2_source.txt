@@ -1,0 +1,4 @@
+url: https://satcatalog.s3.amazonaws.com/components/1408/SatCatalog_-_CubeSpace_-_Gen2_CubeMag_Compact__Deployable_-_Datasheet.pdf?lastmod=20260129004942
+title: Gen2: CubeMag (Compact & Deployable) - Magnetometer
+query: CubeMag Deployable datasheet
+found by web search; verify that it is the right part

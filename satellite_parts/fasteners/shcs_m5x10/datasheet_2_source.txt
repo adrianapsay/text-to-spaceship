@@ -1,0 +1,4 @@
+url: https://www.af1racing.com/store/ProdImages/st3/16DS.pdf
+title: Zero Motocycles - AF1 Racing
+query: generic ISO 4762 M5x10 datasheet pdf
+found by web search; verify that it is the right part

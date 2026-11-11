@@ -1,0 +1,5 @@
+image: https://www.pumpkinspace.com/uploads/8/2/6/7/82676946/dsc-3027_orig.jpg
+page: https://www.pumpkinspace.com/news/previous/4
+title: Blog Posts - Pumpkin, Inc.
+query: Pumpkin Space Systems BM 1 (710-01006) battery
+found by web image search; representative, verify before use

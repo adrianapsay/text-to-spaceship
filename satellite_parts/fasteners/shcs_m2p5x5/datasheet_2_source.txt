@@ -1,0 +1,4 @@
+url: https://www.heidenhain.us/wp-content/uploads/2022/08/RENCO-R35i-R35iL-General-Catalog.pdf
+title: RENCO R35i and R35iL rotary encoders - Heidenhain Corporation
+query: generic ISO 4762 M2.5x5 datasheet pdf
+found by web search; verify that it is the right part

@@ -1,0 +1,2 @@
+url: https://www.astrofein.com/wp-content/uploads/2023/04/ASTROFEIN-Reaction-Wheel-Family_20230425.pdf
+found by Claude (web search) on 2026-11-10; downloaded by download_datasheets.py

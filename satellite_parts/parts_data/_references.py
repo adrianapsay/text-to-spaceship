@@ -193,3 +193,10 @@ REFERENCES = {
     "adcole_mai_400": {"photo": "https://satcatalog.s3.amazonaws.com/components/87/featured_image.jpg", "photo_source": "satcatalog", "page": "https://satcatalog.com/component/mai-400", "datasheet": "https://satcatalog.s3.amazonaws.com/components/87/SatCatalog_-_Adcole_Maryland_Aerospace_-_MAI-400_-_Datasheet.pdf"},
     "adcole_mai_ss": {"photo": "https://satcatalog.s3.amazonaws.com/components/271/featured_image.jpg", "photo_source": "satcatalog", "page": "https://satcatalog.com/component/mai-ss", "datasheet": "https://satcatalog.s3.amazonaws.com/components/271/SatCatalog_-_Adcole_Maryland_Aerospace_-_MAI-SS_-_Datasheet.pdf"},
 }
+
+
+# Parts added 2026-11-10 from satsearch listings: product photo per listing (see parts_data/added_2026_11_10.py).
+from parts_data.added_2026_11_10 import PHOTOS as _ADDED_PHOTOS, PARTS as _ADDED_PARTS
+for _record in _ADDED_PARTS:
+    if _ADDED_PHOTOS.get(_record["id"]):
+        REFERENCES[_record["id"]] = {"photo": _ADDED_PHOTOS[_record["id"]], "photo_source": "satsearch", "page": _record["source"]["url"]}

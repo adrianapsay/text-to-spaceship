@@ -91,6 +91,15 @@
      "file": "bodies/part__lid.stl"
     },
     {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
      "name": "connector",
      "color": [
       0.16,
@@ -116,14 +125,17 @@
   "power_bus_V": 3.7
  },
  "reference_images": {
+  "datasheets": [],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_fwt7h3_exa_1u-high-capacity-battery-arrays.JPG",
   "photo_source": "satsearch",
   "photo_page": "https://satsearch.co/products/exa-25-whr-high-energy-density-li-po-battery-array",
-  "photo_file": "reference_photo",
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": "https://www.cubesatshop.com/wp-content/uploads/2016/11/EXA-BA0x-Brochure.pdf",
-  "datasheet_page_file": "datasheet_page1.png",
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

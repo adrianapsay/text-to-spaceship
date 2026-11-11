@@ -1,0 +1,5 @@
+image: https://www.expo21xx.com/cipmedia/16598/21.jpg
+page: https://www.expo21xx.com/industry4/16598_st3_iot_rfid/default.htm
+title: Gyro modules,long lifetime, high reliability and pressure dies by sensonor
+query: Safran Sensonor STIM277H gyroscope
+found by web image search; representative, verify before use

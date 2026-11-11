@@ -1,0 +1,5 @@
+image: https://parts.zsk.de/media/26/d8/29/1770297439/307011-02.webp?ts=1770299585
+page: https://parts.zsk.de/en/mechanics/norm-parts/screws/m4-x-10-din-912-iso-4762-hexagon-socket-head-cap-screw/z-000-0136
+title: M4 x 10 | DIN 912 / ISO 4762 | Hexagon socket head cap screw at ZSK ...
+query: generic ISO 4762 M4x10 screw
+found by web image search; representative, verify before use

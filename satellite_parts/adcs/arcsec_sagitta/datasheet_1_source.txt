@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-arcsec-sagitta-star-tracker-ta8ual.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJLB7IRZ54RAMS36Q%2F20261111%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20261111T031724Z&X-Amz-Expires=86400&X-Amz-Signature=5702a8a5cefbc044b931da6f1a916851499f4e10c873b14d17b3cc2cdf1f2cd7&X-Amz-SignedHeaders=host
+found by Claude (web search) on 2026-11-10; downloaded by download_datasheets.py

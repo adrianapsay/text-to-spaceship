@@ -1,0 +1,2 @@
+url: https://www.aac-clyde.space/wp-content/uploads/2021/10/PULSAR-SANT-1.pdf
+found by Claude (web search) on 2026-11-10; downloaded by download_datasheets.py

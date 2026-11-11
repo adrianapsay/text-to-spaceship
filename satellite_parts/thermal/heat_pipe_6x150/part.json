@@ -71,14 +71,32 @@
   "power_bus_V": null
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://www.farnell.com/datasheets/2621201.pdf",
+    "title": "Heat Pipe Selection Guide - Farnell"
+   },
+   {
+    "file": "datasheet_2_page1.png",
+    "pdf": "datasheet_2.pdf",
+    "kind": "web_search",
+    "url": "https://wakefieldthermal.com/content/data_sheets/wfv-heatpipe_designguide_R3_2020.pdf",
+    "title": "heat pipe - Wakefield Thermal"
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": null,
   "photo_source": null,
   "photo_page": null,
   "photo_file": null,
+  "photo_kind": null,
   "datasheet_url": null,
   "datasheet_page_file": null,
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

@@ -1,0 +1,4 @@
+url: http://www.itu.int/en/ITU-R/space/workshops/2015-prague-small-sat/Presentations/GomSpace.pdf
+title: GOMX-3 (GomSpace Express-3) - eoPortal
+query: GomSpace NanoPower BP4 datasheet pdf
+found by web search; verify that it is the right part

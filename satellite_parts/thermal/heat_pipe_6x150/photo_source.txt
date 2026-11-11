@@ -1,0 +1,5 @@
+image: https://www.mouser.cn/images/marketingid/2020/img/134995265.png?v=070223.1011
+page: https://www.mouser.cn/new/aavid-thermalloy/aavid-boyd-hp-cws-heat-pipes/
+title: HP-CWS Copper-Water Heat Pipes - Aavid | Mouser
+query: Copper-water miniature heat pipe 6 mm x 150 mm product photo
+found by web image search; representative, verify before use

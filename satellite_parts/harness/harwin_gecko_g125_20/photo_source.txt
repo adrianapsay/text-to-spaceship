@@ -1,0 +1,5 @@
+image: https://content.harwin.com/transform/c03a0c51-d0cc-4f96-aca3-28681103d2ff/G125-MH12005M4P-2?io=transform:scale,width:1920
+page: https://www.harwin.com/products/G125-MH12005M4P
+title: Gecko-SL Male Horizontal Conn. - G125-MH12005M4P - Harwin
+query: Harwin G125-MH12005-0300 connector
+found by web image search; representative, verify before use

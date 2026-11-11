@@ -1,0 +1,4 @@
+url: https://hexagondownloads.blob.core.windows.net/public/Novatel/assets/Documents/Papers/OEM719-Product-Sheet/OEM719-Product-Sheet.pdf
+title: OEM719 Product Sheet
+query: NovAtel OEM719 datasheet pdf
+found by web search; verify that it is the right part

@@ -1,0 +1,4 @@
+url: https://www.epsondevice.com/sensing/en/pdf/m-g370pdt0_briefsheet_e_rev11.pdf
+title: Features and Lineup of IMU | Products | Epson Sensing Device
+query: Seiko Epson M-G370PDS0 datasheet pdf
+found by web search; verify that it is the right part

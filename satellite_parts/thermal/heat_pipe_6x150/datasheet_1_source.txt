@@ -1,0 +1,4 @@
+url: https://www.farnell.com/datasheets/2621201.pdf
+title: Heat Pipe Selection Guide - Farnell
+query: copper water heat pipe 6mm datasheet pdf
+found by web search; verify that it is the right part

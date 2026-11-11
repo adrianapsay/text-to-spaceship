@@ -1,0 +1,4 @@
+url: https://catalog.orbitaltransports.com/content/brands/ISIspace/ISIS-CubeSat-Development-Platform-Brochure-v2R-web.pdf
+title: CubeSat Development Platform
+query: ISISPACE AntS (ISIS-ANTS) datasheet pdf
+found by web search; verify that it is the right part

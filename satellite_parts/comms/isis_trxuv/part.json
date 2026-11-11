@@ -138,14 +138,25 @@
   "power_bus_V": null
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://space-for-space.com/wp-content/uploads/2018/10/ISIS-VHF-uplink_UHF-downlink-Full-Duplex-Transceiver-Brochure-v1-1.pdf",
+    "title": "Communication Systems"
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": "https://cdn.satsearch.com/product-images/satsearch_0qvm50_innovative_solutions_in_space_vhf_uplink_uhf_downlink.png",
   "photo_source": "satsearch (TRXVU photo; same family)",
   "photo_page": "https://satsearch.co/products/isis-vhf-uplink-uhf-downlink-full-duplex-transceiver",
-  "photo_file": "reference_photo",
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": "https://www.cubesatshop.com/wp-content/uploads/2016/06/Communication-systems-Brochure-v1.pdf",
-  "datasheet_page_file": "datasheet_page1.png",
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

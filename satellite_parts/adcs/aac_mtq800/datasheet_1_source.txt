@@ -1,0 +1,2 @@
+url: https://www.aac-clyde.space/wp-content/uploads/2021/11/MTQ800.pdf
+found by Claude (web search) on 2026-11-10; downloaded by download_datasheets.py

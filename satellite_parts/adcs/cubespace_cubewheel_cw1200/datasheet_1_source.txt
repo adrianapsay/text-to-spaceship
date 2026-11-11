@@ -1,0 +1,4 @@
+url: https://www.cubespace.co.za/uploads/29197e76-cd6d-409e-8896-e29b4813ed2c.pdf
+title: CubeWheel Interface Control Document - CubeSpace
+query: CubeSpace Satellite Systems CW1200 datasheet pdf
+found by web search; verify that it is the right part

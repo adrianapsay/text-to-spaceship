@@ -1,0 +1,4 @@
+url: https://www.endurosat.com/wp-content/uploads/2022/02/Endurosat_Product_Catalogue_02_22.pdf
+title: EnduroSat - Catalogue
+query: EnduroSat CubeSat EPS datasheet pdf
+found by web search; verify that it is the right part

@@ -1,0 +1,4 @@
+url: https://pub-mediabox-storage.rxweb-prd.com/exhibitor/products/exh-0d97a667-a4c1-4dca-9a33-58b7aa04ec80/product-documents/pro-99cdd38a-16b3-4718-99f3-14ca4d479253/8c44fc95-0c06-4c6f-b822-3954fe7124b2.pdf
+title: 2025 Tensor Tech Brochure V5.1-L
+query: Tensor Tech TensorFSS-15M datasheet pdf
+found by web search; verify that it is the right part

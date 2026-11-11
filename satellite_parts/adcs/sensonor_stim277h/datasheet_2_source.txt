@@ -1,0 +1,4 @@
+url: https://www.safran-group.com/sites/default/files/2022-08/safransensingtechnologies-dok0451-r2-user-manual-stim210-stim277h-evaluation-kit.pdf
+title: STIM210/ STIM277H - Safran
+query: Safran Sensonor STIM277H datasheet pdf
+found by web search; verify that it is the right part

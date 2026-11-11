@@ -1,0 +1,5 @@
+image: https://www.cutmetall.com/itemimages/res3/m6x12-hexagon-socket-head-screw-88-din-912-iso-4762-galvanised-33953.jpg
+page: https://www.cutmetall.com/en/m6x12-hexagon-socket-head-screw-8-8-din-912-iso-4762-galvanised-p15497/
+title: M6x12 hexagon socket head screw 8.8 DIN 912 / ISO 4762, galvanised ...
+query: generic ISO 4762 M6x12 screw
+found by web image search; representative, verify before use

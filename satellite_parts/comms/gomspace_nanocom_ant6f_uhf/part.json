@@ -94,7 +94,7 @@
   ],
   "mesh_volume_mm3": 137123.7,
   "watertight": true,
-  "render_kind": "box",
+  "render_kind": "tape_antenna_stowed",
   "effective_density_g_cm3": 0.656,
   "deployed_measured_bbox_mm": [
    543.7,
@@ -104,13 +104,31 @@
   "bodies": {
    "part": [
     {
-     "name": "body",
+     "name": "base",
      "color": [
       0.36,
       0.4,
       0.46
      ],
-     "file": "bodies/part__body.stl"
+     "file": "bodies/part__base.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "tape_coil",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__tape_coil.stl"
     }
    ],
    "part_deployed": [
@@ -148,14 +166,32 @@
   "power_bus_V": 3.3
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_page1.png",
+    "pdf": null,
+    "url": "https://gomspace.com/wp-content/uploads/2025/09/gs-ds-nanocom-ant6f-uhf-3.0.pdf",
+    "kind": "vendor_link",
+    "title": "NanoCom ANT-6F UHF datasheet DS 1010785"
+   },
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://gomspace.com/wp-content/uploads/2025/09/gs-ds-nanocom-ant6f-uhf-3.0.pdf",
+    "title": null
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": null,
   "photo_source": null,
   "photo_page": null,
-  "photo_file": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "web_search_representative",
   "datasheet_url": "https://gomspace.com/wp-content/uploads/2025/09/gs-ds-nanocom-ant6f-uhf-3.0.pdf",
   "datasheet_page_file": "datasheet_page1.png",
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

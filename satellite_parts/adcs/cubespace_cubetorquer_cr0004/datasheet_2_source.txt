@@ -1,0 +1,4 @@
+url: https://files.kempstoncontrols.com/files/5aea7fef9a75feda4aa1001052580ba7/CR0004.pdf
+title: CR0004.pdf - Kempston Controls
+query: CR0004 datasheet
+found by web search; verify that it is the right part

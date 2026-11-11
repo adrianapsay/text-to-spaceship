@@ -1,0 +1,5 @@
+image: https://cubesat-propulsion.com/wp-content/uploads/2015/11/JPL-Marco-MIP-0919_web.jpg
+page: https://cubesat-propulsion.com/jpl-marco-micro-propulsion-system/
+title: JPL MarCO Micro CubeSat Propulsion System | VACCO
+query: VACCO Industries MarCO MiPS cold gas module
+found by web image search; representative, verify before use

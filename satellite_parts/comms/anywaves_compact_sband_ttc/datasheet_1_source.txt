@@ -1,0 +1,4 @@
+url: https://content.anywaves.com/hubfs/Anywaves-Datasheets/PORTFOLIO-ANYWAVES_compressed.pdf
+title: Portfolio TT&C - Anywaves
+query: Anywaves Compact S-Band TT&C Antenna datasheet pdf
+found by web search; verify that it is the right part

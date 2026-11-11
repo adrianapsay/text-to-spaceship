@@ -1,0 +1,4 @@
+url: https://gomspace.com/wp-content/uploads/2026/01/gs-ds-nanopower-msp_1016340_32.pdf
+title: NanoPower MSP - GomSpace
+query: GomSpace NanoPower P31u datasheet pdf
+found by web search; verify that it is the right part

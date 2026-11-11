@@ -1,0 +1,5 @@
+image: https://cubesat-propulsion.com/wp-content/uploads/2015/09/X13003000-01-product-photo-0919_web.jpg
+page: https://cubesat-propulsion.com/reaction-control-propulsion-module/
+title: NASA C-POD Micro CubeSat Propulsion System | VACCO Industries
+query: VACCO Industries X14029003-7 (0.8U) cold gas module
+found by web image search; representative, verify before use

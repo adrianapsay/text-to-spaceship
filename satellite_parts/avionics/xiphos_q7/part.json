@@ -107,6 +107,15 @@
      "file": "bodies/part__lid.stl"
     },
     {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
      "name": "connector",
      "color": [
       0.16,
@@ -140,14 +149,32 @@
   "power_bus_V": null
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://xiphos.com/hubfs/Xiphos-2023/PDFs/XTI-2001-2019-f-Q7-Spec-Sheet.pdf",
+    "title": "Q7 SPECIFICATIONS - Xiphos"
+   },
+   {
+    "file": "datasheet_2_page1.png",
+    "pdf": "datasheet_2.pdf",
+    "kind": "web_search",
+    "url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-xiphos-q7-processor-khh4oc.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJLB7IRZ54RAMS36Q%2F20261111%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20261111T031811Z&X-Amz-Expires=86400&X-Amz-Signature=f1ab022a0c238109348adbf7b73edfc3c7017619f84c7dbbc479bf5b1015551c&X-Amz-SignedHeaders=host",
+    "title": null
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": "https://cdn.satsearch.com/product-images/image-xiphos-q7-processor-vz5zab.jpg",
   "photo_source": "satsearch",
   "photo_page": "https://satsearch.co/products/xiphos-q7-processor",
-  "photo_file": "reference_photo",
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": null,
   "datasheet_page_file": null,
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

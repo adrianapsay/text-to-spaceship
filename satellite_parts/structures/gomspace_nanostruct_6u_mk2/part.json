@@ -46,25 +46,34 @@
    100.0,
    340.5
   ],
-  "mesh_volume_mm3": 7705515.1,
+  "mesh_volume_mm3": 258572.6,
   "watertight": true,
-  "render_kind": "box",
-  "effective_density_g_cm3": 0.086,
+  "render_kind": "cubesat_frame",
+  "effective_density_g_cm3": 2.572,
   "bodies": {
    "part": [
     {
-     "name": "body",
+     "name": "rails",
      "color": [
       0.36,
       0.4,
       0.46
      ],
-     "file": "bodies/part__body.stl"
+     "file": "bodies/part__rails.stl"
+    },
+    {
+     "name": "rings",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__rings.stl"
     }
    ]
   },
   "face_counts": {
-   "part": 12
+   "part": 344
   }
  },
  "image": "preview.png",
@@ -76,14 +85,32 @@
   "power_bus_V": null
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_page1.png",
+    "pdf": null,
+    "url": "https://gomspace.com/wp-content/uploads/2025/09/gs-ds-nanostructure-6u-Mk2-1060779-12-EXT.pdf",
+    "kind": "vendor_link",
+    "title": "GomSpace NanoStruct 6U Mk2 datasheet DS 1060779"
+   },
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://gomspace.com/wp-content/uploads/2025/09/gs-ds-nanostructure-6u-Mk2-1060779-12-EXT.pdf",
+    "title": null
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": "https://gomspace.com/wp-content/uploads/2025/09/NanoStruct-6U-Featured.png",
   "photo_source": "vendor",
   "photo_page": "https://gomspace.com/product/nanostruct-6u/",
-  "photo_file": "reference_photo",
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": "https://gomspace.com/wp-content/uploads/2025/09/gs-ds-nanostructure-6u-Mk2-1060779-12-EXT.pdf",
   "datasheet_page_file": "datasheet_page1.png",
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

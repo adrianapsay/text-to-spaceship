@@ -1,0 +1,5 @@
+image: https://cubesat-propulsion.com/wp-content/uploads/2019/08/X16029000-01-VIEW-Green-Propulsion-System_web1.jpg
+page: https://cubesat-propulsion.com/green-propulsion-system/
+title: Green Propulsion System - VACCO Industries
+query: VACCO Industries X14029003-1 (0.3U) cold gas module
+found by web image search; representative, verify before use

@@ -1,0 +1,4 @@
+url: https://content.harwin.com/asset/494c0cd3-de03-41eb-b7cd-bd49b919bf17/PD015-Product-Datasheet-M300-range-HRi.pdf
+title: Product Datasheets - Harwin
+query: Harwin connector datasheet pdf
+found by web search; verify that it is the right part

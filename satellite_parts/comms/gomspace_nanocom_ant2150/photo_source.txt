@@ -1,0 +1,5 @@
+image: https://gomspace.com/wp-content/uploads/2025/09/Compacet-S-band-Antenna-TOP.png
+page: https://gomspace.com/product/nanocom-ant2150-dup-ant2150-isl/
+title: NanoCom ANT2150 DUP / ANT2150 ISL - GomSpace
+query: GomSpace NanoCom ANT2150 antenna
+found by web image search; representative, verify before use

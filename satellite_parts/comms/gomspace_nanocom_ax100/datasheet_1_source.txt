@@ -1,0 +1,4 @@
+url: https://gomspace.com/wp-content/uploads/2025/09/gs-ds-nanocom-ax100.pdf
+title: NanoCom AX100 - GomSpace
+query: GomSpace NanoCom AX100 datasheet pdf
+found by web search; verify that it is the right part

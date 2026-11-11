@@ -1,0 +1,4 @@
+url: https://cdn.hackaday.io/files/1900958133024480/CubeSat+Antenna+Design+(Nacer+Chahat).pdf
+title: CubeSat Antenna Design | Hackaday.io
+query: EnduroSat X-Band Patch Antenna (single) datasheet pdf
+found by web search; verify that it is the right part

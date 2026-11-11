@@ -1,0 +1,4 @@
+url: https://www.eurosatcom.eu/files/6890db85/space_ka_band_transmitter.pdf
+title: CubeSat K-band Transmitter - eurosatcom
+query: EnduroSat X-Band Transmitter datasheet pdf
+found by web search; verify that it is the right part

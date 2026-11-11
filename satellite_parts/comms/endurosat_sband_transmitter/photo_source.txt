@@ -1,0 +1,5 @@
+image: https://www.endurosat.com/wp-content/uploads/2022/02/S-Band-Transceiver-I-cubesat-communication-endurosat-2024-1-min.webp
+page: https://www.endurosat.com/projects/innospacecomm-project/
+title: InnoSpaceComm Project - EnduroSat
+query: EnduroSat S-Band Transmitter transmitter
+found by web image search; representative, verify before use

@@ -24,10 +24,10 @@
    "dimensions_mm",
    "mounting"
   ],
-  "notes": "Envelope: CDS Rev 14.1 (226.3 x 100 x 366 mm); 6U/12U widths 226.3 mm per cubesat-specs summary of CDS (https://cubesat-specs.readthedocs.io). Rails 8.5 mm square (CDS 2.2.5 minimum). Mass is DERIVED: typical vendor primary-structure masses (ISIS 1U 100 g, EnduroSat 1U 120 g, 3U 243-290 g, 6U 850-900 g); 1.5U, 2U, 12U interpolated. 6U/12U drawn as envelope boxes only."
+  "notes": "Envelope: CDS Rev 14.1 (226.3 x 100 x 366 mm); 6U/12U widths 226.3 mm per cubesat-specs summary of CDS (https://cubesat-specs.readthedocs.io). Rails 8.5 mm square (CDS 2.2.5 minimum). Mass is DERIVED: typical vendor primary-structure masses (ISIS 1U 100 g, EnduroSat 1U 120 g, 3U 243-290 g, 6U 850-900 g); 1.5U, 2U, 12U interpolated. 6U/12U drawn as two-bay skeleton frames with a middle rail pair (schematic)."
  },
  "status": "in_production",
- "fidelity": "envelope",
+ "fidelity": "envelope_plus_features",
  "vendor_country": null,
  "distributors": [],
  "material": "aluminium 6061/6082 (typical; CDS requires 7075, 6061, 5005 or 5052 for rails)",
@@ -45,25 +45,34 @@
    100.0,
    366.0
   ],
-  "mesh_volume_mm3": 8282580.1,
+  "mesh_volume_mm3": 284100.6,
   "watertight": true,
-  "render_kind": "box",
-  "effective_density_g_cm3": 0.103,
+  "render_kind": "cubesat_frame",
+  "effective_density_g_cm3": 2.992,
   "bodies": {
    "part": [
     {
-     "name": "body",
+     "name": "rails",
      "color": [
       0.36,
       0.4,
       0.46
      ],
-     "file": "bodies/part__body.stl"
+     "file": "bodies/part__rails.stl"
+    },
+    {
+     "name": "rings",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__rings.stl"
     }
    ]
   },
   "face_counts": {
-   "part": 12
+   "part": 448
   }
  },
  "image": "preview.png",
@@ -75,14 +84,25 @@
   "power_bus_V": null
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_page1.png",
+    "pdf": null,
+    "url": "https://www.nasa.gov/wp-content/uploads/2018/01/cubesatdesignspecificationrev14_12022-02-09.pdf",
+    "kind": "vendor_link",
+    "title": "CubeSat Design Specification (CDS) Rev 14.1, Cal Poly, 2022-02-09"
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": null,
   "photo_source": null,
   "photo_page": null,
   "photo_file": null,
+  "photo_kind": null,
   "datasheet_url": "https://www.nasa.gov/wp-content/uploads/2018/01/cubesatdesignspecificationrev14_12022-02-09.pdf",
   "datasheet_page_file": "datasheet_page1.png",
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

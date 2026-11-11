@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-tensor-tech-tensoradcs-mtq-integrated-attitude-determination-and-control-system-with-magnetorquers-rnk5ji.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJLB7IRZ54RAMS36Q%2F20261111%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20261111T031753Z&X-Amz-Expires=86400&X-Amz-Signature=f1996091c741d34e813562875ffd241bc4764e1a6292d3f20f09ef0b7115aefc&X-Amz-SignedHeaders=host
+found by Claude (web search) on 2026-11-10; downloaded by download_datasheets.py

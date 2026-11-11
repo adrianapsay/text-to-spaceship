@@ -7,6 +7,7 @@ then catalog.csv, downloads.csv and needs_verification.csv.
 """
 
 import os
+import re
 import sys
 import csv
 import json
@@ -74,6 +75,14 @@ def styled_spec(record, spec):
         spec["kind"] = "connector_block"
     if spec.get("kind") == "box" and record.get("subcategory") == "sun_sensor":
         spec["kind"] = "sun_sensor"
+    if spec.get("kind") == "box" and record.get("subcategory") == "solar_cell":
+        spec["kind"] = "solar_cell"
+    if spec.get("kind") in ("box", "module_box") and record.get("subcategory") in ("battery", "battery_pack") and spec["x"] >= 70 and spec["y"] >= 40 and spec["z"] >= 20:
+        spec["kind"] = "battery_pack"
+        spec["cells"] = (1, max(1, min(8, int((spec["y"] - 4) // 20))))
+    if spec.get("kind") in ("box", "module_box") and record.get("subcategory") == "antenna" and "shape_deployed" in record:
+        spec["kind"] = "tape_antenna_stowed"
+        spec["base_x"], spec["base_y"], spec["base_z"] = spec["x"], spec["y"], spec["z"]
     return spec
 
 
@@ -163,7 +172,26 @@ for module_name in modules:
         reference = dict(REFERENCES[reference_key]) if reference_key else {}
         source_url = (record.get("source") or {}).get("url", "") or ""
         datasheet_url = reference.get("datasheet") or (source_url if source_url.lower().split("?")[0].endswith(".pdf") else None)
-        record["reference_images"] = {"stl_preview": "preview.png" if arguments.render else None, "photo_url": reference.get("photo"), "photo_source": reference.get("photo_source"), "photo_page": reference.get("page"), "photo_file": "reference_photo" if reference.get("photo") else None, "datasheet_url": datasheet_url, "datasheet_page_file": "datasheet_page1.png" if datasheet_url else None, "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"}
+        photo_present = os.path.exists(os.path.join(folder, "reference_photo.jpg"))
+        datasheet_present = os.path.exists(os.path.join(folder, "datasheet_page1.png"))
+        photo_note_path = os.path.join(folder, "photo_source.txt")
+        datasheets = []
+        if datasheet_present:
+            datasheets.append({"file": "datasheet_page1.png", "pdf": "datasheet.pdf" if os.path.exists(os.path.join(folder, "datasheet.pdf")) else None, "url": datasheet_url, "kind": "vendor_link", "title": (record.get("source") or {}).get("document", {}).get("title")})
+        for name in sorted(os.listdir(folder)):
+            match = re.match(r"datasheet_(\d+)_page1\.png$", name)
+            if not match:
+                continue
+            source_path = os.path.join(folder, "datasheet_" + match.group(1) + "_source.txt")
+            info = {"file": name, "pdf": "datasheet_" + match.group(1) + ".pdf", "kind": "web_search", "url": None, "title": None}
+            if os.path.exists(source_path):
+                for line in open(source_path, encoding="utf-8"):
+                    if line.startswith("url: "):
+                        info["url"] = line[5:].strip()
+                    if line.startswith("title: "):
+                        info["title"] = line[7:].strip()
+            datasheets.append(info)
+        record["reference_images"] = {"datasheets": datasheets, "stl_preview": "preview.png" if os.path.exists(os.path.join(folder, "preview.png")) else None, "drawing": "drawing.png" if os.path.exists(os.path.join(folder, "drawing.png")) else None, "photo_url": reference.get("photo"), "photo_source": reference.get("photo_source"), "photo_page": reference.get("page"), "photo_file": "reference_photo.jpg" if photo_present else None, "photo_kind": ("web_search_representative" if os.path.exists(photo_note_path) else "vendor_or_marketplace") if photo_present else None, "datasheet_url": datasheet_url, "datasheet_page_file": "datasheet_page1.png" if datasheet_present else None, "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"}
         reference_rows.append([part_id, category, reference.get("photo") or "", reference.get("photo_source") or "", reference.get("page") or "", datasheet_url or ""])
         output = {key: value for key, value in record.items() if key not in ("shape", "shape_deployed", "connectors", "rf_connectors")}
         output["files"] = {stem: [stem + ".step", stem + ".stl"] for stem in geometries}

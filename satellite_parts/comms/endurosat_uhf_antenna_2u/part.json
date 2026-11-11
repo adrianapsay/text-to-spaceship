@@ -77,9 +77,9 @@
    98.0,
    8.0
   ],
-  "mesh_volume_mm3": 156779.1,
+  "mesh_volume_mm3": 156800.0,
   "watertight": true,
-  "render_kind": "module_box",
+  "render_kind": "tape_antenna_stowed",
   "effective_density_g_cm3": 1.339,
   "deployed_measured_bbox_mm": [
    536.0,
@@ -89,13 +89,13 @@
   "bodies": {
    "part": [
     {
-     "name": "housing",
+     "name": "base",
      "color": [
       0.36,
       0.4,
       0.46
      ],
-     "file": "bodies/part__housing.stl"
+     "file": "bodies/part__base.stl"
     },
     {
      "name": "lid",
@@ -107,13 +107,13 @@
      "file": "bodies/part__lid.stl"
     },
     {
-     "name": "connector",
+     "name": "tape_coil",
      "color": [
-      0.16,
-      0.16,
-      0.18
+      0.62,
+      0.64,
+      0.66
      ],
-     "file": "bodies/part__connector.stl"
+     "file": "bodies/part__tape_coil.stl"
     }
    ],
    "part_deployed": [
@@ -138,7 +138,7 @@
    ]
   },
   "face_counts": {
-   "part": 40,
+   "part": 12,
    "part_deployed": 76
   }
  },
@@ -155,14 +155,25 @@
   "power_bus_V": null
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_2_page1.png",
+    "pdf": "datasheet_2.pdf",
+    "kind": "web_search",
+    "url": "https://endurosat.com/wp-content/uploads/2022/02/Endurosat_Product_Catalogue_02_22.pdf",
+    "title": null
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": "https://www.endurosat.com/wp-content/uploads/2025/01/UHF-Antenna-2U.webp",
   "photo_source": "vendor (2U antenna page)",
   "photo_page": "https://www.endurosat.com/products/uhf-antenna-2u/",
-  "photo_file": "reference_photo",
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": null,
   "datasheet_page_file": null,
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

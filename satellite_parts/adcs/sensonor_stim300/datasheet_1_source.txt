@@ -1,0 +1,4 @@
+url: https://www.safran-group.com/sites/default/files/2022-05/safran-sensing-technologies-product-brief-stim300.pdf
+title: STIM300 - Safran
+query: Sensonor STIM300 datasheet pdf
+found by web search; verify that it is the right part

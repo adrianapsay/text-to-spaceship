@@ -1,0 +1,5 @@
+image: https://cdn.satnow.com/live/125_1362_gfts_big_638428788456338148_700.png
+page: https://www.satnow.com/products/thermal-straps/technology-applications/125-1362-gfts
+title: GFTS - Technology Applications | Space Qualified Thermal Strap
+query: Technology Applications, Inc. CuTS UltraFlex II 9x1 (0.20 in rope) thermal strap
+found by web image search; representative, verify before use

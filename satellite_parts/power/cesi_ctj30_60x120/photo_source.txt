@@ -1,0 +1,5 @@
+image: https://cdn.satnow.com/live/SC-F_638269853340089245_700.png
+page: https://www.satnow.com/products/solar-cells/cesi-spa/104-1319-ctj30
+title: CTJ30 - CESI SpA | Satellite Solar Cell
+query: CESI CTJ30 120x60 solar cell
+found by web image search; representative, verify before use

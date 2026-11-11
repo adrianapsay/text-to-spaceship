@@ -53,6 +53,23 @@ for row in rows:
         image.save(buffer, format="JPEG", quality=70)
         thumbnail = "data:image/jpeg;base64," + base64.b64encode(buffer.getvalue()).decode()
     record["thumbnail"] = thumbnail
+    def embed(path, size, quality):
+        if not os.path.exists(path):
+            return ""
+        image = Image.open(path).convert("RGB")
+        image.thumbnail(size)
+        buffer = io.BytesIO()
+        image.save(buffer, format="JPEG", quality=quality)
+        return "data:image/jpeg;base64," + base64.b64encode(buffer.getvalue()).decode()
+    record["photo"] = embed(os.path.join(folder, "reference_photo.jpg"), (280, 280), 62)
+    record["datasheet_image"] = ""
+    record["datasheet_images"] = []
+    for sheet in (record.get("reference_images") or {}).get("datasheets", []):
+        image = embed(os.path.join(folder, sheet["file"]), (200, 270), 45)
+        if image:
+            record["datasheet_images"].append({"image": image, "url": sheet.get("url"), "title": sheet.get("title"), "kind": sheet.get("kind")})
+    record["drawing"] = embed(os.path.join(folder, "drawing.png"), (330, 115), 60) if not record["photo"] else ""
+    record["photo_note"] = open(os.path.join(folder, "photo_source.txt")).read() if os.path.exists(os.path.join(folder, "photo_source.txt")) else ""
     record["has_deployed"] = os.path.exists(deployed_path)
     parts.append(record)
 

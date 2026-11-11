@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/satsearch_datasheet_lxlu54_aac-clyde_optimus-30.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJLB7IRZ54RAMS36Q%2F20261111%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20261111T032119Z&X-Amz-Expires=86400&X-Amz-Signature=41bc37b75d7f28e5ccb43ebdc56a966cd72834c1216e3966bb3e8925434b41c2&X-Amz-SignedHeaders=host
+found by Claude (web search) on 2026-11-10; downloaded by download_datasheets.py

@@ -1,0 +1,4 @@
+url: https://www.cubespace.co.za/uploads/7007f7f5-f682-49d6-94d3-13d2cf3c5a93.pdf
+title: CubeWheel Gen 2 - CubeSpace
+query: CubeSpace Satellite Systems CW0162 datasheet pdf
+found by web search; verify that it is the right part

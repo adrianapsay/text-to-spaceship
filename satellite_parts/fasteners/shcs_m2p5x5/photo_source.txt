@@ -1,0 +1,5 @@
+image: https://www.novotek.de/shop/images/products/main/NV_4762_M25x5.jpg
+page: https://www.novotek.de/Vakuumoptimierte-Schrauben/Zylinderkopfschraube-mit-Innensechskant-ISO-4762-DIN-912-M25x5-A2-mit-zentr-Entlueftung.html
+title: Zylinderkopfschraube mit Innensechskant ISO 4762 (DIN 912) M2,5x5, A2 ...
+query: generic ISO 4762 M2.5x5 screw
+found by web image search; representative, verify before use

@@ -74,12 +74,21 @@
    103.0,
    46.0
   ],
-  "mesh_volume_mm3": 347646.5,
+  "mesh_volume_mm3": 288991.3,
   "watertight": true,
   "render_kind": "reaction_wheel",
-  "effective_density_g_cm3": 1.726,
+  "effective_density_g_cm3": 2.076,
   "bodies": {
    "part": [
+    {
+     "name": "flange",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__flange.stl"
+    },
     {
      "name": "housing",
      "color": [
@@ -90,27 +99,27 @@
      "file": "bodies/part__housing.stl"
     },
     {
-     "name": "flywheel",
+     "name": "lid",
      "color": [
       0.62,
       0.64,
       0.66
      ],
-     "file": "bodies/part__flywheel.stl"
+     "file": "bodies/part__lid.stl"
     },
     {
-     "name": "motor_cap",
+     "name": "connector",
      "color": [
       0.16,
       0.16,
       0.18
      ],
-     "file": "bodies/part__motor_cap.stl"
+     "file": "bodies/part__connector.stl"
     }
    ]
   },
   "face_counts": {
-   "part": 348
+   "part": 1080
   }
  },
  "image": "preview.png",
@@ -124,14 +133,32 @@
   "power_bus_V": 28
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://rocketlabcorp.com/assets/Uploads/400-MNMS-product-sheet.pdf",
+    "title": "Rad-Hard Reaction Wheels (RW4-0.2 / RW4-0.4) - Rocket Lab"
+   },
+   {
+    "file": "datasheet_2_page1.png",
+    "pdf": "datasheet_2.pdf",
+    "kind": "web_search",
+    "url": "https://rocketlabcorp.com/assets/Uploads/400-MNMS-product-sheet.pdf",
+    "title": null
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_cxkxv5_rocketlab_rw200.png",
   "photo_source": "satsearch",
   "photo_page": "https://satsearch.co/products/rocketlab-200-mnms-reaction-wheel",
-  "photo_file": "reference_photo",
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": null,
   "datasheet_page_file": null,
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

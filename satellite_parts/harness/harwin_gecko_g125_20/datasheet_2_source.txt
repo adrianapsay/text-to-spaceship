@@ -1,0 +1,4 @@
+url: https://www.farnell.com/datasheets/1833329.pdf
+title: Harwin Connector Catalog - Farnell
+query: Harwin connector datasheet pdf
+found by web search; verify that it is the right part

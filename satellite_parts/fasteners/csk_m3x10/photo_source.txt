@@ -1,0 +1,5 @@
+image: https://www.maker-kits.com/wp-content/uploads/countersunk-head-screw-m3x10_iso-10642.jpg
+page: https://www.maker-kits.com/product/countersunk-head-screw-m3x10/
+title: Countersunk Head Screw M3x10 - ISO 10642 - MAKER-KITS
+query: generic M3x10 ISO 10642 screw
+found by web image search; representative, verify before use

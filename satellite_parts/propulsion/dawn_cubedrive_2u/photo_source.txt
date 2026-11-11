@@ -1,0 +1,5 @@
+image: https://cdn.satsearch.com/product-images/image-dawn-aerospace-cubedrive-propulsion-modules-efohus.jpg
+page: https://satsearch.co/products/dawn-aerospace-cube-drive-propulsion-modules
+title: CubeDrive Propulsion Modules | satsearch
+query: Dawn Aerospace CubeDrive 2U bipropellant module
+found by web image search; representative, verify before use

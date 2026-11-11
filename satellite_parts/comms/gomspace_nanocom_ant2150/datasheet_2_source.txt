@@ -1,0 +1,4 @@
+url: https://epubs.stfc.ac.uk/manifestation/49404900/STFC-APV-2021-034.pdf
+title: Cubesats for monitoring atmospheric processes (CubeMAP) - ePubs
+query: GomSpace NanoCom ANT2150 datasheet pdf
+found by web search; verify that it is the right part

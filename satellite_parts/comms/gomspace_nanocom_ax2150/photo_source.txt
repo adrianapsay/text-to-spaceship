@@ -1,0 +1,5 @@
+image: https://gomspace.com/wp-content/uploads/2025/09/NanoCom-AX2150-2-1536x1080.png
+page: https://gomspace.com/product/nanocom-ax2150/
+title: NanoCom AX2150 - GomSpace
+query: GomSpace NanoCom AX2150 transceiver
+found by web image search; representative, verify before use

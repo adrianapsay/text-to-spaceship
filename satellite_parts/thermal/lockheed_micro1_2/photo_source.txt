@@ -1,0 +1,5 @@
+image: https://www.defensedaily.com/wp-content/uploads/2015/08/LMT-High-Power-Microcryocooler-satellite.jpg
+page: https://www.defensedaily.com/lockheed-martin-unveils-smaller-more-efficient-satellite-cooling-system/space/
+title: Lockheed Martin Unveils Smaller, More Efficient Satellite Cooling ...
+query: Lockheed Martin MICRO1-2 cryocooler cryocooler
+found by web image search; representative, verify before use

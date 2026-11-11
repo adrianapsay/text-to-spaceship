@@ -1,0 +1,130 @@
+{
+ "id": "exa_bat_25whr_lipo",
+ "name": "EXA 25 Whr high energy density LiPo battery array (1U face)",
+ "category": "power",
+ "subcategory": "battery",
+ "vendor": "EXA (Ecuadorian Civilian Space Agency)",
+ "model": "25 Whr LiPo array",
+ "dimensions_mm": {
+  "x": 95,
+  "y": 89,
+  "z": 7
+ },
+ "mass_g": 125,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.co/products/exa-25-whr-high-energy-density-li-po-battery-array",
+  "document": {
+   "title": "satsearch listing: EXA 25 Whr LiPo battery array (specification table)",
+   "revision": null,
+   "date": "2026-11-10"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical"
+  ],
+  "notes": "95 x 89 x 7 mm, 125 g, 6000 mAh at 3.7 V (22.2 Wh; listing title says 25 Whr)."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "distributors": [
+  "satsearch",
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "vendor_country": "Ecuador",
+ "electrical": {
+  "capacity_Wh": 22.2,
+  "voltage_V": {
+   "nominal": 3.7
+  }
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   95.0,
+   89.0,
+   7.0
+  ],
+  "mesh_volume_mm3": 59165.1,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 2.113,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 3.7
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_fwt7h3_exa_1u-high-capacity-battery-arrays.JPG",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/exa-25-whr-high-energy-density-li-po-battery-array",
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

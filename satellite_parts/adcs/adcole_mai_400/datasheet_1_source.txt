@@ -1,0 +1,2 @@
+url: https://satcatalog.s3.amazonaws.com/components/87/SatCatalog_-_Adcole_Maryland_Aerospace_-_MAI-400_-_Datasheet.pdf
+found by Claude (web search) on 2026-11-10; downloaded by download_datasheets.py

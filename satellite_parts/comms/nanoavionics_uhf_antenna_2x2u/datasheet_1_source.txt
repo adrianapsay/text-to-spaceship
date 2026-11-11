@@ -1,0 +1,4 @@
+url: https://www.nasa.gov/wp-content/uploads/2025/02/9-soa-communications-2024.pdf?emrc=67af4bc4efe23
+title: Small Spacecraft Technology State of the Art Report: Communications
+query: NanoAvionics UHF antenna 2x2U datasheet pdf
+found by web search; verify that it is the right part

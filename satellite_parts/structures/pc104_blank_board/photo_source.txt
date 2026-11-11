@@ -1,0 +1,5 @@
+image: https://cdn.shopify.com/s/files/1/0022/4867/1276/files/PC104_side_by_side.PNG?1239
+page: https://apexembeddedsystems.com/pages/pc104
+title: PC104 Explained
+query: generic PC/104 module outline pcb
+found by web image search; representative, verify before use

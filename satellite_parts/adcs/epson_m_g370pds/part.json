@@ -101,6 +101,15 @@
      "file": "bodies/part__lid.stl"
     },
     {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
      "name": "connector",
      "color": [
       0.16,
@@ -127,14 +136,32 @@
   "power_bus_V": 3.3
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://www.epsondevice.com/sensing/en/pdf/m-g370pdt0_briefsheet_e_rev11.pdf",
+    "title": "Features and Lineup of IMU | Products | Epson Sensing Device"
+   },
+   {
+    "file": "datasheet_2_page1.png",
+    "pdf": "datasheet_2.pdf",
+    "kind": "web_search",
+    "url": "https://eios.epson-electronics.de/medias/TheCrystalmaster2024.pdf?context=bWFzdGVyfGVlZ3wyMTM5NjAzMnxhcHBsaWNhdGlvbi9wZGZ8YURRNEwyZ3hOQzg1TXpBek1qTTBNVGd6TVRrNEwxUm9aVU55ZVhOMFlXeHRZWE4wWlhJeU1ESTBMbkJrWmd8NzI3ZDU5YTcwMWNlODRhZDkxZjIyZTdlMTlmNTNiMTE0MjIwZDI1NzExYWNmYTFlNjEwMTNjMGE4ZTQ3ZThiNw&attachment=true",
+    "title": "THE C R YS TAL M A S T ER - Epson"
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": "",
   "photo_source": "",
   "photo_page": "https://global.epson.com/products_and_drivers/sensing_system/imu/g370",
-  "photo_file": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "web_search_representative",
   "datasheet_url": "https://texim-europe.com/Cmsfile/EPS-M-G370PDS-DS-211001-TE.pdf",
-  "datasheet_page_file": "datasheet_page1.png",
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

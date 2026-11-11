@@ -1,0 +1,4 @@
+url: https://space-for-space.com/wp-content/uploads/2021/01/Datasheet-for-TensorFSS-15M-V1-V1.0.4c.pdf
+title: Datasheet for TensorFSS-15M (V1)
+query: Tensor Tech TensorFSS-15M datasheet pdf
+found by web search; verify that it is the right part

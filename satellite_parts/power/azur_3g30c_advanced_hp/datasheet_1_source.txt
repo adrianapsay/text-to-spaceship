@@ -1,0 +1,2 @@
+url: https://www.azurspace.com/media/uploads/file_links/file/bdb_00010894-02-00_3g30-advanced_hp.pdf
+found by Claude (web search) on 2026-11-10; downloaded by download_datasheets.py

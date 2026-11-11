@@ -1,0 +1,5 @@
+image: https://res.cloudinary.com/rsc/image/upload/b_auto,c_pad,dpr_2,f_auto,h_399,q_auto,w_710/c_pad,h_399,w_710/F7707868-01?pgw=1
+page: https://uk.rs-online.com/web/p/d-sub-connectors/7707868
+title: MDM-37SSB-A174 | ITT Cannon MDM 37 Way Panel Mount D-sub Connector ...
+query: generic MDM-37 connector
+found by web image search; representative, verify before use

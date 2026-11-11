@@ -1,0 +1,4 @@
+url: https://www.satlab.com/resources/SLDS-SRS3-1.3.pdf
+title: SRS-3 Full-duplex Low-power S-band Transceiver - Satlab
+query: Satlab SRS-3 datasheet pdf
+found by web search; verify that it is the right part

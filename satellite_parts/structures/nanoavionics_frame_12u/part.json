@@ -48,25 +48,34 @@
    226.3,
    366.0
   ],
-  "mesh_volume_mm3": 18743479.0,
+  "mesh_volume_mm3": 415498.7,
   "watertight": true,
-  "render_kind": "box",
-  "effective_density_g_cm3": 0.064,
+  "render_kind": "cubesat_frame",
+  "effective_density_g_cm3": 2.888,
   "bodies": {
    "part": [
     {
-     "name": "body",
+     "name": "rails",
      "color": [
       0.36,
       0.4,
       0.46
      ],
-     "file": "bodies/part__body.stl"
+     "file": "bodies/part__rails.stl"
+    },
+    {
+     "name": "rings",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__rings.stl"
     }
    ]
   },
   "face_counts": {
-   "part": 12
+   "part": 620
   }
  },
  "image": "preview.png",
@@ -78,14 +87,32 @@
   "power_bus_V": null
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_page1.png",
+    "pdf": null,
+    "url": null,
+    "kind": "vendor_link",
+    "title": "NanoAvionics CubeSat structural frame product page"
+   },
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://ntnu.no/wiki/download/attachments/124061783/M6P_Summary%20Technical%20Information_rev8.pdf?api=v2",
+    "title": null
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": "https://nanoavionics.com/wp-content/uploads/2020/07/6U-rez.png",
   "photo_source": "vendor (6U photo)",
   "photo_page": "https://nanoavionics.com/cubesat-components/cubesat-structural-frame/",
-  "photo_file": "reference_photo",
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": null,
-  "datasheet_page_file": null,
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

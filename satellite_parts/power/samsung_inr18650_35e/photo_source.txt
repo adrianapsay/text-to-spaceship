@@ -1,0 +1,5 @@
+image: https://cdn-production.shoperb.com/patareid/images/379590/samsung-35e_71051_size-2048_1280x1280.jpg
+page: https://www.patareid.ee/ru/products/samsung-sdi-inr18650-35e-3400mah-unprotected-cell-37v/
+title: Samsung SDI INR18650-35E 3400mAh unprotected cell 3.7V | PATAREID.EE
+query: Samsung SDI INR18650-35E battery cell
+found by web image search; representative, verify before use

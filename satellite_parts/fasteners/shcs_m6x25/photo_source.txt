@@ -1,0 +1,5 @@
+image: https://i.accu.co.uk/360/_APC/SSCF-P80/0_14.png
+page: https://www.accu.co.uk/metric-cap-head-screws/1009896-NBK-SNSU-M6-25-AT-P80
+title: M6 x 25mm Full Thread Socket Cap Head Screws (DIN 912 / ISO 4762 ...
+query: generic ISO 4762 M6x25 screw
+found by web image search; representative, verify before use

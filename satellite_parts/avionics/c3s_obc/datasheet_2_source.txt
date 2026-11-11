@@ -1,0 +1,4 @@
+url: https://fenix.tecnico.ulisboa.pt/downloadFile/563345090422114/Dissertation_94241_Diogo_Abreu.pdf
+title: Onboard Computer for a CubeSat Electronics Engineering - Fenix
+query: C3S Electronics Development OBC datasheet pdf
+found by web search; verify that it is the right part

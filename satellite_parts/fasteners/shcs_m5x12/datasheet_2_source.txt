@@ -1,0 +1,4 @@
+url: https://repuestoszero.es/wp-content/uploads/2020/05/2014_Zero_DS_Exploded_Views-Print-Version.pdf
+title: Zero Motocycles
+query: generic ISO 4762 M5x12 datasheet pdf
+found by web search; verify that it is the right part

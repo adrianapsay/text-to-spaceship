@@ -1,0 +1,4 @@
+url: https://nanoavionics.com/wp-content/uploads/2024/09/Platform-Payload-Interface-Control-Document-M6P-Nanosatellite.pdf
+title: Platform-Payload Interface Control Document | NanoAvionics
+query: NanoAvionics MTQ M6P datasheet pdf
+found by web search; verify that it is the right part

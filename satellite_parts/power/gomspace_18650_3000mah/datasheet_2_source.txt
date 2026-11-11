@@ -1,0 +1,4 @@
+url: https://ris.utwente.nl/ws/files/5089150/battery-aging-kinetic_2017-02-23.pdf
+title: Battery aging and the Kinetic Battery Model - https ://ris.utwen te.nl
+query: GomSpace NanoPower Battery 3000 mAh datasheet pdf
+found by web search; verify that it is the right part

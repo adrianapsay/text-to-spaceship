@@ -57,18 +57,27 @@
   ],
   "mesh_volume_mm3": 480.0,
   "watertight": true,
-  "render_kind": "box",
+  "render_kind": "solar_cell",
   "effective_density_g_cm3": 5.333,
   "bodies": {
    "part": [
     {
-     "name": "body",
+     "name": "cell",
      "color": [
-      0.36,
-      0.4,
-      0.46
+      0.16,
+      0.26,
+      0.62
      ],
-     "file": "bodies/part__body.stl"
+     "file": "bodies/part__cell.stl"
+    },
+    {
+     "name": "bus_bar",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__bus_bar.stl"
     }
    ]
   },
@@ -85,14 +94,32 @@
   "power_bus_V": null
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_page1.png",
+    "pdf": null,
+    "url": "https://www.cesi.it/app/uploads/2025/04/CESI-CTJ30-v2025.1.pdf",
+    "kind": "vendor_link",
+    "title": "CESI CTJ30 datasheet v2025.1"
+   },
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://www.cesi.it/app/uploads/2025/04/CESI-CTJ30-v2025.1.pdf",
+    "title": null
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": null,
   "photo_source": null,
   "photo_page": null,
-  "photo_file": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "web_search_representative",
   "datasheet_url": "https://www.cesi.it/app/uploads/2025/04/CESI-CTJ30-v2025.1.pdf",
   "datasheet_page_file": "datasheet_page1.png",
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

@@ -1,0 +1,5 @@
+image: https://dragonflyaerospace.com/wp-content/themes/dragonfly/assets/images/page-product/product-gecko-2.png
+page: https://dragonflyaerospace.com/products/gecko/
+title: Gecko Imager - Dragonfly Aerospace
+query: SCS Space Gecko imager
+found by web image search; representative, verify before use

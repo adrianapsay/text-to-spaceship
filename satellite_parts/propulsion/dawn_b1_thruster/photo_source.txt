@@ -1,0 +1,5 @@
+image: https://cdn.satnow.com/live/dawn-T_638233603183726677_700.jpg
+page: https://www.satnow.com/products/thrusters/dawn-aerospace/36-1161-b1
+title: B1 - Dawn Aerospace | Spacecraft Thruster
+query: Dawn Aerospace B1 thruster
+found by web image search; representative, verify before use

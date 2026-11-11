@@ -59,10 +59,10 @@
    93.0,
    46.55
   ],
-  "mesh_volume_mm3": 402577.5,
+  "mesh_volume_mm3": 367264.6,
   "watertight": true,
-  "render_kind": "module_box",
-  "effective_density_g_cm3": 1.351,
+  "render_kind": "battery_pack",
+  "effective_density_g_cm3": 1.481,
   "bodies": {
    "part": [
     {
@@ -75,27 +75,18 @@
      "file": "bodies/part__housing.stl"
     },
     {
-     "name": "lid",
+     "name": "cells",
      "color": [
-      0.78,
-      0.8,
-      0.82
+      0.85,
+      0.72,
+      0.3
      ],
-     "file": "bodies/part__lid.stl"
-    },
-    {
-     "name": "connector",
-     "color": [
-      0.16,
-      0.16,
-      0.18
-     ],
-     "file": "bodies/part__connector.stl"
+     "file": "bodies/part__cells.stl"
     }
    ]
   },
   "face_counts": {
-   "part": 40
+   "part": 684
   }
  },
  "image": "preview.png",
@@ -110,14 +101,17 @@
   "power_bus_V": 28.8
  },
  "reference_images": {
+  "datasheets": [],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": "https://cdn.satsearch.com/product-images/image-space-inventor--battery-bat-28-p4-dndoto.jpg",
   "photo_source": "satsearch",
   "photo_page": "https://satsearch.co/products/space-inventor-bat600-p3",
-  "photo_file": "reference_photo",
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": null,
   "datasheet_page_file": null,
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

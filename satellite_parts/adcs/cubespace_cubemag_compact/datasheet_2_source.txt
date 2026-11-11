@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-cubespace-magnetometer-compact-deployable-q6uvjd.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJLB7IRZ54RAMS36Q%2F20261111%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20261111T031543Z&X-Amz-Expires=86400&X-Amz-Signature=d58b839a615b4ea8ed3a15c7884d5774de26ee87ee2cb6b9712d82183092a46e&X-Amz-SignedHeaders=host
+found by Claude (web search) on 2026-11-10; downloaded by download_datasheets.py

@@ -64,10 +64,10 @@
    84.1,
    23.1
   ],
-  "mesh_volume_mm3": 183552.6,
+  "mesh_volume_mm3": 148239.8,
   "watertight": true,
-  "render_kind": "module_box",
-  "effective_density_g_cm3": 2.043,
+  "render_kind": "battery_pack",
+  "effective_density_g_cm3": 2.53,
   "bodies": {
    "part": [
     {
@@ -80,27 +80,18 @@
      "file": "bodies/part__housing.stl"
     },
     {
-     "name": "lid",
+     "name": "cells",
      "color": [
-      0.78,
-      0.8,
-      0.82
+      0.85,
+      0.72,
+      0.3
      ],
-     "file": "bodies/part__lid.stl"
-    },
-    {
-     "name": "connector",
-     "color": [
-      0.16,
-      0.16,
-      0.18
-     ],
-     "file": "bodies/part__connector.stl"
+     "file": "bodies/part__cells.stl"
     }
    ]
   },
   "face_counts": {
-   "part": 40
+   "part": 684
   }
  },
  "image": "preview.png",
@@ -112,14 +103,32 @@
   "power_bus_V": 14.8
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_page1.png",
+    "pdf": null,
+    "url": null,
+    "kind": "vendor_link",
+    "title": "satsearch listing of the Ibeos B14-M45 datasheet"
+   },
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-ibeos-14v-modular-smallsat-battery-kus3ae.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJLB7IRZ54RAMS36Q%2F20261111%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20261111T032128Z&X-Amz-Expires=86400&X-Amz-Signature=827cbe7b722d7d24102c2b0b3febbdda550eb0a6aa2e578eed2e17fc4e966897&X-Amz-SignedHeaders=host",
+    "title": null
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_7day3i_ibeos_45wh-modular-smallsat-battery.jpg",
   "photo_source": "satsearch",
   "photo_page": "https://satsearch.co/products/ibeos-14v-modular-smallsat-battery",
-  "photo_file": "reference_photo",
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": null,
-  "datasheet_page_file": null,
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

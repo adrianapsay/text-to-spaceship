@@ -1,0 +1,5 @@
+image: https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/806/MDM-21SCBR-A174-F222.jpg
+page: https://www.digikey.ca/en/products/detail/itt-cannon-llc/MDM-21SCBR-A174-F222/4950397
+title: MDM-21SCBR-A174-F222 ITT Cannon, LLC | Connectors, Interconnects | DigiKey
+query: generic MDM-21 connector
+found by web image search; representative, verify before use

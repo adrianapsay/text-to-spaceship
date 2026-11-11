@@ -104,14 +104,32 @@
   "power_bus_V": null
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://content.anywaves.com/hubfs/Anywaves-Datasheets/PORTFOLIO-ANYWAVES_compressed.pdf",
+    "title": "Portfolio TT&C - Anywaves"
+   },
+   {
+    "file": "datasheet_2_page1.png",
+    "pdf": "datasheet_2.pdf",
+    "kind": "web_search",
+    "url": "https://anywaves.com/wp-content/uploads/2026/02/EN_9100-ENG-10000446366-MSC-ACCREDIA-FRA-3-2026-01-14.pdf",
+    "title": "Space Antenna & RF Electronics Datasheets - Anywaves"
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": "https://cdn.satsearch.com/product-images/image-anywaves-wide-beam-x-band-antenna-wn6ikb.jpg",
   "photo_source": "satsearch",
   "photo_page": "https://satsearch.co/products/anywaves-wide-beam-x-band-antenna",
-  "photo_file": "reference_photo",
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": null,
   "datasheet_page_file": null,
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

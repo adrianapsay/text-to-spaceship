@@ -1,0 +1,154 @@
+{
+ "id": "simera_triscape200",
+ "name": "Simera Sense TriScape200 imager (1.5 m GSD at 500 km)",
+ "category": "payload",
+ "subcategory": "imager",
+ "vendor": "Simera Sense",
+ "model": "TriScape200",
+ "dimensions_mm": {
+  "x": 216,
+  "y": 216,
+  "z": 304
+ },
+ "mass_g": 12100,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.co/products/simera-sense-triscape200",
+  "document": {
+   "title": "satsearch listing: Simera Sense TriScape200 (specification table)",
+   "revision": null,
+   "date": "2026-11-10"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "216 x 216 x 304 mm, 12.1 kg, 2.5 W idle / 5.8 W imaging, 5 V, 1.5 m GSD at 500 km, I2C/SPI (SpaceWire, RS422, RS485, CAN optional), -10 to 50 C."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "distributors": [
+  "satsearch",
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "vendor_country": "South Africa",
+ "electrical": {
+  "power_W": {
+   "idle": 2.5,
+   "peak": 5.8
+  },
+  "voltage_V": {
+   "nominal": 5
+  },
+  "interfaces": [
+   "I2C",
+   "SPI",
+   "SpaceWire (optional)",
+   "RS422 (optional)",
+   "CAN (optional)"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -10,
+   "max": 50
+  }
+ },
+ "payload": {
+  "gsd_m": 1.5
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   216.0,
+   216.0,
+   304.0
+  ],
+  "mesh_volume_mm3": 11859393.4,
+  "watertight": true,
+  "render_kind": "camera_box_lens",
+  "effective_density_g_cm3": 1.02,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    },
+    {
+     "name": "lens_barrel",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__lens_barrel.stl"
+    },
+    {
+     "name": "glass",
+     "color": [
+      0.45,
+      0.65,
+      0.85
+     ],
+     "file": "bodies/part__glass.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 180
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "CAN",
+   "I2C",
+   "SPI"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 5
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

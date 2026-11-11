@@ -130,14 +130,32 @@
   "power_bus_V": 5.0
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://rocketlabcorp.com/assets/Uploads/30-Nms-RW-0.03-Data-Sheet.pdf",
+    "title": "reaction wheel - Rocket Lab"
+   },
+   {
+    "file": "datasheet_2_page1.png",
+    "pdf": "datasheet_2.pdf",
+    "kind": "web_search",
+    "url": "https://rocketlabusa.com/assets/Uploads/RW-0.03-Datasheet-v3.0.pdf",
+    "title": null
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_d3xa7i_rocketlab_30mnms_rw.png",
   "photo_source": "satsearch",
   "photo_page": "https://satsearch.co/products/rocketlab-30-mnms-reaction-wheel",
-  "photo_file": "reference_photo",
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": null,
   "datasheet_page_file": null,
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

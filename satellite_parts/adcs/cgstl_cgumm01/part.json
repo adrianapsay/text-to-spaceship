@@ -1,0 +1,108 @@
+{
+ "id": "cgstl_cgumm01",
+ "name": "Chang Guang CGUMM01 magnetometer (cylindrical)",
+ "category": "adcs",
+ "subcategory": "magnetometer",
+ "vendor": "Chang Guang Satellite Technology",
+ "model": "CGUMM01",
+ "dimensions_mm": {
+  "x": 98,
+  "y": 98,
+  "z": 80
+ },
+ "mass_g": 195,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.co/products/cgsatellite-cgumm01-magnetometer",
+  "document": {
+   "title": "satsearch listing: Chang Guang CGUMM01 magnetometer (specification table)",
+   "revision": null,
+   "date": "2026-11-10"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical"
+  ],
+  "notes": "Diameter 98 mm, length 80 mm, 195 g, 0.54 W, 12 V, RS422, 10 Hz."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "distributors": [
+  "satsearch",
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "vendor_country": "China",
+ "electrical": {
+  "power_W": {
+   "nominal": 0.54
+  },
+  "voltage_V": {
+   "nominal": 12
+  },
+  "interfaces": [
+   "RS422"
+  ]
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   98.0,
+   97.73,
+   80.0
+  ],
+  "mesh_volume_mm3": 601188.8,
+  "watertight": true,
+  "render_kind": "cylinder",
+  "effective_density_g_cm3": 0.324,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 164
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 12
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_y3uoip_cgstl_cgumm01.jpeg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/cgsatellite-cgumm01-magnetometer",
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

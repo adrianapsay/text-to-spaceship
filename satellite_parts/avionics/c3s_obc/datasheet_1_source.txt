@@ -1,0 +1,4 @@
+url: https://c3s.hu/wp-content/uploads/2022/01/C3S_OBC_datasheet.pdf
+title: ON-BOARD COMPUTER (OBC) - C3S LLC
+query: C3S Electronics Development OBC datasheet pdf
+found by web search; verify that it is the right part

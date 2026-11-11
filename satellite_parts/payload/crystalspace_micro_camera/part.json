@@ -1,0 +1,137 @@
+{
+ "id": "crystalspace_micro_camera",
+ "name": "Crystalspace micro camera system (5 MP)",
+ "category": "payload",
+ "subcategory": "camera",
+ "vendor": "Crystalspace",
+ "model": "Micro Camera System",
+ "dimensions_mm": {
+  "x": 45,
+  "y": 25,
+  "z": 45
+ },
+ "mass_g": 50,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.co/products/crystalspace-micro-camera-system",
+  "document": {
+   "title": "satsearch listing: Crystalspace Micro Camera System (specification table)",
+   "revision": null,
+   "date": "2026-11-10"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "45 x 25 x 45 mm, <50 g, 240 mW peak / 75 mW nominal, 5 MP sensor, -30 to 75 C."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "distributors": [
+  "satsearch",
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "vendor_country": "Estonia",
+ "electrical": {
+  "power_W": {
+   "peak": 0.24,
+   "nominal": 0.075
+  }
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -30,
+   "max": 75
+  }
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   45.0,
+   25.0,
+   45.0
+  ],
+  "mesh_volume_mm3": 41135.6,
+  "watertight": true,
+  "render_kind": "camera_box_lens",
+  "effective_density_g_cm3": 1.215,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    },
+    {
+     "name": "lens_barrel",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__lens_barrel.stl"
+    },
+    {
+     "name": "glass",
+     "color": [
+      0.45,
+      0.65,
+      0.85
+     ],
+     "file": "bodies/part__glass.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 180
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_29hy5k_crystalspace_crystal_space_micro_camera_system.jpg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/crystalspace-micro-camera-system",
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

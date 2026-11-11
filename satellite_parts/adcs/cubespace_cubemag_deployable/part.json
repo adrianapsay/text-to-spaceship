@@ -102,6 +102,15 @@
      "file": "bodies/part__lid.stl"
     },
     {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
      "name": "connector",
      "color": [
       0.16,
@@ -131,14 +140,32 @@
   "power_bus_V": 3.3
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://www.cubespace.co.za/uploads/e7490268-e4ad-48c8-8db3-fce677d37514.pdf",
+    "title": "CubeMag Gen 2 - CubeSpace"
+   },
+   {
+    "file": "datasheet_2_page1.png",
+    "pdf": "datasheet_2.pdf",
+    "kind": "web_search",
+    "url": "https://satcatalog.s3.amazonaws.com/components/1408/SatCatalog_-_CubeSpace_-_Gen2_CubeMag_Compact__Deployable_-_Datasheet.pdf?lastmod=20260129004942",
+    "title": "Gen2: CubeMag (Compact & Deployable) - Magnetometer"
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": "https://cdn.satsearch.com/product-images/image-cubespace-gen2-cubemag-compact-deployable-uw9m9o.jpg",
   "photo_source": "satsearch",
   "photo_page": "https://satsearch.co/products/cubespace-gen2-cubemag-compact-and-deployable",
-  "photo_file": "reference_photo",
+  "photo_file": null,
+  "photo_kind": null,
   "datasheet_url": "https://www.cubesatshop.com/wp-content/uploads/2023/06/CubeSpace-SENSORS-2023.pdf",
-  "datasheet_page_file": "datasheet_page1.png",
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

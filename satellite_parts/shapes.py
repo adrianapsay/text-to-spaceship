@@ -35,18 +35,34 @@ def box(x, y, z, color=ANODIZED, **_):
 
 
 def module_box(x, y, z, connector_face="+x", lid=1.5, **_):
-    """Electronics module: anodized body, a lighter lid plate on +z, and a connector block recessed into one face. Same envelope as box(x, y, z)."""
+    """Electronics module: anodized body, an inset aluminium lid plate on +z with four corner screws, and a connector block recessed into the +x face. Same envelope as box(x, y, z)."""
     lid_height = min(lid, z * 0.15)
-    body = b.Box(x, y, z - lid_height)
-    body = b.Pos(0, 0, -lid_height / 2) * body
-    top = b.Pos(0, 0, (z - lid_height) / 2) * b.Box(x, y, lid_height)
+    inset = min(2.0, 0.06 * min(x, y))
+    body = b.Pos(0, 0, -lid_height / 2) * b.Box(x, y, z - lid_height)
+    rim = b.Pos(0, 0, (z - lid_height) / 2) * (b.Box(x, y, lid_height) - b.Box(x - 2 * inset, y - 2 * inset, lid_height + 1))
+    body = body + rim
+    top = b.Pos(0, 0, (z - lid_height) / 2) * b.Box(x - 2 * inset, y - 2 * inset, lid_height)
+    screw_radius = min(1.2, 0.02 * min(x, y))
+    screws = None
+    for sx in (-1, 1):
+        for sy in (-1, 1):
+            head = b.Pos(sx * (x / 2 - inset - 3 * screw_radius), sy * (y / 2 - inset - 3 * screw_radius), (z - lid_height) / 2 + lid_height / 2 - 0.15) * b.Cylinder(screw_radius, 0.3)
+            screws = head if screws is None else screws + head
     connector_width = min(0.5 * y, 20.0)
     connector_height = min(0.4 * z, 8.0)
     connector_depth = min(3.0, 0.2 * x)
     pocket = b.Pos(x / 2 - connector_depth / 2, 0, -lid_height / 2) * b.Box(connector_depth + 0.2, connector_width + 0.2, connector_height + 0.2)
     body = body - pocket
     connector = b.Pos(x / 2 - connector_depth / 2, 0, -lid_height / 2) * b.Box(connector_depth, connector_width, connector_height)
-    return bodies(("housing", ANODIZED, body), ("lid", ALUMINIUM, top), ("connector", BLACK, connector))
+    return bodies(("housing", ANODIZED, body), ("lid", ALUMINIUM, top), ("screws", STEEL, screws), ("connector", BLACK, connector))
+
+
+def solar_cell(x, y, z, **_):
+    """Single triple-junction cell: dark blue cell with a silver bus bar along one short edge."""
+    cell = b.Box(x, y, z)
+    bar = b.Pos(-x / 2 + 1.5, 0, z / 2 - 0.05) * b.Box(3.0, y * 0.9, 0.1)
+    cell = cell - bar
+    return bodies(("cell", SOLAR, cell), ("bus_bar", STEEL, bar))
 
 
 def rounded_box(x, y, z, radius=2.0, color=ANODIZED, **_):
@@ -109,15 +125,17 @@ def pc104_board(x=95.89, y=90.17, z=1.6, hole_diameter=3.2, components_height=0.
     return result
 
 
-def cubesat_frame(units_x=1, units_y=1, units_z=1, rail=8.5, wall=1.5, length_z=None, **_):
-    """Skeleton frame: four square rails along z (anodized), end rings and mid rings (aluminium). Outer envelope 100 x 100 mm per unit; z = CDS length."""
-    width_x = 100.0 * units_x
-    width_y = 100.0 * units_y
+def cubesat_frame(units_x=1, units_y=1, units_z=1, rail=8.5, wall=1.5, length_z=None, width_x=None, width_y=None, **_):
+    """Skeleton frame: four square rails along z (anodized), end rings and mid rings (aluminium). Outer envelope 100 x 100 mm per unit (226.3 mm for 2 units per CDS) unless width_x / width_y are given; z = CDS length."""
+    width_x = width_x if width_x is not None else (226.3 if units_x == 2 else 100.0 * units_x)
+    width_y = width_y if width_y is not None else (226.3 if units_y == 2 else 100.0 * units_y)
     length = length_z if length_z is not None else {1: 113.5, 2: 227.0, 3: 340.5}.get(units_z, 113.5 * units_z)
     rails = None
-    for sx in (-1, 1):
-        for sy in (-1, 1):
-            rail_part = b.Pos(sx * (width_x - rail) / 2, sy * (width_y - rail) / 2, 0) * b.Box(rail, rail, length)
+    positions_x = [-(width_x - rail) / 2, (width_x - rail) / 2] + ([0.0] if units_x == 2 else [])
+    positions_y = [-(width_y - rail) / 2, (width_y - rail) / 2] + ([0.0] if units_y == 2 else [])
+    for px in positions_x:
+        for py in positions_y:
+            rail_part = b.Pos(px, py, 0) * b.Box(rail, rail, length)
             rails = rail_part if rails is None else rails + rail_part
     rings = None
     for sz in (-1, 1):
@@ -132,9 +150,21 @@ def cubesat_frame(units_x=1, units_y=1, units_z=1, rail=8.5, wall=1.5, length_z=
     return bodies(("rails", ANODIZED, rails), ("rings", ALUMINIUM, rings))
 
 
-def reaction_wheel(x, y, z, flywheel_diameter=None, **_):
-    """Housing box (anodized) with a flywheel disc (steel) proud of the top face and a motor cap on the disc."""
+def reaction_wheel(x, y, z, flywheel_diameter=None, housing="box", **_):
+    """Housing box (anodized) with a flywheel disc (steel) proud of the top face and a motor cap on the disc. housing="round": sealed cylindrical housing on a thin mounting flange with four lugs (Astrofein, NewSpace, BST style)."""
     diameter = flywheel_diameter if flywheel_diameter is not None else min(x, y) * 0.9
+    if housing == "round":
+        flange_thickness = min(3.0, z * 0.15)
+        flange = b.Pos(0, 0, -z / 2 + flange_thickness / 2) * b.Box(x, y, flange_thickness)
+        lug_bore = max(2.5, min(x, y) * 0.06)
+        for sx in (-1, 1):
+            for sy in (-1, 1):
+                flange = flange - b.Pos(sx * (x / 2 - lug_bore), sy * (y / 2 - lug_bore), -z / 2 + flange_thickness / 2) * b.Cylinder(lug_bore / 2.0, flange_thickness + 1)
+        can_height = z - flange_thickness - 1.5 + 0.4
+        can = b.Pos(0, 0, -z / 2 + flange_thickness - 0.2 + can_height / 2) * b.Cylinder(diameter / 2.0, can_height)
+        cap = b.Pos(0, 0, z / 2 - 0.75 - 0.1) * b.Cylinder(diameter * 0.9 / 2.0, 1.7)
+        connector = b.Pos(min(diameter / 2 + 1.8, x / 2 - 2.0), 0, -z / 2 + flange_thickness + 4.8) * b.Box(4.0, min(0.35 * y, 16.0), 8.0)
+        return bodies(("flange", ALUMINIUM, flange), ("housing", ANODIZED, can), ("lid", STEEL, cap), ("connector", BLACK, connector))
     height = z * 0.6
     base = b.Box(x, y, z - height)
     disc = b.Pos(0, 0, (z - height) / 2 + height * 0.8 / 2) * b.Cylinder(diameter / 2.0, height * 0.8)
@@ -234,14 +264,14 @@ def battery_pack(x, y, z, cells=(2, 2), cell_diameter=18.4, cell_axis="x", **_):
     cell_length = min(x - 6, 65.0)
     cell_bodies = None
     pitch_y = min(cell_diameter + 1.5, (y - 4) / max(rows, 1))
+    radius = min(cell_diameter, pitch_y - 1) / 2.0
     for row in range(rows):
         cy = -pitch_y * (rows - 1) / 2 + row * pitch_y
-        for column in range(columns):
-            cx = 0.0
-            cell = b.Pos(cx, cy, z / 2 - cell_diameter * 0.45) * b.Cylinder(min(cell_diameter, pitch_y - 1) / 2.0, cell_length).rotate(b.Axis.Y, 90)
-            cell_bodies = cell if cell_bodies is None else cell_bodies + cell
-            break
-    housing = housing - cell_bodies
+        cell = b.Pos(0.0, cy, z / 2 - radius - 0.3) * b.Cylinder(radius, cell_length).rotate(b.Axis.Y, 90)
+        cell_bodies = cell if cell_bodies is None else cell_bodies + cell
+    pocket_depth = min(z - 2.0, 2 * radius + 0.9)
+    pocket = b.Pos(0.0, 0.0, z / 2 - pocket_depth / 2) * b.Box(cell_length + 2.0, pitch_y * rows + 1.0, pocket_depth)
+    housing = housing - pocket
     return bodies(("housing", ANODIZED, housing), ("cells", INSULATION, cell_bodies))
 
 
@@ -299,6 +329,14 @@ def patch_antenna(x, y, z, patch_inset=8.0, patch_height=1.0, **_):
     base = b.Box(x, y, z)
     patch = b.Pos(0, 0, z / 2 + patch_height / 2) * b.Box(x - 2 * patch_inset, y - 2 * patch_inset, patch_height)
     return bodies(("housing", WHITE, base), ("patch", COPPER, patch))
+
+
+def radome_puck(diameter, length, flange_diameter=None, flange_thickness=2.0, **_):
+    """Round antenna: white radome disc on a thin aluminium mounting flange."""
+    flange_d = flange_diameter if flange_diameter is not None else diameter
+    flange = b.Pos(0, 0, -length / 2 + flange_thickness / 2) * b.Cylinder(flange_d / 2.0, flange_thickness)
+    radome = b.Pos(0, 0, flange_thickness / 2) * b.Cylinder(diameter / 2.0, length - flange_thickness)
+    return bodies(("flange", ALUMINIUM, flange), ("radome", (0.92, 0.92, 0.9), radome))
 
 
 def tape_antenna_deployed(base_x, base_y, base_z, tape_length, tape_width=6.0, tape_thickness=0.3, count=4, **_):
@@ -365,12 +403,17 @@ def lens_barrel(diameter, length, flange_diameter=None, flange_thickness=0.0, **
     return result
 
 
-def camera_box_lens(x, y, z, lens_diameter, lens_length, **_):
-    """Camera / star tracker: anodized body, lens barrel on +z with a glass front, connector on a side. Overall z = z + lens_length."""
+def camera_box_lens(x, y, z, lens_diameter, lens_length, baffle_diameter=None, **_):
+    """Camera / star tracker: anodized body, lens barrel on +z with a glass front, connector on a side. Overall z = z + lens_length. baffle_diameter: the barrel becomes a conical stray-light baffle opening to that diameter."""
     body = b.Box(x, y, z)
-    barrel = b.Pos(0, 0, z / 2 + lens_length / 2) * b.Cylinder(lens_diameter / 2.0, lens_length)
-    glass = b.Pos(0, 0, z / 2 + lens_length - 0.5) * b.Cylinder(lens_diameter * 0.42, 1.0)
-    barrel = barrel - glass
+    if baffle_diameter:
+        barrel = b.Pos(0, 0, z / 2) * b.Cone(lens_diameter / 2.0, baffle_diameter / 2.0, lens_length, align=(b.Align.CENTER, b.Align.CENTER, b.Align.MIN))
+        barrel = barrel - b.Pos(0, 0, z / 2 + 1.5) * b.Cone(lens_diameter / 2.0 - 1.5, baffle_diameter / 2.0 - 1.5, lens_length, align=(b.Align.CENTER, b.Align.CENTER, b.Align.MIN))
+        glass = b.Pos(0, 0, z / 2 + 1.0) * b.Cylinder(lens_diameter * 0.42, 1.0)
+    else:
+        barrel = b.Pos(0, 0, z / 2 + lens_length / 2) * b.Cylinder(lens_diameter / 2.0, lens_length)
+        glass = b.Pos(0, 0, z / 2 + lens_length - 0.5) * b.Cylinder(lens_diameter * 0.42, 1.0)
+        barrel = barrel - glass
     connector = b.Pos(x / 2 - 1.5, 0, 0) * b.Box(3.0, min(0.4 * y, 15.0), min(0.3 * z, 6.0))
     return bodies(("body", ANODIZED, body), ("lens_barrel", BLACK, barrel), ("glass", GLASS, glass), ("connector", BLACK, connector))
 

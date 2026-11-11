@@ -1,0 +1,138 @@
+{
+ "id": "scanway_sop_1u_65",
+ "name": "Scanway SOP 1U/65 optical payload (65 mm aperture)",
+ "category": "payload",
+ "subcategory": "imager",
+ "vendor": "Scanway S.A.",
+ "model": "SOP 1U/65",
+ "dimensions_mm": {
+  "x": 96,
+  "y": 119,
+  "z": 90
+ },
+ "mass_g": 800,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.co/products/scanway-sop-1u-65",
+  "document": {
+   "title": "satsearch listing: Scanway SOP 1U/65 (specification table)",
+   "revision": null,
+   "date": "2026-11-10"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "payload"
+  ],
+  "notes": "96 x 119 x 90 mm, 800 g, 65 mm aperture, 14 m GSD (spec table), LVDS/I2C/SPI."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "distributors": [
+  "satsearch",
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "vendor_country": "Poland",
+ "electrical": {
+  "interfaces": [
+   "LVDS",
+   "I2C",
+   "SPI"
+  ]
+ },
+ "payload": {
+  "aperture_mm": 65,
+  "gsd_m": 14
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   96.0,
+   119.0,
+   90.0
+  ],
+  "mesh_volume_mm3": 865798.9,
+  "watertight": true,
+  "render_kind": "camera_box_lens",
+  "effective_density_g_cm3": 0.924,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    },
+    {
+     "name": "lens_barrel",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__lens_barrel.stl"
+    },
+    {
+     "name": "glass",
+     "color": [
+      0.45,
+      0.65,
+      0.85
+     ],
+     "file": "bodies/part__glass.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 180
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "I2C",
+   "SPI"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": "https://cdn.satsearch.com/product-images/image-scanway-sa-sop-1u65-iocmyk.jpg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/scanway-sop-1u-65",
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

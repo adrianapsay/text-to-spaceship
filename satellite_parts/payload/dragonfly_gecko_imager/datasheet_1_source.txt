@@ -1,0 +1,4 @@
+url: https://dragonflyaerospace.com/wp-content/themes/dragonfly/assets/brochures/caiman.pdf
+title: Caiman Imager - Dragonfly Aerospace
+query: Dragonfly Aerospace Gecko Imager datasheet pdf
+found by web search; verify that it is the right part

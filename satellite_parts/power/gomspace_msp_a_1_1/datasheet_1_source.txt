@@ -1,0 +1,2 @@
+url: https://gomspace.com/wp-content/uploads/2026/01/gs-ds-nanopower-msp_1016340_32.pdf
+found by Claude (web search) on 2026-11-10; downloaded by download_datasheets.py

@@ -56,10 +56,10 @@
    83.0,
    2.5
   ],
-  "mesh_volume_mm3": 18345.4,
+  "mesh_volume_mm3": 19641.4,
   "watertight": true,
   "render_kind": "solar_panel",
-  "effective_density_g_cm3": 2.725,
+  "effective_density_g_cm3": 2.546,
   "bodies": {
    "part": [
     {
@@ -95,14 +95,32 @@
   "power_bus_V": 3.0
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://catalog.orbitaltransports.com/content/brands/ISIspace/ISIS-Solar-Panels-Brochure-v2R-web.pdf",
+    "title": "Solar Panels"
+   },
+   {
+    "file": "datasheet_2_page1.png",
+    "pdf": "datasheet_2.pdf",
+    "kind": "web_search",
+    "url": "https://www.nasa.gov/wp-content/uploads/2021/10/6.soa_structures_2021.pdf",
+    "title": "Structures, Materials, and Mechanisms - NASA"
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_deg9bl_isis_1u_cube_sat_solar_panel.png",
   "photo_source": "satsearch (one photo for the 1U-6U family)",
   "photo_page": "https://satsearch.co/products/isis-1u-cube-sat-solar-panel",
-  "photo_file": "reference_photo",
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": "https://www.cubesatshop.com/wp-content/uploads/2016/06/ISIS-Solar-Panels-Brochure-v1.pdf",
-  "datasheet_page_file": "datasheet_page1.png",
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

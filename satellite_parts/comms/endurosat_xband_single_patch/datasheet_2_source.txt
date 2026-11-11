@@ -1,0 +1,4 @@
+url: https://projekter.aau.dk/projekter/files/306516779/Report_05_06_2019_Handin_.pdf
+title: Dual-band S- and X-band antenna for nano-satellites
+query: EnduroSat X-Band Patch Antenna (single) datasheet pdf
+found by web search; verify that it is the right part

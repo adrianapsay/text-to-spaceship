@@ -1,0 +1,150 @@
+{
+ "id": "bst_st200",
+ "name": "Berlin Space Technologies ST200 star tracker (no baffle)",
+ "category": "adcs",
+ "subcategory": "star_tracker",
+ "vendor": "Berlin Space Technologies",
+ "model": "ST200",
+ "dimensions_mm": {
+  "x": 30,
+  "y": 30,
+  "z": 39
+ },
+ "mass_g": 40,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.co/products/berlin-space-tech-st200",
+  "document": {
+   "title": "satsearch listing: BST ST200 star tracker (specification table)",
+   "revision": null,
+   "date": "2026-11-10"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "adcs",
+   "thermal"
+  ],
+  "notes": "30 x 30 x 39 mm, 40 g (UART version), 0.55-0.67 W at 3.7 V, 3.7-5 V, UART, 10 arcsec pitch/yaw, 70 arcsec roll (1-sigma), -20 to 40 C."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "distributors": [
+  "satsearch",
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "vendor_country": "Germany",
+ "electrical": {
+  "power_W": {
+   "nominal": 0.6
+  },
+  "voltage_V": {
+   "min": 3.7,
+   "max": 5
+  },
+  "interfaces": [
+   "UART"
+  ]
+ },
+ "adcs": {
+  "accuracy_arcsec_cross_boresight": 10,
+  "accuracy_arcsec_about_boresight": 70
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -20,
+   "max": 40
+  }
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   30.0,
+   30.0,
+   39.0
+  ],
+  "mesh_volume_mm3": 29229.9,
+  "watertight": true,
+  "render_kind": "camera_box_lens",
+  "effective_density_g_cm3": 1.368,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    },
+    {
+     "name": "lens_barrel",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__lens_barrel.stl"
+    },
+    {
+     "name": "glass",
+     "color": [
+      0.45,
+      0.65,
+      0.85
+     ],
+     "file": "bodies/part__glass.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 180
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "UART"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_k4cpcs_berlin-space-tech_st200.png",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/berlin-space-tech-st200",
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

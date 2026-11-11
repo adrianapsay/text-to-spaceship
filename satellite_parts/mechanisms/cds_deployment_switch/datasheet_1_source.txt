@@ -1,0 +1,4 @@
+url: https://www.al-enterprise.com/api/media/file/omniswitch-6575-datasheet-en.pdf
+title: Omniswitch 6575-Datasheet - Alcatel-Lucent
+query: generic deployment switch datasheet pdf
+found by web search; verify that it is the right part

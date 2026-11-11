@@ -105,14 +105,32 @@
   "power_bus_V": 3.6
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://gomspace.com/wp-content/uploads/2026/01/gs-man-nanopower-bpx-3-1.5-MAN-1018160-1-1.5-1.pdf",
+    "title": "NanoPower BPX Manual - GomSpace"
+   },
+   {
+    "file": "datasheet_2_page1.png",
+    "pdf": "datasheet_2.pdf",
+    "kind": "web_search",
+    "url": "https://ris.utwente.nl/ws/files/5089150/battery-aging-kinetic_2017-02-23.pdf",
+    "title": "Battery aging and the Kinetic Battery Model - https ://ris.utwen te.nl"
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": null,
   "photo_source": null,
   "photo_page": null,
   "photo_file": null,
+  "photo_kind": null,
   "datasheet_url": "https://gomspace.com/UserFiles/Subsystems/datasheet/gs-ds-nanopower-battery-3000mah-cell-21.pdf",
-  "datasheet_page_file": "datasheet_page1.png",
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

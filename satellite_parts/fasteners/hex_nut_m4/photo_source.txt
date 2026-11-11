@@ -1,0 +1,5 @@
+image: https://www.maker-kits.com/wp-content/uploads/hexagon-nut-m4_iso-4032.jpg
+page: https://www.maker-kits.com/product/hexagon-nut-m4/
+title: Hexagon Nut M4 - ISO 4032 - MAKER-KITS
+query: generic ISO 4032 M4 nut
+found by web image search; representative, verify before use

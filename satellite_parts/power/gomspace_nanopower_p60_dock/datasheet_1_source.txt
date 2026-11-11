@@ -1,0 +1,2 @@
+url: https://gomspace.com/wp-content/uploads/2025/09/gs-ds-nanopower-p60-dock-3.1.pdf
+found by Claude (web search) on 2026-11-10; downloaded by download_datasheets.py

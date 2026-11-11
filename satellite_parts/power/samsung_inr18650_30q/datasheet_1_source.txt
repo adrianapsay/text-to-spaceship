@@ -1,0 +1,2 @@
+url: https://cdn.shopify.com/s/files/1/0481/9678/0183/files/samsung_30q_data_sheet.pdf
+found by Claude (web search) on 2026-11-10; downloaded by download_datasheets.py

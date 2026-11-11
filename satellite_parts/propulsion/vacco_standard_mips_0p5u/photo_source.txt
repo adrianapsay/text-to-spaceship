@@ -1,0 +1,5 @@
+image: https://cubesat-propulsion.com/wp-content/uploads/2021/01/ArgoMoon_X17025000_1_web.jpg
+page: https://cubesat-propulsion.com/argomoon-propulsion-system/
+title: ArgoMoon Propulsion System - VACCO Industries
+query: VACCO Industries X14029003-4 (0.5U) cold gas module
+found by web image search; representative, verify before use

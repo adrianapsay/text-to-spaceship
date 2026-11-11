@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/satsearch_datasheet_ro6fyl_aac-clyde_kryten-m3.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJLB7IRZ54RAMS36Q%2F20261111%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20261111T031809Z&X-Amz-Expires=86400&X-Amz-Signature=a8e4cc0bb42819bdd99e97d851ac6c24f6545e690430eeb2d882fcef52e821cf&X-Amz-SignedHeaders=host
+found by Claude (web search) on 2026-11-10; downloaded by download_datasheets.py

@@ -1,0 +1,4 @@
+url: https://www.vision-control.com/uploads/tx_vcproducts/article/Manta_Technical_Manual_7.9.1_en.pdf
+title: Manta Technical Manual V7.9.1 - Vision & Control
+query: generic ISO 4762 M2x4 datasheet pdf
+found by web search; verify that it is the right part

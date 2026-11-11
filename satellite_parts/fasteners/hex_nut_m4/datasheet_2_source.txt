@@ -1,0 +1,4 @@
+url: https://www.ti.com/lit/ds/sprs712c/sprs712c.pdf
+title: TMS320DM8127 DaVinci™ Video Processors datasheet (Rev. C)
+query: generic ISO 4032 M4 datasheet pdf
+found by web search; verify that it is the right part

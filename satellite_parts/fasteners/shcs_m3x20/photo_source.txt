@@ -1,0 +1,5 @@
+image: https://www.maker-kits.com/wp-content/uploads/cylinder-head-screw-m3x20_iso-4762.jpg
+page: https://www.maker-kits.com/product/cylinder-head-screw-m3x20-2/
+title: Cylinder Head Screw M3x20 - ISO 4762 - MAKER-KITS
+query: generic ISO 4762 M3x20 screw
+found by web image search; representative, verify before use

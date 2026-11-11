@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-ibeos-14v-modular-smallsat-battery-kus3ae.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJLB7IRZ54RAMS36Q%2F20261111%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20261111T032128Z&X-Amz-Expires=86400&X-Amz-Signature=827cbe7b722d7d24102c2b0b3febbdda550eb0a6aa2e578eed2e17fc4e966897&X-Amz-SignedHeaders=host
+found by Claude (web search) on 2026-11-10; downloaded by download_datasheets.py

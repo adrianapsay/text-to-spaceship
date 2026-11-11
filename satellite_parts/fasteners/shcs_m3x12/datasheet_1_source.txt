@@ -1,0 +1,4 @@
+url: https://docs.rs-online.com/574c/A700000011307398.pdf
+title: DIN 912 ISO 4762 8.8 - RS Online
+query: generic ISO 4762 M3x12 datasheet pdf
+found by web search; verify that it is the right part

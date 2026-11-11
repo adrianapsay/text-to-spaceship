@@ -1,0 +1,5 @@
+image: https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/2615/MDM-15PCBRM7-A174.jpg
+page: https://www.digikey.com/en/products/detail/itt-cannon-llc/MDM-15PCBRM7-A174/6225215
+title: MDM-15PCBRM7-A174 ITT Cannon, LLC | Connectors, Interconnects | DigiKey
+query: generic MDM-15 connector
+found by web image search; representative, verify before use

@@ -1,0 +1,4 @@
+url: https://www.cubespace.co.za/uploads/d3ecdd54-cfc4-4a18-89e5-e7e033a42b66.pdf
+title: CubeTorquer Interface Control Document - Stellenbosch - CubeSpace
+query: CubeSpace Satellite Systems CR0004 datasheet pdf
+found by web search; verify that it is the right part

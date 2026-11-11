@@ -70,12 +70,21 @@
    43.5,
    24.0
   ],
-  "mesh_volume_mm3": 33555.5,
+  "mesh_volume_mm3": 30651.0,
   "watertight": true,
   "render_kind": "reaction_wheel",
-  "effective_density_g_cm3": 4.083,
+  "effective_density_g_cm3": 4.47,
   "bodies": {
    "part": [
+    {
+     "name": "flange",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__flange.stl"
+    },
     {
      "name": "housing",
      "color": [
@@ -86,27 +95,27 @@
      "file": "bodies/part__housing.stl"
     },
     {
-     "name": "flywheel",
+     "name": "lid",
      "color": [
       0.62,
       0.64,
       0.66
      ],
-     "file": "bodies/part__flywheel.stl"
+     "file": "bodies/part__lid.stl"
     },
     {
-     "name": "motor_cap",
+     "name": "connector",
      "color": [
       0.16,
       0.16,
       0.18
      ],
-     "file": "bodies/part__motor_cap.stl"
+     "file": "bodies/part__connector.stl"
     }
    ]
   },
   "face_counts": {
-   "part": 348
+   "part": 1072
   }
  },
  "image": "preview.png",
@@ -121,14 +130,32 @@
   "power_bus_V": null
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_page1.png",
+    "pdf": null,
+    "url": null,
+    "kind": "vendor_link",
+    "title": "NanoAvionics RW0 / 4RW0 product page (spec table and list price)"
+   },
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://ntnu.no/wiki/download/attachments/124061783/M6P_Summary%20Technical%20Information_rev8.pdf?api=v2",
+    "title": null
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": "https://nanoavionics.com/wp-content/uploads/2018/07/SatBus-4RW0-1-new.jpg",
   "photo_source": "vendor",
   "photo_page": "https://nanoavionics.com/cubesat-components/cubesat-reaction-wheels-control-system-satbus-4rw/",
-  "photo_file": "reference_photo",
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": null,
-  "datasheet_page_file": null,
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

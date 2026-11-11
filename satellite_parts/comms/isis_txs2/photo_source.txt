@@ -1,0 +1,5 @@
+image: https://www.markertek.com/productImage/alternate-1/hi-res/INTI-I2TX-S2.JPG
+page: https://www.markertek.com/product/inti-i2tx-s2/interspace-industries-i2tx-s2-wireless-remote-control-transmitter-for-mastercue-microcue-dual-button-black-yellow
+title: Interspace Industries I2TX-S2 Wireless Remote Control Transmitter for ...
+query: ISISPACE TXS2 transmitter
+found by web image search; representative, verify before use

@@ -129,14 +129,32 @@
   "power_bus_V": null
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_page1.png",
+    "pdf": null,
+    "url": "https://gomspace.com/wp-content/uploads/2025/09/Data-Sheet-NanoCom-SDR-MK3-1.pdf",
+    "kind": "vendor_link",
+    "title": "GomSpace NanoCom SDR MK3 data sheet (values from the product page; PDF not opened)"
+   },
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://gomspace.com/wp-content/uploads/2025/09/Data-Sheet-NanoCom-SDR-MK3-1.pdf",
+    "title": null
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": "https://gomspace.com/wp-content/uploads/2025/09/NanoCom_SDRMK3-Featured-Image.png",
   "photo_source": "vendor",
   "photo_page": "https://gomspace.com/product/software-defined-radio/",
-  "photo_file": "reference_photo",
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": "https://gomspace.com/wp-content/uploads/2025/09/Data-Sheet-NanoCom-SDR-MK3-1.pdf",
   "datasheet_page_file": "datasheet_page1.png",
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

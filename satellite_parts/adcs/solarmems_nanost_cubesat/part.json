@@ -1,0 +1,144 @@
+{
+ "id": "solarmems_nanost_cubesat",
+ "name": "Solar MEMS nanoST star tracker (CubeSat version)",
+ "category": "adcs",
+ "subcategory": "star_tracker",
+ "vendor": "Solar MEMS Technologies S.L.",
+ "model": "nanoST (CubeSat)",
+ "dimensions_mm": {
+  "x": 52,
+  "y": 38,
+  "z": 90
+ },
+ "mass_g": 180,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.co/products/solarmems-stns-star-tracker-for-small-satellites",
+  "document": {
+   "title": "satsearch listing: Solar MEMS nanoST star tracker (specification table)",
+   "revision": null,
+   "date": "2026-11-10"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "CubeSat version 90 x 52 x 38 mm, 180 g (non-CubeSat 118 x 63 x 63 mm, 220 g), 1 W, 5 V, UART, -30 to 70 C."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "distributors": [
+  "satsearch",
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "vendor_country": "Spain",
+ "electrical": {
+  "power_W": {
+   "nominal": 1.0
+  },
+  "voltage_V": {
+   "nominal": 5
+  },
+  "interfaces": [
+   "UART"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -30,
+   "max": 70
+  }
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   52.0,
+   38.0,
+   90.0
+  ],
+  "mesh_volume_mm3": 139686.7,
+  "watertight": true,
+  "render_kind": "camera_box_lens",
+  "effective_density_g_cm3": 1.289,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    },
+    {
+     "name": "lens_barrel",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__lens_barrel.stl"
+    },
+    {
+     "name": "glass",
+     "color": [
+      0.45,
+      0.65,
+      0.85
+     ],
+     "file": "bodies/part__glass.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 180
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "UART"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 5
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_56wcj6_solarmems_stns-star-tracker-for-small-satellites.jpg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/solarmems-stns-star-tracker-for-small-satellites",
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

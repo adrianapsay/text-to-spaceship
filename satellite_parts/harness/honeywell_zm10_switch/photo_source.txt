@@ -1,0 +1,5 @@
+image: https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/1268/ZM10E10F01.jpg
+page: https://www.devicemart.co.kr/goods/view?no=8906462
+title: ZM10E10F01 / 디바이스마트
+query: Honeywell ZM10 switch
+found by web image search; representative, verify before use

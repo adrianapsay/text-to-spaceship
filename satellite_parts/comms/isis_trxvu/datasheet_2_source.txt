@@ -1,0 +1,4 @@
+url: https://catalog.orbitaltransports.com/content/brands/ISIspace/VHF-UHF-Full-Duplex-Transceiver-Brochure-web-1.pdf
+title: VHF/UHF duplex transceiver
+query: ISISPACE TRXVU datasheet pdf
+found by web search; verify that it is the right part

@@ -99,6 +99,15 @@
      "file": "bodies/part__lid.stl"
     },
     {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
      "name": "connector",
      "color": [
       0.16,
@@ -127,14 +136,32 @@
   "power_bus_V": 5
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://www.newspacesystems.com/wp-content/uploads/2026/08/Aquila-Sun-Sensors-260825.pdf",
+    "title": "AQUILA SUN SENSORS | NewSpace Systems"
+   },
+   {
+    "file": "datasheet_2_page1.png",
+    "pdf": "datasheet_2.pdf",
+    "kind": "web_search",
+    "url": "https://satcatalog.s3.amazonaws.com/components/332/SatCatalog_-_NewSpace_Systems_-_NFSS-411_-_Datasheet.pdf?lastmod=20210708045151",
+    "title": "NFSS-411 - Sun Sensor - SatCatalog"
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": "https://cdn.satsearch.com/product-images/image-newspace-systems-aquila-d02-sun-sensor-4v6roa.png",
   "photo_source": "satsearch",
   "photo_page": "https://satsearch.co/products/newspace-systems-nfss-411-fine-sun-sensor",
-  "photo_file": "reference_photo",
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": null,
   "datasheet_page_file": null,
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

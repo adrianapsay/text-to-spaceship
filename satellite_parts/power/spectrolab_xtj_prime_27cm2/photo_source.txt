@@ -1,0 +1,5 @@
+image: https://cdn.satnow.com/live/104_1317_xtj_prime_big_638003870956067487_700.PNG
+page: https://www.satnow.com/products/solar-cells/spectrolab/104-1317-xtj-prime
+title: XTJ Prime - Spectrolab | Satellite Solar Cell
+query: Spectrolab XTJ Prime 27 cm2 solar cell
+found by web image search; representative, verify before use

@@ -58,10 +58,10 @@
    83.0,
    1.5
   ],
-  "mesh_volume_mm3": 10211.4,
+  "mesh_volume_mm3": 11507.4,
   "watertight": true,
   "render_kind": "solar_panel",
-  "effective_density_g_cm3": 2.546,
+  "effective_density_g_cm3": 2.259,
   "bodies": {
    "part": [
     {
@@ -97,14 +97,25 @@
   "power_bus_V": null
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_2_page1.png",
+    "pdf": "datasheet_2.pdf",
+    "kind": "web_search",
+    "url": "https://www.ryanmck.net/croissant2020.pdf",
+    "title": "Design and mission planning of Bobcat-1, the Ohio University ..."
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": null,
   "photo_source": null,
   "photo_page": null,
-  "photo_file": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "web_search_representative",
   "datasheet_url": "https://gomspace.com/UserFiles/Subsystems/datasheet/gs-ds-nanopower-p110-210.pdf",
-  "datasheet_page_file": "datasheet_page1.png",
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

@@ -131,14 +131,25 @@
   "power_bus_V": 5.0
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-newspace-systems-gemini-sr5-gps-receiver-moaxjw.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJLB7IRZ54RAMS36Q%2F20261111%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20261111T031715Z&X-Amz-Expires=86400&X-Amz-Signature=4cf953e67538c099423fbe8b616d48818f2a8cc554385ed8dcdf0c49e8fa56de&X-Amz-SignedHeaders=host",
+    "title": null
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": "https://cdn.satsearch.com/product-images/image-newspace-systems-gemini-sr5-gps-receiver-turxvl.jpg",
   "photo_source": "satsearch",
   "photo_page": "https://satsearch.co/products/newspace-systems-ngps-03-422-gps-receiver",
-  "photo_file": "reference_photo",
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": null,
   "datasheet_page_file": null,
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

@@ -1,0 +1,143 @@
+{
+ "id": "lusospace_mag28",
+ "name": "Lusospace MAG28 analogue magnetometer",
+ "category": "adcs",
+ "subcategory": "magnetometer",
+ "vendor": "Lusospace",
+ "model": "MAG28",
+ "dimensions_mm": {
+  "x": 85,
+  "y": 60,
+  "z": 53
+ },
+ "mass_g": 300,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.co/products/lusospace-mag28-analogue-magnetometer",
+  "document": {
+   "title": "satsearch listing: Lusospace MAG28 (specification table)",
+   "revision": null,
+   "date": "2026-11-10"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "85 x 60 x 53 mm, 300 g, <1 W, 15-40 V, +-70000 nT, linearity <0.2 percent, -30 to 60 C."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "distributors": [
+  "satsearch",
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "vendor_country": "Portugal",
+ "electrical": {
+  "power_W": {
+   "nominal": 1.0
+  },
+  "voltage_V": {
+   "min": 15,
+   "max": 40
+  },
+  "interfaces": [
+   "analog"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -30,
+   "max": 60
+  }
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   85.0,
+   60.0,
+   53.0
+  ],
+  "mesh_volume_mm3": 270266.5,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.11,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": "https://cdn.satsearch.com/product-images/image-lusospace-mag28-analogue-magnetometer-vgy415.jpg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/lusospace-mag28-analogue-magnetometer",
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

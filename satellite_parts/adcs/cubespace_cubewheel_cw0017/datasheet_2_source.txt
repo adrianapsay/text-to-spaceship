@@ -1,0 +1,4 @@
+url: https://satcatalog.s3.amazonaws.com/components/1400/SatCatalog_-_CubeSpace_-_Gen2_CubeWheel_CW0017_-_Datasheet.pdf?lastmod=20260129010529
+title: Gen2: CubeWheel CW0017 - Reaction Wheel - SatCatalog
+query: CubeSpace Satellite Systems CW0017 datasheet
+found by web search; verify that it is the right part

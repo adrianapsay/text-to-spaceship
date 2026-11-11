@@ -1,0 +1,143 @@
+{
+ "id": "trad_hircom",
+ "name": "TRAD HIRCOM CubeSat UHF transceiver (PC/104)",
+ "category": "comms",
+ "subcategory": "transceiver",
+ "vendor": "TRAD Tests & Radiations",
+ "model": "HIRCOM",
+ "dimensions_mm": {
+  "x": 95,
+  "y": 90,
+  "z": 20
+ },
+ "mass_g": 85,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.co/products/trad-tests-and-radiations-hircom-cubesat-uhf-transceiver",
+  "document": {
+   "title": "satsearch listing: TRAD HIRCOM UHF transceiver (specification table)",
+   "revision": null,
+   "date": "2026-11-10"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "rf",
+   "thermal"
+  ],
+  "notes": "90 x 95 x 20 mm, 85 g, 4.8 W transmit / 0.63 W receive, 5 V PA and 3.3 V, 400-438 MHz, 2 W (33 dBm), -35 to 80 C."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "distributors": [
+  "satsearch",
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "vendor_country": "France",
+ "electrical": {
+  "power_W": {
+   "peak": 4.8,
+   "nominal": 0.63
+  },
+  "voltage_V": {
+   "nominal": 5
+  },
+  "interfaces": [
+   "PC/104 stack"
+  ]
+ },
+ "rf": {
+  "band": "UHF",
+  "frequency_MHz": [
+   400,
+   438
+  ],
+  "output_power_dBm": 33
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -35,
+   "max": 80
+  }
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   95.0,
+   90.0,
+   20.0
+  ],
+  "mesh_volume_mm3": 105256.9,
+  "watertight": true,
+  "render_kind": "pc104_board",
+  "effective_density_g_cm3": 0.808,
+  "bodies": {
+   "part": [
+    {
+     "name": "pcb",
+     "color": [
+      0.09,
+      0.42,
+      0.24
+     ],
+     "file": "bodies/part__pcb.stl"
+    },
+    {
+     "name": "stack_header",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__stack_header.stl"
+    },
+    {
+     "name": "components",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__components.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 732
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": "PC/104 stack",
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 5
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_sc4kdx_trad_hircom.jpg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/trad-tests-and-radiations-hircom-cubesat-uhf-transceiver",
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

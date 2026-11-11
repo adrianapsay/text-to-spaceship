@@ -1,0 +1,4 @@
+url: https://solar-mems.com/wp-content/uploads/2024/01/nanoSSOC-D60.pdf
+title: NanoSSOC - D60 - SOLAR MEMS Technologies
+query: Solar MEMS Technologies nanoSSOC-D60 datasheet pdf
+found by web search; verify that it is the right part

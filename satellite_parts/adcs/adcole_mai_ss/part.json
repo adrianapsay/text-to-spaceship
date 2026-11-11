@@ -127,14 +127,32 @@
   "power_bus_V": 5.0
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_page1.png",
+    "pdf": null,
+    "url": "https://satcatalog.s3.amazonaws.com/components/271/SatCatalog_-_Adcole_Maryland_Aerospace_-_MAI-SS_-_Datasheet.pdf",
+    "kind": "vendor_link",
+    "title": "MAI-SS Specification"
+   },
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://satcatalog.s3.amazonaws.com/components/271/SatCatalog_-_Adcole_Maryland_Aerospace_-_MAI-SS_-_Datasheet.pdf",
+    "title": null
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": "https://satcatalog.s3.amazonaws.com/components/271/featured_image.jpg",
   "photo_source": "satcatalog",
   "photo_page": "https://satcatalog.com/component/mai-ss",
-  "photo_file": "reference_photo",
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": "https://satcatalog.s3.amazonaws.com/components/271/SatCatalog_-_Adcole_Maryland_Aerospace_-_MAI-SS_-_Datasheet.pdf",
   "datasheet_page_file": "datasheet_page1.png",
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

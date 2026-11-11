@@ -1,0 +1,5 @@
+image: https://www.beaconcorporation.co.uk/wp-content/uploads/2021/04/ISO-10642-DRAFT.png
+page: https://www.beaconcorporation.co.uk/products/socket-slotted-products/iso10642-dimensions/
+title: ISO 10642 Dimensions | Beacon Corporation
+query: generic M2.5x8 ISO 10642 screw
+found by web image search; representative, verify before use

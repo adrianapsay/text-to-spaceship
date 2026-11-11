@@ -1,0 +1,2 @@
+url: https://www.rocketlab.co.nz/assets/Uploads/ST-16RT2-Datasheet-v3.pdf
+found by Claude (web search) on 2026-11-10; downloaded by download_datasheets.py

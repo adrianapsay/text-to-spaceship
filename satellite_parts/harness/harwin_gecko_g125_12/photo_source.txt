@@ -1,0 +1,5 @@
+image: https://content.harwin.com/transform/4c4fef80-3f73-4e86-9a76-9443d95e2c9a/G125-MH11205L1P-2?io=transform:scale,width:1920
+page: https://www.harwin.com/products/G125-MH11205L1P
+title: Gecko Male Horizontal Connector - G125-MH11205L1P - Harwin
+query: Harwin G125-MH11205-0300 connector
+found by web image search; representative, verify before use

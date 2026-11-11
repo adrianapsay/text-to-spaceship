@@ -1,0 +1,2 @@
+url: https://ntnu.no/wiki/download/attachments/124061783/M6P_Summary%20Technical%20Information_rev8.pdf?api=v2
+found by Claude (web search) on 2026-11-10; downloaded by download_datasheets.py

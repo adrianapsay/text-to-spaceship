@@ -1,0 +1,5 @@
+image: https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/2528/G125-2242096F1.JPG
+page: https://www.digikey.com/en/products/detail/harwin-inc/G125-2242096F1/7364701
+title: G125-2242096F1 Harwin Inc. | Connectors, Interconnects | DigiKey
+query: Harwin G125-MH10405-0300 connector
+found by web image search; representative, verify before use

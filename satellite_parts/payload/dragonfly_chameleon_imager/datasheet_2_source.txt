@@ -1,0 +1,4 @@
+url: https://www.spacemic.net/pdf/premic8/magnetacube_abst.pdf
+title: 1 Title: CONSTELLATION OF CUBESAT TO ANALYZE THE ...
+query: Dragonfly Aerospace Chameleon Imager datasheet pdf
+found by web search; verify that it is the right part

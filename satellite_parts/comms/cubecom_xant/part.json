@@ -1,0 +1,117 @@
+{
+ "id": "cubecom_xant",
+ "name": "CUBECOM XANT X-band patch antenna",
+ "category": "comms",
+ "subcategory": "antenna",
+ "vendor": "CUBECOM",
+ "model": "XANT",
+ "dimensions_mm": {
+  "x": 51,
+  "y": 51,
+  "z": 5
+ },
+ "mass_g": 26.5,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.co/products/cubecom-xant-x-band-patch-antenna",
+  "document": {
+   "title": "satsearch listing: CUBECOM XANT X-band patch antenna (specification table)",
+   "revision": null,
+   "date": "2026-11-10"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "rf"
+  ],
+  "notes": "51 x 51 x 5 mm, 26.5 g, 8-8.4 GHz, 8 dBi max, RHCP or LHCP, single SMP connector."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "distributors": [
+  "satsearch",
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "vendor_country": "South Africa",
+ "rf": {
+  "band": "X",
+  "frequency_MHz": [
+   8000,
+   8400
+  ],
+  "gain_dBi": 8,
+  "polarization": "circular (RHCP or LHCP)"
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   51.0,
+   51.0,
+   5.0
+  ],
+  "mesh_volume_mm3": 11629.0,
+  "watertight": true,
+  "render_kind": "patch_antenna",
+  "effective_density_g_cm3": 2.279,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "patch",
+     "color": [
+      0.72,
+      0.45,
+      0.2
+     ],
+     "file": "bodies/part__patch.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 28
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [
+   "SMP"
+  ],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_u92fk1_cubecom_xant-x-band-patch-antenna.jpg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/cubecom-xant-x-band-patch-antenna",
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

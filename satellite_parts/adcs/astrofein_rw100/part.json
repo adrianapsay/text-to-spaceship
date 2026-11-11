@@ -58,12 +58,21 @@
    100.0,
    60.0
   ],
-  "mesh_volume_mm3": 422761.8,
+  "mesh_volume_mm3": 350991.5,
   "watertight": true,
   "render_kind": "reaction_wheel",
-  "effective_density_g_cm3": 1.892,
+  "effective_density_g_cm3": 2.279,
   "bodies": {
    "part": [
+    {
+     "name": "flange",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__flange.stl"
+    },
     {
      "name": "housing",
      "color": [
@@ -74,27 +83,27 @@
      "file": "bodies/part__housing.stl"
     },
     {
-     "name": "flywheel",
+     "name": "lid",
      "color": [
       0.62,
       0.64,
       0.66
      ],
-     "file": "bodies/part__flywheel.stl"
+     "file": "bodies/part__lid.stl"
     },
     {
-     "name": "motor_cap",
+     "name": "connector",
      "color": [
       0.16,
       0.16,
       0.18
      ],
-     "file": "bodies/part__motor_cap.stl"
+     "file": "bodies/part__connector.stl"
     }
    ]
   },
   "face_counts": {
-   "part": 348
+   "part": 1080
   }
  },
  "image": "preview.png",
@@ -106,14 +115,39 @@
   "power_bus_V": null
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_page1.png",
+    "pdf": null,
+    "url": "https://www.astrofein.com/wp-content/uploads/2023/04/ASTROFEIN-Reaction-Wheel-Family_20230425.pdf",
+    "kind": "vendor_link",
+    "title": "ASTROFEIN Reaction Wheel Family brochure"
+   },
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://www.astrofein.com/wp-content/uploads/2023/04/ASTROFEIN-Reaction-Wheel-Family_20230425.pdf",
+    "title": null
+   },
+   {
+    "file": "datasheet_2_page1.png",
+    "pdf": "datasheet_2.pdf",
+    "kind": "web_search",
+    "url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-astro-und-feinwerktechnik-adlershof-gmbh-astrofein-reaction-wheel-rw100-7wnuku.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJLB7IRZ54RAMS36Q%2F20261111%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20261111T031638Z&X-Amz-Expires=86400&X-Amz-Signature=3295810bde39b4c3464e2a47a3d82d4c1d532ff556312a43388c50c44feeb058&X-Amz-SignedHeaders=host",
+    "title": null
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_rc3pnl_astrofein_reaction-wheel-rw100.jpg",
   "photo_source": "satsearch",
   "photo_page": "https://satsearch.co/products/astrofein-reaction-wheel-rw100",
-  "photo_file": "reference_photo",
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": "https://www.astrofein.com/wp-content/uploads/2023/04/ASTROFEIN-Reaction-Wheel-Family_20230425.pdf",
   "datasheet_page_file": "datasheet_page1.png",
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

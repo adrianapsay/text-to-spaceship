@@ -1,0 +1,142 @@
+{
+ "id": "thrustme_npt30_i2",
+ "name": "ThrustMe NPT30-I2 1U iodine electric propulsion system",
+ "category": "propulsion",
+ "subcategory": "electric_thruster",
+ "vendor": "ThrustMe",
+ "model": "NPT30-I2 1U",
+ "dimensions_mm": {
+  "x": 96,
+  "y": 96,
+  "z": 113
+ },
+ "mass_g": 1200,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.co/products/thrustme-npt30-i2-1u-electric-propulsion-system",
+  "document": {
+   "title": "satsearch listing: ThrustMe NPT30-I2 1U (specification table)",
+   "revision": null,
+   "date": "2026-11-10"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "propulsion"
+  ],
+  "notes": "96 x 96 x 113 mm, 1.2 kg wet, 35-65 W, 12-28 V, 0.3-1.1 mN, Isp <2400 s, total impulse <5500 Ns, solid iodine, I2C/CAN."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "distributors": [
+  "satsearch",
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "vendor_country": "France",
+ "electrical": {
+  "power_W": {
+   "min": 35,
+   "max": 65
+  },
+  "voltage_V": {
+   "min": 12,
+   "max": 28
+  },
+  "interfaces": [
+   "I2C",
+   "CAN"
+  ]
+ },
+ "propulsion": {
+  "thrust_mN": [
+   0.3,
+   1.1
+  ],
+  "isp_s": 2400,
+  "total_impulse_Ns": 5500,
+  "propellant": "iodine"
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   96.0,
+   96.0,
+   113.0
+  ],
+  "mesh_volume_mm3": 961773.8,
+  "watertight": true,
+  "render_kind": "electric_thruster",
+  "effective_density_g_cm3": 1.248,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    },
+    {
+     "name": "emitter",
+     "color": [
+      0.85,
+      0.66,
+      0.22
+     ],
+     "file": "bodies/part__emitter.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 348
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "CAN",
+   "I2C"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_3qqgge_thrustme_npt30-i2_1u.jpg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/thrustme-npt30-i2-1u-electric-propulsion-system",
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

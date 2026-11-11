@@ -1,0 +1,4 @@
+url: https://www.moog.com/content/dam/moog/literature/sdg/space/structures/moog-espa-users-guide-datasheet.pdf
+title: espa user's guide | moog | space | payload adapters
+query: generic separation spring datasheet pdf
+found by web search; verify that it is the right part

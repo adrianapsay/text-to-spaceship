@@ -1,0 +1,5 @@
+image: https://www.maker-kits.com/wp-content/uploads/cylinder-head-screw-m2x10_iso-4762.jpg
+page: https://www.maker-kits.com/product/cylinder-head-screw-m2x10/
+title: Cylinder Head Screw M2x10 - ISO 4762 - MAKER-KITS
+query: generic ISO 4762 M2x10 screw
+found by web image search; representative, verify before use

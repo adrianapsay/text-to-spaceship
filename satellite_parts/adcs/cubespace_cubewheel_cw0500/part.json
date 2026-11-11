@@ -147,14 +147,32 @@
   "power_bus_V": 12
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://www.cubespace.co.za/uploads/9500bbef-0880-422b-bc69-5135da6a4413.pdf",
+    "title": "your global adcs partner - CubeSpace"
+   },
+   {
+    "file": "datasheet_2_page1.png",
+    "pdf": "datasheet_2.pdf",
+    "kind": "web_search",
+    "url": "https://satcatalog.s3.amazonaws.com/components/1403/SatCatalog_-_CubeSpace_-_Gen2_CubeWheel_CW0500_-_Datasheet.pdf?lastmod=20260129010059",
+    "title": "Gen2: CubeWheel CW0500 - Reaction Wheel - SatCatalog"
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": "https://cdn.satsearch.com/product-images/image-cubespace-reaction-wheel-cw0500-h615ki.jpg",
   "photo_source": "satsearch",
   "photo_page": "https://satsearch.co/products/cubespace-gen2cubewheelcw0500",
-  "photo_file": "reference_photo",
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": "https://www.cubesatshop.com/wp-content/uploads/2023/05/CubeSpace-GEN-2-ACTUATORS-2023.pdf",
-  "datasheet_page_file": "datasheet_page1.png",
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

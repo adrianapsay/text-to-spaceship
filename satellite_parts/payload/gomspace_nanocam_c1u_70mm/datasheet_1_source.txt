@@ -1,0 +1,4 @@
+url: https://revistas.uis.edu.co/index.php/revistauisingenierias/article/download/14188/13104/99637
+title: Critical Design of the FACSAT-2 mission CubeSat for ... - Revistas UIS
+query: GomSpace NanoCam C1U 70mm datasheet pdf
+found by web search; verify that it is the right part

@@ -1,0 +1,4 @@
+url: https://gomspace.com/wp-content/uploads/2026/01/gs-man-nanopower-bpx-3-1.5-MAN-1018160-1-1.5-1.pdf
+title: NanoPower BPX Manual - GomSpace
+query: GomSpace NanoPower BPX 100 Wh datasheet pdf
+found by web search; verify that it is the right part

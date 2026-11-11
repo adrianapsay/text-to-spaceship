@@ -1,0 +1,5 @@
+image: https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/2241/ESQ-1xx-12-G-D.jpg
+page: https://www.digikey.com/en/products/detail/samtec-inc/ESQ-132-12-G-D/2640985
+title: ESQ-132-12-G-D Samtec Inc. | Connectors, Interconnects | DigiKey
+query: Samtec ESQ-132-12-G-D connector
+found by web image search; representative, verify before use

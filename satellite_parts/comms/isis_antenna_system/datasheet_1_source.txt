@@ -1,0 +1,4 @@
+url: https://isispace.nl/wp-content/uploads/2025/02/ISIS-ANTS_ELEC-DSH-0001-Antenna_System_Electrical_Model_Datasheet-03_00.pdf
+title: Deployable Antenna System Electrical Model - ISISPACE
+query: ISISPACE AntS (ISIS-ANTS) datasheet pdf
+found by web search; verify that it is the right part

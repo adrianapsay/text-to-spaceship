@@ -1,0 +1,4 @@
+url: https://gomspace.com/wp-content/uploads/2025/09/gs-ds-nanocom-ant6f-vhf-18.pdf
+title: NanoCom NanoUtil ANT-6F VHF AR6 Datasheet - GomSpace
+query: GomSpace camera datasheet pdf
+found by web search; verify that it is the right part

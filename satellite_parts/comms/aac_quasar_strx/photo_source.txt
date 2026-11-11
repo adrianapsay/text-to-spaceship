@@ -1,0 +1,5 @@
+image: https://www.aac-clyde.space/wp-content/uploads/2021/10/SDR.png
+page: https://www.aac-clyde.space/what-we-do/space-products-components/communications/quasar-strx
+title: QUASAR-STRX - Laser Communication Module | AAC Clyde Space
+query: AAC Clyde Space Quasar-STRX transceiver
+found by web image search; representative, verify before use

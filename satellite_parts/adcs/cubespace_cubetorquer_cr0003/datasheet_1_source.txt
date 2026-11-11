@@ -1,0 +1,4 @@
+url: https://www.cubespace.co.za/uploads/a55e9627-9377-496b-800e-ecde36e3b21e.pdf
+title: CubeADCS Gen 2 - CubeSpace
+query: CubeSpace Satellite Systems CR0003 datasheet pdf
+found by web search; verify that it is the right part

@@ -1,0 +1,4 @@
+url: https://rocketlabcorp.com/assets/Uploads/60-MNMS-product-sheet.pdf
+title: Microsatellite Reaction Wheels (RW3-0.06) - Rocket Lab
+query: Rocket Lab RW-0.06 datasheet pdf
+found by web search; verify that it is the right part

@@ -1,0 +1,5 @@
+image: https://www.myaluprofil.de/images/product_images/original_images/Zylinderkopfschraube_5.jpg
+page: https://www.myaluprofil.de/cylinder-head-screw-iso-4762-m6x20.html?language=en
+title: myaluprofil - cylinder-head-screw-iso-4762-m6x20
+query: generic ISO 4762 M6x20 screw
+found by web image search; representative, verify before use

@@ -1,0 +1,4 @@
+url: https://catalog.orbitaltransports.com/content/brands/ISIspace/ISIS-Solar-Panels-Brochure-v2R-web.pdf
+title: Solar Panels
+query: ISISPACE 1U solar panel set (body mounted) datasheet pdf
+found by web search; verify that it is the right part

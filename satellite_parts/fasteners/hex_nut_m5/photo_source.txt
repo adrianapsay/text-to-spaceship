@@ -1,0 +1,5 @@
+image: https://media.rs-online.com/image/upload/bo_1.5px_solid_white,b_auto,c_pad,dpr_2,f_auto,h_399,q_auto,w_710/c_pad,h_399,w_710/Y2884419-01?pgw=1
+page: https://uk.rs-online.com/web/p/hex-nuts/2884419
+title: BN 628 M5 | Bossard Stainless Steel Hex Nut, DIN 934, ISO 4032, M5 | RS
+query: generic ISO 4032 M5 nut
+found by web image search; representative, verify before use

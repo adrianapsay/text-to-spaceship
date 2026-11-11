@@ -1,0 +1,4 @@
+url: https://anywaves.com/wp-content/uploads/2026/02/EN_9100-ENG-10000446366-MSC-ACCREDIA-FRA-3-2026-01-14.pdf
+title: S-Band TT&C Launcher Antenna - Anywaves
+query: Anywaves Compact S-Band TT&C Antenna datasheet pdf
+found by web search; verify that it is the right part

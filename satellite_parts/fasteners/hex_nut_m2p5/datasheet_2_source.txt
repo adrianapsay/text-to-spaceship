@@ -1,0 +1,4 @@
+url: https://nvmexpress.org/wp-content/uploads/NVM-Express-1_4c-2021.06.28-Ratified.pdf
+title: NVMe Base Specification, Revision 1.4c - NVM Express
+query: generic ISO 4032 M2.5 datasheet pdf
+found by web search; verify that it is the right part

@@ -102,14 +102,32 @@
   "power_bus_V": null
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://space-for-space.com/wp-content/uploads/2021/01/Datasheet-for-TensorFSS-15M-V1-V1.0.4c.pdf",
+    "title": "Datasheet for TensorFSS-15M (V1)"
+   },
+   {
+    "file": "datasheet_2_page1.png",
+    "pdf": "datasheet_2.pdf",
+    "kind": "web_search",
+    "url": "https://pub-mediabox-storage.rxweb-prd.com/exhibitor/products/exh-0d97a667-a4c1-4dca-9a33-58b7aa04ec80/product-documents/pro-99cdd38a-16b3-4718-99f3-14ca4d479253/8c44fc95-0c06-4c6f-b822-3954fe7124b2.pdf",
+    "title": "2025 Tensor Tech Brochure V5.1-L"
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": "https://cdn.satsearch.com/product-images/image-tensor-tech-tensorfss-15m-fine-sun-sensor-jekdig.jpg",
   "photo_source": "satsearch",
   "photo_page": "https://satsearch.co/products/tensortech-fss-15-fine-sun-sensor",
-  "photo_file": "reference_photo",
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": null,
   "datasheet_page_file": null,
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

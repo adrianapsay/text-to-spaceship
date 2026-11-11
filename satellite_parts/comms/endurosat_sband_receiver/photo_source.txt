@@ -1,0 +1,5 @@
+image: https://cdn11.bigcommerce.com/s-uuk5gaaahj/images/stencil/2560w/products/977/780/s-band-receiver-700x700__02782.1750271208.jpg?c=2
+page: https://catalog.orbitaltransports.com/s-band-transceiver/
+title: S-Band Transceiver - Endurosat - SmallSat Catalog
+query: EnduroSat S-Band Receiver receiver
+found by web image search; representative, verify before use

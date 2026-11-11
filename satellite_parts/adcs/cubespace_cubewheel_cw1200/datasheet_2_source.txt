@@ -1,0 +1,4 @@
+url: https://media.newae.com/datasheets/NAE-CW1200_datasheet.pdf
+title: CW1200: ChipWhisperer-Pro - Newae Technology
+query: CW1200 datasheet
+found by web search; verify that it is the right part

@@ -1,0 +1,4 @@
+url: https://wakefieldthermal.com/content/data_sheets/wfv-heatpipe_designguide_R3_2020.pdf
+title: heat pipe - Wakefield Thermal
+query: copper water heat pipe 6mm datasheet pdf
+found by web search; verify that it is the right part

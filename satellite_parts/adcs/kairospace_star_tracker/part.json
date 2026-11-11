@@ -1,0 +1,146 @@
+{
+ "id": "kairospace_star_tracker",
+ "name": "KAIROSPACE star tracker (with baffle)",
+ "category": "adcs",
+ "subcategory": "star_tracker",
+ "vendor": "KAIROSPACE Co., Ltd.",
+ "model": "Star tracker",
+ "dimensions_mm": {
+  "x": 56,
+  "y": 60,
+  "z": 93
+ },
+ "mass_g": 197,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.co/products/kairospace-star-tracker",
+  "document": {
+   "title": "satsearch listing: KAIROSPACE star tracker (specification table)",
+   "revision": null,
+   "date": "2026-11-10"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "adcs",
+   "thermal"
+  ],
+  "notes": "56 x 60 x 93 mm, 197 g including baffle, 5 V, CAN / RS485, <5 arcsec 3-sigma, -30 to 40 C."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "distributors": [
+  "satsearch",
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "vendor_country": "South Korea",
+ "electrical": {
+  "voltage_V": {
+   "nominal": 5
+  },
+  "interfaces": [
+   "CAN",
+   "RS485"
+  ]
+ },
+ "adcs": {
+  "accuracy_arcsec": 5
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -30,
+   "max": 40
+  }
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   56.0,
+   60.0,
+   93.0
+  ],
+  "mesh_volume_mm3": 163705.8,
+  "watertight": true,
+  "render_kind": "camera_box_lens",
+  "effective_density_g_cm3": 1.203,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    },
+    {
+     "name": "lens_barrel",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__lens_barrel.stl"
+    },
+    {
+     "name": "glass",
+     "color": [
+      0.45,
+      0.65,
+      0.85
+     ],
+     "file": "bodies/part__glass.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 600
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "CAN"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 5
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_vhveeq_kairo-space_star-tracker.png",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/kairospace-star-tracker",
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

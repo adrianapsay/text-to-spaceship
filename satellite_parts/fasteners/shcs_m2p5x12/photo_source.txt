@@ -1,0 +1,5 @@
+image: https://www.novotek-vacuum.com/shop/images/products/main/thumb/NV_4762_M25x12.jpg
+page: https://www.novotek-vacuum.com/vacuum-optimized-screws/uncoated/iso4762-din912/
+title: Vacuum optimized Screws Uncoated,ISO4762 (DIN912)
+query: generic ISO 4762 M2.5x12 screw
+found by web image search; representative, verify before use

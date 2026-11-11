@@ -1,0 +1,4 @@
+url: https://rocketlabcorp.com/assets/Uploads/30-Nms-RW-0.03-Data-Sheet.pdf
+title: reaction wheel - Rocket Lab
+query: Rocket Lab RW-0.03 datasheet pdf
+found by web search; verify that it is the right part

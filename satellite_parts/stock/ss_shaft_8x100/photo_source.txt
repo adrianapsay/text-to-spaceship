@@ -1,0 +1,5 @@
+image: https://cdn11.bigcommerce.com/s-f6vfspkkjf/images/stencil/original/products/1653/5975/2100-0008-0100__27695__16510.1701974629.jpg?c=1
+page: https://www.servocity.com/8mm-x-100mm-stainless-steel-precision-shafting/
+title: 8mm Shaft (Stainless Steel, 100mm Length) - ServoCity®
+query: Stainless steel shaft 8 mm x 100 mm product photo
+found by web image search; representative, verify before use

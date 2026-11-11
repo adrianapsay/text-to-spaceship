@@ -1,0 +1,4 @@
+url: https://catalog.orbitaltransports.com/content/brands/ISIspace/TXS-Brochure-web.pdf
+title: ISIS High data rate TXS
+query: ISISPACE S-band transmitter (TXS) datasheet pdf
+found by web search; verify that it is the right part

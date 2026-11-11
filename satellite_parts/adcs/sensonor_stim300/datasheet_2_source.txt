@@ -1,0 +1,4 @@
+url: https://safran-navigation-timing.com/wp-content/uploads/2025/01/user-manual-stim300_stim377h-evaluation-kit-r3.pdf
+title: STIM300 IMU - Safran - Navigation & Timing
+query: Sensonor STIM300 datasheet pdf
+found by web search; verify that it is the right part

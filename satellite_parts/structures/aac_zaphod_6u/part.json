@@ -29,7 +29,7 @@
   "notes": "Dimensions and mass from the listing (6U listed as 340.5 x 226.3 x 100 mm, i.e. a 6U with 3U-length rails). Aluminium 7075 and 6082 primary structure, -40 to 80 C, anodised rails, deployment switches, GEVS."
  },
  "status": "in_production",
- "fidelity": "envelope",
+ "fidelity": "envelope_plus_features",
  "vendor_country": "Sweden / UK",
  "distributors": [
   "direct",
@@ -54,25 +54,34 @@
    100.0,
    340.5
   ],
-  "mesh_volume_mm3": 7705515.1,
+  "mesh_volume_mm3": 258572.6,
   "watertight": true,
-  "render_kind": "box",
-  "effective_density_g_cm3": 0.087,
+  "render_kind": "cubesat_frame",
+  "effective_density_g_cm3": 2.607,
   "bodies": {
    "part": [
     {
-     "name": "body",
+     "name": "rails",
      "color": [
       0.36,
       0.4,
       0.46
      ],
-     "file": "bodies/part__body.stl"
+     "file": "bodies/part__rails.stl"
+    },
+    {
+     "name": "rings",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__rings.stl"
     }
    ]
   },
   "face_counts": {
-   "part": 12
+   "part": 344
   }
  },
  "image": "preview.png",
@@ -84,14 +93,32 @@
   "power_bus_V": null
  },
  "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_page1.png",
+    "pdf": null,
+    "url": null,
+    "kind": "vendor_link",
+    "title": "satsearch listing of the AAC Clyde Space ZAPHOD 6U datasheet"
+   },
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/satsearch_datasheet_1e3xlv_aac-clyde_zaphod-6u-structure.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJLB7IRZ54RAMS36Q%2F20261111%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20261111T032409Z&X-Amz-Expires=86400&X-Amz-Signature=e60ab45175c7686c791953c3a10f2c45500125b59a328cd9dcc72f049b757384&X-Amz-SignedHeaders=host",
+    "title": null
+   }
+  ],
   "stl_preview": "preview.png",
+  "drawing": "drawing.png",
   "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_ntls4i_aac-clyde_zaphod-6u-structure.jpg",
   "photo_source": "satsearch",
   "photo_page": "https://satsearch.co/products/aac-clyde-zaphod-6u-structure",
-  "photo_file": "reference_photo",
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": null,
-  "datasheet_page_file": null,
-  "note": "photo_file and datasheet_page1.png are written by fetch_reference_images.py (needs web access)"
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {
   "part": [

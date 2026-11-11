@@ -1,0 +1,140 @@
+{
+ "id": "arcsec_twinkle",
+ "name": "arcsec Twinkle miniature star tracker",
+ "category": "adcs",
+ "subcategory": "star_tracker",
+ "vendor": "arcsec",
+ "model": "Twinkle",
+ "dimensions_mm": {
+  "x": 20,
+  "y": 20,
+  "z": 40
+ },
+ "mass_g": 35,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.co/products/arcsec-twinkle-star-tracker",
+  "document": {
+   "title": "satsearch listing: arcsec Twinkle star tracker (specification table)",
+   "revision": null,
+   "date": "2026-11-10"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "adcs"
+  ],
+  "notes": "20 x 20 x 40 mm, 35 g, <1 W, 5 V, RS485, 15 arcsec cross-boresight / 90 arcsec about-boresight (1-sigma, spec table)."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "distributors": [
+  "satsearch",
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "vendor_country": "Belgium",
+ "electrical": {
+  "power_W": {
+   "nominal": 1.0
+  },
+  "voltage_V": {
+   "nominal": 5
+  },
+  "interfaces": [
+   "RS485"
+  ]
+ },
+ "adcs": {
+  "accuracy_arcsec_cross_boresight": 15,
+  "accuracy_arcsec_about_boresight": 90
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   20.0,
+   20.0,
+   40.0
+  ],
+  "mesh_volume_mm3": 13533.6,
+  "watertight": true,
+  "render_kind": "camera_box_lens",
+  "effective_density_g_cm3": 2.586,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    },
+    {
+     "name": "lens_barrel",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__lens_barrel.stl"
+    },
+    {
+     "name": "glass",
+     "color": [
+      0.45,
+      0.65,
+      0.85
+     ],
+     "file": "bodies/part__glass.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 180
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 5
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": "https://cdn.satsearch.com/product-images/image-arcsec-twinkle-star-tracker-x82vtk.jpg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/arcsec-twinkle-star-tracker",
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

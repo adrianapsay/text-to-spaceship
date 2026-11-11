@@ -1,0 +1,5 @@
+image: https://mm.digikey.com/Volume0/opasdata/d220001/medias/images/3125/MDM-25PBS.jpg
+page: https://www.digikey.com/en/products/detail/itt-cannon-llc/MDM-25PBS/2496540
+title: MDM-25PBS ITT Cannon, LLC | Connectors, Interconnects | DigiKey
+query: generic MDM-25 connector
+found by web image search; representative, verify before use

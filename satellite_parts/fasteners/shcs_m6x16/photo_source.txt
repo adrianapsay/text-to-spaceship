@@ -1,0 +1,5 @@
+image: https://www.mwparts.com/out/pictures/generated/product/1/700_700_75/dn191006312_1.jpg
+page: https://www.mwparts.com/en/Hexagon-socket-cheese-head-screw-M6x16-DIN-912-ISO-4762-DN191006312.html
+title: Hexagon socket cheese head screw, M6x16, DIN 912 / ISO 4762
+query: generic ISO 4762 M6x16 screw
+found by web image search; representative, verify before use

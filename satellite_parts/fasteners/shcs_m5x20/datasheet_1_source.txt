@@ -1,0 +1,4 @@
+url: https://crafter.fastenal.com/static-assets/pdfs/Torque-Tension_Chart_for_Metric_Fasteners.pdf
+title: Torque-Tension Relationship for Metric Fasteners
+query: generic ISO 4762 M5x20 datasheet pdf
+found by web search; verify that it is the right part
