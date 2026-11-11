@@ -168,9 +168,34 @@ if os.path.exists(os.path.join(cards_folder, "cards.json")):
         image_path = os.path.join(cards_folder, card["image"])
         card["image"] = "data:image/png;base64," + base64.b64encode(open(image_path, "rb").read()).decode() if os.path.exists(image_path) else None
 
+# order study: set 0 of each category at k = 10, for three algorithms: default order, the best and the worst random order (the 3D viewer shows what order alone changes)
+order_solutions_path = os.path.join(RESULTS, "order_solutions_k10_k20.jsonl")
+if os.path.exists(order_solutions_path):
+    chosen = {}
+    for line in open(order_solutions_path):
+        record = json.loads(line)
+        if record["k"] != 10 or record["set"] != 0 or record["algorithm"] not in ("empty_maximal_spaces", "heightfield_drop", "genetic_heightfield", "grasp_ems", "box_extreme_points"):
+            continue
+        key = (record["dataset"], record["algorithm"])
+        bucket = chosen.setdefault(key, {})
+        if record["order_spec"] == "default":
+            bucket["default"] = record
+        elif record["order_spec"] == "random":
+            if "random best" not in bucket or record["density"] > bucket["random best"]["density"]:
+                bucket["random best"] = record
+            if "random worst" not in bucket or record["density"] < bucket["random worst"]["density"]:
+                bucket["random worst"] = record
+        elif record["order_spec"] in ("combined", "volume_asc"):
+            bucket[record["order_spec"].replace("_", " ")] = record
+    for (dataset_name, algorithm_name), bucket in sorted(chosen.items()):
+        parts, keys = load_instance_parts(os.path.join(HERE, "datasets_large"), dataset_name)
+        for label, record in bucket.items():
+            used = {name: keys[name] for name in record["parts"]}
+            packings.append(pack_record(record, used, {"collection": "order", "instance": dataset_name + " / " + algorithm_name, "algorithm": label + " order", "mode": "open", "container": None, "ratio": record["density"], "valid": record["valid"], "placed": len(record["placements"]), "k": len(record["parts"]), "note": "same 10 parts, placed in a different order: " + " > ".join(record["order"])}))
+
 data = {"order": order_rows, "cards": cards, "benchmark": benchmark_rows, "verification": verification_rows, "packings": packings, "meshes": meshes, "algorithms": ALGORITHM_ORDER, "family": FAMILY, "datasets": DATASET_ORDER}
 payload = json.dumps(data, separators=(",", ":"))
 template = open(os.path.join(HERE, "explorer_template.html")).read()
-page = template.replace("/*__DATA__*/", payload)
+page = template.replace("/*__DATA__*/", payload).replace("/*__ANIM__*/", open(os.path.join(HERE, "explorer_animations.js")).read())
 open(os.path.join(HERE, "explorer.html"), "w").write(page)
 print("meshes " + str(len(meshes)) + ", packings " + str(len(packings)) + ", page " + format(len(page) / 1e6, ".1f") + " MB")

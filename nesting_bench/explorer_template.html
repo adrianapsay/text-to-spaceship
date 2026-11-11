@@ -57,14 +57,16 @@ section.tab[hidden] { display: none !important; }
 .algo-list button { text-align: left; padding: 6px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); color: var(--fg); cursor: pointer; font: inherit; font-size: 13px; display: flex; align-items: center; gap: 8px; }
 .algo-list button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); }
 .algo-list .fam { font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--fg3); margin: 8px 0 2px 2px; }
-.algo-card { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.algo-card { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 14px; align-content: start; grid-auto-rows: min-content; }
 .algo-card h2 { grid-column: 1 / -1; margin-bottom: 0; }
 .algo-card .what { grid-column: 1 / -1; font-size: 15px; color: var(--fg); margin: 0 0 4px; }
 .algo-card img { width: 100%; border: 1px solid var(--line); border-radius: 6px; background: #fff; }
 .algo-card h3 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--fg3); margin: 10px 0 4px; }
 .algo-card p, .algo-card li { font-size: 13.5px; line-height: 1.45; margin: 0; }
 .algo-card ul { margin: 0; padding-left: 18px; }
-.algo-card .replay { position: relative; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); height: 300px; overflow: hidden; }
+.algo-card .sketch { position: relative; border: 1px solid var(--line); border-radius: 6px; background: #ffffff; height: 300px; overflow: hidden; margin-bottom: 10px; }
+.algo-card .sketch canvas { width: 100%; height: 100%; display: block; }
+.algo-card .replay { position: relative; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); height: 240px; overflow: hidden; }
 .algo-card .replay canvas { width: 100%; height: 100%; display: block; }
 .algo-card .replay .bar { position: absolute; left: 8px; right: 8px; bottom: 8px; display: flex; gap: 8px; align-items: center; font-size: 12px; color: var(--fg2); }
 .algo-card .replay .bar button { font: inherit; font-size: 12px; padding: 3px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); color: var(--fg); cursor: pointer; }
@@ -162,7 +164,7 @@ section.tab[hidden] { display: none !important; }
 <section class="tab viewer" id="tab-viewer" hidden>
   <div>
     <div class="controls">
-      <label>Collection <select id="v-collection"><option value="literature">Literature test (proven box)</option><option value="scrabble">Scrabble test (k = 9)</option><option value="benchmark">Benchmark (k = 10, trial 0)</option></select></label>
+      <label>Collection <select id="v-collection"><option value="literature">Literature test (proven box)</option><option value="scrabble">Scrabble test (k = 9)</option><option value="benchmark">Benchmark (k = 10, trial 0)</option><option value="order">Order study (same parts, different orders)</option></select></label>
       <label>Instance <select id="v-instance"></select></label>
       <label>Algorithm <select id="v-algorithm"></select></label>
     </div>
@@ -183,6 +185,7 @@ section.tab[hidden] { display: none !important; }
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
+/*__ANIM__*/
 const DATA = /*__DATA__*/;
 const FAMILY_COLOR = { baseline: "var(--baseline)", box: "var(--box)", shape: "var(--shape)", search: "var(--search)" };
 const PART_COLORS = [0x4e79a7, 0xf28e2b, 0xe15759, 0x76b7b2, 0x59a14f, 0xedc948, 0xb07aa1, 0xff9da7, 0x9c755f, 0xbab0ac, 0x1f77b4, 0xd62728, 0x2ca02c, 0x9467bd, 0x8c564b, 0xe377c2, 0x17becf];
@@ -548,10 +551,29 @@ function showAlgorithm(name) {
   aCard.innerHTML = `<h2><i class="swatch" style="background:${FAMILY_COLOR[DATA.family[name] || "baseline"]}"></i>${pretty(name)} <span class="meta" style="font-weight:normal">${(DATA.family[name] || "baseline")} family · ${card.cost}</span></h2>
     <p class="what">${card.what}</p>
     <div><img src="${card.image}" alt="sketch of ${pretty(name)}"><h3>How it places</h3><p>${card.how}</p></div>
-    <div><div class="replay" id="a-replay"><span class="hint" style="position:absolute;left:8px;top:6px;font-size:11px;color:var(--fg3)">replay of a saved packing</span><div class="bar"><button id="a-play">play</button><select id="a-instance">${instances.map(instance => `<option value="${instance}">${pretty(instance)}</option>`).join("")}</select><progress id="a-progress" value="0" max="1"></progress><span id="a-count"></span></div></div>
+    <div><div class="sketch" id="a-sketch-wrap"><canvas id="a-sketch"></canvas><span class="hint" style="position:absolute;right:8px;bottom:6px;font-size:11px;color:var(--fg3)">how it works, animated</span></div><div class="replay" id="a-replay"><span class="hint" style="position:absolute;left:8px;top:6px;font-size:11px;color:var(--fg3)">replay of a saved packing</span><div class="bar"><button id="a-play">play</button><select id="a-instance">${instances.map(instance => `<option value="${instance}">${pretty(instance)}</option>`).join("")}</select><progress id="a-progress" value="0" max="1"></progress><span id="a-count"></span></div></div>
       <h3>Strengths</h3><ul>${card.strengths.map(item => `<li>${item}</li>`).join("")}</ul><h3>Weaknesses</h3><ul>${card.weaknesses.map(item => `<li>${item}</li>`).join("")}</ul><h3>Numbers</h3><p class="meta">${benchmarkNumbers(name)}</p></div>`;
+  setupSketch(name);
   setupReplay(name);
   try { localStorage.setItem("nesting-algorithm", name); } catch (error) {}
+}
+let sketchFrame = null;
+function setupSketch(name) {
+  if (sketchFrame) { cancelAnimationFrame(sketchFrame); sketchFrame = null; }
+  const wrap = document.getElementById("a-sketch-wrap"), canvas = document.getElementById("a-sketch");
+  if (!ANIM.has(name)) { wrap.hidden = true; return; }
+  wrap.hidden = false;
+  const context = canvas.getContext("2d");
+  const started = performance.now();
+  const frame = () => {
+    const w = wrap.clientWidth, h = wrap.clientHeight;
+    if (w > 0 && (canvas.width !== w * 2 || canvas.height !== h * 2)) { canvas.width = w * 2; canvas.height = h * 2; }
+    context.setTransform(2, 0, 0, 2, 0, 0);
+    context.clearRect(0, 0, w, h);
+    try { ANIM.sketches[name](context, (performance.now() - started) / 1000, w, h); } catch (error) { context.fillStyle = "#888"; context.fillText("sketch error: " + error.message, 10, 20); }
+    sketchFrame = requestAnimationFrame(frame);
+  };
+  frame();
 }
 function setupReplay(name) {
   const wrap = document.getElementById("a-replay");
@@ -588,7 +610,7 @@ function setupReplay(name) {
     const center = new THREE.Vector3((min[0] + max[0]) / 2, (min[1] + max[1]) / 2, (min[2] + max[2]) / 2);
     const diagonal = Math.hypot(max[0] - min[0], max[1] - min[1], max[2] - min[2]);
     replay.meshes.forEach((mesh, index) => { const start = replay.finals[index].clone(); const offset = new THREE.Vector3(start.elements[12], start.elements[13], start.elements[14]).sub(center).normalize().multiplyScalar(diagonal * 0.9); start.elements[12] += offset.x; start.elements[13] += offset.y; start.elements[14] += offset.z + diagonal * 0.3; replay.starts.push(start); });
-    replay.camera.position.set(center.x + diagonal * 1.6, center.y + diagonal * 1.4, center.z + diagonal * 1.1);
+    replay.camera.position.set(center.x + diagonal * 1.15, center.y + diagonal * 1.0, center.z + diagonal * 0.8);
     replay.camera.up.set(0, 0, 1); replay.camera.lookAt(center);
     const w = wrap.clientWidth, h = wrap.clientHeight; replay.renderer.setSize(w, h, false); replay.camera.aspect = w / h; replay.camera.updateProjectionMatrix();
     replay.box = boxLines(min, max, 0x888888); replay.group.add(replay.box);

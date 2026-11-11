@@ -67,6 +67,15 @@ genetic_heightfield: genetic_algorithm with the heightfield drop as decoder (abo
 best_of_fast: runs shelf, bottom-left, extreme points, EMS, voxel and heightfield and keeps the densest (the "let the tool choose" option).
 genetic_box: genetic_algorithm with the exact extreme-points box decoder (no grid rounding, ~50x cheaper decodes); boxes only. Not in BENCHMARK_ALGORITHMS; used in the verification tests.
 
+Added Nov 10 (all five are in BENCHMARK_ALGORITHMS and ORDERED_ALGORITHMS):
+skyline_3d: a 1 mm height map of box tops on a square floor; a part rests on the highest point under its footprint at the 2D corners of placed boxes; lowest top, then least waste. Floor sizes 1.0 to 2.0 x footprint tried.
+wall_building: George and Robinson style container loading; the first part sets a wall's depth, the wall face is filled with 2D maximal empty rectangles, then the next wall.
+dblf_24: voxel deep-bottom-left-fill with all 24 orientations and the (z, y, x) deepest position inside a fixed floor.
+beam_search: deterministic beam (width 8) over placement sequences with the extreme-points decoder; children scored by the density reachable if the rest fit perfectly; 5 s cap.
+grasp_ems: GRASP: repeated randomized EMS constructions (perturbed order, random pick among the 3 best spots) for 5 s, best kept.
+
+Placement order (settings["order"], added Nov 10): every ordered algorithm takes its initial order from algorithms.initial_order: "default" (largest box first, the original behaviour), "random", "volume_desc", "volume_asc", "convexity_desc" (mesh volume / hull volume, most convex first), "combined" (volume x convexity), "flatness_desc" (compact first, plates and rods last), or an explicit index list. The search methods use it as their starting point. order_study.py runs the study (results/order_trials_k10_k20.csv, order_summary_k10_k20.csv, order_solutions_k10_k20.jsonl); make_order_report.py writes results/order_findings.md and plots_order/.
+
 Adding an algorithm: write a function with the signature at the top of algorithms.py and add it to ALGORITHMS and BENCHMARK_ALGORITHMS (and RANDOMIZED_ALGORITHMS if it uses randomness, ORDERED_ALGORITHMS if its placement order means something).
 
 ## Run time
@@ -97,6 +106,10 @@ summary_n1000_k10_all6.csv: the six original algorithms at n = 1000 (merged from
 summary_*_k5 / k20 / k30.csv: the same four at k = 5, 20, 30, n = 100.
 summary_*_container_k30.csv: container mode (100 mm cube), k = 30, n = 100, eight fast algorithms.
 slides.pdf: one slide per algorithm and the result plots, built by make_slides.py.
+summary_large_new_{fast,dblf,search}_k*_n*.csv: the five Nov 10 algorithms under the same protocol (fast n = 300, search n = 100).
+order_trials_k10_k20.csv, order_findings.md, plots_order/: the placement-order study (10 part sets per category and k, default + 5 heuristic orders + 20 random orders per set, 8 for the search methods).
+algorithm_cards/: the sketch and text card per algorithm used by the explorer's Algorithms tab (algorithm_cards.py).
+explorer.html (make_explorer.py): the self-contained explorer with six tabs: Benchmark, Scrabble test, Literature test, Order study, 3D viewer, Algorithms.
 
 ## Limits
 
