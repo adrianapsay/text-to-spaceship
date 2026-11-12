@@ -909,3 +909,135 @@ PHASE3_DONE
 6240 runs, 41606 done, 5674 pending
 50/5674  5.2 h left
 100/5674  4.1 h left
+31680 runs, 41721 done, 0 pending
+summary /home/claude/nb/nesting_bench/results/order_summary_k10_k20.csv
+PHASE1_DONE
+6240 runs, 41721 done, 0 pending
+summary /home/claude/nb/nesting_bench/results/order_summary_k10_k20.csv
+PHASE2_DONE
+3120 runs, 41721 done, 0 pending
+summary /home/claude/nb/nesting_bench/results/order_summary_k10_k20.csv
+PHASE3_DONE
+6240 runs, 41721 done, 5559 pending
+50/5559  3.9 h left
+31680 runs, 41789 done, 0 pending
+summary /home/claude/nb/nesting_bench/results/order_summary_k10_k20.csv
+PHASE1_DONE
+6240 runs, 41789 done, 0 pending
+summary /home/claude/nb/nesting_bench/results/order_summary_k10_k20.csv
+PHASE2_DONE
+3120 runs, 41789 done, 0 pending
+summary /home/claude/nb/nesting_bench/results/order_summary_k10_k20.csv
+PHASE3_DONE
+6240 runs, 41789 done, 5491 pending
+50/5491  4.0 h left
+100/5491  3.9 h left
+150/5491  3.9 h left
+200/5491  3.8 h left
+250/5491  3.8 h left
+300/5491  3.7 h left
+350/5491  3.2 h left
+400/5491  2.8 h left
+450/5491  2.6 h left
+500/5491  2.3 h left
+550/5491  2.1 h left
+600/5491  2.2 h left
+650/5491  2.3 h left
+700/5491  2.3 h left
+750/5491  2.4 h left
+800/5491  2.4 h left
+850/5491  2.4 h left
+900/5491  2.4 h left
+950/5491  2.4 h left
+1000/5491  2.4 h left
+1050/5491  2.4 h left
+1100/5491  2.4 h left
+1150/5491  2.4 h left
+1200/5491  2.4 h left
+1250/5491  2.4 h left
+1300/5491  2.4 h left
+1350/5491  2.3 h left
+1400/5491  2.2 h left
+1450/5491  2.2 h left
+1500/5491  2.1 h left
+1550/5491  2.0 h left
+1600/5491  1.9 h left
+1650/5491  1.9 h left
+1700/5491  1.9 h left
+1750/5491  1.9 h left
+1800/5491  1.9 h left
+1850/5491  1.9 h left
+1900/5491  1.9 h left
+1950/5491  1.9 h left
+2000/5491  1.8 h left
+2050/5491  1.8 h left
+2100/5491  1.8 h left
+2150/5491  1.8 h left
+2200/5491  1.7 h left
+2250/5491  1.7 h left
+2300/5491  1.7 h left
+2350/5491  1.7 h left
+2400/5491  1.7 h left
+2450/5491  1.6 h left
+2500/5491  1.6 h left
+2550/5491  1.5 h left
+2600/5491  1.5 h left
+2650/5491  1.4 h left
+2700/5491  1.4 h left
+2750/5491  1.4 h left
+2800/5491  1.4 h left
+2850/5491  1.4 h left
+2900/5491  1.3 h left
+2950/5491  1.3 h left
+3000/5491  1.3 h left
+3050/5491  1.3 h left
+3100/5491  1.2 h left
+3150/5491  1.2 h left
+3200/5491  1.2 h left
+3250/5491  1.2 h left
+3300/5491  1.2 h left
+3350/5491  1.1 h left
+3400/5491  1.1 h left
+3450/5491  1.1 h left
+3500/5491  1.0 h left
+3550/5491  1.0 h left
+3600/5491  1.0 h left
+3650/5491  0.9 h left
+3700/5491  0.9 h left
+3750/5491  0.9 h left
+3800/5491  0.9 h left
+3850/5491  0.8 h left
+3900/5491  0.8 h left
+3950/5491  0.8 h left
+4000/5491  0.8 h left
+4050/5491  0.7 h left
+4100/5491  0.7 h left
+4150/5491  0.7 h left
+4200/5491  0.7 h left
+4250/5491  0.6 h left
+4300/5491  0.6 h left
+4350/5491  0.6 h left
+4400/5491  0.6 h left
+4450/5491  0.5 h left
+4500/5491  0.5 h left
+4550/5491  0.5 h left
+4600/5491  0.5 h left
+4650/5491  0.4 h left
+4700/5491  0.4 h left
+4750/5491  0.4 h left
+4800/5491  0.3 h left
+4850/5491  0.3 h left
+4900/5491  0.3 h left
+4950/5491  0.3 h left
+5000/5491  0.2 h left
+5050/5491  0.2 h left
+5100/5491  0.2 h left
+5150/5491  0.2 h left
+5200/5491  0.1 h left
+5250/5491  0.1 h left
+5300/5491  0.1 h left
+5350/5491  0.1 h left
+5400/5491  0.0 h left
+5450/5491  0.0 h left
+summary /home/claude/nb/nesting_bench/results/order_summary_k10_k20.csv
+ALL_DONE
