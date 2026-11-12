@@ -28,7 +28,8 @@ if ! pgrep -f "run_search_algorithms.sh" > /dev/null && ! grep -q ALL_DONE resul
   nohup ./run_search_algorithms.sh > /dev/null 2>&1 &
   echo "relaunched search algorithms"
 fi
-if ! pgrep -f "run_new_algorithms.sh" > /dev/null && ! grep -q ALL_DONE results/new_algorithms.log; then
+# PAUSE_DBLF_K30: dblf_24 at k = 30 (300 trials) cannot finish before the deadline because the container restarts often; paused 2026-11-11 so the order study and verification get the cores. Delete the file to resume.
+if [ ! -f PAUSE_DBLF_K30 ] && ! pgrep -f "run_new_algorithms.sh" > /dev/null && ! grep -q ALL_DONE results/new_algorithms.log; then
   nohup ./run_new_algorithms.sh > /dev/null 2>&1 &
   echo "relaunched new algorithms"
 fi

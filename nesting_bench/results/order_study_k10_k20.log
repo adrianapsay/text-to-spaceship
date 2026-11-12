@@ -813,3 +813,99 @@ PHASE2_DONE
 300/2472  8.9 h left
 350/2472  9.4 h left
 400/2472  9.5 h left
+450/2472  9.2 h left
+500/2472  8.4 h left
+550/2472  7.7 h left
+600/2472  7.1 h left
+650/2472  6.5 h left
+700/2472  6.5 h left
+750/2472  6.7 h left
+800/2472  6.7 h left
+850/2472  6.7 h left
+900/2472  6.5 h left
+950/2472  6.2 h left
+1000/2472  5.8 h left
+1050/2472  5.5 h left
+1100/2472  5.2 h left
+1150/2472  4.9 h left
+1200/2472  4.8 h left
+31680 runs, 39962 done, 0 pending
+summary /home/claude/nb/nesting_bench/results/order_summary_k10_k20.csv
+PHASE1_DONE
+6240 runs, 39962 done, 0 pending
+summary /home/claude/nb/nesting_bench/results/order_summary_k10_k20.csv
+PHASE2_DONE
+3120 runs, 39962 done, 1231 pending
+31680 runs, 39980 done, 0 pending
+summary /home/claude/nb/nesting_bench/results/order_summary_k10_k20.csv
+PHASE1_DONE
+6240 runs, 39980 done, 0 pending
+summary /home/claude/nb/nesting_bench/results/order_summary_k10_k20.csv
+PHASE2_DONE
+3120 runs, 39980 done, 1213 pending
+31680 runs, 39982 done, 0 pending
+summary /home/claude/nb/nesting_bench/results/order_summary_k10_k20.csv
+PHASE1_DONE
+6240 runs, 39982 done, 0 pending
+summary /home/claude/nb/nesting_bench/results/order_summary_k10_k20.csv
+PHASE2_DONE
+3120 runs, 39982 done, 1211 pending
+50/1211  6.7 h left
+100/1211  5.6 h left
+150/1211  4.9 h left
+200/1211  4.0 h left
+250/1211  3.1 h left
+300/1211  2.6 h left
+350/1211  2.1 h left
+400/1211  1.8 h left
+450/1211  1.6 h left
+500/1211  1.5 h left
+550/1211  1.5 h left
+31680 runs, 40562 done, 0 pending
+summary /home/claude/nb/nesting_bench/results/order_summary_k10_k20.csv
+PHASE1_DONE
+6240 runs, 40562 done, 0 pending
+summary /home/claude/nb/nesting_bench/results/order_summary_k10_k20.csv
+PHASE2_DONE
+3120 runs, 40562 done, 631 pending
+50/631  1.6 h left
+31680 runs, 40647 done, 0 pending
+summary /home/claude/nb/nesting_bench/results/order_summary_k10_k20.csv
+PHASE1_DONE
+6240 runs, 40647 done, 0 pending
+summary /home/claude/nb/nesting_bench/results/order_summary_k10_k20.csv
+PHASE2_DONE
+3120 runs, 40647 done, 546 pending
+50/546  0.8 h left
+100/546  0.5 h left
+150/546  0.4 h left
+200/546  0.3 h left
+250/546  0.2 h left
+300/546  0.2 h left
+350/546  0.2 h left
+400/546  0.1 h left
+450/546  0.1 h left
+500/546  0.1 h left
+summary /home/claude/nb/nesting_bench/results/order_summary_k10_k20.csv
+PHASE3_DONE
+6240 runs, 41193 done, 6087 pending
+50/6087  1.0 h left
+100/6087  0.7 h left
+150/6087  1.7 h left
+200/6087  2.3 h left
+250/6087  2.6 h left
+300/6087  2.9 h left
+350/6087  3.0 h left
+400/6087  3.0 h left
+31680 runs, 41606 done, 0 pending
+summary /home/claude/nb/nesting_bench/results/order_summary_k10_k20.csv
+PHASE1_DONE
+6240 runs, 41606 done, 0 pending
+summary /home/claude/nb/nesting_bench/results/order_summary_k10_k20.csv
+PHASE2_DONE
+3120 runs, 41606 done, 0 pending
+summary /home/claude/nb/nesting_bench/results/order_summary_k10_k20.csv
+PHASE3_DONE
+6240 runs, 41606 done, 5674 pending
+50/5674  5.2 h left
+100/5674  4.1 h left

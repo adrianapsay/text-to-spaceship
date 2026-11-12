@@ -991,3 +991,541 @@ Total time: 443.0 min
 Per-trial results: /home/claude/nb/nesting_bench/results/trials_large_new_dblf_k20_n300.csv
 Summary:           /home/claude/nb/nesting_bench/results/summary_large_new_dblf_k20_n300.csv
 Loading complex_concave ...
+  dblf_24                60/300   about 1503.1 min left overall
+  dblf_24               120/300   about 1534.2 min left overall
+  dblf_24               180/300   about 1551.2 min left overall
+Resuming: 12 (dataset, algorithm) pairs already complete
+Loading complex_concave ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading complex_convex ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading cuboids ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading real_shapes ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading simple_concave ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading simple_convex ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Solutions:         /home/claude/nb/nesting_bench/results/solutions_large_new_fast_k10_n300.jsonl
+
+mode=open  k=10  n=300  clearance t=0.5 mm  restarts=3  voxel_pitch=2.0
+dens = % volume utilized (mean), AR = aspect ratio, COM% = COM to COV distance as % of box diagonal, gap = min gap mm, cont = part pairs in contact (within t + 0.5 mm), clr = share of trials meeting t
+dataset          algorithm             score   dens  valid        box x*y*z mm    AR  COM%  Izz/Ixx   gap  cont   clr  s/trial
+complex_concave  skyline_3d            0.134  0.134   1.00            88x91x50  1.99   7.3     1.53  1.09   0.8  1.00    0.048
+complex_concave  wall_building         0.226  0.226   1.00            41x89x64  2.27   6.3     0.80  0.68   2.5  1.00    0.053
+complex_convex   skyline_3d            0.220  0.220   1.00            87x90x50  1.94   6.9     1.49  0.67   2.7  1.00    0.040
+complex_convex   wall_building         0.368  0.368   1.00            45x85x63  2.15   6.7     0.84  0.52   7.0  1.00    0.054
+cuboids          skyline_3d            0.391  0.391   1.00            86x87x43  2.22   6.8     1.62  0.48  11.2  0.92    0.067
+cuboids          wall_building         0.646  0.646   1.00            42x81x57  2.02   7.1     0.87  0.50  14.2  1.00    0.111
+real_shapes      skyline_3d            0.100  0.100   1.00            91x90x54  1.81   8.0     1.45  1.12   0.7  1.00    0.081
+real_shapes      wall_building         0.178  0.178   1.00            46x90x61  2.08   7.6     0.81  0.57   2.6  1.00    0.093
+simple_concave   skyline_3d            0.222  0.222   1.00            98x97x64  1.71   8.1     1.44  0.50   8.0  0.98    0.067
+simple_concave   wall_building         0.402  0.402   1.00            48x95x74  2.25   6.5     0.83  0.50  13.0  1.00    0.093
+simple_convex    skyline_3d            0.175  0.175   1.00            86x87x52  1.87   8.5     1.42  0.54   3.8  0.99    0.041
+simple_convex    wall_building         0.280  0.280   1.00            42x87x64  2.17   7.2     0.76  0.50   7.8  1.00    0.059
+
+Total time: 0.0 min
+Per-trial results: /home/claude/nb/nesting_bench/results/trials_large_new_fast_k10_n300.csv
+Summary:           /home/claude/nb/nesting_bench/results/summary_large_new_fast_k10_n300.csv
+Resuming: 12 (dataset, algorithm) pairs already complete
+Loading complex_concave ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading complex_convex ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading cuboids ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading real_shapes ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading simple_concave ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading simple_convex ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Solutions:         /home/claude/nb/nesting_bench/results/solutions_large_new_fast_k20_n300.jsonl
+
+mode=open  k=20  n=300  clearance t=0.5 mm  restarts=3  voxel_pitch=2.0
+dens = % volume utilized (mean), AR = aspect ratio, COM% = COM to COV distance as % of box diagonal, gap = min gap mm, cont = part pairs in contact (within t + 0.5 mm), clr = share of trials meeting t
+dataset          algorithm             score   dens  valid        box x*y*z mm    AR  COM%  Izz/Ixx   gap  cont   clr  s/trial
+complex_concave  skyline_3d            0.122  0.122   1.00          113x114x69  1.75   5.6     1.51  0.76   2.0  0.99    0.147
+complex_concave  wall_building         0.225  0.225   1.00           52x115x87  2.60   5.7     0.79  0.58   5.6  1.00    0.230
+complex_convex   skyline_3d            0.197  0.197   1.00          115x115x66  1.85   5.3     1.54  0.54   5.5  0.98    0.135
+complex_convex   wall_building         0.363  0.363   1.00           51x112x89  2.57   5.9     0.77  0.51  14.8  1.00    0.213
+cuboids          skyline_3d            0.348  0.348   1.00          111x111x58  2.03   5.0     1.61  0.45  25.2  0.81    0.184
+cuboids          wall_building         0.647  0.647   1.00            50x98x80  2.23   6.3     0.80  0.50  33.7  1.00    0.206
+real_shapes      skyline_3d            0.090  0.090   1.00          120x121x68  1.82   5.3     1.35  0.70   1.7  0.99    0.119
+real_shapes      wall_building         0.181  0.181   1.00           46x127x85  2.75   6.0     0.77  0.51   6.4  1.00    0.229
+simple_concave   skyline_3d            0.220  0.220   1.00          121x121x82  1.62   5.9     1.42  0.47  19.9  0.88    0.215
+simple_concave   wall_building         0.406  0.406   1.00          53x129x101  2.83   5.7     0.76  0.50  29.4  1.00    0.316
+simple_convex    skyline_3d            0.155  0.155   1.00          112x112x69  1.75   6.3     1.42  0.49   8.7  0.94    0.151
+simple_convex    wall_building         0.275  0.275   1.00           50x116x86  2.59   5.9     0.76  0.50  17.8  1.00    0.214
+
+Total time: 0.0 min
+Per-trial results: /home/claude/nb/nesting_bench/results/trials_large_new_fast_k20_n300.csv
+Summary:           /home/claude/nb/nesting_bench/results/summary_large_new_fast_k20_n300.csv
+Resuming: 12 (dataset, algorithm) pairs already complete
+Loading complex_concave ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading complex_convex ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading cuboids ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading real_shapes ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading simple_concave ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading simple_convex ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Solutions:         /home/claude/nb/nesting_bench/results/solutions_large_new_fast_k30_n300.jsonl
+
+mode=open  k=30  n=300  clearance t=0.5 mm  restarts=3  voxel_pitch=2.0
+dens = % volume utilized (mean), AR = aspect ratio, COM% = COM to COV distance as % of box diagonal, gap = min gap mm, cont = part pairs in contact (within t + 0.5 mm), clr = share of trials meeting t
+dataset          algorithm             score   dens  valid        box x*y*z mm    AR  COM%  Izz/Ixx   gap  cont   clr  s/trial
+complex_concave  skyline_3d            0.123  0.123   1.00          134x134x73  1.89   4.3     1.59  0.64   3.4  1.00    0.248
+complex_concave  wall_building         0.225  0.225   1.00          48x138x114  3.20   5.4     0.68  0.54   9.0  1.00    0.418
+complex_convex   skyline_3d            0.198  0.198   1.00          131x131x74  1.85   4.4     1.55  0.51   9.0  0.97    0.173
+complex_convex   wall_building         0.351  0.351   1.00          46x143x114  3.39   5.6     0.70  0.50  23.4  1.00    0.277
+cuboids          skyline_3d            0.348  0.348   1.00          128x128x64  2.08   4.2     1.64  0.39  40.7  0.61    0.207
+cuboids          wall_building         0.662  0.662   1.00           56x113x94  2.39   5.7     0.78  0.50  53.1  1.00    0.362
+real_shapes      skyline_3d            0.085  0.085   1.00          136x136x82  1.72   5.5     1.45  0.55   3.7  0.97    0.204
+real_shapes      wall_building         0.185  0.185   1.00          51x141x103  2.98   5.8     0.74  0.50  11.6  1.00    0.294
+simple_concave   skyline_3d            0.222  0.222   1.00          144x144x85  1.79   4.6     1.52  0.45  31.0  0.82    0.234
+simple_concave   wall_building         0.406  0.406   1.00          45x169x129  3.91   5.2     0.71  0.50  46.0  1.00    0.370
+simple_convex    skyline_3d            0.154  0.154   1.00          130x131x74  1.86   5.3     1.48  0.47  14.3  0.88    0.169
+simple_convex    wall_building         0.278  0.278   1.00          55x128x106  2.68   5.2     0.70  0.50  27.9  1.00    0.287
+
+Total time: 0.0 min
+Per-trial results: /home/claude/nb/nesting_bench/results/trials_large_new_fast_k30_n300.csv
+Summary:           /home/claude/nb/nesting_bench/results/summary_large_new_fast_k30_n300.csv
+Resuming: 6 (dataset, algorithm) pairs already complete
+Loading complex_concave ...
+  dblf_24              kept from the previous run
+Loading complex_convex ...
+  dblf_24              kept from the previous run
+Loading cuboids ...
+  dblf_24              kept from the previous run
+Loading real_shapes ...
+  dblf_24              kept from the previous run
+Loading simple_concave ...
+  dblf_24              kept from the previous run
+Loading simple_convex ...
+  dblf_24              kept from the previous run
+Solutions:         /home/claude/nb/nesting_bench/results/solutions_large_new_dblf_k10_n300.jsonl
+
+mode=open  k=10  n=300  clearance t=0.5 mm  restarts=3  voxel_pitch=2.0
+dens = % volume utilized (mean), AR = aspect ratio, COM% = COM to COV distance as % of box diagonal, gap = min gap mm, cont = part pairs in contact (within t + 0.5 mm), clr = share of trials meeting t
+dataset          algorithm             score   dens  valid        box x*y*z mm    AR  COM%  Izz/Ixx   gap  cont   clr  s/trial
+complex_concave  dblf_24               0.245  0.245   1.00            66x66x48  1.40   5.7     1.52  1.48   0.1  1.00    3.107
+complex_convex   dblf_24               0.345  0.345   1.00            65x65x57  1.17   6.6     1.33  1.09   0.9  1.00    2.959
+cuboids          dblf_24               0.550  0.550   1.00            61x61x60  1.16   9.2     1.23  0.68   5.1  1.00    2.553
+real_shapes      dblf_24               0.193  0.193   1.00            68x67x48  1.42   7.9     1.51  1.35   0.2  1.00    3.960
+simple_concave   dblf_24               0.374  0.379   0.99            72x72x66  1.15   8.1     1.21  0.71   3.2  0.99    4.737
+simple_convex    dblf_24               0.323  0.323   1.00            66x65x46  1.45   7.4     1.61  0.92   1.2  1.00    3.417
+
+Total time: 0.0 min
+Per-trial results: /home/claude/nb/nesting_bench/results/trials_large_new_dblf_k10_n300.csv
+Summary:           /home/claude/nb/nesting_bench/results/summary_large_new_dblf_k10_n300.csv
+Resuming: 6 (dataset, algorithm) pairs already complete
+Loading complex_concave ...
+  dblf_24              kept from the previous run
+Loading complex_convex ...
+  dblf_24              kept from the previous run
+Loading cuboids ...
+  dblf_24              kept from the previous run
+Loading real_shapes ...
+  dblf_24              kept from the previous run
+Loading simple_concave ...
+  dblf_24              kept from the previous run
+Loading simple_convex ...
+  dblf_24              kept from the previous run
+Solutions:         /home/claude/nb/nesting_bench/results/solutions_large_new_dblf_k20_n300.jsonl
+
+mode=open  k=20  n=300  clearance t=0.5 mm  restarts=3  voxel_pitch=2.0
+dens = % volume utilized (mean), AR = aspect ratio, COM% = COM to COV distance as % of box diagonal, gap = min gap mm, cont = part pairs in contact (within t + 0.5 mm), clr = share of trials meeting t
+dataset          algorithm             score   dens  valid        box x*y*z mm    AR  COM%  Izz/Ixx   gap  cont   clr  s/trial
+complex_concave  dblf_24               0.258  0.258   1.00            83x83x59  1.43   5.3     1.55  1.17   0.4  1.00   14.814
+complex_convex   dblf_24               0.370  0.370   1.00            82x82x68  1.21   5.9     1.37  0.78   2.3  1.00   12.906
+cuboids          dblf_24               0.533  0.533   1.00            77x77x76  1.06   8.7     1.19  0.60  12.2  1.00    8.795
+real_shapes      dblf_24               0.199  0.199   1.00            85x85x61  1.41   7.0     1.44  1.06   0.6  1.00   31.001
+simple_concave   dblf_24               0.409  0.409   1.00            90x90x76  1.20   6.7     1.30  0.62   8.3  1.00   33.306
+simple_convex    dblf_24               0.337  0.337   1.00            83x82x56  1.51   6.1     1.58  0.69   2.9  1.00   24.165
+
+Total time: 0.0 min
+Per-trial results: /home/claude/nb/nesting_bench/results/trials_large_new_dblf_k20_n300.csv
+Summary:           /home/claude/nb/nesting_bench/results/summary_large_new_dblf_k20_n300.csv
+Resuming: 0 (dataset, algorithm) pairs already complete
+Loading complex_concave ...
+  dblf_24                60/300   about 1023.3 min left overall
+Resuming: 12 (dataset, algorithm) pairs already complete
+Loading complex_concave ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading complex_convex ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading cuboids ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading real_shapes ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading simple_concave ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading simple_convex ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Solutions:         /home/claude/nb/nesting_bench/results/solutions_large_new_fast_k10_n300.jsonl
+
+mode=open  k=10  n=300  clearance t=0.5 mm  restarts=3  voxel_pitch=2.0
+dens = % volume utilized (mean), AR = aspect ratio, COM% = COM to COV distance as % of box diagonal, gap = min gap mm, cont = part pairs in contact (within t + 0.5 mm), clr = share of trials meeting t
+dataset          algorithm             score   dens  valid        box x*y*z mm    AR  COM%  Izz/Ixx   gap  cont   clr  s/trial
+complex_concave  skyline_3d            0.134  0.134   1.00            88x91x50  1.99   7.3     1.53  1.09   0.8  1.00    0.048
+complex_concave  wall_building         0.226  0.226   1.00            41x89x64  2.27   6.3     0.80  0.68   2.5  1.00    0.053
+complex_convex   skyline_3d            0.220  0.220   1.00            87x90x50  1.94   6.9     1.49  0.67   2.7  1.00    0.040
+complex_convex   wall_building         0.368  0.368   1.00            45x85x63  2.15   6.7     0.84  0.52   7.0  1.00    0.054
+cuboids          skyline_3d            0.391  0.391   1.00            86x87x43  2.22   6.8     1.62  0.48  11.2  0.92    0.067
+cuboids          wall_building         0.646  0.646   1.00            42x81x57  2.02   7.1     0.87  0.50  14.2  1.00    0.111
+real_shapes      skyline_3d            0.100  0.100   1.00            91x90x54  1.81   8.0     1.45  1.12   0.7  1.00    0.081
+real_shapes      wall_building         0.178  0.178   1.00            46x90x61  2.08   7.6     0.81  0.57   2.6  1.00    0.093
+simple_concave   skyline_3d            0.222  0.222   1.00            98x97x64  1.71   8.1     1.44  0.50   8.0  0.98    0.067
+simple_concave   wall_building         0.402  0.402   1.00            48x95x74  2.25   6.5     0.83  0.50  13.0  1.00    0.093
+simple_convex    skyline_3d            0.175  0.175   1.00            86x87x52  1.87   8.5     1.42  0.54   3.8  0.99    0.041
+simple_convex    wall_building         0.280  0.280   1.00            42x87x64  2.17   7.2     0.76  0.50   7.8  1.00    0.059
+
+Total time: 0.0 min
+Per-trial results: /home/claude/nb/nesting_bench/results/trials_large_new_fast_k10_n300.csv
+Summary:           /home/claude/nb/nesting_bench/results/summary_large_new_fast_k10_n300.csv
+Resuming: 12 (dataset, algorithm) pairs already complete
+Loading complex_concave ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading complex_convex ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading cuboids ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading real_shapes ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading simple_concave ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading simple_convex ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Solutions:         /home/claude/nb/nesting_bench/results/solutions_large_new_fast_k20_n300.jsonl
+
+mode=open  k=20  n=300  clearance t=0.5 mm  restarts=3  voxel_pitch=2.0
+dens = % volume utilized (mean), AR = aspect ratio, COM% = COM to COV distance as % of box diagonal, gap = min gap mm, cont = part pairs in contact (within t + 0.5 mm), clr = share of trials meeting t
+dataset          algorithm             score   dens  valid        box x*y*z mm    AR  COM%  Izz/Ixx   gap  cont   clr  s/trial
+complex_concave  skyline_3d            0.122  0.122   1.00          113x114x69  1.75   5.6     1.51  0.76   2.0  0.99    0.147
+complex_concave  wall_building         0.225  0.225   1.00           52x115x87  2.60   5.7     0.79  0.58   5.6  1.00    0.230
+complex_convex   skyline_3d            0.197  0.197   1.00          115x115x66  1.85   5.3     1.54  0.54   5.5  0.98    0.135
+complex_convex   wall_building         0.363  0.363   1.00           51x112x89  2.57   5.9     0.77  0.51  14.8  1.00    0.213
+cuboids          skyline_3d            0.348  0.348   1.00          111x111x58  2.03   5.0     1.61  0.45  25.2  0.81    0.184
+cuboids          wall_building         0.647  0.647   1.00            50x98x80  2.23   6.3     0.80  0.50  33.7  1.00    0.206
+real_shapes      skyline_3d            0.090  0.090   1.00          120x121x68  1.82   5.3     1.35  0.70   1.7  0.99    0.119
+real_shapes      wall_building         0.181  0.181   1.00           46x127x85  2.75   6.0     0.77  0.51   6.4  1.00    0.229
+simple_concave   skyline_3d            0.220  0.220   1.00          121x121x82  1.62   5.9     1.42  0.47  19.9  0.88    0.215
+simple_concave   wall_building         0.406  0.406   1.00          53x129x101  2.83   5.7     0.76  0.50  29.4  1.00    0.316
+simple_convex    skyline_3d            0.155  0.155   1.00          112x112x69  1.75   6.3     1.42  0.49   8.7  0.94    0.151
+simple_convex    wall_building         0.275  0.275   1.00           50x116x86  2.59   5.9     0.76  0.50  17.8  1.00    0.214
+
+Total time: 0.0 min
+Per-trial results: /home/claude/nb/nesting_bench/results/trials_large_new_fast_k20_n300.csv
+Summary:           /home/claude/nb/nesting_bench/results/summary_large_new_fast_k20_n300.csv
+Resuming: 12 (dataset, algorithm) pairs already complete
+Loading complex_concave ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading complex_convex ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading cuboids ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading real_shapes ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading simple_concave ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading simple_convex ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Solutions:         /home/claude/nb/nesting_bench/results/solutions_large_new_fast_k30_n300.jsonl
+
+mode=open  k=30  n=300  clearance t=0.5 mm  restarts=3  voxel_pitch=2.0
+dens = % volume utilized (mean), AR = aspect ratio, COM% = COM to COV distance as % of box diagonal, gap = min gap mm, cont = part pairs in contact (within t + 0.5 mm), clr = share of trials meeting t
+dataset          algorithm             score   dens  valid        box x*y*z mm    AR  COM%  Izz/Ixx   gap  cont   clr  s/trial
+complex_concave  skyline_3d            0.123  0.123   1.00          134x134x73  1.89   4.3     1.59  0.64   3.4  1.00    0.248
+complex_concave  wall_building         0.225  0.225   1.00          48x138x114  3.20   5.4     0.68  0.54   9.0  1.00    0.418
+complex_convex   skyline_3d            0.198  0.198   1.00          131x131x74  1.85   4.4     1.55  0.51   9.0  0.97    0.173
+complex_convex   wall_building         0.351  0.351   1.00          46x143x114  3.39   5.6     0.70  0.50  23.4  1.00    0.277
+cuboids          skyline_3d            0.348  0.348   1.00          128x128x64  2.08   4.2     1.64  0.39  40.7  0.61    0.207
+cuboids          wall_building         0.662  0.662   1.00           56x113x94  2.39   5.7     0.78  0.50  53.1  1.00    0.362
+real_shapes      skyline_3d            0.085  0.085   1.00          136x136x82  1.72   5.5     1.45  0.55   3.7  0.97    0.204
+real_shapes      wall_building         0.185  0.185   1.00          51x141x103  2.98   5.8     0.74  0.50  11.6  1.00    0.294
+simple_concave   skyline_3d            0.222  0.222   1.00          144x144x85  1.79   4.6     1.52  0.45  31.0  0.82    0.234
+simple_concave   wall_building         0.406  0.406   1.00          45x169x129  3.91   5.2     0.71  0.50  46.0  1.00    0.370
+simple_convex    skyline_3d            0.154  0.154   1.00          130x131x74  1.86   5.3     1.48  0.47  14.3  0.88    0.169
+simple_convex    wall_building         0.278  0.278   1.00          55x128x106  2.68   5.2     0.70  0.50  27.9  1.00    0.287
+
+Total time: 0.0 min
+Per-trial results: /home/claude/nb/nesting_bench/results/trials_large_new_fast_k30_n300.csv
+Summary:           /home/claude/nb/nesting_bench/results/summary_large_new_fast_k30_n300.csv
+Resuming: 6 (dataset, algorithm) pairs already complete
+Loading complex_concave ...
+  dblf_24              kept from the previous run
+Loading complex_convex ...
+  dblf_24              kept from the previous run
+Loading cuboids ...
+  dblf_24              kept from the previous run
+Loading real_shapes ...
+  dblf_24              kept from the previous run
+Loading simple_concave ...
+  dblf_24              kept from the previous run
+Loading simple_convex ...
+  dblf_24              kept from the previous run
+Solutions:         /home/claude/nb/nesting_bench/results/solutions_large_new_dblf_k10_n300.jsonl
+
+mode=open  k=10  n=300  clearance t=0.5 mm  restarts=3  voxel_pitch=2.0
+dens = % volume utilized (mean), AR = aspect ratio, COM% = COM to COV distance as % of box diagonal, gap = min gap mm, cont = part pairs in contact (within t + 0.5 mm), clr = share of trials meeting t
+dataset          algorithm             score   dens  valid        box x*y*z mm    AR  COM%  Izz/Ixx   gap  cont   clr  s/trial
+complex_concave  dblf_24               0.245  0.245   1.00            66x66x48  1.40   5.7     1.52  1.48   0.1  1.00    3.107
+complex_convex   dblf_24               0.345  0.345   1.00            65x65x57  1.17   6.6     1.33  1.09   0.9  1.00    2.959
+cuboids          dblf_24               0.550  0.550   1.00            61x61x60  1.16   9.2     1.23  0.68   5.1  1.00    2.553
+real_shapes      dblf_24               0.193  0.193   1.00            68x67x48  1.42   7.9     1.51  1.35   0.2  1.00    3.960
+simple_concave   dblf_24               0.374  0.379   0.99            72x72x66  1.15   8.1     1.21  0.71   3.2  0.99    4.737
+simple_convex    dblf_24               0.323  0.323   1.00            66x65x46  1.45   7.4     1.61  0.92   1.2  1.00    3.417
+
+Total time: 0.0 min
+Per-trial results: /home/claude/nb/nesting_bench/results/trials_large_new_dblf_k10_n300.csv
+Summary:           /home/claude/nb/nesting_bench/results/summary_large_new_dblf_k10_n300.csv
+Resuming: 6 (dataset, algorithm) pairs already complete
+Loading complex_concave ...
+  dblf_24              kept from the previous run
+Loading complex_convex ...
+  dblf_24              kept from the previous run
+Loading cuboids ...
+  dblf_24              kept from the previous run
+Loading real_shapes ...
+  dblf_24              kept from the previous run
+Loading simple_concave ...
+  dblf_24              kept from the previous run
+Loading simple_convex ...
+  dblf_24              kept from the previous run
+Solutions:         /home/claude/nb/nesting_bench/results/solutions_large_new_dblf_k20_n300.jsonl
+
+mode=open  k=20  n=300  clearance t=0.5 mm  restarts=3  voxel_pitch=2.0
+dens = % volume utilized (mean), AR = aspect ratio, COM% = COM to COV distance as % of box diagonal, gap = min gap mm, cont = part pairs in contact (within t + 0.5 mm), clr = share of trials meeting t
+dataset          algorithm             score   dens  valid        box x*y*z mm    AR  COM%  Izz/Ixx   gap  cont   clr  s/trial
+complex_concave  dblf_24               0.258  0.258   1.00            83x83x59  1.43   5.3     1.55  1.17   0.4  1.00   14.814
+complex_convex   dblf_24               0.370  0.370   1.00            82x82x68  1.21   5.9     1.37  0.78   2.3  1.00   12.906
+cuboids          dblf_24               0.533  0.533   1.00            77x77x76  1.06   8.7     1.19  0.60  12.2  1.00    8.795
+real_shapes      dblf_24               0.199  0.199   1.00            85x85x61  1.41   7.0     1.44  1.06   0.6  1.00   31.001
+simple_concave   dblf_24               0.409  0.409   1.00            90x90x76  1.20   6.7     1.30  0.62   8.3  1.00   33.306
+simple_convex    dblf_24               0.337  0.337   1.00            83x82x56  1.51   6.1     1.58  0.69   2.9  1.00   24.165
+
+Total time: 0.0 min
+Per-trial results: /home/claude/nb/nesting_bench/results/trials_large_new_dblf_k20_n300.csv
+Summary:           /home/claude/nb/nesting_bench/results/summary_large_new_dblf_k20_n300.csv
+Resuming: 0 (dataset, algorithm) pairs already complete
+Loading complex_concave ...
+Resuming: 12 (dataset, algorithm) pairs already complete
+Loading complex_concave ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading complex_convex ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading cuboids ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading real_shapes ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading simple_concave ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading simple_convex ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Solutions:         /home/claude/nb/nesting_bench/results/solutions_large_new_fast_k10_n300.jsonl
+
+mode=open  k=10  n=300  clearance t=0.5 mm  restarts=3  voxel_pitch=2.0
+dens = % volume utilized (mean), AR = aspect ratio, COM% = COM to COV distance as % of box diagonal, gap = min gap mm, cont = part pairs in contact (within t + 0.5 mm), clr = share of trials meeting t
+dataset          algorithm             score   dens  valid        box x*y*z mm    AR  COM%  Izz/Ixx   gap  cont   clr  s/trial
+complex_concave  skyline_3d            0.134  0.134   1.00            88x91x50  1.99   7.3     1.53  1.09   0.8  1.00    0.048
+complex_concave  wall_building         0.226  0.226   1.00            41x89x64  2.27   6.3     0.80  0.68   2.5  1.00    0.053
+complex_convex   skyline_3d            0.220  0.220   1.00            87x90x50  1.94   6.9     1.49  0.67   2.7  1.00    0.040
+complex_convex   wall_building         0.368  0.368   1.00            45x85x63  2.15   6.7     0.84  0.52   7.0  1.00    0.054
+cuboids          skyline_3d            0.391  0.391   1.00            86x87x43  2.22   6.8     1.62  0.48  11.2  0.92    0.067
+cuboids          wall_building         0.646  0.646   1.00            42x81x57  2.02   7.1     0.87  0.50  14.2  1.00    0.111
+real_shapes      skyline_3d            0.100  0.100   1.00            91x90x54  1.81   8.0     1.45  1.12   0.7  1.00    0.081
+real_shapes      wall_building         0.178  0.178   1.00            46x90x61  2.08   7.6     0.81  0.57   2.6  1.00    0.093
+simple_concave   skyline_3d            0.222  0.222   1.00            98x97x64  1.71   8.1     1.44  0.50   8.0  0.98    0.067
+simple_concave   wall_building         0.402  0.402   1.00            48x95x74  2.25   6.5     0.83  0.50  13.0  1.00    0.093
+simple_convex    skyline_3d            0.175  0.175   1.00            86x87x52  1.87   8.5     1.42  0.54   3.8  0.99    0.041
+simple_convex    wall_building         0.280  0.280   1.00            42x87x64  2.17   7.2     0.76  0.50   7.8  1.00    0.059
+
+Total time: 0.0 min
+Per-trial results: /home/claude/nb/nesting_bench/results/trials_large_new_fast_k10_n300.csv
+Summary:           /home/claude/nb/nesting_bench/results/summary_large_new_fast_k10_n300.csv
+Resuming: 12 (dataset, algorithm) pairs already complete
+Loading complex_concave ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading complex_convex ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading cuboids ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading real_shapes ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading simple_concave ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading simple_convex ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Solutions:         /home/claude/nb/nesting_bench/results/solutions_large_new_fast_k20_n300.jsonl
+
+mode=open  k=20  n=300  clearance t=0.5 mm  restarts=3  voxel_pitch=2.0
+dens = % volume utilized (mean), AR = aspect ratio, COM% = COM to COV distance as % of box diagonal, gap = min gap mm, cont = part pairs in contact (within t + 0.5 mm), clr = share of trials meeting t
+dataset          algorithm             score   dens  valid        box x*y*z mm    AR  COM%  Izz/Ixx   gap  cont   clr  s/trial
+complex_concave  skyline_3d            0.122  0.122   1.00          113x114x69  1.75   5.6     1.51  0.76   2.0  0.99    0.147
+complex_concave  wall_building         0.225  0.225   1.00           52x115x87  2.60   5.7     0.79  0.58   5.6  1.00    0.230
+complex_convex   skyline_3d            0.197  0.197   1.00          115x115x66  1.85   5.3     1.54  0.54   5.5  0.98    0.135
+complex_convex   wall_building         0.363  0.363   1.00           51x112x89  2.57   5.9     0.77  0.51  14.8  1.00    0.213
+cuboids          skyline_3d            0.348  0.348   1.00          111x111x58  2.03   5.0     1.61  0.45  25.2  0.81    0.184
+cuboids          wall_building         0.647  0.647   1.00            50x98x80  2.23   6.3     0.80  0.50  33.7  1.00    0.206
+real_shapes      skyline_3d            0.090  0.090   1.00          120x121x68  1.82   5.3     1.35  0.70   1.7  0.99    0.119
+real_shapes      wall_building         0.181  0.181   1.00           46x127x85  2.75   6.0     0.77  0.51   6.4  1.00    0.229
+simple_concave   skyline_3d            0.220  0.220   1.00          121x121x82  1.62   5.9     1.42  0.47  19.9  0.88    0.215
+simple_concave   wall_building         0.406  0.406   1.00          53x129x101  2.83   5.7     0.76  0.50  29.4  1.00    0.316
+simple_convex    skyline_3d            0.155  0.155   1.00          112x112x69  1.75   6.3     1.42  0.49   8.7  0.94    0.151
+simple_convex    wall_building         0.275  0.275   1.00           50x116x86  2.59   5.9     0.76  0.50  17.8  1.00    0.214
+
+Total time: 0.0 min
+Per-trial results: /home/claude/nb/nesting_bench/results/trials_large_new_fast_k20_n300.csv
+Summary:           /home/claude/nb/nesting_bench/results/summary_large_new_fast_k20_n300.csv
+Resuming: 12 (dataset, algorithm) pairs already complete
+Loading complex_concave ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading complex_convex ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading cuboids ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading real_shapes ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading simple_concave ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Loading simple_convex ...
+  skyline_3d           kept from the previous run
+  wall_building        kept from the previous run
+Solutions:         /home/claude/nb/nesting_bench/results/solutions_large_new_fast_k30_n300.jsonl
+
+mode=open  k=30  n=300  clearance t=0.5 mm  restarts=3  voxel_pitch=2.0
+dens = % volume utilized (mean), AR = aspect ratio, COM% = COM to COV distance as % of box diagonal, gap = min gap mm, cont = part pairs in contact (within t + 0.5 mm), clr = share of trials meeting t
+dataset          algorithm             score   dens  valid        box x*y*z mm    AR  COM%  Izz/Ixx   gap  cont   clr  s/trial
+complex_concave  skyline_3d            0.123  0.123   1.00          134x134x73  1.89   4.3     1.59  0.64   3.4  1.00    0.248
+complex_concave  wall_building         0.225  0.225   1.00          48x138x114  3.20   5.4     0.68  0.54   9.0  1.00    0.418
+complex_convex   skyline_3d            0.198  0.198   1.00          131x131x74  1.85   4.4     1.55  0.51   9.0  0.97    0.173
+complex_convex   wall_building         0.351  0.351   1.00          46x143x114  3.39   5.6     0.70  0.50  23.4  1.00    0.277
+cuboids          skyline_3d            0.348  0.348   1.00          128x128x64  2.08   4.2     1.64  0.39  40.7  0.61    0.207
+cuboids          wall_building         0.662  0.662   1.00           56x113x94  2.39   5.7     0.78  0.50  53.1  1.00    0.362
+real_shapes      skyline_3d            0.085  0.085   1.00          136x136x82  1.72   5.5     1.45  0.55   3.7  0.97    0.204
+real_shapes      wall_building         0.185  0.185   1.00          51x141x103  2.98   5.8     0.74  0.50  11.6  1.00    0.294
+simple_concave   skyline_3d            0.222  0.222   1.00          144x144x85  1.79   4.6     1.52  0.45  31.0  0.82    0.234
+simple_concave   wall_building         0.406  0.406   1.00          45x169x129  3.91   5.2     0.71  0.50  46.0  1.00    0.370
+simple_convex    skyline_3d            0.154  0.154   1.00          130x131x74  1.86   5.3     1.48  0.47  14.3  0.88    0.169
+simple_convex    wall_building         0.278  0.278   1.00          55x128x106  2.68   5.2     0.70  0.50  27.9  1.00    0.287
+
+Total time: 0.0 min
+Per-trial results: /home/claude/nb/nesting_bench/results/trials_large_new_fast_k30_n300.csv
+Summary:           /home/claude/nb/nesting_bench/results/summary_large_new_fast_k30_n300.csv
+Resuming: 6 (dataset, algorithm) pairs already complete
+Loading complex_concave ...
+  dblf_24              kept from the previous run
+Loading complex_convex ...
+  dblf_24              kept from the previous run
+Loading cuboids ...
+  dblf_24              kept from the previous run
+Loading real_shapes ...
+  dblf_24              kept from the previous run
+Loading simple_concave ...
+  dblf_24              kept from the previous run
+Loading simple_convex ...
+  dblf_24              kept from the previous run
+Solutions:         /home/claude/nb/nesting_bench/results/solutions_large_new_dblf_k10_n300.jsonl
+
+mode=open  k=10  n=300  clearance t=0.5 mm  restarts=3  voxel_pitch=2.0
+dens = % volume utilized (mean), AR = aspect ratio, COM% = COM to COV distance as % of box diagonal, gap = min gap mm, cont = part pairs in contact (within t + 0.5 mm), clr = share of trials meeting t
+dataset          algorithm             score   dens  valid        box x*y*z mm    AR  COM%  Izz/Ixx   gap  cont   clr  s/trial
+complex_concave  dblf_24               0.245  0.245   1.00            66x66x48  1.40   5.7     1.52  1.48   0.1  1.00    3.107
+complex_convex   dblf_24               0.345  0.345   1.00            65x65x57  1.17   6.6     1.33  1.09   0.9  1.00    2.959
+cuboids          dblf_24               0.550  0.550   1.00            61x61x60  1.16   9.2     1.23  0.68   5.1  1.00    2.553
+real_shapes      dblf_24               0.193  0.193   1.00            68x67x48  1.42   7.9     1.51  1.35   0.2  1.00    3.960
+simple_concave   dblf_24               0.374  0.379   0.99            72x72x66  1.15   8.1     1.21  0.71   3.2  0.99    4.737
+simple_convex    dblf_24               0.323  0.323   1.00            66x65x46  1.45   7.4     1.61  0.92   1.2  1.00    3.417
+
+Total time: 0.0 min
+Per-trial results: /home/claude/nb/nesting_bench/results/trials_large_new_dblf_k10_n300.csv
+Summary:           /home/claude/nb/nesting_bench/results/summary_large_new_dblf_k10_n300.csv
+Resuming: 6 (dataset, algorithm) pairs already complete
+Loading complex_concave ...
+  dblf_24              kept from the previous run
+Loading complex_convex ...
+  dblf_24              kept from the previous run
+Loading cuboids ...
+  dblf_24              kept from the previous run
+Loading real_shapes ...
+  dblf_24              kept from the previous run
+Loading simple_concave ...
+  dblf_24              kept from the previous run
+Loading simple_convex ...
+  dblf_24              kept from the previous run
+Solutions:         /home/claude/nb/nesting_bench/results/solutions_large_new_dblf_k20_n300.jsonl
+
+mode=open  k=20  n=300  clearance t=0.5 mm  restarts=3  voxel_pitch=2.0
+dens = % volume utilized (mean), AR = aspect ratio, COM% = COM to COV distance as % of box diagonal, gap = min gap mm, cont = part pairs in contact (within t + 0.5 mm), clr = share of trials meeting t
+dataset          algorithm             score   dens  valid        box x*y*z mm    AR  COM%  Izz/Ixx   gap  cont   clr  s/trial
+complex_concave  dblf_24               0.258  0.258   1.00            83x83x59  1.43   5.3     1.55  1.17   0.4  1.00   14.814
+complex_convex   dblf_24               0.370  0.370   1.00            82x82x68  1.21   5.9     1.37  0.78   2.3  1.00   12.906
+cuboids          dblf_24               0.533  0.533   1.00            77x77x76  1.06   8.7     1.19  0.60  12.2  1.00    8.795
+real_shapes      dblf_24               0.199  0.199   1.00            85x85x61  1.41   7.0     1.44  1.06   0.6  1.00   31.001
+simple_concave   dblf_24               0.409  0.409   1.00            90x90x76  1.20   6.7     1.30  0.62   8.3  1.00   33.306
+simple_convex    dblf_24               0.337  0.337   1.00            83x82x56  1.51   6.1     1.58  0.69   2.9  1.00   24.165
+
+Total time: 0.0 min
+Per-trial results: /home/claude/nb/nesting_bench/results/trials_large_new_dblf_k20_n300.csv
+Summary:           /home/claude/nb/nesting_bench/results/summary_large_new_dblf_k20_n300.csv
+Resuming: 0 (dataset, algorithm) pairs already complete
+Loading complex_concave ...

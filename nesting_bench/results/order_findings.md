@@ -13,13 +13,14 @@ Same part sets as the benchmark; every algorithm packed each set under its defau
 | wall_building | 120 | 0.120 | 0.351 | big+convex first | +0.003 (+0.001 to +0.005) significant | -0.043 | +0.015 (+0.009 to +0.022) |
 | voxel_bottom_left | 120 | 0.095 | 0.411 | big+convex first | -0.001 (-0.004 to +0.003) | -0.036 | +0.005 (-0.001 to +0.011) |
 | heightfield_drop | 120 | 0.108 | 0.389 | big+convex first | +0.000 (-0.004 to +0.004) | -0.035 | +0.015 (+0.009 to +0.020) |
-| dblf_24 (partial, still running) | 41 | 0.083 | 0.316 | big+convex first | -0.004 (-0.010 to +0.001) | -0.039 | +0.004 (-0.005 to +0.013) |
+| dblf_24 | 120 | 0.093 | 0.352 | big+convex first | -0.004 (-0.008 to +0.000) | -0.039 | +0.008 (-0.001 to +0.016) |
 | best_of_fast | 120 | 0.089 | 0.427 | big+convex first | -0.001 (-0.004 to +0.001) | -0.036 | +0.004 (-0.001 to +0.010) |
 | simulated_annealing | 120 | 0.051 | 0.403 | big+convex first | -0.001 (-0.005 to +0.002) | -0.010 | +0.015 (+0.010 to +0.020) |
 | genetic_algorithm | 120 | 0.025 | 0.409 | big+convex first | -0.000 (-0.003 to +0.002) | -0.010 | +0.004 (-0.001 to +0.009) |
 | genetic_heightfield | 120 | 0.034 | 0.418 | big+convex first | +0.002 (-0.001 to +0.005) | -0.009 | +0.009 (+0.004 to +0.013) |
 | genetic_box | 120 | 0.031 | 0.416 | big+convex first | +0.001 (-0.001 to +0.003) | -0.014 | +0.002 (-0.003 to +0.006) |
-| beam_search (partial, still running) | 6 | 0.000 | 0.213 | volume asc | +0.000 (+0.000 to +0.000) | +0.000 | +0.000 (+0.000 to +0.000) |
+| beam_search (partial, still running) | 13 | 0.002 | 0.220 | convex first | +0.001 (-0.002 to +0.003) | +0.000 | +0.001 (-0.003 to +0.005) |
+| grasp_ems (partial, still running) | 10 | 0.029 | 0.288 | big+convex first | -0.001 (-0.006 to +0.005) | -0.015 | -0.001 (-0.008 to +0.005) |
 
 volume desc is the default order itself (same sort key), so it is left out of 'best other fixed order'.
 

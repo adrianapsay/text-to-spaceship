@@ -127,3 +127,173 @@ resuming: 2288 jobs already done
 550/3712   about 685.8 min left
 600/3712   about 673.7 min left
 650/3712   about 656.3 min left
+700/3712   about 689.1 min left
+750/3712   about 655.1 min left
+800/3712   about 624.4 min left
+850/3712   about 593.7 min left
+900/3712   about 568.5 min left
+950/3712   about 545.0 min left
+1000/3712   about 526.4 min left
+1050/3712   about 510.0 min left
+1100/3712   about 492.3 min left
+1150/3712   about 478.7 min left
+1200/3712   about 463.5 min left
+1250/3712   about 444.8 min left
+1300/3712   about 427.6 min left
+1350/3712   about 409.3 min left
+1400/3712   about 392.5 min left
+1450/3712   about 377.6 min left
+1500/3712   about 364.3 min left
+1550/3712   about 351.3 min left
+1600/3712   about 338.6 min left
+1650/3712   about 326.4 min left
+1700/3712   about 315.2 min left
+1750/3712   about 308.8 min left
+1800/3712   about 303.0 min left
+1850/3712   about 296.8 min left
+1900/3712   about 286.1 min left
+1950/3712   about 276.8 min left
+2000/3712   about 267.5 min left
+2050/3712   about 258.9 min left
+2100/3712   about 250.9 min left
+2150/3712   about 242.8 min left
+resuming: 200 jobs already done
+8 instances, 5 algorithms, 5 repeats: 0 jobs to run
+
+Ranking (literature): mean ratio to the known optimum, 99% CI, solved rate (ratio >= 0.98)
+  1  grasp_ems             0.834  [0.763, 0.905]   solved 0.25   valid 1.00
+  2  wall_building         0.820  [0.754, 0.887]   solved 0.12   valid 1.00
+  3  beam_search           0.820  [0.754, 0.887]   solved 0.12   valid 1.00
+  4  dblf_24               0.549  [0.443, 0.655]   solved 0.00   valid 1.00
+  5  skyline_3d            0.451  [0.338, 0.565]   solved 0.00   valid 1.00
+Total time 0.0 min
+resuming: 200 jobs already done
+8 instances, 5 algorithms, 5 repeats: 0 jobs to run
+
+Ranking (literature): mean ratio to the known optimum, 99% CI, solved rate (ratio >= 0.98)
+  1  beam_search           1.007  [0.929, 1.086]   solved 0.75   valid 1.00
+  2  wall_building         0.953  [0.876, 1.029]   solved 0.50   valid 1.00
+  3  grasp_ems             0.902  [0.797, 1.008]   solved 0.50   valid 1.00
+  4  dblf_24               0.639  [0.583, 0.694]   solved 0.00   valid 1.00
+  5  skyline_3d            0.508  [0.371, 0.644]   solved 0.12   valid 1.00
+Total time 0.0 min
+resuming: 40 jobs already done
+8 instances, 1 algorithms, 5 repeats: 0 jobs to run
+
+Ranking (literature): mean ratio to the known optimum, 99% CI, solved rate (ratio >= 0.98)
+  1  dblf_24               0.527  [0.429, 0.625]   solved 0.00   valid 1.00
+Total time 0.0 min
+resuming: 40 jobs already done
+8 instances, 1 algorithms, 5 repeats: 0 jobs to run
+
+Ranking (literature): mean ratio to the known optimum, 99% CI, solved rate (ratio >= 0.98)
+  1  dblf_24               0.638  [0.588, 0.687]   solved 0.00   valid 1.00
+Total time 0.0 min
+resuming: 4450 jobs already done
+600 instances, 5 algorithms, 2 repeats: 1550 jobs to run
+50/1550   about 142.3 min left
+100/1550   about 104.8 min left
+150/1550   about 87.9 min left
+200/1550   about 80.1 min left
+250/1550   about 74.4 min left
+300/1550   about 69.5 min left
+350/1550   about 79.7 min left
+400/1550   about 81.2 min left
+450/1550   about 76.3 min left
+500/1550   about 74.5 min left
+resuming: 200 jobs already done
+8 instances, 5 algorithms, 5 repeats: 0 jobs to run
+
+Ranking (literature): mean ratio to the known optimum, 99% CI, solved rate (ratio >= 0.98)
+  1  grasp_ems             0.834  [0.763, 0.905]   solved 0.25   valid 1.00
+  2  wall_building         0.820  [0.754, 0.887]   solved 0.12   valid 1.00
+  3  beam_search           0.820  [0.754, 0.887]   solved 0.12   valid 1.00
+  4  dblf_24               0.549  [0.443, 0.655]   solved 0.00   valid 1.00
+  5  skyline_3d            0.451  [0.338, 0.565]   solved 0.00   valid 1.00
+Total time 0.0 min
+resuming: 200 jobs already done
+8 instances, 5 algorithms, 5 repeats: 0 jobs to run
+
+Ranking (literature): mean ratio to the known optimum, 99% CI, solved rate (ratio >= 0.98)
+  1  beam_search           1.007  [0.929, 1.086]   solved 0.75   valid 1.00
+  2  wall_building         0.953  [0.876, 1.029]   solved 0.50   valid 1.00
+  3  grasp_ems             0.902  [0.797, 1.008]   solved 0.50   valid 1.00
+  4  dblf_24               0.639  [0.583, 0.694]   solved 0.00   valid 1.00
+  5  skyline_3d            0.508  [0.371, 0.644]   solved 0.12   valid 1.00
+Total time 0.0 min
+resuming: 40 jobs already done
+8 instances, 1 algorithms, 5 repeats: 0 jobs to run
+
+Ranking (literature): mean ratio to the known optimum, 99% CI, solved rate (ratio >= 0.98)
+  1  dblf_24               0.527  [0.429, 0.625]   solved 0.00   valid 1.00
+Total time 0.0 min
+resuming: 40 jobs already done
+8 instances, 1 algorithms, 5 repeats: 0 jobs to run
+
+Ranking (literature): mean ratio to the known optimum, 99% CI, solved rate (ratio >= 0.98)
+  1  dblf_24               0.638  [0.588, 0.687]   solved 0.00   valid 1.00
+Total time 0.0 min
+resuming: 4984 jobs already done
+600 instances, 5 algorithms, 2 repeats: 1016 jobs to run
+50/1016   about 71.8 min left
+resuming: 200 jobs already done
+8 instances, 5 algorithms, 5 repeats: 0 jobs to run
+
+Ranking (literature): mean ratio to the known optimum, 99% CI, solved rate (ratio >= 0.98)
+  1  grasp_ems             0.834  [0.763, 0.905]   solved 0.25   valid 1.00
+  2  wall_building         0.820  [0.754, 0.887]   solved 0.12   valid 1.00
+  3  beam_search           0.820  [0.754, 0.887]   solved 0.12   valid 1.00
+  4  dblf_24               0.549  [0.443, 0.655]   solved 0.00   valid 1.00
+  5  skyline_3d            0.451  [0.338, 0.565]   solved 0.00   valid 1.00
+Total time 0.0 min
+resuming: 200 jobs already done
+8 instances, 5 algorithms, 5 repeats: 0 jobs to run
+
+Ranking (literature): mean ratio to the known optimum, 99% CI, solved rate (ratio >= 0.98)
+  1  beam_search           1.007  [0.929, 1.086]   solved 0.75   valid 1.00
+  2  wall_building         0.953  [0.876, 1.029]   solved 0.50   valid 1.00
+  3  grasp_ems             0.902  [0.797, 1.008]   solved 0.50   valid 1.00
+  4  dblf_24               0.639  [0.583, 0.694]   solved 0.00   valid 1.00
+  5  skyline_3d            0.508  [0.371, 0.644]   solved 0.12   valid 1.00
+Total time 0.0 min
+resuming: 40 jobs already done
+8 instances, 1 algorithms, 5 repeats: 0 jobs to run
+
+Ranking (literature): mean ratio to the known optimum, 99% CI, solved rate (ratio >= 0.98)
+  1  dblf_24               0.527  [0.429, 0.625]   solved 0.00   valid 1.00
+Total time 0.0 min
+resuming: 40 jobs already done
+8 instances, 1 algorithms, 5 repeats: 0 jobs to run
+
+Ranking (literature): mean ratio to the known optimum, 99% CI, solved rate (ratio >= 0.98)
+  1  dblf_24               0.638  [0.588, 0.687]   solved 0.00   valid 1.00
+Total time 0.0 min
+resuming: 5064 jobs already done
+600 instances, 5 algorithms, 2 repeats: 936 jobs to run
+50/936   about 59.9 min left
+100/936   about 52.1 min left
+150/936   about 46.6 min left
+200/936   about 44.4 min left
+250/936   about 42.4 min left
+300/936   about 39.1 min left
+350/936   about 36.0 min left
+400/936   about 33.0 min left
+450/936   about 29.4 min left
+500/936   about 25.3 min left
+550/936   about 21.6 min left
+600/936   about 18.2 min left
+650/936   about 15.1 min left
+700/936   about 12.2 min left
+750/936   about 9.5 min left
+800/936   about 6.9 min left
+850/936   about 4.3 min left
+900/936   about 1.8 min left
+
+Ranking (scrabble): mean ratio to the known optimum, 99% CI, solved rate (ratio >= 0.98)
+  1  grasp_ems             0.546  [0.527, 0.565]   solved 0.00   valid 1.00
+  2  dblf_24               0.496  [0.482, 0.509]   solved 0.00   valid 1.00
+  3  beam_search           0.486  [0.468, 0.504]   solved 0.00   valid 1.00
+  4  wall_building         0.445  [0.429, 0.461]   solved 0.00   valid 1.00
+  5  skyline_3d            0.264  [0.254, 0.274]   solved 0.00   valid 0.99
+Total time 46.1 min
+ALL_DONE
