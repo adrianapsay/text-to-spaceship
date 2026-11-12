@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-iq-spacecom-s-band-antennas-ku47j9.pdf
+method: product image from the catalog page https://satsearch.co/products/iq-s-band-antenna

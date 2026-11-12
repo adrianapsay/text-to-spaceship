@@ -60,6 +60,20 @@
   },
   "face_counts": {
    "part": 76
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "extrusion",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__extrusion.stl"
+    }
+   ]
   }
  },
  "image": "preview.png",

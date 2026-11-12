@@ -1,0 +1,90 @@
+T
+e
+c
+h
+n
+o
+l
+o
+g
+y
+ 
+R
+e
+a
+d
+i
+n
+e
+s
+s
+ 
+L
+e
+v
+e
+l
+9
+TRL
+cyber® reaction wheel 2
+compact
+durable
+connective
+robust
+efficient
+cyber motor
+efficient
+compact
+robust
+
+Excellent solution for ambitious missions
+DETUMBLING
+STABILIZING
+Robustness
+Efficiency
+Durability
+Connectivity
+Compactness
+Momentum storage > 2 mNms
+20 x 20 x 20 mm square design
+For 1U to 8U cubesats
+Integrated drive electronic with  
+I2C, UART,  SPI interface
+Lifetime 5 years
+Rated power consumption 480 mW  
+(@2 mNms) 
+Vacuum up to 10-8 mbar
+Temperature -60°C to +100°C
+POINTING
+Technical data
+Dimensions
+20 x 20 x 20 mm
+Mass
+30 g
+Momentum storage @ nominal voltage
+2,0 mNms
+Rated power consumption (@2 mNms) 
+480 mW
+Peak power consumption (configurable)
+<1500 mW
+Max. rotation rate
+18.000 rpm
+Operating voltage
+3 to 8,8 V
+Nominal voltage
+5 V
+Radiation resistance
+> 200 Gy
+Vacuum resistance
+10-8 mbar
+Operating temperature
+-40°C to +85°C
+Survival temperature
+-60°C to +100°C
+WITTENSTEIN – one with the future
+Flyer_WCM-cyber®_reaction_wheel_2_en_2022_I Subject to changes!
+www.reaction-wheel.com
+WITTENSTEIN cyber motor GmbH 
+Walter-Wittenstein-Straße 1 · 97999 Igersheim · Germany 
+Tel. +49 7931 493-15800 · info@wittenstein-cyber-motor.de
+

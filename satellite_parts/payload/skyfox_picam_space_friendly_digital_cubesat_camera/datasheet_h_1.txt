@@ -1,0 +1,1081 @@
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Space-Friendly   
+Digital CubeSat Camera 
+piCAM 
+ 
+Product Datasheet 
+Rev. B/2022 
+ 
+ 
+Intended for small satellite imaging. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Made in Czech Republic, a country with space heritage since 1978. 
+© 2014-2022 SkyFox Labs, All rights reserved. 
+
+ 
+ 
+Space-Friendly 
+Digital CubeSat Camera
+ 
+Intended for small satellite imaging. 
+ 
+ 
+ 
+               www.SkyFoxLabs.com, Space-Friendly products 
+2             piCAM Product Datasheet, Rev. B 
+Issue rev. B, 2022, info@skyfoxlabs.com, U Studanky 620/13, CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2022 SkyFox Labs, s.r.o., All rights reserved 
+ 
+ 
+                           
+FEATURES 
+ 
+Miniature Digital CubeSat Camera Module 
+ 
+VGA resolution (640×480px), JPEG data output 
+ 
+Simple use upon one-byte telecommands 
+ 
+External LED Flash trigger output via Open-
+Collector driven signal 
+ 
+Power consumption 
+ 
+315 mW (typical), 3.3 V @ 25°C 
+ 
+Easy-to-Implement Data Interface  
+ 
+UART 115200-8-N-1, 3.3V-CMOS levels 
+ 
+Selectable Bitrate On-the-fly 
+ 
+1k2, 2k4, 9k6, 19k2, 38k4, 57k6,  
+ 
+115k2 (default), 230k4, 460k8, 921k6 
+ 
+Serial Output packets in ASCII representation of 
+HEX data, divided by CR+LF 
+ 
+Captures image within 5 seconds 
+ 
+Evaluation Kit available with White LED Flash 
+driver schematics and Demo 
+ 
+MOSFET-Free Input Power Switch, allows the unit 
+to be connected permanently to a fixed power bus 
+ 
+Housekeeping Telemetry readout 
+ 
+- total input current readout 
+ 
+- input voltage readout 
+ 
+- camera module input current readout 
+ 
+- camera core voltage readout 
+ 
+Power Supply Input 
+2.7 to 3.6 V, 3.3V Nominal 
+ 
+Miniature Dimensions  
+ 
+33×33×19 mm body 
+ 
++ optics (variable) 
+ 
+Mounting bracket 48×33 mm with 4×M2.5 
+mounting holes for easy integration 
+ 
+STEP model available 
+ 
+Factory pre-focused to: infinity (default),  
+ 
+other distances on request 
+ 
+Optics with ~60° Field-of-View (default), 116° and 
+170° optics available, IR-Cut filter included 
+ 
+Low Unit Mass 40 grams only 
+ 
+Wide temperature range 
+ 
+-30˚C to +85˚C 
+ 
+Connector 
+ 
+6 pin Molex PicoBlade (53261 type) 
+ 
+ 
+APPLICATIONS 
+ 
+Small Satellites, CubeSats, Pico- Nano- Micro- Sats 
+ 
+Low res Space Imaging 
+ 
+Civil Scientific High Altitude Balloons 
+ 
+Educational Imaging 
+ 
+Educational Weather Monitoring from Space 
+ 
+ 
+ 
+Fig. 1 Digital CubeSat Camera piCAM, Flight Model. 
+ 
+ 
+GENERAL DESCRIPTION 
+ 
+ 
+The piCAM is the World’s First Space-
+Friendly 
+Digital 
+CubeSat 
+Camera 
+module 
+specially designed to provide the colorful imaging 
+in JPEG format and VGA resolution aboard small 
+satellites with external Flashlight control signal. 
+The unit enables a possibility to trigger signal for 
+external LED-based flashlight to illuminate nearby 
+objects of interest in dark orbital periods, such as 
+solar sails, booms, deployable structures, tethers, 
+etc. 
+ 
+ 
+The camera could be delivered as 
+configured with various optics. By default the 
+optics with ~60° Field-of-View (diagonal) with IR-
+cut filter is attached and fixed, set to focus on 
+infinity. Other configurations or focuses are on 
+prior request during the manufacturing process. 
+ 
+ 
+ 
+Product is manufactured in two grades to 
+satisfy both Engineering and Flight requirements. 
+Modules (/EM, /FM) are electrically identical, 
+however their chemical and mechanical properties 
+allows it to be used in laboratory or space, 
+respectively.  
+ 
+The fully functional Engineering Model is 
+finished by red coating with Remove Before Flight 
+labelling. 
+ 
+ 
+ 
+ 
+PRODUCT DATA SHEET                   
+piCAM
+
+ 
+ 
+ 
+ 
+  
+ 3       
+www.SkyFoxLabs.com, Space-Friendly products 
+piCAM Product Datasheet, Rev. B 
+Issue rev. B, 2022 info@skyfoxlabs.com, U Studanky 620/13, CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2022 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+piCAM
+TABLE OF CONTENTS 
+ 
+APPLICATIONS...................................................................2 
+GENERAL DESCRIPTION..................................................2 
+TABLE OF CONTENTS .......................................................3 
+ABSOLUTE MAXIMUM RATINGS ....................................3 
+PARAMETRIC SPECIFICATION........................................3 
+CONNECTOR DESCRIPTION ............................................4 
+FUNCTIONAL BLOCK DIAGRAM .....................................5 
+ELECTRICAL INTERFACE & BOOT-UP............................5 
+COMMAND PROTOCOL.....................................................6 
+OUTPUT DATA DESCRIPTION .........................................6 
+FIXED OPTICS.................................................................. 10 
+HIGH ALTITUDE BALLOON (HAB) IMAGE SAMPLES 10 
+SUN SYNCHRONNOUS ORBIT IMAGE SAMPLES........ 10 
+JPEG COMPRESSION .......................................................11 
+EVALUATION KIT.............................................................11 
+APPLICATION NOTES & RECOMMENDATIONS.......... 13 
+QUALITY ASSURANCE .................................................... 13 
+SATELLITE IMAGING.......................................................15 
+EXPORT CONTROL...........................................................15 
+DISCLAIMER .................................................................... 16 
+ 
+ 
+ABSOLUTE MAXIMUM RATINGS 
+ 
+VDD to GND………….…………………………..-0.3 V to +3.6 V 
+Other Pins to GND:.............................. -0.3 V to +(VDD +0.3) V 
+DC Input Voltage: VI  ....... -0.3 V to VDD + 0.3 V (≤ 3.6 V max.) 
+ 
+DC Output Voltage: VO ....-0.3 V to VDD + 0.3 V (≤ 3.6 V max.) 
+ 
+DC Input Current: II at VI < 0 V or VI > VDD ...................±120 
+mA 
+Operating Temperature Range:……………..…-30°C to +85°C 
+DC Output Current: IFlash at VFlash < 0 V or VO > 
+VDD..............±20 mA 
+Storage Temperature Range:………………...-40°C to +85°C 
+ 
+NOTE: Stresses beyond those listed under “Absolute Maximum Ratings” may cause permanent damage to the 
+device. These are stress ratings only, and functional operation of the device at these or any other conditions 
+beyond those indicated under specification conditions is not implied. Exposure to absolute maximum rated 
+conditions for extended periods may affect device reliability. Voltage values are with respect to system ground 
+terminal. 
+ 
+ 
+PARAMETRIC SPECIFICATION 
+ 
+Tab.: 1 piCAM Parametric Specification summary. 
+TA = −30°C to +85°C, VDD = 3.3 V, unless otherwise noted. 
+Parameter 
+Symbol 
+Min 
+Typ 
+Max 
+Units 
+Notes/Conditions 
+Operating Supply Voltage 
+DD
+V
+ 
+2.7 
+3.3 
+3.6 
+V 
+ 
+Operating Supply Current 
+D
+I
+ 
+ 
+95 
+ 
+mA 
+ 
+Serial Inteface (UART) Bitrate 
+Bps 
+1200 
+115200 
+921600 
+BPS 
+115200-8-N-1 set as default after each 
+boot-up. 
+Image Resolution 
+Px 
+- 
+640×480
+- 
+Pixels 
+RGB VGA JPEG 640×480 px. 
+Maximum Saturation Voltage at Flash 
+Output 
+x
+SatFlashMa
+V
+ 
+0.9 
+ 
+V 
+At IFlashMax = 20 mA. 
+Maximum Open Collector Voltage at 
+Flash Output 
+OCFlashMax
+V
+ 
+ 
+35  
+V 
+ 
+Startup time 
+STARTUP
+T
+ 
+  
+5 
+  
+s 
+Unit boot-up time. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+  
+ 4       
+www.SkyFoxLabs.com, Space-Friendly products 
+piCAM Product Datasheet, Rev. B 
+Issue rev. B, 2022 info@skyfoxlabs.com, U Studanky 620/13, CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2022 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+piCAM
+CONNECTOR DESCRIPTION 
+ 
+ 
+The piCAM unit is connected to the target system via single System Interface connector with 6 pins, 
+Molex PicoBlade, 53261 type. Each pin, its function and direction or manner of use is indicated in the Tab.: 2 
+below. The connector location within the unit is displayed in Fig. 2.  
+ 
+ 
+ 
+ 
+Tab.: 2 The piCAM Pin Description, NOTE: Minimum required interface pins are highlighted. 
+Pin 
+Name 
+I/O, Power or Do 
+Not Connect 
+Description 
+1 
+VDD 
+Power 
+Main Power Input. +3.3V main input power line, designed to be connected to 
+permanent power bus, as the unit contains internal main power switch. It is however 
+always recommended, to include the Latch-up protection current limiter to protect the 
+power line against Single Event Effects in space. 
+2 
+ON 
+Power 
+Power ON signal. Log. 1 level will turn ON the input power line power switch - note this 
+signal must be held log. 1 to keep the unit running - when in log 0, the unit is shut off 
+with idle current consumption. 
+3 
+RXD 
+I 
+UART Data Input TO the Camera. UART data input to the camera - the UART 
+controller must be able to turn off the idle level in order to prevent power bootstrapping 
+of the unit. LVCMOS compatible. 
+4 
+TXD 
+O 
+UART Data output FROM the Camera. The UART controller must be able to turn off 
+the idle level (pull-up driver) to GND potential in order to prevent power bootstrapping of 
+the unit. LVCMOS compatible. 
+5 
+FLASH 
+I 
+Flash Open-Collector Input. Holds sink current when the image is being captured, 
+otherwise it is kept open-circuit. BJT based open-collector with 10 ohm protective 
+resistor in series, 20 mA max. 
+6 
+GND 
+Power 
+Ground potential. Unit casing (including all screws) is galvanically connected to this pin 
+internally. 
+Chassis
+GND 
+Power 
+All mechanical/metallic parts are connected together with the GND potential. Connection 
+to camera power ground potential is recommended. 
+ 
+ 
+Fig. 2 The piCAM Dimensions, Connector pinout and recommended footprint. Dimensions are shown in millimeters. 
+The unit is mount using four M2.5 screws/standoffs. Detailed STEP model is available. 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+  
+ 5       
+www.SkyFoxLabs.com, Space-Friendly products 
+piCAM Product Datasheet, Rev. B 
+Issue rev. B, 2022 info@skyfoxlabs.com, U Studanky 620/13, CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2022 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+piCAM
+FUNCTIONAL BLOCK DIAGRAM 
+ 
+ 
+The key functional blocks of the piCAM are described in Fig. 3. The unit consist of two main blocks:  
+1) imaging sensor engine and 2) data handling and telemetry engine.  
+ 
+Indicator LEDs are associated to internal status of power. Green LED indicates availability of power to 
+the internal data handling and telemetry engine. Red LED indicates power availability to the imaging sensor 
+engine. Blue LED is available to indicate data transfer, data handling and serves for test purposes (Test 
+Telemetry/Telecommand). Blue LED also indicates activated Flash signal during the image capture. Location of 
+all three LEDs within the unit is shown in Fig. 4. 
+ 
+ 
+Fig. 3 The piCAM Block Diagram.  
+ 
+ 
+ 
+Fig. 4 piCAM Unit, indicator LED locations. 
+ 
+ 
+ELECTRICAL INTERFACE & BOOT-UP 
+ 
+When interfacing the piCAM unit, the user needs to consider the effect of power bootstrapping of a 
+typical UART driver. When UART line is idle, it holds the logical level HIGH or 1 (3.3V in case of LVCMOS 
+levels). Such voltage and current capability is able to power up the camera core, which is naturally very low 
+power in order of 5 - 10 mA. Thus, even if the main power input control signal "ON" (pin 2) is held LOW or 0, 
+the bootstrapping via communication interface may still prevent the unit from proper power cycle or restart. It is 
+thus highly recommended to disable the driver of UART interface on both RXD and TXD channels or forcing 
+them directly to zero Volts.  
+ 
+For proper boot-up, following sequence shall be used: the ON, RXD and TXD levels shall be held LOW 
+for at least 1 second. Then ON signal shall be changed into log. 1, followed by activating idle levels (log. 1) on 
+both RXD and TXD channels. Each proper unit boot-up is indicated by three blinks of BLUE LED and with 
+sending Initial Informal Sentence towards the onboard computer. 
+
+ 
+ 
+ 
+ 
+  
+ 6       
+www.SkyFoxLabs.com, Space-Friendly products 
+piCAM Product Datasheet, Rev. B 
+Issue rev. B, 2022 info@skyfoxlabs.com, U Studanky 620/13, CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2022 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+piCAM
+COMMAND PROTOCOL 
+ 
+ 
+The physical communication is realized via the standard bidirectional UART data interface. The bitrate 
+is set to 115200 bps, no parity, 8 data bits, 1 stop bit (115200-8-N-1) as default after each successful unit 
+boot-up. Logical levels are equal to LVCMOS levels as defined in JEDEC JESD8C.01 standard.  
+Telecommanding is realized based on a set of single byte commands as summarized in Tab.: 3. There is 
+a total of six commands for image capture brightness sensitivity and flash settings for daylight, medium and 
+night regime, with and without activated flash output.  
+The test telecommand is useful tool to check the proper bidirectional connection in flight and is also 
+able to activate the flash circuits during ground tests and satellite development.  
+The unit is able to modify the communication bitrate, from as low as 1200-8-N-1 up to 921600-8-N-1 in 
+ten different steps. When such telecommand is issued, the unit switches to a new bitrate and the user UART 
+interface driver needs to rearrange the bitrate as well in order to communicate at new bitrate.  
+Keep at least 20 ms between the change bitrate telecommand and the moment a new telecommand is 
+issued. 
+ 
+Tab.: 3 piCAM Set of single byte Telecommands. 
+ASCII Character 
+Command Description 
+Image Capture Telecommands 
+d 
+Captures image with daylight ambient light optimal settings without Flash activated during the image capture 
+D 
+Captures image with Daylight ambient light optimal settings with Flash activated during the image capture 
+m 
+Captures image with medium ambient light optimal settings without Flash activated during the image capture 
+M 
+Captures image with Medium ambient light optimal settings with Flash activated during the image capture 
+n 
+Captures image with night ambient light (darkness) optimal settings without Flash activated during the image capture 
+N 
+Captures image with Night ambient light (darkness) optimal settings with Flash activated during the image capture 
+s 
+Captures image with solar sail contrast and light optimal settings without Flash activated during the image capture 
+S 
+Captures image with Solar sail contrast and light optimal settings with Flash activated during the image capture 
+Test Telecommands 
+t 
+Returns test string with telemetry measurement, module LED blinking and without activated Flash 
+T 
+Returns test string with telemetry measurement, module LED blinking and with activated Flash (Flash test) 
+Bitrate Change Telecommands 
+0 
+Change from current bitrate to: 1200bps-8-n-1 
+1 
+Change from current bitrate to: 2400bps-8-n-1 
+2 
+Change from current bitrate to: 9600bps-8-n-1 
+3 
+Change from current bitrate to: 19200bps-8-n-1 
+4 
+Change from current bitrate to: 38400bps-8-n-1 
+5 
+Change from current bitrate to: 57600bps-8-n-1 
+6 
+Change from current bitrate to: 115200bps-8-n-1 (default after boot-up) 
+7 
+Change from current bitrate to: 230400bps-8-n-1 
+8 
+Change from current bitrate to: 460800bps-8-n-1 
+9 
+Change from current bitrate to: 921600bps-8-n-1 
+ 
+ 
+OUTPUT DATA DESCRIPTION 
+ 
+ 
+The camera module via its telemetry engine provides serialized image information upon uplinking 
+telecommand. As extension, the telemetry sentence is provided in order to measure the unit internal voltages, 
+operational currents and image size and image processing information. Data is sent in fixed length format 
+consisting of 67 bytes per sentence (including CR+LF characters) in order to simplify the parsing process. 
+ 
+Output is represented by user-readable ASCII character form and thus could be easily displayed using 
+computer with various terminal software for COM port data reception and stored easily in satellite onboard 
+computer memory storage space. Post-parsing of image data sentences is necessary in order to extract and 
+compile the whole JPEG image.  
+ 
+The unique sentence identification numbering shall support the user to simplify the reconstruction of the 
+JPEG image process, especially in remote telemetry downlink attempts from satellite memory. As first after 
+boot-up, the unit sends the initial informal sentence set, as follows: 
+ 
+ 
+INITIAL INFORMAL SENTENCE (sent after each successful boot-up sequence) 
+⇐ 
+@----------------------------------------------------------------⇐ 
+@| piCAM/FM (c) SkyFox Labs s.r.o., 2021 - Unit Boot-Up FW v7.0 |⇐ 
+@----------------------------------------------------------------⇐ 
+
+ 
+ 
+ 
+ 
+  
+ 7       
+www.SkyFoxLabs.com, Space-Friendly products 
+piCAM Product Datasheet, Rev. B 
+Issue rev. B, 2022 info@skyfoxlabs.com, U Studanky 620/13, CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2022 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+piCAM
+ 
+The image data is provided upon telecommand in following format: 
+ 
+DIGITAL OUTPUT EXAMPLE (6 sentences shown only, 67 bytes each) 
+@000003DEFFD8FFDB0084000D09090B0A080D0B0A0B0E0E0D0F13201513121213⇐ 
+@000103DE271C1E17202E2931302E292D2C333A4A3E333646372C2D405741464C⇐ 
+@000203DE4E525352323E5A615A50604A51524F010E0E0E131113261515264F35⇐ 
+@000303DE2D354F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F⇐ 
+@000403DE4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4FFFC401A2⇐ 
+@000503DE0000010501010101010100000000000000000102030405060708090A⇐ 
+ 
+@ 
+ 
+packet initial character (#40h),  
+ 
+ 
+1 byte, fixed length, 
+ 
+nnnn 
+ 
+where nnnn means ASCII representation of HEX number of current sentence, always  
+ 
+ 
+starts at address 0000, 
+ 
+ 
+4 bytes, fixed length, 
+ 
+xxxx 
+ 
+where xxxx means ASCII representation of HEX total amount of image sentences in  
+ 
+ 
+captured image data stream, 0x03DEh = 990 image sentences (0x0000h to 0x03DDh)  
+ 
+ 
++ 1 telemetry sentence (0x03DEh), 
+ 
+ 
+4 bytes, fixed length, 
+ 
+data 
+ 
+where data means 2 byte-ish consecutive ASCII representation stream of HEX byte of  
+ 
+ 
+raw captured image data, 28 bytes of raw image data, ie.: 0xFFh = 255, 0xD8h = 216, etc.,  
+ 
+ 
+56 bytes, fixed length,  
+ 
+⇐ 
+ 
+CR character (#0Dh), 
+ 
+ 
+1 byte, fixed length, 
+ 
+ 
+ 
+LF character (#0Ah), 
+ 
+ 
+1 byte, fixed length. 
+ 
+ 
+ 
+At the end of each image data stream, the telemetry is captured and sentence compiled and provided in 
+following format: 
+ 
+TELEMETRY SENTENCE (1 sentence per each image data stream, always sent as the last one) 
+@FACE03DE1E006C4700112233445566778899AABBCCDDEEFF00A35B9F4D000670⇐ 
+ 
+@ 
+ 
+packet initial character (#40h),  
+ 
+ 
+1 byte, fixed length, 
+ 
+FACE 
+ 
+where FACE indicates the last sentence number,  
+ 
+ 
+4 bytes, fixed length, 
+ 
+xxxx 
+ 
+where xxxx means ASCII representation of HEX total amount of image sentences in  
+ 
+ 
+captured image data stream,  
+ 
+ 
+0x03DE = 990 image sentences (0x0000 to 0x03DD) + 1 telemetry sentence (0x03DE), 
+ 
+ 
+4 bytes, fixed length, 
+ 
+tries 
+ 
+where tries means 2 byte ASCII representation of HEX byte of number of internal  
+ 
+ 
+communication sync tries, (0x1E = 0d30), may vary up to 0xFF, 
+ 
+ 
+2 bytes, fixed length, 
+ 
+iiiiii  
+where iiiiii means ASCII representation of HEX total amount of JPEG image raw bytes, 
+ 
+ 
+0x006C47 = 27719 raw bytes of final JPEG image,  
+ 
+ 
+6 bytes, fixed length, 
+
+ 
+ 
+ 
+ 
+  
+ 8       
+www.SkyFoxLabs.com, Space-Friendly products 
+piCAM Product Datasheet, Rev. B 
+Issue rev. B, 2022 info@skyfoxlabs.com, U Studanky 620/13, CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2022 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+piCAM
+stuffing 
+where stuffing means fixed string of characters to byte-stuff the sentence length, 
+ 
+ 
+32 bytes, fixed length, 
+ 
+00 
+ 
+fixed byte separator, always 00,  
+ 
+ 
+2 bytes, fixed length, 
+ 
+InputVoltage 
+where InputVoltage means ASCII representation of HEX byte, equals to unit main power  
+ 
+ 
+bus input voltage by following formula: V = InputVoltage * 0,02 [V] 
+ 
+ 
+i.e. 0xA3 = 0d163, V = 163*0,02 = 3,26 V, 
+ 
+ 
+2 bytes, fixed length, 
+ 
+InputCurrent 
+where InputCurrent means ASCII representation of HEX byte, 0xA3 = 0d163, equals to  
+ 
+ 
+unit main power bus input current by following formula: I = InputCurrent [mA] 
+ 
+ 
+i.e. 0x5B = 0d91, I = 91 mA, 
+ 
+ 
+2 bytes, fixed length, 
+ 
+ 
+CoreVoltage 
+where CoreVoltage means ASCII representation of HEX byte, equals to unit core power  
+ 
+ 
+bus input voltage by following formula: V = CoreVoltage * 0,02 [V] 
+ 
+ 
+i.e. 0x9F = 0d159, V = 159*0,02 = 3,18 V, 
+ 
+ 
+2 bytes, fixed length, 
+ 
+CoreCurrent 
+where CoreCurrent means ASCII representation of HEX byte, equals to unit core power  
+ 
+ 
+bus input current by following formula: I = CoreCurrent [mA] 
+ 
+ 
+i.e. 0x4D = 0d77, I = 77 mA, 
+ 
+ 
+2 bytes, fixed length 
+ 
+00 
+ 
+fixed byte separator, always 00,  
+ 
+ 
+2 bytes, fixed length, 
+ 
+Flash 
+ 
+where Flash indicates whether the image was captured using activated Flash illumination 
+ 
+ 
+(0x01 = 0d01), or without Flash (0x00 = 0d00) 
+ 
+ 
+1 byte, fixed length, 
+ 
+Baudrate 
+where Baudrate indicates at which baudrate the image was telecommanded to and  
+ 
+ 
+downlinked from the camera according to following baudrate list: 
+ 
+ 
+ 
+0 = 1200bps-8-n-1, 
+ 
+ 
+ 
+1 = 2400bps-8-n-1, 
+ 
+ 
+ 
+2 = 9600bps-8-n-1, 
+ 
+ 
+ 
+3 = 19200bps-8-n-1, 
+ 
+ 
+ 
+4 = 38400bps-8-n-1, 
+ 
+ 
+ 
+5 = 57600bps-8-n-1, 
+ 
+ 
+ 
+6 = 115200bps-8-n-1 (default after power up), 
+ 
+ 
+ 
+7 = 230400bps-8-n-1, 
+ 
+ 
+ 
+8 = 460800bps-8-n-1, 
+ 
+ 
+ 
+9 = 921600bps-8-n-1, 
+ 
+ 
+1 byte, fixed length, 
+ 
+FW Version 
+where FW Version indicates the camera unit firmware version installed, 
+ 
+ 
+0x70 = FW v 7.0 
+ 
+ 
+2 bytes, fixed length, 
+ 
+⇐ 
+ 
+CR character (#0Dh), 
+ 
+ 
+1 byte, fixed length, 
+ 
+ 
+ 
+LF character (#0Ah), 
+ 
+ 
+1 byte, fixed length. 
+ 
+ 
+
+ 
+ 
+ 
+ 
+  
+ 9       
+www.SkyFoxLabs.com, Space-Friendly products 
+piCAM Product Datasheet, Rev. B 
+Issue rev. B, 2022 info@skyfoxlabs.com, U Studanky 620/13, CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2022 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+piCAM
+TEST SENTENCE EXAMPLES (Flash ON / OFF) 
+@----------------------------------------------------------------⇐ 
+@| piCAM/FM Test String Transmission - Flash ON  A7080000001670 |⇐ 
+@----------------------------------------------------------------⇐ 
+@----------------------------------------------------------------⇐ 
+@| piCAM/FM Test String Transmission - Flash OFF A7080000000670 |⇐ 
+@----------------------------------------------------------------⇐ 
+ 
+InputVoltage 
+where InputVoltage means ASCII representation of HEX byte, equals to unit main power  
+ 
+ 
+bus input voltage by following formula: V = InputVoltage * 0,02 [V], 
+ 
+ 
+i.e. 0xA3 = 0d163, V = 163*0,02 = 3,26 V, 
+ 
+ 
+2 bytes, fixed length, 
+ 
+InputCurrent 
+where InputCurrent means ASCII representation of HEX byte, equals to unit main power  
+ 
+ 
+bus input current by following formula: I = InputCurrent [mA], 
+ 
+ 
+i.e. 0x08 = 0d08, I = 8 mA, 
+ 
+ 
+2 bytes, fixed length, 
+ 
+CoreVoltage 
+where CoreVoltage means ASCII representation of HEX byte, equals to unit main power  
+ 
+ 
+bus input voltage by following formula: V = CoreVoltage * 0,02 [V], 
+ 
+ 
+i.e. 0x00 = 0d00, V = 0*0,02 = 0 V, 
+ 
+ 
+2 bytes, fixed length, 
+ 
+CoreCurrent 
+where CoreCurrent means ASCII representation of HEX byte, 0xA3 = 0d163, equals  
+ 
+ 
+to unit main power bus input current by following formula: I = CoreCurrent [mA], 
+ 
+ 
+i.e. 0x00 = 0d00, I = 00 mA, 
+ 
+ 
+2 bytes, fixed length, 
+ 
+00 
+ 
+fixed byte separator, always 00,  
+ 
+ 
+2 bytes, fixed length, 
+ 
+Flash 
+ 
+where Flash indicates whether the test was captured using activated Flash illumination 
+ 
+ 
+(0x01 = 0d01), or without Flash (0x00 = 0d00), 
+ 
+ 
+1 byte, fixed length, 
+ 
+Baudrate 
+where Baudrate indicates at which baudrate the test was telecommanded to and  
+ 
+ 
+downlinked from the camera according to following baudrate list: 
+ 
+ 
+ 
+0 = 1200bps-8-n-1, 
+ 
+ 
+ 
+1 = 2400bps-8-n-1, 
+ 
+ 
+ 
+2 = 9600bps-8-n-1, 
+ 
+ 
+ 
+3 = 19200bps-8-n-1, 
+ 
+ 
+ 
+4 = 38400bps-8-n-1, 
+ 
+ 
+ 
+5 = 57600bps-8-n-1, 
+ 
+ 
+ 
+6 = 115200bps-8-n-1 (default after power up), 
+ 
+ 
+ 
+7 = 230400bps-8-n-1, 
+ 
+ 
+ 
+8 = 460800bps-8-n-1, 
+ 
+ 
+ 
+9 = 921600bps-8-n-1, 
+ 
+ 
+1 byte, fixed length, 
+ 
+FW Version 
+where FW Version indicates the camera unit firmware version installed, 
+ 
+ 
+0x70 = FW v 7.0 
+ 
+ 
+2 bytes, fixed length 
+ 
+⇐ 
+ 
+CR character (#0Dh), 
+ 
+ 
+1 byte, fixed length, 
+ 
+ 
+ 
+LF character (#0Ah), 
+ 
+ 
+1 byte, fixed length. 
+
+ 
+ 
+ 
+ 
+  
+ 10     
+www.SkyFoxLabs.com, Space-Friendly products 
+piCAM Product Datasheet, Rev. B 
+Issue rev. B, 2022 info@skyfoxlabs.com, U Studanky 620/13, CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2022 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+piCAM
+FIXED OPTICS 
+ 
+ 
+The piCAM is designed to hold the S-mount lens with a fixed focal length, pre-adjusted during the 
+manufacturing upon customer requirement of the focal distance. As a standard, the focus is set and glue-fixed to 
+infinity. Lens contain the IR-cut filter. There are a variety of lens focal length options with variety of associated 
+fields-of-view (FoV). As a standard, 60° FoV optics with IR-cut filter is utilized. Examples of three major types 
+of FoVs available are mentioned in Fig. 5. 
+ 
+ 
+Fig. 5 The Prague Castle captured with different optics from the same spot, 
+ (FoV example: 21° left, 60° middle, 170° right). 
+ 
+ 
+HIGH ALTITUDE BALLOON (HAB) IMAGE SAMPLES 
+ 
+ 
+There are three examples of the image captured using imagery mode "Middle", 60° FoV optics and IR-
+Cut filter during the HAB flight at an altitude of ~25 km above ground. Residual atmosphere is visible in Fig. 6.  
+ 
+ 
+ 
+ 
+Fig. 6 High Altitude Balloon flight image data  with residual atmosphere, 60° FoV Optics with IR-Cut filter. 
+ 
+ 
+SUN SYNCHRONNOUS ORBIT IMAGE SAMPLES 
+ 
+ 
+The plot in Fig. 7 shows data from the Sun Synchronous Orbit (SSO) 530 km flight of the CubeSat 
+spacecraft (NORAD ID 44406), identifying several regions over Europe, including direct sunlight image capture. 
+ 
+ 
+ 
+ 
+Fig. 7 Examples of real in-orbit image captures using standard optics with IR-cut filter, Sun Synchronous Orbit. 
+[Lucky-7 Spacecraft mission]. 
+ 
+ 
+

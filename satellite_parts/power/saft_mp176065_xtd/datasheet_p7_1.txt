@@ -1,0 +1,146 @@
+Rechargeable lithium-ion battery
+MP 176065
+High performance
+Medium prismatic cell
+Benefits
+G Extended autonomy and life for
+mobile systems
+G Recommended for ruggedized
+designs
+G Easy integration into compact and
+light systems
+Key features
+G Very high energy density
+(350 Wh/l and 165 Wh/kg)
+G Unrivalled low temperature
+performance
+G Excellent charge recovery after long
+storage, even at high temperature
+G Maintenance free
+G Long cycle life (over 70% capacity
+after 500 cycles 100% DoD)
+Applications
+G Mobile asset tracking
+G Rack-mount telecom batteries
+G Small UPS
+G Future soldier equipment
+G Portable radios
+G Portable defibrillators
+G Professional portable lighting
+G Electric bikes and personal mobility
+Electrical characteristics
+Nominal voltage (V)
+3.75
+Typical capacity 20°C (Ah)
+6.8 Ah @ 4.2 V
+6.1 Ah @ 4.1 V
+Mechanical characteristics
+Thickness max at end of life (mm)
+19.8
+Width max (mm)
+61
+Height max (mm)
+65
+Typical weight (g)
+155
+Lithium equivalent content (g)         
+2.0
+Volume (cm3)
+73
+Operating conditions
+Charging method
+Constant Current/Constant Voltage (CCCV)
+Charging voltage
+4.20 V +/– 0.05 V per cell
+Max recommended charging current* (A) 
+6.8 (C rate)
+Charging temperature range*
+– 20°C to + 60°C
+Timer @ 20°C
+To be set as a function of the charging current:
+1C 
+➔
+2 to 3 h
+0.5C
+➔
+3 to 4 h
+0.2C
+➔
+6 to 7 h
+Max continuous discharge current (A)
+13.6 (2C rate)
+Pulse discharge current (A)
+up to 27 (4C rate)
+Discharge cut off voltage (V)
+2.5
+Discharge temperature range
+– 50°C to + 60°C
+* Consult Saft for optimized charging below 0°C
+March 2005
+
+Discharge versus current at 20°C
+Capacity (Ah)
+Capacity (Ah)
+Charge time (h)
+Voltage (V)
+Voltage (V)
+Current (A) Capacity (Ah)
+Voltage (V)
+Discharge characteristics at C/5 rate
+Charge characteristics to 4.2 V at +20°C at C, C/2 and C/5 rates
+Saft
+12, rue Sadi Carnot
+93170 Bagnolet - France
+Tel +33 1 49 93 19 18
+Fax +33 1 49 93 19 69
+313, Crescent Street
+Valdese NC 28690 - USA
+Tel +1 828 874 41 11
+Fax +1 828 879 39 81
+www.saftbatteries.com
+Doc. No 54037-2-0305
+Published by the Communications Department
+Information in this document is subject to change without
+notice and becomes contractual only after written
+confirmation by Saft.
+Photo credit: Saft
+Produced by Arthur Associates
+Société anonyme au capital de 31 944 000 
+RCS Bobigny B 383 703 873
+MP 176065
+Technology
+G Graphite-based anode
+G Lithium Cobalt oxide-based cathode
+G Electrolyte: organic solvents
+G Built-in redundant safety protections
+G Batteries assembled from MP cells feature an
+electronic protection circuit 
+Built-in protection devices ensure safety in case of:
+G Exposure to heat
+G Exposure to direct sunlight for extended periods
+of time
+G Short circuit
+G Overcharge
+G Overdischarge
+When handling Saft MP batteries:
+G Do not solder directly to cell terminal
+G Do not disassemble
+G Do not remove the protection circuit
+G Do not incinerate
+Transportation and storage:
+G Store in a dry place at a temperature preferably
+not exceeding 30°C
+G For long-term storage, keep the battery within a
+(30 ± 15) % state of charge
+Positive terminal
+Circuit breaker
+Cover (stainles steel)
+Insulator
+Safety vent
+Electrolyte
+filling hole
+Jelly roll
+Separator
+Can (stainles steel)
+Negative terminal
+

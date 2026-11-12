@@ -19,7 +19,9 @@ import numpy as np
 import build123d as b
 import trimesh
 import shapes
+import shapes_detail
 from parts_data._references import REFERENCES
+from parts_data._detail_shapes import DETAIL_SHAPES
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -27,6 +29,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--only", nargs="*", default=None)
 parser.add_argument("--tolerance", type=float, default=0.15, help="STL tessellation tolerance mm (bigger = fewer faces)")
 parser.add_argument("--render", action="store_true", help="also write preview.png per part (needs pyvista; run under xvfb-run on a headless machine)")
+parser.add_argument("--envelope-preview", action="store_true", help="render preview.png from the envelope instead of the detail geometry")
 arguments = parser.parse_args()
 
 modules = sorted(os.path.basename(path)[:-3] for path in glob.glob(os.path.join(HERE, "parts_data", "*.py")) if not os.path.basename(path).startswith("_"))
@@ -47,8 +50,8 @@ def render_preview(folder, stems, body_lists):
             if len(mesh.faces) == 0:
                 continue
             faces = np.hstack([np.full((len(mesh.faces), 1), 3), mesh.faces]).ravel()
-            plotter.add_mesh(pyvista.PolyData(np.asarray(mesh.vertices), faces), color=color, smooth_shading=False, show_edges=False, specular=0.3)
-        whole = trimesh.load(os.path.join(folder, stem + ".stl"))
+            plotter.add_mesh(pyvista.PolyData(np.asarray(mesh.vertices), faces), color=color, smooth_shading=True, split_sharp_edges=True, feature_angle=35, show_edges=False, specular=0.3)
+        whole = trimesh.load(os.path.join(folder, (stem if stem in ("part", "part_deployed") else "part") + ".stl"))
         extent = whole.bounds[1] - whole.bounds[0]
         plotter.add_text(("deployed  " if stem.endswith("deployed") else "") + " x ".join(format(v, ".1f") for v in extent) + " mm", position="lower_left", font_size=8, color="#444444")
         plotter.view_isometric()
@@ -151,8 +154,45 @@ for module_name in modules:
                 record["geometry"]["deployed_measured_bbox_mm"] = (mesh.bounds[1] - mesh.bounds[0]).round(2).tolist()
         record["geometry"]["bodies"] = {stem: [{"name": body_name, "color": [round(c, 3) for c in color], "file": "bodies/" + os.path.basename(body_path)} for body_name, color, body_path in body_lists[stem]] for stem in body_lists}
         record["geometry"]["face_counts"] = face_counts
+        # Detail level (shapes_detail.py): visible features, all inside the envelope. Packing uses part.stl (the envelope); detail.stl is for looks and fine checks.
+        if part_id in DETAIL_SHAPES:
+            record["detail_shape"] = DETAIL_SHAPES[part_id]
+        detail_list = shapes_detail.detail_bodies(record, styled_spec(record, record["shape"]))
+        detail_folder = os.path.join(folder, "bodies_detail")
+        os.makedirs(detail_folder, exist_ok=True)
+        for old_file in glob.glob(os.path.join(detail_folder, "*.stl")):
+            os.remove(old_file)
+        if detail_list is None:
+            detail_paths = [(body_name, color, body_path) for body_name, color, body_path in body_lists["part"]]
+            record["geometry"]["detail"] = {"same_as_envelope": True, "bodies": record["geometry"]["bodies"]["part"]}
+        else:
+            detail_fused = None
+            for body_name, color, body in detail_list:
+                detail_fused = body if detail_fused is None else detail_fused + body
+            envelope_bbox = trimesh.load(os.path.join(folder, "part.stl")).bounds
+            detail_box = detail_fused.bounding_box()
+            detail_size = np.array([detail_box.max.X - detail_box.min.X, detail_box.max.Y - detail_box.min.Y, detail_box.max.Z - detail_box.min.Z])
+            shift = b.Pos(-(detail_box.min.X + detail_box.max.X) / 2 + (envelope_bbox[0][0] + envelope_bbox[1][0]) / 2, -(detail_box.min.Y + detail_box.max.Y) / 2 + (envelope_bbox[0][1] + envelope_bbox[1][1]) / 2, -(detail_box.min.Z + detail_box.max.Z) / 2 + (envelope_bbox[0][2] + envelope_bbox[1][2]) / 2)
+            detail_paths = []
+            children = []
+            for body_name, color, body in detail_list:
+                body = shift * body
+                body_path = os.path.join(detail_folder, body_name + ".stl")
+                b.export_stl(body, body_path, tolerance=min(arguments.tolerance, 0.1), angular_tolerance=0.15)
+                detail_paths.append((body_name, color, body_path))
+                body.label = body_name
+                body.color = b.Color(*color)
+                children.append(body)
+            b.export_step(b.Compound(children=children, label=part_id + "_detail"), os.path.join(folder, "detail.step"))
+            envelope_size = envelope_bbox[1] - envelope_bbox[0]
+            overshoot = (detail_size - envelope_size).round(2)
+            record["geometry"]["detail"] = {"same_as_envelope": False, "measured_bbox_mm": detail_size.round(2).tolist(), "inside_envelope": bool((overshoot <= 0.5).all()), "overshoot_mm": [max(0.0, float(value)) for value in overshoot],
+                                            "bodies": [{"name": body_name, "color": [round(c, 3) for c in color], "file": "bodies_detail/" + os.path.basename(body_path)} for body_name, color, body_path in detail_paths], "step": "detail.step"}
         if arguments.render:
-            render_preview(folder, list(geometries.keys()), body_lists)
+            if arguments.envelope_preview or "part_deployed" in geometries:
+                render_preview(folder, list(geometries.keys()), body_lists)
+            else:
+                render_preview(folder, ["detail"], {"detail": detail_paths})
             record["image"] = "preview.png"
         # Interfaces: structured block for compatibility checks (buses, connectors, mechanical). Data buses are parsed from electrical.interfaces when not given explicitly.
         buses = set()
@@ -193,7 +233,7 @@ for module_name in modules:
             datasheets.append(info)
         record["reference_images"] = {"datasheets": datasheets, "stl_preview": "preview.png" if os.path.exists(os.path.join(folder, "preview.png")) else None, "drawing": "drawing.png" if os.path.exists(os.path.join(folder, "drawing.png")) else None, "photo_url": reference.get("photo"), "photo_source": reference.get("photo_source"), "photo_page": reference.get("page"), "photo_file": "reference_photo.jpg" if photo_present else None, "photo_kind": ("web_search_representative" if os.path.exists(photo_note_path) else "vendor_or_marketplace") if photo_present else None, "datasheet_url": datasheet_url, "datasheet_page_file": "datasheet_page1.png" if datasheet_present else None, "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"}
         reference_rows.append([part_id, category, reference.get("photo") or "", reference.get("photo_source") or "", reference.get("page") or "", datasheet_url or ""])
-        output = {key: value for key, value in record.items() if key not in ("shape", "shape_deployed", "connectors", "rf_connectors")}
+        output = {key: value for key, value in record.items() if key not in ("shape", "shape_deployed", "detail_shape", "connectors", "rf_connectors")}
         output["files"] = {stem: [stem + ".step", stem + ".stl"] for stem in geometries}
         json.dump(output, open(os.path.join(folder, "part.json"), "w"), indent=1)
         dims = record.get("dimensions_mm", {})

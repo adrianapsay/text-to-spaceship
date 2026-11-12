@@ -1,0 +1,220 @@
+{
+ "id": "skyfox_piadsb_ng_space_friendly_cubesat_ads_b_receiver",
+ "name": "SkyFox Labs s.r.o. piADSB-NG - Space-Friendly\u2122 CubeSat ADS-B Receiver",
+ "category": "comms",
+ "subcategory": "receiver",
+ "vendor": "SkyFox Labs s.r.o.",
+ "model": "piADSB-NG - Space-Friendly\u2122 CubeSat ADS-B Receiver",
+ "dimensions_mm": {
+  "x": 98.0,
+  "y": 82.6,
+  "z": 12.5
+ },
+ "mass_g": 124.0,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/satsearch_datasheet_aozy84_skyfox_piadsb-ng.pdf",
+  "document": {
+   "title": "SkyFox Labs s.r.o. piADSB-NG - Space-Friendly\u2122 CubeSat ADS-B Receiver data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-11",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Read from the vendor data sheet (satsearch_datasheet_aozy84_skyfox_piadsb-ng.pdf): dimensions \"(standard) HEX or Binary (on request) Ultra Low Profile and Dimensions 98\u00d782.6\u00d712.5 mm Wide t\"; mass \"ower + Data) Low mass 124 grams E\". Catalog page lists no mass. Electrical / RF values found in the data sheet or page text by pattern (quoted where possible).",
+  "found_via": "https://satsearch.co/products/skyfox-labs-pi-adsb-ng-fm"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "electrical": {
+  "power_W": {
+   "nominal": 0.25
+  },
+  "quote": "Power consumption 250 mW"
+ },
+ "rf": {
+  "band": "L-Band"
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   98.0,
+   82.6,
+   12.5
+  ],
+  "mesh_volume_mm3": 101159.4,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.226,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    98.0,
+    82.6,
+    12.5
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "feet",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/feet.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "connector_shell",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/connector_shell.stl"
+    },
+    {
+     "name": "connector_insert",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector_insert.stl"
+    },
+    {
+     "name": "jackscrews",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/jackscrews.stl"
+    },
+    {
+     "name": "label",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies_detail/label.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
+  "datasheet_url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/satsearch_datasheet_aozy84_skyfox_piadsb-ng.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

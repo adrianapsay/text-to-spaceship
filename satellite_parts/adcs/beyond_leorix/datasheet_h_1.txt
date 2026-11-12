@@ -1,0 +1,125 @@
+Beyond Gravity
+beyondgravity.com
+LEORIX GNSS 
+Receiver
+Multi-Constellation, Single-Frequency, LEO 
+LEORIX, the Beyond Gravity multi-constellation (GPS, GALILEO) single-
+frequency GNSS Receiver for LEO applications provides an excellent on-board 
+real-time navigation solution accuracy of below one meter. 
+
+Beyond Gravity │Spacecraft
+beyondgravity.com
+• Selective RF-filter and low-noise amplifier for 
+improved performance 
+• Accurate force model-based orbit propagator 
+• Advanced Kalman filtering and single-frequency 
+ionospheric correction allow for high on-board 
+navigation performance 
+• Flexible acquisition and tracking concept: 
+-
+Single frequency signal processing of up to 
+12 satellites 
+-
+Sliding search window for minimized
+acquisition times 
+-
+Doppler-based loop aiding 
+• Configurable data rate per measurement type 
+Autonomous start-mode determination for 
+minimized time-to-first-fix 
+• Powerful parameter interface supports changes in 
+standby and operational mode 
+• Additional data products provide excellent visibility 
+of receiver internals 
+• Low mass and power consumption 
+Key features
+This document remains the intellectual property of Beyond Gravity Austria GmbH and may not be copied, 
+or used without their prior written approval.
+Internal Code/Doc.No.
+Issue 1 
+Supported GNSS Signals 
+Time-to-first-fix
+Based on dedicated RF- and Mixed-Signal ASICs 
+as well as the AGGA-4 ASIC, LEORIX is able to
+use the following signals: 
+• GPS C/A on L1 
+• Galileo E1 B/C 
+• Warm start: < 90 s 
+• Cold start: < 15 min GPS; <40 min 
+GALILEO 
+Data products
+Physical/ environment 
+• Navigation solution based on GPS/GALILEO 
+con- stellations 
+• PPS signal synchronized to GPS/GALILEO 
+second 
+• Carrier phase measurements for each tracked 
+signal 
+• Code phase measurements for each tracked 
+signal 
+• Support data:
+
+Tracking state 
+
+GDOP 
+
+Carrier to noise (C/N) measurement of 
+each tracked signal 
+
+Noise measurements of the RF down-
+conversion chain
+
+Satellites in view status
+
+Satellite navigation message
+Electronic box: 
+• Size: 280x240x81 mm; weight: 3.0 kg 
+• Operating temperature: -30°C to +60°C 
+(qualification level) 
+• Minimum switch-on temperature: -40°C (qualification 
+level) 
+• Radiation: suitable for orbits between 300 and 
+1500km, any inclination 
+• Power consumption: 15 W avg. 
+Antenna (recommended for LEO): 
+• Patch Excited Cup antenna 
+• Size: 144 mm, h: 36,5 mm; weight: 215 g 
+
+Beyond Gravity │Spacecraft
+beyondgravity.com
+• TC/TM: MIL-STD-1553B or UART (RS-422) or SpaceWire
+• PPS output nom/red/test (RS-422)
+• Primary power input 28 V unregulated
+• ON/OFF high level command interface or auto-start upon voltage application
+• Thermistor TM interfaces
+• External USO input available
+Interfaces
+This document remains the intellectual property of Beyond Gravity Austria GmbH and may not be copied, 
+or used without their prior written approval.
+Internal Code/Doc.No.
+Issue 1 
+Product availability: Please contact our Sales team. 
+Phone +43 664 8864 4995 | hilmar.pirker@beyondgravity.com
+Beyond Gravity | Stachegasse 13 | 1120 Vienna | Austria
+On-board navigation solution accuracy 
+• Position: 1.0 m 3D rms 
+• Velocity: 2 mm/s 3D rms 
+• Time offset 1PPS (10): < 50 ns (typ. 25ns) 
+Programs/ heritage 
+Beyond Gravity has delivered more than 90 flight models of GNSS receivers to customers in 
+Europe, USA, Middle East and Asia. Some example missions: 
+• SWARM (ESA) 
+• Sentinel-1, Sentinel-2 and Sentinel-3 A/B satellites (Copernicus) 
+• Sentinel-1, Sentinel-2 and Sentinel-3 C/D 
+• Sentinel-6/Michael Freilich A/B (NASA/ESA) 
+• Earthcare (ESA/JAXA) 
+• ICESat-2 (NASA) 
+• PACE (NASA) 
+• OSAM-1 (NASA) 
+• Biomass (ESA) 
+• FLEX (ESA) 
+• KOMPSAT-6, -7 (KARI) 
+• CAS-500 (KARI/KAI) 
+• WSF-M (Ball Aerospace) 
+
+

@@ -1,0 +1,175 @@
+{
+ "id": "takeme2space_30mnms_reaction_wheel_pyramidal_assembly",
+ "name": "TakeMe2Space 30mNms Reaction Wheel Pyramidal Assembly",
+ "category": "adcs",
+ "subcategory": "reaction_wheel",
+ "vendor": "TakeMe2Space",
+ "model": "30mNms Reaction Wheel Pyramidal Assembly",
+ "dimensions_mm": {
+  "x": 96.5,
+  "y": 95.0,
+  "z": 94.5
+ },
+ "mass_g": 1489.0,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-takeme2space-30mnms-reaction-wheel-pyramidal-assembly-bnayei.pdf",
+  "document": {
+   "title": "TakeMe2Space 30mNms Reaction Wheel Pyramidal Assembly data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-11",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Read from the vendor data sheet (datasheet-takeme2space-30mnms-reaction-wheel-pyramidal-assembly-bnayei.pdf): dimensions \"orted 1 x Full Duplex RS-485 4 x Motor Driver output Mechanical Dimensions 96.5 x 95 x 94.5 mm Mass 14\"; mass \"6.5 x 95 x 94.5 mm Mass 1489 g Con\". Catalog page lists no mass.",
+  "found_via": "https://satsearch.co/products/tm2s-reactionwheelassembly"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   96.5,
+   95.0,
+   94.5
+  ],
+  "mesh_volume_mm3": 637777.8,
+  "watertight": true,
+  "render_kind": "reaction_wheel",
+  "effective_density_g_cm3": 2.335,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "flywheel",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__flywheel.stl"
+    },
+    {
+     "name": "motor_cap",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__motor_cap.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 348
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    96.5,
+    95.0,
+    94.5
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "base",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/base.stl"
+    },
+    {
+     "name": "cover",
+     "color": [
+      0.24,
+      0.26,
+      0.3
+     ],
+     "file": "bodies_detail/cover.stl"
+    },
+    {
+     "name": "cap",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/cap.stl"
+    },
+    {
+     "name": "bolts",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/bolts.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
+  "datasheet_url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-takeme2space-30mnms-reaction-wheel-pyramidal-assembly-bnayei.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

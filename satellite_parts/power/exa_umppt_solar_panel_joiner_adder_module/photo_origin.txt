@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/satsearch_datasheet_xp5c7v_exa_umppt_-_solar_panel_joiner_adder_module.pdf
+method: product image from the catalog page https://satsearch.co/products/exa-umppt-solar-panel-joiner-adder-module

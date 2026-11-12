@@ -1,0 +1,244 @@
+ 
+EXA-US,   16192 Coastal Highway, Lewes,                                                                                                                                                                                Facebook - LinkedIn 
+(593) 999 429106: Whatsapp, Telegram                                                                                                                                                                        cco@exa.ec - www.exa.ec 
+Delaware 19958, USA                                                                                                                                                                       www.cubesat.market - www.smallsat.market 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+     
+ 
+ 
+ 
+ 
+HDRM Clamp:  
+MOTOR OPERATED ROTARY HDRM DEVICES FOR RELIABLE 
+RELEASE AND DEPLOY OPERATIONS 
+
+ 
+EXA-US,   16192 Coastal Highway, Lewes,                                                                                                                                                                                Facebook - LinkedIn 
+(593) 999 429106: Whatsapp, Telegram                                                                                                                                                                        cco@exa.ec - www.exa.ec 
+Delaware 19958, USA                                                                                                                                                                       www.cubesat.market - www.smallsat.market 
+ 
+ 
+ 
+ 
+The EXA Clamp Hold down & Release Mechanism (HDRM-CLAMP) has been designed for the Small 
+Satellite range (50 to 500 Kg) deployables like solar arrays, hatches or any other deployable 
+mechanisms that need a safe, no-compromise, electrically powered HDRM. 
+ 
+With a very small footprint (56x22x15 mm), surface mount, very low mass (32 g) and small power 
+consumption (<1W), yet boasting a hold-down force of up to 48.9 Newtons and a retention force 
+of over 245 Newtons, it has been tested to hold down solar arrays as big as 500x530x1500 mm 
+during launch, its precious metals brush micro motor with 1000:1 gear box lubricated by industry-
+standard Castrol®  Braycote®  601EF easily and safely withstand the conditions in LEO, MEO, GEO 
+and Lunar surface, very simple to operate over a wide range of voltages (5 to 24V) and fast action 
+(<1.5s) insures release of any deployables in space. 
+ 
+Analog and digital versions are available, on the analog version, you just need to send a TTL signal 
+to an SSR relay or a MOSFET allowing to pass 5 to 24V to the HDRM, depending on your 
+deployment speed requirements. 
+ 
+The digital version includes an integrated incremental quadrature encoder on the motor shaft. The 
+two-channel Hall effect encoder senses the rotation of a 6-pole magnetic disc on a rear protrusion 
+of the motor shaft, providing a resolution of 12 counts per revolution (CPR) of the motor shaft 
+when counting both edges of both channels. To compute the gearbox output CPR, multiply 12 by 
+the gearbox reduction factor. So, for the 50:1 gearbox, the encoder would provide approximately 
+11837 CPR of the gearbox output shaft. Then you can know the position of the HDRM at any point 
+and therefore report the successful opening and release of your deployable. All models are 
+provided with Forward-Reverse switches for ground operation and testing. 
+ 
+ 
+ 
+ 
+• Very strong yet very small space grade electric motor 
+• 1000:1 Gear ratio 
+• Space grade lubricant, Castrol® Braycote® 601EF 
+• Small surface footprint 
+• Fast and reliable operation 
+• Reverse and Forward operation for no-hassle ground testing 
+• Analog and digital versions 
+• Custom length PTFE cables and connectors 
+SUMMARY 
+FEATURES 
+
+ 
+EXA-US,   16192 Coastal Highway, Lewes,                                                                                                                                                                                Facebook - LinkedIn 
+(593) 999 429106: Whatsapp, Telegram                                                                                                                                                                        cco@exa.ec - www.exa.ec 
+Delaware 19958, USA                                                                                                                                                                       www.cubesat.market - www.smallsat.market 
+ 
+ 
+AT 24V@100Kg/mm2: 
+Hold down force:  
+ 
+4.99Kg / 48.93N 
+Hold down pressure:   
+4.54 x 10^6 Kg/m2 / 44.52MPa 
+AT 12V@21Kg/mm2: 
+Hold down force:  
+ 
+1.05Kg / 10.29N 
+Hold down pressure:   
+9.54 x 10^5 Kg/m2 / 9.36MPa 
+AT 6V@10.5Kg/mm2: 
+Hold down force:  
+ 
+0.525Kg / 5.145N 
+Hold down pressure:   
+4.77 x 10^5 Kg/m2 / 4.68MPa 
+AT 0V MAX RETENTION FORCE (GEAR BOX): 25 Kg / 245.16 N 
+@24V NO LOAD SPEED:       40 RPM 
+@24V NO LOAD CURRENT:  0.040 A 
+@24V STALL TORQUE: 
+90 Kg/mm 
+@24V STALL CURRENT: 
+0.50 A 
+@12V NO LOAD SPEED:       35 RPM 
+@12V NO LOAD CURRENT:  0.080 A 
+@12V STALL TORQUE: 
+100 Kg/mm 
+@12V STALL CURRENT: 
+0.75 A 
+@6V NO LOAD SPEED:       
+33 RPM 
+@6V NO LOAD CURRENT:  
+0.150 A 
+@6V STALL TORQUE:  
+110 Kg/mm 
+@6V STALL CURRENT: 
+1.15 A 
+WORKING VOLTAGE: 
+MINIMUM:  
+5V 
+NOMINAL:  
+12V 
+MAXIMUM: 
+24V 
+OPERATING TEMPERATURE: 
+MINIMUM: 
+-45 C 
+MAXIMUM: 
+120 C 
+ 
+PERFORMANCE DATA 
+
+ 
+EXA-US,   16192 Coastal Highway, Lewes,                                                                                                                                                                                Facebook - LinkedIn 
+(593) 999 429106: Whatsapp, Telegram                                                                                                                                                                        cco@exa.ec - www.exa.ec 
+Delaware 19958, USA                                                                                                                                                                       www.cubesat.market - www.smallsat.market 
+ 
+ 
+
+ 
+EXA-US,   16192 Coastal Highway, Lewes,                                                                                                                                                                                Facebook - LinkedIn 
+(593) 999 429106: Whatsapp, Telegram                                                                                                                                                                        cco@exa.ec - www.exa.ec 
+Delaware 19958, USA                                                                                                                                                                       www.cubesat.market - www.smallsat.market 
+ 
+ 
+As measured from standard components, customized products will vary 
+• Dimensions (L x W x H): 56mm x 22mm x 14.5mm 
+• Movement angle: -45 to 255 degrees (customizable) 
+• Affixing interface: M2(4)  
+ 
+ 
+ 
+ 
+• Motor Body: Stainless Steel 316 
+• Lubrication: Braycote 601EF 
+• Type: Precious Metals Brush (Pt/Au) 
+• Case body and moving parts: AL 6061 
+• Cables: AWG 24 PTFE / Custom electrical mating interface 
+ 
+ 
+ 
+All products are provided with tests reports regarding: 
+ 
+• Thermal Bake out (10E-5 mbar @ 50C for 72 hours) 
+• Full vibration test for Falcon 9, Electron, Soyuz, Angara, PSLV 
+ 
+Test 
+QT 
+AT 
+Functional  
+Vibration  
+ 
+Thermal Cycling  
+ 
+Thermal Vacuum  
+ 
+Repeatability (100 times) 
+ 
+ 
+ 
+• 4 to 6 weeks 
+ 
+ 
+TECHNICAL DATA 
+MATERIALS 
+TESTING 
+AVAILABILITY AND LEAD TIME 
+
+ 
+EXA-US,   16192 Coastal Highway, Lewes,                                                                                                                                                                                Facebook - LinkedIn 
+(593) 999 429106: Whatsapp, Telegram                                                                                                                                                                        cco@exa.ec - www.exa.ec 
+Delaware 19958, USA                                                                                                                                                                       www.cubesat.market - www.smallsat.market 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+PICTURES AND DIMENSIONS 
+
+ 
+EXA-US,   16192 Coastal Highway, Lewes,                                                                                                                                                                                Facebook - LinkedIn 
+(593) 999 429106: Whatsapp, Telegram                                                                                                                                                                        cco@exa.ec - www.exa.ec 
+Delaware 19958, USA                                                                                                                                                                       www.cubesat.market - www.smallsat.market 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+EXA-US,   16192 Coastal Highway, Lewes,                                                                                                                                                                                Facebook - LinkedIn 
+(593) 999 429106: Whatsapp, Telegram                                                                                                                                                                        cco@exa.ec - www.exa.ec 
+Delaware 19958, USA                                                                                                                                                                       www.cubesat.market - www.smallsat.market 
+ 
+MECHANICAL  SPECIFICATIONS 
+
+ 
+EXA-US,   16192 Coastal Highway, Lewes,                                                                                                                                                                                Facebook - LinkedIn 
+(593) 999 429106: Whatsapp, Telegram                                                                                                                                                                        cco@exa.ec - www.exa.ec 
+Delaware 19958, USA                                                                                                                                                                       www.cubesat.market - www.smallsat.market 
+ 
+ 
+

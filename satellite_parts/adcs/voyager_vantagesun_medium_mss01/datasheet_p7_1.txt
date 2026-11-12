@@ -1,0 +1,83 @@
+PRODUCT SPECIFICATIONS
+APPLICATIONS
+KEY FEATURES
+OVERVIEW
+VANTAGESUN Medium
+USA-sourced and manufactured, the highly reliable 
+VantageSun sun sensors have decades of 
+spaceflight heritage. This low-cost, two-axis, 
+medium-resolution sun sensor comprises a small 
+housing and four quadrant photodiode assembly. 
+The housing assembly also serves as an aperture, 
+reducing mechanical complexity and precisely 
+masking solar light.
+• 2-axis accuracy better than 1° over full FoV
+• Passive device draws no power
+• Low mass less than 40g for all configurations
+• Long and short baffle configurations
+• Calibration data provided with each sensor
+• Attitude determination during:
+– Launch vehicle separation 
+– Initial attitude acquisition 
+– Emergencies and off-nominal modes
+•
+Sun vector determination
+DEFENSE & NATIONAL SECURITY
+MSS-01
+MSS-02
+MSS-03
+Field of View
+48° Full Angle Circular
+120° Full Angle Circular
+120° Full Angle Circular
+Accuracy 
+          0-24° Half Angle
+          24-45° Half Angle
+          45-60° Half Angle
+<0.4°
+n/a
+n/a
+<0.6°
+<0.75°
+<1°
+<0.6°
+<0.75°
+<1°
+Interfaces 
+Four 0 to 4.5 mA (typical) current sources
+Five flying leads, 1.27m (50”) length
+M22759/33-26 26 AWG wire
+Mounting 
+San Diego, CA
+*Subject to change without notice
+REV July 2025
+www.voyagertechnologies.com
+
+MSS-01
+MSS-02 / MSS-03
+DEFENSE & NATIONAL SECURITY 
+Environment 
+          Temperature Range 
+          Vibration 
+          Suitability 
+-40°C to +80°C (Operating), -60°C to +100°C (Storage)
+GFSC-STD-7000 (NASA GEVS) Acceptance Level
+All Orbits – LEO, MEO, GEO, Cislunar, and beyond
+SWaP 
+          Dimensions 
+          Mass
+    
+          Power 
+Housing Diameter: 19.05mm
+Flange Diameter: 34.93mm 
+Sensor Height: 24.31mm (MSS-01), 11.61mm (MSS-02 / MSS-03)
+38.5g (MSS-01), 33.5g (MSS-02 / MSS-03) including flying leads
+None required
+PRODUCT SPECIFICATIONS
+San Diego, CA
+*Subject to change without notice
+REV July 2025
+www.voyagertechnologies.com
+VANTAGESUN Medium
+DIMENSIONS
+

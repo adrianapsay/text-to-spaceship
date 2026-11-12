@@ -1,0 +1,244 @@
+Constellation
+On-Board Computer
+The Constellation On Board Computer (cOBC) is a complete subsystem entirely based on 
+commercial components to enable high performance and short lead times at an affordable 
+price, still delivering the high reliability Beyond Gravity is well known for. The cOBC provides 
+a host of functions including on-board processing, GNSS receiver, ground communication 
+and both platform and payload interfaces. The computer is fully redundant and offers flight 
+proven fault detection, isolation, and recovery (FDIR) as well as radiation mitigation to 
+provide a highly reliable solution.
+Beyond Gravity
+beyondgravity.com
+
+Beyond Gravity
+ake.jendeby@beyondgravity.com
+beyondgravity.com
+This document remains the intellectual property of Beyond Gravity Sweden AB and may not be copied,
+or used without their prior written approval.
+Internal Code/Doc.No.
+Iss.3
+Key Features
+•
+Highly 
+reliable 
+solution 
+with 
+dual 
+redundant 
+architecture and support for long missions in LEO, 
+MEO and GEO.
+•
+Extensive functions and flexible I/O support, 
+integrating OBC, RTU and GNSS receiver functions 
+into one unit. 
+•
+Manufacturing highly automated and optimized for 
+large quantities.
+•
+Optional integrated GNSS receiver, NavRIX Integral, 
+with support for GPS and Galileo including harness 
+and antennas. Accuracy of down to 1m 3D RMS.
+•
+Full TM/TC chain compliant to CCSDS format 
+including optional AES256 encryption/decryption and 
+authentication.
+Main Functions
+Options & Configuration
+• Processing Function
+• Extensive and flexible digital I/O
+• Analogue / AOCS interfaces
+• Full Telecommand/Telemetry stack (CCSDS)
+• Automatic and programmable reconfiguration 
+function in hardware
+• Safe-guard memory
+• On-board time keeping in synch with GNSS
+• GNSS support
+• TM/TC authentication, encryption and decryption
+• Secure boot
+• Interface counts and configuration
+• Number of PDIO boards *
+• Number of PROPE boards *
+• Operating System: VxWorks, RTEMS or Linux
+* See next page and dedicated datasheets.
+Standard Offerings
+•
+Development Kit
+-
+All you need to start SW development
+-
+HW fully representative of digital parts
+•
+Engineering Models
+-
+Fully representative units
+-
+Redundant or non-redundant
+•
+Qualification Package
+-
+Analyses, reports and process documentation 
+to prove stated cOBC quality
+•
+Flight Units
+-
+According to the defined configuration
+-
+From a single unit to hundreds
+•
+Partner Offerings
+MAX FSW Toolbox (by RocketLab)
+-
+Flight, simulation and operational SW suite
+https://rocketlabcorp.com/space-systems/space-software/
+TERMA cOBC Simulator (by Terma)
+-
+Accurate simulator for SW development and 
+verification as well as operations simulation
+
+Beyond Gravity
+ake.jendeby@beyondgravity.com
+beyondgravity.com
+This document remains the intellectual property of Beyond Gravity Sweden AB and may not be copied,
+or used without their prior written approval.
+Internal Code/Doc.No.
+Iss.3
+Contact our sales team for more information:  ake.jendeby@beyondgravity.com
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+mathias.kremer@beyondgravity.com
+Processing function
+Core Digital Interfaces
+• Power Architecture ©
+-
+2x e500Core @ 800 MHz
+-
+3600 DMIPS
+-
+1600 MFLOPS
+-
+32 KB L1 instruction cache
+-
+32 KB L1 data cache
+-
+512 KB L2 cache
+• 1 GiB DDR3 processing memory with ECC
+• 4 GB non-volatile storage with ECC
+• 2 x 2 TM Encoder RS422
+• 2 x 2 TC Decoder RS422
+• 2 x 1 Ethernet interfaces
+• 2 x 6 SpaceWire links (2x1 hot powered)
+• 2 x 3 CAN buses
+• 2 x 18 RS422/RS485 UART interfaces
+• 2 x 16 GPIO
+• 2 x 4 Sync Pulse output
+• 2 x 1 Separation strap inputs
+• 2 x 2 External alarm inputs
+• 2 x 1 External Encryption Unit (option)
+Additional I/O
+• Optional number of PROPE/PDIO boards
+• Standard Power and Drive (PDIO) boards *
+-
+Analogue Acquisition
+-
+Digital and Relay Status
+-
+Temperature Acquisition
+-
+Secondary Voltages
+-
+Stepper Motors
+-
+Magnetorquers
+-
+Magnetometers
+-
+Sun Sensors
+-
+Pulse Commands
+• Standard Chemical Propulsion (PROPE) boards *
+-
+Heater Control
+-
+Temperature Acquisition
+-
+Pressure Transducer
+-
+Latch Valves
+-
+Flow Control Valves
+•
+Custom I/O boards
+* See dedicated fact sheets for PDIO and PROPE board 
+capabilities 
+GNSS option
+• Reliability: 99% (10 years, 30°C base plate)
+• No single-point failures
+• Fully dual-redundant architecture
+• Tracks GPS L1 C/A and Galileo E1 B/C signals and 
+provides position, velocity and time
+• Accuracy down to 1m 3D RMS with use of dynamic filtering
+• Pulse Per Second (PPS) time error < 100ns RMS
+• Operation without need of external LNA 
+Above performances guaranteed in LEO orbit
+*) See dedicated datasheet for NavRIX Integral capabilities
+Reliability
+• Temperature -20 to +60°C
+• Random vibration 15g RMS
+• Shock 2000g @ 2000Hz
+Environment
+• Volume 300 x 119 x 239 mm³ (excluding feet)
+• Power consumption ~26W (nominal)
+• Mass 5.4 kg
+SWaP
+Constellation On Board Computer
+Additional IO boards
+Additional IO boards
+Core Module
+Core Module
+PM
+• Processor
+• Memory
+• Links
+• Digital I/O
+TTR
+• Reconfiguration
+• Telecommand
+• Telemetry
+• On-board Time
+• Digital I/O
+CAN (nom)
+PM
+• Processor
+• Memory
+• Links
+• Digital I/O
+TTR
+• Reconfiguration
+• Telecommand
+• Telemetry
+• On-board Time
+• Digital I/O
+Additional IO boards
+Additional IO boards
+PDIO/PROPE
+• DC/DC
+• IO (see datasheet)
+PDIO/PROPE
+• DC/DC
+• IO (see datasheet)
+GNSS Rx
+(option)
+GNSS Rx
+(option)
+PCIe
+CAN (red)
+• BSP for VxWorks, RTEMS or Linux
+• Driver SW API towards all HW functions
+• Boot Software, including Standby Mode
+Software
+

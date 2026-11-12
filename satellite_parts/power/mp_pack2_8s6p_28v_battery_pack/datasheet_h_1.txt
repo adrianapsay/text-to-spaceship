@@ -1,0 +1,134 @@
+REV 3 – All details subject to change
+ 
+mpspace.io 
+          
+                   
+Built to perform. Easy to integrate. Ready to fly. 
+ 
+  Pack2 – 8S6P 2170 Lithium-Ion 
+Pack2 is a fully integrated lithium-ion battery pack built for 
+modern spacecraft, where reliability, seamless integration, 
+and cost-performance matter most. It leverages flight-
+proven components, a streamlined BMS, and software-
+tuned behaviour to simplify system integration. 
+28.8V   |   864 Wh   |   4.6 kg 
+• Low-cost, eval-ready models to 
+accelerate your mission 
+• LEO Flight heritage 2026 
+• Configurable for ease of 
+integration 
+ 
+Thermal & Environmental Limits 
+Cell Discharge Temp 
+Range 
+-30 °C to 55 °C 
+Cell Charge Temp 
+Range 
+0 °C to 55 °C 
+Radiation TID Tolerance 
+35 krad CO-60 Gamma  
+Vibration (Qual) GEVS 
+14.1 Grms, 20 Hz–2 kHz, 3 
+axes 
+Vibration (Accep) GEVS 
+9.7 Grms, 20 Hz–2 kHz, 3 
+axes  
+TVAC (Qual Only) 
+GEVS 
+Op 6 cyc: –30 °C to +55 °C, 
+Survive: –40 °C to +60 °C, 
+≤10⁻⁵ Torr 
+Enclosure Material 
+Aluminium, Anodized 
+Enclosure ε 
+0.82 – 0.86 
+ 
+BMS Features 
+Our BMS design applies principles proven across multiple 
+GWh of deployed battery systems, delivering advanced 
+protection, telemetry, and scalability tailored to spacecraft 
+demands. 
+• 
+Integrated Battery Management & Protection 
+• 
+Powered by ASIL-D rated dual core lockstep ARM 
+Cortex R processor core 
+• 
+Internal heaters & autonomous thermal control 
+• 
+Pre-charge capable 
+Electrical Interfaces 
+POWER 
+Harwin  
+M80-5000000M5-02-PM3-00-
+000 
+SIGNAL1  
+Harwin M80-5401205 
+SIGNAL2  
+Harwin M80-5401205 
+5V AUX POWER 
+M80-5C10405MU 
+ 
+ 
+System Specifications 
+Voltage Range 
+20 V / 28.8 V / 33.6 V 
+Nameplate Energy at 23°C 
+864 Wh 
+Rated Current 
+38 A 
+Comms Interface 
+CAN 2.0  
+Rated Life 
+5 years LEO 
+Mass (kg) 
+4.6 kg  
+Dimensions (L x W x H) 
+218.9 x 172.2 x 84.2 mm 
+Mounting 
+4 X M6 
+5V AUX 
+POWER 
+SIGNAL1 
+SIGNAL2 
+
+REV 3 – All details subject to change
+ 
+mpspace.io 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Feature Details 
+Protections & Management 
+OV/UV, OT/UT to protect cells 
+Automated cell balancing  
+Fast acting OC protections 
+Configurable limits and thresholds to suit mission parameters 
+Communication & Telemetry 
+Communication protocol configurable as customers’ needs 
+Periodic publication of battery voltage, current & temperature states 
+SoC Estimation 
+Battery state of charge estimation to within <10% accuracy across operating ranges 
+Pre-charge 
+Bus pre-charge capability with short-circuit protection 
+Heaters 
+Up to 144W of heater power to efficiently reach charge temperatures from cold soak 
+Storage (≤90 days at 100% SoC) 
+Expect 3–4% loss (~2% permanent, ~1–2% recoverable); recharge before flight if held >3 
+months 
+

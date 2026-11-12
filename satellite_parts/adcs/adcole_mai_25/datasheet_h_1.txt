@@ -1,0 +1,62 @@
+ 
+ 
+Page 1 of 2 
+ 
+© 2019 Adcole Maryland Aerospace, LLC.
+All Rights Reserved                         
+669 Forest Street
+Marlborough, MA 01752 
+508-485-9100
+www.adcolemai.com
+MAI-25  
+1/4U Micro ADACS 
+Sub Miniature Nadir Pointing ADACS 
+Stock #: MAI-000-00000010 
+ 
+The MAI-25 Micro ADACS is a complete Attitude Determination and Control 
+System in 1/4U.  It is suitable for cost sensitive applications where SWaP is at a 
+premium.  The unit contains a single reaction wheel and 3 Torque Rods with a 
+magnetometer as the only sensor.  Just apply power and the system fully autonomously detumbles, acquires attitude and 
+points the spacecraft to nadir.  A vastly simplified command protocol is used that minimizes management by the spacecraft 
+or the ground. 
+ 
+Specifications 
+Performance Item 
+Specification 
+Nadir Pointing Accuracy  
+1 deg roll/pitch, 3 deg yaw (typical) 
+Dimensions 
+50 mm x 50 mm x 70 mm 
+Weight 
+250 gm 
+Supply Voltage 
+4-6 VDC 
+Power Consumption 
+3.5W @ 5VDC (Peak) 
+0.25W @ 5VDC (Steady State) 
+0.15W @ 5VDC (Idle)
+Operating Temperature 
+-40 to 80 °C 
+Interface 
+                        3.3V UART                  
+ 
+
+ 
+ 
+Page 2 of 2 
+ 
+© 2019 Adcole Maryland Aerospace, LLC.
+All Rights Reserved                         
+669 Forest Street
+Marlborough, MA 01752 
+508-485-9100
+www.adcolemai.com
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+

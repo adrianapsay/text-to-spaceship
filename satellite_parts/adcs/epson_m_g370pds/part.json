@@ -122,6 +122,41 @@
   },
   "face_counts": {
    "part": 40
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    24.0,
+    24.0,
+    10.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",
@@ -136,22 +171,7 @@
   "power_bus_V": 3.3
  },
  "reference_images": {
-  "datasheets": [
-   {
-    "file": "datasheet_1_page1.png",
-    "pdf": "datasheet_1.pdf",
-    "kind": "web_search",
-    "url": "https://www.epsondevice.com/sensing/en/pdf/m-g370pdt0_briefsheet_e_rev11.pdf",
-    "title": "Features and Lineup of IMU | Products | Epson Sensing Device"
-   },
-   {
-    "file": "datasheet_2_page1.png",
-    "pdf": "datasheet_2.pdf",
-    "kind": "web_search",
-    "url": "https://eios.epson-electronics.de/medias/TheCrystalmaster2024.pdf?context=bWFzdGVyfGVlZ3wyMTM5NjAzMnxhcHBsaWNhdGlvbi9wZGZ8YURRNEwyZ3hOQzg1TXpBek1qTTBNVGd6TVRrNEwxUm9aVU55ZVhOMFlXeHRZWE4wWlhJeU1ESTBMbkJrWmd8NzI3ZDU5YTcwMWNlODRhZDkxZjIyZTdlMTlmNTNiMTE0MjIwZDI1NzExYWNmYTFlNjEwMTNjMGE4ZTQ3ZThiNw&attachment=true",
-    "title": "THE C R YS TAL M A S T ER - Epson"
-   }
-  ],
+  "datasheets": [],
   "stl_preview": "preview.png",
   "drawing": "drawing.png",
   "photo_url": "",

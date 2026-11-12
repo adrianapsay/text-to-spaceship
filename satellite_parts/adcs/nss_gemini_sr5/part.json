@@ -76,43 +76,141 @@
    91.0,
    18.0
   ],
-  "mesh_volume_mm3": 98392.7,
+  "mesh_volume_mm3": 157216.6,
   "watertight": true,
-  "render_kind": "pc104_board",
-  "effective_density_g_cm3": 1.321,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 0.827,
   "bodies": {
    "part": [
     {
-     "name": "pcb",
-     "color": [
-      0.09,
-      0.42,
-      0.24
-     ],
-     "file": "bodies/part__pcb.stl"
-    },
-    {
-     "name": "stack_header",
-     "color": [
-      0.16,
-      0.16,
-      0.18
-     ],
-     "file": "bodies/part__stack_header.stl"
-    },
-    {
-     "name": "components",
+     "name": "housing",
      "color": [
       0.36,
       0.4,
       0.46
      ],
-     "file": "bodies/part__components.stl"
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
     }
    ]
   },
   "face_counts": {
-   "part": 732
+   "part": 40
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    96.0,
+    91.0,
+    18.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "feet",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/feet.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "connector_shell",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/connector_shell.stl"
+    },
+    {
+     "name": "connector_insert",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector_insert.stl"
+    },
+    {
+     "name": "jackscrews",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/jackscrews.stl"
+    },
+    {
+     "name": "label",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies_detail/label.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",
@@ -121,7 +219,7 @@
    "RS-422",
    "UART"
   ],
-  "mechanical": "PC/104 stack",
+  "mechanical": null,
   "electrical_connectors": [
    "Nano-D"
   ],

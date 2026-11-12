@@ -1,0 +1,108 @@
+Beyond Gravity
+beyondgravity.com
+Software Defined Drive 
+Electronics (CODE+) 
+High reliability drive electronics with advanced features at 
+attractive
+Building on our CODE unit, the CODE+ offers higher capability and flexibility 
+with its radiation-tolerant microcontroller and a fully software-defined 
+architecture. A key improvement is the direct acquisition and processing of 
+analog and digital sensor inputs and advanced driving profiles with micro-
+stepping.
+
+Beyond Gravity
+beyondgravity.com
+Overview
+This document remains the intellectual property of Beyond Gravity Austria GmbH and may not be copied, 
+or used without their prior written approval.
+Internal Code/Doc.No.
+Issue 1 
+Protection
+Interfaces
+Performance 
+• Start-up time: < 500 ms
+• Motor drive voltage: < 32 V
+• Motor current: < 1 A 
+• Stepping rate: < 1000 steps/s 
+• Standby power consumption: < 3 W 
+• Motor driver efficiency: > 75% 
+• Failure rate: < 350 FIT (Class 1 parts)
+• Secondary supply short-circuit protection 
+• Over-current protection of motor driver 
+• FDIR based on sensor data 
+• Compatible to LCL-protected power bus
+• Size: 235 x 135x 35 mm³
+• Weight: < 0.9 kg
+• Operating temperature: -30°C to +65°C (qual) 
+• Non-operating temperature: -40°C to + 75°C (qual) 
+• Minimum switch-on temperature: -30°C 
+• Random vibration 18.4gRMS
+• Radiation: up to 50 kRad (Si), unit provides 2mm eq. 
+aluminium shielding
+• Passive cooling of the entire unit 
+• Optional black Kapton tape on top for emissivity 
+reduction
+Features 
+• Two-phase motor driving with up to 64 micro-steps 
+• Three-phase motor driving in full-step mode 
+• Auto-Start function or On/Off High-Power-
+Command 
+• Go to Target operation (absolute / relative)
+• Constant Speed drive
+• Acceleration limited speed profiles 
+• End-switch stop, step-loss control 
+Physical / environment
+• Primary power bus: 22 V to 38 V 
+• Discrete TM: Unit health status, unit temperature 
+Dual-UART interface, RS-422 type 
+• 3 sensor signals processed per motor (or fed 
+through) 2 feed-through lines per motor (100 V 
+compliant) 
+• 1 connector per motor (DEM15S)
+• 1 common control connector (OAM26P) 
+• 1 power & discrete control connector (DEM9P)
+The CODE+ is a compact, modular, high-reliable 
+two-axes stepper motor controller capable of 
+operating various types of mechanisms such as 
+antennas, solar arrays or thrusters.
+Each module provides 2 independent motor 
+channels that can be individually configured as two- 
+or three-phase drivers. Up to 3 sensors per motor 
+are processed on-board or routed-through. Each 
+sensor can be configured either as digital (switch) or 
+analog input (thermistor, potentiometer). Additional 
+2 feed-through lines are provided per motor, which 
+can be used for functions not supported on-board 
+such as heater control or encoder processing. Each 
+motor interface is located on a separate connector. 
+To increase the channel capacity, up to 4 modules 
+may be stacked vertically.
+Optional extension modules can be offered for e.g. 
+multiplexing or MIL-STD-1553B interfacing. The 
+CODE+ is controlled via a dual UART interface 
+applying CCSDS packets. The unit is operated from 
+a rad-tolerant microcontroller. The software is 
+category B (ECSS-E-ST-40C) and supports in-orbit 
+patching.
+Extensibility
+• Software patching while in-orbit 
+• Extension modules for motor multiplexing on request 
+Product availability: Please contact our Sales team. 
+Phone +43 664 464 9439 | wolfgang.mayer@beyondgravity.com
+Beyond Gravity | Stachegasse 13 | 1120 Vienna | Austria
+Programs / heritage 
+• BepiColombo (ESA)
+• Meteosat Third Generation (ESA)
+• Geo-Kompsat-2A/B (KARI)
+• Kompsat-3 (KARI)
+• Metop-SG (ESA)
+• CO2M, ROSE-L, LSTM (Copernicus)
+• Harmony (ESA)
+• Comet Interceptor (ESA/JAXA)
+• Ramses (ESA)
+• PLATO (ESA)
+• HERA (ESA)
+Beyond Gravity has delivered more than 50 flight models 
+of drive electronics to customers in Europe, USA, Middle 
+East and Asia. Some example missions:
+

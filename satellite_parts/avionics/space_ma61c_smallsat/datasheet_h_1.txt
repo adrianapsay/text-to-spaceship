@@ -1,0 +1,103 @@
+MA61C SmallSat interfaces with essential subsystems such as AOCS sensors and actuators, 
+communication, power, payload, and more.
+The system scans connections, detects incoming data, routes and converts it between 
+interfaces, and monitors bus data, sending information to connected units.
+MA61C is designed for ease of use, offering a database of pre-installed drivers that enable 
+plug-and-play functionalities. This simpliﬁes hardware integration with:
+ 
+By integrating with MA61C, users streamline the entire SmallSat lifecycle—from 
+design and supply chain management to system integration—accelerating time to 
+space.
+automatic driver installation
+self conﬁguration
+device recognition
+Key Features
+Powered by the GR712RC LEON3-FT SPARC V8 processor
+Supports multiple I/O interfaces at the same time
+80Mbit of SRAM and 64Mbit of FLASH memory for software 
+and data storage. 
+Built-in timer driven by an onboard oscillator, 
+ensuring precision in its operations. 
+API and a Windows-based GUI for easy subsystem 
+monitoring and control 
+MA61C 
+SmallSat 
+is 
+an 
+intelligent, 
+plug-and-play 
+Command 
+and 
+Data 
+Handling (C&DH) system engineered to 
+seamlessly integrate multiple satellite 
+subsystems with onboard computers.
+MA61C 
+SmallSat
+Multipurpose
+Adapter
+Generic
+Interface
+Connector
+www.spinintech.com
+ITALY  GERMANY   LUXEMBOURG   UNITED KINGDOM  UNITED STATES 
+info@spinintech.com
+SP N
+Simplify Space Manufacturing
+
+Simplify Space 
+SP N
+Manufacturing
+Space Products and Innovation spins technology into the space industry to simplify manufacturing.  SPiN enables rapid, 
+ﬂexible, and cost-effective satellite designs through modularity, enabled by the combination of MA61C, its plug-and-play 
+intelligent data node, with system engineering.  SPiN democratizes access to space, empowering manufacturers to unlock 
+new ventures.
+Increase efﬁciency modular design
+Reduces design and integration time by 50%
+Lowers development costs up to 30%
+Simpliﬁes supply chain management
+Key Beneﬁts
++5V to 24V
+What does the MA61C 
+package include?
+1 x MA61C (board and casing)
+1 x Debug cable
+1 x USB with windows API and GUI Manuals
+ 
+GR712RC dual-core 32-bit LEON3 fault-tolerant 
+SPARC V8 processor 50 MHz clock frequencies
+Processor
+Power Supply
+• SRAM - 64 Mbit - 2 x 32 Mbit 
+• FLASH - 64 Mbit
+Onboard memory
+• Plug and play
+• Embedded driver database
+• Routing and converting
+• Data Buffering 
+Onboard software
+• Operating Temperature: -40 deg C to +85 deg C
+• Quality: ISO standard
+• Size PCB: 105 mm  x 105 mm (without casing)
+• Size with casing: 131 mm x 131 mm x 30 mm
+• Weight: 435 grams (approx.)
+Physical Properties
+• 2 x SpaceWire, micro-d 9 pins female
+• 2 x CAN-bus, dsub9 male
+• 1 x MIL-STD-1553B (RT/BC/MT), dsub9 male
+• 5 x RS422 and 1 x RS485 mdm-25 female
+• 9 x GPIO, 16 Analogues: mdm-37 male
+• 1 x power and 1x JTAG: dsub-9
+• 1 x I2C Master, 1 x SPI master, 6 x PWM: mdm-15 male
+Interfaces on the board
+• SpaceWire - Up to 200 Mbit/s, nominal 10Mbit/s
+• CAN-bus - 1Mbit/s
+• I2C interface - up to 0.4Mbit/s
+• SPI interface - up to 20Mbit/s
+• RS422/RS485 interfaces - up to 10Mbit/s
+• Debug port  - 1 Mbit/s
+Port speed
+www.spinintech.com
+ITALY  GERMANY   LUXEMBOURG   UNITED KINGDOM  UNITED STATES 
+info@spinintech.com
+

@@ -1,0 +1,144 @@
+ 
+Deep Space Avionics 
+PROPULSION REMOTE TERMINAL UNIT (PRTU) 
+Fault-Tolerant, Lightweight SmallSat Thruster Driver Unit for LEO and Deep 
+Space Applications 
+ 
+ 
+ 
+Figure 1: PRTU high-thruster count render 
+The Propulsion Remote Terminal Unit (PRTU) is a complete 
+interface bridge between a low-level onboard computer/ 
+controller and a wide set of HPGP- or Hydrazine-type thrusters. 
+The PRTU handles electrical actuators, sensors and thruster 
+ConOps, offloading most of the thruster operation complexity 
+from the user. Users control the unit through a single power and 
+communication interface using high-level commands.  
+The unit is modular such that driven thruster count and type can 
+be increased by duplicating generic modules by plug&play. This 
+way, the PRTU remains the best solution for a wide variety of 
+thruster configurations, mission profiles and spacecrafts. 
+The needs for high reliability, low mass and long lifetime of deep 
+space missions are met by the PRTU; designed to operate for a 
+TID up to 30 kRad under a proton-heavy environment. It is built 
+to be single-failure-tolerant leading to increased resilience 
+against single events and other type of failures. 
+All of this makes the PRTU the ideal candidate for deep space, 
+high delta-v but also weight-, size- and reliability- sensitive LEO 
+missions. 
+ 
+ 
+MAIN FEATURES 
+• Single interface towards valve drivers, reactor and valve heaters, 
+reactor thermocouples valve thermistors as well as upstream 
+latch valve and pressure transducer. 
+• Configurable closed-loop reactor temperature control and 
+automatic thrust sequencing. 
+• Modular design for optimal, mission-specific performance. 
+• Best-in-class thruster count to weight ratio optimized for high 
+delta-v missions. 
+• High reliability and single failure tolerant architecture. 
+• Extensive internal and external housekeeping (bus, valve, 
+heater, aux voltages, currents, temperatures). 
+BUDGETS 
+• Mass: < 0.5 kg (baseline config.). 
+• Volume (w x h x d): 20 x 120 x 135 mm (baseline config.). 
+• Power: < 1 W quiescent (baseline config.) 
+ 
+INTERFACES 
+• Power input: 22 V to 34 V unregulated. 
+• TM/TC: single or redundant CAN or RS485/422. 
+• Thruster: single electrical interface per thruster for ease of wiring. 
+• Thruster types: compatibility is ensured with 1N, 5N and 22N 
+ECAPS HPGP thruster products. 
+ENVIRONMENT 
+• Operational temperature range: -30 °C to +60 °C. 
+• Non-operational temperature range: -40 °C to +70 °C. 
+• Radiation: qualified up to 30 kRad total ionizing dose and for high 
+energy protons. 
+• Lifetime: > 5 years. 
+READINESS 
+• Technology readiness: TRL 6 with expected TRL 7 by Q1 2023. 
+Designed by Quentin Mannes 
+with love in Luxembourg 
+
+ 
+Non-contractual document, subject to changes 
+© Bradford Engineering BV • All rights reserved. 
+Bradford Space Deep Space Industries 
+info@bradford-space.com 
+www.bradford-space.com 
+ 
+ 
+Performance and Specifications (per module) 
+• Flow control valves (FCV): 4 redundant pairs. 
+o Resistance: 60 Ohmmin 
+o Pull and hold voltage: 28 V unreg. and 10 V regulated 
+• Thermocouple circuits (Tc): 4 redundant pairs. 
+o Recommended type: K-type 
+• Reactor heaters (HTR): 4 redundant pairs. 
+o Power: 25 Wmax each 
+o Voltage: 28 V unregulated 
+• Valve heater (htr): 4 iterations. 
+o Power: 5 Wmax each 
+o Voltage: 28 V unregulated 
+• Valve thermistor (Th): 4 iterations. 
+o Recommended type: 1k @ 25degC PTC 
+• Latch valve (LV): single iteration. 
+o Type: mono- or bipolar with readback 
+o Voltage: 28V unregulated 
+• Pressure transducer (Pt): single per module. 
+o Recommended type: current-excited resistive bridge 
+ 
+ 
+ 
+Figure 2: PRTU simplified block diagram 
+ 
+ 
+Scalability and example thruster configurations 
+ 
+RCS 
+Delta-v + RCS 
+High-reliability RCS 
+Thruster configuration 
+4x 1N ECAPS HPGP 
+4x 1N + 2x 5N  ECAPS HPGP 
+12x 1N ECAPS HPGP 
+PRTU configuration 
+Baseline 
+Baseline + 1 extension 
+Baseline + 2 extension 
+Latch valves (LV) 
+1 
+1/2 used 
+2/3 used 
+Pressure transducers (Pt) 
+1 
+1/2 used 
+2/3 used 
+Flow Control Valves (FCV) 
+4 (series redundant) 
+6/8 used (series redundant) 
+12 (series redundant) 
+Reactor heaters (HTR) 
+4 (parallel redundant) 
+6/8 used (parallel redundant) 
+12 (parallel redundant) 
+Thermocouples (Tc) 
+4 (parallel redundant) 
+6/8 used (parallel redundant) 
+12 (parallel redundant) 
+Valve heaters (htr) 
+4 
+6/8 used 
+12 
+Valve thermistors (Th) 
+4 
+6/8 used 
+12 
+ 
+ 
+Figure 3: PRTU typical high-thruster-count configuration 
+ 
+Rev. A, July 2022 
+

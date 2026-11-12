@@ -1,0 +1,156 @@
+{
+ "id": "calian_tw2710",
+ "name": "Calian (Tallysman) TW2710 single-band GNSS antenna (magnet mount)",
+ "category": "adcs",
+ "subcategory": "gnss_antenna",
+ "vendor": "Calian (Tallysman)",
+ "model": "TW2710",
+ "dimensions_mm": {
+  "x": 57,
+  "y": 57,
+  "z": 16
+ },
+ "mass_g": 110,
+ "source": {
+  "type": "datasheet",
+  "url": "https://sites.calian.com/app/uploads/sites/8/2024/07/Calian%C2%AE-TW2710-Datasheet.pdf",
+  "document": {
+   "title": "Calian TW2710 data sheet",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "rf",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "57 mm diameter x 16 mm high, 110 g, 1559 to 1606 MHz, LNA gain 28 dB typical, 2.5 to 16 VDC, 12 mA typical, -40 to +85 C. Commercial antenna, not space qualified."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "Canada",
+ "distributors": [
+  "Digi-Key",
+  "Mouser",
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "distributor",
+  "source": null
+ },
+ "rf": {
+  "band": "GNSS L1 / E1 / B1 / G1",
+  "frequency_MHz": [
+   [
+    1559,
+    1606
+   ]
+  ],
+  "lna_gain_dB": 28,
+  "antenna_type": "active patch, radome"
+ },
+ "electrical": {
+  "voltage_V": {
+   "min": 2.5,
+   "max": 16
+  },
+  "current_mA": 12
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -40,
+   "max": 85
+  }
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   57.0,
+   56.84,
+   16.0
+  ],
+  "mesh_volume_mm3": 40676.0,
+  "watertight": true,
+  "render_kind": "radome_puck",
+  "effective_density_g_cm3": 2.704,
+  "bodies": {
+   "part": [
+    {
+     "name": "flange",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__flange.stl"
+    },
+    {
+     "name": "radome",
+     "color": [
+      0.92,
+      0.92,
+      0.9
+     ],
+     "file": "bodies/part__radome.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 164
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "flange",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__flange.stl"
+    },
+    {
+     "name": "radome",
+     "color": [
+      0.92,
+      0.92,
+      0.9
+     ],
+     "file": "bodies/part__radome.stl"
+    }
+   ]
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://sites.calian.com/app/uploads/sites/8/2024/07/Calian%C2%AE-TW2710-Datasheet.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

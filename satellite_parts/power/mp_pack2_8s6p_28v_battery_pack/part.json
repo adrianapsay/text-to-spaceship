@@ -1,0 +1,169 @@
+{
+ "id": "mp_pack2_8s6p_28v_battery_pack",
+ "name": "MP Space Pack2 \u2013 8S6P 28V Battery Pack",
+ "category": "power",
+ "subcategory": "battery",
+ "vendor": "MP Space",
+ "model": "Pack2 \u2013 8S6P 28V Battery Pack",
+ "dimensions_mm": {
+  "x": 218.9,
+  "y": 172.2,
+  "z": 84.2
+ },
+ "mass_g": 4600.0,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-mp-space-pack2-8s6p-28v-battery-pack-58z7o8.pdf",
+  "document": {
+   "title": "MP Space Pack2 \u2013 8S6P 28V Battery Pack data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-11",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Read from the vendor data sheet (datasheet-mp-space-pack2-8s6p-28v-battery-pack-58z7o8.pdf): dimensions \"e CAN 2.0 Rated Life 5 years LEO Mass (kg) 4.6 kg Dimensions (L x W x H) 218.9 x 172.2 x 84.2 mm Mounting\"; mass \"Life 5 years LEO Mass (kg) 4.6 kg Dim\". Catalog page lists 4.6 kg. Electrical / RF values found in the data sheet or page text by pattern (quoted where possible).",
+  "found_via": "https://satsearch.co/products/mp-space-leosatellitebattery8s6p"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "electrical": {
+  "battery_energy_Wh": 864.0
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   218.9,
+   172.2,
+   84.2
+  ],
+  "mesh_volume_mm3": 3104483.9,
+  "watertight": true,
+  "render_kind": "battery_pack",
+  "effective_density_g_cm3": 1.482,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "cells",
+     "color": [
+      0.85,
+      0.72,
+      0.3
+     ],
+     "file": "bodies/part__cells.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 1340
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    218.91,
+    172.2,
+    84.2
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.01,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "cells",
+     "color": [
+      0.2,
+      0.45,
+      0.7
+     ],
+     "file": "bodies_detail/cells.stl"
+    },
+    {
+     "name": "end_plates",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/end_plates.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
+  "datasheet_url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-mp-space-pack2-8s6p-28v-battery-pack-58z7o8.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

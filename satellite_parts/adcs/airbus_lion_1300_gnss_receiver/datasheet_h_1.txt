@@ -1,0 +1,237 @@
+Based on Airbus DS Products’ heritage in the development
+of HiRel space GNSS receivers, the LION 1000 generation 
+navigation receiver series delivers high performance 
+supporting both multiple frequency reception and multiple 
+navigation constellation operation. The cutting-edge 
+new series takes benefit from advances in navigation 
+processing technology, as well as from upgrades of the 
+GPS constellation - now providing more civil signals - and 
+from Galileo entering its operational phase. Therefore, 
+LION 1300, the first member of the Product family, is 
+designed to make use of the GPS signals L1, L2C, and L5 
+and of the Galileo signals E1, E5a, as well as Glonass and 
+Compass open signals*.
+36 parallel channels are available to track all satellites in view. 
+The LION 1000 series is designed to demodulate the navigation 
+data messages of the GNSS constellations navigation signals 
+and to use this information for PVT determination through an 
+instant point-solution as well as through a dynamic Kalman-
+filtered solution. 
+The LION 1000 series reaches a very high level of integration 
+and performance thanks to the use of an ASIC as the core 
+of the receiver. This ASIC (AGGA-4), developed by AIRBUS 
+under ESA contract, gathers in a single chip a modern 
+GNSS baseband processor, a LEON-FT as a fault-tolerant 
+microprocessor with FPU, and digital interfaces (1553, UART, 
+SpW). 
+* on request for Glonass and Compass
+FLIGHT PROVEN
+P
+a
+y
+l
+o
+a
+d
+A
+v
+i
+o
+n
+i
+c
+s
+SPACECRAFT EQUIPMENT
+DEFENCE AND SPACE
+Spacecraft Equipment
+LION GNSS SERIES
+The best of decades of Airbus 
+GNSS receivers heritage 
+concentrated in  
+a strong product familly
+
+LION 1000 architecture
+LION 1000 is based on the AGGA-4, which comprises a complete GNSS core 
+with 36 baseband channels, the LEON-FT as a fault-tolerant micro-processor 
+together with a FPU, a FFT module and digital communication interfaces (MIL-
+STD-1553, UART, SpaceWire). On its digital board it is complemented with 
+RAM, Boot Loader PROM, and an EEPROM to store the GNSS Application. 
+The modular design of the RF frame provides for each GNSS frequency a RF 
+front-end with filtering. A central OCXO provides the highly precise reference 
+clock to all modules. 
+* For LION1000neo the LNA is integrated in the receiver
+LION 1000Neo 
+LION1000neo is a derivate of the LION1000 series with integrated LNA & filter, implementing a complete 
+single- (1100Neo) or multi- (1300Neo), constellation GNSS receiver. The main features are: 
+• Integrated LNA and cavity filters mounted to the receiver housing
+• Same HW and SW interface as LION 1000 Series
+• Architecture based on LION 1000 Series
+• State-of-the-art design with AGGA-4 for GNSS signal processing
+• Attractive price / performance relation 
+• Option for enhanced navigation algorithm using phase measurement for high accuracy orbit determination - increasing 
+the navigation performance even further
+LION 1000 SERIES - COMMON KEY FEATURES
+M u l t i - C o n s t e l l a t i o n 
+Receiver
+Galileo / GPS / Glonass / Compass
+Multi Use
+Platform/Payload (scientific receiver)
+High precision
+•	 Real-time performance using
+•	 up to 36 Channels
+•	 Centimeter post processing 
+capability onground
+Interfaces
+•	 Communication through MIL-
+STD 1553
+•	 bus, space wire, UART
+•	 Up to 4 antennas capability
+•	 18-50V power supply
+Power
+•	 Same footprint, same electrical 
+interface,
+•	 same SW for all LION series 
+Products
+•	 Operating : [-25°C ; 55°C]
+Life time
+15 years
+Radiation
+ TID > 50 kRad (Si)
+Reliability
+ < 1500 fits
+Application fields
+LEO, MEO and GEO satellites
+ LION 1000 SERIES - COMMON KEY FEATURES
+LION 1300
+LION 1300Neo
+LION 1100Neo
+Mass
+6 Kg (without LNA, 
+harness,Antenna)
+6.8 Kg (with LNA,
+without harness
+and Antenna) 
+Volume
+226 x 184 x 205 mm3
+226x229x205 mm3
+Power
+20W
+18W
+Configuration
+Full redundancy 
+in one box.
+LNA / Antenna external
+Full redundancy in
+one box including
+LNA
+Frequency
+Tri
+Mono
+E1, L1, E5a, L2, L5
+E1, L1
+Position
+accuracy
+(3D-RMS)
+0.8 m (LEO)
+30 m (GEO)
+up to 1 m (LEO)
+30 m (GEO)
+up to 1.5 m 
+(LEO)
+velocity
+accuracy
+0.001 m/s (LEO)
+0.05 m/s (GEO
+0.002 m/s (LEO)
+0.05 m/s (GEO)
+Time
+30 ns (LEO)
+100 ns (GEO)
+Budget
+Performance
+LION 1000 assembly
+The typical complete redundant LION 1000 assembly is
+composed of:
+• Two LION 1000 Units
+• Two LNA Units
+• Two GNSS Antennas
+• Associated RF cables between above components
+Up to four GNSS Antennas can be connected to each non-redundant LION 
+1000 Receiver Unit, e.g. for scientific applications. The communication options 
+for the fully redundant connection with the onboard computers are:
+• MIL-STD-1553 Bus
+• Cross-strapped SpaceWire
+• Cross-strapped UART
+Receiver
+Unit A
+Receiver
+Unit B
+LNA A
+LNA B
+Antenna A
+Antenna B
+LION 1000 Series
+Redundant Box
+MIL-STD-1553
+Redundant Bus
+Onboard
+Computer
+A
+Onboard
+Computer
+B
+Receiver
+Unit A
+Receiver
+Unit B
+LNA A
+LNA B
+Antenna A
+Antenna B
+LION 1000 Series
+Redundant Box
+SpaceWire or UART
+Cross-Strapping
+Onboard
+Computer
+A
+Onboard
+Computer
+B
+LION 1000 Series
+Power
+Converter
+RAM
+PROM
+EEPROM 
+Space
+Wire
+UART
+MIL 
+STD 
+1553
+GNSS
+Antenna
+L
+N
+A
+RF Frame
+Digital Board
+Clock 
+Module
+RF
+Front-End
+L1 L2 L5
+PPS
+AGGA-4 
+GNSS
+Core
+LEON
+CPU
+* For LION1000neo the LNA is integrated in the receiver
+Airbus Defence and Space
+spacecraft.equipment@airbus.com
+LION GNSS series / Non-contractual document, subject to changes. 
+This document shall not be reproduced, in whole or in part, without prior consent. 
+ © 2020 Airbus Defence and Space SAS
+

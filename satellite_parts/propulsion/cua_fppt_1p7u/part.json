@@ -1,0 +1,253 @@
+{
+ "id": "cua_fppt_1p7u",
+ "name": "CU Aerospace FPPT 1.7U fibre-fed pulsed plasma thruster",
+ "category": "propulsion",
+ "subcategory": "electric_thruster",
+ "vendor": "CU Aerospace",
+ "model": "FPPT-1.7U",
+ "dimensions_mm": {
+  "x": 217,
+  "y": 90,
+  "z": 86.5
+ },
+ "mass_g": 3030,
+ "source": {
+  "type": "datasheet",
+  "url": "https://cuaerospace.com/Portals/0/SiteContent/assets/PDF/FPPT-Datasheet%20240807.pdf",
+  "document": {
+   "title": "CU Aerospace FPPT data sheet 2024-08-07",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "propulsion",
+   "electrical"
+  ],
+  "notes": "21.7 x 9.0 x 8.65 cm envelope (1.7U), 3.03 kg wet, 51 W at 2 Hz (16 W at 0.64 Hz), 0.21 mN at 2 Hz, 29,000 N s total impulse. Nozzle split of the CAD is schematic (PPT electrodes)."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "USA",
+ "mass_note": "wet mass",
+ "propulsion": {
+  "type": "pulsed plasma (Teflon fibre fed)",
+  "thrust_N": {
+   "nominal": 0.00021
+  },
+  "total_impulse_Ns": 29000
+ },
+ "electrical": {
+  "power_W": {
+   "nominal": 51
+  }
+ },
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   217.0,
+   90.0,
+   86.5
+  ],
+  "mesh_volume_mm3": 1537681.3,
+  "watertight": true,
+  "render_kind": "thruster_box_nozzle",
+  "effective_density_g_cm3": 1.97,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    },
+    {
+     "name": "flange",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__flange.stl"
+    },
+    {
+     "name": "nozzle",
+     "color": [
+      0.55,
+      0.55,
+      0.58
+     ],
+     "file": "bodies/part__nozzle.stl"
+    },
+    {
+     "name": "valve",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__valve.stl"
+    },
+    {
+     "name": "tank_dome",
+     "color": [
+      0.55,
+      0.55,
+      0.58
+     ],
+     "file": "bodies/part__tank_dome.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 448
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    217.0,
+    90.0,
+    86.5
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "feet",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/feet.stl"
+    },
+    {
+     "name": "deck",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/deck.stl"
+    },
+    {
+     "name": "tank_dome",
+     "color": [
+      0.55,
+      0.55,
+      0.58
+     ],
+     "file": "bodies_detail/tank_dome.stl"
+    },
+    {
+     "name": "valves",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/valves.stl"
+    },
+    {
+     "name": "feed_tubes",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/feed_tubes.stl"
+    },
+    {
+     "name": "electronics",
+     "color": [
+      0.24,
+      0.26,
+      0.3
+     ],
+     "file": "bodies_detail/electronics.stl"
+    },
+    {
+     "name": "nozzles",
+     "color": [
+      0.55,
+      0.55,
+      0.58
+     ],
+     "file": "bodies_detail/nozzles.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://cuaerospace.com/Portals/0/SiteContent/assets/PDF/FPPT-Datasheet%20240807.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

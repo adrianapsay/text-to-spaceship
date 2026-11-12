@@ -1,0 +1,113 @@
+The PULSAR-STX and PULSAR-STXC are compact 
+S-Band transmitters designed for CubeSat missions 
+operating at amateur and commercial frequencies 
+respectively. The transmitters implement O/QPSK 
+modulation with transmission data rates of up to 2 Mbps. 
+The transmitters are ideal for space missions where a 
+high data rate downlink is required. They implement an 
+open network encoding scheme based on the IntelSAT 
+IESS-308 specification which allows this product to be 
+used with low-cost commercial satellite demodulators.
+HIGH DATA RATE
+LOW POWER
+CONSUMPTION
+The PULSAR-STX/C solution is compatible with our 
+S-Band Patch Antenna. A nadir facing S-Band patch an­
+tenna can also be incorporated into the CubeSat design. 
+Its small size, low profile, rugged design and high direc­
+tionality make it an excellent addition to the system. The 
+S-Band patch antenna is designed to be mounted on the 
+nadir facing side of a CubeSat. A wide beamwidth ensures 
+satellite communication through a wide range of 
+elevation angles. It is machined from solid aluminium.
+The PULSAR-STX and PULSAR-STXC 
+have a low power consumption and 
+total power consumption of < 5 W (for 
+maximum RF power output). With a 
+selection of transmit output power 
+levels from 24 dBm to 30 dBm in 
+2 dB steps makes the PULSAR-
+STX/C an attractive solution.”
+The PULSAR-STXC and PULSAR-
+STX supports commercial (2.2 
+- 2.3 GHz) and amateur (2.4 - 2.45 
+GHz) bands respectively, and is user 
+programmable within the bands.
+The PULSAR-STX/C solution has 
+been tried, tested and trusted on 
+an array of on-orbit missions 
+proving to be not only reliable but
+efficient. The PULSAR-STX was part of 
+the UKube-1 mission, the UK Space
+Agency’s first national spacecraft.
+POWER
+FREQUENCIES
+RELIABILITY
+PULSAR-STX
+COMMUNICATIONS
+
+To make an enquiry, request a quotation or 
+learn about AAC Clyde Space’s other products 
+and services, please contact: 
+enquiries@aac-clydespace.com
+General
+Temperature
+-25°C to +51°C
+Power
+< 5 W
+Voltage
+6 V – 12 V (5 V alternative)
+Mass
+< 100 g
+TX SNR
+ 20 dB
+Frequency
+2.2 GHz – 2.3 GHz (PULSAR-STXC) 
+2.4 GHz – 2.45 GHz (PULSAR-STX)
+RF Power
+24 - 30 dBm (1 W RF) in 2 dB steps
+Channel Spacing
+500 kHz
+Spurious Response
+< -60 dBc
+Design Life
+2 years in LEO
+TECHNICAL SPECIFICATIONS
+Copyright AAC Clyde Space 2021. All rights reserved. All 
+information subject to change. Release date 6 August 2021.
+www.aac-clyde.space
+#SPACEISAWESOME
+Performance
+Processing
+•	
+Low-power Flash-based FPGA
+•	
+V.35 IntelSAT scrambler
+•	
+½ rate convolutional encoding (K=7)
+•	
+Differential encoding
+•	
+Pulse shaping filter
+Interfaces
+•	
+Low-speed I2C Bus – 400 kHz (telemetry and 
+control) 
+•	
+High-speed SPI Bus – 4 MHz (payload data)
+•	
+50 Ω SMA connector
+Modulation
+•	
+QPSK or OQPSK
+•	
+IntelSAT IESS-308
+Dimensions
+Length
+96 mm
+Width 
+90 mm
+Height
+16.9 mm 
+*Height from top PCB to lowest component
+

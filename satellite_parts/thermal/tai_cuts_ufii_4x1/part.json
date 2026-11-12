@@ -81,6 +81,29 @@
   },
   "face_counts": {
    "part": 44
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "rope",
+     "color": [
+      0.72,
+      0.45,
+      0.2
+     ],
+     "file": "bodies/part__rope.stl"
+    },
+    {
+     "name": "fittings",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__fittings.stl"
+    }
+   ]
   }
  },
  "image": "preview.png",

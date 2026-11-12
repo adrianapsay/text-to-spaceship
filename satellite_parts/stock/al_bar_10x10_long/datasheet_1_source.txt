@@ -1,0 +1,2 @@
+url: https://ucpcdn.thyssenkrupp.com/_legacy/UCPthyssenkruppBAMXUK/assets.files/material-data-sheets/aluminium/aluminium-6061.pdf
+family datasheet: thyssenkrupp aluminium 6061 material data sheet (same alloy for every bar and plate size); copied from al_bar_20x10 on 2026-11-11

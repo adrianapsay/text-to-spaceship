@@ -1,0 +1,3 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-ecuadorian-space-agency-exa-hinges-micro-l-microsat-sized-hinges-with-integrated-locking-mechanism-iuktbh.pdf
+found from: https://satsearch.co/products/exa-hinges-micro-l-with-integrated-locking-mechanism
+downloaded on the lab laptop by harvest_catalogs.py (pass 6) on 2026-11-11

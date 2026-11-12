@@ -1,0 +1,212 @@
+{
+ "id": "craft_spacewire_router",
+ "name": "Craft Prospect Ltd SpaceWire Router",
+ "category": "avionics",
+ "subcategory": "obc",
+ "vendor": "Craft Prospect Ltd",
+ "model": "SpaceWire Router",
+ "dimensions_mm": {
+  "x": 88.0,
+  "y": 94.0,
+  "z": 11.5
+ },
+ "mass_g": 60.0,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-craft-prospect-ltd-spacewire-router-5lkyha.pdf",
+  "document": {
+   "title": "Craft Prospect Ltd SpaceWire Router data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-11",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Read from the vendor data sheet (datasheet-craft-prospect-ltd-spacewire-router-5lkyha.pdf): dimensions \"sweep (NASA GEVS) Random vibration (NASA GEVS) Size, Weight & Power Dimensions 88 x 94 x 11.5 mm Mass 60 g\"; mass \"s 88 x 94 x 11.5 mm Mass 60 g Powe\". Catalog page lists no mass. Electrical / RF values found in the data sheet or page text by pattern (quoted where possible).",
+  "found_via": "https://satsearch.co/products/craft-prospect-spacewire-router"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "electrical": {
+  "power_W": {
+   "nominal": 0.66
+  },
+  "quote": "Power consumption Idle: 0.66 W",
+  "voltage_V": {
+   "min": 6.0,
+   "max": 10.0
+  }
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   88.0,
+   94.0,
+   11.5
+  ],
+  "mesh_volume_mm3": 61588.4,
+  "watertight": true,
+  "render_kind": "pc104_board",
+  "effective_density_g_cm3": 0.974,
+  "bodies": {
+   "part": [
+    {
+     "name": "pcb",
+     "color": [
+      0.09,
+      0.42,
+      0.24
+     ],
+     "file": "bodies/part__pcb.stl"
+    },
+    {
+     "name": "stack_header",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__stack_header.stl"
+    },
+    {
+     "name": "components",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__components.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 732
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    88.0,
+    94.0,
+    11.5
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "pcb",
+     "color": [
+      0.09,
+      0.42,
+      0.24
+     ],
+     "file": "bodies_detail/pcb.stl"
+    },
+    {
+     "name": "standoffs",
+     "color": [
+      0.78,
+      0.62,
+      0.28
+     ],
+     "file": "bodies_detail/standoffs.stl"
+    },
+    {
+     "name": "stack_header",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/stack_header.stl"
+    },
+    {
+     "name": "header_pins",
+     "color": [
+      0.85,
+      0.66,
+      0.22
+     ],
+     "file": "bodies_detail/header_pins.stl"
+    },
+    {
+     "name": "shield",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/shield.stl"
+    },
+    {
+     "name": "ics",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/ics.stl"
+    },
+    {
+     "name": "passives",
+     "color": [
+      0.55,
+      0.45,
+      0.3
+     ],
+     "file": "bodies_detail/passives.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": "PC/104 stack",
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
+  "datasheet_url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-craft-prospect-ltd-spacewire-router-5lkyha.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

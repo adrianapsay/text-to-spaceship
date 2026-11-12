@@ -1,0 +1,3 @@
+url: https://www.terma.com/media/0m4hsarf/terma_t3_str_data_sheet.pdf
+found from: https://www.terma.com/media/0m4hsarf/terma_t3_str_data_sheet.pdf
+found by Claude (web search) on 2026-11-11; downloaded by fetch_pass5.py

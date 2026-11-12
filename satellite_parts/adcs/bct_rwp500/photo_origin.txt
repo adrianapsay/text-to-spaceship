@@ -1,0 +1,3 @@
+url: https://cdn.satsearch.com/product-images/satsearch_product-image_4klh27_bluecanyontech_rwp500.png
+method: image on page https://satsearch.co/products/bluecanyontech-rwp500
+found by Claude (web search) on 2026-11-11; downloaded by fetch_pass5.py

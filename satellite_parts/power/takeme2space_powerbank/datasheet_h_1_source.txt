@@ -1,0 +1,3 @@
+url: https://satcatalog.s3.amazonaws.com/components/3284/SatCatalog_-_TakeMe2Space_-_PowerBank_-_50Wh_Battery_Pack_-_Datasheet.pdf
+found from: https://satcatalog.com/component/powerbank-50wh-battery-pack/
+downloaded on the lab laptop by harvest_catalogs.py (pass 6) on 2026-11-11

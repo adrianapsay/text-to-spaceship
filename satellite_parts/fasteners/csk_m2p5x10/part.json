@@ -75,6 +75,29 @@
   },
   "face_counts": {
    "part": 332
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "head",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__head.stl"
+    },
+    {
+     "name": "shank",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__shank.stl"
+    }
+   ]
   }
  },
  "image": "preview.png",
@@ -88,11 +111,11 @@
  "reference_images": {
   "datasheets": [
    {
-    "file": "datasheet_2_page1.png",
-    "pdf": "datasheet_2.pdf",
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
     "kind": "web_search",
-    "url": "https://www.govinfo.gov/content/pkg/GOVPUB-C13-69771f6d5d6b56a5a54c8154a0af17c7/pdf/GOVPUB-C13-69771f6d5d6b56a5a54c8154a0af17c7.pdf",
-    "title": "OM85 basic properties of optical materials - GovInfo"
+    "url": "https://upmold.com/wp-content/uploads/Data-center/screw-technical-data-sheet.pdf",
+    "title": null
    }
   ],
   "stl_preview": "preview.png",

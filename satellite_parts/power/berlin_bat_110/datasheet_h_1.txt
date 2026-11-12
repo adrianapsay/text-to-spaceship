@@ -1,0 +1,112 @@
+ 
+  
+ 
+ 
+ 
+ 
+ 
+FURTHER INFORMATION   Max-Planck-Str. 3 | 12489 Berlin Germany | info@berlin-space-tech.com | www.berlin-space-tech.com 
+ 
+ 
+ 
+BAT-110  
+The BST BAT-110 is a modular battery system for small satellites. It is based on Lithium-Ferrite 
+(Li-Fe) cells. The BST’s Li-Fe battery technology offers 10x more cycle over Li-Io or Li-Po 
+batteries and is significantly less hazardous. The battery block is protected for over charging 
+(non-destructive), tolerant against deep discharge (non-destructive) and offers cell balancing. 
+It has a design life of 5 years lifetime in LEO  and its direct predecessor is space proven.     
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+BST Li-Fe Battery System  
+ 
+C H A R A C T E R I S T I C S 
+ 
+Size 
+240x119x87mm³ 
+Weight 
+3000g 
+Nominal Voltage 
+23.1V 
+Capacity 
+172Wh 
+Operating Temperature 
+-20°C to +40°C 
+Design Life 
+5 years LEO 
+Tested for >3,000 Cycles @ 0.5C/1C & 100% DoD 
+Space Heritage 
+Yes  
+Radiation Test (Co60) 
+30 krad 
+ 
+
+ 
+  
+ 
+ 
+ 
+ 
+ 
+FURTHER INFORMATION   Max-Planck-Str. 3 | 12489 Berlin Germany | info@berlin-space-tech.com | www.berlin-space-tech.com 
+ 
+ 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+DETAILED CAPABILITIES 
+ 
+Power Draw 
+ 
+Peak @ 4C 
+<690W 
+Recommended @ 1C  
+<170W 
+Deep Discharge Tolerance 
+non-destructive 
+external protection recommended (Schmitt trigger) 
+Charging 
+ 
+Peak  
+<2.5A per string 
+Recommended  
+<1.0A per string 
+Over Charge Protection 
+non-destructive & resettable shunt  
+Lifetime 
+ 
+Accelerated Lifetime Testing 
+3000 Cycles @ 1C charge / discharge & 100 % DoD 
+Result: <3% Capacity fade 
+Modularity 
+ 
+Voltage 
+23.1V standard 
+Scalable for 12V, 15V, 18V, 28V  
+Capacity 
+2.5Ah per string, 1-10 strings 
+ 
+

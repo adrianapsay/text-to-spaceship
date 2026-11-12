@@ -1,0 +1,35 @@
+ 
+ 
+T A K E M E 2 S P A C E 
+https:://tm2.space 
+CIN: U61900TS2024PTC186392 
+Air Torquers by TakeMe2Space 
+ 
+Description: 
+The TM2S-1-AT Air Torquer is designed for precise attitude control in CubeSat ADCS systems. 
+It efficiently generates dipole moment for orientation adjustments and is built for robust 
+performance. 
+ 
+Properties 
+   TM2S-1-AT 
+Dimension of AT 
+69.5 x 54 x 16 mm 
+Max current rating 
+400 mA 
+Max magnetic dipole moment 
+~0.22 Am²  
+Voltage 
+3.3 V 
+Weight 
+73 gm 
+Connector 
+2 pin Molex Pico blade 
+Operational Temperature 
+-40C to 120C 
+Air Torquer mount material 
+PEEK 
+Winding material 
+26 AWG Oxygen free high-conductivity 
+Annealed Copper coated with Silver 
+ 
+

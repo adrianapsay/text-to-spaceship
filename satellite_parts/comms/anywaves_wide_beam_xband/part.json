@@ -91,6 +91,50 @@
   },
   "face_counts": {
    "part": 28
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    100.0,
+    100.0,
+    16.1
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.1
+   ],
+   "bodies": [
+    {
+     "name": "ground_plate",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies_detail/ground_plate.stl"
+    },
+    {
+     "name": "patches",
+     "color": [
+      0.72,
+      0.45,
+      0.2
+     ],
+     "file": "bodies_detail/patches.stl"
+    },
+    {
+     "name": "feeds",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/feeds.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",
@@ -111,13 +155,6 @@
     "kind": "web_search",
     "url": "https://content.anywaves.com/hubfs/Anywaves-Datasheets/PORTFOLIO-ANYWAVES_compressed.pdf",
     "title": "Portfolio TT&C - Anywaves"
-   },
-   {
-    "file": "datasheet_2_page1.png",
-    "pdf": "datasheet_2.pdf",
-    "kind": "web_search",
-    "url": "https://anywaves.com/wp-content/uploads/2026/02/EN_9100-ENG-10000446366-MSC-ACCREDIA-FRA-3-2026-01-14.pdf",
-    "title": "Space Antenna & RF Electronics Datasheets - Anywaves"
    }
   ],
   "stl_preview": "preview.png",

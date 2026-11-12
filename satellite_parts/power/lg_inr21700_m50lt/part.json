@@ -1,0 +1,142 @@
+{
+ "id": "lg_inr21700_m50lt",
+ "name": "LG INR21700 M50LT cylindrical Li-ion cell (18.2 Wh)",
+ "category": "power",
+ "subcategory": "cell",
+ "vendor": "LG Energy Solution",
+ "model": "INR21700 M50LT",
+ "dimensions_mm": {
+  "x": 21.44,
+  "y": 21.44,
+  "z": 70.65
+ },
+ "mass_g": 68.2,
+ "source": {
+  "type": "datasheet",
+  "url": "https://evwest.com/support/21700_M50LT_datasheet.pdf",
+  "document": {
+   "title": "LG INR21700 M50LT product specification (preliminary)",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "Diameter <= 21.44 mm, height <= 70.65 mm, weight with tube and washer 68.2 +- 1.0 g (marked TBD in this preliminary specification), 18.2 Wh nominal, 3.69 V average, charge 0 to 45 C, discharge -20 to 55 C."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "South Korea",
+ "distributors": [
+  "distributors"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "distributor",
+  "source": null
+ },
+ "mass_note": "preliminary specification value",
+ "electrical": {
+  "energy_Wh": 18.2,
+  "voltage_V": {
+   "nominal": 3.69
+  }
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -20,
+   "max": 55
+  }
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   21.44,
+   21.38,
+   70.65
+  ],
+  "mesh_volume_mm3": 24917.7,
+  "watertight": true,
+  "render_kind": "cell_18650",
+  "effective_density_g_cm3": 2.737,
+  "bodies": {
+   "part": [
+    {
+     "name": "can",
+     "color": [
+      0.85,
+      0.72,
+      0.3
+     ],
+     "file": "bodies/part__can.stl"
+    },
+    {
+     "name": "positive_cap",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__positive_cap.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 332
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "can",
+     "color": [
+      0.85,
+      0.72,
+      0.3
+     ],
+     "file": "bodies/part__can.stl"
+    },
+    {
+     "name": "positive_cap",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__positive_cap.stl"
+    }
+   ]
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 3.69
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://evwest.com/support/21700_M50LT_datasheet.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

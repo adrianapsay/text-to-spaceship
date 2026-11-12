@@ -8,29 +8,29 @@
  "dimensions_mm": {
   "x": 18.4,
   "y": 18.4,
-  "z": 65.1
+  "z": 65.0
  },
  "mass_g": 48.0,
  "source": {
-  "type": "unverified",
+  "type": "datasheet",
   "url": "https://cdn.shopify.com/s/files/1/0481/9678/0183/files/samsung_30q_data_sheet.pdf",
   "document": {
-   "title": "Samsung SDI INR18650-30Q datasheet (mirror indexed at https://www.18650batterystore.com/pages/data-sheets)",
+   "title": "Samsung SDI specification INR18650-30Q, version 0.0 (March 2014)",
    "revision": null,
-   "date": null
+   "date": "2026-11-11"
   },
   "accessed": "2026-11-08",
-  "fields_from_source": [],
-  "notes": "Datasheet link recorded but not opened from this session; diameter, length, mass, capacity and current are from memory of the datasheet and must be checked against the PDF (max dimensions, typical mass)."
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "Diameter 18.33 +/- 0.07 mm, height 64.85 +/- 0.15 mm (maxima 18.40 x 65.00 used), 48.0 g max. 3000 mAh nominal, 3.6 V, 15 A maximum continuous discharge, 4 A rapid charge. Charge 0 to 50 C, discharge -20 to 75 C (surface)."
  },
  "status": "in_production",
  "fidelity": "envelope",
  "vendor_country": "Korea",
- "distributors": [
-  "18650batterystore",
-  "Digi-Key (some)",
-  "cell distributors"
- ],
  "electrical": {
   "chemistry": "Li-ion 18650",
   "capacity_mAh": 3000,
@@ -50,16 +50,23 @@
  },
  "cost_note": "typical single-cell retail, approximate",
  "cost_basis_note": "approximate",
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -20,
+   "max": 75
+  }
+ },
+ "status_note": "stocked by nkon (2023 production lot), Buerklin, Rapid (web search 2026-11-11)",
  "geometry": {
   "measured_bbox_mm": [
    18.4,
    18.35,
-   65.1
+   65.0
   ],
-  "mesh_volume_mm3": 16882.2,
+  "mesh_volume_mm3": 16855.7,
   "watertight": true,
   "render_kind": "cell_18650",
-  "effective_density_g_cm3": 2.843,
+  "effective_density_g_cm3": 2.848,
   "bodies": {
    "part": [
     {
@@ -84,6 +91,29 @@
   },
   "face_counts": {
    "part": 332
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "can",
+     "color": [
+      0.85,
+      0.72,
+      0.3
+     ],
+     "file": "bodies/part__can.stl"
+    },
+    {
+     "name": "positive_cap",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__positive_cap.stl"
+    }
+   ]
   }
  },
  "image": "preview.png",
@@ -101,7 +131,7 @@
     "pdf": null,
     "url": "https://cdn.shopify.com/s/files/1/0481/9678/0183/files/samsung_30q_data_sheet.pdf",
     "kind": "vendor_link",
-    "title": "Samsung SDI INR18650-30Q datasheet (mirror indexed at https://www.18650batterystore.com/pages/data-sheets)"
+    "title": "Samsung SDI specification INR18650-30Q, version 0.0 (March 2014)"
    },
    {
     "file": "datasheet_1_page1.png",

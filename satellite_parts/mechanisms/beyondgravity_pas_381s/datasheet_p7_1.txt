@@ -1,0 +1,89 @@
+Beyond Gravity │ Launchers
+beyondgravity.com
+Low Shock Satellite Separation System for 
+your mission.
+The Beyond Gravity 381S Separation System is the smallest member of our family of Low 
+Shock Separation Systems designed for interfacing small sized spacecraft with Launcher 
+Vehicles. It has been developed to fit the ESPA 15” adapter interface.
+PAS 381S (15”) 
+Separation System
+
+Internal Code/Doc.No
+1146555
+This document remains the intellectual property of Beyond Gravity Sweden AB and may not be copied, 
+or used without their prior written approval.
+beyondgravity.com
+Beyond Gravity | Launchers
+The Separation System includes a low shock clamp band separation system, interface rings, umbilical connection 
+and a separation spring set. With our CBOD-LT™ Separation System Release Mechanism we can provide the 
+unique combination of high load capability and a low shock release.
+Building on heritage and reliability
+The PAS 381S Separation System is based on the 
+already flight proven systems at Beyond Gravity. 
+Developed for over 30 years, the Beyond Gravity Space 
+product family to date includes a broad range of 
+Separation Systems, spanning diameters from 360mm 
+to 2624mm (14” to 103”).
+Our Separation Systems have an outstanding flight 
+record. To date more than 660 in-orbit separations 
+have been carried out with a success rate of 100%! Our 
+customer base includes launch service providers, 
+satellite builders, government entities and national 
+space agencies. We work closely with the customers 
+during the spacecraft design phase to establish a fully 
+compatible design.
+
+Internal Code/Doc.No
+1146555
+This document remains the intellectual property of Beyond Gravity Sweden AB and may not be copied, 
+or used without their prior written approval.
+Beyond Gravity | Launchers 
+launchers@beyondgravity.com | launchers.usa@beyondgravity.com 
+beyondgravity.com
+Beyond Gravity | Launchers
+Main characteristics of PAS 381S
+Unit
+Value 
+Bolt pretension (nominal)
+kN
+11
+Mass
+Total 1)
+kg
+3.7
+Separated mass 
+kg
+0.98
+Dimensions
+Height 2)
+mm
+79
+I/F
+Passive ring
+24 x 1/4 inch bolts placed on a
+diameter of 381 mm (15 inch ESPA I/F)
+Active ring
+24 x 1/4 inch bolts placed on a
+diameter of 381 mm (15 inch ESPA I/F)
+Initiator type
+Pacific Scientific 103377-449 
+Hi-Shear PC23-250
+ASI PD22240024-009
+USI 1F01084-1
+Separation springts
+No. of springs
+pcs
+4 to 24
+Spring energy 3)
+Joule
+1.1
+Release type
+Low shock < 100 g's @ 1 kHz
+Shock output
+Low shock < 100 g‘s @ 1 kHz
+
+1) Mass of the standard system including passive ring. Can be optimized to meet specific needs.
+2) Height includes separation springs, active and passive rings.
+3) Energy per spring.
+Illustrative Drawing and Nominal Release Envelopes
+

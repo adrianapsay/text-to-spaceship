@@ -1,0 +1,1702 @@
+Sales Information
+Phone:(425) 353-3010
+Fax: (425) 353-4030
+SVSA2800S - 14.0
+E-mail: vptsales@vptpower.com
+Web: www.vptpower.com
+Page 1
+SVSA2800S SERIES
+SPACE QUALIFIED HYBRID DC-DC CONVERTERS
+SVSA2800S – Exact marking may differ from that shown
+Models Available
+Input: 15 V to 50 V continuous, 80 V transient
+Single output: +3.3 V, +5 V, +5.2 V, +7V, +12 V, +15 V
+Wattage: 4 – 6 W
+MIL-PRF-38534: Class H and Class K, RHA level L
+1.0 DESCRIPTION
+The SVSA Series of space qualified DC-DC converters is 
+specifically designed for the harsh radiation environment of 
+space applications. Performance is guaranteed through the use 
+of hardened semiconductor components, radiation lot 
+acceptance testing (RLAT) of non-hardened components, and 
+analysis. The SVSA Series has been characterized for Total 
+Ionizing Dose (TID) performance including Enhanced Low Dose 
+Rate Sensitivity (ELDRS) and for Single Event Effects (SEE) 
+according to VPT’s DLA-approved Radiation Hardness 
+Assurance (RHA) plan per MIL-PRF-38534, Appendix G, 
+Level P. Characterization is performed at both the component 
+level and at the SVSA Series hybrid converter level. 
+The SVSA Series of DC-DC converters is radiation tolerant and 
+suited for use in low Earth orbit (LEO), medium Earth orbit 
+(MEO), geostationary orbit (GEO), deep space, and launch 
+vehicle programs.
+1.1 FEATURES
+• Up to 6 W output power
+• Wide input voltage range: 15 V to 50 V plus 80 V transient
+• Continuous operation over full military temperature range of 
+-55 °C to +125 °C with no power derating
+• Very low output noise
+• Radiation immune magnetic feedback circuit
+• No use of optoisolators
+• Undervoltage lockout
+• Current limit protection / short circuit protection
+1.2 SPACE LEVEL CHARACTERIZATIONS
+• Guaranteed TID performance to 60 krad(Si) including LDR
+• SEE performance to 44 MeV/mg/cm2. Transients are fully 
+characterized for cross section and magnitude
+• Worst-case analysis, stress, radiation, reliability reports available
+1.3 MANUFACTURING AND COMPLIANCE
+• Qualified to MIL-PRF-38534 Class H 
+DLA SMD # 5962-11219
+• MIL-PRF-38534 element evaluated components
+• MIL-STD-461 when used with appropriate VPT EMI filter 
+• Manufactured in an ISO9001, MIL-PRF-38534 Class H and Class K 
+facility
+• MIL-STD-883
+1.4 PACKAGING
+• Low-profile: 1.075” x 1.075” x 0.270” 
+• Max weight: 20 g
+• Industry standard pinout
+• Precision projection-welded hermetic metal case
+• Flanged and Non-flanged versions available
+1.5 ACCESSORIES
+• DVMA28 EMI Filter
+• Use with Thermal Pad TP-005
+
+Sales Information
+Phone:(425) 353-3010
+Fax: (425) 353-4030
+SVSA2800S - 14.0
+E-mail: vptsales@vptpower.com
+Web: www.vptpower.com
+Page 2
+SVSA2800S Series
+2.0 DIAGRAMS
+2.1 BLOCK DIAGRAM
+2.2 CONNECTION DIAGRAM
+3.0 SPECIFICATIONS
+3.1 ABSOLUTE MAXIMUM RATINGS 
+Absolute Maximum Ratings
+Input Voltage (Continuous):
+-0.5 V to 50 V
+Operating Temperature (Full Load):
+-55 °C to +125 °C
+Input Voltage (Transient, 1 second):
+-0.5 V to 80 V
+Storage Temperature:
+-65 °C to +150 °C
+ESD Rating per MIL-PRF-38534:
+3B
+Lead Solder Temperature (10 seconds):
+270 °C
+UNDER
+VOLTAGE
+SHUTDOWN
+PRIMARY
+HOUSEKEEPING
+SUPPLY
+PWM
+CONTROL
+VOLTAGE AND
+CURRENT
+AMPLIFIERS
+28V IN
+IN COM
+L1
+C1
+Q1
+Rs1
+T1
+D1
+C2
+Rs2
++V OUT
+INH
+FEEDBACK
+MAGNETIC
+OUT COM
+SECONDARY
+HOUSEKEEPING
+SUPPLY
+7
+INCOM
+5
+INH
+6
+28VIN
+1
++VOUT
+2
+OUTCOM
+LOAD
++-
+28 Vdc
+2
+28VOUT
+4
+OUTCOM
+1
+28VIN
+5
+INCOM
+3
+DVMA28 EMI FILTER
+8
+SVSA2800S DC-DC CONVERTER
+CASE
+
+Sales Information
+Phone:(425) 353-3010
+Fax: (425) 353-4030
+SVSA2800S - 14.0
+E-mail: vptsales@vptpower.com
+Web: www.vptpower.com
+Page 3
+SVSA2800S Series
+3.2 PERFORMANCE SPECIFICATIONS
+Tcase = -55 °C to +125 °C, Vin = +28 V ± 5%, Full Load, Unless Otherwise Specified
+SVSA283R3S
+SVSA2805S
+Parameter
+Conditions
+Min
+Typ
+Max
+Min
+Typ
+Max
+Units
+INPUT
+Voltage
+Continuous
+15
+28
+50
+15
+28
+50
+V
+Transient, 1 sec2
+-
+-
+80
+-
+-
+80
+V
+Current
+INH < 1.5 V
+-
+4
+6
+-
+4
+6
+mA
+No Load
+-
+45
+60
+-
+45
+60
+mA
+Ripple Current
+20 Hz to 10 MHz
+-
+25
+50
+-
+30
+50
+mApp
+Undervoltage Lockout
+Turn-On
+12
+-
+14.8
+12
+-
+14.8
+V
+Turn-Off2
+11
+-
+14.5
+11
+-
+14.5
+V
+OUTPUT STATIC
+Voltage
+Tcase = 25 °C
+3.267
+3.3
+3.333
+4.95
+5
+5.05
+V
+Tcase = -55 °C to +125 °C
+3.25
+3.3
+3.35
+4.925
+5
+5.075
+V
+Power4
+0
+-
+4
+0
+-
+5
+W
+Current4
+0
+-
+1.21
+0
+-
+1
+A
+Ripple Voltage
+20 Hz to 10 MHz
+-
+-
+30
+-
+-
+30
+mVpp
+Line Regulation
+Vin = 15 V to 50 V
+-
+-
+15
+-
+-
+15
+mV
+Load Regulation
+No Load to Full Load
+-
+-
+50
+-
+-
+50
+mV
+Load Fault Power Dissipation
+Overload2
+-
+-
+3.3
+-
+-
+3.3
+W
+Short Circuit
+-
+-
+3
+-
+-
+3
+W
+OUTPUT DYNAMIC
+Load Step, Half to Full Load
+Output Transient
+-
+200
+300
+-
+200
+500
+mVpk
+Recovery1
+-
+450
+700
+-
+450
+700
+µs
+Line Step2, Vin = 16V to 40 V
+Output Transient
+-
+250
+500
+-
+350
+700
+mVpk
+Recovery1
+-
+600
+1200
+-
+600
+1200
+µs
+Turn-On, Vin = 0 to 28 V
+Delay 
+-
+10
+20
+-
+10
+20
+ms
+Overshoot 
+-
+0
+15
+-
+0
+25
+mVpk
+FUNCTION
+INH Pin Input2
+Output Inhibited
+0
+-
+1.5
+0
+-
+1.5
+V
+INH Pin Open Circuit Voltage2
+Output Enabled
+9
+11
+13
+9
+11
+13
+V
+GENERAL
+Efficiency
+62
+65
+-
+65
+68
+-
+%
+Capacitive Load2
+-
+-
+1000
+-
+-
+1000
+µF
+Switching Frequency
+350
+450
+500
+350
+450
+500
+kHz
+Isolation
+500 V DC, Tcase = 25 °C
+100
+-
+-
+100
+-
+-
+MΩ
+Non-Flanged package option
+-
+-
+15
+-
+-
+15
+Weight
+Flanged package option
+-
+-
+20
+-
+-
+20
+g
+MTBF (MIL-HDBK-217F) 5
+SF @ Tcase = 55 °C
+-
+1.36
+-
+-
+1.36
+-
+MHr
+POST-RAD END-OF-LIFE LIMITS3
+Input Ripple Current
+-
+-
+100
+-
+-
+100
+mApp
+Output Voltage
+Tcase = -55 °C to +125 °C
+3.244
+-
+3.35
+4.89
+-
+5.1
+V
+1. Time for output voltage to settle within 1% of steady-state value.
+2. Verified by initial electrical design verification. Post design verification, parameter shall be guaranteed to the limits specified.
+3. End-of-Life performance includes aging and radiation degradation and is within standard limits except where noted.
+4.   Derate linearly to 0 at 135 °C.
+5.   Correction factor of 0.12 added to ceramic capacitors. 
+
+Sales Information
+Phone:(425) 353-3010
+Fax: (425) 353-4030
+SVSA2800S - 14.0
+E-mail: vptsales@vptpower.com
+Web: www.vptpower.com
+Page 4
+SVSA2800S Series
+3.2 PERFORMANCE SPECIFICATIONS (CONTINUED)
+Tcase = -55 °C to +125 °C, Vin = +28 V ± 5%, Full Load, Unless Otherwise Specified
+SVSA285R2S
+SVSA2807S
+Parameter
+Conditions3
+Min
+Typ
+Max
+Min
+Typ
+Max
+Units
+INPUT
+Voltage
+Continuous
+15
+28
+50
+15
+28
+50
+V
+Transient, 1 sec2
+-
+-
+80
+-
+-
+80
+V
+Current
+INH < 1.5 V
+-
+4
+6
+-
+4
+6
+mA
+No Load
+-
+45
+60
+-
+45
+60
+mA
+Ripple Current
+20 Hz to 10 MHz
+-
+30
+50
+-
+30
+50
+mApp
+Undervoltage Lockout
+Turn-On
+12
+-
+14.8
+12
+-
+14.8
+V
+Turn-Off2
+11
+-
+14.5
+11
+-
+14.5
+V
+OUTPUT STATIC
+Voltage
+Tcase = 25 °C
+5.148
+5.2
+5.252
+6.93
+7
+7.07
+V
+Tcase = -55 °C to +125 °C
+5.122
+5.2
+5.278
+6.895
+7
+7.105
+V
+Power4
+0
+-
+5.2
+0
+-
+5
+W
+Current4
+0
+-
+1
+0
+-
+0.71
+A
+Ripple Voltage
+20 Hz to 10 MHz
+-
+10
+30
+-
+10
+30
+mVpp
+Line Regulation
+Vin = 15 V to 50 V
+-
+2
+15
+-
+2
+15
+mV
+Load Regulation
+No Load to Full Load
+-
+15
+50
+-
+5
+50
+mV
+Load Fault Power Dissipation
+Overload2
+-
+-
+3.3
+-
+-
+3
+W
+Short Circuit
+-
+-
+3
+-
+-
+3
+W
+OUTPUT DYNAMIC
+Load Step, Half to Full Load
+Output Transient
+-
+200
+500
+-
+550
+900
+mVpk
+Recovery1
+-
+450
+700
+-
+620
+950
+µs
+Line Step2, Vin = 16V to 40 V
+Output Transient
+-
+350
+700
+-
+900
+1200
+mVpk
+Recovery1
+-
+600
+1200
+-
+600
+1200
+µs
+Turn-On, Vin = 0 to 28 V
+Delay 
+-
+10
+20
+-
+10
+20
+ms
+Overshoot 
+-
+0
+25
+-
+0
+50
+mVpk
+FUNCTION
+INH Pin Input2
+Output Inhibited
+0
+-
+1.5
+0
+-
+1.5
+V
+INH Pin Open Circuit Voltage2
+Output Enabled
+9
+11
+13
+9
+11
+13
+V
+GENERAL
+Efficiency
+65
+68
+-
+67
+70
+-
+%
+Capacitive Load2
+-
+-
+1000
+-
+-
+500
+µF
+Switching Frequency
+350
+450
+500
+350
+450
+500
+kHz
+Isolation
+500 V DC, Tcase = 25 °C
+100
+-
+-
+100
+-
+-
+MΩ
+Non-Flanged package option
+-
+-
+15
+-
+-
+15
+Weight
+Flanged package option
+-
+-
+20
+-
+-
+20
+g
+MTBF (MIL-HDBK-217F) 5
+SF @ Tcase = 55 °C
+-
+1.36
+-
+-
+1.36
+-
+MHr
+POST-RAD END-OF-LIFE LIMITS3
+Input Ripple Current
+-
+-
+100
+-
+-
+100
+mApp
+Output Voltage
+Tcase = -55 °C to +125 °C
+5.08
+-
+5.3
+6.85
+-
+7.14
+V
+1. Time for output voltage to settle within 1% of steady-state value.
+2. Verified by initial electrical design verification. Post design verification, parameter shall be guaranteed to the limits specified.
+3. End-of-Life performance includes aging and radiation degradation and is within standard limits except where noted.
+4.   Derate linearly to 0 at 135 °C.
+5.   Correction factor of 0.12 added to ceramic capacitors. 
+
+Sales Information
+Phone:(425) 353-3010
+Fax: (425) 353-4030
+SVSA2800S - 14.0
+E-mail: vptsales@vptpower.com
+Web: www.vptpower.com
+Page 5
+SVSA2800S Series
+3.2 PERFORMANCE SPECIFICATIONS (CONTINUED)
+Tcase = -55 °C to +125 °C, Vin = +28 V ± 5%, Full Load, Unless Otherwise Specified
+SVSA2812S
+SVSA2815S
+Parameter
+Conditions3
+Min
+Typ
+Max
+Min
+Typ
+Max
+Units
+INPUT
+Voltage
+Continuous
+15
+28
+50
+15
+28
+50
+V
+Transient, 1 sec2
+-
+-
+80
+-
+-
+80
+V
+Current
+INH < 1.5 V
+-
+4
+6
+-
+4
+6
+mA
+No Load
+-
+45
+60
+-
+45
+60
+mA
+Ripple Current
+20 Hz to 10 MHz
+-
+30
+50
+-
+30
+50
+mApp
+Undervoltage Lockout
+Turn-On
+12
+-
+14.8
+12
+-
+14.8
+V
+Turn-Off2
+11
+-
+14.5
+11
+-
+14.5
+V
+OUTPUT STATIC
+Voltage
+Tcase = 25 °C
+11.88
+12
+12.12
+14.85
+15
+15.15
+V
+Tcase = -55 °C to +125 °C
+11.82
+12
+12.18
+14.775
+15
+15.225
+V
+Power4
+0
+-
+6
+0
+-
+6
+W
+Current4
+0
+-
+0.5
+0
+-
+0.4
+A
+Ripple Voltage
+20 Hz to 10 MHz
+-
+10
+30
+-
+10
+30
+mVpp
+Line Regulation
+Vin = 15 V to 50 V
+-
+2
+15
+-
+2
+15
+mV
+Load Regulation
+No Load to Full Load
+-
+5
+50
+-
+5
+50
+mV
+Load Fault Power Dissipation
+Overload2
+-
+-
+3
+-
+-
+3
+W
+Short Circuit
+-
+-
+3
+-
+-
+3
+W
+OUTPUT DYNAMIC
+Load Step, Half to Full Load
+Output Transient
+-
+300
+700
+-
+300
+700
+mVpk
+Recovery1
+-
+200
+400
+-
+200
+400
+µs
+Line Step2, Vin = 16V to 40 V
+Output Transient
+-
+700
+1200
+-
+700
+1300
+mVpk
+Recovery1
+-
+200
+600
+-
+200
+600
+µs
+Turn-On, Vin = 0 to 28 V
+Delay 
+-
+10
+20
+-
+10
+20
+ms
+Overshoot 
+-
+0
+50
+-
+0
+50
+mVpk
+FUNCTION
+INH Pin Input2
+Output Inhibited
+0
+-
+1.5
+0
+-
+1.5
+V
+INH Pin Open Circuit Voltage2
+Output Enabled
+9
+11
+13
+9
+11
+13
+V
+GENERAL
+Efficiency
+71
+76
+-
+72
+78
+-
+%
+Capacitive Load2
+-
+-
+500
+-
+-
+500
+µF
+Switching Frequency
+350
+450
+500
+350
+450
+500
+kHz
+Isolation
+500 V DC, Tcase = 25 °C
+100
+-
+-
+100
+-
+-
+MΩ
+Non-flanged package option
+-
+-
+15
+-
+-
+15
+Weight
+Flanged package option
+-
+-
+20
+-
+-
+20
+g
+MTBF (MIL-HDBK-217F) 5
+SF @ Tcase = 55 °C
+-
+1.36
+-
+-
+1.36
+-
+MHr
+POST-RAD END-OF-LIFE LIMITS3
+Input Ripple Current
+-
+-
+100
+-
+-
+100
+mApp
+Output Voltage
+Tcase = -55 °C to +125 °C
+11.66
+-
+12.3
+14.565
+-
+15.4
+V
+1. Time for output voltage to settle within 1% of steady-state value.
+2. Verified by initial electrical design verification. Post design verification, parameter shall be guaranteed to the limits specified.
+3. End-of-Life performance includes aging and radiation degradation and is within standard limits except where noted.
+4.   Derate linearly to 0 at 135 °C.
+5.   Correction factor of 0.12 added to ceramic capacitors. 
+
+Sales Information
+Phone:(425) 353-3010
+Fax: (425) 353-4030
+SVSA2800S - 14.0
+E-mail: vptsales@vptpower.com
+Web: www.vptpower.com
+Page 6
+SVSA2800S Series
+4.0 PERFORMANCE CURVES
+4.1.1
+SVSA283R3S Efficiency (Typical, 25 °C)
+4.1.2
+SVSA2805S Efficiency (Typical, 25 °C)
+4.1.3
+SVSA285R2S Efficiency (Typical, 25 °C)
+4.1.4
+SVSA2807S Efficiency (Typical, 25 °C)
+4.1.5
+SVSA2812S Efficiency (Typical, 25 °C)
+4.1.6
+SVSA2815S Efficiency (Typical, 25 °C)
+40
+44
+48
+52
+56
+60
+64
+68
+72
+0
+1
+2
+3
+4
+5
+15 V
+28 V
+50 V
+Efficiency (%)
+Output Power (W)
+40
+45
+50
+55
+60
+65
+70
+75
+0
+1
+2
+3
+4
+5
+15 V
+28 V
+50 V
+Efficiency (%)
+Output Power (W)
+
+Sales Information
+Phone:(425) 353-3010
+Fax: (425) 353-4030
+SVSA2800S - 14.0
+E-mail: vptsales@vptpower.com
+Web: www.vptpower.com
+Page 7
+SVSA2800S Series
+5.0 MECHANICAL OUTLINES AND PINOUT
+Non-Flanged Package Option:
+1. Tolerances are ±0.005” unless otherwise stated.
+2. Case temperature is measured on the center of the baseplate surface.
+3. Materials: Case (Steel, gold over nickel plated); Cover (Steel, nickel plated); Pin (Copper-cored alloy 52, gold over nickel plated); Pin Seals (Glass).
+Pin
+Function
+Pin
+Function
+Pin
+Function
+1
++VOUT
+4
+NC
+7
+INCOM
+2
+OUTCOM
+5
+INH
+8
+CASE
+3
+NC
+6
+28VIN
+1.075in 27.31mm MAX
+1.075in 27.31mm MAX
+PIN 1
+8X PIN
+0.025in±0.002
+0.64mm±0.05
+7X SEAL
+0.070in±0.002
+1.78mm±0.05
+0in 0mm
+0.132in 3.35mm
+0.200in 5.08mm
+0.600in 15.24mm
+0.800in 20.32mm
+0.400in 10.16mm
+0in 0mm
+0.132in 3.35mm
+0.800in 20.32mm
+1
+2
+3
+4
+5
+6
+7
+8
+BASEPLATE
+SURFACE
+0.270in 6.86mm MAX
+0.200in±0.010
+5.08mm±0.25
+
+Sales Information
+Phone:(425) 353-3010
+Fax: (425) 353-4030
+SVSA2800S - 14.0
+E-mail: vptsales@vptpower.com
+Web: www.vptpower.com
+Page 8
+SVSA2800S Series
+5.0 MECHANICAL OUTLINES AND PINOUT (CONTINUED)
+        Flanged Package Option:
+ 
+1. Tolerances are ±0.005” unless otherwise stated.
+2. Case temperature is measured on the center of the baseplate surface.
+3.   Mounting holes are not threaded. Recommended fastener is #4-40 screw.
+4. Materials: Case (Steel, gold over nickel plated); Cover (Steel, nickel plated); Pin (Copper-cored alloy 52, gold over nickel plated); Pin Seals (Glass).
+Pin
+Function
+Pin
+Function
+Pin
+Function
+1
++VOUT
+4
+NC
+7
+INCOM
+2
+OUTCOM
+5
+INH
+8
+CASE
+3
+NC
+6
+28VIN
+
+Sales Information
+Phone:(425) 353-3010
+Fax: (425) 353-4030
+SVSA2800S - 14.0
+E-mail: vptsales@vptpower.com
+Web: www.vptpower.com
+Page 9
+SVSA2800S Series
+6.0 TECHNICAL NOTES
+Please note that many of these functions are also demonstrated in detail on the VPT website in the form of technical video labs.
+6.1 GENERAL INFORMATION
+6.1.1 Topology Description
+The SVSA2800S Series is an isolated, single output, flyback converter. It operates over a wide input voltage range and provides a 
+tightly regulated positive output voltage with respect to the OUTCOM pin. Feedback isolation is accomplished using VPT’s proprietary 
+magnetic feedback technology. The converter regulates with zero load, and no minimum load is required. 
+6.1.2 External Components
+The SVSA2800S Series is designed to operate stand-alone in most applications. It does not require any external components for 
+proper operation or to meet the datasheet specifications. Input and output L-C filters are provided internally for low ripple and noise. To 
+further reduce output ripple and noise, a small ceramic capacitor, 1 µF to 10 µF, can be added at the output. Most application specific 
+ripple requirements can be met with the addition of output capacitors alone. External output capacitance can be added up to the 
+maximum listed in Section 3.2.
+6.1.3 Source Impedance
+The impedance of the 28 V input source can interact with the DC-DC converter and can affect performance. High source impedance is 
+often caused by a long input cable or components added in series with the input. Source resistance will cause a DC voltage drop as the 
+converter draws DC input current. This voltage drop is simply the cable resistance multiplied by the input current at low line. The 
+voltage drop and the actual voltage at the input to the converter will determine the minimum source voltage at which the converter will 
+operate. A high source inductance can interact with the feedback control loop of the converter. VPT’s EMI filters will usually isolate the 
+source and eliminate this problem. In some cases, additional input capacitance will be needed to stabilize the system.
+6.1.4 Output Configurations
+Since the converter is isolated, the output can be configured as a positive or negative voltage. For example, the SVSA2812S model can 
+provide +12 V referenced to OUTCOM or -12 V referenced to +VOUT. 
+The outputs of multiple converters can be stacked in series to provide higher voltages. When outputs of multiple modules are stacked, 
+they naturally share the load. For example, two SVSA2812S converters can be stacked to provide a 24 V output at 12 W.
+6.2 FUNCTION DESCRIPTIONS
+6.2.1 On/Off Control (Inhibit) 
+The INH (Inhibit) pin is a primary-side control pin referenced to INCOM. The INH 
+pin must be driven using an open collector or open drain configuration. Pulling the 
+INH pin low disables the converter output, removes bias voltage from internal 
+control circuitry, and puts the converter in a state of minimum input current draw. 
+Leaving INH open enables the output, allowing the converter to operate normally. 
+The pin must be pulled below 1.5 V to disable the output. An optional capacitor 
+from INH to INCOM may be used to delay turn-on. The INH pin should be left 
+open if not used. 
+7
+IN COM
+5
+INH
+6
+28V IN
+OPTIONAL
+CAPACITOR
+BIAS
+12V
+10K
+
+Sales Information
+Phone:(425) 353-3010
+Fax: (425) 353-4030
+SVSA2800S - 14.0
+E-mail: vptsales@vptpower.com
+Web: www.vptpower.com
+Page 10
+SVSA2800S Series
+6.3 PROTECTION FEATURES
+6.3.1 Input Undervoltage Lockout
+The SVSA2800S Series provides input undervoltage lockout protection. For input voltages below the turn-on voltage, the converter will 
+remain off, drawing minimal current from the source. When the input voltage exceeds the turn-on voltage, the converter will start. The 
+lockout circuit is designed to tolerate slow ramping input voltage waveforms. VPT’s proprietary magnetic feedback technology provides 
+bias voltage to all secondary control circuits and control amplifiers before the output starts, ensuring a well-controlled start up 
+sequence.
+6.3.2 Output Soft Start
+The SVSA2800S Series utilizes an output soft-start function to ramp the output in a controlled manner, eliminating output voltage 
+overshoot and limiting inrush current at turn on. A voltage-mode soft-start ensures the output waveform remains consistent regardless 
+of changes in the load current. The output rise time is approximately 8 ms. The soft-start function is active whether the module is turned 
+on with an application of input voltage or from release of the inhibit pin. Under normal conditions, current drawn from the source during 
+turn-on will not exceed the full-load input current. The turn-on delay time is specified from the application of input voltage (or release of 
+the inhibit pin) until the output reaches 90% of its final value.
+6.3.3 Output Overcurrent Protection
+The SVSA2800S Series provides output overcurrent and output short circuit protection. During a load fault condition, a constant output 
+current control circuit reduces the converter duty cycle to limit the output current to approximately 125% its rated value. The converter 
+will continue to provide constant current into any overload or short circuit condition. This feature allows the converter to start into any 
+capacitive load. Recovery is automatic and immediate upon removal of the fault condition. Sustained short circuit or overload operation 
+can cause excessive power dissipation. Care should be taken to control the operating temperature of the converter in this condition.
+6.4 THERMAL CONSIDERATIONS
+The SVSA2800S Series is rated for full power operation at 125 °C. Operation above 125 °C is allowed at reduced power. Specifically, 
+the output power should be derated linearly from full power at 125 °C to half power at 130 °C and to zero power at 135 °C. The 
+operating temperature of the converter is specified on the baseplate of the converter. The converter is designed to be conduction-
+cooled, with the baseplate mounted to a heat sink, chassis, PCB or other thermal surface. The internal power dissipating components 
+are mounted to the baseplate of the converter and all heat flow is through the baseplate and mounting flanges. The lid of the converter 
+does not provide a good thermal path. 
+The hybrid DC-DC converter contains many semiconductor components. The maximum temperature rise from junction to case is 
+10 °C at full load. 
+
+Sales Information
+Phone:(425) 353-3010
+Fax: (425) 353-4030
+SVSA2800S - 14.0
+E-mail: vptsales@vptpower.com
+Web: www.vptpower.com
+Page 11
+SVSA2800S Series
+6.5 RADIATION HARDNESS ASSURANCE
+VPT takes a conservative approach to radiation testing to ensure product performance in a space environment. VPT’s DLA-approved 
+Radiation Hardness Assurance (RHA) plan documents VPT’s processes and procedures for guaranteeing the performance of VPT 
+products under various environmental conditions in space including Total Ionizing Dose (TID) and Single-Event Effects (SEE). 
+Additionally, Enhanced Low Dose-Rate Sensitivity (ELDRS) effects are considered for all bipolar ICs used in the hybrid. Hardness is 
+guaranteed by a combination of both hybrid-level characterization and Radiation Lot Acceptance Testing (RLAT) of all sensitive 
+semiconductor piece-parts used within the hybrid.
+6.5.1 Radiation Test and Performance Levels
+Radiation Environment
+Piece Part RLAT
+Hybrid-Level Characterization
+High Dose Rate (HDR)
+60 krad(Si)
+60 krad(Si)
+Total Ionizing Dose (TID)
+Low Dose Rate (LDR)
+160 krad(Si)
+60 krad(Si)
+Destructive (SEB, SEGR, SEL)
+Not applicable
+≥ 44 MeV/mg/cm2
+Single-Event Effects (SEE)
+Non-Destructive (SET, SEU)
+Not applicable
+≥ 44 MeV/mg/cm2
+1.
+Piece-part LDR screening performed only on potentially ELDRS parts (bipolar ICs).
+6.5.2 RHA Plan Summary
+Test
+RHA Plan for SV Series Isolated DC-DC Converters
+Total Ionizing Dose (TID):
+Sensitive semiconductor components undergo RLAT to 60 krad(Si) per MIL-STD-883 Method 1019. Converters are 
+characterized to 60 krad(Si).
+Enhanced Low Dose Rate Sensitivity (ELDRS):
+All bipolar linear ICs are characterized for ELDRS and tested in accordance with MIL-STD-883 test method 1019 
+section 3.13
+Single Event Effects (SEE):
+Converters are characterized to LET ≥ 44 MeV/mg/cm2 for both catastrophic events (SEL, SEB, SEGR) and functional 
+interrupts (SEFI) under heavy ion exposure. Converters are also characterized for cross-section and magnitude of 
+output transients (SET) for at least 3 different LET levels.
+Radiation Lot Acceptance Testing (RLAT): 
+All production lots of sensitive semiconductor components undergo RLAT for TID at HDR and/or LDR as appropriate 
+per part type.
+6.5.3 RHA Designators available on SMD
+The SVSA2800S series converters are available on SMD with RHA level L. See section 8.0 for full SMD number information.
+6.5.4 Supporting Documentation Available (Contact Sales)
+Report
+Description
+Radiation Hardness Assurance Plan:
+DLA-approved RHA plan covering TID, SEE, and ELDRS
+Worst-Case Analysis Report:
+Detailed worst-case analysis including electrical stress/derating limits and guaranteed circuit performance post-radiation and end 
+of life
+Radiation Test Summary Report:
+Overview of piece-part RLAT and hybrid characterization for all guaranteed environments. Also includes SEE cross-section data.
+Reliability Report:
+MTBF report based on MIL-HDBK-217 reliability calculations.
+Thermal Analysis Report:
+Component temperature rise analysis and measurement results.
+
+Sales Information
+Phone:(425) 353-3010
+Fax: (425) 353-4030
+SVSA2800S - 14.0
+E-mail: vptsales@vptpower.com
+Web: www.vptpower.com
+Page 12
+SVSA2800S Series
+7.0 ENVIRONMENTAL SCREENING
+100% tested per MIL-STD-883 as referenced to MIL-PRF-38534.
+Contact sales for more information concerning additional environmental screening and testing options. VPT Inc. reserves the right to 
+ship higher screened or SMD products to meet orders for lower screening levels at our sole discretion unless specifically forbidden by 
+customer contract.
+Test
+MIL-STD-883 Test 
+Method, Condition
+/H+
+(Class H Screening + PIND)
+/KL11,7
+(Non-QML)
+/EM
+(Engineering Model, Non-QML1,6)
+Non-Destructive 
+Bond Pull
+TM2023
+●2
+●
+●2
+Internal Visual
+TM2010, TM2017, TM2032 
+(MIL-STD-750, TM2072, 
+TM2073)
+●
+●
+●
+Temperature 
+Cycling
+TM1010, Condition C
+-65 °C to 150 °C, Ambient
+●
+●
+Constant 
+Acceleration
+TM2001, 3000g, Y1 
+Direction
+●
+●
+PIND3
+TM2020, Condition A
+●2
+●
+Pre Burn-In 
+Electrical
+25 °C
+●
+TM1015, 320 hrs.,
+125 °C, Case Typ
+●
+TM1015, 160 hrs.,
+125 °C, Case Typ
+●
+Burn-In
+24 hrs., 125 °C, Case Typ
+●
+MIL-PRF-38534, Group A
+Subgroups 1-6
+-55 °C, 25 °C, 125 °C4
+●
+●
+Final Electrical
+MIL-PRF-38534, Group A
+Subgroups 1 and 4
+25 °C
+●
+TM1014, Fine Leak,
+Condition A2 or B1
+●
+●
+TM1014, Gross Leak,
+Condition C1 or B2
+●
+●
+Hermeticity 
+(Seal)
+Gross Leak, Dip (No Bomb), 
+Visual Verification
+●
+Radiography5
+TM2012
+●
+External Visual
+TM2009
+●
+●
+●
+1. Non-QML products may not meet all requirements of MIL-PRF-38534.
+2. Not required per MIL-PRF-38534. Test performed for additional product quality assurance.
+3. PIND test Certificate of Compliance included in product shipment.
+4. 100% R&R testing with all test data included in product shipment.
+5. Radiographic test Certificate of Compliance and film(s) or data CD included in product shipment.
+6. Engineering models utilize only the screening specified and are not considered compliant for flight use.
+7.  -KL1 products are identical in every way with Class K products in compliance with MIL-PRF-38534 revision L and later revisions except they contain 
+elements evaluated to the requirements of MIL-PRF-38534 revision K and previous revisions. These devices are not marked with an SMD number or MIL-
+PRF-38534 certification mark and are marked with -KL1 screening code in place of -K.
+
+Sales Information
+Phone:(425) 353-3010
+Fax: (425) 353-4030
+SVSA2800S - 14.0
+E-mail: vptsales@vptpower.com
+Web: www.vptpower.com
+Page 13
+SVSA2800S Series
+8.0 STANDARD MICROCIRCUIT DRAWING (SMD) NUMBERS
+Standard Microcircuit 
+Drawing Number
+SVSA2800S Series 
+Similar Part Number
+5962P1121901HXC
+5962P1121901HXA
+5962P1121901HYC
+5962P1121901HYA
+SVSA283R3S/H+
+SVSA283R3S/H+-E
+SVSA283R3SF/H+
+SVSA283R3SF/H+
+5962P1121902HXC
+5962P1121902HXA
+5962P1121902HYC
+5962P1121902HYA
+SVSA2805S/H+
+SVSA2805S/H+-E
+SVSA2805SF/H+
+SVSA2805SF/H+-E
+5962P1121903HXC
+5962P1121903HXA
+5962P1121903HYC
+5962P1121903HYA
+SVSA2812S/H+
+SVSA2812S/H+-E
+SVSA2812SF/H+
+SVSA2812SF/H+-E
+5962P1121904HXC
+5962P1121904HXA
+5962P1121904HYC
+5962P1121904HYA
+SVSA2815S/H+
+SVSA2815S/H+-E
+SVSA2815SF/H+
+SVSA2815SF/H+-E
+5962P1121905HXC 
+5962P1121905HXA 
+5962P1121905HYC 
+5962P1121905HYA
+SVSA285R2S/H+ 
+SVSA285R2S/H+-E
+SVSA285R2SF/H+ 
+SVSA285R2SF/H+-E 
+5962P1121906HXC 
+5962P1121906HXA 
+5962P1121906HYC 
+5962P1121906HYA
+SVSA2807S/H+ 
+SVSA2807S/H+-E 
+SVSA2807SF/H+ 
+SVSA2807SF/H+-E
+Do not use the SVSA2800S Series similar part number for SMD product acquisition. It is listed for reference only. For exact 
+specifications for the SMD product, refer to the SMD drawing. SMDs can be downloaded from the DLA Land and Maritime (Previously 
+known as DSCC) website at https://landandmaritimeapps.dla.mil/programs/defaultapps.asp. The SMD number listed above represents 
+the Federal Stock Class, Device Type, Device Class Designator, Case Outline, Lead Finish and RHA Designator (where applicable). 
+Please reference the SMD for other screening levels, lead finishes, and radiation levels. All SMD products are marked with a “Q” on the 
+cover as specified by the QML certification mark requirement of MIL-PRF-38534.
+
+Sales Information
+Phone:(425) 353-3010
+Fax: (425) 353-4030
+SVSA2800S - 14.0
+E-mail: vptsales@vptpower.com
+Web: www.vptpower.com
+Page 14
+SVSA2800S Series
+9.0 ORDERING INFORMATION 
+SVSA
+28
+05
+S
+F
+/KL1
+-
+XXX
+1
+2
+3
+4
+5
+6
+7
+(1)
+Product 
+Series
+(2)
+Nominal Input 
+Voltage
+(3)
+Output Voltage
+(4)
+Number of 
+Outputs
+(5)
+Package 
+Option
+(6)
+Screening 
+Code1,2,3,4
+(7)
+Additional 
+Screening 
+Code
+SVSA
+28
+28 Volts
+3R3
+05
+5R2
+07
+12
+15
+3.3 Volts
+5 Volts
+5.2 Volts
+7 Volts
+12 Volts
+15 Volts
+S
+Single
+(None)
+F
+Non-Flanged
+Flanged
+/EM
+/H+
+/KL1
+Engineering Model
+Class H + PIND
+Class K (KL1)
+Contact Sales
+1. Contact the VPT Sales Department for availability of Class H (/H) and KL1 (/KL1) qualified products.
+2. VPT Inc. reserves the right to ship higher screened or SMD products to meet lower screened orders at our sole discretion unless specifically forbidden by customer 
+contract.
+3. Engineering models utilize only the standard screening specified and are not considered compliant for flight use. These models are intended for low volume engineering 
+characterization only and have no guarantee regarding operation in a radiation environment.  The customer must place the following statement on each line item of their 
+purchase order(s) for /EM units when ordering engineering models: 
+“(Customer Name) acknowledges that the /EM unit listed in this line item is not permitted for flight use and will be used for Engineering characterization only.”
+4. -KL1 products are identical in every way with Class K products in compliance with MIL-PRF-38534 revision L and later revisions except they contain elements evaluated to 
+the requirements of MIL-PRF-38534 revision K and previous revisions. These devices are not marked with an SMD number or MIL-PRF-38534 certification mark and are 
+marked with -KL1 screening code in place of -K.
+Please contact your sales representative or the VPT Inc. Sales Department for more information concerning additional environmental 
+screening and testing, different input voltage, output voltage, power requirements, source inspection, and/or special element evaluation 
+for space or other higher quality applications.
+
+Sales Information
+Phone:(425) 353-3010
+Fax: (425) 353-4030
+SVSA2800S - 14.0
+E-mail: vptsales@vptpower.com
+Web: www.vptpower.com
+Page 15
+SVSA2800S Series
+10.0 CONTACT INFORMATION
+To request a quotation or place orders please contact your sales representative or the VPT, Inc. Sales Department at:
+Phone:
+(425) 353-3010
+Fax: 
+(425) 353-4030
+E-mail:
+vptsales@vptpower.com
+All information contained in this datasheet is believed to be accurate, however, no responsibility is assumed for possible errors or 
+omissions. The products or specifications contained herein are subject to change without notice.
+11.0 ADDITIONAL INFORMATION
+Visit the VPT website for additional technical resources, including:
+Product Catalogs
+Application Notes and White Papers
+Technical Video Labs
+Additional Products For Avionics/Military,
+Hi-Rel COTS, and Space Applications
+

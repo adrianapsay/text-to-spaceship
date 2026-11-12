@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/satsearch_iut629_satlab_polaris%20ais%20receiver.pdf
+method: product image from the catalog page https://satsearch.co/products/satlab-polaris-ais-receiver

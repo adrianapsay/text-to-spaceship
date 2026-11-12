@@ -1,0 +1,70 @@
+manastuspace.com
+@2025 by Manastu Space Technologies Private Limited
+COST-EFFECTIVE
+60% reduced operational costs. 
+SAFE AND GREEN
+Proprietary fuel comparable
+in safety to common salt
+HIGH PERFORMANCE
+Achieved an ISP of 150 seconds.
+CUTTING-EDGE:  TECHNOLOGY
+Propellant Management
+Device
+Advanced propellant
+management device
+ensuring proper delivery of
+propellant to the thruster
+Self-pressurization
+System designed to
+pressurize and push the
+fluid without use of an
+external pressurant gas.
+MAJOR INNOVATIONS
+Sharanga is a next-generation micro-propulsion system
+powered by a non-carcinogenic, green propellant - HTP.
+With no pressurant gas needed, Sharanga is self-
+pressurizing, operates at low system pressures, and offers
+precise and throttleable thrust. Its low power demand
+and lightweight design make it ideal for CubeSats and
+small satellites. Sharanga provides simple, reliable and
+cost effective solution for attitude control, orbit change,
+station keeping, formation flying and deorbiting of
+CubeSats.
+SHARANGA
+GREEN PROPULSION SYSTEM
+
+manastuspace.com
+@2025 by Manastu Space Technologies Private Limited
+SHARANGA
+SYSTEM SPECIFICATIONS
+SHARANGA
+Nominal Thrust
+ 1 to 10 mN
+Total Impulse 
+500 N-s
+Specific Impulse 
+~ 150 s (BOL)
+Max continuous firing time
+5 hours
+Supply voltage
+12 VDC
+Propellant 
+HTP
+Mass (Dry/Wet)
+1.05 Kg (Dry), 1.4 kg (Wet)
+System Dimensions  
+96 x 96 x 113 mm
+Operational Temp. Range
+-10 °C to 80 °C
+Interfaces:
+Mechanical
+Electrical 
+Data 
+As per user requirements
+As per user requirements 
+RS485 (can be customized)  
+System Power
+Satellite Weight
+For 3U TO 10U + satellites
+< 10 W
+

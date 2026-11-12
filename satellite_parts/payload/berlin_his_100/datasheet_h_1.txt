@@ -1,0 +1,109 @@
+ 
+  
+ 
+ 
+ 
+ 
+ 
+FURTHER INFORMATION   Max-Planck-Str. 3 | 12489 Berlin Germany | info@berlin-space-tech.com | www.berlin-space-tech.com 
+ 
+ 
+ 
+HYPER SPECTRAL CAMERA (OBSOLETE) 
+In the frame of the Kent Ridge 1 mission Berlin Space Technologies has developed a dual 
+band VNIR & SWIR hyper spectral payload. The instrument is built upon a proprietary 
+technology from Singapore. A special filter element allows the camera to act as a polarizing 
+Fourier transform hyper spectral camera (PolarFour™). The payload incorporates a high 
+performance data processing unit and data storage (DPU) for each of the two bands. For 
+utilisation on a high altitude platform a light weighting modification is proposed. 
+ 
+ 
+VNIR & SWIR Hyper Spectral Camera (HSI-100) 
+C H A R A C T E R I S T I C S 
+ 
+Size 
+262x221x131mm³ 
+Weight 
+5.6kg 
+Storage Temperature 
+-10°C to +35°C 
+Operating Temperature 
+0°C to +10°C 
+Design Life 
+5 years LEO 
+Space Heritage 
+Yes  
+ 
+
+ 
+  
+ 
+ 
+ 
+ 
+ 
+FURTHER INFORMATION   Max-Planck-Str. 3 | 12489 Berlin Germany | info@berlin-space-tech.com | www.berlin-space-tech.com 
+ 
+ 
+ 
+BST HSI-100 during qualification and calibration 
+INTERFACES & CAPABILITIES 
+VNIR Band (PPL1) 
+SWIR Band (PPL2) 
+Resolution 
+44m 
+110m 
+Swath Width 
+47km 
+52km 
+Spectral Band 
+500-900nm 
+1000-1500nm 
+Channels 
+30 
+30 
+Scene Size 
+47 x 47km 
+52 x 52 km 
+Bit Depth 
+8/10/12 
+16 
+MTF 
+>0.2 
+>0.15 
+SNR 
+>200 
+>250 
+Camera Raw Data Rate 
+1.4 Gbit/s 
+532 Mbit/s 
+DPU 
+ 
+ 
+Storage 
+240GB 
+240GB 
+Processing Speed 
+5.6 GFlops 
+5.6 GFlops 
+Compression 
+JPEG2000 
+selectable ratio 
+JPEG2000 
+selectable ratio 
+CCSDS Engine 
+Yes 
+Yes 
+Science Data Encryption  
+optional 
+optional 
+X-Band Data Output 
+LVDS 
+LVDS 
+TMTC Interface 
+RS422 
+RS422 
+ 
+Light Weighting: Removal of shock mounts (-500g). Reduction of wall thickness from 
+5mm AL to 2mm AL (2.5kg structure mass to 1.25kg = -1.25kg). Total 1.75kg. 
+

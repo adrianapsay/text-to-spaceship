@@ -1,0 +1,74 @@
+[Digitare il testo] 
+ 
+ 
+ 
+1 
+PRODUCT SHEET 
+AOCS & GNC 
+   
+ 
+ 
+ 
+  
+ 
+Reaction/Momentum Wheel (RMW) 
+SITAEL Reaction/Momentum Wheel (RMW) is an attitude control device suitable for LEO orbits. Each RMW is capable to store 
+up to 0.4 Nms angular moment and to provide up to 10 mNm control torque in a range between 0 and ±4000 rpm. 
+The RMW structure has been optimized in order to provide high angular momentum storage in a reduced volume envelope 
+(120x100x130 mm) and mass (up to 1.2 kg in the fully equipped version). Its internal components are guaranteed for a 
+standard lifetime of about 2 years that could be extended depending on the operating conditions.  
+The RMW driver can be controlled via RS232 serial protocol, but an additional interface can be provided to integrate also a 
+redundant CAN bus communication port. 
+From a mechanical point of view, the MWR has been sized to resist to the mechanical launch loads of the most common 
+launch vehicle for mini/micro satellite class. 
+SITAEL RMW 
+Features 
+ 
+High torque/mass ratio actuator 
+ 
+High stall torque 
+ 
+Hard preloaded bearings 
+ 
+Robust thermal and mechanical response 
+ 
+Scalable to fit different mission profiles 
+ 
+Oil lubrication with space grade lubricant 
+
+[Digitare il testo] 
+ 
+ 
+ 
+2 
+PRODUCT SHEET 
+AOCS & GNC 
+ 
+ 
+SPECIFICATIONS  
+ 
+Speed range 
+[-4000 ; +4000] rpm 
+Momentum storage 
+≤ 0.4 Nms 
+Bus Input Voltage (V) 
++12 V to +30 V 
+Interfaces 
+RS232, CAN-Bus 
+Environment 
+Storage Temperature: -40 °C to +100 °C 
+Operating Temperature: -10 °C to +60 °C 
+Power Consumption 
+14 W (peak) / 2.5 W (typ.) 
+Size 
+120x100x130 mm (L x W x H) 
+Mass (g) 
+≤ 1100 
+ 
+Technical Information 
+SITAEL S.P.A | Via San Sabino, 21 - 70042 Mola di Bari (BA) Italy | info@sitael.com | www.sitael.com 
+Small Satellites, Advanced Propulsion, Instruments and Avionics, Services and Applications. 
+Copyright © 2015 SITAEL S.p.A. All Rights Reserved. 
+4-wheels redundant configuration 
+(reaction/momentum) 
+

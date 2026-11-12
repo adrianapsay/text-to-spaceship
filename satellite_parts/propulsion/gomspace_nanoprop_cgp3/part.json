@@ -1,0 +1,217 @@
+{
+ "id": "gomspace_nanoprop_cgp3",
+ "name": "GomSpace NanoProp CGP3",
+ "category": "propulsion",
+ "subcategory": "cold_gas_module",
+ "vendor": "GomSpace",
+ "model": "NanoProp CGP3",
+ "dimensions_mm": {
+  "x": 100.0,
+  "y": 100.0,
+  "z": 50.0
+ },
+ "mass_g": 350.0,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satcatalog.s3.amazonaws.com/components/1082/SatCatalog_-_GomSpace_-_NanoProp_CGP3_-_Datasheet.pdf",
+  "document": {
+   "title": "GomSpace NanoProp CGP3 data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-11",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Read from the vendor data sheet (SatCatalog_-_GomSpace_-_NanoProp_CGP3_-_Datasheet.pdf): dimensions \"VDC and 12 VDC \u2022 Electrical interface: Flying leads Mechanical Features: \u2022 Size 100 x 100 x 50 mm (includin\"; mass \"mass from the catalog page (0.35 kg); the data sheet text gave no parsable mass\". Catalog page lists 0.35 kg. Electrical / RF values found in the data sheet or page text by pattern (quoted where possible).",
+  "found_via": "https://satcatalog.com/component/nanoprop-cgp3/"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "electrical": {
+  "power_W": {
+   "nominal": 2.0
+  },
+  "quote": "Average Power 2.0 W"
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   100.0,
+   100.0,
+   50.0
+  ],
+  "mesh_volume_mm3": 499966.5,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 0.7,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    100.0,
+    100.0,
+    50.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "feet",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/feet.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "connector_shell",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/connector_shell.stl"
+    },
+    {
+     "name": "connector_insert",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector_insert.stl"
+    },
+    {
+     "name": "jackscrews",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/jackscrews.stl"
+    },
+    {
+     "name": "label",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies_detail/label.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://satcatalog.s3.amazonaws.com/components/1082/SatCatalog_-_GomSpace_-_NanoProp_CGP3_-_Datasheet.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

@@ -1,0 +1,41 @@
+ES-01 - Satellite Ethernet switch
+The Sitle ES-01 provides a space ready unmanaged ethernet switch in a small form factor allowing the 
+interconnection of up to four ethernet devices at gigabit speeds.
+The ES-01 will be achieving flight heritage in 2026.
+Specifications
+Switching
+Ethernet speeds
+10/100/1000BASE-T
+Ports
+4
+Design parameters
+Size
+75x75x14mm
+Weight
+55g
+Power draw
+3W avarage
+7.2W max
+Radiation
+TID: >30krad with options for 
+higher lifetime.
+Availability, costs, extras
+Availability
+Some stock to ship immediately, 
+6 weeks lead time for larger 
+orders.
+Flight Model cost
+$15,000 AUD
+Engineering Model 
+cost
+$7,500 AUD
+info@sitle.space
+https://sitle.space
+Newcastle, NSW, Australia
+August 2025
+Enquiries
+Sitle can help with other hardware, 
+software, and custom solutions.
+Find out more by contacting 
+info@sitle.space
+

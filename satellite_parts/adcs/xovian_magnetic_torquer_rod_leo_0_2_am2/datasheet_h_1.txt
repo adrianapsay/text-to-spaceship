@@ -1,0 +1,34 @@
+
+Space quality Magnetic Torquer Rod (MTR) for 
+Low Earth Orbit (LEO) 15Am2 
+Specification: 
+Parameter  	                                      Value  
+Magnetic dipole moment  	
+   0.2 Am2  
+Power 	
+                                     175 mW @ 5V 
+Operating Temperature  	             -400C to +800C 
+Envelope 	
+ 	
+                          60mm X 14mm X 14mm (L, B, H) 
+Mass   	
+ 	
+                          30 g 
+Mechanical I/F 	
+                          4 Nos of M2.5 screws/tied to PCB  
+Electrical I/F 	
+                             Direct soldering of coil wire or 24AWG pigtail leads to PCB 
+Random vibration                           15 g rms 
+Linearity 	
+ 	
+ 	
+               +/-  5% 
+                                                         
+                                                                 
+                                                               www.xovian.co.in
+  Satellite Components and Subsystems                                                                                           | Page 1 of 1
+MTR are regularly used in Communication Satellites and Remote Sensing Satellites. They 
+are predominantly used for momentum dumping i.e. de-saturation of momentum wheels 
+and reaction wheels.Angular momentum and notation control of spinning momentum- 
+biased and dual-spin spacecraft.
+

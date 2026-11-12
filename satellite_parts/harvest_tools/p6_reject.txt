@@ -1,0 +1,70 @@
+satcatalog__comet-x  # enclosure dims of a family sheet, page mass missing
+satcatalog__st-200-1  # already in catalog (aac_st200, Hyperion = AAC)
+satcatalog__st-400-1  # already in catalog (aac_st400)
+satcatalog__iadcs200-15  # already in catalog (aac_iadcs200)
+satcatalog__iadcs200-30  # already in catalog (aac_iadcs200)
+satcatalog__cmg-40-60s  # dims are the mechanism only, mass includes electronics
+satcatalog__hrvi-6hd  # same numbers as HRVI-6 (shared sheet)
+satcatalog__lion-1300neo-gnss-receiver  # same numbers as LION 1300, page mass differs
+satcatalog__mini-dual-earth-sensor  # same sheet as MiDES-G
+satcatalog__rafti-service-valve-low-pressure  # dims belong to the coupling, not the valve
+satcatalog__rw20  # dims are the 4-wheel cluster, mass is one wheel
+satcatalog__gps-701-satellite-gnss  # already in catalog (aac_gnss_701)
+satcatalog__gps-702-satellite-gnss  # same sheet as GPS-701
+satcatalog__rw-35  # already in catalog (astrofein_rw35)
+satcatalog__leorix-gnss-receiver  # duplicate of the satsearch LEORIX row (that one has a photo)
+satcatalog__next-generation-on-board-computer  # duplicate of the satsearch row
+satsearch__liftero-1n-green-chemical-thruster  # one shared module envelope for the whole family
+satsearch__liftero-booster-25-green-chemical-propulsion-system  # shared family envelope
+satsearch__liftero-booster-5-green-chemical-propulsion  # shared family envelope
+satsearch__liftero-booster-50-green-chemical-propulsion-system  # shared family envelope
+satsearch__liftero-whisper-green-chemical-propulsion-system  # shared family envelope
+satsearch__resonate-testing-ltd-battery-abuse-testing  # test service
+satsearch__tm2s-flatsat  # test equipment
+satsearch__scanway-scanways-optical-payload-sop  # dims are a size range for the product line
+satsearch__beyond-gravity-fox-mass-memory  # same unit numbers as the FoX payload processor
+satsearch__spacemanic-deep-thought-the-on-board-computer  # already in catalog
+satsearch__spacemanic-eddie-the-on-board-computer  # already in catalog
+satsearch__aspina-arw-0-35-reaction-wheel  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__aspina-arw-2-reaction-wheel  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__billingsley-aerospace-and-defense-hfm500-mil-titanium-housed-miniature-magnetometer  # duplicate HFM500 row
+satsearch__callisto-space-26ghz-compact-ultra-low-noise-amplifier-p-n-3130  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__callisto-space-ka-band-25-5-27-0ghz-low-noise-amplifier-lna-p-n-3220-02  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__callisto-space-xband-compact-low-noise-amp  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__exa-gca01-compact-gnss-active-patch-antenna  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__exa-gca02-high-gain-gnss-l1-active-patch-antenna  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__exa-hinges-nano-cubesat-sized-hinges-for-reliable-deploy-operations  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__exa-hinges-nano  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__exa-ssa01-wide-bandwidth-s-band-patch-antenna  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__exa-ssa02-34db-wide-bandwidth-amplified-s-band-patch-antenna  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__fast-micro-b-v-fallout-scanner  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__fast-micro-b-v-sample-scanner  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__hemeria-nanosatellite-hp-io-t-regular-version  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__hemeria-nanosatellite-hp-io-t-short-version  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__kplabs-leopard-data-processing-unit  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__kplabs-sml-remote-space-hardware-testing  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__mvp-aerospace-kisscam-v1  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__newspace-systems-newspace-systems-nrwa-t025-reaction-wheel  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__newspace-systems-nrwa-t065-reaction-wheel  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__newspace-systems-nrwa-t2-reaction-wheel  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__newspace-systems-nrwa-t6-reaction-wheel  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__persei-space-mades  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__printech-circuit-laboratories-xband16x16patchantennaarray  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__redwirespace-star-tracker  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__reliasat-fsn11200816qfp  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__reliasat-fsn11201632qfp  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__remosspace-expedite-software-modem  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__remosspace-expedite-turnkey-ground-station  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__rocketlab-1nms-reaction-wheel  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__rocketlab-rocketlab-5nms-reaction-wheel  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__scanway-sop-120  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__scanway-sop-200  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__scanway-sop-3u-50  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__scanway-sop-450  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__serenumspace-6ustructure  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__servo-corporation-of-america-servo-corporation-of-america-mides  # same numbers as the other Servo earth sensor row
+satsearch__tianjin-lantian-solar-technology-co-ltd-mc  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__tm2s-1u-cubesat  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__tm2s-2u-cubesat  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__tm2s-3u-cubesat  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate
+satsearch__xiphos-q8-optical-payload-processor  # pass 8 review: family sheet, test/ground/platform item, size range or duplicate

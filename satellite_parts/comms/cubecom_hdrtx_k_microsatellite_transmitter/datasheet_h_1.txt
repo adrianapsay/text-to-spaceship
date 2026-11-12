@@ -1,0 +1,106 @@
+ANTENNAS
+TRANSMITTERS
+DOWNCONVERTERS
+C U B E C O M . S PA C E
+The µHDRTX-K is a highly conﬁgurable multi-channel K-band transmitter 
+that has two independent transmission paths. The transmitter implements 
+DVB-S2 encoding and can support multi-channel transmission.
+Each channel has a symbol rate of up to 150 Msps or 300 Msps in 
+single-channel mode. Channel bonding is implemented which combines 
+multiple channels to constitute larger  transmission bandwidths.
+The µHDRTX-K is ideal for space missions that generate very large data 
+sets such as multispectral imagers. This allows for payload data to be 
+rapidly downloaded in a single pass and new data to be captured.
+The adaptive modulation and coding of the transmitter enables optimized 
+data throughput during a pass. 
+WE DESIGN, DEVELOP AND 
+MANUFACTURE COMMUNICATION 
+SYSTEMS FOR SATELLITES
+µHDRTX-K
+MICROSATELLITE  TRANSMITTER
+Boost your downlink
+T E C H N I C A L S P E C I F I C A T I O N S
+with data rates of 1.5 Gbps
+ALL NEW!
++ MICROSATELLITE FORMFACTOR
++ K/Ka-BAND TRANSMITTER
++ DVB-S2 ENCODING
++ MULTI-CHANNEL
++ TWO INDEPENDENT RF CHAINS
+DIMENSIONS
+175 x 145 x 55 mm
+TOTAL UNIT MASS
+1.4 kg
+BOARD TEMPERATURE -20 to 60 ºC
+INPUT VOLTAGE
+7 V - 13 V
+POWER CONSUMPTION
+26 Watt
+
+15 Elektron Road, Techno Park, Stellenbosch, South Africa 7600
+Contact :  +27 (0)21 880 1163   /   sales@cubecom.space
+•  LATEST GEN MULTISPECTRAL & HYPERSPECTRAL IMAGER TECHNOLOGY
+P A I R S W E L L W I T H 
+FREQUENCY RANGE 
+MAXIMUM RF POWER  
+SPURIOUS RESPONSE
+TX SNR
+EVM
+SYMBOL RATE
+TOTAL SYMBOL RATE
+25.5 - 27 GHz 
+2 Watt (33 dBm)
+< -60 dBc (TBC)
+> 20 dB
+< 4%
+50 - 300 Msps
+300 Msps
+R F S P E C I F I C A T I O N S
+1. TELEMETRY & CONTROL:
+•
+LOW SPEED I²C BUS
+•
+OR CAN 2.0
+2. HIGH SPEED DATA INTERFACES:
+•
+SPACEWIRE
+•
+GENERIC LVDS
+•
+8B/10B   SERDES INPUT
+•
+DRAGONFLY NCU HIGH SPEED INTERFACE
+3. TWO  50Ω SMA RF OUTPUT CONNECTORS
+I N T E R F A C E S
+•  DVB-S2 ENCODING 
+•  BCH ENCODING FOR BURST ERROR CORRECTION 
+•  LDPC ENCODING 
+•  MULTI-CHANNEL PACKETIZER
+P R O C E S S I N G
+•  FLIGHT BOARD
+•  USER MANUAL + STEP MODEL
+•  ACCEPTANCE TEST REPORT
+D E L I V E R A B L E S
+M O D U L A T I O N
+• CONFORMS TO SFCG 21 2R4 EMISSIONS
+M O D U L A T I O N
+Q P S K
+8 - P S K
+1 6 - A P S K
+3 2 - A P S K
+3 2 - A P S K
+315°
+45°
+1 6 - A P S K
+315°
+45°
+Q P S K
+315°
+45°
+315°
+45°
+8 - P S K
+315°
+45°
+S P E C T R U M C A P T U R E
+

@@ -1,0 +1,159 @@
+GNSS200 
+GNSS Receiver 
+The GNSS200 Global 
+Navigation Satellite System 
+(GNSS) receiver is a low mass, 
+low power GNSS receiver for 
+use in (small) satellites. It is 
+designed specifically for use in 
+CubeSat platforms, and it can 
+also be used in conjunction 
+with the iADCS-series of 
+attitude determination and 
+control systems as well as the 
+iACS series of attitude control 
+systems. 
+It offers a multi-constellation output, and 
+the standard version is delivered with a 
+TTL UART output. It is designed to work 
+either with active or passive antennas (to 
+be defined at the time of ordering) and 
+outputs 
+NMEA 
+compatible 
+data 
+as 
+standard output. 
+It is possible to qualify the units for use in 
+larger satellites as well, please contact 
+Hyperion in case this is of interest. 
+ 
+• 
+Multi-constellation receiver 
+• 
+Active or passive antenna compatible 
+• 
+Tracking rate: > 10 Hz 
+• 
+Time to first fix: < 90 s 
+• 
+TTL UART interface 
+• 
+In-orbit position accuracy: < 8 m 
+• 
+Low mass: 3 g 
+• 
+Low power: < 150 mW peak 
+• 
+Module dimensions: 20 x 15 x 3 mm 
+ 
+ 
+HIGHLIGHTS 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Flight heritage since 2018  
+
+  
+ 
+1 Using active antenna 
+2 Using passive antenna 
+3 To be confirmed 
+4 Excluding antenna power consumption 
+ 
+ 
+Performance 
+Update Rate 
+> 10 
+Hz 
+Time-to-first-fix (TTFF) 
+<901, <1202 
+s 
+Position Accuracy 
+< 83 
+m 
+Velocity Accuracy 
+<TBD> 
+m/s 
+ 
+ 
+ 
+Dimensions 
+Outer dimensions 
+20 x 14.5 x 3.1 
+mm 
+Mass 
+3 
+g 
+ 
+ 
+ 
+Environmental 
+Operating temperature 
+- 40 to + 85 
+°C 
+Radiation tolerance 
+> 36 
+krad (Si) 
+ 
+ 
+ 
+Communication interface 
+TTL UART Baud Rate 
+9600 
+bps 
+ 
+ 
+ 
+Electrical specifications 
+ 
+Min. 
+Typ. 
+Max. 
+ 
+Supply voltage 
+3.25 
+3.3 
+3.5 
+V 
+ 
+ 
+ 
+Power consumption4 
+ 
+Min. 
+Typ. 
+Max. 
+ 
+Acquisition / Tracking 
+148 
+157 
+165 
+mW 
+ 
+ 
+ 
+ 
+ 
+SPECIFICATIONS 
+MECHANICAL CHARACTERISTICS (IN MM) 
+V2.1 
+For pricing, delivery, configuration and ordering information please contact us 
+at sales@hyperion.space or call us at +31(0)15-5160905 
+ 
+

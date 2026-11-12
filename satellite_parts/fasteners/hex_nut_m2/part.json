@@ -60,6 +60,20 @@
   },
   "face_counts": {
    "part": 192
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "nut",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__nut.stl"
+    }
+   ]
   }
  },
  "image": "preview.png",
@@ -71,22 +85,7 @@
   "power_bus_V": null
  },
  "reference_images": {
-  "datasheets": [
-   {
-    "file": "datasheet_1_page1.png",
-    "pdf": "datasheet_1.pdf",
-    "kind": "web_search",
-    "url": "https://nvmexpress.org/wp-content/uploads/NVM-Express-1_4c-2021.06.28-Ratified.pdf",
-    "title": "NVMe Base Specification, Revision 1.4c - NVM Express"
-   },
-   {
-    "file": "datasheet_2_page1.png",
-    "pdf": "datasheet_2.pdf",
-    "kind": "web_search",
-    "url": "https://www.infineon.com/assets/row/public/documents/10/49/infineon-cyt3dl-traveo-tm-t2g-32-bit-automotive-mcu-based-on-arm-r-cortex-r--m7-single-datasheet-en.pdf",
-    "title": "CYT3DL - TRAVEO\u2122 T2G 32-bit Automotive MCU"
-   }
-  ],
+  "datasheets": [],
   "stl_preview": "preview.png",
   "drawing": "drawing.png",
   "photo_url": null,

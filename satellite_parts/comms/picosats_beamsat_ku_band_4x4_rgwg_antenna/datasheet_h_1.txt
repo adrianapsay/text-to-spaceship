@@ -1,0 +1,41 @@
+KU - RIDGE-GAP WAVEGUIDE ANTENNA
+3D-PRINTED RIDGE GAP WAVEGUIDE KU-BAND ANTENNA 
+HIGH THROUGHPUT DATA AND TELEMETRY DOWNLINK 
+FOR LEO AND GEO APPLICATIONS
+OVERVIEW
+This cutting-edge Ku-band 4X4 antenna utilizes innovative Ridge Gap Waveguide 
+technology, featuring a fully aluminium design manufactured through 3D printing. With 
+high-gain performance, peak gain of  19 dBi, compact dimensions, less than 1 U surface, 
+and a weight of  110 g. Its robust metal construction ensures durability and reliability, 
+making it an ideal solution for missions requiring efﬁcient, high-performance 
+communication in a lightweight and compact form, both for LEO and GEO applications.
+APPLICATIONS
+●
+LEO Earth Observation data 
+downlink
+●
+Cubesats and Smallsats 
+Telemetry
+
+MAIN PARAMETERS
+www.picosats.eu
+info@picosats.eu
+FREQUENCY
+PEAK GAIN
+INPUT MATCHING
+HPBW
+POLARIZATION
+CONNECTOR
+MECHANICAL PROPERTIES
+MASS
+VOLUME
+110 g
+99.0 mm x 89.0 mm x 12.0 mm
+12.75-14.8 GHz
+19 dBi
+< -15 dB
+17.3°
+Linear
+SMA
+RF PROPERTIES
+

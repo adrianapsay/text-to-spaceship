@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-xiphos-xiphos-q9-versal-computer-on-module-diyvxi.pdf
+method: product image from the catalog page https://satsearch.co/products/xiphos-q9-versal-computer-on-module

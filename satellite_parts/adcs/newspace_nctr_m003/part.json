@@ -1,0 +1,182 @@
+{
+ "id": "newspace_nctr_m003",
+ "name": "NewSpace Systems NCTR-M003",
+ "category": "adcs",
+ "subcategory": "magnetorquer",
+ "vendor": "NewSpace Systems",
+ "model": "NCTR-M003",
+ "dimensions_mm": {
+  "x": 72.0,
+  "y": 15.0,
+  "z": 13.0
+ },
+ "mass_g": 30.0,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satcatalog.s3.amazonaws.com/components/172/SatCatalog_-_NewSpace_Systems_-_NCTR-M003_-_Datasheet.pdf",
+  "document": {
+   "title": "NewSpace Systems NCTR-M003 data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-11",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Read from the vendor data sheet (SatCatalog_-_NewSpace_Systems_-_NCTR-M003_-_Datasheet.pdf): dimensions \"5 Am <0.005 Am <0.3 at 100 Am PHYSICAL CHARACTERISTICS Dimensions (l x w x h) 72 mm x 15 mm x 13 mm 94 mm x 1\"; mass \"mass from the catalog page (0.03 kg); the data sheet text gave no parsable mass\". Catalog page lists 0.03 kg.",
+  "found_via": "https://satcatalog.com/component/nctr-m003/"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "flight_heritage": true,
+ "electrical": {
+  "power_W": {
+   "nominal": 0.25
+  },
+  "note": "average power from the catalog page"
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   72.0,
+   15.0,
+   13.0
+  ],
+  "mesh_volume_mm3": 14028.1,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 2.139,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    72.0,
+    13.0,
+    13.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "coil",
+     "color": [
+      0.72,
+      0.45,
+      0.2
+     ],
+     "file": "bodies_detail/coil.stl"
+    },
+    {
+     "name": "windings",
+     "color": [
+      0.62,
+      0.38,
+      0.16
+     ],
+     "file": "bodies_detail/windings.stl"
+    },
+    {
+     "name": "end_caps",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/end_caps.stl"
+    },
+    {
+     "name": "clamps",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/clamps.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://satcatalog.s3.amazonaws.com/components/172/SatCatalog_-_NewSpace_Systems_-_NCTR-M003_-_Datasheet.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

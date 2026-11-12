@@ -1,0 +1,238 @@
+1
+www.xiphos.com
+A High Performance AI/ Edge-Processing 
+System-on-Module in a Tiny COTS 
+Package 
+Q9 Versal Computer-on-Module
+Designing a processor-intensive payload but short on 
+schedule, and room to fit it? Keen to try out the new 
+AMD Versal but worried about the risk?
+The new Xiphos Q9 takes the Versal Adaptive SoC 
+and adds the radiation robust architecture we’ve been 
+building on for more than 20 years, which has already 
+enabled hundreds of processors to be flying with zero 
+on-orbit failures. The Q9 is as small as a drinks coaster 
+and has all of the benefits of Xiphos’ COTS model to 
+enable a smooth development and fast time-to-launch. 
+OVERVIEW
+The Q9 is ideal for advanced payload applications, 
+requiring onboard AI/ML processing, I/O-intensive 
+applications, and high-speed C&DH systems. At the core 
+of each Q9 is a hybrid environment of powerful multi-
+core CPUs and re-programmable logic, providing flexible 
+and scalable performance. The Q9 extends the capability 
+of the Xiphos Q-Card processor family, adding support 
+for high-speed JESD204B interfaces and PCIe, as well as 
+access to 2TB of high speed data storage. 
+WHAT’S THE BIG DEAL?
+The Q9 is the first time a Versal-based platform has been 
+available in such a small form-factor that can fit almost 
+anywhere. It is also a true commercial grade product 
+with all of the benefits of COTS along with the tools and 
+systems in place to make development, demonstration 
+and launch fast and reliable. It is ideal for development of 
+the next generation of intensive AI and real-time sensor 
+processing applications.
+
+2
+Xiphos
+www.xiphos.com
+FEATURE HIGHLIGHTS 
+INDUSTRY-LEADING PERFORMANCE
+The new Q9 features an AI/ML capable Adaptive 
+System-on-Chip (SoC), to provide unparalleled 
+performance in a small form factor space hardened 
+architecture supporting our customer’s toughest 
+missions and reduce their time to orbit. 
+SMALL FORM FACTOR, HIGH AI PERFORMANCE
+The Q9 measures only 90 mm x 110 mm x 20 mm while 
+providing 101 TOPS and 8 TFLOPs of AI/ML performance. 
+Its small size, low mass and high performance makes 
+the Q9 ideal for aerospace applications that demand 
+extremely high performance.
+INTEGRATED HYBRID ENVIRONMENT
+The application space in a Q9 is a tight integration of a 
+dual core ARM Cortex A72 Application Processing Unit, a 
+dual core ARM Cortex R5F Real Time Processing Unit, 152 
+AI Engine-ML tiles, featuring 820,000 system logic cells, 
+750,000 flip flops, 375,000 lookup tables and 984 DSP 
+slices reserved for application specific use.
+SOFTWARE DEVELOPMENT
+Xiphos provides an Application Development Kit with 
+standard Linux libraries for C/C++ to support software 
+development on Linux workstations. Code previously 
+developed for Linux desktop and server applications 
+can be easily ported to the Q9. Q9 hardware and logic 
+interfaces are all accessible through either standard 
+Linux and Xilinx kernel drivers or custom drivers provided 
+by Xiphos.
+LOGIC DEVELOPMENT
+Logic development uses standard Xilinx development 
+tools such as Vivado and Vitis AI. Xiphos, Xilinx and 
+many third-party vendors also provide a wide range of 
+compatible reusable logic cores for Xilinx FPGAs.
+FLEXIBLE INTERFACING
+The Q9 provides 16 GTYP transceivers, 64 LVDS/Single 
+Ended GPIO, 20 GPIO 1.8 V,40 GPIO 3.3 V, 49 MIO, 4 
+analog inputs. MIO can be configured to provide Gigabit 
+interfaces, USB 2.0, CAN and/or GPIO. GTYP transceivers 
+high-speed interface can be used for various high speed 
+application such as 10 GbE or PCIe. 
+APPLICATIONS
+The extremely high performance, data storage and 
+extensive FPGA fabric make the Q9 ideally suited for 
+onboard:
+•	 AI/ML Edge Processing
+•	 Onboard image processing
+•	 Mass memory applications & Cloud storage 
+•	 5G Direct-to-Device (D2D) network applications
+•	 Synthetic Aperture Radar (SAR) processing
+•	 High Speed Data Movement
+•	 Hyper/multi-spectral compression
+•	 Image registration and alignment
+•	 High resolution camera interfacing and control
+•	 Convolutional neural networks
+•	 Advanced wideband Software Defined Radios (SDR)
+
+3
+Xiphos
+www.xiphos.com
+Q9S FLIGHT MODELS INCLUDE
+•	 Triple mode redundancy in Control FPGA
+•	 EDAC-protected RAM
+•	 Upset and multi-current monitoring
+•	 Over-current protection (multiple)
+•	 FPGA bit-stream scrubbing
+•	 Software robustness / watchdog
+CHARACTERISTICS 
+Model:
+Q9
+Environmental Characteristics
+Temperature 
+(operating)
+-40 to +60 °C
+Size
+90 mm x 110 mm x 20 mm
+Weight
+154 g without connectors
+Power
+•	 30-50 W, typical
+•	 8 to 14 VDC
+•	 Over-current detection & protection 
+(global and local) and brownout 
+protection
+Memory
+Memory
+•	 16 GB LPDDR4 DRAM, PS and PL-
+accessible (2x8 GB)
+•	 1GB QSPI Flash (NOR)
+•	 2x SSD, 1,000 GB each, on independent 
+buses
+•	 Fire code power control 
+•	 1MB MRAM for critical telemetry/state 
+data
+MPSoC
+Model
+AMD Versal AI Core Adaptive System-on-
+Chip
+Application 
+Processing 
+Unit
+Dual core ARM Cortex A72 Application 
+Processing Unit at up to 1.7 GHz
+Real-Time 
+Processing 
+Unit
+Dual core ARM Cortex R5F Real-Time 
+Processing Unit at up to 750 MHz
+AI Engines
+•	 152 AI Engine-ML Tiles
+•	 101 TOPS and 8 TFLOPs
+System Logic 
+Cells
+820,000
+Flip Flops
+750,000 FF
+Look-up 
+Tables
+375,000 LUT
+DSP Slices
+984
+Model:
+Q9
+Control FPGA
+Microchip PolarFire
+Operating System
+Yocto Linux BSP (LTS distribution)
+Real Time Clock
+•	 RTC with sleep & wake up on alarm/
+interrupt
+•	 Dedicated power pin for external 
+battery
+Interfaces
+•	 2 mezzanine connectors providing:
+•	 1.8 V/ 3.3 V GPIO, 1.8 V MIO, LVDS ​
+•	 26.5625 Gbps GTY transceivers 
+supporting PCIe Gen 4, Ethernet, 
+JESD204b, SSD, SERDES, etc.​
+•	 2 Multi-rate MACs (each - 1 x 100G or 
+2 x 50G/40G, or 4 x 10G)
+
+Xiphos
+www.xiphos.com 
+sales@xiphos.com
+3981 St-Laurent Boulevard, Suite 500, 
+Montreal, Quebec, H2W 1Y5, Canada 
+© 2026
+ABOUT XIPHOS
+Xiphos, based in Montreal and part of Epiq Solutions 
+since 2023, has over 20 years of experience delivering 
+thousands of low-SWaP-C COTS-based processor 
+cards for space applications including satellites, 
+landers, rovers, and space stations. Known for high 
+reliability, radiation tolerance, and strong customer 
+support, Xiphos specializes in compact processing 
+solutions using cutting-edge processors for commercial, 
+scientific, and military missions.
+4th March, 2026
+WHY CHOOSE XIPHOS? 
+Faster Time to Launch Using COTS Processing With 
+Heritage
+FLIGHT-PROVEN PROCESSORS:
+Space-hardened, COTS-based computing solutions 
+deployed across hundreds of commercial, civil and 
+defense missions.
+HIGH PERFORMANCE:
+Products offer impressive processing, networking, RF 
+and storage performance by leveraging state-of-the-art 
+commercial devices.
+COST-EFFECTIVE PERFORMANCE:
+Delivers high performance and reliability at a fraction of 
+the cost of traditional space processors.
+SCALABLE SOLUTIONS
+Flexibility across the design stack ensures the right level 
+of integration for your use case.
+COMPACT, EFFICIENT, FLEXIBLE:
+Ideal for spacecraft, unmanned systems, and robotics 
+requiring small size, low power, and adaptability.
+CERTIFIED QUALITY:
+AS9100 and ISO 9001:2015 certified; explore our 
+FPGA-based multiprocessors, SoCs, and advanced 
+subsystems.
+ENHANCED COTS SOLUTIONS 
+Optimizes the cost & performance trade while still 
+providing radiation robustness
+OPEN ARCHITECTURE DESIGNS
+Enables development across a variety of toolkits
+SHORTER LEAD TIMES
+Shipping 500+ processors annually 
+IMPRESSIVE HERITAGE:
+We’ve been a new space company for more than 20 
+years and have delivered many thousands of cards. In 
+that time, we’ve accumulated a LOT of experience that 
+you get to benefit from when you partner with us.
+As of July 2025, our cumulative time on orbit stands at 
+more than 568 years. In that time, we have had no on-
+orbit product failures and have more than 260 boards in 
+space.
+

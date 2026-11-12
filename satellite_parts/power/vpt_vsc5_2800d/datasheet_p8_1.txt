@@ -1,0 +1,1246 @@
+ 
+ 
+Sales Information 
+Phone:(425) 353-3010 
+Fax: (425) 353-4030 
+ VSC5-2800D – 9.0 
+ 
+E-mail: vptsales@vptpower.com 
+Web: www.vptpower.com 
+Page 1 
+VSC5-2800D SERIES 
+RADIATION TOLERANT DC-DC CONVERTERS 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+VSC5-2800D - Exact marking may differ from that shown 
+Models Available 
+Input: 15 V to 50 V continuous, 80 V transient 
+Dual outputs: ±5 V, ±12 V, or ±15 V 
+Wattage: 5 W 
+ 
+ 
+1.0 DESCRIPTION 
+The VSC5-2800D Series is a commercial off the shelf DC-DC 
+converter designed for the ‘NewSpace’ market. Performance is 
+guaranteed through the use of radiation lot acceptance tested 
+(RLAT) components. Our proprietary packaging creates a dual 
+side heatsinking option with very low outgassing.   
+ 
+Radiation tested to 42 MeV/mg/cm² with no destructive SEE 
+events (SEGR, SEB, and SEL) and tested to 40 krad(Si), 
+guaranteed to 30 krad(Si), for TID in accordance with VPT’s 
+inhouse radiation hardness assurance (RHA) plan. 
+ 
+The VSC5-2800D Series are designed for smaller satellites in 
+low Earth orbits (LEO), and NASA Class D missions where the 
+balance of cost and guaranteed performance is critical. 
+ 
+1.1 FEATURES 
+• Output Voltage ±5 V, ±12 V, ±15 V 
+• Wide input voltage range: 15 V to 50 V plus 80 V transient 
+• Continuous operation over full military temperature range of  
+-55 °C to +105 °C with no power derating 
+• Fixed frequency 
+• Very low output noise 
+• No use of optoisolators 
+• Undervoltage lockout 
+1.2 SPACE LEVEL CHARACTERIZATIONS 
+• Guaranteed TID performance to 30 krad(Si) including LDR 
+• SEE tested to 42 MeV/mg/cm2. Transients are fully analyzed for 
+cross-section and magnitude at 30 MeV/mg/cm2 
+• Radiation Hardness Assurance, see Section 6.5 herein 
+• Mean Time Between Failures (MTBF) calculations available 
+• Failure In Time (FIT) numbers available 
+1.3 MANUFACTURING AND COMPLIANCE 
+• Manufactured in an ISO9001, J-STD-001, and IPC-A-610 certified 
+facility  
+• MIL-STD-461 C-G conducted emissions when used with the 
+appropriate VPT EMI filter  
+1.4 PACKAGING 
+• Low-profile: 1.110” x 1.110” x 0.360”  
+• Max weight: 24 g 
+1.5 ACCESSORIES 
+• VSCF1-28 EMI filter 
+• Use with Thermal Pad TP-008 or TP2-008 
+
+ 
+ 
+ 
+Sales Information 
+Phone:(425) 353-3010 
+Fax: (425) 353-4030 
+VSC5-2800D – 9.0 
+ 
+E-mail: vptsales@vptpower.com 
+Web: www.vptpower.com 
+Page 2 
+VSC5-2800D Series 
+2.0 DIAGRAMS 
+2.1 BLOCK DIAGRAM 
+ 
+ 
+ 
+2.2 CONNECTION DIAGRAM 
+ 
+     
+3.0 SPECIFICATIONS 
+3.1 ABSOLUTE MAXIMUM RATINGS  
+Absolute Maximum Ratings 
+Input Voltage (Continuous): 
+-0.5 V to 50 V 
+Operating Temperature (Full Load): 
+-55 °C to +105 °C 
+Input Voltage (Transient, 1 second): 
+-0.5 V to 80 V 
+Storage Temperature: 
+-55 °C to +125 °C 
+ 
+ 
+Lead Solder Temperature (10 seconds): 
+300 °C 
+ 
+ 
+
+ 
+ 
+ 
+Sales Information 
+Phone:(425) 353-3010 
+Fax: (425) 353-4030 
+VSC5-2800D – 9.0 
+ 
+E-mail: vptsales@vptpower.com 
+Web: www.vptpower.com 
+Page 3 
+VSC5-2800D Series 
+3.2 PERFORMANCE SPECIFICATIONS 
+Tcase = -55 °C to +105 °C, Vin = +28 V ± 5%, Full Load4, Unless Otherwise Specified 
+ 
+ 
+VSC5-2805D 
+VSC5-2812D 
+ 
+Parameter 
+Conditions 
+Min 
+Typ 
+Max 
+Min 
+Typ 
+Max 
+Units 
+INPUT 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Voltage 
+Continuous 
+15 
+28 
+50 
+15 
+28 
+50 
+V 
+ 
+Transient, 1 sec3 
+- 
+- 
+80 
+- 
+- 
+80 
+V 
+Current 
+INH < 1.5 V 
+- 
+4 
+6 
+- 
+4 
+6 
+mA 
+ 
+No Load 
+- 
+40 
+70 
+- 
+40 
+70 
+mA 
+Ripple Current 
+20 Hz to 10 MHz 
+- 
+30 
+60 
+- 
+30 
+60 
+mApp 
+Undervoltage Lockout  
+Turn On 
+12 
+- 
+14.8 
+12 
+- 
+14.8 
+V 
+ 
+Turn Off3 
+11 
+- 
+14.5 
+11 
+- 
+14.5 
+V 
+OUTPUT STATIC 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Voltage 
++Vout, Tcase = 25 °C 
+4.92 
+5 
+5.08 
+11.70 
+12 
+12.30 
+V 
+ 
++Vout, Tcase = -55 °C to 105 °C 
+4.87 
+5 
+5.13 
+11.58 
+12 
+12.42 
+V 
+ 
+-Vout, Tcase = 25 °C 
+4.87 
+5 
+5.13 
+11.70 
+12 
+12.30 
+V 
+ 
+-Vout, Tcase = -55 °C to 105 °C 
+4.82 
+5 
+5.18 
+11.58 
+12 
+12.42 
+V 
+Power2,5 
+Total 
+0 
+- 
+5 
+0 
+- 
+5 
+W 
+ 
+Either Output 
+0 
+- 
+3.5 
+0 
+- 
+3.5 
+W 
+Current2,5 
+Total 
+0 
+- 
+1 
+0 
+- 
+0.42 
+A 
+ 
+Either Output 
+0 
+- 
+0.7 
+0 
+- 
+0.39 
+A 
+Ripple Voltage 
+20 Hz to 10 MHz 
+- 
+50 
+95 
+- 
+35 
+75 
+mVpp 
+Line Regulation 
++Vout, Vin = 15 V to 50 V 
+- 
+1 
+20 
+- 
+5 
+20 
+mV 
+ 
+-Vout, Vin = 15 V to 50 V 
+- 
+10 
+50 
+- 
+30 
+150 
+mV 
+Load Regulation6 
++Vout, No Load to Full Load 
+- 
+1 
+20 
+- 
+5 
+20 
+mV 
+ 
+-Vout, No Load to Full Load 
+- 
+20 
+100 
+- 
+55 
+200 
+mV 
+Cross Regulation, -Vout 
++Vout: 70% load, -Vout: 30% load 
+- 
+150 
+300 
+- 
+200 
+300 
+mV 
+ 
++Vout: 30% load, -Vout: 70% load 
+mV 
+OUTPUT DYNAMIC 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Load Step, Half to Full Load  
+Output Transient 
+- 
+65 
+150 
+- 
+100 
+200 
+mVpk 
+ 
+Recovery1 
+- 
+150 
+300 
+- 
+200 
+500 
+µs 
+Line Step3, Vin = 16 V to 40 V  
+Output Transient 
+- 
+20 
+50 
+- 
+55 
+120 
+mVpk 
+ 
+Recovery1 
+- 
+- 
+40 
+- 
+- 
+80 
+µs 
+Turn On, Vin = 0 to 28 V  
+Delay 
+- 
+10 
+20 
+- 
+10 
+20 
+ms 
+ 
+Overshoot 
+- 
+0 
+25 
+- 
+0 
+50 
+mVpk 
+FUNCTION 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+INH Pin Input3 
+Output Inhibited 
+0 
+- 
+1.5 
+0 
+- 
+1.5 
+V 
+INH Pin Open Circuit Voltage3 
+Output Enabled 
+9 
+- 
+13 
+9 
+11 
+13 
+V 
+GENERAL 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Efficiency 
+ 
+64 
+72 
+- 
+66 
+74 
+- 
+% 
+Capacitive Load3 
+Either Output 
+- 
+- 
+300 
+- 
+- 
+100 
+µF 
+Switching Frequency 
+ 
+425 
+500 
+550 
+425 
+500 
+550 
+kHz 
+Isolation 
+500 V DC, Tcase = 25 °C 
+100 
+- 
+- 
+100 
+- 
+- 
+MΩ 
+Weight  
+ 
+- 
+- 
+24 
+- 
+- 
+24 
+g 
+MTBF (MIL-HDBK-217F) 
+SF @ Tcase = 25 °C 
+- 
+ 
+- 
+- 
+ 
+- 
+MHr 
+ 
+SF @ Tcase = 55 °C 
+- 
+7.52 
+- 
+- 
+7.52 
+- 
+MHr 
+ 
+SF @ Tcase = 85 °C 
+- 
+ 
+- 
+- 
+ 
+- 
+MHr 
+POST-RAD LIMITS7 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Output Voltage 
++Vout, Tcase = -55 °C to +105 °C 
+4.77 
+5 
+5.23 
+11.34 
+12 
+12.66 
+V 
+- Vout, Tcase = -55 °C to +105 °C 
+4.72 
+5 
+5.28 
+11.34 
+12 
+12.66 
+V 
+Line Regulation 
++Vout, Vin = 15 V to 50 V 
+- 
+1 
+25 
+- 
+1 
+25 
+mV 
+Load Regulation6 
++Vout, No Load to Full Load 
+- 
+1 
+25 
+- 
+1 
+25 
+mV 
+ 
+ 
+1. Time for output voltage to settle within 1% of steady-state value. 
+2. Derate linearly to 0 at 115°C. 
+3. Verified by initial electrical design verification. Post design verification, parameter shall be guaranteed to the limits specified. 
+4. Half load at +Vout and half load at -Vout. 
+5. Up to 70% of the total power or current can be drawn either of the two outputs. 
+6. 5% Load to Full Load at -55°C. 
+7. Post-RAD limits are within standard limits except where noted. 
+
+ 
+ 
+ 
+Sales Information 
+Phone:(425) 353-3010 
+Fax: (425) 353-4030 
+VSC5-2800D – 9.0 
+ 
+E-mail: vptsales@vptpower.com 
+Web: www.vptpower.com 
+Page 4 
+VSC5-2800D Series 
+3.2 PERFORMANCE SPECIFICATIONS 
+Tcase = -55 °C to +105 °C, Vin = +28 V ± 5%, Full Load4, Unless Otherwise Specified 
+ 
+ 
+VSC5-2815D 
+ 
+Parameter 
+Conditions 
+Min 
+Typ 
+Max 
+Units 
+INPUT 
+ 
+ 
+ 
+ 
+ 
+Voltage 
+Continuous 
+15 
+28 
+50 
+V 
+ 
+Transient, 1 sec3 
+- 
+- 
+80 
+V 
+Current 
+INH < 1.5 V 
+- 
+4 
+6 
+mA 
+ 
+No Load 
+- 
+40 
+70 
+mA 
+Ripple Current 
+20 Hz to 10 MHz 
+- 
+30 
+60 
+mApp 
+Undervoltage Lockout  
+Turn On 
+12 
+- 
+14.8 
+V 
+ 
+Turn Off3 
+11 
+- 
+14.5 
+V 
+OUTPUT STATIC 
+ 
+ 
+ 
+ 
+ 
+Voltage 
++Vout, Tcase = 25 °C 
+14.62 
+15 
+15.38 
+V 
+ 
++Vout, Tcase = - 55 °C to 105 °C 
+14.47 
+15 
+15.53 
+V 
+ 
+-Vout, Tcase = 25 °C 
+14.62 
+15 
+15.38 
+V 
+ 
+-Vout, Tcase = - 55 °C to 105 °C 
+14.47 
+15 
+15.53 
+V 
+Power2,5 
+Total 
+0 
+- 
+5 
+W 
+ 
+Either Output 
+0 
+- 
+3.5 
+W 
+Current2,5 
+Total 
+0 
+- 
+0.33 
+A 
+ 
+Either Output 
+0 
+- 
+0.23 
+A 
+Ripple Voltage 
+20 Hz to 10 MHz 
+- 
+35 
+75 
+mVpp 
+Line Regulation 
++Vout, Vin = 15 V to 50 V 
+- 
+5 
+20 
+mV 
+ 
+-Vout, Vin = 15 V to 50 V 
+- 
+30 
+150 
+mV 
+Load Regulation6 
++Vout, No Load to Full Load 
+- 
+5 
+20 
+mV 
+ 
+-Vout, No Load to Full Load 
+- 
+55 
+200 
+mV 
+Cross Regulation, -Vout 
++Vout: 70% load, -Vout: 30% load 
+- 
+200 
+300 
+mV 
+ 
++Vout: 30% load, -Vout: 70% load 
+mV 
+OUTPUT DYNAMIC 
+ 
+ 
+ 
+ 
+ 
+Load Step, Half Load to Full Load 
+Output Transient 
+- 
+100 
+200 
+mVpk 
+ 
+Recovery1 
+- 
+200 
+500 
+µs 
+Line Step3, Vin = 16 V to 40 V  
+Output Transient 
+- 
+55 
+150 
+mVpk 
+ 
+Recovery1 
+- 
+- 
+80 
+µs 
+Turn On, Vin = 0 V to 28 V  
+Delay 
+- 
+10 
+20 
+ms 
+ 
+Overshoot 
+- 
+0 
+50 
+mVpk 
+FUNCTION 
+ 
+ 
+ 
+ 
+ 
+INH Pin Input3 
+Output Inhibited 
+0 
+- 
+1.5 
+V 
+INH Pin Open Circuit Voltage3 
+Output Enabled 
+9 
+11 
+13 
+V 
+GENERAL 
+ 
+ 
+ 
+ 
+ 
+Efficiency 
+ 
+67 
+75 
+- 
+% 
+Capacitive Load3 
+Either Output 
+- 
+- 
+100 
+µF 
+Switching Frequency  
+ 
+425 
+500 
+550 
+kHz 
+Isolation 
+500 V DC, Tcase= 25 °C 
+100 
+- 
+- 
+MΩ 
+Weight  
+ 
+- 
+- 
+24 
+g 
+MTBF (MIL-HDBK-217F) 
+SF @ Tcase = 55 °C 
+- 
+7.52 
+- 
+MHr 
+POST-RAD LIMITS7 
+ 
+ 
+ 
+ 
+ 
+Output Voltage 
++Vout, Tcase = -55 °C to +105 °C 
+14.17 
+15 
+15.83 
+V 
+- Vout, Tcase = -55 °C to +105 °C 
+14.17 
+15 
+15.83 
+V 
+Line Regulation 
++Vout, Vin = 15 V to 50 V 
+- 
+1 
+25 
+mV 
+Load Regulation6 
++Vout, No Load to Full Load 
+- 
+1 
+25 
+mV 
+ 
+ 
+ 
+ 
+ 
+ 
+1. Time for output voltage to settle within 1% of steady-state value. 
+2. Derate linearly to 0 at 115°C. 
+3. Verified by initial electrical design verification. Post design verification, parameter shall be guaranteed to the limits specified. 
+4. Half load at +Vout and half load at -Vout. 
+5. Up to 70% of the total power or current can be drawn either of the two outputs. 
+6. 5% Load to Full Load at -55°C. 
+7. Post-RAD limits are within standard limits except where noted. 
+ 
+
+ 
+ 
+ 
+Sales Information 
+Phone:(425) 353-3010 
+Fax: (425) 353-4030 
+VSC5-2800D – 9.0 
+ 
+E-mail: vptsales@vptpower.com 
+Web: www.vptpower.com 
+Page 5 
+VSC5-2800D Series 
+4.0 PERFORMANCE CURVES 
+4.1.1 VSC5-2805D Efficiency (Typical, 25 °C) 
+4.1.2 VSC5-2812D Efficiency (Typical, 25 °C) 
+ 
+ 
+4.1.3 VSC5-2815D Efficiency (Typical, 25 °C) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+Sales Information 
+Phone:(425) 353-3010 
+Fax: (425) 353-4030 
+VSC5-2800D – 9.0 
+ 
+E-mail: vptsales@vptpower.com 
+Web: www.vptpower.com 
+Page 6 
+VSC5-2800D Series 
+4.0 PERFORMANCE CURVES (CONTINUED) 
+4.2.1 VSC5-2805D Cross-Regulation (Typical, 25 °C) 
+ 
+ 
+4.1.2 VSC5-2812D Cross-Regulation (Typical, 25 °C) 
+ 
+ 
+4.1.3 VSC5-2815D Cross-Regulation (Typical, 25 °C) 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+Sales Information 
+Phone:(425) 353-3010 
+Fax: (425) 353-4030 
+VSC5-2800D – 9.0 
+ 
+E-mail: vptsales@vptpower.com 
+Web: www.vptpower.com 
+Page 7 
+VSC5-2800D Series 
+5.0 MECHANICAL OUTLINES AND PINOUT 
+ 
+Standard Package Option: 
+ 
+ 
+ 
+1. Tolerances are ±0.010” unless otherwise stated 
+2. Case temperature is measured on the center of the baseplate surface 
+3. Materials: Body (Epoxy); Pin (Tellurim Copper, alloy 145, gold over nickel plating) 
+ 
+Pin 
+Function 
+Pin 
+Function 
+1 
+CASE 
+5 
++VOUT 
+2 
+INH 
+6 
+OUTCOM 
+3 
+INCOM 
+7 
+-VOUT 
+4 
+28VIN 
+ 
+ 
+
+ 
+ 
+ 
+Sales Information 
+Phone:(425) 353-3010 
+Fax: (425) 353-4030 
+VSC5-2800D – 9.0 
+ 
+E-mail: vptsales@vptpower.com 
+Web: www.vptpower.com 
+Page 8 
+VSC5-2800D Series 
+6.0 TECHNICAL NOTES 
+Please note that many of these functions are also demonstrated in detail on the VPT website in the form of technical video labs. 
+6.1 GENERAL INFORMATION 
+6.1.1 Topology Description 
+The VSC5-2800D Series is an isolated dual-output flyback converter. It provides a positive and negative output voltage with respect to 
+the OUTCOM pin. Up to 70% of the total output power is available from either output. The internal voltage regulation loop actively 
+regulates the positive output using VPT’s proprietary magnetic feedback technology. The negative output is regulated by cross-
+regulation of the transformer windings. The negative output is well-regulated for balanced load conditions. For unbalanced load 
+conditions, refer to the cross-regulation performance graphs in Section 4.2 for expected performance. For a balanced or near-balanced 
+load condition, the converter will regulate down to zero load, and no minimum load is required. For an unbalanced load condition, with 
+negative loads greater than 10%, a minimum load of 10% is recommended on the positive output.  
+ 
+6.1.2 External Components 
+The VSC5-2800D Series is designed to operate stand-alone in most applications. It does not require any external components for 
+proper operation or to meet the datasheet specifications. Input and output L-C filters are provided internally for low ripple and noise. To 
+further reduce output ripple and noise, a small ceramic capacitor, 1 µF to 10 µF, can be added at the output. Most application specific 
+ripple requirements can be met with the addition of output capacitors alone. External output capacitance can be added up to the 
+maximum listed in Section 3.2. 
+6.1.3 Source Impedance 
+The impedance of the 28 V input source can interact with the DC-DC converter and can affect performance. High source impedance is 
+often caused by a long input cable or components added in series with the input. Source resistance will cause a DC voltage drop as the 
+converter draws DC input current. This voltage drop is simply the cable resistance multiplied by the input current at low line. The 
+voltage drop and the actual voltage at the input to the converter will determine the minimum source voltage at which the converter will 
+operate. A high source inductance can interact with the feedback control loop of the converter. VPT’s EMI filters will usually isolate the 
+source and eliminate this problem. In some cases, additional input capacitance will be needed to stabilize the system. 
+6.1.4 Output Configurations 
+Since the converter is isolated, the outputs can be used as a traditional 
+dual-output, with a positive and negative voltage referenced to OUTCOM, 
+or as a single-ended output referenced to –VOUT or +VOUT. For example, 
+the VSC5-2812D can provide +12 V and -12 V in the traditional dual output 
+configuration, or can provide +24 V referenced to –VOUT, or -24 V 
+referenced to +VOUT in single-ended configuration. In the single-ended 
+configuration, the OUTCOM pin will be at +12 V relative to –VOUT.  
+ 
+The outputs of multiple converters can be stacked in series to provide 
+higher voltages. When outputs of multiple modules are stacked, they 
+naturally share the load. For example, two VSC5-2812D converters can be 
+stacked to provide a 48 V output at 10 W. 
+ 
+ 
+ 
+
+ 
+ 
+ 
+Sales Information 
+Phone:(425) 353-3010 
+Fax: (425) 353-4030 
+VSC5-2800D – 9.0 
+ 
+E-mail: vptsales@vptpower.com 
+Web: www.vptpower.com 
+Page 9 
+VSC5-2800D Series 
+6.2 FUNCTION DESCRIPTIONS 
+6.2.1 On/Off Control (Inhibit)  
+The INH (Inhibit) pin is a primary-side control pin referenced to INCOM. The INH pin must 
+be driven using an open collector or open drain configuration. Pulling the INH pin low 
+disables the converter output, removes bias voltage from internal control circuitry, and puts 
+the converter in a state of minimum input current draw. Leaving INH open enables the 
+output, allowing the converter to operate normally. The pin must be pulled below 1.5 V to 
+disable the output. An optional capacitor from INH to INCOM may be used to delay turn-
+on. The INH pin should be left open if not used. 
+ 
+ 
+6.3 PROTECTION FEATURES 
+6.3.1 Input Undervoltage Lockout 
+The VSC5-2800D Series provides input undervoltage lockout protection. For input voltages below the turn-on voltage, the converter will 
+remain off, drawing minimal current from the source. When the input voltage exceeds the turn-on voltage, the converter will start. The 
+lockout circuit is designed to tolerate slow ramping input voltage waveforms.  
+6.3.2 Output Soft Start 
+The VSC5-2800D Series utilizes an output soft-start function to ramp the output in a controlled manner, eliminating output voltage 
+overshoot and limiting inrush current at turn on. A voltage-mode soft-start ensures the output waveform remains consistent regardless 
+of changes in the load current. The output rise time is approximately 8 ms. The soft-start function is active whether the module is turned 
+on with an application of input voltage or from release of the inhibit pin. Under normal conditions, current drawn from the source during 
+turn-on will not exceed the full-load input current. The turn-on delay time is specified from the application of input voltage (or release of 
+the inhibit pin) until the output reaches 90% of its final value. 
+6.4 THERMAL CONSIDERATIONS 
+The VSC5-2800D Series is rated for full power operation at 105 °C. Operation above 105 °C is allowed at reduced power. Specifically, 
+the output power should be derated linearly from full power at 105 °C to half power at 110 °C and to zero power at 115 °C. The 
+operating temperature of the converter is specified on the baseplate or the top plate of the converter. The converter is designed to be 
+conduction-cooled, with the baseplate or the top plate mounted to a heat sink, chassis, PCB or other thermal surface.  
+ 
+The DC-DC converter contains many semiconductor components. The maximum temperature rise from junction to case is  
+14 °C at full load.  
+ 
+ 
+
+ 
+ 
+ 
+Sales Information 
+Phone:(425) 353-3010 
+Fax: (425) 353-4030 
+VSC5-2800D – 9.0 
+ 
+E-mail: vptsales@vptpower.com 
+Web: www.vptpower.com 
+Page 10 
+VSC5-2800D Series 
+6.5 RADIATION HARDNESS ASSURANCE 
+VPT takes a conservative approach to radiation testing to ensure product performance in a space environment. VPT’s internal Space 
+COTS Radiation Hardness Assurance (RHA) plan documents VPT’s processes and procedures for assuring the performance of VPT 
+Space COTS products under various environmental conditions in space including Total Ionizing Dose (TID) and Single-Event Effects 
+(SEE). Additionally, the converters were characterized for Enhanced Low Dose Rate Sensitivity (ELDRS) by testing samples at 10 - 100 
+mrad(Si)/s to 40 krad(Si). Radiation tolerance is assured by a combination of both module-level characterization and sample TID testing 
+of sequestered lots of all sensitive semiconductor piece-parts used within the module. 
+ 
+6.5.1 Radiation Test and Performance Levels 
+Radiation Environment 
+Module-Level 
+Characterization 
+Total Ionizing Dose (TID) 
+High Dose Rate (HDR) 
+30 krad(Si) 
+Low Dose Rate (LDR) 
+30 krad(Si) 
+Single-Event Effects (SEE) 
+Destructive (SEB, SEGR, SEL) 
+≥ 42 MeV/mg/cm2 
+Non-Destructive (SET, SEU, SEFI) 
+≥ 30 MeV/mg/cm2 
+ 
+ 
+6.5.2 RHA Plan Summary 
+Test 
+RHA Plan for VSC Series Isolated DC-DC Converters 
+Total Ionizing Dose (TID): 
+Sensitive semiconductor components undergo RLAT to 40 krad(Si) per MIL-STD-883 Method 1019. Converters are 
+characterized to 30 krad(Si). 
+Enhanced Low Dose Rate Sensitivity (ELDRS): 
+Converters were tested at 10 - 100 mrad(Si)/s up to 40 krad(Si). Converters are characterized to 30 krad(Si). 
+Single Event Effects (SEE): 
+Converters are characterized to LET ≥ 42 MeV/mg/cm2 for catastrophic events (SEL, SEB, SEGR) and to LET ≥ 
+30 MeV/mg/cm2 for transients (SET) and functional interrupts (SEFI) under heavy ion exposure.  
+Radiation Lot Acceptance Testing (RLAT):  
+All production lots of sensitive semiconductor components undergo a sample test for TID up to 40 krad(Si). 
+ 
+ 
+
+ 
+ 
+ 
+Sales Information 
+Phone:(425) 353-3010 
+Fax: (425) 353-4030 
+VSC5-2800D – 9.0 
+ 
+E-mail: vptsales@vptpower.com 
+Web: www.vptpower.com 
+Page 11 
+VSC5-2800D Series 
+7.0 ENVIRONMENTAL SCREENING  
+ 
+Test 
+/ES+ 
+Internal Visual 
+IPC-A-610, Class 3 
+Temperature Cycling 
+MIL-STD-883, Method 1010, Condition B, -55°C to +125°C, 10 Cycles 
+Burn In 
+96 hours at +105 °C 
+Final Electrical1 
+-55 °C, 25 °C, 105 °C 
+External Visual 
+Internal Procedure 
+ 
+1. 100% R&R testing with all test data included in product shipment 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+8.0 ORDERING INFORMATION  
+ 
+VSC5- 
+28 
+05 
+D 
+/ES+ 
+1 
+2 
+3 
+4 
+5 
+ 
+(1) 
+Product 
+Series 
+(2) 
+Nominal Input 
+Voltage 
+(3) 
+Output Voltage 
+ 
+(4) 
+Number of 
+Outputs 
+(5) 
+Screening 
+Code 
+VSC5- 
+28 28 Volts 
+05 
+12 
+15 
+5 Volts 
+12 Volts 
+15 Volts  
+D Dual 
+/ES+ 
+ 
+Please contact your sales representative or the VPT Inc. Sales Department for more information concerning additional environmental 
+screening and testing, different input voltage, output voltage, power requirements, and source inspection. 
+
+ 
+ 
+ 
+Sales Information 
+Phone:(425) 353-3010 
+Fax: (425) 353-4030 
+VSC5-2800D – 9.0 
+ 
+E-mail: vptsales@vptpower.com 
+Web: www.vptpower.com 
+Page 12 
+VSC5-2800D Series 
+10.0 CONTACT INFORMATION 
+To request a quotation or place orders please contact your sales representative or the VPT, Inc. Sales Department at: 
+ 
+Phone:  
+(425) 353-3010 
+Fax:  
+ 
+(425) 353-4030 
+E-mail:  
+vptsales@vptpower.com 
+ 
+All information contained in this datasheet is believed to be accurate, however, no responsibility is assumed for possible errors or 
+omissions. The products or specifications contained herein are subject to change without notice. 
+ 
+11.0 ADDITIONAL INFORMATION 
+Visit the VPT website for additional technical resources, including: 
+Product Catalogs 
+Application Notes and White Papers 
+ 
+ 
+Technical Video Labs 
+ 
+Additional Products For Avionics/Military, 
+Hi-Rel COTS, and Space Applications 
+ 
+ 
+

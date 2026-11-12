@@ -1,0 +1,26 @@
+NINANO
+Powerful Processing board for nano-satellites
+ 
+Zynq 7030 SoC
+1Gbyte DDR3 or 512Mbyte EDAC protected
+8Kbyte FRAM
+16Mbyte QSPI Flash for bootloaderand PL configuration
+8Gbits NAND flash for data storage(PS) or 128Gbits if handledby PL
+33.33 MHz Ultrastable XO
+3-axis magnetometer(option)
+Data: 
+I2C Master or Slave, 2 UART, CAN bus, JTAG for debug
+ARM TRACE, 1 wire bus, 2 SpaceWire or 
+4 in / 4 out (LVDS or RS422), MTQ commands
+XBT interface : LVDS (data + clock) 200Mbps
+S-band transponderinterface : RS422 (RX/TX data + clock) 10 Mbps
+8 HCMOS GPIO and 12 LVCMOS user GPIO
+www.dimacred.com
+linkedin.com/company/dimac-red
+On Board Computers
+for
+Space Applications
+Size : 90 x 95 x 15mm
+Temperature (IF) : -30/+55°C
+mass : 102 g
+

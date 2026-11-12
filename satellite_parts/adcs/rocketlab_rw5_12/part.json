@@ -1,0 +1,215 @@
+{
+ "id": "rocketlab_rw5_12",
+ "name": "Rocket Lab RW5-12.0 (standard) reaction wheel (12 Nms)",
+ "category": "adcs",
+ "subcategory": "reaction_wheel",
+ "vendor": "Rocket Lab",
+ "model": "RW5-12.0 (standard)",
+ "dimensions_mm": {
+  "x": 264,
+  "y": 264,
+  "z": 70
+ },
+ "mass_g": 5000,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.rocketlab.co.nz/assets/Uploads/12-Nms-RW4-RW5-Data-Sheet-v3.pdf",
+  "document": {
+   "title": "Rocket Lab 12 Nms RW4/RW5 data sheet v3",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "adcs",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "264 mm diameter x 70 mm height, 5 kg max, +-12 Nms, +-0.2 Nm, <38 W at 12 Nms steady state, CAN-FD and redundant RS-485, -20 to 60 C operating. Mass is the stated maximum."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "USA / Canada",
+ "distributors": [
+  "direct"
+ ],
+ "satellite_class": "smallsat",
+ "adcs": {
+  "momentum_Nms": 12,
+  "max_torque_Nm": 0.2
+ },
+ "electrical": {
+  "voltage_V": {
+   "min": 30,
+   "max": 50
+  },
+  "power_W": {
+   "idle": 1.6,
+   "nominal": 38
+  },
+  "interfaces": [
+   "CAN-FD",
+   "RS-485 (redundant)"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -20,
+   "max": 60
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   264.0,
+   264.0,
+   70.0
+  ],
+  "mesh_volume_mm3": 3156213.5,
+  "watertight": true,
+  "render_kind": "reaction_wheel",
+  "effective_density_g_cm3": 1.584,
+  "bodies": {
+   "part": [
+    {
+     "name": "flange",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__flange.stl"
+    },
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 1080
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    264.0,
+    264.0,
+    70.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "base",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/base.stl"
+    },
+    {
+     "name": "cover",
+     "color": [
+      0.24,
+      0.26,
+      0.3
+     ],
+     "file": "bodies_detail/cover.stl"
+    },
+    {
+     "name": "cap",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/cap.stl"
+    },
+    {
+     "name": "bolts",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/bolts.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "CAN",
+   "RS-485"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://www.rocketlab.co.nz/assets/Uploads/12-Nms-RW4-RW5-Data-Sheet-v3.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

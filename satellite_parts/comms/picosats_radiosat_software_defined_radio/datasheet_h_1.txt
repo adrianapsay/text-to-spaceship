@@ -1,0 +1,94 @@
+SOFTWARE DEFINED RADIO
+MINIATURIZED HIGH THROUGHPUT TWO CHANNELS 
+MODEM/SDR DESIGNED FOR CUBESAT AND SMALL 
+SATELLITES FOR LEO AND GEO APPLICATIONS
+OVERVIEW
+A miniaturized modem/SDR designed for 
+CubeSat and Small Satellites for LEO and 
+GEO applications. With a volume < 0.5 U 
+and a mass < 500 g, it can reach up to 
+4 Gbps in transmission and 1 Gbps in 
+reception making it unique in size and 
+performance ratio.
+The SDR is compatible with DVB-S2X (with 
+ACM) in transmission and CCSDS in 
+reception, but also supports custom 
+waveforms and protocols. The interface 
+frequency can be programmed from 300 
+MHz to 7 GHz with instantaneous 
+bandwidth up to 1 GHz.
+APPLICATIONS
+●
+Earth observation data downlink
+●
+Constellation ISL
+●
+Satellite communication
+●
+TT&C
+
+KEY FEATURES
+PERFORMANCE
+●
+2 x 1 GHz IBW Rx channels
+●
+2 x 1 GHz IBW Tx channels
+●
+Frequency range:  300 - 7000 MHz
+●
+TX datarate:  up to 4 Gbps
+●
+RX datarate:  up to 1 Gbps 
+POWER SUPPLY
+●
+Power consumption:  < 35 W
+●
+Input supply:  from 12 V to 24 V
+ADDITIONAL FEATURES
+●
+Already compatible with DVB-S2X 
+with ACM and pre-distortion 
+transmission and CCSDS reception
+●
+Optional DVB-RCS2 or custom 
+protocols
+●
+In orbit FW and protocols 
+reprogramming
+●
+Redundant boot ﬂash with 
+automatic failover and watchdog 
+timers
+WORK ENVIRONMENT and TESTING
+●
+Operating temperature range: 
+-20 °C to +70 °C
+●
+Non-operating temperature range: 
+-30 °C to +90 °C
+●
+Vibration and TVAC qualiﬁed by 
+ECSS-E-ST-10-03C
+INTERFACES
+●
+SMP gold plated RF connectors
+●
+Space qualiﬁed data and power 
+connector
+●
+System telemetry and control with 
+CSP over CAN (opt. Ethernet or 
+RS422)
+●
+Data over SpaceFibre (opt. 
+SpaceWire or Ethernet)
+●
+Other interfaces:  UART, SPI, I2C
+ACCOMODATION
+●
+Mass:  < 500 g
+●
+Volume:  83.50 x 96 x 25 mm
+www.picosats.eu
+info@picosats.eu
+

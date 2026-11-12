@@ -1,29 +1,30 @@
 {
  "id": "serenum_1u",
- "name": "Serenum Space 1-Unit Structure (1U)",
+ "name": "Serenum Space JUNO 1-Unit Structure (1U)",
  "category": "structures",
  "subcategory": "frame",
  "vendor": "Serenum Space",
- "model": "1-Unit Structure (1U)",
+ "model": "JUNO 1-Unit Structure (1U)",
  "dimensions_mm": {
   "x": 100,
   "y": 100,
   "z": 113.5
  },
- "mass_g": 137,
+ "mass_g": 133,
  "source": {
-  "type": "unverified",
+  "type": "datasheet",
   "url": "https://satsearch.co/products/serenumspace-1-unit-structure-1u",
   "document": {
-   "title": "satsearch structures overview (mass) and listing",
+   "title": "Serenum JUNO CubeSat Structural Frames datasheet, 1 to 3 unit structure",
    "revision": null,
-   "date": null
+   "date": "2026-11-11"
   },
   "accessed": "2026-11-08",
   "fields_from_source": [
+   "dimensions_mm",
    "mass_g"
   ],
-  "notes": "Approximate mass from the satsearch overview; envelope assumed per CDS Rev 14.1 (not stated on the overview). Listing has the datasheet."
+  "notes": "1U: outside envelope 100 x 100 x 113.5 mm, inside 99.5 x 96.6 x 96.6 mm per module, 133 g. Aluminium, titanium and stainless steel; -40 to +80 C; PC/104 compatible; dual kill switch; qualification vibration, shock and thermal vacuum."
  },
  "status": "in_production",
  "fidelity": "envelope_plus_features",
@@ -32,13 +33,19 @@
   "direct",
   "satsearch"
  ],
- "dimensions_note": "assumed per CDS",
  "cost": {
   "value": null,
   "currency": "USD",
   "basis": "quote",
   "source": null
  },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -40,
+   "max": 80
+  }
+ },
+ "material": "aluminium, titanium, stainless steel",
  "geometry": {
   "measured_bbox_mm": [
    100.0,
@@ -48,7 +55,7 @@
   "mesh_volume_mm3": 80775.5,
   "watertight": true,
   "render_kind": "cubesat_frame",
-  "effective_density_g_cm3": 1.696,
+  "effective_density_g_cm3": 1.647,
   "bodies": {
    "part": [
     {
@@ -73,6 +80,41 @@
   },
   "face_counts": {
    "part": 96
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    100.0,
+    100.0,
+    113.5
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "rails",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/rails.stl"
+    },
+    {
+     "name": "frames",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies_detail/frames.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",

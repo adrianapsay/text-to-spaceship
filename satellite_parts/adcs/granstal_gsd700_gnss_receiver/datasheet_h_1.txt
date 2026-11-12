@@ -1,0 +1,166 @@
+GSD700 GNSS Receiver
+RTK accuracy & Multi-frequency receiver
+The GSD700 OEM boards is Gran Stal’s latest generation receiver powered by the most
+advanced algorithms for robust and accurate positioning.
+Key Features
++ 440 channels for tracking signals from GPS,
+GLONASS, BeiDou,Galileo,SBAS.
++ Centimetre-level (RTK) and sub decimetre-
+level position accuracy
++ Support dynamic base station, used for two-
+dimensional orientation, three-dimensional
+attitude measurement
++ Long-range RTK baselines of up to 100 km
+Accuracy scaleable to a centimetre
+Gran Stal’s knowledge and experience in the GNSS
+industry ensures that the GSD700 offers you the highest
+possible accuracy, scaleable to a centimeter.
+The GSD700 GNSS receiver designed with the super
+processing
+capability,
+up
+to
+support
+50HZ
+raw
+observation data and PVT data output, support 20HZ
+RTK decoding.
+Excellent performance
+Intelligent dynamic sensitivity signal tracking technology
+& highly reliable carrier tracking technology, greatly
+improving the carrier accuracy, to provide users with
+high-quality original observations.
+It supports current and
+planned
+signals
+as
+they
+become available
+– guaranteeing you
+reliable and
+accurate GNSS positioning now and into the future.
+
+GSD700 GNSS Receiver
+FEATURES
+GNSS Technology
+440 hardware channels for simultaneous
+tracking of all visible satellite signals
+Supported signals:
+• GPS: L1, L2C / L2P, L5
+• GLONASS:L1,L2
+• BeiDou: B1, B2, B3
+• Galileo E1, E5a, E5b
+• SBAS L1 C/A
+Highly reliable carrier tracking
+technology, greatly improving the
+carrier accuracy, to provide users with
+high-quality original data.
+Formats
+RTCM v3.0 and 3.2 (MSM included)
+CMR2.0 and CMR+ (CMR+ input only)
+NMEA 0183, v2.3, v4.0 (output only)
+Connectivity
+2 LVTTL
+4 RS232 (up to 921,600 bps)
+Full speed USB (device)
+3*LVCMOS
+2*CAN buses
+1*Ethernet
+China
+Suit 16/F, NO.99 SX West Road, Tongzhou District, Beijing, China
+Tel: +86-1831-0915-100
+Fax: +86-10-56683291
+Web: www.gnssmart.com
+Email: info@granstal.com
+PERFORMANCE
+PHYSICAL AND ENVIRONMENTAL
+Position accuracy
+Size
+100 x 60 x 9mm
+Pseudo
+Carrier
+Accuracy
+Accuracy
+3.95 x 2.36 x 0.45 in
+GPS L1 (1σ)
+10 cm
+0.5 mm
+Weight
+45 g / 1.59 oz
+GPS L2 (1σ)
+10 cm
+1.0 mm
+GPS L5 (1σ)
+5 cm
+0.5 mm
+Input voltage
+3.3 - 5.5 VDC
+BDS B1 (1σ)
+10 cm
+0.5 mm
+BDS B2 (1σ)
+10 cm
+0.5 mm
+Operating temperature
+-40 °C to +85 °C
+BDS B3 (1σ)
+5 cm
+0.5 mm
+Storage temperature
+-55 °C to +95 °C
+GOLNASS L1
+10 cm
+1.0 mm
+GOLNASS L2
+10 cm
+1.0 mm
+Antenna LNA power output
+Output voltage
+5 VDC
+Horizontal
+Vertical
+Maximum current
+100 mA
+Single Baseline RTK 1cm + 1ppm
+2cm + 1ppm
+Autonomous (1σ)
+3.0 m
+3.0 m
+Connectors
+I/O Connector
+24-pin dual row P2.0
+Time accuracy
+Antenna Connector
+MMCX
+xPPS Out
+50 ns
+Event accuracy
+< 20 ns
+Power Consumption
+1.7 W
+Velocity accuracy (1σ)
+0.03 m/s
+Dynamics
+Acceleration
+20 g
+Jerk
+10 g/s
+RTK initialization
+Initialization time
+<10 s
+Initialization reliability
+>99.9 %
+Time to first fix
+ColdStart
+< 50s
+Hot Start
+6s ~ 8 s
+Data update rate
+Position outputs (RTK)
+1/2/5/10/20Hz
+Raw measurement
+1/2/5/10/20Hz
+Signal re-acquisition
+< 2 s
+Specifications subject to change without notice.Certainfeatures and specifications may not apply to all models. © 2022 GRAN STAL CO.,Ltd. All rights reserved.
+

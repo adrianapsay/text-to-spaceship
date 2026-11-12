@@ -1,0 +1,137 @@
+{
+ "id": "saft_ls26500",
+ "name": "Saft LS 26500 primary lithium-thionyl chloride cell (7.7 Ah)",
+ "category": "power",
+ "subcategory": "cell",
+ "vendor": "Saft",
+ "model": "LS 26500",
+ "dimensions_mm": {
+  "x": 26.0,
+  "y": 26.0,
+  "z": 50.4
+ },
+ "mass_g": 48,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.master-instruments.com.au/files/battery_information/saft_lithium_product_selector_guide_54083_2_0522.pdf",
+  "document": {
+   "title": "Saft primary lithium batteries selector guide 54083-2-0522",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical"
+  ],
+  "notes": "Diameter 26.0 mm, height 50.4 mm, weight 48 g, 7.7 Ah nominal, 3.6 V Li-SOCl2 bobbin cell (selector guide table)."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "France",
+ "distributors": [
+  "Digi-Key",
+  "Farnell",
+  "distributors"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "distributor",
+  "source": null
+ },
+ "electrical": {
+  "capacity_Ah": 7.7,
+  "voltage_V": {
+   "nominal": 3.6
+  },
+  "chemistry": "Li-SOCl2 primary"
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   26.0,
+   25.93,
+   50.4
+  ],
+  "mesh_volume_mm3": 25933.0,
+  "watertight": true,
+  "render_kind": "cell_18650",
+  "effective_density_g_cm3": 1.851,
+  "bodies": {
+   "part": [
+    {
+     "name": "can",
+     "color": [
+      0.85,
+      0.72,
+      0.3
+     ],
+     "file": "bodies/part__can.stl"
+    },
+    {
+     "name": "positive_cap",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__positive_cap.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 332
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "can",
+     "color": [
+      0.85,
+      0.72,
+      0.3
+     ],
+     "file": "bodies/part__can.stl"
+    },
+    {
+     "name": "positive_cap",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__positive_cap.stl"
+    }
+   ]
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 3.6
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://www.master-instruments.com.au/files/battery_information/saft_lithium_product_selector_guide_54083_2_0522.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

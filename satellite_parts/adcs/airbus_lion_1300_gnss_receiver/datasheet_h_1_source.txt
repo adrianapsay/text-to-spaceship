@@ -1,0 +1,3 @@
+url: https://satcatalog.s3.amazonaws.com/components/33/SatCatalog_-_Airbus_-_LION_1300_GNSS_Receiver_-_Datasheet.pdf
+found from: https://satcatalog.com/component/lion-1300-gnss-receiver/
+downloaded on the lab laptop by harvest_catalogs.py (pass 6) on 2026-11-11

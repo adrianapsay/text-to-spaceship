@@ -1,0 +1,118 @@
+COLOSSUS
+Falcon
+Falcon, our most advanced GPU data processor, provides 
+massive parallel computing capability to your satellite in a 
+compact form factor. Based around the NVIDIA Jetson Orin 
+AGX module, the design also includes a built-in SSD for mass 
+data storage and many options for connectivity. An added 
+FPGA provides flexibility for interfaces as well as additional 
+compute hardware. 
+ Colossus’ design adds protection and telemetry circuits 
+for routine monitoring, as well as fault detection and 
+isolation. Each subsystem is protected with a resettable 
+e-fuse circuit to mitigate the effects of radiation. Data is 
+protected with Error Correction Codes (ECC) for RAM 
+and the large capacity non-volatile memory allows for the 
+storage of multiple copies of key files. 
+EFFICIENCY
+SPEED
+AUTONOMY
+Filtering, prioritizing, and 
+compressing data allows more efficient 
+use of limited bandwidth by sending 
+data products instead of raw data.
+Data products can be small enough 
+to allow transmission through satellite-
+to-satellite networks in seconds instead 
+of waiting hours for a traditional 
+ground station pass.
+On-board processing enables 
+satellites to make intelligent decisions 
+without waiting hours for commands to 
+be uplinked from the ground. Satellites 
+can respond instantly to changing 
+circumstances.
+
+PROCESSING CAPABILITIES
+AI Performance
+248 TOPS
+GPU
+2048-core Ampere @ 1.2 GHz
+64 Tensor Cores
+CPU
+12-core A78AE @ 2.0 GHz
+PVA
+Programmable Vision Accelerator
+FPGA
+Up to 78k LUTs
+OS
+Linux-based (built w/Yocto)
+SIZE, WEIGHT, & POWER
+Size
+Optimized for SmallSats
+118 x 100 x 30 mm
+3U SpaceVPX planned
+Mass
+600 g
+Power
+Idle: <10W
+Max Efficiency:	 45 W
+Absolute Max: 90 W
+Input Voltage
+24-36 VDC
+Protection
+eFuse input protection and monitoring
+Telemetry
+Internal ADC for voltage/
+temperature telemetry
+ENVIRONMENTAL
+Radiation
+Minimum 5-year LEO mission
+Temperature
+-40 to +60 C Operating 
+-55 to +85 C Storage
+Testing
+Thermal, Vibration, and EMI/EMC
+compliant to GSFC-STD-7000
+MEMORY/STORAGE
+RAM
+64 GB of 256-bit DRAM with ECC
+Module eMMC
+64 GB eMMC
+Internal eMMC
+256 GB
+Internal SSD
+1 TB
+EEPROM
+512 kb
+CONNECTIVITY
+Ethernet
+Two 1000BASE-T
+UART
+Four RS-422, RS-485 compatible
+CAN
+Two 1 Mbps
+USB
+Three USB3.2 Gen2
+PPS
+RS-422 hardware
+GPIO
+4 buffered GPIOs
+Debug
+JTAG, Recovery USB, UART
+Expanded
+Capabilities
+with
+Add-on board
+Additional Gigabit Ethernet
+SpaceWire
+LVDS, Camera Link
+PCIe, SpaceFibre, 40G Ethernet
+Questions? Comments?
+Need high-performance computing on your satellite?
+Please contact: sales@colossuscompute.com
+COLOSSUSCOMPUTE.COM
+© Colossus Computing, Inc. 2025
+All information subject to change. 
+Release date 25 Jul 2025. 
+

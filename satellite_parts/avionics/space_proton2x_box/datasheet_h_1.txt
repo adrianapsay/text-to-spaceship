@@ -1,0 +1,298 @@
+ 
+       Proton2X-BoxTM Suite 
+ 
+15378 Avenue of Science, Suite 200, San Diego, CA 92128 
+858.332.0700 | sales@spacemicro.com | www.spacemicro.com 
+Specifications Subject to Change Without Notice 
+Rev2.1: 12/9/2016 
+FEATURES 
+• Modular, Customizable Design 
+• Lightweight Interchangeable Slices 
+• High Performance Computing with Proton-400k SBC 
+• Solid State Buffer Storage 
+• Analog IO, Digital IO 
+• Interface Options 
+• RS-422 Buffered Serial and Parallel Ports 
+• RS-485 
+• SpaceWire 
+• PCI-104S Backplace Connector 
+• Applications: Command and Data Handling, Payload Control Electronics, Sensor/Data Processing 
+• Size: 8.0” x 6.6” (204x155mm) cross section, length depends on slices 
+• Custom Parts Program: Space Micro Commercial Space, EEE-INST-001 Level 1 or 2 
+• Radiation Hardened Electronics (TID, SEU, SEL) 
+• Internal Connectors: Two (2) 120-pin, board to board 
+• End Slice Connectivity: Between slices and inter-vehicle 
+• Frame and End Caps: Aluminum 6061-T651, configurable, conductive cooling, high strength, radiation shielding  
+Three (3) Slice Standard Configuration of Proton2X-Box™ Chassis 
+The size is 22.48 x 17.15 x 5.72 cm (8.85 x 6.75 x 2.25 inches), yielding a volume of 2205 cc. 
+SAMPLE PROTON2X-BOX 
+
+ 
+       Proton2X-BoxTM Suite 
+ 
+15378 Avenue of Science, Suite 200, San Diego, CA 92128 
+858.332.0700 | sales@spacemicro.com | www.spacemicro.com 
+Specifications Subject to Change Without Notice 
+Rev2.1: 12/9/2016 
+SLICE 
+KEY PARAMETERS 
+Proton200k 
+ 
+• 
+Advanced Very Long Instruction Word (VLIW) DSP core – TI 320C6 Series 
+• 
+4,000 MIPS@1GHz (Fixed Point Version) 
+• 
+900 MFLOPS@300MHz (Floating Point Version) 
+• 
+Memory 
+• 
+128 MB to 512 MB SDRAM with EDAC 
+• 
+1 MB RH EEPROM or 8 Gb RH Flash 
+• 
+Interfaces: 
+• 
+cPCI - 32 bit, 33 MHz I/O bus at 3.3 V 
+• 
+UART 
+• 
+Programmable GPIO 
+• 
+OS – TI Code Composer Studio 
+Proton400k 
+ 
+Proton400K with Ethernet 
+• 
+Dual Core 45 nm Freescale 2020 PowerPC Processor 
+• 
+5,760 MIPS @ 1.2GHz (2,880 MIPS w/TTMR) 
+• 
+Memory 
+• 
+512 MB to 1 GB SDRAM with EDAC 
+• 
+8 Gb RH flash storage memory 
+• 
+512 kB L2 cache 
+• 
+32 kB Instruction/32 kB Data Caches 
+• 
+Interfaces: 
+• 
+cPCI - 32 bit, 33 MHz I/O bus at 3.3 V 
+• 
+UART  
+• 
+16 Programmable GPIO 
+• 
+OS Options: 
+• 
+Linux 
+• 
+VxWorks 
+Analog I/O
+ 
+ 
+• 
+General purpose data acquisition card with 48 single ended channels 
+• 
+Monitor a variety of sensor types: 
+• 
+Attitude sensors such as gyroscope, magnetometer, and sun track-
+ers 
+• 
+Environmental sensors such as mixed thermal sensors 
+• 
+Any instrument requiring simultaneous measurements 
+• 
+14 bit ADC and 8 bit DAC 
+• 
+Configurable with 12-bit /8-bit input/output channels 
+• 
+48 single ended input multiplexed channels of resistance or voltage output 
+measurements 
+• 
+16 single output channels, single ended or differential 
+Digital I/O
+ 
+Digital I/O (1X Form Factor) 
+• 
+16 Differential RS-422 Receivers, FPGA configured as Single RX or part of 
+a Multi Drop 
+• 
+16 Differential RS-422 Drivers, FPGA configured as Single TX or Multi 
+Drop 
+• 
+36 Bit, discrete signal, Bi Directional Bus, in 8255 format, programmable 
+as: 
+• 
+Bi Directional CMOS (+5V) 
+• 
+Bi Directional CMOS (+3.3V) 
+• 
+16 Bits LVDS (at +2.5V) drive capability from the FPGA. (Note: this can be 
+programmed as serial ports or discrete signals) 
+• 
+Logic Voltage: 0 to 3.3V and 5.0V (CMOS) 
+• 
+Logic Low < 0.66V 
+• 
+Logic High > 2.65V 
+
+ 
+       Proton2X-BoxTM Suite 
+ 
+15378 Avenue of Science, Suite 200, San Diego, CA 92128 
+858.332.0700 | sales@spacemicro.com | www.spacemicro.com 
+Specifications Subject to Change Without Notice 
+Rev2.1: 12/9/2016 
+SWAP, INDIVIDUAL SINGLE WIDE SLICE FORM FACTOR (NOMINAL) 
+Function 
+Footprint 
+Weight 
+Power  
+Consumption 
+Comments 
+Processor 
+P200K 
+8.0” x 6.1” 
+(204x155 mm)* 
+150g 
+(0.33 lb) 
+4.24W 
+ 
+Processor 
+P400K 
+8.0” x 6.1” 
+(204x155 mm)* 
+150g 
+(0.33 lb) 
+12.7W (max) 
+Freescale P2020 dual core PowerPC processor, 
+VxWorks™ BSP  or Linux BSP available 
+Standard cryptographic acceleration available 
+FPGA 
+P300K 
+8.0” x 6.1” 
+(204x155 mm)* 
+~250g 
+(0.55 lb) 
+~8.0W (depending 
+on gate use & 
+speed) 
+Reconfigurable FPGA utilizing Virtex 7 
+Analog I/O 
+AIO 
+8.0” x 6.1” 
+(204x155 mm)* 
+150g 
+(0.33 lb) 
+2.12W 
+General purpose data acquisition card with 42 
+single ended channels 
+Digital I/O 
+DIO 
+8.0” x 6.1” 
+(204x155 mm)* 
+150g 
+(0.33 lb) 
+1.12W 
+General Purpose Digital I/O card with up to 32 
+differential and 36 discrete signals available 
+Space Wire 
+8.0” x 6.1” 
+(204x155 mm)* 
+150g 
+(0.33 lb) 
+2.12W 
+Supports GSFC design 
+Full-duplex LVDS Transceiver circuits 
+Raw Data rate of 200 Mbit/sec 
+3 user ports for communication 
+1553 Slice 
+1553 
+8.0” x 6.1” 
+(204x155 mm)* 
+180g 
+(0.4 lb) 
+1.90W 
+MIL-STD-1553 dual redundant Bus 
+16-bit read/write time-tag 
+Simultaneous RT/MT operation 
+Flash Module 
+8.0” x 6.1” 
+(204x155 mm)* 
+150g 
+(0.33 lb) 
+3.5W 
+Available Memory up to 256 Gb 
+Battery Mgmt. 
+8.0” x 6.1” 
+(204x155 mm)* 
+200g 
+(0.44 lb) 
+0.45W 
+Measures current and voltage for up to 4 solar 
+panels 
+Provides 4 sensed and switched +/- 5V to lines 
+Power Switch 
+8.0” x 6.1” 
+(204x155 mm)* 
+180g 
+(0.4 lb) 
+1.90W 
+ 4 H-bridges that can be configured to 8 half-
+bridges 
+8 high-side switches 
+Switches external 28V spacecraft power 
+Switches redundant slices 
+Power Supply 
+4.0” x 6.1” 
+(102x155 mm)* 
+200g 
+(0.44 lb) 
+(74%  
+efficiency) 
+3 isolated DC-DC converters produces 3.3V, 5V, 
+and ±12V 
+Input Voltage is 15 to 50V 
+Turn On Time is < 1 s 
+EMI filtering meets MIL-STD-461C and MIL-STD
+-461D EMC Requirements. 
+End Cap 
+4.0” x 6.1” 
+(102x155 mm)* 
+150g 
+(0.33 lb) 
+N/A 
+ 
+SLICE 
+KEY PARAMETERS 
+Solid State Buffer
+ 
+• 
+Variety of sizes and formats 
+• 
+SDRAM or DDR3 memory (8GB to 512 GB) 
+• 
+Flash memory (32 GB to 1 TB) 
+• 
+No SEL >70 MeV/mg/cm2 
+• 
+Auto-corrected SEFI’s 
+• 
+SEU rate of 1E-4 unrecoverable errors per day 
+• 
+Reed-Solomon EDAC 
+• 
+Heritage on ORS-1 and Classified programs 
+• 
+Up to 256 GB flash in Proton2X-Box 
+• 
+Read speed 24 MB/sec 
+• 
+Write speed 9 MB/sec 
+• 
+Faster Speeds Coming 
+

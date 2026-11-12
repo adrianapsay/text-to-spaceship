@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-printech-circuit-laboratories-ltd-x-band-8x8-patch-antenna-array-war84h.pdf
+method: product image from the catalog page https://satsearch.co/products/printech-circuit-laboratories-xband8x8patchantennaarray

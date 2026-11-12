@@ -101,6 +101,86 @@
   },
   "face_counts": {
    "part": 348
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    98.0,
+    99.0,
+    95.3
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "front_plate",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/front_plate.stl"
+    },
+    {
+     "name": "emitter",
+     "color": [
+      0.85,
+      0.66,
+      0.22
+     ],
+     "file": "bodies_detail/emitter.stl"
+    },
+    {
+     "name": "emitter_ring",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/emitter_ring.stl"
+    },
+    {
+     "name": "corner_screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/corner_screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    },
+    {
+     "name": "bolt_circle",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/bolt_circle.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",

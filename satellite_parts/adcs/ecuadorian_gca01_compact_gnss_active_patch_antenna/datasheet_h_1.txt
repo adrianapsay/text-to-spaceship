@@ -1,0 +1,223 @@
+ 
+GCA01 – COMPACT GNSS ACTIVE 
+PATCH ANTENNA 
+PRODUCT NAME 
+GCA01- COMPACT GNSS ACTIVE PATCH ANTENNA 
+SUMMARY 
+The EXA GCA01 is a one-stage, compact GNSS active patch antenna solution than works with your 
+GNSS card and link it to GPS, GALILEO, BEIDOU and  GLONASS constellations, It is the ideal antenna 
+for space-grade GNSS devices to achieve good sensitivity across all bands in a small form factor. 
+The active patch antenna, by means of a double resonance design, has a wide-band operation over 
+GPS/GLONASS/GALILEO/BeiDou systems from 1561MHz to 1606MHz. It includes a one-stage LNA 
+and front-end SAW filter to reduce out of band noise,  this antenna offers better protection from 
+LEO radiation and greatly reduces the probability of damaging your GNSS receiver due to nearby 
+transmissions. 
+FEATURES 
+• 
+Flight heritage since 2018 
+• 
+Active antenna, LNA integrated 
+• 
+SAW filter integrated 
+• 
+Wide bandwidth: 1561 to 1606 MHz 
+• 
+Low profile, only 4.7mm thickness 
+• 
+Custom choice of connectors  
+• 
+Wide FOV of 112 degrees 
+• 
+Designed for LEO missions and requirements 
+• 
+Manufactured according to NASA and ESA space standards and materials 
+• 
+Functional, performance, thermal bake out and vibration tests provided w/documentation. 
+• 
+Compatible and compliant with standard deployers and CubeSat Standard 
+ 
+ 
+ 
+
+ 
+PERFORMANCEECTRICAL 
+• 
+Frequencies: 
+o 
+GPS: 1575.42 ± 1.023MHz 
+o 
+Galileo: 1575.42 ± 4MHz 
+o 
+GLONASS: 1602 ± 5MHz  
+o 
+BeiDou: 1561.098 ± 2.046MHz. 
+• 
+Polarization RHCP 
+• 
+Antenna Gain at Zenith 
+o 
+(Ceramic Patch only) 
+ 
+GPS/Galileo 1575.42MHz: -2.5 dBi typ. @zenith 
+ 
+GLONASS 1602MHz: -1.5 dBi typ. @zenith 
+ 
+BeiDou 1561MHz: -1 dBi typ. @zenith 
+• 
+Total Antenna Gain at Zenith 
+o 
+(Antenna+SAW+LNA+Cable+Connector) 
+ 
+GPS/Galileo 1575.42MHz: 15.5 +/- 3dBi 
+ 
+GLONASS 1602MHz: 16.5 +/- 3dBi 
+ 
+BeiDou 1561MHz: 17 +/- 3dBi 
+• 
+Impedance 50 ohms 
+• 
+Output VSWR Max 2.0 
+• 
+LNA Propierties: 
+o Frequency range:  1558~1610 MHz. 
+o Out of Band Attenuation:  
+ 
+0-1534MHz, 13dB Min. 
+ 
+1634MHz-6000MHz, 20dB Min. 
+o Output Impedance: 50Ω 
+o Output VSWR 2.0 Max 
+o Pout at 1dB Gain -6 dBm Min. 
+o Compression Point -2 dBm Typical 
+o LNA Gain, Power Consumption and Noise Figure 
+ 
+Min 1.8V 12dB 5mA 3.0dB 
+ 
+Typ 3.0V 18dB 10mA 2.8dB 
+ 
+Max 5.5V 22dB 23mA 3.0dB 
+PRODUCT PROPERTIES 
+• 
+Ceramic Dimension: 
+o  25.1 x 25.1 x 4.7mm 
+• 
+Total Dimension (including shielding case) 
+o 25.1 x 25.1 x 7.9mm 
+• 
+Connector IPEX MHFI (U.FL) / SMA / MCX 
+• 
+Cable coaxial cable:  Ø1.13, length 60mm 
+• 
+Mass: 11.38 grams 
+• 
+Operating Temperature: -40 to +85°C 
+• 
+Radiation Tolerance: 4 years minimum in LEO 
+MATERIALS 
+• 
+Only TML and CVCM < 1% materials used, NASA and ESA approved 
+• 
+Antenna Material:  Ceramic 
+• 
+Connector:  SMA, MCX or Uf.l  
+• 
+PTFE (Teflon) space grade cables, coax, custom choice 
+ 
+ 
+2 
+ 
+
+ 
+PRODUCT CHARTS: 
+ANTENNA RETURN LOSS 
+ 
+NOISE FIGURE vs GAIN 
+ 
+ 
+3 
+ 
+
+ 
+LNA GAIN 
+ 
+2D RADIATION PATTERN 
+ 
+ 
+4 
+ 
+
+ 
+2D RADIATION PATTERN 
+ 
+ 
+ 
+5 
+ 
+
+ 
+ 
+3D RADIATION PATTERN 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+TESTING 
+All antennas are provided with tests reports regarding: 
+• 
+Thermal Bake out (10E-5 mbar @ 50C for 72 hours) 
+• 
+Full vibration test for Falcon 9, Electron, Soyuz, Dnepr and Long March 2D 
+• 
+QT and AT is performed on the unit to be shipped 
+Test 
+QT 
+AT 
+Functional 
+✔ 
+✔ 
+Vibration 
+ 
+✔ 
+Thermal Cycling 
+ 
+✔ 
+Thermal Vacuum 
+ 
+✔ 
+Antenna network VSWR Test 
+✔ 
+✔ 
+ 
+6 
+ 
+
+ 
+CONFIGURATION and PRICES 
+• 
+GCA01 Compact GNSS Active Patch Antenna: 1700€  
+AVAILABILITY: 
+• 
+Immediately  
+ 
+ 
+ 
+7 
+ 
+

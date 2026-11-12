@@ -1,0 +1,195 @@
+ 
+TakeMe2Space 
+PowerBank-50  
+Technical Specifications 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Description: 
+ 
+PowerBank-50 is a modular CubeSat battery pack using high energy density lithium ion 
+cells. Each pack contains 4 x 18650 cells, with a total energy capacity of over 50 Wh. The 
+battery configuration can be either 2S2P or 4S1P. Multiple battery packs of the same 
+configuration can be stacked together to increase the overall energy storage capacity of the 
+satellite. The built-in battery management system optimally charges and discharges the 
+batteries to maximise battery life and ensures constant power delivery to the system even 
+when the batteries are charging.  An intelligent fuel gauge system monitors and logs the 
+battery health and state of charge, balances the cells, and protects the cells from various 
+fault conditions. Polyimide heaters are attached to each cell to ensure that the cell 
+temperature does not drop below 5°C. The cells and electronics are packaged into a 
+compact PEEK enclosure with an aluminium lid for thermal management. The pack provides 
+rich telemetry and heater control through I2C protocol.  
+ 
+ 
+
+PowerBank-50 - Technical Specifications 
+Revision: B 
+Date: 24-08-2025 
+Specifications: 
+ 
+ 
+Parameter 
+Value 
+Physical 
+Outer Dimensions 
+95.5 x 95.5 x 26.0 mm 
+Weight 
+370 g 
+Form factor 
+PC104 compliant 
+Materials 
+PEEK enclosure, Al 6061-T6 lid and cell holders 
+Operating Temperature 
+-40°C to +85°C (with heaters active)  
+Storage Temperature 
++15°C to +30°C (recommended) 
+Cell 
+Chemistry 
+Li-ion (NCA) 
+Form Factor 
+18650 
+Voltage 
+Nominal: 3.6 V  
+Full Charged: 4.2 V 
+Full Discharged: 2.65 V 
+Capacity 
+3500 mAh / 12.6 Wh 
+Specific Energy 
+252 Wh/kg 
+Operating Temperature 
+Charging: 10°C to 45°C  
+Discharging: 0°C to 60°C 
+Battery 
+Pack 
+Configuration 
+4S1P 
+2S2P 
+Input Voltage Range 
+18 - 30 V 
+9 - 30 V 
+Battery Charging Voltage 
+16.8 V  
+8.4 V 
+Discharge Voltage Range 
+  Nominal: 14.4 V  
+Fully Charged: 16.8 V 
+Fully Discharged: 12 V 
+(varies with DoD limit) 
+Nominal: 7.2 V  
+Fully Charged: 8.4 V 
+Fully Discharged: 6 V 
+(varies with DoD limit) 
+Nominal Capacity 
+50.4 Wh 
+(3.5 Ah @ 14.4 V)  
+50.4 Wh 
+(7 Ah @ 7.2 V)  
+Charge Current  
+Nominal: 1.0 A  
+Max: 2.0 A 
+Nominal: 2.0 A  
+Max: 3.2 A 
+Max Discharge Current  
+Continuous: 5.0 A  
+Pulse: 10.0 A 
+Continuous: 5.0 A  
+Pulse: 12.0 A 
+Max Discharge Power 
+Continuous: 72 W 
+Pulse: 144 W 
+Continuous: 36 W 
+Pulse: 86 W 
+Cycles (@ Depth of 
+Discharge) 
+20,000 (@ 20% DoD) 
+10,000 (@ 30% DoD) 
+  5,000 (@ 50% DoD) 
+  1,000 (@ 80% DoD) 
+2 
+
+PowerBank-50 - Technical Specifications 
+Revision: B 
+Date: 24-08-2025 
+Battery Heater Power 
+Up to 3 W per cell (EPS controlled) 
+Idle Power Consumption 
+0.1 W  
+Safety 
+Over-voltage Protection 
+Limits charging voltage to programmed voltage  
+Under-voltage Protection 
+Prevents discharge when battery voltage reaches 
+lower threshold  
+Over-charge current 
+Prevents charging current above programmed 
+threshold 
+Over-discharge current 
+Prevents discharge current over programmed limit  
+Short-circuit protection 
+Detects short circuit and cuts off batteries from 
+load  
+Resettable Fuse 
+PTC fuse shuts off battery when overheated, resets 
+when fuse has cooled 
+Over temperature 
+protection 
+Does not charge or discharge when cell temp. is 
+over 60°C 
+Under temperature 
+protection 
+Does not charge when cell temp. is below 5°C  
+Internal self-discharge 
+detection 
+Measures and logs battery leakage current 
+Active Cell Balancing 
+Fuel gauge monitors and balances cells in series 
+(up to 10 mA balance current)  
+Telemetry 
+Charge Voltage 
+Discharge Voltage 
+Individual Cell voltage 
+Charge Current  
+Discharge Current 
+Charge Power 
+Discharge Power 
+Battery Cycle Count 
+Battery Charge % 
+Battery Capacity 
+Time-to-full/empty 
+Cycle-based Age Forecast 
+IC Die Temperature 
+Battery Temperature  
+Interfaces 
+Connectors 
+1 x Samtec B2B Header male 
+1 x Samtec B2B Header female 
+3 
+
+PowerBank-50 - Technical Specifications 
+Revision: B 
+Date: 24-08-2025 
+1 x Harwin Gecko-SL  
+Communication 
+I2C  
+Software 
+Software Development Kit 
+(SDK) 
+SDK will be provided for all sensors 
+Supported Languages for 
+SDK 
+C - Language 
+Testing & 
+Compliance 
+ETL: TVAC, EMI/EMC, 
+Vibration and Shock 
+Tolerance 
+TBD 
+Mission Life Expectancy 
+Up to 5 Years 
+ 
+4 
+

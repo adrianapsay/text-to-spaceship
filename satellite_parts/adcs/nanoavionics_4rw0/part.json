@@ -117,6 +117,50 @@
   },
   "face_counts": {
    "part": 40
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    92.5,
+    92.5,
+    51.2
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "plate",
+     "color": [
+      0.55,
+      0.52,
+      0.45
+     ],
+     "file": "bodies_detail/plate.stl"
+    },
+    {
+     "name": "wheels",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/wheels.stl"
+    },
+    {
+     "name": "covers",
+     "color": [
+      0.7,
+      0.72,
+      0.74
+     ],
+     "file": "bodies_detail/covers.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",
@@ -131,15 +175,7 @@
   "power_bus_V": null
  },
  "reference_images": {
-  "datasheets": [
-   {
-    "file": "datasheet_2_page1.png",
-    "pdf": "datasheet_2.pdf",
-    "kind": "web_search",
-    "url": "https://ntnu.no/wiki/download/attachments/124061783/M6P_Summary%20Technical%20Information_rev8.pdf?api=v2",
-    "title": null
-   }
-  ],
+  "datasheets": [],
   "stl_preview": "preview.png",
   "drawing": "drawing.png",
   "photo_url": "https://nanoavionics.com/wp-content/uploads/2018/07/nanoavionics-cubesat-small-satellite-nanosatellite-momentum-reaction-wheels-4rw0-set.jpg",

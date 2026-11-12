@@ -1,0 +1,120 @@
+Navcube | Technical Specifications | TM2.space 
+Revision: A 
+Date: 22-01-2024 
+ 
+Navcube (Dual Transceiver Model) 
+Technical Specifications  
+ 
+ 
+ 
+ 
+Description: 
+NavCube is a compact, high-performance multi-GNSS navigation module developed by 
+TM2Space for CubeSats and small satellite platforms requiring reliable position, velocity, 
+and timing information. Supporting GPS L1, GLONASS L1, and Galileo E1 constellations, 
+NavCube provides precise navigation data and high-accuracy Pulse-Per-Second (PPS) 
+timing for orbit determination, mission synchronization, and spacecraft operations. 
+Designed in a PC104-compliant form factor with dual isolated Full-Duplex RS-485 
+interfaces, the module enables seamless integration with satellite avionics while ensuring 
+robust communication and electrical isolation. Featuring low power consumption, a 
+rugged hard-anodized aluminium enclosure, and qualification through thermal vacuum, 
+vibration, and shock testing, NavCube delivers reliable performance in demanding space 
+environments.
+ 
+CIN: U61900TS2024PTC186392 
+1 
+
+Navcube | Technical Specifications | TM2.space 
+Revision: A 
+Date: 22-01-2024 
+Specifications: 
+ 
+ 
+Parameter 
+Value 
+GPS 
+GNSS type 
+GPS L1 / GLONASS L1 / 
+GALILEO E1 
+Cold Start TTFF 
+35 seconds (typical)  
+90 seconds (max) 
+Hot start 
+1 second 
+Attitude restriction 
+None 
+Velocity restriction 
+9.75 km/s 
+Max input power at antenna 
+RF input 
+-10 dBm 
+PPS output duty cycle 
+10% (100ms) 
+PPS accuracy 
+20 ns 
+Position accuracy 
+12 m (3σ) 
+Velocity accuracy 
+0.9 m/s (3σ) 
+Measurement update rate 
+1 Hz default (configurable up to 5 Hz) 
+Power 
+Power Consumption 
+(Nominal) 
+0.6W (dual transceivers) 
+0.3W (single transceiver)​
+This power consumption is with passive 
+antenna 
+Input Voltage 
+5V 
+Input power isolation 
+Included 
+Interfaces 
+Interfaces 
+2X full duplex RS485 
+Signal isolation 
+Included 
+Mechanical 
+Dimensions 
+90.1mm x 95.6mm x 20.2mm 
+Weight 
+170g 
+Form factor 
+PC104 compliant with stackable connector 
+Material 
+Hard anodised Al 6061 T6 
+Temperature Range 
+-40 C to 85 C 
+Storage Temperature 
+-55C to + 85C 
+Connectors 
+1x 2-pin Molex picolock, 3x 6-pin Molex 
+CIN: U61900TS2024PTC186392 
+2 
+
+Navcube | Technical Specifications | TM2.space 
+Revision: A 
+Date: 22-01-2024 
+picolock, 1 PC104, 2 SMA  
+Software 
+Software Development Kit 
+(SDK) 
+Custom library provided 
+Testing &  
+Compliance 
+T-Vac 
+2 Cycles with temperature range of +60℃ 
+to -25℃ 
+Vibration 
+Random vibration acceptance test levels  
+20 - 2000 Hz at 4.47grms for 60 seconds 
+Shock 
+100 Hz at 30g 
+1000 Hz at 1500g 
+5000 Hz at 1500g 
+ 
+ 
+Questions? Queries? Contact us at info@tm2.space 
+CIN: U61900TS2024PTC186392 
+3 
+

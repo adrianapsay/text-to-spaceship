@@ -1,40 +1,40 @@
 {
  "id": "samsung_inr21700_50e",
- "name": "Samsung SDI INR21700-50E Li-ion cell (21700, 5000 mAh)",
+ "name": "Samsung SDI INR21700-50E Li-ion cell (21700, 4900 mAh)",
  "category": "power",
  "subcategory": "cell",
  "vendor": "Samsung SDI",
  "model": "INR21700-50E",
  "dimensions_mm": {
-  "x": 21.1,
-  "y": 21.1,
+  "x": 21.25,
+  "y": 21.25,
   "z": 70.8
  },
  "mass_g": 69.0,
  "source": {
-  "type": "unverified",
+  "type": "datasheet",
   "url": "https://cdn.shopify.com/s/files/1/0481/9678/0183/files/samsung_50e-2.pdf",
   "document": {
-   "title": "Samsung SDI INR21700-50E datasheet (mirror indexed at https://www.18650batterystore.com/pages/data-sheets)",
+   "title": "Samsung SDI specification INR21700-50E, version 'Tentative'",
    "revision": null,
-   "date": null
+   "date": "2026-11-11"
   },
   "accessed": "2026-11-08",
-  "fields_from_source": [],
-  "notes": "Datasheet link recorded but not opened from this session; diameter, length, mass, capacity and current are from memory of the datasheet and must be checked against the PDF (max dimensions, typical mass)."
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "Height 70.80 mm max, 69 g max. Diameter: the specification table prints 'max 20.25 mm' but the cell drawing in the same document gives max 21.25 mm; 21.25 is used (a 21700 cell cannot be 20.25). 1C = 4900 mA, rated capacity min 4753 mAh at 1C, 3.6 V, 9.8 A maximum continuous discharge (14.7 A not continuous). Charge 0 to 45 C, discharge -20 to 60 C."
  },
  "status": "in_production",
  "fidelity": "envelope",
  "vendor_country": "Korea",
- "distributors": [
-  "18650batterystore",
-  "Digi-Key (some)",
-  "cell distributors"
- ],
  "electrical": {
   "chemistry": "Li-ion 21700",
-  "capacity_mAh": 5000,
-  "energy_Wh": 18.0,
+  "capacity_mAh": 4900,
+  "energy_Wh": 17.6,
   "voltage_V": {
    "min": 2.5,
    "nominal": 3.6,
@@ -50,16 +50,23 @@
  },
  "cost_note": "typical single-cell retail, approximate",
  "cost_basis_note": "approximate",
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -20,
+   "max": 60
+  }
+ },
+ "status_note": "stocked by cell distributors (web search 2026-11-11)",
  "geometry": {
   "measured_bbox_mm": [
-   21.1,
-   21.04,
+   21.25,
+   21.19,
    70.8
   ],
-  "mesh_volume_mm3": 24186.0,
+  "mesh_volume_mm3": 24531.1,
   "watertight": true,
   "render_kind": "cell_18650",
-  "effective_density_g_cm3": 2.853,
+  "effective_density_g_cm3": 2.813,
   "bodies": {
    "part": [
     {
@@ -84,6 +91,29 @@
   },
   "face_counts": {
    "part": 332
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "can",
+     "color": [
+      0.85,
+      0.72,
+      0.3
+     ],
+     "file": "bodies/part__can.stl"
+    },
+    {
+     "name": "positive_cap",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__positive_cap.stl"
+    }
+   ]
   }
  },
  "image": "preview.png",
@@ -101,7 +131,7 @@
     "pdf": null,
     "url": "https://cdn.shopify.com/s/files/1/0481/9678/0183/files/samsung_50e-2.pdf",
     "kind": "vendor_link",
-    "title": "Samsung SDI INR21700-50E datasheet (mirror indexed at https://www.18650batterystore.com/pages/data-sheets)"
+    "title": "Samsung SDI specification INR21700-50E, version 'Tentative'"
    },
    {
     "file": "datasheet_1_page1.png",

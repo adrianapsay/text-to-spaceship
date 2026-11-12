@@ -108,6 +108,95 @@
   },
   "face_counts": {
    "part": 40
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    71.0,
+    46.0,
+    11.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "feet",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/feet.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "connector_shell",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/connector_shell.stl"
+    },
+    {
+     "name": "connector_insert",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector_insert.stl"
+    },
+    {
+     "name": "jackscrews",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/jackscrews.stl"
+    },
+    {
+     "name": "label",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies_detail/label.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",

@@ -1,0 +1,219 @@
+{
+ "id": "umbra_syncrelease_4",
+ "name": "Umbra SyncRelease 4 separation system (part 5011H10001-1)",
+ "category": "mechanisms",
+ "subcategory": "separation_system",
+ "vendor": "Umbra",
+ "model": "SyncRelease 4 separation system 5011H10001-1",
+ "dimensions_mm": {
+  "x": 449.6,
+  "y": 499.9,
+  "z": 88.4
+ },
+ "mass_g": 6400,
+ "source": {
+  "type": "datasheet",
+  "url": "https://umbra.space/wp-content/uploads/2026/03/SpaceSystemsCatalog.pdf",
+  "document": {
+   "title": "Umbra Space Systems Catalog (2026-03)",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical"
+  ],
+  "notes": "17.700 x 19.680 x 3.480 in, 6.40 kg total (5.48 kg lower, 0.92 kg upper), <4.5 W peak, 3 W average at 24 V."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "electrical": {
+  "power_W": {
+   "nominal": 3.0,
+   "peak": 4.5
+  }
+ },
+ "vendor_country": "USA",
+ "distributors": [
+  "direct"
+ ],
+ "satellite_class": "smallsat",
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   449.6,
+   499.9,
+   88.4
+  ],
+  "mesh_volume_mm3": 19868312.4,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 0.322,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    449.6,
+    499.9,
+    88.4
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "feet",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/feet.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "connector_shell",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/connector_shell.stl"
+    },
+    {
+     "name": "connector_insert",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector_insert.stl"
+    },
+    {
+     "name": "jackscrews",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/jackscrews.stl"
+    },
+    {
+     "name": "label",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies_detail/label.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://umbra.space/wp-content/uploads/2026/03/SpaceSystemsCatalog.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

@@ -1,0 +1,849 @@
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Space-Friendly   
+CubeSat ADS-B Next Generation 
+piADSB-NG 
+  
+Product Datasheet 
+Rev. A/2023 
+ 
+ 
+Intended to track Air Traffic from Space.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Made in Czech Republic, a country with space heritage since 1978. 
+© 2014-2023 SkyFox Labs, All rights reserved. 
+
+ 
+ 
+Space-Friendly 
+CubeSat ADS-B System - Next Generation
+ 
+Intended to track Air Traffic from Space.  
+ 
+ 
+ 
+               www.SkyFoxLabs.com, Space-Friendly products 
+2             piADSB-NG Product Datasheet, Rev. A 
+Issue rev. A, 2023, info@skyfoxlabs.com, U studanky 620/13. CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2023 SkyFox Labs, s.r.o., All rights reserved 
+ 
+ 
+                           
+FEATURES 
+ 
+Realtime Aircraft Surveillance for Space Stations 
+ 
+CubeSat ADS-B System with No Moving Parts 
+ 
+Fully functional Passive Radar for Aircraft tracking 
+ 
+Automatic Dependent Surveillance – Broadcast 
+(ADS-B) Receiver, Mode-S 1090ES 
+ 
+1090 MHz L-band Zero-IF receiver 
+ 
+Improved sensitivity, Squitter Counter, Telemetry 
+ 
+56bit, 112bit Extended Squitters 
+ 
+Civil Downlink Format 11, 17 (DF11, DF17) Output 
+ 
+Highly Sensitive, Ultra Low Power, World's Lowest 
+Profile 
+ 
+Sensitivity up to -106 dBm (10-2 BER) 
+ 
+Up to 2000 km slant range  
+ 
+Embedded RHCP Patch Antenna Array 
+ 
+Intended to LEO up to h = 600 km,  
+ 
+Squitter Filters, 24bit CRC calculation 
+ 
+CubeSat standard Compatible 
+ 
+Ideal for X/Y,+/- CubeSat wall mount 
+ 
+Mega-Constellation Ready! product 
+ 
+Easy-to-Implement Data Interface  
+ 
+UART 230400-8-N-1, 3V3-CMOS levels 
+ 
+Allow Nonstop Operation with conventional 
+ 
+1U CubeSat power budget 
+ 
+2.7 to 3.6V Power supply 
+ 
+Power consumption 
+ 
+250 mW (typical), 3.3 V @ 25°C 
+ 
+Velocity  
+ 
+0 up to 10 km/s (Flight Model) 
+ 
+Startup time less than 3 seconds (typical) 
+ 
+Protocols 
+ 
+ASCII output (standard) 
+ 
+HEX or Binary (on request) 
+ 
+Ultra Low Profile and Dimensions  
+ 
+98×82.6×12.5 mm 
+ 
+Wide temperature range 
+ 
+-40˚C to +85˚C 
+ 
+Connectors 
+ 
+PicoBlade™ 1.25 6P connector (Power + Data) 
+ 
+Low mass 124 grams  
+ 
+Engineering Model for FlatSat design Available 
+ 
+Evaluation Kit Available 
+ 
+ 
+ 
+APPLICATIONS 
+ 
+Nonstop Aircraft tracking on Small Satellites 
+ 
+Aircraft Search & Rescue (SAR) Node 
+ 
+Air Trafic Control (ATC) Megaconstellations 
+ 
+Air Trafic Control (ATC) Management 
+ 
+CubeSats, Nano- Micro-Sats 
+ 
+Limited Power Budget Space Projects 
+ 
+Stratospheric, Meteorological, Scientific Balloons 
+ 
+ 
+Fig. 1 CubeSat ADS-B System - Next Generation, 
+Flight Model. 
+ 
+GENERAL DESCRIPTION 
+ 
+ 
+The piADSB-NG/Flight Model is the 
+World's 
+First 
+Space-Friendly 
+Automatic 
+Dependent 
+Surveillance–Broadcast 
+or 
+ADS-B 
+Extended Squitter, Mode-S Passive Radar Receiver 
+System with No Moving Parts, Ultra Low Profile, 
+Low Power requirements, Squitter Counter and 
+Telemetry engine. With integrated RHCP patch 
+antenna array the product is intended to track 
+Aircrafts from satellites in Low Earth Orbit (LEO), 
+High Altitude Balloons (HAB) or Unmanned Aerial 
+Vehicles (UAVs) with limited power and mass 
+budgets.  
+ 
+It requires only 10 % of power in 
+comparison with conventional space-grade ADS-B 
+receivers allowing permanent data output. 
+ 
+Easy-to-use UART serial data interface 
+output providing standardized ASCII sentences 
+together with embedded ADS-B antenna array 
+provides a smart standalone solution for all kind of 
+Space-grade or terrestrial projects where the precise 
+Aircraft position, type, velocity, direction or 
+ICAO/airliner information is required.  
+ 
+ 
+The unit is interfaced with power supply 
+and data output using single six pin PicoBladeTM 
+connector with redundant pins. 
+ 
+Very low mass and dimensions fits 
+perfectly with all kind of space-demanding projects.  
+PRODUCT DATA SHEET                   
+piADSB-NG
+
+ 
+ 
+ 
+ 
+  
+ 3       
+www.SkyFoxLabs.com, Space-Friendly products 
+piADSB-NG Product Datasheet, Rev. A 
+Issue rev. A, 2023, info@skyfoxlabs.com, U studanky 620/13. CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2023 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+piADSB-NG
+TABLE OF CONTENTS 
+ 
+APPLICATIONS...................................................................2 
+GENERAL DESCRIPTION..................................................2 
+TABLE OF CONTENTS .......................................................3 
+ABSOLUTE MAXIMUM RATINGS ....................................3 
+PARAMETRIC SPECIFICATION........................................3 
+CONNECTORS DESCRIPTION ..........................................4 
+FUNCTIONAL BLOCK DIAGRAM .....................................4 
+THEORY OF OPERATION..................................................5 
+PROTOCOLS........................................................................6 
+OUTPUT DATA DESCRIPTION .........................................6 
+ANTENNA ........................................................................... 7 
+ENGINEERING MODEL ....................................................8 
+EVALUATION KIT..............................................................8 
+APPLICATION NOTES & RECOMMENDATIONS.......... 10 
+QUALITY ASSURANCE .................................................... 10 
+EXPORT CONTROL...........................................................11 
+DISCLAIMER .................................................................... 12 
+ 
+ 
+ABSOLUTE MAXIMUM RATINGS 
+ 
+VDD to GND………….…………………………..-0.3 V to +4.2 V 
+Other Pins to GND:.............................. -0.3 V to +(VDD +0.3) V 
+DC Input Voltage: VI  ....... -0.3 V to VDD + 0.3 V (≤ 4.2 V max.) 
+Maximum RF Input Power:........................................ +15 dBm 
+DC Output Voltage: VO ....-0.3 V to VDD + 0.3 V (≤ 4.2 V max.) 
+ 
+DC Input Current: II at VI < 0 V or VI > VDD ...................±20 mA 
+Operating Temperature Range:……………..…-40°C to +85°C 
+DC Output Current: IO at VO < 0 V or VO > VDD..............±20 mA 
+Storage Temperature Range:……………….....-45°C to +90°C 
+ 
+NOTE: Stresses beyond those listed under “Absolute Maximum Ratings” may cause permanent damage to the 
+device. These are stress ratings only, and functional operation of the device at these or any other conditions 
+beyond those indicated under specification conditions is not implied. Exposure to absolute maximum rated 
+conditions for extended periods may affect device reliability. Voltage values are with respect to system ground 
+terminal. 
+ 
+PARAMETRIC SPECIFICATION 
+ 
+TA = −40°C to +85°C, VDD = 3.3 V, Integrated RHCP patch antenna array used, unless otherwise noted. 
+Parameter 
+Symbol 
+Min 
+Typ 
+Max 
+Units 
+Notes/Conditions 
+Operating Supply Voltage 
+VDD 
+2.7 
+3.3 
+3.6 
+V 
+ 
+Operating Supply Current 
+ID 
+ 
+75 
+ 
+mA 
+Continuous DC current consumption during 
+nominal operations. 
+Operating Power Consumption 
+POperation 
+ 
+250 
+ 
+mW 
+ 
+Operating Frequency 
+fRFIN 
+  
+1090 
+  
+MHz 
+1090ES, L-band 
+RF Bandwidth 
+BW 
+ 
+15 
+ 
+MHz 
+-3dB 
+Operating Velocity 
+V 
+0 
+ 
+9 
+km/s 
+ 
+Time-to-First-Frame 
+tTTFF 
+  
+ 
+3  
+s 
+The piADSB-NG Start-up time. 
+RF Sensitivity 
+PIN 
+-104 
+-105 
+-106 
+dB 
+BER 10-2 
+Dynamic range 
+DR 
+ 
+20 
+30 
+dB 
+-76 to -86 dBm maximum input power 
+Slant Range 
+d 
+600 
+1000 
+2000 
+km 
+Depending on the ADS-B Out transponder 
+output power/aircraft antenna radiation 
+pattern. 
+~33000 
+Framerate given by DF11, DF17 frames 
+filtering and provided at 230400 bps output 
+bitrate per minute. 
+ 
+Framerate is limited by amount of Downlink 
+Format frames selected and output bitrate 
+and was measured with periodical frame 
+transmission generator, at 230400 bps 
+output datarate. 
+Minimum framerate is 1 fpm telemetry 
+frame, if no aircraft transponder is received.
+Output Data Framerate 
+FR 
+1 
+ 
+~600 
+fpm 
+Limitation of the Engineering Model unit 
+maximum framerate. 100ms delay between 
+frames. 
+Output Data Bitrate 
+BR 
+ 9600 
+230400 
+1250000  
+bps 
+Bitrate settings are uploaded and fixed 
+during manufacturing process. No post-
+manufacturing settings possible. 
+Output Frame Data Quality 
+DQ 
+ 
+99.99999
+100  
+% 
+As a standard, only CRC-checked 
+Downlink Format 11 and 17 frames are 
+provided. Most civil airliners uses ADS-B 
+1090ES frames to broadcast the most 
+useful and detailed data in this frame type. 
+100% of all output data frames are valid, 
+based on internal software-defined Cyclic 
+redundancy check. 
+
+ 
+ 
+ 
+ 
+  
+ 4       
+www.SkyFoxLabs.com, Space-Friendly products 
+piADSB-NG Product Datasheet, Rev. A 
+Issue rev. A, 2023, info@skyfoxlabs.com, U studanky 620/13. CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2023 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+piADSB-NG
+CONNECTORS DESCRIPTION 
+ 
+ 
+The piADSB-NG receiver is connected to the satellite system via standardized PicoBladeTM 6 pin 
+interface connector (P/N 53261-06). Each pin, its function and direction or manner of use is indicated in the  
+Tab.: 1 below. The connector location is displayed in Fig. 2. 
+ 
+ 
+Tab.: 1 The piADSB-NG Pin Description, NOTE: Minimum required interface pins are highlighted. 
+Pin
+Name
+Input, 
+Output, 
+Power 
+Description 
+1 
+2 
+VDD 
+Power 
+Positive (+) System Power Input. Positive power supply input, connect to +3.3 V with respect to 
+GND system ground pins.  
+3 
+4 
+TXD 
+Output 
+ADS-B Receiver Serial Data Output. ASCII sentences are present on this pin. Data is provided 
+by standard UART serial transfer at a rate of 230400 bps, no parity, 8 data bits, 1 stop bit. 
+LVCMOS compatible signaling. 
+5 
+6 
+GND 
+ Power 
+System Ground. Must be connected to ground potential. This pin may be internally connected to 
+mounting areas.  
+GND-Chassis zero ohm resistors/jumpers may be soldered to connect the system ground to 
+mounting chassis. Keep GND-Chassis left floating to prevent grounding loops. 
+ 
+ 
+ 
+Fig. 2 The piADSB-NG ACTIVITY LED and Interface Connector locations. NOTE: The piADSB-NG connector location 
+is displayed from the BOTTOM side. The SMD mount connector type is MOLEX 53261-0671 with 1.25mm pitch. Detailed 
+dimensions drawing is available online as STEP model. 
+ 
+IMPORTANT NOTE: Metallic Contacting Areas (MCA) touching the satellite walls after the panel 
+is mounted are electrically insulated from the module GND in DC domain (<100MΩ), however 
+works as an AC short in order to extend the antenna ground plane. Total capacity per each of two 
+metallic contacting areas is 150 + 150 pF = 300 pF with respect to GND groundplane potential. 
+To prevent the grounding loops, GND-Chassis zero ohm solder jumpers are intrinsically not used. In case the 
+satellite structure is realized as non-conductive, please contact factory for further recommendations. Standard 
+cylindrical head screws (M2.5) can be utilized to fix the module onto the CubeSat structure. 
+ 
+ 
+FUNCTIONAL BLOCK DIAGRAM 
+ 
+ 
+The key functional blocks of the piADSB-NG are described in Fig. 3. The system consists of the high 
+gain RHCP (Right Hand Circular Polarization) Patch Antenna array interconnected via RF coupler, Low Noise 
+Amplifier (LNA), SAW Filter, Down Converter to Zero-IF and High speed baseband data processing core. The 
+telemetry engine consist of the main input bus voltage readout, input current sensing, temperature measurement 
+and squitter counter. The design of the front-end guarantees excellent noise figure and ensure high suppression 
+of the out of band signals, whilst being optimized for large/orbital range with at least 20 - 30dB dynamic range.  
+
+ 
+ 
+ 
+ 
+  
+ 5       
+www.SkyFoxLabs.com, Space-Friendly products 
+piADSB-NG Product Datasheet, Rev. A 
+Issue rev. A, 2023, info@skyfoxlabs.com, U studanky 620/13. CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2023 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+piADSB-NG
+ 
+The frame decoder, downlink format filter, CRC calculation and serialization is performed in high speed 
+digital core. Output ASCII sentences are provided via UART interface. The piADSB-NG receiver is realized on 
+4-layers PCB including two power planes to maximally suppress the noise of analogue and digital circuits and 
+protect the receiver circuits against interference from the other electronics (EMC susceptibility). Frame 
+transmission indication using Blue "ACTIVITY" LED is used for quick check of the receiver's activity. DC 
+discharge attenuation and ESD protection is applied on the antenna array input. 
+ 
+ 
+Fig. 3 The piADSB-NG Receiver Functional Block Diagram.  
+ 
+ 
+THEORY OF OPERATION 
+ 
+ 
+The piADSB-NG unit is the standalone single channel zero-IF receiver processing freely available 
+frame transmissions of the Aircrafts' Mode-S Automatic Dependent Surveillance–Broadcast or ADS-B Extended 
+Squitter, Mode-S Passive Radar working on 1090 MHz frequency band. Signals are broadcasted by flying or fly-
+ready aircraft transponders upon terrestrial Air Traffic Control (ATC) interrogations broadcasted at 1030 MHz. 
+Concurrent in-flight transponders interrogations occurs also by line-of-sight airplanes in the air.  
+ 
+Data processing core and RF signal chain supports 1090ES transport protocol only. Interrogation 
+reception on 1030 MHz or 978 MHz Universal Access Transceiver (UAT) transport protocol are not 
+implemented. 
+ 
+Aircraft Flight Management System (FMS) produces data which are then stored in Binary Data Store or 
+so-called BDS registers. This aircraft's digital memory space is updated according to actual in-flight values as a 
+database source for Mode-S interrogation replies. Moreover a total of 56 and 112 bits long Mode-S Extended 
+Squitter frames transmitted at a rate of 1 Mbps contains cyclic redundant check (CRC) bytes to help control the 
+correctness of transmitted data on receiver side. 
+ 
+High frequency L-band RF signal from the passive antenna array is fed through the Low Noise 
+Amplifier with ultra low Noise Figure and ESD protection blocking the DC bias and possible antenna plasma 
+charging in space. Signal is then filtered out to clean out-of-band signals using SAW filter with as low as 2dB 
+passband attenuation. Downconversion to zero-IF band is then performed to feed the high speed data processing 
+core. The frame header pattern is continuously searched in digitized input signal. In case the frame initial header 
+is correctly found in the signal, the record of following 56/112 bits long datagram is extracted using SkyFox 
+Labs' developed demodulator and decoder. Zero-IF conversion together with software-defined decoder allows 
+the receiver to perform the whole reception task using ultra low power requirement only.  
+ 
+On top of signal recordings the Downlink Format or data type filtering is performed and in case of 
+Downlink Format 11 and 17, the CRC is calculated. If the calculated CRC matches the received CRC data, the 
+serialized data output is provided on output TX pin. During the processed datagram transmission the associated 
+SMD LED shines to indicate the receiver performance / activity. Ultra low power LED requirement and short 
+duty cycle allows user to remain the LED soldered even for flight conditions. 
+ 
+The piADSB-NG receiver software-defined demodulator and data processing core allows to perform 
+also other Downlink Format reception processing and output. However, in most cases Downlink Format 11 and 
+17 frames provided by civil aircrafts' broadcasts contains the most useful and most detailed data such as position, 
+ICAO callsign, velocity, heading, etc. From this point of view, the DF11 and DF17 filter has been implemented 
+as fixed providing up to 100% of output datagrams to be correct. 
+
+ 
+ 
+ 
+ 
+  
+ 6       
+www.SkyFoxLabs.com, Space-Friendly products 
+piADSB-NG Product Datasheet, Rev. A 
+Issue rev. A, 2023, info@skyfoxlabs.com, U studanky 620/13. CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2023 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+piADSB-NG
+ 
+The same frequency band (1090 MHz) is also shared with the Traffic Collision Avoidance System 
+(TCAS), by different frequency channel spacing also due to the Distance Measuring Equipment (DME) system 
+interrogations. Furthermore, more aircraft transponders may share the same band at a time by nature of timing-
+uncoordinated media access transmissions. Several transponders in the range are also broadcasting different 
+types of frames. Certain amount of squitter loss rate is thus always expected. Including the CRC filtering, the 
+frame rate of DF11 and DF17 piADSB-NG output data yield is therefore in order of ~4000 sentences per minute 
+in a crowdy airspace. 
+ 
+ 
+PROTOCOLS 
+ 
+ 
+The physical communication is realized via the standard UART data interface. The bitrate is set to 
+230400 bps, no parity, 8 data bits, 1 stop bit. Logical levels are equal to LVCMOS (3.3V) levels as defined in 
+JEDEC JESD8C.01 standard. 
+ 
+The bitrate settings is defined during the manufacturing process and cannot be changed later on. As a 
+standard, 230400 bps is a well tested and recommended compromise between the receiver lock-out time needed 
+to process the data transfer and slow enough to not overload upper level system with too much interrupt requests 
+caused by UART data transmission. By a factory settings during manufacturing, the bitrate can be changed from 
+9600 bps up to a maximum of 1.25 Mbps, on request. 
+ 
+ 
+OUTPUT DATA DESCRIPTION 
+ 
+ 
+Data is provided in ASCII representation of HEX characters. Thus for example one received byte from 
+air radio traffic represented by binary set (0b00111100), which means 60d (Decadic) and 0x3C in Hexadecimal 
+representation is provided as two bytes - ASCII letter "3" followed by ASCII letter "C". This is to make the data 
+reception easily readable using standard serial terminal in PC. Fully binary data output would cause non-
+printable characters to be shown on serial terminal (like Hyperterminal, etc.) However, fully binary data output is 
+two times shorter than ASCII representation. 
+ 
+NOTE: Firmware modification to provide only BINARY data is possible to perform on request during 
+manufacturing process. To make the use of the unit as much simple as possible, no settings is needed and 
+also is not possible (no RXD pin on the Main Interface Connector). Customer shall decide which format 
+requires in advance. 
+ 
+A) ASCII Output - STANDARD: 
+ 
+As a standard, the piADSB-NG unit is delivered with firmware providing 56 bit and 112 bit long 
+1090ES sentences of Downlink Format 11 and 17, which means the datagram contains 14 and 28 bytes of ASCII 
+data with 1 byte prefix and 3 bytes suffix. Total of 1+14+3 = 18 bytes or 1+28+3 = 32 bytes, respectively are 
+provided, with fixed length. 
+ 
+B) BINARY Output - ON REQUEST ONLY: 
+ 
+In case the Binary output is selected during the order process, the prefix and suffix characters remains 
+the same, to keep good orientation in data stream. However, internal datagram is shorter, only 7 or 14 bytes. 
+Total of 1+7+3 = 11 bytes or 1 + 14 + 3 = 18 bytes, respectively are provided, with fixed length. 
+ 
+ 
+Each datagram is initiated with the character "*" (star) prefix and ended with semicolon ";" and CR + 
+LF (0x13h + 0x10h) suffix string.  
+ 
+There are four different types of datagrams provided by the piADSB-NG in the output serial data stream: 
+ 
+1) The Initial Sentence available after power up or automatic reset (via watchdog within the radiation 
+environment) is still the same and distinguishing between the Engineering and Flight Model firmware as 
+highlighted below (0x0E and 0x0F for Engineering and Flight Model, respectively): 
+ 
+piADSB-NG INITIAL SENTENCE (Engineering Model) 
+*0E00112233445566778899AABBCC; 
+ 
+piADSB-NG INITIAL SENTENCE (Flight Model) 
+*0F00112233445566778899AABBCC; 
+
+ 
+ 
+ 
+ 
+  
+ 7       
+www.SkyFoxLabs.com, Space-Friendly products 
+piADSB-NG Product Datasheet, Rev. A 
+Issue rev. A, 2023, info@skyfoxlabs.com, U studanky 620/13. CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2023 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+piADSB-NG
+2) During nominal operations, the 56 bit squitter sentence is provided in following form, 
+ 
+piADSB-NG 56bit Squitter OUTPUT SENTENCE Example 
+*5DA2A3D2010CDA; 
+ 
+3) and the 112 bit squitter sentence in following form: 
+ 
+piADSB-NG 112bit Squitter OUTPUT SENTENCE Example 
+*8D3C54659909C8173004A132B0C5; 
+ 
+ 
+There are several freely available online resources describing how to parse the output data into 
+dedicated BDS register's information. It is out of scope of this document to provide detailed squitter content and 
+parsing procedures.  
+ 
+However, for Search and Rescue (SAR) applications, the most valuable content is stored on byte 
+positions shown in underlined bold below. Each received sentence provided by the piADSB-NG represents 
+published unique Mode - S Aircraft ICAO Registration Code. From the example above is thus the ICAO code 
+as following: 
+ 
+*8D3C54659909C8173004A132B0C5; 
+ 
+ Identified Aircraft ICAO Code is: 3C5465  
+ 
+There is much more information provided about the aircraft flight parameters such as Aircraft 
+Velocity, Altitude, Heading, GPS position, etc. in piADSB-NG data output, DF11 and DF17. Above is listed 
+only one example showing how to easily interpret the data. 
+ 
+ 
+4) The Telemetry sentence containing human-readable values (Input Bus Voltage, Input Current, Temperature 
+and Squitter Counter, respectively) is provided periodically each ~60 seconds. In order to keep the fixed amount 
+of characters in the Telemetry sentence, the temperature zero crossing is as follows: +01°C, +00°C, -01°C and 
+vice versa. If the squitter counter reaches 99999999 frames, the value is reset down to 00000000. 
+ 
+piADSB-NG Telemetry OUTPUT SENTENCE Example 
+#3.28V,075.6mA,+22°C,00004187; 
+ 
+ 
+ANTENNA 
+ 
+ 
+The piADSB-NG receiver system is equipped with SkyFox Labs-optimized high gain RHCP ceramic 
+patch antenna array, with a typical hemispherical pattern elongated along the axis between two ceramic patch 
+elements, forming +3dB more gain with respect to a single patch antenna element. The whole CubeSat panel 
+serving as the antenna ground plane with outer dimensions of 98×82.6 mm has milled corners fitting the standard 
+CubeSat Structure and +/- X/Y-axis footprint. Antenna radiation pattern is described in Fig.4. As a groundplane 
+extension, the CubeSat rails are utilized, for full performance, the module needs to be mounted onto the structure 
+as much smooth with the rails as possible. 
+ 
+ 
+ 
+Fig. 4 Optimized piADSB-NG Antenna Array Radiation Pattern plot mounted on 1U AL-6061 CubeSat structure. 
+
+ 
+ 
+ 
+ 
+  
+ 8       
+www.SkyFoxLabs.com, Space-Friendly products 
+piADSB-NG Product Datasheet, Rev. A 
+Issue rev. A, 2023, info@skyfoxlabs.com, U studanky 620/13. CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2023 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+piADSB-NG
+ENGINEERING MODEL 
+ 
+ 
+As the Space-based long distance (free space loss -148dB @ 1090MHz, 550 km range) ADS-B link 
+budget is set to be extremely tight (~ -90 to -100dBm level only! at the 550 km slant range signal level with 
+750W transponder), a special care have to be taken to the EMC/EMI environment in order to maximize the 
+receiver sensitivity yield. To test whether the satellite bus subsystems, flatsat or satellite qualification model 
+(magnetorquers, MPPT solar controllers, DC/DC converters, transmitters, mixers, local oscillators, etc.) are not 
+affecting the piADSB-NG system noisefloor, the Engineering Model grade with identical electrical and RF 
+properties is available. It is highly recommended to run the test before the flight and observe whether the fully 
+operational satellite is not limiting the maximum available range/frame rate in open space or using ADS-B 1090 
+MHz test signal generator. The Engineering Model is also an excellent module for satellite software 
+development with all basic (yet framerate limited) functionalities and data outputs as Flight Model. 
+ 
+The red Remove Before Flight finish reminds the user to replace the unit with the Flight Model grade 
+unit suitable for the environment of space, in case it is used on Flight Model of the satellite. The firmware of the 
+EM model is modified to notify the upper level system that the EM model is mounted. To distinguish between 
+FM and EM firmware, please note chapter: Output Data Description, section 1) Initial Sentence. A limit of 
+maximum frame rate is applied. Photo of the piADSB-NG Engineering Model unit is depicted in Fig. 5. 
+ 
+ 
+Fig. 5 Engineering Model of the piADSB-NG unit with Red Remove Before Flight finish. 
+ 
+ 
+EVALUATION KIT 
+ 
+ 
+To connect the piADSB-NG with a conventional PC during satellite development, the Evaluation Kit is 
+provided to serve as a power supply from the USB bus via voltage regulator (3.3V), ESD protection and EMI 
+filters. The PCB contains signal test pins for oscilloscope probe hooks, current sensing/power cycling jumper 
+(3.3V Main Power) and a set of indicating LEDs. A Starboard Side (Right wing) green LED indicates the 
+available power. It is lit up once the input power is available (regardless the ADS-B 3.3V Main Power jumper 
+status). Port Side (Left wing) red LED is active during the data transmission FROM the piADSB-NG towards 
+the PC/satellite/terminal, the idle status is normally OFF.  
+ 
+A front side yellow LED is indicating the transmission of data TO the piADSB-NG from the 
+PC/satellite/terminal. Not connected on piADSB-NG, intended for future use. 
+ 
+The layout of the Evaluation Kit PCB is depicted in Fig. 6. The associated USB-to-Serial FTDI cable 
+can connect and power the unit from the USB. A simple communication with PC terminal is realized via Virtual 
+COM Port (VCP). 
+
+ 
+ 
+ 
+ 
+  
+ 9       
+www.SkyFoxLabs.com, Space-Friendly products 
+piADSB-NG Product Datasheet, Rev. A 
+Issue rev. A, 2023, info@skyfoxlabs.com, U studanky 620/13. CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2023 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+piADSB-NG
+ 
+ 
+Fig. 6 The piADSB-NG Evaluation Kit. 
+ 
+ 
+EVAL KIT SCHEMATICS 
+ 
+When interfacing the piADSB-NG unit, the effect of power bootstrapping of a typical UART receiver 
+needs to be considered. When UART line is idle, it holds the logical level HIGH or 1 (3.3V in case of LVCMOS 
+levels). Such voltage and current capability is able to power up the digital core, which is naturally very low 
+power in order of 5 - 10 mA. Thus, even if the main power input is held LOW (or 0V), the bootstrapping via 
+communication interface may still prevent the unit from proper power cycle / restart. It is thus highly 
+recommended to disable the receiver pull-up resistor of UART interface on RXD channel or forcing it directly to 
+zero Volts in input mode (set UART RX pin to input, force it with log. 0). 
+ 
+Each successful unit boot-up is indicated by three blinks of BLUE LED and with sending Initial 
+sentence towards the onboard computer. An example of interface including the bus receiver/driver is provided 
+within the Evaluation Kit schematics in Fig. 7. 
+ 
+ 
+ 
+Fig. 7 piCAM Evaluation Kit Schematics with highlighted 3.3V LED Flash Driver Example circuitry. 
+
+ 
+ 
+ 
+ 
+  
+ 10     
+www.SkyFoxLabs.com, Space-Friendly products 
+piADSB-NG Product Datasheet, Rev. A 
+Issue rev. A, 2023, info@skyfoxlabs.com, U studanky 620/13. CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2023 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+piADSB-NG
+APPLICATION NOTES & RECOMMENDATIONS 
+ 
+ 
+ 
+EMC CONSIDERATIONS 
+ 
+As the size of the small satellites imply the high level of integration of different electronic devices 
+(switch mode power supplies, high speed digital electronics, pulse-width modulated electromagnetic actuators, 
+etc.) into a limited satellite structure volume containing potential sources of disturbing signals, the 
+electromagnetic susceptibility and compatibility is critical for implementation of any subsystems sensitive to 
+electromagnetic radiation.  
+ 
+Proper ground planes and PCB design rules minimizing the radiated and conducted emissions shall be 
+applied within the whole small satellite structure, including custom payloads, conventional (Communication and 
+Data Handling, Power Supply and Power Distribution, Onboard Computer, Attitude Determination and Control) 
+and third party electronic subsystems. The small satellite electronics should be properly designed to not disturb 
+the ADS-B receiver input with harmonic frequencies falling to the 1090 MHz L-band.  
+ 
+Observe the maximum distance logged over 1 hour of daylight operations and compare it with switched 
+On/Off  electronic subsystem to identify the potential source of the disturbance if needed. Keep in mind, local 
+horizon visibility of the open airspace determines the maximum range, which typically does not exceed 400 km. 
+ 
+ 
+QUALITY ASSURANCE 
+ 
+GENERAL INFORMATION 
+ 
+ 
+Since the piADSB-NG/FM (Flight Model) receiver has been designed for the operation in harsh space 
+environment as a specially featured electronic device based on Commercial Off-the-Shelf (COTS) components, 
+the special care is taken to follow the standardized space-grade product assembly procedures, materials and 
+components where possible (i.e. no Radiation Hardened integrated circuit are used). 
+ 
+ 
+MATERIALS 
+ 
+ 
+ 
+Components are soldered on the Space-grade 4-layers FR-4 PCB, using 60/40% (Tin/Lead) compound. 
+Special Non-toxic Flux is used for precise soldering of the integrated circuits for its excellent soft soldering 
+quality properties, complying with the RoHS 2002/95/EC directive. The NASA approved 3M Scotch Weld 
+Epoxy is used for critical component fixings. 
+ 
+Vacuum-proof electronic components from ESA and NASA-preferred space-grade vendors are used (i.e. 
+no electrolytic capacitors) in industrial or automotive/military temperature grade, where possible.  
+ 
+ 
+PROCESSES 
+ 
+ 
+ 
+The Flight Model is hand soldered, assembled in 100.000 Class Clean Room by the ESA-certified 
+personnel. The PCB is then cleaned using the Isopropyl Alcohol, programmed and tested. Post production burn-
+in screening test is performed for 96 hours under nominal operating conditions.  
+ 
+ 
+PACKAGING & SHIPPING 
+ 
+ 
+ 
+Once the piADSB-NG successfully passes the screening test, it is finally cleaned, optically inspected 
+and shipped encapsulated in ESD protective packaging.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+

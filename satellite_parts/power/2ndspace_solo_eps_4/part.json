@@ -1,0 +1,218 @@
+{
+ "id": "2ndspace_solo_eps_4",
+ "name": "2NDSPACE SOLO EPS 4",
+ "category": "power",
+ "subcategory": "eps",
+ "vendor": "2NDSPACE",
+ "model": "SOLO EPS 4",
+ "dimensions_mm": {
+  "x": 97.0,
+  "y": 92.0,
+  "z": 48.0
+ },
+ "mass_g": 340.0,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satcatalog.s3.amazonaws.com/components/1460/SatCatalog_-_2NDSPACE_-_SOLO_EPS_4_-_Cubesat_EPS_and_PCDU_-_Datasheet.pdf",
+  "document": {
+   "title": "2NDSPACE SOLO EPS 4 data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-11",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Read from the vendor data sheet (SatCatalog_-_2NDSPACE_-_SOLO_EPS_4_-_Cubesat_EPS_and_PCDU_-_Datasheet.pdf): dimensions \") SOLO-EPS X4 (2PDCU + 4xBMS) SOLO-EPS X8 (2PDCU + 8xBMS) Dimensions [mm] 97x92x48 97x92x48\"; mass \"97x92x68 97x92x68 Mass [g] 340g 340\". Catalog page lists 0.35 kg.",
+  "found_via": "https://satcatalog.com/component/solo-eps-4-cubesat-eps-and-pcdu/"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "flight_heritage": true,
+ "electrical": {
+  "power_W": {
+   "nominal": 0.035
+  },
+  "note": "average power from the catalog page"
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   97.0,
+   92.0,
+   48.0
+  ],
+  "mesh_volume_mm3": 428318.5,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 0.794,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    97.0,
+    92.0,
+    48.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "feet",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/feet.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "connector_shell",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/connector_shell.stl"
+    },
+    {
+     "name": "connector_insert",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector_insert.stl"
+    },
+    {
+     "name": "jackscrews",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/jackscrews.stl"
+    },
+    {
+     "name": "label",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies_detail/label.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
+  "datasheet_url": "https://satcatalog.s3.amazonaws.com/components/1460/SatCatalog_-_2NDSPACE_-_SOLO_EPS_4_-_Cubesat_EPS_and_PCDU_-_Datasheet.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

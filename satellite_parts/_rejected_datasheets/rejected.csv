@@ -1,0 +1,130 @@
+part_id,file,reason
+dragonfly_chameleon_imager,datasheet_1,Caiman imager brochure (moved to dragonfly_caiman_imager)
+dragonfly_chameleon_imager,datasheet_2,student paper
+dragonfly_gecko_imager,datasheet_1,Caiman imager brochure
+endurosat_solar_panel_6u,datasheet,"EnduroSat 6U structure datasheet, not the solar panel"
+gomspace_nanocam_c1u_8mm,datasheet_2,other GomSpace products
+gomspace_nanocom_ant2150,datasheet_2,"research paper, not the datasheet"
+gomspace_nanopower_p110a,datasheet_2,"research paper, not the datasheet"
+harwin_gecko_g125_10,datasheet_2,unrelated Harwin document (statement or another connector family)
+harwin_gecko_g125_12,datasheet_2,unrelated Harwin document (statement or another connector family)
+harwin_gecko_g125_20,datasheet_2,unrelated Harwin document (statement or another connector family)
+harwin_gecko_g125_4,datasheet_2,unrelated Harwin document (statement or another connector family)
+harwin_gecko_g125_6,datasheet_2,unrelated Harwin document (statement or another connector family)
+isis_txs2,datasheet_1,"ISISPACE compact EPS document, wrong product"
+lockheed_micro1_1,datasheet,paper on a different Lockheed cryocooler
+lockheed_micro1_2,datasheet,paper on a different Lockheed cryocooler
+nanoavionics_4rw0,datasheet_2,"NanoAvionics M6P platform summary or company profile, not this part"
+nanoavionics_battery_2s2p,datasheet_1,"NanoAvionics M6P platform summary or company profile, not this part"
+nanoavionics_battery_4s2p,datasheet_1,"NanoAvionics M6P platform summary or company profile, not this part"
+nanoavionics_eps_1p0,datasheet_1,"NanoAvionics M6P platform summary or company profile, not this part"
+nanoavionics_eps_2p0,datasheet_1,"NanoAvionics M6P platform summary or company profile, not this part"
+nanoavionics_frame_12u,datasheet_1,"NanoAvionics M6P platform summary or company profile, not this part"
+nanoavionics_frame_6u,datasheet,EnduroSat 6U structure datasheet attached to the wrong vendor
+nanoavionics_frame_6u,datasheet_1,"NanoAvionics M6P platform summary or company profile, not this part"
+nanoavionics_mtq_m6p,datasheet_2,"NanoAvionics M6P platform summary or company profile, not this part"
+nanoavionics_payload_controller_2p0,datasheet,"NanoAvionics M6P platform summary or company profile, not this part"
+nanoavionics_payload_controller_2p0,datasheet_1,"NanoAvionics M6P platform summary or company profile, not this part"
+nanoavionics_rw0,datasheet,"NanoAvionics M6P platform summary or company profile, not this part"
+nanoavionics_rw0,datasheet_1,"NanoAvionics M6P platform summary or company profile, not this part"
+nanoavionics_satbus_3c2,datasheet_1,"NanoAvionics M6P platform summary or company profile, not this part"
+nanoavionics_satcom_uhf,datasheet_1,"NanoAvionics M6P platform summary or company profile, not this part"
+nanoavionics_solar_array_6u_double,datasheet_1,"NanoAvionics M6P platform summary or company profile, not this part"
+nanoavionics_solar_panel_6u_fixed,datasheet,"NanoAvionics M6P platform summary or company profile, not this part"
+nanoavionics_solar_panel_6u_fixed,datasheet_1,"NanoAvionics M6P platform summary or company profile, not this part"
+nanoavionics_uhf_antenna_1x1u,datasheet_2,"NanoAvionics M6P platform summary or company profile, not this part"
+nanoavionics_uhf_antenna_1x2u,datasheet_2,"NanoAvionics M6P platform summary or company profile, not this part"
+nanoavionics_uhf_antenna_2x2u,datasheet_2,"NanoAvionics M6P platform summary or company profile, not this part"
+nss_gemini_a01,datasheet_1,research paper
+cds_deployment_switch,datasheet_1,unrelated document for a standard part (alcatel-lucent)
+cds_separation_spring,datasheet_1,unrelated document for a standard part (moog | space | payload adapters | espa)
+csk_m2p5x10,datasheet_2,unrelated document for a standard part (natl inst of stand & tech)
+hex_nut_m2,datasheet_1,unrelated document for a standard part (nvm expresstm revision 1.4c)
+hex_nut_m2,datasheet_2,unrelated document for a standard part (cyt3dl)
+hex_nut_m2p5,datasheet_2,unrelated document for a standard part (nvm expresstm revision 1.4c)
+hex_nut_m3,datasheet_1,unrelated document for a standard part (tms320dm8127)
+hex_nut_m3,datasheet_2,unrelated document for a standard part (cyt3dl)
+hex_nut_m4,datasheet_1,unrelated document for a standard part (at32f435/437 series datasheet)
+hex_nut_m4,datasheet_2,unrelated document for a standard part (tms320dm8127)
+hex_nut_m5,datasheet_1,unrelated document for a standard part (mechanical properties and identification markings)
+hex_nut_m5,datasheet_2,unrelated document for a standard part (tms320dm8127)
+pc104_standoff_m3_15p24,datasheet,unrelated document for a standard part (pc/104 specification)
+pc104_standoff_m3_23p5,datasheet,unrelated document for a standard part (pc/104 specification)
+pc104_standoff_m3_30p48,datasheet,unrelated document for a standard part (pc/104 specification)
+pocketqube_1p_frame,datasheet,unrelated document for a standard part (over 29 gw sold)
+radiator_plate_1u_face,datasheet,unrelated document for a standard part (cubesat design specification rev. 14.1)
+radiator_plate_3u_face,datasheet,unrelated document for a standard part (cubesat design specification rev. 14.1)
+shcs_m2p5x10,datasheet_1,unrelated document for a standard part (accessories)
+shcs_m2p5x12,datasheet_1,unrelated document for a standard part (torque-tension relationship for metric fasteners)
+shcs_m2p5x20,datasheet_1,unrelated document for a standard part (product catalogue)
+shcs_m2p5x5,datasheet_1,unrelated document for a standard part (renco)
+shcs_m2p5x5,datasheet_2,unrelated document for a standard part (renco)
+shcs_m2x12,datasheet_1,unrelated document for a standard part (m)
+shcs_m2x16,datasheet_2,unrelated document for a standard part (m)
+shcs_m2x4,datasheet_2,unrelated document for a standard part (gige vision cameras)
+shcs_m2x6,datasheet_1,unrelated document for a standard part (m)
+shcs_m3x25,datasheet_1,unrelated document for a standard part (angle encoders)
+shcs_m3x5,datasheet_1,unrelated document for a standard part (m)
+shcs_m3x6,datasheet_2,unrelated document for a standard part (accessories)
+shcs_m3x8,datasheet_2,unrelated document for a standard part (accessories)
+shcs_m4x16,datasheet_2,unrelated document for a standard part (executive summary of the thesis)
+shcs_m4x20,datasheet_2,unrelated document for a standard part (m)
+shcs_m4x25,datasheet_1,unrelated document for a standard part (accessories)
+shcs_m5x10,datasheet_2,unrelated document for a standard part (zero motocycles)
+shcs_m5x12,datasheet_1,unrelated document for a standard part (zero motocycles)
+shcs_m5x12,datasheet_2,unrelated document for a standard part (zero motocycles)
+shcs_m5x20,datasheet_1,unrelated document for a standard part (torque-tension relationship for metric fasteners)
+shcs_m5x40,datasheet_1,unrelated document for a standard part (accessories)
+shcs_m5x50,datasheet_2,unrelated document for a standard part (m)
+shcs_m6x12,datasheet_1,unrelated document for a standard part (product data sheet)
+shcs_m6x25,datasheet_2,unrelated document for a standard part (zero motocycles)
+shcs_m6x30,datasheet_2,unrelated document for a standard part (zero motocycles)
+shcs_m6x50,datasheet_2,unrelated document for a standard part (m)
+washer_m3,datasheet_1,unrelated document for a standard part (certificate gb96/8063)
+washer_m4,datasheet_2,unrelated document for a standard part (mechanical properties and identification markings)
+washer_m6,datasheet_1,unrelated document for a standard part (part number   description                      cur)
+aim_sf070,datasheet_1,"NASA SOA thermal chapter: survey reference, not a datasheet (strict check 2026-11-11)"
+isis_ieps_battery_4cell,datasheet_2,"NASA SOA power chapter: survey reference, not a datasheet (strict check 2026-11-11)"
+isis_solar_panel_1u,datasheet_2,"NASA SOA structures chapter: survey reference, not a datasheet (strict check 2026-11-11)"
+lockheed_micro1_1,datasheet_1,"NASA SOA thermal chapter: survey reference, not a datasheet (strict check 2026-11-11)"
+lockheed_micro1_2,datasheet_1,"NASA SOA thermal chapter: survey reference, not a datasheet (strict check 2026-11-11)"
+mli_blanket_1u_face,datasheet_1,"NASA SOA thermal chapter: survey reference, not a datasheet (strict check 2026-11-11)"
+nanoavionics_uhf_antenna_1x1u,datasheet_1,"NASA SOA communications chapter: survey reference, not a datasheet (strict check 2026-11-11)"
+nanoavionics_uhf_antenna_2x2u,datasheet_1,"NASA SOA communications chapter: survey reference, not a datasheet (strict check 2026-11-11)"
+ricor_k508n,datasheet_1,"NASA SOA thermal chapter: survey reference, not a datasheet (strict check 2026-11-11)"
+sunpower_cryotel_ds_mini,datasheet_1,"NASA SOA thermal chapter: survey reference, not a datasheet (strict check 2026-11-11)"
+anywaves_compact_sband_ttc,datasheet_2,ISO management system certificate (strict check 2026-11-11)
+anywaves_wide_beam_xband,datasheet_2,ISO management system certificate (strict check 2026-11-11)
+endurosat_xband_single_patch,datasheet_1,IEEE book on CubeSat antenna design (strict check 2026-11-11)
+endurosat_xband_single_patch,datasheet_2,student master thesis (strict check 2026-11-11)
+enpulsion_micro_r3_head,datasheet_1,"ENPULSION NANO R3 brochure, a different product (strict check 2026-11-11)"
+enpulsion_micro_r3_ppu,datasheet_1,"ENPULSION NANO R3 brochure, a different product (strict check 2026-11-11)"
+isis_ieps_battery_4cell,datasheet_1,"ISIS ICEPS2 datasheet, a different (newer) product (strict check 2026-11-11)"
+isis_solar_panel_2u,datasheet_1,ISIS CubeSat Development Platform datasheet (strict check 2026-11-11)
+isis_solar_panel_2u,datasheet_2,ISIS company presentation 2015 (strict check 2026-11-11)
+isis_solar_panel_3u,datasheet_1,ISIS ICEPS2 datasheet (EPS) (strict check 2026-11-11)
+isis_solar_panel_3u,datasheet_2,ISIS CubeSat structures brochure (strict check 2026-11-11)
+isis_solar_panel_6u,datasheet_1,ISIS ICEPS2 datasheet (EPS) (strict check 2026-11-11)
+isis_structure_2u,datasheet_1,"ISIS 1U CubeSat platform brochure, not the 2U structure (strict check 2026-11-11)"
+isis_structure_3u,datasheet_1,"ISIS 1U CubeSat platform brochure, not the 3U structure (strict check 2026-11-11)"
+isis_structure_6u,datasheet_1,"ISIS 1U CubeSat platform brochure, not the 6U structure (strict check 2026-11-11)"
+nanoavionics_battery_4s2p,datasheet,"ISISPACE IMEPS2 datasheet, another vendor (strict check 2026-11-11)"
+alenspace_sband_transceiver,datasheet,"Alen Space company presentation, not a product datasheet (strict check 2026-11-11)"
+c3s_obc,datasheet_2,student master thesis (strict check 2026-11-11)
+c3s_eps,datasheet_2,"C3S OBC page, not the EPS (strict check 2026-11-11)"
+gomspace_nanopower_bp4,datasheet_2,GomSpace symposium slides (strict check 2026-11-11)
+npc_spacemind_sm_sp3x,datasheet,"NPC SPACEMIND structures sheet, not the SP3X solar panel (strict check 2026-11-11)"
+harwin_gecko_g125_10,datasheet_1,"Harwin HRi connector brochure, not Gecko (strict check 2026-11-11)"
+harwin_gecko_g125_20,datasheet_1,"Harwin HRi connector brochure, not Gecko (strict check 2026-11-11)"
+honeywell_zm10_switch,datasheet_1,"Honeywell general technical bulletin, not the ZM10 datasheet (strict check 2026-11-11)"
+honeywell_zm50_switch,datasheet_1,"Honeywell general technical bulletin, not the ZM50 datasheet (strict check 2026-11-11)"
+cubespace_cubetorquer_cr0003,datasheet_1,"CubeSpace CubeWheel manual, not the CR0003 torquer (strict check 2026-11-11)"
+cubespace_cubetorquer_cr0008,datasheet_1,"CubeSpace company brochure (wheels), does not list CR0008 (strict check 2026-11-11)"
+cubespace_cubetorquer_cr0008,datasheet_2,"CubeSpace magnetorquer brochure, does not list CR0008 (strict check 2026-11-11)"
+cubespace_cubetorquer_cr0010,datasheet_1,"CubeSpace company brochure (wheels), does not list CR0010 (strict check 2026-11-11)"
+cubespace_cubewheel_cw1200,datasheet_1,"CubeSpace CubeWheel manual covering CW0017 to CW0500, not CW1200 (strict check 2026-11-11)"
+isis_antenna_system,datasheet_2,ISIS CubeSat Development Platform datasheet (strict check 2026-11-11)
+epson_m_g370pds,datasheet_1,"Epson M-G370PDT0 sheet, a sibling variant, not M-G370PDS (strict check 2026-11-11)"
+epson_m_g370pds,datasheet_2,Epson crystal devices catalogue (strict check 2026-11-11)
+enpulsion_micro_r3_head,datasheet_p5_1,"ENPULSION NANO R3 brochure, a different product (pass 5b)"
+mli_blanket_1u_face,datasheet_p5_2,DHV smallsat power brochure (pass 5b)

@@ -1,0 +1,1591 @@
+DATASHEET
+Ref. & issue:
+SM-DT-DS-0002_3.2
+Date:
+04/08/2026
+Pages:
+1 of 23
+Spacemanic CZ s.r.o. | sales@spacemanic.com | www.spacemanic.com
+¶
+DEEP THOUGHT OBC
+DATASHEET
+
+DATASHEET
+Ref. & issue:
+SM-DT-DS-0002_3.2
+Date:
+04/08/2026
+Pages:
+2 of 23
+Spacemanic CZ s.r.o. | sales@spacemanic.com | www.spacemanic.com
+TABLE OF CONTENTS
+1
+PRODUCT OVERVIEW.............................................................................................5
+2
+TECHNICAL SPECIFICATION...............................................................................5
+3
+INTERFACES.............................................................................................................7
+3.1
+ELECTRICAL...................................................................................................................7
+3.1.1
+PROGRAMMING AND DEBUG INTERFACE...................................................................7
+3.1.2
+MAIN CONNECTORS..........................................................................................................8
+3.1.3
+DEBUG UART (UART-0)...................................................................................................14
+3.1.4
+CSP I2C (I2C-0)....................................................................................................................14
+3.1.5
+CSP RS485 (UART-1)..........................................................................................................15
+3.1.6
+CSP CAN (MCAN-0)...........................................................................................................15
+3.1.7
+ISOLATED I2C (I2C-1).......................................................................................................16
+3.1.8
+SENSOR SPI (SPI-0)............................................................................................................17
+3.1.9
+GPIO, ADC, PWM...............................................................................................................17
+3.1.10
+RMII......................................................................................................................................18
+3.1.11
+SENS I2C AND INTERNAL SENSORS.............................................................................18
+3.1.12
+FRAM SPI.............................................................................................................................20
+3.1.13
+QSPI AND FLASH MEMORIES.........................................................................................20
+3.2
+SOFTWARE.....................................................................................................................21
+3.3
+MECHANICAL...............................................................................................................22
+4
+DELIVERABLES......................................................................................................23
+5
+RELATED PRODUCTS............................................................................................23
+6
+DISCLAIMER...........................................................................................................23
+
+DATASHEET
+Ref. & issue:
+SM-DT-DS-0002_3.2
+Date:
+04/08/2026
+Pages:
+3 of 23
+Spacemanic CZ s.r.o. | sales@spacemanic.com | www.spacemanic.com
+LIST OF FIGURES
+Figure 2-1: Deep Thought OBC v2b block diagram..........................................................................5
+Figure 3-1: Programming connector..................................................................................................7
+Figure 3-2: Main connectors (J1 & J2)...............................................................................................8
+Figure 3-3: Connector pin numbering................................................................................................8
+Figure 3-4: RS485 driver circuit.......................................................................................................15
+Figure 3-5: CAN driver circuit.........................................................................................................15
+Figure 3-6: ISOL I2C (I2C-1) circuit................................................................................................16
+Figure 3-7: Internal sensor and memory placement.........................................................................18
+Figure 3-8: Magnetometer coordinate system (left-handed)............................................................19
+Figure 3-9: Gyroscope & accelerometer coordinate system............................................................19
+Figure 3-10: Mechanical Interface of the Deep Thought Module....................................................22
+Figure 3-11: Recommended Mounting Spacer (brass).....................................................................22
+LIST OF TABLES
+Table 2-1: Technical specification.....................................................................................................6
+Table 2-2: Key OBC parameters........................................................................................................6
+Table 2-3: Overview of interfaces......................................................................................................6
+Table 3-4: Electrical characteristics...................................................................................................7
+Table 3-5: Main connector reference.................................................................................................7
+Table 3-6: Main connector reference.................................................................................................8
+Table 3-7: Pin description of the main Deep Thought connector J1..................................................9
+Table 3-8: Pin description of the extension Deep Thought connector J2.........................................12
+Table 3-9: Debug UART (UART-0) pin reference..........................................................................14
+Table 3-10: CSP I2C (I2C-0) pin reference......................................................................................14
+Table 3-11: Debug UART (UART-0) pin reference........................................................................15
+Table 3-12: CSP CAN pin reference................................................................................................15
+Table 3-13: ISOL I2C (I2C-1) pin reference....................................................................................16
+Table 3-14: GPIO, ADC, PWM pin reference.................................................................................17
+Table 3-15: GPIO, ADC, PWM pin reference (J1)..........................................................................17
+Table 3-16: GPIO, ADC, PWM pin reference (J2)..........................................................................17
+Table 3-17: GPIO, ADC, PWM pin reference (J1)..........................................................................18
+Table 3-18: SENS I2C pin reference................................................................................................19
+Table 3-19: FRAM SPI pin reference..............................................................................................20
+Table 3-20: Flash QSPI pin reference..............................................................................................20
+Table 4-1: Deliverables....................................................................................................................23
+
+DATASHEET
+Ref. & issue:
+SM-DT-DS-0002_3.2
+Date:
+04/08/2026
+Pages:
+4 of 23
+Spacemanic CZ s.r.o. | sales@spacemanic.com | www.spacemanic.com
+GLOSSARY
+CAN
+Controller Area Network
+CDHS
+Command Data Handling System
+CSP
+Cubesat Space Protocol
+FRAM
+Ferroelectric RAM
+IC
+Integrated Circuit
+I2C
+Inter Integrated Circuit
+KISS
+"Keep It Simple, Stupid" (popular radio amateur protocol)
+MCU
+Micro Controller Unit
+OBC
+On-Board Computer
+RS485
+Differential bus standard
+SPI
+Serial Peripheral Interface
+UART
+Universal Asynchronous Receiver Transmitter
+
+DATASHEET
+Ref. & issue:
+SM-DT-DS-0002_3.2
+Date:
+04/08/2026
+Pages:
+5 of 23
+Spacemanic CZ s.r.o. | sales@spacemanic.com | www.spacemanic.com
+1
+PRODUCT OVERVIEW
+Deep Thought an On-Board Computer suitable for small satellite applications in role of main satel-
+lite computer or as a specific payload computer. The module is based on Microchip SAMV71Q21 32-
+bit Arm Cortex M7 based micro-controller. This micro-controller is compatible with various RTOS
+systems. The module also integrates an on-board gyroscope, accelerometer and magnetometer sensors.
+Besides MSU’s FLASH memory for program itself two external memory systems are integrated on-
+board the module. A Flash based memory array consisting of 4x 32MiB ICs, and an FRAM based mem-
+ory array consisting of 3x 1MiB ICs.
+Two options are available:
+-
+Engineering model integrating consumer grade MCU
+-
+Flight model integrating radiation tolerant MCU (SAMV71Q21RT)
+Flight heritage on 10+ missions (e.g. LASARsat, CroCube, Planetum-1 and external customers).
+2
+TECHNICAL SPECIFICATION
+Figure 2-1: Deep Thought OBC v2b block diagram
+
+DATASHEET
+Ref. & issue:
+SM-DT-DS-0002_3.2
+Date:
+04/08/2026
+Pages:
+6 of 23
+Spacemanic CZ s.r.o. | sales@spacemanic.com | www.spacemanic.com
+Table 2-1: Technical specification
+Parameter
+Value
+Unit
+Operating Temperature
+-40 to +85
+°C
+Dimensions
+67 x 42 x 7
+mm
+Mass
+25
+g
+Power Supply
+3.3V
+V
+Power Consumption - average
+330
+mW
+Power Consumption - peak
+<500
+mW
+Note: Power consumption is directly proportional to implemented software. Presented specification repre-
+sents typical usage in Spacemanic applications on CSP based satellite buses.
+Table 2-2: Key OBC parameters
+Parameter
+Value
+Unit
+MCU
+SAMV71Q21
+HF Crystal
+16
+MHz
+LF Crystal
+32.768
+kHz
+Data storage external FRAM
+3 x 1
+MiB
+Data storage external Flash
+4 x 32
+MiB
+Operating system
+FreeRTOS
+(alt. Custom)
+On-board magnetometer
+MMC5983
+On-board gyroscope & accelerometer
+ICM-42688-P
+Table 2-3: Overview of interfaces
+Interface
+Description
+UART-0
+Typically implements plain text CLI.
+Available on both debug and main connectors.
+CSP I2C
+CSP over I2C bus. Speed up to 400 kHz
+CSP RS485
+CSP over RS485 KISS.
+Speed up to 115200 Baud rate. Higher speeds possible with software
+optimizations.
+CSP CAN
+CSP over CAN.
+Speed up to 1 Mbit/s
+I2C-SENS
+Connects to on-board sensors.
+Speed up to 400kHz
+SPI-MEM
+Internal only. Connects to on-board FRAM memories.
+Typical speed is 40 MHz. Higher possible with software optimization.
+QSPI-MEM
+Connects to on-board Flash memories.
+Typical speed is 40 MHz. Higher possible with software optimization.
+I2C-ISOL
+Isolated plain I2C bus, typically used for external sensors.
+Speed up to 400 kHz.
+SPI-0
+External SPI for sensor interfacing.
+Typical speed is 40 MHz. Higher possible with software optimization.
+ADC
+>5 x 12bit with 3.3 V range. (See pin table)
+PWM
+3 x 3.3 V range available as High or Low signal.
+GPIO
+Up to 18 x 3.3 V range. Shares pins with SPI-0, ADC, PWM.
+
+DATASHEET
+Ref. & issue:
+SM-DT-DS-0002_3.2
+Date:
+04/08/2026
+Pages:
+7 of 23
+Spacemanic CZ s.r.o. | sales@spacemanic.com | www.spacemanic.com
+3
+INTERFACES
+3.1
+ELECTRICAL
+Table 3-4: Electrical characteristics
+Parameter
+Min.
+Typ.
+Max.
+Unit
+Power Input
+3.0
+3.3
++3.6
+V
+Current draw (3.3 V)
+-
+100
+120
+mA
+Current draw (5 V)
+-
+-
+-
+mA
+GPIO Level
+(including comm.
+Buses)
+-0.2
+3.3
++3.6
+V
+Note: Since most communication buses and GPIO are connected directly to the MCU, for more details on rat-
+ings refer to SAMV71Q21 documentation and main connectors J1 & J2 documentation.
+3.1.1
+PROGRAMMING AND DEBUG INTERFACE
+Programming is done by a SWD/JTAG interface on the front facing debug connector. Also present
+is Debug UART (UART-0).
+Figure 3-1: Programming connector
+Table 3-5: Main connector reference
+Connector
+Type
+Programming (on module)
+Molex PicoLock
+503763-0691
+Programming (on motherboard)
+Molex PicoLock
+503764-0601
+(crimp housing)
+It is NOT recommended to use the programming connector as the power supply of the OBC mod-
+ule.
+
+DATASHEET
+Ref. & issue:
+SM-DT-DS-0002_3.2
+Date:
+04/08/2026
+Pages:
+8 of 23
+Spacemanic CZ s.r.o. | sales@spacemanic.com | www.spacemanic.com
+3.1.2
+MAIN CONNECTORS
+Figure 3-2: Main connectors (J1 & J2)
+Table 3-6: Main connector reference
+Connector
+Type
+Main J1 (on module)
+Molex SlimStack
+55650-0688
+Main J1 (on motherboard)
+Molex SlimStack
+54363-0689
+Figure 3-3: Connector pin numbering
+
+DATASHEET
+Ref. & issue:
+SM-DT-DS-0002_3.2
+Date:
+04/08/2026
+Pages:
+9 of 23
+Spacemanic CZ s.r.o. | sales@spacemanic.com | www.spacemanic.com
+Table 3-7: Pin description of the main Deep Thought connector J1
+PN
+Schematic name
+Alt. functions
+Pin attributes *
+Notes
+1
+BATT_MEAS
+GPIO
+Analog In
+PWM
+PC0
+AFE1_AD9
+PWMC0_PWML0
+Reserved for battery measurement. Analog
+input in 0-3.3V range.
+2
+BATT_MEAS
+GPIO
+Analog In
+PWM
+PC0
+AFE1_AD9
+PWMC0_PWML0
+See PN 1.
+3
++5V_IN
+-
+-
+Not connected
+4
++5V_IN
+-
+-
+See PN 3.
+5
++5V_IN
+-
+-
+See PN 3.
+6
++5V_IN
+-
+-
+See PN 3.
+7
++3.3V_IN
+-
+-
+Board power supply.
+8
++3.3V_IN
+-
+-
+See PN 7.
+9
++3.3V_IN
+-
+-
+See PN 7.
+10
++3.3V_IN
+-
+-
+See PN 7.
+11
+GND
+-
+-
+12
+GND
+-
+-
+13
+I2C_0_SDA
+-
+PA3
+TWD0
+Intended as main communication bus, e.g.
+CSP.
+14
+I2C_0_SCL
+-
+PA4
+TWCK0
+WKUP3
+TCLK0
+UTXD1
+Intended as main communication bus, e.g.
+CSP.
+15
+UART_0_TXD
+-
+PA10
+UTXD0
+PWMC0_PWMEXTRG
+Shared with Debug/Programming connector.
+16
+RS485_B
+-
+-
+Intended as main communication bus, e.g.
+CSP.
+17
+UART_0_RXD
+-
+PA9
+URXD0
+WKUP6
+PWMC0_PWMFI0
+Same as Programming and Debug connector.
+18
+RS485_A
+-
+-
+Intended as main communication bus, e.g.
+CSP.
+19
+SPI_0_CLK
+GPIO
+PWMC0_PWMH2
+SPI0_SPCK
+TIOB11
+20
+SPI_0_CS
+GPIO
+PWMC0_PWML1
+SPI0_NPCS1
+URXD2
+21
+SPI_0_MISO
+GPIO
+PWMC0_PWMH0
+SPI0_MISO
+22
+SPI_0_MOSI
+GPIO
+PWMC0_PWMH1
+SPI0_MOSI
+TIOA11
+23
+GND
+-
+-
+24
+GND
+-
+-
+25
+CAN_H
+-
+
+DATASHEET
+Ref. & issue:
+SM-DT-DS-0002_3.2
+Date:
+04/08/2026
+Pages:
+10 of 23
+Spacemanic CZ s.r.o. | sales@spacemanic.com | www.spacemanic.com
+PN
+Schematic name
+Alt. functions
+Pin attributes *
+Notes
+26
+CAN_H
+-
+27
+CAN_L
+-
+28
+CAN_L
+-
+29
+GND
+-
+30
+GND
+-
+31
+GPIO0
+PC16
+32
+GPIO1
+PWM
+UART
+PB13
+WKUP4
+PWMC1_PWML3
+URXD1
+33
+GPIO2
+PWM
+PC18
+PWMC0_PWML1
+34
+GPIO3
+UART
+PA6
+UTXD1
+35
+GPIO4_ADC0
+GPIO
+PA18
+AFE0_AD7
+PWMC1_PWMEXTRG
+36
+GPIO5_ADC1
+GPIO
+PWM
+PA19
+AFE0_AD8
+WKUP9
+PWMC0_PWML0
+37
+GPIO6_ADC2
+GPIO
+PA21
+AFE0_AD1
+PWMC1_PWMFI0
+38
+GPIO7_ADC3
+GPIO
+PWM
+PA20
+AFE0_AD9
+WKUP10
+PWMC0_PWML1
+39
+PWM_H0
+GPIO
+PA23
+PWMC0_PWMH0
+PWMC1_PWML2
+40
+PWM_H1
+GPIO
+PA24
+PWMC0_PWMH1
+41
+PWM_H2
+GPIO
+PA25
+PWMC0_PWMH2
+42
+-
+-
+-
+43
+-
+-
+-
+44
+CLK_OUT
+GPIO
+PA1
+WKUP1
+PWMC0_PWML0
+TIOB0
+45
+EXT_RST
+-
+Reserved for future use. Do not connect.
+46
+PPS
+GPIO
+PE4
+AFE0_AD4
+TIOB10
+Reserved for use as 1 pulse per second input
+for time synchronization, when using with
+Spacemanic Celeste GNSS module.
+47
+GND
+-
+48
+GND
+-
+49
+-
+-
+50
+-
+-
+51
+-
+-
+
+DATASHEET
+Ref. & issue:
+SM-DT-DS-0002_3.2
+Date:
+04/08/2026
+Pages:
+11 of 23
+Spacemanic CZ s.r.o. | sales@spacemanic.com | www.spacemanic.com
+PN
+Schematic name
+Alt. functions
+Pin attributes *
+Notes
+52
+-
+-
+53
++3.3V_ISOL
+-
+Needs to be powered externally for the I2C
+isolator to work!
+54
++3.3V_ISOL
+-
+Needs to be powered externally for the I2C
+isolator to work!
+55
+I2C_ISOL_SDA
+-
+Reserved for non-CSP use, can be reconfig-
+ured at the cost of losing secondary I2C bus
+(GPIO open drain to GND, pulled high, in-
+put/output)
+56
+I2C_ISOL_SDA
+-
+Reserved for non-CSP use, can be reconfig-
+ured at the cost of losing secondary I2C bus
+(GPIO open drain to GND, pulled high, in-
+put/output)
+57
+I2C_ISOL_SCL
+-
+Reserved for non-CSP use, can be reconfig-
+ured at the cost of losing secondary I2C bus
+(GPIO open drain to GND, pulled high, in-
+put/output)
+58
+I2C_ISOL_SCL
+-
+Reserved for non-CSP use, can be reconfig-
+ured at the cost of losing secondary I2C bus
+(GPIO open drain to GND, pulled high, in-
+put/output)
+59
+GND_ISOL
+-
+Needs to be grounded externally for the I2C
+isolator to work!
+60
+GND_ISOL
+-
+Needs to be grounded externally for the I2C
+isolator to work!
+* (MCU datasheet https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ProductDocuments/DataSheets/SAM-E70-
+S70-V70-V71-Family-Data-Sheet-DS60001527.pdf)
+Color coding:
+Reserved for payload, free to use and reconfigure.
+Reserved for specified use, can be reconfigured if needed.
+Not configurable, specified by hardware.
+
+DATASHEET
+Ref. & issue:
+SM-DT-DS-0002_3.2
+Date:
+04/08/2026
+Pages:
+12 of 23
+Spacemanic CZ s.r.o. | sales@spacemanic.com | www.spacemanic.com
+Table 3-8: Pin description of the extension Deep Thought connector J2
+PN
+Schematic name
+Alternative
+functions
+Pin attributes *
+Notes
+1
+-
+-
+-
+2
+-
+-
+-
+3
+-
+-
+-
+4
+-
+-
+-
+5
+-
+-
+-
+6
+-
+-
+-
+7
+-
+-
+-
+8
+-
+-
+-
+9
+-
+-
+-
+10
+-
+-
+-
+11
+GND
+-
+-
+12
+GND
+-
+-
+13
+REFCK
+GPIO
+DAC
+PWM
+PD0
+DAC1
+GTXCK,
+PWMC1_PWML0
+SPI1_NPCS1
+GMAC peripheral (Ethernet) with external
+transceiver circuitry.
+14
+TXEN
+GPIO
+PWM
+PD1
+GTXEN,
+PWMC1_PWMH0
+GMAC peripheral (Ethernet) with external
+transceiver circuitry.
+15
+RXD0
+GPIO
+PWM
+PD5
+GRX0,
+PWMC1_PWMH2
+GMAC peripheral (Ethernet) with external
+transceiver circuitry.
+16
+RXD1
+GPIO
+PWM
+PD6
+GRX1,
+PWMC1_PWML3
+GMAC peripheral (Ethernet) with external
+transceiver circuitry.
+17
+TXD0
+GPIO
+PWM
+PD2
+GTX0
+PWMC1_PWML1
+GMAC peripheral (Ethernet) with external
+transceiver circuitry.
+18
+TXD1
+GPIO
+PWM
+PD3
+GTX1,
+PWMC1_PWMH1
+GMAC peripheral (Ethernet) with external
+transceiver circuitry.
+19
+CRSDV
+GPIO
+PWM
+PD4
+GRXDV
+PWMC1_PWML2
+GMAC peripheral (Ethernet) with external
+transceiver circuitry.
+20
+RXER
+GPIO
+PWM
+PD7
+GRXER,
+PWMC1_PWMH3
+GMAC peripheral (Ethernet) with external
+transceiver circuitry.
+21
+MDC
+GPIO
+PD8
+GMDC
+PWMC0_PWMFI1
+GMAC peripheral (Ethernet) with external
+transceiver circuitry.
+22
+MDIO
+GPIO
+PD9
+GMDIO
+PWMC0_PWMFI2
+AFE1_ADTRG
+GMAC peripheral (Ethernet) with external
+transceiver circuitry.
+23
+GND
+-
+-
+24
+GND
+-
+-
+
+DATASHEET
+Ref. & issue:
+SM-DT-DS-0002_3.2
+Date:
+04/08/2026
+Pages:
+13 of 23
+Spacemanic CZ s.r.o. | sales@spacemanic.com | www.spacemanic.com
+PN
+Schematic name
+Alternative
+functions
+Pin attributes *
+Notes
+25
+USB_HSDM
+-
+-
+26
+-
+-
+27
+USB_HSDP
+-
+-
+28
+-
+-
+-
+29
+GND
+-
+-
+30
+GND
+-
+-
+31
+GPIO8
+PWM
+PWMC0_PWML2
+32
+GPIO9
+CAN
+TCLK8
+CANTX1
+33
+GPIO10
+Analog In
+UART
+AFE0_AD10
+RTCOUT0
+PWMC0_PWMH0
+RXD0
+34
+GPIO11
+Analog In
+CAN
+AFE1_AD3
+TIOB8
+CANRX1
+35
+GPIO12
+Analog In
+UART
+AFE1_AD0
+RTCOUT1
+PWMC0_PWMH1
+TXD0
+36
+GPIO13
+PWM
+WKUP7
+PWMC0_PWMH0
+PWMC1_PWML0
+37
+GPIO14
+DAC
+PWM
+DAC0
+PWMC0_PWML2
+38
+GPIO15
+PWM
+WKUP2
+PWMC0_PWMH1
+39
+PWM_L0
+GPIO
+PC1
+PWMC0_PWML1
+Reverse polarity of PWM_H0. See J1-39.
+40
+PWM_L1
+GPIO
+PC2
+PWMC0_PWML2
+Reverse polarity of PWM_H1. See J1-40.
+41
+PWM_L2
+GPIO
+PC3
+PWMC0_PWML3
+Reverse polarity of PWM_H2. See J1-41.
+42
+-
+-
+-
+43
+-
+-
+-
+44
+-
+-
+-
+45
+-
+-
+-
+46
+-
+-
+-
+47
+GND
+-
+-
+48
+GND
+-
+-
+49
+FLASH_CLK
+-
+PA14
+QSCK
+SPI/QSPI bus to on-board memories
+50
+-
+-
+-
+51
+FLASH_MOSI_IO0
+-
+PA13
+QIO0
+SPI/QSPI bus to on-board memories
+52
+PLASH_MISO_IO1
+-
+PA12
+QIO1
+SPI/QSPI bus to on-board memories
+
+DATASHEET
+Ref. & issue:
+SM-DT-DS-0002_3.2
+Date:
+04/08/2026
+Pages:
+14 of 23
+Spacemanic CZ s.r.o. | sales@spacemanic.com | www.spacemanic.com
+PN
+Schematic name
+Alternative
+functions
+Pin attributes *
+Notes
+53
+FLASH_WP#_IO2
+-
+PA17
+QIO2
+SPI/QSPI bus to on-board memories
+54
+FLASH_RST#_IO3
+-
+PD31
+QIO3
+SPI/QSPI bus to on-board memories
+55
+I2C_SENS_SDA
+-
+PB4
+TWD1
+I2C bus to on-board sensors
+56
+-
+-
+-
+57
+I2C_SENS_SCL
+-
+PB5
+TWCK1
+I2C bus to on-board sensors
+58
+-
+-
+-
+59
+GND
+-
+-
+60
+GND
+-
+-
+* (MCU datasheet https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ProductDocuments/DataSheets/SAM-E70-
+S70-V70-V71-Family-Data-Sheet-DS60001527.pdf)
+Color coding:
+Reserved for payload, free to use and reconfigure.
+Reserved for specified use, can be reconfigured if needed.
+Not configurable, specified by hardware.
+3.1.3
+DEBUG UART (UART-0)
+Table 3-9: Debug UART (UART-0) pin reference
+Signal
+J1 Pin
+Debug pin
+MCU Pin
+TX
+15
+2
+PA10
+RX
+17
+3
+PA9
+The Debug UART is also connected to the Debug/Programming connector. The connection is di-
+rectly to MCU pins.
+3.1.4
+CSP I2C (I2C-0)
+Table 3-10: CSP I2C (I2C-0) pin reference
+Signal
+J1 Pin
+MCU Pin
+SDA
+13
+PA3
+SCL
+14
+PA4
+This I2C bus is directly connected to the controller and does not include any pull-up resistors. User
+is advised to use external 3.3 kΩ pull-up resistors to 3.3 V level.
+If the module is to be turned OFF while still connected to an actively used I2C bus, an I2C separator
+is recommended (e.g. NXP PCA9507 or TI ISO1540).
+
+DATASHEET
+Ref. & issue:
+SM-DT-DS-0002_3.2
+Date:
+04/08/2026
+Pages:
+15 of 23
+Spacemanic CZ s.r.o. | sales@spacemanic.com | www.spacemanic.com
+3.1.5
+CSP RS485 (UART-1)
+Table 3-11: Debug UART (UART-0) pin reference
+Signal
+J1 Pin
+MCU Pin
+TX
+-
+PD16
+RX
+-
+PD15
+DE
+/RE
+-
+PD18
+A
+18
+-
+B
+16
+-
+The RS485 interface connects MCU UART and direction controlling GPIO to an RS485 differen-
+tial bus driver. This circuit includes outside facing 10 Ω serial resistors and not populated termination
+and bias resistors. It is recommended to implement termination and bias on module’s motherboard.
+Figure 3-4: RS485 driver circuit
+3.1.6
+CSP CAN (MCAN-0)
+Table 3-12: CSP CAN pin reference
+Signal
+J1 Pin
+MCU Pin
+H
+55/56
+-
+L
+57/58
+-
+CAN TX
+-
+PB2
+CAN RX
+-
+PB3
+CAN LBK
+-
+PC5
+Figure 3-5: CAN driver circuit
+
+DATASHEET
+Ref. & issue:
+SM-DT-DS-0002_3.2
+Date:
+04/08/2026
+Pages:
+16 of 23
+Spacemanic CZ s.r.o. | sales@spacemanic.com | www.spacemanic.com
+The CAN BUS interface is realized using a CAN driver XXX. There is no termination or serial re-
+sistors on-board.
+3.1.7
+ISOLATED I2C (I2C-1)
+Table 3-13: ISOL I2C (I2C-1) pin reference
+Signal
+J1 Pin
+MCU Pin
+SDA
+55/56
+PD27
+SCL
+57/58
+PD28
+Figure 3-6: ISOL I2C (I2C-1) circuit
+This I2C bus is connected to an isolator IC. For this interface to function an external power and
+ground needs to be connected to +3.3V_ISOL and GND_ISOL. It is recommended to use 3.3V power,
+but up to 5.5 V can be used. The outside facing I2C voltage level is directed by the externally connected
+power supply.
+The outside facing side of the isolator already implements 4.7 kΩ pull-up resistors connected to the
++3.3V_ISOL line.
+
+DATASHEET
+Ref. & issue:
+SM-DT-DS-0002_3.2
+Date:
+04/08/2026
+Pages:
+17 of 23
+Spacemanic CZ s.r.o. | sales@spacemanic.com | www.spacemanic.com
+3.1.8
+SENSOR SPI (SPI-0)
+Table 3-14: GPIO, ADC, PWM pin reference
+Signal
+J1 Pin
+MCU Pin
+CLK
+19
+PD22
+CS
+20
+PD25
+MISO
+21
+PD20
+MOSI
+22
+PD21
+SPI interface on the main connector is available for any user application. Pins are connected directly
+from the MCU to the connector. Typical SPI speed is 40 MHz. Performance is dependent on software
+implementation.
+Alternatively, all four pins may be used as GPIO.
+3.1.9
+GPIO, ADC, PWM
+Table 3-15: GPIO, ADC, PWM pin reference (J1)
+Signal
+J1 Pin
+MCU Pin
+GPIO0
+31
+PC16
+GPIO1
+32
+PA5
+GPIO2
+33
+PC18
+GPIO3
+34
+PA6
+GPIO4 / ADC0
+35
+PA18
+GPIO5 / ADC1
+36
+PA19
+GPIO6 / ADC2
+37
+PA21
+GPIO7 / ADC3
+38
+PA20
+PWM_H0
+39
+PA23
+PWM_H1
+40
+PA24
+PWM_H2
+41
+PA25
+CLK_OUT
+44
+PA1
+PPS
+46
+PE4
+BATT_MEAS
+1/2
+PC0
+Table 3-16: GPIO, ADC, PWM pin reference (J2)
+Signal
+J2 Pin
+MCU Pin
+GPIO8
+31
+PD26
+GPIO9
+32
+PC14
+GPIO10
+33
+PB0
+GPIO11
+34
+PC12
+GPIO12
+35
+PB0
+GPIO13
+36
+PA11
+GPIO14
+37
+PB13
+GPIO15
+38
+PA2
+PWM_L0
+39
+PC1
+PWM_L1
+40
+PC2
+PWM_L2
+41
+PC3
+
+DATASHEET
+Ref. & issue:
+SM-DT-DS-0002_3.2
+Date:
+04/08/2026
+Pages:
+18 of 23
+Spacemanic CZ s.r.o. | sales@spacemanic.com | www.spacemanic.com
+The OBC exposes a number of pins directly connected from the MCU for use as general purpose
+I/O, Analog measurement input, PWM output or special functions. Refer to MCU documentation for
+the exact usage via software.
+Extra GPIO:
+-
+CLK_OUT: legacy name, no special function implemented.
+-
+PPS: extra GPIO reserved for use as Pulse-Per-Second input if implemented in software.
+-
+BATT_MEAS: extra ADC input meant for analog battery measurement. It does NOT imple-
+ment any scaling or protection circuits. It is connected directly to the MCU.
+3.1.10
+RMII
+Table 3-17: GPIO, ADC, PWM pin reference (J1)
+Signal
+J2 Pin
+MCU Pin
+REFCK
+13
+PD0
+TXEN
+14
+PD1
+RXD0
+15
+PD5
+RXD1
+16
+PD6
+TXD0
+17
+PD2
+TXD1
+18
+PD3
+CRSDV
+19
+PD4
+RXER
+20
+PD7
+MDC
+21
+PD8
+MDIO
+22
+PD9
+Reduced media-independent interface I/O is exposed directly from the MCU. The module does
+NOT implement any PHY for the Ethernet interface.
+3.1.11
+SENS I2C AND INTERNAL SENSORS
+Figure 3-7: Internal sensor and memory placement
+
+DATASHEET
+Ref. & issue:
+SM-DT-DS-0002_3.2
+Date:
+04/08/2026
+Pages:
+19 of 23
+Spacemanic CZ s.r.o. | sales@spacemanic.com | www.spacemanic.com
+Table 3-18: SENS I2C pin reference
+Signal
+J2 Pin
+MCU Pin
+SDA
+55
+PB4
+SCL
+57
+PB5
+MAG SENS INT
+-
+PE0
+GYR SENS INT1
+-
+PE1
+GYR SENS INT2
+-
+PE2
+This I2C bus is connected internally to on-board magnetometer and gyroscope & accelerometer sen-
+sors including their respective interrupt signals. This bus is not accessible outside of the module. The
+bus is exposed on J2 connector for possible extension by additional sensors by the user implemented on
+module’s motherboard.
+MAGNETOMETER
+The Deep Thought OBC module integrates a three-axis MEMS magnetometer (MMC5983). The
+sensor also includes temperature information. Refer to manufacturer documentation for details or the
+example software for basic usage.
+Figure 3-8: Magnetometer coordinate system (left-handed)
+GYROSCOPE & ACCELEROMETER
+The Deep Thought OBC module integrates a three-axis MEMS gyroscope & accelerometer sensor
+(ICM-42688-P). The sensor also includes temperature information. Refer to manufacturer documen-
+tation for details or the example software for basic usage.
+Figure 3-9: Gyroscope & accelerometer coordinate system
+
+DATASHEET
+Ref. & issue:
+SM-DT-DS-0002_3.2
+Date:
+04/08/2026
+Pages:
+20 of 23
+Spacemanic CZ s.r.o. | sales@spacemanic.com | www.spacemanic.com
+3.1.12
+FRAM SPI
+The module integrates 3 FRAM memory ICs (CY15B108QN), each with 1 MiB data capacity. All
+are available for user implementation into mission specific software. Typical SPI speed is 40 MHz.
+Performance is dependent on software implementation.
+Table 3-19: FRAM SPI pin reference
+Signal
+Jn Pin
+MCU Pin
+FRAM SPI MOSI
+-
+PC27
+FRAM SPI MISO
+-
+PC26
+FRAM SPI SCK
+-
+PC24
+FRAM 1 CS
+-
+PC31
+FRAM 2 CS
+-
+PC30
+FRAM 3 CS
+-
+CP29
+3.1.13
+QSPI AND FLASH MEMORIES
+Alongside FRAM, the module integrates 4 Flash memory ICs (S25FL256L), each with 32 MiB data
+capacity. All are available for user implementation into mission specific software. Maximum QSPI
+speed is 40 MHz. This is driven by attached Flash memory chips. The QSPI bus is exposed on J2 con-
+nector for possible extension by additional SPI/QSPI devices by the user implemented on module’s
+motherboard. CS signals of these additional devices need to make use of module’s GPIO available on
+J1 and J2 connectors.
+Table 3-20: Flash QSPI pin reference
+Signal
+J2 Pin
+MCU Pin
+FLASH_CLK
+49
+PA14
+FLASH_MOSI_IO0
+51
+PA13
+FLASH_MISO_IO1
+52
+PA12
+FLASH_WP#_IO2
+53
+PA17
+FLASH_RST#_IO3
+54
+PD31
+Flash 1 CS
+-
+PC20
+Flash 2 CS
+-
+PC21
+Flash 3 CS
+-
+PC22
+Flash 4 CS
+-
+PC23
+
+DATASHEET
+Ref. & issue:
+SM-DT-DS-0002_3.2
+Date:
+04/08/2026
+Pages:
+21 of 23
+Spacemanic CZ s.r.o. | sales@spacemanic.com | www.spacemanic.com
+3.2
+SOFTWARE
+The OBC is fully programable and reprogrammable by the user using the programming/debug con-
+nector via supported SWD/JTAG tools.
+Spacemanic offers an open-source software example project available at:
+https://gitlab.com/spacemanic-public/dt-fw-example
+This software is available as-is without any warranty. For extensive software support and develop-
+ment support contact Spacemanic directly.
+
+DATASHEET
+Ref. & issue:
+SM-DT-DS-0002_3.2
+Date:
+04/08/2026
+Pages:
+22 of 23
+Spacemanic CZ s.r.o. | sales@spacemanic.com | www.spacemanic.com
+3.3
+MECHANICAL
+Figure 3-10: Mechanical Interface of the Deep Thought Module
+It is recommended to mount the module using four ISO 14579 M3x6 socket head hexalobular TX
+titanium grade 5 screws against 2.1 mm M3 spacers on the motherboard.
+Figure 3-11: Recommended Mounting Spacer (brass)
+
+DATASHEET
+Ref. & issue:
+SM-DT-DS-0002_3.2
+Date:
+04/08/2026
+Pages:
+23 of 23
+Spacemanic CZ s.r.o. | sales@spacemanic.com | www.spacemanic.com
+4
+DELIVERABLES
+Table 4-1: Deliverables
+Type
+Item
+Note
+Mechanical Part
+Aluminium cover
+Mechanical Part
+USS module standoffs
+Interface
+USS module V2b
+Wiring
+Debug cable
+503764-0601
+~15cm terminated to fe-
+male 2.54mm header
+Support
+Engineering support: 1 hour
+5
+RELATED PRODUCTS
+You may be also interested in:
+-
+Eddie OBC
+-
+1-16U CubeSat Platforms / Complete Mission
+6
+DISCLAIMER
+Spacemanic shall not be liable for any damages, losses, delays, or other consequences arising from
+improper use, unauthorized modifications, or incompatibility of the product with other systems, even in
+cases where these products are deployed in demanding environments such as satellite or space appli-
+cations. The product is designed for specific use according to the technical specifications outlined in the
+official documentation, and the company is not responsible for any issues arising from usage beyond
+this scope.
+The company is also not liable for damages caused by external factors that cannot be predicted or
+controlled, including but not limited to infrastructure failures, space conditions (e.g., radiation, micro-
+gravity), natural disasters, human error, unauthorized third-party interference, or unplanned changes in
+regulatory or legal requirements.
+By using the product, the user acknowledges awareness of the risks associated with its use in satel-
+lite and space applications and accepts full responsibility for the correct deployment and use of the
+product.
+

@@ -1,0 +1,194 @@
+ 
+www.DSI-AS.de 
+Aerospace Electronics 
+ 
+DSI Aerospace Technologie GmbH 
+Otto-Lilienthal-Str. 1 
+D-28199 Bremen 
+Germany 
+ 
+Phone +49 421 596969 0 
+FAX +49 421 596969 59 
+www.DSI-AS.de 
+info@dsi-as.de 
+ 
+OBC 
+A highly reliable On-Board 
+Computer for small- and 
+medium-sized satellites 
+ 
+Lead time for Flight Model: 8-10 months 
+ 
+issue 1.0 
+The On-Board Computer (OBC) is a highly reliable failure-
+tolerant unit acting as the central command, control and data-
+handling unit of a satellite. It is implemented in a compact 
+housing and contains a redundant set of modules consisting of 
+the processor module (CPM), interface module (IFM) and 
+power converter module (PCM). The processor system 
+includes a fault-tolerant microcontroller with SDRAM 
+(512 MiB net) and a combination of MRAM devices for non-
+volatile storage (2 MiB Boot MRAM and 32 MiB data MRAM). 
+For the CPU, the GR712RC device (Dual-Core LEON3-FT SPARC 
+V8 Processor) from Cobham Gaisler is used. 
+This high-performance processor contains two CPU cores, on-
+chip SRAM (192 KiB) and provides SpaceWire and serial S-band 
+transmitter/ receiver interfaces. The interface board employs 
+a Microsemi RTAX2000 FPGA, which implements various 
+interfaces for the satellite subsystems. An analogue section of 
+the interface board allows the acquisition of data from 
+multiple temperature sensors. The power converter module 
+converts the unregulated satellite primary power input to 
+those needed to supply the processor and interface modules. 
+The design of the OBC allows simple adaptions to the type and 
+number of interfaces to be made. 
+Key Features 
+Interfaces 
+ 
+Dual-Core LEON3FT processor system incl. 192 KiB on-
+chip SRAM 
+ 
+512 MiB (net) processor working memory (EDAC 
+protected) 
+ 
+32 MiB non-volatile data memory and 2 MiB Boot MRAM 
+ 
+CCSDS-compliant TM/TC interfaces (redundant) 
+ 
+UART/SpaceWire sub-unit interfaces 
+ 
+Analogue acquisition 
+ 
+Flexible redundancy features 
+ 
+Redundant CCSDS TC and TM interfaces (SBDL) 
+ 
+S/C Busses: e.g. CAN bus, 1553, SpaceWire 
+ 
+Time Sync. Interface: LVDS, SBDL 
+ 
+Power Interface: +28V nominal (unregulated) 
+ 
+Sub-unit/Payload interfaces: SpaceWire, UART (SBDL) 
+ 
+Monitoring Interface: UART (SBDL) 
+ 
+Temperature acquisition: AD590, Pt-1k, NTC 
+ 
+Analogue acquisition: 0..5V 
+Performance parameters 
+Key Design Parameters 
+ 
+Processor System with Dual-Core LEON3-FT CPU, 
+providing up to 300 DMIPS and 250 MFLOPS peak 
+ 
+SpaceWire with up to 200Mbps (RMAP support, 
+optional) 
+ 
+CCSDS/ECSS telecommand decoder  
+(up to 10 Mbps input rate) 
+ 
+CCSDS/ECSS telemetry encoder  
+(up to 50 Mbps output rate) 
+ 
+Unit size: 243 mm x 169 mm x 164.5 mm (L x W x H) 
+ 
+Mass: 4700 g  
+ 
+Power (Eu:CROPIS configuration, partly hot-redundant):  
+       < 10W (2x PCM + 1x CPM + 2x IFM) 
+ 
+ 
+
+ 
+www.DSI-AS.de 
+Aerospace Electronics 
+ 
+DSI Aerospace Technologie GmbH 
+Otto-Lilienthal-Str. 1 
+D-28199 Bremen 
+Germany 
+ 
+Phone +49 421 596969 0 
+FAX +49 421 596969 59 
+www.DSI-AS.de 
+info@dsi-as.de 
+ 
+Unit Overview 
+OBC
+(Nominal)
+OBC
+(Redundant)
+Backplane
+Payload 
+#3
+Payload 
+#2
+Payload 
+#1
+Mag. 
+Torquer
+Payload 
+#4
+Reaction
+Wheels 
+#1-#4
+Payload 
+#5
+Sun 
+Sensors
+#1-#5 N
+Sun 
+Sensors 
+#1-#5 R
+GPS N
+GPS R
+Mag. Field 
+Sensor N
+Mag. Field  
+Sensor R
+Gyros-
+copes
+#1-#4
+Primary
+S-Band
+RX
+S-Band 
+TX R
+Redundant
+S-Band
+RX
+S-Band 
+TX N
+PCDU
+Temp.
+Signals
+(Analog)
+R
+Temp.
+Signals
+(Analog)
+N
+Nom. I/F
+Red. I/F
+OBC-to-OBC comm. 
+via backplane
+Via backplane
+PCM
+CPM
+IFM
+PCM
+CPM
+IFM
+ 
+This OBC is a compact command, control and data-handling unit for small- and medium-sized satellites. Its special architecture, 
+which is composed of a GR712 processor and an interface FPGA, allows easy support for commonly-used sub-unit interface types.  
+This OBC was developed for the Eu:CROPIS mission (DLR) and has been operating flawlessly in orbit since December 2018.  
+Design References: 
+TET-NVS (DLR) 
+MASCOT OBC (DLR) 
+SCB-MM (KACST) 
+ExoMars Orbiter PDHU (ESA) 
+EnMap DSHA (DLR) 
+Eu:CROPIS CDH (DLR) 
+

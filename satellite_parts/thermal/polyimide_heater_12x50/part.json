@@ -88,6 +88,50 @@
   },
   "face_counts": {
    "part": 12
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    50.0,
+    12.0,
+    0.3
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "film",
+     "color": [
+      0.85,
+      0.72,
+      0.3
+     ],
+     "file": "bodies_detail/film.stl"
+    },
+    {
+     "name": "element",
+     "color": [
+      0.72,
+      0.45,
+      0.2
+     ],
+     "file": "bodies_detail/element.stl"
+    },
+    {
+     "name": "lead_pads",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/lead_pads.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",

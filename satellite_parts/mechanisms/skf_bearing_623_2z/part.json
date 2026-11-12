@@ -1,0 +1,118 @@
+{
+ "id": "skf_bearing_623_2z",
+ "name": "SKF 623-2Z deep groove ball bearing, shielded (3 x 10 x 4 mm)",
+ "category": "mechanisms",
+ "subcategory": "bearing",
+ "vendor": "SKF",
+ "model": "623-2Z",
+ "dimensions_mm": {
+  "x": 10,
+  "y": 10,
+  "z": 4
+ },
+ "mass_g": 1.5,
+ "source": {
+  "type": "datasheet",
+  "url": "https://baoanjsc.com.vn/TaiLieu/single-row-deep-groove-ball-bearings-d3-6mm-skf-type-6-CATALOG-12068.pdf",
+  "document": {
+   "title": "SKF single row deep groove ball bearings, d 3 to 6 mm (product table)",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "d = 3 mm, D = 10 mm, B = 4 mm, mass 0.0015 kg, from the SKF table row 623-2Z. Steel rings and balls, 2Z = metal shield on both sides."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Sweden",
+ "distributors": [
+  "SKF distributors",
+  "RS Components",
+  "Misumi"
+ ],
+ "material": "bearing steel, steel shields",
+ "mechanism": {
+  "type": "deep groove ball bearing",
+  "bore_mm": 3,
+  "outside_diameter_mm": 10,
+  "width_mm": 4
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "distributor",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   10.0,
+   9.97,
+   4.0
+  ],
+  "mesh_volume_mm3": 284.8,
+  "watertight": true,
+  "render_kind": "tube",
+  "effective_density_g_cm3": 5.266,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 336
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "body",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://baoanjsc.com.vn/TaiLieu/single-row-deep-groove-ball-bearings-d3-6mm-skf-type-6-CATALOG-12068.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

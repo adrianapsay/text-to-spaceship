@@ -1,0 +1,133 @@
+ 
+VECTRONIC Aerospace GmbH 
+ 
+TEL 
++49(0)30 6789 4990 
+Carl-Scheele-Str. 12 
+ 
+FAX 
++49(0)30 6789 5230 
+D-12489 Berlin 
+ 
+E-Mail 
+mail@vectronic-aerospace.com 
+ 
+ 
+Web 
+www.vectronic-aerospace.com 
+ 
+VECTRONIC Aerospace GmbH reserves the right to change any part of this specification without notice 
+ 
+ 
+ 
+ 
+Star Tracker VST-41M 
+ 
+VECTRONIC Aerospace offers with the VST-41M a 
+high performance 3-axis star tracker for small 
+satellite applications with the technical capabilities 
+and radiation tolerance suitable for LEO, GEO and 
+even for interplanetary missions. The sensor has 
+been successfully used in several small satellite 
+missions with outstanding in-orbit performance. 
+The star tracker consists of two main elements:  
+• The optical head with the high quality lens 
+system (Leica) and the baffle in front of it 
+• The star tracker processing electronics with the 
+on-board star catalogue 
+The VST-41M performs direct and autonomous 
+measurement of the spacecraft attitude in the body 
+fixed star tracker reference frame relative to the 
+inertially fixed celestial reference system. 
+Core element of the sensor’s processing electronics 
+is a 512 x 512 pixel rad-hard CMOS sensor, 
+especially developed for space applications, which 
+transforms star images detected through the lens into 
+electrical information. After the A/D conversion the 
+CPU analyses the incoming data through a chain of 
+several algorithms, which eliminate fixed pattern 
+noise, objects that are too bright like the Moon or 
+planets and then determine star positions using a 
+barycentric algorithm. With a focal length of 50 mm 
+the 
+sensor’s 
+FOV 
+is 
+around 
+14°x14° 
+which 
+guarantees at least 10 visible stars independent of 
+the current attitude. After the first acquisition, which 
+takes typically 800 ms, the sensor operates with an 
+update rate of 4 Hz calculates the attitude with a 2σ 
+accuracy of better than 18 arcsec for each individual 
+star frame. The probability of attitude acquisition at 
+spacecraft angular rates lower than 0.3 deg/sec is 
+better than 99.7%. The attitude information is 
+provided together with other status telemetry in the 
+form 
+of 
+quaternions 
+and 
+Euler 
+angles. 
+The 
+communication interface comprises two independent   
+asynchronous SCI’s with a baud rate up to 1 Mbit. 
+ 
+ 
+ 
+Technical Data 
+ 
+Mechanical
+Dimensions (with baffle) 
+80 mm x 100 mm x 180 mm 
+Mass 
+0.7 to 0.9 kg (configuration) 
+Mounting pattern 
+4x M4  66 mm x 90 mm 
+ 
+ 
+ 
+ 
+ 
+Environmental
+Operating temp. range 
+-20°C to +65°C 
+Storage temp. range 
+-40°C to +80°C 
+Vibration 
+20g rms random 3 axis 
+Radiation tolerance TID 
+>20 krad 
+ 
+ 
+ 
+Electrical
+Power consumption, max. 
+2.5 W 
+Input voltage range (VDC) 
+9 to 18 or 18 to 40 
+Signal interface 
+RS422 / RS485 
+Signal characteristics 
+Serial asynchronous 
+Connector type 
+SUB HD26 male 
+ 
+Performance
+Accuracy 2σ (x,y / z axis) 
+18 arcsec / 122 arcsec 
+Acquisition probability 
+>99.7% 
+Update rate 
+4 Hz  
+Field of view 
+14° x 14° 
+Time to first acquisition 
+Typ. 800 ms 
+ 
+VECTRONIC Aerospace GmbH 
+Communication • Navigation • Space Applications 
+Star Tracker VST-41M 
+

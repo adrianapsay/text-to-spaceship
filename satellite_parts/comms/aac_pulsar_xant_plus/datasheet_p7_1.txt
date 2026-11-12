@@ -1,0 +1,120 @@
+[Type here] 
+COMMUNICATIONS 
+PULSAR-XANT-PLUS 
+ 
+HIGH-GAIN  
+X-BAND ANTENNA 
+ 
+ 
+The PULSAR-XANT-PLUS is a high-gain, lightweight, 
+low-profile X-Band patch antenna designed for, but not 
+limited to, CubeSat missions. It is compatible with the 
+CubeSat standard in terms of height limitations for 
+mounts on the exterior chassis. If your mission has a 
+demanding link budget requiring high data-rates then 
+the XANT-PLUS is the one for you, featuring a low 
+profile, high-gain four element (2x2) array. 
+  
+KEY HIGHLIGHTS: 
+• 
+High data-rate for space missions needing to 
+downlink high data volumes 
+• 
+High gain for space missions where greater link 
+budget margins are needed, or simply to close 
+the link 
+• 
+Sub 2 dB axial ratio over the entire X-Band of 
+operation, with both LHCP and RHCP versions 
+available 
+• 
+Extremely light-weight minimalistic design 
+• 
+Performance insensitive to the surrounding 
+ground plane allowing seamless integration 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+COMPATIBLE 
+PERFORMANCE 
+RELIABILITY 
+Covers the entire X-Band frequency 
+range of 8.025 - 8.40 GHz with a small 
+mechanical profile. 
+High gain, sub 2 dB axial ratio over the 
+entire X-Band frequency range offering 
+exceptional performance. 
+The light, minimal, and rugged design offers 
+extreme reliability with a hard gold layer 
+protecting the antenna elements from the 
+harsh space environment for superior 
+durability.  
+ 
+
+#SPACEISAWESOME 
+#SPACEISAWESOME 
+www.aac-clyde.space 
+Copyright AAC Clyde Space 2026. All rights reserved. 
+All information subject to change. Release date 1 July 2026. 
+BR-01-00201 RevA 
+TECHNICAL SPECIFICATIONS 
+ 
+General 
+PULSAR-XANT-PLUS 
+Frequency Range 
+8.025 GHz – 8.40 GHz 
+Bandwidth 
+375 MHz 
+Temperature 
+-40°C to +85°C 
+Mass 
+8 g 
+Gain 
+12 dBi ± 0.5 dB 
+Axial Ratio 
+< 2 dB across the band 
+S11 
+< -14 dB 
+Polarisation 
+LHCP / RHCP 
+Max RF Power 
+5 W (37 dBm) 
+Connector Type 
+Straight SMP 
+Design Life 
+> 2 years in LEO 
+Width 
+43 mm 
+Height (excl.connector) 
+1.65 mm 
+Length 
+43 mm 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+To make an enquiry, request a quotation or 
+learn about AAC Clyde Space’s other products 
+and services, please contact: enquiries@aac-
+clyde.space 
+

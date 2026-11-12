@@ -1,0 +1,2 @@
+url: https://upmold.com/wp-content/uploads/Data-center/screw-technical-data-sheet.pdf
+family datasheet: metric fastener dimension table covering countersunk socket screws; copied from csk_m2p5x5 on 2026-11-11

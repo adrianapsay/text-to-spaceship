@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-reliasat-fsn11200816qf-u2g0fi.pdf
+method: product image from the catalog page https://satsearch.co/products/reliasat-fsn11200816qf

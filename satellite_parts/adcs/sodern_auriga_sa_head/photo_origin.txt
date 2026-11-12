@@ -1,0 +1,3 @@
+url: https://satcatalog.s3.amazonaws.com/components/294/featured_image.jpg?lastmod=20210708041857
+method: image on page https://www.satcatalog.com/component/auriga-sa/
+found by Claude (web search) on 2026-11-11; downloaded by fetch_pass5.py

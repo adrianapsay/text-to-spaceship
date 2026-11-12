@@ -1,0 +1,414 @@
+FoX Payload Processor
+Unit to control and process data for Payloads, Instruments, 
+Robotics and Platform needs. 
+For LEO, MEO and GEO through the FoX platform.
+The FoX Payload Processor is a high-performance unit to control and process data for payloads, 
+instruments and robotics. Drawing on Beyond Gravity's experience from decades of successful 
+digital electronics construction, it provides outstanding performance at a competitive cost. The 
+FoX Payload Processor provides a solution for both software and gateware processing and is 
+scalable depending on processing and storage needs.
+The FoX Payload Processor is part of the FoX Electronics Platform which offers a multitude of 
+functions and capabilities.
+Beyond Gravity
+beyondgravity.com
+
+Beyond Gravity
+mathias.kremer@beyondgravity.com
+beyondgravity.com
+This document remains the intellectual property of Beyond Gravity Sweden AB and may not be copied,
+or used without their prior written approval.
+Internal Code/Doc.No.
+Iss.3
+Key Features
+•
+High-speed processing and fast communication 
+interfaces.
+•
+3U SpaceVPX modular platform allows you to scale 
+processing as well as complement with other FoX 
+Platform capabilities.
+•
+Designed for 10+ years in LEO, MEO and GEO.
+•
+Outstanding performance at competitive cost. Beyond 
+Gravity's innovative component selection and test 
+approach based on decades of successfully building 
+space equipment delivers "traditional space" reliability 
+& quality at "new space" cost.
+•
+Guaranteed resilience and flexibility due to design 
+dedicated to space applications.
+Standard Modules
+Radiation Tolerance
+Physical / Environment
+•
+Single-Board Computer
+•
+Interface Extension
+•
+Mass Memory​
+•
+Ethernet Switch
+•
+Software Defined Radio
+•
+GNSS​ Rx Module
+•
+Master Reference Oscillator
+•
+More to come…
+•
+All orbits suitable 
+(additional shielding for 
+long missions in challenging orbits)
+•
+Latch-up free (53 MeV.cm2/mg)
+•
+Component Total Ionising 
+Dose (TID) > 36 kRad
+•
+All memories with ECC
+•
+Triple modular redundancy in FPGAs
+•
+Operating temperature:
+ -20ºC to +60ºC
+•
+TID allows >10 years in LEO
+•
+Random Vibration 15g RMS
+•
+Shock 2000g @ 2000Hz
+Example Configurations
+FoX Payload Processor (4-slot)
+•
+Compact Non-redundant Unit
+•
+Single-board Computer
+•
+Interface Extension
+(can be tailored for mission needs)
+•
+Spare slot for e.g. more interfaces, mass memory etc
+FoX Payload Processor (9-slot)
+•
+Dual-redundant Unit
+•
+2x Single-board Computers
+•
+2x Interface Extension
+(can be tailored for mission needs)
+•
+Spare slots for more interfaces, processing 
+power or mass memory
+DC/DC
+SBC
+SBC IF Ext
+Spare
+Mass: 3.6 kg
+Size: 148x128x217 mm3
+Mass: 7.6 kg
+Size: 275x128x217 mm3
+Contact our sales team for more information:  ake.jendeby@beyondgravity.com
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+mathias.kremer@beyondgravity.com
+DC/DC
+SBC
+SBC IF Ext
+SBC IF Ext
+SBC
+DC/DC
+Mass 
+Memory
+Mass 
+Memory
+SBC
+
+Beyond Gravity
+mathias.kremer@beyondgravity.com
+beyondgravity.com
+This document remains the intellectual property of Beyond Gravity Sweden AB and may not be copied,
+or used without their prior written approval.
+Internal Code/Doc.No.
+Iss.3
+FoX Module Details - Single-Board Computer (SBC)
+•
+High performance processor and a powerful FPGA for flexibility in 
+terms of communication, interface and processing capability
+•
+Quad Core ARM, > 30.000 DMIPS
+•
+4 GiB DDR processing memory with ECC
+•
+20 GiB non-volatile storage with ECC
+•
+Extension modules available providing additional external 
+interfaces allowing to meet every mission's need
+•
+4x Ethernet  
+(1000BASE-KX)
+•
+2x PCIe 
+ 
+(Two 1-lane Root Complex)
+•
+4x HSSL 
+ 
+(4 general purpose lanes)
+•
+2x CAN
+•
+2x SpaceWire 
+(LVDS) 
+•
+2x I2C
+Key Features
+External Interfaces
+•
+2 Ethernet 
+ 
+(1000BASE-T, 10/100BASE-TX)
+•
+2 SpaceWire 
+(LVDS)
+•
+2 UART  
+ 
+(RS422/485)
+•
+Processor Debug 
+(UART + JTAG)
+•
+FPGA Debug 
+(UART + JTAG)
+•
+GPIO 
+ 
+(CMOS in/out)
+Backplane Interfaces
+FoX SBC
+Quad Core 
+ARM
+FPGA
+RAM
+(DDR)
+NVM
+(Flash)
+JTAG+UART
+(Debug)
+SpaceWire / LVDS
+JTAG + UART (debug)
+Ethernet
+I2C
+SpW
+GPIO
+IO RAM
+(DDR)
+HSSL
+GPIO
+CAN
+UART
+UART
+Ethernet
+Front Connectors
+SpaceVPX Backplane
+PCI express
+PCI express
+•
+Quad core ARM processor
+•
+>30000 DMIPS, >45000 CoreMarks, 58 GFlops
+•
+4/8 GiB DDR4 processing memory with ECC
+Performance
+•
+Boot software: Tests the processor, loads and starts app
+•
+Board Support Package for Operating Systems:
+-
+VxWorks 7
+-
+RTEMS (available Q3 2026)
+-
+Linux (available 2027)
+•
+Driver SW (DSW): API for all hardware functions; 
+•
+Software Development Environment: 
+image building, loading, debugging
+Software
+On-Board SW
+Software Execution Platform (SEP)
+Driver SW (DSW)
+Application SW
+Boot 
+SW
+Operating System
+(VxWorks / Linux / Other)
+BSP
+System Hardware
+
+Beyond Gravity
+mathias.kremer@beyondgravity.com
+beyondgravity.com
+This document remains the intellectual property of Beyond Gravity Sweden AB and may not be copied,
+or used without their prior written approval.
+Internal Code/Doc.No.
+Iss.3
+FoX Module Details – SBC Interface Extension
+•
+Interface extension module to the FoX SBC modules
+•
+Used to extend backplane signals to external connectors
+•
+Easily tailored to mission needs
+Key Features
+Version A: External Interfaces
+•
+2x Ethernet  
+(1000BASE-T, 10/100BASE-TX)
+or
+•
+2x SpaceWire 
+(LVDS)
+•
+1x MIL-STD-1553B 
+(Nom + Red) 
+•
+2x CAN
+•
+2x UART 
+ 
+(RS422 / RS485)
+•
+8x GPIO 
+ 
+(12V, 3 in + 5 out)
+FoX SBC IF Extension
+1553 
+Tranceiver
+1553 nom/red
+Front Connectors
+GPIO
+SpaceVPX Backplane
+Ethernet
+PHY + MAG
+SGMII
+CAN
+GPIO
+CAN 
+Tranceiver
+SpaceWire or
+UART
+GPIO
+RS422/RS485
+3x GPIO (12V)
+GPIO
+12V buffers
+5x GPIO (12V)
+GPIO
+LVDS
+Ethernet
+SpaceWire
+Version B: External Interfaces
+•
+8x SpaceWire 
+(LVDS)
+Interface Extension - Version A
+
+Beyond Gravity
+mathias.kremer@beyondgravity.com
+beyondgravity.com
+This document remains the intellectual property of Beyond Gravity Sweden AB and may not be copied,
+or used without their prior written approval.
+Internal Code/Doc.No.
+Iss.3
+FoX Module Details - Mass Memory
+•
+1 TeraByte (EOL) mass storage
+•
+Advanced error correcting capabilities
+•
+Fast access from FoX SBCs
+•
+Prepared for future extensions
+- Direct storage from instruments, cameras etc.
+- Direct downlink to ground
+Key Features
+•
+4x SpaceWire 
+(LVDS)
+•
+Debug 
+ 
+(UART + JTAG)
+•
+2x PCIe EP 
+(1-lane) 
+•
+4x SpaceWire 
+(LVDS)
+•
+2x I2C
+External Interfaces
+Backplane Interfaces
+FoX Mass Memory
+FPGA
+SpaceWire
+JTAG + UART (debug)
+SpaceWire
+SpaceWire
+SpaceWire
+Front Connectors
+SpaceVPX Backplane
+PCI express
+I2C
+SpaceWire
+SpaceWire
+SpaceWire
+SpaceWire
+Buffer 
+RAM
+(DDR)
+PWR 
+Switch
+NAND 
+Flash
+NAND 
+Flash
+NAND 
+Flash
+NAND 
+Flash
+NAND 
+Flash
+NAND 
+Flash
+NAND 
+Flash
+NAND 
+Flash
+NAND 
+Flash
+NAND 
+Flash
+NAND 
+Flash
+NAND 
+Flash
+NAND 
+Flash
+NAND 
+Flash
+PWR 
+Switch
+Data
+ECC
+PCI express
+

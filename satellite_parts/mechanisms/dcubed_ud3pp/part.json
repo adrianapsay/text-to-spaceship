@@ -1,0 +1,234 @@
+{
+ "id": "dcubed_ud3pp",
+ "name": "DCUBED uD3PP micro pin puller (shape-memory alloy)",
+ "category": "mechanisms",
+ "subcategory": "pin_puller",
+ "vendor": "DCUBED (Deployables Cubed GmbH)",
+ "model": "uD3PP",
+ "dimensions_mm": {
+  "x": 25.5,
+  "y": 25.5,
+  "z": 25.5
+ },
+ "mass_g": 80,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.cubesatshop.com/wp-content/uploads/2022/12/D3-1-13-TDS-DataSheet_uD3PP-6.pdf",
+  "document": {
+   "title": "DCUBED uD3PP technical data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "mechanism",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "25.5 x 25.5 x 25.5 mm (standard interface), about 80 g, 6.5 mm stroke, about 150 N maximum actuation sideload, 1.6 to 2 A DC actuation, 1.2 +- 0.2 ohm, -35 to 80 C (TBC). All values marked preliminary by DCUBED."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Germany",
+ "distributors": [
+  "direct",
+  "CubeSatShop"
+ ],
+ "satellite_class": "cubesat_and_smallsat",
+ "mechanism": {
+  "actuator_type": "shape_memory_alloy pin puller",
+  "stroke_mm": 6.5,
+  "max_sideload_N": 150
+ },
+ "electrical": {
+  "current_A": {
+   "min": 1.6,
+   "max": 2.0
+  },
+  "resistance_ohm": 1.2
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -35,
+   "max": 80
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   25.5,
+   25.5,
+   25.5
+  ],
+  "mesh_volume_mm3": 16558.2,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 4.831,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    25.5,
+    25.5,
+    25.5
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "feet",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/feet.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "connector_shell",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/connector_shell.stl"
+    },
+    {
+     "name": "connector_insert",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector_insert.stl"
+    },
+    {
+     "name": "jackscrews",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/jackscrews.stl"
+    },
+    {
+     "name": "label",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies_detail/label.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://www.cubesatshop.com/wp-content/uploads/2022/12/D3-1-13-TDS-DataSheet_uD3PP-6.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

@@ -1,0 +1,36 @@
+High Reliability
+Spacecraft Solutions
+Spinning Sun Sensor
+669 Forest St, Marlborough MA 01752 USA                                                         
+ Tel: 978.485.9100     adcolemai.com    email: info@adcolemai.com
+Speciﬁcations
+Rad-Hard  Hi-Rel
+Hundreds of Missions
+On-Board Spacecraft
+Across the Solar System
+Spinning Sun Sensor
+The Adcole Miniature Spinning Sun Sensor is 
+designed for use on small spinning satellites. 
+This sensor has ﬂown on the ST5 and Themis 
+satellite clusters, and has been delivered for 
+the NASA MMS program.
+Parameters:
+Field of View:         ±87.5° from normal to spin axis
+Accuracy:               ±0.25°
+LSB Size:                0.125
+Input Power:           +12 V to +15 V 
+                               (consumption less than 0.5 W)
+Output Power:        Parallel 11 data bits plus sun 
+                               crossing pulse output
+Weight:                  0.25 kg max
+Size:                      57mm x 51.5mm x 51 mm
+Conﬁguration Features:
+Fully integrated unit with optical heads and 
+electronics processing circuitry.
+Adcole Spinning Sun Sensors are uniquely 
+designed to provide sun aspect angle and 
+sun crossing pulses for spinning spacecraft. 
+This information is used to determine spin 
+rate and spin axis orientation relative to the 
+sun
+

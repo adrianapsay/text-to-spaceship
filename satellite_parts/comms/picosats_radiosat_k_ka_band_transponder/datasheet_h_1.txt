@@ -1,0 +1,84 @@
+K/KA - BAND TRANSPONDER
+MINIATURIZED NON-REGENERATIVE TRANSPONDER 
+DESIGNED FOR CUBESAT AND SMALL SATELLITES FOR LEO 
+AND GEO APPLICATIONS
+OVERVIEW
+A miniaturized non regenerative bent-pipe 
+transponder designed for CubeSat and 
+Small Satellites for LEO and GEO 
+applications. With a volume of 0.5 U and a 
+mass of 700 g, the transponder operates in 
+K/Ka-band and it is characterized by high 
+performances and low power 
+consumption. 
+The transponder analog bandwidth can be 
+customized from 400 kHz to 500 MHz. 
+The receiver and transmitter can be tuned 
+independently and the gain can be set in 
+60 dB range as ﬁxed (FGM) or adaptive 
+with automatic gain control mode (AGC). 
+The transponder offers a versatile CW 
+beacon mode as an option.
+APPLICATIONS
+●
+LEO small satellites services
+●
+GEO satellites services
+
+KEY FEATURES
+FREQUENCIES
+●
+Downlink:  17.8 - 20.2 GHz
+●
+Uplink:  27.6 - 30.0 GHz
+POWER SUPPLY
+●
+Power consumption:  < 40 W
+●
+Input supply:  from 12 V to 24 V
+PERFORMANCE
+●
+Customizable bandwidth:  from 400 
+kHz to 500 MHz (20 MHz default)
+●
+RF output power:  up to 5 W
+●
+Receiver noise ﬁgure:  3 dB
+WORK ENVIRONMENT and TESTING
+●
+Operating temperature range: 
+-20 °C to +70 °C
+●
+Non-operating temperature range: 
+-30 °C to +90 °C
+●
+Vibration and TVAC qualiﬁed by 
+ECSS-E-ST-10-03C
+INTERFACES
+●
+2.92 mm RF connectors
+●
+Space qualiﬁed data and power 
+connectors
+●
+Transponder telemetry and control 
+over RS422
+●
+Additional control over RS232
+ACCOMODATION
+●
+Mass:  700 g
+●
+Volume:  93.5 x 114.2 x 45.6 mm
+ADDITIONAL FEATURES
+●
+Fixed Gain Mode (FGM) and Automatic Gain Control mode (AGC) available
+●
+In-Orbit ﬁrmware updating
+●
+Optional CW beacon function
+●
+Optional programmable oscillator frequency correction
+www.picosats.eu
+info@picosats.eu
+

@@ -1,0 +1,151 @@
+{
+ "id": "anywaves_gnss_all_bands_antenna",
+ "name": "Anywaves GNSS All-Bands Antenna",
+ "category": "comms",
+ "subcategory": "antenna",
+ "vendor": "Anywaves",
+ "model": "GNSS All-Bands Antenna",
+ "dimensions_mm": {
+  "x": 99.4,
+  "y": 99.4,
+  "z": 15.2
+ },
+ "mass_g": 130.0,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-anywaves-gnss-all-bands-antenna-v0wzek.pdf",
+  "document": {
+   "title": "Anywaves GNSS All-Bands Antenna data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-11",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Read from the vendor data sheet (datasheet-anywaves-gnss-all-bands-antenna-v0wzek.pdf): dimensions \"0\u00b0 Group Delay Variation < 1.2 ns Physical Characteristics Envelope Size 99.4 mm x 99.4 mm x 15.2 mm Protrudin\"; mass \"ding height: 8.7 mm Mass With Connector 130 g Conn\". Catalog page lists no mass. Electrical / RF values found in the data sheet or page text by pattern (quoted where possible).",
+  "found_via": "https://satsearch.co/products/anywaves-gnss-all-bands-antenna"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "rf": {
+  "band": "L-band"
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   99.4,
+   99.4,
+   16.2
+  ],
+  "mesh_volume_mm3": 157137.0,
+  "watertight": true,
+  "render_kind": "patch_antenna",
+  "effective_density_g_cm3": 0.827,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "patch",
+     "color": [
+      0.72,
+      0.45,
+      0.2
+     ],
+     "file": "bodies/part__patch.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 28
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    99.4,
+    99.4,
+    16.3
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.1
+   ],
+   "bodies": [
+    {
+     "name": "ground_plate",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies_detail/ground_plate.stl"
+    },
+    {
+     "name": "patches",
+     "color": [
+      0.72,
+      0.45,
+      0.2
+     ],
+     "file": "bodies_detail/patches.stl"
+    },
+    {
+     "name": "feeds",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/feeds.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
+  "datasheet_url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-anywaves-gnss-all-bands-antenna-v0wzek.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

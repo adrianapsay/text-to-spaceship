@@ -1,5 +1,4 @@
-image: https://www.pipingmaterial.ae/specification/fasteners/iso-7089-washer-specifications.jpg
-page: https://storage.googleapis.com/dbwwecxpburjke/iso-7089-washer-dimensions.html
-title: Iso 7089 Washer Dimensions at Gabriella Madden blog
-query: generic ISO 7089 M3 washer
-found by web image search; representative, verify before use
+representative photo of ISO 7089 / DIN 125 plain washers (Westfield Fasteners product page)
+url: https://www.westfieldfasteners.co.uk/Images3/Main_Images_Published/Plain-Flat-Washer-ISO-7089-200HV-300HV-in-A2.jpg
+method: image on page https://www.westfieldfasteners.co.uk/Metric-Washers/200HV-Flat-Plain-Washer-ISO-7089-M3-A2-Stainless.html
+found by Claude (web search) on 2026-11-11; downloaded by fetch_pass5.py

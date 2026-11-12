@@ -104,6 +104,68 @@
   },
   "face_counts": {
    "part": 1080
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    102.0,
+    102.0,
+    58.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "base",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/base.stl"
+    },
+    {
+     "name": "cover",
+     "color": [
+      0.24,
+      0.26,
+      0.3
+     ],
+     "file": "bodies_detail/cover.stl"
+    },
+    {
+     "name": "cap",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/cap.stl"
+    },
+    {
+     "name": "bolts",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/bolts.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",

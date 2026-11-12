@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-ecuadorian-space-agency-exa-ssa04-dual-sc-band-patch-antenna-09r0u9.pdf
+method: product image from the catalog page https://satsearch.co/products/exa-ssa04-dual-band-patch-antenna

@@ -1,0 +1,4 @@
+url: https://www.renco.com/fileadmin/user_upload/renco/1319497-21_Drehgeber_RENCO_en.pdf
+title: RENCO R35i and R35iL rotary encoders
+query: generic ISO 4762 M2.5x5 datasheet pdf
+found by web search; verify that it is the right part

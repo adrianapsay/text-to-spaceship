@@ -1,0 +1,59 @@
+NanoProp
+CGP3
+gomspace.com
+
+NanoProp CGP3
+Highlighted Technical Features
+Configuration:
+• 4 Individual thrusters 
+• Closed-loop thrust control 
+• Real time thrust measurement
+• Propellant: Butane
+Specification:
+• Thrust: 1mN
+• Thrust resolution: 10 µN
+• Specific impulse: 60-110 sec 
+• Total impulse 40 Ns
+• Power consumption < 2W (average)
+• Mass 300/350 gram (dry/wet)
+• Operating pressure: 2-5 bar
+• Temperature range  0° to 50°C 
+Interfaces:
+• Communication: CAN, I2C
+• Supply voltage: 5 VDC and 12 VDC
+• Electrical interface: Flying leads
+Mechanical Features:
+• Size 100 x 100 x 50 mm (including electronics board)
+• Interface: 4xM3 (PC/104 spec)
+The unique fine thrust 
+control capability is 
+based on NanoSpace’s 
+proprietary MEMS 
+(Micro-Electrically-
+Mechanical-Systems) 
+technology for realising  
+key components wihtin  
+the system.
+The system can provide both 
+translational thrust and torque 
+action. The thrust control is 
+extremely accurate and direct 
+feedback is provided on the 
+flow. Ideal for applications 
+involving formation flying, 
+rendevouz & docking 
+maneurvers – and for deep 
+space attitude control.
+Mature & miniaturised 
+cold-gas propulsion 
+system for easy 
+integration into cubesat 
+(require 0.5U volume).  
+The product was 
+succesfully flight proven 
+in 2015.
+Flightproven propulsion system for 3U satellites: 
+• For both thrust and torque actuation
+• Extremely fine thrust control and direct feedback
+• Fits seamlessly into COTS 3U structures
+

@@ -1,0 +1,211 @@
+{
+ "id": "exa_rbl_micro_remove_before_lauch",
+ "name": "EXA (Ecuadorian Space Agency) RBL-Micro (Remove Before Lauch)",
+ "category": "power",
+ "subcategory": "eps",
+ "vendor": "EXA (Ecuadorian Space Agency)",
+ "model": "RBL-Micro (Remove Before Lauch)",
+ "dimensions_mm": {
+  "x": 53.1,
+  "y": 49.0,
+  "z": 25.4
+ },
+ "mass_g": 101.0,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-ecuadorian-space-agency-exa-rbl-remove-before-launch-microsat-sized-rbl-for-overengineered-aplications-odzn1j.pdf",
+  "document": {
+   "title": "EXA (Ecuadorian Space Agency) RBL-Micro (Remove Before Lauch) data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-11",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Read from the vendor data sheet (datasheet-ecuadorian-space-agency-exa-rbl-remove-before-launch-microsat-sized-rbl-for-overengineered-aplications-odzn1j.pdf): dimensions \"01 grams \u2022 Conductive surface contact area: 200 mm^2 \u2022 Dimensions (LxWxH): 53.10mm x 49.00mm x 25.4mm \u2022 Interf\"; mass \"mentation. \u2022 Weight (w/o RBL key): 101 grams \u2022 C\". Catalog page lists no mass.",
+  "found_via": "https://satsearch.co/products/exa-rbl-remove-before-lauch"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   53.1,
+   49.0,
+   25.4
+  ],
+  "mesh_volume_mm3": 66054.8,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.529,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    53.1,
+    49.0,
+    25.4
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "feet",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/feet.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "connector_shell",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/connector_shell.stl"
+    },
+    {
+     "name": "connector_insert",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector_insert.stl"
+    },
+    {
+     "name": "jackscrews",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/jackscrews.stl"
+    },
+    {
+     "name": "label",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies_detail/label.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
+  "datasheet_url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-ecuadorian-space-agency-exa-rbl-remove-before-launch-microsat-sized-rbl-for-overengineered-aplications-odzn1j.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

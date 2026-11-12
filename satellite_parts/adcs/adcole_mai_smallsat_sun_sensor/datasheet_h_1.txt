@@ -1,0 +1,56 @@
+ 
+ 
+Page 1 of 1 
+ 
+© 2017 Adcole Maryland Aerospace, LLC 
+All Rights Reserved                         
+410-451-2505 
+www.adcolemai.com 
+2145 Priest Bridge Dr, Suite 15 
+Crofton, MD. 21114 
+MAI Sun Sensor 
+Stock #: MAI-000-00006000 
+ 
+Specifications 
+ 
+Performance Item 
+Specification 
+SmallSat Sun Sensor 
+ 
+          Dimensions 
+50.80 x 19.05 x 2.03 mm 
+          Mass 
+5.5 g 
+          Output 
+0 to 250 mV 
+          Scaling Resistor 
+6.8 kΩ 
+          Mounting Holes 
+4-40 screws 
+CubeSat Sun Sensor 
+ 
+          Dimensions 
+27.94 x 17.14 x 2.03 mm 
+          Mass 
+3.5 g 
+          Output 
+0 to 390 mV 
+          Scaling Resistor 
+5.9 Ω 
+          Mounting Holes 
+4 x 0-80 Button Head Socket Cap Screws 
+Powered Sun Sensor (optional) 
+ 
+          Power Required 
+5 mW (3.3V or 5V) 
+          Output 
+0 to 3.3 V or 0 to 5 V 
+The MAI Sun Sensor can be used for a variety of 
+spacecraft missions requiring sun detection. The output 
+of the MAI Sun Sensor is an analog voltage range which 
+can be fed into a microcontroller ADC. It can also be fed 
+to some signal conditioning circuitry to obtain an 
+amplified voltage output of up to 3.3 or 5V. 
+MAI Sun Sensors are sold in packs of 6 and are available 
+in two sizes: SmallSat or CubeSat. 
+

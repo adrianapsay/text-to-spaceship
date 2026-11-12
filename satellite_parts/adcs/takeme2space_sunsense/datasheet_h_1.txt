@@ -1,0 +1,48 @@
+SunSense - Technical specifications 
+Revision: A 
+Date: 11-03-2025 
+SunSense – Coarse Sun Sensor​
+ 
+ 
+​
+Description: 
+SunSense, our advanced sun sensor, gives you a wide sensing range and a desirable operational 
+temperature, delivering precision and reliability. Its compact design makes it an ideal fit for any 
+CubeSat configuration. Featuring a low shut-down current consumption, SunSense ensures efficient 
+energy management. SunSense’s sensor includes on-board temperature compensation. It also 
+includes a low-noise amplifier and a 16-bit ADC. It comes with a hard anodised AL 6061 enclosure, 
+making it mountable externally on all solar panels.​
+ 
+ 
+Parameter 
+Value 
+Performance 
+Interface Type 
+Digital 
+FOV (Field of View) 
+110° 
+Range 
+0 to 228 kLux 
+Output resolution 
+0.0034 lux/counts 
+Operational temperature  
+-40° to 110°C 
+Mechanical 
+Dimensions (including housing) 
+30mm x 22mm x 7.6mm 
+Mass 
+~15 g 
+Connector 
+4-pin Molex pico-blade 
+Electrical 
+Shutdown current consumption 
+0.5 μA 
+Operating Voltage 
+2.5V to 3.3V (nominal) 
+Communication Interface 
+I2C 
+ 
+1 
+TM2Space Technologies Pvt Ltd, Hyderabad, India​
+info@tm2.space | tm2.space  
+

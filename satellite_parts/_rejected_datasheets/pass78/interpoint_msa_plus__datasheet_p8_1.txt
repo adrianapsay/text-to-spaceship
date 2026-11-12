@@ -1,0 +1,2296 @@
+FEATURES
+•	 Trim function ±10%, single and duals 
+•	 Small size, 1.13 in2 (7.31 cm2) 
+•	 -55° to +125°C operation
+•	 15 to 50 volt input
+•	 Low output ripple
+•	 80 volts for 1 second transient protection
+•	 Magnetic isolation
+•	 Fixed high frequency switching
+•	 Inhibit function
+•	 Indefinite short circuit protection
+•	 Efficiency up to 78% typical
+•	 Soft-start function limits inrush current 
+during start-up
+DESCRIPTION
+The Interpoint® MSA+ Series™ of DC-DC converters offers up to 6 
+watts of power. The low profile MSA+ converters are manufactured 
+in our fully certified and qualified MIL-PRF-38534 Class H production 
+facility and packaged in hermetically sealed steel cases. Thick-film 
+hybrid techniques provide military/aerospace reliability levels and 
+optimum miniaturization. The hermetically sealed case is 1.065 by 
+1.065 inches with a height of 0.350 inches. Power density for the 
+MSA+ Series converters is 15 watts per cubic inch. 
+ 
+Converter Design
+The converters are switching regulators that use a flyback converter 
+design with a constant switching frequency of 400 kHz typical. They 
+are regulated, isolated units using a pulse width modulated topology 
+and are built as high reliability thick-film hybrids. Isolation between 
+input and output circuits is provided with a transformer in the 
+forward power path and in the feedback control loop. 
+Excellent input line transient response and audio rejection is 
+achieved by an advanced feed-forward compensation technique. 
+For dual outputs, negative output regulation is maintained by tightly 
+coupled magnetics. Up to 4.8 watts, 80% of the total output power, 
+is available from either output, provided that the opposite output is 
+simultaneously carrying 20% of the total power in order to maintain 
+the specified regulation on the negative output. 
+A predictable current limit is accomplished by direct monitoring of 
+the output load current, which results in a constant current output. 
+Internal input and output filters eliminate the need for external 
+capacitors for stable operation. 
+Wide Voltage Range
+The MSA+ converters are designed to provide full power operation 
+over a 15 to 50 volt input range. 
+Trim Function
+When trimming, ensure that neither the maximum current nor the 
+maximum power is exceeded.
+The MSA+ singles and duals can be trimmed ±10% using trim pin 4. 
+However, the 3.3 single model’s trim range is -5% and +10%. 
+The dual outputs will then both be trimmed by the same percentage.
+See Figure 1 and Figure 2 on page 2 for external trim resistor 
+selection.
+Dynamic Response
+The feed-forward compensation system ­provides excellent dynamic 
+response and audio rejection. Audio rejection is typically 50 dB. 
+Span Voltage
+Our duals can be configured as a single output where the positive 
+output is used as one rail and the negative output is used as the 
+other rail. As an example the positive and negative 15 volt dual can 
+be configured as a single 30 volt output. If the dual is configured 
+as a positive 30 volt output the negative output would be used as 
+system ground and the positive output would be used as the positive 
+30 volt output. In all cases Output Common of the converter is not 
+connected. The maximum capacitance when using a span voltage on 
+a dual is half the value specified for each output. 
+Screening
+The converters are offered with /883 (Class H), ES or standard 
+screening. For screening options and descriptions see Table 10 on 
+page 20.
+ 
+MODELS
+Output Voltage (V)
+SINGLE
+DUAL
+3.3
+±5
+5
+±6.3
+6.3
+±12
+12
+±15
+15
+ Crane Aerospace & Electronics Power Solutions
+MSA+ Single and Dual DC-DC Converters
+Page 1 of 20
+MSA+ Rev AL Preliminary - 2024.06.12
+Preliminary - 15 to 50 Volt Input – 6 Watt
+Crane Aerospace & Electronics
+Power Solutions – Interpoint Products
+16706 13th Avenue West, Lynnwood, WA 98037
++1 425.882.3100  •  power@craneae.com
+www.craneae.com/interpoint
+
+ 
+Inhibit Function
+The inhibit feature can be used to disable internal switching and 
+inhibit the unit’s output. Inhibiting in this manner results in low 
+standby current and no generation of switching noise.
+The converter is inhibited when the inhibit pin is pulled below 0.8 
+volts and enabled when its inhibit pin is left floating. An external 
+inhibit interface should be used to pull the converter’s inhibit pin 
+below 0.8 volts while sinking the maximum inhibit current. It also 
+allows the inhibit pin to float high to enable the converter. A voltage 
+should not be applied to the inhibit pin. The open circuit output 
+voltage associated with the inhibit pin is 9.5 to 11.5 volts. In the 
+inhibit mode, a maximum of 4 mA is sourced from the inhibit pin. 
+See Figure 4 and Figure 3 on page 3.
+Undervoltage Lockout
+Undervoltage lockout helps keep system current levels low during 
+initialization or re-start operations. A low voltage lockout feature 
+keeps the converter shutdown below approximately 12.7 volts to 
+ensure smooth initialization.
+Transient Protection
+The MSA+ can withstand short term transients of up to 80 volts for 
+up to one second without damage. 
+MIL-STD-461
+Use the FMCE-0328 filter to pass the CE03 requirements of 
+MIL-STD-461C. Or and FMCE filter up to the rated current of the 
+filter. 
+Packaging
+The MSA+ Series converters are packaged in hermetically sealed, 
+seam-sealed steel cases which provide EMI/RFI shielding. The small 
+size, 1.065 x 1.065 x 0.350 inches (27.05 x 27.05 x 8.89 mm), 
+saves space and weight in critical applications. They are available in 
+non-flange or offset flange cases. See Figure 7 on page 19 and 
+Figure 8 on page 18.
+MSA+ Trim Up Formulas for Singles and Duals
+Vout = desired output voltage; Rt = trim resistor
+	
+    
+	
+3.3 V:	Rt =   23760         -60000	
+	
+	
+	
+	
+    Vout - 3.3
+	
+	
+5 V:	 Rt =    36000        -60000
+	
+	
+	
+    Vout - 5	
+	
+	
+	
+6.3 V:	Rt =    76860        -110000
+	
+	
+	
+    Vout - 6.3	
+ 	
+	
+	
+12 V:	 Rt =    120000      -91000
+	
+	
+	
+    Vout - 12	
+	
+	
+	
+15 V:	 Rt =   156000       -91000
+	
+	
+	
+    Vout - 15	
+	
+MSA+ Trim Down Formulas for Singles and Duals
+Vout = desired output voltage; Rt = trim resistor
+	
+	
+3.3 V:	Rt = _   53460          -72000	 	
+	
+  	
+	
+         Vout - 3.3 
+	
+	
+5 V:	 Rt = _    54000         -78000
+	
+	
+	
+         Vout - 5	
+	
+	
+6.3 V:	Rt = _    153720       -146600	
+	
+	
+ 	
+	
+ Vout - 6.3
+	
+	
+12 V:	 Rt = —    600000       -151000	
+	
+	
+ 	
+	
+ Vout - 12
+	
+	
+15 V:	 Rt = —   1014000     -169000	
+	
+	
+	
+	
+ Vout - 15
+Figure 1: MSA+ Trim Down
+Figure 2: MSA+ Trim Up
+ Crane Aerospace & Electronics Power Solutions
+MSA+ Single and Dual DC-DC Converters
+Preliminary - 15 to 50 Volt Input – 6 Watt
+www.craneae.com/interpoint
+Page 2 of 20
+MSA+ Rev AL Preliminary - 2024.06.12
+EXTERNAL TRIM CONNECTION
+RL
+OUTPUT
+COMMON
+MSA+ TRIM DOWN
+2
+4
+1
+7
+6
++VIN
+INPUT
+COMMON
+TRIM
+POSITIVE
+OUTPUT
+RT
+EXTERNAL TRIM CONNECTION
+RL
+OUTPUT
+COMMON
+MSA+ TRIM UP
+2
+4
+1
+7
+6
++VIN
+INPUT
+COMMON
+TRIM
+POSITIVE
+OUTPUT
+RT
+
+Rcs
+UNDER VOLTAGE
+LOCKOUT &
+PRIMARY SUPPLY
+VOLTAGE & 
+CURRENT
+AMPLIFIERS
+ISOLATION
+MAIN GATE
+DRIVE
+PWM
+CONTROL
++VOUT
+OUT COM
++28 VIN
+IN COM
+INHIBIT
+T1
+CASE
+FEEDBACK
+SECONDARY
+SUPPLY
+CASE
+-VOUT
+Rs
+Rs
+TRIM
+Figure 3: Block Diagram MSA+ Single Output
+Rcs
+UNDER VOLTAGE
+LOCKOUT &
+PRIMARY SUPPLY
+VOLTAGE & 
+CURRENT
+AMPLIFIERS
+ISOLATION
+MAIN GATE
+DRIVE
+PWM
+CONTROL
++VOUT
++28 VIN
+IN COM
+INHIBIT
+T1
+CASE
+T2
+SECONDARY
+SUPPLY
+Rsense
+CASE
+OUT COM
+TRIM
+Figure 4: Block Diagram MSA+ Dual Output
+ Crane Aerospace & Electronics Power Solutions
+MSA+ Single and Dual DC-DC Converters
+Preliminary - 15 to 50 Volt Input – 6 Watt
+www.craneae.com/interpoint
+Page 3 of 20
+MSA+ Rev AL Preliminary - 2024.06.12
+
+Figure 5: MSA+ Pin Out Bottom View
+BOTTOM VIEW
+MSA+
+8
+7
+6
+5
+4
+3
+2
+1
+Dot on top of case 
+indicates pin one.
+Dotted line outlines indicate
+flanged case option.
+See Figure 7 on page 19 and Figure 8 on page 18.
+MSA+ PINS NOT IN USE
+Inhibit
+Leave unconnected
+“No Connection” pin
+Leave unconnected
+Trim
+Leave unconnected
+PIN OUT
+Pin
+Single Output
+Dual Output
+1
+Positive Output 
+Positive Output 
+2
+Output Common
+Output Common
+3
+No Connection
+Negative Output
+4
+Trim
+Trim
+5
+Inhibit
+Inhibit
+6
+Positive Input
+Positive Input
+7
+Input Common
+Input Common
+8
+Case Ground
+Case Ground
+Table 1: MSA+ Pin Out
+Table 2: MSA+ Pins not in Use
+ Crane Aerospace & Electronics Power Solutions
+MSA+ Single and Dual DC-DC Converters
+Preliminary - 15 to 50 Volt Input – 6 Watt
+www.craneae.com/interpoint
+Page 4 of 20
+MSA+ Rev AL Preliminary - 2024.06.12
+
+MODEL NUMBERING KEY
+MSA+    28    12    SF  / ES
+Base Model
+Input Voltage
+Output Voltage
+Number of Outputs
+(S = single, D = dual)
+(R = decimal point, 3R3 = 3.3 Vout)
+Screening
+(Standard screening has no designator
+in this position.)
+MODEL NUMBER OPTIONS 1 
+To determine the model number enter one option from each category in the form below.
+CATEGORY
+Base Model and 
+Input Voltage
+Output Voltage 2 
+Number of 
+Outputs 3
+Case Options 4
+Screening 5
+OPTIONS
+3R3, 05, 6R3, 12, 15
+S
+(non-flanged, leave blank)
+(standard, leave blank)
+MSA+28
+05, 6R3, 12, 15
+D
+F (flanged)
+ES
+/SX 6
+/883
+FILL IN FOR 
+MODEL # 7
+MSA+28
+__________
+__________
+                        
+                       
+/
+                                                
+Notes
+1. See Figure 6 above for an example of a model number. 
+2. Output Voltage: An R indicates a decimal point. 3R3 is 3.3 volts out. The values of 3.3 is only available in single output models.  
+3. Number of Outputs: S is a single output and D is a dual output.
+4. Case Options: For the standard case (Figure 7 on page 19) leave the Case Option blank. For the flanged case option (Figure 8 on page 18), insert the letter F in the 
+Case Option position. 
+5. Screening: For standard screening leave the screening option blank. For other screening options, insert the desired screening level. For more information see Table 10 
+on page 20.
+6. “SX” screening performed per MIL-PRF-38534, MIL-STD-883 for Class H but the product is not yet QML. See Table 10 on page 20.  
+7. If ordering by model number add suffix “-Q” to request solder dipped leads (MSA+2805S/ES-Q). 
+Table 3: SMD Number Cross Reference
+Figure 6: MSA+ Model Numbering Key
+SMD NUMBERS
+Standard Microcircuit Drawing (SMD)
+MSA+ Similar Part
+5962-0621003HMC IN PROCESS
+MSA+283R3S/883
+5962-9309205HMC IN PROCESS
+MSA+2805S/883
+5962-9309206HMC IN PROCESS
+MSA+286R3S/883
+5962-9309305HMC IN PROCESS
+MSA+2812S/883
+5962-9309404HMC IN PROCESS
+MSA+2815S/883
+5962-0052205HMC IN PROCESS
+MSA+2805D/883
+5962-0052206HMC IN PROCESS
+MSA+286R3D/83
+5962-9308904HMC IN PROCESS
+MSA+2812D/883
+5962-9309003HMC IN PROCESS
+MSA+2815D/883
+SMD numbers shown are for screening level Class H, standard MSA+ case 
+(M), standard pin seal and non-solder dipped pins (C). For other options 
+please refer to the SMD for the SMD number and the vendor similar 
+number. All SMD numbers are listed on the SMD in the “Bulletin” which is 
+the last page of the SMD. For exact specifications for an SMD product, refer 
+to the SMD. SMDs can be downloaded from https://landandmaritimeapps.
+dla.mil/programs/smcr
+Table 4: Model Number Options
+ Crane Aerospace & Electronics Power Solutions
+MSA+ Single and Dual DC-DC Converters
+Preliminary - 15 to 50 Volt Input – 6 Watt
+www.craneae.com/interpoint
+Page 5 of 20
+MSA+ Rev AL Preliminary - 2024.06.12
+
+Table 5: Operating Conditions - All Models, 25°C case, 28 Vin, unless otherwise specified.
+ ALL MODELS
+UNIT
+S
+PARAMETER
+CONDITIONS
+MIN
+TYP
+MAX
+LEAD SOLDERING TEMPERATURE 
+10 SECONDS MAX. PER LEAD
+—
+—
+300
+°C
+STORAGE TEMPERATURE 1
+-65
+—
++150
+°C
+CASE OPERATING
+FULL POWER
+-55
+—
++125
+°C
+TEMPERATURE
+ABSOLUTE 1
+-55
+—
++135
+DERATING OUTPUT POWER/CURRENT 1
+LINEARLY
+From 100% at 125°C to 0% at 135°C
+ISOLATION: INPUT TO OUTPUT, INPUT TO
+@ 500 VDC AT 25°C
+100
+—
+—
+Megohms
+CASE, OUTPUT TO CASE 2
+INPUT TO OUTPUT CAPACITANCE 1
+—
+50
+—
+pF
+UNDERVOLTAGE LOCKOUT 1
+—
+13
+—
+V
+CURRENT LIMIT 1, 3
+% OF FULL LOAD
+—
+130
+­—
+%
+AUDIO REJECTION 1
+—
+50
+—
+dB
+SWITCHING FREQUENCY
+-55° TO +125°C
+350
+—
+450
+kHz
+INHIBIT ACTIVE LOW (OUTPUT DISABLED)
+INHIBIT PIN PULLED LOW 
+—
+­—
+0.8
+V
+Do not apply a voltage to the inhibit pin. 4
+INHIBIT PIN SOURCE CURRENT 1
+—
+—
+4
+mA
+REFERENCED TO
+INPUT COMMON
+INHIBIT ACTIVE HIGH (OUTPUT ENABLED)
+INHIBIT PIN CONDITION
+OPEN COLLECTOR OR UNCONNECTED
+OPEN PIN VOLTAGE 1
+9.5
+—
+11.5
+V
+Notes
+1. Guaranteed by qualification test and/or analysis. Not a production test.
+2. When testing isolation, input pins are tied together and output pins are tied together. They are tested against each other and against case. Discharge 
+the pins before and after testing.
+3. Current limit is defined as the point at which the output voltage decreases by 1%. 
+   Dual outputs: The over-current limit will trigger when the sum of the currents from both outputs reaches 130% (typical value) of the maximum rated 
+“total” current of both outputs.
+4. An external inhibit interface should be used to pull the inhibit low or leave it floating. The inhibit pin can be left unconnected if not used. 
+ Crane Aerospace & Electronics Power Solutions
+MSA+ Single and Dual DC-DC Converters
+Preliminary - 15 to 50 Volt Input – 6 Watt
+www.craneae.com/interpoint
+Page 6 of 20
+MSA+ Rev AL Preliminary - 2024.06.12
+
+Table 6: Electrical Characteristics -55°C to +125°C case, 28 Vin, 100% load, unless otherwise specified.
+Notes
+1. Guaranteed by characterization test and/or analysis. Not a production test.
+2.	Indefinite short circuit protection not guaranteed above 125°C (case).
+3.	Recovery time is measured from application of the transient to point at which Vout is 
+within 1% of Vout at final value.
+4. Step load test is performed at 10 microseconds typical.
+5. Step line test is performed at 100 microseconds ± 20 microseconds.
+6. No effect on dc performance. 
+MSA+ SINGLE OUTPUT MODELS
+MSA+283R3S
+MSA+2805S
+MSA+286R3S
+UNITS
+PARAMETER
+CONDITIONS
+MIN
+TYP
+MAX
+MIN
+TYP
+MAX
+MIN
+TYP
+MAX
+OUTPUT VOLTAGE 
+3.15
+3.30
+3.45
+4.80
+5.00
+5.20
+6.10
+6.30
+6.50
+V
+OUTPUT CURRENT 
+VIN = 15 TO 50
+0
+—
+1500
+0
+—
+1200
+0
+—
+950
+mA
+OUTPUT POWER 
+VIN = 15 TO 50
+0
+—
+5
+0
+—
+6
+0
+—
+6
+W
+OUTPUT RIPPLE
+TC = 25°C
+—
+20
+30
+—
+20
+30
+—
+20
+30
+mV p-p
+10 kHz - 10 MHz
+TC = -55°C TO +125°C
+—
+30
+40
+—
+30
+40
+—
+30
+40
+LINE REGULATION
+VIN = 15 TO 50
+—
+10
+50
+—
+10
+50
+—
+10
+50
+mV
+LOAD REGULATION 
+NO LOAD TO FULL
+—
+10
+50
+—
+10
+50
+—
+10
+50
+mV
+INPUT VOLTAGE 
+CONTINUOUS
+15
+28
+50
+15
+28
+50
+15
+28
+50
+V
+NO LOAD TO FULL
+TRANSIENT 1 SEC 1
+—
+—
+80
+—
+—
+80
+—
+—
+80
+INPUT CURRENT 
+NO LOAD
+—
+27
+40
+—
+27
+40
+—
+28
+40
+mA
+INHIBITED
+—
+3
+6
+—
+3
+6
+—
+3
+6
+INPUT RIPPLE CURRENT
+10 kHz - 10 MHz
+—
+95
+150
+—
+95
+150
+—
+95
+150
+mA p-p
+EFFICIENCY
+TC = 25°C
+66
+70
+—
+69
+73
+—
+68
+73
+—
+%
+TC = -55°C TO +125°C
+64
+—
+—
+67
+72
+—
+67
+72
+—
+LOAD FAULT 2, 3
+POWER DISSIPATION
+—
+—
+2.5
+—
+—
+2.5
+—
+—
+2.5
+W
+SHORT CIRCUIT
+RECOVERY 1
+—
+—
+30
+—
+—
+30
+—
+—
+30
+ms
+STEP LOAD RESPONSE 3, 4
+TRANSIENT
+—
+—
+±500
+—
+—
+±500
+—
+—
+±550
+mV pk
+50% - 100% - 50% 
+RECOVERY 
+—
+—
+1200
+—
+—
+1200
+—
+—
+1200
+µs
+STEP LINE RESPONSE 1, 3, 5
+TRANSIENT 
+—
+—
+±500
+—
+—
+±600
+—
+—
+±700
+mV pk
+VIN = 16 - 40 - 16 
+RECOVERY 
+—
+—
+1500
+—
+—
+1500
+—
+—
+1500
+µs
+STEP LINE RESPONSE 1, 3, 5
+TRANSIENT 
+—
+±350 
+—
+—
+±350 
+—
+—
+±350 
+—
+mV pk
+VIN = 15 - 50 - 15 
+RECOVERY 
+—
+1200
+—
+—
+1200
+—
+—
+1200
+—
+µs
+START-UP 3 
+DELAY
+—
+—
+30
+—
+—
+30
+—
+—
+30
+ms
+VIN = 0 - 28
+OVERSHOOT 1
+—
+—
+200
+—
+—
+200
+—
+—
+200
+mV pk
+CAPACITIVE LOAD 1, 6
+TC = 25°
+—
+—
+500
+—
+—
+500
+—
+—
+500
+µF
+ Crane Aerospace & Electronics Power Solutions
+MSA+ Single and Dual DC-DC Converters
+Preliminary - 15 to 50 Volt Input – 6 Watt
+www.craneae.com/interpoint
+Page 7 of 20
+MSA+ Rev AL Preliminary - 2024.06.12
+
+MSA+ SINGLE OUTPUT MODELS
+MSA+2812S
+MSA+2815S
+UNITS
+PARAMETER
+CONDITIONS
+MIN
+TYP
+MAX
+MIN
+TYP
+MAX
+OUTPUT VOLTAGE 
+11.52
+12.00
+12.48
+14.40
+15.00
+15.60
+V
+OUTPUT CURRENT 
+VIN = 15 TO 50
+0
+—
+500
+0
+—
+400
+mA
+OUTPUT POWER 
+VIN = 15 TO 50
+0
+—
+6
+0
+—
+6
+W
+OUTPUT RIPPLE
+TC = 25°C
+—
+20
+30
+—
+20
+30
+mV p-p
+10 kHz - 10 MHz
+TC = -55°C TO +125°C
+—
+30
+40
+—
+30
+40
+LINE REGULATION
+VIN = 15 TO 50
+—
+10
+50
+—
+10
+50
+mV
+LOAD REGULATION 
+NO LOAD TO FULL
+—
+10
+50
+—
+10
+50
+mV
+INPUT VOLTAGE 
+CONTINUOUS
+15
+28
+50
+15
+28
+50
+V
+NO LOAD TO FULL
+TRANSIENT 1 SEC 1
+—
+—
+80
+—
+—
+80
+INPUT CURRENT 
+NO LOAD
+—
+29
+42
+—
+31
+44
+mA
+INHIBITED
+—
+3
+6
+—
+3
+6
+INPUT RIPPLE CURRENT
+10 kHz - 10 MHz
+—
+70
+150
+—
+70
+150
+mA p-p
+EFFICIENCY
+TC = 25°C
+70
+76
+—
+73
+78
+—
+%
+TC = -55°C TO +125°C
+68
+—
+—
+72
+77
+—
+LOAD FAULT 2, 3
+POWER DISSIPATION
+—
+—
+2.5
+—
+—
+2.5
+W
+SHORT CIRCUIT
+RECOVERY 1
+—
+—
+30
+—
+—
+30
+ms
+STEP LOAD RESPONSE 3, 4
+TRANSIENT
+—
+—
+±750
+—
+—
+±750
+mV pk
+50% - 100% - 50% 
+RECOVERY 
+—
+—
+1200
+—
+—
+1200
+µs
+STEP LINE RESPONSE 1, 3, 5
+TRANSIENT 
+—
+—
+±750
+—
+—
+±750
+mV pk
+VIN = 16 - 40 - 16 
+RECOVERY 
+—
+—
+1500
+—
+—
+1500
+µs
+STEP LINE RESPONSE 1, 3, 5
+TRANSIENT 
+—
+±350 
+—
+—
+±350 
+—
+mV pk
+VIN = 15 - 50 - 15
+RECOVERY 
+—
+1200
+—
+—
+1200
+—
+µs
+START-UP 3 
+DELAY
+—
+—
+30
+—
+—
+30
+ms
+VIN = 0 - 28
+OVERSHOOT 1
+—
+—
+200
+—
+—
+200
+mV pk
+CAPACITIVE LOAD 1
+TC = 25°
+—
+—
+500
+—
+—
+500
+µF
+Notes
+1. Guaranteed by characterization test and/or analysis. Not a production test.
+2.	Indefinite short circuit protection not guaranteed above 125°C (case).
+3.	Recovery time is measured from application of the transient to point at 
+which Vout is within 1% of Vout at final value.
+4. Step load test is performed at 10 microseconds typical.
+5. Step line test is performed at 100 microseconds ± 20 microseconds.
+6. No effect on dc performance. 
+Table 7: Electrical Characteristics -55°C to +125°C case, 28 Vin, 100% load, unless otherwise specified.
+ Crane Aerospace & Electronics Power Solutions
+MSA+ Single and Dual DC-DC Converters
+Preliminary - 15 to 50 Volt Input – 6 Watt
+www.craneae.com/interpoint
+Page 8 of 20
+MSA+ Rev AL Preliminary - 2024.06.12
+
+MSA+ DUAL OUTPUT MODELS
+MSA+2805D
+MSA+286R3D
+UNITS
+PARAMETER
+CONDITIONS
+MIN
+TYP
+MAX
+MIN
+TYP
+MAX
+OUTPUT VOLTAGE
++VOUT
+4.80
+5.00
+5.20
+6.10
+6.30
+6.50
+V
+-VOUT
+4.75
+5.00
+5.25
+6.05
+6.30
+6.55
+OUTPUT CURRENT 2 
+EITHER OUTPUT
+—
+±600
+960
+—
+±475
+760
+mA
+VIN = 15 TO 50
+TOTAL OUTPUT
+—
+—
+1200
+—
+—
+950
+OUTPUT POWER 2 
+EITHER OUTPUT
+—
+±3
+4.8
+—
+±3
+4.8
+W
+VIN = 15 TO 50
+TOTAL OUTPUT
+—
+—
+6
+—
+—
+6
+OUTPUT RIPPLE, ± VOUT
+TC = 25°C
+—
+30
+60
+—
+30
+60
+mV p-p
+10 kHz - 10 MHz
+TC = -55°C TO +125°C
+—
+40
+70
+—
+40
+70
+LINE REGULATION     
++VOUT
+—
+10
+25
+—
+10
+50
+mV
+VIN = 15 TO 50
+-VOUT
+—
+40
+75
+—
+40
+150
+LOAD REGULATION 
++VOUT
+—
+10
+50
+—
+—
+75
+mV
+NO LOAD TO FULL
+-VOUT
+—
+115
+200
+—
+50
+200
+CROSS REGULATION 1, 3
+ 20 TO 80%
+—
+10
+—
+—
+10
+—
+%
+EFFECT ON -VOUT
+50 TO 20%
+—
+5
+8
+—
+5
+8
+INPUT VOLTAGE 
+CONTINUOUS
+15
+28
+50
+15
+28
+50
+V
+NO LOAD TO FULL
+TRANSIENT 1 SEC 1
+—
+—
+80
+—
+—
+80
+INPUT CURRENT 
+NO LOAD
+—
+30
+35
+—
+30
+40
+mA
+INHIBITED
+—
+3
+6
+—
+3
+6
+INPUT RIPPLE CURRENT
+10 kHz - 10 MHz
+—
+90
+160
+—
+90
+160
+mA p-p
+EFFICIENCY
+TC = 25°C
+68
+72
+—
+69
+75
+—
+%
+TC = -55°C TO +125°C
+65
+—
+—
+67
+—
+—
+LOAD FAULT 4, 5
+POWER DISSIPATION
+—
+—
+2.0
+—
+—
+2.0
+W
+SHORT CIRCUIT
+RECOVERY 1
+—
+—
+30
+—
+—
+30
+ms
+STEP LOAD RESPONSE 5, 6
+TRANSIENT
+—
+—
+±500
+—
+—
+±600
+mV pk
+50% - 100% - 50% 
+RECOVERY 
+—
+—
+1000
+—
+—
+1000
+µs
+STEP LINE RESPONSE 1, 4, 7
+TRANSIENT 
+—
+—
+±600
+—
+—
+±750
+mV pk
+VIN = 16 - 40 - 16 
+RECOVERY 
+—
+—
+1500
+—
+—
+1500
+µs
+STEP LINE RESPONSE 1, 4, 7
+TRANSIENT 
+—
+±350 
+—
+—
+±350 
+—
+mV pk
+VIN = 15 - 50 - 15
+RECOVERY 
+—
+1200
+—
+—
+1200
+—
+µs
+START-UP 5
+DELAY
+—
+—
+30
+—
+—
+30
+ms
+VIN = 0 - 28
+OVERSHOOT 1
+—
+—
+200
+—
+—
+200
+mV pk
+CAPACITIVE LOAD 1, 8, 9
+TC = 25°C 
+—
+—
+500
+—
+—
+500
+µF
+Notes
+1. Guaranteed by characterization test and/or analysis. Not a production test.
+2. Up to 4.8 watts (80% of full power) is available from either output providing the 
+opposite output is carrying 20% of total power.
+3.	Shows regulation effect on the minus output during defined cross loading conditions. 
+4.	Indefinite short circuit protection not guaranteed above 125°C (case).
+5.	Recovery time is measured from application of the transient to point at which Vout is 
+within 1% of Vout at final value.
+6. Step load test is performed at 10 microseconds typical.
+7. Step line test is performed at 100 microseconds ± 20 microseconds.
+8. Each output. 
+9. No effect on dc performance. 
+Table 8: Electrical Characteristics -55°C to +125°C case, 28 Vin, 100% load, unless otherwise specified.
+ Crane Aerospace & Electronics Power Solutions
+MSA+ Single and Dual DC-DC Converters
+Preliminary - 15 to 50 Volt Input – 6 Watt
+www.craneae.com/interpoint
+Page 9 of 20
+MSA+ Rev AL Preliminary - 2024.06.12
+
+MSA+ DUAL OUTPUT MODELS
+MSA+2812D
+MSA+2815D
+UNITS
+PARAMETER
+CONDITIONS
+MIN
+TYP
+MAX
+MIN
+TYP
+MAX
+OUTPUT VOLTAGE
++VOUT
+11.52
+12.00
+12.48
+14.40
+15.00
+15.60
+V
+-VOUT
+11.04
+12.00
+12.96
+13.80
+15.00
+16.20
+OUTPUT CURRENT 2 
+EITHER OUTPUT
+—
+±250
+400
+—
+±200
+320
+mA
+VIN = 15 TO 50
+TOTAL OUTPUT
+—
+—
+500
+—
+—
+400
+OUTPUT POWER 2 
+EITHER OUTPUT
+—
+±3
+4.8
+—
+±3
+4.8
+W
+VIN = 15 TO 50
+TOTAL OUTPUT
+—
+—
+6
+—
+—
+6
+OUTPUT RIPPLE, ± VOUT
+TC = 25°C
+—
+20
+40
+—
+20
+40
+mV p-p
+10 kHz - 10 MHz
+TC = -55°C TO +125°C
+—
+30
+50
+—
+30
+50
+LINE REGULATION     
++VOUT
+—
+10
+50
+—
+10
+50
+mV
+VIN = 15 TO 50
+-VOUT
+—
+—
+50
+—
+—
+50
+LOAD REGULATION 
++VOUT
+—
+10
+50
+—
+10
+50
+mV
+NO LOAD TO FULL
+-VOUT
+—
+90
+200
+—
+—
+200
+CROSS REGULATION 1, 3
+ 20 TO 80%
+%
+EFFECT ON -VOUT
+50 TO 20%
+—
+3.7
+6
+—
+3
+6
+INPUT VOLTAGE 
+CONTINUOUS
+15
+28
+50
+15
+28
+50
+V
+TRANSIENT 1 SEC 1
+—
+—
+80
+—
+—
+80
+INPUT CURRENT 
+NO LOAD
+—
+25
+40
+—
+30
+55
+mA
+INHIBITED
+—
+3
+6
+—
+3
+6
+INPUT RIPPLE CURRENT
+10 kHz - 10 MHz
+—
+70
+150
+—
+70
+150
+mA p-p
+EFFICIENCY
+TC = 25°C
+74
+—
+—
+73
+—
+—
+%
+TC = -55°C TO +125°C
+74
+—
+—
+72
+—
+—
+LOAD FAULT 4, 5
+POWER DISSIPATION
+—
+—
+2.0
+—
+—
+2.0
+W
+SHORT CIRCUIT
+RECOVERY 1
+—
+—
+30
+—
+—
+30
+ms
+STEP LOAD RESPONSE 5, 6
+TRANSIENT
+—
+—
+±450
+—
+—
+±550
+mV pk
+50% - 100% - 50% 
+RECOVERY 
+—
+—
+2000
+—
+—
+2000
+µs
+STEP LINE RESPONSE 1, 4, 7
+TRANSIENT 
+—
+—
+±1300
+—
+—
+±1500
+mV pk
+VIN = 16 - 40 - 16
+RECOVERY 
+—
+—
+2000
+—
+—
+1200
+µs
+STEP LINE RESPONSE 1, 4, 7
+TRANSIENT 
+—
+±350 
+—
+—
+±350 
+—
+mV pk
+VIN = 15 - 50 - 15
+RECOVERY 
+—
+1200
+—
+—
+1200
+—
+µs
+START-UP 5
+DELAY
+—
+—
+30
+—
+—
+30
+ms
+VIN = 0 - 28
+OVERSHOOT 1
+—
+—
+200
+—
+—
+200
+mV pk
+CAPACITIVE LOAD 1, 8, 9
+TC = 25°C 
+—
+—
+500
+—
+—
+500
+µF
+Notes
+1. Guaranteed by characterization test and/or analysis. Not a production test.
+2. Up to 4.8 watts (80% of full power) is available from either output providing the 
+opposite output is carrying 20% of total power.
+3.	Shows regulation effect on the minus output during defined cross loading conditions. 
+4.	Indefinite short circuit protection not guaranteed above 125°C (case).
+5.	Recovery time is measured from application of the transient to point at which Vout is 
+within 1% of Vout at final value.
+6. Step load test is performed at 10 microseconds typical.
+7. Step line test is performed at 100 microseconds ± 20 microseconds.
+8. Each output. 
+9. No effect on dc performance.
+Table 9: Electrical Characteristics -55°C to +125°C case, 28 Vin, 100% load, unless otherwise specified.
+ Crane Aerospace & Electronics Power Solutions
+MSA+ Single and Dual DC-DC Converters
+Preliminary - 15 to 50 Volt Input – 6 Watt
+www.craneae.com/interpoint
+Page 10 of 20
+MSA+ Rev AL Preliminary - 2024.06.12
+
+MSA+2805S Efficiency
+EFFICIENCY 100%
+10
+30
+70
+50
+100
+85%
+45%
+55%
+65%
+75%
+35%
+OUTPUT POWER
+FIGURE 8
+MSA+28R3RS Efficiency
+EFFICIENCY 100%
+10
+30
+70
+50
+100
+85%
+45%
+55%
+65%
+75%
+35%
+OUTPUT POWER
+FIGURE 7
+MSA+286R3S Efficiency
+EFFICIENCY 100%
+10
+30
+70
+50
+100
+85%
+45%
+55%
+65%
+75%
+35%
+OUTPUT POWER
+FIGURE 9
+MSA+2812S Efficiency
+EFFICIENCY 100%
+10
+30
+70
+50
+100
+85%
+45%
+55%
+65%
+75%
+35%
+OUTPUT POWER
+FIGURE 10
+Typical Performance Plots: 25°C case, 28 Vin, 100% load, unless otherwise specified.
+For reference only, not guaranteed specifications.
+ Crane Aerospace & Electronics Power Solutions
+MSA+ Single and Dual DC-DC Converters
+Preliminary - 15 to 50 Volt Input – 6 Watt
+www.craneae.com/interpoint
+Page 11 of 20
+MSA+ Rev AL Preliminary - 2024.06.12
+
+MSA+2815S Efficiency
+EFFICIENCY 100%
+10
+30
+70
+50
+100
+85%
+45%
+55%
+65%
+75%
+35%
+OUTPUT POWER
+FIGURE 11
+Typical Performance Plots: 25°C case, 28 Vin, 100% load, unless otherwise specified.
+For reference only, not guaranteed specifications.
+Frequency (Hz)
+360.000
+-360.000
+288.000
+216.000
+144.000
+72.000
+0.000
+-72.000
+-144.000
+-216.000
+-288.000
+MSA+2805S Single Audio Rejection
+FIGURE 12
+0.000
+-40.000
+-70.000
+-100.000
+-60.000
+-50.000
+-30.000
+-90.000
+-20.000
+-10.000
+-80.000
+1 kHz
+10 kHz
+100 kHz
+100Hz
+Attenuation (dB)
+MSA+2805S Output Ripple
+           FIGURE 13
+Units are per Division
+MSA+2805S Input Ripple
+                 FIGURE 14
+Units are per Division
+ Crane Aerospace & Electronics Power Solutions
+MSA+ Single and Dual DC-DC Converters
+Preliminary - 15 to 50 Volt Input – 6 Watt
+www.craneae.com/interpoint
+Page 12 of 20
+MSA+ Rev AL Preliminary - 2024.06.12
+
+IOUT
+VOUT
+MSA+2805S Step Load 50% - 100%
+Units are per Division
+MSA+2805S Step Load 100% - 50%
+Units are per Division
+IOUT
+VOUT
+                 FIGURE 15
+                 FIGURE 16
+MSA+2805S Step Line 15 - 50 Volts FULL Load
+MSA+2805S Step Line 50 - 15 Volts FULL Load
+Units are per Division
+Units are per Division
+VIN
+VOUT
+VIN
+VOUT
+                 FIGURE 17
+                 FIGURE 18
+Typical Performance Plots: 25°C case, 28 Vin, 100% load, unless otherwise specified.
+For reference only, not guaranteed specifications.
+ Crane Aerospace & Electronics Power Solutions
+MSA+ Single and Dual DC-DC Converters
+Preliminary - 15 to 50 Volt Input – 6 Watt
+www.craneae.com/interpoint
+Page 13 of 20
+MSA+ Rev AL Preliminary - 2024.06.12
+
+Typical Performance Plots: 25°C case, 28 Vin, 100% load, unless otherwise specified.
+For reference only, not guaranteed specifications.
+100
+MSA+2805S Start-up Response Full Load
+Units are per Division
+VIN
+VOUT
+MSA+2805S Start-up Response Full Load w 500uF Cap
+Units are per Division
+VIN
+VOUT
+FIGURE 19
+FIGURE 20
+MSA+2805D Efficiency
+EFFICIENCY 100%
+10
+30
+70
+50
+100
+85%
+45%
+55%
+65%
+75%
+35%
+MSA+286R3D Efficiency
+EFFICIENCY 100%
+10
+30
+70
+50
+85%
+45%
+55%
+65%
+75%
+35%
+OUTPUT POWER
+OUTPUT POWER
+FIGURE 21
+FIGURE 22
+ Crane Aerospace & Electronics Power Solutions
+MSA+ Single and Dual DC-DC Converters
+Preliminary - 15 to 50 Volt Input – 6 Watt
+www.craneae.com/interpoint
+Page 14 of 20
+MSA+ Rev AL Preliminary - 2024.06.12
+
+Typical Performance Plots: 25°C case, 28 Vin, 100% load, unless otherwise specified.
+For reference only, not guaranteed specifications.
+Frequency (Hz)
+250.000
+-250.000
+200.000
+150.000
+100.000
+50.000
+0.000
+-50.000
+-100.000
+-150.000
+-200.000
+MSA+2805D Audio Rejection
+Attenuation (dB)
+0.000
+-40.000
+-70.000
+-100.000
+-60.000
+-50.000
+-30.000
+-90.000
+-20.000
+-10.000
+-80.000
+1 kHz
+10 kHz
+100 kHz
+100Hz
+MSA+2805D Output Ripple
+Units are per Division
+MSA+2812D Efficiency
+EFFICIENCY 100%
+10
+30
+70
+50
+100
+85%
+45%
+55%
+65%
+75%
+35%
+MSA+2815D Efficiency
+EFFICIENCY 100%
+10
+30
+70
+50
+85%
+45%
+55%
+65%
+75%
+35%
+OUTPUT POWER
+OUTPUT POWER
+FIGURE 23
+FIGURE 24
+100
+FIGURE 25
+FIGURE 26
+ Crane Aerospace & Electronics Power Solutions
+MSA+ Single and Dual DC-DC Converters
+Preliminary - 15 to 50 Volt Input – 6 Watt
+www.craneae.com/interpoint
+Page 15 of 20
+MSA+ Rev AL Preliminary - 2024.06.12
+
+Typical Performance Plots: 25°C case, 28 Vin, 100% load, unless otherwise specified.
+For reference only, not guaranteed specifications.
+MSA+2815D Output Ripple
+Units are per Division
+MSA+2805D Step Load 50% - 100%
+Units are per Division
+FIGURE 27
+FIGURE 28
+IOUT
+VOUT
+IOUT
+VOUT
+MSA+2815S Step Load 100% - 50%
+Units are per Division
+FIGURE 29
+IOUT
+VOUT
+MSA+2805 Step Line 15 - 50V Full Load
+Units are per Division
+FIGURE 30
+ Crane Aerospace & Electronics Power Solutions
+MSA+ Single and Dual DC-DC Converters
+Preliminary - 15 to 50 Volt Input – 6 Watt
+www.craneae.com/interpoint
+Page 16 of 20
+MSA+ Rev AL Preliminary - 2024.06.12
+
+Typical Performance Plots: 25°C case, 28 Vin, 100% load, unless otherwise specified.
+For reference only, not guaranteed specifications.
+IOUT
+VOUT
+MSA+2805D Step Line 50 - 15V Full Load
+Units are per Division
+FIGURE 31
+MSA+2805D Start-up Response Full Load
+Units are per Division
+VIN
+VOUT
+FIGURE 32
+MSA+2805D Start-up Response Full Load w 500uF Cap
+Units are per Division
+VIN
+VOUT
+FIGURE 33
+ Crane Aerospace & Electronics Power Solutions
+MSA+ Single and Dual DC-DC Converters
+Preliminary - 15 to 50 Volt Input – 6 Watt
+www.craneae.com/interpoint
+Page 17 of 20
+MSA+ Rev AL Preliminary - 2024.06.12
+
+BOTTOM VIEW CASE D6 MSA+ OFFSET FLANGE
+Weight: 25 grams maximum
+Case dimensions in inches (mm)
+Tolerance ±0.005 (0.13) for three decimal places 
+±0.01 (0.3) for two decimal places
+unless otherwise specified
+CAUTION
+Heat from reflow or wave soldering may damage the device. 
+Solder pins individually with heat application 
+not exceeding 300°C for 10 seconds per pin.
+Materials
+Header 
+Cold Rolled Steel/Nickel/Gold
+Cover  
+Cold Rolled Steel/Nickel
+Pins  
+#52 alloy, gold, compression seal
+Gold plating of 50 - 100 microinches included in pin diameter
+Seal hole: 0.070 ±0.003 (1.78 ±0.08)
+2 x R 0.130 
+(3.30)
+2 x Dia 0.129 ±0.002
+   (3.28 ±0.05)
+Flanged cases: Designator "F" required in Case Option position of model number
+0.060 (1.52)
+(1.660 (42.16))
+0.000
+0.132 (3.35)
+0.283 (7.19)
+0.783 (19.89)
+0.932 (23.67)
+0.000
+0.1675 (4.25)
+0.132 (3.35)
+8
+7
+6
+5
+4
+3
+2
+1
+0.332 (8.43)
+0.532 (13.51)
+0.732 (18.59)
+0.932 (23.67)
+0.025
+(0.640)
+dia.
+0.000
+0.350 (8.89)
+0.205 ±0.01
+(5.21 ±0.25)
+Dot on top of case
+indicates pin one.
+1.065 (27.05)
+1.065 (27.05)
+1.233 (31.31)
+Seam Seal
+Figure 7: MSA+ Offset Flanged Case Dimensions
+ Crane Aerospace & Electronics Power Solutions
+MSA+ Single and Dual DC-DC Converters
+Preliminary - 15 to 50 Volt Input – 6 Watt
+www.craneae.com/interpoint
+Page 18 of 20
+MSA+ Rev AL Preliminary - 2024.06.12
+
+0.000
+0.132 (3.35)
+0.932 (23.67)
+0.000
+0.132 (3.35)
+8
+7
+6
+5
+4
+3
+2
+1
+0.332 (8.43)
+0.532 (13.51)
+0.732 (18.59)
+0.932 (23.67)
+0.025
+(0.64)
+dia.
+0.000
+0.350  (8.89)
+BOTTOM VIEW CASE C4 MSA+
+0.205 ±0.01
+(5.21 ±0.25)
+Weight: 23 grams maximum
+Case dimensions in inches (mm)
+Tolerance ±0.005 (0.13) for three decimal places 
+±0.01 (0.3) for two decimal places
+unless otherwise specified
+CAUTION
+Heat from reflow or wave soldering may damage the device. 
+Solder pins individually with heat application 
+not exceeding 300°C for 10 seconds per pin.
+Materials
+Header 
+Cold Rolled Steel/Nickel/Gold
+Cover  
+Cold Rolled Steel/Nickel
+Pins  
+#52 alloy, gold,  compression seal
+Gold plating of 50 - 100 microinches included in pin diameter
+Seal hole: 0.070 ±0.003 (1.78 ±0.08)
+Please refer to the numerical dimensions for accuracy. 
+1.065 (27.05)
+1.065 (27.05)
+Seam Seal
+Squared corner and dot on
+top of case indicates pin one.
+Figure 8: MSA+ Case Dimensions
+ Crane Aerospace & Electronics Power Solutions
+MSA+ Single and Dual DC-DC Converters
+Preliminary - 15 to 50 Volt Input – 6 Watt
+www.craneae.com/interpoint
+Page 19 of 20
+MSA+ Rev AL Preliminary - 2024.06.12
+
+Table 10: Environmental Screening
+environmenTal Screening high reliabiliTy STandard, 
+/eS, /Sx and /883 (claSS h)
+non-Qml 1
+claSS h Qml 2
+TeST performed
+STandard
+/eS
+/Sx
+/883
+ch 3
+/883
+Qml 4
+Pre-cap Inspection, Method 2017, 2032
+■
+■
+■
+■
+■
+Temperature Cycle (10 times)
+Method 1010, Cond. C, -65°C to +150°C, ambient
+■
+■
+■
+Method 1010, Cond. B, -55°C to +125°C, ambient
+■
+Constant Acceleration
+Method 2001, 3000 g
+■
+■
+■
+Method 2001, 500 g
+■
+PIND, Test Method 2020, Cond. A
+   ■ 5
+   ■ 5
+   ■ 5
+Burn-in Method 1015, +125°C case, typical 6
+96 hours
+■
+ 
+ 
+ 
+160 hours
+■
+■
+■
+Final Electrical Test, MIl-PRF-38534, Group A, 
+Subgroups 1 through 6, -55°C, +25°C, +125°C case
+■
+■
+■
+Subgroups 1 and 4, +25°C case
+■
+■
+Hermeticity Test, Method 1014 
+Gross Leak, Cond. C1, fluorocarbon
+■
+■
+■
+■
+Fine Leak, Cond. A2, helium
+■
+■
+■
+■
+Gross Leak, Dip
+■
+Final visual inspection, Method 2009
+■ 
+■
+■
+■
+■
+Test methods are referenced to MIL-STD-883 as determined by MIL-PRF-38534.
+Notes
+1. Non-QML products may not meet all of the requirements of MIL-PRF-38534.
+2. All processes are QML qualified and performed by certified operators.
+3. Class H QML products with no SMD number are marked “CH” per MIL-PRF-38534, 3.9.5.8.3, Table III.
+4. Class H QML products have an SMD number 
+5. Not required by DLA but performed to assure product quality. 
+6. Burn-in temperature designed to bring the case temperature to +125°C minimum. Burn-in is a powered test.
+ 
+Element Evaluation tables for QML products are in “APP-009 Quality and Certification”, Appendix A, in compliance with MIL-PRF-38534 revision L.
+( Link https://www.craneae.com/quality-assurance-modular-power )  
+ Crane Aerospace & Electronics Power Solutions
+MSA+ Single and Dual Series, MSA+ Rev AL Preliminary - 2024.06.12. This revision supersedes all previous releases. Crane Electronics, Inc. reserves the 
+right to make changes that do not affect form, fit or function of Class H products or specifications without notice. Interpoint is a registered trademark of 
+Crane Co. MSA+ Series is a trademark of Crane Electronics, Inc. Copyright © 1999-2024 Crane Electronics, Inc. All rights reserved. www.craneae.com/
+interpoint 
+MSA+ Single and Dual DC-DC Converters
+Preliminary - 15 to 50 Volt Input – 6 Watt
+Page 20 of 20
+

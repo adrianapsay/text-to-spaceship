@@ -1,0 +1,186 @@
+RADSP-22-A
+Issue Date: 12/07/2023
+DOC REV 1
+Page 1 of 3
+No licence is granted under any patent or any patent rights of ReliaSat. Information furnished by ReliaSat is believed to be accurate. No responsibility is assumed by ReliaSat for 
+its use, nor for any infringements on the rights of other parties that may result for the use of the information herein. All specifications are subject to change without notice. 
+RADSP-22-A
+Universal radar baseband board for millimeter wave 
+applications.
+Overview 
+The RADSP-22-A is a full function radar core 
+processing board that is designed to simplify the 
+design of millimeter wave FMCW radars. The 
+board generates swept low phase signal through 
+local oscillator outputs that connect to an external 
+transmitter and up to three receivers.
+The IF frequency is centred at 5.4 GHz. The net 
+outputs that can be fed to post-processors for image 
+generation and synthetic aperture data display are 
+generated from sub-13 MHz beat signals. This novel 
+design allows multiple target data to be accessed by 
+relatively inexpensive embedded data applications. 
+Information such as range, velocity and direction 
+can be easily computed with external software. 
+In addition, the multiple receiver channels enable 
+designers to implement this design as part of a 
+monopulse tracking system. The unit is supplied in a 
+rugged aluminium housing with external connectors.
+Features
+Applications
+•	 FMCW Radars
+•	 Monopulse tracking systems
+•	 Allows monopulse operation
+•	 One transmit & three receive 
+modules
+•	 Four low phase noise local oscillator 
+outputs 
+•	 Beat signal outputs allow range, 
+velocity & direction
+•	 Applicable with virtually any front-
+end with external downconversion
+ReliaSat
+Product Datasheet
+Universal Radar 
+Baseband Board
+For MM-Wave Applications 
+
+Specifications
+Universal Radar 
+Baseband Board
+For MM-Wave Applications 
+Parameter
+Min
+Typ
+Max
+Unit
+Notes
+TX Frequency 
+20.9
+23.9
+(GHz)
+23.8-26 GHz option is 
+available
+TX Power
+13
+19
+(dBm)
+2.92 mm female
+TX FMCW Waveforms
+Triangular, sawtooth, single, continuous, dual ramp,        program­
+mable sweep time
+RX Frequency
+5.4
+(GHz)
+SMA female
+# of RX Channels
+1
+3
+Baseband Frequency
+0.1
+13
+(MHz)
+Max 40 MHz option 
+available 
+Baseband Output
+Differential, MCX (single ended option available)
+Conversion Gain
+8
+24
+(dB)
+Programmable
+Internal Reference Output
+100 MHz, 3 Vpp, LVCMOS, MCX
+External Reference Input 
+100 MHZ, min 10 dBm, MCX
+Control
+i2C, SPI
+Supply
+12 VDC, 075A (1A for 1 second after power up)
+Dimensions 
+163.4 mm x 101.2 mm x 22 mm
+Weight 
+550 grams
+Operating Temperature
+-40oC
++85oC
+RADSP-22-A
+Issue Date: 12/07/2023
+DOC REV 1
+Page 2 of 3
+No licence is granted under any patent or any patent rights of ReliaSat. Information furnished by ReliaSat is believed to be accurate. No responsibility is assumed by ReliaSat for 
+its use, nor for any infringements on the rights of other parties that may result for the use of the information herein. All specifications are subject to change without notice. 
+ReliaSat
+Product Datasheet
+
+Universal Radar 
+Baseband Board
+For MM-Wave Applications 
+Typical Application 94 GHz Monopulse Set-up
+FMCW-MBB5-22
+TR
+RX Module
+RX Module
+RX Module
+TX Module
+21.7-22.7GHz LO
+21.7-22.7GHz LO
+21.7-22.7GHz LO
+21.7-22.7GHz LO
+5.4GHz IF Out
+5.4GHz IF In
+5.4GHz IF In
+5.4GHz IF In
+Az
+El
+Range
+REF IN
+REF Out
+Beat Frequency
+Outputs
+Elevation
+Antennas
+Hybrid T
+92-96 GHz Input
+Azimuth
+Antennas
+92-96 GHz Input
+92-96 GHz Input
+92-96 GHz Output
+PLL
+5.4 GHz
+PLL
+100 MHz Ref
+Ext Ref out
+Ext Ref In
+Local Oscilator
+Outputs
+21.7-22.7 GHz
+Tx IF Output
+5.4GHz
+Beat Freq Out
+<13MHz
+Beat Freq Out
+<13MHz
+Beat Freq Out
+<13MHz
+Rx IF Intput
+5.4GHz
+Rx IF Intput
+5.4GHz
+Rx IF Intput
+5.4GHz
+RADSP-22-A Functional Diagram
+ReliaSat European Offices
+e: sales@reliasat.com
+www. arralis.com
+Contact Information
+RADSP-22-A
+Issue Date: 12/07/2023
+DOC REV 1
+Page 3 of 3
+No licence is granted under any patent or any patent rights of ReliaSat. Information furnished by ReliaSat is believed to be accurate. No responsibility is assumed by ReliaSat for 
+its use, nor for any infringements on the rights of other parties that may result for the use of the information herein. All specifications are subject to change without notice. 
+ReliaSat
+Product Datasheet
+

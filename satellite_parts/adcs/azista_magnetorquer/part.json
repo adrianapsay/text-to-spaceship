@@ -1,0 +1,186 @@
+{
+ "id": "azista_magnetorquer",
+ "name": "Azista Magnetorquer",
+ "category": "adcs",
+ "subcategory": "magnetorquer",
+ "vendor": "Azista",
+ "model": "Magnetorquer",
+ "dimensions_mm": {
+  "x": 300.0,
+  "y": 64.0,
+  "z": 89.0
+ },
+ "mass_g": 550.0,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-azista-magnetorquer-t4xv5b.pdf",
+  "document": {
+   "title": "Azista Magnetorquer data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-11",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Read from the vendor data sheet (datasheet-azista-magnetorquer-t4xv5b.pdf): dimensions \"6 AWG Max. power consumption 5.5 W Mass < 550 g Mechanical envelope (L \u00d7 W \u00d7 H) 300 \u00d7 64 \u00d7 89 mm Resistanc\"; mass \"onsumption: 5.5 W \u2022 Mass: < 550 g \u2022 Re\". Catalog page lists no mass.",
+  "found_via": "https://satsearch.co/products/azista-magnetorquer"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "mass_note": "upper bound stated by the data sheet",
+ "electrical": {
+  "power_W": {
+   "nominal": 5.5
+  },
+  "note": "from the data sheet / catalog page text: \"Power Consumption: 5.5 W\"",
+  "voltage_V": {
+   "min": 28.0,
+   "max": 42.0
+  }
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   300.0,
+   64.0,
+   89.0
+  ],
+  "mesh_volume_mm3": 1708766.5,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 0.322,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    300.0,
+    64.0,
+    64.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "coil",
+     "color": [
+      0.72,
+      0.45,
+      0.2
+     ],
+     "file": "bodies_detail/coil.stl"
+    },
+    {
+     "name": "windings",
+     "color": [
+      0.62,
+      0.38,
+      0.16
+     ],
+     "file": "bodies_detail/windings.stl"
+    },
+    {
+     "name": "end_caps",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/end_caps.stl"
+    },
+    {
+     "name": "clamps",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/clamps.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-azista-magnetorquer-t4xv5b.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

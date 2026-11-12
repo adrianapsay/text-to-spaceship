@@ -107,6 +107,59 @@
   },
   "face_counts": {
    "part": 40
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    23.0,
+    15.3,
+    6.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "pcb",
+     "color": [
+      0.09,
+      0.42,
+      0.24
+     ],
+     "file": "bodies_detail/pcb.stl"
+    },
+    {
+     "name": "ic",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/ic.stl"
+    },
+    {
+     "name": "pin_header",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/pin_header.stl"
+    },
+    {
+     "name": "passives",
+     "color": [
+      0.55,
+      0.45,
+      0.3
+     ],
+     "file": "bodies_detail/passives.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",
@@ -120,12 +173,12 @@
  "reference_images": {
   "datasheets": [],
   "stl_preview": "preview.png",
-  "drawing": null,
+  "drawing": "drawing.png",
   "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_gp5xaj_redwire_micro_sun_sensor.jpg",
   "photo_source": "satsearch",
   "photo_page": "https://satsearch.co/products/redwirespace-micro-sun-sensor",
-  "photo_file": null,
-  "photo_kind": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": null,
   "datasheet_page_file": null,
   "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"

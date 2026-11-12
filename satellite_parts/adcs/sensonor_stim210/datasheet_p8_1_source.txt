@@ -1,0 +1,3 @@
+url: https://www.safran-group.com/sites/default/files/2022-05/safran-sensing-technologies-ts1545r20-stim210-datasheet.pdf
+found from: https://www.safran-group.com/sites/default/files/2022-05/safran-sensing-technologies-ts1545r20-stim210-datasheet.pdf
+found by Claude (web search) on 2026-11-11; downloaded by fetch_pass5.py

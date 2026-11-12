@@ -1,0 +1,2 @@
+url: https://satcatalog.s3.amazonaws.com/components/3282/SatCatalog_-_TakeMe2Space_-_CMCube_-_Datasheet.pdf
+method: largest picture on page 1-2 of datasheet.pdf

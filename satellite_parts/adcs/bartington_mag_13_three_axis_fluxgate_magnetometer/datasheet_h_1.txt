@@ -1,0 +1,380 @@
+bartington.com
+DS3143/21
+Mag-13
+®
+Three-Axis Magnetic Field Sensors
+
+Mag-13
+® Three-Axis Magnetic Field Sensors
+Bartington® is a registered trade mark of Bartington Holdings Limited in the 
+following territories: Argentina, Australia, Brazil, Canada, Chile, China, European 
+Union, Hong Kong, Iceland, India, Israel, Japan, Malaysia, Mexico, New Zealand, 
+Norway, Russia, Singapore, South Africa, Switzerland, Taiwan, Turkey, United 
+Kingdom, United States of America, and Vietnam.
+Bartington® is used under licence by Bartington Instruments Limited.
+Mag-13 is a registered trade mark of Bartington Holdings Limited in the following
+territories: European Union, United Kingdom, and United States of America.
+ 
+Mag-13® 
+Three-Axis
+Magnetic Field Sensors
+The Mag-13 range of sensors provide high precision 
+measurements of static and alternating magnetic fields. 
+Different combinations of noise level, measuring range, 
+and a range of enclosures, make the sensors suitable 
+for use in many applications. These include defence, 
+physics, geophysics, bioelectromagnetics and mineral 
+exploration.
+© Crown copyright 2019
+
+bartington.com
+Features
+•	 Wide range of enclosures; unpackaged and submersible versions available
+•	 Noise levels down to <5pTrms/√Hz at 1Hz
+•	 Measuring ranges from ±70μT to ±1000μT
+•	 Bandwidth of up to 3kHz
+•	 Environmentally sealed and shielded from electrical interference
+Typical Applications
+•	 Magnetic field monitoring
+•	 Use as feedback sensors in active magnetic field cancellation systems
+•	 Magnetic signature measurements
+•	 Electromagnetic surveys
+
+Mag-13
+® Three-Axis Magnetic Field Sensors
+Product Identification
+Product name
+Package
+Noise
+Range in μT 
+Mag-13
+MC = Circular enclosure
+MS = Square enclosure
+MCD = Deep submersible circular enclosure
+MCDFL = Deep submersible circular enclosure with potted cable tail
+U = Unpackaged
+U-TPU = Unpackaged 2-part
+MSS = Submersible square enclosure
+No code = Standard 
+noise
+L = Low noise
+Q = Very low noise
+70 = ±70µT
+100 = ±100µT
+250 = ±250µT
+500 = ±500µT
+1000 = ±1000µT
+Example: Mag-13U-TPUL100 = A low noise unpackaged 2-part Mag-13 with a measuring range of ±100μT.
+Sensors with ranges ≥ 250µT are only available in standard noise option.
+
+bartington.com
+Specifications
+Performance
+Number of axes
+Three
+Polarity
++ve when pointing North
+Full Scale Measuring Ranges
+±70µT
+±100µT
+±250µT
+±500µT
+±1000µT
+Scaling
+143mV/µT
+100mV/µT
+40mV/µT
+20mV/µT
+10mV/µT
+Scaling error
+±0.5%
+Scaling Temperature Coefficient
+<±60ppm
+Linearity error
+0.0015% (least squares fit)
+Frequency response at 50µT peak
+DC to 1kHz (±5%)
+Max Bandwidth at 50µT peak
+3400Hz
+3100Hz
+3000Hz
+3000Hz
+3000Hz
+Max Bandwidth at full scale
+3000Hz
+2500Hz
+1100Hz
+700Hz
+300Hz
+Primary Resistance
+10Ω ±1.5Ω
+Primary Inductance
+1000µH typical
+Secondary Resistance
+36Ω ±4Ω
+Secondary Inductance
+5600µH typical
+Noise:
+Standard	
+Low noise (L)
+Very low noise (Q)
+≤10pT rms / √Hz @1Hz
+<6pT rms / √Hz @1Hz (70 and 100µT range only)
+<5pTrms/√Hz at 1Hz (70 and 100μT range only)
+Zero Field Offset
+≤±30nT
+≤±40nT
+≤±50nT
+Offset Temperature Coefficient
+≤±0.6nT/°C
+≤±1nT/°C
+Perming (Magnetisation Hysteresis)
+<2nT (at 1 x Full-scale, when powered)
+Orthogonality error between axes
+<±0.1° (<±0.2° for MCD and MCDFL)
+Alignment to datum face/s
+<±0.1° (Mag-13MS only)
+Excitation Breakthrough
+<5mV pk-pk 15.625kHz typical
+Start-up/Settling time
+<100ms
+Warm-up drift time
+15 minutes to meet specifications for scaling
+<60 minutes to meet specifications for noise
+
+Mag-13
+® Three-Axis Magnetic Field Sensors
+Electrical
+Supply Voltage
+±12 to 17V
+Current Consumption – Positive
+35 to 41mA in zero-field
+Current Consumption – Negative
+13 to 17mA in zero-field
+Power Supply Rejection Ratio
+120dB
+Power-on Surge
++90mA, -25mA, 20ms
+Analogue Output
+±10V
+Output Impedance
+10Ω
+Test function field in each axis
+-1µT ±10%
+Maximum cable length @ 12V supply
+70μT = 1000m
+100μT = 1000m
+250μT = 800m
+500μT = 650m
+1000μT = 500m
+Maximum cable length @ 14V supply
+70μT to 500μT = 1500m
+1000μT = 1100m
+Cable Length Note
+Higher supply voltages will allow longer cable lengths to be used, depend­
+ant on cable resistance and magnetometer range.
+Environmental
+Operating temperature range
+-40 to +70°C 
+Storage temperature range
+-40 to +70°C
+Compliance (CE, etc.)
+EMC BS EN 61326 & RoHS
+Additional environmental qualifications
+Mag-13MCD 550bar hydrostatic pressure test
+Environmental protection / sealing
+MC
+MS
+MCD
+MCDFL
+U
+U-TPU
+MSS
+IP67
+IP67
+IP68 (5000m)
+IP68 (500m)
+N/A (unpackaged)
+N/A (unpackaged)
+IP68 (200m)
+
+bartington.com
+Mechanical
+Package 
+options
+Mag-13MC
+Mag-13MS
+Mag-13MSS
+Mag-13MCD
+Mag-13MCDFL
+Mag-13U
+Mag-13U-TPU
+Dimensions
+Ø 25.4 x 
+203mm
+32 x 32 x 
+203mm
+30 x 30 x 
+251mm
+Ø 60 x 
+301mm
+Ø60 x 264mm
+Ø 23.2 x 
+150mm
+Probe:
+Ø23.2 x 
+43mm
+Electronics:
+19.5 x 129mm
+Harness 
+length max 
+5m
+Weight
+82.5g
+222.6g
+300g
+950g
+950g
+23.5g
+157g (max 
+cable length)
+Enclosure 
+material
+Acetal & PEEK
+Acetal
+Acetal
+PEEK
+PEEK
+N/A
+N/A
+Connector
+Fischer AL-1731-DEU-1031-
+A010-SR-11-11-G-12 
+SubConn 
+MCBH10FNM 
+(under-
+water mate­
+able)
+SubConn 
+MCBH10F 
+(under-
+water mate­
+able)
+MacArtney 
+Type 4622C 
+Cable
+Molex 53047-
+0810
+Molex 53047-
+0810
+Mating 
+connector
+Fischer AL1731-S-1031-
+A010SR11-11 with E3-
+1031.2/6.2
+SubConn MCOM10M or 
+MCIL10M
+(underwater mateable)
+N/A
+Molex Pico­
+blade 51021-
+0800
+Molex Pico­
+blade 51021-
+0800
+MTBF
+MTBF – MIL-HDBK-217F:
+Ground Fixed - 70°C
+Ground Fixed - 50°C
+Ground Benign - 70°C
+Ground Benign - 50°C
+60,000 hours
+86,000 hours
+95,000 hours
+157,000 hours
+
+Mag-13
+® Three-Axis Magnetic Field Sensors
+Cables
+The standard cable length is 5m; alternative lengths are available on 
+request. 
+All cables are terminated with a Hirose RM15TPD10S, suitable for 
+connection to Bartington Instruments’ range of data acquisition and 
+power supply units.
+Mag-13MC, Mag-13MS
+Conductors
+7/0.2 PVC insulated conductors, overall braided screen and PVC sheath
+Type no.
+7-2-8C Black to Def Stan 61-12, part 4
+Conductor resistance
+0.092Ω/m
+Max cable length
+600m
+Capacitance
+100pF/m core to core
+170pF/m core to screen
+Mag-13MCD, Mag-13MSS submersible cable
+Conductors
+8 conductors, 3x shielded twisted pairs, 2x untwisted,
+overall foil screen and polyurethane sheath
+Conductor resistance
+20.5Ω/km at 20°C
+Max cable length
+1500m
+Weight
+0.2kg/m (in air) 0.075kg/m (in seawater)
+Cable bending radius
+95mm (static) 130mm (dynamic)
+Mag-13MCDFL submersible cable
+Conductors
+14 conductors, 5x shielded twisted pairs, 1x jacketed shielded twisted pair, 
+2x untwisted conductors (not used), overall braided screen and polyurethane sheath
+Conductor resistance
+88.2Ω/km at 20°C
+Weight
+0.204kg/m (in air) 0.088kg/m (in seawater)
+Cable bending radius
+80mm (static) 120mm (dynamic)
+Max cable length
+300m
+Mating Connectors
+Mating connectors for the Mag-13MC and Mag-13MS models are supplied free of charge.
+Submersible mating connectors are not supplied.
+
+bartington.com
+Compatibility
+The Mag-13 range is compatible with the following data acquisition and power supply units from 
+Bartington Instruments.
+
+•	
+PSU1 Power Supply Unit
+•	
+Magmeter-2 Power Supply and Display Unit
+•	
+Spectramag-6 Data Acquisition Unit
+•	
+SCU1 Signal Conditioning Unit
+•	
+Decaport Analogue Interface Module
+•	
+DAS1 Data Acquisition System
+•	
+DecaPSU Power Supply Unit
+(Outputs for the test coil are presently only available with the DecaPSU).
+
+Mag-13
+® Three-Axis Magnetic Field Sensors
+Mounting Accessories
+A range of mounting accessories is available.
+Specification
+Mag-BR 
+Mounting bracket for use with the Mag-13MC
+Mag-T 
+Tripod
+Mag-TA 
+Tripod adaptor
+Mag-LP 
+Levelling platform for use with the Mag-T, Mag-TA and Mag-MR
+Mag-MR 
+Mounting rack for the installation of Mag-LP and Mag-13 sensors, available in lengths of 1 metre and multiples
+

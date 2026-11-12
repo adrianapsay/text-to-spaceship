@@ -1,0 +1,77 @@
+ 
+ 
+Page 1 of 1 
+ 
+© 2017 Adcole Maryland Aerospace, LLC 
+All Rights Reserved                         
+410-451-2505 
+www.adcolemai.com 
+2145 Priest Bridge Dr, Suite 15 
+Crofton, MD. 21114 
+  MAI-500 
+0.6U CubeSat ADACS+Star Tracker 
+ 
+ 
+ 
+Specifications 
+Performance Item 
+Specification 
+Dimensions 
+ 10 x 10 x 6.23 cm 
+Mass 
+1049 g 
+Momentum Storage @10000 RPM 
+11.076 mNms 
+Max Torque 
+0.635 mNm 
+Magnetic Dipole Moment 
+0.14 (0.15 @94% Duty Cycle) Am2 
+Magnetometer 
++/- 900 µT 
+Operating Voltage 
+5.0 V 
+Power Consumption 
+ 
+          Minimum Power 
+1.82 W (0.164 A) 
+          Avg. Power Use in Nadir Pointing 
+ 2.13 W (0.226 A) 
+          1 RW Low Speed Max Torque Power Use 
+3.05 W (0.41 A) 
+          1 RW High Speed Max Torque Power Use 
+2.10 W (0.22 A) 
+          Max Instantaneous Current 
+1.603 A 
+Star Tracker 
+ 
+          Accuracy (cross boresight) 
+6 / 30 as 
+          Max Acquisition Time 
+250 msec 
+          Max Slew Rate (Pacq=0.5) 
+1.0°/sec 
+          Star Catalog 
+6.0 VM 
+Pointing 
+                0.1 deg LVLH / 0.008 deg ECI 
+Command/TLM Interface 
+RS232, SCI/UART (3.3 V) 
+Sun Sensor Interface 
+6 Analog Channels (0 – 3.3 V)  
+Operating Temperature 
+-20 to 60 °C 
+Launch Environment Vibration Spec 
+14 G rms (GEVS) 
+ 
+This 0.6U Attitude Determination and Control System 
+features two Star Trackers, three reaction wheels, three 
+electromagnets, a 3-axis magnetometer, and an ADACS 
+computer for a stand-alone, Plug-and-Play attitude control 
+system for small satellites. The configuration is compatible 
+with the CubeSat standard. The Star Trackers are oriented 
+either 180 or 90 degrees apart, and angled upward at 24 
+degrees. Other mounting angles are available. 
+In accordance the SBA Policy Directive Sec 4 (c) (2), any procurement by US Government Entities is an SBIR Phase III award that is derived 
+from, extends, or completes efforts made under prior SBIR funding agreements and is authorized under 10 U.S.C. 2304(b)(2) or 41 U.S.C. 
+3303(b) with no further competition pursuant to FAR 6.302-5. 
+

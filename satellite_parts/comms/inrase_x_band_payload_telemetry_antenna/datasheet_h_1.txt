@@ -1,0 +1,417 @@
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Datasheet 
+for the X-band Antenna 
+Version 0.1 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Prepared by  
+Electronic Communication Systems FZC  
+Incubator Building, 
+Masdar City, Abu Dhabi 
+United Arab Emirates 
+ 
+ 
+
+Datasheet for the X-band Antenna  
+0.1 
+2 
+Revision History 
+  
+Version 
+Date 
+Changes 
+0.1 
+04 Jul 2024 
+Initial release 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+Datasheet for the X-band Antenna  
+0.1 
+3 
+Contents 
+Revision History .................................................................................................................. 2 
+1 
+Overview ....................................................................................................................... 4 
+2 
+Specifications ................................................................................................................ 5 
+2.1 
+Key Specifications ................................................................................................. 5 
+2.2 
+Environmental Specifications ................................................................................ 6 
+3 
+Principles of Operation and Block Diagram ................................................................. 7 
+4 
+Typical Performance Graphs ......................................................................................... 8 
+5 
+Mechanical Characteristics ......................................................................................... 12 
+5.1 
+Transmitter Envelope and Mounting ................................................................... 12 
+5.2 
+Connector Position ............................................................................................... 12 
+5.3 
+Mass and Center of Gravity ................................................................................. 12 
+5.4 
+Mounting Interface .............................................................................................. 12 
+6 
+Testing Outline ............................................................................................................ 14 
+7 
+Safety ........................................................................................................................... 15 
+7.1 
+Utilization ............................................................................................................ 15 
+8 
+Disclaimer ................................................................................................................... 16 
+ 
+ 
+ 
+
+Datasheet for the X-band Antenna  
+0.1 
+4 
+1 Overview 
+The passive array microstrip antenna operates in the X-band frequency range, making it 
+ideal for satellite communication applications requiring high throughput. Designed for small 
+satellite applications, this antenna features a compact, lightweight construction ensuring efficient 
+space utilization and ease of integration. The antenna leverages advanced microstrip technology 
+and provides excellent gain and directivity, enhancing signal strength and quality for satellite 
+communication systems. 
+Features 
+• Operates in the 8050-8400 MHz X-band allocation for Earth science satellites 
+• Flat passive microstrip array  
+• 
+Designed to be integrated with ECS high-throughput X-band transmitter (PRDC) 
+• Gain of 18.5 dB is 3 dB higher than typical competing antennas targeted for 1U 
+formfactor, that provides corresponding link budget improvement 
+• Test cap (test hat) is available for the satellite integration testing 
+ 
+Figure 1 X-band Antenna 
+ 
+ 
+
+Datasheet for the X-band Antenna  
+0.1 
+5 
+2 Specifications 
+2.1 Key Specifications 
+Table 1. Key Specifications 
+Parameter 
+Min 
+Typ 
+Max 
+Unit 
+RF specifications 
+ 
+ 
+ 
+ 
+Frequency band 
+8050 
+8220 
+8400 
+MHz 
+Gain at central frequency in ±1° sector 
+18.0 
+ 
+ 
+dB 
+Gain flatness in full band 
+ 
+ 
+±0.6 
+dB 
+Output impedance 
+ 
+50 
+ 
+Ω 
+VSWR in full band 
+ 
+ 
+1.6 
+ 
+Polarization 
+Circular, right-hand 
+ 
+Axial ratio at 8220 MHz in ±1° sector 
+ 
+ 
+3 
+dB 
+Axial ratio in full band in ±1° sector 
+ 
+ 
+4.4 
+dB 
+Radiation pattern width in XY plane at -3 dB 1 
+ 
+±4.5 
+ 
+deg 
+Radiation pattern width in ZY plane at -3 dB 1 
+ 
+±9.5 
+ 
+deg 
+RF power at the input connector 
+ 
+ 
+10 
+W 
+Environmental specifications 
+ 
+ 
+Operating temperature 
+-50 
+ 
++100 
+C 
+Storage temperature 
+-50 
+ 
++100 
+C 
+Vacuum 
+10-12 
+ 
+10-5 
+torr 
+Mechanical specifications 
+ 
+ 
+Dimensions (w/o connector) 
+100x200x3 
+mm 
+Mass 
+ 
+ 
+130 
+g 
+ 
+Note 1. See outline drawing (sec 5.1) for the axes directions. 
+ 
+
+Datasheet for the X-band Antenna  
+0.1 
+6 
+2.2 Environmental Specifications 
+Sinusoidal sweep vibration operational levels for each device axis are specified in Table 2. 
+The antenna shall not have resonances in the 1 – 100 Hz band. 
+Table 2. Sinusoidal Sweep Vibration Specifications 
+Frequency subbands, Hz 
+1-2 
+2-5 
+5-10 
+10-15 
+15-20 
+20-100 
+Amplitude, 
+g = 9.81 m / s2 
+0.3-0.5 
+1.0 
+1.0-1.2 
+1.2-4.0 
+4.0-10.0 
+10.0 
+Note: 
+Test duration 600 s each axis. 
+ 
+Random vibration operational levels for each device axis are specified in Table 3.  
+Table 3. Random Vibration Specifications 
+Frequency subbands, 
+Hz 
+20-40 
+40 - 100 100 - 300 300 - 600 600 - 1200 1200 - 2500 
+Acceleration spectral 
+density, g2 / Hz 
+0.04-0.50 
+0.50 
+0.50 
+0.50-0.20 
+0.20-0.06 
+0.06-0.02 
+Note: 
+Test duration 600 s each axis. 
+ 
+Shock operational levels for each device axis are specified in Table 4.  
+Table 4. Shock Specifications 
+Frequency 
+subbands, Гц 
+30-50 
+50-150 150-200 200-500 
+500-
+1000 
+1000-2000 2000-5000 
+Shock response 
+spectrum, g 
+15-40 
+40-160 160-200 
+200-
+1000 
+1000 
+1000 
+1000 
+Shocks per each 
+axis 
+10 (5 in each direction) 
+Total number of 
+shocks 
+30 
+ 
+Total Ionizing Dose tolerance is 10 Mrad. The device is not susceptible to single events. 
+ 
+ 
+
+Datasheet for the X-band Antenna  
+0.1 
+7 
+3 Principles of Operation  
+The X-band Antenna is a passive microstrip antenna array. Its operation is based on the 
+principles of electromagnetic wave propagation and resonance. The array consists of a matrix of 
+microstrip patch elements, each acting as a radiating element, printed on a dielectric substrate. 
+These elements are fed by a network that distributes the input signal uniformly across the array, 
+ensuring coherent radiation. The patches resonate at specific frequencies in the X-band, converting 
+the guided electromagnetic waves into free-space radiation efficiently. The array configuration 
+allows for constructive interference of the radiated waves, to enhance the overall gain and 
+directivity. The passive nature of the antenna means it does not require active components, relying 
+solely on the spatial arrangement and feeding network to achieve the desired radiation pattern and 
+performance. 
+The antenna is made from woven glass reinforced hydrocarbon/ceramics dielectric 
+material, that complies with NASA outgassing requirements. Front side (“A” in Figure 9) features 
+microstrip patch radiating elements, with immersion gold plating. The antenna backside (“B” in 
+Figure 9) shall be mounted on the flat conducting surface of the satellite.  
+The SMA connector ensures a reliable interface between the feeder cable and the antenna. 
+Larger diameter and more rigid coaxial cables can be used. 
+ 
+ 
+
+Datasheet for the X-band Antenna  
+0.1 
+8 
+4 Typical Performance Graphs 
+ 
+Figure 2 3D Radiation Pattern at 8220 MHz 
+ 
+Figure 3 Azimuth (Black) and Elevation (Blue) Radiation Pattern Sections (8220 MHz) 
+ 
+ 
+deg 
+-32.2 deg 
+-13.1 dB 
+32.4 deg 
+-12.3 dB 
+dB 
+
+Datasheet for the X-band Antenna  
+0.1 
+9 
+ 
+Figure 4 Broadside Gain (dB) vs Frequency (MHz) (Devices Ser.# 5 - 8) 
+ 
+Figure 5 VSWR vs Frequency (MHz) (Devices Ser.# 5 - 8) 
+ 
+17.75
+18.00
+18.25
+18.50
+18.75
+19.00
+19.25
+19.50
+8000 8025 8050 8075 8100 8125 8150 8175 8200 8225 8250 8275 8300 8325 8350 8375 8400 8425 8450 8475 8500
+5
+6
+7
+8
+1.00
+1.05
+1.10
+1.15
+1.20
+1.25
+1.30
+1.35
+1.40
+1.45
+1.50
+1.55
+1.60
+1.65
+1.70
+1.75
+1.80
+1.85
+1.90
+1.95
+2.00
+8000 8025 8050 8075 8100 8125 8150 8175 8200 8225 8250 8275 8300 8325 8350 8375 8400 8425 8450 8475 8500
+5
+6
+7
+8
+
+Datasheet for the X-band Antenna  
+0.1 
+10 
+ 
+Figure 6 Axial Ratio (dB) vs Frequency (MHz) (Devices Ser.# 5 - 8) 
+ 
+ 
+Figure 7 Side Lobe Peak Level in Azimuth (dB) vs Frequency (MHz) (Devices Ser.# 5 - 8) 
+ 
+0
+0.2
+0.4
+0.6
+0.8
+1
+1.2
+1.4
+1.6
+1.8
+8000 8025 8050 8075 8100 8125 8150 8175 8200 8225 8250 8275 8300 8325 8350 8375 8400 8425 8450 8475 8500
+5
+6
+7
+8
+-13.500
+-13.250
+-13.000
+-12.750
+-12.500
+-12.250
+-12.000
+-11.750
+-11.500
+-11.250
+-11.000
+8000 8025 8050 8075 8100 8125 8150 8175 8200 8225 8250 8275 8300 8325 8350 8375 8400 8425 8450 8475 8500
+5
+6
+7
+8
+

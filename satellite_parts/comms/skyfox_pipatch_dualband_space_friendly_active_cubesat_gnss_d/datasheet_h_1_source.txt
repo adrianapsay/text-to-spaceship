@@ -1,0 +1,3 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-skyfox-labs-sro-pipatch-dualband-space-friendly-active-cubesat-gnss-dual-band-patch-antenna-bd769c.pdf
+found from: https://satsearch.co/products/skyfox-labs-pipatch-dual-band
+downloaded on the lab laptop by harvest_catalogs.py (pass 6) on 2026-11-11

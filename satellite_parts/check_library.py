@@ -5,7 +5,7 @@ import glob
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 problems = []
-for path in sorted(glob.glob(os.path.join(HERE, "*", "*", "part.json"))):
+for path in sorted([path for path in glob.glob(os.path.join(HERE, "*", "*", "part.json")) if not os.path.basename(os.path.dirname(os.path.dirname(path))).startswith("_")]):
     record = json.load(open(path))
     part_id = record["id"]
     dims = [record["dimensions_mm"]["x"], record["dimensions_mm"]["y"], record["dimensions_mm"]["z"]]
@@ -22,6 +22,9 @@ for path in sorted(glob.glob(os.path.join(HERE, "*", "*", "part.json"))):
         problems.append(part_id + ": no mass")
     if not record.get("source", {}).get("url"):
         problems.append(part_id + ": no source url")
+    detail = record["geometry"].get("detail") or {}
+    if detail and not detail.get("same_as_envelope") and not detail.get("inside_envelope", True):
+        problems.append(part_id + ": detail geometry pokes out of the envelope by " + str(detail.get("overshoot_mm")) + " mm (packing would miss it)")
     if record["geometry"]["face_counts"]["part"] > 2000:
         problems.append(part_id + ": " + str(record["geometry"]["face_counts"]["part"]) + " faces")
 for problem in problems:

@@ -1,0 +1,20 @@
+
+4 π Sun Sensor 
+for Low earth Satellites
+4 π Sun Sensor is used in Spacecrafts to find the orientation with respect to Sun. Sun Sensor 
+consists of two optical heads each head has solar cells mounted on three orthogonal sides. 
+Two such heads mounted on two diametrically opposite side of a Satellite gives three di-
+rection cosines.
+4 π SUN SENSOR
+There are two solar cells on each side for redundancy. A nine pin connector on each head 
+brings out the solar cell out. Specification
+* Each cell output is given as
+    I = Imax COS θ where Imax + 8 ma +/- 10%
+* Physical size : 46 x 30 x 32 mm
+* Mass : 50 g
+* I/F : 9 pin Micro D connector
+                                                         
+                                                                 
+                                                               www.xovian.co.in
+Satellite Components and Subsystems                                                                                          | Page 1 of 1
+

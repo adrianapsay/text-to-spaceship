@@ -1,0 +1,2 @@
+url: https://satcatalog.s3.amazonaws.com/components/38/SatCatalog_-_GomSpace_-_NanoSense_GPS_Kits_-_Datasheet.pdf
+method: largest product picture on page 1-2 of the vendor data sheet (pdfimages), checked by eye 2026-11-11

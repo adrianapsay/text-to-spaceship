@@ -1,0 +1,3 @@
+url: https://cdn.craft.cloud/8b2193af-9254-40b8-94b1-f0108baf88de/assets/products/datasheets/DS-VSC5-2800D-9.docx-89821-1-1_2026-08-19-132317_snqo.pdf
+found from: https://cdn.craft.cloud/8b2193af-9254-40b8-94b1-f0108baf88de/assets/products/datasheets/DS-VSC5-2800D-9.docx-89821-1-1_2026-08-19-132317_snqo.pdf
+found by Claude (web search) on 2026-11-11; downloaded by fetch_pass5.py

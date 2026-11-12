@@ -1,0 +1,84 @@
+Copyright Craft Prospect Ltd – All information subject to change.
++44 (0) 7803 477 945                                                                www.craftprospect.com                    
+hello@craftprospect.com 
+Cloud
+Detector
+Earth observation missions generate vast amounts of data, but a 
+significant fraction of that data often has limited or no value when cloud 
+cover obscures the target area. In such cases, downlinking these images 
+wastes bandwidth, onboard storage, and operational time.
+The Craft Prospect Cloud Detector provides onboard cloud awareness, 
+enabling spacecraft to make informed decisions before data is collected or 
+transmitted. By imaging the Earth ahead of the satellite, the Cloud 
+Detector identifies, classifies, and maps cloud cover to deliver up to four 
+minutes of forecast directly to the payload computer.
+With a low SWaP design for CubeSat constraints, the Cloud Detector 
+delivers strong return on investment for missions seeking to ensure 
+optimal utilisation of onboard resources, remove downlink transmission 
+bottlenecks, and improve overall mission productivity.
+4-minute forecast of 
+incoming cloud 
+cover.
+Full and partial 
+cloud cover 
+classification.
+Unlock responsive 
+pointing and image 
+masking.
+Rev 1.1
+
+TECHNICAL SPECIFICATION
+General
+FPGA
+Zynq 7000
+Camera
+RGB sensor, filter and lens
+Interfaces
+CAN, SPI, RS422, I2C
+Operating 
+temperature
+-20oC to +65oC
+Performance – reference 500km sun-sync. mission
+Resolution
+2048 x 1536 px
+Field of View
+50o
+Swath width at nadir
+500 km
+GSD at nadir
+250 m/px
+Classification accuracy
+97%
+Georeference precision
+10 km
+Inference time
+< 5 s to payload 
+computer
+Framerate
+0.02 Hz (for contiguous 
+classification)
+Look-ahead range
+Up to 150 s / 1,000 k
+Qualification
+Thermal
+Full qualification: 
+-40oC to +80oC
+Vibration
+Full qualification: 
+Sine sweep (NASA GEVS)
+Random vibration (NASA GEVS)
+Size, Weight & Power
+Dimensions
+95 x 95 x 35 mm
+Mass
+250g
+Power consumption
+5W
+Input voltage
+5V
+Copyright Craft Prospect Ltd – All information subject to change.
++44 (0) 7803 477 945                                                                www.craftprospect.com                    
+hello@craftprospect.com 
+Smart. Secure. Space.
+Rev 1.1
+

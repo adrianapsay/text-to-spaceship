@@ -1,0 +1,1252 @@
+ 
+ 
+Sales Information 
+Phone:(425) 353-3010 
+Fax: (425) 353-4030 
+SVPL3R306SG – 4.0 
+ 
+E-mail: vptsales@vptpower.com 
+Web: www.vptpower.com 
+Page 1 
+SVPL3R306SG SERIES 
+SPACE QUALIFIED POINT OF LOAD CONVERTERS 
+ 
+Products and reports described in this datasheet are subject to all export license restrictions and regulations which may include but are not limited to ITAR 
+(International Traffic in Arms Regulations) and the Export Administration and Foreign Assets Control Regulations. Further restrictions may apply. Contact VPT 
+sales for details. VPT, its logo and tagline are registered trademarks in the U.S. Patent and Trademark Office. All other names, product names and trade names 
+may be trademarks or registered trademarks of their respective holders. 
+. 
+ 
+ 
+ 
+SVPL Series DC-DC Converter  
+Models Available 
+Input: 3.1 V to 5.5 V 
+6 A output 
+Qualified to MIL-PRF-38534 Class H and Class K 
+ 
+1.0 DESCRIPTION 
+The SVPL Series of space qualified point-of-load DC-DC 
+converters is specifically designed for the harsh radiation 
+environment of space applications. Performance is guaranteed 
+through the use of hardened semiconductor components and 
+analysis. The SVPL Series has been characterized for Total 
+Ionizing Dose (TID) performance including Enhanced Low Dose 
+Rate Sensitivity (ELDRS) and for Single Event Effects (SEE) per 
+VPT’s DLA-approved Radiation Hardness Assurance (RHA) plan 
+per MIL-PRF-38534, Appendix G, Level R.  
+ 
+The SVPL3R306SG is based on the Intersil ISL70001ASEH 
+radiation-hardened monolithic buck regulator. It is designed to 
+operate from a nominal 3.3 V or 5 V bus. The SVPL3R306SG 
+supplies low voltages at 6 A with high efficiency and fast 
+transient response, making it an ideal choice to supply point-of-
+load applications such as high-performance space processors.  
+ 
+1.1 FEATURES 
+• Operates from 3.1 – 5.5 V input 
+• Adjustable Output from 0.8 – 3.8 V 
+• Up to 6 Amps Output  
+• High Efficiency, up to 95% 
+• High Power Density, up to 67 W/in3 
+• Output Enable Control 
+• Low Output Noise 
+• Over Current Protection 
+• Bi-directional SYNC pin allows devices to be synchronized  
+180° out-of-phase 
+1.2 SPACE LEVEL CHARACTERIZATIONS 
+• Total Ionizing Dose Performance 
+• High Dose Rate [50-300 rad(Si)/s] ≥ 100 krad(Si) 
+• Low Dose Rate [<10 mrad(Si)/s] ≥ 100 krad(Si) 
+• Single Event Effects Performance 
+• SEL, SEB, and SEGR LETTH ≥ 85 MeV/mg/cm2 
+• SEFI Threshold LETTH ≥ 42 MeV/mg/cm2 
+• SEFI X-section (LETEFF = 85 MeV/mg/cm2) ≤ 8.25x10-7 cm2 
+• SET fully characterized for cross section and magnitude 
+• Operation from -55 °C to +125 °C   
+• Worst-case analysis, stress, radiation, reliability reports available 
+1.3 MANUFACTURING AND COMPLIANCE 
+• Qualified to MIL-PRF-38534 Class H and Class K,  
+DLA SMD # 5962-17215 
+• MIL-PRF-38534 element evaluated components 
+• Manufactured in a MIL-PRF-38534 Class H and Class K facility 
+• MIL-STD-883 
+• ISO-9001 
+1.4 PACKAGING 
+• Low-profile: 1.110” x 1.110” x 0.276”  
+• Max weight: 21 g  
+• Precision seam-welded hermetic metal case 
+• Standard gullwing or optional straight-lead versions available 
+1.5 SIMILAR PRODUCTS AND ACCESSORIES 
+• SVGA0510S 10 A space qualified point of load DC-DC converter 
+• SVRGA0508S 8 A space qualified point of load DC-DC converter 
+• Custom versions available 
+• Space qualified isolated DC-DC converters, 6 - 100 W 
+• EMI filters  
+ 
+
+ 
+ 
+ 
+Sales Information 
+Phone:(425) 353-3010 
+Fax: (425) 353-4030 
+SVPL3R306SG - 4.0 
+ 
+E-mail: vptsales@vptpower.com 
+Web: www.vptpower.com 
+Page 2 
+SVPL3R306SG Series 
+2.0 DIAGRAMS 
+2.1 BLOCK DIAGRAM 
+ 
+      2.2 CONNECTION DIAGRAMS 
+ 
+ 
+1. 
+Rtrim should be connected directly across pins 11 and 12 as close as possible to the SVPL. 
+2. 
+AGND should be connected to GND close to the SVPL. Voltage difference between the AGND and the GND pins greater than 0.3 V may result in regulation error 
+and/or damage to the SVPL. 
+3. 
+If not using EN, connect pin 7 to VIN. 
+4. 
+If not synchronizing converters, use Master Mode Synchronization connections and leave pin 9 open. 
+5. 
+If not using PGOOD, leave pin 10 open. 
+6. 
+Rcomp and Ccomp are optional components that can be used to optimize the SVPL transient response. 
+ 
+3.0 SPECIFICATIONS 
+3.1 ABSOLUTE MAXIMUM RATINGS  
+Absolute Maximum Ratings 
+VIN, PGOOD1: 
+-0.3 V to 6.5 V 
+Operating Temperature (Full Load): 
+-55 °C to +125 °C 
+EN, M/S, SYNC 
+-0.3 V to Vin + 0.3 V 
+Storage Temperature: 
+-65 °C to +150 °C 
+AGND 
+-0.3 V to 0.3 V 
+Lead Solder Temperature (10 seconds): 
+270 °C 
+ESD Rating per MIL-PRF-38534: 
+1C 
+Solder Reflow Temperature (30 seconds): 
+220 °C 
+ 
+ 
+1. Limited to 5.7 V for operation in a heavy ion environment at LET ≥ 85 MeV/mg/cm2 and Tcase = 125 °C.  
+ 
+
+ 
+ 
+ 
+Sales Information 
+Phone:(425) 353-3010 
+Fax: (425) 353-4030 
+SVPL3R306SG - 4.0 
+ 
+E-mail: vptsales@vptpower.com 
+Web: www.vptpower.com 
+Page 3 
+SVPL3R306SG Series 
+3.2 PERFORMANCE SPECIFICATIONS1 
+Tcase = -55 °C to +125 °C, Vin = +5 V ± 1% or 3.3 V ± 1%, Full Load, Unless Otherwise Specified 
+ 
+ 
+ 
+SVPL3R306SG 
+ 
+Parameter 
+Conditions 
+Min 
+Typ 
+Max 
+Units 
+INPUT 
+ 
+ 
+ 
+ 
+ 
+Voltage2 
+ 
+3.1 
+- 
+5.5 
+V 
+Current 
+EN = GND, Vin = 5 V 
+- 
+5 
+12 
+mA 
+ 
+EN = GND, Vin = 3.3 V 
+- 
+4 
+12 
+mA 
+EN = Vin = 5 V, No Load 
+-  
+45 
+60 
+mA 
+EN = Vin = 3.3 V, No Load 
+- 
+25 
+60 
+mA 
+Undervoltage Lockout 
+Rising Threshold2 
+2.65 
+2.8 
+2.95 
+V 
+ 
+Hysteresis2 
+0.09 
+0.175 
+0.26 
+V 
+OUTPUT STATIC 
+ 
+ 
+ 
+ 
+ 
+Voltage  
+Tcase = 25 °C 
+-1.0 
+- 
++1.0 
+%Vout 
+ 
+Tcase = -55 °C to +125 °C 
+-1.5 
+- 
++1.5 
+%Vout 
+Power3 
+ 
+0 
+- 
+22.8 
+W 
+Current 
+ 
+0 
+- 
+6 
+A 
+Ripple Voltage 
+20 Hz to 10 MHz 
+- 
+15 
+30 
+mVpp 
+Load Regulation 
+ 
+-0.5 
+0.03 
++0.5 
+%Vout 
+Load Fault Dissipation 
+Vin = 5 V, Vout = 3.3 V  
+- 
+- 
+1 
+W 
+OUTPUT DYNAMIC 
+ 
+ 
+ 
+ 
+ 
+Load Step, Half to Full Load, Vout = 3.3 V 
+Output Transient  
+- 
+35 
+70 
+mV 
+ 
+Recovery4  
+- 
+30 
+60 
+µs 
+Turn-On (Vin = 0 to 3.3 V or 5 V, EN = Vin) 
+Delay 
+- 
+5 
+12 
+ms 
+ 
+Overshoot  
+- 
+0 
+15 
+mVpk 
+FUNCTION 
+ 
+ 
+ 
+ 
+ 
+Enable (EN)2 
+Rising Threshold 
+1.15 
+1.31 
+1.48 
+V 
+ 
+Hysteresis 
+0.058 
+0.110 
+0.172 
+V 
+ 
+EN Pin Current, EN = 5.5 V  
+- 
+- 
+300 
+µA 
+SYNC Frequency Range  
+Vin = 5V, M/S = GND 
+0.85 
+1 
+1.15 
+MHz 
+GENERAL 
+ 
+ 
+ 
+ 
+ 
+Efficiency 
+Vin = 5 V, Vout = 3.3 V, Iout = 6 A 
+87 
+92 
+- 
+% 
+Capacitive Load2 
+ 
+220 
+- 
+3300 
+Vout 
+µF 
+Switching Frequency 
+M/S = Vin 
+0.85 
+1 
+1.15 
+MHz 
+Weight 
+Standard package option 
+- 
+- 
+21 
+g 
+MTBF (MIL-HDBK-217F) 
+SF @ Tcase = 55 °C 
+- 
+7.04 
+- 
+MHr 
+POST-RAD END-OF-LIFE LIMITS5 
+ 
+ 
+ 
+ 
+ 
+OUTPUT Voltage 
+Tcase = -55 °C to +125 °C 
+-3.0 
+- 
++3.0 
+%Vout 
+ 
+ 
+ 
+ 
+1. Performance specifications are guaranteed with 100 µF from VIN to GND and 220 µF from VOUT to GND. 
+2. Verified by initial electrical design verification. Post design verification, parameter shall be guaranteed to the limits specified. 
+3. Dependent on output voltage. 
+4.  Time for output voltage to settle within 1% of steady-state value. 
+5. End-of-Life performance includes aging and radiation degradation and is within standard limits except where noted. 
+ 
+
+ 
+ 
+ 
+Sales Information 
+Phone:(425) 353-3010 
+Fax: (425) 353-4030 
+SVPL3R306SG - 4.0 
+ 
+E-mail: vptsales@vptpower.com 
+Web: www.vptpower.com 
+Page 4 
+SVPL3R306SG Series 
+4.0 PERFORMANCE CURVES 
+4.1.1 SVPL3R306SG Efficiency (Typical, 25 °C, Vin = 3.3 V) 
+ 
+ 
+4.1.2 SVPL3R306SG Efficiency (Typical, 25 °C, Vin = 5 V) 
+ 
+ 
+
+ 
+ 
+ 
+Sales Information 
+Phone:(425) 353-3010 
+Fax: (425) 353-4030 
+SVPL3R306SG - 4.0 
+ 
+E-mail: vptsales@vptpower.com 
+Web: www.vptpower.com 
+Page 5 
+SVPL3R306SG Series 
+5.0 MECHANICAL OUTLINES AND PINOUT 
+ 
+Standard Gullwing Package Option: 
+ 
+ 
+ 
+ 
+1. Tolerances are ±0.005” unless otherwise stated 
+2. Case temperature is measured on the center of the baseplate surface 
+3. Materials: Case (Steel, gold over nickel plated); Cover (Kovar, nickel plated); Pin (Copper-cored alloy 52, gold over nickel plated, 63/37 SnPb solder dipped);  
+Pin Seals (Glass) 
+ 
+ 
+Pin 
+Function 
+Pin 
+Function 
+Pin 
+Function 
+Pin 
+Function 
+1 
+VIN 
+6 
+GND 
+11 
+AGND 
+16 
+GND 
+2 
+VIN 
+7 
+EN 
+12 
+TRIM 
+17 
+VOUT 
+3 
+VIN 
+8 
+M/S 
+13 
++SENSE 
+18 
+VOUT 
+4 
+GND 
+9 
+SYNC 
+14 
+GND 
+19 
+VOUT 
+5 
+GND 
+10 
+PGOOD 
+15 
+GND 
+20 
+VOUT 
+
+ 
+ 
+ 
+Sales Information 
+Phone:(425) 353-3010 
+Fax: (425) 353-4030 
+SVPL3R306SG - 4.0 
+ 
+E-mail: vptsales@vptpower.com 
+Web: www.vptpower.com 
+Page 6 
+SVPL3R306SG Series 
+5.0 MECHANICAL OUTLINES AND PINOUT (CONTINUED) 
+ 
+Optional Straight-Lead Package: 
+ 
+ 
+ 
+ 
+1. Tolerances are ±0.005” unless otherwise stated 
+2. Case temperature is measured on the center of the baseplate surface 
+3. Materials: Case (Steel, gold over nickel plated); Cover (Kovar, nickel plated); Pin (Copper-cored alloy 52, gold over nickel plated); Pin Seals (Glass) 
+4. Pins may have exposed nickel plating (not base metal) beyond the ceramic tie bars due to the plating process. No nickel plating is exposed between the tie bar and case. 
+ 
+Pin 
+Function 
+Pin 
+Function 
+Pin 
+Function 
+Pin 
+Function 
+1 
+VIN 
+6 
+GND 
+11 
+AGND 
+16 
+GND 
+2 
+VIN 
+7 
+EN 
+12 
+TRIM 
+17 
+VOUT 
+3 
+VIN 
+8 
+M/S 
+13 
++SENSE 
+18 
+VOUT 
+4 
+GND 
+9 
+SYNC 
+14 
+GND 
+19 
+VOUT 
+5 
+GND 
+10 
+PGOOD 
+15 
+GND 
+20 
+VOUT 
+
+ 
+ 
+ 
+Sales Information 
+Phone:(425) 353-3010 
+Fax: (425) 353-4030 
+SVPL3R306SG - 4.0 
+ 
+E-mail: vptsales@vptpower.com 
+Web: www.vptpower.com 
+Page 7 
+SVPL3R306SG Series 
+6.0 TECHNICAL NOTES 
+Please note that many of these functions are also demonstrated in detail on the VPT website in the 
+form of technical video labs. 
+6.1 GENERAL INFORMATION 
+6.1.1 Topology Description 
+The SVPL3R306SG is a non-isolated, fixed-frequency, radiation-hardened, synchronous buck 
+converter based on the Intersil ISL70001ASEH. It is optimized for low voltage point-of-load (POL) applications. The SVPL3R306SG 
+operates from a 3.1 to 5.5 V input and provides a stepped-down, precisely regulated, programmable output voltage at high efficiency.  
+6.1.2 Source Impedance 
+The impedance of the 3.3 V or 5 V source can interact with the POL converter and impact performance. High source impedance is 
+often caused by a long input cable or other components added in series with the input. In some cases, additional input capacitance will 
+be needed to stabilize the system. 
+6.1.3 Case Connection 
+The SVPL3R306SG case is connected to GND at a single point inside of the package. 
+ 
+6.2 FUNCTION DESCRIPTIONS 
+6.2.1 Enable (EN) 
+The figure below demonstrates the enable circuit. Initially, Vcontrol is below the turn-on threshold (Vcontrol_enable), and the Ien current source 
+is active. As Vcontrol rises, the turn-on threshold is calculated as: 
+ 
+𝑉𝑉𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐_𝑒𝑒𝑒𝑒𝑒𝑒𝑒𝑒𝑒𝑒𝑒𝑒= 𝑉𝑉𝑟𝑟∙൤1 + 𝑅𝑅1 + 𝑅𝑅𝑒𝑒𝑒𝑒
+𝑅𝑅2
+൨+ 𝐼𝐼𝑒𝑒𝑒𝑒∙(𝑅𝑅1 + 𝑅𝑅𝑒𝑒𝑒𝑒) 
+ 
+After Vcontrol reaches Vcontrol_enable, Ien turns off. To disable the converter, drive Vcontrol below the turn-off threshold (Vcontrol_disable): 
+ 
+𝑉𝑉𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐_𝑑𝑑𝑑𝑑𝑑𝑑𝑑𝑑𝑏𝑏𝑏𝑏𝑏𝑏= 𝑉𝑉𝑟𝑟∙൤1 + 𝑅𝑅1 + 𝑅𝑅𝑒𝑒𝑒𝑒
+𝑅𝑅2
+൨ 
+ 
+The enable circuit hysteresis is: 
+ 
+𝑉𝑉𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐_ℎ𝑦𝑦𝑦𝑦= 𝑉𝑉𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐_𝑒𝑒𝑒𝑒𝑒𝑒𝑒𝑒𝑒𝑒𝑒𝑒−𝑉𝑉𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐_𝑑𝑑𝑑𝑑𝑑𝑑𝑑𝑑𝑑𝑑𝑑𝑑𝑑𝑑= 𝐼𝐼𝑒𝑒𝑒𝑒∙(𝑅𝑅1 + 𝑅𝑅𝑒𝑒𝑒𝑒) 
+ 
+When EN is driven directly from a low-resistance source, Ren can be assumed to be 0 Ω, and the limits from the Performance 
+Specifications table apply directly. To increase the turn-on threshold, add the appropriate Ren based on the equations above. If the 
+ability to disable the SVPL3R306SG is not necessary, connect EN to VIN. When EN is below its turn-on threshold, the internal power 
+MOSFETs are turned off, and the SVPL3R306SG power stage is in a high-impedance state. 
+ 
+ 
+
+ 
+ 
+ 
+Sales Information 
+Phone:(425) 353-3010 
+Fax: (425) 353-4030 
+SVPL3R306SG - 4.0 
+ 
+E-mail: vptsales@vptpower.com 
+Web: www.vptpower.com 
+Page 8 
+SVPL3R306SG Series 
+6.2.2 Power Good (PGOOD) 
+PGOOD is an open-drain output. It is pulled to GND when the output voltage is outside a ±11% regulation window. When the output 
+voltage is within ±11% of its set point, PGOOD will be released. The PGOOD pin can be pulled up through an external resistor to any 
+voltage from 0 to 5.5 V, independent of the input voltage. The external pull-up resistor should have a nominal value in the range of 1 kΩ 
+to 10 kΩ.  
+6.2.3 Synchronization (M/S and SYNC) 
+When multiple DC/DC converters are connected to a common input bus, differences in their switching frequencies may lead to undesired 
+beat frequencies at the common bus. The simplest way to mitigate beat frequency issues is to synchronize the POL converters.     
+ 
+To synchronize two or more SVPL3R306SG converters: 
+• 
+Connect the M/S pin of the master converter to VIN (SYNC will output pulses with magnitude of VIN and 50% duty cycle) 
+• 
+Connect the M/S pin of the slave converters to GND (SYNC will be configured as an input) 
+• 
+Connect the SYNC pins of the master and slave converters together 
+ 
+ 
+ 
+To synchronize to an external clock, connect M/S to GND and connect the clock output to SYNC. The clock signal’s low level must be 
+less than 1 V and its high level must be between 2.3 V and VIN to guarantee proper synchronization. Its duty cycle should be between 
+40 to 60%. If not synchronizing converters, connect M/S to VIN and leave SYNC open. 
+ 
+
+ 
+ 
+ 
+Sales Information 
+Phone:(425) 353-3010 
+Fax: (425) 353-4030 
+SVPL3R306SG - 4.0 
+ 
+E-mail: vptsales@vptpower.com 
+Web: www.vptpower.com 
+Page 9 
+SVPL3R306SG Series 
+6.2.4 Adjusting the Output Voltage (TRIM)  
+The output voltage of the converter is set with an external trim resistor connected from the TRIM pin to the AGND pin. Use the 
+equations or table below to choose the trim resistor value. Trim resistor tolerance of 0.1% is recommended to achieve an accurate 
+output voltage. The default output voltage with the TRIM pin left open is 0.8 V. The designer can adjust the output voltage from 0.8 V to 
+85% of the input voltage.   
+ 
+ 
+  
+ 
+ 
+ 
+6.2.5 Output Capacitors  
+While the SVPL3R306SG is stable without external output capacitance, a minimum of 220 µF is required to meet the Performance 
+Specifications from section 3.2. Output capacitors for point-of-load (POL) DC/DC converters should be chosen to meet output voltage 
+ripple and transient requirements. Meeting the transient response requirement is accomplished by making the output impedance of the 
+converter sufficiently small. Given the high control bandwidth of POL converters like the SVPL series, the peak output impedance is 
+typically dominated by the equivalent series resistance (ESR) of the bulk output capacitance. Therefore, the output capacitors should 
+be chosen to set a certain maximum total ESR. The total ESR is the parallel combination of the internal bulk capacitor’s ESR and that 
+of the added capacitors. Given the output voltage transient requirement, maximum load step, and the ESR of each bulk capacitor that 
+will be added, the number of added capacitors needed is calculated with the following equations: 
+ 
+ 
+ 
+𝐸𝐸𝐸𝐸𝐸𝐸𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇= ∆𝑉𝑉𝑂𝑂𝑂𝑂𝑂𝑂
+∆𝐼𝐼𝑂𝑂𝑂𝑂𝑂𝑂
+ 
+ 
+𝐸𝐸𝐸𝐸𝐸𝐸𝐴𝐴𝐴𝐴𝐴𝐴𝐴𝐴𝐴𝐴= 𝐸𝐸𝐸𝐸𝐸𝐸𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇∗𝐸𝐸𝐸𝐸𝐸𝐸𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼
+𝐸𝐸𝐸𝐸𝐸𝐸𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼−𝐸𝐸𝐸𝐸𝐸𝐸𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇
+ 
+ 
+𝑁𝑁= 𝐸𝐸𝐸𝐸𝐸𝐸𝐸𝐸𝐸𝐸𝐸𝐸𝐸𝐸
+𝐸𝐸𝐸𝐸𝐸𝐸𝐴𝐴𝐴𝐴𝐴𝐴𝐴𝐴𝐴𝐴
+ 
+ 
+ 
+ 
+Make sure that the added capacitance does not violate the maximum allowed output capacitance using the following equation: 
+ 
+𝐶𝐶𝑂𝑂𝑂𝑂𝑂𝑂−𝑀𝑀𝑀𝑀𝑀𝑀= 3300µ𝐹𝐹
+𝑉𝑉𝑂𝑂𝑂𝑂𝑂𝑂
+ 
+ 
+For example, assume that VOUT is 1.5 V, the maximum output transient allowed is 37.5 mV, and the load step is 3 A. Assume the output 
+capacitors being used are 330 µF and have a maximum ESR of 50mΩ each.   
+SVPL3R306SG 
++Vout (V) 
+Rtrim (Ω) 
+0.8 
+Open 
+0.9 
+5.80k 
+1.0 
+2.80k 
+1.2 
+1.30k 
+1.5 
+657 
+1.8 
+400 
+2.0 
+300 
+2.5 
+153 
+2.8 
+100 
+3.0 
+72.7 
+3.3 
+40.0 
+3.6 
+14.3 
+3.8 
+0.0 
+Parameter 
+Definition 
+ΔVOUT 
+Max VOUT transient allowed 
+ΔIOUT 
+Max load current step 
+ESRTOTAL 
+Total combined parallel ESR, including internal 
+and added capacitors 
+ESRADDED 
+Combined parallel ESR of the added capacitors 
+ESRINTERNAL 
+ESR of the internal bulk capacitor  
+(43.7mΩ max under worst-case conditions) 
+ESREACH 
+ESR of each of the added capacitors 
+N 
+Number of added capacitors 
+𝑅𝑅𝑡𝑡𝑡𝑡𝑡𝑡𝑡𝑡=
+600
+𝑉𝑉𝑂𝑂𝑂𝑂𝑂𝑂−0.8 −200 
+𝑉𝑉𝑂𝑂𝑂𝑂𝑂𝑂=
+600
+𝑅𝑅𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇+ 200 + 0.8 
+
+ 
+ 
+ 
+Sales Information 
+Phone:(425) 353-3010 
+Fax: (425) 353-4030 
+SVPL3R306SG - 4.0 
+ 
+E-mail: vptsales@vptpower.com 
+Web: www.vptpower.com 
+Page 10 
+SVPL3R306SG Series 
+𝐸𝐸𝐸𝐸𝐸𝐸𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇= ∆𝑉𝑉𝑂𝑂𝑂𝑂𝑂𝑂
+∆𝐼𝐼𝑂𝑂𝑂𝑂𝑂𝑂
+= 37.5𝑚𝑚𝑚𝑚
+3𝐴𝐴
+= 12.5𝑚𝑚𝑚𝑚 
+ 
+𝐸𝐸𝐸𝐸𝐸𝐸𝐴𝐴𝐴𝐴𝐴𝐴𝐴𝐴𝐴𝐴= 𝐸𝐸𝐸𝐸𝐸𝐸𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇∗𝐸𝐸𝐸𝐸𝐸𝐸𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼
+𝐸𝐸𝐸𝐸𝐸𝐸𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼𝐼−𝐸𝐸𝐸𝐸𝐸𝐸𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇𝑇
+= 12.5𝑚𝑚𝑚𝑚∗43.7𝑚𝑚𝑚𝑚
+43.7𝑚𝑚𝑚𝑚−12.5𝑚𝑚𝑚𝑚= 17.5𝑚𝑚𝑚𝑚 
+ 
+𝑁𝑁= 𝐸𝐸𝐸𝐸𝐸𝐸𝐸𝐸𝐸𝐸𝐸𝐸𝐸𝐸
+𝐸𝐸𝐸𝐸𝐸𝐸𝐴𝐴𝐴𝐴𝐴𝐴𝐸𝐸𝐷𝐷
+= 50𝑚𝑚𝑚𝑚
+17.5𝑚𝑚𝑚𝑚= 2.86 →𝑢𝑢𝑢𝑢𝑢𝑢 3 𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜 𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐𝑐 
+ 
+𝐶𝐶𝑂𝑂𝑂𝑂𝑂𝑂−𝑀𝑀𝑀𝑀𝑀𝑀= 3300µ𝐹𝐹
+𝑉𝑉𝑂𝑂𝑂𝑂𝑂𝑂
+= 3300µ𝐹𝐹
+1.5
+= 2200µ𝐹𝐹 
+ 
+In the example, 3x 330 µF/50 mΩ capacitors are needed. This is a total capacitance of 990 µF, which is well below the 2200 µF 
+maximum allowed.  
+ 
+The output voltage ripple can be evaluated through simulation using the circuit below. This circuit incorporates worst-case conditions 
+that include the effects of component tolerances, temperature extremes (-55 °C to 125 °C), radiation (100 krad), and aging (10 year 
+mission). Note that the resistor shown in series with the inductor includes the resistance of the inductor and ISL70001A power FETs. 
+The pulsed voltage source should have a peak voltage equal to the input voltage and the minimum switching frequency (850 kHz) to 
+evaluate the worst-case ripple. The duty cycle should be adjusted to attain the correct output voltage. 
+ 
+ 
+6.2.6 Input Capacitors 
+A minimum of 100 µF of input capacitance should be added between VIN and GND to maintain the input voltage during transient 
+conditions. The SVPL3R306SG has been designed with enough internal ceramic input capacitance to minimize the current stress 
+through the added capacitors. For capacitances greater than 100 µF, their RMS current will be determined primarily by their combined 
+ESR. The left-hand graph below shows the total RMS current through the added input capacitors assuming worst-case conditions for 
+load current, internal capacitance, switching frequency, input voltage, and output voltage. If multiple capacitors are added, then the 
+RMS current will divide between them. The right-hand graph shows the power dissipation in the added input capacitors. Note that the 
+RMS currents and maximum power dissipation under worst-case conditions are low enough that any practical input capacitors added 
+are expected to have large margins over their ratings.  
+ 
+
+ 
+ 
+ 
+Sales Information 
+Phone:(425) 353-3010 
+Fax: (425) 353-4030 
+SVPL3R306SG - 4.0 
+ 
+E-mail: vptsales@vptpower.com 
+Web: www.vptpower.com 
+Page 11 
+SVPL3R306SG Series 
+ 
+6.3 PROTECTION FEATURES 
+6.3.1 Input Undervoltage Lockout 
+The SVPL3R306SG Series provides input undervoltage lockout (UVLO) protection. For input voltages below the turn-on voltage, the 
+converter will remain off. The internal power MOSFETs will be turned off, and the SVPL3R306SG power stage will be in a  
+high-impedance state. When the input voltage exceeds the turn-on voltage, the converter will start. For input voltages above the UVLO 
+turn-off voltage but below the operating range of the converter, the converter may reach its maximum duty cycle and the output may be 
+out of regulation.  
+6.3.2 Output Soft-Start 
+The SVPL3R306SG Series utilizes an output soft-start function to ramp the output in a controlled manner, eliminating output voltage 
+overshoot and limiting inrush current at turn on. A voltage mode soft-start ensures the output waveform remains consistent regardless 
+of changes in the load current. The output rise time is approximately 4 ms.  The soft-start function is active whether the module is 
+turned on with an application of input voltage or from driving EN high. The turn-on delay time is specified from the application of input 
+voltage (or application of EN) until the output reaches 90% of its final value. 
+6.3.3 Output Short Circuit Protection 
+The SVPL3R306SG Series provides hiccup-mode output short-circuit protection. When a sustained high peak current is detected, the 
+converter will shut down. After a delay, the converter will attempt a soft-start. This sequence will continue until the fault is removed, 
+allowing the converter to soft-start and resume normal operation.  
+ 
+6.4 THERMAL CONSIDERATIONS 
+The SVPL3R306SG is rated for full power operation at 125 °C. Above 125 °C, the output power must be derated linearly from full power 
+at 125 °C to zero power at 135 °C. The operating temperature of the converter is specified on the baseplate of the converter. The 
+converter is designed to be conduction-cooled, with the baseplate mounted to a heat sink, chassis, PCB, or other thermal surface. The 
+internal power-dissipating components are mounted to the baseplate of the converter and all heat flow is through the baseplate. The lid 
+of the converter does not provide a good thermal path.  
+ 
+The maximum temperature rise from junction to case is 10 °C at full load.  
+ 
+ 
+ 
+
+ 
+ 
+ 
+Sales Information 
+Phone:(425) 353-3010 
+Fax: (425) 353-4030 
+SVPL3R306SG - 4.0 
+ 
+E-mail: vptsales@vptpower.com 
+Web: www.vptpower.com 
+Page 12 
+SVPL3R306SG Series 
+6.5 RADIATION HARDNESS ASSURANCE 
+VPT takes a conservative approach to radiation testing to ensure product performance in a space environment. VPT’s DLA-approved 
+Radiation Hardness Assurance (RHA) plan documents VPT’s processes and procedures for guaranteeing the performance of VPT 
+products under various environmental conditions in space including Total Ionizing Dose (TID) and Single-Event Effects (SEE). 
+Additionally, Enhanced Low Dose-Rate Sensitivity (ELDRS) effects are considered for all bipolar ICs used in the hybrid. Hardness is 
+guaranteed by a combination of both hybrid-level characterization and Radiation Lot Acceptance Testing (RLAT) of all sensitive 
+semiconductor piece-parts used within the hybrid. 
+ 
+6.5.1 Radiation Test and Performance Levels 
+Radiation Environment 
+Piece Part RLAT 
+Hybrid-Level 
+Characterization 
+Total Ionizing Dose 
+(TID) 
+High Dose Rate (HDR) 
+100 krad(Si) 
+100 krad(Si) 
+1Low Dose Rate (LDR) 
+50 krad(Si) 
+100 krad(Si) 
+2Single-Event Effects 
+(SEE) 
+Destructive (SEB, SEGR, SEL) 
+Not applicable 
+≥ 85 MeV/mg/cm2 
+Non-Destructive (SET, SEU, SEFI) 
+Not applicable 
+≥ 85 MeV/mg/cm2 
+3Displacement Damage 
+(DD) 
+ 
+1x1012 n/cm2 
+Not applicable 
+ 
+1. 
+The microcircuit device within the hybrid was characterized by its manufacturer to 150 krad(Si) at LDR and shown to be ELDRS free. Additionally, piece-part LDR 
+radiation lot acceptance testing is performed to the level indicated.  
+2. 
+The microcircuit device within the hybrid was characterized by its manufacturer for destructive SEE. Non-destructive SEE was tested by VPT during hybrid level 
+characterization. 
+3. 
+The microcircuit device was characterized per MIL-STD-883 Method 1017 to the level indicated. The device will be retested after design or process changes that 
+may affect its RHA response.   
+ 
+6.5.2 RHA Plan Summary 
+Test 
+RHA Plan for SV Series Isolated DC-DC Converters 
+Total Ionizing Dose (TID): 
+Sensitive semiconductor components undergo RLAT to 100 krad(Si) per 
+MIL-STD-883 Method 1019. Converters are characterized to 100 krad(Si). 
+Enhanced Low Dose Rate Sensitivity (ELDRS): 
+All bipolar linear ICs are characterized for ELDRS and tested in accordance 
+with MIL-STD-883 test method 1019 section 3.13 
+Single Event Effects (SEE): 
+Converters are characterized to LET ≥ 85 MeV/mg/cm2 for both catastrophic 
+events (SEL, SEB, SEGR) and functional interrupts (SEFI) under heavy ion 
+exposure. Converters are also characterized for cross-section and magnitude 
+of output transients (SET) for at least 3 different LET levels. 
+Radiation Lot Acceptance Testing (RLAT):  
+All production lots of sensitive semiconductor components undergo RLAT for 
+TID at HDR and/or LDR as appropriate per part type. 
+Displacement Damage (DD): 
+The potentially sensitive microcircuit device is characterized to 1x1012 n/cm2 
+per MIL-STD-883 Method 1017.  
+ 
+6.5.3 RHA Designators available on SMD 
+The SVPL3R306SG series converters are available on SMD with RHA level R. See section 8.0 for full SMD number information. 
+ 
+6.5.4 Supporting Documentation Available (Contact Sales) 
+• 
+Radiation Hardness Assurance Plan: 
+DLA-approved RHA plan covering TID, SEE, and ELDRS 
+• 
+Worst-Case Analysis Report: 
+Detailed worst-case analysis including electrical stress/derating limits and 
+guaranteed circuit performance post-radiation and end of life 
+• 
+Radiation Test Summary Report: 
+Overview of piece-part RLAT and hybrid characterization for all guaranteed 
+environments. Also includes SEE cross-section data. 
+• 
+Reliability Report: 
+MTBF report based on MIL-HDBK-217 reliability calculations. 
+• 
+Thermal Analysis Report: 
+Component temperature rise analysis and measurement results. 
+ 
+ 
+
+ 
+ 
+ 
+Sales Information 
+Phone:(425) 353-3010 
+Fax: (425) 353-4030 
+SVPL3R306SG - 4.0 
+ 
+E-mail: vptsales@vptpower.com 
+Web: www.vptpower.com 
+Page 13 
+SVPL3R306SG Series 
+7.0 ENVIRONMENTAL SCREENING 
+100% tested per MIL-STD-883 as referenced to MIL-PRF-38534. 
+ 
+Contact sales for more information concerning additional environmental screening and testing options. VPT Inc. reserves the right to 
+ship higher screened or SMD products to meet orders for lower screening levels at our sole discretion unless specifically forbidden by 
+customer contract. 
+Test 
+MIL-STD-883 Test 
+Method, Condition 
+/H+ 
+(Class H + PIND) 
+/K 
+(Class K) 
+/EM 
+(Engineering Model) 
+Non-QML1,6 
+Non-Destructive 
+Bond Pull 
+TM2023 
+●2 
+● 
+●2 
+Internal Visual 
+TM2010, TM2017, TM2032 
+(MIL-STD-750, TM2072, 
+TM2073) 
+● 
+● 
+● 
+Temperature 
+Cycling 
+TM1010, Condition C 
+-65 °C to 150 °C, Ambient 
+● 
+● 
+ 
+Constant 
+Acceleration 
+TM2001, 3000g, Y1 
+Direction 
+● 
+● 
+ 
+PIND3 
+TM2020, Condition A 
+●2 
+● 
+ 
+Pre Burn-In 
+Electrical 
+25 °C 
+ 
+● 
+ 
+Burn-In 
+TM1015, 320 hrs., 
+125 °C, Case Typ 
+ 
+● 
+ 
+TM1015, 160 hrs., 
+125 °C, Case Typ 
+● 
+ 
+ 
+24 hrs., 125 °C, Case Typ 
+ 
+ 
+● 
+Final Electrical 
+MIL-PRF-38534, Group A 
+Subgroups 1-6 
+-55 °C, 25 °C, 125 °C4 
+● 
+● 
+ 
+MIL-PRF-38534, Group A 
+Subgroups 1 and 4 
+25 °C 
+ 
+ 
+● 
+Hermeticity 
+(Seal) 
+TM1014, Fine Leak, 
+Condition A2 or B1 
+● 
+● 
+ 
+TM1014, Gross Leak, 
+Condition C1 or B2 
+● 
+● 
+ 
+Gross Leak, Dip (1x10-3) 
+ 
+ 
+● 
+Radiography5 
+TM2012 
+ 
+● 
+ 
+External Visual 
+TM2009 
+● 
+● 
+● 
+ 
+ 
+ 
+ 
+ 
+1. Non-QML products may not meet all requirements of MIL-PRF-38534 
+2. Not required per MIL-PRF-38534. Test performed for additional product quality assurance 
+3. PIND test Certificate of Compliance included in product shipment 
+4. 100% R&R testing with all test data included in product shipment 
+5. Radiographic test Certificate of Compliance and film(s) or data CD included in product shipment 
+6. Engineering models utilize only the screening specified and are not considered compliant for flight use 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+Sales Information 
+Phone:(425) 353-3010 
+Fax: (425) 353-4030 
+SVPL3R306SG - 4.0 
+ 
+E-mail: vptsales@vptpower.com 
+Web: www.vptpower.com 
+Page 14 
+SVPL3R306SG Series 
+8.0 STANDARD MICROCIRCUIT DRAWING (SMD) NUMBERS 
+ 
+Standard Microcircuit 
+Drawing Number 
+SVPL3R306SG Series 
+Similar Part Number 
+5962R1721501HYC 
+5962R1721501HXA 
+5962R1721501KYC 
+5962R1721501KXA 
+SVPL3R306SGN/H+ 
+SVPL3R306SG/H+-E 
+SVPL3R306SGN/K 
+SVPL3R306SG/K-E 
+ 
+Do not use the SVPL3R306SG Series similar part number for SMD product acquisition. It is listed for reference only. For exact 
+specifications of the SMD product, refer to the SMD drawing. SMDs can be downloaded from the DLA Land and Maritime (Previously 
+known as DSCC) website at https://landandmaritimeapps.dla.mil/programs/defaultapps.asp. The SMD numbers listed above represents 
+the Federal Stock Class, Device Type, Device Class Designator, Case Outline, Lead Finish and RHA Designator (where applicable). 
+Please reference the SMD for other screening levels, lead finishes, and radiation levels. All SMD products are marked with a “Q” on the 
+cover as specified by the QML certification mark requirement of MIL-PRF-38534. 
+ 
+ 
+9.0 ORDERING INFORMATION  
+ 
+SVPL 
+3R3 
+06 
+S 
+G 
+ 
+/K 
+- 
+E 
+1 
+2 
+3 
+4 
+5 
+6 
+7 
+ 
+8 
+ 
+(1) 
+Product 
+Series 
+(2) 
+Nominal 
+Input 
+Voltage 
+(3) 
+Output 
+Current 
+ 
+(4) 
+Number 
+of 
+Outputs 
+(5) 
+Package 
+Option 
+(6) 
+Package Lead 
+Option4 
+(7) 
+Screening Code1,2,3 
+(8) 
+Additional 
+Screening Code4 
+SVPL 
+3R3 3.3 Volts 
+06 
+ 
+6 Amps 
+ 
+S 
+ 
+Single 
+ 
+G 
+Gullwing 
+None 
+N 
+Formed 
+Straight 
+/EM 
+/H+ 
+/K 
+Engineering Model 
+Class H + PIND 
+Class K 
+E 
+Solder Dipped 
+ 
+Contact Sales for 
+additional options 
+ 
+1 Contact the VPT Sales Department for availability of Class H (/H) or Class K (/K) qualified products 
+2 VPT Inc. reserves the right to ship higher screened or SMD products to meet lower screened orders at our sole discretion unless specifically forbidden by customer 
+contract 
+3 Engineering models utilize only the standard screening specified and are not considered compliant for flight use. These models are intended for low volume engineering 
+characterization only and have no guarantee regarding operation in a radiation environment.  The customer must place the following statement on each line item of their 
+purchase order(s) for /EM units when ordering engineering models: 
+ 
+“(Customer Name) acknowledges that the /EM unit listed in this line item is not permitted for flight use and will be used for Engineering characterization only.” 
+ 
+4 When selecting Package Lead Option “Formed”, Additional Screening Code “-E” (solder dipped leads) must also be applied. When selecting Package Lead Option 
+“Straight”, Additional Screening Code “-E” should not be applied.  
+ 
+ 
+Please contact your sales representative or the VPT Inc. Sales Department for more information concerning additional environmental 
+screening and testing, different input voltage, output voltage, power requirements, source inspection, and/or special element evaluation 
+for space or other higher quality applications. 
+
+ 
+ 
+ 
+Sales Information 
+Phone:(425) 353-3010 
+Fax: (425) 353-4030 
+SVPL3R306SG - 4.0 
+ 
+E-mail: vptsales@vptpower.com 
+Web: www.vptpower.com 
+Page 15 
+SVPL3R306SG Series 
+10.0 CONTACT INFORMATION 
+To request a quotation or place orders please contact your sales representative or the VPT, Inc. Sales Department at: 
+ 
+Phone:  
+(425) 353-3010 
+Fax:  
+ 
+(425) 353-4030 
+E-mail:  
+vptsales@vptpower.com 
+ 
+All information contained in this datasheet is believed to be accurate, however, no responsibility is assumed for possible errors or 
+omissions. The products or specifications contained herein are subject to change without notice. 
+ 
+11.0 ADDITIONAL INFORMATION 
+Visit the VPT website for additional technical resources, including: 
+Product Catalogs 
+Application Notes and White Papers 
+ 
+ 
+Technical Video Labs 
+Additional Products For Avionics/Military, 
+Hi-Rel COTS, and Space Applications 
+ 
+ 
+

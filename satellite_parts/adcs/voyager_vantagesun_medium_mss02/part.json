@@ -1,0 +1,197 @@
+{
+ "id": "voyager_vantagesun_medium_mss02",
+ "name": "Voyager VantageSun Medium MSS-02 / MSS-03 analog fine sun sensor (120 deg full angle)",
+ "category": "adcs",
+ "subcategory": "sun_sensor",
+ "vendor": "Voyager Technologies",
+ "model": "VantageSun Medium MSS-02 / MSS-03",
+ "dimensions_mm": {
+  "x": 34.93,
+  "y": 34.93,
+  "z": 11.61
+ },
+ "mass_g": 33.5,
+ "source": {
+  "type": "datasheet",
+  "url": "https://voyagertechnologies.com/wp-content/uploads/2026/04/VantageSun-Medium-data-sheet.pdf",
+  "document": {
+   "title": "Voyager VantageSun Medium data sheet",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "adcs",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "Housing 19.05 mm diameter, flange 34.93 mm across, sensor height 11.61 mm, 33.5 g including flying leads, 120 deg full-angle circular FOV, <0.6 deg accuracy inside 24 deg, passive (four 0 to 4.5 mA current outputs), 1.27 m flying leads, -40 to +80 C. Flange thickness is drawn as 2 mm in the CAD (not stated)."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "USA",
+ "mass_note": "includes flying leads",
+ "adcs": {
+  "accuracy_deg": 0.6,
+  "fov_full_angle_deg": 120
+ },
+ "electrical": {
+  "power_W": {
+   "nominal": 0
+  },
+  "interfaces": [
+   "4 analog current outputs"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -40,
+   "max": 80
+  }
+ },
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   34.93,
+   34.83,
+   11.61
+  ],
+  "mesh_volume_mm3": 4638.3,
+  "watertight": true,
+  "render_kind": "lens_barrel",
+  "effective_density_g_cm3": 7.223,
+  "bodies": {
+   "part": [
+    {
+     "name": "barrel",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__barrel.stl"
+    },
+    {
+     "name": "glass",
+     "color": [
+      0.45,
+      0.65,
+      0.85
+     ],
+     "file": "bodies/part__glass.stl"
+    },
+    {
+     "name": "flange",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__flange.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 332
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    34.93,
+    34.93,
+    11.61
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.1,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "barrel",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/barrel.stl"
+    },
+    {
+     "name": "rings",
+     "color": [
+      0.24,
+      0.26,
+      0.3
+     ],
+     "file": "bodies_detail/rings.stl"
+    },
+    {
+     "name": "bezel",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/bezel.stl"
+    },
+    {
+     "name": "glass",
+     "color": [
+      0.45,
+      0.65,
+      0.85
+     ],
+     "file": "bodies_detail/glass.stl"
+    },
+    {
+     "name": "flange",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies_detail/flange.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://voyagertechnologies.com/wp-content/uploads/2026/04/VantageSun-Medium-data-sheet.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

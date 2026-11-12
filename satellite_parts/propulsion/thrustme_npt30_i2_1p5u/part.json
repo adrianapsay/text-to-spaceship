@@ -1,0 +1,211 @@
+{
+ "id": "thrustme_npt30_i2_1p5u",
+ "name": "ThrustMe NPT30-I2 1.5U iodine gridded ion propulsion system",
+ "category": "propulsion",
+ "subcategory": "electric_thruster",
+ "vendor": "ThrustMe",
+ "model": "NPT30-I2 1.5U",
+ "dimensions_mm": {
+  "x": 93,
+  "y": 93,
+  "z": 155
+ },
+ "mass_g": 1700,
+ "source": {
+  "type": "datasheet",
+  "url": "https://thrustme.fr/base/stock/ProductBannerFiles/2_thrustme-npt30-i2.pdf",
+  "document": {
+   "title": "ThrustMe NPT30-I2 data sheet",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "propulsion",
+   "electrical"
+  ],
+  "notes": "93 x 93 x 155 mm, 1.7 kg total wet mass, thrust 0.3 to 1.1 mN, Isp up to 2400 s, 35 to 65 W, total impulse up to 9500 Ns. Dry mass not stated."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "France",
+ "mass_note": "wet mass (iodine loaded)",
+ "propulsion": {
+  "type": "gridded ion (iodine)",
+  "thrust_mN": {
+   "min": 0.3,
+   "max": 1.1
+  },
+  "isp_s": 2400,
+  "total_impulse_Ns": 9500
+ },
+ "electrical": {
+  "power_W": {
+   "min": 35,
+   "max": 65
+  }
+ },
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   93.0,
+   93.0,
+   155.0
+  ],
+  "mesh_volume_mm3": 1266630.8,
+  "watertight": true,
+  "render_kind": "electric_thruster",
+  "effective_density_g_cm3": 1.342,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    },
+    {
+     "name": "emitter",
+     "color": [
+      0.85,
+      0.66,
+      0.22
+     ],
+     "file": "bodies/part__emitter.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 348
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    93.0,
+    93.0,
+    155.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "front_plate",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/front_plate.stl"
+    },
+    {
+     "name": "emitter",
+     "color": [
+      0.85,
+      0.66,
+      0.22
+     ],
+     "file": "bodies_detail/emitter.stl"
+    },
+    {
+     "name": "emitter_ring",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/emitter_ring.stl"
+    },
+    {
+     "name": "corner_screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/corner_screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    },
+    {
+     "name": "bolt_circle",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/bolt_circle.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_3qqgge_thrustme_npt30-i2_1u.jpg",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/thrustme-npt30-i2-1u-electric-propulsion-system",
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://thrustme.fr/base/stock/ProductBannerFiles/2_thrustme-npt30-i2.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

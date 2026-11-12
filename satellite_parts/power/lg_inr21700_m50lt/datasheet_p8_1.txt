@@ -1,0 +1,909 @@
+ 
+PRODUCT SPECIFICATION 
+ 
+ 
+Description 
+Document No. 
+Date 
+Rev 
+Lithium Ion LG INR21700M50LT 
+2020-LSD-MBD-b00090 
+2020-09-17 
+0 
+ 
+1/14 
+ 
+PRODUCT SPECIFICATION 
+Rechargeable Lithium Ion Battery 
+Model : INR21700M50LT 
+ 
+ For (Promotion) only 
+ 
+[Approval table] 
+Prepared by 
+Approved by 
+Dev. Team Leader 
+Dev. Dep. Leader 
+Dev. Qual. Leader 
+CS Leader 
+Jeahyeok Ryu 
+Kwansoo Lee 
+Byung Sup Kim  
+Yongmin Lee 
+Alex Shin 
+ 
+ 
+ 
+ 
+ 
+ 
+[Notice] 
+1. Check whether all signatures of responsible members are in place in the above approval table. If 
+one or more signatures are missing, then the product specification is invalid and LGC shall not be 
+liable for any quality claims raised by this product specification holder. 
+2. Check whether your company’s name (or your customer company’s name) is written on this cover 
+page. If it is missing or different, then the product specification is invalid and LGC shall not be 
+liable for any quality claims raised by this product specification holder whose (or whose 
+customer’s) name is not specified or different from this cover page. 
+3. LGC strongly prohibits the sale or distribution of the product covered by this product 
+specification to any individual end-users or open markets that were not approved by LGC, and 
+shall not be liable for any loss, damage, or liability resulting from such unapproved sale or 
+distribution 
+4. LGC strongly prohibits this product to be applied to any application other than as specified in this 
+product specification section 1.2, and shall not be liable for any loss, damage, or liability resulting 
+from any misapplication. 
+This document should only be used for engineer study and pre-discussion before confirming 
+the actual cell spec. This document is NOT the final version. 
+ 
+ 
+
+ 
+PRODUCT SPECIFICATION 
+ 
+ 
+Description 
+Document No. 
+Date 
+Rev 
+Lithium Ion LG INR21700M50LT 
+2020-LSD-MBD-b00090 
+2020-09-17 
+0 
+ 
+2/14 
+ 
+Revision History 
+ 
+Revision 
+Date 
+Originator 
+Description 
+0 
+2020-09-17 
+Jeahyeok Ryu 
+Tentative 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+PRODUCT SPECIFICATION 
+ 
+ 
+Description 
+Document No. 
+Date 
+Rev 
+Lithium Ion LG INR21700M50LT 
+2020-LSD-MBD-b00090 
+2020-09-17 
+0 
+ 
+3/14 
+ 
+Contents 
+ 
+Contents …………………………………………………………………………….……………………………. 3 
+1. General Information ……………………………………………………………………………………… 4 
+1.1 Scope 
+1.2 Application 
+1.3 Product Classification 
+1.4 Model Name 
+2. Nominal Specification …………………………………………………………………………………… 4 
+2.1 Energy 
+ 
+2.2 Nominal Voltage 
+2.3 Shipping Cell Voltage 
+2.4 Standard Charge 
+2.5 Max. Charge Voltage 
+2.6 Max. Charge Current 
+2.7 Standard Discharge 
+2.8 Min. Discharge Voltage 
+2.9 Max. Discharge Current 
+2.10 Over Voltage Protection 
+2.11 Under Voltage Protection 
+2.12 Weight 
+2.13 Operating (Atmosphere) Temperature 
+2.14 Storage Temperature (for shipping state) 
+2.15 Storage Temperature (for full charged state) 
+2.16 Storage Humidity 
+ 
+3. Appearance and Dimension ……………………………………………….…………….…………… 7 
+ 
+ 
+3.1 Appearance  
+ 
+ 
+3.2 Dimension 
+ 
+4. Performance Specification ……………………………………………………………………………. 8 
+ 
+ 
+4.1 Test Condition 
+ 
+ 
+4.2 Electrical Specification 
+ 
+ 
+4.3 Environmental Specification 
+ 
+ 
+4.4 Mechanical / Safety Specification 
+ 
+5. Warranty …………..……………………………………………………………….………………………… 10 
+ 
+6. Cautions and Prohibitions in Handling ……………………………….………………………... 10 
+7. Compliance details of buyer……………………………………………….………………………... 13 
+8. Exclusion of Liability ………………………………………………………….…………………………14 
+
+ 
+PRODUCT SPECIFICATION 
+ 
+ 
+Description 
+Document No. 
+Date 
+Rev 
+Lithium Ion LG INR21700M50LT 
+2020-LSD-MBD-b00090 
+2020-09-17 
+0 
+ 
+4/14 
+ 
+1. General Information 
+ 
+1.1 Scope 
+This product specification defines the requirements of the rechargeable lithium ion battery to be supplied  
+to Promotion by LG Chem. All conditions and criteria written in this document are defined and resulted from 
+fresh cell (ex-factory) state. 
+1.2 Application  
+□ Portable IT             □ E-Kickboard            □ Power bank             □ E-bike   
+□ E-scooter              □ LEV                   □ EV                     □ ESS/UPS 
+ 
+  * If you intend to apply this battery cell model to different applications that are not clarified above, please contact 
+and discuss with LG chem. Then, LG chem will officially provide a revised version of this document if 
+necessary. Otherwise, LGC shall not be liable for any claims resulted from the usage of different applications. 
+1.3 Product classification: Cylindrical rechargeable lithium ion battery 
+1.4 Model name:  INR21700M50LT 
+ 
+ 
+2. Nominal Specification 
+Item 
+Condition / Note 
+Specification 
+2.1 Energy* 
+By Std. charge/discharge  
+Nom. 18.2 Wh 
+Min. 17.6 Wh 
+2.2 Nominal Voltage 
+Average by Std. charge/discharge 
+3.69V 
+2.3 Shipping Cell SOC** 
+At ex-factory state. 
+Below SOC 30% 
+2.4 Standard charge 
+(Refer to 4.1.1) 
+Constant current (1C=4800mA) 
+0.3C (1,440mA) 
+Constant voltage 
+4.20V 
+End condition(Cut off) 
+50mA 
+Charging time1) 
+4h 
+2.5 Max. Charge Voltage 
+In all measurements and operations of 
+the cell, the minimum allowable closed 
+circuit voltage shall not exceed the 
+following value 
+4.20V 
+2.6 Max. Charge Current 
+(complete full charge)2) 
+0 ~ 25ºC (Atmosphere) 
+0.3C (1,440mA)  
+25 ~ 45ºC (Atmosphere) 
+0.7C (3,360mA) 
+2.7 Standard Discharge 
+(Refer to 4.1.2) 
+Constant current 
+0.2C (960mA) 
+End voltage(Cut off) 
+2.50V 
+
+ 
+PRODUCT SPECIFICATION 
+ 
+ 
+Description 
+Document No. 
+Date 
+Rev 
+Lithium Ion LG INR21700M50LT 
+2020-LSD-MBD-b00090 
+2020-09-17 
+0 
+ 
+5/14 
+ 
+2.8 Min. Discharge Voltage 
+In all measurements and operations of 
+the cell, the minimum allowable closed 
+circuit voltage shall not be below the 
+following value 
+2.50V 
+2.9 Max. Discharge Current2) 
+-20 ~ 10ºC 
+0.5C (2,400mA) 
+10 ~ 25ºC 
+3.0C (14,400mA) 
+25 ~ 55ºC 
+1.5C (7,200mA) 
+2.10 Over Voltage Protection 
+Cell voltage shall not exceed the 
+following value to prevent any safety 
+events. And cell performance can’t be 
+guaranteed between 4.20V and 4.25V 
+4.25V 
+2.11 Under Voltage Protection 
+Cell voltage shall not drop below the 
+following value to prevent any safety 
+events. And cell performance can’t be 
+guaranteed between 2.50V and 2.00V 
+2.00V 
+2.12 Weight 
+With Tube and Washer 
+68.2 ± 1.0g (TBD) 
+2.13 Operating Temperature3) 
+(Atmosphere or Chamber 
+Temperature) 
+Charge 
+0 ~ 45ºC 
+Discharge 
+-20 ~ 55ºC 
+* Max. cell surface temperature should be below 70℃ for discharging. 
+(Temperature cut-off function is needed on BMU under 70℃of cell surface 
+temperature.) 
+2.14 Storage Temperature4) 
+(for shipping statei**) 
+1 month 
+-20 ~ 55ºC 
+3 month 
+-20 ~ 45ºC 
+1 year 
+-20 ~ 25ºC 
+Recovery capacity5) after the storage ≥ 
+80% of minimum energy(or capacity) 
+ 
+2.15Storage Temperature4) 
+(for full charged state) 
+1 month 
+-20~ 45 ºC 
+6 month 
+-20~ 25 ºC 
+Recovery capacity5) after the storage ≥ 
+80% of minimum energy(or capacity) 
+ 
+2.16 Storage Humidity 
+ 
+Under 60% 
+1) Charging time is based on one complete charge from the 0~100% SOC. contact and discuss with LG chem, if trickle 
+charging is required to maintain fully charged state (ex. Trickle or floating charge) 
+                                                     
+* Based on the cell that shipped out of factory 
+** Shipping state : About 30% capacity of fully charged state 
+
+ 
+PRODUCT SPECIFICATION 
+ 
+ 
+Description 
+Document No. 
+Date 
+Rev 
+Lithium Ion LG INR21700M50LT 
+2020-LSD-MBD-b00090 
+2020-09-17 
+0 
+ 
+6/14 
+ 
+2) The maximum continuous charge or discharge current herein is the allowable current to operate cell without possibility of 
+dramatic degradation of the cell. (Max. cell surface temperature should be controlled by BMU protection unit below 55ºC 
+for charging and 70ºC for discharging). “Complete full charge” means that cell is charged from the minimum discharge 
+voltage (refer to 2.8) to the max charge voltage (refer to 2.5) without stopping for 1 cycle. The charge and discharge 
+current herein doesn’t have an effect on the safety, but this has nothing to do with guarantee of cycle performance and/or 
+single cell degradation speed. For detailed Criteria for Cell basic properties (such as cycle life and capacity, etc), please 
+refer to the explicit current conditions in each sections of this document.   
+3) The operating temperature range defined in this section (2.13) is not for defining safety window, but it is the maximum 
+allowable range in which the battery cell can perform normal charge/discharge without sudden internal changes such as 
+CID activation. However, even if the cell is charged / discharged within the above (2.13) operating temperature range, 
+characteristics of the cell such as capacity / voltage / internal resistance may be deteriorated depending on factors such as 
+the accumulated number of charge / discharge cycles, usage time and diverse charge/discharge current profiles. For 
+detailed Criteria for Cell basic properties (such as cycle life and capacity, etc), please refer to the explicit temperature 
+conditions in each sections of this document. 
+4) The storage temperature and period range defined in this section (2.14) is not for defining safety window, but it is the 
+maximum allowable range in which the battery cell can perform normal charge/discharge without sudden internal changes 
+such as CID activation. However, even if the cell storage (including the cell storage after assembled inside the final 
+application in the field) is within the above temperature and range, characteristics of the cell such as capacity / voltage / 
+internal resistance may be deteriorated when compared to the fresh cell state (ex-factory state). It is highly recommended 
+that the cell should be stored (including the cell storage after assembled inside the final application in the field) in the room 
+temperature (25℃) and under the shipping SOC. For detailed Criteria for Cell basic properties (such as cycle life and 
+capacity, etc), please refer to the explicit temperature conditions in each sections of this document. 
+5) Recovery Capacity: After storage, cells shall be discharged with Std. discharge condition per 4.1.2, and then cells shall be 
+charged with Std. charge condition per 4.1.1, and then discharged with Std. discharge condition per 4.1.2. 
+ 
+ 
+
+ 
+PRODUCT SPECIFICATION 
+ 
+ 
+Description 
+Document No. 
+Date 
+Rev 
+Lithium Ion LG INR21700M50LT 
+2020-LSD-MBD-b00090 
+2020-09-17 
+0 
+ 
+7/14 
+ 
+3. Appearance and Dimension 
+  
+3.1 Appearance 
+There shall be no such defects as severe scratch, crack, rust, discoloration or leakage, which may 
+adversely affect the commercial value of the cell. 
+ 3.2 Dimension 
+Diameter 
+: 
+≤ 21.44 mm 
+Diameter is defined as the largest data value measured on the “A” area (4mm from the top) of a  
+cylindrical cell, measured by Vernier Calipers (Mitsutoyo (500-182-20)). 
+Height 
+ 
+: 
+≤ 70.65 mm 
+TTS(Top to shoulder)   :  0 +0.00/-0.25 mm 
+ 
+ 
+ 
+A 
+
+ 
+PRODUCT SPECIFICATION 
+ 
+ 
+Description 
+Document No. 
+Date 
+Rev 
+Lithium Ion LG INR21700M50LT 
+2020-LSD-MBD-b00090 
+2020-09-17 
+0 
+ 
+8/14 
+ 
+4. Performance Specification 
+ 
+ 4.1 Test condition 
+4.1.1 Standard Charge 
+Unless otherwise specified, “Rated Charge” shall consist of charging at constant current of 
+0.3C(1440mA).The cell shall then be charged at constant voltage of 4.20V while tapering the charge 
+current. Charging shall be terminated when the charging current has tapered to 50mA. For test purposes, 
+charging shall be performed at 25ºC. 
+ 
+4.1.2 Standard Discharge 
+“Standard Discharge” shall consist of discharging at a constant current of 0.2C(960mA) to 2.50V. 
+Discharging is to be performed at 25ºC unless otherwise noted (such as capacity versus temperature). 
+ 
+ 
+4.1.3 Charge / discharge condition  
+ Cells shall be charged at constant current of 0.3C(1,440mA) to 4.10V with end current of 1/20C. 
+Cells shall be discharged at constant current of 0.5C(2,400mA) to 2.85V. 
+Charging and discharging are to be performed at 25 ºC unless otherwise noted (such as capacity versus 
+temperature). Cells are to rest 10 minutes after charge and 20 minutes after discharge at 25ºC. 
+ 
+ 
+4.2 Electrical Specification 
+ 
+Item 
+Condition 
+Specification 
+4.2.1  
+Initial AC Impedance 
+Cell shall be measured at 1kHz after charge per 
+4.1.1 
+15±6 mΩ 
+4.2.2  
+Initial DC Impedance 
+Cell shall be charged per 4.1.1 and discharged to 
+the SOC (states of charge) 50%. 
+Measurement of internal impedance under DC 
+loads at constant current of 0.5C for 10 sec at 25ºC 
+without any attachment of metal leads. 
+23±6 mΩ 
+4.2.3 
+Initial Energy 
+Cells shall be charged per 4.1.1 and discharged per 
+4.1.2 within 1h after full charge. 
+≥ 17.6Wh 
+4.2.4  
+Cycle Life 
+Cells shall be charged and discharged per 4.1.3 for 
+1000 cycles. A cycle is defined as one charge and 
+one discharge. 1000th discharge energy efficiency. 
+≥ 80% of Whini  
+(vs. initial cycle energy) 
+
+ 
+PRODUCT SPECIFICATION 
+ 
+ 
+Description 
+Document No. 
+Date 
+Rev 
+Lithium Ion LG INR21700M50LT 
+2020-LSD-MBD-b00090 
+2020-09-17 
+0 
+ 
+9/14 
+ 
+4.3 Environmental specification. 
+ 
+Item 
+Condition 
+Specification 
+4.3.1  
+Storage Characteristics 
+Cells shall be charged per 4.1.1 and stored in a 
+temperature-controlled environment at 25ºC for 30 
+days. After storage, cells shall be discharged per 
+4.1.2 to obtain the remaining capacity*. 
+Energy remain rate 
+≥ 90% of Whmin in 4.2.3 
+4.3.2  
+High Temperature 
+Storage Test 
+Cells shall be charged per 4.1.1 and stored in a 
+temperature-controlled environment at 55ºC for 1 
+week. After storage, cells shall be discharged per 
+4.1.2 and cycled per 4.1.1 and 4.1.2 for 3 cycles 
+to obtain recovered capacity. 
+No leakage,  
+Energy recovery rate 
+≥ 80% of Whmin in 4.2.3 
+4.3.3  
+Temperature 
+Dependency of 
+Energy 
+Cells shall be charged per 4.1.1 at 25ºC and 
+discharged 
+per 
+4.1.2 
+at 
+the 
+following 
+temperatures. 
+ 
+Charge 
+Discharge 
+Energy 
+ 
+25ºC 
+-10ºC 
+≥70% of Whmin in 4.2.3 
+ 
+0ºC 
+≥80% of Whmin in 4.2.3 
+ 
+25ºC 
+≥100% of Whmin in 4.2.3 
+ 
+55ºC 
+≥95% of Whmin in 4.2.3 
+ 
+ 
+4.4 Mechanical / Safety Specification 
+- Cell satisfies UN38.3 regulation 
+ 
+ 
+                                                     
+* Remaining Capacity : After storage, cells shall be discharged with Std. condition(4.1.2) to measure the remaining capacity. 
+** Recovery Capacity : After storage, cells shall be discharged with Std condition(4.1.2), and then cells shall be charged with std. charge 
+condition(4.1.1), and then discharged with Std. condition(4.1.2). This charge / discharge cycle shall be repeated three times to measure the 
+recovery capacity. 
+
+ 
+PRODUCT SPECIFICATION 
+ 
+ 
+Description 
+Document No. 
+Date 
+Rev 
+Lithium Ion LG INR21700M50LT 
+2020-LSD-MBD-b00090 
+2020-09-17 
+0 
+ 
+10/14 
+ 
+5. Warranty  
+Warranty period of the battery cell is 12 months from the date of cell manufacture. This warranty becomes void 
+when the cells are used in ways that deviate from this specification or handled improperly. This warranty holds only 
+when the cells are used under conditions specified in this document. 
+ 
+ 
+6. Cautions and Prohibitions in Handling 
+Warning for using the lithium ion rechargeable battery, mishandling of the battery may cause heat, fire and 
+deterioration in performance. Be sure to observe the following. 
+ 
+6.1 Cautions for Use and Handling 
+ 
+When using the application equipped with the battery, refer to the user’s manual before usage.  
+ 
+Please read the specific charger manual before charging. 
+ 
+Charge time should not be longer than specified in the manual. 
+ 
+When the cell is not charged after long exposure to the charger, discontinue charging.    
+ 
+Battery must be charged at operating(atmosphere) temperature range 0 ~ 45℃ 
+ 
+Battery must be discharged at operating(atmosphere) temperature range -20 ~ 55℃. 
+(Cell surface temperature -20 ~ 70℃) 
+ 
+Please check the positive (+) and negative (-) direction before packing. 
+ 
+When a lead plate or wire is connected to the cell for packing, check out insulation not to short-circuit. 
+ 
+Battery must be stored separately. 
+ 
+Battery must be stored in a dry area with low temperature for long-term (3 months or more) storage. 
+ 
+Do not place the battery in direct sunlight or heat. 
+ 
+Do not use the battery in high static energy environment where the protection device can be damaged. 
+ 
+When rust or smell is detected on first use, please return the product to the seller immediately. 
+ 
+The battery must be away from children or pets 
+ 
+When cell life span shortens after long usage, please exchange to new cells. 
+ 
+Do insulate between the metal plate and cell or other components not to make an electrical short.  
+ 
+The cells should be handled and used in Pack/System manufacturing companies only.  
+ 
+The cells should be sold only to Battery Pack Maker(s) or System Integrator(s). The cells should not be 
+handled by individual consumers and should not be sold to individual consumers by individual markets. 
+(especially, the cells are strictly prohibited to be used for any kinds of E-cigarette devices) 
+ 
+Be sure to request and confirm the most current product specifications in advance which explain the 
+specifications in detail, before the final stage of your design, purchasing or use for any application. 
+ 
+ 
+
+ 
+PRODUCT SPECIFICATION 
+ 
+ 
+Description 
+Document No. 
+Date 
+Rev 
+Lithium Ion LG INR21700M50LT 
+2020-LSD-MBD-b00090 
+2020-09-17 
+0 
+ 
+11/14 
+ 
+6.2 Prohibitions 
+ 
+Do not connect battery directly to cigarette/aux jack in automobiles. Use only approved chargers. 
+ 
+Do not charge with constant current more than maximum charge current. 
+ 
+Do not charge the cell, which was discharged equal to 1V or under. 
+ 
+Do not disassemble or reconstruct the battery. 
+ 
+Do not throw or cause impact. 
+ 
+Do not pierce a hole in the battery with sharp things. (such as nail, knife, pencil, drill) 
+ 
+Do not use with other batteries or cells.  
+ 
+Do not solder on battery directly. 
+ 
+Do not press the battery with overload in manufacturing process, especially ultrasonic welding. 
+ 
+Do not use old and new cells together for packing. 
+ 
+Do not expose the battery to high heat. (such as fire) 
+ 
+Do not put the battery into a microwave or high pressure container. 
+ 
+Do not use the battery reversed. 
+ 
+Do not connect positive(+) and negative(-) with conductive materials (such as metal, wire) 
+ 
+Do not allow the battery to be immerged in or wetted with water or sea-water. 
+ 
+Do not give immoderate heat and force to battery cell during a welding process of metal plates on it.    
+6.3 Caution for the battery and the pack 
+Pack shall meet under condition to maintain battery safety and last long performance of the lithium 
+rechargeable cells. 
+6.3.1 Installing the battery into the pack 
+-. The cell should be inspected visually before battery assembly into the pack.  
+-. Damaged cell should not be used. (damaged surface, can-distortion, electrolyte-smell) 
+-. Different Lot Number cells should not be packaged into the same pack. 
+-. Different types of cells, or same types but different cell maker’s should not be used together. 
+ 
+6.3.2 Design of battery pack  
+-. The battery pack should not be connected easily to any charger other than the dedicated charger. 
+-. The battery pack has function not to cause external short circuit easily. 
+-. The design of battery pack and its structure should be reviewed physically, mechanically and electrically 
+not to cause cell imbalance.  
+-. The battery pack for multiple cells should be designed to monitor the voltage of each bank. 
+-. To prevent the deterioration of battery (cell imbalance, cycle degradation, etc) by heat, the battery (cells) 
+should be positioned/ installed as far as possible from the area where heat is generated in the 
+application or system. 
+
+ 
+PRODUCT SPECIFICATION 
+ 
+ 
+Description 
+Document No. 
+Date 
+Rev 
+Lithium Ion LG INR21700M50LT 
+2020-LSD-MBD-b00090 
+2020-09-17 
+0 
+ 
+12/14 
+ 
+6.3.3 Charge 
+ -. Charging method is Constant Current-Constant Voltage (CC/CV).  
+        -. Charging should be operating under maximum charge voltage and current which is specified in the 
+product specification. (Article. 2.5, 2.6)  
+ -. The battery should be charged under operating temperature specified in product specification. (Article. 
+2.13) 
+ 
+6.3.4 Discharge 
+ -. Discharging method is Constant Current (CC). 
+-. Discharging should be operating under maximum discharge current which is specified in the product 
+specification. (Article. 2.9) 
+-. Discharging should be done by cut off voltage which is specified in the product specification. (Article. 
+2.7) 
+-. The battery should be discharged under operating temperature specified in product specification. (Article. 
+2.13) 
+ 
+6.3.5 Protection Circuit 
+ -. The protection circuit should be installed in the battery pack, charger. 
+        -. The system should have voltage sensing to prevent over charge or over discharge in order to maintain 
+the battery’s normal operating mode and protect against cell imbalance.  
+ -. The system should have protection against over temperature, over voltage and over current 
+-. When battery packs for any applications are assembled with cells, following functions must be designed 
+into the battery packs and/or in the charger or charging adapter. The detailed levels, values, 
+conditions for each following functions should be referring to the contents specified in this Product 
+Specification. If one or more than one function is/are to be omitted, the Packer Company (and/or 
+System integration company) must be informing to LG Chem’s or to LG Chem’s sales Agent company. 
+Without informing to LGC, LGC will not be liable for any field quality issues happened due to exclusion 
+of following functions. 
+ 
+(1) Over voltage protection circuit  
+(2) Under voltage protection circuit  
+(3) Over Charge current protection circuit  
+(4) Over Discharge current protection circuit 
+(5) Short circuit protection  
+(6) Over Temperature protection circuit  
+(7) 2nd over voltage protection  
+
+ 
+PRODUCT SPECIFICATION 
+ 
+ 
+Description 
+Document No. 
+Date 
+Rev 
+Lithium Ion LG INR21700M50LT 
+2020-LSD-MBD-b00090 
+2020-09-17 
+0 
+ 
+13/14 
+ 
+(8) FET failure protection (in case FET is out of order) 
+(9) Cell imbalance protection circuit (only for battery packs assembled with more than one cell) 
+(10) Cell Voltage balancing function (only for battery packs assembled with more than one cell) 
+ 
+※ If the customer or user doesn’t comply with this item(6. Caution and Prohibition in Handling), LG Chem 
+is not responsible for any problems 
+ 
+ 
+7. Compliance details of buyer 
+-. The Buyer shall read, understand, and comply with all the conditions set forth in this Contract and the  
+PRODUCT SPECIFICATION provided by the Seller, in particular the section(s) related to the cautions and 
+prohibitions of the Products. 
+-. The Buyer shall not make any use of the Products without obtaining and fully understanding the PRODUCT  
+SPECIFICATION.  
+-. The Buyer or buyer’s customer shall not make different product or set up the different equipment, with the 
+product, which is not following the PRODUCT SPECIFICATION 
+-. The Buyer fully understands and agrees that the Products should be sold to and handled only by battery pack 
+makers, system integrators or other entity expressly authorized by the Seller. The Products can be used solely 
+for the application(s) set forth in the PRODUCT SPECIFICATION and no other application is permitted for use 
+without obtaining the express prior written consent/confirmation as well as the most current PRODUCT 
+SPECIFICATION from the Seller.  
+-. The Buyer shall provide (a) the most recent PRODUCT SPECIFICATION, (b) the terms of this Special 
+Responsibilities of the Buyer and (c) the terms of the Prohibited Sales of the Buyer under this Contract to its 
+customers, have them acknowledge the contents and require that the Buyer’s customers be bound by the terms 
+and conditions set forth therein. 
+-. During the Effective Period of this Contract and for three (3) years thereafter, the Seller may, at any time with 
+fourteen (14) days’ prior notice, audit the Buyer’s information, records and data (which may include battery pack 
+and system application data) to validate Buyer’s compliance with the terms contained in this Special 
+Responsibilities of the Buyer and the Prohibited Sales of the Buyer. 
+In the event that the Buyer (or the Buyer’s customer) violates the terms and conditions of the PRODUCT 
+SPECIFICATION, the Special Responsibilities of the Buyer or the Prohibited Sales of the Buyer of this Contract, the 
+Seller shall bear no liability for any losses or damages incurred by any party arising out of or resulting from any 
+
+ 
+PRODUCT SPECIFICATION 
+ 
+ 
+Description 
+Document No. 
+Date 
+Rev 
+Lithium Ion LG INR21700M50LT 
+2020-LSD-MBD-b00090 
+2020-09-17 
+0 
+ 
+14/14 
+ 
+such violation. The Buyer shall be solely liable for such violation and shall indemnify, defend, and hold the Seller 
+and its affiliates, officers, directors, agents and employees harmless from and against any and all losses, damages, 
+liabilities, settlements, penalties, fines, costs and expenses (including, without limitation, costs of suit, attorney’s 
+fees, other professional fees and expenses), which may at any time be suffered by or incurred by, or be asserted 
+against Seller, directly or indirectly, and which are attributable to any and all allegations, claims, or suits arising out 
+of or in connection with any such violation, or any breach of Buyer’s obligations under this Contract. Furthermore, 
+such violation of the Buyer (or such violation of the Buyer’s customer) shall cause this Contract to be immediately 
+terminated. 
+The Seller shall cooperate with the Buyer and its legal representatives in the investigation and defense of any claim, 
+lawsuit or other action covered by this indemnification, all at the reasonable expense of the Buyer.  The Seller 
+shall have the right to be represented by counsel of its own selection and expense. 
+ 
+※ If the customer or user doesn’t comply with this item(6. Caution and Prohibition in Handling), LG Chem 
+is not responsible for any problems 
+ 
+8. Exclusion of Liability 
+The warranty shall not cover defects caused by normal wear and tear, inadequate maintenance, handling, storage 
+faulty repair, modification to the battery or pack by a third party other than LGC or LGC’s agent approved by LGC, 
+failure to observe the product specification provided herein or improper use or installation, including but not limited 
+to, the following: 
+-. Damage during transport or storage 
+-. Incorrect installation of battery into pack or maintenance 
+-. Use of battery or pack in inappropriate environment 
+-. Improper, inadequate, or incorrect charge, discharge or protection circuit other than stipulated herein 
+-. Incorrect use or inappropriate use 
+-. Insufficient ventilation 
+-. Ignoring applicable safety warnings and instructions 
+-. Altering or attempted repairs by unauthorized personnel 
+-. In case of force majeure(ex. lightening, storm, flood, fire, earthquake, etc.) 
+There are no warranties-implied or express-other than those stipulated herein. In the event the battery pack and/or 
+cells have been used in accordance with this product specification and the defect is found to be attributable to LGC, 
+LGC shall replace the defective battery pack and/or cell with a new battery pack and/or cell that is free of any 
+defects. In such circumstances, replacement of the battery pack and/or cell shall be the sole remedy available to 
+the customer.  
+

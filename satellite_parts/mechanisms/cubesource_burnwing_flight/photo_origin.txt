@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-cubesource-burnwing-flight-apx9xi.pdf
+method: product image from the catalog page https://satsearch.co/products/cube-source-burnwing-flight

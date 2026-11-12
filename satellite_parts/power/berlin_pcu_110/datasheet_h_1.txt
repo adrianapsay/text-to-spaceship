@@ -1,0 +1,87 @@
+ 
+  
+ 
+ 
+ 
+ 
+ 
+FURTHER INFORMATION   Max-Planck-Str. 3 | 12489 Berlin Germany | info@berlin-space-tech.com | www.berlin-space-tech.com 
+ 
+v. 1.1.0 
+POWER CONTROL UNIT - PCU-110  
+The PCU-110 by Berlin Space Technologies is the second generation of our flight proven 
+Power Control and Distribution Units. It is able to handle power regulation, power switching, 
+DC/DC conversion and safety features of a small satellite. It is highly adaptable for different 
+missions and sub systems. 
+ 
+ 
+Power Control Unit - PCU-110 
+ C H A R A C T E R I S T I C S 
+ 
+Data Interfaces 
+3x RS422 
+3x 1-Wire 
+Booting Time 
+4.5 sec 
+Operating Voltage [Min/Nominal/Max] 
+20.5 V / 23.1 V / 25.2 V 
+Maximum Current 
+8 A 
+Maximum Power Output 
+180 W 
+Idle Power 
+0.5 W 
+MPPT 
+Optional 
+Size 
+186.0 x 105.5 x 60.6 mm³ 
+Weight 
+1.08 kg 
+Storage Temperature 
+-30°C to +50°C 
+Operating Temperature 
+-20°C to +40°C 
+Design Life 
+5 years LEO 
+ 
+
+ 
+  
+ 
+ 
+ 
+ 
+ 
+FURTHER INFORMATION   Max-Planck-Str. 3 | 12489 Berlin Germany | info@berlin-space-tech.com | www.berlin-space-tech.com 
+ 
+v. 1.1.0 
+ 
+ 
+ 
+C H A R A C T E R I S T I C S 
+VALUE 
+Solar Panel Power In (standard) 
+                                   (optional) 
+20-28V DC 
+12V, 15V, 18V 
+Connectable Battery Strings 
+6 
+Connectable Solar Strings 
+12 
+Power Output Interfaces 
+31 
+Regulated Power Output (standard) 
+                                         (optional)    
+2x 12V, 12x 5V, 5x 3.8V 
+Any between 1.8V to 28V 
+Unregulated Power Output 
+12x 23.1 V (20-25 V) 
+Adjustable Switches and Fuses 
+Yes 
+Latch Protection 
+Yes 
+Battery Protection  
+Schmitt Trigger  
+intelligent Power Management 
+ 
+

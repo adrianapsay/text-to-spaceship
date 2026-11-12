@@ -1,0 +1,232 @@
+{
+ "id": "interpoint_smhf_dcdc",
+ "name": "Crane Interpoint SMHF space DC-DC converter, 15 W, non-flanged case",
+ "category": "power",
+ "subcategory": "dc_dc_converter",
+ "vendor": "Crane Aerospace & Electronics (Interpoint)",
+ "model": "SMHF28xx (non-flanged)",
+ "dimensions_mm": {
+  "x": 37.08,
+  "y": 28.7,
+  "z": 8.38
+ },
+ "mass_g": 30,
+ "source": {
+  "type": "datasheet",
+  "url": "https://static.datasheets.com/doc/14462600-interpoint-smhf2805s-kl-ds.pdf",
+  "document": {
+   "title": "Crane Interpoint SMHF series data sheet",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical"
+  ],
+  "notes": "Maximum package 1.46 x 1.130 x 0.330 in (37.08 x 28.70 x 8.38 mm), 30 g maximum, up to 15 W (3.3 V 8 W, 5 V 12 W, 12/15 V 15 W; duals +-5/12/15 V), 16 to 40 VDC input, 50 V transient. Models SMHF283R3S, 2805S, 2812S, 2815S, 2805D, 2812D, 2815D share the case."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "USA",
+ "mass_note": "maximum per data sheet",
+ "electrical": {
+  "voltage_V": {
+   "min": 16,
+   "nominal": 28,
+   "max": 40
+  },
+  "power_W": {
+   "peak": 15
+  },
+  "outputs": [
+   "3.3 V",
+   "5 V",
+   "12 V",
+   "15 V",
+   "+-5 V",
+   "+-12 V",
+   "+-15 V"
+  ]
+ },
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   37.08,
+   28.7,
+   8.38
+  ],
+  "mesh_volume_mm3": 8902.1,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 3.37,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    37.08,
+    28.7,
+    8.38
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "feet",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/feet.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "connector_shell",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/connector_shell.stl"
+    },
+    {
+     "name": "connector_insert",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector_insert.stl"
+    },
+    {
+     "name": "jackscrews",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/jackscrews.stl"
+    },
+    {
+     "name": "label",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies_detail/label.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 28
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://static.datasheets.com/doc/14462600-interpoint-smhf2805s-kl-ds.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

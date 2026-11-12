@@ -1,0 +1,85 @@
+	  
+	  
+SpaceQuest,  Ltd.      3554  Chain  Bridge  Road,  Suite  400        Fairfax,  Virginia  22030          I          703.  424.  7801          I          www.spacequest.com  
+The  RX-­2000  is  an  efficient  space  qualified  FM  S-­Band  receiver  for  microsats  and  small  satellites.  
+The  receiver  generates  a  clock  and  data  output  allowing  customers  the  flexibility  and  control  to  
+implement  customized  or  reconfigurable  communication  protocols  on  their  flight  computer  or  on  an  
+auxiliary  communications  processor.            
+	  
+  
+  
+Frequency:  
+2000  -­  2400  MHz  
+Data  Rate:  
+9.6  -­  153.6  Kbps  (Fixed  or  Customer  Programmable)  
+Modulation:  
+FM,  GFSK  
+Sensitivity:        
+-­117  dBm  @  9600bps,  -­110  dBm  @128Kbps  (With  Programmable  AGC)  
+Noise  Figure:  
+2  dB  Nominal  
+Channels:                      
+Up  to  26  Preset  Channels  with  20  MHz  Bandwidth  
+RX-­‐2000	  	  S-­‐Band	  Receiver	  
+Key	  Features	  
+àSpace  Qualified    
+àUp  to  26  Customer  Programmable  Channels  
+à2.0  to  2.4  GHz  Frequency  Range  
+àProgrammable  Data  Rates  
+àFM/GFSK  Demodulation  
+General	  Specifications	  	  
+
+	  
+	  
+SpaceQuest,  Ltd.      3554  Chain  Bridge  Road,  Suite  400        Fairfax,  Virginia  22030          I          703.  424.  7801          I          www.spacequest.com  
+RX-­‐2000-­‐ver-­‐20160707	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+Input  Voltage:  
+6.0  to  16.0  Volts  
+Front-­end  Filter:  
+Built  in  Custom  Ceramic  Coaxial  Resonators  with  65  dB  of  Rejection  
+Power  Consumption:  
+1.5  Watts  (6  -­  16  VDC  @  200mA)  
+IF  Filter:  
+140MHz  Custom  Surface  Mount  Filter  with  50  dB  of  Rejection  
+IF  Bandwidth:  
+100,  150,  or  200  KHz  (Channel  Specific,  Customer  Defined,  Pre-­wired)  
+Frequency  Stability:  
+±1.5  ppm  Over  Internal  Temperature  Range  of  -­30°C  to  +75°C  
+Sync  Word  Recognition:  
+Automatic  or  Programmable  Recognition  of  12,  16,  20  or  24  bits  
+RSSI  Indicator:  
+Digital  Out  
+Data  Interface:  
+Received  Data  Output  
+Recovered  Data  Clock  Output  (Differential  or  Single  Ended)  
+Receiver  Control  Input  &  Output  
+Data/Power  Connector:  
+15  Pin  Micro  Miniature  Military  D  
+RF  Connector:  
+SMA  Female  
+Input  Impedance:  
+50  Ohms  Nominal  
+Mass:  
+200  grams  
+Size:  
+135  mm  x  50  mm  x  25  mm  
+Operating  Temperature:  
+-­30°C  to  +75°C  
+Storage  Temperature:  
+-­40°C  to  +85°C  
+Electrical	  and	  RF	  Specifications	  
+Mechanical	  and	  Environmental	  
+Heritage	  
+RX-­‐2000	  
+àAprizeSat  5,  8,  and  10  (SpaceQuest)  
+àexactView  5,  6,  and  11  (exactEarth)  
+àKestrelEye  -­  Block  1  and  Block  2  (Maryland  Aerospace)  
+

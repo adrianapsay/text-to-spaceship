@@ -6,25 +6,27 @@
  "vendor": "Sierra Space",
  "model": "Passive Thermal Control Heat Switch",
  "dimensions_mm": {
-  "x": 50,
-  "y": 50,
-  "z": 30
+  "x": 36.1,
+  "y": 36.1,
+  "z": 50.8
  },
  "mass_g": 110,
  "source": {
-  "type": "unverified",
-  "url": "https://nasa.gov/smallsat-institute/sst-soa/thermal-control",
+  "type": "datasheet",
+  "url": "https://www.sierraspace.com/wp-content/uploads/2025/01/698133956-passive-thermal-control-heat-switch.pdf",
   "document": {
-   "title": "NASA SmallSat State-of-the-Art, Thermal Control chapter",
+   "title": "Sierra Space Spaceflight Hardware Catalog, Passive Thermal Control Heat Switch (2024)",
    "revision": null,
-   "date": null
+   "date": "2026-11-11"
   },
   "accessed": "2026-11-08",
   "fields_from_source": [
+   "dimensions_mm",
    "mass_g",
-   "thermal"
+   "thermal",
+   "mechanism"
   ],
-  "notes": "~0.110 kg, 1 W/K on / 0.015 W/K off, 6 W max from the SOA table. Dimensions NOT given; 50 x 50 x 30 mm assumed."
+  "notes": "50.8 mm high x 36.1 mm diameter, about 110 g; conductance closed 1 W/K; operating -95 to +20 C; set points -10 to +50 C typical; more than 350 cycles tested, more than 4,000 on the Mars Exploration Rovers; fully passive. Open conductance 0.015 W/K and 6 W maximum are from the NASA SoA table."
  },
  "status": "in_production",
  "fidelity": "envelope",
@@ -32,11 +34,19 @@
  "distributors": [
   "direct"
  ],
- "dimensions_note": "assumed",
+ "flight_heritage": "Mars Exploration Rovers Spirit and Opportunity",
  "thermal": {
   "conductance_on_W_per_K": 1.0,
   "conductance_off_W_per_K": 0.015,
-  "max_heat_W": 6
+  "max_heat_W": 6,
+  "operating_temperature_C": {
+   "min": -95,
+   "max": 20
+  }
+ },
+ "mechanism": {
+  "cycles": 4000,
+  "actuator_type": "passive, thermally actuated"
  },
  "cost": {
   "value": null,
@@ -46,29 +56,43 @@
  },
  "geometry": {
   "measured_bbox_mm": [
-   50.0,
-   50.0,
-   30.0
+   36.1,
+   36.0,
+   50.8
   ],
-  "mesh_volume_mm3": 75000.0,
+  "mesh_volume_mm3": 51802.0,
   "watertight": true,
-  "render_kind": "box",
-  "effective_density_g_cm3": 1.467,
+  "render_kind": "cylinder",
+  "effective_density_g_cm3": 2.123,
   "bodies": {
    "part": [
     {
      "name": "body",
      "color": [
-      0.36,
-      0.4,
-      0.46
+      0.62,
+      0.64,
+      0.66
      ],
      "file": "bodies/part__body.stl"
     }
    ]
   },
   "face_counts": {
-   "part": 12
+   "part": 164
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "body",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
   }
  },
  "image": "preview.png",
@@ -84,9 +108,9 @@
    {
     "file": "datasheet_page1.png",
     "pdf": null,
-    "url": null,
+    "url": "https://www.sierraspace.com/wp-content/uploads/2025/01/698133956-passive-thermal-control-heat-switch.pdf",
     "kind": "vendor_link",
-    "title": "NASA SmallSat State-of-the-Art, Thermal Control chapter"
+    "title": "Sierra Space Spaceflight Hardware Catalog, Passive Thermal Control Heat Switch (2024)"
    },
    {
     "file": "datasheet_1_page1.png",
@@ -103,7 +127,7 @@
   "photo_page": null,
   "photo_file": "reference_photo.jpg",
   "photo_kind": "web_search_representative",
-  "datasheet_url": null,
+  "datasheet_url": "https://www.sierraspace.com/wp-content/uploads/2025/01/698133956-passive-thermal-control-heat-switch.pdf",
   "datasheet_page_file": "datasheet_page1.png",
   "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },

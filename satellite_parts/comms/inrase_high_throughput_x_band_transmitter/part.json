@@ -1,0 +1,212 @@
+{
+ "id": "inrase_high_throughput_x_band_transmitter",
+ "name": "INRASE High-throughput X-band Transmitter",
+ "category": "comms",
+ "subcategory": "transmitter",
+ "vendor": "INRASE",
+ "model": "High-throughput X-band Transmitter",
+ "dimensions_mm": {
+  "x": 87.0,
+  "y": 93.0,
+  "z": 30.0
+ },
+ "mass_g": 380.0,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-inrase-high-throughput-x-band-transmitter-3nzdx6.pdf",
+  "document": {
+   "title": "INRASE High-throughput X-band Transmitter data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-11",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Read from the vendor data sheet (datasheet-inrase-high-throughput-x-band-transmitter-3nzdx6.pdf): dimensions \"mption 22 W Power supply 12 V (11 - 16 V) non-isolated Weight 380g Size 87x93x30 mm Operatin\"; mass \"16 V) non-isolated Weight 380g Siz\". Catalog page lists no mass.",
+  "found_via": "https://satsearch.co/products/inrase-high-throughput-x-band-transmitter"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "electrical": {
+  "power_W": {
+   "nominal": 22.0
+  },
+  "note": "from the data sheet / catalog page text: \"power consumption 22 W\"",
+  "voltage_V": {
+   "min": 10.0,
+   "max": 16.5
+  }
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   87.0,
+   93.0,
+   30.0
+  ],
+  "mesh_volume_mm3": 141730.1,
+  "watertight": true,
+  "render_kind": "pc104_board",
+  "effective_density_g_cm3": 2.681,
+  "bodies": {
+   "part": [
+    {
+     "name": "pcb",
+     "color": [
+      0.09,
+      0.42,
+      0.24
+     ],
+     "file": "bodies/part__pcb.stl"
+    },
+    {
+     "name": "stack_header",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__stack_header.stl"
+    },
+    {
+     "name": "components",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__components.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 732
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    87.0,
+    93.0,
+    30.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "pcb",
+     "color": [
+      0.09,
+      0.42,
+      0.24
+     ],
+     "file": "bodies_detail/pcb.stl"
+    },
+    {
+     "name": "standoffs",
+     "color": [
+      0.78,
+      0.62,
+      0.28
+     ],
+     "file": "bodies_detail/standoffs.stl"
+    },
+    {
+     "name": "stack_header",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/stack_header.stl"
+    },
+    {
+     "name": "header_pins",
+     "color": [
+      0.85,
+      0.66,
+      0.22
+     ],
+     "file": "bodies_detail/header_pins.stl"
+    },
+    {
+     "name": "shield",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/shield.stl"
+    },
+    {
+     "name": "ics",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/ics.stl"
+    },
+    {
+     "name": "passives",
+     "color": [
+      0.55,
+      0.45,
+      0.3
+     ],
+     "file": "bodies_detail/passives.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": "PC/104 stack",
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
+  "datasheet_url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-inrase-high-throughput-x-band-transmitter-3nzdx6.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

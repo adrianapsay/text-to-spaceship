@@ -79,6 +79,50 @@
   },
   "face_counts": {
    "part": 1280
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    244.4,
+    244.4,
+    260.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "shell",
+     "color": [
+      0.55,
+      0.55,
+      0.58
+     ],
+     "file": "bodies_detail/shell.stl"
+    },
+    {
+     "name": "weld_flange",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/weld_flange.stl"
+    },
+    {
+     "name": "ports",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/ports.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",

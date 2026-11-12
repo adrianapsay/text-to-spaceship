@@ -1,0 +1,146 @@
+ 
+SSA02 – 34 dB WIDE BANDWIDTH 
+AMPLIFIED S-BAND PATCH ANTENNA 
+PRODUCT NAME 
+SSA02- 34dB WIDE BANDWIDTH AMPLIFIED S-BAND PATCH ANTENNA 
+SUMMARY 
+The EXA SSA02 is the power-amplified version of the SSA01 wide bandwidth S-band antenna than 
+can accommodate a bandwidth of up to 195 MHz for missions that need greater speed and/or 
+bandwidth separation capabilities and great flexibility on the final frequencies selection. It will work 
+between 2025 and 2120 MHz and 2200 and 2300 MHz without sacrificing gain, allowing your mission 
+to not wait for the final bands and frequencies approval: By the time you get your approval papers 
+from your telecommunications authority, you will be ready to fly, just request a frequency within 
+SSA02’s ample range and you save at least 6 months of red tape time. 
+SSA02 gives your mission’s link budget a powerful boost thanks to its onboard amplifier tied directly 
+to the antenna, working alongside a RF switch chip that allows safe transceiver capability to your 
+radio; the total ERP delivered by the SSA02 is a powerful 34 dB allowing the use of very low power 
+radios, thus saving power without sacrificing link budget  
+This also means that 2 radios can share the same antenna! 
+FEATURES 
+• 
+Flight heritage since 2020 
+• 
+Wide bandwidth: 2025 to 2120 MHz and 2200 to 2300 MHz 
+• 
+Powerful 34 dB of ERP 
+• 
+Only 4.8mm thickness 
+• 
+On board RF-switch allows safe transceiver capability 
+• 
+Allows 2 radios to operate de same antenna 
+• 
+Allows the use of very low power radios 
+• 
+Custom configurable choice of connectors and/or cables  
+• 
+Wide FOV of 120 degrees 
+
+ 
+• 
+Designed for LEO missions and requirements 
+• 
+Manufactured according to NASA and ESA space standards and materials 
+• 
+Functional, performance, thermal bake out and vibration tests provided with 
+documentation. 
+• 
+Compatible and compliant with standard deployers and CubeSat Standard 
+PERFORMANCE 
+• 
+Band Range:  
+o First range: 2025 to 2120MHz 
+o Second range: 2200 to 2300MHz 
+• 
+34 dB Total Effective Radiated Power 
+• 
+195 MHz total bandwidth 
+• 
+FOV 120 degrees aperture: 
+o Vertical beam: 60 degrees 
+o Horizontal beam: 60 degrees 
+• 
+Impedance: 50 Ohms 
+• 
+Power Amplifier: 
+o Power operation: 5V@0.5A , 2.5W 
+o Power range: 4.5V min, 5.5V max 
+o Frequency Range: 2.0 – 3.0GHz 
+o Gain: 24dB 
+o P1dB: +28.5dBm 
+o IP3: +42dBm 
+o Noise Figure: 6dB 
+o Input/Output VSWR: 1.7:1/1.9:1 
+o Max RF input power +15 dB 
+• 
+Polarization: RHCP 
+• 
+F/B ratio: > 20 dB 
+• 
+RH/LH isolation: 14 dB typical 
+• 
+VSWR: 
+o < 1.2 for center band frequencies 
+o < 1.8 for frequency range 
+PRODUCT PROPERTIES 
+• 
+Mass:  60 g  
+• 
+Dimensions: 97 x 80 x 4.8 mm (5.8mm including the bulkhead) 
+• 
+Operating Temperature: -40 to +85°C 
+• 
+Radiation Tolerance: 4 years minimum in LEO 
+MATERIALS 
+• 
+Only TML and CVCM < 1% materials used, NASA and ESA approved 
+• 
+Antenna Material:  Rogers 4350 
+• 
+Connector:  SMA, MCX or Uf.l  
+• 
+PTFE (Teflon) space grade cables, coax, custom choice 
+ 
+2 
+ 
+
+ 
+ 
+TESTING 
+All antennas are provided with tests reports regarding: 
+Test 
+QT 
+AT 
+Functional 
+✔ 
+✔ 
+Vibration 
+ 
+✔ 
+Thermal Cycling 
+ 
+✔ 
+Thermal Vacuum 
+ 
+✔ 
+Power amplifier test 
+✔ 
+✔ 
+Antenna network VSWR Test 
+✔ 
+✔ 
+• 
+Thermal Bake out (10E-5 mbar @ 50C for 72 hours) 
+• 
+Full vibration test for Falcon 9, Electron, Soyuz, Dnepr and Long March 2D 
+CONFIGURATION and PRICES 
+• 
+SSA02  34dB Wide Bandwidth Amplified S-Band Patch Antenna: 7500€  
+AVAILABILITY: 
+• 
+Immediately  
+ 
+ 
+3 
+ 
+

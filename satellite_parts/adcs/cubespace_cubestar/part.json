@@ -125,6 +125,95 @@
   },
   "face_counts": {
    "part": 180
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    35.0,
+    24.0,
+    49.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "mount_plate",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/mount_plate.stl"
+    },
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "lens_barrel",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/lens_barrel.stl"
+    },
+    {
+     "name": "grip_rings",
+     "color": [
+      0.24,
+      0.26,
+      0.3
+     ],
+     "file": "bodies_detail/grip_rings.stl"
+    },
+    {
+     "name": "bezel",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/bezel.stl"
+    },
+    {
+     "name": "glass",
+     "color": [
+      0.45,
+      0.65,
+      0.85
+     ],
+     "file": "bodies_detail/glass.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",
@@ -163,8 +252,8 @@
   "photo_url": "https://cdn.satsearch.com/product-images/image-cubespace-gen2-cubestar-r2ehz3.jpg",
   "photo_source": "satsearch",
   "photo_page": "https://satsearch.co/products/cubespace-gen2-cubestar-miniature-star-tracker",
-  "photo_file": null,
-  "photo_kind": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": null,
   "datasheet_page_file": "datasheet_page1.png",
   "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"

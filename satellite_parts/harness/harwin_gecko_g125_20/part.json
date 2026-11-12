@@ -88,6 +88,59 @@
   },
   "face_counts": {
    "part": 12
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    16.45,
+    5.0,
+    4.65
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.05
+   ],
+   "bodies": [
+    {
+     "name": "flange",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/flange.stl"
+    },
+    {
+     "name": "shell",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/shell.stl"
+    },
+    {
+     "name": "insulator",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/insulator.stl"
+    },
+    {
+     "name": "contacts",
+     "color": [
+      0.85,
+      0.66,
+      0.22
+     ],
+     "file": "bodies_detail/contacts.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",
@@ -101,22 +154,7 @@
   "power_bus_V": null
  },
  "reference_images": {
-  "datasheets": [
-   {
-    "file": "datasheet_1_page1.png",
-    "pdf": "datasheet_1.pdf",
-    "kind": "web_search",
-    "url": "https://content.harwin.com/asset/494c0cd3-de03-41eb-b7cd-bd49b919bf17/PD015-Product-Datasheet-M300-range-HRi.pdf",
-    "title": "Product Datasheets - Harwin"
-   },
-   {
-    "file": "datasheet_2_page1.png",
-    "pdf": "datasheet_2.pdf",
-    "kind": "web_search",
-    "url": "https://www.farnell.com/datasheets/1833329.pdf",
-    "title": "Harwin Connector Catalog - Farnell"
-   }
-  ],
+  "datasheets": [],
   "stl_preview": "preview.png",
   "drawing": "drawing.png",
   "photo_url": null,

@@ -1,0 +1,208 @@
+GranStalTM Reaction Wheels Solutions
+GS-RW
+Reaction
+Wheels
+The GS-RW series reaction wheels are low mass, low power reaction control wheels, which allow CubeSats and other pico- or
+nano-satellites to control their attitude.
+These reaction wheels are specifically designed for 1 to 3U CubeSat platforms, and they are also used in the iADCS-series of
+attitude determination and control systems as well as the iACS series of attitude control systems.
+Products specification
+Model
+GS-RWT37
+GS-RWT41
+Appearance
+Dimensions
+37mm x 37mm x 37mm
+41mm x 41mm x 41mm
+Performance
+• Total momentum storage: +/- 3mN.m.s@6000rpm
+• Maximum torque: 0.45mN.m
+• Maximum rotation rate: ±6000rpm
+• Control accuracy: ±5rpm
+• Fire-and-forget speed and torque control.
+• I2C-compatible interface
+• Primary components radiation tolerant to over 36 krad (Si)
+• Supply voltage: 8.0(6.4~8.4)VDC
+• Low mass: 90±10 g
+• Low power: 0.7W@3000rpm@8V
+≤2.5W@0.45mN.m peak
+• Total momentum storage: +/- 6mN.m.s@8000rpm
+• Maximum torque: 0.45mN.m
+• Maximum rotation rate: ±8000rpm
+• Control accuracy: ±5rpm
+• Fire-and-forget speed and torque control.
+• I2C-compatible interface
+• Primary components radiation tolerant to over 36 krad (Si)
+• Supply voltage: 24~32 VDC
+• Low mass: 115±10 g
+• Low power: 0.8W@3000rpm@8V
+≤2.5W@0.45mN.m peak
+GS-RWTM
+Reaction
+Wheel for
+CubeSat
+Attitude
+Control
+
+GranStalTM Reaction Wheels Solutions
+GS-RWS
+Reaction
+Wheels
+The GS-RW series reaction wheels are low mass, low power reaction control wheels, which allow CubeSats and other pico-
+or nano-satellites to control their attitude.
+These reaction wheels are specifically designed for 1 to 3U CubeSat platforms, and they are also used in the iADCS-series of
+attitude determination and control systems as well as the iACS series of attitude control systems.
+Products specification
+Model
+GS-RWS15
+GS-RWS56
+GS-RWS67
+Appearance
+Dimensions
+49mm×49mm×23mm
+49mm×49mm×49mm
+70mm×70mm×72.4mm
+Performance
+• Total momentum storage:
+15N.m.s@6000rpm
+• Maximum torque: 2.5mN.m
+• Maximum rotation rate: ±6500rpm
+• Control accuracy: ±5rpm
+• Fire-and-forget speed and torque
+control.
+• I2C-compatible interface
+• Primary components radiation tolerant
+to over 36 krad (Si)
+• Supply voltage: 7.0~12)VDC
+• Low mass: 150g
+• Low power: 2.5W@6000rpm@8V
+≤5.0W@2.5mN.m peak
+• Total momentum storage:
+56mN.m.s@8000rpm
+• Maximum torque: 8.0mN.m
+• Maximum rotation rate: ±6200rpm
+• Control accuracy: ±5rpm
+• Fire-and-forget speed and torque
+control.
+• I2C-compatible interface
+• Primary components radiation tolerant
+to over 36 krad (Si)
+• Supply voltage: 12 VDC
+• Low mass: 460 g
+• Low power: 2.5W@6000rpm@8V
+≤7.5W@0.45mN.m peak
+• Total momentum storage:
+67mN.m.s@8000rpm
+• Maximum torque: 10.0mN.m
+• Maximum rotation rate: ±6500rpm
+• Control accuracy: ±5rpm
+• Fire-and-forget speed and torque control.
+• I2C-compatible interface
+• Primary components radiation tolerant to
+over 36 krad (Si)
+• Supply voltage: 24~32 VDC
+• Low mass: 450 g
+• Low power: 3.0W@6000rpm@8V
+≤7.5W@0.45mN.m peak
+GS-RWTM
+Reaction
+Wheel for
+CubeSat
+Attitude
+Control
+
+GranStalTM Reaction Wheels Solutions
+GS-RW
+Reaction
+Wheels
+The GS-RW series reaction wheels are low mass, low power reaction control wheels, which allow CubeSats and other pico- or
+nano-satellites to control their attitude.
+These reaction wheels are specifically designed for 1 to 3U CubeSat platforms, and they are also used in the iADCS-series of
+attitude determination and control systems as well as the iACS series of attitude control systems.
+Products specification
+Model
+GS-RW10
+GS-RW60
+GS-RW200
+GS-RW400
+Appearance
+Dimensions
+50mm x 50mm x 60mm
+100mm x 100mm x 65mm
+130mm x 130mm x 85mm
+170mm x 170mm x 91mm
+Performance
+• Total momentum storage:
++/- 0.1N.m.s
+• Maximum torque: 10mN.m
+• Maximum rotation rate:
+±6800rpm
+• Control accuracy: ±0.5rpm
+• Fire-and-forget speed and
+torque control.
+• I2C-compatible interface
+• Plug-and-play design
+• Primary components
+radiation tolerant to over 36
+krad (Si)
+• Supply voltage: 9~15 VDC
+• Low mass: 250 g
+• Low power:
+3.5W@6000rpm@28V
+• Total momentum storage: +/-
+0.6N.m.s
+• Maximum torque: 20mN.m
+• Maximum rotation rate:
+±6500rpm
+• Control accuracy: ±0.5rpm
+• Fire-and-forget speed and
+torque control.
+• I2C-compatible interface
+• Plug-and-play design
+• Primary components radiation
+tolerant to over 36 krad (Si)
+• Supply voltage: 10~32 VDC
+• Low mass: 1050 g
+• Low power:
+4.5W@6000rpm@28V
+• Total momentum storage:
++/- 2.0N.m.s
+• Maximum torque: 60mN.m
+• Maximum rotation rate: ±
+6200rpm
+• Control accuracy: ±
+0.5rpm
+• Fire-and-forget speed and
+torque control.
+• I2C-compatible interface
+• Plug-and-play design
+• Primary components
+radiation tolerant to over 36
+krad (Si)
+• Supply voltage: 24~32 VDC
+• Low mass: 1850 g
+• Low power:
+5W@6000rpm@28V
+• Total momentum storage: +/-
+4.0N.m.s
+• Maximum torque: 100 mN.m
+• Maximum rotation rate:
+±5600rpm
+• Control accuracy: ±1.0rpm
+• Fire-and-forget speed and
+torque control.
+• I2C-compatible interface
+• Plug-and-play design
+• Primary components radiation
+tolerant to over 36 krad (Si)
+• Supply voltage: 20~32 VDC
+• Low mass: 2850 g
+• Low power:
+10W@5600rpm@28V
+GS-RWTM
+Reaction
+Wheel for
+CubeSat
+Attitude
+Control
+

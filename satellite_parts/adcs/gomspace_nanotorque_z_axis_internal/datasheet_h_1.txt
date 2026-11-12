@@ -1,0 +1,184 @@
+ 
+ 
+    
+NanoTorque 
+Z-axis Internal 
+ 
+Datasheet 
+Internal magnetorquer for nano-satillites  
+
+ 
+ 
+ 
+ 
+2 
+© 2016 Gomspace Aps 
+NanoTorque Ztorque Internal Datasheet 
+7 October 2016 
+gs-ds-nanotorque-ztorqueinternal-1.0 
+ 
+1 Changelog 
+ 
+Date 
+Revision Author 
+Description 
+7-10-2016 
+1.0 
+KLK 
+First release 
+ 
+
+ 
+ 
+ 
+ 
+3 
+© 2016 Gomspace Aps 
+NanoTorque Ztorque Internal Datasheet 
+7 October 2016 
+gs-ds-nanotorque-ztorqueinternal-1.0 
+ 
+2 Overview 
+A magnetorquer is used with a satellites ADCS. The GomSpace NanoTorque Z-axis Internal is 
+made for nano-satellites. It has flown on several satellites and performed perfectly. The size is fitted 
+for standard PC104 size. 
+ 
+The top of the Z-axis Internal is defined as shown on the front-page picture. 
+ 
+Below is a picture of the Z-axis Internal integrated into the top of the GOMX-3 satellite. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+3 Connector 
+Harwin M80-5100642 
+ 
+ 
+ 
+ 
+ 
+ 
+Pin 
+Description 
+Pin 
+Description 
+Pin 
+Description 
+4 
+VCC - 
+5 
+Not connected 
+6 
+VCC + 
+1 
+VCC - 
+2 
+Not connected 
+3 
+VCC + 
+ 
+4 Absolute maximum ratings 
+Stresses above those listed under Absolute Maximum Ratings may cause permanent damage to 
+the Z-axis Internal. Exposure to absolute maximum rating conditions for extended periods may 
+affect the reliability. 
+ 
+Symbol 
+Description 
+Min. 
+Max. 
+Unit 
+VCC 
+Supply voltage 
+0 
+3.4 
+V 
+T 
+Operating Temperature 
+-50 
+85 
+°C 
+ 
+4
+1
+5
+2
+6
+3
+
+ 
+ 
+ 
+ 
+4 
+© 2016 Gomspace Aps 
+NanoTorque Ztorque Internal Datasheet 
+7 October 2016 
+gs-ds-nanotorque-ztorqueinternal-1.0 
+ 
+5 Electrical and Magnetorque Characteristics 
+Values are for a 20°C system. 
+ 
+Symbol 
+Description 
+Value 
+Unit 
+VCC 
+Supply voltage 
+3.3 
+V 
+R 
+Total resistance 
+148 
+Ω 
+ρ 
+Temperature coefficient 
+0.571 
+Ω/°C 
+m 
+Dipole moment 
+139 
+mAm2 
+ 
+ 
+ 
+The direction of the magnetic field is shown in the drawing on 
+the right. Notice it is viewed from the top. 
+ 
+ 
+ 
+6 Physical Characteristics 
+ 
+Description 
+Value 
+Unit 
+Mass 
+106 
+g 
+Size  
+90.5 x 96.9 x 17.2 
+mm 
+ 
+7 Connecting with other PCB’s 
+ 
+To place the Z-axis Internal correctly within the PC104 stack, the magnetic field vector points the 
+same direction as the stack connector. Align the holes of the PCB with the Z-axis Internal, as shown 
+in the drawing below. 
+ 
+Notice the Z-axis Internal is viewed from the 
+bottom. 
+ 
+

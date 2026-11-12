@@ -88,6 +88,59 @@
   },
   "face_counts": {
    "part": 44
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    98.0,
+    83.0,
+    2.11
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.11
+   ],
+   "bodies": [
+    {
+     "name": "substrate",
+     "color": [
+      0.2,
+      0.2,
+      0.22
+     ],
+     "file": "bodies_detail/substrate.stl"
+    },
+    {
+     "name": "cells",
+     "color": [
+      0.16,
+      0.26,
+      0.62
+     ],
+     "file": "bodies_detail/cells.stl"
+    },
+    {
+     "name": "busbars",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/busbars.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",

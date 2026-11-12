@@ -1,0 +1,2 @@
+url: https://satcatalog.s3.amazonaws.com/components/1460/SatCatalog_-_2NDSPACE_-_SOLO_EPS_4_-_Cubesat_EPS_and_PCDU_-_Datasheet.pdf
+method: largest product picture on page 1-2 of the vendor data sheet (pdfimages), checked by eye 2026-11-11

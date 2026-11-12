@@ -1,0 +1,119 @@
+HPC | Technical Specifications | TM2.space 
+Revision: A 
+Date: 26-02-2026 
+ 
+ 
+ 
+ 
+HPC  
+Technical specifications 
+​
+ 
+ 
+ 
+Description: 
+The Hosted Payload Control Board by TakeMe2Space provides a 
+compliant interface to connect to the satellite power and communication systems to 
+various payloads present inside. It supports various communication protocols, ensuring 
+seamless integration with the payload.  
+ 
+​
+ 
+​
+CIN: U61900TS2024PTC186392 
+1 
+ 
+
+HPC | Technical Specifications | TM2.space 
+Revision: A 
+Date: 26-02-2026 
+ 
+ 
+Technical Specifications :  
+ 
+Parameter 
+Value 
+Controller 
+Controller Type 
+32-bit Arm® Cortex®  
+Processor Clock Speed 
+Up to 160MHz 
+Power 
+Input Voltage 
+●​
+10V to 18V  
+●​
+12V nominal 
+Input Power protection 
+●​
+Over Voltage protection 
+●​
+Under Voltage Lockout  
+●​
+Over Current Protection  
+Output Voltages 
+1x 12V 
+1x 5V 
+Isolation Specification 
+Isolation Resistance : 1000MΩ 
+Isolation Voltage : 1.6KVDC  
+Interfaces 
+Interfaces Supported 
+2 x Full Duplex RS-485  
+1 x GPIO for Power control 
+Onboard Peripherals 
+1 x IMU 
+1 x Temperature Sensor 
+Mechanical 
+Dimensions 
+96.87 mm  x 98.66 mm  x 25.7 mm 
+Mass 
+270 g 
+Form factor 
+PC104 compliant  with stackable connector 
+Connectors 
+1 x 10 pin Harwin Gecko screw lock for 12V 
+power input 
+2 x 6 pin Harwin Gecko screw lock for Full 
+Duplex RS-485 
+3 x 6 pin Harwin Gecko screw lock for 12V 
+Power Output  
+2 x 6 pin Harwin Gecko screw lock for 5V 
+Power Output ​
+1 x 10 pin Harwin Gecko screw lock for  GPIO 
+control 
+Software 
+Software Development Kit 
+(SDK) 
+Control SDK Library included 
+Debug Interface 
+SWDIO 
+​
+CIN: U61900TS2024PTC186392 
+2 
+ 
+
+HPC | Technical Specifications | TM2.space 
+Revision: A 
+Date: 26-02-2026 
+ 
+ 
+ 
+ 
+Questions? Queries? Contact us at info@tm2.space 
+​
+CIN: U61900TS2024PTC186392 
+3 
+ 
+Testing & 
+compliance 
+T-Vac 
+2 Cycles with temperature range of +60℃ to -25℃ 
+Vibration 
+Random vibration acceptance test levels  20 - 2000 Hz at 
+4.47grms for 60 seconds 
+Shock 
+100 Hz at 30g 
+1000 Hz at 1500g 
+5000 Hz at 1500g 
+

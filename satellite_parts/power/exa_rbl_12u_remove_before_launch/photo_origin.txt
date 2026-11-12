@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-exa-ecuadorian-space-agency-rbl-12u-remove-before-launch-urs3la.pdf
+method: product image from the catalog page https://satsearch.co/products/exa-rbl-12u-remove-before-launch

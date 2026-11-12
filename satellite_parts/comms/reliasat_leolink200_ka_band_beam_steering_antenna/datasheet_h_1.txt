@@ -1,0 +1,222 @@
+ReliaSat
+LEOLINK200
+Issue Date: 20/05/2024
+DOC REV 1
+Page 1 of 4
+Information furnished by ReliaSat is believed to be accurate. No responsibility is assumed by ReliaSat for its use, nor for any infringements on the rights of other parties that may 
+result for the use of the information herein. All specifications are subject to change without notice. 
+LEOLINK200
+A Ka-band Beam Steering Antenna operating in 
+bands within the transmit frequency of 27.5-31 
+GHz and receive frequency of 17.7-21.2 GHz. 
+Overview 
+A high-performance solution for modern 
+communication systems. The antenna can be used 
+for satellite, aviation and ground communications 
+in remote areas as well as 5G systems. Offering a 
+small profile and flat geometry, this technology 
+enables wide operational bandwidth, good 
+polarization and high EIRP. The control board 
+is offered as an optional add-on, providing 
+further customization to suit specific operational 
+requirements.
+The antenna is designed for multiple platforms 
+including aircraft and other mobile platforms that 
+need to interact with low earth orbit satellites. 
+The antenna is of phased array design, hence 
+having a flat profile. The number of elements is 
+1024 and complex tapering algorithms are used to 
+enable very high sidelobe suppression so as not to 
+interfere with other space craft.
+The platform slots onto a standard commercial 
+airframe but other formats can be accommodated.
+Features
+Applications
+•	 Mobile LEO Satellite platforms including 
+aerospace
+•	 Drones and UAVs 
+•	 Autonomous Vehicles
+•	 Remote Internet Reception
+•	 Satellite 5G Base Stations
+•	 Covers Satellite Bands 17.7-21.2 and 
+27.5-31 GHz
+•	 Hi Gain/EIRP Flat Ka band Satellite         
+Antenna System
+•	 Omnidirectional +60 degree scan angle
+•	 Circular polarisation
+•	 Complete with Up/Down- Conversion
+•	 Directly interfaces with any SDR/Modem
+Beam Steering 
+Antenna
+Transmit 27.5-31 GHz & 
+Receive 17.7-21.2 GHz  
+Preliminary Datasheet
+
+Transmit Section
+Parameter
+Value
+Unit
+Frequency Band
+27.5-31
+GHz
+Bandwidth
+3.5
+GHz
+EIRP
+76 @ 0O scan
+72 @ 60O scan
+dBm
+HPBW
+3.4 @ 0O scan
+5.9 @ 60O scan
+Degree
+Gain
+34 @ 0O scan
+30 @ 60O scan
+dBi
+Axial Ratio Over Bandwidth
+<3
+dB
+Steering Angle
+±60O
+Degree
+SLL
+Meets ITU-R S.580-6
+Polarization
+LHCP, RHCP
+ 
+RF Port VSWR
+<2
+Rf Input Power (Maximum)
+0
+dBm
+IF Frequency
+950-2000
+(adjustable)
+MHz
+Connector
+Rugged SMA
+Receive Section
+Parameter
+Value
+Unit
+Frequency Band
+17.7-21.2
+GHz
+Bandwidth
+3.5
+GHz
+HPBW
+ 3.6 @ 0O scan
+6.2 @ 60O scan
+Degree
+Gain
+34 @ 0O scan
+30 @ 60O scan
+dBi
+Axial Ratio Over Bandwidth
+<3
+dB
+Steering Angle
+±60O
+Degree
+SLL
+Meets ITU-R S.580-6
+Polarization
+LHCP, RHCP
+ 
+G/T
+<10
+dB/K
+RF Port VSWR
+<2
+Noise Figure
+2.5 typ
+dB
+Board Size
+120 x 90.5
+mm
+Connector 
+2.92 (K)
+mm
+ReliaSat
+LEOLINK200
+Issue Date: 20/05/2024
+DOC REV 1
+Page 2 of 4
+Information furnished by ReliaSat is believed to be accurate. No responsibility is assumed by ReliaSat for its use, nor for any infringements on the rights of other parties that may 
+result for the use of the information herein. All specifications are subject to change without notice. 
+Beam Steering 
+Antenna
+Transmit 27.5-31 GHz & 
+Receive 17.7-21.2 GHz  
+Preliminary Datasheet
+
+ReliaSat
+LEOLINK200
+Issue Date: 20/05/2024
+DOC REV 1
+Page 3 of 4
+Information furnished by ReliaSat is believed to be accurate. No responsibility is assumed by ReliaSat for its use, nor for any infringements on the rights of other parties that may 
+result for the use of the information herein. All specifications are subject to change without notice. 
+Beam Steering 
+Antenna
+Transmit 27.5-31 GHz & 
+Receive 17.7-21.2 GHz  
+Preliminary Datasheet
+General
+Parameter
+Value
+Unit
+Dimensions L x W x H 
+810 x 320 x 50
+mm
+Weight
+2.5
+Kg
+DC Power Consumption
+Watts
+DC Power Supply
+12-50
+VDC
+GNSS Bands
+GPS L1, L2, L5, Gallileo, Glonass
+GNSS Interface
+NMEA and UBX
+Degree
+Interface
+Asynchronous
+Interface Connector
+RG45
+Temperature Range
+-60 to +120
+DegC
+Shock
+MIL-STD 810
+Vibration
+MIL-STD 167
+EMC
+MIL-STD461G
+RTCA Specifications
+TBA
+
+ReliaSat
+LEOLINK200
+Issue Date: 20/05/2024
+DOC REV 1
+Page 4 of 4
+Information furnished by ReliaSat is believed to be accurate. No responsibility is assumed by ReliaSat for its use, nor for any infringements on the rights of other parties that may 
+result for the use of the information herein. All specifications are subject to change without notice. 
+Beam Steering 
+Antenna
+Transmit 27.5-31 GHz & 
+Receive 17.7-21.2 GHz  
+Preliminary Datasheet
+Block Diagram
+Each antenna contains a control board, frequency adjustable transceiver with optional GNSS antenna 
+and receiver. The unit is housed in a robust aerodynamic enclosure with very low loss radome.
+Contact Information
+ReliaSat
+e: sales@reliasat.com
+www.reliasat.com
+

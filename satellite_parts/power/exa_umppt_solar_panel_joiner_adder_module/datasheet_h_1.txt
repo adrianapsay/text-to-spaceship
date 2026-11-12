@@ -1,0 +1,138 @@
+UMPPT – SOLAR PANEL 
+JOINER/ADDER MODULE 
+PRODUCT NAME 
+UMPPT - SOLAR PANEL JOINER/ADDER MODULE 
+SUMMARY 
+The EXA UMPPT Solar Panel Joiner/Adder Module is a sub-EPS module that allows you to 
+connect up to four (4) independent solar panel and joins/adds their power yield, no 
+matter their orientation and state of illumination, providing a unified multiple power 
+point track service. 
+Unlike common MPPT modules, The EXA UMPPT module adds the power yield of all solar 
+panels, not only the ones in full illumination or with the maximum power point, but all at 
+once, providing the maximum power yield possible by your solar panel configuration, 
+boosting your power production in orbit and securing the best positive power budget for 
+your mission.  
+It also provides telemetry output for each solar panel connected to the module. 
+FEATURES 
+•
+Flight heritage since 2013
+•
+4 independent Direct Solar Channel processors
+•
+Input proportionally bright LEDS eases engineering diagnostics on ground
+•
+Each DSC is capable to handle up to 32W
+•
+Total power output rated at 128W with proper passive cooling
+•
+Allows the sum of all solar panels output at the same time, no matter their
+illumination state
+•
+Very small footprint and low mass
+•
+Provides telemetry for each solar panel connected to the module
+•
+Designed for LEO missions and requirements
+•
+Manufactured according to NASA and ESA space standards and materials
+•
+Functional, performance, thermal bake out and vibration tests provided
+w/documentation.
+•
+Compatible and compliant with CubeSat Standard
+
+PERFORMANCEECTRICAL 
+•
+Inputs:
+o
+4 DSC channels
+o
+Each input is capable of 16V@2A
+o
+Minimum input voltage: 1.5V
+o
+Maximum input voltage: 16V
+•
+Output:
+o
+1 output of custom selectable voltage
+o
+Output voltage range from 2v to 16V at up to 2A
+o
+Conversion efficiency 92%
+o
+Maximum power output: 128W with proper passive cooling
+•
+Pilot LEDS:
+o
+Bright Proportional to solar input intensity
+o
+2 blue, 2 green
+o
+Can be disconnected for space flight
+PRODUCT PROPERTIES 
+•
+Dimensions:
+o
+45 x 45 x 7.2mm
+•
+Connectors:
+o
+Input: 4 Molex 53261-2 or 2 Molex 53261-4
+o
+Output: 1 Molex 87438-4 or 1 Molex 87438-2
+o
+Telemetry: 1 Molex 53261-5
+•
+Mass: 11.58 grams
+•
+Operating Temperature: -40 to +85°C
+•
+Radiation Tolerance: 4 years minimum in LEO
+MATERIALS 
+•
+Only TML and CVCM < 1% materials used, NASA and ESA approved
+•
+PCB Material:  FR4-6
+TESTING 
+All boards are provided with tests reports regarding: 
+•
+Thermal Bake out (10E-5 mbar @ 50C for 72 hours)
+•
+Full vibration test for Falcon 9, Electron, Soyuz, Dnepr and Long March 2D
+•
+QT and AT is performed on the unit to be shipped
+Test 
+QT 
+AT 
+Functional 
+✔ 
+✔ 
+Vibration 
+✔ 
+Thermal Cycling 
+✔ 
+Thermal Vacuum 
+✔ 
+Power yield 
+✔
+✔ 
+CONFIGURATION and PRICES 
+•
+UMPPT Solar Panels power joiner/adder: € 1,850
+AVAILABILITY:
+•
+Immediately
+2 
+
+ 
+ 
+ 
+ 
+ 
+ 
+UMPPT Module installed on IRVINE02, launched on 2018 
+ 
+3 
+ 
+

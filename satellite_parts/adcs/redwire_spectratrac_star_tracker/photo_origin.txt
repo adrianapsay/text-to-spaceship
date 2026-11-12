@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/satsearch_datasheet_c2ix5k_redwirespace_spectratrac-star-tracker.pdf
+method: product image from the catalog page https://satsearch.co/products/redwirespace-spectratrac-star-tracker

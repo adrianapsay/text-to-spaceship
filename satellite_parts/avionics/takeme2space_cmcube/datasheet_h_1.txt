@@ -1,0 +1,133 @@
+CMCube - Technical specifications 
+Revision: B 
+Date: 13-03-2025 
+CMCube - Technical Specifications 
+ 
+ 
+ 
+ 
+ 
+Description: 
+ 
+CMCube is a CubeSat Onboard Computer (OBC) powered by Raspberry Pi CM4 with a 
+ARM Cortex M4 based Co-Processor and integrated with NASA's cFS framework that runs 
+on Linux. It provides efficient and versatile computing for CubeSats, allowing easy extension 
+of both software and hardware capabilities. With its modular software design, users can add 
+mission-specific apps without compromising OBC performance, and it supports Multiple 
+ADC interfaces interfaceable with Analog sensors, RTDs, NTCs along with RS485, CAN, I2C, 
+UART interfaces. On-board power isolation and signal isolation for all interfaces are 
+integrated. The built-in hardware watchdog ensures reliability during long-duration 
+missions. 
+ 
+ 
+ 
+ 
+ 
+1 
+
+CMCube - Technical specifications 
+Revision: B 
+Date: 13-03-2025 
+Specifications: 
+ 
+ 
+Parameter 
+Value 
+Compute 
+Processor Type 
+Main - Quad-core 64-bit Arm Cortex-A72 CPU, 
+Co-processor - Arm Cortex-M4 MCU  
+Processor Clock Speed 
+Main - 1.5 GHz 
+Co-processor - 168 MHz 
+RAM Size 
+8GB SDRAM 
+Non-volatile Memory 
+32GB eMMC (Boot), 2TB NVMe SSD (Storage) 
+Real-Time Clock (RTC) 
+TCXO based RTC with Battery Backup 
+Data Retention 
+10 Years with < 10% of Rated P/E Cycles 
+Rated P/E Cycle 
+60,000 Cycles 
+Clock Synchronization 
+RTC and External GPS Synchronisation 
+Fault Tolerance 
+External Watchdog Timer(configurable) 
+Power 
+Power Consumption (Idle) 
+3 W 
+Power Consumption (Nominal) 
+6 W 
+Power Consumption (Peak) 
+9 W 
+Processor Voltage Range 
+4.75V - 5.25V 
+Peripheral Voltage Range 
+3.18V - 3.45V 
+Interfaces 
+Interfaces Supported 
+16 x Isolated 24 Bit ADC 
+3 x Multiplexed Isolated UART 
+4 x Multiplexed Isolated 
+I2C, 2 x Isolated HS-CAN 
+3 x Isolated RS-485 
+1 x USB-C 
+1 x USB-C(Power Only) 
+1 x MIPI-CSI Camera Connector 
+GPIO Pins 
+10 x Isolated GPIO (3 X PWM Enabled) 
+Mechanical 
+Dimensions 
+90.1mm x 95.6mm x 20.2mm 
+Weight 
+250g* 
+Form factor 
+PC104 compliant with stackable connector 
+Material 
+Hard anodised Al 6061 T6 
+Temperature Range 
+-40 C to 85 C 
+Storage Temperature 
+-55C to + 85C 
+Connectors 
+2 x 20 Pin Harwin Gecko Latch 
+5 x 6-pin Harwin Gecko Latch 
+6 x 4-pin Molex picolock 
+1 x PC104 
+1 x USB-C 
+1 x 22-pin CSI 
+2 
+
+CMCube - Technical specifications 
+Revision: B 
+Date: 13-03-2025 
+Software 
+Software Development Kit (SDK) 
+OrbitOS , a fork of NASA cFS , implemented on 
+32 Bit raspbian bullseye 
+Supported Languages for SDK 
+C - Language 
+Firmware Update Mechanism 
+eMMC Flash 
+CCSDS Compliance 
+Compliant with ground stations following 
+CCSDS 1v2 protocol 
+Boot Time 
+75 Seconds 
+Debug Interface 
+USB-C 
+Testing & 
+compliance 
+ETL: TVAC, EMI/EMC, Vibration 
+and Shock Tolerance 
+TBD 
+TBD 
+Mission Life Expectancy 
+5 Years 
+Radiation Tolerance 
+Radshield protection with proprietary Ta-tape 
+for up to 10x reduction in TID for LEO 
+ 
+3 
+

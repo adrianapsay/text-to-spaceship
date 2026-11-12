@@ -1,0 +1,238 @@
+{
+ "id": "sensonor_stim210",
+ "name": "Safran Sensonor STIM210 3-axis gyro module",
+ "category": "adcs",
+ "subcategory": "gyroscope",
+ "vendor": "Safran Sensonor",
+ "model": "STIM210",
+ "dimensions_mm": {
+  "x": 38.6,
+  "y": 44.8,
+  "z": 21.5
+ },
+ "mass_g": 52,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.safran-group.com/sites/default/files/2022-05/safran-sensing-technologies-ts1545r20-stim210-datasheet.pdf",
+  "document": {
+   "title": "Safran Sensonor STIM210 data sheet TS1545 rev 20",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "adcs",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "38.6 x 44.8 x 21.5 mm, 52 g, +-400 deg/s, bias instability 0.3 deg/h (Allan variance, 25 C), single 5 V supply (4.5 to 5.5 V), 1.5 W, RS422, -40 to +85 C."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "Norway",
+ "distributors": [
+  "direct",
+  "distributors"
+ ],
+ "adcs": {
+  "gyro_range_deg_s": 400,
+  "gyro_bias_stability_deg_h": 0.3
+ },
+ "electrical": {
+  "voltage_V": {
+   "min": 4.5,
+   "nominal": 5.0,
+   "max": 5.5
+  },
+  "power_W": {
+   "nominal": 1.5
+  },
+  "interfaces": [
+   "RS422"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -40,
+   "max": 85
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   38.6,
+   44.8,
+   21.5
+  ],
+  "mesh_volume_mm3": 37146.0,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.4,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    38.6,
+    44.8,
+    21.5
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "feet",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/feet.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "connector_shell",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/connector_shell.stl"
+    },
+    {
+     "name": "connector_insert",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector_insert.stl"
+    },
+    {
+     "name": "jackscrews",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/jackscrews.stl"
+    },
+    {
+     "name": "label",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies_detail/label.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 5.0
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://www.safran-group.com/sites/default/files/2022-05/safran-sensing-technologies-ts1545r20-stim210-datasheet.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

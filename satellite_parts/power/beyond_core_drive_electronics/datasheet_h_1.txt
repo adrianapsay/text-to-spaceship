@@ -1,0 +1,104 @@
+Beyond Gravity
+beyondgravity.com
+Core Drive Electronics
+(CODE)
+Light weight motor driver for high reliability applications
+The Core Drive Electronics (CODE) is a generic low-cost two-axes stepper motor 
+controller capable of operating various types of actuators such as antenna 
+pointing, solar arrays or thruster pointing mechanisms. It has been optimized for 
+small volume and low mass. 
+
+Beyond Gravity
+beyondgravity.com
+Overview
+This document remains the intellectual property of Beyond Gravity Austria GmbH and may not be copied, 
+or used without their prior written approval.
+Internal Code/Doc.No.
+Issue 1 
+Protection
+Physical / environment
+The CODE is a compact and lightweight motor 
+controller designed for high operational reliability. 
+Its modular architecture enables each module to 
+independently control two bipolar stepper motors. 
+Multiple modules can be stacked vertically, either 
+to create a redundant configuration or to increase 
+the number of available drive channels. The 
+modules are mechanically isolated from one 
+another and operate in a cold-redundant 
+configuration.
+Each module incorporates an isolated DC/DC 
+converter with integrated EMC filtering, providing a 
+protected and hardware-adjustable motor drive 
+voltage. Both stepper motor interfaces are 
+equipped with dedicated connectors carrying 
+motor power signals as well as seven auxiliary 
+signal lines. These auxiliary lines are routed directly 
+to the common control connector and can be 
+utilized for sensor interfaces, such as limit switches 
+or thermistors, as well as for heater control 
+applications up to 115 V.
+Motor control is achieved through three discrete 
+input signals per motor: ENABLE, DIRECTION, and 
+STEP, which are routed via the common control 
+connector. The combination of dedicated motor 
+connectors and a centralized control interface 
+simplifies system integration while minimizing 
+cabling complexity and overall harness mass.
+Performance 
+• Start-up time: < 500 ms
+• Motor drive voltage: 18 to 26 V (adjustable) 
+• Motor current: < 0.5 A 
+• Stepping rate: < 1000 steps/s 
+• Standby power consumption: < 3 W
+• Motor driver efficiency: > 75% 
+• Failure rate: < 150 FIT (Class 1 parts)
+• Secondary supply short-circuit protection 
+• Over-current protection of motor driver 
+• WAVE mode protection (to avoid overheating 
+the motor in failure case) 
+• Size: 190 x 125 x 58 mm³ 
+• Weight: < 1.1 kg 
+• Operating temperature: -30C to +65C (qual) 
+• Non-operating temperature: -40C to +75C (qual) 
+• Minimum switch-on temperature: -30°C 
+• Radiation: up to 50 kRad (Si), unit provides 2mm eq. 
+aluminium shielding
+• Passive cooling of the entire unit 
+Features 
+• 2 dedicated actuator interfaces per 
+module 
+• 1 common control interface per module 
+• Compatible with externally LCL-protected 
+power bus 
+• Wave-/full-/half-step operation modes 
+• Auto-Start function or On/Off High-Power-
+Command
+Interfaces
+• Primary power bus: 22 V to 38 V 
+• On/Off: High power command (optional) 
+• Discrete TM: Digital health status, unit 
+temperature 
+• 2 x 3 discrete motor control 
+• (Enable/Direction/Step): Differential, RS-422 type 
+• 14 sensor feed-through signals including                           
+4 high-voltage heater feed-through 
+Product availability: Please contact our Sales team. 
+Phone +43 664 464 9439 | wolfgang.mayer@beyondgravity.com
+Beyond Gravity | Stachegasse 13 | 1120 Vienna | Austria
+Programs / heritage 
+• BepiColombo (ESA)
+• Meteosat Third Generation (ESA)
+• Geo-Kompsat-2A/B (KARI)
+• Kompsat-3 (KARI)
+• Metop-SG (ESA)
+• CO2M, ROSE-L, LSTM (Copernicus)
+• Harmony (ESA)
+• Comet Interceptor (ESA/JAXA)
+• Ramses (ESA)
+• PLATO (ESA)
+• HERA (ESA)
+Beyond Gravity has delivered more than 50 flight models 
+of drive electronics to customers in Europe, USA, Middle 
+East and Asia. Some example missions:
+

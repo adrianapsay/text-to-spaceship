@@ -1,0 +1,3 @@
+url: https://satcatalog.s3.amazonaws.com/components/88/SatCatalog_-_Adcole_Maryland_Aerospace_-_MAI-25_-_Datasheet.pdf
+found from: https://satcatalog.com/component/mai-25/
+downloaded on the lab laptop by harvest_catalogs.py (pass 6) on 2026-11-11

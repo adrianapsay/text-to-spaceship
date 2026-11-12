@@ -12,19 +12,20 @@
  },
  "mass_g": 50,
  "source": {
-  "type": "unverified",
-  "url": "https://satsearch.co/products/aac-clyde-pulsar-sant-s-band-antenna",
+  "type": "derived",
+  "url": "https://www.aac-clyde.space/wp-content/uploads/2021/10/PULSAR-SANT-1.pdf",
   "document": {
-   "title": "satsearch listing of the PULSAR-SANT",
+   "title": "AAC Clyde Space PULSAR-SANT datasheet",
    "revision": null,
-   "date": null
+   "date": "2026-11-11"
   },
   "accessed": "2026-11-08",
   "fields_from_source": [
    "mass_g",
-   "rf"
+   "rf",
+   "thermal"
   ],
-  "notes": "<50 g, 2.2-2.3 and 2.4-2.45 GHz, 7 dBi, LHCP or RHCP, SMA female, '1U' from the listing. Dimensions NOT listed: 98 x 98 x 8 mm assumed for a 1U face patch."
+  "notes": "Datasheet (read 2026-11-11 from the PDF text): mass under 50 g; 2.4 to 2.45 GHz (SANT) or 2.2 to 2.3 GHz (SANTC); beamwidth 60 deg; gain 7 dBi; S11 under -15 dB; SMA female; -40 to +85 C; design life over 2 years in LEO; flown on UKube-1. Dimensions are given only as '1U form factor': 98 x 98 x 8 mm is DERIVED from a 1U face."
  },
  "status": "in_production",
  "fidelity": "envelope",
@@ -89,6 +90,50 @@
   },
   "face_counts": {
    "part": 28
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    98.0,
+    98.0,
+    8.1
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.1
+   ],
+   "bodies": [
+    {
+     "name": "ground_plate",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies_detail/ground_plate.stl"
+    },
+    {
+     "name": "patches",
+     "color": [
+      0.72,
+      0.45,
+      0.2
+     ],
+     "file": "bodies_detail/patches.stl"
+    },
+    {
+     "name": "feeds",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/feeds.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",
@@ -125,7 +170,7 @@
   "photo_page": "https://satsearch.co/products/aac-clyde-pulsar-sant-s-band-antenna",
   "photo_file": "reference_photo.jpg",
   "photo_kind": "vendor_or_marketplace",
-  "datasheet_url": null,
+  "datasheet_url": "https://www.aac-clyde.space/wp-content/uploads/2021/10/PULSAR-SANT-1.pdf",
   "datasheet_page_file": null,
   "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },

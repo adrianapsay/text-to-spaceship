@@ -1,0 +1,67 @@
+The Moog additive manufactured small liquid 
+monopropellant blowdown propulsion module 
+is suitable for cubesats and small satellites that 
+require attitude control or delta V maneuvers. 
+This is an all-digital design leveraging Moog 
+additive 
+manufacturing 
+and 
+propulsion 
+equipment design expertise. The module is 
+compact, scalable and can be supplied pre-filled 
+with propellant, either green or traditional 
+chemical, to enable rapid integration into any 
+space platform.  The use of additive manufacturing techniques allows the module to 
+be tailored to mission specific requirements with minimal impact on cost or schedule. 
+The Module is revolutionary in its use of Laser Powder Bed Fusion Additive 
+Manufacturing techniques for almost all of the metallic parts including the propellant 
+catalyzing agent. It utilizes a Moog heritage Thruster Valve  contained within each of 
+the .5N baseline Thruster Assemblies. The non-metallic combustion chamber is 
+additively manufactured using stereo lithography. The COTS based custom circuit 
+card assembly heater driver is made in house at Moog.
+PROPULSION  |  MONOPROPELLANT MODULE
+MONOPROPELLANT 
+PROPULSION MODULE
+
+MONOPROPELLANT PROPULSION MODULE
+©2018 Moog, Inc.  All rights reserved.
+Product and company names listed are trademarks or trade names of their respective companies.
+Form 500-1202 0418
+linkedin.com/
+company/moog-sdg
+facebook.com/
+MoogSDG.USA
+twitter.com/
+MoogSDG
+For More Information:
+Chet Crone +1.818.576.6823 
+ccrone@moog.com
+SPECIFICATIONS
+Parameter
+Specification
+Propellant
+Liquid Chemical – Green or Traditional
+Dimensions
+10cm x 10cm x 10cm baseline – scalable to 24cm x 24cm x 24cm
+Thrust
+0.1 to 1 N, .5N baseline
+Isp – Vacuum
+224 sec with 30:1 nozzle baseline
+Total Impulse
+500 N/sec with 150cc baseline tank capacity
+Delta-V
+59 m/s
+Input Voltage
+28 VDC
+Power
+2 x 22.5 W/Thruster
+Mass
+1.01 Kg wet baseline
+Maximum Expected Operating Pressure
+400 psig
+Moog Additive Manufacturing Rolling Metal Diaphragm Technology
+x1.2 proof pressure tested
+Equipment described herein falls under the jurisdiction of the EAR 
+and may require US Government Authorization for export purposes. 
+Diversion contrary to US law is prohibited.
+

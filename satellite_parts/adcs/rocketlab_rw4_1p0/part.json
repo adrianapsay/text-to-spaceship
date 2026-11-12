@@ -1,0 +1,204 @@
+{
+ "id": "rocketlab_rw4_1p0",
+ "name": "Rocket Lab RW4-1.0 reaction wheel (1 Nms)",
+ "category": "adcs",
+ "subcategory": "reaction_wheel",
+ "vendor": "Rocket Lab",
+ "model": "RW4-1.0",
+ "dimensions_mm": {
+  "x": 154,
+  "y": 146,
+  "z": 45
+ },
+ "mass_g": 1380,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.rocketlab.co.nz/assets/Uploads/1-Nms-RW4-1.0-Data-Sheet.pdf",
+  "document": {
+   "title": "Rocket Lab 1 Nms RW4-1.0 data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "adcs",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "154 x 146 x 45 mm, 1380 g, 100 mNm at 0.8 Nms (28 V), 5.3 W steady at 1 Nms, 43 W peak, 24-34 V (50 V max), redundant RS-485, -40 to +70 C operating."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "USA / Canada",
+ "distributors": [
+  "direct"
+ ],
+ "satellite_class": "smallsat",
+ "adcs": {
+  "momentum_Nms": 1.0,
+  "max_torque_Nm": 0.1
+ },
+ "electrical": {
+  "voltage_V": {
+   "min": 24,
+   "max": 34
+  },
+  "power_W": {
+   "nominal": 5.3,
+   "peak": 43
+  },
+  "interfaces": [
+   "RS-485 (redundant)"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -40,
+   "max": 70
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   154.0,
+   146.0,
+   45.0
+  ],
+  "mesh_volume_mm3": 732278.6,
+  "watertight": true,
+  "render_kind": "reaction_wheel",
+  "effective_density_g_cm3": 1.885,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "flywheel",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__flywheel.stl"
+    },
+    {
+     "name": "motor_cap",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__motor_cap.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 348
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    154.0,
+    146.0,
+    45.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "base",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/base.stl"
+    },
+    {
+     "name": "cover",
+     "color": [
+      0.24,
+      0.26,
+      0.3
+     ],
+     "file": "bodies_detail/cover.stl"
+    },
+    {
+     "name": "cap",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/cap.stl"
+    },
+    {
+     "name": "bolts",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/bolts.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "RS-485"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://www.rocketlab.co.nz/assets/Uploads/1-Nms-RW4-1.0-Data-Sheet.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

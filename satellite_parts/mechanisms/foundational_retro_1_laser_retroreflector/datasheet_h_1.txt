@@ -1,0 +1,38 @@
+PROFILE
+LEO qualified Laser Retroreflector (LRR) for precision 
+orbit determination.
+MISSION BRIEFING
+The Foundational Retro-1 laser retroreflector enables high-
+precision tracking of satellites with Satellite Laser Ranging 
+(SLR) up to 800km orbits for missions with a wide array of 
+challenging CONOPS. The Retro-1 has a simple lightweight 
+design which requires no power or data from the host 
+satellite. 
+The Retro-1 is built and qualified to ensure performance and 
+resilience over a diverse range of mission profiles and has 
+TRL 9 flight heritage.
+ASSET
+Retro-1
+DATA
+Mass   20g
+Dimensions   40 x 40 x 13.5mm
+Angle of Acceptance   120
+0
+Maximum Altitude  800km
+Thermal Vacuum   Min Temp -180
+oC   Max Temp + 165
+oC
+Random Vibration   14.47gRMS @ 20-2000Hz
+Shock profile:
+Frequency (Hz)     Acceleration (g)
+100	
+20
+2000	
+2000
+10000	
+2000
+VECTOR SPECS (mm)
+IMAGE CAPTURE
+INITIATE CONTACT sales@foundational.space
+this is
+

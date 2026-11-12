@@ -12,12 +12,12 @@
  },
  "mass_g": 63,
  "source": {
-  "type": "unverified",
+  "type": "derived",
   "url": "https://satsearch.co/products/npcspacemind-sm-sp3x",
   "document": {
-   "title": "satsearch listing of the NPC SPACEMIND SM-SP3X",
+   "title": "NPC SPACEMIND SM Solar Panels datasheet, release 01/2020 (PDF behind the satsearch listing)",
    "revision": null,
-   "date": null
+   "date": "2026-11-11"
   },
   "accessed": "2026-11-08",
   "fields_from_source": [
@@ -25,7 +25,7 @@
    "electrical",
    "interfaces"
   ],
-  "notes": "63 g, 8 W peak, 460 mA, 18.2 V open circuit, UTJ cells, 4 parallel Picoblade connectors. Dimensions NOT listed: 3U face assumed; datasheet on the listing."
+  "notes": "SM-SP3X: 63 g and 8 W peak power confirmed in the datasheet text (read 2026-11-11); 460 mA, 18.2 V open circuit, UTJ cells, 4 parallel Picoblade connectors from the listing. The datasheet gives no outline dimensions in its text: the 3U XY face size is DERIVED from the SM structure it mounts on."
  },
  "status": "in_production",
  "fidelity": "envelope",
@@ -84,6 +84,59 @@
   },
   "face_counts": {
    "part": 124
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    325.0,
+    82.0,
+    2.11
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.11
+   ],
+   "bodies": [
+    {
+     "name": "substrate",
+     "color": [
+      0.2,
+      0.2,
+      0.22
+     ],
+     "file": "bodies_detail/substrate.stl"
+    },
+    {
+     "name": "cells",
+     "color": [
+      0.16,
+      0.26,
+      0.62
+     ],
+     "file": "bodies_detail/cells.stl"
+    },
+    {
+     "name": "busbars",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/busbars.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",
@@ -100,13 +153,6 @@
  "reference_images": {
   "datasheets": [
    {
-    "file": "datasheet_page1.png",
-    "pdf": null,
-    "url": null,
-    "kind": "vendor_link",
-    "title": "satsearch listing of the NPC SPACEMIND SM-SP3X"
-   },
-   {
     "file": "datasheet_1_page1.png",
     "pdf": "datasheet_1.pdf",
     "kind": "web_search",
@@ -122,7 +168,7 @@
   "photo_file": "reference_photo.jpg",
   "photo_kind": "vendor_or_marketplace",
   "datasheet_url": null,
-  "datasheet_page_file": "datasheet_page1.png",
+  "datasheet_page_file": null,
   "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {

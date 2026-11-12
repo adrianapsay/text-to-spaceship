@@ -1,0 +1,135 @@
+info@cubesource.space
+https://www.cubesource.space/
+ 
+Page 1 of 4 
+ 
+Burnwing Flight - Technical Datasheet 
+(Rev. 1.1 – 2025-08-03) 
+ 
+1. Product Overview 
+The Burnwing Flight PCB is a compact CubeSat subsystem 
+designed for reliable burn wire release applications.  
+It integrates Dual Low-Side Drivers, Burn Resistors, and 
+LED indicators in a small form factor suitable for 
+nanosatellite deployment systems. 
+Applications:  
+- 
+Deployable Solar Panels 
+- 
+Antenna Deployments 
+- 
+Sensor Deployments 
+2. Key Features 
+ 
+Redundant Burn Channels with Independent Control 
+ 
+Overcurrent, Overvoltage, Over Temp. and ESD Protection 
+ 
+Analog Drive Capability (Logic Level Input)  
+ 
+PicoBlade or Pico-Lock Gold Plated 6-pin Connectors 
+ 
+Surface Mount or Through-Hole Pulse Withstanding 
+Resistors 
+ 
+5V or 12V Power Input 
+3. Product Specifications 
+Parameter 
+Value 
+Unit 
+Required Power 
+5 
+W 
+Release Time 
+10 
+sec 
+Resistor Cycle Life 
+50 
+x 10 sec 
+Mass 
+3 
+g 
+Dimensions 
+28.5 x 22.9 x 3.6 
+mm 
+Operating Temperature 
+-40 to +85 
+°C 
+ 
+*Release time measured as time to cut 1mm diameter Dyneema line in atmosphere.  
+ 
+
+info@cubesource.space
+https://www.cubesource.space/
+ 
+Page 2 of 4 
+ 
+4. Functional Description 
+The Burnwing operates as a thermal knife release mechanism. Dyneema hold down line is 
+used to secure a deployable subsystem in place. When ready for release, a trigger signal 
+(BurnCTRL1) is sent for 10 seconds causing the (R1) Burn Resistor to heat to a temperature 
+>150°C cutting the hold down line. If the first attempt was unsuccessful this can be repeated 
+multiple times. Allow 60 seconds between attempts. (BurnCTRL1) can be active for longer 
+than 10 seconds if necessary but this may reduce cycle life. The (R2) burn resistor is a 
+redundant backup controlled by (BurnCTRL2) which can be used in the event (R1) has 
+failed. Using (R1) and (R2) simultaneously is not recommended. Standoffs or spacers should 
+be used when mounting to prevent the resistors from shorting against a frame.  
+ 
+**Safety note: Allow time for the Burnwing resistors to cool before handling after use.** 
+5. Pinout 
+ 
+ 
+ 
+Pin 
+Function 
+Value 
+1 
+VDC 
+5V or 12V 
+2 
+Burn_CTRL_1 
+5 – 14V 
+3 
+GND 
+N/A 
+4 
+Burn_CTRL_2 
+5 – 14V 
+5 
+VDC 
+5V or 12V 
+6 
+GND 
+N/A 
+
+info@cubesource.space
+https://www.cubesource.space/
+ 
+Page 3 of 4 
+ 
+6. Electrical Characteristic 
+ 
+ 
+ 
+
+info@cubesource.space
+https://www.cubesource.space/
+ 
+Page 4 of 4 
+ 
+7. Typical Application Circuit 
+ 
+ 
+8. Mechanical Specifications 
+9. Document Revision History 
+Date 
+Rev 
+Changes 
+2025-07-02 
+2025-08-03 
+1.0 
+1.1 
+Preliminary release 
+Added Pinout/Wiring Diagrams 
+ 
+

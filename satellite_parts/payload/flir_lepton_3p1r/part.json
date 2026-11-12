@@ -1,0 +1,235 @@
+{
+ "id": "flir_lepton_3p1r",
+ "name": "Teledyne FLIR Lepton 3.1R LWIR micro thermal camera module",
+ "category": "payload",
+ "subcategory": "camera",
+ "vendor": "Teledyne FLIR",
+ "model": "Lepton 3.1R",
+ "dimensions_mm": {
+  "x": 11.5,
+  "y": 12.7,
+  "z": 6.9
+ },
+ "mass_g": 1.0,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.mouser.com/catalog/specsheets/Teledyne_Lepton_Series_7-28-23.pdf",
+  "document": {
+   "title": "Teledyne FLIR Lepton series data sheet (7-28-23)",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "payload"
+  ],
+  "notes": "11.5 x 12.7 x 6.9 mm without socket (11.8 x 12.7 x 7.2 mm with socket), 1.0 g without socket, 160 x 120 pixels, 150 mW operating (650 mW during shutter), video over SPI, CCI (I2C-like) control. The lens boss height inside the 6.9 mm is drawn from the photo, not stated."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "USA",
+ "distributors": [
+  "Digi-Key",
+  "Mouser",
+  "GroupGets"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "distributor",
+  "source": null
+ },
+ "electrical": {
+  "power_W": {
+   "nominal": 0.15,
+   "peak": 0.65
+  },
+  "interfaces": [
+   "SPI video",
+   "CCI (I2C)"
+  ]
+ },
+ "payload": {
+  "type": "LWIR microbolometer",
+  "resolution_px": [
+   160,
+   120
+  ]
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   11.5,
+   12.7,
+   6.9
+  ],
+  "mesh_volume_mm3": 803.1,
+  "watertight": true,
+  "render_kind": "camera_box_lens",
+  "effective_density_g_cm3": 1.245,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    },
+    {
+     "name": "lens_barrel",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__lens_barrel.stl"
+    },
+    {
+     "name": "glass",
+     "color": [
+      0.45,
+      0.65,
+      0.85
+     ],
+     "file": "bodies/part__glass.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 180
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    11.5,
+    12.7,
+    6.9
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "mount_plate",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/mount_plate.stl"
+    },
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "lens_barrel",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/lens_barrel.stl"
+    },
+    {
+     "name": "grip_rings",
+     "color": [
+      0.24,
+      0.26,
+      0.3
+     ],
+     "file": "bodies_detail/grip_rings.stl"
+    },
+    {
+     "name": "bezel",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/bezel.stl"
+    },
+    {
+     "name": "glass",
+     "color": [
+      0.45,
+      0.65,
+      0.85
+     ],
+     "file": "bodies_detail/glass.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "I2C",
+   "SPI"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://www.mouser.com/catalog/specsheets/Teledyne_Lepton_Series_7-28-23.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

@@ -1,30 +1,33 @@
 {
  "id": "dragonfly_gecko_imager",
- "name": "Dragonfly Aerospace Gecko RGB imager (39 m GSD, 2U class)",
+ "name": "Dragonfly Aerospace Gecko RGB imager (39 m GSD, 1U)",
  "category": "payload",
  "subcategory": "camera",
  "vendor": "Dragonfly Aerospace",
  "model": "Gecko Imager",
  "dimensions_mm": {
-  "x": 97,
-  "y": 97,
-  "z": 96
+  "x": 65,
+  "y": 90,
+  "z": 105
  },
  "mass_g": 500,
  "source": {
-  "type": "unverified",
+  "type": "datasheet",
   "url": "https://satsearch.co/products/dragonfly-aerospace-gecko-imager",
   "document": {
-   "title": "satsearch listing of the Dragonfly Gecko imager",
+   "title": "Dragonfly Aerospace Gecko Imager datasheet (PDF behind the satsearch listing)",
    "revision": null,
-   "date": null
+   "date": "2026-11-11"
   },
   "accessed": "2026-11-08",
   "fields_from_source": [
+   "dimensions_mm",
    "mass_g",
-   "payload"
+   "payload",
+   "electrical",
+   "thermal"
   ],
-  "notes": "Mass <0.5 kg, 39 m GSD / 80 km swath at 500 km, fits 2U frames, TRL 9, 12 units delivered. Dimensions NOT listed: a 1U-face envelope is assumed. Datasheet on the listing."
+  "notes": "Physical size 1U, 65 x 90 x 105 mm; mass including electronics under 0.5 kg (RGB) or about 0.5 kg (wide swath); 39 m GSD at 500 km, swath 80 km (160 km wide-swath version); imaging under 6 W (7 W wide swath), readout under 4 W; 5 V DC; LVDS and SpaceWire data, SPI / I2C / CAN / RS422 / RS485 command; 128 GB storage; operating +10 to +30 C, survival -20 to +55 C; TRL 9. Read 2026-11-11 from the PDF text. The earlier entry assumed a 97 x 97 x 96 mm envelope."
  },
  "status": "in_production",
  "fidelity": "envelope",
@@ -34,11 +37,39 @@
   "satsearch",
   "CubeSatShop"
  ],
- "dimensions_note": "assumed 1U envelope",
  "payload": {
   "type": "RGB matrix imager",
   "gsd_m_at_500km": 39,
-  "swath_km_at_500km": 80
+  "swath_km_at_500km": 80,
+  "storage_GB": 128
+ },
+ "electrical": {
+  "power_W": {
+   "nominal": 4,
+   "peak": 6
+  },
+  "voltage_V": {
+   "nominal": 5
+  },
+  "interfaces": [
+   "LVDS",
+   "SpaceWire",
+   "SPI",
+   "I2C",
+   "CAN",
+   "RS422",
+   "RS485"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": 10,
+   "max": 30
+  },
+  "survival_temperature_C": {
+   "min": -20,
+   "max": 55
+  }
  },
  "cost": {
   "value": null,
@@ -48,14 +79,14 @@
  },
  "geometry": {
   "measured_bbox_mm": [
-   97.0,
-   97.0,
-   96.0
+   65.0,
+   90.0,
+   105.0
   ],
-  "mesh_volume_mm3": 784018.9,
+  "mesh_volume_mm3": 486285.2,
   "watertight": true,
   "render_kind": "camera_box_lens",
-  "effective_density_g_cm3": 0.638,
+  "effective_density_g_cm3": 1.028,
   "bodies": {
    "part": [
     {
@@ -98,25 +129,111 @@
   },
   "face_counts": {
    "part": 180
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    65.0,
+    90.0,
+    105.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "mount_plate",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/mount_plate.stl"
+    },
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "lens_barrel",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/lens_barrel.stl"
+    },
+    {
+     "name": "grip_rings",
+     "color": [
+      0.24,
+      0.26,
+      0.3
+     ],
+     "file": "bodies_detail/grip_rings.stl"
+    },
+    {
+     "name": "bezel",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/bezel.stl"
+    },
+    {
+     "name": "glass",
+     "color": [
+      0.45,
+      0.65,
+      0.85
+     ],
+     "file": "bodies_detail/glass.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",
  "interfaces": {
-  "data_buses": [],
+  "data_buses": [
+   "CAN",
+   "I2C",
+   "SPI"
+  ],
   "mechanical": null,
   "electrical_connectors": [],
   "rf_connectors": [],
-  "power_bus_V": null
+  "power_bus_V": 5
  },
  "reference_images": {
   "datasheets": [
-   {
-    "file": "datasheet_1_page1.png",
-    "pdf": "datasheet_1.pdf",
-    "kind": "web_search",
-    "url": "https://dragonflyaerospace.com/wp-content/themes/dragonfly/assets/brochures/caiman.pdf",
-    "title": "Caiman Imager - Dragonfly Aerospace"
-   },
    {
     "file": "datasheet_2_page1.png",
     "pdf": "datasheet_2.pdf",

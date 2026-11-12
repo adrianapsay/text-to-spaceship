@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-raptor-photonics-owl-1280-digital-vis-swir-camera-j3k5vt.pdf
+method: product image from the catalog page https://satsearch.co/products/raptor-photonics-owl-1280-digital-vis-swir-camera

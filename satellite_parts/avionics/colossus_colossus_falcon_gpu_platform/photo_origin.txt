@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-colossus-colossus-falcon-gpu-platform-9d8pg1.pdf
+method: product image from the catalog page https://satsearch.co/products/colossus-falcon

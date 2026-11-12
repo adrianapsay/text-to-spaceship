@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-raptor-photonics-hawk-1920-flight-ready-modified-cots-cmos-vis-camera-v06t9b.pdf
+method: product image from the catalog page https://satsearch.co/products/raptor-photonics-hawk-1920-flight-ready-oem-s

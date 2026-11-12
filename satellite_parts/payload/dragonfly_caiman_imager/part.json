@@ -1,0 +1,202 @@
+{
+ "id": "dragonfly_caiman_imager",
+ "name": "Dragonfly Aerospace Caiman imager (3.25 m GSD, 3U)",
+ "category": "payload",
+ "subcategory": "camera",
+ "vendor": "Dragonfly Aerospace",
+ "model": "Caiman Imager",
+ "dimensions_mm": {
+  "x": 100,
+  "y": 100,
+  "z": 250
+ },
+ "mass_g": 1400,
+ "source": {
+  "type": "datasheet",
+  "url": "https://dragonflyaerospace.com/wp-content/themes/dragonfly/assets/brochures/caiman.pdf",
+  "document": {
+   "title": "Dragonfly Aerospace Caiman Imager brochure (vendor PDF; downloaded while searching for the Chameleon)",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "payload",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "Physical size 3U, 100 x 100 x 250 mm with the rear-mounted nCCM electronics; 1.4 kg including electronics; 3.25 m GSD at 500 km (RGB) or PAN 3.25 m / MS 6.5 m (multispectral, 11 bands, push broom), swath 13 km; imaging under 10 W, readout under 4 W; 5 V DC; LVDS and SpaceWire data; 128 GB storage; operating +10 to +30 C. Read 2026-11-11 from the PDF text."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "South Africa",
+ "distributors": [
+  "direct"
+ ],
+ "payload": {
+  "type": "RGB or multispectral imager",
+  "gsd_m_at_500km": 3.25,
+  "swath_km_at_500km": 13,
+  "storage_GB": 128
+ },
+ "electrical": {
+  "power_W": {
+   "nominal": 4,
+   "peak": 10
+  },
+  "voltage_V": {
+   "nominal": 5
+  },
+  "interfaces": [
+   "LVDS",
+   "SpaceWire",
+   "SPI",
+   "I2C",
+   "CAN",
+   "RS422",
+   "RS485"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": 10,
+   "max": 30
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   100.0,
+   99.72,
+   250.0
+  ],
+  "mesh_volume_mm3": 1956179.7,
+  "watertight": true,
+  "render_kind": "lens_barrel",
+  "effective_density_g_cm3": 0.716,
+  "bodies": {
+   "part": [
+    {
+     "name": "barrel",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__barrel.stl"
+    },
+    {
+     "name": "glass",
+     "color": [
+      0.45,
+      0.65,
+      0.85
+     ],
+     "file": "bodies/part__glass.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 164
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    100.0,
+    100.0,
+    250.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.28,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "barrel",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/barrel.stl"
+    },
+    {
+     "name": "rings",
+     "color": [
+      0.24,
+      0.26,
+      0.3
+     ],
+     "file": "bodies_detail/rings.stl"
+    },
+    {
+     "name": "bezel",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/bezel.stl"
+    },
+    {
+     "name": "glass",
+     "color": [
+      0.45,
+      0.65,
+      0.85
+     ],
+     "file": "bodies_detail/glass.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "CAN",
+   "I2C",
+   "SPI"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 5
+ },
+ "reference_images": {
+  "datasheets": [
+   {
+    "file": "datasheet_page1.png",
+    "pdf": null,
+    "url": "https://dragonflyaerospace.com/wp-content/themes/dragonfly/assets/brochures/caiman.pdf",
+    "kind": "vendor_link",
+    "title": "Dragonfly Aerospace Caiman Imager brochure (vendor PDF; downloaded while searching for the Chameleon)"
+   }
+  ],
+  "stl_preview": "preview.png",
+  "drawing": "drawing.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
+  "datasheet_url": "https://dragonflyaerospace.com/wp-content/themes/dragonfly/assets/brochures/caiman.pdf",
+  "datasheet_page_file": "datasheet_page1.png",
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

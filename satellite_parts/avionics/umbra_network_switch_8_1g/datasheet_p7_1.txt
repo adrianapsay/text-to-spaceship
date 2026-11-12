@@ -1,0 +1,1185 @@
+We Build It. 
+We Fly It.
+https://umbra.space/space-systems 
+space.systems@umbra.space
+SPACE 
+SYSTEMS
+CATALOG
+https://umbra.space/space-systems 
+space.systems@umbra.space
+WE KNOW SPACE.™
+
+BUILT FOR 
+OPERATORS 
+BY OPERATORS
+Flight-Proven: 100% success across our own 
+spacecraft platforms since day one – we only sell 
+what we trust to fly ourselves. Every part has 
+earned its place on orbit.
+
+For Operators, by Operators: We don’t just build – 
+we operate on orbit. That experience shapes every 
+design and every detail. Performance backed by 
+firsthand knowledge.
+
+Timely Delivery: We build to meet our own launch 
+schedules – and yours. No guesswork.  
+No slippage.
+
+American-Made: Designed, built, and trusted in 
+the U.S.
+https://umbra.space/space-systems 
+space.systems@umbra.space
+HARDWARE CULTURE
+At Umbra, components aren’t line items – they’re the building blocks of something 
+bigger.
+ 
+Our hardware is built from a foundation of operational experience, shaped by the 
+real-world demands of our SAR constellation. We design, build, and deploy critical 
+systems – powered by our software – guided by a simple principle: it has to work 
+when it counts. Each bolt, board, and bracket is forged by engineers who don’t just 
+design for the mission – they live it. From power and communications to control 
+and deployment, our hardware is flown, tested, and trusted in our own systems, 
+under real-world conditions where failure isn’t an option. Because when it works 
+together, it works.
+ 
+This is Hardware Culture
+hardware culture 
+[hahrd-wair][kuhl-cher]
+n. a mindset where code and components are 
+fused 
+by 
+necessity, 
+not 
+convenience. 
+Designed 
+not 
+for 
+catalogs, 
+but 
+for 
+consequences. A manufacturing environment 
+where every element is engineered for 
+power, resilience, clarity, and control. 
+Because a mission is only as strong as what 
+it’s built on.
+
+FIRST 
+PRINCIPLES 
+SOLUTIONS
+To set a new pace, we took matters into our own hands — applying 
+First Principles engineering to design and build every component 
+from the ground up, based on what we knew the mission demanded. 
+Our inaugural lineup of hardware across four mission-critical 
+categories:
+Power: Systems engineered for endurance and efficiency. From 
+our battery modules and solar arrays to complete power 
+systems, these are proven solutions that keep missions alive 
+longer and working harder
+
+Control: Precision attitude and maneuvering technology, 
+including our MSS package, reaction wheels, and Magnetorquer 
+6: built to adapt and hold steady under pressure
+
+Communications: Robust, resilient links. Our S-band radios and 
+network switches deliver clarity and speed, even through 
+interference and challenging conditions
+
+Deployment: Hardware that delivers clean separation, reliable 
+actuation, and mission success.
+https://umbra.space/space-systems 
+space.systems@umbra.space
+
+SPACE 
+SYSTEMS
+https://umbra.space/space-systems 
+space.systems@umbra.space
+THE COMPONENTS
+
+BATTERY MODULE
+The Umbra Battery Module delivers reliable, high-energy-density power storage for demanding space missions. These 
+flight-proven modules come in 8S1P (8-Cell) and 8S2P (16-Cell) configurations, which feature built-in cell balancing, thermal 
+regulation, and a ruggedized design. Certified to UN 38.3 and compliant with NASA debris mitigation standards, they ensure 
+safe and dependable operation. Choose Umbra Battery Modules for mission-critical power backed by flight-proven heritage.
+8S2P Displayed
+FEATURES
+Built-In Safety & Performance  
+Thermal Management & Cell Balancing
+Integrated thermal regulation (with onboard heater and temperature sensor) 
+and built-in cell balancing circuitry ensure optimal battery performance, 
+safety, and longevity. This comprehensive management system maximizes 
+operational life and minimizes risks associated with battery operation in 
+space.
+Certified & Compliant 
+UN 38.3 & NASA Standards
+Umbra Battery Modules are DOT-certified to UN 38.3 for safe transportation 
+and meet NASA-STD-8719.14C requirements for limiting orbital debris. These 
+certifications demonstrate a commitment to safety, regulatory compliance, 
+and responsible space operations.
+FLIGHT-Proven| Validated Reliability
+Validated through successful deployments, the Umbra Battery Module offers 
+proven reliability and performance in real-world space environments. This 
+flight heritage, combined with its compatibility with the complete Umbra 
+Integrated System, provides mission-ready confidence and minimizes risk.
+HIGH ENERGY DENSITY | OPTIMIZED FOR SWaP
+Utilizing high-energy-density lithium-ion cells, Umbra Battery Modules deliver 
+significant power storage capacity in a compact and lightweight package. 
+This optimized SWaP (Size, Weight, and Power) performance is crucial for 
+small satellite applications.
+DATA SHEET 5061D0002 REV 02
+PART 5061H10001-1 (8S1P) & 5061H10001-2 (8S2P)
+Valid as of 03.20.2026
+08
+GENERAL SPECIFICATIONS
+22 V to 31 V
+Battery Voltage Range
+Battery Voltage Nominal
+28 V
+Intended Space 
+Environment
+Multi-Orbit
+Flown on Umbra 1 - 12
+HERITAGE
+Design Life
+5+ Years
+Assembled and tested in the USA
+Lithium Ion
+Production
+Chemistry
+Electrical Interface
+Combination D-Sub (2 Power and 5 Signal Contacts)
+CONFIGURATION SPECIFICATIONS
+METRIC
+8S1P
+8S2P
+L: 7.13 in
+W: 4.04 in
+H: 1.43 in
+L: 7.13 in  
+W: 4.03 in
+H: 2.50 in
+Max Dimensions
+0.93 kg
+1.46 kg
+Mass
+250 Wh (8.5 Ah)
+Nameplate Energy Capacity
+125 Wh (4.25 Ah)
+20 A
+Maximum discharge rate
+15 A
+CONFIGURATIONS
+TYPE
+DESCRIPTION & DETAILS
+SPACE READY
+B oth 8S2P & 8S1P available
+Suitable for ground testbeds
+EDU
+No
+8S1P
+Yes
+8-Battery Cells
+16-Battery Cells
+Yes
+8S2P
+8S2P Displayed
+ENVIRONMENTAL SPECIFICATIONS
+Random Vibe
+Qualified to 14.16 Gᵣₘₛ profile 
+enveloping GEVS, Falcon 9, 
+SpaceX Rideshare, and 
+Electron levels
+Shock
+Qualified to 1000g peak profile 
+enveloping GEVS, Falcon 9, 
+SpaceX Rideshare, and 
+Electron levels
+Operating 
+Temperature
+Charge: 10ºC to 45ºC 
+Discharge: -20ºC to 60ºC
+Survival 
+Temperature
+-20ºC to 50ºC
+(Higher temp possible during 
+discharge)
+Total ionizing
+dose design
+capability
+Designed to 
+withstand at least 
+30 krad TID
+DOT 
+Certification
+UN 38.3 in compliance with 
+49 CFR §173.185
+Limiting Orbital 
+Debris 
+Meets NASA-STD-8719.14C 
+Requirements
+COST
+TYPICAL LEAD TIME
+< 6 Weeks
+CONTACT
+< 8 Weeks
+CONTACT
+< 8 Weeks
+CONTACT
+https://umbra.space/space-systems 
+space.systems@umbra.space
+
+MAGNETORQUER 6
+The Umbra Magnetorquer 6  is engineered for precise, reliable attitude control in demanding small satellite missions. 
+Leveraging space-proven heritage and Umbra's commitment to quality, this compact torque rod delivers at least 6 Am² dipole 
+moment in a minimal form factor. The Umbra Magnetorquer 6 boasts high torque per required spacecraft volume, dependable 
+attitude control, and rigorous qualification testing. Designed for seamless integration, the Umbra Magnetorquer 6 will be ready 
+for your mission right out of the box. 
+FEATURES
+Simple Design | Simple Integration
+Designed for ease of integration with any GNC system, the Magnetorquer 6 
+can be installed in its lightest configuration using Umbra's 4-point mounting 
+pattern or can be adapted to any other bolt pattern with the available 
+mounting tray. The 2-pin connection is easily integrated into any GNC 
+system. Contact us for more information about Umbra's fully integrated GNC 
+solution.
+Seamless Integration | OPERATIONALLY READY
+The Umbra Magnetorquer 6 features a highly compact design, thoughtful 
+connector placement for tight packaging, and an integrated mounting 
+bracket for flexible installation options. This meticulous design simplifies 
+physical integration into SWaP-constrained small satellite platforms, reducing 
+assembly time and complexity.
+Compact Power | High Torque Density
+The Umbra Magnetorquer 6 delivers a powerful 6 Am² dipole moment in a 
+remarkably compact and lightweight form factor. This high torque density 
+maximizes control authority while minimizing mass and volume, optimizing 
+your satellite's payload capacity and maneuverability.
+Precision Engineering | BUILT-TO-LAST
+The Umbra Magnetorquer 6 is built for the demanding space environment, 
+utilizing space-rated materials with low outgassing properties (compliant 
+with ASTM E595). It undergoes rigorous testing, ensuring exceptional 
+reliability and long-term performance in orbit.
+DATA SHEET 5031D0002 REV 02
+PART 5031H10001-1
+Valid as of 03.20.2026
+10
+GENERAL SPECIFICATIONS
+Max Dimensions
+5.100 in x 1.440 in x 0.875 in
+Mass
+300 g
+12 V ± 0.5 V for > 6 Am   performance
+2
+Input Voltage Range
+Input Voltage Nominal
+Electromagnetics designed for 12 V
+Peak Power
+4.24 W
+Electrical Interface
+Keyed 2 pin circular connector
+Intended Space 
+Environment
+LEO
+Flown on Umbra 11+
+HERITAGE
+Design Life
+5+ Years
+Production
+Assembled and tested in the USA
+Materials Compliance
+ASTM E595
+CONFIGURATIONS
+TYPE
+DESCRIPTION & DETAILS
+SPACE READY
+Suitable for hardware-in-the-loop 
+testbeds
+No
+EDU
+Yes
+Acceptance tested
+FLIGHT
+ENVIRONMENTAL SPECIFICATIONS
+Qualified to 14.16 G 
+profile enveloping 
+GEVS, Falcon 9, 
+SpaceX Rideshare, and 
+Electron levels
+rms
+Random Vibe
+Shock
+Qualified to 1000g 
+peak profile enveloping 
+GEVS, Falcon 9, 
+SpaceX Rideshare, and 
+Electron levels
+Operating 
+Temperature
+-40°C to 80°C
+Survival 
+Temperature
+-40°C to 100°C
+Total ionizing
+dose design
+capability
+Designed to 
+withstand at 
+least 30 krad TID
+COST
+TYPICAL LEAD TIME
+4-Week Lead Time
+CONTACT
+CONTACT
+7-Week Lead Time
+https://umbra.space/space-systems 
+space.systems@umbra.space
+
+MSS PACKAGE
+The Umbra Magnetometer + Sun Sensor (MSS) PACKAGE  is a low-size, weight, and power (SWaP) solution for precise 
+attitude determination. The integrated tri-axis magnetometer and dual-axis sun sensor provide essential magnetic field and 
+solar orientation data for small satellite GNC systems. This sensor delivers flight heritage and competitive performance with 
+respect to accuracy, reliability, and ease of integration. Its compact size and minimal power consumption make the MSS ideal 
+for demanding missions requiring high-performance attitude knowledge in resource-constrained environments. Ready for 
+rapid integration across diverse platforms.
+FEATURES
+RS-422 Output | Broad Compatibility
+The Umbra MSS boasts minimal power consumption for its accuracy and 
+precision capability. The combination of high performance and low power 
+consumption the Umbra MSS provides is ideal for power-constrained small 
+satellite missions.
+Space-Grade ReliabilitY | Rigorously Tested
+Built to withstand the demanding space environment, the MSS undergoes 
+extensive qualification testing exceeding industry standards for vibration, 
+shock, thermal cycling, and radiation (>30 krad). This proven resilience 
+ensures dependable operation and mission confidence throughout its multi-
+year design life.
+Ultra-Compact | Lightweight Design
+At less than 65 grams and with a minimal footprint, the Umbra MSS 
+significantly reduces SWaP burden on small satellite platforms. This compact 
+design enables easier integration in constrained spaces and maximizes 
+payload capacity without sacrificing performance.
+High Accuracy | Small Package
+The Umbra MSS provides fine dual-axis sun sensor accuracy (<1° at 
+boresight) with tri-axis magnetometer readings, offering superior 
+attitude determination compared to coarse sun sensors alone. This 
+enhanced accuracy enables precise pointing and control for 
+demanding and agile small satellite missions.
+DATA SHEET 5041D0002 REV 02
+PART 5041H10001-1
+Valid as of 03.20.2026
+12
+GENERAL SPECIFICATIONS 
+Max Dimensions
+2.02 in x 1.47 in x 0.91 in
+Mass 
+< 65 g (with standard mount)
+Input Voltage Range
+5 +/- 1V (tolerant up to  36 V)
+Input Voltage Nominal
+5 V
+Peak Power
+< 170 mW (at 5 V)
+Average Power
+< 170 mW (at 5 V)
+Electrical Interface
+15-Pin Micro-D Connector
+Data Interface
+RS-422
+Intended Space 
+Environment
+HERITAGE
+Design Life
+Production
+Field of View
+Accuracy of boresight
+Accuracy of FOV edge
+Solution Rate
+Measurement Range
+Single Axis Magnetic 
+Sensitivity
+Single Axis Magnetic
+Accuracy
+Single Axis Magnetic
+LEO
+Acceptance tested and Fight Heritage
+5+ Years
+Assembled and tested in the USA
+110° x 110°
+< 1°
+8º
+> 10 Hz
++/- 4 Gauss
+1 mGauss
+± 50 mGauss
+CONFIGURATIONS
+TYPE
+DESCRIPTION & DETAILS
+SPACE READY
+Suitable for Hardware-in-the-Loop 
+testbeds
+EDU
+No
+Acceptance Tested
+Yes
+FLIGHT
+Umbra Space Systems offers custom 
+modifications. Please contact.
+CUSTOM
+Inquire
+ENVIRONMENTAL SPECIFICATIONS
+Qualified to 14.16 G       
+profile enveloping 
+GEVS, Falcon 9, 
+SpaceX Rideshare, 
+and Electron levels
+rms
+Random Vibe
+Shock
+Qualified to 1000g 
+peak profile 
+enveloping GEVS, 
+Falcon 9, SpaceX 
+Rideshare, and 
+Electron levels
+Operating 
+Temperature
+-40°C to 80°C
+Survival 
+Temperature
+-40°C to 100°C
+Total ionizing
+dose design
+capability
+Designed to 
+withstand at 
+least 30 krad TID
+COST
+TYPICAL LEAD TIME
+< 4 Weeks
+CONTACT
+< 8 Weeks
+CONTACT
+Inquire
+CONTACT
+https://umbra.space/space-systems 
+space.systems@umbra.space
+
+NETWORK SWITCH 8-1G
+The Umbra Network Switch 8-1G  is a qualified ethernet device for communication between onboard modules in Low 
+Earth Orbit (LEO). It provides mission-critical Gigabit Ethernet connectivity between 2 to 8 onboard modules, and is available 
+in a plug-and-play unmanaged configuration, or in a managed configuration for more complex integrations. With testing 
+tailored for Falcon 9 rideshare missions and multi-orbit compatibility, the Umbra Network Switch 8-1G offers dependable high-
+bandwidth intra-satellite communication, backed by rigorous testing.
+FEATURES
+Space-Hardened | Radiation Tolerant
+Built to withstand the extreme conditions of space, the Umbra Network 
+Switch 8-1G features a ruggedized design and radiation-tolerant 
+components. This design ensures dependable operation in harsh 
+environments, including rigorous vibration, shock, and radiation exposure.
+High-Bandwidth | 8-Port Gigabit Ethernet
+The Umbra Network Switch 8-1G is equipped with eight ports of Gigabit 
+Ethernet (1 Gbps); the switch delivers high-bandwidth data transfer 
+capabilities for demanding intra-satellite communication needs. This design 
+enables efficient communication between various onboard systems and 
+payloads.
+SPACE QUALIFIED | RUGGEDIZED INTERFACES
+Umbra’s successful history of delivering mission critical data has led to the 
+design of the Umbra Network Switch 8-1G. Fully space qualified, this module 
+allows your spacecraft systems to take advantage of modern ethernet 
+performance in a simple to use, low SWaP package. 
+Compatibility | simple to complex
+Designed to create an ethernet-connected infrastructure within any small 
+spacecraft seamlessly. The Umbra Network Switch is available in unmanaged 
+configuration for single switches used in basic applications or in a managed 
+configuration for complex installations utilizing multiple switches or inter-
+satellite connections.
+DATA SHEET 5091D0002 REV 02
+PART 5091H10001-1
+Valid as of 03.20.2026
+14
+GENERAL SPECIFICATIONS
+Max Dimensions
+5.84 in x 3.15 in x 0.97 in
+Mass
+Input Voltage Nominal
+Peak Power
+Average Power
+< 300 grams
+28 V
+5.4 W (at 33 V, max traffic)
+4.6 W (at 28 V)
+Electrical Interface
+9-Socket Micro-D Connector
+Data Interface
+IX Type A Ethernet
+Intended Space 
+Environment
+Multi-Orbit Capable
+HERITAGE
+Design Life
+Production
+Data Rate
+Number of Ports
+Protocols
+Qualified and Flight Heritage on Umbra 11+
+5+ Years
+Assembled and tested in the USA
+Up to 1 Gbps
+8
+10BASE-T, 100BASE-TX, 1000BASE-T
+CONFIGURATIONS
+TYPE
+DESCRIPTION & DETAILS
+SPACE READY
+Suitable for use in: 
+Software development 
+Hardware-in-the-Loop testbeds
+O ptional strain relief
+Custom connector configurations 
+available 
+Available now
+No
+EDU
+FLIGHT
+UNMANAGED
+Yes
+O ptional strain relief
+Custom connector configurations 
+available
+Currently under development
+FLIGHT
+MANAGED
+Yes
+ENVIRONMENTAL SPECIFICATIONS
+Random Vibe
+Qualified to 14.16 Gᵣₘₛ profile 
+enveloping GEVS, Falcon 9, 
+SpaceX Rideshare, and 
+Electron levels
+Shock
+Qualified to 1000g peak 
+profile enveloping GEVS, 
+Falcon 9, SpaceX 
+Rideshare, and Electron 
+levels
+Operating 
+Temperature
+-30°C to 65°C
+Survival 
+Temperature
+-40°C to 85°C
+EMI/EMC
+C omponent level radiated 
+emissions
+Electrical fast transient/
+burst immunity
+Power frequency magnetic 
+field immunity testing
+Total ionizing
+dose design
+capability
+Designed to 
+withstand at 
+least 30 krad TID
+COST
+TYPICAL LEAD TIME
+CONTACT
+4 Weeks
+< 8 Weeks
+CONTACT
+< 8 Weeks
+CONTACT
+https://umbra.space/space-systems 
+space.systems@umbra.space
+
+POWER PACKAGE
+The Umbra Power Package  delivers a complete, integrated power solution for small satellites. Combining a high-
+efficiency, body-steered deployable solar array, high-density battery modules, and intelligent power management, it provides 
+reliable power for demanding LEO missions. Flight-proven components, Falcon 9 heritage, and a compact design ensure 
+mission success. Choose Umbra for a streamlined, high-performance power subsystem.
+FEATURES
+EASY | GENERATION, STORAGE & MANAGEMENT
+The Umbra Power Package provides a complete, pre-integrated power 
+subsystem, combining solar power generation, high-density energy storage, 
+and intelligent power management. This integrated approach simplifies 
+procurement, reduces integration complexity, and optimizes system-level 
+performance.
+FLIGHT-Proven | Validated Reliability
+Successfully flown on Falcon 9 rideshare missions to LEO, the solar array, 
+battery, and HDRM offer proven reliability. This flight heritage reduces mission 
+risk and provides assurance of dependable performance in real-world space 
+environments.
+Compact Power | SIMPLE INTEGRATION
+Featuring a high-efficiency, body-steered deployable (BSD) solar array and 
+high-energy-density lithium-ion battery modules, the system delivers robust 
+and reliable power. Body-steering removes the need for a solar array drive, 
+while the batteries ensure continuous operation through eclipse and peak 
+demand periods.
+LOW SWaP | REDUCE FOOTPRINT
+Engineered for small satellite applications, the Power Package optimizes 
+SWaP (Size, Weight, and Power) through its compact and lightweight design. 
+The high stowage efficiency of the array and the high energy density of the 
+batteries minimize the system's footprint, maximizing available payload 
+volume.
+DATA SHEET 5101D0002 REV 02
+PART 5101H10001-1
+Valid as of 03.20.2026
+16
+STOWED 
+ARRAY
+BATTERY
+GENERAL SPECIFICATIONS
+Bus Voltage Range
+28 V  ± 4V
+Bus Voltage Nominal
+28 V
+Single Array: 120 W generation BOL
+Dual Array: 240W generation BOL
+Peak Power
+Average Power
+N/A
+Power Umbilical
+Inhibits
+TT&C
+Electrical Interface
+Data Interface
+RS-422
+Intended Space 
+Environment
+LEO
+HERITAGE
+In combination: Individual component designs 
+flown on Umbra 1-10, combined 
+and repackaged for customer product
+Design Life
+5+ Years
+Production
+Assembled and tested in the USA
+CONFIGURATIONS
+TYPE
+DESCRIPTION & DETAILS
+SPACE READY
+No
+B attery Modules: Not Space Rated
+Power Management Unit: Not Space Rated
+EDU
+Default flight configuration (as described in this 
+data sheet)
+Umbra Steered Deployable Solar Array-120: 1x
+Umbra Battery Module-8S2P: 2x
+Umbra Power Management Unit: 1x
+Umbra Hold Down and Release Mechanism: 1x
+Yes
+FLIGHT
+PMU
+ENVIRONMENTAL SPECIFICATIONS
+Random Vibe
+Qualified to 14.16 Gᵣₘₛ 
+profile enveloping GEVS, 
+Falcon 9, SpaceX 
+Rideshare, and Electron 
+levels
+Shock
+Qualified to 1000g peak 
+profile enveloping GEVS, 
+Falcon 9, SpaceX 
+Rideshare, and Electron 
+levels
+Operating 
+Temperature
+Solar Array & HDRMS: 
+-50°C to 90°C 
+Survival 
+Temperature
+Solar Array & HDRMS: 
+-60°C to 120°C
+Total Ionizing 
+Dose Design 
+Capability
+Designed to 
+withstand at 
+least 30 krad TID
+TYPICAL LEAD TIME
+COST
+< 6 Weeks
+CONTACT
+< 18 Weeks
+CONTACT
+https://umbra.space/space-systems 
+space.systems@umbra.space
+
+REACTION WHEEL
+The Umbra Reaction Wheel  delivers precise and reliable attitude control for small satellites, focusing on responsible 
+space debris mitigation. Designed for demisability per NASA standards, this > 2 Nms reaction wheel offers high torque and 
+momentum in a compact, lightweight package. Optimized for seamless integration with other Umbra Components and test 
+levels tailored for Falcon 9 Rideshare, it provides a qualified, high-performance solution for demanding missions.
+FEATURES
+Responsible De-orbiting | Demiseable  Design
+Engineered for complete demisability upon atmospheric re-entry in 
+compliance with NASA-STD-8719.14C, this reaction wheel minimizes space 
+debris. This commitment to responsible space operations is crucial for 
+sustainable LEO activities and simplifies the licensing process.
+BUILT for Reliability | Redundancy & Quality
+Built for dependable operation, the Umbra Reaction Wheel features 
+redundant Hall Effect control and ABEC 7 ceramic angular contact bearings. 
+These high-quality components enhance reliability and ensure long-term 
+performance in the harsh space environment.
+High-Performance Control | Momentum 
+Providing >2 Nms of momentum and 100 mNm of maximum torque, the 
+Umbra Reaction Wheel enables precise attitude control and agile 
+maneuvering for small satellites. This high-performance capability allows for 
+demanding pointing requirements and quick response to disturbances.
+STANDARD INTERFACE | EASY INTEGRATION
+Designed for optimized performance and seamless integration with any GNC 
+system utilizing RS-485 communication, the Umbra Reaction Wheel works 
+harmoniously with other Umbra components. Contact us for more 
+information on Umbra's fully integrated GNC solution, utilizing Umbra 
+Reaction Wheels.
+DATA SHEET 5021D0002 REV 02 
+PART 5021H10001-1
+Valid as of 03.20.2026
+18
+GENERAL SPECIFICATIONS
+6.0 in x 6.0 in x 1.5 in
+Max Dimensions
+Mass
+2 kg
+Input Voltage Range
+24-32 V
+Input Voltage Nominal
+28 V
+Peak Power
+100 W at maximum torque (typical)
+Average Power
+5 W steady state draw
+Electrical Interface
+15-Socket Micro-D Connector
+Data Interface
+RS-485
+Intended Space 
+Environment
+Multi-orbit
+Qualification testing complete in Q2 2026
+HERITAGE
+Design Life
+5+ Years
+Assembled and tested in the USA
++/- 2.0 Nms (at max rpm)
+Production
+Momentum
+250 mNm
+Max Torque
+CONFIGURATIONS
+TYPE
+DESCRIPTION & DETAILS
+SPACE READY
+Suitable for use in Hardware-in-the-Loop 
+testbeds and software development 
+testbeds
+No
+EDU
+Flight Hardware with Acceptance Testing
+FLIGHT
+Yes
+Umbra Space Systems is adding additional 
+wheel sizes to our catalog. Please contact us 
+with your needs.
+CUSTOM
+Inquire
+ENVIRONMENTAL SPECIFICATIONS
+Random Vibe
+Qualified to 14.16 Gᵣₘₛ 
+profile enveloping GEVS, 
+Falcon 9, SpaceX 
+Rideshare, and Electron 
+levels
+Shock
+Qualified to 1000g peak 
+profile enveloping 
+GEVS, Falcon 9, SpaceX 
+Rideshare, and Electron 
+levels
+Operating 
+Temperature
+-34°C to 70°C
+Survival 
+Temperature
+-34°C to 80°C
+Total ionizing
+dose design
+capability
+Designed to 
+withstand at 
+least 30 krad TID
+TYPICAL LEAD TIME
+COST
+< 4 Weeks
+CONTACT
+< 12 Weeks
+CONTACT
+Inquire
+CONTACT
+https://umbra.space/space-systems 
+space.systems@umbra.space
+
+S-BAND RADIO
+The Umbra S-Band Radio  is a qualified transceiver for command and telemetry in Low Earth Orbit (LEO). It supports Unified 
+S-Band, complies with modulation and coding standards defined by the Consultative Committee for Space Data Systems 
+(CCSDS MODCOD), and integrates easily via an industrial Ethernet interface. With testing tailored for Falcon 9 rideshare 
+missions, it offers post-launch configurability for flexibility on-orbit, reliable communication with commercial ground stations 
+and compatibility with launch requirements. Above all, the Umbra S-Band Radio boasts high value and short lead times.
+FEATURES
+On-Orbit Flexibility | REMOTELY Configurable
+The Umbra S-Band Radio offers unparalleled flexibility, allowing for complete 
+reconfiguration of communication parameters after launch. This powerful 
+capability enables on-the-fly adjustments to optimize performance and 
+adapt to evolving mission needs throughout the satellite's operational life.
+Global Compatibility | Unified S-Band & CCSDS
+Engineered for full compliance with the Unified S-Band standard and 
+Consultative Committee for Space Data Systems (CCSDS)  modulation and 
+coding schemes (MODCOD), the Umbra S-Band Radio ensures 
+robust communication compatibility. This standard adherence simplifies 
+operations and guarantees reliable data links with diverse systems.
+SPACE QUALIFIED | RADIO HERITAGE
+Umbra's extensive history in RF payloads and high-performance downlinks 
+has led to the design of the Umbra S-Band Radio. Fully space qualified, this 
+design offers a full 2W output power to close demanding link budgets.
+Worry-free Telemetry | Simple integration
+Built on Umbra's operational experience with Telemetry, Tracking, and Control 
+(TT&C) via commercial ground network providers. The Umbra S-Band Radio 
+has been engineered to provide seamless integration into your spacecraft, 
+your test Hardware-in-the-Loop testbed, and to ensure reliable connection 
+with your chosen ground provider.
+DATA SHEET 5111D0002 REV 02
+PART 5111H10001-1
+Valid as of 03.20.2026
+20
+GENERAL SPECIFICATIONS
+Max Dimensions
+4.82 in x 3.7 in x .812 in
+< 300 g
+Mass
+Bus Voltage Range
+28 ± 4 V
+Bus Voltage Nominal
+28 V
+Peak Power
+15.7 W while transmitting
+Average Power
+4.4 W while receiving
+Electrical Interface
+15-Pin Micro-D Connector
+GigE over IX connector with Serial backup
+Data Interface
+Intended Space Environment
+LEO
+HERITAGE
+Acceptance tested. First Flight Q2 2026
+5+ Years
+Design Life
+Assembled and tested in the USA
+Production
+Output Power
+Up to 2 W
+Data Rate
+1 kbps to 1 Mbps
+OPERATING DOPPLER
+± 100 kHz at 10 kHz/s
+Sensitivity @ 100kbps
+-100 dBm
+Transmit MODCOD
+OQPSK, HDLC, NRZ-L/M/S, Convolutional 
+Encoding (k=7, ½, G2 inverted), Reed-Solomon 
+(255,223)
+Receive MODCOD
+BPSK, HDLC, NRZ-L/M/S
+Frequency Range
+Uplink: 2025 MHz to 2110 MHz, 
+Downlink: 2200 MHz to 2290 MHz
+Acquisition Time
+< 3 seconds
+CONFIGURATIONS
+TYPE
+DESCRIPTION & DETAILS
+SPACE READY
+Suitable for Hardware-in-the-Loop 
+testbeds
+Acceptance Tested
+Optional – Diplexer
+Optional – Diplexer + Splitter
+Umbra Space Systems offers custom 
+modifications. Please contact.
+No
+EDU
+Yes
+FLIGHT
+CUSTOM
+Inquire
+ENVIRONMENTAL SPECIFICATIONS
+Random Vibe
+Qualified to 14.16 Gᵣₘₛ 
+profile enveloping GEVS, 
+Falcon 9, SpaceX 
+Rideshare, and Electron 
+levels
+Shock
+Qualified to 1000g peak 
+profile enveloping GEVS, 
+Falcon 9, SpaceX 
+Rideshare, and Electron 
+levels
+Operating 
+Temperature
+-30°C to 65°C
+Survival 
+Temperature
+-40°C to 85°C
+EMI/EMC
+MIL-STD-461
+Total ionizing
+dose design
+capability
+Designed to 
+withstand at least 
+30 krad TID
+COST
+TYPICAL LEAD TIME
+< 5 Weeks
+CONTACT
+< 8 Weeks
+CONTACT
+Inquire
+CONTACT
+https://umbra.space/space-systems 
+space.systems@umbra.space
+
+SOLAR ARRAY
+The Umbra Body Steered Deployable Solar Array  delivers more than 120W of reliable power in a compact, flight-
+proven design for small satellites. Optimized for body-steering in Low Earth Orbit (LEO), this tri-fold array features high 
+dynamic stability and redundant, premium triple-junction solar cells. Validated on Falcon 9 and designed for seamless 
+integration within the Umbra Integrated System, this solar array provides a dependable, high-performance power generation 
+solution.
+FEATURES
+Compact Power | High Efficiency
+The Umbra Solar Array generates 120W of peak power (BOL) from a 
+compact, tri-fold design. This high power density, combined with premium 
+triple-junction solar cells, maximizes energy generation while minimizing 
+stowed volume, crucial for small satellite applications.
+FLIGHT-Proven | Validated Reliability
+Validated through successful deployments, the Umbra Solar Array offers 
+proven reliability and performance in real-world space environments. This 
+flight heritage, combined with its compatibility with the Umbra HDRM, 
+provides mission-ready confidence and minimizes risk.
+Body-Steering Optimized Design
+Specifically engineered for body-steering, this array eliminates the need for 
+complex, dedicated pointing mechanisms. This design simplifies spacecraft 
+design, reduces weight and power consumption, and enhances overall 
+mission efficiency for agile small satellites.
+Built to Endure | Robust & Redundant
+The Umbra Solar Array is built for long-term operation, featuring multiple 
+layers of redundancy in the photovoltaic design, premium triple-junction cells 
+with bypass diodes, and robust construction. Space-rated materials, rigorous 
+testing exceeding industry standards, and customizable coverglass options 
+ensure lasting performance in the harsh LEO environment.
+DATA SHEET 5081D0002 REV 02
+PART 5081H10001-1
+Valid as of 03.20.2026
+22
+GENERAL SPECIFICATIONS
+Max Dimensions Stowed
+Max Dimensions Deployed
+12.87 in x 12.95 in x 2.90 in
+40 in x 13 in x 10 in
+Mass
+Peak Power
+Electrical Interface
+HERITAGE
+2.5 kg
+120W generation BOL (at 28°C, AM0)
+Single MIL-38999 Connector
+Design flown on Umbra 1 - 12
+BOL: 38.2 V (at 28°C)
+EOL: 37.4 V (at 28°C, 5-year estimate)
+VOC
+BOL: 34.0 V (at 28°C)
+EOL: 33.0 V (at 28°C, 5-year estimate)
+VMP
+IMP
+PRODUCTION
+BOL: 9 Strings @ 445 mA = 4 total
+Assembled and tested in the USA
+CONFIGURATIONS
+TYPE
+DESCRIPTION & DETAILS
+SPACE READY
+Deployable panels only, for use in 
+structural/thermal model builds
+Cells not included
+Single & Double Available
+No
+EDU
+Acceptance tested
+Multiple arrays can be used on the same 
+spacecraft, or integrated into the UMBRA 
+POWER PACKAGE
+FLIGHT
+Yes
+Umbra Space Systems offers custom 
+modifications. Please contact.
+CUSTOM
+Inquire
+ENVIRONMENTAL SPECIFICATIONS
+Random Vibe
+Qualified to 14.16 Gᵣₘₛ profile 
+enveloping GEVS, Falcon 9, 
+SpaceX Rideshare, and 
+Electron levels
+Shock
+Qualified to 600g peak 
+profile enveloping 
+attenuated GEVS, Falcon 9, 
+SpaceX Rideshare, and 
+Electron levels
+Operating 
+Temperature
+-50°C to 90°C
+Survival 
+Temperature
+-60°C to 120°C
+Total ionizing
+dose design
+capability
+Designed to 
+withstand at least 
+30 krad TID
+COST
+TYPICAL LEAD TIME
+< 4 Weeks
+CONTACT
+Single Wing: < 12 Weeks
+Double Wing: < 16 Weeks
+CONTACT
+Inquire
+CONTACT
+https://umbra.space/space-systems 
+space.systems@umbra.space
+
+SYNCRELEASE 4
+The UMBRA Synchronized RELEASE MECHANISM 4  is a spacecraft separation system designed for precise and controlled 
+deployment from a launch vehicle. The Umbra SyncRelease 4 is engineered for small satellites to ensure low-shock, debris-
+free separation. Optimized for SpaceX Falcon 9 Rideshare missions, Umbra SyncRelease 4 presents a reliable integration for 
+its associated payload and surrounding mission assets. This lightweight, all-inclusive solution simplifies spacecraft 
+deployment while maintaining the reliability required for extreme launch environments.
+FEATURES
+Debris-Free Deployment | EASY INTEGRAtION
+The mechanism ensures a simple & synchronized deployment, generating 
+minimal foreign object debris (FOD). Unlike traditional pyrotechnic systems, 
+the Umbra SyncRelease 4 is easily resettable, speeding up integration testing 
+and launch site integration.
+VALIDATED | Mission-ready reliability
+Umbra continuously seeks to expand the envelope of spacecraft mass 
+properties validated for Umbra SyncRelease 4 customers. The Umbra 
+SyncRelease 4 provides simple actuation you can trust. The inherent 
+reliability of the design minimizes mission risk and ensures dependable 
+separation in real-world space environments.
+Low-Shock Separation | Protect Payload
+Engineered for low-shock separation, the Umbra SyncRelease 4 minimizes 
+the loads on your spacecraft during deployment. This design protects 
+sensitive instruments and components, ensuring their operational integrity 
+after launch.
+Tailored DEPLOYMENT | Customizable
+Offering customization for CG offset, Umbra engineers will work to tailor the 
+deployment parameters to your specific spacecraft and mission needs. This 
+flexibility ensures optimal separation conditions for a wide range of small 
+satellite platforms.
+DATA SHEET 5011D0002 REV 02
+PART 5011H10001-1
+Valid as of 03.20.2026
+24
+GENERAL SPECIFICATIONS
+Max Dimensions
+17.700 in x 19.680 in x 3.480 in
+Lower/Launch Vehicle Side: 5.48 kg  
+Upper/Flyaway Vehicle Side: 0.92 kg
+Mass
+bus voltage range
+24 - 32 V
+BUS VOLtage nominal
+28 V
+< 4.5 W
+Peak Power
+3W @ 24V
+Average power
+9-Socket D-Sub Connector
+Electrical Interface
+Intended Space 
+Environment
+Separation occurring within 
+4 hours of launch
+HERITAGE
+Protoflight planned Q3 2026
+Design Life
+1 Launch, plus > 5 I&T actuation cycles
+Production
+Assembled and tested in the USA
+CONFIGURATIONS
+TYPE
+DESCRIPTION & DETAILS
+SPACE READY
+Suitable for test fits and Hardware-in-
+the-Loop testbeds
+No
+EDU
+Flight Hardware with Acceptance Testing
+FLIGHT
+Yes
+Umbra Space Systems offers custom 
+configurations tailored for your spacecraft 
+mass properties. Please contact.
+CUSTOM
+Inquire
+ENVIRONMENTAL SPECIFICATIONS
+Random Vibe
+Qualified to 14.16 Gᵣₘₛ 
+profile enveloping 
+GEVS, Falcon 9, 
+SpaceX Rideshare, and 
+Electron levels
+Shock
+Qualified to 2,000g 
+peak profile
+Operating 
+Temperature
+-30°C to 70°C
+Survival Temperature
+-40°C to 80°C
+Quasi-Static Load
+Qualified to 12.5g axial 
+and 16.88g lateral sine 
+bursts
+COST
+TYPICAL LEAD TIME
+< 6 Weeks
+CONTACT
+< 16 Weeks
+CONTACT
+Inquire
+CONTACT
+https://umbra.space/space-systems 
+space.systems@umbra.space
+
+SPACE 
+SYSTEMS
+https://umbra.space/space-systems 
+space.systems@umbra.space
+
+SPACE 
+SYSTEMS
+https://umbra.space/space-systems 
+space.systems@umbra.space
+
+SPACE 
+SYSTEMS
+https://umbra.space/space-systems 
+space.systems@umbra.space
+THANK YOU
+

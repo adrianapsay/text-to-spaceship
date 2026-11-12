@@ -1,0 +1,3 @@
+url: https://content.harwin.com/asset/85d293be-c09f-4fa0-a334-46b2f60da08c/PD007-Product-Datasheet-Gecko-range-signal-connectors-HRi.pdf
+found from: https://content.harwin.com/asset/85d293be-c09f-4fa0-a334-46b2f60da08c/PD007-Product-Datasheet-Gecko-range-signal-connectors-HRi.pdf
+found by Claude (web search) on 2026-11-11; downloaded by fetch_pass5.py

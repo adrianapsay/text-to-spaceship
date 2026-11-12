@@ -1,0 +1,3 @@
+url: https://satcatalog.s3.amazonaws.com/components/923/SatCatalog_-_Aerojet_Rocketdyne_-_MR-502A_IMPEHT_-_Datasheet.pdf
+found from: https://satcatalog.com/component/mr-502a-impeht/
+downloaded on the lab laptop by harvest_catalogs.py (pass 6) on 2026-11-11

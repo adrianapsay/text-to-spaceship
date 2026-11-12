@@ -1,0 +1,173 @@
+ 
+PdR, Vía a Samborondon km 3.5 #4129           Facebook 
+(593) 999 429106  Guayaquil – Ecuador          LinkedIn 
+(593) 987443668                                                                info@exa.ec - www.exa.ec - @EXA_ec 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+     
+ 
+ 
+ 
+ 
+Hinges Micro L:  
+MICROSAT SIZED HINGES WITH INTEGRATED LOCKING 
+MECHANISM FOR RELIABLE DEPLOY OPERATIONS 
+
+ 
+PdR, Vía a Samborondon km 3.5 #4129           Facebook 
+(593) 999 429106  Guayaquil – Ecuador          LinkedIn 
+(593) 987443668                                                                info@exa.ec - www.exa.ec - @EXA_ec 
+ 
+ 
+ 
+ 
+ 
+The Micro Hinges L are mechanically simple, minimalistic and very solid, CNC machined, sturdy and 
+thick with very few failure points. They are mechanically actuated by loaded torsion springs 
+calibrated to each individual array, attached with screws to the panel, lubricated with solid 
+(powdered) graphene and coated in corona dope for any non-conductive surface. The mechanical 
+movement range is also hard-in-design, specific to the particular hinge by stops incorporated into 
+the geometry of the assembly. This extra powerful hinge also has an incorporated locking 
+mechanism actuated by loaded compression springs that push a locking tab in place, denying 
+movement to the hinge unless manually pulled. Using only tweezers or pins, the locking 
+mechanism can be reset an unlimited number of times by pulling the locking tab. Each individual 
+hinge can also, optionally, be configured as conductive to carry current from panel to panel. 
+ 
+ 
+ 
+ 
+• Hard-stop custom deploy angle specified before manufacturing 
+• Angular locking mechanism to maintain position 
+• Manually resettable as many times as needed 
+• All components are CNC machined with micron-precision 
+• Corona dope coating for electrical isolation if required 
+• Powered graphene lubrication for internal mechanisms 
+• Optional cable-less single-channel electrical conductivity per hinge 
+• Torque adjustment and tuning system for a case-by-case basis 
+• Mechanically minimalistic, single spring operated 
+• Sturdy, thick and over-engineered design 
+• Custom configurable choice of mechanical mating and screws  
+• Designed for MicroSat applications, missions and requirements. 
+• Manufactured according to NASA and ESA space standards and materials. 
+• Repetitive functional and performance tests provided with documentation. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+SUMMARY 
+FEATURES 
+
+ 
+PdR, Vía a Samborondon km 3.5 #4129           Facebook 
+(593) 999 429106  Guayaquil – Ecuador          LinkedIn 
+(593) 987443668                                                                info@exa.ec - www.exa.ec - @EXA_ec 
+ 
+ 
+ 
+ 
+• Weight: 150 grams 
+• Max torque: 248Nmm to 1912Nmm 
+• Max angular deviation: +/- 1 deg 
+• Dimensions (LxHxW): 
+o Deployed (90 degrees): 100.00mm x 44.00mm x 44.00mm 
+o Deployed (180 degrees): 100.00mm x 44.00mm x 72.00mm 
+o Stowed (0 degrees): 100.00mm x 16.00mm x 44.00mm 
+o Interface Dimensions: 100mm x 25mm 
+o Nominal Thickness: 5mm 
+• Axis Diameter: 8.00mm 
+• Interface Flatness: +/- 0.01mm 
+• Operating Temperature: -100C to +150C 
+ 
+ 
+ 
+ 
+ 
+• Only TML and CVCM < 1% materials used, NASA and ESA approved. 
+• Hinge Material (options): 
+o Stainless Steel 304 
+o BeCu CNS 17200 Y1/2 
+o Aluminum 6061 
+o Aluminum 7075 
+• Spring, Axis, Screws: Stainless Steel 304 
+• Lubrication: Powdered graphene coating 
+• Electrical Isolation (if required): Corona Dope 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+PERFORMANCE AND PRODUCT PROPERTIES 
+MATERIALS 
+
+ 
+PdR, Vía a Samborondon km 3.5 #4129           Facebook 
+(593) 999 429106  Guayaquil – Ecuador          LinkedIn 
+(593) 987443668                                                                info@exa.ec - www.exa.ec - @EXA_ec 
+ 
+ 
+ 
+ 
+All antennas are provided with tests reports regarding: 
+ 
+• Thermal Bake out (10E-5 mbar @ 50C for 72 hours) 
+• Full vibration test for Falcon 9, Electron, Soyuz, Dnepr and Long March 2D 
+ 
+Test 
+QT 
+AT 
+Functional  
+Vibration  
+ 
+Thermal Cycling  
+ 
+Thermal Vacuum  
+ 
+Repeatability (100 times) 
+ 
+ 
+ 
+ 
+ 
+• 6 to 8 weeks 
+ 
+ 
+TESTING 
+AVAILABILITY AND LEAD TIME 
+
+ 
+PdR, Vía a Samborondon km 3.5 #4129           Facebook 
+(593) 999 429106  Guayaquil – Ecuador          LinkedIn 
+(593) 987443668                                                                info@exa.ec - www.exa.ec - @EXA_ec 
+ 
+ 
+

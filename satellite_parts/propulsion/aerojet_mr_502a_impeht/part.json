@@ -1,0 +1,218 @@
+{
+ "id": "aerojet_mr_502a_impeht",
+ "name": "Aerojet Rocketdyne MR-502A IMPEHT",
+ "category": "propulsion",
+ "subcategory": "electric_thruster",
+ "vendor": "Aerojet Rocketdyne",
+ "model": "MR-502A IMPEHT",
+ "dimensions_mm": {
+  "x": 279.4,
+  "y": 94.2,
+  "z": 146.1
+ },
+ "mass_g": 870.0,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satcatalog.s3.amazonaws.com/components/923/SatCatalog_-_Aerojet_Rocketdyne_-_MR-502A_IMPEHT_-_Datasheet.pdf",
+  "document": {
+   "title": "Aerojet Rocketdyne MR-502A IMPEHT data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-11",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Read from the vendor data sheet (SatCatalog_-_Aerojet_Rocketdyne_-_MR-502A_IMPEHT_-_Datasheet.pdf): dimensions \" . . . . . . . . . . . . . . . . 2 kg \u2022 Envelope . . . . . . . . . . . . . . 27.94 x 9.42 x 14.61 cm \u2022 Input V\"; mass \"29.5 \u2013 Vdc Letdown Mass\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026.\u20260.87 kg (1.9\". Catalog page lists 0.87 kg. Electrical / RF values found in the data sheet or page text by pattern (quoted where possible).",
+  "found_via": "https://satcatalog.com/component/mr-502a-impeht/"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "flight_heritage": true,
+ "electrical": {
+  "power_W": {
+   "nominal": 748.0
+  },
+  "quote": "average power consumption of 748 W"
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   279.4,
+   94.2,
+   146.1
+  ],
+  "mesh_volume_mm3": 3845242.5,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 0.226,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    279.4,
+    94.2,
+    146.1
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "feet",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/feet.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "connector_shell",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/connector_shell.stl"
+    },
+    {
+     "name": "connector_insert",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector_insert.stl"
+    },
+    {
+     "name": "jackscrews",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/jackscrews.stl"
+    },
+    {
+     "name": "label",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies_detail/label.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://satcatalog.s3.amazonaws.com/components/923/SatCatalog_-_Aerojet_Rocketdyne_-_MR-502A_IMPEHT_-_Datasheet.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

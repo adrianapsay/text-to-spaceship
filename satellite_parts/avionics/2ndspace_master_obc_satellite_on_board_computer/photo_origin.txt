@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-2ndspace-master-obc-satellite-on-board-computer-g4o5yp.pdf
+method: product image from the catalog page https://satsearch.co/products/2ndspace-master-obc

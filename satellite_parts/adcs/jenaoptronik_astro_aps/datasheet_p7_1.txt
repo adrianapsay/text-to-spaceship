@@ -1,0 +1,127 @@
+Autonomous Star Sensor ASTRO APS
+The Jena-Optronik ASTRO APS is an Autonomous Star Sensor with the most 
+advanced radiation hard CMOS Active Pixel Sensor detector technology for 
+long-term missions on Telecom, Science and Earth Observation satellites.
+space for success
+The ASTRO APS has been designed with compact 
+dimensions, low mass, and low power consumption.  
+Since July 2013, the ASTRO APS has been accumulating 
+space heritage operating flawlessly on board of Alphasat.
+Features
+• Lifetime on orbit >18 years
+• Radiation design for 25 years GEO environment
+• APS design with space qualified CMOS detectors
+• Full performance with Moon in the field of view
+• Very robust against solar flare environment and false star objects 
+• Data fusion between several ASTRO APS star sensors for full 3-axes 
+   attitude measurement, improved agility performance, and autonomous 
+   FDIR capabilities
+ASTRO APS Highlights
+• Autonomous compensation of White Spots, DSNU, FPN and Dark 
+   Current
+• LSFE fully compensated over entire lifetime due to smart self-
+   calibration
+• Both "lost in space" attitude acquisition and attitude tracking possible 
+   w/o Peltier cooling over entire operational temperature range
+• Integrates either APS HAS2 or STAR1000 detector chips depending on 
+   mission demands
+
+All data is subject to change without notice. Copyright 01/2015 Jena-Optronik GmbH.  Picture Alphsat © ESA
+Jena-Optronik GmbH · Otto-Eppenstein-Straße 3 · 07745 Jena · Germany  
+Phone +49 3641 200-110 · Fax +49 3641 200-222 
+Email sales@jena-optronik.de · Web www.jena-optronik.com  
+Size & Mass
+Dimensions
+154 mm x 154 mm x 237 mm 
+including baffle
+Mass
+approx. 2 kg
+including baffle, GEO-shielding, DC/DC-converter, MIL1553
+Imaging System Design
+Optics
+refractive, focal length 43 mm, f/1.2
+aspherical lens technology, rad-hard glass material
+Detector Resolution
+1024 x 1024 pixels
+Field of View
+20 deg
+circular
+Detector Options
+HAS2 
+APS CMOS radiation tolerant
+STAR1000
+APS CMOS radiation hard
+Temperature Range
+Operational 
+-30 °C ... +60 °C
+typical cooler controller set point at TAPS=+30°C
+Non-operational
+-40 °C ... +70 °C
+Attitude Performance
+Random Error
+< 1 arcsec [1σ], across boresight
+includes LSFE, HSFE, TE
+< 8 arcsec [1σ], boresight
+Bias Error
+< 5 arcsec, all axes
+over full operational temperature range
+Acquisition Time
+< 10 sec, after switch-ON
+< 5 sec, re-acquisition “lost in space”
+direct entry to attitude tracking with apriori information
+Slew Rate & Acceleration
+< 0.3 deg/sec, ≤ 0.3 deg/sec²
+full performance
+≤ 3.0 deg/sec, ≤ 2.0 deg/sec²
+STAR1000 single head capability
+≤ 5.0 deg/sec, ≤ 7.0 deg/sec² 
+HAS2 single head capability
+Sensitivity
+6.0mi G0-reference star
+end of life performance
+Sampling Rate
+10 Hz
+16 Hz
+others up to 32 Hz on demand
+Stray Light
+Sun:         26 deg exclusion angle
+half cone
+Earth:      < 20 deg
+depending on orbit height and Earth illumination conditions
+Moon:      accepted in field of view
+Interfaces
+Data
+MIL-STD-1553B
+optional selectable, others on demand
+RS422
+Power
+28V nominal
+optional selectable for either regulated or unregulated 
+50V nominal
+primary power s/c bus architectures
+100V nominal
+other voltages on demand
+Power  Consumption
+MIL-STD-1553B
+< 6 W, Peltier Cooler OFF
+end of life
+data interface
+< 12 W, Peltier Cooler ONMAX
+RS422
+< 5 W, Peltier Cooler OFF
+end of life
+data interface
+< 11 W, Peltier Cooler ONMAX
+Operations
+Reliability
+460 FIT, TI/F=20°C
+with Class 1 EEE parts
+Operational Modes
+Boot
+fully autonomous mode switching from Power-ON to NAT 
+Standby-Mode
+by software parameter set-up possible
+Autonomous Attitude Determination (AAD)
+Nominal Attitude Tracking (NAT)
+Photo, Upload/Download, Self-Test
+

@@ -1,0 +1,156 @@
+G
+eneral Dynamics’ space-qualified HRT-440 Mission Data 
+Transmitter will maximize your data downlink at X-Band. 
+Implementing the powerful new CCSDS Low Density Parity 
+Check (LDPC) code, the performance of this state-of-the-art unit 
+approaches the Shannon theoretical limit for channel capacity. 
+Standard operation is SQPSK modulation at the traditional 8.2 GHz 
+downlink band, with options available for Tracking and Data Relay 
+Satellite System (TDRSS) Ku-Band or Ka-Band operation.
+The HRT-440 utilizes the latest space-qualified and radiation-
+hardened FPGA, ASIC, and GaAs MMIC technology. Implemented 
+using space-proven design techniques from our line of transponders, 
+the result is a high-performance and reliable unit with a very small 
+size, low mass and power.
+The transmitter includes a low power, level controlled output suitable 
+for driving power amplifiers. An optional 15 Watt solid state power 
+amplifier (SSPA) can be provided if desired for feeding downlink 
+antennas.
+X-BAND HIGH RATE MISSION DATA
+TRANSMITTER (HRT-440)
+Proven design with state-of-the-art encoding
+www.gd-ais.com/space
+Features
+• 
+SQPSK Modulation
+• 
+Up to 440 MBPS data rate 
+(uncoded)
+-	 384 MBPS w/LDPC Encoding
+-	 Optional dual data rate capability
+-	 Data rates can be custom 
+	
+ordered
+• 
+X-Band Frequency: 8200.5 MHz
+-	 Option for Ka Band output
+• 
+Built-in commandable test patterns
+- 	 223 - 1 PN pattern included
+• 
+Forward Error Correction Coding
+- 	 CCSDS (8160,7136) LDPC
+- 	 Optional Codes
+- 	 CCSDS Reed-Solomon
+- 	 Convolutional Encoding
+• 
+Redundant 8-bit parallel LVDS data 
+interfaces
+- 	 Output source clock for 
+	
+synchronous operation
+• 
+Redundant 8-bit Serial Command 
+& Telemetry
+• 
+DRO/TCXO Frequency Source
+• 
+Radiation and SEE Tolerant
+• 
+Mass Less than 5 Pounds
+• 
+Envelope < 160 Cubic Inches
+- 	 8.0” x 6.6” Footprint
+• 
+Qualified over -34 to +71°C
+• 
+Internal High Efficiency Power 
+Converter 22 to 36 VDC Input 
+Range
+• 
+Internal level controlled output for 
+driving Phased-Array Antenna or 
+High-Power Amplifier
+- 	 Optional 15 W SSPA available
+
+www.gd-ais.com/space
+X-Band High Rate Mission Data
+Transmitter (HRT-440)
+Performance Characteristics
+RF
+• Output Frequencies: X-Band: 8.2005 GHz
+	
+-	 Optional TDRSS Ku-Band and Ka-Band capability
+• Output Power: +10 dBm Nominal
+• Modulation: SQPSK
+• Data Rate:
+	
+-	 Up to 440 Mbps Uncoded
+	
+-	 Up to 384 Mbps (8160,7136) LDPC coded
+	
+-	 Option for selectable dual-data rates
+Data Encoding/Formatting
+• Standard Forward Error Correction: (8160,7136) LDPC
+	
+-	 Standard Near-earth code per CCSDS 131.1-O-2
+	
+-	 Frame Length: 892 bytes data, 128 bytes parity, 4 bytes ASM
+	
+-	 FEC bypass on command
+• Framing ASM Word: 1A,CF,FC,1D Hex
+• Randomization:
+	
+-	 Mission Data plus Parity randomized per CCSDS standard
+	
+-	 Randomizer bypass on command
+• Pulse Shaping: Custom analog pre-modulation filtering.
+• Optional FEC Codes:
+	
+-	 (4088,3360) LDPC
+	
+-	 (255/223) Reed-Solomon with interleave depth I=1 to 5
+	
+-	 Rate ½ Convolutional
+Manufacturer reserves the right to change specifications to reflect latest 
+changes in technology and improvements at any time without notice. 
+Export is subject to U.S. Government regulations
+User Interfaces/Connectors
+• Primary User Data: 8-Bit Parallel w/source clock /25 skt Micro-D
+• Redundant User Data: 8-Bit Parallel w/source clock /25 pin Micro-D
+• Command/Telemetry:
+	
+-	 Primary/Redundant: 8O1 UART /21-skt Micro-D
+• Discrete Telemetry:
+	
+-	 Primary: Voltage, Temperature, PLL Lock, more /21 pin Micro-D
+	
+-	 Redundant: Voltage, Temperature, PLL Lock, more /21 pin Micro-D
+• DC Power:
+	
+-	 Primary/Redundant: 28VDC power /9 skt Micro-D
+• RF Output /SMA Jack
+Input Power
+• Operating Voltage: 22.0 – 36.0 VDC
+• Input Operating Power: 15 Watts maximum
+General
+• Mass: 5 lbs (2.3 Kg) maximum
+• Size: 8.0”L x 6.6”W x 3.0”H (20.3cm X 16.8cm X 7.6 cm) maximum 
+envelope
+• Temperature Limits:  -34° C to +71° C (Qualification)
+	
+	
+-24° C to +61° C (Acceptance)
+• Radiation: TID > 40 krad (Si)
+ 
+- Most parts are >100 kRad (call for availability of radiation upgrades)
+	
+SEE tolerant
+DS4-0514-8
+For More Information, Contact:
+Joseph Verderame
+Manager, Business Development
+480.586.9973
+joseph.verderame@gd-ais.com
+www.gd-ais.com/space
+

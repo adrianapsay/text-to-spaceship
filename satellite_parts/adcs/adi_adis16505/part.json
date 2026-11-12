@@ -1,0 +1,138 @@
+{
+ "id": "adi_adis16505",
+ "name": "Analog Devices ADIS16505 MEMS inertial measurement unit (BGA)",
+ "category": "adcs",
+ "subcategory": "imu",
+ "vendor": "Analog Devices",
+ "model": "ADIS16505",
+ "dimensions_mm": {
+  "x": 15,
+  "y": 15,
+  "z": 5
+ },
+ "mass_g": 1.75,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www-cce.cldnet.analog.com/media/en/technical-documentation/data-sheets/adis16505.pdf",
+  "document": {
+   "title": "Analog Devices ADIS16505 data sheet",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "adcs",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "Approximately 15 x 15 x 5 mm BGA, 1.75 g (Table 4), gyro up to +-2000 deg/s, in-run bias 2.3 deg/h (best model), accelerometer +-8 g, 3.0 to 3.6 V, 44 mA typical, SPI, -40 to +105 C. Commercial part."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "USA",
+ "distributors": [
+  "Digi-Key",
+  "Mouser",
+  "Analog Devices"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "distributor",
+  "source": null
+ },
+ "adcs": {
+  "gyro_range_deg_s": 2000,
+  "gyro_bias_stability_deg_h": 2.3,
+  "accel_range_g": 8
+ },
+ "electrical": {
+  "voltage_V": {
+   "min": 3.0,
+   "max": 3.6
+  },
+  "current_mA": 44,
+  "interfaces": [
+   "SPI"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -40,
+   "max": 105
+  }
+ },
+ "mass_note": "upper bound (<1.75 g)",
+ "geometry": {
+  "measured_bbox_mm": [
+   15.0,
+   15.0,
+   5.0
+  ],
+  "mesh_volume_mm3": 1125.0,
+  "watertight": true,
+  "render_kind": "box",
+  "effective_density_g_cm3": 1.556,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 12
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "SPI"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://www-cce.cldnet.analog.com/media/en/technical-documentation/data-sheets/adis16505.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

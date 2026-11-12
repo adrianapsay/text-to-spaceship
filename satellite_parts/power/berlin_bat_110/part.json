@@ -1,0 +1,174 @@
+{
+ "id": "berlin_bat_110",
+ "name": "Berlin Space Technologies BAT-110",
+ "category": "power",
+ "subcategory": "battery",
+ "vendor": "Berlin Space Technologies",
+ "model": "BAT-110",
+ "dimensions_mm": {
+  "x": 240.0,
+  "y": 119.0,
+  "z": 87.0
+ },
+ "mass_g": 3000.0,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satcatalog.s3.amazonaws.com/components/1287/SatCatalog_-_Berlin_Space_Technologies_-_BAT-110_-_Datasheet.pdf",
+  "document": {
+   "title": "Berlin Space Technologies BAT-110 data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-11",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Read from the vendor data sheet (SatCatalog_-_Berlin_Space_Technologies_-_BAT-110_-_Datasheet.pdf): dimensions \"BST Li-Fe Battery System C H A R A C T E R I S T I C S Size 240x119x87mm\u00b3 Weight\"; mass \"ize 240x119x87mm\u00b3 Weight 3000g Nom\". Catalog page lists 3.0 kg. Further values from the same data sheet: {\"electrical\": {\"battery_energy_Wh\": 172, \"power_W\": {\"peak\": 690, \"nominal\": 170}}}",
+  "found_via": "https://satcatalog.com/component/bat-110/"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "flight_heritage": true,
+ "electrical": {
+  "battery_energy_Wh": 172,
+  "power_W": {
+   "peak": 690,
+   "nominal": 170
+  }
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   240.0,
+   119.0,
+   87.0
+  ],
+  "mesh_volume_mm3": 2440860.4,
+  "watertight": true,
+  "render_kind": "battery_pack",
+  "effective_density_g_cm3": 1.229,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "cells",
+     "color": [
+      0.85,
+      0.72,
+      0.3
+     ],
+     "file": "bodies/part__cells.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 848
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    240.0,
+    119.0,
+    87.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "cells",
+     "color": [
+      0.2,
+      0.45,
+      0.7
+     ],
+     "file": "bodies_detail/cells.stl"
+    },
+    {
+     "name": "end_plates",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/end_plates.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
+  "datasheet_url": "https://satcatalog.s3.amazonaws.com/components/1287/SatCatalog_-_Berlin_Space_Technologies_-_BAT-110_-_Datasheet.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

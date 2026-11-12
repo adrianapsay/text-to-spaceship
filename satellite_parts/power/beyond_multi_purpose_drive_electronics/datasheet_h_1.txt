@@ -1,0 +1,112 @@
+Beyond Gravity
+beyondgravity.com
+Multi Purpose 
+Drive Electronics
+Low micro-vibration, high performance for all environments
+The Multi-Purpose Drive Electronics (MPDE) is a high-performance, two-axis 
+stepper motor controller optimized for smooth operation in demanding satellite 
+applications. Compatible with a wide range of actuators, it is available for 
+different power bus voltages, making it a versatile and flexible solution.
+
+Beyond Gravity
+beyondgravity.com
+Overview
+This document remains the intellectual property of Beyond Gravity Austria GmbH and may not be copied, 
+or used without their prior written approval.
+Internal Code/Doc.No.
+Issue 1 
+Protection
+Physical / environment
+Performance 
+Features 
+Interfaces
+The MPDE is a generic stepper motor controller 
+capable of operating various types of mechatronic 
+systems such as antenna pointing mechanisms, 
+solar arrays or thruster pointing mechanisms, with 
+up to 4 redundant motors. It has been optimized 
+for low micro-vibrations and is compatible to 
+different types of actuators. The MPDE comprises 
+two electrically identical units, operated in cold 
+redundancy.
+Each unit contains an isolated DC/DC converter as 
+well as a control module. It is controlled via a 
+MIL1553 TC/TM interface, which optionally may be 
+replaced by another command interface to adapt it 
+to different satellite platforms. The main feature of 
+the MPDE is its high flexibility, its large degree of 
+autonomy as well as its high drive performance 
+allowing a wide range of drive applications. 
+• Baseline: MIL-STD-1553B, UART (RS-422)
+• Optional: CAN, SpaceWire
+• Primary power bus options: 50V, 30V, 100V
+• On/off: High power command interface 
+• Discrete TM: Power status, unit temperature 
+• Thermistor acquisition interfaces
+• Potentiometer: user-defined calibration tables, 
+deadband detection, coarse/fine option for high-
+precision pointing
+• Switch: end-stop, reference position 
+• Start-up time: < 500 ms 
+• MIL-1553 TM rate: up to 16 Hz 
+• Motor Drive voltage: up to 60 V 
+• Drive current: up to 1 A, 8-bit 
+• Motor speed: 0 - 750 full-steps/s
+• Thermistor acquisition: 1.3°C in a range of -50° to 
++140°C; 0.5°C in reduced range 
+• Potentiometer acquisition: 0.07% full-scale, 12-bit 
+• Speed jitter: < 0.02% 
+• Standby power consumption: < 8 W
+• Motor driver efficiency: > 75% 
+• Failure rate: < 540 FIT per nominal module 
+• Magnetic moment: < 0.015 Am2
+• Size: 300x250x123 mm 
+• Weight: <5 kg ; <6.7 kg (4 motor version)
+• Operating temperature: -30°C to +60°C
+• Non-operating temperature: -40°C to+ 70°C 
+• Minimum switch-on temperature: -30°C
+• Radiation: typ. 50 kRad (Si), higher values with 
+additional shielding
+• 2+2 (redundant) mechanism interfaces
+−
+Up 4 motors connected with Y harness
+• Minimized generation of micro-vibrations 
+• Half-/Full-/up to 64 micro-steps 
+• Autonomous start-up 
+• Flexible configuration via MRAM 
+• Different drive operations: 
+−
+Target (drive to position) 
+−
+Cruise (rotate at constant speed) 
+−
+Track (follow user defined trajectory) 
+• Control of speed and acceleration
+• Drive range limitation, end switch processing
+• 8 user-defined actuator settings (kinematic limits, 
+current amplitude, current waveform)
+• Automatic step counter calibration 
+• Steploss detection based on position feedback 
+• Output power limitation for motor driver
+• Over-current protection of motor driver
+• Optional solid-state relays on each motor output to 
+isolate motors with large inter-winding coupling 
+Product availability: Please contact our Sales team. 
+Phone +43 664 464 9439 | wolfgang.mayer@beyondgravity.com
+Beyond Gravity | Stachegasse 13 | 1120 Vienna | Austria
+Programs / heritage 
+• BepiColombo (ESA)
+• Meteosat Third Generation (ESA)
+• Geo-Kompsat-2A/B (KARI)
+• Kompsat-3 (KARI)
+• Metop-SG (ESA)
+• CO2M, ROSE-L, LSTM (Copernicus)
+• Harmony (ESA)
+• Comet Interceptor (ESA/JAXA)
+• Ramses (ESA)
+• PLATO (ESA)
+• HERA (ESA)
+Beyond Gravity has delivered more than 50 flight models 
+of drive electronics to customers in Europe, USA, Middle 
+East and Asia. Some example missions:
+

@@ -1,0 +1,115 @@
+{
+ "id": "ebad_frangibolt_fc8",
+ "name": "EBAD TiNi Frangibolt FC8 shape-memory release actuator",
+ "category": "mechanisms",
+ "subcategory": "release_actuator",
+ "vendor": "Ensign-Bickford Aerospace & Defense (EBAD)",
+ "model": "TiNi Frangibolt FC8",
+ "dimensions_mm": {
+  "x": 35.6,
+  "y": 35.6,
+  "z": 53.8
+ },
+ "mass_g": 175,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.ebad.com/wp-content/uploads/2023/08/SPACE_MECH_68pgPlusCover_CATALOG_DigitalOnly_FINAL_7-25-2023.pdf",
+  "document": {
+   "title": "EBAD Space Mechanisms catalog (7-25-2023), TiNi Frangibolt actuators",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "mechanism"
+  ],
+  "notes": "Compressed length 2.12 in, diameter 1.4 in, thru-hole 0.52 in, mass 175 g, max load support 9600 lbf."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "USA",
+ "material": "NiTi shape-memory alloy actuator, titanium fastener",
+ "mechanism": {
+  "actuator_type": "shape_memory_alloy (Frangibolt)",
+  "max_load_N": 42701
+ },
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   35.6,
+   35.5,
+   53.8
+  ],
+  "mesh_volume_mm3": 46017.1,
+  "watertight": true,
+  "render_kind": "tube",
+  "effective_density_g_cm3": 3.803,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 336
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "body",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://www.ebad.com/wp-content/uploads/2023/08/SPACE_MECH_68pgPlusCover_CATALOG_DigitalOnly_FINAL_7-25-2023.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

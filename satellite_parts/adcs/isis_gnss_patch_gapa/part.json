@@ -1,0 +1,175 @@
+{
+ "id": "isis_gnss_patch_gapa",
+ "name": "ISISPACE GNSS active patch antenna (GPS L1 / Galileo E1)",
+ "category": "adcs",
+ "subcategory": "gnss_antenna",
+ "vendor": "ISISPACE",
+ "model": "GNSS Active Patch Antenna (GAPA)",
+ "dimensions_mm": {
+  "x": 70,
+  "y": 70,
+  "z": 15
+ },
+ "mass_g": 18,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.isispace.nl/wp-content/uploads/2022/09/ISIS-GAPA-DSH-0001-GNSS_Antenna_Datasheet-02_1.pdf",
+  "document": {
+   "title": "ISIS GNSS Antenna data sheet ISIS-GAPA-DSH-0001 issue 2.1",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "rf",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "70 x 70 x 15 mm, 18 g, 5.2 dBi peak at 1575 MHz, 34.5 dB LNA gain, 1572-1578 MHz, 3-5 V, <10 mA at 5 V, single straight MMCX for RF and power, -30 to +70 C."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "Netherlands",
+ "rf": {
+  "band": "L1/E1",
+  "frequency_MHz": [
+   [
+    1572,
+    1578
+   ]
+  ],
+  "gain_dBi": 5.2,
+  "antenna_type": "active patch"
+ },
+ "electrical": {
+  "voltage_V": {
+   "min": 3,
+   "max": 5
+  },
+  "current_mA": 10
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -30,
+   "max": 70
+  }
+ },
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   70.0,
+   70.0,
+   15.0
+  ],
+  "mesh_volume_mm3": 66900.0,
+  "watertight": true,
+  "render_kind": "patch_antenna",
+  "effective_density_g_cm3": 0.269,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "patch",
+     "color": [
+      0.72,
+      0.45,
+      0.2
+     ],
+     "file": "bodies/part__patch.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 28
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    70.0,
+    70.0,
+    15.1
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.1
+   ],
+   "bodies": [
+    {
+     "name": "ground_plate",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies_detail/ground_plate.stl"
+    },
+    {
+     "name": "patches",
+     "color": [
+      0.72,
+      0.45,
+      0.2
+     ],
+     "file": "bodies_detail/patches.stl"
+    },
+    {
+     "name": "feeds",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/feeds.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://www.isispace.nl/wp-content/uploads/2022/09/ISIS-GAPA-DSH-0001-GNSS_Antenna_Datasheet-02_1.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

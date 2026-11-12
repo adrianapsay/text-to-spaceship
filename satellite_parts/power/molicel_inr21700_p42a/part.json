@@ -6,31 +6,31 @@
  "vendor": "Molicel (E-One Moli)",
  "model": "INR21700-P42A",
  "dimensions_mm": {
-  "x": 21.4,
-  "y": 21.4,
+  "x": 21.55,
+  "y": 21.55,
   "z": 70.15
  },
  "mass_g": 70.0,
  "source": {
-  "type": "unverified",
+  "type": "datasheet",
   "url": "https://cdn.shopify.com/s/files/1/0481/9678/0183/files/Molicel-INR21700-P42A-data-sheet-v1.7.pdf",
   "document": {
-   "title": "Molicel (E-One Moli) INR21700-P42A datasheet (mirror indexed at https://www.18650batterystore.com/pages/data-sheets)",
+   "title": "Molicel INR-21700-P42A product data sheet, version 1.7",
    "revision": null,
-   "date": null
+   "date": "2026-11-11"
   },
   "accessed": "2026-11-08",
-  "fields_from_source": [],
-  "notes": "Datasheet link recorded but not opened from this session; diameter, length, mass, capacity and current are from memory of the datasheet and must be checked against the PDF (max dimensions, typical mass)."
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "Diameter 21.55 mm max, height 70.15 mm max, 70 g max. 4200 mAh typical / 4000 mAh minimum, 3.6 V nominal, 45 A continuous discharge, 4.2 A standard charge. Charge 0 to 45 C, discharge -40 to 60 C."
  },
  "status": "in_production",
  "fidelity": "envelope",
  "vendor_country": "Taiwan",
- "distributors": [
-  "18650batterystore",
-  "Digi-Key (some)",
-  "cell distributors"
- ],
  "electrical": {
   "chemistry": "Li-ion 21700",
   "capacity_mAh": 4200,
@@ -50,16 +50,23 @@
  },
  "cost_note": "typical single-cell retail, approximate",
  "cost_basis_note": "approximate",
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -40,
+   "max": 60
+  }
+ },
+ "status_note": "stocked by cell distributors (web search 2026-11-11)",
  "geometry": {
   "measured_bbox_mm": [
-   21.4,
-   21.34,
+   21.55,
+   21.49,
    70.15
   ],
-  "mesh_volume_mm3": 24645.7,
+  "mesh_volume_mm3": 24992.4,
   "watertight": true,
   "render_kind": "cell_18650",
-  "effective_density_g_cm3": 2.84,
+  "effective_density_g_cm3": 2.801,
   "bodies": {
    "part": [
     {
@@ -84,6 +91,29 @@
   },
   "face_counts": {
    "part": 332
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "can",
+     "color": [
+      0.85,
+      0.72,
+      0.3
+     ],
+     "file": "bodies/part__can.stl"
+    },
+    {
+     "name": "positive_cap",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__positive_cap.stl"
+    }
+   ]
   }
  },
  "image": "preview.png",
@@ -101,7 +131,7 @@
     "pdf": null,
     "url": "https://cdn.shopify.com/s/files/1/0481/9678/0183/files/Molicel-INR21700-P42A-data-sheet-v1.7.pdf",
     "kind": "vendor_link",
-    "title": "Molicel (E-One Moli) INR21700-P42A datasheet (mirror indexed at https://www.18650batterystore.com/pages/data-sheets)"
+    "title": "Molicel INR-21700-P42A product data sheet, version 1.7"
    },
    {
     "file": "datasheet_1_page1.png",

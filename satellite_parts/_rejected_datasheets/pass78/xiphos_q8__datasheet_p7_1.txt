@@ -1,0 +1,467 @@
+1
+www.xiphos.com
+Q8 SPECIFICATIONS
+FLIGHT HERITAGE
+The Q8S, the Flight Model (FM) version of the Q8, has 
+been flying since September 2020.
+Other flight heritage products in the current 
+Xiphos Q-Card family include the Q7S and 
+Q8JS.  
+Xiphos has been flying previous generations 
+of the Xiphos Q-Card family since  2002.
+PRODUCT INTEGRATION MODULE (PIM)
+Each Q8 Engineering Model (EM) is delivered with a 
+detachable PIM to facilitate development.  The PIM 
+provides standard commercial interfaces (e.g. CAN, RS-
+232/422/485, 1-Wire, 13 GPIO, 8 analog inputs, 4 analog 
+outputs, JTAG), debug LEDs and other lab development 
+features. 
+SOFTWARE DEVELOPMENT
+Xiphos provides an Application Development Kit with 
+standard Linux libraries for C/C++ to support software 
+development on Linux workstations. Code previously 
+developed for Linux desktop and server applications 
+can be easily ported to the Q8. Q8 hardware and logic 
+interfaces are all accessible through either standard 
+Linux and Xilinx kernel drivers or custom drivers 
+provided by Xiphos.
+LOGIC DEVELOPMENT
+Logic development uses standard Xilinx development 
+tools. Xiphos, Xilinx and many third party vendors also 
+provide a wide range of compatible reusable logic 
+cores for Xilinx FPGAs.
+FEATURE HIGHLIGHTS 
+INDUSTRY-LEADING PERFORMANCE
+The Q8 features a Multi-Processor System-on-Chip 
+(MPSoC), including multi-core CPUs providing 64-bit 
+processor scalability supported by programmable logic 
+resources and a wide array of hardware interfaces.
+LOW MASS, VOLUME, POWER
+The Q8 measures 80 mm x 80 mm x 11.2 mm and 
+consumes as little as  5 W. Its small size, low mass and 
+power consumption make the Q8 ideal  for aerospace 
+applications that demand extremely high performance.
+INTEGRATED HYBRID ENVIRONMENT
+The application space in a Q8 is a tight integration of a 
+quad core ARM Cortex A53 Application Processing Unit, 
+a dual core ARM Cortex R5 Real Time Processing Unit, 
+and programmable logic featuring 504,000 system 
+logic cells, 461,000 flip flops, 274,000 lookup tables 
+and 1,728 DSP slices reserved for application-specific 
+use. 
+FLEXIBLE INTERFACING
+The Q8 provides Gigabit Ethernet networking through 
+its RJ45 connector along with a USB 2.0/USB 3.1 Gen 
+1 Host port. The Q8 also provides multiple digital I/O 
+lines, including up to 52 GPIO, 12 MIO, 64 LVDS pairs, 
+USB 2.0 and factory selectable RS-232/422/485 
+through  its mezzanine connector.
+OVERVIEW 
+The Q8 is based on the Xilinx Zynq UltraScale+ 
+MPSoC FPGA.  For a modest size, weight, and power 
+increase, it offers additional processing, logic, and I/O 
+capacity over the Zynq 7020-based Q7 processor 
+card.  Q-Cards combine a small form factor with broad 
+networking, processing, and I/O capabilities. At the 
+core of each Q8 is a hybrid environment of powerful 
+multi- core CPUs and re-programmable logic, providing 
+flexible and scalable  performance. 
+APPLICATIONS
+The extremely high performance and extensive FPGA 
+fabric make the Q8 ideally suited for onboard:
+•	
+High resolution camera interfacing and control
+•	
+Onboard image processing
+•	
+Synthetic Aperture Radar (SAR) processing 
+•	
+Hyper/multispectral compression
+•	
+Image registration and alignment 
+•	
+Convolutional neural networks
+•	
+Advanced Software Defined Radios (SDR)
+
+2
+Xiphos
+www.xiphos.com
+CHARACTERISTICS
+MEMORY
+•	
+4 GB LPDDR4 DRAM with EDAC
+•	
+2x 256 MB QSPI Flash (NOR)
+•	
+2x eMMC, 128 GB each, on independent buses/ 
+power control 
+MULTI PROCESSOR SYSTEM ON CHIP
+•	
+Xilinx Zynq UltraScale+ XCZU7EG 
+•	
+Quad core ARM Cortex A53 Application Processing 
+Unit at up to 1.2 GHz 
+•	
+Dual core ARM Cortex R5 Real Time Processing Unit 
+at up to 500 MHz 
+•	
+504,000 system logic cells 
+•	
+461,000 flip flops (FF) 
+•	
+274,000 lookup tables (LUT) 
+•	
+1,728 DSP slices 
+CONTROL FPGA
+•	
+Microchip ProASIC3
+OPERATING SYSTEM
+•	
+Yocto Linux BSP (LTS distribution)
+REAL TIME CLOCK
+•	
+RTC with sleep & wake up on alarm/interrupt 
+•	
+Dedicated power pin for external battery
+FORM FACTOR
+•	
+85.8 mm x 80 mm x 22.6 mm, 64 g  
+(with RJ45 and power connectors) 
+•	
+80 mm x 80 mm x 11.2 mm, 56 g  
+(without connectors)
+INTERFACES
+•	
+Power
+•	
+Gigabit Ethernet (RJ45) 
+•	
+1x USB Type-C Host port (USB 2.0 & USB 3.1 Gen 1) 
+•	
+CAN Bus controller (in logic)
+•	
+Up to 38 single-ended GPIO 3.3 V, 14 single-ended 
+GPIO 1.8 V, 12 MIO 1.8 V, 64 LVDS pairs/128 single-
+ended GPIO 1.8 V, 3 Gigabit transceivers (SATA, 
+PCI express), USB 2.0, and factory-selectable RS- 
+232/422/485 (Mezzanine connector)
+ENVIRONMENTAL
+•	
+Operating Temperature Range:1 -40 to +60 °C
+1	
+Operating temperature range ensures all components 
+are derated according to Xiphos commercial best practices. Those 
+practices draw from standards such as ECSS and NASA GEVS.
+POWER
+•	
+5 W, typical 
+•	
+6 to 15 Vdc
+•	
+Various power modes (including deep sleep) 
+•	
+Overcurrent detection & protection (global and local) 
+and brownout protection
+RADIATION ROBUSTNESS FEATURES
+•	
+Triple mode redundancy in Control FPGA 
+•	
+EDAC-protected RAM 
+•	
+Upset and multi-current monitoring
+•	
+Overcurrent protection (multiple)
+•	
+FPGA bit stream scrubbing 
+•	
+Software robustness/ watchdog
+ENGINEERING MODEL (EM) VS. FLIGHT MODEL (FM) 
+OPTIONS
+EM
+FM
+IPC Class
+Class 2
+Class 3
+Acceptance 
+Temperature 
+Range
+Room 
+Temperature
+Flight Levels, 
+-40 to +60 °C
+Conformal 
+Coating Available
+No
+Yes
+EIDP Available
+No
+Yes
+Extended 
+Warranty 
+Available
+No
+Yes
+PIM & 
+Accessories 
+Supplied
+Yes
+No
+•	 EMs ship with PIM/fansink mounted and include 
+accessories
+•	 FMs ship without PIM/fansink and do not include 
+accessories
+
+3
+Xiphos
+www.xiphos.com
+PHYSICAL VIEWS
+
+4
+Xiphos
+www.xiphos.com
+ORDERING INFORMATION
+Use the QR code at right to be taken to the Q8 product page to request a quote.
+Q8-001
+•	
+Baseline configuration, available in flight and engineering model configurations.
+Q8-002
+•	
+This configuration is often used as a bench top model as it has an integrated 1G Ethernet RJ45 and power barrel. 
+It allows customers to quickly begin development with minimal lab resources as power is supplied with an A/C 
+power cord.
+ Q8-003
+•	
+Similar to standard configuration Q8-001, but Ethernet PHY built-in to the Q8 is routed to 7mm stack header pins 
+for interface with Ethernet magnetics installed on the customer’s daughter board.
+Q8-004
+•	
+Similar to Q8-003 configuration, but USB2 is routed to the mezzanine connector for customers who want to 
+expose a USB2 interface from their daughter board. The USB2 oscillator is also always enabled.
+Configuration
+Q8-001
+Q8-002
+Q8-003
+Q8-004
+EM Uncoated Part Numbers
+XS002-10002-
+001-02-A
+XS002-10002-
+002-02-A
+XS002-10002-
+003-02-A
+XS002-10002-
+004-02-A
+FM Uncoated Part Numbers
+XS002-10001-
+005-02-A
+N/A
+XS002-10001-
+012-02-A
+XS002-10001-
+013-02-A
+FM Conformal Coated Part Numbers
+XS002-10001-
+001-02-A
+N/A
+XS002-10001-
+003-02-A
+XS002-10001-
+004-02-A
+Power Barrel Connector
+Unpopulated
+Populated
+Unpopulated
+Ethernet connector
+Unpopulated
+RJ45
+7mm stack daughter board header
+Input voltage range
+6-15 V
+Startup voltage
+4.5 V
+Brownout voltage
+4.0 V
+Hardware over-current limit
+1 A
+Case GND to Digital GND connection
+Open
+USB2 routing
+Q8 PCB USB connector
+Q8 bottom 
+mezzanine 
+connector 
+underside 
+to connect 
+to custom 
+daughterboard
+USB2 oscillator control
+Software controllable through ZYNQ
+Always enabled
+PUDC (Pull-Up During Configuration)
+Pull-up active
+Serial Comms
+Serial port configuration (RSXXX pins)
+RS422 
+ttyPS0 routing
+PIM serial to USB connector 
+ttyPS1 routing
+Serial port pins in the mezzanine connector
+
+5
+Xiphos
+www.xiphos.com
+CONFIGURATIONS
+Q8-001
+Q8-002
+Q8-003
+Q8-004
+•	 External power connector
+•	 RJ45 Ethernet connector. 
+Ethernet PHY installed on Q8.
+Baseline configuration.
+Each of the standard configurations are detailed below and are available as EM, FM uncoated, or FM conformally 
+coated versions.
+Benchtop model.
+Similar to Q8-001 but with changes detailed below.
+Similar to Q8-003 but with addition detailed below.
+•	 Ethernet PHY installed on Q8, signals routed down through connector 
+header to customer daughter board providing Ethernet magnetics
+•	 Ethernet PHY installed on Q8, signals routed down through connector 
+header to customer daughter board providing Ethernet magnetics
+•	 USB2 signals rerouted from topside USB connector to 
+mezzanine connector for customer daughter board use; 
+USB2 oscillator always enabled.
+
+6
+Xiphos
+www.xiphos.com
+DEVELOPING WITH XIPHOS
+It’s All Included.
+Xiphos delivers flight-ready processor hardware as a complete, open development platform: Linux boots out of the 
+box, baseline FPGA logic is already configured, the PIM and cables provide immediate console/ network/ JTAG access, 
+and customers retain low-level flexibility instead of being locked into a closed or bare-metal environment. More 
+specifically:
+1. Ready to Use Out of the Box
+Xiphos products (A) are designed to 
+accelerate development from the moment 
+they are powered on. Rather than requiring 
+customers to perform extensive low-level 
+hardware bring-up, each processor boots 
+directly into Linux and provides immediate 
+access to a command-line interface. 
+Developers can begin building and testing 
+their applications right away, reducing 
+integration effort and shortening time to 
+productivity.
+2. The PIM is Included as Part of Every 
+Board Package
+The Product Integration Module (PIM) (B) 
+gives customers everything they need to 
+begin development immediately. It provides 
+convenient access to console, networking, 
+JTAG, power, test, and other key interfaces 
+in a lab-friendly format. These capabilities 
+are included as part of the platform, not 
+as an add-on, allowing teams to focus on 
+development instead of building their own 
+integration infrastructure.
+3. Open Platform. Unlimited Flexibility.
+Xiphos products are designed to grow with your application. Out of the box, they include baseline FPGA logic (C) 
+and Linux drivers that initialize the processor board and PIM interfaces, as well as any Xiphos daughter board, while 
+supporting the Linux development environment. For advanced users, the reference design and Vivado skeleton project 
+serves as a proven foundation for developing custom FPGA logic and software and integrating mission-specific 
+daughter cards (D), providing maximum flexibility without sacrificing ease of use.
+4. Supports Both Software-First and Hardware Integration Workflows
+Whether your priority is software or hardware, Xiphos products provide the right starting point. Software teams can 
+begin developing immediately with the out-of-the-box Linux environment, while hardware teams can use the PIM 
+and daughter-board architecture to implement custom I/O, FPGA logic, and mission-specific functionality. The PIM 
+exposes the essential interfaces needed for early development, and the daughter board provides the flexibility for full 
+system integration. Start simple. Scale to a fully customized solution.
+5. And There’s More…
+Xiphos delivers a complete development ecosystem, not just a processor board. Customers receive access to a 
+dedicated support portal with direct Engineering support, a comprehensive Wiki containing 3D models, user manuals, 
+ICDs, and other technical resources, and an SDK that is available as soon as an order is placed - before the hardware 
+even ships. Built on a Yocto Linux Board Support Package (BSP) using a Long-Term Support (LTS) distribution, Xiphos 
+platforms provide a robust and stable software foundation from day one, enabling teams to develop faster and 
+integrate with confidence.
+ 
+
+7
+Xiphos
+www.xiphos.com
+Q8 EM INCLUDED ACCESSORIES 
+Q8 Engineering Models (EM) ship with the following as standard:
+•	
+Q8/Q8J Product Integration Module (PIM)
+•	
+12V output wall-mount power supply (for Q8-002)
+•	
+Micro‑B to USB cable
+•	
+USB‑C to female USB‑A cable
+ 
+USB‑C to female USB‑A cable
+Male Micro USB
+Ethernet Adapter to USB-A Male 
+Q8/Q8J Product 
+Integration Module 
+(PIM)
+12V output wall-mount power supply
+
+Xiphos
+www.xiphos.com 
+sales@xiphos.com
+3981 St-Laurent Boulevard, Suite 500, 
+Montreal, Quebec, H2W 1Y5, Canada 
+© 2026
+ABOUT XIPHOS
+Xiphos, based in Montreal and part of Epiq Solutions 
+since 2023, has over 20 years of experience delivering 
+thousands of low-SWaP-C COTS-based processor 
+cards for space applications including satellites, 
+landers, rovers, and space stations. Known for high 
+reliability, radiation tolerance, and strong customer 
+support, Xiphos specializes in compact processing 
+solutions using cutting-edge processors for commercial, 
+scientific, and military missions.
+11th November, 2026
+WHY CHOOSE XIPHOS? 
+Faster Time to Launch Using COTS Processing With 
+Heritage
+FLIGHT-PROVEN PROCESSORS:
+Space-hardened, COTS-based computing solutions 
+deployed across hundreds of commercial, civil and 
+defense missions.
+HIGH PERFORMANCE:
+Products offer impressive processing, networking, RF 
+and storage performance by leveraging state-of-the-art 
+commercial devices.
+COST-EFFECTIVE PERFORMANCE:
+Delivers high performance and reliability at a fraction of 
+the cost of traditional space processors.
+SCALABLE SOLUTIONS
+Flexibility across the design stack ensures the right level 
+of integration for your use case.
+COMPACT, EFFICIENT, FLEXIBLE:
+Ideal for spacecraft, unmanned systems, and robotics 
+requiring small size, low power, and adaptability.
+CERTIFIED QUALITY:
+AS9100 and ISO 9001:2015 certified; explore our 
+FPGA-based multiprocessors, SoCs, and advanced 
+subsystems.
+ENHANCED COTS SOLUTIONS 
+Optimizes the cost & performance trade while still 
+providing radiation robustness
+OPEN ARCHITECTURE DESIGNS
+Enables development across a variety of toolkits
+SHORTER LEAD TIMES
+Shipping 500+ processors annually 
+IMPRESSIVE HERITAGE:
+We’ve been a new space company for more than 20 
+years and have delivered many thousands of cards. In 
+that time, we’ve accumulated a LOT of experience that 
+you get to benefit from when you partner with us.
+As of August 2026, our cumulative Q-Card time on orbit 
+stands at more than 750 years. 
+

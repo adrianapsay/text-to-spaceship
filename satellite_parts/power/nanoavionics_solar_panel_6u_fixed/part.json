@@ -87,6 +87,59 @@
   },
   "face_counts": {
    "part": 236
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    325.0,
+    208.0,
+    2.61
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.11
+   ],
+   "bodies": [
+    {
+     "name": "substrate",
+     "color": [
+      0.2,
+      0.2,
+      0.22
+     ],
+     "file": "bodies_detail/substrate.stl"
+    },
+    {
+     "name": "cells",
+     "color": [
+      0.16,
+      0.26,
+      0.62
+     ],
+     "file": "bodies_detail/cells.stl"
+    },
+    {
+     "name": "busbars",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/busbars.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",
@@ -98,22 +151,7 @@
   "power_bus_V": null
  },
  "reference_images": {
-  "datasheets": [
-   {
-    "file": "datasheet_page1.png",
-    "pdf": null,
-    "url": null,
-    "kind": "vendor_link",
-    "title": "NanoAvionics CubeSat GaAs solar panel product page (power, price)"
-   },
-   {
-    "file": "datasheet_1_page1.png",
-    "pdf": "datasheet_1.pdf",
-    "kind": "web_search",
-    "url": "https://ntnu.no/wiki/download/attachments/124061783/M6P_Summary%20Technical%20Information_rev8.pdf?api=v2",
-    "title": null
-   }
-  ],
+  "datasheets": [],
   "stl_preview": "preview.png",
   "drawing": "drawing.png",
   "photo_url": "https://nanoavionics.com/wp-content/uploads/2020/07/solar-panels_4rez.png",
@@ -122,7 +160,7 @@
   "photo_file": "reference_photo.jpg",
   "photo_kind": "vendor_or_marketplace",
   "datasheet_url": null,
-  "datasheet_page_file": "datasheet_page1.png",
+  "datasheet_page_file": null,
   "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {

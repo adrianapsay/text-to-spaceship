@@ -1,0 +1,121 @@
+The PM200 is a bi-propellant propulsion module offered in 
+partnership with Dawn Aerospace. It is intended for use in 
+3-6U CubeSats and allows manoeuvres of up to 230 m/s to be 
+performed utilizing non-toxic propellants (nitrous oxide and 
+propene) in a self-pressurizing configuration. Low system 
+complexity and zero propellant toxicity allow for simple and 
+robust operations, both on the ground and when in orbit. The 
+medium tank pressure and high storage density of liquid 
+propellants enables high safety factor tanks to be used with 
+little mass penalty. the standard 1U configuration of the PM200 
+propulsion module can deliver in excess of 230 m/s of velocity 
+increment to a 3U CubeSat of 4 kg. The system utilizes a single 
+0.5 N thruster. This relatively high thrust allows manoeuvres 
+to be completed in a timely manner as well as enabling the use 
+of Hohmann transfer orbits. Integrated thrust vector control 
+ensure that inherent thruster disturbance torques are actively 
+compensated.
+HIGH PRECISION
+HIGH PERFORMANCE
+KEY HIGHLIGHTS:
+•	
+Nominal thrust	
+	
+                   0.5 N
+•	
+Specific impulse	 	
+               > 285 s
+•	
+ΔV (3U CubeSat)	 	
+          > 230 m/s
+•	
+Minimum impulse bit 	
+             35 mN.s
+•	
+Maximum impulse bit	
+                   5 N.s
+•	
+Repeatability (3 σ)		
+         +/- 5 mN.s
+•	
+Power requirement (firing)	               < 12 W
+•	
+Power requirement (sleep)	              < 0.1 W
+•	
+Storability	
+	
+	
+           > 5 years
+The PM200 can be configured to suit any 
+CubeSat structure. It also features an I²C 
+or RS422/RS485 compliant interface.
+The PM200 can be seamlessly integrated
+with AAC Hyperion’s’ line of integrated
+attitude determination and control
+systems to provide a fully integrated GNC
+and ADCS solution. The PM200 can fire
+seconds after wake-up allowing for agile
+missions that do not have time to lose.
+Through the use of additive
+manufacturing, the system is highly
+customizable. Design paramters
+such as total system deltaV,
+interface style and thrust direction can
+be changed on request and adapted
+to an existing CubeSat architecture.
+COMPATIBLE
+PERFORAMANCE
+CUSTOMISABLE
+PM200
+PROPULSION
+
+To make an enquiry, request a quotation or 
+learn about AAC Clyde Space’s other products 
+and services, please contact: 
+enquiries@aac-clydespace.com
+Performance
+Total impulse
+>850
+N.s
+Thrust
+0.5
+N
+Isp vac
+>285
+s
+ΔV (4kg satellite incl. PM200) 
+>230
+m/s
+TECHNICAL SPECIFICATIONS
+Copyright AAC Clyde Space 2023. All rights reserved. All 
+information subject to change. Release date 16 February 2023.
+www.aac-clyde.space
+#SPACEISAWESOME
+Environmental
+Operating temperature
+-5 to +35
+°C
+Electrical specifications
+Supply voltages
+5 and 12
+V
+Power required (during firing)
+<12
+W
+Power required (sleep)
+<0.1
+W
+Mechanical
+Outer dimensions
+97.7 x 95.4 x 95.4
+mm
+Nom. propellant storage pressures
+45 (Ox) / 9 (Fuel)
+bar
+Dry mass (excluding propellant) 
+1100
+g
+Propellant mass
+310
+g
+

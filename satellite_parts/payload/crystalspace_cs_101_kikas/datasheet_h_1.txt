@@ -1,0 +1,120 @@
+CrystalSpace  
+CS-101 Kikas  
+Specifications
+Overview
+Nanosatellite cameras are the smallest and the most advanced CubeSat 
+camera systems on the market. It suits well for densely packed CubeSats. 
+Some of the use cases are: taking high quality images for PR purposes as 
+well as monitoring satellite panels deployments. Flight Heritage on various 
+missions since 2013.
+Example applications
+● Missions on LEO up to 5 years
+● Small robotic missions
+● Monitoring mission-critical events
+● PR images
+Heritage
+TRL 9 since 2013.
+Imaging sensor
+5 MP 12-bit visual wavelength - monochrome or RGB
+Dimensions (mm)
+42 x 25 x 45 mm
+Weight (g)
+50 g (without optics)
+Working distance
+100 mm to ∞
+Ground resolution GSD
+@500km orbit examples with ideal conditions
+● 20° FoV lens - 90 m per pixel
+● 60° FoV lens - 270 m per pixel
+Camera head 
+positioning
+Two off-the-shelf options:
+● Vertical
+● Horizontal
+Camera head customization possible
+Field of view
+Different qualified lenses available from 20° to 120° diagonal. 
+IR-cut option for lens
+The system can be configured with or without an IR cut
+Communication 
+protocols
+● UART
+● RS-485
+● RS-422  
+● CAN
+sales@crystalspace.com
+Configuration Options	
+
+Power consumption
+Nominal power consumption is 600 mW with peaks of 900 mW during 
+imaging and compression
+RAW framerate with full 
+resolution
+● 1/60 fps (@RAW 5MP format) over UART/RS-xxx @ 3Mhz
+● 1 fps (@ RAW 5MP format) to long term memory
+Video Feed
+● 480p - 10fps (save to long term memory)
+● 720p - 5fps (save to long term memory)
+● 1080p - 1fps (save to long term memory)
+5 MP RAW image size
+7.5 MB
+Framerate improvement
+Possible to achieve higher fps with in-camera compression, windowing or 
+binning.
+Available compression 
+algorithms
+● JPEG
+● bitbacking
+● Zipping
+Long term memory
+150 RAW 5MP images
+Power input
+3.3V DC
+Operating temperature 
+range (°C)
+-30...70°C
+Storage temperature 
+range (°C)
+-40...80°C
+Total ionizing dose (krad)
+~ 10 krad
+System Details	
+Additional information
+ROM Cost and estimated  
+lead times as of 2025. 
+Contact sales@crystalspace.eu  
+for up-to-date quote with pricing  
+and lead times.
+● FM - 19.000 € 	
+4-5 months
+● EQM - 12.000 € 	 4-5 months
+● EM - 8.000 € 	
+2-3 months
+CrystalSpace is conducting tests for Flight Models 
+to assure the highest quality. The testing campaign 
+typically takes up to several weeks. It is possible 
+to align the test profiles with the client or to select 
+typical CrystalSpace qualification campaign.
+Tests conducted for the FM module:
+● Vibration test (sine and random)
+● Shock test
+● Thermal-Vacuum cycling
+● Functional tests
+● Visual inspection
+Tests conducted for the EQM module:
+● Vibration test (sine and random)
+● Functional tests
+● Visual inspection
+End Item Data Package (EIDP)
+● Certificate of Conformance
+● ICD
+● Assembly, Integration & Testing 
+(AIT) report (With FM)
+CrystalSpace provides dedicated support software 
+to streamline and accelerate the integration of all 
+our camera systems. 
+We also offer C-SDK, a lightweight software 
+development kit designed to make integration even 
+faster and easier.
+For more information, contact sales@crystalspace.com
+

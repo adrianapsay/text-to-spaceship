@@ -1,0 +1,108 @@
+The ABSL™ 8s16p 56 Ah battery was first commercial 
+battery solution by EnerSys to offer the energy-dense 
+E35 3.5 Ah Li-ion 18650 cells. Leveraging the heritage 
+ABSL 8s16p battery design, the current ABSL 8s16p 
+56 Ah battery provides a significant energy density 
+increase with a low mass and small footprint.
+The ABSL 8s16p battery’s versatility and reliability 
+has made it the preferred battery for many mission 
+profiles. The ABSL 8s16p battery supports missions 
+across nearly every use case of space including but 
+not limited to LEO, MEO, GEO, Interplanetary and 
+Lunar applications.
+ABSL standard spacecraft batteries uniquely eliminate 
+the need for complex cell balancing electronics 
+by leveraging proprietary and flight proven 
+manufacturing processes pioneered by EnerSys.
+Facts at a Glance
+ABSLTM Cell	
+18650 E35
+Configuration	
+8s16p
+Nameplate Capacity	
+56 Ah
+Nameplate Energy	
+1628 Wh
+Maximum Discharge  
+Current (continuous)	
+25 A
+Nominal Mass	
+7.8 kg
+Footprint	
+364 x 203 mm
+Height	
+98 mm
+Voltage Range	
+24 - 33.6 V
+Visit us at www.enersys.com/space
+Li-ion Rechargeable Battery
+ABSL™ 8s16p 28 V 56 Ah
+Leading the industry without failure for over 25 years of 
+continuous in-orbit heritage using ABSL™ Li-ion battery 
+technology.
+ 364 
+ 203 
+ 98 
+ 85 
+
+Qualification
+Cell Level Radiation Exposure
+Dosage
+Effects
+< 1Mrad
+Negligible
+Up to 10Mrad
+Negligible
+Random Vibration
+Frequency (Hz)
+ASD (g2/Hz)*
+20
+0.026
+50
+0.160
+800
+0.160
+2,000
+0.026
+Overall GRMS
+14.100
+Duration
+2 min/axis
+Shock
+Frequency (Hz)
+PF SRS Level Test Q = 10
+100
+50 g
+1,800
+3,000 g
+10,000
+3,000 g
+*Notching utilized within profile
+Li-ion Rechargeable Battery
+ABSL™ 8s16p 28 V 56 Ah
+20°C Charge and Discharge Voltage Profiles
+These batteries and controlled technical data are classified under the Commerce Control List and are subject to licensing requirements for any export. Additional export restrictions and regulations may apply depending 
+on their end use. It is the responsibility of the purchasing or receiving party to comply with all requirements of export laws, including ensuring that all required export authorizations are in place prior to exportation or 
+re-exportation.
+Temperature
+Non-Operating (°C)
+Operating (°C)
+Discharge: -5 to 40
+Charge: 0 to 40
+© 2026 EnerSys. All rights reserved. Trademarks and logos are the property of EnerSys and its afﬁliates unless otherwise noted. Subject to revisions without prior notice. E.&O.E.
+Visit us at: www.enersys.com/space
+AMER-EN-DS-ABSL-8s16p-0426
+World Headquarters 
+2366 Bernville Road 
+Reading, PA 19605 USA  
++1-610-208-1991 / +1-800-538-3627
+EnerSys EMEA 
+EH Europe GmbH 
+Baarerstrasse 18
+6300 Zug Switzerland
+EnerSys Asia 
+No. 85, Tuas Avenue 1
+Singapore 639518
++65 6558 7333  
+-20 to 60
+

@@ -1,0 +1,92 @@
+The Fine Sun Sensor (FSS) is designed to deliver exact information about the position of the sun. 
+This information is used for yaw steering of the spacecraft and therefore applied in earth pointing 
+devices and solar array orientation. 
+The FSS is an analogue sensor, based on the use of a quadrant detector which is capable of 
+measuring the solar aspect angle in two axes. Processing the four quadrant outputs results in the 
+two components of the solar aspect angle.    
+The applied algorithms cancel out all disturbances that are common to the four quadrants, such 
+as temperature effects, particle radiation degradation, window performance and scale factors. 
+The FSS provides four quadrant output voltage and a sun presence output voltage. 
+Key Advantages 
+ 
+Analog sun-presence signal provided 
+ 
+Internal thermistor on electronics 
+ 
+Qualified for low earth orbits with many temperature excursions 
+ 
+Qualified for very severe radiation regions (HEO in Van Allen belts) 
+ 
+Extremely low EMC susceptibility and emissions 
+FINE SUN SENSOR 
+© ESA/EC 
+© Globalstar 
+© Thales Alenia 
+
+Variants of FSS Available 
+1 Mini-FSS without readout electronics 
+2 Filtered variant for high solar input regions 
+ABOUT 
+Bradford is a high-tech European developer and 
+manufacturer of satellite control sub-systems 
+and components. 
+© Bradford Engineering BV • All rights reserved. 
+BRADFORD ENGINEERING BV 
+De Wijper 26 
+4726 TG Heerle 
+The Netherlands 
+T:  +31 (0)165 305100 
+F:  +31 (0)165 304422 
+E:  info@bradford-space.com 
+W:  www.bradford-space.com 
+Revision: JAN.2017 
+Fine Sun Sensor 
+Characterisc 
+Performance / Interfaces Budget 
+Mass per sensor unit   
+Approximately 375 grams 
+Envelope dimension  
+<108 x 108 x 52.5 mm, including all protrusions by mounting feet, connectors, align-
+ment cube and bondpin, exclusive dowel pins. 
+Floor space: 104 x 94 mm 
+Nominal FOV   
+128° x 128° of the COTS sensor version 
+Unobstructed FOV (to be free of straylight sources) 
+138° x 138° 
+Accuracy 
+Two-axis measurement of solar aspect angles:  
+EOL Bias error less than 0.3° (3 σ) in whole 128° x 128° FOV (throughout mission 
+lifetime),  after on-board implementation of ground calibration parameters.  
+Note: This figure applies for condition without albedo 
+Resolution 
+Better than 0.03 degrees of arc 
+Noise equivalent angle   
+Less than 0.05° (3 σ) 
+Cross coupling between two axis read-outs 
+Change of Δα in one axis direction (α) may cause error   
+Δβ < 0.05° in other direction (β). 
+Outputs 
+Analogue voltages in the range of 0-5V per quadrant; multiplexed on the basis of 
+address command  (rate should be about 1 ms). 
+Power consumption   
+< 0.25 W from ±15 V secondary power. No DC/DC converter included. (current per 
+unit drawn from V+ approx 12 mA; current drawn from V- approx 3 mA) 
+Reliability   
+Failure rate: approx 70 FIT @30°C per unit;  
+Reliability for 5 years in orbit for a single unit > 0.997. 
+Alignment  
+Alignment cube will be included; accuracy of faces of the cube: <10 arcsec;   
+accuracy of alignment < 0.05 degrees of arc 
+Qualification temperature   
+-50 to +85 °C 
+Radiation Environment 
+The detector active element is made of p-type epitaxial silicon. With the shielding (>3 
+mm of cover glass thickness) the accumulated dose will be about 10 kRad. The deg-
+radation of the device output will be limited to less than 5% in current and an increase 
+in temperature coefficient to 0.10%/°C max. Degradation will be common mode, com-
+mon mode effects are cancelled out in sensor algorithms. EEE parts rad tolerance 
+larger than 100 kRad, shielding > 7.5 mm aluminium. SEU and SEL Immune. 
+Electrical Stimuli / closed loop testing 
+Four voltage input interface provided, which by-passes the detector and enables 
+closed loop testing. 
+

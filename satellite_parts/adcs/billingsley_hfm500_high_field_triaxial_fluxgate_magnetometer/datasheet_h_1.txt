@@ -1,0 +1,78 @@
+20936 Theseus Terrace, Germantown, Maryland  20876 
+ 
+301-540-8338 Phone 
+301-540-6231Fax 
+ 
+sales@magnetometer.com 
+www.magnetometer.com 
+BILLINGSLEY AEROSPACE & DEFENSE 
+ 
+HFM500 
+ 
+HIGH FIELD TRIAXIAL FLUXGATE MAGNETOMETER 
+FEBRUARY 2008 SPECIFICATIONS 
+ 
+Description: 
+Triaxial Fluxgate Magnetometer used for measurement of large 
+magnetic fields, has low noise and excellent linearity, and can be 
+configured to measure field up to ± 15 Gauss. 
+ 
+Axial Alignment: 
+Orthogonality better than ± 1°  
+Input Voltage Options: 
+Unipolar + 18 to 35 V; Protected against reverse voltage; Surge 
+protected with clamps in 1 picosecond with pulse power to 600 
+Watts; Galvanically isolated power converter. 
+Input Current: 
+28mA t Zero Field = 1.5 mA/Gauss/Axis 
+Feedback Ripple Current: 
+5 mA Peak to Peak (Minimizes crosstalk between magnetometers 
+when used in arrays.) 
+Field Measurement Range: 
+± 500 μT (Other Ranges Available)  
+Accuracy: 
+± 0.75% of Full Scale (0.5% Typical) 
+Linearity: 
+± 0.007% of Full Scale 
+Sensitivity: 
+20 µV/nT 
+Scale Factor Temperature Shift: 0.01% Full Scale/°C 
+Noise: 
+≤20 pT RMS/ Hz @1 Hz (≤ 10 pT Option Available) 
+Output Ripple: 
+3 mV Peak to Peak @ 2nd Harmonic 
+Analog Output @ Zero Field: 
+± 0.020 V  
+Zero Shift with Temperature: 
+< 1 nT/°C 
+Susceptibility to Perming: 
+± 8 nT Shift with ± 5 Gauss Applied 
+ 
+± 30 nT Shift with ± 15 Gauss Applied 
+Output Impedance: 
+332 Ω ± 5% 
+Frequency Response: 
+-3 dB @ > 500 kHz/ > 4 kHz Available with increased Output Ripple  
+Overload Recovery: 
+Unconditional stability with any load capacitance; Will drive any 
+length cable. 
+ 
+E M I: 
+Minimizes conducted/radiation emissions and susceptibility  
+Random Vibration: 
+20G RMS 20 Hz to 2 KHz 
+Temperature Range: 
+- 40°  to + 85 °C 
+Acceleration: 
+60G 
+Weight: 
+182 g 
+Size: 
+3.51 cm x 3.51 cm x 15.37cm 
+Chasis: 
+Aluminium with ground jumper option for optimum EMI shielding 
+Connector: 
+9 PIN MALE "D" TYPE; Female Mating Connector Supplied 
+ 
+ 
+

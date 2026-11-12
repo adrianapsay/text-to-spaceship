@@ -1,0 +1,245 @@
+{
+ "id": "sdl_iris_lna",
+ "name": "SDL / JPL Iris deep-space radio low-noise amplifier",
+ "category": "comms",
+ "subcategory": "transponder",
+ "vendor": "Utah State University Space Dynamics Laboratory (JPL design)",
+ "model": "Iris LNA",
+ "dimensions_mm": {
+  "x": 114.3,
+  "y": 46.0,
+  "z": 15.5
+ },
+ "mass_g": 125,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.sdl.usu.edu/downloads/brochures/iris-radio.pdf",
+  "document": {
+   "title": "SDL Iris radio brochure",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "rf",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "LNA 114.3 x 46.0 x 15.5 mm, <=125 g. System 1.1 kg, 35 W DC at 3.8 W RF, 12-28 V, X-band uplink 7.145-7.190 GHz, downlink 8.400-8.450 GHz, UHF receive 390-450 MHz, -20 to +50 C."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "USA",
+ "mass_note": "upper bound (<=125 g)",
+ "rf": {
+  "band": "X",
+  "frequency_MHz": [
+   [
+    8400,
+    8450
+   ]
+  ],
+  "rx_frequency_MHz": [
+   [
+    7145,
+    7190
+   ]
+  ]
+ },
+ "electrical": {
+  "voltage_V": {
+   "min": 12,
+   "max": 28
+  },
+  "power_W": {
+   "peak": 35
+  }
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -20,
+   "max": 50
+  }
+ },
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   114.3,
+   46.0,
+   15.5
+  ],
+  "mesh_volume_mm3": 81467.1,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.534,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    114.3,
+    46.0,
+    15.5
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "feet",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/feet.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "connector_shell",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/connector_shell.stl"
+    },
+    {
+     "name": "connector_insert",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector_insert.stl"
+    },
+    {
+     "name": "jackscrews",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/jackscrews.stl"
+    },
+    {
+     "name": "label",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies_detail/label.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://www.sdl.usu.edu/downloads/brochures/iris-radio.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

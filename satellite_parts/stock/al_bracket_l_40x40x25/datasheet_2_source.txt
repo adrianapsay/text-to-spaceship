@@ -1,0 +1,5 @@
+url: https://ntrs.nasa.gov/api/citations/19720022808/downloads/19720022808.pdf
+title: MATERIALS DATA HANDBOOK ! 2duminm_1 2dlo 7 6061 (2nd ...
+query: aluminium 6061-T6 bar datasheet pdf
+found by web search; verify that it is the right part
+family datasheet: material data for aluminium 6061 (bracket material)

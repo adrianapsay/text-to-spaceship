@@ -1,0 +1,28 @@
+Parameters
+Description
+Frequency Band
+8025-8400MHz
+VSWR
+< 1.5:1
+Peak Gain
+23.5±0.5dBic
+Half-Power Beamwidth (HPBW)
+8.5o±0.4o
+Polarisation
+Right-Handed Circular (RHCP)
+Axial Ratio Bandwidth
+< 1.0 dB with HPBW
+Power Handling
+5W CW Typ.
+Configuration
+Multilayer Space-Qualified PCBs
+Connector
+Thru-Hole SMA
+Dimensions
+220mm x 220mm x 5.2mm, Excl. Connector
+Mass
+366g
+Notes – 8x φ3.2mm fixing holes (M3) 
+8x8 X-Band Patch Antenna Array
+
+

@@ -1,0 +1,84 @@
+ 
+Cubesat X-band Transmitter 
+ 
+INRASE 
+Avda. Franciso Valles 8, Boecillo, Valladolid, 47151 Spain 
+www.inrase.com | info@inrase.com 
+The Cubesat X-band Transmitter brings state-of-the-art 
+flight-proven transmitter technology to the cubesats. 
+Applications 
+• 
+Cubesats 
+• 
+Small satellites 
+Features 
+• 
+High throughput in the cubesat formfactor 
+• 
+Flexible state-of-the-art modulation and error 
+correction coding 
+• 
+Adaptive coding and modulation to maximize  
+throughput for various Es/No 
+• 
+Customizable data and control interfaces 
+Specifications 
+Carrier frequency 
+8220 MHz (factory settable 8.1-8.5 GHz) 
+Throughput 
+Up to 1.5 Gbps  
+Output power (QPSK, max T, EOL) 
+2.5 W  
+Modulation 
+QPSK, 8PSK, 16APSK, 32APSK 
+Symbol rate 
+280, 250 or 125 Msymb/s  
+Error correction coding and framing 
+DVB-S2 
+Spectral mask 
+SFCG-21-2R4; baseband SRRC 0.35 
+Frequency stability, including temperature and aging  
+               ±10 ppm 
+Power consumption 
+22 W 
+Power supply 
+12 V (11 - 16 V) non-isolated 
+Weight 
+380g 
+Size 
+     87x93x30 mm 
+Operating temperature 
+-20 °C to +50 °C 
+Survival temperature 
+-50 °C to +65 °C 
+MTTF   
+250k hours 
+Design life 
+        5 years 
+Radiation at the component level 
+>10 krad  
+(average enclosure shielding 0.64 g/cm2) 
+SEL tolerance 
+ most parts >40 MeV·cm2/mg, overcurrent protection 
+Data interface 
+Customizable LVDS  
+(clock input/output, data, enable) 
+Ethernet 1000Base-T 
+Control and telemetry interface 
+RS-422 or CMOS UART / CAN-2B 
+Connectors 
+Micro-D (MIL-DTL-83513) female 
+ (9-pin power, 21-pin data/control) 
+SMA female 50 Ω RF output 
+ 
+
+  
+ 
+ Preliminary information – may be changed without further notice  
+Mechanical Outline Drawing 
+ 
+Heritage 
+Flight proven in at least 12 missions since January 2023. 
+High-speed X-band transmitters designed by the team successfully work on the following spacecraft: ISS – 
+12 years, Egyptsat – 10 years and on the other satellites. 
+

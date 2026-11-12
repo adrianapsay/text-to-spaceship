@@ -1,0 +1,177 @@
+WIS310Y
+Product Data Sheet
+V1.1
+3-axis high-performance
+MEMS gyroscope
+
+WIS310Y Product Data Sheet V1.1
+目录
+1 Product Introduction.............................................................................................................................................1
+2 Technical Parameters and Specifications............................................................................................................2
+2.1 Main Parameter Specifications..................................................................................................................... 2
+2.2 Installation Dimensions................................................................................................................................. 3
+3 Electrical Interface................................................................................................................................................. 4
+3.1 Interface Pinout Description......................................................................................................................... 4
+3.2 Electrical Interface......................................................................................................................................... 4
+4 Equipment Installation and Usage......................................................................................................................5
+4.1
+Coordinate System..................................................................................................................................... 5
+4.2 Equipment Installation.................................................................................................................................. 5
+5 User Serial Communication Protocol..................................................................................................................5
+
+WIS310Y Product Data Sheet V1.1
+1
+1
+Product Introduction
+Figure 1-1
+Exterior View of the WIS310Y Gyroscope
+The WIS310Y is a high-performance MEMS gyroscope independently developed by HUAV. It
+features a compact size and lightweight design, integrating a triaxial high-performance
+MEMS gyroscope internally, and is screened according to aerospace standards.
+Prior to shipment, the WIS310Y undergoes precise calibration and full-temperature range
+calibration. It has passed tests including thermal vacuum, EMC, magnetic testing, and
+ionizing radiation total dose, enabling it to meet the requirements of aerospace applications.
+It can reliably output angular rate, temperature, and real-time diagnostic information in the
+space environment.
+Key Features
+
+Independent
+Intellectual Property
+
+Full-Temperature
+Range Calibration
+
+Aerospace Standard
+Screening
+
+In-Orbit
+Reconfiguration
+
+WIS310Y Product Data Sheet V1.1
+2
+2
+Technical Parameters and Specifications
+2.1 Main Parameter Specifications
+Table 2-1 Parameter Specifications
+MEMS Gyroscope
+Range
+B
+D
+±100°/s
+±100°/s
+Bias
+≤10°/h
+≤5°/h
+Bias Stability Over
+Temperature (10s 1σ)
+≤1°/h
+≤0.3°/h
+Bias Repeatability (1σ)
+≤1°/h
+≤0.3°/h
+Angle Random Walk
+≤0.03°/√h
+≤0.015°/√h
+Scale Factor Nonlinearity
+≤100ppm
+≤100ppm
+Scale Factor Repeatability
+≤100ppm
+≤100ppm
+Orthogonality
+≤0.1%
+Bandwidth
+≥10Hz
+System Specifications
+Power Supply Voltage
++5.2V~+6.0V
+Power Consumption
+1.5W
+Dimensions (L x W x H)
+45mm x 46mm x 25mm
+Weight
+72g±5g
+Operating Temperature
+-40℃~+70℃
+Start-up Time
+<2s
+Output Frequency
+Supports blind submission
+Supports polling mode output
+Interface
+Electrical Interface
+RS422 x 1
+Connector
+J30J-15ZK
+
+WIS310Y Product Data Sheet V1.1
+3
+2.2 Installation Dimensions
+Detailed dimensions are shown in the figure below:
+Figure 2-1 WIS310Y Dimension Diagram
+
+WIS310Y Product Data Sheet V1.1
+4
+3
+Electrical Interface
+The device utilizes a J30J-15ZK rectangular connector, which incorporates both power supply and signal interfaces.
+3.1 Interface Pinout Description
+The interface pinout configuration when viewed from the external side of the product is shown in the figure below:
+Figure 3-1 Interface Signal Pinout
+3.2 Electrical Interface
+The signal definitions are shown in the table below:
+Table 3-1 Interface Pinout Definition
+Pin Number
+Name
+Description
+1，4
+RS422 TX-
+Device Serial Transmit Negative
+2，3
+RS422 RX-
+Device Serial Receive Negative
+7，8
+PVCC
+Power Input (Nominal 5V)
+5，9
+RS422 TX+
+Device Serial Transmit Positive
+10，11
+RS422 RX+
+Device Serial Receive Positive
+12
+GND
+Signal Ground (SGND)
+13，15
+GND
+Power Ground (PGND)
+6，14
+\
+Reserved
+
+WIS310Y Product Data Sheet V1.1
+5
+4
+Equipment Installation and Usage
+4.1 Coordinate System
+The coordinate system of the WIS310Y is configured as shown in the figure
+below. With the connector end facing forward, the X-axis points forward, the
+Y-axis points left, and the Z-axis points upward.
+4.2 Equipment Installation
+
+The WIS310Y gyroscope must be securely and reliably connected to the user's platform. It should be fastened using
+bolts, and the rectangular connector must be securely mated.
+
+Hex socket head cap screws (specification: M4x12, 304 Stainless Steel, Grade 8.8) are recommended for mounting the
+device. Recommended torque: 2.45 N·m. If washers are required, the recommended washer specification is: M4x7x0.5
+(Stainless Steel).
+5
+User Serial Communication Protocol
+The default serial port configuration is: Baud rate 115200 bps, 8 data bits, 1 stop bit, and odd parity. Multi-byte transmission byte
+order: high byte first, low byte last.
+The product can be configured for either Broadcast or Telemetry mode, which requires a restart to take effect. The default output
+mode is Telemetry. The output frequency in Broadcast mode is configurable, supporting up to 1000Hz. In Telemetry mode, the
+gyroscope's response time does not exceed 2ms. Response time is defined as the interval between the last bit of a sent command
+and the first bit of the gyroscope's reply.
+Figure 4-1 Coordinate System Diagram
+

@@ -1,0 +1,190 @@
+ 
+ 
+ 
+FSS-1  
+Preliminary Factsheet- v1.0 - February  2020 
+ 
+FSS-1 
+1 deg accuracy Fine Sun Sensor  
+For Micro- and Nano-Satellites 
+Features 
+●
+Performance 
+○
+2 axis sun sensor 
+○
+Field of view: 60 deg half angle 
+○
+Accuracy: 1 deg 
+●
+Physical  
+○
+42 x 16 x 6.2 mm  
+○
+Mass: 8 gram 
+○
+Operating temperature range -40ºC to 
+70ºC 
+●
+Interface 
+○
+CAN 
+○
+Flying leads w/wo connector 
+●
+Electrical 
+○
+Voltage: 3,3V 
+○
+Power: 90 mW 
+●
+Reliability 
+○
+5 years design lifetime 
+ 
+ 
+Description 
+Small factor 2 axis stand-alone fine sun sensor with two
+ 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+different estimates modes; table based (from ground
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+calibration)
+or
+polynomial
+fit
+(on-orbit
+or
+ground
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+calibration).  
+The sensor provides an estimate of sen sun vector and
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+multiple measurements can be combined to increase the
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+precision
+of
+the
+sun
+vector
+estimate,
+e.g. using a
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Fraser-Potter fixed-interval smoother or a Kalman Filter. 
+Everything except the photodiodes are shielded in an
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+aluminum casing to protect it from the harsh environment
+ 
+ 
+ 
+   
+ 
+ 
+ 
+ 
+of space. 
+The
+CAN
+interface
+together
+with
+Space
+Inventor’s
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+parameter system provides an easy to setup and user
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+interface for the sun sensor. The sun vector along with
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+calibration
+parameters,
+raw values and intermediate
+ 
+ 
+ 
+ 
+ 
+ 
+calculations are exposed by the parameter system. 
+ 
+ 
+FSS-1 - Fine Sun-sensor with flying leads 
+ 
+ 
+© 2020 Space Inventor · Nybrogade 14, st. · 9000 Aalborg · Denmark · www.space-inventor.com 
+1 
+ 
+ 
+

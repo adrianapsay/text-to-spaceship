@@ -1,0 +1,3 @@
+url: https://enersys.com/496008/globalassets/documents/product-documentation/absl/emea/emea_apac-en-ds-absl-cm170-4s6p-0722-web.pdf
+found from: https://enersys.com/496008/globalassets/documents/product-documentation/absl/emea/emea_apac-en-ds-absl-cm170-4s6p-0722-web.pdf
+found by Claude (web search) on 2026-11-11; downloaded by fetch_pass5.py

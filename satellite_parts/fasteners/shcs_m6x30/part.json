@@ -71,6 +71,29 @@
   },
   "face_counts": {
    "part": 356
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "head",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__head.stl"
+    },
+    {
+     "name": "shank",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__shank.stl"
+    }
+   ]
   }
  },
  "image": "preview.png",
@@ -89,13 +112,6 @@
     "kind": "web_search",
     "url": "https://hicf.co.in/wp-content/uploads/2019/03/Unbrako-Price-List-DFL-16-March-2022.pdf",
     "title": "Unbrako-Price-List-DFL-16-March-2022.pdf - HIC Fasteners"
-   },
-   {
-    "file": "datasheet_2_page1.png",
-    "pdf": "datasheet_2.pdf",
-    "kind": "web_search",
-    "url": "https://www.af1racing.com/store/ProdImages/st3/16DS.pdf",
-    "title": "Zero Motocycles - AF1 Racing"
    }
   ],
   "stl_preview": "preview.png",

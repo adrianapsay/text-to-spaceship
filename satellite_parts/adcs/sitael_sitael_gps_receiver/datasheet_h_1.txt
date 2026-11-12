@@ -1,0 +1,100 @@
+[Digitare il testo] 
+ 
+ 
+ 
+1 
+PRODUCT SHEET 
+AOCS & GNC 
+   
+ 
+ 
+ 
+  
+ 
+GPS Receiver 
+SITAEL GPS receiver is designed to perform real-time orbit determination on-board LEO satellites. The unit is based on two 
+COTS front-ends kept in cold redundancy. Each front-end is individually protected against high current absorption events 
+with a dedicated re-triggerable current limiter. 
+The active front-end provides raw GPS observations to the navigation computer, which support the following functions: 
+ 
+Power regulation and distribution 
+ 
+Data interface implementation 
+ 
+Front-end current absorption monitoring  
+ 
+Navigation algorithm computation, with the options: 
+o 
+Kinematic navigation (to be preferred at low altitudes or during maneuvers) 
+o 
+Reduced dynamic navigation (more accurate) 
+ 
+SITAEL GPS RECEIVER 
+Features 
+ 
+Redundant front-end protected against overcurrent 
+ 
+Isolated DC-DC converters 
+ 
+Kinematic or reduced dynamic navigation algorithm 
+ 
+Includes 26dB signal LNA 
+ 
+To be used with passive single frequency GPS antenna 
+
+[Digitare il testo] 
+ 
+ 
+ 
+2 
+PRODUCT SHEET 
+AOCS & GNC 
+ 
+ 
+SPECIFICATIONS  
+ 
+Bus Input Voltage (V) 
++12 V to +30 V 
+Interfaces 
+CAN-Bus 
+Environment 
+Storage Temperature: -40 °C to +100 °C 
+Operating Temperature: -10 °C to +60 °C 
+Power Consumption 
+< 3W 
+Size 
+210x110x30 mm (L x W x H) (excluding the antenna) 
+Mass (g) 
+≤ 800 
+Kinematic position accuracy 
+10m 3D RMS 
+Kinematic velocity accuracy 
+30cm/s 
+Reduced dyn. position accuracy 
+1m 3D RMS 
+Reduced dyn. velocity accuracy 
+1cm/s 
+Time to first fix 
+< 50s 
+TRL 
+5 
+ 
+Technical Information 
+SITAEL S.P.A | Via San Sabino, 21 - 70042 Mola di Bari (BA) Italy | info@sitael.com | www.sitael.com 
+Small Satellites, Advanced Propulsion, Instruments and Avionics, Services and Applications. 
+Copyright © 2015 SITAEL S.p.A. All Rights Reserved. 
+General remarks 
+ 
+The device is developed as part of the low cost product line for small LEO platforms and technological 
+demonstrators. 
+ 
+All electronic components are selected with industrial and military grades. 
+ 
+The main computation unit is a 32-bit ARM device, tested for TID, SEL, SEU and SEFI. 
+o 
+TID test demonstrated no loss of functionality up to 30krads 
+o 
+SEL protection is implemented at board level (re-triggerable LCL) 
+o 
+SEU and SEFI impact is mitigated at software level 
+

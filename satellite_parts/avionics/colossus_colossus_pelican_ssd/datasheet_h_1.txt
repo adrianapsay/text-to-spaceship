@@ -1,0 +1,100 @@
+COLOSSUS
+Pelican
+Pelican is a radiation tolerant solid state drive 
+designed for modern satellites. New missions require 
+high storage capacity with low size, weight, and 
+power. A dual-string redundant design based on 
+qualified components provides superior reliability and 
+fault tolerance. Pelican provides the capacity and 
+performance of modern commercial SSDs with the 
+reliability of legacy systems. 
+Colossus’ custom controller provides an opportunity 
+to tune the performance to customer needs. The design 
+can be optimized for specific workloads, and special 
+features such as cache prewarming are available. 
+The design also features a computational engine, 
+providing the ability to process data on the device itself, 
+reducing the workload on the host system. 
+HIGH CAPACITY
+RAD TOLERANT
+SMART
+Starts at 2 TB capacity.
+Store data for later downlink, or 
+keep reference data to support 
+image processing tasks such as 
+change detection. 
+Designed for the harsh 
+environment of space. Commercial 
+NAND chips are hardened with our 
+proprietary hardware, firmware, 
+and software protections. 
+A built-in computational engine 
+enables processing of the data 
+without transporting it to another 
+system. Background tasks can 
+automatically flag interesting data.
+
+STORAGE SPECIFICATIONS
+Capacity
+2 TB
+Max Sustained Read
+2,000 MB/s
+Max Sustained Write
+1,000 MB/s
+Random Operations
+30,000-50,000 IOPS
+Endurance
+1,200 TBW
+SIZE, WEIGHT, & POWER
+Size
+PC104: 96 x 91 x 15 mm
+Mass
+400 g (est, w/enclosure)
+Power
+Idle:            	 <1 W (est)
+Active:        	 20 W (est)
+Abs Max:     	 35 W (est)
+Input Voltage
+12 VDC
+Telemetry
+Internal ADC for voltage/
+temperature telemetry
+ENVIRONMENTAL
+Radiation
+Minimum 5-year LEO mission
+GEO/cis-lunar under development
+Temperature
+-40 to +60 C Operating 
+-55 to +85 C Storage
+Testing
+Thermal, Vibration, and EMI/EMC
+compliant to GSFC-STD-7000
+COMPUTATIONAL ENGINE
+CPU
+Dual-core ARM Cortex-A72
+RAM
+16 GB LPDRR4 with ECC*
+(shared with controller)
+FPGA
+Partial Reconfiguration Available
+AI
+150+ AI Engines
+CONNECTIVITY
+Data
+PCIe Gen4 x4, NVMe 1.4
+Telemetry
+PCIe or I2C
+Debug
+JTAG, RS-232
+Also Available
+40G Ethernet, SpaceWire, LVDS
+Questions? Comments?
+Need reliable, high-performance 
+data storage on your satellite?
+Please contact: 
+sales@colossuscompute.com
+COLOSSUSCOMPUTE.COM
+© Colossus Computing, Inc 2024
+All information subject to change. 
+Release date 13 Jun 2024. 
+

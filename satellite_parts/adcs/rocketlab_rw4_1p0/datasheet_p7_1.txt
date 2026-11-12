@@ -1,0 +1,93 @@
+components@rocketlabusa.com
+rocketlabusa.com
+MOMENTUM
+Nominal: 1.0 Nms
+TORQUE
+100 mNm at 0.8 Nms (at 28 V supply)
+CONTROL MODE
+Speed or torque, with built-in control CPU
+COMMAND/TELEMETRY
+Redundant RS-485, with galvanic isolation from primary
+MECHANICAL
+Dimensions: 154 mm x 146 mm x 45 mm
+Mass: 1380 g
+SUPPLY VOLTAGE
+Nominal: 24 V to 34 V, Maximum: 50 V
+SUPPLY POWER
+(28 V IN VACCUM)
+43 W @ 1.0 Nms, +60 mNm torque
+5.3 W @ 1.0 Nms, steady state
+1.4 W @ 0.2 Nms, steady state
+-28 W @ 1.0 Nms, −100 mNm regenerative braking
+ENVIRONMENT
+Thermal: −40° C to +70° C (operating)
+Vibration: >14 gRMS
+RADIATION
+> 60 krad Total Dose. > 5 mm Al equivalent shield. Heavy ion tested to 50
+MeV-cm²/mg, LDRS tested. Hardware TMR on all flip-flops, EDAC on all RAM
+RELIABILITY
+Advanced hybrid ball bearings, redundant motor windings, active neutralization of rotor 
+static charge
+HERITAGE
+9 unit on orbit. Mechanical design from RW3-1.0, with additional 76 Units on orbit
+PRICE
+US $80,000 each
+1Nms RW-1.0  Data Sheet
+r e ac ti o n
+w h e e l
+Version 2, 7 April 2022
+
+components@rocketlabusa.com
+rocketlabusa.com
+-1.5
+-1
+-0.5
+0
+0.5
+1
+1.5
+2
+2.5
+3
+3.5
+-1
+-0.8
+-0.6
+-0.4
+-0.2
+0
+0.2
+0.4
+0.6
+0.8
+1
+Current Consuption (A)
+Momentum (Nm-sec)
+Input Current at 28V in Vacuum for Various Torques
+10mNm
+20mNm
+40mNm
+60mNm
+80mNm
+100mNm
+1mNm
+-0.4
+-0.3
+-0.2
+-0.1
+0
+0.1
+0.2
+0.3
+0.4
+-1.5
+-1
+-0.5
+0
+0.5
+1
+1.5
+Torque (Nm)
+Momentum (Nms)
+RW4-1.0 torque box, in vacuum, 28 V supply
+

@@ -1,0 +1,114 @@
+Beyond Gravity │ Satellites
+beyondgravity.com
+Beyond Gravity Space compact Slice Frequency Converter for Ka-
+band payloads meet the highest performance and reliability require­
+ments. Application of new technology enables small size, low 
+mass and efficient manufacturing.
+Telecom: 
+Ka-band Slice 
+Frequency Converter
+
+Internal Code/Doc.No
+1106324 /01-22
+This document remains the intellectual property of Beyond Gravity Sweden AB and may not be copied, 
+or used without their prior written approval.
+beyondgravity.com
+Beyond Gravity | Satellites
+Heritage
+Modularity
+Production
+Compact Receiver and Converter 
+block diagram
+Compact design
+Key features
+Interfaces
+Beyond Gravity Space has been supplying high 
+performance and highly reliable microwave 
+communication equipment for telecom satellites for 
+more than 35 years.
+Delivery record for telecom payloads:
+> 1300 FSS/BSS Units delivered
+> 700 Ka-band Channels delivered
+> 10 000 years accumulated operational time in orbit
+The modular design allows the equipment to be 
+configured for different frequency plans as well as 
+for a variety of DC voltages.
+•	
+Well-known technologies and established 
+processes
+•	
+Extensive clean-room facilities
+•	
+Highly automated testing and data collection
+•	
+Inhouse facilities for environmental testing
+Extensive use of MMIC and miniaturizarion 
+technologies are employed to give small size and low 
+mass. The high level of integration result in improved 
+producibility and short lead times.
+Frequency Converter for Ka-band payloads
+Ka-band Frequency Converter for 30 GHz to 20 
+GHz Conversion. The use of external LO and EPC 
+allows the use of frequency converter with small 
+size and low mass. The equipment is built using the 
+latest MMIC technologies for excellent electrical 
+performance while exhibiting low DC power 
+consumption and small dimension.
+RF input: 	
+  	
+Waveguide (WR28) or 
+                      	
+	
+coaxial (SMA-K) 
+RF output: 	
+  	
+SMA-K
+LO input:	
+  	
+SMA
+DC & TM/TC:  	 	
+MDM-9
+
+Internal Code/Doc.No
+1106324 / 01-22
+This document remains the intellectual property of Beyond Gravity Sweden AB and may not be copied, 
+or used without their prior written approval.
+Beyond Gravity | Satellites 
+satellites@beyondgravity.com | satellites.usa@beyondgravity.com 
+beyondgravity.com
+Beyond Gravity | Satellites
+Technical Data
+Parameter
+Typical Performance
+Frequency range, Input
+27.5 to 31.0 GHz
+Frequency range, Output
+17.7 to 21.2 GHz
+LO Frequency range
+7.0 to 12.0 GHz
+Input Power:
+                   RF
+                   LO             
+-20 dBm (nom/carrier) and 0 dBm (overdrive)
+0 to +3 dBm (typical)
+Gain
+28 - 34 dB 
+Transmit Band Gain
+<-20 dB
+OIP3
+>28 dBm
+Noise figure
+<15 dB
+Temperature range
+-20°C to + 70°C
+DC power supply:
+                   V+/I+
+                   V-/I-
+
++5.5 – +9.0 V / <500 mA
+-9.0 – -6.0 V/ <20 mA
+Mass
+0,24 kg
+Size (footprint)
+111 x 31 x 71 mm 
+

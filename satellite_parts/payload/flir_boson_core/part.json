@@ -1,0 +1,192 @@
+{
+ "id": "flir_boson_core",
+ "name": "Teledyne FLIR Boson LWIR thermal camera core (no lens)",
+ "category": "payload",
+ "subcategory": "camera",
+ "vendor": "Teledyne FLIR",
+ "model": "Boson 320 / 640 core",
+ "dimensions_mm": {
+  "x": 21,
+  "y": 21,
+  "z": 11
+ },
+ "mass_g": 7.5,
+ "source": {
+  "type": "datasheet",
+  "url": "https://groupgets-files.s3.amazonaws.com/boson/documents/Boson%20datasheet,%20102-2013-40,%20Rev%20340.pdf",
+  "document": {
+   "title": "Teledyne FLIR Boson data sheet 102-2013-40 rev 340",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "thermal",
+   "payload"
+  ],
+  "notes": "21 x 21 x 11 mm (lens-less, shutter-less 320 and 640 engines), as light as 7.5 g, 0.5 to 1.55 W at 3.3 V, 320 x 256 or 640 x 512, CMOS or USB3 video, UART or USB control, -40 to +80 C. A lens adds length and mass."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "USA",
+ "distributors": [
+  "distributors",
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "distributor",
+  "source": null
+ },
+ "mass_note": "lower bound (as light as 7.5 g, configuration dependent)",
+ "electrical": {
+  "voltage_V": {
+   "nominal": 3.3
+  },
+  "power_W": {
+   "min": 0.5,
+   "max": 1.55
+  },
+  "interfaces": [
+   "CMOS video",
+   "USB3",
+   "UART"
+  ]
+ },
+ "payload": {
+  "type": "LWIR microbolometer",
+  "resolution_px": [
+   640,
+   512
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -40,
+   "max": 80
+  }
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   21.0,
+   21.0,
+   11.0
+  ],
+  "mesh_volume_mm3": 4837.0,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.551,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    21.0,
+    21.0,
+    11.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "UART",
+   "USB"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 3.3
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://groupgets-files.s3.amazonaws.com/boson/documents/Boson%20datasheet,%20102-2013-40,%20Rev%20340.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

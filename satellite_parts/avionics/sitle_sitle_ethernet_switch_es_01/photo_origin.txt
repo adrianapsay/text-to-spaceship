@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-sitle-sitle-ethernet-switch-es-01-avx62u.pdf
+method: product image from the catalog page https://satsearch.co/products/sitle-ethernet-switch

@@ -1,0 +1,400 @@
+HTC01  SHUTTER 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+     
+ 
+ 
+ 
+ 
+ 
+MICROSAT/CUBESAT HATCH SHUTTER FOR RELIABLE 
+PROTECTION OF OPTICS AND DEVICES 
+
+ 
+PdR, Vía a Samborondon km 3.5 #4129           Facebook 
+(593) 999 429106  Guayaquil – Ecuador          LinkedIn 
+(593) 987443668                                            info@exa.ec - www.exa.ec - @EXA_ec 
+ 
+ 
+ 
+ 
+ 
+HTC01 is a hatch shutter with PC104 hole pattern designed to protect delicate optics 
+during launch and spacecraft separation and deploy operations in orbit. It is safely 
+operated by a spring loaded hinge and released by MMA (memory metal alloy) HDRM, it 
+has dry contact PtIr (Platinum-Iridium) sensors that compress at 99.998% their length to 
+insure a reliable seal in order to prevent the ingress of particles or dust to the protected 
+device. 
+ 
+HTC01 can be operated by any GPIO/TTL signal (5V@0.1A) and comes with its own 
+DSACTRL v2.0 controller (optional) for hassle-free, programming-free operation, the 
+controller (TRL9 flight heritage since 2013) will receive a 5V TTL signal as control and the 
+raw battery input as power to operate the hatch and will execute the release and deploy 
+operations reporting to your OBC via TTL level dry contact sensors that you can receive 
+on any GPIO entry with discrete values (0 or 5V). Once the operation is completed and 
+both sensors report successful operation, the controller will cut the signal input to prevent 
+any battery power runaway, passivating the MMA HDRM and securing total system safety. 
+ 
+ 
+ 
+ 
+• Memory metal alloy TRL9 HDRM 
+• Complete automation of the release/deploy operation 
+• 100% success rate in orbit and in the lab 
+• Repeatability without any need to re-build 
+• Deploy and Release dry contact sensors guarantees zero-failure operation 
+• Super safety design impedes battery runaway 
+ 
+ 
+ 
+• Mass: 55 grams 
+• Dimensions (LxWxH): 108mm x 105mm x 7.64mm 
+• Control Signal: 3V3@0.15A or 5V@0.1A 
+• Actuator Power input: 4V to 24V; 2A to 4A (depends on desired operation speed) 
+SUMMARY
+FEATURES 
+PERFORMANCE AND PRODUCT PROPERTIES 
+
+ 
+PdR, Vía a Samborondon km 3.5 #4129           Facebook 
+(593) 999 429106  Guayaquil – Ecuador          LinkedIn 
+(593) 987443668                                            info@exa.ec - www.exa.ec - @EXA_ec 
+ 
+• Operation: MMA HDRM, spring loaded Hinge Nano+ 
+• Operating Temperature: -100C to +90C 
+• Interface: Molex pico-blade 8 positions (interface cable included) 
+• Hole pattern: PC104 
+• Finish: White reflective, gold plated 70 um 
+ 
+ 
+ 
+All devices are provided with tests reports regarding: 
+ 
+• Thermal Bake out (10E-5 mbar @ 50C for 72 hours) 
+• Full vibration test for Falcon 9, Falcon Heavy, Electron, Soyuz, Dnepr and Long 
+March 2D 
+ 
+Test 
+QT 
+AT 
+Functional  
+Vibration  
+ 
+ 
+Thermal Cycling  
+ 
+Thermal Vacuum  
+ 
+ 
+Repeatability (100 times) 
+ 
+ 
+ 
+ 
+ 
+• 2 to 4 weeks 
+ 
+ 
+ 
+      
+ 
+ 
+ 
+ 
+TESTING 
+AVAILABILITY AND LEAD TIME 
+
+ 
+PdR, Vía a Samborondon km 3.5 #4129           Facebook 
+(593) 999 429106  Guayaquil – Ecuador          LinkedIn 
+(593) 987443668                                            info@exa.ec - www.exa.ec - @EXA_ec 
+ 
+ 
+ 
+HTC01 in opened position and its DSACTRL v2.0 controller 
+ 
+HTC01 in closed position 
+
+ 108 
+ 7.04 
+ 4.65 
+ 2 
+ 1 
+ 108 
+ 34.50 
+ 34.50 
+ 26 
+ 5 
+ 105 
+ 95 
+ 5 
+ 5 
+ 5 
+ 98 
+DRAWN
+CHK'D
+APPV'D
+MFG
+Q.A
+NAME
+SIGNATURE
+DATE
+MATERIAL:
+TITLE: GENERAL DIMENSIONS
+SCALE: 1:1
+SHEET 1 OF 6
+A4
+WEIGHT: 
+JND
+JND
+RNB
+RNB
+-
+EXA CUBESAT SHUTTER
+
+ 108 
+ 96° 
+ 5.46 
+ 4.06 
+ 5.46 
+DRAWN
+CHK'D
+APPV'D
+MFG
+Q.A
+NAME
+SIGNATURE
+DATE
+MATERIAL:
+TITLE: GENERAL DIMENSIONS
+SCALE: 1:1
+SHEET 2 OF 6
+A4
+WEIGHT: 
+JND
+JND
+RNB
+RNB
+-
+EXA CUBESAT SHUTTER
+
+ 34.50 
+ 5 
+ 5 
+ 98 
+ 5 
+ 95 
+ 5 
+ 98 
+ 5 
+ 5 
+ 34.50 
+ 52.50 
+ 52.50 
+ 26 
+ 6 
+ 8 
+ 54 
+ 54 
+ 
+80 
+DRAWN
+CHK'D
+APPV'D
+MFG
+Q.A
+NAME
+SIGNATURE
+DATE
+MATERIAL:
+TITLE: GENERAL DIMENSIONS
+SCALE: 1:1
+SHEET 3 OF 6
+A4
+WEIGHT: 
+JND
+JND
+RNB
+RNB
+-
+EXA CUBESAT SHUTTER
+
+ 47.50 
+ 10 
+ 7.50 
+ 7.50 
+ 3.62 
+ 
+2.25 
+ 
+2.25 
+ 
+1.03 
+ 8 
+ 47.50 
+ 11.07 
+ 12.57 
+ 12.43 
+ 11.07 
+ 16.31 
+ 11.21 
+ 11.21 
+ 15.04 
+ 5 
+ 5 
+ 5 
+ 5 
+ 
+3.20 
+ 
+2.25 
+ 
+80 
+ 8.50 
+ 48.50 
+A
+A
+B
+ 
+2.25 
+ 1.20 
+ 
+4.65 
+ 
+2.25 
+ 1.20 
+ 
+4.65 
+Top
+DRAWN
+CHK'D
+APPV'D
+MFG
+Q.A
+NAME
+SIGNATURE
+DATE
+MATERIAL:
+TITLE: GENERAL DIMENSIONS
+SCALE: 1:1
+SHEET 4 OF 6
+A4
+WEIGHT: 
+JND
+JND
+RNB
+RNB
+-
+EXA CUBESAT SHUTTER
+
+ 34.79 
+ 16.25 
+ 20.75 
+ 5.10 
+ 3.25 
+ 9.35 
+ 20.75 
+ 8.25 
+ 26 
+ 8.25 
+ 20.75 
+ 16.25 
+ 3.25 
+ 45 
+ 3.25 
+ 16.25 
+DRAWN
+CHK'D
+APPV'D
+MFG
+Q.A
+NAME
+SIGNATURE
+DATE
+MATERIAL:
+TITLE: GENERAL DIMENSIONS
+SCALE: 1:1
+SHEET 5 OF 6
+A4
+WEIGHT: 
+JND
+JND
+RNB
+RNB
+-
+EXA CUBESAT SHUTTER
+
+ 22 
+ 22 
+ 2.38 
+ 2.38 
+ 24.88 
+ 24.88 
+ 3 
+ 3 
+ 
+2 
+ 
+2.65 
+C
+C
+D
+D
+E
+F
+ 
+3 
+ 
+3 
+ 
+2 
+ 0.50 
+ 0.50 
+ 90° 
+Top
+ 
+4.65 
+ 
+2.65 
+ 45° 
+Top
+DRAWN
+CHK'D
+APPV'D
+MFG
+Q.A
+NAME
+SIGNATURE
+DATE
+MATERIAL:
+TITLE: GENERAL DIMENSIONS
+SCALE: 1:1
+SHEET 6 OF 6
+A4
+WEIGHT: 
+JND
+JND
+RNB
+RNB
+-
+EXA CUBESAT SHUTTER
+

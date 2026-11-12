@@ -1,0 +1,227 @@
+Revision:
+TW2710
+The
+TW2710
+employs
+Calian's
+patented
+Accutenna®
+technology covering the BeiDou B1, Galileo E1, GPS-L1,
+GLONASS-G1 and SBAS (WAAS, QZSS, EGNOS & MSAS)
+frequency band (1559 to 1606 MHz). It is especially designed
+for precision industrial,
+agricultural, safety
+and security
+applications. It provides truly circular response over its entire
+bandwidth
+thereby
+producing
+superior
+multipath
+signal
+rejection. 
+The TW2710 has a low axial ratio, excellent phase linear
+response and a tight phase centre variation, providing the
+performance normally associated with higher priced antennas. 
+The TW2710 features a dual-feed wideband patch element,
+with one LNA per feed, a mid section combiner and SAW filter,
+and a final output gain stage. 
+The
+TW2710
+is
+housed in a compact, industrial-grade
+weatherproof, magnet mount enclosure, and is available with
+a variety of connectors and cable lengths. 
+The antenna can be ordered without the magnet. In such
+cases, the magnet is replaced with a plastic plug to provide a
+smooth under surface.
+Applications
+Features
+Benefits
+202407
+About Calian: With global headquarters and manufacturing in Ottawa, Canada, Calian is a leading manufacturer of high-
+precision antennas and components for Global Navigation Satellite System (GNSS) applications. Calian’s mission is to
+support the needs of a new generation of positioning systems by delivering unprecedented antenna precision at
+competitive prices. Learn more at www.calian.com
+Contact us:
+info@tallysman.com
+T: +1 613 591-3131
+• High-accuracy & mission-critical global 
+positioning
+• Precision agriculture, mining, and construction
+• Law enforcement and public safety
+• Law enforcement and public safety
+• Fleet management and asset tracking
+• Covers B1 / E1 /L1 / G1 Frequencies
+• Great axial ratio: 1 typ., 3 dB max
+• Low noise LNA: ≤1 dB
+• High-rejection SAW filter
+• LNA gain (28 dB typ.)
+• Low current (12 mA typ.)
+• Wide voltage input range: 2.5 to 16 VDC
+• Excellent multipath rejection
+• Increased system accuracy
+• Excellent signal-to-noise ratio
+• Great out-of-band signal rejection
+• Ideal for harsh environments
+• RoHS and REACH compliant
+Multi-Constellation Antenna
+Frequency Coverage:
+GPS L1 | GALILEO E1 | BEIDOU B1 | GLONASS G1 
+
+L1
+L2
+L5
+G1
+G2
+G3
+E1
+E5A
+E5B
+E6
+B1
+B2b
+B2a
+B3
+L5
+L6
+Radome
+Mount
+Revision:
+Frequency Bandwith
+1559 - 1606 MHz
+-
+Out-of-band Rejection
+> 40 dB @ < 1500 MHz 
+> 20 dB @ < 1540 MHz 
+> 45 dB @ > 1640 MHz 
+-
+Technology
+Dual-feed RHCP ceramic patch
+Upper Band
+Lower Band
+GNSS
+QZSS
+-
+-
+Gain
+Axial Ratio
+GLONASS
+4.75
+≤ 2
+-
+-
+-
+Non pre-filtered
+< 1.5:1 typ., 1.8:1 max
+-
+-
+Galileo
+dBic typ. at Zenith
+dB at Zenith
+GPS / QZSS
+4.75
+≤ 2
+-
+-
+-
+-
+-
+-
+4.75
+≤ 2
+P 1dB Output
+-
+L-Band Services (1525 MHz - 1559 MHz)
+-
+-
+-
+Efficiency
+-
+4.75
+≤ 2
+ESD Circuit Protection
+-
+-
+-
+PCO
+BeiDou
+Noise Figure
+1 dB typ.
+-
+-
+VSWR
+-
+-
+Supply Current
+12 mA typ.
+Gain
+28 dB typ.
+Architecture
+-
+-
+IRNSS / NavIC
+-
+-
+Supply Voltage Range
+2.5 to 16 VDC nominal, up to 50mV p-p ripple
+-
+-
+Group Delay
+PC Variation
+-
+Size
+Satellite Communications
+Iridium
+-
+-
+Globalstar
+-
+-
+Other
+Axial Ratio at 10°
+IP67
+Part Number
+TW2710 – Multi-Constellation antenna
+Compliance
+IPC-A-610, FCC, RED / CE Mark, RoHS, REACH
+Where xx = connector type and yyyy = cable length in mm
+15 kV air discharge
+Operating Temperature
+-40 °C to +85 °C
+Storage Temperature
+-55 °C to 95 °C
+57 mm (dia.) x 16 mm (h.)
+Weight
+110 g
+LEXAN™ EXL9330, Base: Zamac Metal
+Magnetic, adhesive, or permanent
+Available Connectors
+Please refer to ordering guide
+202407
+Parts and Labour
+3-year standard warranty
+Please refer to our Ordering Guide to review available radomes and connectors at:
+https://www.tallysman.com/resource/tallysman-ordering-guide/ 
+© 2023 Calian Inc. All rights reserved. Calian, the “Confidence. Engineered.” tag line and the Calain logo are trademarks or registered
+trademarks of Calian Inc. and/or its affiliates in Canada and certain other countries. All other trademarks mentioned in this document are the
+property of their respective owners. The information presented is subject to change without notice. Calian assumes no responsibility for any
+errors or omissions in this document. Calian hereby disclaims any or all warranties and liabilities of any kind.
+Vibration
+MIL-STD-810-E - Test Method 514.5
+Shock
+MIL-STD-810-G - Test Method 516.6
+Salt Fog
+MIL-STD-810-F - Test Method 509.5
+IP Rating
+Antenna - Measured with a 100 mm ground plane
+Mechanicals
+Environmental
+Warranty:
+Ordering Information
+Low Noise Amplifier (LNA)  - Measured at 3V and 25°C
+Mechanical Diagram - Units in 'mm'
+Multi-Constellation Antenna
+Frequency Coverage:
+GPS L1 | GALILEO E1 | BEIDOU B1 | GLONASS G1 
+

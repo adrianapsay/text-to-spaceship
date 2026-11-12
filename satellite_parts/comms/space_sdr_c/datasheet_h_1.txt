@@ -1,0 +1,282 @@
+ 
+      µSDR-CTM Software Defined Radio  
+ Specifications Subject to Change Without Notice 
+Rev 7.2: 1/7/19 
+1 
+15378 Avenue of Science, Suite 200, San Diego, CA 92128 
+858.332.0700 | sales@spacemicro.com | www.spacemicro.com 
+• Small Form Factor Software Defined Radio 
+• Radiation Hardened 
+• Suitable for LEO, GEO 
+• FPGA Reconfigurable Resources, Transceiver Chip 
+• Base µSDR-C using 2 Board Set (DPS + RF Trans-
+ceiver) provides 150 MHz to 6 GHz operation 
+• Optional Up/Down Converter Board with Low Noise 
+Amplifier (LNA), Power Amplifier (PA) available 
+• Interfaced with KG-250 NSA Type 1 Cryptographic 
+Unit (Option) 
+KEY FEATURES 
+BLOCK DIAGRAM 
+CSP 
+Processor
+(Digital 
+Software 
+Defined 
+Radio)
+PROCESSING 
+SYSTEM Dual 
+core ARM 
+Cortex-A9
+3 FLASH 
+Chips Gigbyte
+512MB 
+DDR3L
+BACKPLANE CONNECTOR
+300 Pin Searay
+Point of 
+Load 
+Regulators
+OSC 40 MHz 
+VCXO
+70 MHz 
+to 6 GHz 
+RF MMCX
+RF 
+TRANSCEIVER
+ 
+WATCHDOG, 
+FLASH CTRL, 
+10 MHz PLL
+OSC 
+33.33 MHz
+PROGRAMMABLE 
+LOGIC 125k 
+CELLS, 9.5 Mb 
+RAM, 593GMACs
+1GB 
+DDR3L PL
+µSDR-C
+CAN
+Personality Card
+SGMII
+Boot Cfg
+RF DAC
+10MHz Ref
+Ext Clk
+JTAG
+RF CTRL
+GPIO AIO
+SPI
+Mictor
+GIGe
+PCIe
+SDIO
+USB OTG
+UART
+SpaceWire
+X-band Transmitter
+ 
+LO
+10.0 GHz
+To RF Detector for ALC
+BPF
+S-band Input
+2025-2120 MHz
+BPSK, OQPSK
+X-band Output
+8.0-8.4 GHz
+Pout = +33dBm
+RF Up/Down Converter Board (Optional)
+Fc = 1.6-2.0 GHz
+750  MHz CH BW
+64/128 APSK
+S-band Receiver
+To RF Detector for ALC
+LPF
+LNA
+LNA
+BPF
+S-band Output
+2025-2120 MHz
+10 GHz 
+BSF
+LPF
+1W-10W SSPA
+µSDR-C Dimensions: 10 cm x 10 cm x 8 cm 
+RF Transceiver Board 
+Digital Signal Processor Board 
+Up/Down Converter Board 
+
+ 
+      µSDR-CTM Software Defined Radio  
+ Specifications Subject to Change Without Notice 
+Rev 7.2: 1/7/19 
+2 
+15378 Avenue of Science, Suite 200, San Diego, CA 92128 
+858.332.0700 | sales@spacemicro.com | www.spacemicro.com 
+TRANSCEIVER FEATURES 
+Carrier Frequency  
+150 MHz — 6 GHz 
+Tunable Channel Bandwidth 
+<200kHz to 56 MHz 
+Data rate 
+1 kbps to 42 Mbps using Higher Modulation Codes 
+RF Output Power 
+Varies at Different LO Selections 
+User configurable: 6.5 dBm to 8 dBm from RF Transceiver 
+ 
+Optional Power Amplifier: 1 to 10 Watts RF Power 
+LO step size 
+< 2.4 Hz 
+Encoding 
+CCSDS ReedSolomon(255,223), Interleave=5, CONVO
+(7,1/2), LDPC and User Provided Options Available 
+Modulation 
+BPSK, OQPSK, 8PSK, 16APSK, FSK 
+ADC/DAC 
+12-bits, Optimized Sample Rate of 30.72 Msps 
+Optional Sample Rate up to 61.44 Msps 
+Noise Figure 
+UHF: < 2.5 dB 
+S-band: 3 dB 
+C-band: 3.8 dB 
+Dynamic Range 
+Threshold (Minimum)      -21 dBm (Maximum) 
+Sensitivity 
+100 kbps, 16-ary FSK, 1E-6 BER  
+ -109 dBm (Maximum)  
+Range 
+Dependent on RF Power Output and Antenna Selection 
+Power—Receiver Only 
+ 
+4 W (Typical)                      5 W (Maximum) 
+Transmitter Power Determined by Required Output Power Need-
+ed 
+RECEIVER SECTION  
+GENERAL SPECIFICATIONS 
+• 
+Size: 10 x 10 x 5 cm (2 Board Base Model); 10 x 10 x 8 cm (3 Board Model) 
+• 
+Weight: <0.6 kg (2 Board Model); < 0.75 kg (3 Board Model) 
+• 
+Operating Remperature: -30º C to +60º C (contact factory for other temperature ranges) 
+• 
+Storage Temperature: 50°C to + 85°C  
+• 
+Vacuum Environment: 10E-5 Torr 
+• 
+Power consumption: 8 Watt 
+• 
+Radiation 
+• 
+30, 50 and 100 krad models available 
+• 
+No SEL <70 MeV/mg/cm2 
+• 
+No unrecoverable SEFI 
+
+ 
+      µSDR-CTM Software Defined Radio  
+ Specifications Subject to Change Without Notice 
+Rev 7.2: 1/7/19 
+3 
+15378 Avenue of Science, Suite 200, San Diego, CA 92128 
+858.332.0700 | sales@spacemicro.com | www.spacemicro.com 
+POWER CONSUMPTION 
+Telemetry Outputs  
+• 
+Received Signal Strength Indicator (RSSI) 
+• 
+Automatic Gain Control (AGC) 
+• 
+Carrier and Demod Lock 
+• 
+Frequency and Time Offset 
+• 
+Critical Voltages 
+• 
+Critical Temperatures 
+Programmable I/O 
+• 
+14 User Programmable I/O Pins on µD 15-pin Header 
+• 
+Differential Routed Pairs on 2.5 V Bank 
+• 
+LVDS25 or LVCMOS25 Standards 
+• 
+Bus Routed 
+Standards Available on µD 15-
+pin connector 
+• 
+Standards available in Zynq EMIO 
+• 
+SPI 
+• 
+UART 
+• 
+I2C 
+• 
+CAN (Phy not on backplane) 
+• 
+No Ethernet 
+• 
+SpaceWire (tested to 100 Mbps) Core Provided 
+• 
+EtherWire 
+Telemetry Interface 
+User Defined 
+I/O AND INTERFACES 
+INPUT VOLTAGE 
+Maximum Input Power 
+ 
+2.5 dBm to the Transceiver 
+Slice Available for Signal Conditioning of Power Prior to Entering 
+the Transceiver Chip 
+ 
+Element
+Tx & Rx 
+Power
+Tx Power
+Rx Power
+Digital Processing
+1.8
+1.3
+1.3
+Agile Converter
+2.1
+1.3
+1.3
+Up convert
+1.6
+1.6
+0
+Down convert
+1.6
+0
+1.6
+Freq Synthesis
+1.0
+1.0
+1.0
+Power Amp (2W)
+6.6
+6.6
+0
+LNA
+0.3
+0
+0.3
+Misc
+0.5
+0.5
+0.5
+TOTAL
+15.5
+12.3
+6
+Option:
++28V DC-DC Conversion
+25%
+25%
+25%
+

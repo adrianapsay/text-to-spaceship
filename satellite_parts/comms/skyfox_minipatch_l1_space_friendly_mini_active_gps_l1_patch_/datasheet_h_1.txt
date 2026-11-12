@@ -1,0 +1,582 @@
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Space-Friendly   
+Mini Active GPS-L1 Patch Antenna 
+miniPATCH-L1 
+ 
+Product Datasheet 
+Rev. D/2020 
+ 
+ 
+Intended to cover all CubeSat Project needs. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Made in Czech Republic, a country with space heritage since 1978. 
+© 2014-2020 SkyFox Labs, All rights reserved. 
+
+ 
+ 
+Space-Friendly 
+Mini Active GPS-L1 Patch Antenna Module
+ 
+Intended to cover all CubeSat Project needs. 
+ 
+ 
+ 
+               www.SkyFoxLabs.com, Space-Friendly products 
+2             miniPATCH-L1 Product Datasheet, Rev. D 
+Issue rev. D, 2020, info@skyfoxlabs.com, U Studanky 620/13. CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2020 SkyFox Labs, s.r.o., All rights reserved 
+ 
+ 
+                           
+FEATURES – Flight Model 
+ 
+Stable 50+ dBc-Hz SNR on ground for  
+ 
+close-to-zenith satellites 
+ 
+Power consumption 
+ 
+20 mA (typical), 3.3 V @ 25°C 
+ 
+2.7 to 5.5V power supply 
+ 
+Large groundplane insulated from structure 
+ 
+Mass 40 grams 
+ 
+Dimensions 
+ 
+75×75×12.5 mm incl. shielding 
+ 
++5 mm top, -6 mm bottom 
+ 
+Wide temperature range 
+ 
+-40˚C to +85˚C 
+ 
+Connector 
+ 
+MCX-F for both signal + power 
+ 
+straight or right-angle on request 
+ 
+FR-4 Space-grade 4-layers PCB 
+ 
+SAW filter 
+ 
+TRL-9 
+ 
+Patch epoxy-fixed (Ultra Low Outgassing)  
+ 
+Double-sided Kapton fix below Patch 
+ 
+60/40 Tin-Lead used (prevent tin whiskers) 
+ 
+ 
+FEATURES – Engineering Model 
+ 
+Stable 50+ dBc-Hz SNR on ground for  
+ 
+close-to-zenith satellites 
+ 
+Power consumption 
+ 
+20 mA (typical), 3.3 V @ 25°C 
+ 
+2.7 to 5.5V power supply 
+ 
+Large groundplane insulated from structure 
+ 
+Mass 40 grams 
+ 
+Dimensions 
+ 
+75×75×12.5 mm incl. shielding 
+ 
++5 mm top, -6 mm bottom 
+ 
+Wide temperature range 
+ 
+-40˚C to +85˚C 
+ 
+Connector 
+ 
+MCX-F  for both signal + power 
+ 
+Straight or Right-angle on request 
+ 
+FR-4 Space-grade 4-layers PCB 
+ 
+SAW Filter 
+ 
+Patch Epoxy-fixed (Ultra Low Outgassing)  
+ 
+Standard Green PCB Conformal coating used 
+ 
+RED Remove Before Flight coating finish 
+ 
+RoHS Tin used (for Engineering Only) 
+ 
+ 
+APPLICATIONS 
+ 
+CubeSats, MicroSats or similar space platforms 
+ 
+Limited power budget space projects 
+ 
+ 
+Fig. 1 Mini GPS-L1 Patch Antenna Flight Model. 
+ 
+ 
+GENERAL DESCRIPTION 
+ 
+ 
+The miniPATCH-L1 is a miniature version 
+of the Space-Friendly GPS-L1 CubeSat Active 
+Antenna module especially designed to provide 
+strong signal for GPS satellites reception in space. 
+Integrated Low Noise Amplifier as well as SAW 
+filter are matched together with 35×35 mm patch 
+antenna and sufficiently large (75×75 mm) ground 
+plane. 
+ 
+Easy-to-use MCX signal and power 
+interface provides compact solution for all kind of 
+projects where strong GPS signal reception with 
+enough margins is required.  
+ 
+The module shall be embedded into the 
+satellite body close to conductive parts such as 
+metallic sidewalls or PCB ground planes, to extend 
+the existing antenna groundplane. 
+ 
+Product is manufactured in two grades to 
+satisfy both Engineering and Flight requirements. 
+Modules (/EM, /FM) are electrically identical, 
+however their chemical and mechanical properties 
+allows it to be used in laboratory or space, 
+respectively.  
+ 
+The fully functional Engineering Model is 
+finished by red coating with Remove Before Flight 
+labelling. 
+ 
+ 
+ 
+ 
+ 
+PRODUCT DATASHEET 
+miniPATCH-L1
+
+ 
+ 
+ 
+ 
+  
+ 3       
+www.SkyFoxLabs.com, Space-Friendly products 
+miniPATCH-L1 Product Datasheet, Rev. D 
+Issue rev. D, 2020, info@skyfoxlabs.com, U Studanky 620/13. CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2020 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATASHEET 
+miniPATCH-L1
+                           
+TABLE OF CONTENTS 
+ 
+APPLICATIONS...................................................................2 
+GENERAL DESCRIPTION..................................................2 
+TABLE OF CONTENTS .......................................................3 
+DIMENSIONS......................................................................3 
+ABSOLUTE MAXIMUM RATINGS ....................................3 
+APPLICATION NOTES & RECOMMENDATIONS............4 
+EXPORT CONTROL............................................................ 7 
+DISCLAIMER ......................................................................8 
+ 
+ 
+DIMENSIONS 
+ 
+ 
+The four-layer PCB with outer dimensions of 75×75 mm contains four mounting holes for M2.5 conical 
+head screws. Metalized vias below screw heads are electrically insulated from the inner groundplane potential to 
+prevent grounding loops. Conductive mounting holes are expected to be mounted onto the metallic part of the 
+satellite chassis, thus interconnected together to chassis potential. Ground the mounting system to prevent arcing. 
+In miniPATCH-L1 product, the grounding is provided by the CubeSat structure. The miniPATCH-L1 antenna is 
+equipped with the female MCX-Female straight or right angle RF connector. 
+ 
+ 
+Fig. 2 miniPATCH-L1 dimensions drawing. 
+ 
+ 
+ 
+ 
+Tab.: 1 The miniPATCH-L1 MCX-F Connector Description. 
+Pin 
+Name 
+I/O, Power or Do Not 
+Connect 
+Description 
+Shield 
+GND 
+Power 
+System ground. Must be connected to receiver ground potential. This signal is internally 
+connected to the inner ground plane and patch antenna tap. 
+Center 
+VDD 
+Power 
+Positive system power input. Positive power supply input and RF signal output. 
+ 
+ 
+ABSOLUTE MAXIMUM RATINGS 
+ 
+VIN to GND ………..……..-0.3 V to (≤ 7 V max) 
+Operating Temperature Range:…………..……-40°C to +85°C 
+DC Input Current: II at VI < 0 V or VI > VDD ...................30 mA 
+Storage Temperature Range:…..……………...-40°C to +85°C 
+ 
+ 
+ 
+NOTE: Stresses beyond those listed under “Absolute Maximum Ratings” may cause permanent damage to the 
+device. These are stress ratings only, and functional operation of the device at these or any other conditions 
+beyond those indicated under specification conditions is not implied. Exposure to absolute maximum rated 
+conditions for extended periods may affect device reliability. Voltage values are with respect to system ground 
+terminal. The manufacturer reserves all rights to decline the responsibility for any damage caused by improper 
+using of the miniPATCH-L1 product. 
+
+ 
+ 
+ 
+ 
+  
+ 4       
+www.SkyFoxLabs.com, Space-Friendly products 
+miniPATCH-L1 Product Datasheet, Rev. D 
+Issue rev. D, 2020, info@skyfoxlabs.com, U Studanky 620/13. CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2020 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATASHEET 
+miniPATCH-L1
+CAUTION: The antenna tap is DC-shorted with the ground plane and the MCX connector shielding 
+potential. Always disconnect the power before start to change the antenna electrical/mechanical 
+setup. Short circuit of the DC bias feeding or its overloading over the Absolute maximum ratings may 
+affect device reliability, damage the power source device and void the product warranty.  
+Conductive mounting holes are disconnected electrically from the antenna groundplane potential. Connect all 
+screws in conductive manner to prevent arcing in space caused by radiation. The miniPATCH-L1 module is 
+intended to be embedded into user-defined mechanical frame/housing. 
+ 
+  
+ 
+ 
+APPLICATION NOTES & RECOMMENDATIONS 
+ 
+ 
+ 
+EMC CONSIDERATIONS 
+ 
+As the size of the small satellites imply the high level of integration of different electronic devices 
+(switch mode power supplies, high speed digital electronics, pulse-width modulated electromagnetic actuators, 
+etc.) into a limited satellite structure volume containing potential sources of disturbing signals, the 
+electromagnetic susceptibility and compatibility is critical for implementation of any subsystems sensitive to 
+electromagnetic radiation.  
+ 
+Proper ground planes and PCB design rules minimizing the radiated and conducted emissions shall be 
+applied within the whole small satellite structure, including custom payloads, conventional (Communication and 
+Data Handling, Power Supply and Power Distribution, Onboard Computer, Attitude Determination and Control) 
+and third party electronic subsystems. The small satellite electronics should be properly designed to not disturb 
+the GNSS receiver input with harmonic frequencies falling to the GPS L1 frequency band.  
+ 
+The C/N0 parameter provided in GPS receiver output sentences can be exploited as a diagnostic tool if 
+the EMC issues affect the signal reception capability. Observe the C/N0 levels and switch On/Off each electronic 
+subsystem to identify the potential source of the disturbance, if needed. 
+ 
+ 
+ANTENNA LOCATION 
+ 
+Special care should be taken to the interference with the small satellite communication subsystem, as an 
+active electronic device radiating the high power electromagnetic waves. The manufacturer recommends 
+installing the GPS antenna as far from the (transmitting) communication antennas as possible.  
+ 
+Be sure to test the target small satellite subsystems against affecting the performance of the GPS 
+receiver under all satellite operation conditions. Keep in mind the receiver may be sensitive to harmonics of the 
+downlink (transmitter) frequency (i.e. 1575 MHz /9, /8, /7, /6, /5 /4, /3,/2, etc.).  
+ 
+The miniPATCH-L1 signal reception has been successfully tested onboard the 1U CubeSat with 
+omnidirectional antenna and FM modulated transmitter with 500 mWEIRP output power at the UHF band (435 
+MHz) with no functional degradation of the receiver functionality. However, especial care have to be taken 
+during integration campaign to check the GPS system performance prior flight. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+  
+ 5       
+www.SkyFoxLabs.com, Space-Friendly products 
+miniPATCH-L1 Product Datasheet, Rev. D 
+Issue rev. D, 2020, info@skyfoxlabs.com, U Studanky 620/13. CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2020 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATASHEET 
+miniPATCH-L1
+ENGINEERING MODEL 
+ 
+To test the GNSS system aboard the satellite prototype or engineering / development / qualification 
+model, the Engineering Model grade with identical electrical and RF properties is available at reduced cost. The 
+red finish with Remove Before Flight label reminds the user to replace the unit with the Flight Model grade unit 
+suitable for the environment of space. Photo of the miniPATCH-L1/EM unit is depicted in Fig. 3. 
+ 
+ 
+Fig. 3 Engineering Model of the miniPATCH-L1 unit with red Remove Before Flight finish. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+  
+ 6       
+www.SkyFoxLabs.com, Space-Friendly products 
+miniPATCH-L1 Product Datasheet, Rev. D 
+Issue rev. D, 2020, info@skyfoxlabs.com, U Studanky 620/13. CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2020 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATASHEET 
+miniPATCH-L1
+RECYCLING 
+ 
+Below mentioned logo given on the goods, its packaging or inside this datasheet or other related 
+documentation means that used electrical or electronic devices or products should not be disposed with 
+household waste. To ensure proper disposal of the product hand it to designated collection points, where they 
+will be accepted free of charge.  
+ 
+Eco disposal of SkyFox Labs s.r.o. products is maintained by collective system RETELA in Czech 
+Republic. Please recycle product and its packaging in proper way according to valid laws in country of disposal.  
+ 
+ 
+ 
+     
+ 
+ 
+ 
+The miniPATCH-L1 / Engineering Model is RoHS compliant. 
+ 
+  
+ 
+ 
+ 
+ 
+The miniPATCH-L1 / Flight Model is NOT RoHS compliant, contains leaded solder. 
+ 
+ 
+ 
+ 
+ 
+ 
+PRODUCT SAFETY 
+ 
+According to use of the product in line with this Quick Start Guide, the product is safe under normal use 
+The CE mark (Conformité Européenne) has been issued on this family of products. Related EC Declaration of 
+Conformity 
+is 
+issued 
+with 
+each 
+supply 
+and 
+is 
+available 
+online 
+at 
+manufacturer’s 
+website 
+http://www.skyfoxlabs.com . 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+  
+ 7       
+www.SkyFoxLabs.com, Space-Friendly products 
+miniPATCH-L1 Product Datasheet, Rev. D 
+Issue rev. D, 2020, info@skyfoxlabs.com, U Studanky 620/13. CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2020 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATASHEET 
+miniPATCH-L1
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+EXPORT CONTROL 
+ 
+ 
+Since the country of origin of this product (the Czech Republic) is a valid participating member of the 
+Wassennaar Agreement ( http://www.wassenaar.org ) and agrees with the Missile Technology Control Regime 
+( http://www.mtcr.info ) and the miniPATCH-L1/FM and EM (Space-grade Flight Model and Engineering 
+Model) functional parameters are considered as a regulated goods, the export is controlled and needs special 
+Export License approved by the Ministry of Industry and Trade of the Czech Republic (the local control entity). 
+The request for the Export License has to be submitted by the manufacturer to the local control entity, based on 
+the binding order, including all the information as: the characteristics of goods, target country (territory), detailed 
+end-user and target application information, etc.  
+ 
+Manufacturer is fully prepared to support the customer with obtaining the valid Export License (if 
+approved by the local control entity). The entity declares the typical Export License assessing period from 30 to 
+60 days since the Export License Application Form delivery, implicating the respective product delivery date 
+extension. 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+  
+ 8       
+www.SkyFoxLabs.com, Space-Friendly products 
+miniPATCH-L1 Product Datasheet, Rev. D 
+Issue rev. D, 2020, info@skyfoxlabs.com, U Studanky 620/13. CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2020 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATASHEET 
+miniPATCH-L1
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+DISCLAIMER 
+ 
+THIS DEVICE HAS BEEN DEVELOPED WITH IDEA TO SUPPORT THE SMALL 
+SATELLITE COMMUNITY EFFORT IN SPACE RELATED RESEARCH, 
+ENGINEERING AND PEACEFUL CONQUEST OF SPACE. THE MANUFACTURER 
+RESERVES ALL RIGHTS TO DECLINE THE ORDER OF THIS PRODUCT OR 
+PROVIDE ANY FURTER INFORMATION TO END USERS ASSUMING TO VIOLATE 
+ANY LOCAL OR GLOBAL NATIONAL LAWS BY THIS DEVICE OR INFORMATION 
+MENTIONED IN THIS AND RELATED DOCUMENTS. MANUFACTURER DOES NOT 
+ASSUME ANY LIABILITY ARISING OUT OF THE APPLICATION OR USE OF THIS 
+PRODUCT OR CIRCUIT DESCRIBED HEREIN; NEITHER DOES IT CONVEY ANY 
+LICENSE UNDER ITS PATENT RIGHTS, NOR THE RIGHTS OF OTHERS. 
+MANUFACTURER RESERVES THE RIGHT TO MAKE CHANGES OF THIS PRODUCT 
+DATASHEET WITHOUT FURTHER NOTICE. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Prague, Czech Republic 
+© 2014-2020 SkyFox Labs, All rights reserved. 
+ 
+

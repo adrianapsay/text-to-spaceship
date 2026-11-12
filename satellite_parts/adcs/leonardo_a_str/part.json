@@ -1,0 +1,209 @@
+{
+ "id": "leonardo_a_str",
+ "name": "Leonardo A-STR",
+ "category": "adcs",
+ "subcategory": "star_tracker",
+ "vendor": "Leonardo",
+ "model": "A-STR",
+ "dimensions_mm": {
+  "x": 195.0,
+  "y": 175.0,
+  "z": 290.5
+ },
+ "mass_g": 3550.0,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satcatalog.s3.amazonaws.com/components/287/SatCatalog_-_Leonardo_-_A-STR_-_Datasheet.pdf",
+  "document": {
+   "title": "Leonardo A-STR data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-11",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Read from the vendor data sheet (SatCatalog_-_Leonardo_-_A-STR_-_Datasheet.pdf): dimensions \"RS 422 Interface for EGSE Custom Custom MECHANICAL INTERFACES Size (L x W x H) 195mm x 175mm x 290.5mm (40 deg\"; mass \"(25 deg SEA baffle) Mass 3.55kg with\". Catalog page lists 3.55 kg.",
+  "found_via": "https://satcatalog.com/component/a-str/"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "flight_heritage": true,
+ "electrical": {
+  "power_W": {
+   "nominal": 8.9
+  },
+  "note": "average power from the catalog page"
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   195.0,
+   175.0,
+   290.5
+  ],
+  "mesh_volume_mm3": 9913279.0,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 0.358,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    195.0,
+    175.0,
+    290.5
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "mount_plate",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/mount_plate.stl"
+    },
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "baffle",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/baffle.stl"
+    },
+    {
+     "name": "baffle_vanes",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/baffle_vanes.stl"
+    },
+    {
+     "name": "glass",
+     "color": [
+      0.45,
+      0.65,
+      0.85
+     ],
+     "file": "bodies_detail/glass.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
+  "datasheet_url": "https://satcatalog.s3.amazonaws.com/components/287/SatCatalog_-_Leonardo_-_A-STR_-_Datasheet.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

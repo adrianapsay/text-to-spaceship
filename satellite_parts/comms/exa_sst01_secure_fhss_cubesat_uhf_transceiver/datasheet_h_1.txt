@@ -1,0 +1,153 @@
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The EXA’s SST01 is a highly integrated, low cost, 
+240/433/868/915MHZ 
+wireless 
+transceiver 
+module.  Designed for CubeSat and SmallSat 
+missions, is ideal for space missions where 
+a low data–rate uplink  and downlink are 
+required and can be used as a robust lower 
+data-rate back-up radio for a higher data-
+rate 
+The  very low  receive  sensitivity (–120dBm) 
+coupled  with industry  leading  +30dBm  
+output  power  ensures extended range and 
+improved   link   performance.   Built-in   
+antenna   diversity   and support for frequency 
+hopping can be used to further extend range 
+and enhance performance. 
+Additional system features such as an 
+automatic wake-up timer, low battery detector, 
+64 byte TX/RX FIFOs, automatic packet 
+handling, and preamble detection reduce 
+overall current consumption and allow the use 
+of lower-cost system MCUs. An integrated 
+temperature sensor, general purpose ADC, 
+power- on-reset (POR), and GPIOs further 
+reduce overall system cost and size.  
+The SST01 digital receiver architecture features 
+a high-performance ADC and DSP based 
+modem 
+which 
+performs 
+demodulation, 
+filtering, and packet handling for increased 
+flexibility and performance. The direct digital 
+transmit modulation and automatic PA power 
+ramping ensure precise transmit modulation 
+and reduced spectral spreading ensuring 
+compliance with global regulations including 
+FCC, ETSI. 
+For high security applications, the SST01 
+is FHSS capable and programmable in 
+steps from 10 kHz to 2.56 MHz allowing 
+Anti-Jam implementations for additional 
+levels of security in mission critical 
+applications. 
+KEY FEATURES: 
+1. Space Qualified (Many Units On Orbit) 
+2. Compact Single Board Design 
+3. Up to 48 Programmable Channels 
+4. Up to +30 dBm  RF Output 
+5. CubeSat Compatible 
+ 
+ 
+ 
+ 
+ 
+ 
+SST01: Cubesat Secure Transceiver 
+
+SST01 - TECHNICAL SPECIFICATIONS 
+ 
+General 
+Frequency 
+240 MHz to  9 6 0 MHz 
+Transmit Power: 
+1  Watt RF Output 
+Transmit Data Rate: 
+Customer Defined Between 0.123 and 256 Kbps 
+Receive Data Rate: 
+Customer Defined Between 0.123 and 256 Kbps 
+Channels: 
+1 to 48 Channels, Custom Programmed in 10 MHz Steps 
+Modulation: 
+FSK, GFSK,OOK, FHSS 
+Sensors: 
+Temperature 
+ADC: 
+8-bit SAR 
+GPIO 
+3 channels 
+ 
+Electrical and RF Specifications 
+Input Voltage: 
+3.3 to 6.0 Volts 
+Power Consumption: 
+RX: 125 mW @ 5.0V, 82.5 mW @3.3V  
+TX: 2.75 W for 1 W RF Out with 5.0 V Input 
+Clock and Data Output: 
+3.3 Volt CMOS 
+Power and Data Connector: 
+14 Pin PicoBlade  
+RF Connector: 
+MCX Socket 
+Nominal Sensitivity (BER 10-4): 
+-120 dBm @ 9600 bps  
+-110 dBm @ 19.2 Kbps 
+Front-end Noise Figure: 
+< 2 dB with built in LNA and Filter 
+Modem: 
+DSP, demodulation, filtering, and packet handling. 
+RF Impedance: 
+50 Ohms Nominal (Input and Output) 
+Max VSWR: 
+1.5:1 at All Phase Angles 
+Automatic Control: 
+Built in AGC and AFC for Gain and Doppler Control 
+Digital RSSI: 
+-120 dBm to +30 dBm 
+Data Interface: 
+SPI: (SDO, SDI, SCLK, nSEL, nIRQ) 
+PA ramp up: 
+8 levels manual/auto 
+Antenna Diversity & Control 
+1~2 antennas, SPDT RF switch control trough GPIO pins 
+Programmable Gain Amplifier 
+3 dB steps, +10 to +30 dB 
+FHSS (programmable): 
+10 kHz increment, 2.56 MHz max channel step size 
+ 
+Mechanical and Environmental 
+Mass: 
+50 grams 
+Size: 
+63 mm x 41 mm x 12 mm  
+Operating Temperature: 
+-40ºC to +85ºC 
+Storage Temperature: 
+-55ºC to +125ºC 
+Vibration: 
+20G RMS (20 – 2000 Hz) 
+ 
+ 
+

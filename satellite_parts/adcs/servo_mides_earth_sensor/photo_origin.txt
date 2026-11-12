@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-servo-corporation-of-america-mides-earth-sensor-z6xzbm.pdf
+method: product image from the catalog page https://satsearch.co/products/servo-corporation-of-america-servo-corporation-of-america-mides-earth-sensor

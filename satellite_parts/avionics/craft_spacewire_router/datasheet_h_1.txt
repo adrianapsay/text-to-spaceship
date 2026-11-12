@@ -1,0 +1,87 @@
+Copyright Craft Prospect Ltd – All information subject to change.
++44 (0) 7803 477 945                                                                www.craftprospect.com                    
+hello@craftprospect.com 
+SpaceWire 
+Router
+Modern space missions increasingly rely on high-speed, deterministic 
+data links to support advanced subsystems and payloads, including high-
+resolution imagers, high-bandwidth downlinks, and complex onboard 
+processing. SpaceWire has become the standard for these requirements, 
+providing high bandwidth, time synchronisation, and reliability across 
+nanosatellite, small satellite, and larger spacecraft platforms.
+The Craft Prospect SpaceWire Router is designed for missions that 
+demand more capability than legacy data interfaces can provide. Its low-
+SWaP design is compatible with CubeSat constraints and supports data 
+routing across up to 16 SpaceWire nodes, while also providing a bridge 
+between the SpaceWire bus and UART-based devices.
+This architecture simplifies the integration of diverse payloads and 
+subsystems into a unified, high-speed onboard network, supporting 
+scalable and flexible spacecraft system design.
+High-performance 
+routing for up to 16 
+nodes.
+SpaceWire bridge 
+to common UART 
+interfaces.
+Reliable in-flight 
+updates via RMAP 
+protocol.
+Rev 1.1
+
+TECHNICAL SPECIFICATION
+General
+FPGA
+Microchip PolarFire
+Storage
+16 MB MRAM
+Configuration and firmware 
+updates
+Form factor
+PC/104 mounting hole locations
+Connectors
+Power/data: Harwin Gecko
+SpaceWire: Samtec ARF6
+Operating 
+temperature
+-30oC to +70oC
+Interfaces
+SpaceWire
+16x ports, 2x per ARF6
+200 Mbps
+Time-Codes supported
+RMAP PnP for config, telemetry, 
+firmware updates
+SpaceWire-
+UART bridge
+RS-485 or 2.5 V LVCMOS
+1Mbps
+Hardware flow control (RTS/CTS)
+HDLC like protocol encapsulates 
+SpaceWire packets
+Qualification
+Thermal
+Full qualification: 
+-40oC to +80oC
+Vibration
+Full qualification: 
+Sine sweep (NASA GEVS)
+Random vibration (NASA GEVS)
+Size, Weight & Power
+Dimensions
+88 x 94 x 11.5 mm
+Mass
+60 g
+Power 
+consumption
+Idle: 0.66 W
+2x SpW active: 0.84 W
+4x SpW active: 1.04 W
+8x SpW active:  1.38 W
+Input voltage
+6 - 10 V
+Copyright Craft Prospect Ltd – All information subject to change.
++44 (0) 7803 477 945                                                                www.craftprospect.com                    
+hello@craftprospect.com 
+Smart. Secure. Space.
+Rev 1.1
+

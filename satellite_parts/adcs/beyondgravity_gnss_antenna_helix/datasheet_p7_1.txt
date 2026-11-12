@@ -1,0 +1,136 @@
+Beyond Gravity │ Satellites
+beyondgravity.com
+Beyond Gravity Space antennas for satellite-born GNSS receivers are 
+all designed to minimize satellite body interaction. We off er helix and 
+Patch Excited Cup (PEC) antennas. The L-band helix has very low 
+back radiation and can be used where the height is not a limiting 
+factor. The PEC antenna can be delivered without corrugations 
+(for lowest mass and size) or with corrugations (for further improved 
+back radiation).
+Antennas for 
+GNSS receivers
+
+Internal Code/Doc.No.
+beyondgravity.com
+Beyond Gravity │ Satellites
+This document remains the intellectual property of Beyond Gravity Sweden AB and may not be copied, 
+or used without their prior written approval.
+Extended GNSS PEC antenna
+If you need improved performance with reduced spacecraft illumination, 
+lowered cross-polarization and also reduced omni variation, the extended 
+PEC antenna is your choice. The antenna is well suited for precise orbit 
+determination (POD) applications, where antenna phase center stability is
+essential.
+The antenna operates at all GNSS bands, from L5/E5a, E5b, L2 to L1/E1, and
+it has a near hemispherical coverage.
+The antenna diameter is 200 mm, the maximum height is 87 mm and the 
+mass is 735 g. It has a female SMA connector as RF interface. The SMA 
+interface can face either sideways or directly into the spacecraft, i.e. 
+possibility to use a straight or a 90 degree bend SMA.
+Typical measured radiation pattern performance for the antenna is shown
+below; min/ average/max gain envelope over the hemisphere for co- and
+crosspolar radiation.
+ 
+D-I-PRB-00029-SE
+Our products are originally developed for GPS and Galileo use, but are also compatible with other navigation
+systems like Glonass, COMPASS and QZSS. The products are based on many years of experience from 
+antenna and microwave products for telecom payloads and also from microwave instrumentation for 
+scientific purposes.
+Radiation patterns for Extended GNSS PEC antenna, L5/E5a, L2 and L1/E1 frequencies.
+Extended GNSS PEC antenna
+
+Internal Code/Doc.No.
+beyondgravity.com
+Beyond Gravity │ Satellites
+This document remains the intellectual property of Beyond Gravity Sweden AB and may not be copied, 
+or used without their prior written approval.
+GNSS PEC antenna
+For smaller spacecraft where the quadrifilar helix antenna and the 
+extended PEC antenna can be too high, a lower profi le antenna is 
+available. It also operates at all GNSS bands, from L5/E5a, E5b, L2 to L1/E1. 
+It is a PEC antenna with highly stable RF performance over the GNSS 
+frequency bands.
+The antenna diameter is 160 mm, the maximum height is 55 mm and the 
+mass is 325g. It has a female SMA connector as RF interface.
+It is designed to cope with very demanding vibration loads, as normally 
+used or boom mounted TT&C antennas.
+Typical measured radiation pattern performance of the antenna is shown
+below; min/average/max gain envelope over the hemisphere for co- and
+cross-polar radiation.
+ 
+D-I-PRB-00029-SE
+Radiation patterns for GNSS PEC antenna, L5/E5a, L2 and L1/E1 frequencies.
+GNSS PEC antenna
+GEO GNSS PEC antenna
+This antenna is aimed towards use 
+on geostationary orbit (GEO) 
+satellites. It is also a PEC antenna, 
+but with increased boresight gain.
+The antenna operates at the GNSS
+L1/E1 band (also capable of Glonass
+G1 use).
+The antenna diameter is 239 mm, 
+the maximum height is 179 mm and 
+the mass is 715 g. It has a female 
+SMA connector as RF interface.
+Radiation pattern for GEO GNSS PEC 
+antenna, L1/E1 frequency
+GEO GNSS PEC antenna
+
+Internal Code/Doc.No.
+beyondgravity.com
+Beyond Gravity │ Satellites
+This document remains the intellectual property of Beyond Gravity Sweden AB and may not be copied, 
+or used without their prior written approval.
+ 
+D-I-PRB-00029-SE
+L1 PEC Antenna
+For missions and applications requiring single 
+frequency antenna with low mass and volume this 
+antenna is a very good choice. It is also a PEC antenna.
+The antenna operates at the GNSS L1/E1 band and is
+also capable of Glonass G1 use.
+The antenna diameter is 144 mm, the maximum height 
+is 35 mm and the mass is 220 g. It has a female SMA
+connector as RF interface. The SMA interface faces
+directly into the spacecraft.
+Radiation pattern for GEO GNSS PEC antenna, L1/E1 frequency
+L1 PEC antenna
+Typical measured radiation pattern performance of the
+antennas is shown above: min/average/max gain 
+envelope over the hemisphere for co- and cross-polar 
+radiation.
+GNSS helix antenna
+This quadrifilar helix design exhibits extremely low back radiation in order 
+to minimize satellite disturbances. To achieve this, a special feeding 
+technique reducing the back radiation by 5 - 10 dB is used. The antenna 
+design is patent protected.
+The antenna operates at GNSS frequencies from 1.176 GHz (L5/ E5a), 1.227
+GHz (L2) to 1.575 GHz (L1/E1) and it has a hemispherical coverage.
+The antenna diameter is 90 mm, the maximum height is 410 mm and the 
+mass is 815g. It has a female TNC connector as RF interface.
+Typical measured radiation pattern performance of the antenna is shown
+below; min/ average/max gain envelope over the hemisphere for co- and
+cross-polar radiation
+GNSS helix antennas
+
+beyondgravity.com
+Beyond Gravity │ Satellites
+Beyond Gravity 
+satellites@beyondgravity.com | satellites.usa@beyondgravity.com 
+This document remains the intellectual property of Beyond Gravity Sweden AB and may not be copied, 
+or used without their prior written approval.
+Internal Code/Doc.No.
+Test caps
+	 	 Test caps/hats are available to all our GNSS antennas. The caps/hats for all antennas, except the L1 PEC 
+antenna, are absorptive with a set coupling value (e.g. 10, 15, 20 dB etc.). The L1 PEC antenna test cap/hat
+ is of a 0 dB coupling type.
+ 
+D-I-PRB-00029-SE
+Radiation patterns for GNSS Helix Antenna, L5/E5a, L2 and L1/E1 frequencies.
+GNSS Helix test cap/hat for ambient use
+GNSS PEC test cap/hat for TVAC use
+GEO GNSS PEC test cap/hat for TVAC use
+L1 PEC test cap/hat for TVAC use
+Extended GNSS PEC test cap/hat for TVAC use
+

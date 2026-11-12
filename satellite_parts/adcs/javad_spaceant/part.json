@@ -1,0 +1,161 @@
+{
+ "id": "javad_spaceant",
+ "name": "JAVAD SpaceAnt OEM multi-GNSS antenna",
+ "category": "adcs",
+ "subcategory": "gnss_antenna",
+ "vendor": "JAVAD GNSS",
+ "model": "SpaceAnt OEM",
+ "dimensions_mm": {
+  "x": 70.1,
+  "y": 70.1,
+  "z": 16.6
+ },
+ "mass_g": 62,
+ "source": {
+  "type": "datasheet",
+  "url": "https://download.javad.com/sheets/SpaceAnt_Datasheet_250722.pdf",
+  "document": {
+   "title": "JAVAD SpaceAnt data sheet 2025-07-22",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "rf",
+   "thermal"
+  ],
+  "notes": "70.1 x 70.1 x 16.6 mm, 62 g, LNA gain 32 +- 2 dB, GPS L1/L2/L5, GLONASS, Galileo E1/E5, BeiDou, QZSS, SBAS, NavIC, L-band 1525-1559 MHz, -45 to +85 C operating."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "USA",
+ "rf": {
+  "band": "multi-GNSS",
+  "antenna_type": "active patch",
+  "lna_gain_dB": 32
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -45,
+   "max": 85
+  }
+ },
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   70.1,
+   70.1,
+   16.6
+  ],
+  "mesh_volume_mm3": 75289.4,
+  "watertight": true,
+  "render_kind": "patch_antenna",
+  "effective_density_g_cm3": 0.823,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "patch",
+     "color": [
+      0.72,
+      0.45,
+      0.2
+     ],
+     "file": "bodies/part__patch.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 28
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    70.1,
+    70.1,
+    16.7
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.1
+   ],
+   "bodies": [
+    {
+     "name": "ground_plate",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies_detail/ground_plate.stl"
+    },
+    {
+     "name": "patches",
+     "color": [
+      0.72,
+      0.45,
+      0.2
+     ],
+     "file": "bodies_detail/patches.stl"
+    },
+    {
+     "name": "feeds",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/feeds.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://download.javad.com/sheets/SpaceAnt_Datasheet_250722.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

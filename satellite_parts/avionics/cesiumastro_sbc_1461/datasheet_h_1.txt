@@ -1,0 +1,642 @@
+
+CesiumAstro builds high-throughput, plug-and-play phased array communication 
+payloads for space and airborne platforms. Cesium’s full-stack, multi-mission hardware 
+and software products enable a diverse range of commercial and defense objectives. 
+Full-system engineering design is at the heart of every Cesium product. We deliver 
+high-performance solutions under rapid development timelines with a combination of:
+       •   Adaptable, software-defined modules with multi-mission utility.
+       •   “Plug-and-play” design that lowers the cost of integration.
+       •   Modern, rugged electronic components.
+       •   A rigorous “test like you fly” philosophy.
+       •   A commercial-like industrialization approach.
+Cesium serves customers in both the Defense and Commercial sectors:
+SOFTWARE-DEFINED COMMUNICATION SYSTEMS 
+OUT-OF-THE-BOX
+CESIUM MODULAR SYSTEMS
+Cesium’s architecture was designed to accelerate the delivery of high-performance 
+communication payloads at compelling price points. Cesium works with customers to 
+understand their specific mission requirements, then configures a payload solution built 
+on Cesium’s modular product line.
+This approach combines common power and digital back-end products with modular, 
+scalable phased array front-ends to deliver high-performance integrated systems that 
+close the link from LEO and beyond.
+Choose Your
+Frequency
+Choose Your
+Radio Features
+Choose Your
+Digital Backend
+1
+2
+3
+L to V-Band Active Phased Array Antenna
+RF
+IF
+Digital Data
+DC Power
+Unreg.
+Power
+Ethernet
+U/D CONVERTER
+UDC-1AT1
+SOFTWARE-DEFINED RADIO
+SDR-1001
+SINGLE BOARD COMPUTER
+SBC-1461
+POWER CONDITIONING UNIT 
+PCU-1C28
+CAGE: 7VR43
+CAGE: 7VR43
+CAGE: 7VR43
+CAGE: 7VR43
+SN:
+REV:
+SN:
+REV:
+SN:
+REV:
+SN:
+REV:
+1001
+-
+1524
+-
+0178
+-
+0289
+-
+CesiumAstro,Inc. 
+©2020 
+3
+
+CESIUM PRODUCT SOLUTIONS
+Cesium offers a suite of scalable products from discrete modules to 
+complete software-defined payloads that work out of the box. The 
+integrated product line ranges from single-beam downlink solutions 
+to multi-beam, full-duplex communication payloads.
+Cesium’s software-defined, modular architecture is adaptable to meet 
+your needs for mission success.
+Vireo
+Nightingale I
+CommPack
+Modules
+CesiumAstro,Inc. 
+©2020 
+5
+
+PRODUCT SPECIFICATIONS:
+Measurement data and additional details available 
+under NDA.
+Contact products@cesiumastro.com for more 
+information.
+Vireo is a multi-beam active phased array system 
+for high-throughput satellites. The design addresses 
+the state-of-the-art performance requirements for 
+constellations under aggressive SWaP-C targets.
+A major feature of the Vireo design is its cutting-edge 
+power usage and power saving capabilities. The 
+system meets strict power consumption requirements 
+during full-capacity operation and allows for power 
+reduction with full per-element and per-beam 
+control. In the transmit version, the power amplifier 
+architecture was specifically designed to reduce 
+the effects of active impedance presented by the 
+antenna, as well as to address the complexities of 
+taper implementation while maintaining high power-
+efficiency – a key to minimizing overall constellation 
+cost. 
+To address the need for dynamic throughput 
+management and maximization of capacity, Vireo also 
+supports fast beam hopping, beam-weight storage, 
+and the ability to run sequences of different beam 
+patterns. This advanced digital control is critical for 
+optimization of constellation performance. 
+Vireo’s manufacturing is fully compatible with 
+commercial 
+mass 
+production 
+processes. 
+This 
+approach is the key to meeting cost targets because 
+it eliminates the need for high-skilled labor and 
+specialized manufacturing steps. In addition to being 
+compatible with mass-production manufacturing, the 
+design minimizes the number of unique subassemblies 
+across the aperture and across the constellation. 
+further lowering cost and assembly complexity.
+KEY FEATURES:
+•	
+Multi-beam operation: 
+•	 Example mission implementation: 16 fully 
+independent beams
+•	
+Steering range: +/- 60 degrees in azimuth and 
+elevation
+•	
+Example link budget parameters: 
+•	 Typical mission EIRP range: 50-55 dBW
+•	 Typical mission G/T: 5-7 dB/K at input noise 
+temperature of 300K
+•	 RHCP and LHCP options
+•	
+Flexible beam dwell times
+•	
+Programmable hopping sequences
+•	
+Compatible with any on-board baseband 
+processor
+•	
+On-board calibration
+•	
+Qualification temperature range: -25 C to 71 C at 
+baseplate
+•	
+Interfaces: SpaceWire, Ethernet, CAN (other 
+options available)
+•	
+On-board isolated power supply
+•	
+Rad-tolerant and rad-hard options
+VIREO
+Multi-beam Active Phased Array System
+Vireo system shown on a LEO satellite in both transmit 
+and receive configurations. The system is modular 
+and can be configured to your specific needs or 
+frequency requirements.
+VIREO PAYLOAD
+Active Phased Array
+Beamforming Slices
+Waveguide Filter
+CesiumAstro,Inc. 
+©2020 
+7
+
+Nightingale I system shown on a LEO satellite with 
+one active phased array tile. The system is modular 
+and can be configured to your specific needs or 
+frequency requirements.
+NIGHTINGALE I PAYLOAD
+SYSTEM COMPONENTS:
+•	
+APA-1AT1 Single-Beam Ka-Band Active Phased 
+Array Antenna
+•	
+SDR-1001 Software-Defined Radio
+•	
+SBC-1461 Single-Board Computer (Optional)
+•	
+PCU-1C28 Power Conditioning Unit
+•	
+UDC-1AT1 Up/Down Converter
+KEY FEATURES:
+•	
+Complete “Bits to Photons” Solution
+•	
+Includes a software-defined radio, frequency 
+converters, power conditioning, and digital 
+control
+•	
+Compact form factor: Credit-card-sized modules
+•	
+Scalable, modular architecture
+•	
+Software-selectable frequency with 60° beam 
+steering
+•	
+Time-division duplexing (TDD) architecture
+•	
+BPSK/QPSK modem included, with optional 
+development kit
+•	
+Software API to turn azimuth/elevation angles into 
+beam steering
+•	
+Digital Interfaces: Includes options for Ethernet, 
+RS-422, SpaceWire, SPI
+•	
+Mechanical Interfaces: Configurable, conformal 
+mounting options for SmallSats and CubeSats
+•	
+Suitable for both military and commercial 
+applications on LEO satellites and airborne 
+platforms
+•	
+Ruggedized design in an aluminum enclosure 
+with thermal management
+Nightingale I is a fully-integrated Ka-band phased 
+array communication system that provides a complete 
+hardware and software solution for high-speed RF 
+links with a dynamically-steerable beam. The system 
+includes an active phased array antenna as well as 
+a software-defined radio, single-board computer, 
+power converter, and RF front-end – all integrated 
+into a seamless high-speed downlink solution.
+The complete-system approach and small form factor 
+allow for plug and play integration with LEO spacecraft 
+and airborne platforms, while the tile architecture 
+allows for system scaling and adaptation to mission 
+requirements. Per-element array control enables on-
+orbit optimization of power and beam shape.
+NIGHTINGALE I
+Ka-Band High-Speed Downlink Payload
+PRODUCT SPECIFICATIONS:
+25 GHz to 29 GHz
+-24 to +61 °C
+22 to 36 V
+Frequency:
+Baseplate Operating Temp:
+DC Input Voltage:
+8° (Minimum with
+one tile)
+Beamwidth:
+200 MHz Tx
+100 MHz Rx
+Instantaneous Bandwidth:
+(Per channel)
+30 dBW
+EIRP at P1dB:
+<1.2 kg (Depending 
+on configuration)
+Mass: (Total System)
+CesiumAstro,Inc. 
+©2020 
+9
+
+Four 6U spacecraft will demonstrate critical swarm 
+technologies in LEO for future space exploration missions. 
+Cesium’s ad-hoc network-enabling CommPack will serve 
+as the communications backbone for formation flying, 
+relative navigation, and autonomous reconfiguration 
+demonstrations on-orbit.
+6U SWARM CONSTELLATION
+Active Antenna Array
+8 dBi
+9 to 13 V
+Realized Gain:
+DC Input Voltage:
+KEY FEATURES:
+•	
+Autonomous link/network establishment (no 
+external synchronization required)
+•	
+TDD/TDMA (allows seamless scaling of swarm 
+size)
+•	
+Carrier-sense feature (reduces probability of 
+packet collision)
+•	
+Transmit-power and symbol-rate adaptation 
+(saves DC power)
+0.1 to 50 Mbits/s
+<3 dB
+Circular
+<2.6 dB
+Point-to-point Throughput:
+Axial Ratio:
+Polarization:
+Noise Figure:
+-24 to +61 °C
+Baseplate Operating Temp:
+The CommPack Cross-link Communications Payload 
+uses building blocks from Cesium’s modular device 
+ecosystem to enable mobile ad-hoc networking in 
+space. This swarm technology is paving the way for 
+future small satellite missions to the Moon, Mars, and 
+beyond.
+The system consists of the SDR-1001 and two active 
+S-band antenna arrays (TRM-4S01). The OTS Cesium 
+General Purpose Modem loaded into the SDR-1001’s 
+FPGA provides robust BPSK/QPSK inter-satellite links 
+between spacecraft in a swarm.
+The CommPack was designed as an intersatellite link 
+for NASA Ames, but may be reconfigured as required 
+to support your concept of operations.
+COMMPACK
+Cross-link Communications Payload
+PRODUCT SPECIFICATIONS:
+12V DC
+Power
+RF
+Digital
+Control
+SDR-1001
+TRM-4S01 No. 1
+TRM-4S01 No. 2
+12V DC Power
+12V DC
+Power
+Digital
+Control
+RF
+CesiumAstro,Inc. 
+©2020 
+11
+
+CESIUM GENERAL-PURPOSE MODEM:
+•	
+A pre-loaded comms solution that works out of 
+the box
+•	
+Selectable Data Rate up to 62.5 MSym/s
+•	
+BPSK/QPSK
+•	
+Forward Error Correction
+•	
+Burst Mode
+•	
+SpaceWire and UART interfaces
+KEY FEATURES:
+•	
+Compact 50mm x 84mm x 13mm packaged 
+form-factor
+•	
+4x 100MHz receive channels
+•	
+4x 100MHz transmit channels
+•	
+Customizable FPGA fabric enables user-defined 
+comms system
+•	
+Supports DVB-S2X, LTE-grade waveforms, and 
+other high-order modulations
+•	
+Transmit and receive frequencies adjustable 
+300MHz-6GHz
+•	
+Optional RF observation ports
+•	
+Field-updatable, redundant boot flash with 
+automatic failover
+•	
+Data interfaces: SpaceWire and UART 
+(10GBASE-KR & 1000BASE-X - option)
+•	
+On-board telemetry: temperature, power 
+consumption, rail voltages, error reporting
+•	
+LEO, military and UAV applications
+•	
+Thermal pillars bring heat to flat surface
+DATA INTERFACES:
+•	
+2x 10GBASE-KR (configurable as SGMII)
+•	
+2x RS-422/RS-485
+•	
+1x USB 3.0
+•	
+1x SPI with 2x Chip Select
+2x 100BASE-TX
+•	
+1x SGMII
+•	
+1x JTAG
+•	
+1x UART
+KEY FEATURES:
+•	
+Compact 50mm x 84mm x 13mm packaged 
+form-factor
+•	
+1.8 GHz ARM® 64-bit quad-core Cortex®  
+•	
+Traffic routing and encryption without loading the 
+cores
+•	
+Integrated security engine
+•	
+2GB SDRAM with ECC (option for 4GB or higher)
+•	
+8GB non-volatile eMMC storage
+•	
+Redundant 64MB boot flash  with automatic 
+failover
+•	
+On-board telemetry: temperature, rail voltages, 
+real-time clock
+•	
+IEEE 1588 Precision Time Protocol
+•	
+Linux Kernel, Ubuntu-based OS (option for 
+VxWorks®), GNU Toolchain
+•	
+U-boot with Secure boot
+•	
+LEO, military and UAV applications
+•	
+Thermal pillars bring heat to flat surface
+A 
+high-performance, 
+compact 
+software-defined 
+radio designed to operate in Low Earth Orbit (LEO) 
+environments. 
+The Cesium SDR-1001 includes four receive 
+channels, four transmit channels, and a state-of-the-
+art FPGA in a credit-card-sized footprint. The module 
+is suitable for demanding digital signal processing 
+and communications applications. 
+Use as a stand-alone SDR or combine with other 
+Cesium modules for a complete bits-to-photons 
+solution.
+SOFTWARE-DEFINED RADIO
+SDR-1001
+A credit-card-sized single-board computer designed 
+to operate in Low Earth Orbit (LEO) environments with 
+integrated communications and security features. 
+The module features a quad-core processor, error-
+correcting code memory, mass storage, redundancy 
+and multiple data interfaces  in a compact form-factor.
+The 
+Cesium 
+SBC-1461 
+includes 
+a 
+software 
+development kit for a Linux-based Operating System 
+(OS) providing a fast out of the box solution.
+Use as a stand-alone computer or combine with other 
+Cesium modules for additional computational power, 
+security, and system monitoring and control.
+SINGLE-BOARD COMPUTER
+SBC-1461
+PRODUCT SPECIFICATIONS:
+100 g
+-24 to +61 °C
+9 to 13 V
+Mass:
+Baseplate Operating Temp:
+DC Input Voltage:
+PRODUCT SPECIFICATIONS:
+100 g
+-24 to +61 °C
+11 to 13 V
+Mass:
+Baseplate Operating Temp:
+DC Input Voltage:
+CesiumAstro,Inc. 
+©2020 
+13
+
+KEY FEATURES:
+•	
+Compact 50mm x 84mm x 13mm packaged 
+form-factor
+•	
+Fixed-frequency topology
+•	
+Integrated EMI and input filtering
+•	
+Gallium nitride (GaN) switches
+•	
+Over-temperature protection
+•	
+Input under-voltage lockout
+•	
+Parallelable for higher power or redundancy
+•	
+Digital interface for telemetry
+•	
+LEO, military and UAV applications
+•	
+Thermal pillars bring heat to flat surface
+KEY FEATURES:
+•	
+Compact 50mm x 84mm x 13mm packaged 
+form-factor
+•	
+Wide conversion range
+•	
+On-board synthesizer
+•	
+<100ppb built-in time reference
+•	
+Reference input/output ports
+•	
+LEO, military and UAV applications
+•	
+Digital interface: RS-485
+•	
+Designed and tested for LEO radiation
+•	
+Thermal pillars bring heat to flat surface
+A high-efficiency, compact, DC-to-DC converter 
+designed to operate in Low Earth Orbit (LEO) 
+environments that provides a regulated, isolated, 
+12V rail suitable for powering the full suite of Cesium 
+communication products.
+The Cesium PCU-1C28 includes a fixed-frequency 
+converter with integrated filters and protections as 
+well as a digital interface for telemetry in a credit-
+card-sized footprint. Each module is parallelable with 
+other Cesium PCUs for higher output power or hot 
+redundancy. 
+Use as a stand-alone power converter or combine 
+with other Cesium modules for a system that works 
+out of the box.
+POWER CONDITIONING UNIT
+PCU-1C28
+A wideband up/down converter designed to operate in 
+Low Earth Orbit (LEO) environments with an on-board 
+frequency synthesizer and low power consumption all 
+in a credit-card-sized footprint. The module supports 
+time division up- and down-conversion with 1GHz 
+of instantaneous bandwidth and offers the ability to 
+combine IF channels for further flexibility. 
+The Cesium UDC-1AT1 includes a high-precision 
+clock for LO generation; the module can provide this 
+clock as a reference for other modules, or lock to an 
+external system reference. 
+Use as a stand-alone up/down converter or combine 
+with other Cesium modules for a complete Ka-band 
+communication solution.
+UP/DOWN CONVERTER
+UDC-1AT1
+PRODUCT SPECIFICATIONS:
+12.5 A
+150 W at 12 Vdc
+11.5 to 12.5  Vdc
+22 to 36 Vdc
+Sustained Output Current:
+Maximum Power Output:
+120 g
+-24 to +61 °C
+94%
+Mass:
+Baseplate Operating Temp:
+Nominal Efficiency:
+PRODUCT SPECIFICATIONS:
+100 g
+-24 to +61 °C
+7 to 15 V
+Mass:
+Baseplate Operating Temp:
+DC Input Voltage:
+RF SPECIFICATIONS:
+25 dB
+1 GHz
+4.4 to 5.5 GHz
+24.5 to 29.5 GHz
+Small Signal Gain:
+Max IBW:
+IF Range:
+RF Range:
+<10 dB
+>5 dBm
+30 dB
+Noise Figure:
+Max Output RF Power:
+UP-CONVERSION CHANNEL:
+Dynamic Range:
+<5 dB
+-10 dBm
+Noise Figure:
+Max Output IF Power:
+DOWN-CONVERSION CHANNEL:
+Output Voltage:
+Unregulated Input Voltage:
+CesiumAstro,Inc. 
+©2020 
+15
+
+CONTACT:
+www.cesiumastro.com
+products@cesiumastro.com
+TEXAS HQ
+13412 Galleria Circle Suite H-100
+Austin, TX 78738
+COLORADO
+10901 West 120th Avenue Suite 180 
+Broomfield, CO 80021
+
+Hardware Revision A 
+Datasheet Version 072920 
+ 
+1 
+Proprietary Information ©2020 CesiumAstro, Inc. 
+ 
+SINGLE-BOARD COMPUTER 
+SBC-1461 
+ 
+ 
+ 
+ 
+A credit-card-sized single-board computer designed to operate in Low Earth Orbit (LEO)
+environments with integrated communications and security features. The module features
+a quad-core processor, error-correcting code memory, mass storage, redundancy and
+multiple data interfaces  in a compact form-factor. 
+The Cesium SBC-1461 includes a software development kit for a Linux-based Operating 
+System (OS) providing a fast out of the box solution. 
+Use as a stand-alone computer or combine with other Cesium modules for additional 
+computational power, security, and system monitoring and control. 
+ 
+TABLE OF CONTENTS: 
+ 
+ KEY FEATURES: ........................................................................................................ 2 
+ DATA INTERFACES: .................................................................................................. 2 
+ PRODUCT SPECIFICATIONS: ................................................................................... 2 
+ MECHANICAL VIEW: .................................................................................................. 3 
+ SYSTEM BLOCK DIAGRAM: ...................................................................................... 4 
+CONTACT: ...................................................................................................................... 5 
+

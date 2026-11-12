@@ -1,0 +1,268 @@
+ 
+EXA: Ecuadorian Civilian Space Agency                                                                                                                                                                                        www.exa.ec 
+Whatsapp – Telegram: +593 999 429 106                                                                                                                                                                      Facebook - LinkedIn                                          
+        : cco@exa.ec                                                                                                                    www.cubesat.market - www.smallsat.market 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+DMT01 
+ULTRA-HIGH PRECISION  
+MAGNETORQUER CONTROLLER 
+
+ 
+EXA: Ecuadorian Civilian Space Agency                                                                                                                                                                                        www.exa.ec 
+Whatsapp – Telegram: +593 999 429 106                                                                                                                                                                      Facebook - LinkedIn                                          
+        : cco@exa.ec                                                                                                                    www.cubesat.market - www.smallsat.market 
+ 
+ 
+The EXA DMT01 (Dynamic yield MagneTorquer controller) is a new kind of magnetorquer controller that enhances 
+the classical PWM approach to manage magnetic-based ADCS actuators by allowing the user to dynamically change 
+(up or down) the voltage and current being fed to the actuator via digital control (I2C). It can be used with or without 
+PWM to control the integrated MT01 magnetorquer. 
+ 
+In the DMT01/SP (Standard Precision) version the user can select dynamically the voltage levels as 1V, 2V, 3V, 4V 
+and 5V, this allows a finer point control over the yield of the MT01 integrated into the controller allowing precisions 
+up to 0.5 degrees. 
+ 
+In the DMT01/HP (High Precision) version the same as above is true but the user can also feed a PWM signal 
+concurrently from 1 Hz to 1100 Hz and from 1% to 100% duty cycle, allowing the MT01 to achieve a precision pointing 
+accuracy of up to 0.01 (10E-2) of a degree and theoretically could achieve up to 0.001 (10E-3) of a degree with 
+the right sensors. 
+ 
+ 
+ 
+The controller has a very low consumption, high visibility green LED for each voltage channel that turns on/off 
+when desired voltage is selected/deselected (i.e 2V, 3V, etc) so the user has a visual confirmation of the voltage 
+selection, also, a sample C++ code is provided in order to test functionality. 
+ 
+ 
+ 
+ 
+SUMMARY
+
+ 
+EXA: Ecuadorian Civilian Space Agency                                                                                                                                                                                        www.exa.ec 
+Whatsapp – Telegram: +593 999 429 106                                                                                                                                                                      Facebook - LinkedIn                                          
+        : cco@exa.ec                                                                                                                    www.cubesat.market - www.smallsat.market 
+ 
+ 
+ Duty cycle: 1% to 100% 
+ Frequency supported: 1 to 1100 Hz (higher frequencies are available) 
+ Digital voltage selection: 1, 2, 3, 4 and 5V (higher ranges are available) 
+ Protocol: I2C  
+ Selectable I2C addresses: 8 
+ High-Speed I2C Interface:  100kHz, 400kHz, 1.7MHz 
+ Onboard analog temperature sensor: LM50C, -55C to +125C 
+ Digital Input power supply: 5V@100mA 
+ Digital interface: Molex 53261-05 
+ MT01 power supply: 5V@1.2A 
+ MT01 interface: Molex 53261-03 
+ 
+ 
+ 
+ 
+ 
+ Programming language: C++ 
+ Compatibility: Arduino UNO 
+ Parameters: Duty cycle, Frequency and Voltage channel on/off selection 
+ Functions: Safety disable of concurrent channels, initialization, test. 
+ Operability: Ground tests only, not for spaceflight 
+ 
+ 
+ 
+ 
+ 
+ Working Voltage: From 1.25V to 5V 
+ Working Current: From 70mAh to 1100 mAh 
+ Nominal Magnetic moment: >0.558 Am2 @ 5V 
+ Saturation Magnetic moment: >0.790 Am2 @9V 
+ Linearity: +/- 4% across operating design range 
+ Residual moment: <0.0005 Am2 
+ Torque: 5.36 µNm @ 7.2-3 mTesla (1U mass) 
+ Angular acceleration: 3.2-3 Rad/sec-2 (1U mass) 
+ B-center = 18.9 Gauss @3v3 
+CONTROLLER CHARACTERISTICS
+MT01 CHARACTERISTICS
+CONTROLLER SOFTWARE
+
+ 
+EXA: Ecuadorian Civilian Space Agency                                                                                                                                                                                        www.exa.ec 
+Whatsapp – Telegram: +593 999 429 106                                                                                                                                                                      Facebook - LinkedIn                                          
+        : cco@exa.ec                                                                                                                    www.cubesat.market - www.smallsat.market 
+ B-corners = 54.5 Gauss @3v3 
+ Supply Power: From 50mW to 1500Mw 
+ Capacitance at 0V: 44.31 pF 
+ Inductance at 0V: 892.9 pH 
+ Thermal Performance: 
+        Operating Max temp @3.3V/0.66A 
+53.70
+Centigrade 
+       Operating Max temp @4V/0.76A
+68.90
+Centigrade
+Operating Max temp @5V/0.90A
+85.10
+Centigrade
+ Typical resistance: 4.1 to 4.7 ohms @ 25°C 
+ Random Vibration: 16g rms 
+ Lifetime: >10 years 
+ 
+ 
+ 
+ 
+ 
+ Dimensions: 62x55x4 mm 
+ Mass: 25 grams 
+ Max Operating voltage and current: 5V @ 1.2A 
+ Max Operating temperature range: -55 °C to +125 °C 
+ Radiation Tolerance: 12 years minimum in LEO 
+ 
+Other versions of the DMT01 are available, like low-cost engineering models or actuator-agnostic versions that can 
+control 3rd party magnetorquers. Also, there are versions supporting a higher number of voltage selections (up to 
+30V) and more powerful magnetorquers. 
+ 
+PHYSICAL PROPERTIES
+
+ 
+EXA: Ecuadorian Civilian Space Agency                                                                                                                                                                                        www.exa.ec 
+Whatsapp – Telegram: +593 999 429 106                                                                                                                                                                      Facebook - LinkedIn                                          
+        : cco@exa.ec                                                                                                                    www.cubesat.market - www.smallsat.market 
+ 
+DMT01 top and bottom 
+ 
+ 
+ 
+DMT01/EM engineering model low-cost version (HP version depicted) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+EXA: Ecuadorian Civilian Space Agency                                                                                                                                                                                        www.exa.ec 
+Whatsapp – Telegram: +593 999 429 106                                                                                                                                                                      Facebook - LinkedIn                                          
+        : cco@exa.ec                                                                                                                    www.cubesat.market - www.smallsat.market 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+MECHANICAL DRAWING
+
+ 
+EXA: Ecuadorian Civilian Space Agency                                                                                                                                                                                        www.exa.ec 
+Whatsapp – Telegram: +593 999 429 106                                                                                                                                                                      Facebook - LinkedIn                                          
+        : cco@exa.ec                                                                                                                    www.cubesat.market - www.smallsat.market 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ONBOARD MT01 MAGNETORQUER PERFORMANCE
+
+ 
+EXA: Ecuadorian Civilian Space Agency                                                                                                                                                                                        www.exa.ec 
+Whatsapp – Telegram: +593 999 429 106                                                                                                                                                                      Facebook - LinkedIn                                          
+        : cco@exa.ec                                                                                                                    www.cubesat.market - www.smallsat.market 
+ 
+ 
+ STEP model 
+ Controller ICD 
+ Software user manual 
+ 
+ 
+DOCUMENTATION PROVIDED
+

@@ -1,4 +1,2 @@
-url: https://fcrmotion.com.au/wp-content/uploads/2021/10/Heidenhain-Angle-Encoders.pdf
-title: Angle Encoders without Integral Bearing - FCR Motion
-query: generic ISO 4762 M3x25 datasheet pdf
-found by web search; verify that it is the right part
+url: https://docs.rs-online.com/574c/A700000011307398.pdf
+family datasheet: RS PRO socket head cap screw data sheet (DIN 912 / ISO 4762), one sheet for the whole size range; copied from shcs_m2x8 on 2026-11-11

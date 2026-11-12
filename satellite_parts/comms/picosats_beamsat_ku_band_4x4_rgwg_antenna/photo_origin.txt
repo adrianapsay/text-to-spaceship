@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-picosats-srl-ku-band-4x4-rgwg-antenna-6lsqnl.pdf
+method: product image from the catalog page https://satsearch.co/products/picosats-ku-rgwg-antenna

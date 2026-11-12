@@ -97,7 +97,7 @@ table.facts td:last-child { font-variant-numeric: tabular-nums; word-break: brea
   <aside>
     <div class="cols">
       <div><h2>Category</h2><div id="f-category"></div></div>
-      <div><h2>Source quality</h2><div id="f-source"></div><p style="font-size:10.5px;color:var(--muted);line-height:1.4;margin:4px 0 0">datasheet: values read from the vendor PDF or page linked in the record. standard: ISO / DIN / ASTM / CDS tables. derived: sized from a stated envelope (e.g. 1U). unverified: from memory or a listing not opened; treat as approximate.</p>
+      <div><h2>Completeness</h2><div id="f-complete"></div><p style="font-size:10.5px;color:var(--muted);line-height:1.4;margin:4px 0 8px">complete = photo, CAD, photo-vs-CAD check passed, a datasheet, a verified source with sourced dimensions, and the core fields.</p><h2>Source quality</h2><div id="f-source"></div><p style="font-size:10.5px;color:var(--muted);line-height:1.4;margin:4px 0 0">datasheet: values read from the vendor PDF or page linked in the record. standard: ISO / DIN / ASTM / CDS tables. derived: sized from a stated envelope (e.g. 1U). unverified: from memory or a listing not opened; treat as approximate.</p>
         <h2>Vendor</h2><select id="f-vendor" style="width:100%;padding:5px;border:1px solid var(--line);border-radius:5px;background:var(--bg)"><option value="">all vendors</option></select>
         <h2>Mass (g)</h2><div class="range"><input id="mass-min" placeholder="min" inputmode="decimal"><input id="mass-max" placeholder="max" inputmode="decimal"></div>
         <h2>Longest side (mm)</h2><div class="range"><input id="side-min" placeholder="min" inputmode="decimal"><input id="side-max" placeholder="max" inputmode="decimal"></div>
@@ -115,7 +115,16 @@ table.facts td:last-child { font-variant-numeric: tabular-nums; word-break: brea
 <script>
 const DATA = /*__DATA__*/;
 const PARTS = DATA.parts;
-const MESHES = DATA.meshes;
+const MESHES = DATA.meshes || {};
+const loadedChunks = {};
+// split build: meshes live in meshes_<n>.json next to the page and load when a part is first opened
+function ensureMeshes(p) {
+  if (MESHES[p.id] || p.mesh_chunk === undefined || p.mesh_chunk === null) return Promise.resolve();
+  if (!loadedChunks[p.mesh_chunk]) {
+    loadedChunks[p.mesh_chunk] = fetch("meshes_" + p.mesh_chunk + ".json").then(r => r.json()).then(chunk => { Object.assign(MESHES, chunk); }).catch(() => { delete loadedChunks[p.mesh_chunk]; });
+  }
+  return loadedChunks[p.mesh_chunk];
+}
 const byId = {};
 PARTS.forEach(p => { byId[p.id] = p; });
 const dims = p => [p.dimensions_mm.x, p.dimensions_mm.y, p.dimensions_mm.z];
@@ -125,7 +134,7 @@ const fmt = v => v === null || v === undefined ? "" : (typeof v === "number" ? (
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
 // ---------- filters
-const state = { view: "render", q: "", categories: new Set(), sources: new Set(), vendor: "", massMin: null, massMax: null, sideMin: null, sideMax: null, deployed: false, photo: false, cad: false, price: false, sort: "name" };
+const state = { view: "render", q: "", categories: new Set(), sources: new Set(), completeness: new Set(), vendor: "", massMin: null, massMax: null, sideMin: null, sideMax: null, deployed: false, photo: false, cad: false, price: false, sort: "name" };
 function counts(key) { const c = {}; PARTS.forEach(p => { const v = key(p) || "?"; c[v] = (c[v] || 0) + 1; }); return c; }
 function renderFilterList(container, countMap, set) {
   container.innerHTML = Object.keys(countMap).sort().map(k => '<label><input type="checkbox" value="' + esc(k) + '"' + (set.has(k) ? " checked" : "") + '> ' + esc(k) + '<span class="n">' + countMap[k] + "</span></label>").join("");
@@ -133,6 +142,8 @@ function renderFilterList(container, countMap, set) {
 }
 renderFilterList(document.getElementById("f-category"), counts(p => p.category), state.categories);
 renderFilterList(document.getElementById("f-source"), counts(p => (p.source || {}).type), state.sources);
+const completeLabel = p => p.completeness ? (p.completeness.complete ? "complete" : "incomplete") : "not audited";
+renderFilterList(document.getElementById("f-complete"), counts(completeLabel), state.completeness);
 const vendorSelect = document.getElementById("f-vendor");
 Object.keys(counts(p => p.vendor)).sort().forEach(v => { const o = document.createElement("option"); o.value = v; o.textContent = v; vendorSelect.appendChild(o); });
 vendorSelect.addEventListener("change", () => { state.vendor = vendorSelect.value; render(); });
@@ -141,12 +152,13 @@ document.getElementById("sort").addEventListener("change", e => { state.sort = e
 [["mass-min", "massMin"], ["mass-max", "massMax"], ["side-min", "sideMin"], ["side-max", "sideMax"]].forEach(([id, key]) => document.getElementById(id).addEventListener("input", e => { const v = parseFloat(e.target.value); state[key] = isNaN(v) ? null : v; render(); }));
 document.getElementById("view").addEventListener("change", e => { state.view = e.target.value; render(); });
 [["f-deployed", "deployed"], ["f-photo", "photo"], ["f-cad", "cad"], ["f-price", "price"]].forEach(([id, key]) => document.getElementById(id).addEventListener("change", e => { state[key] = e.target.checked; render(); }));
-document.getElementById("clear").addEventListener("click", () => { state.q = ""; state.categories.clear(); state.sources.clear(); state.vendor = ""; state.massMin = state.massMax = state.sideMin = state.sideMax = null; state.deployed = state.photo = state.cad = state.price = false; document.getElementById("search").value = ""; vendorSelect.value = ""; ["mass-min", "mass-max", "side-min", "side-max"].forEach(id => document.getElementById(id).value = ""); ["f-deployed", "f-photo", "f-cad", "f-price"].forEach(id => document.getElementById(id).checked = false); document.querySelectorAll("#f-category input, #f-source input").forEach(b => b.checked = false); render(); });
+document.getElementById("clear").addEventListener("click", () => { state.q = ""; state.categories.clear(); state.sources.clear(); state.completeness.clear(); state.vendor = ""; state.massMin = state.massMax = state.sideMin = state.sideMax = null; state.deployed = state.photo = state.cad = state.price = false; document.getElementById("search").value = ""; vendorSelect.value = ""; ["mass-min", "mass-max", "side-min", "side-max"].forEach(id => document.getElementById(id).value = ""); ["f-deployed", "f-photo", "f-cad", "f-price"].forEach(id => document.getElementById(id).checked = false); document.querySelectorAll("#f-category input, #f-source input").forEach(b => b.checked = false); render(); });
 
 function matches(p) {
   if (state.q) { const hay = (p.id + " " + p.name + " " + p.vendor + " " + p.model + " " + p.subcategory).toLowerCase(); if (!state.q.split(/\s+/).every(w => hay.includes(w))) return false; }
   if (state.categories.size && !state.categories.has(p.category)) return false;
   if (state.sources.size && !state.sources.has((p.source || {}).type)) return false;
+  if (state.completeness.size && !state.completeness.has(completeLabel(p))) return false;
   if (state.vendor && p.vendor !== state.vendor) return false;
   const m = p.mass_g; if (state.massMin !== null && !(m >= state.massMin)) return false; if (state.massMax !== null && !(m <= state.massMax)) return false;
   const s = longest(p); if (state.sideMin !== null && s < state.sideMin) return false; if (state.sideMax !== null && s > state.sideMax) return false;
@@ -161,7 +173,9 @@ function sortParts(list) {
   return list.sort((a, b) => key(a) < key(b) ? -1 : key(a) > key(b) ? 1 : 0);
 }
 function badgeHtml(p) {
-  const out = ['<span class="badge ' + esc((p.source || {}).type || "") + '">' + esc((p.source || {}).type || "no source") + "</span>"];
+  const out = [];
+  if (p.completeness) out.push(p.completeness.complete ? '<span class="badge standard">complete</span>' : '<span class="badge unverified" title="' + esc(p.completeness.missing) + '">incomplete</span>');
+  out.push('<span class="badge ' + esc((p.source || {}).type || "") + '">' + esc((p.source || {}).type || "no source") + "</span>");
   if (p.status && p.status !== "unknown") out.push('<span class="badge ' + esc(p.status) + '">' + esc(p.status.replace(/_/g, " ")) + "</span>");
   if (p.has_deployed) out.push('<span class="badge">deployable</span>');
   if ((p.cad_downloads || []).length) out.push('<span class="badge">vendor CAD</span>');
@@ -220,11 +234,12 @@ function openPart(id) {
   if (!links.length) links.push("<span>no external links</span>");
   drawer.innerHTML = '<div class="top"><h2>' + esc(p.name) + '</h2><button class="close" id="close">close</button></div>'
     + '<div class="sub">' + esc(p.id) + " &middot; " + esc(p.category) + " / " + esc(p.subcategory) + " &middot; " + esc(p.vendor) + (p.model ? " &middot; " + esc(p.model) : "") + "</div>"
-    + '<div id="viewer"><div class="tools">' + (p.has_deployed ? '<button id="v-stowed" class="on">stowed</button><button id="v-deployed">deployed</button>' : "") + '<button id="v-box">box</button></div><span class="hint">drag to rotate &middot; wheel to zoom &middot; shift-drag to pan</span></div>'
+    + '<div id="viewer"><div class="tools">' + (p.has_detail ? '<button id="v-detail" class="on" title="visible features, all inside the envelope">detail</button><button id="v-envelope" title="simple hull used for nesting and packing">envelope</button>' : "") + (p.has_deployed ? '<button id="v-stowed" class="on">stowed</button><button id="v-deployed">deployed</button>' : "") + '<button id="v-box">box</button></div><span class="hint">drag to rotate &middot; wheel to zoom &middot; shift-drag to pan</span></div>'
     + '<div class="links">' + links.join("") + "</div>"
     + ((p.photo || p.datasheet_image || p.drawing) ? '<div class="imgstrip">' + (p.drawing ? '<figure><img src="' + p.drawing + '" alt="dimension drawing"><figcaption>three-view drawing from the generated geometry (no vendor photo for this generic part)</figcaption></figure>' : "") + (p.photo ? '<figure><img src="' + p.photo + '" alt="supplier photo"><figcaption>' + (p.photo_note ? "representative photo (web search, see note)" : "supplier / marketplace photo") + '</figcaption></figure>' : "") + ((p.datasheet_images || []).map((d, i) => '<figure><img src="' + d.image + '" alt="datasheet page 1"><figcaption>' + (d.url ? '<a href="' + esc(d.url) + '" target="_blank" rel="noopener">datasheet ' + (i + 1) + '</a>' : 'datasheet ' + (i + 1)) + (d.kind === "web_search" ? " (web search, verify)" : "") + '</figcaption></figure>').join("")) + "</div>" : "")
     + (p.photo_note ? '<div class="note">' + esc(p.photo_note) + "</div>" : "")
     + '<div class="badges">' + badgeHtml(p) + "</div>"
+    + (p.completeness ? '<div class="section"><h3>Catalog standard</h3><div class="note">' + (p.completeness.complete ? "Complete." : "Incomplete. Missing: " + esc(p.completeness.missing) + ".") + " Photo vs CAD check: " + esc(String(p.completeness.image_cad_verdict).replace(/_/g, " ")) + (p.completeness.image_cad_note ? " (" + esc(p.completeness.image_cad_note) + ")" : "") + ".</div></div>" : "")
     + (src.notes ? '<div class="section"><h3>Source notes</h3><div class="note">' + esc(src.notes) + "</div></div>" : "")
     + '<div class="section"><h3>Source</h3><table class="facts">' + flatten({ type: src.type, document: src.document, accessed: src.accessed, fields_from_source: src.fields_from_source }, "", []).map(([k, v]) => "<tr><td>" + esc(k) + "</td><td>" + esc(v) + "</td></tr>").join("") + "</table></div>"
     + '<div class="section"><h3>Record</h3><table class="facts">' + facts.map(([k, v]) => "<tr><td>" + esc(k) + "</td><td>" + esc(v) + "</td></tr>").join("") + "</table></div>"
@@ -239,14 +254,19 @@ function openPart(id) {
   const boxButton = document.getElementById("v-box");
   let showBox = false;
   let variant = "part";
-  const show = () => showMesh(variant === "part" ? MESHES[p.id] : MESHES[p.id + "__deployed"], showBox);
+  let level = p.has_detail ? "detail" : "envelope";
+  const show = () => showMesh(variant === "part" ? (level === "detail" ? MESHES[p.id + "__detail"] : MESHES[p.id]) : MESHES[p.id + "__deployed"], showBox);
+  if (p.has_detail) {
+    document.getElementById("v-detail").addEventListener("click", () => { level = "detail"; document.getElementById("v-detail").classList.add("on"); document.getElementById("v-envelope").classList.remove("on"); show(); });
+    document.getElementById("v-envelope").addEventListener("click", () => { level = "envelope"; document.getElementById("v-envelope").classList.add("on"); document.getElementById("v-detail").classList.remove("on"); show(); });
+  }
   boxButton.addEventListener("click", () => { showBox = !showBox; boxButton.classList.toggle("on", showBox); show(); });
   if (p.has_deployed) {
     document.getElementById("v-stowed").addEventListener("click", () => { variant = "part"; document.getElementById("v-stowed").classList.add("on"); document.getElementById("v-deployed").classList.remove("on"); show(); });
     document.getElementById("v-deployed").addEventListener("click", () => { variant = "deployed"; document.getElementById("v-deployed").classList.add("on"); document.getElementById("v-stowed").classList.remove("on"); show(); });
   }
   mountViewer(document.getElementById("viewer"));
-  show();
+  ensureMeshes(p).then(() => { if (byId[p.id] && !document.getElementById("drawer").hidden) show(); });
   try { history.replaceState(null, "", "#" + p.id.replace(/_/g, "-")); } catch (e) {}
 }
 function closeDrawer() { document.getElementById("drawer").hidden = true; document.getElementById("scrim").hidden = true; try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {} }

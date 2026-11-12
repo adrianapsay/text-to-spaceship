@@ -1,0 +1,132 @@
+Innoflight Inc. 
+9985 Pacific Heights Blvd., Suite 250 
+San Diego, CA 92121 
+sales@innoflight.com 
+2019-01-26 
+ 
+ 
+ 
+CFC-500 TFLOP Flight Computer / Payload Processor 
+ 
+ 
+ 
+ 
+ 
+Specification 
+Value 
+Comment 
+Supply Voltage 
+Unregulated 20 VDC to 36 VDC or 
+Regulated 5.0 VDC 
+ 
+-- 
+Accelerator Options 
+ 
+-1 
+-2 
+-3 
+-4 
+Number of GPU hardware accelerators is scalable. >4 is available 
+upon request. 
+Compute (GFLOPS) 
+320 
+640 
+970 
+1290 
+ 
+Power (W):        Low 
+                            Typical  
+                            Maximum 
+< 1 
+15 
+33 
+< 1 
+23 
+47 
+< 1 
+30 
+62 
+< 1 
+38 
+76 
+TFLOP can be programmed to adjust its performance and power 
+dynamically based upon mission needs. 
+Dimensions (mm) 
+180 x 90 x 35 
+180 x 90 x 50 
+Includes enclosure designed for EMI and Thermal 
+Mass 
+≤ 525 gram 
+≤ 750 gram 
+Includes full enclosure 
+Operating Temperature 
+-40° to +85° C 
+Temperature limits at the mounting interface 
+Random Vibration Level 
+ 
+NASA GEVS 
+Conforms to NASA General Environmental 
+Verification Standard, GSFC-STD-7000 
+Operating Pressure 
+Hard vacuum 
+-- 
+Radiation Tolerance 
+Designed for LEO missions 
+-- 
+High-Reliability Platform 
+ Rad-Tolerant FPGA w/LEON3FT CPU 
+ 32 GB NAND flash w/ TMR controller 
+ 8 MB MRAM 
+The MRAM is shared between the high-reliability and high-
+performance components 
+High-Performance Platform 
+ NVIDIA Tegra SoC:  
+o ARM Cortex-A15 (Quad-Core + Low Power 
+Core) up to 2.32 GHz 
+o Kepler GPU, 192 cores up to 950 MHz 
+o 16 Gb DDR3L 
+o 16 GB eMMC 4.51 (iNAND flash) 
+ Xilinx Ultrascale+ FPGA 
+o 4 Gb DDR3L 
+Offered with light-weight Linux BSP including CUDA run-time 
+environment. Cross-compilation required. 
+ Optional Innoflight S/W Development Kit recommended for 
+native CUDA and clustering compilation support.  
+ Includes Innoflight’s CyberDog™ multi-layer cyber-protection 
+capabilities 
+ 
+ 
+I/O 
+ SpaceWire / SpaceFibre 
+ MIL-STD-1553 
+ Camera Link 
+ PCIe Gen 2 (x4)/Aurora   
+ UART, SPI, I2C, CAN 
+ Rapid IO 
+ Ethernet/SGMII 
+ XAUI 
+ USB 3.0 
+ SFPDP 
+TFLOP interfaces can be customized by customer-based on-
+mission requirements and system applications. Sensor examples: 
+ Camera  
+o SpaceWire, Camera Link, UART, SPI, I2C 
+ Focal Plane Array  
+o MIL-STD-1553, SFPDP, UART, SPI, I2C 
+ Synthetic Aperture Radar  
+o Rapid IO, XAUI, UART, SPI, I2C 
+Innoflight’s Trillion FLoating-point Operations Per second (TFLOP) computer is a next-
+generation flight computer and/or payload processor designed with a scalable hybrid 
+architecture to provide a mixture of: 
+- High-reliability operation based on rad-tolerant electronics parts 
+- High-performance operation based on the latest COTS technology 
+TFLOP has many possible applications, including the following: high-reliability C&DH 
+processor, high-performance payload data processor, high-assurance end cryptographic 
+unit (ECU) with built-in cyber protection, or all of the above in one unit.  TFLOP interfaces 
+can be customized to facilitate high-performance algorithms on-orbit, i.e. image 
+processing, image compression, data volume reduction, and potentially novel 
+autonomous functions, with sensor input from high-resolution cameras, focal plane 
+arrays (FPA), radars, and more. 
+(CFC-500-4 shown 
+with mounting tabs) 
+

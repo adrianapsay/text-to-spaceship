@@ -6,9 +6,9 @@
  "vendor": "EXA (Ecuadorian Civilian Space Agency)",
  "model": "TITAN-1",
  "dimensions_mm": {
-  "x": 100,
-  "y": 100,
-  "z": 100
+  "x": 96,
+  "y": 90,
+  "z": 99.8
  },
  "mass_g": 1050,
  "source": {
@@ -27,7 +27,7 @@
    "interfaces",
    "cost"
   ],
-  "notes": "1U-sized, 1050 g full unit (150 g per module), 350 Wh / 84 Ah from 7 x 50 Wh modules, 4.2 or 8.4 V selectable (up to 52 V on request), 2C 30 min / 4C 10 min / 10C 2 s discharge, 2C charge, -30 to 80 C (-60 to 120 with CN/TTB), Molex PicoBlade/PicoSpox or Samtec, AWG 22-24 PTFE leads. EUR 50000-62500, 6-8 weeks (CubeSatShop). Exact dimensions NOT stated: 100 mm cube assumed."
+  "notes": "1U-sized, 1050 g full unit (150 g per module), 350 Wh / 84 Ah from 7 x 50 Wh modules, 4.2 or 8.4 V selectable (up to 52 V on request), 2C 30 min / 4C 10 min / 10C 2 s discharge, 2C charge, -30 to 80 C (-60 to 120 with CN/TTB), Molex PicoBlade/PicoSpox or Samtec, AWG 22-24 PTFE leads. EUR 50000-62500, 6-8 weeks (CubeSatShop). Dimensions 96 x 90 x 99.8 mm (PC/104 footprint, 99.8 mm stack height incl. standoffs, 97.8 mm body) from the TITAN-1 volumetric drawing, sheet 2 of the TITAN-1 datasheet V1.2 Rev B (satsearch download, read 2026-11-11); the drawing leaves the weight blank, so 1050 g is from the brochure."
  },
  "status": "in_production",
  "fidelity": "envelope",
@@ -38,7 +38,7 @@
   "direct"
  ],
  "lead_time": "6-8 weeks",
- "dimensions_note": "assumed 1U",
+ "dimensions_note": "from the TITAN-1 volumetric drawing (datasheet V1.2 Rev B, sheet 2)",
  "electrical": {
   "chemistry": "Li-polymer",
   "energy_Wh": 350,
@@ -65,14 +65,14 @@
  "cost_note": "EUR 50000-62500 range on CubeSatShop",
  "geometry": {
   "measured_bbox_mm": [
-   100.0,
-   100.0,
-   100.0
+   96.0,
+   90.0,
+   99.8
   ],
-  "mesh_volume_mm3": 964653.7,
+  "mesh_volume_mm3": 826925.7,
   "watertight": true,
   "render_kind": "battery_pack",
-  "effective_density_g_cm3": 1.088,
+  "effective_density_g_cm3": 1.27,
   "bodies": {
    "part": [
     {
@@ -97,6 +97,68 @@
   },
   "face_counts": {
    "part": 684
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    96.0,
+    90.0,
+    99.8
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "cells",
+     "color": [
+      0.2,
+      0.45,
+      0.7
+     ],
+     "file": "bodies_detail/cells.stl"
+    },
+    {
+     "name": "end_plates",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/end_plates.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",

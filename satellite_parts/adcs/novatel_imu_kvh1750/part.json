@@ -1,0 +1,135 @@
+{
+ "id": "novatel_imu_kvh1750",
+ "name": "NovAtel IMU-KVH1750 (KVH 1750 fibre-optic IMU in NovAtel enclosure)",
+ "category": "adcs",
+ "subcategory": "imu",
+ "vendor": "NovAtel / KVH",
+ "model": "IMU-KVH1750",
+ "dimensions_mm": {
+  "x": 88.9,
+  "y": 88.9,
+  "z": 73.7
+ },
+ "mass_g": 700,
+ "source": {
+  "type": "datasheet",
+  "url": "https://hexagondownloads.blob.core.windows.net/public/Novatel/assets/Documents/Papers/IMU-P-1750/IMU-P-1750.pdf",
+  "document": {
+   "title": "NovAtel IMU-P1750 product sheet",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "adcs",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "88.9 mm diameter x 73.7 mm high, 0.7 kg, gyro bias instability 0.05 deg/h, 9 to 36 VDC, 8 W max, RS-422, 15-pin Micro-D, -40 to +75 C."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "Canada / USA",
+ "adcs": {
+  "gyro_bias_stability_deg_h": 0.05
+ },
+ "electrical": {
+  "voltage_V": {
+   "min": 9,
+   "max": 36
+  },
+  "power_W": {
+   "peak": 8
+  },
+  "interfaces": [
+   "RS-422"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -40,
+   "max": 75
+  }
+ },
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   88.9,
+   88.65,
+   73.7
+  ],
+  "mesh_volume_mm3": 455763.7,
+  "watertight": true,
+  "render_kind": "cylinder",
+  "effective_density_g_cm3": 1.536,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 164
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "body",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "RS-422"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://hexagondownloads.blob.core.windows.net/public/Novatel/assets/Documents/Papers/IMU-P-1750/IMU-P-1750.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

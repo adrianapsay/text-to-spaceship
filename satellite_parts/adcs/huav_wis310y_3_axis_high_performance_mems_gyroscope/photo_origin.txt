@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-huav-tianjin-technology-development-co-ltd-wis310y3-axis-high-performance-mems-gyroscope-xgadv4.pdf
+method: product image from the catalog page https://satsearch.co/products/huav-tianjin-technology-development-co-ltd-wis310y

@@ -1,0 +1,181 @@
+{
+ "id": "granstal_gs_rw_reaction_wheels",
+ "name": "GranStal Solutions Ltd. GS-RW Reaction Wheels",
+ "category": "adcs",
+ "subcategory": "reaction_wheel",
+ "vendor": "GranStal Solutions Ltd.",
+ "model": "GS-RW Reaction Wheels",
+ "dimensions_mm": {
+  "x": 37.0,
+  "y": 37.0,
+  "z": 37.0
+ },
+ "mass_g": 150.0,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/satsearch_datasheet_ir72va_granstal_gs_rw.pdf",
+  "document": {
+   "title": "GranStal Solutions Ltd. GS-RW Reaction Wheels data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-11",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Read from the vendor data sheet (satsearch_datasheet_ir72va_granstal_gs_rw.pdf): dimensions \"l systems. Products specification Model GS-RWT37 GS-RWT41 Appearance Dimensions 37mm x 37mm x 37mm 41mm x 41\"; mass \"e: 7.0~12)VDC \u2022 Low mass: 150g \u2022 Lo\". Catalog page lists no mass. Electrical / RF values found in the data sheet or page text by pattern (quoted where possible).",
+  "found_via": "https://satsearch.co/products/gnssmart-gs-rw-reaction-wheels"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "electrical": {
+  "power_W": {
+   "nominal": 0.7
+  },
+  "quote": "power: 0.7W"
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   37.0,
+   37.0,
+   37.0
+  ],
+  "mesh_volume_mm3": 37558.8,
+  "watertight": true,
+  "render_kind": "reaction_wheel",
+  "effective_density_g_cm3": 3.994,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "flywheel",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__flywheel.stl"
+    },
+    {
+     "name": "motor_cap",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__motor_cap.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 348
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    37.0,
+    37.0,
+    37.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "base",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/base.stl"
+    },
+    {
+     "name": "cover",
+     "color": [
+      0.24,
+      0.26,
+      0.3
+     ],
+     "file": "bodies_detail/cover.stl"
+    },
+    {
+     "name": "cap",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/cap.stl"
+    },
+    {
+     "name": "bolts",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/bolts.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
+  "datasheet_url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/satsearch_datasheet_ir72va_granstal_gs_rw.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

@@ -1,0 +1,158 @@
+{
+ "id": "ecuadorian_hinges_nano_nanosat_hinges_for_reliable_deploy_op",
+ "name": "Ecuadorian Space Agency Hinges Nano: Nanosat Hinges for reliable deploy operations",
+ "category": "mechanisms",
+ "subcategory": "mechanism",
+ "vendor": "Ecuadorian Space Agency",
+ "model": "Hinges Nano: Nanosat Hinges for reliable deploy operations",
+ "dimensions_mm": {
+  "x": 6.0,
+  "y": 15.0,
+  "z": 6.0
+ },
+ "mass_g": 1.0,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satcatalog.s3.amazonaws.com/components/1466/SatCatalog_-_Ecuadorian_Space_Agency_-_Hinges_Nano_Nanosat_Hinges_for_reliable_deploy_operations_-_Datasheet.pdf",
+  "document": {
+   "title": "Ecuadorian Space Agency Hinges Nano: Nanosat Hinges for reliable deploy operations data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-11",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Read from the vendor data sheet (SatCatalog_-_Ecuadorian_Space_Agency_-_Hinges_Nano_Nanosat_Hinges_for_reliable_deploy_operations_-_Datasheet.pdf): dimensions \"configuration): approx. 1 gram \u2022 Dimensions (LxWxH): o Deployed (90 degrees): 6mm x 15mm x 6mm o Closed\"; mass \"ntation. \u2022 Weight (depends on configuration): approx. 1 gram \u2022 D\". Catalog page lists 0.001 kg.",
+  "found_via": "https://satcatalog.com/component/hinges-nano-nanosat-hinges-for-reliable-deploy-operations/"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "flight_heritage": true,
+ "geometry": {
+  "measured_bbox_mm": [
+   6.0,
+   15.0,
+   6.0
+  ],
+  "mesh_volume_mm3": 535.6,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.867,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    6.0,
+    15.0,
+    6.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://satcatalog.s3.amazonaws.com/components/1466/SatCatalog_-_Ecuadorian_Space_Agency_-_Hinges_Nano_Nanosat_Hinges_for_reliable_deploy_operations_-_Datasheet.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

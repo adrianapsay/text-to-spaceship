@@ -1,0 +1,542 @@
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Space-Friendly   
+Active GNSS Patch Antenna Module 
+piPATCH-MAX 
+ 
+Product Datasheet 
+Rev. A/2025 
+ 
+ 
+Intended to cover all Satellite GNSS needs. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Made in Czech Republic, a country with space heritage since 1978. 
+© 2014-2025 SkyFox Labs, All rights reserved. 
+
+ 
+ 
+Space-Friendly 
+Active GNSS Patch Antenna Module
+ 
+Intended to cover all Satellite GNSS needs. 
+ 
+ 
+ 
+               www.SkyFoxLabs.com, Space-Friendly products 
+2             piPATCH-MAX Product Datasheet, Rev. A 
+Issue rev. A, 2025, info@skyfoxlabs.com, U studanky 620/13. CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2025 SkyFox Labs, s.r.o., All rights reserved 
+ 
+ 
+                           
+FEATURES – Flight Model 
+ 
+Active GNSS antenna for Microsatellites 
+ 
+Stable 50-52+ dBc-Hz SNR on ground for  
+ 
+close-Zenith Satellites (GPS) 
+ 
+Stable 46-48+ dBc-Hz SNR on ground for  
+ 
+close-Zenith Satellites (Galileo) 
+ 
+Stable 50+ dBc-Hz SNR on ground for  
+ 
+close-Zenith Satellites (GLONASS) 
+ 
+Stable 48+ dBc-Hz SNR on ground for  
+ 
+close-Zenith Satellites (BeiDou) 
+ 
+Civil GPS-L1 + GLONASS-G1 + GALILEO-E1 + 
+BEIDOU-B1 bands 
+ 
+Civil GPS-L1 + Galileo-E1 bands version available 
+on request (+ 1-2dB in gain due to narrower band 
+patch antenna element) 
+ 
+Power consumption 
+ 
+20 mA (typical), 3.3 V @ 25°C 
+ 
+2.7 to 5.5V power supply 
+ 
+Large groundplane insulated from Structure,     
+AC-coupled to GND potential 
+ 
+Double ESD Protection, Patch Antenna               
+DC-Shorted to GND potential 
+ 
+Mass 89 grams 
+ 
+Dimensions 74×74×13 mm 
+ 
+ 
+Wide temperature range 
+ 
+-40˚C to +85˚C 
+ 
+Connector 
+ 
+SMA-F, (both Signal + Power) 
+ 
+Straight or Right-angle on request 
+ 
+FR-4, 4-layers PCB 
+ 
+SAW Filter (wideband L1+G1+E1+B1 version       
+or standard band L1+E1 version available) 
+ 
+Patch Epoxy-fixed (3M Ultra Low Outgassing)  
+ 
+Double-sided Kapton fix below Patch 
+ 
+60/40 Tin-Lead used (prevent tin whiskers) 
+ 
+FEATURES – Engineering Model 
+ 
+Active GNSS antenna for Microsatellites 
+ 
+RF and DC characteristics of the Flight Model 
+ 
+Red Remove Before Flight hardened PVC cover 
+ 
+Mechanical outline fitting the Flat Sat design and 
+AIT/AIV activities requirements 
+ 
+Not intended for spaceflight/vacuum environment 
+ 
+APPLICATIONS 
+ 
+Microsatellites, Cargo Ship Satellites GNSS 
+receivers 
+ 
+Satellite Projects using multi-constellation 
+navigation/PVT experiments 
+ 
+High precision GNSS systems with multichannel 
+GNSS receivers 
+ 
+Combined GPS, Galileo, GLONASS, BeiDou  
+supportive GNSS systems RF signal source antenna 
+ 
+ 
+Fig. 1 piPATCH-MAX Patch Antenna Flight Model. 
+ 
+GENERAL DESCRIPTION 
+ 
+ 
+The 
+piPATCH-MAX 
+is 
+the 
+Space-
+Friendly Microsatellite GNSS Active Antenna 
+module specially designed to provide strong signal 
+for GPS-L1 + GALILEO-E1 + GLONASS-G1 + 
+BEIDOU-B1 navigation satellite bands reception in 
+space. An optimized version for GPS-L1 + Galileo-
+E1 is available on request benefiting with +1-2 dB 
+more gain with respect to all band version. 
+Integrated Low Noise Amplifier (LNA) as well as 
+SAW filter are matched together with 35×35 mm 
+Patch antenna and large ground plane DC-insulated 
+from the mounting structure and AC-coupled to 
+enhance the RF groundplane using the satellite wall. 
+ 
+Easy-to-use SMA signal and power 
+interface provides compact solution for all kind of 
+projects where strong GNSS signal reception with 
+enough margins is required.  
+ 
+The module can be easily mounted to the 
+satellite structure using four M4 screws.  
+ 
+High quality conformal coating, Kapton 
+based patch antenna fixture, Sn/Pb tin-lead 
+soledring compound (non-RoHS) and Ketron 
+PEEK used for the Flight Model radome brings the 
+best possible outgassing performance in vacuum 
+environment of space.  
+ 
+The Engineering Model with red Remove 
+Before Flight hardened PVC is available for 
+satellite development, flatsat design and AIT/AIV 
+activities. 
+ 
+The antenna is fully compatible with 
+majority of 3.3 - 5VDC GNSS receivers equipped 
+with active bias over RF coaxial input. 
+PRODUCT DATA SHEET                   
+piPATCH-MAX
+
+ 
+ 
+ 
+ 
+  
+ 3       
+www.SkyFoxLabs.com, Space-Friendly products 
+piPATCH-MAX Product Datasheet, Rev. A 
+Issue rev. A, 2025, info@skyfoxlabs.com, U studanky 620/13. CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2025 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+piPATCH-MAX
+ 
+TABLE OF CONTENTS 
+ 
+APPLICATIONS...................................................................2 
+GENERAL DESCRIPTION..................................................2 
+TABLE OF CONTENTS .......................................................3 
+ABSOLUTE MAXIMUM RATINGS ....................................3 
+DIMENSIONS .....................................................................3 
+APPLICATION NOTES & RECOMMENDATIONS............4 
+EXPORT CONTROL............................................................6 
+DISCLAIMER ...................................................................... 7 
+ 
+ABSOLUTE MAXIMUM RATINGS 
+ 
+RF VIN to GND ………........................…..-0.3 V to (≤ 7 V max) 
+ 
+Chassis to GND Potential ………..…........…........+/- 50 V max 
+Operating Temperature Range:…………..……-40°C to +85°C 
+DC Input Current: II at VI < 0 V or VI > VDD ...................30 mA 
+Storage Temperature Range:………………...-55°C to +100°C 
+ 
+NOTE: Stresses beyond those listed under “Absolute Maximum Ratings” may cause permanent damage to the 
+device. These are stress ratings only, and functional operation of the device at these or any other conditions 
+beyond those indicated under specification conditions is not implied. Exposure to absolute maximum rated 
+conditions for extended periods may affect device reliability. Voltage values are with respect to system ground 
+terminal. The manufacturer reserves all rights to decline the responsibility for any damage caused by improper 
+using of the piPATCH-MAX product. 
+ 
+ 
+CAUTION: The antenna mounting bracket is DC-insulated from the RF coaxial connector GND 
+potential acting as a power source return wire in order to prevent the grounding loops between the 
+antenna, receiver, onboard power supply and satellite mounting wall (if conductive). Internal active 
+electronic circuits are capacitively AC-coupled to the antenna mounting bracket (chassis) to improve 
+the antenna RF performance. Keep the chassis grounding in mind when designing the satellite power system to 
+prevent the charge build-up in case the chassis is not grounded and the satellite mounting wall is not conductive 
+or dissipatively-wise not matched to discharge the charge build-up in the plasma environment of space. Always 
+connect the power before start to change the antenna electrical/mechanical setup. Overloading over the 
+Absolute maximum ratings may affect device reliability, damage the power source device and void the product 
+warranty. 
+ 
+  
+ 
+DIMENSIONS 
+ 
+ 
+Four layer PCB with outer dimensions of 70×70 mm is mounted on top of a Al-6061-T6 aerospace 
+grade aluminum mounting bracket with Ketron PEEK radome cover. The piPATCH-MAX antenna is equipped 
+with the SMA-Female straight or right angle RF connector (on request). 
+ 
+ 
+Fig. 2 piPATCH-MAX Dimensions drawing in millimeters. Detailed STEP file available for download. 
+
+ 
+ 
+ 
+ 
+  
+ 4       
+www.SkyFoxLabs.com, Space-Friendly products 
+piPATCH-MAX Product Datasheet, Rev. A 
+Issue rev. A, 2025, info@skyfoxlabs.com, U studanky 620/13. CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2025 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+piPATCH-MAX
+Tab.: 1 The piPATCH-MAX SMA-F Connector Description. 
+Pin 
+Name 
+I/O, Power or Do Not 
+Connect 
+Description 
+Shield 
+GND 
+Power 
+System ground. Must be connected to receiver ground potential. This signal is internally 
+connected to the inner ground plane and patch antenna tap. 
+Center 
+VDD 
+Power 
+Positive system power input. Positive power supply input and RF signal output. 
+ 
+ENGINEERING MODEL 
+ 
+To test the GNSS system aboard the satellite prototype or engineering / development / qualification 
+model, the Engineering Model grade with identical electrical and RF properties is available. The red Remove 
+Before Flight finish with respective label reminds the user to replace the unit with the Flight Model grade unit 
+suitable for the environment of space. Photo of the piPATCH-MAX/EM unit is depicted in Fig. 3. 
+ 
+ 
+Fig. 3 Engineering Model of the piPATCH-MAX unit with red Remove Before Flight finish. 
+ 
+ 
+APPLICATION NOTES & RECOMMENDATIONS 
+ 
+ 
+ 
+EMC CONSIDERATIONS 
+ 
+As the size of the small satellites imply the high level of integration of different electronic devices 
+(switch mode power supplies, high speed digital electronics, pulse-width modulated electromagnetic actuators, 
+etc.) into a limited satellite structure volume containing potential sources of disturbing signals, the 
+electromagnetic susceptibility and compatibility is critical for implementation of any subsystems sensitive to 
+electromagnetic radiation.  
+ 
+Proper ground planes and PCB design rules minimizing the radiated and conducted emissions shall be 
+applied within the whole small satellite structure, including custom payloads, conventional (Communication and 
+Data Handling, Power Supply and Power Distribution, Onboard Computer, Attitude Determination and Control) 
+and third party electronic subsystems. The small satellite electronics should be properly designed to not disturb 
+the GNSS receiver input frequency band with harmonic frequencies falling to the GPS-L1 + Galileo-E1 + 
+GLONASS-G1 + BeiDou-B1 or GPS-L1 + Galileo-E1 frequency bands respectively. 
+ 
+ 
+NOTE: The C/N0 parameters (Signal-to-Noise Ratios) provided in GNSS receiver output NMEA 
+sentences can be exploited as a diagnosis tool if the EMC issues affect the reception capability. 
+Always observe the C/N0 levels and switch On/Off each electronic subsystem to identify the 
+potential source of the disturbance if needed, using (best possible) open-sky signal quality. 
+Typical terrestrial SNR readings for close-Zenith (high elevation) satellites are as follows: 50-52+ dBc-Hz (GPS), 
+46-48+ dBc-Hz (Galileo), 50+ dBc-Hz (GLONASS), 48+ dBc-Hz (BeiDou) for wideband (all constellation) 
+version. In case significantly lower SNR readings are detected during the RF test, it is recommended to review 
+the whole RF/GNSS/satellite setup. 
+ 
+ 
+
+ 
+ 
+ 
+ 
+  
+ 5       
+www.SkyFoxLabs.com, Space-Friendly products 
+piPATCH-MAX Product Datasheet, Rev. A 
+Issue rev. A, 2025, info@skyfoxlabs.com, U studanky 620/13. CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2025 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+piPATCH-MAX
+ANTENNA LOCATION 
+ 
+Special care should be taken to the interference with the small satellite communication or power 
+subsystem, as an active electronic device radiating the high power electromagnetic waves. The manufacturer 
+recommends installing the GNSS antenna as far from the (transmitting) communication antennas as possible. 
+The RF coaxial cable (harness) between the antenna and the receiver may also pick up harmful interference 
+along the path inside of the satellite body. Be sure to test the target small satellite subsystems against affecting 
+the performance of the GNSS receiver under all satellite operation conditions.  
+ 
+Keep in mind the receiver may be sensitive to harmonics of the downlink (transmitter) frequency (i.e. 
+1553-1620 MHz /9, /8, /7, /6, /5 /4, /3,/2, etc.) or uplink receiver spurious emissions, local MPPT EMC radiation, 
+magnetorquer PWM EMC radiation, etc. It is highly recommended to perform full functional test on the 
+flight or flight-representative satellite model to ensure the EMC compatibility. 
+  
+ 
+In order to maintain and/or improve the antenna radiation pattern, gain, efficiency and performance, it is 
+recommended to mount the antenna in the center, on top of a flat and conductive surface with thickness of 
+at least 0.2 mm or thicker (L-band frequency RF penetration depth for typical metallic materials of satellite 
+walls) in order to expand the basic antenna footprint size (70×70mm). The mounting plate size is not necessary 
+to be larger than ~190 mm in diameter (approximate L-band GNSS wavelength). If smaller, the antenna radiation 
+pattern shall be studied further and checked/verified to conform with mission/satellite pointing requirements. 
+ 
+ 
+RECYCLING 
+ 
+Below mentioned logo given on the goods, its packaging or inside this Quick Start Guide or other 
+related documentation means that used electrical or electronic devices or products should not be disposed with 
+household waste. To ensure proper disposal of the product hand it to designated collection points, where they 
+will be accepted free of charge.  
+ 
+Eco disposal of SkyFox Labs s.r.o. products is maintained by collective system RETELA in Czech 
+Republic. Please recycle product and its packaging in proper way according to valid laws in country of disposal.  
+ 
+ 
+     
+ 
+ 
+ 
+The piPATCH-MAX / Engineering Model is RoHS compliant. 
+ 
+  
+ 
+ 
+ 
+ 
+The piPATCH-MAX / Flight Model is RoHS compliant through exemptions, contains leaded solder. 
+ 
+ 
+ 
+PRODUCT SAFETY 
+ 
+According to use of the product in line with this Quick Start Guide, the product is safe under normal use 
+The CE mark (Conformité Européenne) has been issued on this family of products. Related EC Declaration of 
+Conformity 
+is 
+issued 
+with 
+each 
+supply 
+and 
+is 
+available 
+online 
+at 
+manufacturer’s 
+website 
+http://www.skyfoxlabs.com . 
+ 
+ 
+
+ 
+ 
+ 
+ 
+  
+ 6       
+www.SkyFoxLabs.com, Space-Friendly products 
+piPATCH-MAX Product Datasheet, Rev. A 
+Issue rev. A, 2025, info@skyfoxlabs.com, U studanky 620/13. CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2025 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+piPATCH-MAX
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+EXPORT CONTROL 
+ 
+ 
+Since the country of origin of this product (the Czech Republic) is a valid participating member of the 
+Wassennaar Agreement ( http://www.wassenaar.org ) and agrees with the Missile Technology Control Regime 
+( http://www.mtcr.info ) and the piPATCH-MAX/FM (Space-grade Flight Model), piPATCH-MAX/EM 
+(Engineering Model) functional parameters are considered as a regulated (Dual Use) goods, the export is 
+controlled and needs special Export License approved by the Ministry of Industry and Trade of the Czech 
+Republic (the local control entity), if exported outside EU-member states territory. The request for the Export 
+License has to be submitted by the manufacturer to the local control entity, based on the binding order, including 
+all the information as: the characteristics of goods, target country (territory), detailed end-user and target 
+application information, etc.  
+ 
+ 
+
+ 
+ 
+ 
+ 
+  
+ 7       
+www.SkyFoxLabs.com, Space-Friendly products 
+piPATCH-MAX Product Datasheet, Rev. A 
+Issue rev. A, 2025, info@skyfoxlabs.com, U studanky 620/13. CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2025 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+piPATCH-MAX
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+DISCLAIMER 
+ 
+THIS DEVICE HAS BEEN DEVELOPED WITH IDEA TO SUPPORT THE SMALL 
+SATELLITE COMMUNITY EFFORT IN SPACE RELATED RESEARCH, 
+ENGINEERING AND PEACEFUL CONQUEST OF SPACE. THE MANUFACTURER 
+RESERVES ALL RIGHTS TO DECLINE THE ORDER OF THIS PRODUCT OR 
+PROVIDE ANY FURTER INFORMATION TO END USERS ASSUMING TO VIOLATE 
+ANY LOCAL OR GLOBAL NATIONAL LAWS BY THIS DEVICE OR INFORMATION 
+MENTIONED IN THIS AND RELATED DOCUMENTS. MANUFACTURER DOES NOT 
+ASSUME ANY LIABILITY ARISING OUT OF THE APPLICATION OR USE OF THIS 
+PRODUCT OR CIRCUIT DESCRIBED HEREIN; NEITHER DOES IT CONVEY ANY 
+LICENSE UNDER ITS PATENT RIGHTS, NOR THE RIGHTS OF OTHERS. 
+MANUFACTURER RESERVES THE RIGHT TO MAKE CHANGES OF THIS PRODUCT 
+DATASHEET WITHOUT FURTHER NOTICE. THE UNIT MUST NOT BE USED IN 
+ANY SAFETY-CRITICAL APPLICATION, OR MILITARY-RELATED, OR BY ARMED 
+FORCES, OR BY POLICE GUARDS, OR IN NUCLEAR FACILITIES, OR IN RELATION 
+TO OIL AND GAS MINING, ON LAUNCHERS, MISSILES, TARGET DRONES, 
+WEAPONS OF MASS DESTRUCTION, OR GOVERNMENTAL END USE OR END 
+USER. SAFETY-CRITICAL SYSTEMS ARE THOSE SYSTEMS WHOSE FAILURE 
+COULD RESULT IN LOSS OF LIFE, SIGNIFICANT PROPERTY DAMAGE OR 
+DAMAGE TO THE ENVIRONMENT. THE LIST CONTAINS MOST IMPORTANT 
+AREAS OF PROHIBITED USE AND IS NOT COMPLETE. FOR MORE DETAILS, 
+PLEASE CONTACT FACTORY. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Prague, Czech Republic 
+© 2014-2025 SkyFox Labs, All rights reserved. 
+ 
+

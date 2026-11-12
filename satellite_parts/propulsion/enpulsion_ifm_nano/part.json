@@ -1,0 +1,213 @@
+{
+ "id": "enpulsion_ifm_nano",
+ "name": "ENPULSION IFM Nano Thruster (FEEP, first generation)",
+ "category": "propulsion",
+ "subcategory": "electric_thruster",
+ "vendor": "ENPULSION",
+ "model": "IFM Nano Thruster",
+ "dimensions_mm": {
+  "x": 94,
+  "y": 90,
+  "z": 78
+ },
+ "mass_g": 870,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.cubesatshop.com/wp-content/uploads/2017/04/AMR2017-002-03-IFM-Nano-Thruster-Product-Description.pdf",
+  "document": {
+   "title": "ENPULSION IFM Nano Thruster product description AMR2017-002-03",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "propulsion",
+   "electrical"
+  ],
+  "notes": "94 x 90 x 78 mm, 640 g dry / 870 g wet, 35 W at nominal thrust incl. neutraliser (8-40 W), 350 uN nominal (10 uN to 0.5 mN), Isp 2,000-5,000 s, >5,000 N s. Superseded by the NANO R3."
+ },
+ "status": "discontinued",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "Austria",
+ "mass_note": "wet mass",
+ "distributors": [
+  "direct",
+  "CubeSatShop"
+ ],
+ "propulsion": {
+  "type": "FEEP (indium)",
+  "thrust_N": {
+   "nominal": 0.00035
+  },
+  "isp_s": {
+   "min": 2000,
+   "max": 5000
+  },
+  "total_impulse_Ns": 5000
+ },
+ "electrical": {
+  "power_W": {
+   "nominal": 35
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   94.0,
+   90.0,
+   78.0
+  ],
+  "mesh_volume_mm3": 631050.3,
+  "watertight": true,
+  "render_kind": "electric_thruster",
+  "effective_density_g_cm3": 1.379,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    },
+    {
+     "name": "emitter",
+     "color": [
+      0.85,
+      0.66,
+      0.22
+     ],
+     "file": "bodies/part__emitter.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 348
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    94.0,
+    90.0,
+    78.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "front_plate",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/front_plate.stl"
+    },
+    {
+     "name": "emitter",
+     "color": [
+      0.85,
+      0.66,
+      0.22
+     ],
+     "file": "bodies_detail/emitter.stl"
+    },
+    {
+     "name": "emitter_ring",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/emitter_ring.stl"
+    },
+    {
+     "name": "corner_screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/corner_screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    },
+    {
+     "name": "bolt_circle",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/bolt_circle.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://www.cubesatshop.com/wp-content/uploads/2017/04/AMR2017-002-03-IFM-Nano-Thruster-Product-Description.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

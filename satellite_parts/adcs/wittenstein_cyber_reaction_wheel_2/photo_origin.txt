@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/satsearch_datasheet_xlm8hx_wittenstein-cyber-moto_cyber-reaction-wheel-2.pdf
+method: product image from the catalog page https://satsearch.co/products/wittenstein-cyber-motor-cyber-reaction-wheel-2

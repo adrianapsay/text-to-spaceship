@@ -1,0 +1,520 @@
+4 
+ 
+ 
+ 
+© 2018 GomSpace A/S 
+   
+ 
+ 
+ 
+NanoCom 
+ANT1090-P 
+ 
+Datasheet 
+Active or Passive Patch Antenna for 1090 MHz  
+
+© 2018 GomSpace A/S 
+All printed copies, and all electronic copies and versions except the one accessible on 
+the GomSpace A/S server, are considered uncontrolled copies used for reference only. 
+ 
+ 
+Datasheet NanoCom ANT1090-P 
+26 September 2018 
+DS 1012928 1.3 
+2 
+ 
+ 
+ 
+ 
+Product name: NanoCom ANT1090-P 
+ 
+Document No.: 1012928 
+ 
+Revision: 1.3 
+ 
+Author: KLK 
+ 
+Approved by: BEN 
+ 
+Approval date: 26 September 2018 
+ 
+ 
+ 
+Confidentiality Notice 
+ 
+This document is submitted for a specific purpose as agreed in writing and contains information, 
+which is confidential and proprietary. The recipient agrees by accepting this document, that this 
+material will not be used, transferred, reproduced, modified, copied or disclosed in whole or in 
+part, in any manner or to any third party, except own staff to meet the purpose for which it was 
+submitted without prior written consent. 
+ 
+GomSpace © 2018 
+
+© 2018 GomSpace A/S 
+All printed copies, and all electronic copies and versions except the one accessible on 
+the GomSpace A/S server, are considered uncontrolled copies used for reference only. 
+ 
+ 
+Datasheet NanoCom ANT1090-P 
+26 September 2018 
+DS 1012928 1.3 
+3 
+ 
+1 Table of Contents 
+2 
+OVERVIEW ............................................................................................................................................... 4 
+2.1 
+Highlighted Features .................................................................................................................... 4 
+2.2 
+Active Version .............................................................................................................................. 4 
+2.3 
+Passive Version ........................................................................................................................... 4 
+3 
+MOUNTING PLATE .................................................................................................................................. 5 
+4 
+CONNECTOR ........................................................................................................................................... 6 
+5 
+ABSOLUTE MAXIMUM RATINGS ........................................................................................................... 6 
+6 
+ELECTRICAL CHARACTERISTICS, ACTIVE VERSION ....................................................................... 6 
+7 
+PHYSICAL CHARACTERISTICS ............................................................................................................. 6 
+8 
+RF PERFORMANCE CHARACTERISTICS ............................................................................................. 7 
+8.1 
+Patch Antenna Performance with Type B & C backplates .......................................................... 7 
+8.2 
+Patch Antenna Performance with Type A & D backplates attached to structure ........................ 7 
+8.3 
+Electronics module performance ................................................................................................. 7 
+9 
+ANTENNA PERFORMANCE .................................................................................................................... 8 
+9.1 
+Axial Ratio .................................................................................................................................... 8 
+10 
+MECHANICAL DRAWING ........................................................................................................................ 9 
+10.1 
+Type A .......................................................................................................................................... 9 
+10.2 
+Type B ........................................................................................................................................ 10 
+10.3 
+Type C ....................................................................................................................................... 11 
+10.4 
+Type D ....................................................................................................................................... 12 
+11 
+DISCLAIMER .......................................................................................................................................... 12 
+12 
+RELATED GOMSPACE PRODUCTS .................................................................................................... 13 
+12.1 
+NanoCom ADS-B ....................................................................................................................... 13 
+12.2 
+Software Defined Radio (SDR) Platform ................................................................................... 13 
+ 
+ 
+ 
+ 
+
+© 2018 GomSpace A/S 
+All printed copies, and all electronic copies and versions except the one accessible on 
+the GomSpace A/S server, are considered uncontrolled copies used for reference only. 
+ 
+ 
+Datasheet NanoCom ANT1090-P 
+26 September 2018 
+DS 1012928 1.3 
+4 
+2 Overview 
+The NanoCom ANT1090-P is a patch antenna designed especially for ADS-B signal reception. It is available in 
+an active and a passive version, which makes it capable of interfacing with the GomSpace SDR transceivers or 
+the dedicated GomSpace ADS-B receiver.  
+ 
+The antenna is built as a sandwich around an aluminium shield/mounting plate. The antenna module is placed 
+on the outside of the mounting plate. The electronics module as well as the SSMCX RF connectors is located 
+on the inside of the mounting plate under an additional aluminium shield.. This construction allows flexible 
+mounting on several different satellite structures – just by changing the mounting plate. 
+ 
+ 
+2.1 
+Highlighted Features 
+• 
+Integrated antenna and LNA/filters results in optimum RF noise figure performance 
+• 
+Flexible sandwich construction allows flexible mounting on different satellite structures – just by 
+changing the shield/mounting plate. 
+• 
+RHCP  
+• 
+Gain: 4.5 dBi 
+• 
+1090 MHz 
+• 
+Shielded electronics 
+• 
+PCB material: Rogers 4003C substrate (IPC class 3 production) 
+• 
+IPC-A-610 Class 3 assembly 
+ 
+2.2 
+Active Version 
+The block diagram of the Active antenna LNA system on the back of the antenna module is depicted below. 
+The diagram illustrates that the input signal is passed through a hybrid coupler to receive the circular polarized 
+signal. The RHCP signal is forwarded to the LNA and filtering section. The LNA chain is powered through the 
+coax cable (RF out) via a Bias T block with a LDO stabilizing the voltage level. A limiter is included to protect 
+the SDR receiver from damage by high power from transmitters. 
+ 
+ 
+2.3 
+Passive Version 
+The passive version of the antenna provides a direct connection from the patch antenna to the receiver through 
+the 90° hybrid coupler. Again, the RHCP signal is selected 
+ 
+
+© 2018 GomSpace A/S 
+All printed copies, and all electronic copies and versions except the one accessible on 
+the GomSpace A/S server, are considered uncontrolled copies used for reference only. 
+ 
+ 
+Datasheet NanoCom ANT1090-P 
+26 September 2018 
+DS 1012928 1.3 
+5 
+3 Mounting Plate 
+Four different mounting plates are available, depending on where the ANT1090-P is placed on a nano-satellite. 
+They are all 1.5 mm aluminium. The 3U is used as an example; the plates can also be mounted on 1U and 2U 
+nano-satellite. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Type A 
+ 
+Type B 
+ 
+Used on the A-side of a 3U or 6U structure 
+Used on the B-side of a 6U structure. 
+ 
+Type C 
+ 
+ 
+Type D 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Used on the top or bottom of a 3U structure. Does 
+not exceed the height of the structure rails. 
+Used on the D side of a 3U structure 
+ 
+ 
+ 
+
+© 2018 GomSpace A/S 
+All printed copies, and all electronic copies and versions except the one accessible on 
+the GomSpace A/S server, are considered uncontrolled copies used for reference only. 
+ 
+ 
+Datasheet NanoCom ANT1090-P 
+26 September 2018 
+DS 1012928 1.3 
+6 
+4 Connector  
+A standard SSMCX connector is located on the back of the antenna sandwich assembly. This connector is used 
+as the RF output from the antenna as well as it is used as the supply input for the active version (supply through 
+the RF cable). 
+ 
+5 Absolute Maximum Ratings 
+Stresses above those listed under Absolute Maximum Ratings may cause permanent damage to the ANT1090-
+P. Exposure to absolute maximum rating conditions for extended periods may affect the reliability. 
+ 
+Symbol 
+Description 
+Typ. 
+Max. 
+Unit 
+VDC 
+DC supply voltage for LNA, active version 
+ 
+5.75 
+V 
+Toperation 
+Operating temperature 
+-40 
+85 
+°C 
+Tstorage 
+Storage temperature 
+-40 
+85 
+°C 
+ 
+6 Electrical Characteristics, active version 
+ 
+Symbol 
+Description 
+Min. 
+Typ. 
+Max. 
+Unit 
+VDC 
+DC supply voltage for LNA 
+4.0 
+5.0 
+5.25 
+V 
+IDC 
+DC current needed from supply 
+30 
+31 
+40 
+mA 
+ 
+7 Physical Characteristics 
+Depending on mounting plate. Approximate values bellow: 
+ 
+Description 
+Value 
+Unit 
+Mass 
+135 
+g 
+Size 
+100.0 x 100.0 x 12.0  
+mm 
+ 
+ 
+ 
+
+© 2018 GomSpace A/S 
+All printed copies, and all electronic copies and versions except the one accessible on 
+the GomSpace A/S server, are considered uncontrolled copies used for reference only. 
+ 
+ 
+Datasheet NanoCom ANT1090-P 
+26 September 2018 
+DS 1012928 1.3 
+7 
+8 RF Performance Characteristics 
+ 
+8.1 
+Patch Antenna Performance with Type B & C backplates 
+ 
+Parameter 
+Result 
+Unit 
+Return loss 
+< -8 
+dB 
+Realized Gain, centre frequency 
+> 4.5 
+dBi 
+3 dB beam width 
+> 80 
+° 
+Polarization 
+RHCP 
+ 
+Frequency 
+1.085 – 1.095 
+GHz 
+Axial Ratio within ±40 degrees theta 
+< 3  
+dB 
+ 
+8.2 
+Patch Antenna Performance with Type A & D backplates attached to structure 
+ 
+Parameter 
+Result 
+Unit 
+Return loss 
+< -8 
+dB 
+Realized Gain, centre frequency 
+> 4.5 
+dBi 
+3 dB beam width 
+> 60 
+° 
+Polarization 
+RHCP 
+ 
+Frequency 
+1.085 – 1.095 
+GHz 
+Axial Ratio within ±40 degrees theta 
+< 6  
+dB 
+ 
+8.3 
+Electronics module performance 
+ 
+Active 
+ 
+Symbol 
+Description 
+Test 
+temperature 
+Min. 
+Max. 
+Unit 
+ 
+Gain 
+LNA Gain (ref plane to RX conn.) 
+-40~85°C 
+27 
+32 
+dB 
+NF 
+LNA Noise Figure (ref. plane) 
+-40~85°C 
+ 
+1.5 
+dB 
+Frequency 
+LNA frequency band 
+-40~85°C 
+1085 
+1095 
+MHz 
+P1dB 
+LNA output power@ 1 dB compression 
+point 
+25°C 
+-2  
+ 
+dBm 
+IP3i 
+LNA 3rd order intercept point 
+25°C 
+ 
+8 
+dBm 
+Pin 
+Input RF power level to LNA 
+25°C 
+ 
+-20 
+dBm 
+Pout, max 
+LNA maximum RF output power 
+25°C 
+ 
+5 
+dBm 
+ 
+Note: The limiter functions while the Pout is higher than 0 dBm and as such Pout is kept lower than 5 dBm. This 
+function will protect the SDR receiver from damage by high power from transmitters. 
+ 
+Passive 
+ 
+Symbol 
+Description 
+Test 
+temperature 
+Min. 
+Max. 
+Unit 
+ 
+RL 
+Return loss for combined output 
+-40~85°C 
+ 
+-15 
+dB 
+IL 
+Insert loss 
+ 
+-40~85°C 
+ 
+-0.35 
+dB 
+
+© 2018 GomSpace A/S 
+All printed copies, and all electronic copies and versions except the one accessible on 
+the GomSpace A/S server, are considered uncontrolled copies used for reference only. 
+ 
+ 
+Datasheet NanoCom ANT1090-P 
+26 September 2018 
+DS 1012928 1.3 
+8 
+9 Antenna Performance 
+Figure below is a typical measured radiation pattern, and a definition of the Phi and Theta angles used to 
+describe the general antenna performance with Type B & C backplates. 
+ 
+The antenna module includes connectors and matching circuit and has two feed ports which must be driven 90° 
+out of phase to generate a circular polarized radiation. 
+ 
+On the electronics board a hybrid coupler generates the necessary quadrature signals. For the antenna 
+measurements, an adaptor board with the same hybrid coupler is used as test interface and the adaptor board 
+loss (~0.30 dB) is compensated in the measurements. 
+ 
+ 
+ 
+9.1 
+Axial Ratio 
+ANT1090-P is circular polarized, and product polarization is determined by the electronics PCB. 
+ 
+Below is the axial ratio as a function of Theta for different Phi angels.  
+ 
+As seen the axial ratio is excellent well beyond the ±40° half-power beamwidth. 
+ 
+ 
+ 
+
+© 2018 GomSpace A/S 
+All printed copies, and all electronic copies and versions except the one accessible on 
+the GomSpace A/S server, are considered uncontrolled copies used for reference only. 
+ 
+ 
+Datasheet NanoCom ANT1090-P 
+26 September 2018 
+DS 1012928 1.3 
+9 
+10 Mechanical Drawing 
+All dimensions in mm. 
+ 
+10.1 Type A 
+ 
+  
+ 
+ 
+
+© 2018 GomSpace A/S 
+All printed copies, and all electronic copies and versions except the one accessible on 
+the GomSpace A/S server, are considered uncontrolled copies used for reference only. 
+ 
+ 
+Datasheet NanoCom ANT1090-P 
+26 September 2018 
+DS 1012928 1.3 
+10 
+10.2 Type B 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+

@@ -1,0 +1,147 @@
+L3Harris brings over 50 years of telemetry, tracking and  
+control (TT&C) experience to offer a suite of affordable  
+software-defined transponders. 
+FLEXIBLE AND RELIABLE 
+Perfect for low-cost satellites and constella-
+tion missions, CXS-1000 software-defined 
+transponders offer breakthroughs in price 
+and performance from a trusted, long-
+term TT&C supplier. 
+The multi waveform receiver provides 
+flexibility in demodulation, decoding and 
+channel selection for both narrowband 
+or wideband operation. Customers can 
+select different waveforms and program 
+the frequency on orbit.
+The baseline receiver comes standard 
+with the L-/S-band configuration (CXS-
+1000), with options to select either of the 
+Ka-band (CXK-1000) and X-band (CXX-
+1000) variations.
+HIGH PERFORMANCE SOLUTION
+Digital and analog data interfaces are 
+provided via a serial control and status 
+interface. The unit can be provided as 
+a single integrated unit or as separate 
+transmitters and receivers for full duplex 
+multi-role and multi-band missions.
+The engineering analyses, manufacturing 
+and quality processes used for production 
+are consistent with the highest industry 
+reliability standards. Currently in produc-
+tion, the CXS-1000 is a high-performance 
+solution with standard pricing and deliv-
+ery for evolving lower cost satellites  
+and constellations.
+BENEFITS
+	
+> Radiation tested for  
+geostationary environments 
+	
+> Small form factor scaling  
+with desired functions
+	
+> Flexibility through agile,  
+scalable design 
+	
+> Low cost for small satellites 
+and constellations
+	
+> High reliability using on  
+orbit proven processes 
+CXS-1000 MULTIFUNCTION, 
+SOFTWARE-DEFINED 
+TRANSPONDERS
+Multi waveform and multi band capabilities  
+with a compact footprint 
+
+CXS-1000 PRODUCT LINE SPECIFCIATIONS
+CXS-1000 Multifunction, Software-Defined Transponder
+© 2022 L3Harris Technologies, Inc. | 02/2022 | 61877 | TRP
+Nonexport-controlled Information
+L3Harris Technologies is an agile global aerospace and defense technology innovator, delivering end-to-end 
+solutions that meet customers’ mission-critical needs. The company provides advanced defense and commercial 
+technologies across air, land, sea, space and cyber domains.  
+CXS-1000
+CXX-1000
+CXK-1000
+RECEIVER
+L/S-BAND
+S-BAND
+KA-BAND
+Center frequency
+1.76 – 1.84 GHz, 2.025 – 2.120 GHz 
+2.025 – 2.120 GHz 
+30.0 – 31.0 GHz
+Data rate
+2 – 128 Kbps, 3 Mbps capable
+2 – 128 Kbps, 3 Mbps capable
+1 – 40 Mbps, > 500 Mbps capable
+Modulation
+BPSK, SGLS, USB/STDN, ranging, 
+TDRSS, coherency, user defined
+BPSK, QPSK, ranging, coherency,  
+user defined
+BPSK, DVB-S2 QPSK
+Tracking rate/range
+10 kHz/sec, ±100 kHz; TDRSS 75 Hz/sec, ±160 kHz 10kHz/sec, +- 1 MHz
+Input RF signal
+-30 dBm to -120 dBm -50 to -120 dBm
+TRANSMITTER
+S-BAND
+X-BAND 
+KA-BAND
+Center frequency
+2.2 GHz – 2.3 GHz
+8.0 – 8.5 GHz
+20.2 – 21.2 GHz 
+Frequency stability
+± 10 ppm over life
+Locks to 10 MHz external ref
+Locks to 10 MHz external ref
+Phase noise
+10 kHz/sec, ±100 kHz; TDRSS 75 Hz/sec, ±160 kHz
+EVM
+< 10% RMS
+Data rate
+2K – 2 Mbps,  20 Mbps capable
+1 – 400 Mbps
+1 – 500 Mbps, > 1 Gbps capable
+Modulation
+LPM 1.024 MHz s/c, ranging, BPSK, QPSK, OQPSK, UQPSK, DVB-S2, user defined
+RF output power
+10 mW to 20 W 
+10 mW to 10 W 
+10 mW to 2 W 
+TRANSCEIVER
+Outline dimension
+4.0 in x 4.2 in x 4.0 in 
+(core configuration)
+9.6 in x 8.8 in x 3.55 in 
+9.6 in x 8.8 in x 3.55 in 
+Mass
+2.5 lbs (Al), 3.6 lbs (Cu)
+11.4 lbs 
+11.4 lbs 
+Mission life
+1 to 5 years
+Duty cycle
+TX: 15%, RX: 100% (typical)
+Radiation
+50 krad (chassis), tested to GEO levels for destructive SEE, LET > 43 MeV, 26 krad (parts level), ELDRS tested to 52 krads
+Bus voltage
+28 V ± 6 V, 9.5 – 12.3 V (isolated power)
+EMC/EMI
+MIL-STD-461F (tailored)
+Data/clock interface
+RS-422, single-ended, SpW
+Ethernet
+SpW, Ethernet
+Control/status interface
+RS-422, SpW
+RS-422
+SpW
+Compatible with several NSA certified and commercial cryptographic products. These include KI-700, KI-55, MCU-110C and MRA-706 crypto solutions.
+1025 W. NASA Boulevard 
+Melbourne, FL 32919
+

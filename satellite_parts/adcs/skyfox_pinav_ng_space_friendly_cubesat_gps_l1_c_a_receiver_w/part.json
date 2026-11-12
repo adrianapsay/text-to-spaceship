@@ -1,0 +1,217 @@
+{
+ "id": "skyfox_pinav_ng_space_friendly_cubesat_gps_l1_c_a_receiver_w",
+ "name": "SkyFox Labs s.r.o. piNAV-NG - Space-Friendly\u2122 CubeSat GPS L1 C/A Receiver with DROP",
+ "category": "adcs",
+ "subcategory": "gnss_receiver",
+ "vendor": "SkyFox Labs s.r.o.",
+ "model": "piNAV-NG - Space-Friendly\u2122 CubeSat GPS L1 C/A Receiver with DROP",
+ "dimensions_mm": {
+  "x": 71.1,
+  "y": 45.7,
+  "z": 11.0
+ },
+ "mass_g": 24.0,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-skyfox-labs-sro-pinav-ng-space-friendly-cubesat-gps-receiver-usqlf5.pdf",
+  "document": {
+   "title": "SkyFox Labs s.r.o. piNAV-NG - Space-Friendly\u2122 CubeSat GPS L1 C/A Receiver with DROP data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-11",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Read from the vendor data sheet (datasheet-skyfox-labs-sro-pinav-ng-space-friendly-cubesat-gps-receiver-usqlf5.pdf): dimensions \"upply Active Antenna DC Bias Output (3.3V @ 50mA) Ultra Low Dimensions 71.1\u00d745.7\u00d711 mm Wide t\"; mass \"tennas Ultra low mass 24 grams (inc\". Catalog page lists no mass. Electrical / RF values found in the data sheet or page text by pattern (quoted where possible).",
+  "found_via": "https://satsearch.co/products/skyfox-labs-pi-nav-ng-fm"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "electrical": {
+  "power_W": {
+   "nominal": 0.125
+  },
+  "quote": "Power (125 mW"
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   71.1,
+   45.7,
+   11.0
+  ],
+  "mesh_volume_mm3": 35717.9,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 0.672,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    71.1,
+    45.7,
+    11.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "feet",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/feet.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "connector_shell",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/connector_shell.stl"
+    },
+    {
+     "name": "connector_insert",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector_insert.stl"
+    },
+    {
+     "name": "jackscrews",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/jackscrews.stl"
+    },
+    {
+     "name": "label",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies_detail/label.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
+  "datasheet_url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-skyfox-labs-sro-pinav-ng-space-friendly-cubesat-gps-receiver-usqlf5.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

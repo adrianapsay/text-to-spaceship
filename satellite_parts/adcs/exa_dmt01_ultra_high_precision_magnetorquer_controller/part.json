@@ -1,0 +1,163 @@
+{
+ "id": "exa_dmt01_ultra_high_precision_magnetorquer_controller",
+ "name": "EXA (Ecuadorian Space Agency) DMT01: Ultra-High Precision Magnetorquer Controller",
+ "category": "adcs",
+ "subcategory": "magnetorquer",
+ "vendor": "EXA (Ecuadorian Space Agency)",
+ "model": "DMT01: Ultra-High Precision Magnetorquer Controller",
+ "dimensions_mm": {
+  "x": 62.0,
+  "y": 55.0,
+  "z": 4.0
+ },
+ "mass_g": 25.0,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-exa-ecuadorian-space-agency-dmt01-ultra-high-precision-magnetorquer-controller-4kdy6d.pdf",
+  "document": {
+   "title": "EXA (Ecuadorian Space Agency) DMT01: Ultra-High Precision Magnetorquer Controller data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-11",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Read from the vendor data sheet (datasheet-exa-ecuadorian-space-agency-dmt01-ultra-high-precision-magnetorquer-controller-4kdy6d.pdf): dimensions \"\u00b0C \uf0b7 Random Vibration: 16g rms \uf0b7 Lifetime: >10 years \uf0b7 Dimensions: 62x55x4 mm \uf0b7 Mass:\"; mass \"ions: 62x55x4 mm \uf0b7 Mass: 25 grams \uf0b7 M\". Catalog page lists no mass. Electrical / RF values found in the data sheet or page text by pattern (quoted where possible).",
+  "found_via": "https://satsearch.co/products/exa-dmt01-magnetorquer-controller"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "electrical": {
+  "power_W": {
+   "nominal": 0.05
+  },
+  "quote": "Power: From 50mW"
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   62.0,
+   55.0,
+   4.0
+  ],
+  "mesh_volume_mm3": 13623.3,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.835,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    62.0,
+    55.0,
+    4.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
+  "datasheet_url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-exa-ecuadorian-space-agency-dmt01-ultra-high-precision-magnetorquer-controller-4kdy6d.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

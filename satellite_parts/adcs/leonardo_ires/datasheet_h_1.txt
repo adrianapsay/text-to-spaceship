@@ -1,0 +1,153 @@
+Space
+INFRARED EARTH SENSOR
+IRES is a two axis infrared Earth horizon sensor for 
+accurate measurement of pitch and roll attitude angles 
+with respect to the Earth disk centre. It is used in 
+three-axes stabilised spacecrafts operating in GEO 
+(Geostationary Earth Orbit) and MEO (Medium Earth 
+Orbit).
+Due to its extended acquisition and operational 
+capabilities, IRES allows meeting transfer orbit 
+operations of different launchers.
+The operating principle is based on electro-mechanical 
+modulation of the radiation coming from the Earth 
+horizon in the 14-16.25μm band. Four IR (Infrared) 
+beams in a single telescope swung by a mirror along 
+a scan path of 45° Earth latitude North and South, 
+generates Earth/Space and Space/Earth pulses.
+These are compared in phase with the internal encoder 
+reference to derive Pitch and Roll measurements. 
+IRES consists of an optical head packaged with the 
+processing electronics in a single housing for the two 
+axis measurement. Pitch and Roll are computed inside 
+the sensor by means of a dedicated ASIC.
+HERITAGE
+The company started developing infrared Earth 
+sensors for the Earth horizon detection during 1960. 
+Several IRES generations were developed (around 
+300 units sold), all based on the same earth horizon 
+detection concept that provides pitch and roll direct 
+output.
+IRES has already experienced hundreds of years 
+of successful in-flight life in the frame of many 
+programmes.
+IRES
+leonardocompany.com
+
+ASS
+IRES
+Historic program including infrared earth sensors
+include: AGILA, AMC12, AMC13, AMOS, APSTAR, 
+ARABSAT, ARTEMIS, ASIASAT, ASTRA, DFH/FO, DFH3,
+DRS, ECS, EUTELSAT24, EUTELSAT1/2/3, 
+EURASIASAT, KOREASAT-5, GSTV-V2A and GSTB-
+V2B, HISPASAT, INMARSAT, ITALSAT, MARECS, 
+NAHUELSAT, OLYMPUS, ORION, OTS, RASCOM, 
+SICRAL, SINOSAT, SIRIUS2, SKYNET, SYRACUSE-3A, 
+SYRACUSE-3B, THAICOM, TURKSAT.
+The latest generation of IRES (IRES-N2) is based on 
+the same concept and offers the same performance 
+and interfaces as the previous generation. IRES-N2 is 
+based on pyroelectric detectors, is ITAR free and lower 
+cost with respect to the previous IRES generation. IRES 
+is installed on the GALILEO constellation satellites.
+TECHNICAL CHARACTERISTICS
+Operating modes
+▪▪Earth acquisition mode (Wide Scan)
+▪▪Earth pointing mode (Narrow Scan)
+▪▪Chord mode (single beam crossing).
+PERFORMANCE
+Operating band 	
+	
+14-16.25μm wavelength
+Earth acquisition mode 	
+	
+Between 15,300 and 53,000Km altitude
+Operational capability 	
+	
+Up to 140,000Km altitude
+OPERATIONAL RANGE AT GEO
+Pointing mode linear range 	
+	
+±5.5° pitch; ±2.5° roll
+Acquisition mode linear range 	 	
+±11° pitch; ±2.5° roll
+Chord mode linear range 	
+	
+±23° pitch; ±14° roll
+Acquisition mode sign range 	
+	
+±22° pitch; ±13° roll
+Output data rate 	
+	
+10Hz
+Accuracy 	
+	
+	
+<0.05 deg random error (3σ)
+	
+	
+	
+<0.02 deg bias error
+DATA INTERFACES
+Type 	
+	
+	
+Digital serial interface 32/48 bit or 
+	
+	
+	
+MIL-STD-1553B available
+MECHANICAL INTERFACES
+Dimensions 	
+	
+	
+169.9mm x 163.8mm x 156mm
+Mass 	
+	
+	
+<2.5Kg
+ELECTRICAL INTERFACES
+Type 	
+	
+	
+24 to 50V
+	
+	
+	
+75 to 100V unregulated power bus
+Power consumption 	
+	
+<4W
+ENVIRONMENTAL CONDITIONS
+Operating temperature 	
+	
+-30° to +60°C
+Storage temperature 	
+	
+-40° to +70°C
+AMBIENT AND SPACE VACUUM PRESSURE
+Vibration levels 		
+	
+Sine: 20g peak
+Random 	
+	
+	
+26g rms
+Shock 	
+	
+	
+2000g from 3 to 10kHz
+Lifetime in GEO 	
+	
+> 15 years
+IRES installed onboard of OLYMPUS
+For more information please email infomarketing@leonardocompany.com
+Leonardo S.p.a.
+Via delle Officine Galileo, 1 - 50013 Campi Bisenzio (Fl) - Italy - Tel: +39 055 89501 - Fax: +39 055 8950600
+This publication is issued to provide outline information only and is supplied without liability for errors or omissions. No part of it may be reproduced or used unless 
+authorised in writing. We reserve the right to modify or revise all or part of this document without notice.
+2017 © Leonardo S.p.a.
+leonardocompany.com
+MM07787 1-17
+

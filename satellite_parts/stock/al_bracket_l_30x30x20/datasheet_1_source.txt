@@ -1,0 +1,5 @@
+url: https://ucpcdn.thyssenkrupp.com/_legacy/UCPthyssenkruppBAMXUK/assets.files/material-data-sheets/aluminium/aluminium-6061.pdf
+title: aluminium-6061.pdf - thyssenkrupp
+query: aluminium 6061-T6 bar datasheet pdf
+found by web search; verify that it is the right part
+family datasheet: material data for aluminium 6061 (bracket material)

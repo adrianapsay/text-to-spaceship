@@ -1,0 +1,130 @@
+{
+ "id": "isis_sband_patch_sspa",
+ "name": "ISISPACE S-band patch antenna (RHCP, 2200-2290 MHz)",
+ "category": "comms",
+ "subcategory": "antenna",
+ "vendor": "ISISPACE",
+ "model": "S-Band Patch Antenna",
+ "dimensions_mm": {
+  "x": 80,
+  "y": 80,
+  "z": 8.8
+ },
+ "mass_g": 50,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.isispace.nl/wp-content/uploads/2021/01/ISIS-SSPA-DSH-0001-S_Patch_Antenna_Datasheet-02_00.pdf",
+  "document": {
+   "title": "ISIS S-band Patch Antenna data sheet ISIS-SSPA-DSH-0001 2.0",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "rf",
+   "thermal"
+  ],
+  "notes": "80 mm diameter, 5.0 mm high without connector, 8.8 mm with the straight SMA (envelope uses 8.8 mm), <50 g, 6.5 dBic, 2200-2290 MHz RHCP, -20 to +50 C. Mass is the stated upper bound."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "Netherlands",
+ "mass_note": "upper bound (<50 g) per datasheet",
+ "rf": {
+  "band": "S",
+  "frequency_MHz": [
+   [
+    2200,
+    2290
+   ]
+  ],
+  "gain_dBi": 6.5,
+  "polarization": "RHCP",
+  "antenna_type": "patch"
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -20,
+   "max": 50
+  }
+ },
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   80.0,
+   79.78,
+   8.8
+  ],
+  "mesh_volume_mm3": 44068.8,
+  "watertight": true,
+  "render_kind": "cylinder",
+  "effective_density_g_cm3": 1.135,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 164
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "body",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": "https://cdn.satsearch.com/product-images/satsearch_itntd8_isis_s_band_patch_antenna.png",
+  "photo_source": "satsearch",
+  "photo_page": "https://satsearch.co/products/isis-s-band-patch-antenna",
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://www.isispace.nl/wp-content/uploads/2021/01/ISIS-SSPA-DSH-0001-S_Patch_Antenna_Datasheet-02_00.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

@@ -1,0 +1,132 @@
+IMUCube | Technical Specifications | TM2.space 
+Revision: A 
+Date: 10-02-2026 
+ 
+ 
+ 
+IMUCube 
+Technical Specifications 
+ 
+ 
+ 
+Description: 
+The IMUCube is a high reliability MEMS inertial measurement module. It integrates multiple 
+high-performance Inertial Measurement Units (IMUs) to provide redundant and accurate 
+measurements of angular rate, acceleration, and orientation. The board enhances system 
+robustness through sensor redundancy and cross-validation, enabling improved attitude 
+estimation and fault tolerance. 
+​
+CIN: U61900TS2024PTC186392 
+1 
+ 
+
+IMUCube | Technical Specifications | TM2.space 
+Revision: A 
+Date: 10-02-2026 
+ 
+Specifications: 
+ 
+Parameter 
+Value 
+Controller 
+Controller Type 
+32-bit Arm® Cortex® M4 with FPU 
+Processor Clock Speed 
+Up to 80MHz 
+Onboard Storage 
+128KB 
+Power 
+Input Voltage 
+5V 
+Interfaces 
+Interfaces Supported 
+1 x Full Duplex RS-485  
+Onboard Peripherals 
+1 x AMG IMU 
+2 x AG IMU 
+2 x Magnetometer 
+1 x Gyroscope 
+IMU 
+Characteristics  
+Gyroscope 
+Measurement Range (dps) : ±245, ±500, 
+±2000 
+Sensitivity (mdps/digit) : 8.75, 17.5, 70 
+[with respect to the measurement range] 
+Magnetometer 1 
+Measurement Range (µT) : -800 to +800 
+Sensitivity (nT) : 50 
+Magnetometer 2 
+Measurement Range (gauss) : ±49 
+Sensitivity (mgauss/LSB) : 1.5 
+AG IMU 1 
+Gyroscope Measurement Range (dps) : 
+±15.625 to ±4000 
+Gyroscope Sensitivity (LSB/dps) : 8.2 to 
+2097.2 [with respect to the measurement 
+range] 
+Accelerometer Measurement Range (g) :   
+±2 to ±32  
+Accelerometer Sensitivity (LSB/g) : 
+1024 to 16384 
+[with respect to the measurement range] 
+AG IMU 2 
+Gyroscope Measurement Range (dps) : 
+±300 
+Gyroscope Sensitivity (LSB/dps) :100 
+Accelerometer Measurement Range (g) :  
+±8 
+​
+CIN: U61900TS2024PTC186392 
+2 
+ 
+
+IMUCube | Technical Specifications | TM2.space 
+Revision: A 
+Date: 10-02-2026 
+ 
+Accelerometer Sensitivity (LSB/m/s2) :200 
+AMG IMU 
+Gyroscope Measurement Range (dps) :  
+±125 to ±2000 
+Gyroscope Sensitivity (LSB/dps) : 16 
+Accelerometer Measurement Range (g) :   
+±2 to ±16 
+Accelerometer Sensitivity (LSB/mg) : 1 
+Magnetometer Measurement Range (µT): 
+XY axis : ±1300​
+Z axis : ±2500 
+Magnetometer resolution (µT): 0.3 
+Mechanical 
+Mass 
+55 g 
+Dimensions 
+67.5x56x16 mm 
+Connectors 
+2 x 6 pin Harwin Gecko screw lock​
+1 x 5 pin 1.5mm pitch Molex Picolock 
+Testing and 
+Compliance 
+T-Vac 
+2 Cycles with temperature range of +60℃ 
+to -25℃ 
+Vibration 
+Random vibration acceptance test levels ​
+20 - 2000 Hz at 4.47grms for 60 seconds 
+Shock 
+100 Hz at 30g​
+1000 Hz at 1500g 
+5000 Hz at 1500g 
+Software 
+Software Development Kit 
+(SDK) 
+Control SDK Library included 
+Debug Interface 
+Serial Wire Debug 
+ 
+Questions? Queries? Contact us at info@tm2.space 
+​
+CIN: U61900TS2024PTC186392 
+3 
+ 
+

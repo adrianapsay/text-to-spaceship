@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/satsearch_datasheet_r7wb4p_raptor-photonics_owl-640-t-digital-vis-swir-camera.pdf
+method: product image from the catalog page https://satsearch.co/products/raptor-photonics-owl-640-t-digital-vis-swir-camera

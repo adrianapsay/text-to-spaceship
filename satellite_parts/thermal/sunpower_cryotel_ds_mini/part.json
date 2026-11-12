@@ -1,31 +1,32 @@
 {
  "id": "sunpower_cryotel_ds_mini",
- "name": "SunPower (Ametek) CryoTel DS Mini cryocooler",
+ "name": "Sunpower CryoTel DS 1.5 split cryocooler (1.4 W at 77 K)",
  "category": "thermal",
  "subcategory": "cryocooler",
  "vendor": "SunPower (Ametek)",
- "model": "CryoTel DS Mini cryocooler",
+ "model": "CryoTel DS 1.5",
  "dimensions_mm": {
   "x": 100,
-  "y": 100,
-  "z": 200
+  "y": 55,
+  "z": 128
  },
  "mass_g": 1200,
  "source": {
-  "type": "unverified",
-  "url": "https://nasa.gov/smallsat-institute/sst-soa/thermal-control",
+  "type": "datasheet",
+  "url": "https://d3pcsg2wjq9izr.cloudfront.net/files/60508/download/424802/1-CryoTel-DS-1.5-dataSheet-per(1).pdf",
   "document": {
-   "title": "NASA SmallSat State-of-the-Art, Thermal Control chapter, cryocooler table",
+   "title": "Sunpower CryoTel DS 1.5 data sheet",
    "revision": null,
-   "date": null
+   "date": "2026-11-11"
   },
   "accessed": "2026-11-08",
   "fields_from_source": [
+   "dimensions_mm",
    "mass_g",
    "electrical",
    "thermal"
   ],
-  "notes": "Mass, input power, cooling performance and TRL from the SOA table (manufacturer supplied, not NASA verified). Dimensions NOT given: envelope assumed from the '~1U' / '<2U' form factor column."
+  "notes": "Cold head 128 mm long x 39 mm diameter; pressure wave generator 116 mm long x 55 mm diameter; 1.2 kg total; 1.4 W nominal lift at 77 K (23 C reject) for 30 W input; 24 V dc; lowest temperature 40 K; MTTF goal 120,000 h. The two units are joined by a transfer line and can be placed apart; the catalog draws them side by side with a 6 mm gap, so the 100 x 55 x 128 mm envelope is one valid arrangement, not a vendor dimension. Earlier catalog entry called this 'DS Mini' with a placeholder box."
  },
  "status": "in_production",
  "fidelity": "envelope",
@@ -33,14 +34,17 @@
  "distributors": [
   "direct"
  ],
- "dimensions_note": "assumed from form factor",
+ "dimensions_note": "two cylinders side by side; arrangement is the catalog's choice",
  "thermal": {
-  "cooling_performance": "1.8 W at 77 K",
+  "cooling_performance": "1.4 W at 77 K",
   "trl": "6"
  },
  "electrical": {
   "power_W": {
-   "nominal": 45
+   "nominal": 30
+  },
+  "voltage_V": {
+   "nominal": 24
   }
  },
  "cost": {
@@ -52,28 +56,96 @@
  "geometry": {
   "measured_bbox_mm": [
    100.0,
-   100.0,
-   200.0
+   54.85,
+   128.0
   ],
-  "mesh_volume_mm3": 2000000.0,
+  "mesh_volume_mm3": 371649.4,
   "watertight": true,
-  "render_kind": "box",
-  "effective_density_g_cm3": 0.6,
+  "render_kind": "cryocooler_split",
+  "effective_density_g_cm3": 3.229,
   "bodies": {
    "part": [
     {
-     "name": "body",
+     "name": "compressor",
      "color": [
       0.36,
       0.4,
       0.46
      ],
-     "file": "bodies/part__body.stl"
+     "file": "bodies/part__compressor.stl"
+    },
+    {
+     "name": "cold head",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__cold head.stl"
+    },
+    {
+     "name": "cold finger",
+     "color": [
+      0.85,
+      0.66,
+      0.22
+     ],
+     "file": "bodies/part__cold finger.stl"
+    },
+    {
+     "name": "transfer line",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__transfer line.stl"
     }
    ]
   },
   "face_counts": {
-   "part": 12
+   "part": 716
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "compressor",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__compressor.stl"
+    },
+    {
+     "name": "cold head",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__cold head.stl"
+    },
+    {
+     "name": "cold finger",
+     "color": [
+      0.85,
+      0.66,
+      0.22
+     ],
+     "file": "bodies/part__cold finger.stl"
+    },
+    {
+     "name": "transfer line",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__transfer line.stl"
+    }
+   ]
   }
  },
  "image": "preview.png",
@@ -82,23 +154,16 @@
   "mechanical": null,
   "electrical_connectors": [],
   "rf_connectors": [],
-  "power_bus_V": null
+  "power_bus_V": 24
  },
  "reference_images": {
   "datasheets": [
    {
     "file": "datasheet_page1.png",
     "pdf": null,
-    "url": null,
+    "url": "https://d3pcsg2wjq9izr.cloudfront.net/files/60508/download/424802/1-CryoTel-DS-1.5-dataSheet-per(1).pdf",
     "kind": "vendor_link",
-    "title": "NASA SmallSat State-of-the-Art, Thermal Control chapter, cryocooler table"
-   },
-   {
-    "file": "datasheet_1_page1.png",
-    "pdf": "datasheet_1.pdf",
-    "kind": "web_search",
-    "url": "https://www.nasa.gov/wp-content/uploads/2026/05/7-soa-thermal-2026-final.pdf?emrc=6af3dff847a13",
-    "title": null
+    "title": "Sunpower CryoTel DS 1.5 data sheet"
    }
   ],
   "stl_preview": "preview.png",
@@ -108,7 +173,7 @@
   "photo_page": null,
   "photo_file": null,
   "photo_kind": null,
-  "datasheet_url": null,
+  "datasheet_url": "https://d3pcsg2wjq9izr.cloudfront.net/files/60508/download/424802/1-CryoTel-DS-1.5-dataSheet-per(1).pdf",
   "datasheet_page_file": "datasheet_page1.png",
   "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },

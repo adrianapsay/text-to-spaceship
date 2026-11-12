@@ -1,0 +1,38 @@
+components@rocketlabusa.com
+rocketlabusa.com
+MOMENTUM
+Nominal: 0.2 Nms (light rotor) or 0.4 Nms (heavy rotor)
+TORQUE
+±100 mNm at nominal momentum
+Enhanced motor cooling for high duty cycle (CMG replacement)
+CONTROL MODE
+Speed or torque, with built-in control CPU
+COMMAND/TELEMETRY
+Redundant RS-485
+MECHANICAL
+Dimensions: 46mm high x Ø103 mm (not including mounting feet)
+Mass: 600g (0.2 Nms) or 770 g (0.4 Nms)
+SUPPLY VOLTAGE
+Nominal: 24 V to 34 V, +75 V options available
+SUPPLY POWER
+(28 V IN VACCUM)
+TBD. Regenerative braking returns power to bus
+ENVIRONMENT
+Thermal: −40° C to +70° C (operating)
+Vibration: >14 gRMS
+RADIATION
+> 60 krad Total Dose, with LDRS testing. Heavy ion tested to 50 MeV cm²/mg.
+Hardware TMR on all flip flops, EDAC on all RAM
+RELIABILITY
+Advanced hybrid ball bearings, redundant motor windings, active neutralization of rotor 
+static charge
+HERITAGE
+Mechanical design from 1 Nms wheel, with 85 Units on orbit
+First Flight Deliveries Q2 2021
+PRICE
+US $45,000 each (0.2 Nms), US $50,000 each (0.4 Nms)
+400 mNms RW-0.4  Data Sheet
+r e ac ti o n
+w h e e l
+Version 2, 7 April 2022
+

@@ -1,0 +1,203 @@
+{
+ "id": "bct_rwp500",
+ "name": "Blue Canyon Technologies RWp500 reaction wheel (0.5 Nms)",
+ "category": "adcs",
+ "subcategory": "reaction_wheel",
+ "vendor": "Blue Canyon Technologies",
+ "model": "RWp500",
+ "dimensions_mm": {
+  "x": 112,
+  "y": 124,
+  "z": 38
+ },
+ "mass_g": 860,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.bluecanyontech.com/wp-content/uploads/Reaction-Wheels-1_2025.pdf",
+  "document": {
+   "title": "Blue Canyon Technologies Reaction Wheels data sheet 1_2025",
+   "revision": null,
+   "date": "2025"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "adcs",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "Blue Canyon reaction wheel data sheet (2025): momentum, torque, mass, dimensions, zero-momentum power, supply voltage, RS-422, -20 to +60 C operating (-30 to +70 C survival). The sheet says values are for information only and subject to change. Torque for RWp500 and larger is read from a scrambled text extraction; check against the PDF."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "USA",
+ "distributors": [
+  "direct"
+ ],
+ "satellite_class": "smallsat",
+ "adcs": {
+  "momentum_Nms": 0.5,
+  "max_torque_Nm": 0.025
+ },
+ "electrical": {
+  "voltage_V": {
+   "min": 22,
+   "max": 34
+  },
+  "power_W": {
+   "idle": 6.0
+  },
+  "interfaces": [
+   "RS-422"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -20,
+   "max": 60
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   112.0,
+   124.0,
+   38.0
+  ],
+  "mesh_volume_mm3": 373877.6,
+  "watertight": true,
+  "render_kind": "reaction_wheel",
+  "effective_density_g_cm3": 2.3,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "flywheel",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__flywheel.stl"
+    },
+    {
+     "name": "motor_cap",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__motor_cap.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 348
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    112.0,
+    124.0,
+    38.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "base",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/base.stl"
+    },
+    {
+     "name": "cover",
+     "color": [
+      0.24,
+      0.26,
+      0.3
+     ],
+     "file": "bodies_detail/cover.stl"
+    },
+    {
+     "name": "cap",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/cap.stl"
+    },
+    {
+     "name": "bolts",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/bolts.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "RS-422"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
+  "datasheet_url": "https://www.bluecanyontech.com/wp-content/uploads/Reaction-Wheels-1_2025.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

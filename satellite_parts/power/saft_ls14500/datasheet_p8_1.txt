@@ -1,0 +1,203 @@
+Benefits
+G Enhanced capacity
+G High voltage response, stable
+during most of the lifetime of the
+application
+G Wide operating temperature
+range (- 60 °C/+ 85°C)
+G Easy integration into compact
+system
+G Superior resistance to
+atmospheric corrosion
+Key features
+G Stainless steel container and end
+caps (low magnetic signature)
+G Hermetic glass-to-metal sealing
+G Non-flammable electrolyte
+G Low self-discharge rate
+(less than 1% after 1 year of
+storage at + 20 °C)
+G Compliant with EN 50020
+intrinsic safety standard
+G Underwriters Laboratories (UL)
+Component Recognition
+(File Number MH 12609)
+G Non-restricted for transport
+Main applications
+G Utility metering
+G Automatic meter reading
+G Alarms and security devices
+G Tollgate systems
+G Memory back-up
+G Tracking systems
+G Automotive electronics
+G Professional electronics
+Cell size references
+R6 - AA
+Primary lithium battery
+LS 14500
+3.6 V Primary lithium-thionyl chloride (Li-SOCl2)
+High energy density
+AA-size bobbin cell
+Electrical characteristics
+(typical values relative to cells stored for one year or less at + 30 °C max.)
+Nominal capacity
+2.6 Ah
+(at 2 mA + 20 °C 2.0 V cut off. The capacity restored by the cell varies
+according to current drain, temperature and cut off)
+Open circuit voltage
+(at + 20°C)
+3.67 V
+Nominal voltage
+(at 0.2 mA + 20°C)
+3.6 V
+Pulse capability: Typically up to 280 mA
+(280 mA/0.1 second pulses, drained every 2 mn at + 20 °C from
+undischarged cells with 10 μA base current, yield voltage readings above
+3.0 V. The readings may vary according to the pulse characteristics, the
+temperature, and the cell’s previous history. Fitting the cell with a capacitor
+may be recommended in severe conditions. Consult Saft)
+Maximum recommended continuous current
+70 mA
+(Higher currents possible, consult Saft)
+Storage
+(recommended)
++ 30°C (+ 86°F) max
+(for more severe conditions, consult Saft)
+Operating temperature range
+- 60°C/+ 85°C
+(Operation above ambient T may lead to reduced capacity and
+(- 76°F/+ 185°F)
+lower voltage readings at the beginning of pulses. Consult Saft)
+Physical characteristics
+Diameter (max)
+14.65 mm (0.58 in)
+Height (max)
+50.3 mm (1.98 in)
+Typical weight
+16.7 g (~ 0.6 oz)
+Li metal content
+approx. 0.7 g
+Available termination suffix
+CN, CNR
+radial tabs
+2 PF, 3 PF, 3 PF RP, 4 PF
+radial pins
+CNA (AX)
+axial leads...
+FL
+flying leads...etc.
+April 2008
+
+LS 14500
+Storage
+G The storage area should be
+clean, cool (preferably not
+exceeding + 30°C), dry and
+ventilated.
+Warning
+G Fire, explosion and burn hazard.
+G Do not recharge, short circuit,
+crush, disassemble, heat above
+100°C (212°F), incinerate,
+or expose contents to water.
+G Do not solder directly to the cell
+(use tabbed cell vesions instead).
+Ø 5.5
+max
+Ø 14.5
+± 0.15
+Ø 7.5
+± 0.1
+1.5 ± 0.3
+50 ± 0.3
+0.4
+Saft
+Specialty Battery Group
+12, rue Sadi Carnot
+93170 Bagnolet - France
+Tel.:+33 (0)1 49 93 19 18
+Fax:+33 (0)1 49 93 19 69
+www.saftbatteries.com
+Doc. No 31064-2-0408
+Information in this document is subject to change without notice
+and becomes contractual only after written confirmation by Saft.
+For more details on primary lithium technologies please refer to
+Primary Lithium Batteries Selector Guide Doc No 31048-2.
+Published by the Communications Department.
+Photo credit: Saft.
+Socie´te´ anonyme au capital de 31 944 000
+RCS Bobigny B 383 703 873
+Produced by Arthur Associates Limited.
+Dimensions in mm.
+Voltage plateau versus Current and Temperature (at mid-discharge)
+Current (mA)
+Cell voltage (V)
+Cell voltage (V)
+Capacity (Ah)
+Typical discharge profiles at + 20°C
+Restored Capacity versus Current and Temperature (2.0 V cut-off)
+Current (mA)
+Time (hours)
+0.1
+0.01
+0.1
+1
+10
+100
+1000 
+2.2
+2.4
+2.6
+2.8
+3.0
+3.2
+3.4
+3.6
+3.8
+2.2
+2.0
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2
+1.4
+1.6
+1.8
+2.0
+2.2
+2.4
+2.6
+2.8
+3.0
+2.4
+2.6
+2.8
+3.0
+3.2
+3.4
+3.6
+3.8
+1
+10
+100
+1000
+10000
+0.1
+1
+10
+100
+1000
+- 40ºC
+57 Ohms / 55 mA
+400 Ohms / 8.6 mA
+1000 Ohms / 3.6 mA
+3600 Ohms / 1 mA
+- 20ºC
++ 20ºC
++ 55ºC
++ 70ºC
+

@@ -1,0 +1,2 @@
+url: https://cdn.satsearch.com/product-images/image-takeme2space-navcube-multi-gnss-navigation-module-for-cubesat-adcs-orbit-determination-g4b21b.jpg
+method: product image on https://satsearch.co/products/tm2s-navcube

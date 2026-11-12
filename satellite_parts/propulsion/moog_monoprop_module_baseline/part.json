@@ -1,0 +1,257 @@
+{
+ "id": "moog_monoprop_module_baseline",
+ "name": "Moog monopropellant propulsion module (10 cm baseline)",
+ "category": "propulsion",
+ "subcategory": "propulsion_module",
+ "vendor": "Moog",
+ "model": "Monopropellant propulsion module (baseline)",
+ "dimensions_mm": {
+  "x": 100,
+  "y": 100,
+  "z": 100
+ },
+ "mass_g": 1010,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.moog.com/content/dam/moog/literature/sdg/space/propulsion/moog-monopropellant-propulsion-module-datasheet.pdf",
+  "document": {
+   "title": "Moog monopropellant propulsion module data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "propulsion",
+   "electrical"
+  ],
+  "notes": "10 x 10 x 10 cm baseline (scalable to 24 x 24 x 24 cm), 1.01 kg wet, 150 cc tank, 0.1 to 1 N thrust (0.5 N baseline), 2 x 22.5 W per thruster, 500 N s total impulse, 59 m/s delta-v (vehicle not stated). Nozzle features of the CAD are schematic."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "USA",
+ "distributors": [
+  "direct"
+ ],
+ "satellite_class": "cubesat_and_smallsat",
+ "propulsion": {
+  "type": "monopropellant",
+  "thrust_N": {
+   "min": 0.1,
+   "max": 1.0,
+   "nominal": 0.5
+  },
+  "total_impulse_Ns": 500,
+  "tank_volume_cc": 150,
+  "delta_v_m_s": 59
+ },
+ "electrical": {
+  "power_W": {
+   "peak": 45
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   100.0,
+   100.0,
+   100.0
+  ],
+  "mesh_volume_mm3": 901359.3,
+  "watertight": true,
+  "render_kind": "thruster_box_nozzle",
+  "effective_density_g_cm3": 1.121,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    },
+    {
+     "name": "flange",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__flange.stl"
+    },
+    {
+     "name": "nozzle",
+     "color": [
+      0.55,
+      0.55,
+      0.58
+     ],
+     "file": "bodies/part__nozzle.stl"
+    },
+    {
+     "name": "valve",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__valve.stl"
+    },
+    {
+     "name": "tank_dome",
+     "color": [
+      0.55,
+      0.55,
+      0.58
+     ],
+     "file": "bodies/part__tank_dome.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 490
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    100.0,
+    100.0,
+    100.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "feet",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/feet.stl"
+    },
+    {
+     "name": "deck",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/deck.stl"
+    },
+    {
+     "name": "tank_dome",
+     "color": [
+      0.55,
+      0.55,
+      0.58
+     ],
+     "file": "bodies_detail/tank_dome.stl"
+    },
+    {
+     "name": "valves",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/valves.stl"
+    },
+    {
+     "name": "feed_tubes",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/feed_tubes.stl"
+    },
+    {
+     "name": "electronics",
+     "color": [
+      0.24,
+      0.26,
+      0.3
+     ],
+     "file": "bodies_detail/electronics.stl"
+    },
+    {
+     "name": "nozzles",
+     "color": [
+      0.55,
+      0.55,
+      0.58
+     ],
+     "file": "bodies_detail/nozzles.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://www.moog.com/content/dam/moog/literature/sdg/space/propulsion/moog-monopropellant-propulsion-module-datasheet.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

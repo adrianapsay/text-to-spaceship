@@ -1,0 +1,48 @@
+Solar MEMS Technologies S.L. Spain
+Tel: +34-95-4460113 E-mail: smt@solar-mems.com www.solar-mems.com
+Horizon Sensor for Nano and Micro Satellites (HSNS) of Solar MEMS is a Quad Thermopile sensor for Earth detection and Nadir 
+vector determination. This device measures the infrared radiation from Space and from Earth with 4 IR-eyes, providing accurate and 
+reliable detection and attitude determination.
+HSNS is based on previous experience of Solar MEMS making attitude sensors and long research projects on IR sensing devices. 
+Every HSNS is characterized and tested, and includes a microcontroller for fast assembly and integration with different options like 
+UART or I2C protocols.
+Sensor
+Horizon sensor
+Accuracy
+<1 degree, 3sigma (EOL)
+Aperture
+±64 º adapted for 700 km LEO orbit
+To be tailored for each mission
+FOV of each IR eye
+±2,5 º
+Output rate
+10 Hz
+Housing
+Aluminum 6082 (Alodined and Anodized)
+Power supply
+5V and <30 mA
+Electrical interface
+UART or I2C, microD 15 pins
+Dimensions
+90 x 92 x 50 mm
+Mass
+120 g 
+Orbit
+LEO (Customization for different altitudes)
+Lifetime
+Designed for 3 years
+Mechanical 
+Interface
+Overview:
+Operating Temperature
+-30º to 70º Celsius
+Qualification
+30 kRad Total Ionizing Dose 
+Space-grade components
+Space qualified microcontroller
+Technical Chracteristics:
+Qualification Data and Flight Heritage:
+HSNS
+Horizon Sensor for Nano Satellites
+ITAR FREE
+

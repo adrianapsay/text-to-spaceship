@@ -1,0 +1,125 @@
+{
+ "id": "saft_mp176065_xtd",
+ "name": "Saft MP 176065 xtd prismatic Li-ion cell (6.8 Ah)",
+ "category": "power",
+ "subcategory": "battery_cell",
+ "vendor": "Saft",
+ "model": "MP 176065 xtd",
+ "dimensions_mm": {
+  "x": 19.8,
+  "y": 61,
+  "z": 65
+ },
+ "mass_g": 155,
+ "source": {
+  "type": "datasheet",
+  "url": "https://docs.rs-online.com/32de/0900766b8056b890.pdf",
+  "document": {
+   "title": "Saft MP 176065 data sheet (RS Components copy)",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "Thickness max at end of life 19.8 mm, width max 61 mm, height max 65 mm, typical weight 155 g, 6.8 Ah at 4.2 V, 3.75 V nominal, charge -20 to +60 C, discharge -50 to +60 C."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "France",
+ "distributors": [
+  "RS Components",
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "distributor",
+  "source": null
+ },
+ "electrical": {
+  "capacity_Ah": 6.8,
+  "voltage_V": {
+   "nominal": 3.75,
+   "max": 4.2
+  }
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -50,
+   "max": 60
+  }
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   19.8,
+   61.0,
+   65.0
+  ],
+  "mesh_volume_mm3": 78507.0,
+  "watertight": true,
+  "render_kind": "cell_pouch",
+  "effective_density_g_cm3": 1.974,
+  "bodies": {
+   "part": [
+    {
+     "name": "pouch",
+     "color": [
+      0.75,
+      0.75,
+      0.78
+     ],
+     "file": "bodies/part__pouch.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 12
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "pouch",
+     "color": [
+      0.75,
+      0.75,
+      0.78
+     ],
+     "file": "bodies/part__pouch.stl"
+    }
+   ]
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 3.75
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://docs.rs-online.com/32de/0900766b8056b890.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

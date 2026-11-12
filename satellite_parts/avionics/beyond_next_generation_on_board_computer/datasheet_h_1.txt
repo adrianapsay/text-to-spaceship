@@ -1,0 +1,156 @@
+beyondgravity.com
+Beyond Gravity │ Satellites
+On board computers are designed for space use and are flight proven with 
+extensive heritage and excellent reliability. The Next Generation On Board 
+Computer (OBC NG) is a fully redundant high reliable on board computer based 
+on the radiation hardened CREOLE ASIC developed by Beyond Gravity. The 
+CREOLE ASIC is a complete spacecraft on board computer on a chip including 
+a fault tolerant SPARC® V8 processor, communication functions, 
+reconfiguration function and mass memory controller. 
+Next Generation 
+On Board Computer
+
+Internal Code/Doc.No 
+1238507 / 01-22
+This document remains the intellectual property of Beyond Gravity Sweden AB and may not be copied, 
+or used without their prior written approval.
+beyondgravity.com
+Beyond Gravity | Satellites
+Key features
+Fully redundant unit with cross-strapping between vital functions
+Processing, Telecommand, Telemetry, On-Board Time,
+ Reconfiguration and File/Data Storage functions in one unit
+Fixed or programmable reconfiguration sequences
+Low mass and volume
+Low power consumption
+Unit external mission and spacecraft configuration
+Qualified for space environment (LEO, MEO, GEO, interplanetary
+Expansion slots for additional functions such as GNSS receiver and additional mass memory
+The OBC NG is the latest in a family of on board computers that have successfully been powering various 
+LEO, MEO, GEO and interplanetary spacecraft for decades.
+Options
+•	
+Non-redundant unit for small spacecraft applications
+•	
+Resizing from zero to eight expansion slot
+•	
+Payload mass memory
+•	
+Additional Application Software Processor - several options
+•	
+TC AES Authentication and Decryption with 256-bit keys
+•	
+TM AES Encryption with 256-bit keys
+Interfaces
+•	
+2 x 7 SpaceWire interfaces
+•	
+2 x 2 Control Area Network (CAN) buses
+•	
+2 x 2 Redundant MIL-STD-1553B buses
+•	
+2 x 2 Pulse Per Second (PPS) inputs
+•	
+2 x 16 Synchronisation Pulse outputs
+•	
+2 x 8 Alarm inputs
+•	
+2 x 3 Separation Strap inputs
+•	
+2 x 4 TM serial outputs up to 20 Mbps
+•	
+2 x 2 TC serial inputs up to 2048 kbps
+•	
+2 x 30 Essential TM status inputs
+•	
+2 x 128 Pulse Command outputs
+•	
+External USO input (option)
+•	
+Primary power supply: 28V, 50V or 100V
+Budgets
+Unit Size	
+	
+283 x 242 x 278 mm
+Mass	
+	
+	
+9 kg
+Power Consumption	
+< 38 W
+Reliability	
+	
+0.99
+In-Orbit Life Time	
+up to 20 years
+Processing memory	
+512 MiB w EDAC
+File/Data storage	
+2 x 374 Gbit w EDAC
+
+Internal Code/Doc.No 
+1238507 / 01-22
+This document remains the intellectual property of Beyond Gravity Sweden AB and may not be copied,  
+or used without their prior written approval.
+Beyond Gravity | Satellites 
+satellites@beyondgravity.com | satellites.usa@beyondgravity.com 
+beyondgravity.com
+Beyond Gravity | Satellites
+Beyond Gravity equipment flight heritage
+•	
+> 3500 failure free equipment years in orbit
+•	
+> 300 Launcher On-Board Computers
+•	
+> 120 Satellite Data Handling Systems
+•	
+EDRS-C, MTG, ExoMars Rover, Hispasat 36W-1, SARah, Electra, Euclid, 
+JUICE
+Software and development environment
+•	
+Eclipse integrated software development environment
+•	
+GNU cross compiler (GCC) suite
+•	
+Boot Software and Hardware Driver Software
+•	
+RTEMS operating system Board Support Package
+•	
+LEON Tools utilizing the advanced on-chip Debug Support Unit
+	-
+LEONmon allowing source code level debugging using gdb and eclipse
+	-
+Loader for loading non-volatile SW image storage
+	-
+BackTracker for software execution history analysis
+	-
+Trace for real-time software execution trace dump
+	-
+Inspector for real-time non-intrusive inspection of target
+	-
+Shell for scripting of common tasks or tests
+	-
+Broker management for LEON Tools and target management
+Processing function
+•	
+SPARC V8 LEON FT
+•	
+93 DMIPS @ 75 MHz
+•	
+32 Kbytes instruction cache
+•	
+16 Kbytes data cache
+•	
+512 MiB processing memory
+•	
+32 KiB Boot PROM
+•	
+8 MiB SW Image Storage
+•	
+Gigabit Ethernet Debug Link
+•	
+Real-Time Processor Trace Dump
+•	
+Hardware Driver Software
+Block Diagram
+

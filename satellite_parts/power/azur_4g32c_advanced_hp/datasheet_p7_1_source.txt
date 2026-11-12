@@ -1,0 +1,3 @@
+url: https://www.azurspace.com/media/uploads/file_links/file/bdb_00010897-01-00_4g32-advanced_hp_sqvHd09.pdf
+found from: https://www.azurspace.com/media/uploads/file_links/file/bdb_00010897-01-00_4g32-advanced_hp_sqvHd09.pdf
+found by Claude (web search) on 2026-11-11; downloaded by fetch_pass5.py

@@ -113,6 +113,41 @@
   },
   "face_counts": {
    "part": 40
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    67.0,
+    42.0,
+    7.5
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",
@@ -130,12 +165,12 @@
  "reference_images": {
   "datasheets": [],
   "stl_preview": "preview.png",
-  "drawing": null,
+  "drawing": "drawing.png",
   "photo_url": "https://cdn.satsearch.com/product-images/image-spacemanic-cz-sro-celeste-gnss-receiver-m0370x.jpg",
   "photo_source": "satsearch",
   "photo_page": "https://satsearch.co/products/spacemanic-celeste-the-gnss-receiver",
-  "photo_file": null,
-  "photo_kind": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": null,
   "datasheet_page_file": null,
   "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"

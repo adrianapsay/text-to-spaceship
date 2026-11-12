@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-mp-space-pack2-8s3p-28v-battery-pack-661i0h.pdf
+method: product image from the catalog page https://satsearch.co/products/mp-space-leosatellitebattery8s3p

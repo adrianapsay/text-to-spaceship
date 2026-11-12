@@ -1,0 +1,119 @@
+COLOSSUS
+Kestrel
+With the NVIDIA Jetson TX2i module at its core, 
+Kestrel adds massive parallel computing capability as 
+well as high-performance CPUs. Colossus’ design adds 
+extra storage, including a standard microSD card and 
+M.2 2280 SSD slot. By default these are populated with 
+validated, industrial-grade options. Gigabit ethernet is 
+available for high-speed connectivity, as well as other 
+common interfaces. 
+Colossus’ design adds protection and telemetry 
+circuits for routine monitoring, as well as fault detection 
+and isolation. Each subsystem is protected with a 
+resettable eFuse circuit to mitigate the effects of 
+radiation. Data is protected with Error Correction Codes 
+(ECC) for RAM and the large capacity non-volatile 
+memory allows for the storage of multiple copies of key 
+files. 
+EFFICIENCY
+SPEED
+AUTONOMY
+Filtering, prioritizing, and 
+compressing data allows more 
+efficient use of limited bandwidth 
+by sending data products instead 
+of raw data.
+Data products can be small 
+enough to allow transmission 
+through satellite-to-satellite 
+networks in seconds instead of 
+waiting hours for a traditional 
+ground station pass.
+On-board processing enables 
+satellites to make intelligent 
+decisions without waiting hours 
+for commands to be uplinked from 
+the ground. Satellites can respond 
+instantly to changing circumstances.
+
+PROCESSING CAPABILITIES
+AI Performance
+1.3 TOPS
+GPU
+256-Core Pascal
+CPU
+Quad-Core A57 
+Dual-Core Denver 2
+Video Codecs
+H.264, H.265, MPEG1/2/4
+OS
+Linux-based (built w/Yocto)
+SIZE, WEIGHT, & POWER
+Size
+1/3 U (96 x 89 x 30 mm) 
+Fits CubeSats and SmallSats
+Mass
+402 g
+Power
+Idle:	
+	
+	
+<1 W 
+Max Efficiency:	              15 W
+Max Performance:	
+25 W
+Input Voltage
+9-12 VDC
+Protection
+eFuse input protection and 
+monitoring
+Telemetry
+Internal ADC for voltage/ 
+temperature telemetry
+ENVIRONMENTAL
+Heritage
+TRL-9 as of March 2024
+Radiation
+up to 30 krad(Si)
+Temperature
+-40 to +60 C Operating  
+-55 to +85 C Storage
+Testing
+Thermal, Vibration, and EMI/EMC
+compliant to GSFC-STD-7000
+MEMORY/STORAGE
+RAM
+8 GB of 128-bit DRAM with ECC
+Storage
+32 GB eMMC
+microSD card
+default 64 GB
+M.2 2280 SSD
+default 1 TB
+EEPROM
+512 kb
+CONNECTIVITY
+Ethernet
+1000BASE-T
+UART
+3x RS-422, RS-485 compatible
+CAN
+Two 1 Mbps
+USB
+One USB3.0 SuperSpeed 
+Two USB2.0 Hi-Speed
+PPS
+RS-422 hardware
+GPIO
+4 buffered GPIOs
+Debug
+JTAG, Recovery USB, RS-232
+Questions? Comments?
+Need high-performance computing on your satellite?
+Please contact: sales@colossucompute.com
+COLOSSUSCOMPUTE.COM
+© Colossus Computing 2024
+All information subject to change. 
+Release date 10 Jul 2024. 
+

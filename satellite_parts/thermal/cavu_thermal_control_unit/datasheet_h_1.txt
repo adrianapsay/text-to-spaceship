@@ -1,0 +1,73 @@
+HQ: 12 Scion House, Stirling University Innovation Park, Stirling, UK. FK9 4NF
++44 (0)1786 628002
+Sales@CavuAerospace.UK
+The TCU is a versatile, customizable subsystem designed to manage the thermal environment of spacecraft, ensuring 
+the reliable operation of critical systems in Low Earth Orbit. Featuring FPGA and SoC based control, the TCU provides 
+precise and adaptable temperature regulation, making it suitable for a wide range of satellite missions.
+The TCU is engineered to maintain optimal temperature levels for onboard systems, capable of interfacing with diverse 
+thermal sensors and heaters. Its ﬂexible design allows customization to speciﬁc mission requirements, ensuring that 
+both power consumption and performance are optimized for long-duration missions.
+Overview
+Reliable Thermal Management
+Built to withstand the harsh conditions of space, including radiation and temperature extremes, the TCU delivers 
+consistent performance over a mission life of up to 5 years. The system’s modular design allows it to be integrated into a 
+variety of satellite platforms, from small to larger spacecraft.
+Designed for Space Applications
+CAVU-OBC-Cube-Polar-Br-v2024.1
+Satellite Thermal Control Unit
+TCU
+Mission Life    3 to 5 Years In Low Earth Orbit (LEO)
+Customizable Conﬁguration    Tailored Sensor Inputs And Heater Control Options
+Temperature Control Accuracy 
+ ±0.2°C
+FPGA-Based Design    Flash-Based Architecture, SEU Immune
+High Channel Count    110 Sensor Inputs, 50 Heater Control Channels
+Low Power Consumption    Less Than 4W (Without Heaters)
+Real-Time Monitoring    Programmable Update Rate Of Better Than 1Hz
+Environmental Resistance    Built For Radiation And Temperature Extremes
+
+HQ: 12 Scion House, Stirling University Innovation Park, Stirling, UK. FK9 4NF
++44 (0)1786 628002
+Sales@CavuAerospace.UK
+CAVU-OBC-Cube-Polar-Br-v2024.1
+Special Features
+SEU immune, Flash-Based SoC FPGA Architecture
+Programmable Control For Heater Management
+Wide-Range Thermal Sensor Compatibility
+Low Power Consumption, Eﬃcient Operation
+Customizable Voltage And Conﬁguration Options
+Redundant Design Available For Mission-Critical Systems
+TECHNICAL SPECIFICAIONS
+Processor & Memory
+Processor: FPGA-based SmartFusion2 architecture
+Non-Volatile Memory: 8Gb to 32Gb
+RAM/ROM: MRAM (radiation immune)
+Budget
+Mass: 1.1kg
+Dimensions: 160 × 170 × 38 mm (Customizable)
+Power Supply: +28VDC ±4V
+Power Consumption: Less than 4W (without heaters)
+Heater Control
+Output Channels: 50 channels, Up to 60W each
+Control Voltage: 1V to 28V (up to 60V available)
+Temperature Control Accuracy: ±0.2°C
+Update Rate: Programmable, better than 1Hz
+Thermal Sensors
+Input Channels: 110 channels
+Sensor Types: Thermistor, RTD, Thermocouple, Custom
+Interfaces
+Debug Interface: JTAG, SoftConsole or Keil
+Serial Interfaces: CAN, RS422 RS485, RS232
+Environment
+Radiation Hardness:
+    Total Ionizing Dose: 30Krad (Si)
+    Latch-up Immune
+    SEE @ 60MeV
+Temperature & Pressure:
+      -40 C to +85 C @ 10   bar
+Shocks:
+      2000g, 2000-10000Hz
+Random Vibrations:
+      14g(RMS) 3-Axis , 20~2000Hz
+-8
+

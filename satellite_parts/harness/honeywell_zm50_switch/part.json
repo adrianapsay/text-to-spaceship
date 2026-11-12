@@ -83,6 +83,20 @@
   },
   "face_counts": {
    "part": 12
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
   }
  },
  "image": "preview.png",
@@ -97,13 +111,6 @@
  },
  "reference_images": {
   "datasheets": [
-   {
-    "file": "datasheet_1_page1.png",
-    "pdf": "datasheet_1.pdf",
-    "kind": "web_search",
-    "url": "https://prod-edam.honeywell.com/content/dam/honeywell-edam/sps/siot/en-us/products/switches/basic-switches/common/documents/sps-ast-applying-precision-switches-technical-note.pdf?download=false",
-    "title": "ZM Series Subminiature Switch - Industrial Automation | Honeywell"
-   },
    {
     "file": "datasheet_2_page1.png",
     "pdf": "datasheet_2.pdf",

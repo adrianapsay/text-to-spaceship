@@ -1,0 +1,429 @@
+HyperScape100 
+Datasheet 
+ 
+036552 
+Revision    2 
+i 
+Copyright of this document belongs to Simera Sense and may not be used for any purpose other than for which the information was provided. Simera 
+Sense accepts no responsibility for any errors and reserves the right to make any changes to the information in this document at any time without 
+notice. 
+ 
+ 
+ 
+Datasheet 
+ 
+ 
+ 
+ 
+ 
+ 
+Document Number:  
+ 
+036552 
+Author(s):  
+ 
+ 
+G. Dreijer 
+Revision:  
+ 
+ 
+2 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+HyperScape100 
+
+HyperScape100 
+Datasheet 
+ 
+036552 
+Revision    2 
+ii 
+Copyright of this document belongs to Simera Sense and may not be used for any purpose other than for which the information was provided. Simera 
+Sense accepts no responsibility for any errors and reserves the right to make any changes to the information in this document at any time without 
+notice. 
+Document History 
+ 
+ 
+Revision Date 
+Details 
+1 
+2019-10-07 
+First Release 
+2 
+2019-10-10 
+Updated mechanical drawings 
+ 
+
+HyperScape100 
+Datasheet 
+ 
+036552 
+Revision    2 
+iii 
+Copyright of this document belongs to Simera Sense and may not be used for any purpose other than for which the information was provided. Simera 
+Sense accepts no responsibility for any errors and reserves the right to make any changes to the information in this document at any time without 
+notice. 
+Table of Contents 
+1. Overview ......................................................................................................................................... 8 
+1.1 
+Features ............................................................................................................................................. 9 
+1.2 
+Applications ........................................................................................................................................ 9 
+1.3 
+Key Specifications............................................................................................................................. 10 
+1.4 
+Functional Components ................................................................................................................... 11 
+2. Detailed Description – Optical Front-End......................................................................................... 12 
+3. Detailed Description – HyperScape100 Sensor Unit ......................................................................... 13 
+4. Detailed Description – Control Electronics ....................................................................................... 15 
+4.1 
+Power Supply ................................................................................................................................... 16 
+4.2 
+Control Interface .............................................................................................................................. 16 
+4.3 
+High-Speed Interface ....................................................................................................................... 17 
+4.4 
+General Purpose and High-Speed Digital I/Os ................................................................................. 17 
+4.5 
+Telemetry and Health Monitoring ................................................................................................... 18 
+5. Electrical Interfaces ........................................................................................................................ 19 
+5.1 
+CSKB PC-104 Connector H1 and H2 ................................................................................................. 19 
+5.2 
+High-Speed Connector P5 ................................................................................................................ 21 
+6. Electrical Specifications .................................................................................................................. 22 
+6.1 
+Absolute Maximum Ratings ............................................................................................................. 22 
+6.2 
+Interface Specifications .................................................................................................................... 22 
+6.3 
+Power Consumption......................................................................................................................... 23 
+7. Environmental Ratings ................................................................................................................... 24 
+8. Physical Characteristics .................................................................................................................. 25 
+ 
+ 
+ 
+
+HyperScape100 
+Datasheet 
+ 
+036552 
+Revision    2 
+iv 
+Copyright of this document belongs to Simera Sense and may not be used for any purpose other than for which the information was provided. Simera 
+Sense accepts no responsibility for any errors and reserves the right to make any changes to the information in this document at any time without 
+notice. 
+List of Figures 
+Figure 1-1: HyperScape100 Imager .................................................................................................................... 8 
+Figure 1-2: HyperScape100 Functional Components ....................................................................................... 11 
+Figure 3-1: Line Rate and TDI Stages ................................................................................................................ 14 
+Figure 3-2: SNR vs Central Wavelength ............................................................................................................ 14 
+Figure 4-1: Control Electronics Block Diagram ................................................................................................. 15 
+Figure 5-1: CE Connector Locations .................................................................................................................. 19 
+Figure 8-1: Mechanical Drawing ....................................................................................................................... 25 
+Figure 8-2: CE Mechanical Drawing .................................................................................................................. 26 
+ 
+
+HyperScape100 
+Datasheet 
+ 
+036552 
+Revision    2 
+v 
+Copyright of this document belongs to Simera Sense and may not be used for any purpose other than for which the information was provided. Simera 
+Sense accepts no responsibility for any errors and reserves the right to make any changes to the information in this document at any time without 
+notice. 
+List of Tables 
+Table 1-1: Key Specifications ............................................................................................................................ 10 
+Table 2-1: OFE Characteristics .......................................................................................................................... 12 
+Table 3-1: Filter Range Options ........................................................................................................................ 13 
+Table 3-2: Spectral Band Examples .................................................................................................................. 13 
+Table 4-1: Power Switching Alternatives .......................................................................................................... 16 
+Table 4-2: Control Interface Options ................................................................................................................ 16 
+Table 4-3: High-Speed Data Interface Characteristics ...................................................................................... 17 
+Table 4-4: High-Speed LVDS Description .......................................................................................................... 17 
+Table 4-5: GPIOs and HSIOs .............................................................................................................................. 18 
+Table 4-6: Telemetry Measurement Channels ................................................................................................. 18 
+Table 5-1: Connector H1 Pin Assignment ......................................................................................................... 19 
+Table 5-2: Connector H2 Pin Assignment ......................................................................................................... 20 
+Table 5-3: Connector P5 Pin Assignment ......................................................................................................... 21 
+Table 6-1: Absolute Maximum Ratings............................................................................................................. 22 
+Table 6-2: DC Signal Level Specifications .......................................................................................................... 22 
+Table 6-3: AC Characteristics ............................................................................................................................ 23 
+Table 6-4: Power Consumption (BOL) .............................................................................................................. 23 
+Table 6-5: Power Consumption (after 25 krad TID) ......................................................................................... 23 
+Table 7-1: Environmental Absolute Maximum Ratings .................................................................................... 24 
+Table 8-1: Physical Characteristics ................................................................................................................... 25 
+ 
+ 
+
+HyperScape100 
+Datasheet 
+ 
+036552 
+Revision    2 
+vi 
+Copyright of this document belongs to Simera Sense and may not be used for any purpose other than for which the information was provided. Simera 
+Sense accepts no responsibility for any errors and reserves the right to make any changes to the information in this document at any time without 
+notice. 
+List of Abbreviations 
+Abbreviation 
+Description 
+A 
+Ampère 
+ADC 
+Analog to Digital Converter 
+BOL 
+Beginning of Life 
+°C 
+Degree Celsius 
+CAN 
+Controller Area Network 
+CCD 
+Charge Coupled Device 
+CE 
+Control Electronics 
+CMOS 
+Complementary Metal Oxide Semiconductor 
+CSKB 
+CubeSat Kit Bus  
+DC 
+Direct Current 
+FPGA 
+Field Programmable Gate Array 
+FEE 
+Front-End Electronics 
+FWHM 
+Full Width at Half Maximum 
+GND 
+Ground 
+grms 
+Gravitation Constant, Root Mean Square (g = 9.81 m/s2) 
+GPIO 
+General Purpose Input Output 
+GSD 
+Ground Sampling Distance 
+HPP 
+Half Power Point 
+Hz 
+Hertz 
+I2C 
+Inter-Integrated Circuit 
+I/O 
+Input / Output 
+kg 
+Kilogram 
+kHz 
+Kilohertz 
+km 
+Kilometre 
+krad 
+Kilorad 
+LEO 
+Low Earth Orbit 
+lp 
+Line Pairs 
+LVDS 
+Low Voltage Differential Signalling 
+mA 
+Milliampere 
+MHz 
+Megahertz 
+mm 
+Millimetre 
+ms 
+Milliseconds 
+nm 
+Nanometre 
+OFE 
+Optical Front-End 
+PCB 
+Printed Circuit Board 
+SDR 
+Single Data Rate 
+SEL 
+Single Event Latch-up 
+SNR 
+Signal to Noise Ratio 
+SPI 
+Serial Peripheral Interface 
+SU 
+Sensor Unit 
+
+HyperScape100 
+Datasheet 
+ 
+036552 
+Revision    2 
+vii 
+Copyright of this document belongs to Simera Sense and may not be used for any purpose other than for which the information was provided. Simera 
+Sense accepts no responsibility for any errors and reserves the right to make any changes to the information in this document at any time without 
+notice. 
+Abbreviation 
+Description 
+TDI 
+Time Delay Integration 
+TID 
+Total Ionising Dose 
+U 
+Unit (CubeSat) 
+µm 
+Micrometre 
+V 
+Volt 
+VNIR 
+Visible and Near-Infrared 
+W 
+Watt 
+ 
+
+HyperScape100 
+Datasheet 
+ 
+036552 
+Revision    2 
+8 
+Copyright of this document belongs to Simera Sense and may not be used for any purpose other than for which the information was provided. Simera 
+Sense accepts no responsibility for any errors and reserves the right to make any changes to the information in this document at any time without 
+notice. 
+1. Overview 
+The HyperScape100 is a hyperspectral push-broom imager primarily designed for earth observation 
+applications as a payload for CubeSat satellites. It is based on 12.6-megapixel image sensor and continuously 
+variable filter in the visible and near-infrared (VNIR) spectral range. The HyperScape100 provides continuous 
+line-scan imaging in up to 32 spectral bands, each with digital time delay integration (TDI). 
+The optical front-end (OFE) has a large aperture diameter and long focal length within a compact form factor, 
+resulting in a ground sampling distance (GSD) of 4.75 m at an orbital height of 500 km. The modified Cassegrain 
+optical design brings performance to the edge of the object field over the whole spectral range at an ultra-low 
+distortion. The HyperScape100 is engineered to withstand the rigours of the space environment and maintain 
+performance across a wide temperature range. Its compact form factor is optimised for integration into 3U or 
+larger CubeSat structures. 
+ 
+Figure 1-1: HyperScape100 Imager 
+
+HyperScape100 
+Datasheet 
+ 
+036552 
+Revision    2 
+9 
+Copyright of this document belongs to Simera Sense and may not be used for any purpose other than for which the information was provided. Simera 
+Sense accepts no responsibility for any errors and reserves the right to make any changes to the information in this document at any time without 
+notice. 
+1.1 Features 
+• 
+4.75 m GSD (at 500 km orbit height) 
+• 
+The swath of 19.4 km (at 500 km orbit height) 
+• 
+Up to 32 spectral bands in the VNIR range 
+• 
+FWHM bandwidth of 4% of the central wavelength 
+• 
+128 Gigabyte non-volatile storage capacity for up to 3900 km strip (at 500 km orbit height) 
+• 
+On-board image processing and compression (optional) 
+• 
+Comprehensive onboard telemetry and health monitoring 
+• 
+Environmental verification based on GSFC-STD-7000 
+1.2 Applications 
+• 
+Precision agriculture 
+• 
+Forestry and land use 
+• 
+Energy and infrastructure 
+• 
+Coastal monitoring 
+• 
+Air quality 
+ 
+ 
+
+HyperScape100 
+Datasheet 
+ 
+036552 
+Revision    2 
+10 
+Copyright of this document belongs to Simera Sense and may not be used for any purpose other than for which the information was provided. Simera 
+Sense accepts no responsibility for any errors and reserves the right to make any changes to the information in this document at any time without 
+notice. 
+1.3 Key Specifications 
+ 
+Table 1-1: Key Specifications 
+Optics 
+Focal Length 
+580 mm ±1 mm 
+Aperture 
+95 mm 
+Full Field of View 
+2.22° (Across Track) 
+Imaging 
+Configuration 
+Line-scan (push broom) 
+Sensor Technology 
+CMOS 
+Cross Track 
+4096 pixels 
+Pixel Size 
+5.5 µm 
+Pixel Depth 
+10-bit 
+Spectral Bands 
+Up to 32 
+TDI Stages 
+Up to 32 per band (user assigned) 
+Line Rate 
+Up to 2600 Hz (1)  
+Spectral Range 
+487 nm – 790 nm (filter option 1) 
+502 nm – 801 nm (filter option 2) 
+516 nm – 810 nm (filter option 3) 
+Spectral Band Width 
+FWHM: ~4% of the central wavelength 
+Transmittance 
+51% (at 550 nm) (2) 
+On-Board Electronics 
+Storage Capacity 
+128 Gigabyte NAND Flash 
+Continuous Strip Length 
+Up to 800 km (3) 
+Image Processing 
+Binning, Thumbnails 
+Image Compression 
+Lossy/Lossless (optional) 
+Control Interface 
+I2C or SPI 
+CAN, RS-422 (optional) 
+Customer specific interface (optional) 
+Data Interface 
+LVDS (or customer specific interface, optional) 
+Power Supply 
+5 V DC 
+Power Consumption 
+< 6 W (during imaging mode) 
+Mechanical 
+Mass 
+1.2 kg 
+Dimensions 
+98 x 98 x 176 mm 
+Environmental 
+Operating Temperature  
+-10 to +50 °C 
+Radiation (TID) 
+> 15 krad 
+ 
+(1) Dependant on orbit height, see Figure 3-1 
+(2) Including filter 
+(3) At 500 km orbit height 
+ 
+ 
+

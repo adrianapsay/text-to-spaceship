@@ -1,0 +1,166 @@
+{
+ "id": "xovian_4pi_sun_sensor",
+ "name": "Xovian 4pi Sun Sensor",
+ "category": "adcs",
+ "subcategory": "sun_sensor",
+ "vendor": "Xovian",
+ "model": "4pi Sun Sensor",
+ "dimensions_mm": {
+  "x": 46.0,
+  "y": 30.0,
+  "z": 32.0
+ },
+ "mass_g": 50.0,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satcatalog.s3.amazonaws.com/components/355/SatCatalog_-_Xovian_-_4pi_Sun_Sensor_-_Datasheet.pdf",
+  "document": {
+   "title": "Xovian 4pi Sun Sensor data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-11",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Read from the vendor data sheet (SatCatalog_-_Xovian_-_4pi_Sun_Sensor_-_Datasheet.pdf): dimensions \"output is given as I = Imax COS \u03b8 where Imax + 8 ma +/- 10% * Physical size : 46 x 30 x 32 mm * Mass :\"; mass \": 46 x 30 x 32 mm * Mass : 50 g * I/\". Catalog page lists 0.05 kg.",
+  "found_via": "https://satcatalog.com/component/4pi-sun-sensor/"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   46.0,
+   30.0,
+   32.0
+  ],
+  "mesh_volume_mm3": 44160.0,
+  "watertight": true,
+  "render_kind": "sun_sensor",
+  "effective_density_g_cm3": 1.132,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    },
+    {
+     "name": "aperture",
+     "color": [
+      0.45,
+      0.65,
+      0.85
+     ],
+     "file": "bodies/part__aperture.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 12
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    46.0,
+    30.0,
+    32.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "mask",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/mask.stl"
+    },
+    {
+     "name": "window",
+     "color": [
+      0.45,
+      0.65,
+      0.85
+     ],
+     "file": "bodies_detail/window.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://satcatalog.s3.amazonaws.com/components/355/SatCatalog_-_Xovian_-_4pi_Sun_Sensor_-_Datasheet.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

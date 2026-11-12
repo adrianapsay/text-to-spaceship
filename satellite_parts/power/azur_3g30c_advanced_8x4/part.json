@@ -79,6 +79,29 @@
   },
   "face_counts": {
    "part": 12
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "cell",
+     "color": [
+      0.16,
+      0.26,
+      0.62
+     ],
+     "file": "bodies/part__cell.stl"
+    },
+    {
+     "name": "bus_bar",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__bus_bar.stl"
+    }
+   ]
   }
  },
  "image": "preview.png",

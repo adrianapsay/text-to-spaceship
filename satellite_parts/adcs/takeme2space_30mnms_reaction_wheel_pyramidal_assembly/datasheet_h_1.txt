@@ -1,0 +1,139 @@
+SpaceWheel30 RW Assembly | Technical Specifications | TM2.space 
+Revision: A 
+Date: 05-09-2025 
+ 
+ 
+​
+Space Wheel 30​
+Reaction Wheel Assembly 
+Technical Specifications 
+ 
+​
+Description:​
+The Space Wheel 30 mNms Reaction Wheel Pyramidal Assembly is a complete, 
+integrated attitude control actuator suite designed for cubesat and microsat platforms. 
+The assembly comprises four brushless DC reaction wheels, each delivering 30 mNms of 
+momentum storage, mounted in a pyramidal configuration that provides full three-axis 
+control authority. The geometry allows torque and momentum to be distributed across all 
+four wheels, improving agility.  
+​
+CIN: U61900TS2024PTC186392 
+1 
+
+SpaceWheel30 RW Assembly | Technical Specifications | TM2.space 
+Revision: A 
+Date: 05-09-2025 
+ 
+Technical Specifications:​
+ 
+​
+CIN: U61900TS2024PTC186392 
+2 
+Category 
+Parameter 
+RW-Medium 
+Controller 
+Controller Type 
+32-bit Arm® Cortex® M33 MCU 
+Processor Clock Speed 
+ 
+Up to 250MHz 
+Power 
+Input Voltage 
+9V to 36V  
+Isolation Specification 
+1500 Vdc isolation voltage 
+Interfaces 
+Interfaces Supported 
+1 x Full Duplex RS-485  
+4 x Motor Driver output 
+Mechanical 
+Dimensions 
+96.5 x 95 x 94.5 mm 
+Mass 
+1489 g 
+Connectors 
+1 x 6 pin Harwin Gecko Screw Lock 
+Connectors for RS485 
+1 x 16 pin Harwin Gecko Screwlock 
+Connectors for Power Input 
+Driver 
+Specifications 
+Supported Motor Types 
+3 Phase BLDC Motors 
+Protection Features 
+Overcurrent Protection 
+Thermal Shutdown 
+Under-Voltage Lockout 
+Momentum & 
+Torque 
+Momentum Storage (per 
+wheel) 
+30.4 mNms at 6000 rpm 
+Momentum Capacity 
+(assembly) 
+X: 25.7 mNms 
+Y: 25.7 mNms 
+Z: 110.3 mNms 
+Max. Continuous Torque 
+(per wheel) 
+83.4 mNm (motor rating) 
+Moment of Inertia 
+Wheel (rotor + flywheel, 
+about spin axis) 
+4.84 x 10-5 kg·m² 
+Configuration 
+4-wheel pyramid 
+       Geometry 
+Spin Axis Inclination 
+65° from mounting plane, tilted 
+towards +Z (+Z up) 
+
+SpaceWheel30 RW Assembly | Technical Specifications | TM2.space 
+Revision: A 
+Date: 05-09-2025 
+ 
+ 
+ 
+ 
+ 
+Figure: Reaction wheel geometry and axis definitions 
+ 
+ 
+Questions? Queries? Contact us at info@tm2.space 
+ 
+ 
+​
+CIN: U61900TS2024PTC186392 
+3 
+Wheel Azimuths (from +X 
+towards +Y) 
+RW3: 0° (+X) 
+RW2: 90° (+Y) 
+RW1: 180° (−X) 
+RW4: 270° (−Y) 
+Spin Axis Unit Vectors (X, Y, 
+Z) 
+RW1: (−0.4226, 0, +0.9063) 
+RW2: (0, +0.4226, +0.9063) 
+RW3: (+0.4226, 0, +0.9063) 
+RW4: (0, −0.4226, +0.9063) 
+Software 
+Software Development Kit 
+(SDK) 
+Control SDK Library included 
+Testing & 
+Compliance with 
+Satellite 
+T-Vac 
+2 Cycles with temperature range of 
++60℃ to -25℃ 
+Vibration 
+Random vibration acceptance test 
+levels  20 - 2000 Hz at 4.47grms for 
+60 seconds 
+Shock 
+100 Hz at 30g 
+1000 Hz at 1500g 
+5000 Hz at 1500g 
+

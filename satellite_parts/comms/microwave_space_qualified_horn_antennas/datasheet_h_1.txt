@@ -1,0 +1,481 @@
+Space Qualified Antennas
+CLOSED & OPEN BOUNDARY QUAD-RIDGE HORNS
+
+MAIN FEATURES 
+Technical performance
+•	Wideband Frequency Coverage: Supporting a range 
+of applications with flexible performance across 
+multiple bands
+•	Dual Polarization: Enhancing versatility and signal clarity
+•	Outstanding RF Performance: Delivering stable 
+and repeatable results critical for mission success
+Design
+•	Monolithic design: Minimizes connections and moving 
+parts for improved durability during launch vibrations
+•	Lightweight construction: Helps achieve mission 
+payload weight targets without compromising functionality
+•	Off-the-shelf solution: Streamlines procurement 
+with pre-designed, ready-to-deploy solutions
+•	Scalable design: Frequency bands and mechanical 
+interface customizable upon request
+Space Qualification
+•	RF performance testing for optimal signal integrity
+•	Mechanical and vibrational testing to withstand the 
+harsh conditions of launch
+•	Thermal qualification for extreme temperature variation
+•	Outgassing tests to ensure compliance with space 
+environmental requirements
+PRODUCT CONFIGURATION
+Equipment
+	 Mounting flange
+	 Integrated coaxial transition with high precision 
+connector
+Related services
+	 Calibration
+	 Maintenance
+	 Customization 
+SOLUTION FOR
+•	 LEO / MEO / GEO Payloads
+•	 Satellite-to-Satellite Link
+	 - Inter-satellite connectivity
+	 - Crosslinking across constellation
+•	 Space-Ground Link
+	 - Capturing signals of interest
+	 - Communicating with ground systems
+•	 Satellite Reflector Feed
+	 - Mounting easily on reflectors
+	 - Supporting high gain applications
+ Included     Optional	
+
+Electrical characteristics
+
+Type of antenna	
+CLOSED BOUNDARY QUAD-RIDGE HORN	
+OPEN BOUNDARY QUAD-RIDGE HORN
+Part number	
+	
+QR2000S	
+QR18000S	
+QH800S	
+QH2000S	
+QH18000S
+Frequency range		
+2 – 18 GHz	
+18 – 40 GHz	
+0.8 – 6 GHz	
+2 – 20 GHz	
+18 – 55 GHz
+Polarization	
+	
+Dual linear	
+Dual linear	
+Dual linear	
+Dual linear	
+Dual linear
+Gain	
+	
+7 – 21 dBi	
+11 – 16 dBi	
+5 – 13 dBi	
+3 – 14 dBi	
+9 – 15 dBi
+Return loss	
+	
+> 10 dB 	
+> 10 dB 	
+> 10 dB 	
+> 10 dB	
+> 10 dB
+Port-to-port isolation	
+> 30 dB	
+> 40 dB	
+> 35 dB	
+> 35 dB	
+> 35 dB (avg)
+	 	 	 	
+	
+	
+	
+	
+	
+> 25 dB (wcs)
+Cross-polar discrimination	
+> 25 dB	
+> 37 dB	
+> 30 dB	
+> 30 dB	
+> 30 dB (avg)
+	 	 	 	
+	
+	
+	
+	
+	
+> 25 dB (wcs)
+Impedance	
+	
+50 Ohms	
+50 Ohms	
+50 Ohms	
+50 Ohms	
+50 Ohms
+2
+3
+4
+5
+6
+7
+8
+9
+10
+20
+30
+40
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+2
+[dBi]
+Frequency [GHz]
+QR2000S
+QR18000S
+0.91
+2
+3
+4
+5
+6
+7
+8 9 10
+20
+30
+40
+50
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+0.8
+QH800S
+QH2000S
+QH18000S
+[dBi]
+Frequency [GHz]
+-50
+-45
+-40
+-35
+-30
+-25
+-20
+-15
+-10
+-5
+0
+-90
+-80
+-70
+-60
+-50
+-40
+-30
+-20
+-10
+0
+10
+20
+30
+40
+50
+60
+70
+80
+90
+f = 2 GHz (E-plane)
+f = 6 GHz (E-plane)
+f = 18 GHz (E-plane)
+f = 2 GHz (H-plane)
+f = 6 GHz (H-plane)
+f = 18 GHz (H-plane)
+Theta [deg]
+Magnitude [dB] (normalized)
+-50
+-45
+-40
+-35
+-30
+-25
+-20
+-15
+-10
+-5
+0
+-90
+-80
+-70
+-60
+-50
+-40
+-30
+-20
+-10
+0
+10
+20
+30
+40
+50
+60
+70
+80
+90
+f = 18 GHz (E-plane)
+f = 29 GHz (E-plane)
+f = 40 GHz (E-plane)
+f = 18 GHz (H-plane)
+f = 29 GHz (H-plane)
+f = 40 GHz (H-plane)
+Theta [deg]
+Magnitude [dB] (normalized)
+QRS Boresight realized gain
+QHS Boresight realized gain
+QR2000S radiation pattern
+QR18000S radiation pattern
+-50
+-45
+-40
+-35
+-30
+-25
+-20
+-15
+-10
+-5
+0
+-90
+-80
+-70
+-60
+-50
+-40
+-30
+-20
+-10
+0
+10
+20
+30
+40
+50
+60
+70
+80
+90
+f = 0.8 GHz (E-plane)
+f = 2.5 GHz (E-plane)
+f = 4.2 GHz (E-plane)
+f = 6 GHz (E-plane)
+f = 0.8 GHz (H-plane)
+f = 2.5 GHz (H-plane)
+f = 4.2 GHz (H-plane)
+f = 6 GHz (H-plane)
+Theta [deg]
+Magnitude [dB] (normalized)
+-50
+-45
+-40
+-35
+-30
+-25
+-20
+-15
+-10
+-5
+0
+-90
+-80
+-70
+-60
+-50
+-40
+-30
+-20
+-10
+0
+10
+20
+30
+40
+50
+60
+70
+80
+90
+f = 2 GHz (E-plane)
+f = 4.2 GHz (E-plane)
+f = 9 GHz (E-plane)
+f = 18 GHz (E-plane)
+f = 2 GHz (H-plane)
+f = 4.2 GHz (H-plane)
+f = 9 GHz (H-plane)
+f = 18 GHz (H-plane)
+Theta [deg]
+Magnitude [dB] (normalized)
+QH800S radiation pattern
+QH2000S radiation pattern
+-50
+-45
+-40
+-35
+-30
+-25
+-20
+-15
+-10
+-5
+0
+-90
+-80
+-70
+-60
+-50
+-40
+-30
+-20
+-10
+0
+10
+20
+30
+40
+50
+60
+70
+80
+90
+f = 18 GHz (E-plane)
+f = 32 GHz (E-plane)
+f = 55 GHz (E-plane)
+f = 18 GHz (H-plane)
+f = 32 GHz (H-plane)
+f = 55 GHz (H-plane)
+Theta [deg]
+Magnitude [dB] (normalized)
+QH18000S radiation pattern
+
+Mechanical characteristics
+
+Type of antenna	
+CLOSED BOUNDARY QUAD-RIDGE HORN	
+OPEN BOUNDARY QUAD-RIDGE HORN
+Part number	
+	
+QR2000S	
+QR18000S	
+QH800S	
+QH2000S	
+QH18000S
+Dimensions [mm] (H x W x L)	
+122 x 122 x 256	
+65 x 65 x 85	
+264 x 264 x 242	
+105 x 105 x 110	
+80 x 80 x 50	
+Weight (approx.)	 	
+0.8 Kg	
+0.2 Kg	
+0.9 Kg	
+0.2 Kg	
+0.2 Kg
+RF connector	
+	
+SMA female	
+2.92 mm female 	
+SMA female	
+SMA female	
+1.85 mm female
+	 	 	 	
+	
+	
+(2.4 mm female 
+	 	 	 	
+	
+	
+optional)
+Material	
+	
+Aluminum alloy	
+Aluminum alloy	
+Aluminum alloy	
+Aluminum alloy	
+Aluminum alloy
+QH18000S
+QH800S
+QR2000S
+QR18000S
+QH2000S
+L
+W = H
+Dimensional 
+drawing 
+Dimensional 
+drawing 
+W = H
+L
+OPEN BOUNDARY QUAD-RIDGE HORN
+CLOSED BOUNDARY QUAD-RIDGE HORN
+L
+W = H
+L
+W = H
+
+For more information:  
+https://www.mvg-world.com
+Contact us:  
+www.mvg-world.com/en/contact
+© 2026 - Graphic design: www.ateliermaupoux.com - Pictures: all rights reserved - Images and specifications presented in this brochure are for illustrative purposes only and are subject to change without prior notice. The actual product may vary.
+Testing Connectivity 
+for a Wireless World
+The Microwave Vision Group offers cutting-edge 
+technologies for the visualization of electromagnetic waves. 
+With advanced test solutions for antenna characterization, 
+radar signature evaluation and electromagnetic 
+measurements, we support company R&D teams 
+in their drive to innovate and boost product 
+development.
+

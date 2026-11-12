@@ -1,0 +1,119 @@
+ANTENNAS & PRECISION DEPLOYABLES FOR SPACE 
+www.tendeg.com 
+Deployable High Gain  
+Antenna For Small 
+Satellites 
+
+3U Form Factor 
+
+>49 dBi Antenna Gain 
+
+Offset Fed 
+
+Multiple Horn Option 
+
+Effective aperture = 1m (Baseline design) 
+
+Measured 49.2 dBi gain at 36 GHz 
+
+Mass = 2.5 kg (reflector, boom and feed) 
+
+Packaged volume = 3U (10x10x30cm) 
+
+Offset fed, f/D = 0.75 
+
+Multiple feed options 
+
+Scalable to 5m apertures 
+- Can be center fed 
+
+Applications 
+- RF Communications 
+- Active radar (weather, SAR) 
+- Radiometer (ocean surface winds) 
+Key Features 
+Deployed Antenna on 12U CubeSat 
+Stowed Antenna 
+Ka        na 
+
+Completed RF Testing at NASA JPL 
+near field chamber 
+
+Repeatable deployments 
+
+Predicted RF performance 
+ 
+
+Patent pending 
+-60
+-50
+-40
+-30
+-20
+-10
+0
+-30
+-20
+-10
+0
+10
+20
+30
+Normalized Field (dB)
+Angle (deg)
+Measured CO
+Measured CX
+Calculated CO
+Calculated CX
+Predicted CO
+Predicted CX
+Measured CO
+Measured CX
+
+ANTENNAS & PRECISION DEPLOYABLES FOR SPACE 
+Tendeg LLC 
+1772 Prairie Way Unit A  
+Louisville, CO 80027 
+303-929-4466 
+www.tendeg.com 
+About Tendeg 
+Tendeg LLC provides antennas, precision deployable structures, and 
+mechanical engineering design and analysis services for space 
+missions. The company was founded in 2015 by a group of space 
+industry veterans with an average of 22 years experience in designing 
+and building space flight hardware. Tendeg has offices near Denver, 
+Aspen, and Los Angeles. 
+Performance Specifications 
+Metric 
+Units 
+Specification 
+Stowed Size 
+cm³ 
+10 x 10 x 30 (3U) 
+Deployed Aperture 
+cm 
+100 
+Gain (@ 36GHz) 
+dB 
+49.2 (measured , includes horn) 
+HPBW 
+degrees 
+0.6 
+Sidelobe Level 
+dB 
+-28 dB 
+XPD 
+dB 
+-23 dB 
+RMS Surface Accuracy 
+mm 
+<0.28 
+Mass 
+kg 
+2.5 
+Thermal 
+°C 
+-20 to 85 
+Antenna Deployment Sequence 
+Near field testing 
+

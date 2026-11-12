@@ -1,0 +1,635 @@
+ 
+ 
+TXS S-band Transmitter Datasheet 
+ISIS.TXS.DS.001, version 1.0 
+ 
+ 
+
+ 
+TXS Datasheet 
+Doc ID: 
+ISIS.TXS.DS.001 
+Issue: 
+1.0 
+Date:  
+2019-07-03 
+Page:  
+2 of 9 
+ 
+© 2019. All rights reserved. Disclosure to third parties of this document or any part thereof, or the use of any information contained therein for purposes 
+other than provided for by this document, is not permitted except with express written permission of ISIS – Innovative Solutions In Space. 
+Overview 
+The ISIS High Data-rate S-band Transmitter is a CubeSat compatible transmitter designed to meet the needs 
+of high data-rate downlinks of up to 4.3 Mbps (usable information bit-rate at CCSDS TM Transfer Frame 
+level). The transmitter can be used for both TT&C or Payload Data downlinks. The S-band transmitter is 
+flexible, implementing CCSDS as data link layer protocol and allowing in-flight configuration of data-rate, 
+modulation scheme, frequency, and RF output power. 
+Highlighted features 
+• 
+Operates in the 2200-2290 MHz EESS/SRS/SOS allocation  
+• 
+CCSDS compliant channel coding ensures compatibility with many off-the-shelf demodulators as well 
+as various groundstation networks 
+• 
+Compatibility with the following demodulators has been verified: 
+o Zodiac CORTEX CRT 
+o Teledyne Qubeflex 
+o Amergint satTRAC 
+o RT Logic / KRATOS quantumGND 
+o Antwerp Space Omnisat LT 
+• 
+Compatibility with the following groundstation networks has been verified: 
+o KSAT-lite 
+• 
+Strong Forward Error Correction (FEC) to maximize link throughput 
+• 
+No need for data pre-processing: all channel coding is performed inside the transmitter 
+• 
+Up to 4.3 Mbit/s useful datarate (at CCSDS TM Transfer Frame level) 
+• 
+In-flight configurable RF parameters (Frequency, data-rate, RF power, FEC parameters) – allows to 
+optimize throughput during a satellite overpass 
+• 
+Data interfaces: LVDS (payload data), I2C (housekeeping) 
+• 
+Safety watchdog  
+• 
+Adjustable RF output power from 27 to 33 dBm 
+• 
+Power control loop to keep RF output power constant over varying operating conditions 
+• 
+IPC-A-610 Class 3 assembly 
+
+ 
+TXS Datasheet 
+Doc ID: 
+ISIS.TXS.DS.001 
+Issue: 
+1.0 
+Date:  
+2019-07-03 
+Page:  
+3 of 9 
+ 
+© 2019. All rights reserved. Disclosure to third parties of this document or any part thereof, or the use of any information contained therein for purposes 
+other than provided for by this document, is not permitted except with express written permission of ISIS – Innovative Solutions In Space. 
+Key specifications 
+Table 1 TXS key specifications 
+Parameter 
+Value / Description 
+RF and data link specifications  
+Frequency range 
+2200 – 2290 MHz 
+Frequency step size 
+1 kHz 
+Frequency stability 
++/-10 ppm 
+RF output power 
+27 to 33 dBm (settable) ± 1 dB 
+Spurious emissions 
+Less than -60 dBc 
+Transmitted data rate (on-air) 
+up to 10 Mbit/s (5 Msym/s, OQPSK) 
+Useful information bitrate 
+up to 4.3 Mbit/s (at TM transfer frame level) 
+Supported symbol rates 
+0.625, 1.25, 2.5, 5 Msym/s selectable 
+Modulation scheme 
+Suppressed carrier: BPSK, OQPSK selectable as per CCSDS 401.0-B 
+Pulse shaping filter 
+Root raised cosine Nyquist pulseshaping as per CCSDS 413.0-G. Roll-off: 0.35 / 0.5 
+selectable 
+Forward Error Correction 
+Convolutional (K=7, ½) as per CCSDS 131.0-B 
+Reed Solomon (223, 255) as per CCSDS 131.0-B 
+Pseudorandomization 
+Pseudorandomization as per CCSDS 131.0-B 
+Synchronization 
+32 bit Attached Sync Marker as per CCSDS 131.0-B 
+Power specifications 
+Power consumption 
+13 W (for 33 dBm RF output power) 
+DC supply voltage 
+7 to 20 V 
+Interfaces 
+Payload data interface 
+LVDS 
+Housekeeping data interface 
+I2C 
+Mechanical specifications 
+Dimensions 
+98.8 x 93.3 x 14.5 mm 
+Mass 
+132 g 
+Environmental specifications 
+Operating temperature 
+-40 to +70 °C 
+ 
+ 
+ 
+
+ 
+TXS Datasheet 
+Doc ID: 
+ISIS.TXS.DS.001 
+Issue: 
+1.0 
+Date:  
+2019-07-03 
+Page:  
+4 of 9 
+ 
+© 2019. All rights reserved. Disclosure to third parties of this document or any part thereof, or the use of any information contained therein for purposes 
+other than provided for by this document, is not permitted except with express written permission of ISIS – Innovative Solutions In Space. 
+Electrical characteristics 
+Table 2 Electrical Characteristics 
+Parameter 
+Symbol 
+Conditions 
+Min 
+Typ 
+Max 
+Unit 
+Power supply 
+ 
+ 
+ 
+ 
+ 
+ 
+DC supply voltage 
+Vcc 
+ 
+7 
+ 
+20 
+V 
+DC power consumption 
+PDC 
+Mode: Supervisor on 
+ 
+0.08  
+0.1 
+W 
+DC power consumption 
+PDC 
+Mode: TX standby 
+ 
+1.5 
+1.6 
+W 
+DC power consumption at rated output 
+power 
+PDC 
+Mode: TX on PRF = 33 dBm,  Vcc 
+= 16.0 V 
+ 
+13  
+14 
+W 
+RF 
+ 
+ 
+ 
+ 
+ 
+ 
+RF output power 
+PRF 
+ fTX = 2245 MHz, Vcc = 16.0 V 
+30 
+33 
+35 
+dBm 
+RF output power stability 
+ΔPRF_T 
+-25° C  ≤ Tamb ≤ 55 ° C 
+ 
+1 
+2 
+dB 
+RF output power stability 
+ΔPRF_f 
+2200 MHz ≤  fTX ≤ 2290 MHz 
+ 
+1.5 
+2 
+dB 
+Spurious suppression 
+N/A 
+PRF = 33 dBm 
+ 
+ 
+-60 
+dBc 
+Transmit center frequency 
+fTX 
+ 
+2200 
+ 
+2290 
+MHz 
+Frequency stability 
+Δf 
+ 
+ 
+ 
+±10 
+ppm 
+I2C interface1, 2 
+ 
+ 
+ 
+ 
+ 
+ 
+Bus logic low-level input voltage 
+VIL 
+ 
+0 
+ 
+1.0 
+V 
+Bus logic low-level output voltage 
+VOL 
+ 
+0.47 
+ 
+0.6 
+V 
+Bus logic high-level voltage 
+VOH 
+ 
+2.3 
+ 
+3.3 
+V 
+LVDS Outputs3 
+ 
+ 
+ 
+ 
+ 
+ 
+Differential output voltage 
+VOD 
+ 
+250 
+310 
+450 
+mV 
+Offset voltage 
+VOS 
+ 
+1.125 
+1.17 
+1.375 
+V 
+Output high voltage 
+VOH 
+ 
+ 
+1.33 
+1.6 
+ 
+Output low voltage 
+VOL 
+ 
+0.90 
+1.02 
+ 
+V 
+LVDS Inputs4 
+ 
+ 
+ 
+ 
+ 
+ 
+Differential input high threshold 
+VTH 
+Vcm = 1.2 V, 0.05 V, 2.95 V 
+ 
+-35 
+0 
+mV 
+Differential input low threshold 
+VLH 
+Vcm = 1.2 V, 0.05 V, 2.95 V 
+-100 
+-35 
+ 
+mV 
+Common-mode voltage range 
+VCMR 
+VID = 200 mV p-p 
+0.1 
+ 
+2.3 
+V 
+Input current 
+IIN 
+VIN = 2.8 V 
+-10 
+±5 
++10 
+µA 
+ 
+IIN 
+VIN = 0 V 
+-10 
+±1 
++10 
+µA 
+LVDS input termination resistance 
+RT 
+ 
+ 
+100 
+ 
+Ohm 
+1. 
+I2C repeater IC type: PCA9517A 
+2. 
+The PCA9517A buffers on the TXS are powered by 3.3 V, therefore a nominal bus logic high voltage of 3.3 V is supported 
+3. 
+LVDS Receiver IC type: ADN4668 
+4. 
+LVDS Transmitter IC type: ADN4667 
+ 
+ 
+
+ 
+TXS Datasheet 
+Doc ID: 
+ISIS.TXS.DS.001 
+Issue: 
+1.0 
+Date:  
+2019-07-03 
+Page:  
+5 of 9 
+ 
+© 2019. All rights reserved. Disclosure to third parties of this document or any part thereof, or the use of any information contained therein for purposes 
+other than provided for by this document, is not permitted except with express written permission of ISIS – Innovative Solutions In Space. 
+Absolute Maximum Ratings 
+Stresses at or above the absolute maximum ratings in Table 3 may cause permanent damage to the product. 
+Operation at or beyond the maximum operating ratings may affect product reliability.  
+Table 3 Absolute Maximum Ratings 
+Parameter 
+Symbol 
+Min 
+Max 
+Unit 
+Supply voltage 
+Vcc 
+6 
+26 
+V 
+Operating temperature range 
+Tamb 
+-40 
+70 
+°C 
+Storage temperature range 
+Tstorage 
+-40 
+85 
+°C 
+Voltage on I2C pins 
+VI2C 
+-0.5 
+7 
+V 
+I2C pull up resistor value 
+Rpu 
+1.2 
+ 
+kOhm 
+LVDS input pin voltage 
+VIN_LVDS 
+-0.3 
+3.6 
+V 
+LVDS output pin voltage 
+VOUT_LVDS 
+-0.3 
+3.6 
+V 
+GPIO input voltage, any GPIO pin 
+VIN_GPIO 
+-0.3 
+3.6 
+V 
+Block diagram 
+TXS is based on a MicroSemi SmartFusion2 SoC. A separate supervisor MCU takes care of power switching, 
+telemetry gathering and watchdog functionality. An LVDS interface is provided for high speed payload data, 
+although (low speed) data to be transmitted can also be routed via the I2C bus. 
+ 
+Figure 1 TXS high level block diagram 
+ 
+ 
+
+ 
+TXS Datasheet 
+Doc ID: 
+ISIS.TXS.DS.001 
+Issue: 
+1.0 
+Date:  
+2019-07-03 
+Page:  
+6 of 9 
+ 
+© 2019. All rights reserved. Disclosure to third parties of this document or any part thereof, or the use of any information contained therein for purposes 
+other than provided for by this document, is not permitted except with express written permission of ISIS – Innovative Solutions In Space. 
+Typical performance graphs 
+Conditions: Tamb = 25 ° C, Vcc = 16.0V unless otherwise stated  
+ 
+Figure 2 RF output power vs power control loop setpoint for 
+various frequencies (closed loop) 
+ 
+Figure 3 RF output power vs frequency at max closed 
+loop PCL setpoint 
+ 
+Figure 4 DC power consumption vs RF output power 
+ 
+Figure 5 TX ON mode DC power consumption vs 
+supply voltage 
+ 
+ 
+ 
+
+ 
+TXS Datasheet 
+Doc ID: 
+ISIS.TXS.DS.001 
+Issue: 
+1.0 
+Date:  
+2019-07-03 
+Page:  
+7 of 9 
+ 
+© 2019. All rights reserved. Disclosure to third parties of this document or any part thereof, or the use of any information contained therein for purposes 
+other than provided for by this document, is not permitted except with express written permission of ISIS – Innovative Solutions In Space. 
+Typical link budget 
+Table 4 provides a typical link budget achieved with TXS to a small groundstation (1.9 m diameter), for a link 
+with these parameters, 2.1 Mbit/s OQPSK can be supported from 5 degrees elevation. With higher 
+groundstation G/T, larger usable datarates can be supported. 
+Table 4 Typical TXS link budget 
+Parameter 
+Value 
+Unit 
+Rationale 
+Frequency 
+2245.0 
+MHz 
+2200-2290 MHz SOS / EESS / SRS space-to-Earth 
+allocation 
+Satellite transmitter power 
+3.0 
+dBW 
+2W / 33 dBm 
+Satellite TX losses 
+1.0 
+dB 
+Assumption 
+Satellite antenna gain 
+0.0 
+dBi 
+Typical patch antenna gain for 5 deg elevation and Nadir 
+pointing satellite 
+Satellite EIRP 
+2.0 
+dBW 
+  
+Satellite pointing loss 
+0.5 
+dB 
+Assumption 
+Orbital altitude 
+600000.0 
+m 
+Typical LEO orbit 
+Elevation angle 
+5 
+deg 
+Minimum elevation for communication 
+Range 
+2329031.4 
+m 
+  
+Path loss 
+166.8 
+dB 
+  
+Atmospheric losses 
+0.5 
+dB 
+Source: RD3, 99% of the time, Madrid DSN 
+Ionospheric losses 
+0.1 
+dB 
+Approximate mean values for low earth station elevation 
+angle 
+Polarization losses 
+0.0 
+dB 
+No polarization mismatch assumed 
+Earth station pointing loss 
+1.0 
+dB 
+Assumption 
+Earth station figure of merit 
+9.0 
+dB/K 
+Typical S-band station figure of merit (1.9 m diameter 
+antenna) 
+Channel symbol rate 
+2500000.0 
+sym/s 2.5 Msym/sec 
+Code rate 
+0.430502 
+- 
+CCSDS RS (255, 223) + conv R = 1/2 
+Information bitrate 
+2152510 
+bit/s 
+5 Msym/sec OQPSK, RS (255, 223) + conv R = 1/2, 
+interleaving depth = 1 
+Information bitrate 
+63.3 
+dBHz 
+In dBHz 
+Implementation loss 
+2.0 
+dB 
+Pessimistic assumption for a typical demodulator 
+Eb/N0 
+5.4 
+dB 
+  
+Required Eb/N0 
+2.4 
+dB 
+OQPSK, RS(255, 2223)  +  C(7, 1/2) for a BER 1E-5 
+Link margin 
+3.0 
+dB 
+  
+Note: In the above table, losses are denoted by a positive number. 
+ 
+ 
+
+ 
+TXS Datasheet 
+Doc ID: 
+ISIS.TXS.DS.001 
+Issue: 
+1.0 
+Date:  
+2019-07-03 
+Page:  
+8 of 9 
+ 
+© 2019. All rights reserved. Disclosure to third parties of this document or any part thereof, or the use of any information contained therein for purposes 
+other than provided for by this document, is not permitted except with express written permission of ISIS – Innovative Solutions In Space. 
+Physical layout 
+ 
+Figure 6 Top view 
+ 
+Figure 7 Bottom view 
+Mechanical outline 
+ 
+Figure 8 Mechanical outline1 
+                                                                
+1 This mechanical outline drawing does not contain the CSKB-lite connector, since a number of options for this connector 
+are available. Contact ISIS for details. 
+
+ 
+TXS Datasheet 
+Doc ID: 
+ISIS.TXS.DS.001 
+Issue: 
+1.0 
+Date:  
+2019-07-03 
+Page:  
+9 of 9 
+ 
+© 2019. All rights reserved. Disclosure to third parties of this document or any part thereof, or the use of any information contained therein for purposes 
+other than provided for by this document, is not permitted except with express written permission of ISIS – Innovative Solutions In Space. 
+Disclaimer 
+The contents of this document are subject to the relevant provisions in the contract concluded between the 
+parties. ISIS – Innovative Solutions In Space B.V. (“ISIS”) shall not be liable, in full or in part, for any damage 
+arising out from the application or use of any product or circuit described herein, in case such application or 
+use are carried out in a manner not in line with the instructions and warranties provided in the User Manual, 
+Safety Manual, product information sheets or any other document provided by ISIS upon the delivery of the 
+product (“Documents”). Further, ISIS shall not be liable for any damage caused by any use which exceeds the 
+function(s) of the product, or does not conform to such function(s) as described in the Documents. ISIS shall 
+not be liable for any damage arising from a use which is not carried out in a manner conforming to acceptable 
+practices in the aerospace industry. 
+ISIS warrants that the product is supplied after relevant tests had shown the product is in good order and 
+functioning, as far as these tests may indicate and predict product functionality. 
+

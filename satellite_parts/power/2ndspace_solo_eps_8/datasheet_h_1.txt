@@ -1,0 +1,175 @@
+ 
+ 
+ 
+ 
+ 
+ 
+SOLO EPS  
+MODULAR CUBESAT POWER UNIT 
+ 
+ 
+2NDSpace products derived from a decade of experience of the 2NDSpace team in 
+the design of space systems and successful nanosatellites missions. All 2NDSpace 
+products are conceived to offer excellence combined with  customization-as-a-
+standard approach and reduced lead time.  
+SOLO is a modular EPS configurable according to mission and platform 
+requirements offering high versatility from 1U to 16U CubeSat combined with high 
+performances for platform subsystem and demanding payload units. 
+ 
+ 
+ 
+ 
+ 
+Modular configuration   
+Fault tolerant power-continuity architecture 
+12 to 24 Customizable power outputs 
+6 wider range solar panel inputs 
+Full battery protections 
+Modular battery pack 
+Flexible power delivery unit 
+© 2024. All rights reserved. Use or sharing of this document requires prior written consent from 2NDSPACE SRL. 
+info@2ndspace.eu
+
+ 
+ 
+ 
+2NDSpace SRL - VAT IT02742270396  
+48018 Faenza (RA), Italy 
+ 
+PRODUCT PORTFOLIO 
+ 
+ 
+QUALIFICATION AND ACCEPTANCE TEST 
+ 
+SOLO-EPS 4  
+(PDCU + 4xBMS) 
+SOLO-EPS 8  
+(PDCU + 4xBMS) 
+SOLO-EPS X4   
+(2PDCU + 4xBMS) 
+SOLO-EPS X8   
+(2PDCU + 8xBMS) 
+Dimensions [mm] 
+97x92x48 
+97x92x48 
+97x92x68 
+97x92x68 
+Mass [g] 
+340g 
+340g 
+500g 
+500g 
+Number of channels [n] 
+4x 
+4x 
+8x 
+8x 
+Number of controllable outputs [n] 
+(3x outputs per channel) 
+12x 
+12x 
+24x 
+24x 
+Channels Voltage Output [V] 
+Custom 
+Standard  3.3 / 5 / 12 / 17  
+Custom 
+Standard  3.3 / 5 / 12 / 17  
+Custom 
+Standard  3.3 / 5 / 12 / 17  
+Custom 
+Standard  3.3 / 5 / 12 / 17  
+Peak current output(channel)  [A] 
+3.3(6)A@3.3V 
+3.3(6)A@5V 
+3.3(6)A@12V 
+3.3(6)A@16.8V 
+Custom 
+3.3(6)A@3.3V 
+3.3(6)A@5V 
+3.3(6)A@12V 
+3.3(10)A@16.8V 
+Custom 
+3.3(6)A@3.3V 
+3.3(6)A@5V 
+3.3(6)A@12V 
+3.3(6)A@16.8V 
+Custom 
+3.3(6)A@3.3V 
+3.3(6)A@5V 
+3.3(6)A@12V 
+3.3(10)A@16.8V 
+Custom 
+Overall Peak Power output [W] 
+104W 
+160W 
+104W 
+160W 
+Power Storage [Wh] 
+50 Wh 
+100 Wh 
+50 Wh 
+100 Wh 
+Independent MPPT inputs 
+6 
+6 
+6 
+6 
+Communication Interfaces 
+RS485/UART/CAN/I2C 
+Features 
+OV,UV,OC protection; Controllable output; Integrated MCU; Latch-up protected outputs 
+ 
+Functional/AIT 
+Electrical control  
+Vibration test   
+Mechanical Shock  
+TVAC Test 
+Qualification Test 
+✓ 
+✓ 
+NASA GEVS: GSFC-STD-7000A 
+ESA ECSS-E-ST-10-03C 
+NASA GEVS: GSFC-STD-7000A 
+ESA ECSS-E-ST-10-03C 
+NASA GEVS: GSFC-STD-7000A 
+ESA ECSS-E-ST-10-03C 
+Acceptance Test 
+✓ 
+✓ 
+ 
+ 
+ 
+© 2024. All rights reserved. Use or sharing of this document requires prior written consent from 2NDSPACE SRL. 
+info@2ndspace.eu 
+
+ 
+ 
+ 
+2NDSpace SRL - VAT IT02742270396  
+48018 Faenza (RA), Italy 
+ 
+ 
+ 
+ 
+SOLO is designed to meet the needs of CubeSats platforms 
+from 1 to 16U offering high versatility and composed by SOLO-
+PDCU (single or double) and SOLO-BM4/BM8.  
+ 
+▪ PDM (Power Delivery Module): configurable power outputs 
+for subsystems ranging from 12x to 24x at configurable 
+voltage levels. 
+▪ SACU (Solar Array Conditioning Unit) 6 independent MPPT 
+for harvesting power from solar panels 
+▪ BMS (Battery Management System): battery charging and 
+protection unit capable of handling up to 3x battery pack 
+4S (in standard version). 
+▪ C&DH (Command & Data Handling Module): include a 
+dedicated microcontroller for system management and 
+control with multiple data interfaces available 
+▪ PLI (Power and Launch Interface): external interfaces with 
+platform peripherals for system managing during pre-
+launch operations (RBF, Inhibits, Umbilical) 
+© 2024. All rights reserved. Use or sharing of this document requires prior written consent from 2NDSPACE SRL. 
+info@2ndspace.eu 
+

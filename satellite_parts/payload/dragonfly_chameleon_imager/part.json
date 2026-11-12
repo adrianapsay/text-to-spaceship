@@ -6,25 +6,26 @@
  "vendor": "Dragonfly Aerospace",
  "model": "Chameleon Imager",
  "dimensions_mm": {
-  "x": 98,
-  "y": 98,
-  "z": 250
+  "x": 100,
+  "y": 100,
+  "z": 215
  },
  "mass_g": 1600,
  "source": {
-  "type": "unverified",
-  "url": "https://satsearch.co/products/dragonfly-aerospace-chameleon-imager",
+  "type": "datasheet",
+  "url": "https://www.cubesatshop.com/wp-content/uploads/2018/04/Chameleon-Brochure-2019-07-10.pdf",
   "document": {
-   "title": "satsearch listing of the Dragonfly Chameleon imager",
+   "title": "Dragonfly Aerospace Chameleon imager brochure (2019-07-10)",
    "revision": null,
    "date": null
   },
   "accessed": "2026-11-08",
   "fields_from_source": [
+   "dimensions_mm",
    "mass_g",
    "payload"
   ],
-  "notes": "1.6 kg, 10 m GSD / 39 km swath at 500 km, '2.5U' size, TRL 9. Dimensions NOT listed: 98 x 98 x 250 mm assumed from 2.5U. Brochure: https://www.cubesatshop.com/wp-content/uploads/2018/04/Chameleon-Brochure-2019-07-10.pdf"
+  "notes": "Brochure (read 2026-11-11): physical size 2.5U (100 mm x 100 mm x 215 mm), mass 1.6 kg including electronics, 39 km swath at 500 km, LVDS / SpaceWire data, +10 to +30 C operating. Lens/body split of the CAD is schematic."
  },
  "status": "in_production",
  "fidelity": "envelope",
@@ -34,7 +35,7 @@
   "satsearch",
   "CubeSatShop"
  ],
- "dimensions_note": "assumed from 2.5U",
+ "dimensions_note": "from the brochure (2.5U, 100 x 100 x 215 mm)",
  "payload": {
   "type": "hyperspectral imager",
   "gsd_m_at_500km": 10,
@@ -48,14 +49,14 @@
  },
  "geometry": {
   "measured_bbox_mm": [
-   98.0,
-   98.0,
-   250.0
+   100.0,
+   100.0,
+   215.0
   ],
-  "mesh_volume_mm3": 2237701.1,
+  "mesh_volume_mm3": 1966901.1,
   "watertight": true,
   "render_kind": "camera_box_lens",
-  "effective_density_g_cm3": 0.715,
+  "effective_density_g_cm3": 0.813,
   "bodies": {
    "part": [
     {
@@ -98,6 +99,95 @@
   },
   "face_counts": {
    "part": 180
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    100.0,
+    100.0,
+    215.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "mount_plate",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/mount_plate.stl"
+    },
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "lens_barrel",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/lens_barrel.stl"
+    },
+    {
+     "name": "grip_rings",
+     "color": [
+      0.24,
+      0.26,
+      0.3
+     ],
+     "file": "bodies_detail/grip_rings.stl"
+    },
+    {
+     "name": "bezel",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/bezel.stl"
+    },
+    {
+     "name": "glass",
+     "color": [
+      0.45,
+      0.65,
+      0.85
+     ],
+     "file": "bodies_detail/glass.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",
@@ -109,22 +199,7 @@
   "power_bus_V": null
  },
  "reference_images": {
-  "datasheets": [
-   {
-    "file": "datasheet_1_page1.png",
-    "pdf": "datasheet_1.pdf",
-    "kind": "web_search",
-    "url": "https://dragonflyaerospace.com/wp-content/themes/dragonfly/assets/brochures/caiman.pdf",
-    "title": "Caiman Imager - Dragonfly Aerospace"
-   },
-   {
-    "file": "datasheet_2_page1.png",
-    "pdf": "datasheet_2.pdf",
-    "kind": "web_search",
-    "url": "https://www.spacemic.net/pdf/premic8/magnetacube_abst.pdf",
-    "title": "1 Title: CONSTELLATION OF CUBESAT TO ANALYZE THE ..."
-   }
-  ],
+  "datasheets": [],
   "stl_preview": "preview.png",
   "drawing": "drawing.png",
   "photo_url": "https://cdn.satsearch.com/product-images/image-dragonfly-aerospace-chameleon-imager-k355rs.png",

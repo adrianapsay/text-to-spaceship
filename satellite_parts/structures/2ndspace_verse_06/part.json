@@ -10,34 +10,38 @@
   "y": 100,
   "z": 366
  },
- "mass_g": 690,
+ "mass_g": 890,
  "source": {
-  "type": "unverified",
+  "type": "datasheet",
   "url": "https://satsearch.co/products/2ndspace-verse-06-6u-structure",
   "document": {
-   "title": "satsearch structures overview (mass) and listing",
+   "title": "2NDSpace VERSE Structures datasheet (1U to 16U product portfolio table), satsearch copy",
    "revision": null,
-   "date": null
+   "date": "2026-11-11"
   },
   "accessed": "2026-11-08",
   "fields_from_source": [
+   "dimensions_mm",
    "mass_g"
   ],
-  "notes": "Approximate mass from the satsearch overview; envelope assumed per CDS Rev 14.1 (not stated on the overview). Listing has the datasheet."
+  "notes": "VERSE-06: 100 x 226.3 x 366 mm (also offered at 340.5 mm), 890 g including primary structure, screws, switches and 4 stack frames. An older copy of the same datasheet (SatCatalog) lists 686 g on the same basis."
  },
  "status": "in_production",
- "fidelity": "envelope",
+ "fidelity": "envelope_plus_features",
  "vendor_country": "Italy",
  "distributors": [
   "direct",
   "satsearch"
  ],
- "dimensions_note": "assumed per CDS",
  "cost": {
   "value": null,
   "currency": "USD",
   "basis": "quote",
   "source": null
+ },
+ "mass_note": "primary structure, screws, switches and 4 stack frames",
+ "mounting": {
+  "stacks": "4 stack frames included"
  },
  "geometry": {
   "measured_bbox_mm": [
@@ -45,25 +49,69 @@
    100.0,
    366.0
   ],
-  "mesh_volume_mm3": 8282580.1,
+  "mesh_volume_mm3": 284100.6,
   "watertight": true,
-  "render_kind": "box",
-  "effective_density_g_cm3": 0.083,
+  "render_kind": "cubesat_frame",
+  "effective_density_g_cm3": 3.133,
   "bodies": {
    "part": [
     {
-     "name": "body",
+     "name": "rails",
      "color": [
       0.36,
       0.4,
       0.46
      ],
-     "file": "bodies/part__body.stl"
+     "file": "bodies/part__rails.stl"
+    },
+    {
+     "name": "rings",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__rings.stl"
     }
    ]
   },
   "face_counts": {
-   "part": 12
+   "part": 448
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    226.3,
+    100.0,
+    366.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "rails",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/rails.stl"
+    },
+    {
+     "name": "frames",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies_detail/frames.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",
@@ -81,7 +129,7 @@
     "pdf": null,
     "url": null,
     "kind": "vendor_link",
-    "title": "satsearch structures overview (mass) and listing"
+    "title": "2NDSpace VERSE Structures datasheet (1U to 16U product portfolio table), satsearch copy"
    },
    {
     "file": "datasheet_1_page1.png",

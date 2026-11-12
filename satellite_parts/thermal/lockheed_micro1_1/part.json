@@ -25,7 +25,7 @@
    "electrical",
    "thermal"
   ],
-  "notes": "Mass, input power, cooling performance and TRL from the SOA table (manufacturer supplied, not NASA verified). Dimensions NOT given: envelope assumed from the '~1U' / '<2U' form factor column."
+  "notes": "Mass, input power, cooling performance and TRL from the SOA table (manufacturer supplied, not NASA verified). Dimensions NOT given there or in the vendor paper that was downloaded: the envelope is a PLACEHOLDER from the '~1U' form factor column."
  },
  "status": "in_production",
  "fidelity": "envelope",
@@ -33,7 +33,7 @@
  "distributors": [
   "direct"
  ],
- "dimensions_note": "assumed from form factor",
+ "dimensions_note": "placeholder, assumed from form factor",
  "thermal": {
   "cooling_performance": "1 W at 150 K",
   "trl": "7-9"
@@ -74,6 +74,20 @@
   },
   "face_counts": {
    "part": 12
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
   }
  },
  "image": "preview.png",
@@ -85,22 +99,7 @@
   "power_bus_V": null
  },
  "reference_images": {
-  "datasheets": [
-   {
-    "file": "datasheet_page1.png",
-    "pdf": null,
-    "url": null,
-    "kind": "vendor_link",
-    "title": "NASA SmallSat State-of-the-Art, Thermal Control chapter, cryocooler table"
-   },
-   {
-    "file": "datasheet_1_page1.png",
-    "pdf": "datasheet_1.pdf",
-    "kind": "web_search",
-    "url": "https://www.nasa.gov/wp-content/uploads/2026/05/7-soa-thermal-2026-final.pdf?emrc=6af3dff847a13",
-    "title": null
-   }
-  ],
+  "datasheets": [],
   "stl_preview": "preview.png",
   "drawing": "drawing.png",
   "photo_url": null,
@@ -109,7 +108,7 @@
   "photo_file": null,
   "photo_kind": null,
   "datasheet_url": null,
-  "datasheet_page_file": "datasheet_page1.png",
+  "datasheet_page_file": null,
   "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {

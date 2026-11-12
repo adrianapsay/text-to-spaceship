@@ -1,0 +1,121 @@
+ 
+      Nanocom Space Qualified Ka-Band  
+        Software Defined Transceiver  
+15378 Avenue of Science, Suite 200, San Diego, CA 92128 
+858.332.0700 | sales@spacemicro.com | www.spacemicro.com 
+Specifications Subject to Change Without Notice 
+Rev 4: 1/28/19 
+• LEO or GEO 
+• Radiation Hardened/Tolerant 
+• Parts Program: Commercial Space, Level I, II, III 
+• Suitable for Satellite Constellations 
+• Deployable Cubesat Antenna Option 
+TRANSMITTER FEATURES 
+KEY FEATURES 
+• FPGA Reconfigurable Resources 
+• Minimize SWAP 
+ 
+Mid Rate 
+High Rate 
+Output Power 
+0.5 W to 2 W  
+Power Consumption 
+25 W Maximum 
+30 W Maximum 
+Frequency Range 
+19 GHz to 21 GHz  
+Channel Bandwidth 
+50 MHz 
+1000 MHz 
+Spurious and Harmonics 
+< 60 dBc  
+Phase Noise Non-Coherent Mode 
+3° RMS Maximum  
+Frequency Accuracy 
+±5 ppm Nominal, ±10 ppm Maximum 
+FEC Coding 
+Reed-Solomon, Convolutional 
+Modulation* 
+QPSK, OQPSK 
+QPSK, OQPSK, 8PSK  
+(16APSK, 32APSK Options) 
+Bitrates 
+0.5 Mbps to 50 Mbps 
+100 Mbps (Minimum) 
+1000 Mbps (Nominal) 
+Flash Memory Storage 
+4 GB — 64 GB  
+Interface 
+GiGe for Data and Control, SGMII, LVDS 
+User Definable 
+Data Protocol 
+UDP, TCP/IP  
+Transfer Frame Protocol at Data Layer 
+CCSDS 732.0-B-3, AOS Space Data Link Protocol 
+Encapsulation Service 
+CCSDS 133.1-B-2, Encapsulation Service 
+IP Encapsulation Protocol 
+CCSDS 702.1-B-1, IP Over CCSDS SPACE LINKS 
+*Adaptive Modulation QPSK, 8PSK, 16 APSK, 32 APSK, and encoding per DVB-S2 is an option. 
+
+ 
+      Nanocom Space Qualified Ka-Band  
+        Software Defined Transceiver  
+15378 Avenue of Science, Suite 200, San Diego, CA 92128 
+858.332.0700 | sales@spacemicro.com | www.spacemicro.com 
+Specifications Subject to Change Without Notice 
+Rev 4: 1/28/19 
+Dynamic Range 
+-125 dBm to -50 dBm 
+Input Power 
+0 dBm (Maximum) 
+Frequency Range 
+29 GHz to 31 GHz (Programmable) 
+Bandwidth 
+50 MHz (Maximum) 
+Tracking Frequency Range 
+±700 kHz 
+VSWR 
+1.5:1 
+Power Consumption (Receiver Only) 
+5 W (Maximum) 
+Demodulation  
+QPSK, OQPSK 
+Symbol Rate 
+500 ksymbols/sec to 50 Msymbols/sec 
+RECEIVER FEATURES  
+PHYSICAL CHARACTERISTICS 
+Dimensions 
+Mass 
+ 
+Radiation Tolerance (TID) 
+Single Event Upsets (SEU) 
+Single Event Latchup (SEL) 
+ 
+ 
+Environmental Conditions 
+Operating Temperature 
+Storage Temperature 
+Vacuum Environment 
+Electromagnetic Compliance (EMC) 
+10 cm x 10 cm x 8 cm [1U Cubesat Form Factor]  
+1.0 kg 
+ 
+20 krads (Si); Higher TID Level Optional 
+37 MeV-cm2/mg 
+40 MeV-cm2/mg 
+Includes Patented CPU Watchdog  
+ 
+ 
+-30°C to + 60°C  
+-50°C to + 85°C  
+10E-5 Torr 
+MIL-STD-461E, MIL-STD-1541A 
+Input Voltage 
+7.2V — 10.8V 
+Power Consumption 
+35 W Maximum  
+TRANSCEIVER POWER  
+ANTENNA 
+Nanocom SDR may be bundled with deployable Cubesat Antenna 
+

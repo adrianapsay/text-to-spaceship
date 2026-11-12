@@ -1,0 +1,3 @@
+url: https://satcatalog.s3.amazonaws.com/components/1462/SatCatalog_-_Ecuadorian_Space_Agency_-_GCA02_HIGH_GAIN_L1_GNSS_ACTIVE_PATCH_ANTENNA_-_Datasheet.pdf
+found from: https://satcatalog.com/component/gca02-high-gain-l1-gnss-active-patch-antenna/
+downloaded on the lab laptop by harvest_catalogs.py (pass 6) on 2026-11-11

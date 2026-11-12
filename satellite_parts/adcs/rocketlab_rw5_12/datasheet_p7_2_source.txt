@@ -1,0 +1,3 @@
+url: https://www.rocketlab.co.nz/assets/Uploads/12-Nms-RW4-RW5-Data-Sheet-v3.pdf
+found from: https://www.rocketlab.co.nz/assets/Uploads/12-Nms-RW4-RW5-Data-Sheet-v3.pdf
+found by Claude (web search) on 2026-11-11; downloaded by fetch_pass5.py

@@ -1,0 +1,252 @@
+4 
+ 
+ 
+ 
+© 2019 GomSpace A/S 
+   
+ 
+ 
+ 
+NanoSense 
+GPS Kits 
+ 
+Datasheet 
+Kit with GPS module and antenna for NanoDocks ADCS 
+
+© 2019 GomSpace A/S 
+All printed copies, and all electronic copies and versions except the one accessible on 
+the GomSpace A/S server, are considered uncontrolled copies used for reference only. 
+ 
+ 
+Datasheet NanoSense GPS Kit 
+04 December 2019 
+DS 1015610 2.3 
+2 
+ 
+ 
+ 
+ 
+Product name: NanoSense GPS Kit 
+ 
+Document No.: 1015610 
+ 
+Revision: 2.3 
+ 
+Author: ROBB 
+ 
+Approved by: DJU 
+ 
+Approval date: 18 November 2019 
+ 
+ 
+ 
+Confidentiality Notice 
+ 
+This document is submitted for a specific purpose as agreed in writing and contains information, which is 
+confidential and proprietary. The recipient agrees by accepting this document, that this material will not be 
+used, transferred, reproduced, modified, copied or disclosed in whole or in part, in any manner or to any 
+third party, except own staff to meet the purpose for which it was submitted without prior written consent. 
+ 
+GomSpace © 2019 
+
+© 2019 GomSpace A/S 
+All printed copies, and all electronic copies and versions except the one accessible on 
+the GomSpace A/S server, are considered uncontrolled copies used for reference only. 
+ 
+ 
+Datasheet NanoSense GPS Kit 
+04 December 2019 
+DS 1015610 2.3 
+3 
+ 
+1 Table of Contents 
+2 
+OVERVIEW ............................................................................................................................................... 4 
+3 
+MAIN FEATURES OF GPS MODULE...................................................................................................... 4 
+4 
+KIT CHOICES ........................................................................................................................................... 4 
+5 
+MOUNTING ............................................................................................................................................... 5 
+5.1 
+Mounting on a NanoDock DMC-3 or ADCS-3 ............................................................................. 5 
+5.2 
+Mounting on a NanoDock ADCS-6 .............................................................................................. 5 
+6 
+ANTENNAS ............................................................................................................................................... 6 
+7 
+MOUNTING BLOCK ................................................................................................................................. 6 
+8 
+RAILS ........................................................................................................................................................ 6 
+9 
+DISCLAIMER ............................................................................................................................................ 7 
+ 
+ 
+ 
+ 
+
+© 2019 GomSpace A/S 
+All printed copies, and all electronic copies and versions except the one accessible on 
+the GomSpace A/S server, are considered uncontrolled copies used for reference only. 
+ 
+ 
+Datasheet NanoSense GPS Kit 
+04 December 2019 
+DS 1015610 2.3 
+4 
+2 Overview 
+GomSpace offers GPS antenna kits designed for mounting on NanoDock DMC-3, NanoDock ADCS-3 and 
+NanoDock ADCS-6. Each GPS kit contains a NovAtel GPS module and a GPS antenna. 
+ 
+The datasheet and manuals for the GPS module and antennas can be found here: 
+ 
+GPS: 
+http://docs.novatel.com/OEM7/Content/Technical_Specs_Receiver/OEM719_Specifications.htm 
+ 
+Antennas: 
+https://www.inventeksys.com/actpat184-01-ip-gps-antenna/ 
+https://www.tallysman.com/product/tw1322-embedded-single-band-gnss-antenna-pre-filtered/ 
+ 
+3  Main Features of GPS Module 
+• 
+Precision, position: 1.5 m 
+• 
+Precision, velocity: 0.03 m/s 
+• 
+Power: 3.3 V and <400 mA 
+• 
+COCOM limit removed 
+• 
+Mass: 31 g 
+• 
+Size: 46 x 72 x 11 mm 
+ 
+4 Kit Choices 
+Each kit includes: 
+ 
+• 
+A NovAtel OEM719 GPS module. The location of the connectors on the PCB depends on which 
+NanoDock it is mounted on. If a NanoDock ADCS-6 is used, the GPS module is mounted on a pair of 
+rails. 
+• 
+An antenna (choice of the below): 
+1. Inventek ACTPAT154-01-IP 
+▪ 
+Antenna cable length, Choice of 15, 25, 35 or 45 cm 
+▪ 
+Antenna mounted with glue 
+▪ 
+Mounted on a small aluminium block 
+▪ 
+Collective mass: 42 – 45 g, including GPS module, dependent on antenna cable length 
+2. Tallysman TW1322 
+▪ 
+Antenna cable length, Choice of 15, 25, 35 or 45 cm 
+▪ 
+Four holes for screws used for mounting 
+▪ 
+Collective mass: 54 – 57 g, including GPS module, dependent on antenna cable length 
+ 
+If space permits select the Tallysman antenna for superior performance (gain and detuning sensitivity).  
+ 
+ 
+ 
+
+© 2019 GomSpace A/S 
+All printed copies, and all electronic copies and versions except the one accessible on 
+the GomSpace A/S server, are considered uncontrolled copies used for reference only. 
+ 
+ 
+Datasheet NanoSense GPS Kit 
+04 December 2019 
+DS 1015610 2.3 
+5 
+5 Mounting 
+Mounting of the GPS module is different depending on the NanoDock. See the details below 
+ 
+5.1 
+Mounting on a NanoDock DMC-3 or ADCS-3 
+This kit is mounted on the bottom of the NanoDock DMC-3 (below left) or on the top of the NanoDock ADCS-3 
+(below right). Notice the antenna connector is on the top. 
+ 
+ 
+ 
+ 
+5.2 
+Mounting on a NanoDock ADCS-6 
+This kit is mounted on the top of the NanoDock ADCS-6 with a RF barrel to connect it to the NanoDock. The 
+antenna is connected to the antenna connector or the NanoDock.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+© 2019 GomSpace A/S 
+All printed copies, and all electronic copies and versions except the one accessible on 
+the GomSpace A/S server, are considered uncontrolled copies used for reference only. 
+ 
+ 
+Datasheet NanoSense GPS Kit 
+04 December 2019 
+DS 1015610 2.3 
+6 
+6 Antennas 
+Below are shown photos of the antenna, their cable and connector. 
+ 
+Inventek  
+Tallysman  
+ 
+ 
+7 Mounting Block 
+On the Inventek antenna is glued a small mounting block, which is used to raise the antenna up from the 
+Interstage, to get a clear line of sight. View the illustration below. 
+ 
+8 Rails 
+The GPS module is mounted on the ADCS-6 with two rails, this is to improve the thermal and vibrations 
+performance of the module. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+© 2019 GomSpace A/S 
+All printed copies, and all electronic copies and versions except the one accessible on 
+the GomSpace A/S server, are considered uncontrolled copies used for reference only. 
+ 
+ 
+Datasheet NanoSense GPS Kit 
+04 December 2019 
+DS 1015610 2.3 
+7 
+9 Disclaimer 
+The information in this document is subject to change without notice and should not be construed as a 
+commitment by GomSpace. GomSpace assumes no responsibility for any errors that may appear in this 
+document. 
+ 
+In no event shall GomSpace be liable for incidental or consequential damages arising from use of this document 
+or the software and hardware described in this document. 
+ 
+ 
+

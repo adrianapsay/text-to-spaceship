@@ -1,0 +1,306 @@
+Browse Product Range >
+Westfield Fasteners Product Specification:
+ISO 7380 part 1 - Socket Head Button Screws
+This product guide contains the specification for metric threaded socket head button screws as available from
+Westfield Fasteners. The basis of this specification is the ISO standard ISO 7380, but this specification may
+include information on sizes and materials that are not covered by the ISO standard but are available. 
+Product Description
+A popular and attractive socket head screw, typically used where aesthetics are important, or where a lower
+profile domed finish is required. The hex drive is generally smaller than other hex driven ranges and thus the
+ultimate tightening torque is reduced. These socket button screws are generally manufactured with a fully
+threaded shank, but occasionally we are provided with stock with a partial thread. 
+Scope of the ISO Standard
+ISO standard 7380 part 1 specifies the tolerances and the permissable variation in form of hexagon socket
+button head screws, and covers metric thread diameters from M3 up to and including M16. Mechanical
+properties for these items are defined in ISO 898 and ISO 3506. Table 1 below defines the overall dimensions
+and tolerances of this screw type. Table 2 defines the tolerances on the shank length, whilst table 3 shows the
+reduced minimum ultimate tensile loads for this product. The information in table 3 is presented here because
+due to their head design socket button screws are considered to have reduced loadability over other screw types,
+as defined in ISO 898 and ISO 3506. ISO 7380 part 2 is a seperate standard that covers hexagon socket button
+screws with a flange.
+Figure 1: Socket Head Button Screw
+
+Notes to figure 1:
+The small radius between the head and the shank (rs) is very slightly greater for the full threaded version
+than it is for the partial threaded shanked version. This is an important detail, as the button head may not sit
+fully flush on the surface, without a countersink or washer present. 
+A slight rounding or countersink at the mouth of the socket may be present. 
+On the top of the domed head, surrounding the socket, is a small flat area. The diameter of this area (dL)
+can vary between batches. This dimension is not definitive, and is offered as a reference only.
+Variations from ISO 7380 part 1
+This specification includes information on hexagon socket button screws with an M2.5 thread. This thread size is
+not covered in ISO 7380 part 1. 
+Manufacturer and/or material markings may be present on the domed part of the head.
+Table 1: Dimensions & Tolerances according to ISO 7380-1
+Thread, d
+(M2.5)
+M3
+M4
+M5
+M6
+M8
+M10
+M12
+M16
+thread pitch (standard metric coarse)
+0.45
+0.5
+0.7
+0.8
+1.0
+1.25
+1.5
+1.75
+2.0
+minimum thread length
+b ref.
+-
+18
+20
+22
+24
+28
+32
+36
+44
+inner underhead flat diameter da max.
+-
+3.6
+4.7
+5.7
+6.8
+9.2
+11.2
+13.7
+17.7
+head diameter
+dk max.
+4.5
+5.70
+7.60
+9.50
+10.50 14.00 17.50 21.00
+28.00
+dk min.
+-
+5.40
+7.24
+9.14
+10.07 13.57 17.07 20.48
+27.48
+flathead diameter
+dL ref.
+-
+2.6
+3.8
+5.0
+6.0
+7.7
+10.0
+12.0
+16.0
+shank diameter
+ds max.
+-
+3
+4
+5
+6
+8
+10
+12
+16
+ds min.
+-
+2.86
+3.82
+4.82
+5.82
+7.78
+9.78
+11.73
+15.73
+outer underhead flat diameter dw min.
+-
+5.00
+6.84
+8.74
+9.57
+13.07 16.57 19.68
+26.68
+socket width across corners
+e min.
+-
+2.303 2.873 3.443 4.583 5.723 6.863 9.149 11.429
+head height
+k max.
+1.5
+1.65
+2.20
+2.75
+3.30
+4.40
+5.50
+6.60
+8.80
+k min.
+-
+1.40
+1.95
+2.50
+3.00
+4.10
+5.20
+6.24
+8.44
+dome radius
+rf max.
+-
+3.70
+4.60
+5.75
+6.15
+7.95
+9.80
+11.20
+15.30
+rf min.
+-
+3.30
+4.20
+5.25
+5.65
+7.45
+9.20
+10.50
+14.50
+underhead radius
+rs min.
+-
+0.10
+0.20
+0.20
+0.25
+0.40
+0.40
+0.60
+0.60
+rt min.
+-
+0.30
+0.40
+0.45
+0.50
+0.70
+0.70
+1.10
+1.10
+socket width across flats
+s nom.
+1.5
+2
+2.5
+3
+4
+5
+6
+8
+10
+s max.
+-
+2.080 2.580 3.080 4.095 5.140 6.140 8.175 10.175
+s min.
+-
+2.020 2.520 3.020 4.020 5.020 6.020 8.025 10.025
+socket depth
+t min.
+-
+1.04
+0.30
+0.38
+0.74
+1.05
+1.45
+1.63
+2.25
+w min.
+-
+0.20
+0.30
+0.38
+0.74
+1.05
+1.45
+1.63
+2.25
+
+Table 2: Shank Length Tolerance according to ISO 7380-1
+thread length (mm)
++/- (mm)
+6
+0.24
+8-10
+0.29
+12-16
+0.35
+20-30
+0.42
+35-50
+0.5
+55-90
+0.6
+Table 3: Reduced Ultimate Tensile Loads according to ISO 7380-1
+-
+Strength Class
+thread
+8.8
+10.9
+12.9
+70
+80
+M3
+3220
+4180
+4910
+2810
+3220
+M4
+5620
+7300
+8560
+4910
+5620
+M5
+9080
+11800
+13800
+7950
+9080
+M6
+12900
+16700
+19600
+11200
+12900
+M8
+23400
+30500
+35700
+20400
+23400
+M10
+37100
+48200
+56600
+32400
+37100
+M12
+53900
+70200
+82400
+47200
+53900
+M16
+100000 130000 154000 87900 100000
+For further details, please refer to the ISO/DIN standard document for this item.
+

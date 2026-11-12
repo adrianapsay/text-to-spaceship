@@ -1,0 +1,79 @@
+SpaceQuest, Ltd.   3554 Chain Bridge Road, Suite 103    Fairfax, Virginia 22030     I     703. 424. 7801     I     www.spacequest.com 
+The SpaceQuest TRX-V is a compact single board transceiver for satellite communications in the 
+VHF Band. Similar to the TRX-U, the TRX-V is an ideal satellite TT&C Radio or Narrow Band 
+Communication Payload for CubeSat and SmallSat missions. 
+Frequency: 
+130 MHz to 170 MHz 
+Transmit Power: 
+1 – 6 Watts RF Output 
+Transmit Data Rate: 
+2.4, 4.8, 9.6, and 19.2 Kbps 
+Receive Data Rate: 
+2.4, 4.8, 9.6, and 19.2 Kbps 
+Channels: 
+1 to 16 Channels, Customer Programed in 300 Hz Steps 
+Modulation:          
+FSK, GFSK 
+TRX-­‐V	  	  Satellite	  VHF	  Transceiver	  
+Key	  Features	  
+àSpace Qualified (2 Units On Orbit)
+àCompact Single Board Design
+àUp to 16 Programmable Channels
+àBuilt in Voltage Regulation
+àUp to 6 Watts RF Output
+àCubeSat Compatible
+General	  Specifications	  
+Search powered by 
+
+	  
+	  
+SpaceQuest, Ltd.   3554 Chain Bridge Road, Suite 400    Fairfax, Virginia 22030     I     703. 424. 7801     I     www.spacequest.com 
+TRX-­‐V-­‐ver-­‐20160107	  
+	  
+	  
+	  
+	  
+	  
+	  
+Input Voltage: 
+7.0 to 14.0 Volts 
+Power Consumption: 
+RX: 100 mW    
+TX: 4-16 W 
+Clock and Data Output: 
+3.3 Volt LVCMOS 
+Power and Data Connector: 
+15 Pin Micro-D Socket  
+RF Connector: 
+MMCX Socket 
+Sensitivity: 
+-120 dBm @ 2400 bps, zero errors 
+-111 dBm @ 19.2 Kbps, zero errors 
+Front-end Noise Figure: 
+< 2 dB with built in LNA and Filter 
+RX Dynamic Range: 
+120 dB (-120 dBm to 0 dBm reception) 
+Carrier Stability: 
+2 ppm from -20ºC to +60ºC 
+Impedance: 
+50 Ohms Nominal (Input and Output) 
+VSWR: 
+10:1 at All Phase Angles 
+Automatic Control: 
+Built in AGC and AFC for Gain and Doppler Control 
+Linear Digital RSSI: 
+-110 dBm to -50 dBm 
+Mass: 
+140 grams 
+Size: 
+83 mm x 57 mm x 16 mm (3.27” x 2.25” x 0.63”) 
+Operating Temperature: 
+-20ºC to +60ºC 
+Storage Temperature: 
+-30ºC to +80ºC 
+Vibration: 
+15G RMS (20 – 2000 Hz) 
+TRX-­‐U	  	  
+Electrical	  and	  RF	  Specifications	  
+Mechanical	  and	  Environmental	  
+

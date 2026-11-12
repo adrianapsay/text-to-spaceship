@@ -1,0 +1,86 @@
+BILLINGSLEY AEROSPACE & DEFENSE 
+ 
+ 
+ 
+ 
+TFM 100S 
+SPACECRAFT ATTITUDE CONTROL TRIAXIAL 
+FLUXGATE MAGNETOMETER 
+ 
+FEBRUARY 2008 SPECIFICATIONS 
+ 
+Radiation Tolerance: 
+> 300 kRADs (with 1.59 mm cover) 
+ 
+> 100 kRADs (with 0.79 mm cover) Option 
+Axial Alignment: 
+Orthogonality better than ± 1° ; ± 0.5°  special; calibration 
+data provided to ± 0.1° 
+ 
+Input Voltage: 
++ 15 to + 45 VDC 
+ 
++ 45 to + 125 VDC Option 
+Input Current: 
+20 mA at 28 V 
+Isolation: 
+between power and signal ground > 200 MΩ at 500 VDC 
+Field Measurement Range: 
+± 100 μT 
+Accuracy: 
+± 0.5% of full scale 
+Linearity: 
+0.015% of full scale 
+Sensitivity: 
+100 μV / nT 
+Scale Factor Temperature Shift: .0075% full scale / °C 
+Output Ripple: 
+3 mV peak to peak @ 2nd harmonic 
+Analog Output @ Zero Field: 
+± 0.025V  
+Zero Shift with Temperature: 
+≤ 1.0 nT /°C 
+Susceptibility to Perming: 
+± 25 nT shift with ± 5 Gauss applied 
+Output Impedance: 
+332 Ω ± 5% 
+Frequency Response: 
+- 3 dB @ > 150 Hz 
+E M I: 
+CEO1, CEO3, REO2, CS01, CSO2, CSO6, RSO1, RSO2, RS03  
+Random Vibration: 
+20G RMS (20 Hz to 2 KHz) 
+Shock: 
+>230 G 
+Temperature Range: 
+- 40°  to +85 °C  
+Weight: 
+200 grams (1.59 mm cover) 
+ 
+166 grams (0.79 mm cover) Option 
+ 
+Size: 
+3.66 cm x 3.58 cm x 15.44 cm 
+ 
+Connector: 
+NON-MAGNETIC 9 PIN "D" TYPE  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+20936 Theseus Terrace, Germantown, MD  20876 USA 
+ 
+www.magnetometer.com     sales@magnetometer.com 
+ 
+301-540-8338                         301-774-7707 (LAB) 
+

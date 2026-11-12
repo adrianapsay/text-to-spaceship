@@ -1,5 +1,4 @@
-image: https://imgv2-1-f.scribdassets.com/img/document/620949658/original/1371555f1e/1715020846?v=1
-page: https://www.scribd.com/document/620949658/ISO-7089-Plain-Washer
-title: ISO 7089 Plain Washer | PDF
-query: generic ISO 7089 M2.5 washer
-found by web image search; representative, verify before use
+representative photo of ISO 7089 / DIN 125 plain washers (Westfield Fasteners product page)
+url: https://www.westfieldfasteners.co.uk/Images3/Main_Images_Published/Plain-Flat-Washer-ISO-7089-200HV-300HV-in-A2.jpg
+method: image on page https://www.westfieldfasteners.co.uk/Metric-Washers/200HV-Flat-Plain-Washer-ISO-7089-M3-A2-Stainless.html
+found by Claude (web search) on 2026-11-11; downloaded by fetch_pass5.py

@@ -1,0 +1,147 @@
+Product Data Sheet
+Li-ion Space Battery
+ABSL™ 
+CM2300 – 8s40p P20 28V 80Ah 
+Fully qualified for space applications, 
+this battery has been utilised for a 
+variety of missions such as ESA LEO, 
+communications and national Synthetic 
+Aperture Radar (SAR) programmes.  
+The design incorporates an interchangeable 
+connector bracket which allows easy 
+customisation for a variety of platforms and 
+does not require cell balancing electronics, 
+making it easy to store, use and integrate 
+into the spacecraft.
+Facts at a Glance
+ABSL
+TM Cell	
+P20
+Topology	
+8s40p
+Voltage Range (V)	
+33.6 - 24.0
+Nameplate Capacity	
+80 Ah
+Energy	
+2300 Wh
+Footprint	
+260 x 359 mm
+Height	
+177 mm
+Mass (kg)	
+20
+Celebrating customer success with 
+over 5.5 billion cell hours of in-orbit 
+heritage using ABSL™ Li-ion cell 
+technology
+Visit us at www.enersys.com/space
+175.5
+357
+234
+255.5
+
+Product Data Sheet
+Li-ion Space Battery
+ABSL™ 
+CM2300 – 8s40p P20 28V 80Ah 
+Qualification
+Temperature
+Non-Operating (°C)
+Operating (°C)
+-20 to 50
+0 to 40
+Cell Level Radiation Exposure
+Dosage Mrad
+Effects
+10
+<1% decrease in capacity
+Random Vibration
+Frequency (Hz)
+Input (g^2/Hz)
+20
+0.1256
+80-200
+0.5
+200-400
+0.3
+2000
+0.0121
+Overall GRMS
+15.4
+Duration
+4
+Shock
+Frequency (Hz)
+Input (g)
+100
+40
+2000
+2000
+10,000
+2000
+No of shock (per axis)
+3
+Internal Resistance
+0
+Discharge Temperatures:
+0.00
+0.05
+0.10
+0.15
+0.20
+0.25
+0.30
+10
+20
+30
+40
+50
+SoC [%]
+Cell resistance (Ω)
+60
+70
+80
+90
+100
+60˚C 
+40˚C 
+20˚C 
+10˚C 
+0˚C 
+-15˚C 
+0
+0
+2.4
+2.2
+2.8
+2.6
+3.2
+3.0
+3.6
+3.4
+4.0
+4.2
+3.8
+4.4
+0.5
+1.0
+Capacity (Ah)
+Charge: C/10 to C/100 at 4.2V at 20˚C
+Discharge: to 2.0V
+Voltage (V)
+1.5
+2.0
+2.5
+C/10 
+C 
+2C 
+5C 
+10C 
+Discharge
+© 2022 EnerSys. All rights reserved. Trademarks and logos are the property of EnerSys and its afﬁliates. Subject to revisions without prior notice. E.&O.E.
+Visit us at: www.enersys.com/space
+or email: space@enersys.com
+S PAC E
+EMEA/APAC-EN-DS-ABSL-CM2300-8s40p-0722-Preliminary
+

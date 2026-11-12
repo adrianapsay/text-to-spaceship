@@ -60,6 +60,20 @@
   },
   "face_counts": {
    "part": 336
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "washer",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__washer.stl"
+    }
+   ]
   }
  },
  "image": "preview.png",
@@ -85,8 +99,8 @@
   "photo_url": null,
   "photo_source": null,
   "photo_page": null,
-  "photo_file": null,
-  "photo_kind": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "web_search_representative",
   "datasheet_url": null,
   "datasheet_page_file": "datasheet_page1.png",
   "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"

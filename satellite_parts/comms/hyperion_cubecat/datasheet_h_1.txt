@@ -1,0 +1,185 @@
+CUBECAT  
+Laser communication 
+terminal 
+CubeCAT is a compact,  
+high-performance 
+lasercommunication 
+terminal for use in CubeSats 
+and small satellites.  
+CubeCAT is designed with simplicity 
+and ease of use in mind. This system 
+suits commercial CubeSat applications 
+well, with modest size- and power 
+requirements 
+and 
+no 
+licensing 
+requirements, but also meets the 
+increasing need for high data rates in 
+small satellites, through offering a 
+large data rate with a small volume 
+terminal. 
+The CubeCAT is part of the CubeCAT 
+Lasercom system and is the result of a joint 
+effort by Hyperion and TNO. 
+Hyperion 
+Technologies’ 
+proven 
+iADCS 
+technology, digital processing technology 
+and experience in electronic systems for 
+space in general will be applied in the 
+CubeCAT system to create a system that is 
+efficient, robust and easy to use both for the 
+satellite 
+developer 
+and 
+the 
+satellite 
+operator. 
+TNO is a research institute with a strong 
+heritage in optics for space applications, 
+including laser communication. 
+ 
+ 
+ 
+• 
+Fully integrated Lasercom module 
+• 
+Data rate:  
+o 
+Downlink:  
+1 Gbps 
+o 
+Uplink:   
+200 kbps 
+• 
+On-module data buffering 
+• 
+Interfaces to Cubesat: USB 3.0,  I2C 
+• 
+No regulatory certification requirements for 
+both space segment and ground station 
+• 
+ITAR-free 
+• 
+Small size:    
+ 
+ 
+<1U 
+• 
+Low power:   
+o 
+Peak:   
+ 
+~15W 
+o 
+Orbit average:   
+<1W 
+• 
+Low cost-per-bit 
+ 
+ 
+ 
+ 
+ 
+HIGHLIGHTS 
+
+  
+ 
+ 
+ 
+ 
+ 
+SPECIFICATIONS 
+Performance 
+Raw datarate modes (downlink) 
+100/300/1000 
+Mbps                                          
+Raw datarate (uplink) 
+200 
+kbps 
+On-board buffer size 
+>64 
+GB 
+Maximum slant range 
+1000 
+km 
+ 
+ 
+ 
+Host satellite platform constraints 
+Pointing accuracy 
+< 8.7 / 0.5 / 1800 
+mrad/deg/arcsec (3σ) 
+Low frequency vibration velocity1 (<20Hz) 
+< 2.445 
+mrad/s (3σ) 
+High frequency vibration/jitter amplitude 
+(>20Hz) 
+< 15 / 0.86 / 3.1 
+µrad/mdeg/arcsec (3σ) 
+Pointing knowledge2 error 
+< 0.3 / 17.2 / 61.9 
+mrad/mdeg/arcsec (3σ) 
+ 
+ 
+ 
+Dimensions 
+Outer dimensions 
+96 x 96 x 96 
+mm 
+Mass  
+<1.33 
+kg 
+ 
+ 
+ 
+Environmental 
+Operating temperature 
+-20 - +40 
+°C 
+ 
+ 
+ 
+Electrical 
+ 
+Min. 
+Typ. 
+Max. 
+ 
+Supply voltage digital 
+4.75 
+5 
+5.25 
+V 
+Supply voltage Vbat 
+9.6 
+ 
+21 
+V 
+Bus logic level voltage 
+1.8 
+Referenced 
+to VREF3 
+5.1 
+V 
+Power consumption (total) 
+TBD4 
+155 
+TBD 
+W 
+ 
+1 This is equivalent to the low-frequency pointing/tracking error and describes, together with the high frequency jitter below, the 
+pointing stability of the platform. 
+2 Pointing knowledge provided by the ADCS is defined as knowledge about the actual orientation of the CubeCat mounting plane 
+w.r.t. the line-of-sight towards the ground station. 
+3 VREF can range from 1.8 to 5.1V for I²C and UART applications. 
+4 While receiving data from the satellite at 30Mbps average transfer rate. 
+5 While downlinking data during a ground station passover. 
+V2.0 
+For pricing, delivery, configuration and ordering information please contact us 
+at sales@hyperion.space or call us at +31(0)15-5160905 
+ 
+ 
+

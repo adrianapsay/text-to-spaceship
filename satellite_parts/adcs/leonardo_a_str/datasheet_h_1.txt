@@ -1,0 +1,236 @@
+Space
+AUTONOMOUS STAR TRACKERS
+The A-STR and AA-STR are medium Field of View 
+(FOV) star trackers integrated in a single assembly 
+with a radiation hardened design. The trackers feature 
+robust and accurate three axis attitude determination 
+with very low mass and power consumption for the 
+class of instrument.
+The star trackers are highly reliable and represent 
+the latest technology in the field of autonomous 
+attitude determination. Suitable for a broad range of 
+missions, the trackers are utilised in the commercial 
+market of telecommunication geostationary satellites 
+(characterised by severe radiation orbits and long 
+duration), in Earth observation satellites, scientific 
+satellites and for interplanetary missions/probes.
+Initial attitude acquisition can be performed without 
+any prior information about the S/C orientation, 
+solving the problem of the assembly becoming lost in 
+space.
+All operations are executed under microprocessor 
+control by means of SW modules with in-flight 
+reprogramming capability. The company constantly 
+updates its star trackers with the latest technology, 
+whilst also maintaining a reputation for highly reliable 
+products.
+Active Pixel Sensor (APS) CMOS technology is one of 
+these advancements. The AA-STR is based on the HAS 
+detector, and as such is the first star tracker to include 
+CMOS technology, able to achieve TRL 8. The company 
+is now building on this experience with these highly-
+integrated CMOS image sensors to study further 
+miniaturisation of star trackers, with the goal being 
+to make a “sensor-on-a-chip” device available in the 
+near future. As part of this endeavour a mock-up unit, 
+functionally representative of the “basic” architecture, 
+has already been realised and follow on activities are 
+currently ongoing.
+A-STR AND AA-STR
+leonardocompany.com
+
+The heritage of the A-STR and AA-STR star trackers 
+stems from their predecessor, the High Resolution Star 
+Tracker (HR-STR) that is successfully flying (or was 
+flown) on ISO, SAX, SOHO (flying since December 
+1995), CASSINI, XMM, INTEGRAL, SAC-C, ROSETTA, 
+MARS EXPRESS, VENUS EXPRESS and others.
+All of these star trackers have performed flawlessly 
+and have never placed their mission in jeopardy.
+More than 100 A-STR FMs have been sold for GEO, 
+LEO and inter-planetary missions since 2001 and more 
+than 90 years of successful operations in space have 
+been accumulated to the date.
+The high performance of its CCD detector means that 
+the A-STR can be used in extremely accurate pointing 
+space telescopes and in agile (or spinning) satellites. 
+This is achieved via the A-STR’s dedicated operative 
+modes that can be entered via telecommand.
+For the ESA’s Herschel telescope an “interlaced” 
+tracking mode allows the attitude measurement 
+accuracy to improve up to a factor 1.41. In the NASA 
+PLUTO Kuiper Belt and in the ESA Plank Satellites, 
+a TDI (Time Delay Integration) mode allows Lost in 
+Space and accurate tracking with satellite spin rates up 
+to 10 RPM.
+The AA-STR is a high TRL-9 next generation product. 
+The AA-STR, while offering similar performance and 
+improved radiation capabilities with respect to CCD 
+based star trackers, incorporates all the advantages of 
+miniaturization and reduced weight, power and cost.
+A-STR AND AA-STR
+
+The AA-STR product is the next step in the company’s 
+star tracker products. It benefits from the successful 
+flight experiences Galileo’s customers have had with 
+our earlier star trackers, some of which have been 
+continuously operating in space for more than 10 
+years.
+Our AA-STR product continues this evolutionary 
+philosophy and takes advantage of the relatively new 
+but now mature CMOS Active Pixel Sensor (APS) 
+technology, resulting in the miniature AA-STR star 
+tracker that is approximately two thirds the size, 
+weight, power and cost of conventional CCD units 
+belonging to the same “class”.
+The AA-STR, although it was initially developed for a 
+GEO telecommunication spacecraft, has demonstrated 
+a large flexibility and, despite having been presented 
+on the market quite recently, has already found 
+applications in scientific (Bepi Colombo - ESA, Astro-G 
+- JAXA), Earth observation (PRISMA) and other 
+commercial programs (AlphaBus, SpaceBus 4000).
+We also develop and produce “custom” star trackers 
+for unique spacecraft with highly demanding mission 
+requirements. The SRU for JUNO, NASA’s second New 
+Frontiers Mission, has been designed to specifically 
+cover the high-radiation environment of Jupiter and 
+the need to work on board a spinning satellite (using 
+TDI technique).
+The JUNO SRU includes an optical head (duly radiation 
+hardened to withstand the harsh environment of 
+Jupiter) and an electronic unit, which will be mounted 
+in a radiation protected area of the satellite (radiation 
+vault).
+The star sensor operations are based on the operating 
+modes already developed for the star sensors of the 
+New Horizon Pluto Kuiper Belt mission (by NASA) 
+and Planck mission (by European Space Agency), 
+with adaptations to cope with the severe radiation 
+environment expected by JUNO.
+TECHNICAL CHARACTERISTICS
+Operating principle
+▪▪Embedded star catalogues and algorithms for 
+pattern recognition and attitude estimation.
+Operating modes
+▪▪Autonomous attitude acquisition mode
+▪▪Tracking mode
+–
+– Automatic after acquisition mode or by AOCS 
+telecommand to resume attitude without passing 
+through acquisition phase.
+
+ASS
+A-STR AND AA-STR
+CHARACTERISTICS
+A-STR
+AA-STR
+Detector
+MPP CCD
+HAS APS
+FOV
+16.4 x 16.4°
+20 x 20°
+Dynamic range
+1.5Mi to 5.5Mi
+1.5Mi to 5.5Mi
+Number of Tracked Stars
+Up to 10
+Up to 15
+Tracking rate
+Up to 2°/sec
+Up to 2°/sec
+Acquisition time (from Lost in Space)
+Lower than 6 sec. 
+Lower than 9 sec.
+SEU Tolerance
+up to 17000 protons/cm2/sec (depending on SW settings)
+up to 170000 protons/cm2/sec (depending on SW settings)
+Update rate
+10Hz, 4Hz
+10Hz, 8Hz, 5Hz, 4Hz
+ACCURACY (3SIGMA; EOL; FULL TEMPERATURE RANGE; 10HZ UPDATED RATE)
+Bias (Gaussian distribution)
+8.25 arcsec (pitch/yaw) 11.1 (roll)
+8.25 arcsec (pitch/yaw) 11.1 (roll)
+Low Frequency Error (FOV error)
+<3.6 arcsec (pitch & yaw)
+<21 arcsec (roll)
+<3.3 arcsec( pitch & yaw)
+<15.6 arcsec (roll)
+NEA (random error)
+@0.1°/sec tracking rate
+<6 arcsec (pitch & yaw)
+<63 arcsec (roll)
+<6 arcsec (pitch & yaw)
+<49.4 arcsec (roll)
+NEA (random error)
+@0.5°/sec tracking rate
+<7.5 arcsec (pitch & yaw)
+<78 arcsec roll
+<8.4 arcsec (pitch & yaw)
+<68.2 arcsec (roll)
+NEA (random error)
+@ 2°/sec tracking rate
+<25 arcsec (pitch & yaw)
+<230 arcsec roll
+<34 arcsec (pitch & yaw)
+<288 arcsec (roll)
+DATA INTERFACES
+Telecommand & Telemetry
+MIL-STD-1553B; RS 422
+MIL-STD-1553B; RS 422
+Interface for EGSE
+Custom
+Custom
+MECHANICAL INTERFACES
+Size (L x W  x H)
+195mm x 175mm x 290.5mm 
+(40 deg SEA baffle)
+164mm x 156mm x 348mm 
+(25 deg SEA baffle)
+Mass
+3.55kg with 40° SEA baffle GEO orbit radiation shielding
+2.6kg with 26° SEA baffle GEO orbit radiation shielding
+ELECTRICAL INTERFACES
+Power Supply
+20V to 50V
+60V to 110V, 20V to 52V
+Power consumption
+8.9W @ 20°C 
+13.5W @ 60°C
+5.6W @ 20°C 
+12.6W @ 60°C
+ENVIRONMENTAL CONDITIONS
+Operational temperature
+-30°C to +60°C
+-30°C to +60°C
+Storage temperature
+-35°C to +70°C
+-35°C to +65°C
+Pressure
+Ambient or space vacuum
+Ambient or space vacuum
+Vibrations levels
+Design level Higher than 22g rms Qualification level 17.5g rms all axis 
+Shock: 2000g
+Design level Higher than 22g rms Qualification level 17.03g rms all 
+axis Shock: 2000g
+Lifetime
+18 years in GEO orbit 
+18 years in GEO orbit
+Reliability
+1346 fits with Level 1 parts
+2415 fits with Level 2 parts
+850 fits with Level 1 parts
+1950 fits with Level 2 parts
+For more information please email infomarketing@leonardocompany.com
+Leonardo S.p.a.
+Via delle Officine Galileo, 1 - 50013 Campi Bisenzio (Fl) - Italy - Tel: +39 055 89501 - Fax: +39 055 8950600
+This publication is issued to provide outline information only and is supplied without liability for errors or omissions. No part of it may be reproduced or used unless 
+authorised in writing.
+We reserve the right to modify or revise all or part of this document without notice.
+2017 © Leonardo S.p.a.
+leonardocompany.com
+MM07786 1-17
+

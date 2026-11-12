@@ -1,0 +1,238 @@
+{
+ "id": "basler_dart_daa1920_160um",
+ "name": "Basler dart daA1920-160um USB3 board-level camera (S-mount)",
+ "category": "payload",
+ "subcategory": "camera",
+ "vendor": "Basler",
+ "model": "daA1920-160um",
+ "dimensions_mm": {
+  "x": 29.3,
+  "y": 29,
+  "z": 19.9
+ },
+ "mass_g": 15,
+ "source": {
+  "type": "datasheet",
+  "url": "https://resources.ampheo.com/static/datasheets/basler/108230.pdf",
+  "document": {
+   "title": "Basler dart daA1920-160um (S-mount) data sheet",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "payload",
+   "thermal"
+  ],
+  "notes": "19.9 x 29.3 x 29 mm (L x W x H), 15 g typical, 1920 x 1200 px, USB 3.0, 1.8 W typical, 0 to 50 C. The S-mount boss proportions are drawn from the photo; the outer size is the datasheet's."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "Germany",
+ "distributors": [
+  "Basler shop",
+  "distributors"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "distributor",
+  "source": null
+ },
+ "electrical": {
+  "power_W": {
+   "nominal": 1.8
+  },
+  "interfaces": [
+   "USB 3.0"
+  ]
+ },
+ "payload": {
+  "type": "monochrome CMOS",
+  "resolution_px": [
+   1920,
+   1200
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": 0,
+   "max": 50
+  }
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   29.3,
+   29.0,
+   19.9
+  ],
+  "mesh_volume_mm3": 9181.3,
+  "watertight": true,
+  "render_kind": "camera_box_lens",
+  "effective_density_g_cm3": 1.634,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    },
+    {
+     "name": "lens_barrel",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__lens_barrel.stl"
+    },
+    {
+     "name": "glass",
+     "color": [
+      0.45,
+      0.65,
+      0.85
+     ],
+     "file": "bodies/part__glass.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 180
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    29.3,
+    29.0,
+    19.9
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "mount_plate",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/mount_plate.stl"
+    },
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "lens_barrel",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/lens_barrel.stl"
+    },
+    {
+     "name": "grip_rings",
+     "color": [
+      0.24,
+      0.26,
+      0.3
+     ],
+     "file": "bodies_detail/grip_rings.stl"
+    },
+    {
+     "name": "bezel",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/bezel.stl"
+    },
+    {
+     "name": "glass",
+     "color": [
+      0.45,
+      0.65,
+      0.85
+     ],
+     "file": "bodies_detail/glass.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "USB"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://resources.ampheo.com/static/datasheets/basler/108230.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

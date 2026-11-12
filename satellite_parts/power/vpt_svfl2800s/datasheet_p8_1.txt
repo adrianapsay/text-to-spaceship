@@ -1,0 +1,2228 @@
+Sales Information
+Phone:(425) 353-3010
+Fax: (425) 353-4030
+SVFL2800S – 13.0
+E-mail: vptsales@vptpower.com
+Web: www.vptpower.com
+Page 1
+SVFL2800S SERIES
+SPACE QUALIFIED HYBRID DC-DC CONVERTERS
+SVFL2800S – Exact marking may differ from that shown
+Models Available
+Input: 16 V to 40 V continuous, 50 V transient
+Single output: +3.3 V, +5 V, +6.3 V, +12 V, +15 V
+Wattage: 66 – 120 W
+MIL-PRF-38534: Class H and Class K, RHA level L
+1.0 DESCRIPTION
+The SVFL Series of space qualified DC-DC converters is
+specifically designed for the harsh radiation environment of
+space applications. Performance is guaranteed through the use 
+of hardened semiconductor components, radiation lot 
+acceptance testing (RLAT) of non-hardened components, and 
+analysis. The SVFL Series has been characterized for Total 
+Ionizing Dose (TID) performance including Enhanced Low Dose 
+Rate Sensitivity (ELDRS) and for Single Event Effects (SEE) 
+according to VPT’s DLA-approved Radiation Hardness 
+Assurance (RHA) plan per MIL-PRF-38534, Appendix G, 
+Level L. Characterization is performed at both the component 
+level and at the SVFL Series hybrid converter level. 
+The SVFL Series of DC-DC converters is radiation tolerant and 
+suited for use in low Earth orbit (LEO), medium Earth orbit 
+(MEO), geostationary orbit (GEO), deep space, and launch 
+vehicle programs.
+1.1 FEATURES
+• Up to 120 W output power
+• Wide input voltage range: 16 V to 40 V plus 50 V transient
+• Continuous operation over full military temperature range of 
+-55 °C to +125 °C with no power derating
+• Very low output noise
+• Parallel up to 5 units with current sharing
+• Output voltage trim up +10% or down -20%
+• Radiation immune magnetic feedback circuit
+• No use of optoisolators
+• Undervoltage lockout
+• Current limit protection / short circuit protection
+1.2 SPACE LEVEL CHARACTERIZATIONS
+• Guaranteed TID performance to 60 krad(Si) including LDR
+• SEE performance to 44 MeV/mg/cm2. Transients are fully 
+characterized for cross section and magnitude
+• Worst-case analysis, stress, radiation, reliability reports available
+1.3 MANUFACTURING AND COMPLIANCE
+• Qualified to MIL-PRF-38534 Class H 
+DLA SMD # 5962-11217
+• MIL-PRF-38534 element evaluated components
+• MIL-STD-461 when used with appropriate VPT EMI filter 
+• Manufactured in an ISO9001, MIL-PRF-38534 Class H and Class K 
+facility
+• MIL-STD-883
+1.4 PACKAGING
+• Low-profile: 3.005” x 1.505” x 0.400” 
+• Max weight: 86 g
+• Industry standard pinout
+• Precision seam-welded hermetic metal case
+• Standard and optional side-flanged versions available
+1.5 ACCESSORIES
+• DVME28 EMI Filter
+• Use with Thermal Pad TP-001
+
+Sales Information
+Phone:(425) 353-3010
+Fax: (425) 353-4030
+SVFL2800S - 13.0
+E-mail: vptsales@vptpower.com
+Web: www.vptpower.com
+Page 2
+SVFL2800S Series
+2.0 DIAGRAMS
+2.1 BLOCK DIAGRAM
+2.2 CONNECTION DIAGRAM
+3.0 SPECIFICATIONS
+3.1 ABSOLUTE MAXIMUM RATINGS 
+Absolute Maximum Ratings
+Input Voltage (Continuous):
+-0.5 V to 40 V
+Operating Temperature (Full Load):
+-55 °C to +125 °C
+Input Voltage (Transient, 1 second):
+-0.5 V to 50 V
+Storage Temperature:
+-65 °C to +150 °C
+ESD Rating per MIL-PRF-38534:
+3A
+Lead Solder Temperature (10 seconds):
+270 °C
+UNDER
+VOLTAGE
+SHUTDOWN
+PRIMARY
+HOUSEKEEPING
+SUPPLY
+PWM
+CONTROL
+VOLTAGE AND
+CURRENT
+AMPLIFIERS
+SECONDARY
+HOUSEKEEPING
+SUPPLY
+28VIN
+INCOM
+Q1
++VOUT
+OUTCOM
+INH1
+FEEDBACK
+MAGNETIC
+SYNCIN
+SYNCOUT
+TRIM
++S
+-S
+SHARE
+INH2
+2
+INCOM
+4
+INH1
+1
+28VIN
+7
++VOUT
+8
+OUTCOM
+LOAD
++-
+28 Vdc
+12
+28VOUT
+7
+OUTCOM
+1
+28VIN
+6
+INCOM
+CASE
+-S
+9
++S
+10
+INH2
+12
+SYNCIN
+6
+28VIN
+2
+28VIN
+3
+INCOM
+4
+INCOM
+5
+28VOUT
+11
+28VOUT
+10
+OUTCOM
+9
+OUTCOM
+8
+DVME28 EMI FILTER
+SVFL2800S DC-DC CONVERTER
+
+Sales Information
+Phone:(425) 353-3010
+Fax: (425) 353-4030
+SVFL2800S - 13.0
+E-mail: vptsales@vptpower.com
+Web: www.vptpower.com
+Page 3
+SVFL2800S Series
+3.2 PERFORMANCE SPECIFICATIONS
+Tcase = -55 °C to +125 °C, Vin = +28 V ± 5%, Full Load, Unless Otherwise Specified
+SVFL283R3S
+SVFL2805S
+Parameter
+Conditions
+Min
+Typ
+Max
+Min
+Typ
+Max
+Units
+INPUT
+Voltage
+Continuous
+16
+28
+40
+16
+28
+40
+V
+Transient, 1 sec2
+-
+-
+50
+-
+-
+50
+V
+Current
+INH 1 < 1.5 V
+-
+1
+6
+-
+1
+6
+mA
+INH 2 < 1 V
+-
+40
+70
+-
+40
+70
+mA
+No Load
+-
+60
+120
+-
+65
+120
+mA
+Ripple Current
+20 Hz to 10 MHz
+-
+25
+80
+-
+35
+80
+mApp
+Undervoltage Lockout
+Turn-On
+14.5
+-
+16.0
+14.5
+-
+16.0
+V
+Turn-Off2
+13.5
+-
+15.5
+13.5
+-
+15.5
+V
+OUTPUT STATIC
+Voltage
+Tcase = 25 °C
+3.267
+3.3
+3.333
+4.95
+5
+5.05
+V
+Tcase = -55 °C to +125 °C
+3.25
+3.3
+3.35
+4.925
+5
+5.075
+V
+Power4
+0
+-
+66
+0
+-
+100
+W
+Current4
+0
+-
+20
+0
+-
+20
+A
+Ripple Voltage
+20 Hz to 10 MHz
+-
+15
+80
+-
+15
+80
+mVpp
+Line Regulation
+Vin = 16 V to 40 V
+-
+2
+20
+-
+2
+20
+mV
+Load Regulation
+No Load to Full Load
+-
+2
+80
+-
+2
+100
+mV
+Load Fault Power Dissipation
+Overload2
+-
+-
+50
+-
+-
+50
+W
+Short Circuit
+-
+-
+50
+-
+-
+50
+W
+OUTPUT DYNAMIC
+Load Step, Half to Full Load
+Output Transient
+-
+140
+400
+-
+160
+400
+mVpk
+Recovery1
+-
+260
+500
+-
+260
+500
+µs
+Line Step2, Vin = 16 V to 40 V
+Output Transient
+-
+300
+600
+-
+300
+600
+mVpk
+Recovery1
+-
+300
+500
+-
+300
+500
+µs
+Turn-On, Vin = 0 to 28 V
+Delay 
+-
+5
+20
+-
+5
+20
+ms
+Overshoot 
+-
+0
+15
+-
+0
+25
+mVpk
+FUNCTION
+INH 1 Pin Input2
+Output Inhibited
+0
+-
+1.5
+0
+-
+1.5
+V
+INH 2 Pin Input2
+Output Inhibited
+0
+-
+1
+0
+-
+1
+V
+INH 1 Pin Open Circuit Voltage2
+Output Enabled
+10.5
+-
+15
+10.5
+-
+15
+V
+INH 2 Pin Open Circuit Voltage2
+Output Enabled
+4
+-
+12
+4
+-
+12
+V
+Voltage Trim Range
+-10
+-
++10
+-20
+-
++10
+%
+SHARE Pin Voltage2
+2
+-
+4
+2
+-
+4
+V
+SYNC Frequency Range
+500
+-
+600
+500
+-
+600
+kHz
+GENERAL
+Efficiency
+67
+72
+-
+72
+77
+-
+%
+Capacitive Load2
+-
+-
+1000
+-
+-
+1000
+µF
+Switching Frequency
+425
+525
+600
+425
+525
+600
+kHz
+Isolation
+500 V DC, Tcase = 25 °C
+100
+-
+-
+100
+-
+-
+MΩ
+Weight
+Standard and Optional Side-Flanged 
+-
+-
+86
+-
+-
+86
+g
+MTBF (MIL-HDBK-217F) 5
+SF @ Tcase = 55 °C
+-
+673
+-
+-
+673
+-
+kHr
+POST-RAD END-OF-LIFE3
+Input Ripple Current
+-
+-
+140
+-
+-
+140
+mApp
+Output Voltage
+Tcase = -55 °C to +125 °C
+3.24
+-
+3.35
+4.89
+-
+5.10
+V
+1. Time for output voltage to settle within 1% of steady-state value.
+2. Verified by initial electrical design verification. Post design verification, parameter shall be guaranteed to the limits specified.
+3. End-of-Life performance includes aging and radiation degradation and is within standard limits except where noted.
+4. Derate linearly to 0 at 135 °C.
+5.   Correction factor of 0.12 added to ceramic capacitors. 
+
+Sales Information
+Phone:(425) 353-3010
+Fax: (425) 353-4030
+SVFL2800S - 13.0
+E-mail: vptsales@vptpower.com
+Web: www.vptpower.com
+Page 4
+SVFL2800S Series
+3.2 PERFORMANCE SPECIFICATIONS (CONTINUED)
+Tcase = -55 °C to +125 °C, Vin = +28 V ± 5%, Full Load, Unless Otherwise Specified
+SVFL286R3S
+SVFL2815S
+Parameter
+Conditions
+Min
+Typ
+Max
+Min
+Typ
+Max
+Units
+INPUT
+Voltage
+Continuous
+16
+28
+40
+16
+28
+40
+V
+Transient, 1 sec2
+-
+-
+50
+-
+-
+50
+V
+Current
+INH 1 < 1.5 V
+-
+1
+6
+-
+1
+6
+mA
+INH 2 < 1 V
+-
+40
+70
+-
+40
+70
+mA
+No Load
+-
+80
+120
+-
+80
+120
+mA
+Ripple Current
+20 Hz to 10 MHz
+-
+30
+80
+-
+30
+80
+mApp
+Undervoltage Lockout
+Turn-On
+14.5
+-
+16.0
+14.5
+-
+16.0
+V
+Turn-Off2
+13.5
+-
+15.5
+13.5
+-
+15.5
+V
+OUTPUT STATIC
+Voltage
+Tcase = 25 °C
+6.237
+6.3
+6.363
+11.88
+12
+12.12
+V
+Tcase = -55 °C to +125 °C
+6.205
+6.3
+6.395
+11.82
+12
+12.18
+V
+Power4
+-
+-
+100
+0
+-
+110
+W
+Current4
+-
+-
+15.9
+0
+-
+9.2
+A
+Ripple Voltage
+20 Hz to 10 MHz
+-
+15
+80
+-
+25
+80
+mVpp
+Line Regulation
+Vin = 16 V to 40 V
+-
+25
+80
+-
+2
+20
+mV
+Load Regulation
+No Load to Full Load
+-
+2
+100
+-
+2
+120
+mV
+Load Fault Power Dissipation
+Overload2
+-
+-
+50
+-
+-
+50
+W
+Short Circuit
+-
+-
+50
+-
+-
+50
+W
+OUTPUT DYNAMIC
+Load Step, Half to Full Load
+Output Transient
+-
+150
+300
+-
+570
+1000
+mVpk
+Recovery1
+-
+200
+350
+-
+290
+500
+µs
+Line Step2, Vin = 16 V to 40 V
+Output Transient
+-
+150
+300
+-
+600
+1200
+mVpk
+Recovery1
+-
+150
+300
+-
+300
+500
+µs
+Turn-On, Vin = 0 to 28 V
+Delay 
+-
+5
+20
+-
+5
+20
+ms
+Overshoot 
+-
+0
+25
+-
+0
+50
+mVpk
+FUNCTION
+INH 1 Pin Input2
+Output Inhibited
+0
+-
+1.5
+0
+-
+1.5
+V
+INH 2 Pin Input2
+Output Inhibited
+0
+-
+1
+0
+-
+1
+V
+INH 1 Pin Open Circuit Voltage2
+Output Enabled
+10.5
+-
+15
+10.5
+-
+15
+V
+INH 2 Pin Open Circuit Voltage2
+Output Enabled
+4
+-
+12
+4
+-
+12
+V
+Voltage Trim Range
+-20
+-
++10
+-20
+-
++10
+%
+SHARE Pin Voltage2
+2
+-
+4
+2
+-
+4
+V
+SYNC Frequency Range
+500
+-
+600
+500
+-
+600
+kHz
+GENERAL
+Efficiency
+74
+79
+-
+79
+85
+-
+%
+Capacitive Load2
+-
+-
+1000
+-
+-
+500
+µF
+Switching Frequency
+425
+525
+600
+425
+525
+600
+kHz
+Isolation
+500 V DC, Tcase = 25 °C
+100
+-
+-
+100
+-
+-
+MΩ
+Weight
+Standard and Optional Side-Flanged
+-
+-
+86
+-
+-
+86
+g
+MTBF (MIL-HDBK-217F) 5
+SF @ Tcase = 55 °C
+-
+673
+-
+-
+673
+-
+kHr
+POST-RAD END-OF-LIFE3
+Input Ripple Current
+-
+-
+140
+-
+-
+140
+mApp
+Output Voltage
+Tcase = -55 °C to +125 °C
+6.155
+-
+6.411
+11.66
+-
+12.28
+V
+1. Time for output voltage to settle within 1% of steady-state value.
+2. Verified by initial electrical design verification. Post design verification, parameter shall be guaranteed to the limits specified.
+3. End-of-Life performance includes aging and radiation degradation and is within standard limits except where noted.
+4. Derate linearly to 0 at 135 °C.
+5.   Correction factor of 0.12 added to ceramic capacitors. 
+
+Sales Information
+Phone:(425) 353-3010
+Fax: (425) 353-4030
+SVFL2800S - 13.0
+E-mail: vptsales@vptpower.com
+Web: www.vptpower.com
+Page 5
+SVFL2800S Series
+3.2 PERFORMANCE SPECIFICATIONS
+Tcase = -55 °C to +125 °C, Vin = +28 V ± 5%, Full Load, Unless Otherwise Specified
+SVFL2815S
+Parameter
+Conditions
+Min
+Typ
+Max
+Units
+INPUT
+Voltage
+Continuous
+16
+28
+40
+V
+Transient, 1 sec2
+-
+-
+50
+V
+Current
+INH 1 < 1.5 V
+-
+1
+6
+mA
+INH 2 < 1 V
+-
+40
+70
+mA
+No Load
+-
+85
+120
+mA
+Ripple Current
+20 Hz to 10 MHz
+-
+30
+80
+mApp
+Undervoltage Lockout
+Turn-On
+14.5
+-
+16.0
+V
+Turn-Off2
+13.5
+-
+15.5
+V
+OUTPUT STATIC
+Voltage
+Tcase = 25 °C
+14.85
+15
+15.15
+V
+Tcase = -55 °C to +125 °C
+14.775
+15
+15.225
+V
+Power4
+0
+-
+120
+W
+Current4
+0
+-
+8
+A
+Ripple Voltage
+20 Hz to 10 MHz
+-
+25
+80
+mVpp
+Line Regulation
+Vin = 16 V to 40 V
+-
+2
+20
+mV
+Load Regulation
+No Load to Full Load
+-
+2
+120
+mV
+Load Fault Power Dissipation
+Overload2
+-
+-
+50
+W
+Short Circuit
+-
+-
+50
+W
+OUTPUT DYNAMIC
+Load Step, Half to Full Load
+Output Transient
+-
+640
+1000
+mVpk
+Recovery1
+-
+260
+500
+µs
+Line Step2, Vin = 16 V to 40 V
+Output Transient
+-
+600
+1200
+mVpk
+Recovery1
+-
+300
+500
+µs
+Turn-On, Vin = 0 to 28 V
+Delay 
+-
+5
+20
+ms
+Overshoot 
+-
+0
+50
+mVpk
+FUNCTION
+INH 1 Pin Input2
+Output Inhibited
+0
+-
+1.5
+V
+INH 2 Pin Input2
+Output Inhibited
+0
+-
+1
+V
+INH 1 Pin Open Circuit Voltage2
+Output Enabled
+10.5
+-
+15
+V
+INH 2 Pin Open Circuit Voltage2
+Output Enabled
+4
+-
+12
+V
+Voltage Trim Range
+-20
+-
++10
+%
+SHARE Pin Voltage2
+2
+-
+4
+V
+SYNC Frequency Range
+500
+-
+600
+kHz
+GENERAL
+Efficiency
+80
+85
+-
+%
+Capacitive Load2
+-
+-
+500
+µF
+Switching Frequency
+425
+525
+600
+kHz
+Isolation
+500 V DC, Tcase = 25 °C
+100
+-
+-
+MΩ
+Weight
+Standard and Optional Side-Flanged 
+-
+-
+86
+g
+MTBF (MIL-HDBK-217F) 5
+SF @ Tcase = 55 °C
+-
+673
+-
+kHr
+POST-RAD END-OF-LIFE3
+Input Ripple Current
+-
+-
+140
+mApp
+Output Voltage
+Tcase = -55 °C to +125 °C
+14.565
+-
+15.355
+V
+1. Time for output voltage to settle within 1% of steady-state value.
+2. Verified by initial electrical design verification. Post design verification, parameter shall be guaranteed to the limits specified.
+3. End-of-Life performance includes aging and radiation degradation and is within standard limits except where noted.
+4. Derate linearly to 0 at 135 °C.
+5.   Correction factor of 0.12 added to ceramic capacitors. 
+
+Sales Information
+Phone:(425) 353-3010
+Fax: (425) 353-4030
+SVFL2800S - 13.0
+E-mail: vptsales@vptpower.com
+Web: www.vptpower.com
+Page 6
+SVFL2800S Series
+4.0 PERFORMANCE CURVES
+4.1.1
+SVFL283R3S Efficiency (Typical, 25 °C)
+4.1.2
+SVFL2805S Efficiency (Typical, 25 °C)
+4.1.3
+SVFL286R3S Efficiency (Typical, 25 °C)
+4.1.4
+SVFL2812S Efficiency (Typical, 25 °C)
+                                                                                                         
+4.1.5
+SVFL2815S Efficiency (Typical, 25 °C)
+60
+64
+68
+72
+76
+80
+0
+20
+40
+60
+16 V
+28 V
+40 V
+Efficiency (%)
+Output Power (W)
+64
+68
+72
+76
+80
+84
+0
+20
+40
+60
+80
+100
+16 V
+28 V
+40 V
+Efficiency (%)
+Output Power (W)
+68
+72
+76
+80
+84
+88
+0
+20
+40
+60
+80
+100
+120
+16 V
+28 V
+40 V
+Efficiency (%)
+Output Power (W)
+68
+72
+76
+80
+84
+88
+0
+20
+40
+60
+80
+100
+120
+16 V
+28 V
+40 V
+Efficiency (%)
+Output Power (W)
+
+Sales Information
+Phone:(425) 353-3010
+Fax: (425) 353-4030
+SVFL2800S - 13.0
+E-mail: vptsales@vptpower.com
+Web: www.vptpower.com
+Page 7
+SVFL2800S Series
+5.0 MECHANICAL OUTLINES AND PINOUT
+Standard Package:
+1. Tolerances are ±0.005” unless otherwise stated.
+2. Case temperature is measured on the center of the baseplate surface.
+3. Mounting holes are not threaded. Recommended fastener is # 4-40.
+4. Materials: Case (Steel, gold over nickel plated); Cover (Kovar, nickel plated); Pin (Copper-cored alloy 52, gold over nickel plated); Pin Seals (Glass).
+Pin
+Function
+Pin
+Function
+Pin
+Function
+Pin
+Function
+1
+28VIN
+4
+INH1
+7
++VOUT
+10
++S
+2
+INCOM
+5
+SYNC OUT
+8
+OUTCOM
+11
+SHARE
+3
+TRIM
+6
+SYNC IN
+9
+-S
+12
+INH2
+2.500in 63.50mm
+2.760in 70.10mm
+3.005
+MAX
+76.33
+1.505 38.23 MAX
+0.120in 3.05mm
+4X
+0.128in±0.002
+3.25mm±0.05
+0.230in±0.010
+5.84mm±0.25
+0in 0mm
+0.120in 3.05mm
+0.130in 3.30mm
+0.330in 8.38mm
+0.530in 13.46mm
+0.730in 18.54mm
+0.930in 23.62mm
+1.130in 28.70mm
+1.260in 32mm
+0.050in 1.27mm
+0.220in 5.59mm
+0.400in 10.16mm MAX
+12X PIN
+0.040in±0.002
+1.02mm±0.05
+12X SEAL
+0.100in±0.002
+2.54mm±0.05
+BASEPLATE
+SURFACE
+(BOTTOM)
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+
+Sales Information
+Phone:(425) 353-3010
+Fax: (425) 353-4030
+SVFL2800S - 13.0
+E-mail: vptsales@vptpower.com
+Web: www.vptpower.com
+Page 8
+SVFL2800S Series
+5.0 MECHANICAL OUTLINES AND PINOUT (CONTINUED)
+Optional Side-Flanged Package:
+1. Tolerances are ±0.005” unless otherwise stated.
+2. Case temperature is measured on the center of the baseplate surface.
+3. Mounting holes are not threaded. Recommended fastener is # 4-40.
+4. Materials: Case (Steel, gold over nickel plated); Cover (Kovar, nickel plated); Pin (Copper-cored alloy 52, gold over nickel plated); Pin Seals (Glass).
+Pin
+Function
+Pin
+Function
+Pin
+Function
+Pin
+Function
+1
+28VIN
+4
+INH1
+7
++VOUT
+10
++S
+2
+INCOM
+5
+SYNC OUT
+8
+OUTCOM
+11
+SHARE
+3
+TRIM
+6
+SYNC IN
+9
+-S
+12
+INH2
+1.505in 38.23mm MAX
+2.500in 63.50mm
+4X 0.250in
+6.35mm
+4X
+0.142in±0.003
+3.61mm±0.08
+0.230in±0.010
+5.84mm±0.25
+0in 0mm
+0.375in 9.53mm
+0.675in 17.15mm
+1.825in 46.36mm
+2.125in 53.98mm
+0in 0mm
+0.125in 3.18mm
+0.250in 6.35mm
+0.250in 6.35mm
+0.450in 11.43mm
+0.650in 16.51mm
+0.850in 21.59mm
+1.050in 26.67mm
+1.250in 31.75mm
+1.625in 41.28mm
+1.750in 44.45mm
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+0.050in 1.27mm
+0.220in 5.59mm
+0.400in 10.16mm MAX
+12X SEAL
+0.100in±0.002
+2.54mm±0.05
+12X PIN
+0.040in±0.002
+1.02mm±0.05
+BASEPLATE
+SURFACE
+(BOTTOM)
+
+Sales Information
+Phone:(425) 353-3010
+Fax: (425) 353-4030
+SVFL2800S - 13.0
+E-mail: vptsales@vptpower.com
+Web: www.vptpower.com
+Page 9
+SVFL2800S Series
+6.0 TECHNICAL NOTES
+Please note that many of these functions are also demonstrated in detail on the VPT website in the form of technical video labs.
+6.1 GENERAL INFORMATION
+6.1.1 Topology Description
+The SVFL2800S Series is an isolated, single output, forward converter. It operates over a wide input voltage range and provides a 
+tightly regulated positive output voltage with respect to the OUTCOM pin. Feedback isolation is accomplished using VPT’s proprietary 
+magnetic feedback technology. The converter regulates with zero load, and no minimum load is required. 
+6.1.2 External Components
+The SVFL2800S Series is designed to operate stand-alone in most applications. It does not require any external components for proper 
+operation or to meet the datasheet specifications. Input and output L-C filters are provided internally for low ripple and noise. To further 
+reduce output ripple and noise, a small ceramic capacitor, 1 µF to 10 µF, can be added at the output. Most application-specific ripple 
+requirements can be met with the addition of output capacitors alone. External output capacitance can be added up to the maximum 
+listed in Section 3.2.
+6.1.3 Source Impedance
+The impedance of the 28 V input source can interact with the DC-DC converter and can affect performance. High source impedance is 
+often caused by a long input cable or components added in series with the input. Source resistance will cause a DC voltage drop as the 
+converter draws DC input current. This voltage drop is simply the cable resistance multiplied by the input current at low line. The 
+voltage drop and the actual voltage at the input to the converter will determine the minimum source voltage at which the converter will 
+operate. A high source inductance can interact with the feedback control loop of the converter. VPT’s EMI filters will usually isolate the 
+source and eliminate this problem. In some cases, additional input capacitance will be needed to stabilize the system.
+6.1.4 Output Configurations
+Since the converter is isolated, the output can be configured as a positive or negative voltage. For example, the SVFL2812S model can 
+provide +12 V referenced to OUTCOM or -12 V referenced to +VOUT. 
+The outputs of multiple converters can be stacked in series to provide higher voltages. When outputs of multiple modules are stacked, 
+they naturally share the load. For example, two SVFL2812S converters can be stacked to provide a 24 V output at 220 W.
+6.2 FUNCTION DESCRIPTIONS
+6.2.1 On/Off Control (INH1 and INH2)
+The INH1 (Inhibit 1) pin is a primary-side control pin referenced 
+to INCOM. The INH1 pin must be driven using an open 
+collector or open drain configuration. Pulling the INH1 pin low 
+disables the converter output, removes bias voltage from 
+internal control circuitry, and puts the converter in a state of 
+minimum input current draw. Leaving INH1 open enables the 
+output, allowing the converter to operate normally. The pin 
+must be pulled below 1.5 V to disable the output. An optional 
+capacitor from INH1 to INCOM may be used to delay turn-on. 
+The INH1 pin should be left open if not used. 
+The INH2 (Inhibit 2) pin is a secondary-side control pin referenced to OUTCOM. The INH2 pin must also be driven in an open collector 
+or open drain configuration. Pulling INH2 low to OUTCOM disables the converter output. Internal control circuits, however, remain 
+active. The pin must be pulled below 1.0 V to disable the output. The INH2 pin should be left open if not used.
+
+Sales Information
+Phone:(425) 353-3010
+Fax: (425) 353-4030
+SVFL2800S - 13.0
+E-mail: vptsales@vptpower.com
+Web: www.vptpower.com
+Page 10
+SVFL2800S Series
+6.2.2 Adjusting the Output Voltage (TRIM)
+The output voltage set point of the converter can be adjusted using the TRIM pin. To 
+adjust the output up, connect the trim resistor from TRIM to OUTCOM. To adjust the 
+output down, connect the trim resistor from TRIM to +VOUT. The maximum trim 
+range is -20% and +10% from nominal (±10% for SVFL283R3S only). The 
+appropriate resistor values versus the output voltage are given in the table below. 
+Because the TRIM pin can be sensitive to external noise, the trim resistor should be 
+physically located close to the SVFL converter with short interconnects. The TRIM 
+pin should be left open if not used. When adjusting the output voltage, do not exceed 
+the rated total output power or output current.
+SVFL283R3S
+SVFL2805S
+SVFL286R3S
+SVFL2812S
+SVFL2815S
++Vout (V)
+Rtrim (Ω)
++ Vout (V)
+Rtrim (Ω)
++ Vout (V)
+Rtrim (Ω)
+Rtrim (Ω)
+Rtrim (Ω)
++ Vout (V)
+Rtrim (Ω)
+3.60
+68.3k
+5.5
+35.0k
+6.9
+28.1k
+13.2
+5.80k
+16.50
+1.70k
+3.55
+85.0k
+5.4
+47.5k
+6.8
+36.7k
+13.0
+10.0k
+16.25
+5.00k
+3.50
+110k
+5.3
+68.3k
+6.7
+49.6k
+12.8
+16.2k
+16.00
+10.0k
+3.45
+152k
+5.2
+110k
+6.6
+71.1k
+12.6
+26.6k
+15.75
+18.3k
+3.40
+235k
+5.1
+235k
+6.5
+114k
+12.4
+47.3k
+15.50
+35.0k
+3.35
+485k
+5.0
+—
+6.4
+243k
+12.2
+109k
+15.25
+85.0k
+3.30
+—
+4.9
+225k
+6.3
+-
+12.0
+—
+15.00
+—
+3.25
+135k
+4.8
+100k
+6.2
+367k
+11.8
+454k
+14.75
+475k
+3.20
+55.0k
+4.7
+58.3k
+6.1
+171k
+11.6
+213k
+14.50
+225k
+3.15
+28.3k
+4.6
+37.5k
+6.0
+106k
+11.4
+134k
+14.25
+142k
+3.10
+15.0k
+4.5
+25.0k
+5.9
+72.9k
+11.2
+94.0k
+14.00
+100k
+3.05
+7.00k
+4.4
+16.7k
+5.8
+53.2k
+11.0
+70.1k
+13.75
+75.0k
+3.00
+1.70k
+4.3
+10.7k
+5.7
+40.1k
+10.8
+54.3k
+13.50
+58.3k
+4.2
+6.30k
+5.6
+30.8k
+10.6
+42.9k
+13.25
+46.4k
+4.1
+2.80k
+5.5
+23.8k
+10.4
+34.4k
+13.00
+37.5k
+4.0
+short
+5.4
+18.3k
+10.2
+27.8k
+12.75
+30.6k
+5.3
+13.9k
+10.0
+22.5k
+12.50
+25.0k
+5.2
+10.4k
+9.8
+18.2k
+12.25
+20.5k
+5.1
+7.1k
+9.6
+14.6k
+12.00
+16.7k
+6.2.3 Remote Sense (+S, -S)
+Remote sensing compensates for voltage drops in the output pins and traces by sensing and regulating directly at the load. The remote 
+sense function can compensate for up to a 10% voltage drop (5% in the positive lead and 5% in the negative lead). The sum of the 
+TRIM up and remote sense compensation cannot exceed 10% such that the voltage at the output terminals of the converter does not 
+exceed 110% of the nominal output voltage. If not used, the user should connect +S to +VOUT and –S to OUTCOM at the pins of the 
+converter. 
+6.2.4 Frequency Synchronization (SYNCIN, SYNCOUT)
+The SVFL2800S Series will free run at a switching frequency of approximately 525 kHz, which has been set for optimum converter 
+performance. Frequency synchronization is not necessary unless required by system constraints. The SVFL2800S Series provides a 
+frequency synchronization input (SYNCIN) and output (SYNCOUT), both referenced to INCOM.
+The SYNCIN pin can be driven by an external clock or by the SYNCOUT pin of another SVFL converter. The internal clock and internal 
+power train will operate at the frequency applied to the SYNCIN pin. The SYNCIN pin should be driven with a TTL type 5 V square 
+wave signal. The duty cycle of the square wave should be between 20% and 80%. The SYNCIN pin is internally capacitively-coupled 
+and the internal load is equivalent to 220 pF.  Proper layout and circuit techniques are necessary to prevent noise from being injected 
+into this pin. Synchronized converters should located physically close together and share a low impedance INCOM connection. The 
+SYNCIN pin can be left open or connected to INCOM if not used. 
++
+-
++-
+2.5V
+Ri
+30
+10K
+30
+Rt
++VOUT
+7
++S
+10
+TRIM
+3
+-S
+9
+OUTCOM
+8
+(TRIM DOWN)
+Rtrim
+(TRIM UP)
+Rtrim
+
+Sales Information
+Phone:(425) 353-3010
+Fax: (425) 353-4030
+SVFL2800S - 13.0
+E-mail: vptsales@vptpower.com
+Web: www.vptpower.com
+Page 11
+SVFL2800S Series
+The SYNCOUT pin provides a 5 V quasi-square wave output at either the SYNCIN frequency or the free-running frequency if SYNCIN 
+is not used. The SYNCOUT of a SVFL can be connected to the SYNCIN pin of a second SVFL to synchronize its switching frequency 
+to that of the first SVFL. Similarly, the SYNCOUT of the second SVFL can be connected to SYNCIN of a third SVFL. Subsequent SVFL 
+converters can be connected in this daisy chain arrangement as shown in the figure. SYNCOUT should be left open if not used.
+6.2.5 Parallel Operation (SHARE)
+The SVFL2800S Series provides a SHARE function for active current sharing among paralleled modules. To enable load sharing, 
+connect a single wire between the SHARE pins of all parallel modules. The SHARE pin can be noise sensitive. Paralleled converters 
+should be located physically close to one another and share a low impedance OUTCOM connection. A symmetrical layout of the output 
+traces will improve share accuracy. Frequency synchronization is not required for parallel operation. The SHARE pin should be left 
+open if not used. 
+6.3 PROTECTION FEATURES
+6.3.1 Input Undervoltage Lockout
+The SVFL2800S Series provides input undervoltage lockout protection. For input voltages below the turn-on voltage, the converter will 
+remain off, drawing minimal current from the source. When the input voltage exceeds the turn-on voltage, the converter will start. The 
+lockout circuit is designed to tolerate slow ramping input voltage waveforms. VPT’s proprietary magnetic feedback technology provides 
+bias voltage to all secondary control circuits and control amplifiers before the output starts, ensuring a well-controlled start up 
+sequence.
+2
+INCOM
+4
+INH1
+1
+28VIN
+7
++VOUT
+8
+OUTCOM
+LOAD
++-
+28 Vdc
+12
+28VOUT
+7
+OUTCOM
+1
+28VIN
+6
+INCOM
+CASE
+-S
+9
++S
+10
+SYNCIN
+6
+28VIN
+2
+28VIN
+3
+INCOM
+4
+INCOM
+5
+28VOUT
+11
+28VOUT
+10
+OUTCOM
+9
+OUTCOM
+8
+DVME28 EMI FILTER
+SVFL2800S DC-DC CONVERTER
+CASE
+5
+SYNCOUT
+11
+SHARE
+2
+INCOM
+4
+INH1
+1
+28VIN
+7
++VOUT
+8
+OUTCOM
+-S
+9
++S
+10
+SYNCIN
+6
+SVFL2800S DC-DC CONVERTER
+CASE
+5
+SYNCOUT
+11
+SHARE
+2
+INCOM
+4
+INH1
+1
+28VIN
+7
++VOUT
+8
+OUTCOM
+-S
+9
++S
+10
+SYNCIN
+6
+SVFL2800S DC-DC CONVERTER
+CASE
+11
+SHARE
+
+Sales Information
+Phone:(425) 353-3010
+Fax: (425) 353-4030
+SVFL2800S - 13.0
+E-mail: vptsales@vptpower.com
+Web: www.vptpower.com
+Page 12
+SVFL2800S Series
+6.3.2 Output Soft Start
+The SVFL2800S Series utilizes an output soft-start function to ramp the output in a controlled manner, eliminating output voltage 
+overshoot and limiting inrush current at turn on. A voltage-mode soft-start ensures the output waveform remains consistent regardless 
+of changes in the load current. The output rise time is approximately 4 ms. The soft-start function is active whether the module is turned 
+on with an application of input voltage or from release of the inhibit pin. Under normal conditions, current drawn from the source during 
+turn-on will not exceed the full-load input current. The turn-on delay time is specified from the application of input voltage (or release of 
+the inhibit pin) until the output reaches 90% of its final value.
+6.3.3 Output Overcurrent Protection
+The SVFL2800S Series provides output overcurrent and output short circuit protection. During a load fault condition, a constant output 
+current control circuit reduces the converter duty cycle to limit the output current to approximately 125% its rated value. The converter 
+will continue to provide constant current into any overload or short circuit condition. This feature allows the converter to start into any 
+capacitive load. Recovery is automatic and immediate upon removal of the fault condition. Sustained short circuit or overload operation 
+can cause excessive power dissipation. Care should be taken to control the operating temperature of the converter in this condition.
+6.4 THERMAL CONSIDERATIONS
+The SVFL2800S Series is rated for full power operation at 125 °C. Operation above 125 °C is allowed at reduced power. Specifically, 
+the output power should be to "derated linearly from full power at 125 °C to zero power at 135 °C. The operating temperature of the 
+converter is specified on the baseplate of the converter. The converter is designed to be conduction-cooled, with the baseplate 
+mounted to a heat sink, chassis, PCB or other thermal surface. The internal power dissipating components are mounted to the 
+baseplate of the converter and all heat flow is through the baseplate and mounting flanges. The lid of the converter does not provide a 
+good thermal path. 
+The hybrid DC-DC converter contains many semiconductor components. The maximum temperature rise from junction to case is 15 °C 
+at full load.
+
+Sales Information
+Phone:(425) 353-3010
+Fax: (425) 353-4030
+SVFL2800S - 13.0
+E-mail: vptsales@vptpower.com
+Web: www.vptpower.com
+Page 13
+SVFL2800S Series
+6.5 RADIATION HARDNESS ASSURANCE
+VPT takes a conservative approach to radiation testing to ensure product performance in a space environment. VPT’s DLA-approved 
+Radiation Hardness Assurance (RHA) plan documents VPT’s processes and procedures for guaranteeing the performance of VPT 
+products under various environmental conditions in space including Total Ionizing Dose (TID) and Single-Event Effects (SEE). 
+Additionally, Enhanced Low Dose-Rate Sensitivity (ELDRS) effects are considered for all bipolar ICs used in the hybrid. Hardness is 
+guaranteed by a combination of both hybrid-level characterization and Radiation Lot Acceptance Testing (RLAT) of all sensitive 
+semiconductor piece-parts used within the hybrid.
+6.5.1 Radiation Test and Performance Levels
+Radiation Environment
+Piece Part RLAT
+Hybrid-Level Characterization
+High Dose Rate (HDR)
+60 krad(Si)
+60 krad(Si)
+Total Ionizing Dose (TID)
+Low Dose Rate (LDR)
+160 krad(Si)
+60 krad(Si)
+Destructive (SEB, SEGR, SEL)
+Not applicable
+≥ 44 MeV/mg/cm2
+Single-Event Effects (SEE)
+Non-Destructive (SET, SEU)
+Not applicable
+≥ 44 MeV/mg/cm2
+1.
+Piece-part LDR screening performed only on potentially ELDRS parts (bipolar ICs).
+6.5.2 RHA Plan Summary
+Test
+RHA Plan for SV Series Isolated DC-DC Converters
+Total Ionizing Dose (TID):
+Sensitive semiconductor components undergo RLAT to 60 krad(Si) per MIL-STD-883 Method 1019. Converters are 
+characterized to 60 krad(Si).
+Enhanced Low Dose Rate Sensitivity (ELDRS):
+All bipolar linear ICs are characterized for ELDRS and tested in accordance with MIL-STD-883 test method 1019 
+section 3.13
+Single Event Effects (SEE):
+Converters are characterized to LET ≥ 44 MeV/mg/cm2 for both catastrophic events (SEL, SEB, SEGR) and functional 
+interrupts (SEFI) under heavy ion exposure. Converters are also characterized for cross-section and magnitude of 
+output transients (SET) for at least 3 different LET levels.
+Radiation Lot Acceptance Testing (RLAT): 
+All production lots of sensitive semiconductor components undergo RLAT for TID at HDR and/or LDR as appropriate 
+per part type.
+6.5.3 RHA Designators available on SMD
+The SVFL2800S series converters are available on SMD with RHA level L. See section 8.0 for full SMD number information.
+6.5.4 Supporting Documentation Available (Contact Sales)
+Report
+Description
+Radiation Hardness Assurance Plan:
+DLA-approved RHA plan covering TID, SEE, and ELDRS
+Worst-Case Analysis Report:
+Detailed worst-case analysis including electrical stress/derating limits and guaranteed circuit performance post-radiation and end 
+of life
+Radiation Test Summary Report:
+Overview of piece-part RLAT and hybrid characterization for all guaranteed environments. Also includes SEE cross-section data.
+Reliability Report:
+MTBF report based on MIL-HDBK-217 reliability calculations.
+Thermal Analysis Report:
+Component temperature rise analysis and measurement results.
+
+Sales Information
+Phone:(425) 353-3010
+Fax: (425) 353-4030
+SVFL2800S - 13.0
+E-mail: vptsales@vptpower.com
+Web: www.vptpower.com
+Page 14
+SVFL2800S Series
+7.0 ENVIRONMENTAL SCREENING
+100% tested per MIL-STD-883 as referenced to MIL-PRF-38534.
+Contact sales for more information concerning additional environmental screening and testing options. VPT Inc. reserves the right to 
+ship higher screened or SMD products to meet orders for lower screening levels at our sole discretion unless specifically forbidden by 
+customer contract.
+Test
+MIL-STD-883 Test 
+Method, Condition
+/H+
+(Class H Screening + PIND)
+/KL11,7
+(Non-QML)
+/EM
+(Engineering Model, Non-QML1,6)
+Non-Destructive 
+Bond Pull
+TM2023
+●2
+●
+●2
+Internal Visual
+TM2010, TM2017, TM2032 
+(MIL-STD-750, TM2072, 
+TM2073)
+●
+●
+●
+Temperature 
+Cycling
+TM1010, Condition C
+-65 °C to 150 °C, Ambient
+●
+●
+Constant 
+Acceleration
+TM2001, 3000g, Y1 
+Direction
+●
+●
+PIND3
+TM2020, Condition A
+●2
+●
+Pre Burn-In 
+Electrical
+25 °C
+●
+TM1015, 320 hrs.,
+125 °C, Case Typ
+●
+TM1015, 160 hrs.,
+125 °C, Case Typ
+●
+Burn-In
+24 hrs., 125 °C, Case Typ
+●
+MIL-PRF-38534, Group A
+Subgroups 1-6
+-55 °C, 25 °C, 125 °C4
+●
+●
+Final Electrical
+MIL-PRF-38534, Group A
+Subgroups 1 and 4
+25 °C
+●
+TM1014, Fine Leak,
+Condition A2 or B1
+●
+●
+TM1014, Gross Leak,
+Condition C1 or B2
+●
+●
+Hermeticity 
+(Seal)
+Gross Leak, Dip (No Bomb), 
+Visual Verification
+●
+Radiography5
+TM2012
+●
+External Visual
+TM2009
+●
+●
+●
+1. Non-QML products may not meet all requirements of MIL-PRF-38534.
+2. Not required per MIL-PRF-38534. Test performed for additional product quality assurance.
+3. PIND test Certificate of Compliance included in product shipment.
+4. 100% R&R testing with all test data included in product shipment.
+5. Radiographic test Certificate of Compliance and film(s) or data CD included in product shipment.
+6. Engineering models utilize only the screening specified and are not considered compliant for flight use.
+7.  -KL1 products are identical in every way with Class K products in compliance with MIL-PRF-38534 revision L and later revisions except they contain 
+elements evaluated to the requirements of MIL-PRF-38534 revision K and previous revisions. These devices are not marked with an SMD number or MIL-
+PRF-38534 certification mark and are marked with -KL1 screening code in place of -K.
+
+Sales Information
+Phone:(425) 353-3010
+Fax: (425) 353-4030
+SVFL2800S - 13.0
+E-mail: vptsales@vptpower.com
+Web: www.vptpower.com
+Page 15
+SVFL2800S Series
+8.0 STANDARD MICROCIRCUIT DRAWING (SMD) NUMBERS
+Standard Microcircuit 
+Drawing Number
+SVFL2800S Series 
+Similar Part Number
+5962P1121701HXC 
+5962P1121701HXA
+5962P1121701KXC
+5962P1121701KXA
+5962P1121701HYC 
+5962P1121701HYA
+5962P1121701KYC
+5962P1121701KYA
+SVFL283R3S/H+
+SVFL283R3S/H+-E
+SVFL283R3S/K
+SVFL283R3S/K-E
+SVFL283R3SF/H+
+SVFL283R3SF/H+-E
+SVFL283R3SF/K
+SVFL283R3SF/K-E
+5962P1121702HXC
+5962P1121702HXA
+5962P1121702KXC
+5962P1121702KXA
+5962P1121702HYC
+5962P1121702HYA
+5962P1121702KYC
+5962P1121702KYA
+SVFL2805S/H+
+SVFL2805S/H+-E
+SVFL2805S/K
+SVFL2805S/K-E
+SVFL2805SF/H+
+SVFL2805SF/H+-E
+SVFL2805SF/K
+SVFL2805SF/K-E
+5962P1121705HXC
+5962P1121705HXA
+5962P1121705KXC
+5962P1121705KXA
+5962P1121705HYC
+5962P1121705HYA
+5962P1121705KYC
+                5962P1121705KYA
+SVFL286R3S/H+
+SVFL286R3S/H+-E
+SVFL286R3S/K
+SVFL286R3S/K-E
+SVFL286R3SF/H+
+SVFL286R3SF/H+-E
+SVFL286R3SF/K
+SVFL286R3SF/K-E
+5962P1121703HXC
+5962P1121703HXA
+5962P1121703KXC
+5962P1121703KXA
+5962P1121703HYC
+5962P1121703HYA
+5962P1121703KYC
+5962P1121703KYA
+SVFL2812S/H+
+SVFL2812S/H+-E
+SVFL2812S/K
+SVFL2812S/K-E
+SVFL2812SF/H+
+SVFL2812SF/H+-E
+SVFL2812SF/K
+SVFL2812SF/K-E
+5962P1121704HXC
+5962P1121704HXA
+5962P1121704KXC
+5962P1121704KXA
+5962P1121704HYC
+5962P1121704HYA
+5962P1121704KYC
+5962P1121704KYA
+SVFL2815S/H+
+SVFL2815S/H+-E
+SVFL2815S/K
+SVFL2815S/K-E
+SVFL2815SF/H+
+SVFL2815SF/H+-E
+SVFL2815SF/K
+SVFL2815SF/K-E
+Do not use the SVFL2800S Series similar part number for SMD product acquisition. It is listed for reference only. For exact 
+specifications for the SMD product, refer to the SMD drawing. SMDs can be downloaded from the DLA Land and Maritime (Previously 
+known as DSCC) website at https://landandmaritimeapps.dla.mil/programs/defaultapps.asp. The SMD number listed above represents 
+the Federal Stock Class, Device Type, Device Class Designator, Case Outline, Lead Finish and RHA Designator (where applicable). 
+Please reference the SMD for other screening levels, lead finishes, and radiation levels. All SMD products are marked with a “Q” on the 
+cover as specified by the QML certification mark requirement of MIL-PRF-38534.
+
+Sales Information
+Phone:(425) 353-3010
+Fax: (425) 353-4030
+SVFL2800S - 13.0
+E-mail: vptsales@vptpower.com
+Web: www.vptpower.com
+Page 16
+SVFL2800S Series
+9.0 ORDERING INFORMATION 
+SVFL
+28
+05
+S
+F
+/KL1
+-
+XXX
+1
+2
+3
+4
+5
+6
+7
+(1)
+Product 
+Series
+(2)
+Nominal Input 
+Voltage
+(3)
+Output Voltage
+(4)
+Number of 
+Outputs
+(5)
+Package Option
+(6)
+Screening Code1,2,3,4
+(7)
+Additional 
+Screening 
+Code
+SVFL
+28
+28 Volts
+3R3
+05
+6R3
+12
+15
+3.3 Volts
+5 Volts
+6.3 Volts
+12 Volts
+15 Volts
+S
+Single
+(None)
+F
+Standard
+Side-
+Flanged
+/EM
+/H+
+/KL1
+Engineering Model
+Class H + PIND
+Class K (KL1)
+Contact Sales
+1. Contact the VPT Sales Department for availability of Class H (/H) and KL1 (/KL1) qualified products.
+2. VPT Inc. reserves the right to ship higher screened or SMD products to meet lower screened orders at our sole discretion unless specifically forbidden by customer 
+contract.
+3. Engineering models utilize only the standard screening specified and are not considered compliant for flight use. These models are intended for low volume engineering 
+characterization only and have no guarantee regarding operation in a radiation environment.  The customer must place the following statement on each line item of their 
+purchase order(s) for /EM units when ordering engineering models: 
+“(Customer Name) acknowledges that the /EM unit listed in this line item is not permitted for flight use and will be used for Engineering characterization only.”
+4. -KL1 products are identical in every way with Class K products in compliance with MIL-PRF-38534 revision L and later revisions except they contain elements evaluated to 
+the requirements of MIL-PRF-38534 revision K and previous revisions. These devices are not marked with an SMD number or MIL-PRF-38534 certification mark and are 
+marked with -KL1 screening code in place of -K.
+Please contact your sales representative or the VPT Inc. Sales Department for more information concerning additional environmental 
+screening and testing, different input voltage, output voltage, power requirements, source inspection, and/or special element evaluation 
+for space or other higher quality applications.
+
+Sales Information
+Phone:(425) 353-3010
+Fax: (425) 353-4030
+SVFL2800S - 13.0
+E-mail: vptsales@vptpower.com
+Web: www.vptpower.com
+Page 17
+SVFL2800S Series
+10.0 CONTACT INFORMATION
+To request a quotation or place orders please contact your sales representative or the VPT, Inc. Sales Department at:
+Phone:
+(425) 353-3010
+Fax: 
+(425) 353-4030
+E-mail:
+vptsales@vptpower.com
+All information contained in this datasheet is believed to be accurate, however, no responsibility is assumed for possible errors or 
+omissions. The products or specifications contained herein are subject to change without notice.
+11.0 ADDITIONAL INFORMATION
+Visit the VPT website for additional technical resources, including:
+Product Catalogs
+Application Notes and White Papers
+Technical Video Labs
+Additional Products For Avionics/Military,
+Hi-Rel COTS, and Space Applications
+

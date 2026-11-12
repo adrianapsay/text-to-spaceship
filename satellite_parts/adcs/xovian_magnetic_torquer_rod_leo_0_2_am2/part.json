@@ -1,0 +1,181 @@
+{
+ "id": "xovian_magnetic_torquer_rod_leo_0_2_am2",
+ "name": "Xovian Magnetic Torquer Rod (LEO) 0.2 Am2",
+ "category": "adcs",
+ "subcategory": "magnetorquer",
+ "vendor": "Xovian",
+ "model": "Magnetic Torquer Rod (LEO) 0.2 Am2",
+ "dimensions_mm": {
+  "x": 60.0,
+  "y": 14.0,
+  "z": 14.0
+ },
+ "mass_g": 30.0,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satcatalog.s3.amazonaws.com/components/153/SatCatalog_-_Xovian_-_Magnetic_Torquer_Rod_LEO_0.2_Am2_-_Datasheet.pdf",
+  "document": {
+   "title": "Xovian Magnetic Torquer Rod (LEO) 0.2 Am2 data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-11",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Read from the vendor data sheet (SatCatalog_-_Xovian_-_Magnetic_Torquer_Rod_LEO_0.2_Am2_-_Datasheet.pdf): dimensions \".2 Am2 Power 175 mW @ 5V Operating Temperature -400C to +800C Envelope 60mm X 14mm X 14mm (L, B, H)\"; mass \"m X 14mm (L, B, H) Mass 30 g Mec\". Catalog page lists 0.03 kg.",
+  "found_via": "https://satcatalog.com/component/magnetic-torquer-rod-leo-02-am2/"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "electrical": {
+  "power_W": {
+   "nominal": 0.175
+  },
+  "note": "average power from the catalog page"
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   60.0,
+   14.0,
+   14.0
+  ],
+  "mesh_volume_mm3": 11748.1,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 2.554,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    60.0,
+    14.0,
+    14.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "coil",
+     "color": [
+      0.72,
+      0.45,
+      0.2
+     ],
+     "file": "bodies_detail/coil.stl"
+    },
+    {
+     "name": "windings",
+     "color": [
+      0.62,
+      0.38,
+      0.16
+     ],
+     "file": "bodies_detail/windings.stl"
+    },
+    {
+     "name": "end_caps",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/end_caps.stl"
+    },
+    {
+     "name": "clamps",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/clamps.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://satcatalog.s3.amazonaws.com/components/153/SatCatalog_-_Xovian_-_Magnetic_Torquer_Rod_LEO_0.2_Am2_-_Datasheet.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

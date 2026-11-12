@@ -1,0 +1,3 @@
+url: https://dragonflyaerospace.com/wp-content/themes/dragonfly/assets/images/page-product/product-caiman-1.png
+method: image on page https://dragonflyaerospace.com/products/caiman/
+found by Claude (web search) on 2026-11-11; downloaded by fetch_pass5.py

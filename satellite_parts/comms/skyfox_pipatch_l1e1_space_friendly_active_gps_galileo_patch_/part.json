@@ -1,0 +1,151 @@
+{
+ "id": "skyfox_pipatch_l1e1_space_friendly_active_gps_galileo_patch_",
+ "name": "SkyFox Labs s.r.o. piPATCH-L1E1 - Space-Friendly\u2122 Active GPS+GALILEO Patch Antenna",
+ "category": "comms",
+ "subcategory": "antenna",
+ "vendor": "SkyFox Labs s.r.o.",
+ "model": "piPATCH-L1E1 - Space-Friendly\u2122 Active GPS+GALILEO Patch Antenna",
+ "dimensions_mm": {
+  "x": 98.0,
+  "y": 98.0,
+  "z": 13.0
+ },
+ "mass_g": 50.0,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-skyfox-labs-sro-pipatch-l1e1-active-gpsgalileo-patch-antenna-m93fz3.pdf",
+  "document": {
+   "title": "SkyFox Labs s.r.o. piPATCH-L1E1 - Space-Friendly\u2122 Active GPS+GALILEO Patch Antenna data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-11",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Read from the vendor data sheet (datasheet-skyfox-labs-sro-pipatch-l1e1-active-gpsgalileo-patch-antenna-m93fz3.pdf): dimensions \"rom structure Mass 50 grams Dimensions fitting CubeSat Structure Z+/Z- 98\u00d798\u00d713 mm incl. EMI\"; mass \"d from structure Mass 50 grams D\". Catalog page lists no mass. Electrical / RF values found in the data sheet or page text by pattern (quoted where possible).",
+  "found_via": "https://satsearch.co/products/skyfox-labs-pipatch-l1e1-active-gps-galileo-patch-antenna"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "rf": {
+  "band": "L1"
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   98.0,
+   98.0,
+   14.0
+  ],
+  "mesh_volume_mm3": 131576.0,
+  "watertight": true,
+  "render_kind": "patch_antenna",
+  "effective_density_g_cm3": 0.38,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "patch",
+     "color": [
+      0.72,
+      0.45,
+      0.2
+     ],
+     "file": "bodies/part__patch.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 28
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    98.0,
+    98.0,
+    14.1
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.1
+   ],
+   "bodies": [
+    {
+     "name": "ground_plate",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies_detail/ground_plate.stl"
+    },
+    {
+     "name": "patches",
+     "color": [
+      0.72,
+      0.45,
+      0.2
+     ],
+     "file": "bodies_detail/patches.stl"
+    },
+    {
+     "name": "feeds",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/feeds.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
+  "datasheet_url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-skyfox-labs-sro-pipatch-l1e1-active-gpsgalileo-patch-antenna-m93fz3.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

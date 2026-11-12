@@ -1,0 +1,298 @@
+ 
+ 
+ 
+ 
+ 
+Issue date: 26-Jun-2025 
+Scan the QR code 
+to access most current version 
+DB 00010897-01 
+Page 1 of 2 
+Copyright © 2025 AZUR SPACE Solar Power GmbH 
+ 
+ 
+AZUR SPACE Solar Power GmbH 
+Theresienstrasse 2 
+74072 Heilbronn, Germany 
+E-Mail: sales@azurspace.com 
+Web: www.azurspace.com 
+Certified Company 
+ 
+ 
+SPACE  |  4G32-Advanced (HP) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+32% Quadruple-Junction (QJ)             QJ 4G32-Advanced (HP) 
+III-V Bare Solar Cells & Assemblies         Standard Thickness Devices            
+ 
+Enabling highest power and voltage for space applications 
+ 
+AZUR SPACE’s 4G32-Advanced bare solar cells and solar cell assemblies (“SCA”), or CICs (cell-interconnect-
+coverglass) are the ideal solution for space power applications to reach highest power levels on small areas and 
+at low weight. This 4G32-Advanced technology design offers best-in-class beginning-of-life (BOL) and end-of-life 
+(EOL) performances and exceptionally high voltage, enabling a multitude of options and missions. 
+The 4G32C-Advanced bare cell device is a space-qualified AlInGaP/AlInGaAs/InGaAs/Ge quadruple-junction 
+solar cell originating from a 150 mm germanium (Ge) substrate and provides 32% class efficiency. This device 
+includes AZUR SPACE’s proprietary radiation-hardened design for best EOL performance. Our standard cell 
+features well-proven metallization as well as an improved busbar and grid-design with two contact pads plus one 
+for a discrete bypass diode connection and a standard cell size of 77.44 cm² (~6 cm x ~15 cm, multiple crops per 
+corner, or “half-pipe”). This configuration offers a device with a total bare cell thickness of 245 µm.  The 4G32C 
+solar cell is compatible with an external bypass diode, which is also available from AZUR SPACE together with 
+bare cell orders.   
+The 4G32A assembly includes a bare 77.44 cm2 4G32C-Advanced solar cell, a corner-mounted silicon bypass 
+diode, welded in-plane silver-coated Kovar interconnectors (“ICs”), and a 100 µm AR coated coverglass bonded 
+with space-grade heritage adhesive.  The assembly has a standard size of ~78.62 cm² (glass size) and has a total 
+device thickness of 380 µm.  A digital assembly CAD / CAM STEP file as well as digital device photographs of 
+bare cell or assembly are available upon request. 
+Other non-standard sizes, thicknesses and configurations are also available upon request.  Thickness and mass 
+values and variations are shown below.      
+The 4G32-Advanced technology, cells and assemblies are ECSS-E-ST-20-08C (Rev. 1) qualified.  These devices 
+are all produced in our mature MRL-10 Heilbronn facility.  Our technology and products have demonstrated in-
+orbit TRL-9 level heritage.  AZUR SPACE is certified to ISO 9001:2015 (QMS), EN 9100:2018 (QMS, European 
+equivalent to AS 9100D), as well as ISO 14001:2015 (Environmental) and ISO 45001:2018 (Health & Safety).    
+AZUR SPACE Product Identifiers 
+Bare Cell 
+Assembly (SCA / CIC) 
+AZUR SPACE Material (Part) Number 
+82902 
+82903 
+AZUR SPACE Drawing Number 
+ZP-00010238 
+ZP-00010239 
+Representative Bare Cell 
+Representative Assembly 
+
+ 
+ 
+ 
+ 
+ 
+Issue date: 26-Jun-2025 
+Scan the QR code 
+to access most current version 
+DB 00010897-01 
+Page 2 of 2 
+Copyright © 2025 AZUR SPACE Solar Power GmbH 
+ 
+ 
+AZUR SPACE Solar Power GmbH 
+Theresienstrasse 2 
+74072 Heilbronn, Germany 
+E-Mail: sales@azurspace.com 
+Web: www.azurspace.com 
+Certified Company 
+ 
+ 
+SPACE  |  4G32-Advanced (HP) 
+32% Quadruple-Junction Bare Solar Cells & Assemblies 
+QJ 4G32-Advanced (HP)                                           Standard Thickness Devices 
+   
+Design and Mechanical Data  4G32C-Adv. Bare Cell 
+4G32A-Adv. Assembly (SCA / CIC) 
+AZUR SPACE Material (Part) Number 
+82902 
+82903 
+Base Material 
+AlInGaP/AllnGaAs/InGaAs/Ge 
+AlInGaP/AllnGaAs/InGaAs/Ge 
+AR-Coating 
+TiO2/Al2O3 
+TiO2/Al2O3 
+Outer Dimensions (mm) 
+148.06 (± 0.1) x 60.56 (± 0.1) 
+148.26 (± 0.1) x 60.76 (± 0.1) 
+Cell Total Area (cm2) 
+77.44 
+78.62 glassed area (cell area is 77.44) 
+Average Weight 
+≤ 134 mg/cm2  /  10.4 grams 
+≤ 175 mg/cm2  /  13.6 grams 
+Thickness (µm) 
+245 (± 25) 
+380 (± 50) 
+Coverglass 
+n/a 
+100 µm AR coated 
+Contacts 
+2x front side pads (plus diode pad) 
+3x Interconnects  
+Interconnect Configuration 
+n/a 
+In-Plane 
+Interconnector Material 
+n/a 
+Silver (Ag) coated Kovar 
+Interconnector Dimensions 
+n/a 
+8.1 mm x 12.89 mm x 25 µm 
+ 
+Typical Electrical 
+Performance 
+BOL 
+5E13 
+2.5E14 
+5E14 
+1E15 
+1E16 
+Cell 
+CIC 
+Cell 
+CIC 
+Cell 
+CIC 
+Cell 
+CIC 
+Cell 
+CIC 
+Cell 
+CIC 
+Voc 
+[mV] 
+3405 
+3405 
+3320 
+3320 
+3279 
+3279 
+3242 
+3242 
+3187 
+3187 
+2918 
+2918 
+Isc 
+[mA] 
+1153 
+1134 
+1151 
+1132 
+1147 
+1128 
+1144 
+1125 
+1137 
+1118 
+921 
+906 
+Vmp 
+[mV] 
+2970 
+2970 
+2896 
+2896 
+2848 
+2848 
+2807 
+2807 
+2744 
+2744 
+2533 
+2533 
+Imp 
+[mA] 
+1097 
+1078 
+1092 
+1073 
+1087 
+1068 
+1084 
+1065 
+1072 
+1053 
+813 
+799 
+ŋ (1367 W/m2) 
+[%] 
+30.8 
+30.3 
+29.9 
+29.3 
+29.2 
+28.7 
+28.7 
+28.2 
+27.8 
+27.3 
+19.5 
+19.1 
+ŋ (1353 W/m2) 
+[%] 
+31.1 
+30.6 
+30.2 
+29.6 
+29.6 
+29.0 
+29.0 
+28.5 
+28.1 
+27.6 
+19.7 
+19.3 
+QTR 5466-01-01, QTR 0005927-01, QTR 0006412-01. Spectrum: AM0 WRC, 1367 W/m2; T = 25°C, fluence 1 MeV [e/cm²], 
+Other fluences and proton degradation data available on request. Radiation hardness is periodically assessed. 
+ 
+Typical Temperature 
+Coefficients 
+BOL 
+2.5E14 
+5E14 
+1E15 
+Cell or CIC 
+Cell or CIC 
+Cell or CIC 
+Cell or CIC 
+ΔVoc /ΔT 
+[mV/°C] 
+-8.4 
+-8.5 
+-8.8 
+-8.9 
+ΔIsc /ΔT 
+[mA/°C] 
+0.179 
+0.261 
+0.359 
+0.359 
+ΔVmp /ΔT 
+[mV/°C] 
+-8.6 
+-8.7 
+-9.0 
+-9.0 
+ΔImp /ΔT 
+[mA/°C] 
+0.078 
+0.122 
+0.179 
+0.179 
+QTR 5466-01-01, QTR 0005927-0100, QTR 0006412-01-00; Temperature range 28°C – 140°C; fluence 1 MeV [e/cm2]. 
+ 
+Other Information 
+Item 
+Typical Value 
+Diode (Assemblies) 
+External Si Protection 
+Diode 
+Vforward (620 mA) ≤ 0.8 V (T = 25°C ± 3°C) 
+Ireverse (4 V) ≤ 0.1 µA 
+Threshold Absorptivity 
+Absorptivity Value 
+≤ 0.91 (100 µm AR coverglass) 
+Threshold Pull Test 
+Pull Test Values 
+> 1.6 N at 45° (with 12.5 µm Ag strips) 
+> 7.0 N at 0° (with standard Kovar interconnectors) 
+These performance data reflect a defined configuration at a specific mission environment across a large 
+manufacturing population.  Changes in configuration or production order volume may modify typical performance 
+values. 
+Please refer to the AZUR SPACE General Information Sheet for additional information including on-orbit heritage, 
+quality certifications, business licenses, product registrations and general company information at 
+www.azurspace.com.  Contact information is shown below and is also available on our website. 
+

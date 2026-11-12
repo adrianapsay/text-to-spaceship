@@ -110,7 +110,7 @@ PARTS.append(part("anywaves_compact_sband_ttc", "Anywaves compact S-band TT&C an
     source("datasheet", "https://satsearch.co/products/anywaves-compact-s-band-ttc-antenna", "satsearch listing of the Anywaves compact S-band TT&C antenna datasheet", ["dimensions_mm", "mass_g", "rf", "thermal"], notes="70.9 x 70.9 x 10.3 mm, <106 g, 1.98-2.29 GHz, >5.4 dBi, LHCP and/or RHCP, 2 x SMA female, -120 to 120 C."), vendor_country="France", distributors=["direct", "satsearch"], status="in_production",
     rf={"band": "S", "frequency_MHz": [1980, 2290], "gain_dBi": 5.4, "polarization": "dual circular"}, thermal={"operating_temperature_C": {"min": -120, "max": 120}}, rf_connectors=["SMA female x2"], cost=cost(basis="quote")))
 PARTS.append(part("aac_pulsar_sant", "AAC Clyde Space PULSAR-SANT S-band patch antenna (1U face)", "comms", "antenna", "AAC Clyde Space", "PULSAR-SANT", (98, 98, 8), 50, {"kind": "patch_antenna", "x": 98, "y": 98, "z": 6, "patch_inset": 15, "patch_height": 2},
-    source("unverified", "https://satsearch.co/products/aac-clyde-pulsar-sant-s-band-antenna", "satsearch listing of the PULSAR-SANT", ["mass_g", "rf"], notes="<50 g, 2.2-2.3 and 2.4-2.45 GHz, 7 dBi, LHCP or RHCP, SMA female, '1U' from the listing. Dimensions NOT listed: 98 x 98 x 8 mm assumed for a 1U face patch."), vendor_country="Sweden / UK", distributors=["direct", "satsearch"], status="in_production", dimensions_note="assumed 1U face",
+    source("derived", "https://www.aac-clyde.space/wp-content/uploads/2021/10/PULSAR-SANT-1.pdf", "AAC Clyde Space PULSAR-SANT datasheet", ["mass_g", "rf", "thermal"], notes="Datasheet (read 2026-11-11 from the PDF text): mass under 50 g; 2.4 to 2.45 GHz (SANT) or 2.2 to 2.3 GHz (SANTC); beamwidth 60 deg; gain 7 dBi; S11 under -15 dB; SMA female; -40 to +85 C; design life over 2 years in LEO; flown on UKube-1. Dimensions are given only as '1U form factor': 98 x 98 x 8 mm is DERIVED from a 1U face.", date="2026-11-11"), vendor_country="Sweden / UK", distributors=["direct", "satsearch"], status="in_production", dimensions_note="assumed 1U face",
     rf={"band": "S", "frequency_MHz": [[2200, 2300], [2400, 2450]], "gain_dBi": 7, "polarization": "circular (LHCP or RHCP)"}, rf_connectors=["SMA female"], cost=cost(basis="quote")))
 
 PARTS.append(part("gomspace_nanocom_sdr_mk3", "GomSpace NanoCom SDR MK3 software defined radio (3x TR600 transceivers)", "comms", "sdr", "GomSpace", "NanoCom SDR MK3", (95, 95, 31.5), 240, {"kind": "pc104_board", "x": 95, "y": 95, "z": 1.6, "components_height": 29.9},
@@ -142,3 +142,12 @@ for pid, model, dims, mass, gain, price in (("nanoavionics_uhf_antenna_1x1u", "U
     PARTS.append(part(pid, "NanoAvionics " + model + " deployable UHF antenna (" + " x ".join(str(v) for v in dims) + " mm)", "comms", "antenna", "NanoAvionics (Kongsberg NanoAvionics)", model, dims, mass, {"kind": "box", "x": dims[0], "y": dims[1], "z": dims[2]},
         source("datasheet", NA_ANT, "NanoAvionics UHF antenna product page (spec table and list price)", ["dimensions_mm", "mass_g", "rf", "cost"], notes="Dimensions by configuration from the page (stowed/deployed not stated; treated as stowed), " + str(mass) + " g, 400-500 MHz, " + str(gain) + " dB peak, MCX 50 ohm, monopole deploys 90 deg, EUR " + str(price) + ", 2-4 months (MOQ 4)."), vendor_country="Lithuania", distributors=["direct (nanoavionics.com)"], status="in_production", lead_time="2-4 months", dimensions_note="page does not say stowed or deployed",
         rf={"band": "UHF", "frequency_MHz": [400, 500], "gain_dBi": gain}, rf_connectors=["MCX"], cost=cost(value=price, currency="EUR", basis="list_price", source_url=NA_ANT)))
+
+# Status checked 2026-11-11 (web search): these records had status unknown.
+STATUS_CHECKED_2026_11_11 = {
+    'isis_trxuv': ('discontinued', 'superseded by the ISIS TRXVU full-duplex transceiver (ISIS brochures and option sheets, web search 2026-11-11)'),
+}
+for record in PARTS:
+    if record["id"] in STATUS_CHECKED_2026_11_11:
+        record["status"] = STATUS_CHECKED_2026_11_11[record["id"]][0]
+        record["status_note"] = STATUS_CHECKED_2026_11_11[record["id"]][1]

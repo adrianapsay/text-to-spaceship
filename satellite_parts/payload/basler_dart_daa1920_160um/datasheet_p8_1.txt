@@ -1,0 +1,120 @@
+General Information
+Sensor
+Camera Data
+Products 
+ Cameras 
+ Area Scan Cameras 
+ Basler dart
+daA1920-160um (S-Mount) - Basler dart
+The Basler daA1920-160um (S-Mount) USB 3.0 camera with the
+Sony IMX392 CMOS sensor delivers 160 frames per second at 2.3
+MP resolution. This model comes with a S-mount.
+ 
+ 
+Specifications
+Design-In Sample:
+now
+Series Production:
+now
+Order Number
+108230
+Ready for shipment
+Delivery times may vary.
+Please ask for the current
+availability and use the
+request cart.
+approx. 14 days For information about shipping
+please use the request cart.
+Sensor Vendor
+Sony
+Sensor
+IMX392
+Shutter
+Global Shutter
+Max. Image Circle
+1/2.3"
+Sensor Type
+CMOS
+Sensor Size
+6.6 mm x 4.2 mm
+Resolution (HxV)
+1920 px x 1200 px
+Resolution
+2.3 MP
+Pixel Size (H x V)
+3.45 µm x 3.45 µm
+Frame Rate
+160 fps
+Mono/Color
+Mono
+Interface
+USB 3.0
+Pixel Bit Depth
+8, 12 bits
+Synchronization
+software trigger
+
+Camera Data
+Housing
+Conformity
+hardware trigger
+free-run
+Image Processing
+In-Camera Processing
+Exposure Control
+programmable via the camera API
+hardware trigger
+Digital Input
+1
+Digital Output
+2
+General Purpose I/O
+2
+Power Supply
+Via USB 3.0 interface
+Power Requirements
+(typical)
+1.8 W
+Housing Type
+Board Level
+Housing Size (L x W x H)
+19.9 mm x 29.3 mm x 29 mm
+Lens Mount
+S-mount
+Operating Temperature
+0 - 50°C
+Weight (typical)
+15g
+Conformity
+RoHS
+USB3 Vision
+CE
+GenICam
+KC
+UL
+FCC
+EAC
+
+share
+tweet
+
+
+share
+mail
+
+eNewsletter
+Regular updates on events and product innovations:
+ Subscribe
+Basler on the social networks
+Keep in touch with us via the social networks:
+© 2021 Basler AG
+Glossary
+Sitemap
+Legal Info
+Privacy Statement
+Legal Notice
+Terms and Conditions
+Contact
+Driving Directions
+沪ICP备17041046号-1
+

@@ -1,0 +1,86 @@
+FURTHER INFORMATION   Max-Planck-Str. 3 | 12489 Berlin Germany | info@berlin-space-tech.com | www.berlin-space-tech.com 
+HIGH RESOLUTION VIDEO CAMERA
+High Resolution Video Imagers made by BST allow interactive and real-time operation. This 
+innovative mode of operation supports all missions where time is most precious – search and 
+rescue as well as security. Moreover moving pictures are easy to understand and add to the 
+political value of your small satellite mission. The HRVI-6HD has space heritage and is fully 
+space qualified. 
+High Resolution Video Camera (HRVI-6HD) 
+C H A R A C T E R I S T I C S 
+Resolution (@ 550km) 
+6m GSD 
+Scene Size (@ 550km) 
+12x9km² 
+Spectral Band 
+450-630nm
+Channels 
+3 channel (RGB) 
+Size 
+245x343x158mm³ 
+Weight 
+5450g 
+Storage Temperature 
+-20°C to +40°C
+Operating Temperature 
+0°C to +30°C 
+Design Life 
+5 years LEO 
+Space Heritage 
+Yes 
+
+ 
+  
+ 
+ 
+ 
+ 
+ 
+FURTHER INFORMATION   Max-Planck-Str. 3 | 12489 Berlin Germany | info@berlin-space-tech.com | www.berlin-space-tech.com 
+ 
+ 
+ 
+ 
+ 
+ 
+INTERFACES & CAPABILITIES 
+HRVI-6HD 
+Resolution (@ 550km) 
+6m 
+Scene Size  
+12x9km² 
+Spectral Band 
+450-660nm 
+Channels 
+RGB 
+ 
+450-475nm 
+530-560nm 
+620-660nm 
+Bit Depth 
+8/10/12 
+MTF 
+>0.1 
+SNR 
+>100 
+Camera Raw Data Rate 
+1.4 Gbit/s 
+DPU 
+ 
+Storage 
+240GB 
+Processing Speed 
+5.6 GFlops 
+Compression 
+JPEG2000 
+H.264 
+selectable ratio 
+CCSDS Engine 
+Yes 
+Science Data Encryption  
+optional 
+X-Band Data Output 
+LVDS 
+TMTC Interface 
+RS422 
+ 
+

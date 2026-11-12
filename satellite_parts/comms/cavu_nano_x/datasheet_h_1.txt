@@ -1,0 +1,97 @@
+Frequency Range:   8.0 to 8.4 GHz, in-ﬂight conﬁgurable, optimized for a 100 MHz bandwidth.
+Power Output:   Adjustable from 23 to 33 dBm (2W), conﬁgurable in 1 dB steps.
+Channel Symbol Rate:   Flexible range of 1M to 30M symbols/sec.
+Channel Coding Options:   CCSDS LDPC7/8, Reed-Solomon (RS), RS/Convolutional.
+Modulation Schemes:   DQPSK, OQPSK, QPSK, with options for advanced schemes such as 8-PSK, 16-APSK, and 
+32-APSK.
+Interfaces:   Versatile telemetry/command and payload data interfaces, including CAN, RS232, RS422, LVDS, SPI, and 
+QSPI.
+Compact Design:   Cubesat form factor (90 x 96 x 25 mm) with a mass of ~250 grams.
+Wide Operating Temperature Range:  Designed for -30°C to +50°C ambient temperature and -30°C to +70°C 
+box temperature.
+Key Features
+The NANO-X is a high-performance, compact X-band transmitter tailored for nano and micro-satellite applications. 
+Designed to meet the stringent requirements of CubeSat missions, the NANO-X transmitter delivers reliable, 
+conﬁgurable communication capabilities while maintaining a low power footprint. With in-ﬂight conﬁgurability and 
+multiple modulation and coding options, it ensures adaptability for various mission proﬁles.
+P roduct Overview
+Applications
+High-data-rate telemetry and payload data downlink.
+Mission-critical communications for Earth observation, science, and interplanetary CubeSat missions.
+Adaptable for missions requiring dynamic conﬁguration and reliable X-band communication.
+NANO-X CubeSat
+X-Band Transmitter
+HQ: 12 Scion House, Stirling University Innovation Park, Stirling, UK. FK9 4NF
++44 (0)1786 628002
+Sales@CavuAerospace.UK
+CAVU-NANO-X-Br-v2025.1
+
+Speciﬁcations
+Parameter 
+Value 
+DescripƟon 
+Frequency 
+8.0 ~ 8.4 GHz 
+In-ﬂight conﬁgurable, opƟmized for 
+100 MHz BW 
+Output Power 
+23 to 33 dBm (2W) 
+Adjustable in 1 dB steps 
+Supply Voltage 
+8 ~ 36 V 
+Unregulated 
+Power ConsumpƟon 
+~14 W 
+Channel Symbol Rate 
+1M ~ 30M S/sec 
+In-ﬂight conﬁgurable 
+Frequency Stability 
+< 1 PPM 
+Ensures precision and reliability 
+Channel Coding 
+CCSDS LDPC7/8, RS, 
+RS/Conv. 
+Specify at order Ɵme 
+ModulaƟon 
+DQPSK, OQPSK, QPSK 
+Specify at order Ɵme 
+AlternaƟve ModulaƟon 
+8-PSK, 16-APSK, 32-
+APSK 
+Specify at order Ɵme 
+Telemetry/Command 
+Interface 
+CAN, RS232, RS422 
+Specify at order Ɵme 
+Payload Data Interface 
+RS422, LVDS, SPI, QSPI 
+Specify at order Ɵme 
+Connectors 
+Customizable pin and socket height 
+RF Connector 
+SMA Female 
+Industry-standard connector 
+Mass 
+~250 g 
+Lightweight design 
+Dimensions 
+90 x 96 x 25 mm 
+OperaƟng Ambient 
+Temperature 
+-30 ~ +50 °C 
+Without thermal coupling 
+OperaƟng Box Temperature 
+-30 ~ +70 °C 
+Requires satellite thermal control 
+Cubesat X-Band Transmitter
+HQ: 12 Scion House, Stirling University Innovation Park, Stirling, UK. FK9 4NF
++44 (0)1786 628002
+Sales@CavuAerospace.UK
+CAVU-NANO-X-Br-v2025.1
+
+
+	
+
+
+	
+

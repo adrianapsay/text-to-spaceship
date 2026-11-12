@@ -1,0 +1,173 @@
+{
+ "id": "airbus_battery_launcher_batt_30v_or_60v",
+ "name": "Airbus Defence and Space Battery LAUNCHER-BATT (30V or 60V)",
+ "category": "power",
+ "subcategory": "battery",
+ "vendor": "Airbus Defence and Space",
+ "model": "Battery LAUNCHER-BATT (30V or 60V)",
+ "dimensions_mm": {
+  "x": 220.0,
+  "y": 130.0,
+  "z": 110.0
+ },
+ "mass_g": 2200.0,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-airbus-defence-and-space-battery-launcher-batt-rxbcvs.pdf",
+  "document": {
+   "title": "Airbus Defence and Space Battery LAUNCHER-BATT (30V or 60V) data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-11",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Read from the vendor data sheet (datasheet-airbus-defence-and-space-battery-launcher-batt-rxbcvs.pdf): dimensions \"(< 600 ms) 230 A (< 15 ms) Physical characteristics Dimensions (L x W x H) 220 x 130 x 110 mm 365 x 27\"; mass \"365 x 270 x 110 mm Weight 2.2 kg 9.8\". Catalog page lists no mass. Electrical / RF values found in the data sheet or page text by pattern (quoted where possible).",
+  "found_via": "https://satsearch.co/products/airbus-defence-and-space-launcherbatt"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "electrical": {
+  "voltage_V": {
+   "min": 21.6,
+   "max": 33.6
+  },
+  "battery_capacity_Ah": 9.0
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   220.0,
+   130.0,
+   110.0
+  ],
+  "mesh_volume_mm3": 3093627.1,
+  "watertight": true,
+  "render_kind": "battery_pack",
+  "effective_density_g_cm3": 0.711,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "cells",
+     "color": [
+      0.85,
+      0.72,
+      0.3
+     ],
+     "file": "bodies/part__cells.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 1012
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    220.0,
+    130.0,
+    110.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "cells",
+     "color": [
+      0.2,
+      0.45,
+      0.7
+     ],
+     "file": "bodies_detail/cells.stl"
+    },
+    {
+     "name": "end_plates",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/end_plates.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
+  "datasheet_url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-airbus-defence-and-space-battery-launcher-batt-rxbcvs.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

@@ -1,0 +1,109 @@
+{
+ "id": "set_screw_m6x12",
+ "name": "Socket set screw, flat point M6 x 12 (ISO 4026)",
+ "category": "fasteners",
+ "subcategory": "set_screw",
+ "vendor": "generic (ISO 4026)",
+ "model": "ISO 4026 M6x12",
+ "dimensions_mm": {
+  "x": 6.0,
+  "y": 6.0,
+  "z": 12
+ },
+ "mass_g": 1.81,
+ "source": {
+  "type": "standard",
+  "url": "https://fasten.it/norms/norm/din_en_iso_4026",
+  "document": {
+   "title": "DIN EN ISO 4026 hexagon socket set screws with flat point (fasten.it table)",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Thread M6 x 12 mm, socket s 3.0 mm, pitch 1.0 mm, mass 1.81 g per piece (table: kg per 1000 pcs, steel)."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "material": "alloy steel 45H or stainless steel A2/A4",
+ "thread_pitch_mm": 1.0,
+ "mass_note": "from the ISO 4026 mass table (steel)",
+ "cost": {
+  "value": 0.08,
+  "currency": "USD",
+  "basis": "list_price",
+  "source": null
+ },
+ "cost_note": "typical COTS price per piece, approximate",
+ "geometry": {
+  "measured_bbox_mm": [
+   6.0,
+   5.98,
+   12.0
+  ],
+  "mesh_volume_mm3": 338.0,
+  "watertight": true,
+  "render_kind": "cylinder",
+  "effective_density_g_cm3": 5.355,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 164
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "body",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": null,
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

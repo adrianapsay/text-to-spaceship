@@ -1,0 +1,166 @@
+Overview 
+General Dynamics’ Sentinel M-Code GPS Receiver 
+provides Precise Positioning Service position, velocity, 
+and time information for Low Earth Orbit (LEO) and 
+Geostationary Earth Orbit (GEO) applications. MEO and 
+HEO orbits are also available. Performance and satellite 
+visibility are enhanced through the use of dual antennas; 
+each of the 64 GPS channels can be assigned to either 
+antenna.
+Key Features and Benefits
+n
+n LEO, GEO capable with MEO and HEO option
+n
+n GEO Sidelobe Acquisition and Tracking Algorithms 
+enable continuous PNT availability
+n
+n Fast Acquisition Processor enables rapid COLD start 
+capability
+n
+n Integrated Anti-Jam Technology and anti-spoof 
+algorithms enable superior performance in  GPS 
+contested and denied environments.
+n
+n 64 Channels, L1 and L2 Capable 
+n
+n C/A, P(Y) and Modernized M-Code, with optional L2C 
+civil signal
+n
+n Provides Near Real-time Position, Velocity and Time 
+Measurements for Superior User Performance 
+n
+n Relative Navigation Capability Allows for Differential 
+Position, Velocity and Time Determination Between 
+Co-orbiting Spacecraft (Optional)
+n
+n Precision Time Stamping Allows Unprecedented 
+Accuracies in Space 
+n
+n Precise Position Service Key Management Supports 
+All Selective Availability Anti-spoof Module (SAASM) 
+Unique Keying 
+n
+n Single or Dual Antenna Capability Allows the 
+Spacecraft User Installation Flexibility and Performance 
+n
+n Qualified and Tested for the Space Environment: 
+Pyrotechnic Shock, Random Vibration, Thermal-
+vacuum and EMI/EMC (Tailored Mil-Std-461F)
+Sentinel
+® M-Code GPS Receiver
+Accurate military code certified positioning service in space
+Design Based on Legacy Monarch-M
+® GPS Receiver 
+Space-Qualified Digital Design 
+1000+ Equivalent Years of Accumulated Trouble-Free DoD 
+Space Heritage: >6M Orbits 
+Same Reliable Position, Velocity, Time, Pseudorange, and 
+Carrier Phase @ 10 Sec Optional 
+Optional Relative Navigation Position, Velocity, and Time Modes
+RS-422 I/O interface and control, protocol similar to our 
+Legacy Viceroy
+® C/A Receiver
+Optional MIL-STD-1553B Interface & Control, protocol 
+similar to our legacy Monarch-M P(Y) code receiver
+
+D-SentinelMcode-08-0919 
+PRI-1908-0044
+©2019 General Dynamics. All rights reserved. General Dynamics reserves the right to make changes in its products and specifications at anytime and without notice.  All trademarks 
+indicated as such herein are trademarks of General Dynamics. All other product and service names are the property of their respective owners. ® Reg. U.S. Pat. and Tm. Off. 
+Sentinel® M-Code Receiver
+Space Inquiries  •  1-877-449-0600  •  www.gdmissionsystems.com/space  •  www.gdmissionsystems.com/contact-us
+Performance Characteristics
+Receiver Architecture 
+n
+n 64 Channels PPS-GPS C/A, P(Y), M-Code Channels, L2C available as 
+an option 
+n
+n Dual Antenna – any channel to either antenna 
+n
+n Frequencies & Codes: L1 & L2, C/A Code, P(Y), M-Code, L2C optional
+n
+n Narrow Bandwidth Acceleration-Aided Carrier/Code Tracking 
+n
+n Tracking, and Navigation Algorithms based on Monarch-M GPS 
+Receiver
+n
+n Kalman Filter-based navigation solution with integrated high fidelity 
+orbit propagator bridges gaps between GPS outages
+n
+n On-Orbit Software Reprogrammable 
+Input / Output 
+n
+n RS-422, Follows Legacy Viceroy Receiver ICD
+
+ Optional:  MIL-STD-1553B, Follows Legacy Monarch-M/ 
+Monarch-M ICD 
+n
+n One Pulse per Second (GPS, UTC, or Measurement Epoch Time) 
+n
+n Time Stamp Input Signal, measures the time of an external pulse
+LEO Solution Accuracy 
+n
+n Autonomous Position: 4.0 meters, 1 sigma, < 1 meter typical 
+n
+n Autonomous Velocity: < 2 cm/sec, 1 sigma, < 0.5 cm/sec typical 
+n
+n Clock and 1PPS Absolute: <50 ns 1 sigma, < 5 ns typical 
+n
+n Time Strobe Input: < 50 ns, 1 sigma 
+n
+n Optional Relative PVT Mode: 0.5m, 0.5 cm/sec, 4 ns (1 sigma) 
+GEO Solution Accuracy 
+n
+n Autonomous Position: 25 meters, 1 sigma, < 5 meter typical 
+n
+n Autonomous Velocity: < 2 cm/sec, 1 sigma, < 0.5 cm/sec typical 
+n
+n Clock and 1PPS Absolute: < 50 ns 1 sigma, < 5 ns typical 
+n
+n Time Strobe Input: < 50 ns, 1 sigma 
+Cold Start Time to First Fix (self-test complete & 
+assumed keyed)
+n
+n LEO < 10 minutes, 67% probability, 4 min Typical 
+n
+n GEO < 15 minutes, 90% probability, 8 min Typical 
+Orbital Dynamics 
+n
+n Altitude: LEO, GEO (200 km – 45,000 km), MEO & HEO optional 
+n
+n Velocity: up to 16,000 meters/second 
+n
+n Acceleration: 1G 
+Optional and Custom Features 
+n
+n External Reference Oscillator or Internal Precision 
+n
+n GEO Sidelobe Acquisition and Tracking Software 
+n
+n High Dynamics Acquisition & Tracking 
+Physical/Environmental 
+n
+n Radiation: 100 Krads 
+n
+n Single Event Upset: < 1 per year 
+n
+n Single Event Latchup: Immune 
+n
+n Reliability: 0.90, 10 year, 30°C Baseplate, 100% duty cycle  
+n
+n Vibration: 16.6 Grms 
+n
+n Pyro Shock: 2000 G 
+n
+n Temperature: -34°C to +71°C 
+n
+n Size: 180 x 160 x 60 mm-Envelope
+n
+n Weight: < 2.5 kg
+n
+n DC Power:
+
+ < 9w typical LEO (dual antenna)
+
+ < 8w typical GEO (single antenna) 
+

@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-manastu-space-technologies-sharanga-micro-propulsion-system-for-cubesats-330tdz.pdf
+method: product image from the catalog page https://satsearch.co/products/manastu-space-technologies-sharanga

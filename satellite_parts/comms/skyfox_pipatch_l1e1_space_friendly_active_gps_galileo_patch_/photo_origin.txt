@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-skyfox-labs-sro-pipatch-l1e1-active-gpsgalileo-patch-antenna-m93fz3.pdf
+method: product image from the catalog page https://satsearch.co/products/skyfox-labs-pipatch-l1e1-active-gps-galileo-patch-antenna

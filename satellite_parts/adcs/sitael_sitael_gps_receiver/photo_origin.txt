@@ -1,0 +1,2 @@
+url: https://satcatalog.s3.amazonaws.com/components/57/SatCatalog_-_SITAEL_-_SITAEL_GPS_Receiver_-_Datasheet.pdf
+method: largest product picture on page 1-2 of the vendor data sheet (pdfimages), checked by eye 2026-11-11

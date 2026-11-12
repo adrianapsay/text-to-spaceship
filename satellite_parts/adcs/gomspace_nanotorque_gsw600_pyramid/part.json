@@ -117,6 +117,41 @@
   },
   "face_counts": {
    "part": 40
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    95.0,
+    95.0,
+    54.47
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "bracket",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/bracket.stl"
+    },
+    {
+     "name": "wheels",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/wheels.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",

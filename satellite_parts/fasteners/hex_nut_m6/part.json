@@ -60,6 +60,20 @@
   },
   "face_counts": {
    "part": 192
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "nut",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__nut.stl"
+    }
+   ]
   }
  },
  "image": "preview.png",

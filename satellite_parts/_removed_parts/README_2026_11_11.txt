@@ -1,0 +1,1 @@
+Removed 2026-11-11: generic CDS-envelope frames (6) and the generic separation spring had no real product, photo or datasheet. cds_deployment_switch replaced by omron_d2f_deployment_switch (same envelope, real datasheet).

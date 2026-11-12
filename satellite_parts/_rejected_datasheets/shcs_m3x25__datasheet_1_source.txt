@@ -1,0 +1,4 @@
+url: https://fcrmotion.com.au/wp-content/uploads/2021/10/Heidenhain-Angle-Encoders.pdf
+title: Angle Encoders without Integral Bearing - FCR Motion
+query: generic ISO 4762 M3x25 datasheet pdf
+found by web search; verify that it is the right part

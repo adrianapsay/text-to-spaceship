@@ -1,0 +1,402 @@
+Electric Propulsion
+
+Pulsed Plasma Thruster
+Hall Thruster
+Xenon Ion Engine
+High Power Ammonia
+Arcjet and Feed System
+Hydrazine Arcjets
+and Power Processing Unit / 
+Arcjet and Feed System
+Electrothermal Hydrazine Thruster
+And PPU / Arcjet and Feed System
+AR has delivered over 550 electric propulsion devices
+11411 139th Place NE  •  Redmond, WA 98052
+(425) 885-5000  FAX (425) 882-5747
+
+Design Characteristics
+Propellant…………………………………………..…Hydrazine
+Catalyst…………………………………………………..…S405
+Thrust/Steady State….........…0.80 – 0.36N (0.18 – 0.08 lbf)
+Feed Pressure………………..…26.5-6.2 bar (285 – 90 psia)
+Flow Rate…………………0.28-0.12 g/sec (0.00026 lbm/sec)
+Valve………………………………………………..…Dual Seat
+Valve Power………………8.25 Watts Max @ 28 Vdc& 21°C
+Valve Heater Power…...…1.54 Watts Max @ 28 Vdc& 21°C
+Cat. Bed Heater Pwr…..…3.93 Watts Max @ 28 Vdc& 21°C
+Augmentation Heater Pwr……………………885 – 610 Watts
+Augmentation Htr Voltage…………….… 29.5 – Vdc Letdown
+Mass……………………………………….…0.87 kg (1.92 lbm)
+Performance
+Mission Specific Impulse *
+Steady-State Blowdown…………303 – 294 sec (lbf-sec/lbm)
+Total Impulse……………….524,864 N-sec (118,000 lbf-sec)
+Total Pulses……………….MR-502A not designed for pulsing 
+Steady State Firing…2 hrs Single Firing / 370 hrs Cumulative
+Status
+Flight Proven
+In Production
+Reference
+A1AA-1987-0996
+MR-502A Improved Electrothermal Hydrazine 
+Thruster (IMPEHT)
+11411 139th Place NE  •  Redmond, WA 98052
+(425) 885-5000  FAX (425) 882-5747
+
+Design Characteristics
+• Mass . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  2 kg
+• Envelope . . . . . . . . . . . . . . 27.94 x 9.42 x 14.61 cm
+• Input Voltage . . . . . . . . . . . . . . . . . . . . .15-29.9 vdc
+• Inrush Current . . . . . . . . . . . . . . . . . . . 32 Amp Max
+• Efficiency . . . . . . . . . . . . . . . . . . . . . . . . . . . . >97%
+Interface
+• Enable/Disable Command . . . . . .   Latch Relay Drive 
+• On/Off Command . . . . . . . . . . . . . 0V – Off, 14V – On
+Demonstrated Performance
+• Limits inrush current to the 30 Amps during augmentation 
+heater warm-up 
+• Two identical independent channels that can be operated 
+either redundantly or simultaneously 
+• When used simultaneously, the IMPEHT pair should be 
+started one after the other
+Status
+• Flight Proven
+• Not currently in production
+Power Conditioning
+Unit
+P/N 34830
+1.60 cm (.63”)
+14.605 cm 
+(5.75”)
+6.731 cm 
+(2.65”)
+27.94 cm (11.0”)
+13.97 cm (5.50”)
+MR-502 & MR-502A IMPHET Power Conditioning Unit
+11411 139th Place NE  •  Redmond, WA 98052
+(425) 885-5000  FAX (425) 882-5747
+
+Design Characteristics
+•
+Propellant:...High Purity Grade Hydrazine per MIL-PRF 26536G
+•
+Feed Pressure (nominal)………18.6 – 13.8 bar (270 – 200 psia)
+•
+Mass ……………………………………………..……………………
+•
+Arcjet thruster + 2000 mm (70”) cable ………1.4 kg (3.0 lbm)
+•
+PCU……………………………………………6.2 kg (13.7 lbm)
+•
+Envelope ………………………………………………………………
+•
+Arcjet……………...240 x 125 x 90 mm3 (9.3 x 4.9 x 3.6 inch3)
+•
+PCU….……….…310 x 220 x 95 mm3 (12.2 x 8.7 x 3.7 inch3)
+•
+Valve:………………………………dual seat, electrically actuated
+•
+Valve power (standard)………………………….8.2 W @ 28 VDC
+•
+PCU input power per arcjet………………………..………1780 W
+•
+PCU input voltage……………………………………..65 - 96 VDC
+•
+PCU efficiency, avg.……………………………………………>91%
+•
+Power cable PCU – arcjet…………………...< 2000 mm (79 inch)
+•
+Currently available………………………….…..1575 mm (62 inch)
+Demonstrated Performance
+•
+At 1670 W input to the arcjet (1780 W input to the PCU), and 
+18.6 to 13.8 bar (270 to 200 psia) feed pressure blow down
+•
+Total impulse……………………....866,500 Ns (194,500 lbf s)
+•
+Thrust…………………………….254 – 213 mN (57 – 47 mlbf)
+•
+Specific impulse…………………………………………..> 502 s
+•
+Firing time during lifetime demonstration test:
+•
+Duty cycle 1 h on, > 30 min off…………….…> 1050 cycles
+•
+Number of starts…………………………….…………..>1170
+•
+Longest demonstrated burn:………………………………..65 h
+Status
+•
+Flight proven, no longer in production
+References
+•
+AIAA-1998-3631
+•
+IEPC-1997-081
+•
+Power Conditioning Unit (PN 1000)
+•
+Cable Assembly (PN 31168)
+•
+Arcjet Thruster (PN 32240)
+11411 139th Place NE  •  Redmond, WA 98052
+(425) 885-5000  FAX (425) 882-5747
+MR-509 Low Power Arcjet System
+
+Design Characteristics
+•
+Propellant:...High Purity Grade Hydrazine per MIL-PRF 26536G
+•
+Feed Pressure (nominal)………18.6 – 13.8 bar (270 – 200 psia)
+•
+Mass:
+•
+Arcjet thruster + 3175 mm (125”) cable ……1.6 kg (3.5 lbm)
+•
+Envelope
+•
+Arcjet……………...240 x 123 x 87 mm3 (9.3 x 4.9 x 3.4 inch3)
+•
+Valve:………………………………dual seat, electrically actuated
+•
+Valve power (standard)………………………….8.2 W @ 28 VDC
+•
+Power cable PCU – arcjet…………………< 5590 mm (220 inch)
+Status
+•
+Flight proven
+•
+Recent production
+Demonstrated Performance
+At 2000 W input to the arcjet (2200 W input to the PCU), and 18.6 to 
+13.8 bar (270 to 200 psia) feed pressure blow down
+•
+Total impulse……………………….1,450,000 Ns (326,000 lbf s)
+•
+Thrust……………………………….258 – 222 mN (58 – 50 mlbf)
+•
+Specific impulse…………………………………………585 - 615 s
+•
+Firing time during lifetime demonstration test:
+•
+Duty cycle 1 h on, > 30 min off…………………> 1730 cycles
+•
+Number of starts………………………………..……….>1960
+•
+Demonstrated on-time duty cycles:…………………4 min to 20 h
+References
+•
+AIAA-1998-3630, AIAA-1999-2272, AIAA-2001-3901, 
+AIAA-2009-5364, IEPC-1997-082, esa SP2014-2966753, 
+IEPC-2017-305
+123 mm
+4.9”
+240 mm
+9.3”
+123 mm
+4.9”
+67 mm
+2.6”
+20 mm, 0.8”
+11411 139th Place NE  •  Redmond, WA 98052
+(425) 885-5000  FAX (425) 882-5747
+MR-510 Arcjet Thruster and Cable Assembly
+
+Design Characteristics
+•
+Propellant:...High Purity Grade Hydrazine per MIL-PRF 26536G
+•
+Feed Pressure (nominal)………17.6 – 13.8 bar (250 – 200 psia)
+•
+Mass:
+•
+Arcjet thruster + 2000 mm (70”) cable ………1.4 kg (3.0 lbm)
+•
+PCU……………………………………………6.2 kg (13.7 lbm)
+•
+Envelope
+•
+Arcjet……………...240 x 125 x 90 mm3 (9.3 x 4.9 x 3.6 inch3)
+•
+PCU…………310 x 220 x 95 mm3 (12.2 x 8.7 x 3.7 inch3)
+•
+Valve:………………………………dual seat, electrically actuated
+•
+Valve power (standard)………………………….8.2 W @ 28 VDC
+•
+PCU input power per arcjet…………………………………1780 W
+•
+PCU input voltage………………………………33 – 51.5 VDC
+•
+PCU efficiency, avg.…………………………………………>91%
+•
+Power cable PCU – arcjet…………………< 2000 mm (79 inch)
+•
+Currently available……………………………..1575 mm (62 inch)
+Demonstrated Performance
+At 1670 W input to the arcjet (1780 W input to the PCU), and 
+270 to 200 psia feed pressure blow down
+•
+Total impulse ………………….866,500 Ns (194,500 lbf s)
+•
+Thrust………………………….254 – 213 mN (57 – 47 mlbf)
+•
+Specific impulse
+……………………………………> 502 s
+•
+Firing time during lifetime demonstration test:
+•
+Duty cycle 1 h on, > 30 min off
+…………> 1050 cycles
+•
+Number of starts…………………………………….>1170
+•
+Longest demonstrated burn:……………………………..65 h
+Status
+•
+Flight proven, no longer in production
+References
+•
+AIAA-1998-3631
+•
+IEPC-1997-081
+11411 139th Place NE  •  Redmond, WA 98052
+(425) 885-5000  FAX (425) 882-5747
+MR-512 Low Power Bus Arcjet System
+
+Design Characteristics
+•
+Propellant . . . . . . . . . . . . . . . . . . . . Teflon® (Solid Bar)
+•
+Max Thrust Level1 . . . . . . . . . . . 1.24 mN @ 100 Watts
+•
+Power Level  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+•
+. . . . . . . . . . . . . Up to 100 Watts @ 28 vdc Unregulated
+•
+Compact Solid State Propulsion System
+•
+Ultra Low Minimum Impulse Bit for Precision Control
+•
+Enables All-thruster ACS (No Momentum Wheels)
+•
+Mass (w/o propellant)  . . . . . . . . . . . . . . . . . . . . 4.74 kg
+•
+Includes Integral Power Processing Electronics
+•
+Power Efficiency . . . . . . . . . . . . . . . . . . . . . . . . .  >80%
+Performance
+•
+Specific Impulse . . . . . . . . . . . . . . . . . . Up to 1350 sec
+•
+Thrust to Power Ratio . . . . . . . . . . . . . . . 12.4 N/Watt
+•
+Demonstrated Capability. . . . . . . .3,000 N-sec/thruster
+•
+Predicted Capability (backed by selective testing)  . . . . 
+•
+. . . . . . . . . . . . . . .   15,600 N-sec/system (thruster pair)
+Status
+•
+Flight Proven; no longer in production
+Reference
+•
+AIAA-2003-5016
+•
+AIAA-2002-3973
+•
+AIAA-2001-3637
+•
+AIAA-1999-3376
+11411 139th Place NE  •  Redmond, WA 98052
+(425) 885-5000  FAX (425) 882-5747
+PRS-101 Pulsed Plasma Thruster System
+
+Design Characteristics
+•
+Propellant . . . . . . . . . . . . . . . . . . . . . . . . . . . .  Xenon
+•
+Mass (Thruster & Cathode) . . . . . . . . . . . .    <12.3 kg
+•
+Envelope . . . . . . . . . . . . . . . . . . . . .  14 x 25 x 28 cm
+•
+Input Power . . . . . . . . . . . . . . . . .  1000 to 4500 Watt
+•
+Input Voltage . . . . . . . . . . . . . . . . . .   200 or 400 Volt
+Status
+•
+Qualification Complete; 24 Thrusters Flown
+•
+First flight system launched in 2010
+•
+Six spacecraft currently flying (4 thrusters per S/C)
+Performance
+•
+Thrust (300 Volts). . . . . . . . 132 mN
+195 mN
+290 mN
+•
+Thrust(400 Volts) . . . . . . . . 117 mN
+170 mN
+254 mN
+•
+Specific Impulse (300 V)    1676 sec   1700 sec   1790 sec
+•
+Specific Impulse (400 V)    1858 sec   1920 sec   2020 sec
+•
+Life Capability . . . . . . . . . . . . . . . . . . .. Mission Dependent
+•
+Total Impulse . . . . . . . . . . . . . . . . . . ..  Mission Dependent
+•
+On/Off Cycles . . . . . . . . . . . . . . . . . . . . . . . .  7,316 Cycles
+Status
+•
+Flight Proven, In Production
+Reference
+•
+AIAA-2010-6698
+2.0 kW     3.0 kW      4.5 kW
+11411 139th Place NE  •  Redmond, WA 98052
+(425) 885-5000  FAX (425) 882-5747
+XR-5 Hall Thruster
+
+Design Characteristics
+Propellant …………………………..….……… Xenon
+Thruster Mass……...…………...………..… <13.3 kg
+Thruster Envelope Dimensions....… 58 dia. x 44 cm
+Active optics area……...……………...36 cm dia.
+Thruster Input Power ……………..600 to 6900 Watt
+Propellant Management System Mass
+High Pressure Assembly……………….< 2.2 kg
+Low Pressure Assembly………………..< 4.1 kg
+PMS Volume ………………………..…..< 11,775 c.c.
+PMS does not require plenum tanks
+DCIU interface with Power Processing……..RS-485
+Performance
+•
+Thrust ……………………………………...………….  235 mN
+•
+Specific Impulse…………………………...………  >4100 sec
+•
+Efficiency @ full power …………………....….………. >70%
+•
+Propellant Throughput…….... …………...…………. >270 kg
+•
+On/Off Cycles   …………………….……….….. >3650 cycles
+•
+End of Life Xenon Residuals ………..…………..  < 1% BOL
+Status
+•
+Qualified and in Production; First Flight DART mission
+Reference
+•
+AIAA-2005-3885
+•
+AIAA-2004-4111 
+Propellant Management System
+High pressure assembly (below)
+Low pressure assembly (left)
+11411 139th Place NE  •  Redmond, WA 98052
+(425) 885-5000  FAX (425) 882-5747
+NEXT 6.9 kW Ion Propulsion System
+

@@ -1,0 +1,173 @@
+{
+ "id": "space_fss_1_g1",
+ "name": "Space Inventor FSS-1-G1",
+ "category": "adcs",
+ "subcategory": "sun_sensor",
+ "vendor": "Space Inventor",
+ "model": "FSS-1-G1",
+ "dimensions_mm": {
+  "x": 42.0,
+  "y": 16.0,
+  "z": 6.2
+ },
+ "mass_g": 8.0,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satcatalog.s3.amazonaws.com/components/388/SatCatalog_-_Space_Inventor_-_FSS-1-G1_-_Datasheet.pdf",
+  "document": {
+   "title": "Space Inventor FSS-1-G1 data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-11",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Read from the vendor data sheet (SatCatalog_-_Space_Inventor_-_FSS-1-G1_-_Datasheet.pdf): dimensions \"n sensor \u25cb Field of view: 60 deg half angle \u25cb Accuracy: 1 deg \u25cf Physical \u25cb 42 x 16 x 6.2 mm \u25cb Mass:\"; mass \"2 x 16 x 6.2 mm \u25cb Mass: 8 gram \u25cb O\". Catalog page lists 0.008 kg.",
+  "found_via": "https://satcatalog.com/component/fss-1-g1/"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "flight_heritage": true,
+ "electrical": {
+  "power_W": {
+   "nominal": 0.09
+  },
+  "note": "average power from the catalog page"
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   42.0,
+   16.0,
+   6.2
+  ],
+  "mesh_volume_mm3": 4166.4,
+  "watertight": true,
+  "render_kind": "sun_sensor",
+  "effective_density_g_cm3": 1.92,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    },
+    {
+     "name": "aperture",
+     "color": [
+      0.45,
+      0.65,
+      0.85
+     ],
+     "file": "bodies/part__aperture.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 12
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    42.0,
+    16.0,
+    6.2
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "mask",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/mask.stl"
+    },
+    {
+     "name": "window",
+     "color": [
+      0.45,
+      0.65,
+      0.85
+     ],
+     "file": "bodies_detail/window.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://satcatalog.s3.amazonaws.com/components/388/SatCatalog_-_Space_Inventor_-_FSS-1-G1_-_Datasheet.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

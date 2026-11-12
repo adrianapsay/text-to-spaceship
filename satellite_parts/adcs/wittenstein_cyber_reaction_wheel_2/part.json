@@ -1,0 +1,185 @@
+{
+ "id": "wittenstein_cyber_reaction_wheel_2",
+ "name": "WITTENSTEIN cyber motor GmbH cyber\u00ae reaction wheel 2",
+ "category": "adcs",
+ "subcategory": "reaction_wheel",
+ "vendor": "WITTENSTEIN cyber motor GmbH",
+ "model": "cyber\u00ae reaction wheel 2",
+ "dimensions_mm": {
+  "x": 20.0,
+  "y": 20.0,
+  "z": 20.0
+ },
+ "mass_g": 30.0,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/satsearch_datasheet_xlm8hx_wittenstein-cyber-moto_cyber-reaction-wheel-2.pdf",
+  "document": {
+   "title": "WITTENSTEIN cyber motor GmbH cyber\u00ae reaction wheel 2 data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-11",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Read from the vendor data sheet (satsearch_datasheet_xlm8hx_wittenstein-cyber-moto_cyber-reaction-wheel-2.pdf): dimensions \"up to 10-8 mbar Temperature -60\u00b0C to +100\u00b0C POINTING Technical data Dimensions 20 x 20 x 20 mm Mass 30 g\"; mass \"ons 20 x 20 x 20 mm Mass 30 g Mome\". Catalog page lists no mass. Electrical / RF values found in the data sheet or page text by pattern (quoted where possible).",
+  "found_via": "https://satsearch.co/products/wittenstein-cyber-motor-cyber-reaction-wheel-2"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "electrical": {
+  "power_W": {
+   "nominal": 0.48
+  },
+  "quote": "power consumption 480 mW",
+  "voltage_V": {
+   "min": 3.0,
+   "max": 8.8
+  }
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   20.0,
+   20.0,
+   20.0
+  ],
+  "mesh_volume_mm3": 5931.9,
+  "watertight": true,
+  "render_kind": "reaction_wheel",
+  "effective_density_g_cm3": 5.057,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "flywheel",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__flywheel.stl"
+    },
+    {
+     "name": "motor_cap",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__motor_cap.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 348
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    20.0,
+    20.0,
+    20.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "base",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/base.stl"
+    },
+    {
+     "name": "cover",
+     "color": [
+      0.24,
+      0.26,
+      0.3
+     ],
+     "file": "bodies_detail/cover.stl"
+    },
+    {
+     "name": "cap",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/cap.stl"
+    },
+    {
+     "name": "bolts",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/bolts.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
+  "datasheet_url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/satsearch_datasheet_xlm8hx_wittenstein-cyber-moto_cyber-reaction-wheel-2.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

@@ -1,0 +1,1071 @@
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Space-Friendly   
+CubeSat GPS Receiver/Next Generation 
+with DROP (Dead Reckoning Orbital Propagator) 
+piNAV-NG 
+Product Datasheet 
+Rev. A/2025 
+ 
+ 
+Intended to cover all CubeSat Project needs.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Made in Czech Republic, a country with space heritage since 1978. 
+© 2014-2025 SkyFox Labs, All rights reserved. 
+
+ 
+ 
+Space-Friendly 
+CubeSat GPS Receiver/Next Generation
+ 
+Intended to cover all CubeSat Project needs.  
+ 
+ 
+ 
+               www.SkyFoxLabs.com, Space-Friendly products 
+2             piNAV-NG Product Datasheet 
+Issue rev. A, 2025, info@skyfoxlabs.com, U Studanky 620/13. CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2025 SkyFox Labs, s.r.o., All rights reserved 
+ 
+ 
+                           
+FEATURES 
+ 
+Fast Acquisition Unit for Cold Start (under 80 sec) 
+ 
+Housekeeping Measurements Engine 
+ 
+World’s First Low Power CubeSat GPS Receiver 
+with DROP (Dead Reckoning Orbital Propagator) 
+ 
+Straightforward use – Plug-and-play device 
+ 
+Allow Nonstop Operation with conventional 
+ 
+1U CubeSat power budget 
+ 
+Power consumption 
+ 
+125 mW (typical), 3.3 V @ 25°C 
+ 
+GPS L1 C/A signal, 15 channels 
+ 
+Low Earth Orbit (LEO) operation 
+ 
+Altitudes up to 3600 km 
+ 
+Velocity  
+ 
+up to 9 km/s (Flight Model) 
+ 
+up to 0.5 km/s (Engineering Model) 
+ 
+Cold start time in LEO (Time-to-First Fix  tTTFF) 
+ 
+80 seconds (typical) 
+ 
+Sensitivity 
+ 
+Acquisition 38 dBc-Hz, Tracking 25 dBc-Hz 
+ 
+Short term fading 18 dBc-Hz 
+ 
+Protocols 
+ 
+NMEA 0183 (standard GPS sentences) 
+ 
+piNAV (NMEA sentences extension) 
+ 
+Easy-to-Implement Data Interface  
+ 
+UART 9600-8-N-1, 3V3-CMOS levels 
+ 
+Position update rate 
+ 
+1 Hz 
+ 
+VPP (Valid Position Pulse) output 
+ 
+(3V3-CMOS compatible) 
+ 
+PF (Position Fix) output  
+ 
+(3V3-CMOS compatible) 
+ 
+2.7 to 3.6V power supply 
+ 
+Active Antenna DC Bias Output (3.3V @ 50mA) 
+ 
+Ultra Low Dimensions  
+ 
+71.1×45.7×11 mm 
+ 
+Wide temperature range 
+ 
+-40˚C to +85˚C 
+ 
+Connectors 
+ 
+2 mm, 2×10 pin header (System Interface) 
+ 
+MCX (GPS Antenna Connector) 
+ 
+Supports Active or High Gain Passive GPS 
+Antennas 
+ 
+Ultra low mass 24 grams (incl. coating) 
+ 
+ 
+APPLICATIONS 
+ 
+Position Measurement on Small Satellites 
+ 
+CubeSats, PocketQube, Pico- Nano- Micro-Sats 
+ 
+Limited Power Budget Space Projects 
+ 
+Stratospheric, Meteorological, Scientific Balloons 
+ 
+Precision Data Time-Stamping in Space 
+ 
+Fig. 1 CubeSat GPS Receiver - Next Generation 
+(piNAV-NG), Flight Model, Top side view. 
+ 
+GENERAL DESCRIPTION 
+ 
+ 
+The piNAV-NG is the Next Generation of 
+Ultra Low Power Space-Friendly CubeSat GPS 
+L1 
+receiver 
+specially 
+designed 
+to 
+provide 
+continuous accurate position determination onboard 
+small satellites in LEO or high altitude balloon 
+missions with limited power and mass budgets.  
+ 
+It requires only 10 % of continuous power 
+in comparison with conventional space-grade GPS 
+receivers, allowing permanent data output with only 
+a typical 1U CubeSat power budget. 
+ 
+Flight heritage optimized firmware uses 
+the SkyFox Labs' proprietary DROP (Dead 
+Reckoning 
+Orbital 
+Propagator) 
+algorithm 
+to 
+compensate 
+for 
+orbital regions 
+affected 
+by 
+terrestrial jammers penetrating to LEO regions 
+causing GPS signal outage as well as for signal 
+fading caused by improper antenna pointing or 
+satellite tumbling without the need for uplink data. 
+ 
+The Engineering Model (EM) with the 
+same mechanical and electrical properties is 
+available with software limitation to maximum 
+velocity (500 m/s). Red Remove Before Flight 
+Finish is applied to prevent interchange with the 
+Flight Model unit. 
+ 
+Evaluation Kit based on PC/104+ form 
+factor PCB with USB-to-Serial cable, mechanical 
+mount and system interface connector is available 
+to accelerate FlatSat design and/or onboard 
+software implementation during AIT/AIV activites. 
+PRODUCT DATA SHEET                   
+piNAV-NG
+
+ 
+ 
+ 
+ 
+  
+ 3       
+www.SkyFoxLabs.com, Space-Friendly products 
+piNAV-NG Product Datasheet 
+Issue rev. A, 2025, info@skyfoxlabs.com, U Studanky 620/13, CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2025 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+piNAV-NG
+TABLE OF CONTENTS 
+ 
+APPLICATIONS...................................................................2 
+GENERAL DESCRIPTION..................................................2 
+TABLE OF CONTENTS .......................................................3 
+ABSOLUTE MAXIMUM RATINGS ....................................3 
+PARAMETRIC SPECIFICATION........................................3 
+CONNECTORS DESCRIPTION ..........................................4 
+FUNCTIONAL BLOCK DIAGRAM .....................................5 
+THEORY OF OPERATION..................................................5 
+ANTENNA............................................................................6 
+PROTOCOLS........................................................................7 
+OUTPUT DATA DESCRIPTION ......................................... 7 
+DEAD RECKONING ORBITAL PROPAGATOR .............. 10 
+EXAMPLE LOW EARTH ORBIT DATA OUTPUT........... 12 
+ENGINEERING MODEL .................................................. 14 
+TIMING DIAGRAM............................................................15 
+EVALUATION KIT.............................................................15 
+APPLICATION NOTES & RECOMMENDATIONS.......... 16 
+QUALITY ASSURANCE .................................................... 16 
+EXPORT CONTROL...........................................................17 
+DISCLAIMER .................................................................... 18 
+ 
+ABSOLUTE MAXIMUM RATINGS 
+ 
+VDD to GND………….…………………………..-0.3 V to +4.2 V 
+Other Pins to GND:.............................. -0.3 V to +(VDD +0.3) V 
+DC Input Voltage: VI  ....... -0.3 V to VDD + 0.3 V (≤ 4.2 V max.) 
+Maximum RF Input Power:........................................ +15 dBm 
+DC Output Voltage: VO ....-0.3 V to VDD + 0.3 V (≤ 4.2 V max.) 
+Maximum Output Current to the Active Antenna:...…...100 mA 
+DC Input Current: II at VI < 0 V or VI > VDD ...................±20 mA 
+Operating Temperature Range:……………..…-40°C to +85°C 
+DC Output Current: IO at VO < 0 V or VO > VDD..............±20 mA 
+Storage Temperature Range:………………...-55°C to +100°C 
+ 
+NOTE: Stresses beyond those listed under “Absolute Maximum Ratings” may cause permanent damage to the 
+device. These are stress ratings only, and functional operation of the device at these or any other conditions 
+beyond those indicated under specification conditions is not implied. Exposure to absolute maximum rated 
+conditions for extended periods may affect device reliability. Voltage values are with respect to system ground 
+terminal. 
+ 
+ 
+PARAMETRIC SPECIFICATION 
+ 
+TA = −40°C to +85°C, VDD = 3.3 V, Active 35×35 mm GPS patch antenna with LNA preamplifier used, unless otherwise noted. 
+Parameter 
+Symbol 
+Min 
+Typ 
+Max 
+Units 
+Notes/Conditions 
+Operating Supply Voltage 
+VDD 
+2.7 
+3.3 
+3.6 
+V 
+ 
+40 
+Passive GPS Antenna is used. 
+Operating Supply Current 
+ID 
+ 
+38 
+100 
+mA 
+The inrush current of up to a maximum of 
+100 mA is drawn from the power supply for 
+less than 1 second after power on. 
+Active Antenna Current Feed 
+Capability 
+IAnt 
+0 
+ 
+50 
+mA 
+Use of an active antenna is recommended 
+for improving the C/N0 (SNR). However, the 
+piNAV-NG can also be operated with 
+passive antenna at zero feed current. 
+Operating Power Consumption with 
+Passive GPS Antenna 
+POper-Pass 
+ 
+125 
+ 
+mW 
+Passive GPS Antenna used. 
+324 
+Active GPS Antenna with LNA used. Value 
+depending on antenna type. 
+Operating Power Consumption with 
+Active GPS Antenna 
+POper-Act 
+ 
+ 
+540 
+mW 
+Input power drawn for less than 1 second 
+after power on incl. active GPS antenna. 
+Value depending on antenna type. 
+Reference Oscillator Stability 
+ 
+  
+1 
+ 2.5 
+ppm 
+Over operating temperature range. 
+Acquisition Sensitivity 
+PRF_IN-Acq 
+  
+38  
+  
+dBc-Hz 
+SNR required to acquire the GPS signal.  
+Elevation Mask Filter 
+ 
+ 
+3 
+ 
+° 
+Sats below the mask excluded from PVT. 
+Tracking Sensitivity 
+PRF_IN-Trck 
+18 
+25 
+ 
+dBc-Hz 
+SNR to keep tracking the satellites in view.  
+PVT Calculation Filter 
+ 
+ 
+30 
+  
+dBc-Hz 
+Sats below the level excluded from PVT. 
+Operating Frequency 
+fRFIN 
+  
+1575.42 
+  
+MHz 
+GPS L1, C/A code. 
+Operating Bandwidth 
+BW 
+ 
+2 
+ 
+MHz 
+ 
+Time-to-First-Fix 
+tTTFF 
+  
+80 
+  
+s 
+The piNAV-NG Cold Start time. 
+Warm Start Time 
+tWST 
+  
+50 
+  
+s 
+The piNAV-NG DROP Warm Start time. 
+Valid Position Pulse Accuracy (2σ) 
+VPPA 
+  
+ 
+1 
+µs 
+Time accuracy of the raising edge of the 
+Valid Position Pulse (VPP). The GPS time 
+of the rising edge of the VPP pulse is 
+defined in following LSP and LSV 
+navigation sentences. 
+Horizontal Position Accuracy (2σ) 
+HPA 
+  
+  
+10 
+m 
+No multipath signals (ionosphere and 
+troposphere delay excluded), HDOP <3 
+caused by the noise and mutual 
+acceleration of the LEO and GPS satellite 
+±16 m/s2. 
+Dynamic Stress Position Error 
+DSPE 
+  
+  
+2 
+m 
+Caused by the satellite movement in LEO 
+orbit. 
+Operating Velocity 
+v 
+0 
+ 
+9 
+km/s 
+For Flight Model only. Otherwise maximum 
+of 500 m/s. 
+Operating Altitudes 
+h 
+ 
+ 
+3600 
+Km 
+Above the WGS84. All orbit inclinations. 
+Operating Acceleration 
+a 
+0 
+ 
+5 
+g 
+ 
+Velocity Calculation Accuracy (2σ) 
+VCE 
+  
+  
+0.1+1‰⋅v 
+m/s 
+  
+
+ 
+ 
+ 
+ 
+  
+ 4       
+www.SkyFoxLabs.com, Space-Friendly products 
+piNAV-NG Product Datasheet 
+Issue rev. A, 2025, info@skyfoxlabs.com, U Studanky 620/13, CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2025 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+piNAV-NG
+CONNECTORS DESCRIPTION 
+ 
+ 
+The piNAV-NG receiver is connected to the target system via the System Interface Dual Row 2×10 pin 
+connector header (2 mm pitch). Each pin, its function and direction or manner of use is indicated in the Tab.: 1 
+below. The connector location within the Flight and Engineering Models is displayed in Fig. 2. 
+ 
+ 
+Tab.: 1 The piNAV-NG Pin Description, NOTE: Minimum required interface pins are highlighted. 
+Pin 
+Name 
+I/O, Power or Not 
+Connected 
+Description 
+1 
+NC 
+NC 
+Not connected. Connect to GND. 
+2 
+VDD 
+Power 
+Positive system power input. Positive power supply input, connect to +3.3 V with 
+respect to GND system ground pin. 
+3 
+NC 
+NC 
+Not connected. Connect to GND. 
+4 
+NC 
+NC 
+Not connected. Connect to GND. 
+5 
+/RESET 
+INPUT 
+Reset Input. Active in log. 0. No reset pulse needed. May be used to force Cold Start. 
+6 
+NC 
+NC 
+Not connected. Connect to GND. 
+7 
+NC 
+NC 
+Not connected. Connect to GND. 
+8 
+NC 
+NC 
+Not connected. Connect to GND. 
+9 
+NC 
+NC 
+Not connected. Connect to GND. 
+10 
+GND 
+Power 
+System ground. Must be connected to ground potential. This pin is internally connected 
+(equal) to pin 13, 16 and 18. 
+11 
+TXD 
+OUTPUT 
+GPS Receiver Serial Data Output. NMEA and piNAV sentences are present on this pin. 
+Data is provided by standard UART serial transfer at a rate of 9600 bps, no parity,  
+8 databits, 1 stop bit. New set of sentences are provided with update frequency of 1 Hz. 
+LVCMOS compatible. 
+12 
+RXD 
+INPUT 
+GPS Receiver serial data input. Not used in normal operation. Data received on this pin 
+has no effect. For future use. LVCMOS compatible. 
+13 
+GND 
+Power 
+System ground. Must be connected to ground potential. This pin is internally connected 
+(equal) to pin 10, 16 and 18. 
+14 
+NC 
+NC 
+Not connected. Connect to GND. 
+15 
+NC 
+NC 
+Not connected. Connect to GND. 
+16 
+GND 
+Power 
+System ground. Must be connected to ground potential. This pin is internally connected 
+(equal) to pin 10, 13 and 18. 
+17 
+PF 
+OUTPUT 
+Position Fix. This pin indicates the actual status of the piNAV-NG. Log. 0 indicates no 
+GPS satellites are being tracked, no position data will be provided. Pulses with 0.5 Hz 
+frequency (1000 ms log. 1, 1000 ms log. 0) indicates tracking of at least one GPS 
+satellite, however no position data can be provided (not enough satellites). Permanent 
+log. 1 indicates the piNAV-NG GPS position fix and provision of navigation data. 
+Navigation data are valid and based on at least four GPS satellites in view. 
+18 
+GND 
+Power 
+System ground. Must be connected to ground potential. This pin is internally connected 
+(equal) to pin 10, 13 and 16. 
+19 
+VPP 
+OUTPUT 
+Valid Position Pulse. Raising edge on this pin indicates time to which the position 
+provided by the piNAV-NG was actual. This pin can be utilized for synchronization of the 
+other satellite systems to the GPS or UTC time. LVCMOS compatible. 
+20 
+NC 
+NC 
+Not connected. Connect to GND. 
+ 
+ 
+Fig. 2 The piNAV-NG Dimensions, Connector pinout and device footprint (left), Top view (middle), Bottom 
+view (right). NOTE: Dimensions are shown in millimeters. Detailed dimensions and STEP file available on request. 
+ 
+ 
+The piNAV-NG receiver is equipped with the MCX-Female straight RF connector (located on the 
+module). The Right Angle MCX-Male connector is recommended to fit the standard CubeSat structure envelope. 
+
+ 
+ 
+ 
+ 
+  
+ 5       
+www.SkyFoxLabs.com, Space-Friendly products 
+piNAV-NG Product Datasheet 
+Issue rev. A, 2025, info@skyfoxlabs.com, U Studanky 620/13, CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2025 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+piNAV-NG
+FUNCTIONAL BLOCK DIAGRAM 
+ 
+ 
+The key functional blocks of the piNAV-NG are described in Fig. 3. The input block consists of the 
+Low Noise Amplifier (LNA), SAW Filter, Down Converter and ADC. The design of the front-end guarantees 
+excellent noise figure and ensure high suppression of the out of band signals. The digital IF signal on 
+intermediate frequency 4092 kHz is processed by the array of 15 GPS L1 correlators (15 channels). The 
+microcontroller demodulates, decodes and manages navigation messages, calculates position velocity and time 
+(PVT), calculates Dilution of Precision (DOP) and satellite visibility, manages the satellite channels and 
+generates NMEA and piNAV sentences. The messages are provided via serial UART. The piNAV-NG receiver 
+is realized on 6-layers PCB including four power planes to maximally suppress the noise of analogue and digital 
+circuits and protect the receiver circuits against interference from the other electronics (EMC susceptibility). 
+High efficiency switching step-down regulator is used to produce the core voltage of 1.2 V for both computation 
+cores. The GPS antenna as an external product can be operated as passive or active. The block diagram shows 
+the phantom-like DC bias power supply feed of the active antenna. 
+ 
+ 
+Fig. 3 The piNAV-NG Block Diagram.  
+ 
+ 
+THEORY OF OPERATION 
+ 
+ 
+The piNAV-NG receiver is a stand-alone 15-channels GPS L1 navigation receiver that uses navigation 
+data (almanac and ephemeris) transmitted by the GPS navigation satellites for solving the navigation task and 
+receiver management. No other external or augmentation data (uplink / upload) is needed or supported. The 
+receiver is equipped with a software dead reckoning orbital propagator feature to cover signal (Fix) dropouts. 
+ 
+Minimal required signal-to-noise ratio (SNR) for reliable GPS satellite signal acquisition by the  
+piNAV-NG receiver is 38 dBc-Hz. Once the satellite is acquired, the receiver accepts its lower SNR while keep 
+it tracking. The receiver permanent tracking capability is then ensured if the SNR is higher than 25 dBc-Hz. The 
+piNAV-NG tracking algorithm has been developed to be insensitive to the short (order of seconds) fading that 
+may cause additional deterioration of the SNR as low as 18 dBc-Hz. The high tracking sensitivity feature 
+provides excellent margin which could be efficiently exploited i.e. when the GPS signal reception is performed 
+via side lobes of the antenna radiation pattern (i.e. when the satellite is slowly tumbling, etc.)     
+ 
+The firmware processes the acquired data, code and carrier phase measurement to calculate 3D position 
+fix and velocity vector. The 2D position fix mode is not supported, since it is useless in LEO. The elevation 
+mask of 3° and C/N0 filter set to 30 dBc-Hz implemented in the Position, Velocity & Time algorithm (PVT) 
+selects the GPS satellites used for position calculation. All the satellites below these limits are not included in 
+position data processing in order to maximize the precision of the PVT data output. 
+ 
+The receiver channel management algorithm is programmed to seek for and to track all the satellites in 
+view. If the position of the receiver is unknown (after power up), the elevation mask is not used. However, if the 
+receiver does not process enough satellites above the elevation mask, but the number of the satellites including 
+
+ 
+ 
+ 
+ 
+  
+ 6       
+www.SkyFoxLabs.com, Space-Friendly products 
+piNAV-NG Product Datasheet 
+Issue rev. A, 2025, info@skyfoxlabs.com, U Studanky 620/13, CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2025 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+piNAV-NG
+satellite below elevation mask is enough for 3D position solution, the position information is provided with 
+uncertainty. To increase the position information precision, the elevation mask is applied on calculated data in 
+the following period. In this case the next NMEA sentences can be provided as empty as a result of elevation 
+masking. Once the receiver acquires at least four GPS satellites above the elevation mask (3° or higher), the 
+navigation information is provided continuously. 
+ 
+The PVT does not implement satellite geometry filter. However, its quality is measured by the DOP 
+parameters and provided to the user in NMEA and piNAV sentences. The user can decide then, whether the 
+relevant DOP parameter meets or exceeds the target application requirements (i.e. the conventional ADCS based 
+on magnetometer requires only coarse position data for determination of the orientation of the magnetic flux 
+vector thus even high DOPs can be considered as fully sufficient). 
+ 
+ANTENNA 
+ 
+ 
+ 
+The piNAV-NG receiver has been tested with various GPS antennas including passive and active 
+(including/excluding local Low Noise Amplifier), helical, loop, GP and patch antennas to find the best setup 
+providing maximum receiver performance, sensitivity and position fix capability onboard the CubeSat structure. 
+The best results were observed with the patch antenna (35×35 mm) and local LNA (gain PLNA ≥ +13 dBm, noise 
+figure NF approx. 1 dB) and Z-axis CubeSat panel serving as the Patch Antenna ground plane (copper PCB with 
+square shape, outer dimensions 100×100 mm and milled corners fitting the standard CubeSat Structure Z-axis 
+footprint). It is recommended to keep the antenna facing the Zenith with suitable ADCS (Attitude Determination 
+and Control Subsystem). Recommended deviation from the Zenith allowing the piNAV-NG to fix the position 
+within the tTTFF time is determined as a cone of ± 45° along the Z-axis as described in Fig. 4 in order to face to at 
+least four active (healthy) GPS satellites with a free line of sight above the Elevation Mask.   
+ 
+NOTE: The blocking of the satellite reception by the target satellite construction or improper 
+orientation of the antenna deteriorates the piNAV-NG receiver performance and prolongs the Time-
+to-First-Fix (tTTFF). The receiver disposes by sufficient tracking and acquisition margins and can be 
+operated even if the part of the sky is blocked by the obstacle. However, the performance of the 
+receiver cannot be guaranteed then. Note that the acquired satellite should be tracked at last 30 seconds with 
+C/N0 > 38 dBc-Hz to be able to receive ephemeris data and then the C/N0 could not fall below 25 dBc-Hz 
+permanently, otherwise the satellite tracking is not possible (typical Zenith GPS satellites are tracked on ground 
+at approx. 43 to 48 dBc-Hz with Passive Antenna, at 48-55 dBc-Hz with Active Antenna).  
+ 
+ 
+Fig. 4 The conical area borders of the vector perpendicular to recommended GPS patch antenna’s ground 
+plane.  
+ 
+ 
+After the position fix the antenna can be swapped or rotated or periodically rotated in attitude to Nadir 
+position and back to Zenith, whilst the tracking of the satellites is kept. However, when the signal to noise ratio 
+C/N0 of at least four visible GPS satellites fall below the 30 dBc-Hz level at the RFIN input of the receiver, the 
+position calculation will not be available to avoid providing with too inaccurate position data. When the C/N0 of 
+the latest four satellites serving for navigation reception falls below the minimum PRF_IN-Trck the receiver will be 
+trying to maintain the tracking of the satellites while actively perform the seeking for the new satellites. The total 
+loss of all satellite signals results in no position data output. To recover the position information output the 
+receiver (without re-start) may take up to ~15 minutes, when the proper RF signal path is fully recovered 
+(antenna looking towards the Zenith with no RF interference). If the period with no PVT data is longer than 
+~20 minutes, the power re-cycle or Forced Reset is recommended to be performed externally, as it forces 
+the receiver to work in Fast Acquisition Mode again, with TTFF below 80 seconds again. The 20 minute 
+timeout may be shortened/prolonged by user to force the Fast Acquisition tracking algorithm whenever needed. 
+The antenna/signal quality can be analysed by the SNR parameters in GSV navigation sentences. The SNR of 
+the satellite signal with  the active antenna in the place with clear view to the whole sky shall be at least 48 dBc-
+Hz for peak (Zenith) GPS satellites and at least 43 dBc-Hz for satellites with elevation higher than 30˚. 
+
+ 
+ 
+ 
+ 
+  
+ 7       
+www.SkyFoxLabs.com, Space-Friendly products 
+piNAV-NG Product Datasheet 
+Issue rev. A, 2025, info@skyfoxlabs.com, U Studanky 620/13, CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2025 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+piNAV-NG
+CAUTION: Because the central pin of the MCX coaxial connector is under DC bias when the 
+piNAV-NG is powered on, the special care has to be taken when handling with the coaxial cable, 
+connector and antenna as well. Never connect the GPS antenna element designed as a closed dipole 
+antenna, closed loop antenna, closed helical type, etc. to the receiver input to prevent the short 
+circuit of the DC bias feed. Keep in mind, the central tap of the conventional patch antenna is galvanically 
+connected to the DC bias feed. Prevent the tap against short circuit with the ground plane or GND potential 
+when the receiver is turned On. Short circuit of the DC bias feeding or its overloading over the Absolute 
+maximum ratings may affect device reliability, damage the device and void the product warranty. 
+ 
+ 
+Special care should be taken to the installation of the GPS receiver Antenna. The antenna shall be 
+installed on the sufficiently large ground plane. The shape of the ground plane, near objects and antenna 
+matching affects the patch resonant frequency and radiation pattern. SkyFox Labs as industry’s first 
+manufacturer is ready to offer tailored, optimized and flight-proven GPS antenna modules, fitting the all X/Y/Z 
+sides of a standard CubeSat structures such as given in Fig. 5. since 2015.  
+ 
+For more details about the GNSS Antenna portfolio please visit: http://www.skyfoxlabs.com 
+ 
+ 
+Fig. 5 The piPATCH-L1E1 GPS Patch Antenna – Flight Model (left), Engineering Model (right).  
+ 
+ 
+PROTOCOLS 
+ 
+ 
+The physical communication is realized via the standard UART data interface. The baud rate is set to 
+9600 bps, no parity, 8 data bits, 1 stop bit. Logical levels are equal to LVCMOS levels as defined in JEDEC 
+JESD8C.01 standard.  
+ 
+The piNAV-NG receiver provides navigation data in standard NMEA 0183 format. The standard 
+NMEA sentences GGA, GSA, GLL, RCM, VTG and GSV were augmented by the manufacturers’s defined 
+sentences (piNAV) LSP and LSV in the NMEA format. It provides position and velocity vector in the Cartesian 
+coordinates in the reference frame WGS-84 and GPS time, including the UTC time compensated for system leap 
+seconds.  
+ 
+As the receiver does not store the navigation data in the non-volatile memory, the UTC time in NMEA 
+sentences is available after reception of the ionospheric and UTC data from the satellites. The coarse GPS time 
+in piNAV sentences is available immediately after reception of any sub-frame with up to ~20 ms error. The 
+receiver time is corrected (precised) immediately after the position Fix (when the position of the satellite is 
+known to compensate for the signal Time of Flight). 
+ 
+ 
+OUTPUT DATA DESCRIPTION 
+ 
+ 
+The NMEA navigation message (known as “sentence”) is the ASCII characters string initiated with the 
+"$" and ended by CR+LF characters sequence. Each sentence is not longer than 80 characters.  
+ 
+The standard GPS receiver sentence is identified by characters "GP" immediately after the "$" character. 
+The type of the sentence is identified by the following three letters. The individual data fileds are delimited by 
+commas ",". The last optional field is a check sum introduced by the "*". The checksum is calculated as a logical  
+XOR of all the bytes between the $ and the * characters, written in ASCII representation of a hexadecimal 
+number.  
+
+ 
+ 
+ 
+ 
+  
+ 8       
+www.SkyFoxLabs.com, Space-Friendly products 
+piNAV-NG Product Datasheet 
+Issue rev. A, 2025, info@skyfoxlabs.com, U Studanky 620/13, CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2025 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+piNAV-NG
+ 
+The initial set of introductory data is sent after each reset/power up. The Engineering Model output is: 
+ 
+******************************* 
+*       piNAV-NG v9.3         * 
+*         PK (c) 2025         * 
+*      Engineering Model      * 
+******************************* 
+ 
+ 
+The Flight Model initial data output is: 
+ 
+******************************* 
+*       piNAV-NG v9.3         * 
+*         PK (c) 2025         * 
+*        Flight Model         * 
+******************************* 
+ 
+ 
+Next, the receiver provides slightly modified GPS sentences GGA, GSA, GLL, RCM, VTH and GSV. 
+Two new piNAV messages identified by the "PS" characters were defined. The first one, LSP (LEO Satellite 
+Position), transfers user position into Cartesian coordinates in WGS-84 reference frame and GPS time of the 
+position Fix. The second one, LSV (LEO Satellite Velocity), contains user velocity vector in Cartesian 
+coordinates in WGS-84 reference frame and GPS time of the data (redundantly). The NMEA and piNAV 
+sentences provided by the piNAV-NG receiver with detailed description and sample data are listed below: 
+ 
+ 
+  
+GGA - Fix Data - The NMEA SENTENCE 
+$GPGGA,172120.384,5219.0671,N,05117.0926,E,1,9,0.9,371262.1,M,0,M,,,*54 
+ 
+GGA 
+ 
+Global Positioning System Fix Data 
+172120.384 
+Fix taken at 17:21:20.384 UTC 
+5219.0671,N 
+Latitude 52 deg 19.0671' N 
+05117.0926,E 
+Longitude 51 deg 17.0926' E 
+1             Fix quality: 
+0 = Invalid 
+                              1 = GPS Fix (Standard Positioning Service / SPS) 
+ 
+ 
+ 
+ 
+6 = DROP based Fix 
+9 
+ 
+Number of satellites being tracked 
+0.9 
+ 
+Horizontal Dilution of Precision (HDOP) 
+371262.1,M 
+Altitude, meters, above WGS84 ellipsoid1 
+0,M           Height of the Geoid (mean sea level) above WGS84 ellipsoid 
+(empty field) Time in seconds since last DGPS update 
+(empty field) DGPS station ID number 
+*54 
+ 
+The checksum data, always begin with * 
+ 
+GSA - GPS DOP and Active Satellites - The NMEA SENTENCE 
+$GPGSA,M,3,31,32,22,24,19,11,17,14,20,,,,1.6,0.9,1.3*3E 
+ 
+GSA 
+ 
+Satellite status 
+M 
+ 
+Auto selection of 2D or 3D fix (M = manual)  
+3 
+ 
+3D fix - values include:  
+1 = No GPS Fix (Dead Reckoning Orbital Propagator/  
+ 
+ 
+ 
+ 
+ 
+      DROP based Fix position or no position) 
+ 
+ 
+ 
+ 
+ 
+2 = 2D GPS Fix (not implemented in piNAV-NG) 
+ 
+ 
+ 
+ 
+ 
+3 = 3D GPS Fix 
+31,32...  
+PRNs of satellites used for Fix (space for 12)  
+1.6 
+ 
+Position Dilution of Precision (PDOP)  
+0.9 
+ 
+Horizontal Dilution of Precision (HDOP)  
+1.3 
+ 
+Vertical Dilution of Precision (VDOP) 
+*3e 
+ 
+The checksum data, always begin with * 
+                                                                            
+1 NOTE: The original MLS altitude was replaced by the Altitude above WGS84 ellipsoid. 
+
+ 
+ 
+ 
+ 
+  
+ 9       
+www.SkyFoxLabs.com, Space-Friendly products 
+piNAV-NG Product Datasheet 
+Issue rev. A, 2025, info@skyfoxlabs.com, U Studanky 620/13, CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2025 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+piNAV-NG
+GLL – Geographic Latitude and Longitude - The NMEA SENTENCE 
+$GPGLL,5219.0671,N,05117.0926,E,172120.384,A,*10 
+ 
+GLL           Geographic position, Latitude and Longitude 
+5219.0671,N   Latitude 52 deg. 19.0671 min. North 
+05117.0926,E  Longitude 51 deg. 17.0926 min. East 
+172120.384    Fix taken at 17:21:20.384 UTC 
+A             A = Autonomous (3D GPS Fix), E = Estimated (DROP based Fix), N = Data NOT valid  
+*10           The checksum data, always begin with * 
+ 
+RMC – Recommended Minimum Data - The NMEA SENTENCE 
+$GPRMC,172120.384,A,5219.0671,N,05117.0926,E,14465.87,60.58,230630,,,*15 
+ 
+RMC          
+Recommended Minimum sentence C 
+172120.384    Fix taken at 17:21:20.386 UTC 
+A             A = Autonomous (3D GPS Fix), E = Estimated (DROP based Fix), N = Data NOT valid  
+5219.0671,N   Latitude 52 deg 19.0671' N 
+05117.0926,E  Longitude 51 deg 17.0926' E 
+14465.87      Speed over the ground in knots 
+60.58         Track angle in degrees true 
+230630        Date 
+, 
+      
+Magnetic Variation2 
+*15           The checksum data, always begin with * 
+ 
+VTG – Vector track and Speed over the Ground - The NMEA SENTENCE 
+$GPVTG,60.58,T,,M,14465.87,N,26790.86,K,A,*23 
+ 
+VTG           Track made good and ground speed 
+60.58,T       True track made good (degrees) 
+,M            Magnetic track made good3 
+14465.87,N    Ground speed, knots 
+26790.86,K    Ground speed, kilometres per hour 
+A 
+ 
+A = Autonomous (3D GPS Fix), E = Estimated (DROP based Fix), N = Data NOT valid  
+*23        
+The checksum data, always begin with * 
+ 
+GSV – Satellites in View – The NMEA SENTENCE 
+$GPGSV,4,1,15,31,23,152,51,32,46,279,52,12,2,50,00,22,26,96,51*4A 
+ 
+GSV           Satellites in view 
+4             Number of sentences for full data 
+1             Sentence 1 of 4 
+15            Number of satellites in view 
+31            Satellite PRN number 
+23           
+Elevation, degrees 
+152            Azimuth, degrees 
+51            Carrier to Noise Ratio (C/N0), for up to 4 satellites per sentence 
+ 
+ 
+PRN number, elevation, azimuth and C/N0 is repeated four times in total.  
+*4A           
+The checksum data, always begin with * 
+ 
+ 
+The number of satellite in view is always 15 as the receiver has 15 channels. The PRN, Elevation, 
+and Azimuth are assigned to the channels that process the satellites above the horizon otherwise the empty entry 
+is transmitted. The tracked satellites have non-zero C/N0. 
+                                                                            
+2 NOTE: Magnetic variation is not supported. 
+3 NOTE: Magnetic track made good is not supported. 
+
+ 
+ 
+ 
+ 
+  
+ 10     
+www.SkyFoxLabs.com, Space-Friendly products 
+piNAV-NG Product Datasheet 
+Issue rev. A, 2025, info@skyfoxlabs.com, U Studanky 620/13, CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2025 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+piNAV-NG
+LSP – LEO Satellite Position – The piNAV SENTENCE 
+$PSLSP,193772.0585851,780,3963889.204,1001383.917,4879428.991,5,4.5*72 
+ 
+LSP           LEO satellite position 
+193772.0585851  GPS time [s] to which the rising edge of the Valid Position Pulse (VPP) was calculated 
+780           GPS week 
+3963889.204   X position referenced to WGS-84 [m] 
+1001383.917   Y position referenced to WGS-84 [m] 
+4879428.991   Z position referenced to WGS-84 [m] 
+5 
+ 
+Number of satellites used for PVT 
+4.5           Position Dilution of Precision (PDOP) 
+*72 
+       The checksum data, always begin with * 
+ 
+LSV – LEO Satellite Velocity – The piNAV SENTENCE 
+$PSLSV,193772.0585851,780,0.051,0.017,0.034,5,4.5*7B 
+ 
+LSV           LEO satellite velocity 
+193772.0585851  GPS time [s] to which the rising edge of the Valid Position Pulse (VPP) was calculated 
+780           GPS week 
+0.051        
+vX velocity referenced to WGS-84 [m/s] 
+0.017 
+       vY velocity referenced to WGS-84 [m/s] 
+0.034         vZ velocity referenced to WGS-84 [m/s] 
+5 
+       Number of satellites used for PVT 
+4.5           Position Dilution of Precision (PDOP) 
+*7B 
+       
+The checksum data, always begin with * 
+ 
+LSS – LEO Satellite Status – The piNAV SENTENCE 
+$PSLSS,3.30,1.20,3.29,45,9,22*7B 
+ 
+LSS           LEO satellite status 
+3.30  
+ 
+Main Input Bus voltage in Volts 
+1.20           1.2V Core Voltage in Volts 
+3.29        
+3.3V Core Voltage in Volts 
+45 
+       Main Total Input Current in miliAmps 
+9         
+Output Current fed to the Active Antenna port in miliAmps 
+22           
+Core temperature in deg Celsius. Negative temperature with –sign (e.g. “-7”) 
+*7B 
+       
+The checksum data, always begin with * 
+ 
+ 
+DEAD RECKONING ORBITAL PROPAGATOR 
+ 
+ 
+The piNAV-NG firmware is build around the key principle of processing an extremelly weak RF signal 
+directly from the GPS constellation satellites. In case the antenna of the GPS receiver system is unable to pick 
+up a proper signal quality, signal strength or locally (in-situ) the signal is jammed from (unfortunatelly) 
+increasing amount of terrestrial sources powerfull enough to penetrate up to the LEO altitudes, making high 
+areas of orbits without usable GPS signal, the Dead Reckoning Orbital Propagator (or DROP) algorithm 
+serves as a mathematical solution implemented in the piNAV-NG firmware to overcome the GPS PVT/Fix 
+dropouts.  
+ 
+During the GPS position Fix, the DROP algorithm continuously integrates the data measured and 
+improves the estimation of the satellite state vector by an infinite impulse response Hatch filter with a maximal 
+time constant of 100 seconds. The filter is initiated by the first Fix obtained after power up (Cold Start) and is 
+continuously loaded up to 100 seconds of Fix data, during the flight. Once the GPS Fix is not available for a 
+reasons such as: incorrect antenna attitude, in-situ GPS signal jamming, not enough GPS Satellites in View, less 
+than 4 healthy satellites above the elevation mask or less than 30 dBc-Hz in at least 4 healthy sats SNRs, etc., the 
+PVT output is estimated and provided by the mathematical principle using DROP algorithm.  
+

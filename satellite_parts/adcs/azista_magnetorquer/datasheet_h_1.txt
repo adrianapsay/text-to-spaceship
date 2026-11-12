@@ -1,0 +1,69 @@
+Magnetorquer
+Rod-type electromagnetic actuator for attitude control and
+momentum management
+The Azista Magnetorquer is a rod-type electromagnetic actuator for propellant-free spacecraft attitude control and reaction-wheel 
+desaturation, built on a design lineage ﬂown across GEOSAT, IRNSS navigation, and Earth observation platforms. A Permendur-49 
+cobalt-iron core delivers high saturation ﬂux density and low coercivity integrated with dual independent redundant coils wound with 
+over 1 lakh turns of polyimide-insulated copper wire. Each coil independently delivers the full rated dipole moment, while maintaining 
+a residual magnetic moment below 1 A·m² to prevent parasitic disturbances when unpowered.
+Electrical & Magnetic Performance
+Key Speciﬁcations:
+•
+Max. Dipole Moment: 20 A·m²
+•
+Max. Power Consumption: 5.5 W
+•
+Mass: < 550 g
+•
+Residual Moment: < 1 A·m²
+Parameters
+Value
+Unit
+20 (±10%)
+A·m²
+Max. residual moment
+Max. moment, DPM
+< 1
+A·m²
+Operating supply voltage
+28 to 42
+V
+No. of turns, coil I & II (each)
+122,275
+turns
+Wire gauge, both coils
+36
+AWG
+Max. power consumption
+5.5
+W
+Mass
+< 550
+g
+Mechanical envelope (L × W × H)
+300 × 64 × 89
+mm
+Resistance @ 25 °C
+325
+Ω
+Time constant (±20%)
+35
+ms
+Inductance (±20%)
+12
+H
+Insulation resistance @ 25 °C
+> 0.001
+GΩ
+© Azista Industries Private Limited, Hyderabad, 2026. Azista provides information on its products, including the subject of this document, in good faith and does not accept responsibility for the 
+consequences arising out of the use of, or of the inability to use, these products. Azista also reserves the right to change the product speciﬁcations without notice and to supply a version of the product 
+that performs better than the speciﬁed levels. In case of any discrepancy, a contract document in vogue, or a particular commercial quotation carrying speciﬁcations always takes precedence over 
+standard (or generic) published literature (or documents). Although every effort is made to make sure that the information provided in this document is correct, Azista is not legally bound to these facts 
+unless separately executed as a contract.
+Document Number: AZS_MTQ01-20 Release A (04 September 2026)
+Corporate Ofﬁce: Sy No. 83/1, 19th & 20th ﬂoor, Hetero Tower, Commerzone Madhapur, Hyderabad, India - 500 032
+Azista Space
++91 40-69869999
+www.azista.space
+contactus@azistaindustries.com
+

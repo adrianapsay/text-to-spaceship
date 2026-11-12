@@ -1,0 +1,83 @@
+ 
+ 
+ 
+ 
+ 
+The CosmoOrbit XE is a high-performance GNSS Receiver specifically designed 
+for space applications. It offers a range of advanced features to ensure reliable global 
+positioning and tracking in extreme environments with high precision requirements. 
+ 
+ 
+ 
+Key Features: 
+⚫ 
+230 acquisition/tracking channels 
+⚫ 
+Support for global GPS, Galileo, GLONASS, QZSS, SBAS satellite systems. 
+⚫ 
+16 million time-frequency hypotheses testing per second 
+⚫ 
+Built-in active high gain antenna 
+⚫ 
+1PPS Output; 3.3V TTL, 100ms pulse width when 3D position fixed. 
+⚫ 
+4 GPS Tx indeports  
+⚫ 
+Operating temperature range: -40°C to +85°C 
+⚫ 
+Protocol: NMEA-0183 
+⚫ 
+Baud Rate: 115200bps 
+⚫ 
+Data Format: 8 bits, No Parity, 1 Stop Bit 
+⚫ 
+Default Datum: WGS-84  
+⚫ 
+User-definable Datum 
+ 
+Electrical Specifications: 
+⚫ 
+Input Voltage: 5V 
+⚫ 
+Power Consumption:120mA 
+ 
+Mechanical Specifications: 
+⚫ 
+Dimensions: 60x45x15mm 
+⚫ 
+Weight: 100g 
+ 
+Environmental Specifications: 
+⚫ 
+Operating Temperature: -
+40°C to +85°C 
+⚫ 
+Storage temperature: -55°C 
+to +125°C 
+⚫ 
+Radiation Dose : ~6 Krad 
+(200MeV proton)  
+⚫ 
+Acceleration Test: 20~22Hz, 
+15G, with Random Vibration 
+⚫ 
+Thermal Vacuum: -40~ +65degC, 72hrs, 10^-5 torr.  
+ 
+ 
+ 
+ 
+ 
+The CosmoOrbit XE Series is built to withstand the rigors of space 
+missions, offering exceptional performance, reliability, and precision in 
+demanding environments. 
+ 
+ 
+The specification subject to change without notice.  Ver: 2.3  Feb 24 2025 
+ 
+ 
+ 
+雷斯康國際有限公司 
+LETSCOM International Ltd 
+www.letscom.com.tw   +886 986698666   Randson@letscom.com.tw
+CosmoOrbit XE GNSS Receiver 
+

@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-skyfox-labs-sro-pipatch-max-space-friendly-active-multi-constellation-gnss-patch-antenna-for-microsatellites-6p92f1.pdf
+method: product image from the catalog page https://satsearch.co/products/skyfox-labs-pipatch-max-active-multiband-gnss-patch-antenna-module

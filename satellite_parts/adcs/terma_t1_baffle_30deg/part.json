@@ -1,0 +1,152 @@
+{
+ "id": "terma_t1_baffle_30deg",
+ "name": "Terma T1 star tracker baffle, 30 deg sun exclusion",
+ "category": "adcs",
+ "subcategory": "star_tracker_baffle",
+ "vendor": "Terma",
+ "model": "T1 baffle 30 deg",
+ "dimensions_mm": {
+  "x": 125,
+  "y": 125,
+  "z": 165
+ },
+ "mass_g": 242,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.terma.com/media/d1ifyxd3/terma_t1_str_data_sheet.pdf",
+  "document": {
+   "title": "Terma T1 star tracker data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Baffle 30 deg: diameter 125 mm, height 165 mm, 242 g. Drawn as a solid of revolution envelope."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Denmark",
+ "distributors": [
+  "direct"
+ ],
+ "satellite_class": "smallsat",
+ "adcs": {
+  "sun_exclusion_angle_deg": 30
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   125.0,
+   124.65,
+   165.0
+  ],
+  "mesh_volume_mm3": 2017310.3,
+  "watertight": true,
+  "render_kind": "radome_puck",
+  "effective_density_g_cm3": 0.12,
+  "bodies": {
+   "part": [
+    {
+     "name": "flange",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__flange.stl"
+    },
+    {
+     "name": "radome",
+     "color": [
+      0.92,
+      0.92,
+      0.9
+     ],
+     "file": "bodies/part__radome.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 164
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    125.0,
+    125.0,
+    165.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.35,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "baffle",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/baffle.stl"
+    },
+    {
+     "name": "flange",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/flange.stl"
+    },
+    {
+     "name": "vanes",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/vanes.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
+  "datasheet_url": "https://www.terma.com/media/d1ifyxd3/terma_t1_str_data_sheet.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

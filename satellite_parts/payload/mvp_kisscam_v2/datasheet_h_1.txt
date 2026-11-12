@@ -1,0 +1,555 @@
+KissCAM V2 Datasheet and User Manual
+Features
+ 1280 x 960 Resolution (1.2MP)
+ 4Mb non-volatile MRAM memory
+ Colour Bayer Filter
+ Stock wide-angle, all glass and metal optics
+ S-mount lens holder allows custom lenses
+ Miniature size (38 x 20 x 18mm)
+ Low mass (10g)
+ 3.3 or 5V Supply at 80mA
+ UART command and telemetry interface
+ Tested from -20 to +60◦C
+ High-quality component supply chain
+Applications
+ Engineering/Inspection camera for small satellites
+ Simple science payload for CubeSats
+ Context camera for high-resolution imagers
+1. General Description
+The MVP KissCAM is a miniature, low-cost, colour im-
+ager for satellites. It is designed for small size, ease of use
+and rapid integration, making it ideal for use as an engi-
+neering inspection camera or simple CubeSat payload.
+KissCAM is designed around the Microsemi AR0130 au-
+tomotive CMOS image sensor. Onboard power regula-
+tion allows KissCAM to be powered from either 3.3 or
+Figure 1: KissCAM miniature CubeSat camera.
+5V. Communication with KissCAM is via a logic-level or
+RS422 UART interface, which is readily compatible with
+most microcontrollers.
+The command and telemetry interface is simple to under-
+stand and implement. Essential functions, such as set-
+ting the exposure and capturing images can be accessed
+through single telecommands.
+Direct access to image
+sensor registers is also available for advanced users.
+KissCAM takes bayer-colour filter images in standard
+(640 x 480 pixels) or high definition (1280 x 960 pixels).
+4Mb of non-volatile MRAM memory allows KissCAM to
+store four SD, or one HD image for later download. An
+image preview mode at 80 x 60 pixels is also available.
+Despite its small size (38 x 20 x 18mm) and mass (10g),
+KissCAM features all glass and metal optics.
+A low-
+profile, wide-angle lens is fitted as stock, but the alu-
+minium s-mount lens holder allows compatibility with a
+wide variety of commercial M12 lenses.
+Reliability is considered through conservative PCB lay-
+out, automotive-grade components, IPC-qualified in-
+spection, thermal cycling and burn-in of every unit.
+Revision 1.1
+April 2023
+Page 1 of 14
+
+MVP Aerospace Ltd
+KissCAM V2 Datasheet and User Manual
+April 2023
+2. Absolute Maximum Ratings
+Table 1: Absolute Maximum Ratings of KissCAM
+Parameter
+Rating
+Unit
+Notes
+Supply Voltage
+−0.3 to +6
+V
+RS422 Interface Input
+−60 to +60
+V
+±15kV ESD protected
+Current Consumption
+120
+mA
+Storage Temperature
+−20 to +85
+◦C
+Note: Stresses above those listed under Absolute Maximum Ratings can cause permanent damage to the device.
+3. Electrical Specifications
+Table 2: Electrical Specifications and standard operating conditions.
+Parameter
+Symbol
+Min.
+Typ.
+Max.
+Unit
+Conditions
+Supply Voltage
+Vdd
+3.2
+3.3
+5.5
+V
+Compatible with 3.3 and 5V supplies.
+Current Consumption
+Idd
+50
+78
+mA
+Minimum after power on.
+UART Interface Baud
+b
+115200
+baud
+8 data bits, 1 stop bit, no parity.
+RS422 Interface Voltage1
+Vo
+1.5
+Vdd
+V
+Full RS422 compliance.
+1 Refer to Linear Technology LTC2865 datasheet.
+4. Pinout
+Electrical interfacing to KissCAM is via a single 6-way Molex Picoblade connector (53261-0671).
+Table 3: Electrical Pinout
+Pin
+Function
+Connector Location
+1
+Ground
+2
+Vdd
+3
+Rx+
+4
+Rx-
+5
+Tx+
+6
+Tx-
+Revision 1.1
+April 2023
+Page 2 of 14
+
+MVP Aerospace Ltd
+KissCAM V2 Datasheet and User Manual
+April 2023
+5. Mechanical Specifications
+KissCAM was designed from the ground up to be compatible with even the smallest CubeSats, while still offering
+the flexibility of a standard M12 lens mount. MVP Aerospace offers a wide-angle lens as standard, but customers
+can order KissCAM without a lens if they wish to fit their own.
+KissCAM is designed to be mounted using four M2 cap-head screws. It is light enough to be mounted as a daughter
+board on standard 1.6mm thickness PC104 cards, as are common in CubeSats. In this way, KissCAM can easily
+be added as a primary or auxiliary payload on the Z+/Z- end of the PC104 card stack. Alternatively, KissCAM
+can be mounted to the X or Y panels using standoffs.
+All KissCAM materials have been carefully chosen to be low-outgassing.
+The Molex Picoblade connector has
+extensive flight heritage, the lens mount is anodised aluminium, and the stock lens is all metal and glass construction.
+The PCB material is FR4 Tg 155. All staking is performed with flight heritage epoxy.
+The customer is responsible for staking the connector and mounting screws.
+Figure 2: KissCAM primary dimensions. Refer to the CAD model for more detailed information.
+Table 4: Mechanical and Optical properties
+Parameter
+Value
+Unit
+Notes
+Length
+38
+mm
+Width
+20
+mm
+Height
+17
+mm
+1mm tolerance.
+Weight without lens
+7
+g
+Weight of stock lens
+3
+g
+All metal and glass lens
+Stock Field of View
+128 x 96.4
+Degrees
+1/3” sensor, 2.1 mm FL lens
+Mounting holes
+4 x 2.2mm
+Mounting hardware
+4 x M2 screws
+Use aerospace standard torquing
+Revision 1.1
+April 2023
+Page 3 of 14
+
+MVP Aerospace Ltd
+KissCAM V2 Datasheet and User Manual
+April 2023
+6. Camera Operation
+6.1 Architecture
+KissCAM’s architecture is based on a 1.2MP Onsemi AR0130 CMOS image sensor connected to an ARM Cortex
+M microcontroller via its 8-bit parallel camera interface. Non-volatile image storage is provided by 16Mb of QSPI-
+connected MRAM memory. Data is transferred from the image sensor to the MCU, and from the MCU to the
+non-volatile memory using the MCU’s DMA (Direct Memory Access) peripheral.
+KissCAM is powered by 3.3V to 5V (VDD). Onboard voltage regulators generate local supplies of 1.8V and 2.5V
+for the MCU and image sensor. The command and telemetry interface is provided by the MCU’s UART peripheral
+via an RS422 driver, or VDD-level logic buffer.
+6.2 Image Capture and Download
+KissCAM has three operating modes: Sleep, Standard definition (SD) and High definition (HD). Transitioning
+between the modes is possible at any time using the Set Mode command. Transitioning modes resets all image
+sensor registers, such as exposure, to default.
+In sleep mode the image sensor is held in reset, resulting in minimum power consumption. KissCAM still responds
+to TTC which is not related to the image sensor, such Ping (Section 7.4.2). Image downloads are also possible.
+In SD Mode, KissCAM captures full FOV images with a resolution of 640 x 480 pixels (VGA resolution). This is
+a quarter of the image sensor’s full resolution. Digital binning, performed in the image sensor, takes the average of
+four pixels at a time to produce the reduced-resolution output. SD images can be saved in any of four non-volatile
+memory slots, and downloaded individually.
+In HD mode, KissCAM captures full FOV images with a resolution of 1280 x 960 pixels (1.2 MP). Due to the
+limited non-volatile memory, pnly a single HD image can be stored at a time. The image is stored across all four
+memory slots as shown in Figure 3, and is downloaded as four individual SD images. Any existing SD images will
+be overwritten when an HD image is captured.
+Figure 3: SD image capture (left) allows four VGA images to be captured into four memory slots,
+while HD image capture (right) captures a single 1.2MP image across all four memory
+slots.
+Revision 1.1
+April 2023
+Page 4 of 14
+
+MVP Aerospace Ltd
+KissCAM V2 Datasheet and User Manual
+April 2023
+6.3 Rolling Shutter
+Modern CMOS image sensors largely fall into two categories: Global shutter and rolling shutter. Global shutter de-
+signs expose all pixels simultaneously when taking an image, while rolling shutters expose rows of pixels sequentially.
+Rolling shutters can cause artifacts when capturing rapidly moving scenes. However, in practice, rolling shutter
+designs have proven to be simpler and cheaper to manufacture, and perform well in everyday imaging applications.
+For this reason they have become the most common solution in consumer-grade imagers.
+KissCAM’s automotive grade AR0130 image sensor features a rolling shutter. Therefore, to avoid rolling shutter
+artifacts, it is important to calculate the maximum allowable spin rate of a satellite platform hosting KissCAM.
+In SD mode (Section 6.2), the delta between exposure start (or end) times of sequential rows of pixels is 103.125
+us. This is the time it takes to transfer a row of image data from the image sensor into KissCAM’s non-volatile
+memory.
+In SD mode KissCAM captures 480 pixels over 96 degrees of vertical FOV. Therefore a single pixel covers a FOV
+of 0.2 degrees. To avoid rolling shutter artifacts the image being captured should move by less than half a pixel
+(0.1 degrees) during the time it takes to read out all rows. The calculation gives: 103.125 microseconds x 960 rows
+= 100 ms; 0.1 degrees divided by 100 ms = 1 deg/s. This is typically achievable using pure magnetic detumbling
+control.
+Note that rolling shutter artifacts are independent of total exposure time, and motion blur caused by long exposure
+times should be calculated separately.
+6.4 Bayer Colour Filter
+The image sensor has a bayer colour pattern overlaid. This is a common technique for achieving colour images.
+The bayer pattern follows the sequence shown in Figure 4. If the raw data is plotted as an 8-bit greyscale image, a
+checkerboard pattern is typically visible. MVP Aerospace provides a utility for converting the raw images into colour.
+This utility is based on the Python OpenCV cvtColor(im, cv2.COLOR BayerGR2RGB) function. Alternatively,
+commercial photo editing software capable of handling RAW images can perform the conversion.
+After conversion to colour, most images will require white-balancing. This is a common process in photo editing
+and can be performed in most photo editing software. For more advice on raw image data processing, please contact
+MVP Aerospace.
+Figure 4: Left - The image sensor’s bayer pattern. Centre - Raw image data displayed in 8-bit
+greyscale displays a subtle checkerboard pattern. Right - a zoomed-in view of the
+checkerboard pattern caused by the bayer filter.
+Revision 1.1
+April 2023
+Page 5 of 14
+
+MVP Aerospace Ltd
+KissCAM V2 Datasheet and User Manual
+April 2023
+7. Command and Telemetry
+The command and telemetry interface, which operates over UART (RS422 or logic-level) at 115200 baud, is designed
+for simplicity and ease of integration. Commands, in the form of byte sequences (packets), are sent to the KissCAM
+from a host system and telemetry packets are returned. All commands have the same format and length, and all
+result in a telemetry or error response. Most commands simply return an acknowledge telemetry packet, while
+others return image or other data. KissCAM sends no unsolicited telemetry.
+It is mandatory to wait for a response to a command before sending the next one. A 2000 ms timeout may be used
+to detect stalled or broken communication, in which case the command can be retried or KissCAM power cycled.
+7.1 Command Format
+Command Format
+0x40 ’@’
+Command
+Param 1
+Param 2
+Param 3
+Param 4
+0x0D ’\r’
+Every command has the same format and is composed of seven bytes. The first byte is a start byte of 0x40 ’@’.
+Next comes a command byte.
+As KissCAM is designed for simplicity, there are only eight unique commands.
+The command bytes typically have easy to remember ASCII representations, such as ’C’ for capture, and ’D’ for
+download. See Section 7.3 for an overview of available commands, and Section 7.4 for details.
+After the command byte there are four parameter bytes. How these bytes are utilised is command dependent.
+For example, some commands utilise 8-bit parameters, while others use 16-bit parameters (MSB transmitted first).
+Not all parameter bytes are used by every command. If a parameter is not used by a command it must still be
+transmitted (keeping the total command length at 7 bytes), but its value is ignored by KissCAM. It is recommended
+to transmit 0x00 for unused parameters.
+Finally, every command must be terminated with a carriage return character: 0x0D ’\r’.
+7.2 Telemetry Format
+Telemetry Format
+0x40 ’@’
+ACK/Err
+Mode
+len MSB
+len LSB
+Tlm 0
+...
+Tlm n
+0x0D ’\r’
+All received KissCAM commands result in a telemetry or error response packet. All response packets have the
+same format, but may include different numbers of telemetry data points. Data length is coded into the packet to
+simplify host software.
+The first byte of every response packet is the start character 0x40 ’@’, followed by an ACK byte flag. KissCAM
+acknowledges a successful command with a copy of the command byte in the ACK field. If a command cannot be
+interpreted or executed correctly an Error flag of 0xFF is returned in the ACK field instead.
+The third byte represents KissCAM’s current mode (Section 6.2). After the Mode byte comes a 16-bit number
+(MSB first) representing the number of telemetry bytes to follow (excluding the final 0x0D ’\r’). The content of
+these telemetry bytes depends on the command, as detailed in Section 7.5. Error responses have telemetry bytes,
+too, giving details of the error cause. See Section 7.4.9 for details on error responses.
+Finally, every response packet is terminated with a carriage return character: 0x0D ’\r’.
+Revision 1.1
+April 2023
+Page 6 of 14
+
+MVP Aerospace Ltd
+KissCAM V2 Datasheet and User Manual
+April 2023
+7.3 Command and Telemetry Summary
+The table below gives a summary of the available commands and their responses. It is strongly recommended that
+all available commands be made available at system telecommand level. The Read Register and Write Register
+commands should only be used with guidance from MVP Aerospace, as incorrect use can cause permanent damage
+to KissCAM. Details on the commands and responses are given in Section 7.4.
+Table 5: Command and Telemetry Summary
+Command Name
+Command
+Description
+Response
+Section
+Ping
+0x50 ’P’
+Basic health check
+Uptime (s)
+7.4.1
+Set Mode
+0x4D ’M’
+Set mode: Sleep, SD, HD
+Ack
+7.4.2
+Memory Status
+0x54 ’S’
+Return memory usage status
+Mem Status
+7.4.3
+Set Exposure
+0x45 ’E’
+Set image exposure time.
+Ack
+7.4.4
+Capture
+0x43 ’C’
+Capture a new image
+Ack
+7.4.5
+Download
+0x44 ’D’
+Download a a row of image data
+Image Data
+7.4.6
+Read Register
+0x52 ’R’
+Read an image sensor register directly
+Register Contents
+7.4.7
+Write Register
+0x57 ’W’
+Write an image sensor register directly
+Ack
+7.4.8
+-
+0xFF
+Possible response to any command
+Error
+7.4.9
+Revision 1.1
+April 2023
+Page 7 of 14
+
+MVP Aerospace Ltd
+KissCAM V2 Datasheet and User Manual
+April 2023
+7.4 Command and Telemetry Details
+7.4.1 Ping
+The Ping command checks communication and basic health status of KissCAM. It takes a single parameter which
+selects between an MCU-only (0x00), or MCU and image sensor (0x01), communication check. An MCU-only check
+tests the command-reply behaviour of KissCAM. An MCU and image sensor check also attempts to read the image
+sensor ID register over I2C. Both test types, if successful, return a fixed-length ACK with four telemetry bytes
+indicating successful and invalid command counts, and a 16-bit uptime in seconds. Failed communication results
+in no response or an Error response (Section 7.5.9).
+Ping Command
+0x40 ’@’
+0x50 ’P’
+PN
+0x00
+0x00
+0x00
+0x0D ’\r’
+PN Ping Type. 0x00 MCU only, 0x01 MCU and Image Sensor.
+Ping Response
+0x40 ’@’
+0x50 ’P’
+MD
+0x00
+0x04
+RXV
+RXF
+TM1
+TM2
+0x0D ’\r’
+MD Current KissCAM Mode.
+RXV Number of valid received commands. Rolls over at 256.
+RXF Number of invalid received commands. Rolls over at 256.
+TM1 KissCAM uptime in seconds MSB.
+TM2 KissCAM uptime in seconds LSB.
+7.4.2 Set Mode
+KissCAM has three operating modes: Sleep, Standard definition (SD) and High definition (HD). Transitioning
+between the modes is possible at any time using the Set Mode command.
+Sleep Mode keeps the image sensor in reset, saving power. To start capturing images, KissCAM must be put into
+SD or HD mode with a Set Mode command. This brings the sensor out of reset, followed by a check of I2C
+communication with the sensor and setting up default image sensor register settings. A successful mode change
+will result in a standard ACK with no additional telemetry bytes. Mode changes reset sensor registers, such as
+exposure, to their KissCAM defaults.
+Set Mode Command
+0x40 ’@’
+0x4D ’M’
+MD
+0x00
+0x00
+0x00
+0x0D ’\r’
+MD Mode: 0 sleep, 1 standard definition (SD), 2 high definition (HD)
+Set Mode Response
+0x40 ’@’
+0x4D ’M’
+MD
+0x00
+0x00
+0x0D ’\r’
+MD Current KissCAM Mode.
+Revision 1.1
+April 2023
+Page 8 of 14
+
+MVP Aerospace Ltd
+KissCAM V2 Datasheet and User Manual
+April 2023
+7.4.3 Memory Status
+KissCAM has four non-volatile memory slots for SD images, as explained in Section 6. Details about the images
+currently saved in these image slots can be requested using the Memory Status command, which takes no
+command parameters.
+The telemetry response to a Memory Status command has a fixed length and contains the following information
+about the image in each slot: Image Mode, exposure of image, and KissCAM uptime when the image was taken.
+Note that an image slot containing a test pattern can be identified by an exposure of zero.
+Memory Status Command
+0x40 ’@’
+0x53 ’S’
+0x00
+0x00
+0x00
+0x00
+0x0D ’\r’
+All command parameters are ignored.
+Memory Status Response
+0x40 ’@’
+0x53 ’S’
+MD
+0x00
+0x14
+IMD
+EX1
+EX2
+TM1
+TM2
+...
+0x0D ’\r’
+MD Current KissCAM Mode.
+IMD KissCAM Mode when image was taken.
+EX1 Image exposure MSB.
+EX2 Image exposure LSB.
+TM1 Uptime when image was taken MSB.
+TM2 Uptime when image was taken LSB.
+... The 5 telemetry bytes are repeated for each image slot, in sequence, for a total of 20 tlm bytes.
+7.4.4 Set Exposure
+The exposure of KissCAM images can be changed with the persistent Set Exposure command. Auto-exposure
+algorithms can struggle with the extreme contrast between the blackness of space and the sunlit Earth, especially
+if the satellite is rotating, so manual exposure is preferred. The command Set Exposure takes a single parameter
+specifying the exposure in steps of 89.5 microseconds, and can range from 2 to 960. Therefore, the default setting
+of 672 gives an exposure time of: 672 x 89.5 = 60.144 ms.
+The default exposure time is typically good for taking indoor images in a lab environment. Much lower exposure
+settings are required for images taken outdoors or from space. As a starting point, MVP Aerospace recommends
+an exposure setting of 10 for in-orbit images. More advanced exposure settings can be applied with guidance from
+MVP Aerospace.
+A successful Set Exposure command will return a standard ACK with no additional telemetry bytes.
+Set Exposure Command
+0x40 ’@’
+0x45 ’E’
+EX1
+EX2
+0x00
+0x00
+0x0D ’\r’
+EX1 Exposure MSB.
+EX2 Exposure LSB.
+Set Exposure Response
+0x40 ’@’
+0x45 ’E’
+MD
+0x00
+0x00
+0x0D ’\r’
+MD Current Sensor Mode.
+Revision 1.1
+April 2023
+Page 9 of 14
+
+MVP Aerospace Ltd
+KissCAM V2 Datasheet and User Manual
+April 2023
+7.4.5 Capture
+Capturing an image with KissCAM is simple. The Capture command will capture a new image to memory and
+return an acknowledge response if successful.
+Thereafter, the image can be downloaded using the Download
+command (Section 7.4.6). KissCAM images are taken at either 640 x 480 or 1280 x 960 pixels resolution, depending
+on the current mode (Section 6.2). Each pixel is represented by a single data byte. Therefore, images are 300kB or
+1200kB in size.
+The Capture command takes two parameters: Memory Slot and Test Pattern Enable. In SD Mode there is a
+choice of four memory slots (1-4) to save to. In HD mode all four memory slots are used to save the four quadrants
+of the image, so the Memory Slot parameter is ignored.
+The Test Pattern Enable parameter allows a test pattern to be saved into memory rather than a real camera image.
+This is useful for verifying the datapath from KissCAM to the host platform. The test pattern includes all pixel
+values (0-255) in a repeating pattern, as shown in Figure 5.
+A successful Capture command will return an ACK with two telemetry bytes indicating the exposure used.
+Capture Command
+0x40 ’@’
+0x43 ’C’
+MEM
+TST
+0x00
+0x00
+0x0D ’\r’
+MEM Memory Slot: 1-4
+TST Enable Test Pattern. 0x00 is off. 0x01 is on.
+Capture Response
+0x40 ’@’
+0x43 ’C’
+MD
+0x00
+0x02
+EX1
+EX2
+0x0D ’\r’
+MD Current Sensor Mode.
+EX1 Exposure MSB.
+EX2 Exposure LSB.
+Figure 5: Test pattern in SD (640 x 480) on the left, and in HD (1280 x 640) on the right.
+Revision 1.1
+April 2023
+Page 10 of 14
+

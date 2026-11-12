@@ -1,0 +1,103 @@
+Dual HCI
+Description:
+•FOV:   1.5° each head
+•Accuracy from GEO (3σ): 2-60RPM
+Chord Length 0.03º,
+Chord Center  0.02º
+•Supply Voltage: +/- 12 VDC
+•Supply Power: < 2W
+•Output: Analog 
+•Detector: Proprietary LTO
+•Optical Pass Band: 14.6-15.8µ
+Environmental
+• Random Vibration: 8.4 Grms
+• Shock: 1000Gs @ 5 Khz
+•Temperature: -40 to + 60°C
+• EMC: Mil-Std 1541A
+Specifications
+The Dual Horizon Crossing Indicator (HCI) is a single assembly that contains 
+two Pyroelectric Optical Barrel Assemblies and pulse conditioning circuitry. It 
+is designed to operate at GEO orbit and used during transfer orbit for satellite 
+spin rates of from 2 RPM to 60 RPM. Each HCI has a 1.5 degree beam width 
+and the separation between the two HCI’s is 10 degrees. The output from each 
+of the HCI’s is an analog  pulse whose pulse width is equivalent to the Earth 
+chord length and provides a single leading edge and trailing edge threshold 
+crossing corresponding to the Space/Earth crossing and the Earth/Space 
+crossing. The common chassis mounting of the two heads and the sharing of 
+some common electronics provides for a compact lightweight assembly. A 
+common alignment mirror is provided. 
+Physical
+• Mass:  0.8 KG
+• Dimensions: 7.9 x 4.9 x 2.7 in.
+• Mounting Surface: Flat
+•Hybridized detector assembly
+•Proprietary pulse shaping    
+network
+Flight Heritage
+           
+Time
+0s
+0.400s
+0.800s
+1.200s
+1.600s
+V(Vout)
+-6.0V
+-4.0V
+-2.0V
+-0.0V
+0s
+0.400s
+0.800s
+1.200s
+1.600s
+ulse@1
+ulse@2
+ _Pulse@3
+Earth Crossing @ 27 degC with minimum, nominal, maximum earth radiance
+           
+Time
+0s
+10ms
+20ms
+30ms
+40ms
+50ms
+60ms
+70ms
+V(IR_In)*-20
+V(Vout)
+-6.0V
+-4.0V
+-2.0V
+0V
+0s
+10ms
+20ms
+30ms
+40ms
+50ms
+60ms
+70ms
+ _Pulse@1
+ _Pulse@2
+ _Pulse@3
+60 RPM @27 degC
+Earth Crossing Pulse at 60 RPM
+Electronics
+ _P
+ _P
+Earth Crossing pulse at 2 RPM
+•Orbital BSAT-2
+•Single POBA’S  BSS - MCP
+Contact Information
+STATUS
+Servo Corporation of America
+123 Frost  Street, Westbury, NY 11590,  USA
+Tel: 516 938 9700 Ext. 352 
+Email: georger@servo.com
+FAX: 516 938 9644   URL: www.servo.com
+Qualified Unit
+COTS Availability
+Servo Data Sheet DHCI 001-01/04
+

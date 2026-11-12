@@ -1,0 +1,136 @@
+{
+ "id": "azur_4g32c_advanced_4x8",
+ "name": "AZUR SPACE 4G32C-Advanced 4 x 8 cm bare cell, material 82921",
+ "category": "power",
+ "subcategory": "solar_cell",
+ "vendor": "AZUR SPACE Solar Power GmbH",
+ "model": "4G32C-Advanced 4 x 8 cm bare cell, material 82921",
+ "dimensions_mm": {
+  "x": 80.08,
+  "y": 40.08,
+  "z": 0.195
+ },
+ "mass_g": 3.3,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.azurspace.com/media/uploads/file_links/file/bdb_00010895-02-00_4g32-advanced_4x8.pdf",
+  "document": {
+   "title": "AZUR SPACE data sheet 00010895-02-00",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical"
+  ],
+  "notes": "Outer 80.08 x 40.08 mm, 195 um thick, 3.3 g per cell, cell area 30.6 cm2, BOL efficiency 31.3 % (AM0 1367 W/m2), Vmp 3015 mV, Imp 433 mA, Voc 3415 mV, Isc 450 mA."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Germany",
+ "electrical": {
+  "cell_area_cm2": 30.6,
+  "efficiency_percent": 31.3,
+  "vmp_mV": 3015,
+  "imp_mA": 433,
+  "voc_mV": 3415,
+  "isc_mA": 450
+ },
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   80.08,
+   40.08,
+   0.19
+  ],
+  "mesh_volume_mm3": 625.9,
+  "watertight": true,
+  "render_kind": "solar_cell",
+  "effective_density_g_cm3": 5.273,
+  "bodies": {
+   "part": [
+    {
+     "name": "cell",
+     "color": [
+      0.16,
+      0.26,
+      0.62
+     ],
+     "file": "bodies/part__cell.stl"
+    },
+    {
+     "name": "bus_bar",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__bus_bar.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 12
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "cell",
+     "color": [
+      0.16,
+      0.26,
+      0.62
+     ],
+     "file": "bodies/part__cell.stl"
+    },
+    {
+     "name": "bus_bar",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__bus_bar.stl"
+    }
+   ]
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://www.azurspace.com/media/uploads/file_links/file/bdb_00010895-02-00_4g32-advanced_4x8.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

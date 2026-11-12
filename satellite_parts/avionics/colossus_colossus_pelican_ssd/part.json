@@ -1,0 +1,208 @@
+{
+ "id": "colossus_colossus_pelican_ssd",
+ "name": "Colossus Colossus Pelican SSD",
+ "category": "avionics",
+ "subcategory": "obc",
+ "vendor": "Colossus",
+ "model": "Colossus Pelican SSD",
+ "dimensions_mm": {
+  "x": 96.0,
+  "y": 91.0,
+  "z": 15.0
+ },
+ "mass_g": 400.0,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-colossus-colossus-pelican-757fuj.pdf",
+  "document": {
+   "title": "Colossus Colossus Pelican SSD data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-11",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Read from the vendor data sheet (datasheet-colossus-colossus-pelican-757fuj.pdf): dimensions \"ations 30,000-50,000 IOPS Endurance 1,200 TBW SIZE, WEIGHT, & POWER Size PC104: 96 x 91 x 15 mm Mass 400\"; mass \"04: 96 x 91 x 15 mm Mass 400 g (est\". Catalog page lists no mass. Electrical / RF values found in the data sheet or page text by pattern (quoted where possible).",
+  "found_via": "https://satsearch.co/products/colossus-pelican"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "electrical": {
+  "power_W": {
+   "max": 1.0
+  },
+  "quote": "Power Idle: <1 W"
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   96.0,
+   91.0,
+   15.0
+  ],
+  "mesh_volume_mm3": 83734.9,
+  "watertight": true,
+  "render_kind": "pc104_board",
+  "effective_density_g_cm3": 4.777,
+  "bodies": {
+   "part": [
+    {
+     "name": "pcb",
+     "color": [
+      0.09,
+      0.42,
+      0.24
+     ],
+     "file": "bodies/part__pcb.stl"
+    },
+    {
+     "name": "stack_header",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__stack_header.stl"
+    },
+    {
+     "name": "components",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__components.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 732
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    96.0,
+    91.0,
+    15.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "pcb",
+     "color": [
+      0.09,
+      0.42,
+      0.24
+     ],
+     "file": "bodies_detail/pcb.stl"
+    },
+    {
+     "name": "standoffs",
+     "color": [
+      0.78,
+      0.62,
+      0.28
+     ],
+     "file": "bodies_detail/standoffs.stl"
+    },
+    {
+     "name": "stack_header",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/stack_header.stl"
+    },
+    {
+     "name": "header_pins",
+     "color": [
+      0.85,
+      0.66,
+      0.22
+     ],
+     "file": "bodies_detail/header_pins.stl"
+    },
+    {
+     "name": "shield",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/shield.stl"
+    },
+    {
+     "name": "ics",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/ics.stl"
+    },
+    {
+     "name": "passives",
+     "color": [
+      0.55,
+      0.45,
+      0.3
+     ],
+     "file": "bodies_detail/passives.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": "PC/104 stack",
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
+  "datasheet_url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-colossus-colossus-pelican-757fuj.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

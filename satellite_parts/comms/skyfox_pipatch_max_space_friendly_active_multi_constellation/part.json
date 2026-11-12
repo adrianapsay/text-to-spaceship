@@ -1,0 +1,152 @@
+{
+ "id": "skyfox_pipatch_max_space_friendly_active_multi_constellation",
+ "name": "SkyFox Labs s.r.o. piPATCH-MAX - Space-Friendly\u2122 Active Multi Constellation GNSS Patch Antenna for Microsatellites",
+ "category": "comms",
+ "subcategory": "antenna",
+ "vendor": "SkyFox Labs s.r.o.",
+ "model": "piPATCH-MAX - Space-Friendly\u2122 Active Multi Constellation GNSS Patch Antenna for Microsatellites",
+ "dimensions_mm": {
+  "x": 74.0,
+  "y": 74.0,
+  "z": 13.0
+ },
+ "mass_g": 89.0,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-skyfox-labs-sro-pipatch-max-space-friendly-active-multi-constellation-gnss-patch-antenna-for-microsatellites-6p92f1.pdf",
+  "document": {
+   "title": "SkyFox Labs s.r.o. piPATCH-MAX - Space-Friendly\u2122 Active Multi Constellation GNSS Patch Antenna for Microsatellites data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-11",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Read from the vendor data sheet (datasheet-skyfox-labs-sro-pipatch-max-space-friendly-active-multi-constellation-gnss-patch-antenna-for-microsatellites-6p92f1.pdf): dimensions \"tion, Patch Antenna DC-Shorted to GND potential Mass 89 grams Dimensions 74\u00d774\u00d713 mm Wide\"; mass \"to GND potential Mass 89 grams D\". Catalog page lists no mass. Electrical / RF values found in the data sheet or page text by pattern (quoted where possible).",
+  "found_via": "https://satsearch.co/products/skyfox-labs-pipatch-max-active-multiband-gnss-patch-antenna-module"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "rf": {
+  "band": "L1",
+  "frequency_range": "1553-1620 MHz"
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   74.0,
+   74.0,
+   14.0
+  ],
+  "mesh_volume_mm3": 74552.0,
+  "watertight": true,
+  "render_kind": "patch_antenna",
+  "effective_density_g_cm3": 1.194,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "patch",
+     "color": [
+      0.72,
+      0.45,
+      0.2
+     ],
+     "file": "bodies/part__patch.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 28
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    74.0,
+    74.0,
+    14.1
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.1
+   ],
+   "bodies": [
+    {
+     "name": "ground_plate",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies_detail/ground_plate.stl"
+    },
+    {
+     "name": "patches",
+     "color": [
+      0.72,
+      0.45,
+      0.2
+     ],
+     "file": "bodies_detail/patches.stl"
+    },
+    {
+     "name": "feeds",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/feeds.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
+  "datasheet_url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-skyfox-labs-sro-pipatch-max-space-friendly-active-multi-constellation-gnss-patch-antenna-for-microsatellites-6p92f1.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

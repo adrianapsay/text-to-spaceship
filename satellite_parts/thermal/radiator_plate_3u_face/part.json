@@ -60,6 +60,20 @@
   },
   "face_counts": {
    "part": 12
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
   }
  },
  "image": "preview.png",
@@ -71,15 +85,7 @@
   "power_bus_V": null
  },
  "reference_images": {
-  "datasheets": [
-   {
-    "file": "datasheet_page1.png",
-    "pdf": null,
-    "url": "https://www.nasa.gov/wp-content/uploads/2018/01/cubesatdesignspecificationrev14_12022-02-09.pdf",
-    "kind": "vendor_link",
-    "title": "CDS Rev 14.1 face sizes (rail-to-rail 83 mm) and generic aluminium plate"
-   }
-  ],
+  "datasheets": [],
   "stl_preview": "preview.png",
   "drawing": "drawing.png",
   "photo_url": null,
@@ -88,7 +94,7 @@
   "photo_file": null,
   "photo_kind": null,
   "datasheet_url": "https://www.nasa.gov/wp-content/uploads/2018/01/cubesatdesignspecificationrev14_12022-02-09.pdf",
-  "datasheet_page_file": "datasheet_page1.png",
+  "datasheet_page_file": null,
   "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {

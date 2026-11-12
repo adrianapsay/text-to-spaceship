@@ -60,6 +60,20 @@
   },
   "face_counts": {
    "part": 20
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "bracket",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__bracket.stl"
+    }
+   ]
   }
  },
  "image": "preview.png",
@@ -71,7 +85,22 @@
   "power_bus_V": null
  },
  "reference_images": {
-  "datasheets": [],
+  "datasheets": [
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://ucpcdn.thyssenkrupp.com/_legacy/UCPthyssenkruppBAMXUK/assets.files/material-data-sheets/aluminium/aluminium-6061.pdf",
+    "title": "aluminium-6061.pdf - thyssenkrupp"
+   },
+   {
+    "file": "datasheet_2_page1.png",
+    "pdf": "datasheet_2.pdf",
+    "kind": "web_search",
+    "url": "https://ntrs.nasa.gov/api/citations/19720022808/downloads/19720022808.pdf",
+    "title": "MATERIALS DATA HANDBOOK ! 2duminm_1 2dlo 7 6061 (2nd ..."
+   }
+  ],
   "stl_preview": "preview.png",
   "drawing": "drawing.png",
   "photo_url": null,

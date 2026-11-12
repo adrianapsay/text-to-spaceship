@@ -1,0 +1,175 @@
+MAIN FEATURES
+Bradford’s SUPERNOVA is a complete modular power 
+management system, scaling power, outputs and 
+features, making it the best solution for a wide variety of 
+mission profiles and spacecraft designs.
+The needs for high reliability, low mass and long lifetime 
+are met by Supernova. It is built to be single-failure-
+tolerant leading to increased resilience against single 
+events and other type of failures. 
+Supernova also performs best-in-class on the power to 
+size and weight metric for a wide range of power 
+configurations. All of this makes it the ideal candidate for 
+deep space, high delta-v but also weight-, size- and 
+reliability- sensitive LEO missions
+As part of Bradford’s integrated system (BASIS), it can be 
+included as a key element in a larger avionics unit that can 
+provide power management, communications, RTUs and 
+more – all while allowing your mission to skip the risk and 
+effort of integrating disparate systems.
+HERITAGE 
+Scalable Power
+300 W to 1.5 kW of 
+power throughput 
+handled with 95% 
+efficiency
+Mass & Cost 
+Efficient
+Only buy & fly 
+the modules you 
+need for your 
+specific mission!
+Designed for 
+small satellites, 
+landers and 
+rovers  
+BASIS of your 
+satellite
+Seamless HW & 
+SW integration 
+with Bradford 
+OBCs, PDHS, 
+radios and RTUs
+Short
+Lead Times
+< 6 months from 
+configuration to 
+delivery
+Protected LCLs 
+up to 10A
+Regulate & 
+unregulated 
+loads including 
+retriggerables
+Learn more
+SUPERNOVA PCDU
+Off the Shelf | Bradford Avionics System
+Built Tough
+Designed to avoid 
+critical single failure 
+points & redundancy 
+available throughout
+50 → 500 
+kg
+12
+Modules 
+Shipped
+
+SUPERNOVA PCDU
+Off the Shelf | Bradford Avionics System
+Supernova has been selected 
+for a lunar surface mission
+Revision B (July  2024)    Non-contractual document. Subject to change without notice.
+CONFIGURE 
+YOURS
+TODAY
+Single unit covering solar array power 
+harvesting, battery charge voltage and 
+current regulation as well as protected 
+distribution of regulated and unregulated 
+power to loads. 
+▪
+Modular design for optimal, mission-
+specific performance.
+▪
+Best-in-class weight to power ratio 
+optimized for high delta-v missions.
+▪
+High 
+reliability 
+and 
+single 
+failure 
+tolerant architecture.
+▪
+Triple redundant CC, CV battery charge 
+controller with controllable end-of-
+charge voltage for reduced battery 
+fading.
+SPECIFICATION
+Parameter
+Specification
+Parameter
+Specification
+Input Power 
+Method
+3 - 15 independent MPPT sections
+Step down (DET optional)
+Temperature
+ Operational
+-30 to +60 °C
+Input Power 
+Ratings
+   per section
+Voc
+Isc
+Pmpp
+< 80V
+< 3A
+< 100W
+Temperature
+ Survival
+-40 to +70 °C
+Total Ionising Dose 
+Resilience
+> 30 kRad
+Battery Current
+50 A (charge & discharge)
+Orbital Lifetime
+> 5 years in LEO & cislunar
+EOCV
+2 user-selectable values to optimise 
+against battery fade on long missions
+UVLO
+User-configuable limit & hysteresis
+User Interfaces
+Dual RS-485 or CAN control
+Hardware pulse commands in
+Mass
+850 g (baseline configuration)
+Size
+141 x 90 x 68 mm 
+(baseline configuration)
+Thruster Driver Module
+Optional RTUs for direct interfacing with 1N, 5N and 
+22N monopropellant systems, providing valve and 
+heater control, pressure and temperature telemetry, 
+and latch management for 4 - 28 thruster systems.
+Array Power Regulator(s)
+(APR)
+Unregulated Power 
+Distributor(s)
+Regulated Power 
+Distributor(s)
+SuperNova PCDU
+Internal Power & Comms
+OBC
+Spacecraft 
+Loads
+Battery Charge Regulator
+(BCR)
+Solar Array Safing
+Umbilical 
+Separation Switches (3)
+Solar Array Sections (3-15)
+Data & 
+Control 
+Interface
+15+ Unreg. 
+LCL Outputs
+9+ Regulated 
+Outputs 
+@ 3 Voltages
+To other BASIS modules, if 
+present
+

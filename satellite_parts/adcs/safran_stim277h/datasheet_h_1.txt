@@ -1,0 +1,1459 @@
+ULTRA-HIGH PERFORMANCE  
+GYRO MODULE 
+STIM277H 
+PRODUCT BRIEF 
+ Small size, low weight and low cost 
+ Hermetic package with no paint and separate label 
+ ITAR free 
+ Insensitive to magnetic fields 
+ 10 °/h bias error over temperature gradients 
+ 0.3 °/h bias instability 
+ 0.15 °/√h angular random walk 
+ ±400 °/s angular rate input range 
+ 2000 samples per second 
+ Backwards compatible with STIM210 
+ 1500 g shock capability 
+STIM277H is a tactical grade 3-axis gyro 
+module in a hermetic package. It is based 
+on the well established STIM210, the 
+STIM277H is packaged in clean room and 
+the aluminum enclosure has a glass-to-
+metal sealed electrical micro-d connector 
+and a laser welded lid to secure long term 
+hermetic operation. All parts are tested 
+for fine and gross leak to conform to MIL-
+STD-883J, Class H. The STIM277H 
+enclosure is also free of paint and the 
+label is supplied separately. 
+Each gyro axis is factory calibrated for bias 
+and sensitivity, and compensated for 
+temperature effects. Sensonor's proven 
+gyro sensor technology has been in 
+production for more than two decades. It 
+performs exceptionally well across many 
+applications due to its very low vibration 
+and shock sensitivity. The gyro is qualified 
+according to high-performance aircraft 
+vibration standard. 
+Input range, orthogonality and output 
+formats 
+The STIM277H full-scale angular rate 
+input range is 400 °/s and the output is 
+capped at ±480 °/s. The 3-axis modules 
+feature electronic axis alignment, 
+improving orthogonality between axes to 
+0.2 mrad and has a scale factor non-
+linearity 25 ppm over full-scale. Selectable 
+output formats are angular rate, 
+increment angle, average angular rate 
+and integrated angle, at sample rates up 
+to 2000 samples per second. 
+Reliability and robustness 
+STIM277H modules have been qualified 
+to an equivalent of 20 years operating life. 
+They also have an MTBF at 70k operating 
+hours at 52 °C (according to MIL-HDBK 
+217), which is outperforming current FOG 
+systems. Tuning of excitation and 
+detection frequencies, as well as  
+perfectly balanced vibrational masses, 
+result in very low vibration and shock 
+sensitivity in any direction.  
+Power and interface 
+The unit is powered by a single 5 V supply 
+and communicates via a Plug- 
+and-Play high-level RS422 interface at  
+bit rates up to 3.75 Mbits/s.  
+Device configurations and self 
+diagnostics  
+The use of a 32-bit RISC ARM 
+microcontroller provides flexibility in 
+device configuration. Choices for output 
+unit, sample rate, LP filter cut-off 
+frequency, RS422 transmission bit rate, 
+line termination ON/OFF, etc. can be  
+done in device Service Mode.  
+The Service Mode also provides the  
+ability to perform single measurements 
+on demand and access detailed 
+diagnostics information.  
+Evaluation kits 
+STIM277H evaluation kits for PCIe and 
+USB connectivity are available. The PCIe 
+kit is the recommended choice for 
+extensive characterization. The USB kit is 
+the alternative solution, e.g. for smaller, 
+portable laptop setups, providing an 
+excellent choice for quick gyro module 
+configurations and shorter measurement 
+series.  
+ 
+Application areas 
+STIM277H is a good fit for satellite 
+attitude & orbit control systems (AOCS) 
+and  launchers. Other applications are 
+Industrial, Aerospace and Defense 
+markets, for various platform 
+stabilizations, pointing and navigation 
+systems (e.g. antennas, cameras and 
+gimbals), attitude heading reference 
+systems (AHRSs), inertial navigation 
+systems (INSs) for UAVs, AUVs, AGVs, 
+UGVs and ROVs, smart munitions, 3D 
+mapping systems, range finders, trains, 
+robotics and more. 
+For many applications STIM277H directly 
+replaces FOGs and improves system 
+solutions with respect to robustness, 
+reliability, size, weight, power and cost. 
+(39 mm x 45 mm x 22 mm) 
+
+Information furnished by Sensonor is believed to be accurate and reliable. However, no responsibility is assumed by Sensonor for its use, nor for any infringements of patents or other rights of third parties that may 
+result from its use. Sensonor reserves the right to make changes without further notice to any products herein. Sensonor makes no warranty, representation or guarantee regarding the suitability of its products for 
+any particular purpose, nor does Sensonor assume any liability arising out of the application or use of any product or circuit, and specifically disclaims any and all liability, including without limitation consequential or 
+incidental damages. No license is granted by implication or otherwise under any patent or patent rights of Sensonor. Trademarks and registered trademarks are the property of their respective owners. Sensonor 
+products are not intended for any application in which the failure of the Sensonor product could create a situation where personal injury or death may occur. Should Buyer purchase or use Sensonor products for any 
+such unintended or unauthorized application, Buyer shall indemnify and hold Sensonor and its officers, employees, subsidiaries, affiliates, and distributors harmless against all claims, costs, damages, and expenses, 
+and reasonable legal fees arising out of, directly or indirectly, any claim of personal injury or death associated with such unintended or unauthorized use, even if such claim alleges that Sensonor was negligent 
+regarding the design or manufacture of the part. 
+Sensonor AS • Horten, Norway • sales@sensonor.com • www.sensonor.com 
+ 
+PRODUCT BRIEF STIM277H 
+Ed. 2020-09 
+SPECIFICATIONS 
+MECHANICAL DIMENSIONS 
+All dimensions in mm. 
+FUNCTIONAL BLOCK DIAGRAM 
+Parameter 
+Min 
+Nom 
+Max 
+Unit 
+Weight 
+ 
+52 
+ 
+g 
+Input range 
+ 
+±400 
+ 
+°/s 
+Resolution 
+ 
+24 
+ 
+bits 
+Operating temperature 
+-40 
+ 
+85 
+°C 
+Storage temperature 
+-50 
+ 
+90 
+°C 
+Power supply 
+4.5 
+5.0 
+5.5 
+V 
+Power consumption 
+ 
+1.3 
+1.5 
+W 
+Start-up time 
+ 
+ 
+1 
+s 
+Sample rate 
+ 
+ 
+2000 
+SPS 
+Mechanical shock 
+ 
+ 
+1500 
+g 
+Bias instability  
+ 
+0.3 
+ 
+°/h 
+Angular random walk  
+ 
+0.15 
+ 
+°/√h 
+Bias error over temperature gradients 
+ 
+±10 
+ 
+°/h rms 
+Bandwidth (-3dB) 
+ 
+262 
+ 
+Hz 
+Group delay 
+ 
+1.6 
+ 
+ms 
+Non-linearity (condition: ±200 °/s) 
+ 
+15 
+ 
+ppm 
+Scale factor accuracy 
+ 
+500 
+ 
+ppm 
+RS422 bit rate 
+ 
+ 
+3.75 
+Mbits/s 
+Linear acceleration effect 
+ 
+ 
+ 
+ 
+                      Bias 
+ 
+7 
+ 
+°/h/g 
+                      Scale factor 
+ 
+400 
+ 
+ppm/g 
+Logic levels NRST, EXT TRIGGER and 
+TOV pins 
+CMOS and TTL compatible  
+ 
+PINOUT 
+AXIS DEFINITIONS 
+(TRANSMIT ONLY) 
+(FULL FUNCTION) 
+ELECTRICAL CONNECTIONS 
+TxData+
+TxData-
+RxData+
+RxData-
++5V
+GND
+POWER 
+MANAGEMENT / 
+VOLTAGE AND 
+FREQUENCY 
+REFERENCES
+X-AXIS
+GYRO
+Y-AXIS
+GYRO
+Z-AXIS
+GYRO
+SELF-
+DIAGNOSTICS
+GYRO DRIVE 
++ ADC
+CALIBRATION 
+AND 
+COMPENSATION
+RS422
+OUTPUT 
+DRIVER
+RS422 
+INPUT 
+BUFFER
+TOV
+GYRO DRIVE 
++ ADC
+GYRO DRIVE 
++ ADC
+ExtTrig
+SYSTEM 
+CONTROLLER
+Reset
+1 TxD-
+2 RxD-
+3 TST
+4 TOV
+5 NRST
+6 
+7 
+8 VSUP
+  9 TxD+
+10 RxD+
+11 ExtTrig
+12 GND
+13 GND
+14 
+15 GND
+Volume < 2,0 cu. in (33 cm3) 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM277H Multi-Axis Gyro Module 
+ 
+TS1672 rev.1                                                                         1/53                                                             October 2020 
+ 
+1 
+FEATURES 
+o 
+Miniature laser welded hermetic package  
+o 
+Tested to 20 years life expectancy 
+o 
+Aluminum casing, 6082-T6 alloy - SurTec 650 surface treated 
+o 
+ITAR-free 
+o 
+Low noise and bias instability 
+o 
+Calibrated and verified over operating range 
+o 
+Excellent performance in vibration and shock environments 
+o 
+3 axes offered in same package 
+o 
+Electronically calibrated axis alignment 
+o 
+Single-crystal silicon technology 
+o 
+No intrinsic wear-out effects 
+o 
+Insensitive to magnetic fields 
+o 
+Full EMI compliance 
+o 
+Digital interface, RS422 
+o 
+Fully configurable:  
+o 
+5 different sample rates 
+o 
+5 different bandwidths 
+o 
+LP filter -3dB frequency can be set individually 
+for each axis 
+o 
+RS422 protocol, bit-rate and line termination 
+o 
+Selectable output unit: angular rate [deg/s], 
+incremental angle [deg], average angular rate 
+[deg/s] or integrated angle [°] 
+o 
+External Trigger input and Time Of Validity output to 
+enable synchronization 
+o 
+Continuous self-diagnostics 
+o 
+Delivered in dust free clean-room packaging 
+ 
+ 
+2 
+GENERAL DESCRIPTION 
+ 
+STIM277H is a cluster of 3 high accuracy MEMS-based gyros in a miniature package. Each axis is factory-calibrated for 
+bias, sensitivity and compensated for temperature effects to provide high-accuracy measurements in the temperature 
+range -40°C to +85°C. The unit runs off a single +5V supply. 
+ 
+STIM277H communicates via a standard high-level RS422 interface. The use of a 32 bit RISC ARM microcontroller 
+provides flexibility in the configuration, like choice of output unit, sample rate, LP filter -3dB frequency and RS422 bit-
+rate and protocol parameters. All configurable parameters can be defined when ordering or set by customer. 
+ 
+When STIM277H is powered up, it will perform an internal system check and synchronize the gyros. As an 
+acknowledgement of the complete power-up sequence, it will provide special datagrams containing data, like part 
+number, serial number and configuration parameters as mentioned above. STIM277H will then automatically proceed 
+to provide measurement data. 
+ 
+The measurement data is transmitted as packages of data on a fixed format (datagram) at intervals given by the sample 
+rate. The datagram is in binary coded format in order to have an efficient transfer of data. In addition to the measurement 
+data itself, the datagram contains an identifier, a status byte and a CRC (Cyclic Redundancy Check) byte to provide 
+high degree of fault detection in the transmissions. The status byte will flag any detected errors in the system. 
+ 
+For more advanced users, the gyro may be put in Service Mode. In this mode all the configuration parameters can be 
+intermediately or permanently changed by overwriting the current settings in the flash memory. In Service Mode the 
+commands and responses are in a human readable format; to enable the use of terminal-type software during typical 
+product integration. Service Mode also provides the ability to perform single measurements, perform diagnostics and 
+obtain a higher detail level of detected errors reported in the status byte. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Figure 1-1: STIM277H FUNCTION BLOCK DIAGRAM 
+Sensonor AS 
+Phone: +47 3303 5000 - Fax: +47 3303 5005  
+sales@sensonor.com   
+www.sensonor.com 
+(38.6mm x 44.8mm x 21.5mm) 
+TxData+
+TxData-
+RxData+
+RxData-
++5V
+GND
+POWER 
+MANAGEMENT / 
+VOLTAGE AND 
+FREQUENCY 
+REFERENCES
+X-AXIS
+GYRO
+Y-AXIS
+GYRO
+Z-AXIS
+GYRO
+SELF-
+DIAGNOSTICS
+GYRO DRIVE 
++ ADC
+CALIBRATION 
+AND 
+COMPENSATION
+RS422
+OUTPUT 
+DRIVER
+RS422 
+INPUT 
+BUFFER
+TOV
+GYRO DRIVE 
++ ADC
+GYRO DRIVE 
++ ADC
+ExtTrig
+SYSTEM 
+CONTROLLER
+Reset
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM277H Multi-Axis Gyro Module 
+ 
+TS1672 rev.1                                                                         2/53                                                             October 2020 
+ 
+3 
+TABLE OF CONTENTS 
+ 
+1 
+FEATURES ................................................................................................................................................................ 1 
+2 
+GENERAL DESCRIPTION ......................................................................................................................................... 1 
+3 
+TABLE OF CONTENTS ............................................................................................................................................. 2 
+4 
+DEFINITIONS AND ABBREVIATIONS USED IN DOCUMENT ................................................................................ 3 
+4.1 
+Definitions ............................................................................................................................................................ 3 
+4.2 
+Abbreviations ....................................................................................................................................................... 3 
+5 
+ABSOLUTE MAXIMUM RATINGS ............................................................................................................................. 3 
+6 
+SPECIFICATIONS ...................................................................................................................................................... 3 
+6.1 
+TYPICAL PERFORMANCE CHARACTERISTICS ............................................................................................. 6 
+6.1.1 
+Root Allan Variance ..................................................................................................................................... 6 
+6.1.2 
+Initial bias drift .............................................................................................................................................. 7 
+6.1.3 
+Bias drift over temperature ........................................................................................................................... 7 
+6.1.4 
+Frequency characteristics ............................................................................................................................ 8 
+6.2 
+Configurable parameters ................................................................................................................................... 10 
+6.3 
+Datagram specifications .................................................................................................................................... 11 
+6.4 
+Status byte ........................................................................................................................................................ 15 
+7 
+MECHANICAL .......................................................................................................................................................... 16 
+7.1 
+Mechanical dimensions ..................................................................................................................................... 16 
+7.2 
+Advice on mounting orientation ......................................................................................................................... 17 
+7.3 
+Pin configuration ................................................................................................................................................ 17 
+7.4 
+Definition of axes ............................................................................................................................................... 17 
+8 
+BASIC OPERATION ................................................................................................................................................. 18 
+8.1 
+Reset ................................................................................................................................................................. 18 
+8.2 
+External Trigger ................................................................................................................................................. 18 
+8.3 
+Time of Validity (TOV) ....................................................................................................................................... 20 
+8.4 
+Operating modes ............................................................................................................................................... 21 
+8.4.1 
+Init Mode .................................................................................................................................................... 21 
+8.4.2 
+Normal Mode .............................................................................................................................................. 21 
+8.4.3 
+Service Mode ............................................................................................................................................. 25 
+8.5 
+Self diagnostics ................................................................................................................................................. 25 
+9 
+COMMANDS IN NORMAL MODE ........................................................................................................................... 26 
+9.1 
+N (PART NUMBER DATAGRAM) command .................................................................................................... 26 
+9.2 
+I (SERIAL NUMBER DATAGRAM) command .................................................................................................. 26 
+9.3 
+C (CONFIGURATION DATAGRAM) command ................................................................................................ 27 
+9.4 
+E (EXTENDED ERROR INFORMATION DATAGRAM) command .................................................................. 27 
+9.5 
+R (RESET) command ........................................................................................................................................ 27 
+9.6 
+SERVICEMODE command ............................................................................................................................... 28 
+10 
+COMMANDS IN SERVICE MODE ....................................................................................................................... 29 
+10.1 
+i (INFORMATION) command ........................................................................................................................ 30 
+10.2 
+a (SINGLE-SHOT MEASUREMENT) command ........................................................................................... 33 
+10.3 
+c (DIAGNOSTIC) command .......................................................................................................................... 34 
+10.4 
+d (DATAGRAM FORMAT) command ............................................................................................................ 36 
+10.5 
+t (TRANSMISSION PARAMETERS) command ............................................................................................ 37 
+10.6 
+r (TERMINATION) command ........................................................................................................................ 39 
+10.7 
+u (OUTPUT UNIT) command ........................................................................................................................ 40 
+10.8 
+f (LP FILTER -3dB FREQUENCY) command ............................................................................................... 41 
+10.9 
+m (SAMPLE RATE) command ...................................................................................................................... 42 
+10.10 
+s (SAVE) command ....................................................................................................................................... 43 
+10.11 
+x (EXIT) command ......................................................................................................................................... 44 
+10.12 
+z (RESTORE TO FACTORY SETTINGS) command .................................................................................... 46 
+10.13 
+? (HELP) command ....................................................................................................................................... 48 
+11 
+PACKAGING AND MARKING .............................................................................................................................. 51 
+11.1 
+Product marking ............................................................................................................................................. 51 
+11.2 
+Packaging ...................................................................................................................................................... 51 
+12 
+PART NUMBER / ORDERING INFORMATION ................................................................................................... 52 
+ 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM277H Multi-Axis Gyro Module 
+ 
+TS1672 rev.1                                                                         3/53                                                             October 2020 
+ 
+4 
+DEFINITIONS AND ABBREVIATIONS USED IN DOCUMENT 
+ 
+4.1 
+Definitions 
+ 
+1g = 9.80665m/s2 
+ 
+ 
+4.2 
+Abbreviations 
+ 
+Table 4-1: Abbreviations 
+ABBREVIATION 
+FULL NAME 
+BCD 
+Binary Coded Decimal 
+CIC-filter 
+Cascaded Integrator Comb filter 
+CR 
+Carriage Return 
+ESD 
+Electro-Static Discharge 
+ExtTrig 
+External Trigger 
+GND 
+Ground 
+LF 
+Line Feed 
+LP filter 
+Low-Pass filter 
+NRST 
+Negative (active) Reset 
+rms 
+Root mean square 
+RxD 
+Receive Data 
+TOV 
+Time Of Validity 
+TxD 
+Transmit Data 
+VSUP 
+Voltage supply 
+ 
+ 
+5 
+ABSOLUTE MAXIMUM RATINGS 
+ 
+Stresses beyond those listed in Table 5-1 may cause permanent damage to the device. 
+Exposure to any Absolute Maximum Rating condition for extended periods may affect device reliability and lifetime. 
+ 
+Table 5-1: Absolute maximum ratings 
+Parameter 
+Rating 
+Comment 
+Mechanical shock 
+1 500g/0.5ms half-sine 
+Any direction. Ref: MIL STD-883G 
+ESD human body model 
+±2kV 
+Ref: JEDEC/ESDA JS-001 
+Storage temperature 
+-55°C to +90°C 
+Up to 1000 hours 
+VSUP to GND 
+-0.5 to +7V 
+ 
+RxD+ or RxD- to GND 
+-0.3V to +7V 
+ 
+RxD+ to RxD- 
+±6V 
+with 120Ω Line Termination = ON 
+TxD+ or TxD- to GND 
+-8V to +8V 
+ 
+ExtTrig to GND 
+-0.3V to +7V 
+ 
+TOV to GND 
+-0.3V to +7V 
+ 
+NRST to GND 
+-0.3V to +7V 
+ 
+Chassis to GND 
+500V 
+ 
+Helium sensitivity 
+ 
+Exposure to high concentrations of helium over 
+several days may affect the overall performance 
+ 
+ 
+6 
+SPECIFICATIONS 
+ 
+Table 6-1: Operating conditions 
+Parameter 
+Conditions 
+Min 
+Nom 
+Max 
+Unit 
+Note 
+INPUT RANGE 
+ 
+ 
+±400 
+ 
+°/s 
+ 
+POWER SUPPLY 
+ 
+4.5 
+5.0 
+5.5 
+V 
+ 
+OPERATING TEMPERATURE 
+ 
+-40 
+ 
++85 
+°C 
+ 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM277H Multi-Axis Gyro Module 
+ 
+TS1672 rev.1                                                                         4/53                                                             October 2020 
+ 
+Table 6-2: Functional specifications, general 
+Parameter 
+Conditions 
+Min 
+Nom 
+Max 
+Unit 
+Note 
+POWER CONSUMPTION 
+ 
+ 
+ 
+ 
+ 
+ 
+Power consumption 
+ 
+ 
+ 
+1.5 
+W 
+ 
+TIMING 
+ 
+ 
+ 
+ 
+ 
+ 
+Start-Up time after Power-On 
+ 
+ 
+ 
+0.3 
+s 
+1 
+Time to transmit after Reset 
+ 
+ 
+ 
+0.2 
+s 
+2 
+Time to valid data 
+ 
+T=+25°C 
+ 
+0.7 
+ 
+1 
+s 
+s 
+3 
+3 
+RS422 Bit-Rate 
+ 
+ref. Table 6-5 
+ 
+ 
+RS422 Bit-Rate Accuracy 
+ 
+ 
+ 
+±1 
+% 
+ 
+RS422 PROTOCOL 
+ 
+ 
+ 
+ 
+ 
+ 
+Start Bit 
+ 
+ 
+1 
+ 
+bit 
+ 
+Data Length 
+ 
+ 
+8 
+ 
+bits 
+ 
+Parity 
+ 
+None 
+ 
+4 
+Stop-bits 
+ 
+1 
+bit 
+4 
+RS422 LINE TERMINATION 
+ 
+ 
+ 
+ 
+ 
+ 
+Input resistance 
+Line termination = ON 
+ 
+120 
+ 
+Ω 
+ 
+Input resistance 
+Line termination = OFF 
+48 
+125 
+ 
+kΩ 
+ 
+RESET (NRST PIN) 
+ 
+ 
+ 
+ 
+ 
+ 
+Logic levels 
+“high” 
+“low” 
+2.3 
+ 
+ 
+0.6 
+V 
+V 
+ 
+Minimum hold time for reset 
+ 
+1 
+ 
+ 
+µs 
+ 
+Pull-Up Resistor 
+ 
+80 
+100 
+ 
+kΩ 
+ 
+EXTERNAL TRIGGER 
+ 
+ 
+ 
+ 
+ 
+ 
+Logic levels 
+“high” 
+“low” 
+2.3 
+ 
+ 
+0.6 
+V 
+V 
+ 
+Trigger 
+ 
+Negative transition  
+ 
+ 
+Minimum “high” time before trigger, 
+text_hi 
+ 
+250 
+ 
+ 
+ns 
+5 
+Minimum “low” time after trigger, 
+text_lo 
+ 
+250 
+ 
+ 
+ns 
+5 
+Delay from external trigger to start 
+of transmission, text_dl 
+ 
+ 
+ 
+86 
+µs 
+5 
+Time between triggers 
+Measurement.unit:  
+ 
+ 
+ 
+ 
+ 
+ 
+  angular rate 
+0.5 
+ 
+127 
+ms 
+6,7 
+ 
+  incremental angle 
+0.5 
+ 
+127 
+ms 
+6,8 
+ 
+  average rate 
+0.5 
+ 
+65 
+ms 
+6,9 
+ 
+  integrated angle 
+0.5 
+ 
+8 
+ms 
+6,10 
+Pull-Up Resistor 
+ 
+40 
+50 
+ 
+kΩ 
+ 
+Latency 
+ 
+ 
+ 
+1000 
+µs 
+ 
+TIME OF VALIDITY (TOV PIN) 
+ 
+ 
+ 
+ 
+ 
+ 
+Output configuration 
+ 
+Open drain 
+ 
+ 
+Internal Pull-Up Resistor to Vsup 
+ 
+10 
+kΩ 
+ 
+Sink capability 
+ 
+ 
+ 
+50 
+mA 
+ 
+TOV active level 
+ 
+Active “low” 
+ 
+ 
+Minimum time of TOV, ttov min 
+ 
+50 
+ 
+ 
+µs 
+11 
+Delay from internal time-tick to 
+TOV active, ttov_dl 
+ 
+ 
+0.5 
+6 
+µs 
+11 
+Delay from TOV “low” to start of 
+transmission, ttx dl 
+ 
+ 
+ 
+80 
+µs 
+11 
+CHASSIS 
+ 
+ 
+ 
+ 
+ 
+ 
+Isolation resistance chassis to 
+GND (pin 15)  
+500V 
+100 
+ 
+ 
+MΩ 
+ 
+Note 1: Time from Power-On to start of datagram transmissions (starting with part-number datagram) 
+Note 2: Time from Reset release to start of datagram transmissions (starting with part-number datagram) 
+Note 3: Time from Power-On or Reset to the reset of the Start-Up bit (Bit 6 in the STATUS byte ref. Table 6-13). 
+During this period the output data should be regarded as non-valid 
+Note 4: Other values can be configured, ref. Table 6-5 
+Note 5: For definition, ref. Figure 8-3 
+Note 6: If time between triggers is longer than 127ms, the sample counter will over-run  
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM277H Multi-Axis Gyro Module 
+ 
+TS1672 rev.1                                                                         5/53                                                             October 2020 
+ 
+Note 7: Time between triggers should be carefully evaluated as long time between triggers in combination with high 
+bandwidths could lead to issues related to folding 
+Note 8: If time between triggers is longer than 8ms, an overload may occur in the incremental angle. An overload will 
+be flagged in the status byte, ref. Table 6-13 
+Note 9: If time between triggers is longer than specified, the accuracy of average rate may be reduced 
+Note 10: If time between triggers is longer than specified, the integrated angle may have wrapped several times and 
+hence the change in angle from last sample will not be possible to calculate 
+Note 11: For definition, ref. Figure 8-4 and Figure 8-5 
+ 
+ 
+Table 6-3: Functional specifications, gyros 
+Parameter 
+Conditions 
+Min 
+Nom 
+Max 
+Unit 
+Note 
+Full Scale (FS) 
+ 
+ 
+±400 
+ 
+°/s 
+1 
+Resolution 
+ 
+ 
+24 
+0.22 
+ 
+bits 
+°/h 
+ 
+Scale Factor Accuracy 
+ 
+ 
+±500 
+ 
+ppm 
+ 
+Non-Linearity 
+±200°/s 
+±400°/s 
+ 
+15 
+25 
+ 
+ppm 
+ppm 
+2 
+2 
+Bandwidth (-3dB) 
+ 
+ 
+262 
+ 
+Hz 
+3 
+Sample Rate 
+ 
+ 
+ 
+2000 
+samples/s 
+4 
+Group Delay 
+ 
+ 
+1.6 
+ 
+ms 
+5 
+Bias Range 
+Bias Run-Run 
+Bias error over temperature 
+Bias error over temperature gradients 
+ 
+ 
+Static temperatures 
+ΔT < ±1°C/min 
+-250 
+0 
+4 
+9 
+10 
++250 
+°/h 
+°/h 
+°/h 
+°/h 
+ 
+ 
+6 
+7 
+Bias Instability 
+Allan Variance @25°C 
+ 
+0.3 
+ 
+°/h 
+ 
+Angular Random Walk 
+Allan Variance @25°C 
+ 
+0.15 
+ 
+°/√hr 
+ 
+Linear Acceleration Effect 
+ 
+ 
+7 
+ 
+°/h /g 
+8 
+Vibration Rectification Coefficient 
+ 
+Ref. Figure 6-1 
+°/h /g2rms 
+ 
+Misalignment 
+ 
+ 
+1 
+ 
+mrad 
+9 
+Note 1: Output is monotonous and will saturate at ±480°/s 
+Note 2: Largest deviation from BSL (Best Straight Line) over the range specified 
+Note 3: Low-pass filter -3dB frequency can be configured, ref. Table 6-5 and section 6.1.4 
+Note 4: Other values can be configured, ref. Table 6-5 
+Note 5: Specified group delay is valid for a filter setting = 262Hz. See Table 6-5 to find group delay for other filter-
+settings. Total delay to start of datagram transmission = group delay + 0.5ms + ttov dl + ttx_dl 
+Note 6: rms-value calculated on the residuals at static temperatures over the temperature range 
+Note 7: rms-value calculated on the residual over two temperature-cycles, ref. Figure 6-5 
+Note 8: Section 7.2 gives advice on sensitive directions 
+Note 9: Ref. Figure 6-2 for definition of reference points used in axis alignment 
+ 
+ 
+Figure 6-1: Nominal VRC at 20g rms for gyros (ref. section 7.2 for sensitive directions to acceleration-forces) 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM277H Multi-Axis Gyro Module 
+ 
+TS1672 rev.1                                                                         6/53                                                             October 2020 
+ 
+ 
+ 
+ 
+Figure 6-2: Reference points for alignment of axes 
+ 
+ 
+ 
+Table 6-4: Functional specifications, temperature 
+Parameter 
+Conditions 
+Min 
+Nom 
+Max 
+Unit 
+Note 
+Bias Accuracy 
+@25°C 
+ 
+±5 
+ 
+°C 
+1 
+Scale factor accuracy 
+ 
+ 
+±5 
+ 
+% 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Note 1: Temperature is calibrated to reflect ambient temperature and not the internal temperature. 
+ 
+ 
+6.1 
+TYPICAL PERFORMANCE CHARACTERISTICS 
+6.1.1 
+Root Allan Variance 
+ 
+Figure 6-3: Typical Root Allan-Variance 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM277H Multi-Axis Gyro Module 
+ 
+TS1672 rev.1                                                                         7/53                                                             October 2020 
+ 
+6.1.2 
+Initial bias drift 
+ 
+Figure 6-4: Typical normalized initial bias drift 
+6.1.3 
+Bias drift over temperature 
+ 
+Figure 6-5: Typical Bias drift over temperature 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM277H Multi-Axis Gyro Module 
+ 
+TS1672 rev.1                                                                         8/53                                                             October 2020 
+ 
+6.1.4 
+Frequency characteristics 
+ 
+ 
+Figure 6-6: Frequency characteristics with low-pass filter -3dB frequency set to 16Hz 
+ 
+Figure 6-7: Frequency characteristics with low-pass filter -3dB frequency set to 33Hz 
+ 
+ 
+Figure 6-8: Frequency characteristics with low-pass filter -3dB frequency set to 66Hz 
+ 
+0
+10
+20
+30
+40
+50
+60
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1
+Frequency (Hz)
+Magnitude
+ 
+ 
+Magnitude
+Phase
+0
+10
+20
+30
+40
+50
+60
+-10
+-9
+-8
+-7
+-6
+-5
+-4
+-3
+-2
+-1
+0
+Phase (rad)
+10
+0
+10
+1
+10
+2
+10
+3
+10
+4
+-80
+-70
+-60
+-50
+-40
+-30
+-20
+-10
+0
+10
+Frequency (Hz)
+Magnitude (dB)
+0
+20
+40
+60
+80
+100
+120
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1
+Frequency (Hz)
+Magnitude
+ 
+ 
+Magnitude
+Phase
+0
+20
+40
+60
+80
+100
+120
+-10
+-9
+-8
+-7
+-6
+-5
+-4
+-3
+-2
+-1
+0
+Phase (rad)
+p
+10
+0
+10
+1
+10
+2
+10
+3
+10
+4
+-80
+-70
+-60
+-50
+-40
+-30
+-20
+-10
+0
+10
+Frequency (Hz)
+Magnitude (dB)
+0
+50
+100
+150
+200
+250
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1
+Frequency (Hz)
+Magnitude
+ 
+ 
+Magnitude
+Phase
+0
+50
+100
+150
+200
+250
+-10
+-9
+-8
+-7
+-6
+-5
+-4
+-3
+-2
+-1
+0
+Phase (rad)
+10
+0
+10
+1
+10
+2
+10
+3
+10
+4
+-80
+-70
+-60
+-50
+-40
+-30
+-20
+-10
+0
+10
+Frequency (Hz)
+Magnitude (dB)
+

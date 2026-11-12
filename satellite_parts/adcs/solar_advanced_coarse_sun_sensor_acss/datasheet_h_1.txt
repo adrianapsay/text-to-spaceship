@@ -1,0 +1,63 @@
+Qualification Temperature
+-55 to 105º Celsius
+Radiation tests
+200 kRad (gamma)
+8e11 10 MeV (protons)
+Mechanical tests
+Shock 2000 g
+18.3 g @ 20-2000 H
+Endurance tests
+600 cycles from -55 to 105ºC
+2000h at 125ºC
+EMC/ESD
+ECSS-E-ST-20-07C
+MIL-STD-461F
+Qualification and Verification data:
+Mass production
+Up to more than 100 ss/month
+Quality control
+> 50 inspection points/KC
+Acceptance control
+Each ACSS is characterized and tested 
+Solar MEMS Technologies S.L. C/ Early Ovington 24 nv 01 41309 La Rinconada (Sevilla) Spain
+Tel: +34-95-4460113 E-mail: smt@solar-mems.com www.solar-mems.com
+Advanced Coarse Sun Sensor (ACSS) is a device for sun-tracking and attitude determination. This sensor
+measures the incident angle of sun ray in two orthogonal axes, providing a high sensitivity based on the
+geometrical dimensions of the design.
+ACSS sun sensor offers the highest reliability and radiation hardness for the most demanding LEO missions. ACSS
+technology has flight heritage since 2019 with hundreds of flight units delivered, and its manufacturing process
+has been developed and industrialized for mass production.
+Sun sensor
+Double redundancy
+Type
+2 orthogonal axes
+Field of View
+± 60º 
+Accuracy
+< 1 º (3sigma, calibration)
+Electrical interface
+Analog, 15-pin micro connector
+Power supply
+15-30V, 3 mA
+Operating Temperature
+-40º to 85º Celsius
+Mechanical interface
+65 x 47 x 13 mm
+Mass
+40 g
+Housing
+Aluminum 6082
+Alodine + Black anodizing
+Mechanical specifications:
+ACSS is based on the CSS sensor designed and developed for OneWeb
+Constellation.
+Technical Specifications:
+ACSS
+Advanced Coarse Sun Sensor
+Analog Interface and Redundancy
+Industrial Specifications:
+measuring scale: [mm]
+Analog
+Space Qualified
+Industrialized for Mass Production
+

@@ -1,0 +1,817 @@
+ 
+ 
+Document 
+Name 
+ Cell Specifications of INR-21700-P45B 
+Document No. INR21700P45B-01 
+Ver. 
+0.2 Page 1 of 14 
+ 
+-- CONFIDENTIAL -- 
+Proprietary of E-One Moli Energy Corp. 
+ TABLE OF CONTENTS 
+1. 
+SCOPE ............................................................................................................................ 2 
+2. 
+PRODUCT DESCRIPTION ............................................................................................. 2 
+3. 
+APPEARANCE ................................................................................................................ 3 
+4. 
+RATED SPECIFICATIONS ............................................................................................. 3 
+5. 
+PERFORMANCE ............................................................................................................. 4 
+6. 
+REGULATORY COMPLIANCE ....................................................................................... 8 
+7. 
+PRECAUTIONS FOR USING LITHIUM ION RECHARGEABLE CELL ........................... 8 
+8. 
+REQUIREMENT FOR BATTERY PACK DESDIGN ...................................................... 13 
+9. 
+WARRANTY OF CELL .................................................................................................. 14 
+10. 
+SHIPPING STATE OF CELL ......................................................................................... 14 
+11. 
+PACKING SPECIFICATION .......................................................................................... 14 
+12. 
+AMENDMENT OF SPECIFICATION CONTENT ........................................................... 14 
+    
+ 
+
+ 
+ 
+Document 
+Name 
+ Cell Specifications of INR-21700-P45B 
+Document No. INR21700P45B-01 
+Ver. 
+0.2 Page 2 of 14 
+ 
+-- CONFIDENTIAL -- 
+Proprietary of E-One Moli Energy Corp. 
+1. SCOPE 
+This specification defines the characteristics of a lithium ion rechargeable cell, 
+INR-21700-P45B, 4.5 Ah, designed and manufactured by E-One Moli Energy Corp. 
+ 
+2. PRODUCT DESCRIPTION 
+2.1 Cell Name 
+Lithium ion rechargeable cell (‘cell’) 
+2.2 Cell Model 
+INR-21700-P45B 
+2.3 Cell designation: INR22/71 
+2.4 Cell Construction 
+2.4.1 Shape: Cylindrical 
+2.4.2 Outline Dimensions (refer to 2.4.3 finished cell drawing) 
+Outline Dimensions (mm) 
+Weight (g) 
+Diameter [D] 
+Height [H] 
+21.40  0.15 mm 
+70.00  0.15 mm 
+70.0 (Max) 
+2.4.3 Finished Cell Drawing 
+ 
+2Dimensional code: 
+, includes (PPP  LYMDD  SS) 
+Cell Date Code: YMDDSS 
+Y: indicates calendar year, 9=2009, A=2010, B=2011, C=2012, D=2013, 
+E=2014, F=2015, G=2016, H=2017, I=2018 etc. 
+M: indicates calendar month, 1~9, 10=A, 11=B, 12=C 
+DD: indicates calendar date of a month, 01~31 
+SS: indicates the sequence number in a day, 01, 02, etc. 
+ 
+
+ 
+ 
+Document 
+Name 
+ Cell Specifications of INR-21700-P45B 
+Document No. INR21700P45B-01 
+Ver. 
+0.2 Page 3 of 14 
+ 
+-- CONFIDENTIAL -- 
+Proprietary of E-One Moli Energy Corp. 
+3. APPEARANCE  
+There shall be no visual defects such as dent, rust, deformation or leakage.  
+ 
+4. RATED SPECIFICATIONS 
+Items 
+Specifications 
+Remarks 
+1 
+Rated charge 
+Limiting 4.5A and constant 4.2V charge for 1.5h or 
+90mA taper current at 23 oC. 
+2 
+Rated discharge 
+Constant 0.9A discharge until 2.5V at 23 oC. 
+3 
+Rated capacity 
+4.5Ah (Typical) 
+Rated discharge capacity at 23 oC. 
+4.35Ah 
+(Minimum) 
+Rated discharge capacity at 23 oC. 
+4 
+Nominal voltage 
+3.6V 
+Mean voltage during rated discharge 
+after rated charge. 
+5 
+Shipping voltage 
+≥ 3.45V 
+Nominal. Approximate state of 
+charge = 30%. 
+6 
+Internal resistance at 
+shipping 
+≤ 8mΩ 
+By AC 1 kHz within 3~4 hours after 
+30% discharge. 
+7 
+End of charge voltage 
+4.20  0.05V 
+ 
+8 
+End of discharge voltage 
+2.5V 
+Discharge voltage for determination 
+of rated capacity. 
+9 
+Charging time 
+1.5h 
+Rated charge. 
+10 
+Maximum continuous 
+charging current 
+9A 
+High rate charge cycle will decay 
+fast. 
+Maximum continuous 
+discharging current 
+45A 
+Cycle life is reduced at high rates. 
+11.1 
+Allowable 
+environment 
+temperature 
+Charging 
+0°~60 oC 
+ 
+Discharging 
+-40º~60 oC 
+ 
+11.2 
+Limit of cell 
+surface 
+temperature 
+Charging 
+  0°~70 oC 
+ 
+Discharging 
+-40°~80 oC 
+-20 oC~-40 oC with reducing cut-off 
+discharge voltage. 
+
+ 
+ 
+Document 
+Name 
+ Cell Specifications of INR-21700-P45B 
+Document No. INR21700P45B-01 
+Ver. 
+0.2 Page 4 of 14 
+ 
+-- CONFIDENTIAL -- 
+Proprietary of E-One Moli Energy Corp. 
+Items 
+Specifications 
+Remarks 
+12 
+Storage temperature for 
+shipping cell 
+< 35 oC 
+Recommended temperature less 
+than 23 oC  for long term storage. 
+13 
+Shelf life 
+1 year 
+See Section 5.4. 
+4.14 
+Maximum charge current versus cell surface temperature. 
+ 
+ 
+5. PERFORMANCE 
+5.1  Standard Test Conditions  
+5.1.1 Tolerance on temperatures is   2 oC.  All tests performed at a relative humidity 
+between 45% and 85% unless noted otherwise. 
+5.1.2 3 hours minimum soak time at specified temperature prior to discharging.  
+5.1.3 The accuracy of measuring equipment (voltmeter and ammeter, etc.) shall be 
+higher than class 0.5.  
+5.1.4 4.5A charge/4.5A discharge cycling: 4.5A charge to 4.2V for 50mA and 4.5A 
+discharge to 2.5V, rest 10 minutes between discharge and charge. 
+5.1.5 4.5A charge/10A discharge cycling: 4.5A charge to 4.2V for 50mA and 10A 
+discharge to 2.5V, rest 10 minutes between discharge and charge. 
+5.1.6 4.5A charge/20A discharge cycling: 4.5A charge to 4.2V for 50mA and 20A 
+discharge to 2.5V, rest 30 minutes between discharge and charge. 
+5.1.7 For incoming inspection purpose, the cells should be used in the tests within 
+one week of receipt at customer.  
+ 
+
+ 
+ 
+Document 
+Name 
+ Cell Specifications of INR-21700-P45B 
+Document No. INR21700P45B-01 
+Ver. 
+0.2 Page 5 of 14 
+ 
+-- CONFIDENTIAL -- 
+Proprietary of E-One Moli Energy Corp. 
+5.2  Electrical Performance  
+Items 
+Condition 
+Capacity  
+Test Method 
+1 
+Discharge 
+Capacity 
+at 23 oC 
+0.9A 
+≥4.35Ah 
+Discharge capacity to 2.5V after rated charge 
+(4.1). 
+4.5A 
+≥4.20Ah 
+Discharge capacity to 2.5V after rated charge 
+(4.1). 
+10A 
+≥4.15Ah 
+Discharge capacity to 2.5V after rated charge 
+(4.1). 
+20A 
+≥4.10Ah 
+Discharge capacity to 2.5V after rated charge 
+(4.1). 
+2 
+Temperature 
+Discharge 
+Capacity 
+at 4.5A 
+60 oC 
+≥4.35Ah 
+Discharge capacity to 2.5V after rated charge at 
+23 oC (4.1). 
+45 oC 
+≥4.35Ah 
+Discharge capacity to 2.5V after rated charge at 
+23 oC (4.1). 
+0 oC 
+≥3.85Ah 
+Discharge capacity to 2.5V after rated charge at 
+23 oC (4.1). 
+-20 oC 
+≥3.60Ah 
+Discharge capacity to 2.5V after rated charge at 
+23 oC. (4.1). 
+-30 oC 
+≥3.51Ah 
+Discharge capacity to 2.0V after rated charge at 
+23 oC. (4.1). 
+ 
+5.3 Cycle Life 
+Item 
+Condition 
+Criterion 
+Test Method 
+1 
+23oC 
+4.5A 
+C500 
+≥ 80% 
+Per 5.1.4, 4.5A cycling at 23oC to 500 cycles.  
+The % = (Ah / 4.20) x 100% 
+2. 
+23oC 
+10A 
+C500 
+≥ 75% 
+Per 5.1.5 10A cycling at 23oC to 500 cycles.  
+The % = (Ah / 4.15) x 100% 
+3 
+23 oC 
+20A 
+C500 
+≥ 70% 
+Per 5.1.6 20A cycling at 23oC to 500 cycles.  
+The % = (Ah / 4.10) x 100% 
+ 
+ 
+ 
+
+ 
+ 
+Document 
+Name 
+ Cell Specifications of INR-21700-P45B 
+Document No. INR21700P45B-01 
+Ver. 
+0.2 Page 6 of 14 
+ 
+-- CONFIDENTIAL -- 
+Proprietary of E-One Moli Energy Corp. 
+5.4 Storage Performance (SOC: State of Charge) 
+Item 
+Condition 
+Capacity  
+Retention 
+Test Method 
+1 
+23 oC 
+1 month 
+30% 
+SOC 
+≥ 18% 
+After storage, rated discharge (4.2) and rated 
+charge (4.1) for two cycles. The retention 
+capacity (Ah) is defined at 1st discharge after 
+storage. 
+The % = (Ah / 4.35) x 100% 
+ 
+2 
+23 oC 
+3 months 
+30% 
+SOC 
+≥ 15% 
+3 
+23 oC 
+6 months 
+30% 
+SOC 
+TBD 
+4 
+23 oC 
+12 months 
+30% 
+SOC 
+TBD 
+ 
+5.5 Safety Performance 
+5.5.1 Environmental Endurance Performance 
+Items 
+Criteria 
+Conditions 
+1 Temperature 
+Shock 
+No fire or explosion Storage: -45 oC for 1h and 85 oC for 1h, transfer 
+time within 10 seconds. Repeat cycle 10 times. 
+2 Heating 
+No fire or explosion 
+ 
+At 100% SOC heat cell up in gravity convection 
+and/or circulating air oven. Oven temperature is to 
+be raised at a rate of 5ºC ( 2ºC) per minute to a 
+temperature of 130ºC ( 2ºC). Hold oven at 130°C 
+for 10 minutes.  
+3 Thermal test 
+Mass loss <0.1%, 
+No leakage, venting, 
+explosion, fire, 
+disassembly, or 
+rupture. 
+6 Hours @ 72 ± 2°C followed by 6 Hours @ -40 
+± 2°C x 10 Cycles (interval time of no more than 30 
+minutes between temperatures). Measurements 
+taken after 10 cycles and 24 hours storage at 
+20± 5°C.  (UN method) 
+ 
+5.5.2 Electrical Endurance Performance 
+Items 
+Criteria 
+Conditions 
+
+ 
+ 
+Document 
+Name 
+ Cell Specifications of INR-21700-P45B 
+Document No. INR21700P45B-01 
+Ver. 
+0.2 Page 7 of 14 
+ 
+-- CONFIDENTIAL -- 
+Proprietary of E-One Moli Energy Corp. 
+1 
+Short Circuit  
+No disassembly, 
+rupture or fire within 
+6 hours of test. 
+Max temp:  150°C. 
+While in preheated oven and cell temperature 
+reaches 57 ± 4°C, short circuit cell using a total 
+external 
+resistance 
+ 
+0.1 
+ohm 
+until 
+cell 
+temperature has returned to 57 ± 4°C. (UN 
+method) 
+2 
+Overcharge  
+No fire or explosion Charging at a current of 27A to 15V from the fully 
+discharged state for 2.5hrs. 
+3 
+Forced 
+Discharge 
+No disassembly and 
+no fire within 7 days 
+of test 
+Connect cell in series with a 12V DC power supply 
+at a current equal to maximum discharge 
+specified. (UN method) 
+ 
+5.5.3 Mechanical Endurance Performance 
+Items 
+Criteria 
+Conditions 
+1 
+Crush  
+No fire or explosion Crush between two flat plates. Applied force is 
+about 13KN. 
+2 
+Impact  
+No fire or explosion Impact by 15.8mm bar with 9.1kg weight dropped 
+from 61cm height on the flat surface. 
+ 
+5.6 Environmental Reliability 
+Items 
+Criteria 
+Conditions 
+1 
+Shock 
+No leakage, mass 
+loss, no venting, 
+disassembly, no 
+rupture and no fire. 
+90% voltage 
+recovery 
+Subject to 6 shocks/axis, 18 total, of peak 
+acceleration of150g and pulse duration of 6 ms. 
+(UN method) 
+2 High Temp. 
+Storage 
+No leakage, no vent, 
+no fire or explosion 
+0.84A discharge capacity test after leaving at 85C 
+for 10h.  
+3 
+Drop  
+No visible 
+electrolyte leakage, 
+no temperature 
+rising. 
+Drop from a height of 4ft onto a concrete floor 3 
+times 
+each 
+for 
+bottom, 
+side 
+and 
+header 
+orientations (total=9 drops). 
+4 
+Vibration  
+No leakage, mass 
+loss, no venting, 
+disassembly, no 
+rupture and no fire. 
+90% voltage 
+recovery 
+Subject to 7↔200Hz / 15 min vibration, 12x15 min 
+/3 axes at amplitude of 0.8mm (1.6 mm total 
+excursion). (UN method) 
+ 
+
+ 
+ 
+Document 
+Name 
+ Cell Specifications of INR-21700-P45B 
+Document No. INR21700P45B-01 
+Ver. 
+0.2 Page 8 of 14 
+ 
+-- CONFIDENTIAL -- 
+Proprietary of E-One Moli Energy Corp. 
+5 High Altitude 
+Exposure 
+No leakage, weight 
+loss, no vent, fire or 
+explosion, 90% 
+voltage recovery 
+Stored at a pressure of 11.6 kPa for 6 hrs at 20C. 
+ (UN method) 
+ 
+ 
+ 
+6. REGULATORY COMPLIANCE 
+6.1 Comply with UN Recommendations on the Transport of Dangerous Goods: Manual of 
+Tests and Criteria. 
+6.2 Comply with EU RoHS (The Restriction of the use of certain Hazardous Substances in 
+electrical and electronic equipment, Directive 2015/863/EU). 
+6.3 UL 1642 recognized component.  
+6.4 Comply with IEC62133. 
+ 
+7. PRECAUTIONS FOR USING LITHIUM ION RECHARGEABLE CELL 
+The precautions described below are important to assure the performance and safety of 
+designed pack. Mishandling may cause cell leakage, heat, smoke, explosion or fire.  Please 
+follow instructions carefully.  
+ 
+7.1 Intended Use 
+e-Mobility, BEV/HEV, Hypercar, Evtol/e-aircraft, power/garden tools, marine, drone/UAV, 
+household, and energy storage . 
+It is not designed or produced for use in any vape or e-cigarette devices. 
+ 
+7.2 Handling Precautions 
+7.2.1 Charging 
+The lithium ion rechargeable cell is to be charged by “constant current/constant 
+voltage” method. The lithium ion cell is charged at a constant current (CC Mode) 
+until the cell voltage reaches a specific voltage, followed by a constant voltage 
+charge (CV Mode) at the specific voltage.  The charging current at this constant 
+voltage tapers off.  As long as the tapering current is down to a particular 
+current, the charge process is deemed complete.  
+1) Charge voltage: 
+Do not exceed the specified charge voltage (4.2V per single cell). If the cells 
+are used in battery packs, the maximum voltage is 4.2 x N (N= number of 
+
+ 
+ 
+Document 
+Name 
+ Cell Specifications of INR-21700-P45B 
+Document No. INR21700P45B-01 
+Ver. 
+0.2 Page 9 of 14 
+ 
+-- CONFIDENTIAL -- 
+Proprietary of E-One Moli Energy Corp. 
+cells connected in series) V. 
+2) Charge current: 
+Charge the cell at the specified charge current listed in section 4.10 or less. 
+3) Charge temperature: 
+Charge the cell at the temperature range of 0 oC ~ 60 oC. Due consideration 
+should also be given to the arrangement of the battery pack so that it is in 
+that temperature range even though it is effected by heat generated from 
+the cell charger. 
+7.2.2 Reverse charging: 
+The cell must be prevented from reverse-polarity charging. 
+7.2.3 Discharging 
+A lithium ion rechargeable cell starts to discharge at 4.2V and terminates at a 
+cut off voltage of 2.5V. 
+1) Discharge current: 
+Discharge the cell at the specified discharge current listed in section 4.10 or 
+less. In case a peak current of higher than maximum discharge current 
+depending on the pulse interval may reduce the cell capacity. 
+2) Discharge temperature: 
+Discharge the cell at temperature range from –40oC to 60oC. At a 
+temperature of –30oC or less, the cell will show a significant decrease in 
+discharge capacity. The cell surface temperature must not exceed 80°C. 
+Recommended thermal cut-off of 80°C at high rates. 
+3) Discharge termination voltage/Over discharge: 
+Avoid discharge to voltage less than 2.5V per single cell. A leakage current 
+to the equipment may over discharge the cell, which may damage the 
+performance of cell.  
+7.2.4 Long-term Storage 
+1) In case of long-term storage, store the cell at <23 oC, low humidity, 
+noncorrosive gas atmosphere. 
+2) The cell voltage should be maintained at greater than 2.5V. Should the cell 
+voltage approach to 2.5V (0%SOC) it is recommended that the cell be 
+charged back up to 30% capacity. 
+3) Do not store cell in humid environment. 
+ 
+ 
+
+ 
+ 
+Document 
+Name 
+ Cell Specifications of INR-21700-P45B 
+Document No. INR21700P45B-01 
+Ver. 
+0.2 Page 10 of 14 
+ 
+-- CONFIDENTIAL -- 
+Proprietary of E-One Moli Energy Corp. 
+ 
+ 
+ 
+ 
+ 
+7.3 Safety Precautions 
+7.3.1 When using the cell 
+WARNING 
+1) Mishandling of a cell can lead to generation of heat, possible explosion or 
+ignition and potential serious injury.  Safe handling guidelines include the 
+following: 
+(1) 
+Do not expose cell to fire or heat. 
+(2) 
+Do not install the cell backwards. 
+(3) 
+Do not expose the cell to water or salt water, or allow the cell to get 
+wet. 
+(4) 
+Do not carry or store the cells together with necklaces, hairpins or 
+other metal objects. 
+(5) 
+Do not place the cells in microwave ovens, high-pressure containers, 
+or on induction cookware. 
+(6) 
+Do not connect the positive terminal and the negative terminal of the 
+cell to each other with any metal objects such as chains, coins or wire. 
+(7) 
+Do not pierce the cell with nails, strike the cell with a hammer, step on 
+the cell, or otherwise subject it to strong impacts or shocks. 
+2) Do not disassemble or modify the cell. The cell contains safety and 
+protection devices, that if damaged, may cause the cell to generate heat, 
+explode or ignite. 
+3) Do not place the cell in or near fire, stoves, or other high-temperature 
+locations. Do not place the cell in direct sunshine or use or store the cell 
+inside cars in hot weather. Doing so may cause the cell to generate heat, 
+explode, or ignite. Using the cell in this manner may also result in a loss of 
+performance and a shortened life expectancy. 
+ 
+
+ 
+ 
+Document 
+Name 
+ Cell Specifications of INR-21700-P45B 
+Document No. INR21700P45B-01 
+Ver. 
+0.2 Page 11 of 14 
+ 
+-- CONFIDENTIAL -- 
+Proprietary of E-One Moli Energy Corp. 
+4) Venting device description 
+Safety Valve: Allowing controlled release of pressure in the event of 
+excessive internal gas build up. 
+ 
+ 
+ CAUTION 
+1) If the device is to be used by small children, the caregiver should explain the 
+contents of the user’s manual to the children. The caregiver should provide 
+adequate supervision to ensure that the device is being used as explained 
+in the user‘s manual. 
+2) When the cell is worn out, insulate the terminals with adhesive tape or 
+similar materials before disposal. 
+3) Immediately discontinue use of the cell if, while using, charging, or storing 
+the cell, the cell emits an unusual smell, feels hot, changes color, changes 
+shape, or appears abnormal in any other way. Contact your sales location 
+or E-One Moli Energy if any of these problems are observed. 
+4) In the event that the cell leaks and the fluid get into one’s eye, do not rub the 
+eye. Rinse well with water and immediately seek medical care. If left 
+untreated the cell fluid could cause damage to the eye. 
+ 
+7.3.2 When charging the cell 
+WARNING 
+1) Be sure to follow the rules listed below while charging the cell. Failure to do 
+so may cause the cell to become hot, explode, or ignite and cause serious 
+injury. 
+(1) 
+Do not attach the cell to a power supply plug or directly to a car’s 
+cigarette lighter plug. 
+(2) 
+When charging the cell, use a specified cell charger or ensure that the 
+cell charging conditions specified by E-One Moli Energy are met. 
+(3) 
+Do not place the cells in or near fire, or into direct sunlight. When the 
+
+ 
+ 
+Document 
+Name 
+ Cell Specifications of INR-21700-P45B 
+Document No. INR21700P45B-01 
+Ver. 
+0.2 Page 12 of 14 
+ 
+-- CONFIDENTIAL -- 
+Proprietary of E-One Moli Energy Corp. 
+cell becomes hot, the built in safety equipment is activated, preventing 
+the cell from charging further, and heating the cell can destroy the 
+safety equipment and can cause additional heating, breaking, or 
+ignition of the cell. 
+2) Do not continue charging the cell if it does not recharge within the specified 
+charging time. Doing so may cause the cell to become hot, explode, or 
+ignite. 
+ 
+ CAUTION 
+3) The temperature range over which the cell can be charged is 0 oC to 60 oC. 
+Charging the cell at temperatures outside of this range may cause the cell 
+to become hot or malfunction. Charging the cell outside of this temperature 
+range may also harm the performance of the cell or reduce the cell’s life 
+expectancy. 
+ 
+7.3.3 When Discharging the Cell  
+WARNING 
+1) Do not discharge the cell using any device except for the specified device. 
+When the cell is used in unspecified devices it may damage the 
+performance of the cell or reduce its life expectancy, and if the device 
+causes an abnormal current to flow, it may cause the cell to become hot, 
+explode, or ignite and cause serious injury. 
+ 
+ CAUTION 
+2) The temperature range over which the cell can be discharged is –40oC to 
+60oC (Consult E-One Moli Energy if you plan to discharge the cells at 
+temperature less than –40oC. Use of the cell outside of this temperature 
+range may damage the performance of the cell or may reduce its life 
+expectancy). 
+ 
+7.4 Pack-Assembly Precautions 
+7.4.1 Avoid excessive force on the cell terminals and prevent sparking during 
+welding.  
+7.4.2 Do NOT mix different cell types or manufacturers within a battery pack.  
+7.4.3 Do NOT over-stress or rotate at positive terminal. It is possible to cause 
+
+ 
+ 
+Document 
+Name 
+ Cell Specifications of INR-21700-P45B 
+Document No. INR21700P45B-01 
+Ver. 
+0.2 Page 13 of 14 
+ 
+-- CONFIDENTIAL -- 
+Proprietary of E-One Moli Energy Corp. 
+over-stress by removing the welding point.   
+7.4.4 All battery packs should be inspected for voltage, impedance, and function of 
+protection circuit prior to shipment.  
+7.4.5 Do NOT assemble damaged cells into packs.  
+7.4.6  If the cells are re-shipped to assembling manufacturer, package carefully into 
+the original shipping boxes. 
+7.5 Disposal Instructions 
+When disposing of secondary cells or batteries, keep cells or batteries of different 
+electrochemical systems separate from each other. 
+ 
+8. REQUIREMENT FOR BATTERY PACK DESDIGN 
+E-One Moli Energy recommends that cells be assembled in a pack with protection circuit. 
+Various protection circuit modules are available for applications of multiple series and parallel 
+configurations. In order to ensure safe use of cell, be sure to consult with E-One Moli Energy 
+regarding charging and discharging specifications and contact E-One Moli Energy in 
+advance when designing a device with this cell. 
+8.1 Protective circuit function recommendations: 
+8.1.1 Overcharge protection: recommend overcharge voltage under 4.3V/cell within 
+a tolerance 0.05V/cell maximum. The voltage tolerance is better under 
+0.03V/cell. The charge current shall be shut down once overcharge protection 
+function working.  
+8.1.2 Over discharge protection: recommend over discharge voltage range 2.5V/cell. 
+Below this level the discharge current shall be shut down and the consumption 
+current should be below 10uA  
+8.1.3 Over temperature protection: The battery should have over temperature 
+warning system. The battery shall control FET directly and stop 
+charge/discharge once cell over temperature. 
+8.2 Battery position: To prevent degradation of battery performance by heat exposure, 
+battery shall be positioned away from heat generating source inside application 
+equipment and charger.   
+8.3 Cell configuration: An isolation design that involves a plastic barrier or non-thermal 
+conductive material between cell and PCBA is recommended.   
+ 
+ 
+ 
+
+ 
+ 
+Document 
+Name 
+ Cell Specifications of INR-21700-P45B 
+Document No. INR21700P45B-01 
+Ver. 
+0.2 Page 14 of 14 
+ 
+-- CONFIDENTIAL -- 
+Proprietary of E-One Moli Energy Corp. 
+9. WARRANTY OF CELL 
+Warranty period is one year after shipment under normal conditions. Within this period, 
+E-One Moli Energy will replace the cell for free against defects as long as it is confirmed such 
+defects are the failure of the cell manufacturing process. Any other defects caused by pack 
+assembly equipment/system malfunction or abnormal usage of the cell are not covered by 
+this warranty.  
+ 
+10. SHIPPING STATE OF CELL 
+The cell is shipped at a state of charge not to exceed 30% of rated capacity. Less than 35 oC 
+is recommended for cell shipping during transportation. 
+ 
+11. PACKING SPECIFICATION 
+The maximum quantity of the cells is 100pcs in inner box, 200pcs in master box. 
+ 
+12. AMENDMENT OF SPECIFICATION CONTENT 
+This specification stipulates the final and comprehensive characteristics of the product. It is 
+the responsibility of the customer to explicitly disclose in writing any additional requirements 
+to E-One Moli Energy prior to agreement of purchase.  
+

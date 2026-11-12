@@ -1,0 +1,136 @@
+{
+ "id": "azur_3g30a_advanced_8x8_cic",
+ "name": "AZUR SPACE 3G30A-Advanced 8 x 8 cm assembly (CIC), material 81752",
+ "category": "power",
+ "subcategory": "solar_cell",
+ "vendor": "AZUR SPACE Solar Power GmbH",
+ "model": "3G30A-Advanced 8 x 8 cm assembly (CIC), material 81752",
+ "dimensions_mm": {
+  "x": 80.15,
+  "y": 80.15,
+  "z": 0.28
+ },
+ "mass_g": 7.1,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.azurspace.com/media/uploads/file_links/file/bdb_00010892-01-00_tj3g30-advanced_8x8.pdf",
+  "document": {
+   "title": "AZUR SPACE data sheet 00010892-01-00",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical"
+  ],
+  "notes": "Outer 80.15 x 80.15 mm, 280 um thick, 7.1 g per cell, cell area 60.35 cm2, BOL efficiency 29.0 % (AM0 1367 W/m2), Vmp 2400 mV, Imp 998 mA, Voc 2700 mV, Isc 1030 mA."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Germany",
+ "electrical": {
+  "cell_area_cm2": 60.35,
+  "efficiency_percent": 29.0,
+  "vmp_mV": 2400,
+  "imp_mA": 998,
+  "voc_mV": 2700,
+  "isc_mA": 1030
+ },
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   80.15,
+   80.15,
+   0.28
+  ],
+  "mesh_volume_mm3": 1798.7,
+  "watertight": true,
+  "render_kind": "solar_cell",
+  "effective_density_g_cm3": 3.947,
+  "bodies": {
+   "part": [
+    {
+     "name": "cell",
+     "color": [
+      0.16,
+      0.26,
+      0.62
+     ],
+     "file": "bodies/part__cell.stl"
+    },
+    {
+     "name": "bus_bar",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__bus_bar.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 12
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "cell",
+     "color": [
+      0.16,
+      0.26,
+      0.62
+     ],
+     "file": "bodies/part__cell.stl"
+    },
+    {
+     "name": "bus_bar",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__bus_bar.stl"
+    }
+   ]
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://www.azurspace.com/media/uploads/file_links/file/bdb_00010892-01-00_tj3g30-advanced_8x8.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

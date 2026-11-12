@@ -1,0 +1,170 @@
+Owl 640 M
+Low power, VIS-SWIR camera
+640 x 512 • 15μm x 15μm pixel pitch •
+Key Features and Benefits
+TEC-less Visible SWIR technology
+• TEC-less Visible SWIR
+	 Enables ultra low power
+• 15μm x 15μm pixel pitch
+   Enables highest resolution VIS-SWIR image
+• Ultra high intrascene dynamic range
+	 Enables similtaneous capture of bright & dark portions of a scene
+• Ultra compact, Rugged, No fan
+	 Specially designed for integration into small OEM platforms
+www.raptorphotonics.com
+Resolution	
+640 x 512
+Ultra Low Power	
+<2.5W
+Optical Interface 	
+C-mount
+Wavelength Range	
+VIS-SWIR
+
+Sensor Type
+InGaAs PIN-Photodiode
+Active Pixel
+640 x 512
+Pixel Pitch
+15µm x 15µm
+Active Area
+9.6mm x 7.68mm
+Spectral response1
+0.6 to 1.7µm 
+Readout Noise (RMS)2
+LG = Low Gain HG = High Gain
+LG: <190e- (174e- typical)
+HG: <50e- (38e- typical)
+Peak Quantum Efficiency
+>90% @ 1.3μm
+Full Well Capacity
+LG: 650ke-
+ HG: 9ke-
+Pixel Operability
+>99.5%
+Output Format
+14 bit Camera Link (base configuration)
+Exposure time3
+10µs to 26.8s
+Shutter mode
+Global shutter
+Frame Rate
+Up to 120Hz
+Dynamic Range (Typical)
+LG: 72dB, HG: 49dB
+Optical Interface
+C mount
+Trigger interface
+Trigger IN and OUT - TTL compatible
+Power supply
+12V DC ±0.5V
+TE Cooling
+None
+Image Correction
+3 point NUC (offset, gain and dark current) + pixel correction
+Functions controlled by serial 
+communication
+Exposure, intelligent AGC, Non-Uniformity Correction,
+Gamma, Pk/Av, ALC ROI
+Camera Power Consumption4
+<2.5W (NUC ON)
+Operating Case Temperature5
+-20˚C to +55˚C
+Storage Temperature
+-30˚C to +60˚C
+Dimensions (L*W*H)6
+62.21mm x 42.00mm x 42.00mm
+Weight
+170g
+Raptor Photonics Limited reserves the right to change this document at any time without notice and 
+disclaims liability for editorial, pictorial or typographical errors.
+Specification for Owl 640 M
+Quantum Efficiency
+Applications
+Surveillance
+• 860, 1064 & 1550nm laser line detection
+• Hand Held Systems
+• Vision enhancement
+• Machine vision
+• Beam profiling
+Scientific
+• CubeSat / LEO applications
+• Beam profiling
+• Semiconductor inspection
+• Solar panel cell inspection
+Ordering Information
+Camera
+Owl 640 M Digital Camera
+OW1.7-VS-CL-LP-640
+Power Supply Cable
+RPL-HR4-K
+Optional Accessories
+Mini PC with XCAP Std and
+frame grabber
+RPL-PC-EL1
+EPIX® EB1 frame grabber
+RPL-EPIX-EB1
+EPIX® XCAP Std software
+RPL-XCAP-STD
+MDR-SDR CameraLink Cable (2m)7
+RPL-MCL-CBL-2M
+Optical Lenses8
+RPL-xx-xxxx
+Note 1:  Optional filters available: Low, High or bandpass
+Note 2: Typical readout noise is calculated from an
+              average of the last 20 cameras shipped.
+Note 3: In practice, the maximum exposure time will be
+             dark current limited.
+Note 4: Measured in an ambient of 25°C with adequate
+              heat sinking. For full detailed power consumption
+              values, please refer to the user manual.
+Note 5: Extended operating temperature range on
+              request.
+Note 6: Dimensions include all connector parts on camera
+              interface
+Note 7: Longer Camera Link cable available.
+Note 8: Please consult us to check our range of lenses
+Demo is available on request.
+Pricing AOR subject to volumes.
+Document #: INOWL1.7-VS-CL-LP-640 0521
+ISO 9001
+Registered
+Quality
+Management
+Detailed technical drawings 
+can be downloaded at 
+www.raptorphotonics.com
+Willowbank Business Park
+Larne, Co Antrim
+BT40 2SF, 
+Northern Ireland
+Raptor Photonics Ltd. (UK)
+T: +44(0)2828 270 141
+E: sales@raptorphotonics.com
+www.raptorphotonics.com
+Raptor Photonics Inc. (USA)
+T: +1 (877) 230-4836
+E: sales@raptorphotonics.com
+www.raptorphotonics.com
+600
+800
+1000
+1200
+1400
+0
+10
+20
+30
+40
+50
+60
+70
+80
+90
+Wavelength (nm)
+Quantum Efficiency (%)
+100
+1800
+1600
+*Data supplied by sensor manufacturer
+

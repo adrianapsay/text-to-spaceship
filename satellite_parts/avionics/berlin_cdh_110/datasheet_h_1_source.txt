@@ -1,0 +1,3 @@
+url: https://satcatalog.s3.amazonaws.com/components/418/SatCatalog_-_Berlin_Space_Technologies_-_CDH-110_-_Datasheet.pdf
+found from: https://satcatalog.com/component/cdh-110/
+downloaded on the lab laptop by harvest_catalogs.py (pass 6) on 2026-11-11

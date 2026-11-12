@@ -1,0 +1,119 @@
+{
+ "id": "bct_sada3h",
+ "name": "Blue Canyon Technologies SADA-3H solar array drive assembly",
+ "category": "mechanisms",
+ "subcategory": "sada",
+ "vendor": "Blue Canyon Technologies",
+ "model": "SADA-3H",
+ "dimensions_mm": {
+  "x": 111,
+  "y": 111,
+  "z": 150
+ },
+ "mass_g": 1660,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.bluecanyontech.com/static/datasheet/BCT-Product-Catalog.pdf",
+  "document": {
+   "title": "Blue Canyon Technologies product catalog",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical"
+  ],
+  "notes": "SADA-3H: 11.1 cm diameter x 15.0 cm, 1.66 kg, 12 W while manoeuvring."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "satellite_class": "smallsat",
+ "electrical": {
+  "power_W": {
+   "peak": 12
+  }
+ },
+ "mechanism": {
+  "actuator_type": "solar array drive (rotary)"
+ },
+ "vendor_country": "USA",
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   111.0,
+   110.69,
+   150.0
+  ],
+  "mesh_volume_mm3": 1446125.4,
+  "watertight": true,
+  "render_kind": "cylinder",
+  "effective_density_g_cm3": 1.148,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 164
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "body",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://www.bluecanyontech.com/static/datasheet/BCT-Product-Catalog.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

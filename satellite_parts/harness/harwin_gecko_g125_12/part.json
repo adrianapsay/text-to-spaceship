@@ -88,6 +88,59 @@
   },
   "face_counts": {
    "part": 12
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    11.45,
+    5.0,
+    4.65
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.05
+   ],
+   "bodies": [
+    {
+     "name": "flange",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/flange.stl"
+    },
+    {
+     "name": "shell",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/shell.stl"
+    },
+    {
+     "name": "insulator",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/insulator.stl"
+    },
+    {
+     "name": "contacts",
+     "color": [
+      0.85,
+      0.66,
+      0.22
+     ],
+     "file": "bodies_detail/contacts.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",
@@ -114,13 +167,6 @@
     "pdf": "datasheet_1.pdf",
     "kind": "web_search",
     "url": "https://content.harwin.com/asset/85d293be-c09f-4fa0-a334-46b2f60da08c/PD007-Product-Datasheet-Gecko-range-signal-connectors-HRi.pdf",
-    "title": null
-   },
-   {
-    "file": "datasheet_2_page1.png",
-    "pdf": "datasheet_2.pdf",
-    "kind": "web_search",
-    "url": "https://content.harwin.com/m/59c11be7382ae30/original/Harwin-Modern-Slavery-Statement.pdf",
     "title": null
    }
   ],

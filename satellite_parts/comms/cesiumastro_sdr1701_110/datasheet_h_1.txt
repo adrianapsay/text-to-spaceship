@@ -1,0 +1,137 @@
+Hardware Revision A 
+Datasheet Version 071020 
+ 
+1 
+Proprietary Information ©2020 CesiumAstro, Inc. 
+ 
+SOFTWARE-DEFINED RADIO 
+SDR-1001 
+ 
+ 
+ 
+ 
+A high-performance, compact software-defined radio designed to operate in Low Earth
+Orbit (LEO) environments. 
+The Cesium SDR-1001 includes four receive channels, four transmit channels, and a
+state-of-the-art FPGA in a credit-card-sized footprint. The module is suitable for
+demanding digital signal processing and communications applications. 
+Use as a stand-alone Software-Defined Radio or combine with other Cesium modules for
+a complete bits-to-photons solution. 
+ 
+TABLE OF CONTENTS: 
+ 
+ KEY FEATURES: ........................................................................................................ 2 
+ CESIUM GENERAL-PURPOSE MODEM: .................................................................. 2 
+ PRODUCT SPECIFICATIONS: ................................................................................... 2 
+ MECHANICAL VIEW: .................................................................................................. 3 
+ SYSTEM BLOCK DIAGRAM: ...................................................................................... 4 
+CONTACT: ...................................................................................................................... 5 
+ 
+
+Hardware Revision A 
+Datasheet Version 071020 
+ 
+2 
+Proprietary Information ©2020 CesiumAstro, Inc. 
+ KEY FEATURES: 
+ 
+• Compact 50mm x 84mm x 13mm packaged form-factor 
+• 4x 100MHz receive channels 
+• 4x 100MHz transmit channels 
+• Customizable FPGA fabric enables user-defined comms system 
+• Supports DVB-S2X, LTE-grade waveforms, and other high-order modulations 
+• Transmit and receive frequencies adjustable 300MHz-6GHz 
+• Optional RF observation ports 
+• Field-updatable, redundant boot flash with automatic failover 
+• Data interfaces: SpaceWire and UART (10GBASE-KR & 1000BASE-X - option) 
+• On-board telemetry: temperature, power consumption, rail voltages, error 
+reporting 
+• Suitable for both military and commercial applications on LEO satellites and 
+airborne platforms 
+• Thermal pillars bring heat to flat surface 
+ 
+ 
+ CESIUM GENERAL-PURPOSE MODEM: 
+ 
+• A pre-loaded comms solution that works out of the box 
+• Selectable Data Rate up to 62.5 MSym/s 
+• BPSK/QPSK 
+• Forward Error Correction 
+• Burst Mode 
+• SpaceWire and UART interfaces 
+ 
+ 
+ PRODUCT SPECIFICATIONS: 
+ 
+DC Input Voltage: 
+9 to 13 V 
+Baseplate Operating Temperature: 
+-24 to +61 °C 
+Mass: 
+100 g 
+ 
+ 
+
+Hardware Revision A 
+Datasheet Version 071020 
+ 
+3 
+Proprietary Information ©2020 CesiumAstro, Inc. 
+ MECHANICAL VIEW: 
+ 
+ 
+ 
+ 
+ 
+ 
+
+Hardware Revision A 
+Datasheet Version 071020 
+ 
+4 
+Proprietary Information ©2020 CesiumAstro, Inc. 
+ SYSTEM BLOCK DIAGRAM: 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+TEXAS HQ 
+ 
+13412 Galleria Circle Suite H-100 
+Austin, TX 78738 
+ 
+ 
+COLORADO 
+ 
+10901 West 120th Avenue Suite 180 
+Broomfield, CO 80021 
+ 
+ 
+ 
+ 
+ 
+ 
+CONTACT: 
+ 
+www.cesiumastro.com 
+ 
+products@cesiumastro.com 
+ 
+ 
+ 
+

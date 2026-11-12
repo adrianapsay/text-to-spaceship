@@ -1,0 +1,158 @@
+CMCU
+Clock Monitoring and Control Unit
+The CMCU is a high-performance 10.23 MHz master 
+clock generation unit for satellite navigation systems. Two 
+frequency synthesizers can select independently between 
+two input 9.99 to 10.01 MHz Atomic Clock frequency 
+references as a basis for the master clock generation. 
+One of the two synthesizer outputs is selected to provide 
+the master clock for the payload and is distributed to up 
+to four identical outputs. The output signal of the second 
+synthesizer provides a hot redundant alternative for the 
+master clock with seamless switching (no distortion of 
+the output signal). A phase meter monitors the output 
+phase of the active synthesizer against the hot redundant 
+one.
+Maximum reliability is achieved through a design without 
+microcontroller. The TM TC interface is implemented as 
+hard wired logic and can be addressed by serial and 
+high level commands. A phase synchronous output 
+switching between active and redundant synthesizer is 
+available. Optional features like parameter-based clock drift 
+compensation or synthesizer adaptation to source 
+characteristics can be implemented.
+The CMCU can be operated with rubidium, passive 
+hydrogen maser and caesium clocks to form a complete 
+timing subsystem. The CMCU in the Galileo configura-
+tion operates with passive hydrogen maser and rubidium 
+clocks.
+Key Features
+• Master timing reference generation (10.23 MHz) for NAV payloads
+• Direct digital frequency synthesis with hyper-fine tuning steps to 
+correct frequency drifts of atomic clocks while not degrading their 
+performance
+• Frequency comparison system determines drifts between two  
+atomic clocks
+• Seamless switching capability
+• Frequency distribution networks
+• High phase stability over temperature drifts
+• 4 x 2 switch matrix with high isolation to prevent degradation of 
+clock stability
+• Capability to monitor discrete clock interfaces
+Main application fields
+• Navigation payloads (global or regional)
+• High-performance communication systems
+• Scientific applications
+• GNSS overlay systems
+Customers / Applications
+• Galileo FOC
+• DLR
+• ISRO (Indian regional navigation satellite system)
+Support
+• EGSE including high-precision time generation and verification 
+equipment
+• Expertise in high-precision timing subsystems
+Budgets
+• Mass                    5.2 kg
+• Volume                 270 x 216 x 137 mm³
+• Power (average)    21 W
+Interfaces
+• Power bus               26–48.5 V (adaptable)
+• Clock inputs            9.99...10.1 MHz (adaptable) 
+5..13 dBm 
+Analogue, digital and thermistor inputs for 
+clock telemetry
+• Output signal          10.23 MHz, -1...7 dBm (adaptable)
+• Control & Monitoring  
+MIL-STD-1553B or RS422 
+high level command. 
+Discrete analogue & digital telemetry.
+Environments
+• Temperature:  
+Operating              -15 °C to +45 °C 
+Non-operating       -40 °C to +60 °C
+• Radiation tolerance:                    up to 100 kRad
+• Reliability                                     0.9927 over 12 years
+
+CMCU block diagram
+CMCU functions and performance
+Functions
+• 4 x 2 switch matrix for clock  
+selection
+• Frequency synthesizer:  
+10.00 MHz -> 10.23 MHz
+• Frequency fine tuning  
+and adjustment
+• Seamless switching capability 
+for smooth change between 
+reference atomic clocks
+• Phase meter to monitor hot  
+redundant against active 
+clock
+• Storage of phase measure-
+ment results upon retrieval
+• Second unit in cold  
+redundancy
+• Optional conversion of other  
+input clock frequencies if a 
+mix of clock technologies  
+is desired
+Performance
+Input frequency fin: 	
+9.99...10.01 MHz
+Output frequency fout: 	10.23 MHz
+Step Size (Δf/f): 	
+± 1 x 10-15
+Setting range (Δf/f): 	
+± 1 x 10
+-8
+Phase Noise:	
+CMCU output
+1 Hz	
+-100 dBc/Hz
+10 Hz	
+-124 dBc/Hz
+100 Hz	
+-139 dBc/Hz
+1 KHz	
+-149 dBc/Hz
+10 KHz	
+-154 dBc/Hz
+100 KHz	
+-154 dBc/Hz
+Discrete spurious	 -80 dBc (f ± 1 MHz) 
+and harmonics	
+-60 dBc (outside f ± 1 MHz)
+Short-term frequency 
+residual stability:	
+Residual ADEV
+1s	
+Performance:
+10s	
+6.4 x10-14
+100s	
+2.0 x10
+-14
+1,000s	
+6.4 x10
+-15
+10,000s	
+2.0 x10
+-15
+Phase meter  
+resolution 	
+3 ps
+Phase sensitivity	
+Temperature	
+<10ps/K
+Magnetic field	
+<100ps/Gauss
+Power supply	
+<10ps/V
+ENS2 / Non-contractual document, subject to changes. 
+This document shall not be reproduced, in whole or in part, 
+without prior consent. © 2014 Airbus Defense and Space SAS
+Airbus Defense and Space
+space@electronics-airbusds.com
+www.airbusdefenceandspace.com
+

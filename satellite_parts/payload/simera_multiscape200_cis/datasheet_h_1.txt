@@ -1,0 +1,459 @@
+ 
+038531 
+Revision    5 
+i 
+Copyright of this document belongs to Simera Sense and may not be used for any purpose other than for which the information was provided. The 
+content of this document is subjected to change without notice. Simera Sense disclaims any and all liability, to the maximum extent permitted by law, 
+for any errors, inaccuracies or incompleteness contained in this document. 
+ 
+ 
+ 
+Datasheet 
+ 
+ 
+ 
+ 
+ 
+ 
+Document Number:  
+ 
+038531 
+Author(s):  
+ 
+ 
+J. Vos, E. Grobbelaar 
+Revision:  
+ 
+ 
+5 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+MultiScape200 CIS 
+
+MultiScape200 CIS 
+Datasheet 
+ 
+038531 
+Revision    5 
+ii 
+Copyright of this document belongs to Simera Sense and may not be used for any purpose other than for which the information was provided. The 
+content of this document is subjected to change without notice. Simera Sense disclaims any and all liability, to the maximum extent permitted by law, 
+for any errors, inaccuracies or incompleteness contained in this document. 
+Document History 
+ 
+ 
+Revision 
+Date 
+Details 
+1 
+2019-12-11 
+First Release 
+2 
+2019-12-18 
+Updated Table 1-1 
+3 
+2020-06-01 
+Updated sections 1.3, 3, 5 and 7 
+Added section 2 
+4 
+2020-06-03 
+Minor updates and corrections 
+5 
+2020-11-26 
+Updated Section 1 
+Added Section 7 
+ 
+
+MultiScape200 CIS 
+Datasheet 
+ 
+038531 
+Revision    5 
+iii 
+Copyright of this document belongs to Simera Sense and may not be used for any purpose other than for which the information was provided. The 
+content of this document is subjected to change without notice. Simera Sense disclaims any and all liability, to the maximum extent permitted by law, 
+for any errors, inaccuracies or incompleteness contained in this document. 
+Table of Contents 
+1. Overview ......................................................................................................................................... 8 
+1.1 
+Features ............................................................................................................................................. 9 
+1.2 
+Applications ........................................................................................................................................ 9 
+1.3 
+Key Specifications............................................................................................................................. 10 
+1.4 
+Functional Components ................................................................................................................... 11 
+2. Theory of Operation ....................................................................................................................... 12 
+3. Detailed Description ....................................................................................................................... 13 
+3.1 
+Optical Front-End ............................................................................................................................. 13 
+3.2 
+MultiScape200 CIS Sensor Unit ........................................................................................................ 13 
+3.3 
+Control Electronics ........................................................................................................................... 16 
+3.3.1 
+Power Supply ..................................................................................................................... 17 
+3.3.2 
+Control Interface ................................................................................................................ 17 
+3.3.3 
+Data Interface .................................................................................................................... 18 
+3.3.4 
+General Purpose and High-Speed Digital I/Os ................................................................... 19 
+3.3.5 
+Telemetry and Health Monitoring ..................................................................................... 20 
+3.4 
+Parts and Materials Selection .......................................................................................................... 20 
+4. Electrical Interfaces ........................................................................................................................ 21 
+4.1 
+CSKB PC-104 Connector H1 and H2 ................................................................................................. 21 
+4.2 
+High-Speed Connector P5 ................................................................................................................ 23 
+5. Electrical Specifications .................................................................................................................. 24 
+5.1 
+Absolute Maximum Ratings ............................................................................................................. 24 
+5.2 
+Electrical Characteristics .................................................................................................................. 24 
+5.3 
+Power Consumption......................................................................................................................... 26 
+6. Physical Characteristics .................................................................................................................. 27 
+7. Environmental Ratings ................................................................................................................... 30 
+7.1 
+Qualification Vibration Tests ............................................................................................................ 30 
+7.2 
+Qualification Thermal Tests ............................................................................................................. 31 
+7.3 
+Qualification Radiation Test ............................................................................................................. 32 
+ 
+
+MultiScape200 CIS 
+Datasheet 
+ 
+038531 
+Revision    5 
+iv 
+Copyright of this document belongs to Simera Sense and may not be used for any purpose other than for which the information was provided. The 
+content of this document is subjected to change without notice. Simera Sense disclaims any and all liability, to the maximum extent permitted by law, 
+for any errors, inaccuracies or incompleteness contained in this document. 
+List of Figures 
+Figure 1-1: MultiScape200 CIS Imager ............................................................................................................... 8 
+Figure 1-2: MultiScape200 CIS Functional Components .................................................................................. 11 
+Figure 3-1: Line Rate and dTDI Stages .............................................................................................................. 15 
+Figure 3-2: SNR and Transmittance .................................................................................................................. 15 
+Figure 3-3: Diagram of Control Electronics with FEE ........................................................................................ 16 
+Figure 3-4: Standard LVDS Link Byte Transfer Cycle Waveform ....................................................................... 18 
+Figure 3-5: Imager Data Packet Description ..................................................................................................... 19 
+Figure 4-1: CE Connector Locations .................................................................................................................. 21 
+Figure 6-1: Mechanical Drawing ....................................................................................................................... 27 
+Figure 6-2: CE Mechanical Drawing .................................................................................................................. 28 
+Figure 6-3: CE with Omnetics Bi-Lobe Breakout Adapter ................................................................................ 28 
+Figure 6-4: CE with Harwin Datamate Breakout Adapter ................................................................................ 29 
+ 
+
+MultiScape200 CIS 
+Datasheet 
+ 
+038531 
+Revision    5 
+v 
+Copyright of this document belongs to Simera Sense and may not be used for any purpose other than for which the information was provided. The 
+content of this document is subjected to change without notice. Simera Sense disclaims any and all liability, to the maximum extent permitted by law, 
+for any errors, inaccuracies or incompleteness contained in this document. 
+List of Tables 
+Table 1-1: Key Specifications ............................................................................................................................ 10 
+Table 3-1: OFE Characteristics .......................................................................................................................... 13 
+Table 3-2: Filter Specifications ......................................................................................................................... 13 
+Table 3-3: Power Switching Alternatives .......................................................................................................... 17 
+Table 3-4: Control Interface Options ................................................................................................................ 17 
+Table 3-5: High-Speed Data Output Interface Characteristics ......................................................................... 18 
+Table 3-6: Standard LVDS Link Description ...................................................................................................... 18 
+Table 3-7: USART Signal Description ................................................................................................................ 19 
+Table 3-8: GPIOs and HSIOs .............................................................................................................................. 20 
+Table 3-9: Telemetry Measurement Channels ................................................................................................. 20 
+Table 4-1: Connector H1 Pin Assignment ......................................................................................................... 21 
+Table 4-2: Connector H2 Pin Assignment ......................................................................................................... 22 
+Table 4-3: Connector P5 Pin Assignment ......................................................................................................... 23 
+Table 5-1: Absolute Maximum Ratings............................................................................................................. 24 
+Table 5-2: DC Characteristics ............................................................................................................................ 24 
+Table 5-3: AC Characteristics ............................................................................................................................ 25 
+Table 5-4: Power Consumption (BOL) .............................................................................................................. 26 
+Table 5-5: Power Consumption (after 25 krad TID) ......................................................................................... 26 
+Table 6-1: Physical Characteristics ................................................................................................................... 27 
+Table 7-1: Environmental Absolute Maximum Ratings .................................................................................... 30 
+Table 7-2: Sinusoidal Vibration Test Specifications(1) ..................................................................................... 30 
+Table 7-3: Random Vibration Test Specifications (GEVS)(1) ............................................................................ 30 
+Table 7-4: Thermal Ambient Test Specifications .............................................................................................. 31 
+
+MultiScape200 CIS 
+Datasheet 
+ 
+038531 
+Revision    5 
+vi 
+Copyright of this document belongs to Simera Sense and may not be used for any purpose other than for which the information was provided. The 
+content of this document is subjected to change without notice. Simera Sense disclaims any and all liability, to the maximum extent permitted by law, 
+for any errors, inaccuracies or incompleteness contained in this document. 
+Table 7-5: Thermal Vacuum Test Specifications ............................................................................................... 31 
+Table 7-6: Radiation Test Specifications ........................................................................................................... 32 
+ 
+ 
+ 
+
+MultiScape200 CIS 
+Datasheet 
+ 
+038531 
+Revision    5 
+vii 
+Copyright of this document belongs to Simera Sense and may not be used for any purpose other than for which the information was provided. The 
+content of this document is subjected to change without notice. Simera Sense disclaims any and all liability, to the maximum extent permitted by law, 
+for any errors, inaccuracies or incompleteness contained in this document. 
+List of Abbreviations 
+Abbreviation 
+Description 
+ADC 
+Analog to Digital Converter 
+BOL 
+Beginning of Life 
+CAN 
+Controller Area Network 
+CE 
+Control Electronics 
+CMOS 
+Complementary Metal Oxide Semiconductor 
+CSKB 
+CubeSat Kit Bus  
+DC 
+Direct Current 
+DDR 
+Double Data Rate 
+dTDI 
+Digital Time Delay Integration 
+ECAD 
+Error Detection And Correction 
+FEE 
+Front-End Electronics 
+FPGA 
+Field Programmable Gate Array 
+FWHM 
+Full Width at Half Maximum 
+GND 
+Ground 
+gRMS 
+Gravitation Constant, Root Mean Square (g = 9.81 m/s2) 
+GPIO 
+General Purpose Input Output 
+GSD 
+Ground Sampling Distance 
+HPP 
+Half Power Point 
+I2C 
+Inter-Integrated Circuit 
+I/O 
+Input / Output 
+LEO 
+Low Earth Orbit 
+lp 
+Line Pairs 
+LVDS 
+Low Voltage Differential Signalling 
+MSB 
+Most Significant Bit 
+OFE 
+Optical Front-End 
+PCB 
+Printed Circuit Board 
+SDR 
+Single Data Rate 
+SEL 
+Single Event Latch-up 
+SNR 
+Signal to Noise Ratio 
+SPI 
+Serial Peripheral Interface 
+SU 
+Sensor Unit 
+TID 
+Total Ionising Dose 
+U 
+Unit (CubeSat) 
+UART 
+Universal Asynchronous Receiver Transmitter 
+USART 
+Universal Synchronous Asynchronous Receiver Transmitter 
+VNIR 
+Visible and Near-Infrared (light spectrum) 
+ 
+ 
+ 
+
+MultiScape200 CIS 
+Datasheet 
+ 
+038531 
+Revision    5 
+8 
+Copyright of this document belongs to Simera Sense and may not be used for any purpose other than for which the information was provided. The 
+content of this document is subjected to change without notice. Simera Sense disclaims any and all liability, to the maximum extent permitted by law, 
+for any errors, inaccuracies or incompleteness contained in this document. 
+1. Overview 
+The MultiScape200 CIS is a multispectral push-broom imager primarily designed for earth observation 
+applications as a primary payload for microsatellites like CubeSats. It is based on a CMOS imaging sensor and 
+a 7-band multispectral filter in the visible and near-infrared (VNIR) spectral range. The MultiScape200 CIS 
+provides continuous line-scan imaging in up to 7 spectral bands, each with digital time delay integration (dTDI). 
+The optics have a large aperture diameter and long focal length within a compact form factor, resulting in a 
+ground sampling distance (GSD) of 1.5 m at an orbit height of 500 km. The modified Cassegrain optical design 
+brings performance to the edge of the field over the whole spectral range at ultra-low distortion. The 
+MultiScape200 CIS is engineered to withstand the rigours of the space environment and maintain performance 
+across a wide temperature range. Its compact form factor is optimised for integration into 12U or larger 
+CubeSat structures. 
+ 
+Figure 1-1: MultiScape200 CIS Imager 
+ 
+
+MultiScape200 CIS 
+Datasheet 
+ 
+038531 
+Revision    5 
+9 
+Copyright of this document belongs to Simera Sense and may not be used for any purpose other than for which the information was provided. The 
+content of this document is subjected to change without notice. Simera Sense disclaims any and all liability, to the maximum extent permitted by law, 
+for any errors, inaccuracies or incompleteness contained in this document. 
+1.1 Features 
+• 
+1.5 m GSD (at 500 km orbit height) 
+• 
+Swath width of 14 km (at 500 km orbit height) 
+• 
+7 spectral bands in the VNIR range 
+• 
+12-bit pixel depth 
+• 
+128 Gigabyte non-volatile storage capacity for up to 2 000 km strip (at 500 km orbit height) 
+• 
+On-board image processing and compression capabilities (optional) 
+• 
+Comprehensive telemetry and health monitoring including OFE temperature measurement 
+• 
+Latch-up current monitoring and optional on-board power switch with quick turn-off 
+• 
+Inject AOCS/ADCS parameters and time information into data stream 
+• 
+Option to integrate pulse per second signal 
+• 
+Configurable CubeSat Kit Bus (CSKB) compatible connector interface 
+• 
+Configurable wirable connector interface 
+• 
+Control options include I2C, SPI, SpaceWire, RS422, CAN 2.0B 
+• 
+Image data output options include LVDS, SpaceWire, USART 
+• 
+Expected lifetime of more than 5 years 
+ 
+1.2 Applications 
+• 
+Precision agriculture 
+• 
+Forestry and land use 
+• 
+Energy and infrastructure 
+• 
+Coastal monitoring 
+• 
+Air quality 
+• 
+Resource and infrastructure monitoring 
+ 
+ 
+
+MultiScape200 CIS 
+Datasheet 
+ 
+038531 
+Revision    5 
+10 
+Copyright of this document belongs to Simera Sense and may not be used for any purpose other than for which the information was provided. The 
+content of this document is subjected to change without notice. Simera Sense disclaims any and all liability, to the maximum extent permitted by law, 
+for any errors, inaccuracies or incompleteness contained in this document. 
+1.3 Key Specifications 
+Table 1-1: Key Specifications 
+Optics 
+Focal Length 
+1067 mm ±1 mm 
+Aperture 
+190 mm 
+Full Field of View (FFOV) 
+1.6° (across-track); 1.2° (along-track) 
+Imaging 
+Configuration 
+Line-scan (push broom) 
+Sensor Technology 
+CMOS 
+Across Track 
+9344 pixels 
+Pixel Size 
+3.2 µm 
+Pixel Depth 
+12-bit 
+Spectral Bands 
+7 
+dTDI Stages 
+Up to 32 per band 
+Line Rate 
+Up to 8000 Hz 
+Signal to Noise Ratio 
+36 for Band 2 using 8 dTDI stages (1)(3) 
+On-Board Electronics 
+Storage Capacity 
+128 Gigabyte EDAC protected NAND Flash 
+Continuous Strip Length 
+Up to 500 km (1)(2) 
+Image Processing 
+Binning, Thumbnails 
+Image Compression 
+CCSDS 122.0-B-2 Lossy/Lossless (optional) (4) 
+Control Interface Options 
+I2C, SPI 
+SpaceWire (ECSS-E-ST-50-12C) (optional) 
+RS-422, RS-485 (optional) 
+CAN 2.0B (optional) 
+Data Interface Options 
+LVDS 
+SpaceWire (ECSS-E-ST-50-12C) (optional) 
+USART (optional) 
+Physical Interface Options 
+CSKB Compatible PC-104 connector 
+Wirable high-speed connector 
+Power Supply 
+5 V DC ± 150 mV 
+Power Consumption 
+2.5 W when idle or during readout 
+5.8 W during imaging 
+Mechanical 
+Mass 
+12.1 kg ± 2% 
+Dimensions 
+216 x 216 x 304 mm 
+Environmental 
+Operating Temperature Range 
+-10 to 50 °C 
+Survivable Temperature Range 
+-20 to 60 °C 
+Sun-facing duration 
+Sun can be within FFOV for up to 3 minutes 
+Radiation (TID) 
+Tested beyond 25 kRad, without shielding, using a 60Co source 
+ 
+(1) Dependant on orbit height, see Figure 3-1. Value calculated at 500 km orbit height. 
+(2) Dependant on number of bands enabled 
+(3) Equivalent to Sentinel-2 band B3. At-aperture radiance level of 100 W·m-2·sr-1·µm-1 is assumed. 
+(4) https://public.ccsds.org/Pubs/122x0b2.pdf  
+

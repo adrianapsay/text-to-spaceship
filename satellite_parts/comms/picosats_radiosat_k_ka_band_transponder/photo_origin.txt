@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-picosats-srl-radiosat-kka-band-transponder-2xycu8.pdf
+method: product image from the catalog page https://satsearch.co/products/picosats-radiosat-k-ka-band-transponder

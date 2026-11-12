@@ -1,0 +1,136 @@
+The CAVU CDH-FS is a state-of-the-art, fully redundant 
+FPGA-based satellite onboard computer system. It’s designed 
+with a backup processor board that seamlessly takes over in 
+case of a primary processor failure, ensuring uninterrupted 
+operation. This redundancy signiﬁcantly enhances the system’s 
+reliability and safety, a critical feature for space missions.
+The onboard computer (OBC) is engineered to withstand 
+various space hazards, including radiation, cosmic rays, and 
+solar ﬂares. It utilizes a Microchip/Microsemi SmartFusion2 
+and ProASIC3 Flash Based FPGAs, which are not only SEU 
+immune but also more power-eﬃcient than conventional 
+SRAM-based FPGA architectures.
+The subsystem comprises two CAVU CDH-1 modules and 
+an intelligent supervisor board. These components are 
+interconnected through an interface board that doubles 
+all input and output signals, routing them through the 
+main and redundant boards.
+The transition to the redundant board is automatic, triggered 
+by a sophisticated monitoring system housed in the supervisor 
+module. This module continuously oversees the health and 
+performance of the system, promptly detecting any failures or 
+malfunctions and initiating corrective action.
+Satellite On-Board 
+Command & Data Handling
+Subsystem with Redundancy
+KEY FEATURES
+PIONEERING
+SPACECRAFT COMPUTING
+INTELLIGENT REDUNDANCY
+Two Cold/Hot Redundant OBC Modules
+Two Cold/Hot Redundant ADC/DAC Modules
+         Double Hot Redundant ADC Converters
+Intelligent Supervisor & Health Monitoring Module
+Smart Data Sync Algorithm Between OBC Modules
+Up to 3 Selectable Boot Regions from Bootloader
+Fully Customizable
+HQ: 12 Scion House, Stirling University Innovation Park, Stirling, UK. FK9 4NF
++44 (0)178 662 8002
+The CDH-FS is designed to cater to the complex needs of the 
+satellite industry. It supports over 15 diﬀerent serial interfaces 
+and boasts an impressive 200 GPIOs & 128CH ADC. This makes 
+it compatible with a wide array of sensors and actuators, 
+enabling precision control over satellite systems.
+ 
+In summary, the CAVU CDH-FS embodies cutting-edge 
+technology in satellite computing. Its high level of reliability, 
+redundancy, and ﬂexibility make it an ideal solution for 
+various satellite missions.
+CDH-FS
+CDH-FS
+Spacecraft Onboard Computers
+ADVANCED SATELLITE
+COMMAND CONTROL
+CAVU-CDH-FS-Br-v2024.2
+sales@CavuAerospace.uk
+
+CDH-FS
+CDH-FS
+HQ: 12 Scion House, Stirling University Innovation Park, Stirling, UK. FK9 4NF
++44 (0)178 662 8002
+SPECIFICATIONS
+SPECIFICATIONS
+CAVU-CDH-FS-Br-v2024.2
+sales@CavuAerospace.uk
+PROCESSOR
+ARM Cortex-M3 on FPGA
+Microchip/Microsemi SmartFuion2 Flash Based FPGA
+Microsemi ProASIC3 Flash Based FPGA for Interaface
+FPU on FPGA Upon Request
+150 DMIPS @ 128MHz
+SoftConsole/Keil Programming and Debug via JTAG
+MEMORY
+RAM:
+     160Mbits MRAM 40 bits width (128Mbits+32Mbits ECC)
+ROM:
+     96Mbits MRAM (Conﬁgurable as Triple 32Mbits)
+Nonvolatile Flash Memory:
+     Total 24Gbit SLC NAND Flash (Triple 8G)
+     256K Serial FRAM
+     256M Serial NOR
+INTERFACES
+DIGITAL/ANALOG
+SERIAL
+Digital Outputs (5V/3.3V)
+Digital Inputs (5V/3.3V)
+PWM/Pulse Outputs (5V/3.3V)
+16bits Analog To Digital Converter (-10V~+10V)
+Digital To Analog Converter (0V~5V)
+100
+90
+10
+128
+2
+CAN2.0 Up to 1Mbps
+Full-Duplex RS422
+Half-Duplex RS485
+RS232
+I2C
+SPI
+5
+8
+8
+1
+1
+1
+SPECIAL FEATURES
+Expected Life-time:
+        3-5 years in LEO
+On-Board Current & Temperature Monitoring
+External On-Board Watchdog Monitor via Supervisor
+Power Consumption Monitoring via Supervisor
+Triple Real Time Clock
+Hot Redundant On-Board Voltage Converters
+Intelligent Fail-Safe Switch-Over Algorithm
+ENVIRONMENT
+Radiation Hardness:
+      Total Ionizing Dose: 30Krad (Si)/yr
+      Latch-up Immune
+      SEE @ 60MeV
+Temperature & Pressure:
+      -40 C to +85 C @ 10   bar
+Shocks:
+      2000g, 2000-10000Hz
+Random Vibrations:
+      14g(RMS) 3-Axis , 20~2000Hz
+BUDGET
+Dimensions:
+      205x203x87mm
+Mass:
+      4250gr
+Power Supply:
+      5V ±5%
+Power Consumption:
+      3W ~ 5W
+-8
+

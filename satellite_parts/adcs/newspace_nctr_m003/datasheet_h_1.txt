@@ -1,0 +1,143 @@
+NCTR-M003
+NCTR-M012
+NCTR-M016
+NMTR-X  [Custom]
+FUNCTIONAL CHARACTERISTICS 
+Magnetic moment (nominal)
+0.29 Am
+1.19 Am
+1.6 Am
+From 2 Am up to 300 Am
+Linearity (across operating range)
+<± 5% 
+<± 5% 
+<± 5%
+<± 5% 
+Residual moment
+<0.005 Am
+<0.005 Am
+<0.005 Am
+ <0.3 at 100 Am
+PHYSICAL CHARACTERISTICS 
+Dimensions (l x w x h)
+72 mm x 15 mm x 13 mm
+94 mm x 15 mm x 13 mm
+107 mm x 15 mm x 13 mm
+12 cm up to 75 cm
+Mounting feet
+2
+2
+2
+2, 3 or 4 depending on 
+length
+Mass
+<30 g
+<53 g
+<53 g
+Approx. 30 g/cm length 
+(12mm core)
+Power (nominal)
+<250 mW from 5 V supply
+<800 mW nominal @ 5 V
+<1.2W from 5 V supply
+1 W / 50 Am typical
+(Customisable)
+ENVIRONMENTAL CHARACTERISTICS
+Thermal (acceptance)
+-20 ˚C to +60 ˚C
+-20 ˚C to +60 ˚C
+-25 ˚C to +70 ˚C
+-25 ˚C to +70 ˚C
+Mechanical Tests
+24.8gRMS (random)
+24.8gRMS (random)
+14 gRMS (random)
+24.8gRMS (random)
+n.a.
+n.a.
+n.a.
+n.a.
+INTERFACES
+Power supply
+5 VDC
+5 VDC
+5 VDC
+5 VDC - 28 VDC
+(Customisable)
+Data
+n.a.
+n.a.
+n.a.
+n.a.
+Connector
+Molex Pico-Lock
+Molex Pico-Lock
+Molex Pico-Lock
+9-way D-type male (mi-
+cro-D on smaller rods)
+Mechanical
+4 x M2 Socket Head  
+Cap Screws
+4 x M2 Socket Head  
+Cap Screws
+4 x M2 Socket Head  
+Cap Screws
+Dual pins per winding and 
+redundant winding options 
+available
+PER FO R MAN C E 
+M AG N E TO RQ UER ROD
+CONFIGURATION MANAGEMENT: Speciﬁcations are subject to change. Please refer to latest version. 
+ACCEPTANCE TESTING: All FM parts undergo random vibration (10 rms) as well as thermal cycling (four cycle ambiant pressure) to ﬁve degrees beyond operational thermal speciﬁcations. However, NewSpace can  perform  additional
+ environmental testing if required by a client.  
+
+mark@newspacesystems.com   .   www.newspacesystems.com
+FEATURES
+•   High moment for low power
+•  Small size and low mass
+•  Very small residual magnetic moment
+•   Adaptable for size, moment and power to meet optimal 
+system requirements
+•   Redundant windings available
+•   Simple interface 
+APPLICATIONS
+•   Active damping for spin stabilised, momentum-biased and 
+gravity-gradient-controlled satellites
+•   Momentum dumping of reaction wheels in three-axis 
+stabilised spacecraft
+•   Simple magnetic stabilisation
+QUALIFICATION
+The NSS magnetorquer rod designs are TRL 9 and have extensive 
+in-orbit heritage. Some of the larger NSS magnetorquer rods 
+were ﬁrst ﬂown in 2014 on the SaudiSat-4 and DX-1 missions. 
+Since then, NSS has become one of the largest magnetorquer rod 
+manufacturers in the world, having delivered more than 200 
+CubeSat Rods and 1000 MicroSat Rods to a variety of 
+international missions and constellations, all with diﬀering 
+performance requirements. To date, this product has been 
+baselined on three international constellations. 
+ Version: 10a
+Magnetorquers oﬀer a method of controlling 
+the attitude of a spacecraft either directly, 
+by interacting with the local Earth’s magnetic 
+ﬁeld or, more usually, in combination with 
+reaction wheels. This secondary method 
+allows for the dumping of excess momentum 
+in the reaction wheels without the need for a 
+complex propulsion system.
+The NewSpace Systems (NSS) magnetorquer 
+rods use a magnetic alloy rod which produces 
+an ampliﬁcation eﬀect over an air cored 
+magnetorquer. This allows a system that uses 
+less power and is less susceptible to magnetic 
+torque variations due to temperature.
+Each rod is typically biﬁlar wound for redun-
+dancy, or the windings can be activated 
+together to increase the torque produced. 
+While drive circuits for the rods can be 
+supplied if required, they typically run directly 
+between a switched power output and the 
+on-board power control system.
+UTILITY 
+M AG NE TO RQ UER ROD
+

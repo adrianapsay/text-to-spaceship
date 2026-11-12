@@ -1,0 +1,241 @@
+{
+ "id": "l3harris_ctt_524",
+ "name": "L3Harris C/TT-524 S/X-band transceiver (without diplexer)",
+ "category": "comms",
+ "subcategory": "transceiver",
+ "vendor": "L3Harris",
+ "model": "C/TT-524",
+ "dimensions_mm": {
+  "x": 218.4,
+  "y": 104.1,
+  "z": 116.8
+ },
+ "mass_g": 2950,
+ "source": {
+  "type": "datasheet",
+  "url": "https://l3harris.com/sites/default/files/2024-12/l3harris-ctt-524-spec-sheet.pdf",
+  "document": {
+   "title": "L3Harris C/TT-524 S/X-band transceiver spec sheet (2024-12)",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "rf",
+   "electrical"
+  ],
+  "notes": "8.6 L x 4.1 W x 4.6 H in (218.4 x 104.1 x 116.8 mm) and 2.95 kg without diplexer; 9.5 x 5.7 x 4.6 in and < 4.08 kg with diplexer. 22 to 36 VDC, Rx-only < 8 W. X-band transmit 8025-8500 MHz, S-band receive 2025-2110 MHz, 1 kbps to 6 Mbps (ground network) or 125 bps to 300 kbps (TDRSS). Operating temperature row is garbled in the text extraction (likely -20 to +60 C); check the PDF."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "USA",
+ "distributors": [
+  "direct"
+ ],
+ "satellite_class": "smallsat",
+ "rf": {
+  "band": "X transmit / S receive",
+  "frequency_MHz": [
+   [
+    8025,
+    8500
+   ]
+  ],
+  "rx_frequency_MHz": [
+   [
+    2025,
+    2110
+   ]
+  ],
+  "data_rate_bps": {
+   "max": 6000000
+  }
+ },
+ "electrical": {
+  "voltage_V": {
+   "min": 22,
+   "max": 36
+  },
+  "power_W": {
+   "idle": 8
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   218.4,
+   104.1,
+   116.8
+  ],
+  "mesh_volume_mm3": 2655465.9,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.111,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    218.4,
+    104.1,
+    116.8
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "feet",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/feet.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "connector_shell",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/connector_shell.stl"
+    },
+    {
+     "name": "connector_insert",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector_insert.stl"
+    },
+    {
+     "name": "jackscrews",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/jackscrews.stl"
+    },
+    {
+     "name": "label",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies_detail/label.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://l3harris.com/sites/default/files/2024-12/l3harris-ctt-524-spec-sheet.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

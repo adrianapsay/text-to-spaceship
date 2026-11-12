@@ -1,0 +1,107 @@
+ 
+ 
+IQ Technologies for Earth and Space GmbH 
+Ernst-Lau-Straße 5, 12489 Berlin, Germany 
+ISO 9001:2015 ● info@iq-spacecom.com ● www.iq-spacecom.com 
+ 
+ 
+ 
+ 
+DATASHEET S-BAND ANTENNAS 
+07-2025 
+S-Band Antennas
+⇢ Single patch antennas  
+ 
+ 
+ 
+ 
+ 
+⇢ Quad patch high gain antennas 
+⇢ Dual patch antennas for Tx and Rx   
+ 
+ 
+ 
+⇢ 1.980 – 2.500 GHz
+ 
+ z 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+These COTS antennas are designed for small satellite 
+applications to realize satellite communication links. 
+Their mechanical dimensions fit CubeSats as well as 
+larger satellites. Various designs of different 
+frequencies are available, and customized solutions 
+can be provided. 
+With circular polarization, the antennas provide a 
+robust solution regarding the steering accuracy to 
+the ground station antenna. 
+The design could be either as single patch antennas, 
+dual patch antennas for separate Tx and Rx ports or 
+quad patch antennas. With the dual patch antenna 
+design the duplex filter requirements are minimized. 
+As RF interface a robust SMA (female) or an UMP 
+connector is used.  
+A minimum of four screws provide a proper 
+mounting of the antennas.  
+The antenna backside shall be grounded properly to 
+the satellite chassis. ROGERS™ laminate for space 
+applications is used as dielectric. The patches and 
+conductors are copper with gold surface finish  
+The basic design has achieved TRL 9 with various 
+successful LEO missions. 
+FEATURES 
+• 
+Flight grade tested design 
+• 
+Patch antenna design 
+• 
+Various designs available 
+• 
+Cost effective 
+• 
+Short delivery time
+KEY SPECIFICATIONS 
+ 
+Operation frequency 
+1.980 - 2.500 GHz 
+Dimensions 
+Single Patch: 70 x 70 x 3.4 mm³ 
+Dual Patch: 80 x 100 x 3.4 mm³ 
+Quad Patch: 160 x 160 x 3.4 mm³ 
+Mass 
+49 grams (single) 
+62 grams (dual) 
+180 grams (quad) 
+Maximum Gain (main direction) 
+6…11 dBi (typ.) 
+Connector Type 
+SMA (f), UMP 
+Polarization 
+RHCP (opt. LHCP) 
+Half Power Beam Width 
+±20° (typ.) 
+Impedance 
+50 Ω 
+F/B Ratio 
+> 20 dB  
+Bandwidth 
+50 MHz (within frequency band) 
+VSWR 
+< 1.25 @ typ. 
+< 1.8 @ full BW 
+Type 
+Patch 
+Product specifications may be subject to change without notification.
+HIGHLIGHTS 
+• Circular polarization (RHCP and LHCP) 
+• Small shape 
+• Single, dual or high gain patch antennas 
+• Compatible with CubeSats and Small 
+Satellites 
+• Robust design 
+

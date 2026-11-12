@@ -1,0 +1,139 @@
+{
+ "id": "septentrio_mosaic_x5",
+ "name": "Septentrio mosaic-X5 multi-band GNSS receiver module",
+ "category": "adcs",
+ "subcategory": "gnss_receiver",
+ "vendor": "Septentrio",
+ "model": "mosaic-X5",
+ "dimensions_mm": {
+  "x": 31,
+  "y": 31,
+  "z": 4
+ },
+ "mass_g": 6.8,
+ "source": {
+  "type": "datasheet",
+  "url": "https://components101.com/sites/default/files/2020-09/Mosaic-X5-Datasheet.pdf",
+  "document": {
+   "title": "Septentrio mosaic-X5 data sheet",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "31 x 31 x 4 mm, 6.8 g, 0.6 W typical / 1.1 W max, 3.3 V +-5 %, 4 UART, Ethernet, USB, SDIO, CAN, PPS, -40 to +85 C. Commercial module, not space qualified."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "Belgium",
+ "distributors": [
+  "Digi-Key",
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "distributor",
+  "source": null
+ },
+ "electrical": {
+  "voltage_V": {
+   "nominal": 3.3
+  },
+  "power_W": {
+   "nominal": 0.6,
+   "peak": 1.1
+  },
+  "interfaces": [
+   "UART",
+   "Ethernet",
+   "USB",
+   "SDIO",
+   "CAN"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -40,
+   "max": 85
+  }
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   31.0,
+   31.0,
+   4.0
+  ],
+  "mesh_volume_mm3": 3844.0,
+  "watertight": true,
+  "render_kind": "box",
+  "effective_density_g_cm3": 1.769,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 12
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "CAN",
+   "Ethernet",
+   "UART",
+   "USB"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 3.3
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://components101.com/sites/default/files/2020-09/Mosaic-X5-Datasheet.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

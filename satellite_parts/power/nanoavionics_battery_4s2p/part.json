@@ -88,6 +88,68 @@
   },
   "face_counts": {
    "part": 520
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    156.0,
+    70.0,
+    22.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "cells",
+     "color": [
+      0.2,
+      0.45,
+      0.7
+     ],
+     "file": "bodies_detail/cells.stl"
+    },
+    {
+     "name": "end_plates",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/end_plates.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",
@@ -101,22 +163,7 @@
   "power_bus_V": 14.8
  },
  "reference_images": {
-  "datasheets": [
-   {
-    "file": "datasheet_page1.png",
-    "pdf": null,
-    "url": null,
-    "kind": "vendor_link",
-    "title": "NanoAvionics battery pack product page (capacity, voltage, currents, prices)"
-   },
-   {
-    "file": "datasheet_1_page1.png",
-    "pdf": "datasheet_1.pdf",
-    "kind": "web_search",
-    "url": "https://ntnu.no/wiki/download/attachments/124061783/M6P_Summary%20Technical%20Information_rev8.pdf?api=v2",
-    "title": null
-   }
-  ],
+  "datasheets": [],
   "stl_preview": "preview.png",
   "drawing": "drawing.png",
   "photo_url": "https://nanoavionics.com/wp-content/uploads/2025/05/small-satellite-microsatellite-electrical-power-system-8s-battery-pack.jpg",
@@ -125,7 +172,7 @@
   "photo_file": "reference_photo.jpg",
   "photo_kind": "vendor_or_marketplace",
   "datasheet_url": null,
-  "datasheet_page_file": "datasheet_page1.png",
+  "datasheet_page_file": null,
   "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },
  "files": {

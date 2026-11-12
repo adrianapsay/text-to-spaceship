@@ -1,0 +1,182 @@
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+MASTER OBC  
+CUBESAT ON-BOARD COMPUTER 
+ 
+ 
+MASTER is 2NDSPACE’s flexible OBC, offering high versatility combined with 
+performances and reliability. The product is designed to ensure high robustness and 
+a wide range of capabilities and interfaces to support CubeSats and nanosatellite 
+platforms to meet most operational-demanding missions. 
+ 
+The product family includes two solutions fully based on 2NDSPACE proprietary IP: 
+MASTER, a flexible OBC designed for a wide range of CubeSat applications, and 
+MASTER II, a cutting-edge solution offering exceptional performance and flexibility 
+for demanding commercial missions and high-end small satellites. 
+ 
+  
+  
+ 
+ 
+Dual-core processor for real-time operation  
+Over-The-Air updates for in-orbit software implementation 
+13 communication interfaces and multiple sensor integrations 
+Supports FreeRTOS and MBed software ecosystems 
+Integrated libraries for interface with 2NDSPACE avionics 
+Integrated libraries for interface with reference COTS 
+ 
+Expandable with CHIEF payload data module,  
+adding dedicated payload data processing unit  
+© 2025. All rights reserved. Use or sharing of this document requires prior written consent from 2NDSPACE SRL. 
+ 
+info@2ndspace.eu 
+ 
+
+ 
+ 
+ 
+ 
+PRODUCT FEATURES 
+ 
+ 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+             
+MASTER 
+MASTER-CHIEF 
+Dimensions [mm] 
+97 x 92 x 20 
+97 x 92 x 20 
+Mass [g] 
+130 g 
+145 g 
+Section 1 Processor  
+ARM Cortex M7 @ 480 MHz  + Cortex M4 @ 240 MHz 
+ARM Cortex M7 @ 480 MHz  + Cortex M4 @ 240 MHz 
+Section 2 Processor (Payload data) 
+- 
+Cortex M7 400MHz  
+1MB RAM size with ECC -  2MB Program memory size 
+RAM 
+32 MB SDRAM 
+32 MB SDRAM 
+Flash Memory 
+16 MB NOR flash + 1Mb FRAM 
+16 MB NOR flash + 1Mb FRAM 
+Operating System 
+FreeRTOS; Mbed 
+FreeRTOS; Mbed 
+Storage 
+2x SD slots up to 32GB 
+3x SD slots up to 32GB 
+Interfaces 
+2x CAN, 2x RS422, 2x RS485, 2x UART, 2x I2C, 2x SPI 
+2x CAN, 2x RS422, 2x RS485, 2x UART, 2x I2C, 2x SPI 
+• 
+High-Speed LVDS Interface >10Mbps 
+ADC Inputs 
+8x configurable 
+8x configurable 
+Sensors 
+3x IMU 6DOF / 1x Temperature Sensor 
+3x IMU 6DOF / 1x Temperature Sensor 
+Operating Voltage 
+5V 
+5V 
+Peak Power 
+2W 
+2W 
+Operating Temp. 
+-40°C to +85°C 
+-40°C to +85°C 
+ 
+Functional/AIT 
+Electrical control  
+Vibration test   
+Mechanical Shock  
+TVAC Test 
+Qualification Test 
+✓ 
+✓ 
+NASA GEVS: GSFC-STD-7000A 
+ESA ECSS-E-ST-10-03C 
+NASA GEVS: GSFC-STD-7000A 
+ESA ECSS-E-ST-10-03C 
+NASA GEVS: GSFC-STD-7000A 
+ESA ECSS-E-ST-10-03C 
+Acceptance Test 
+✓ 
+✓ 
+ 
+ 
+ 
+QUALIFICATION AND ACCEPTANCE TEST 
+
+ 
+ 
+ 
+ 
+   
+ 
+ 
+MASTER is designed to meet the needs of CubeSat 
+platforms from 1U to 16U, offering high versatility and 
+consisting of a dual-core processing unit with 
+integrated 
+memory, 
+data 
+storage, 
+and 
+a 
+comprehensive set of communication interfaces. 
+• 
+Modular architecture: Dual-core processor for 
+real-time operation and high-performance 
+computing  
+• 
+Expansion module for integrating and 
+additional independent OBC  
+• 
+OTA Support: Over-The-Air updates for 
+continuous software improvement 
+• 
+Wide Range of Interfaces: 13 communication 
+interfaces and multiple sensor integrations  
+• 
+Compatible Environments: Supports 
+FreeRTOS and MBed software ecosystems  
+© 2025. All rights reserved. Use or sharing of this document requires prior written consent from 2NDSPACE SRL. 
+info@2ndspace.eu 
+

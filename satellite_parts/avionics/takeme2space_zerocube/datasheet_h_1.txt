@@ -1,0 +1,121 @@
+ZeroCube - Technical specifications
+Revision: A
+Date: 29-09-2024
+Zerocube - Technical specifications
+Description:
+ZeroCube is a CubeSat Onboard Computer (OBC) powered by Raspberry Pi and integrated
+with NASA's cFS framework. It provides efficient and versatile computing for CubeSats,
+allowing easy extension of both software and hardware capabilities. With its modular
+software
+design,
+users
+can
+add
+mission-specific
+apps
+without
+compromising
+OBC
+performance, and it supports multiple I2C sensors. The built-in hardware watchdog ensures
+reliability during long-duration missions.
+1
+
+ZeroCube - Technical specifications
+Revision: A
+Date: 29-09-2024
+Specifications:
+Parameter
+Value
+Compute
+Processor Type
+Quad-core 64-bit Arm Cortex-A53 CPU
+Processor Clock Speed
+1GHz
+RAM Size
+512MB SDRAM
+Non-volatile Memory
+4GB Delkin industrial microSD
+Real-Time Clock (RTC)
+TCXO based RTC with Battery Backup
+Data Retention
+10 Years with < 10% of Rated P/E Cycles
+Rated P/E Cycle
+60,000 Cycles
+Clock Synchronization
+RTC and External GPS Synchronisation
+Fault Tolerance
+External Watchdog Timer(configurable)
+Power
+Power Consumption (Idle)
+1.6W
+Power Consumption (Nominal)
+2W
+Power Consumption (Peak)
+3.5W
+Processor Voltage Range
+4.75V - 5.25V
+Peripheral Voltage Range
+3.18V - 3.45V
+Interfaces
+Interfaces Supported
+2 X Multiplexed UART, 6 X Multiplexed I2C, 2 X
+HS-CAN, 1 X RS-485, 1 X MicroUSB(Data), 1 X
+USB-C(Power Only), 1 X MIPI-CSI Camera
+Connector
+GPIO Pins
+4 X GPIO (3 X PWM Enabled)
+External Watchdog Timer
+Can be configured as option
+Mechanical
+Dimensions
+90.1mm x 95.6mm x 20.2mm
+Weight
+250g*
+Form factor
+PC104 compliant with stackable connector
+Material
+Hard anodised Al 6061 T6
+Temperature Range
+-40 C to 85 C
+Storage Temperature
+-55C to + 85C
+Connectors
+1 USB-C, 5 6-pin Harwin Gecko Latch, 6 4-pin
+Molex picolock, 1 PC104, 1 microUSB, 1 22-pin
+CSI
+Software
+Software Development Kit (SDK)
+OrbitOS , a fork of NASA cFS , implemented on
+32 Bit raspbian bullseye
+Supported Languages for SDK
+C - Language
+Firmware Update Mechanism
+SD Card
+CCSDS Compliance
+Compliant with ground stations following ccsds
+2
+
+ZeroCube - Technical specifications
+Revision: A
+Date: 29-09-2024
+v2 protocol
+Boot Time
+75 Seconds
+Debug Interface
+MicroUSB
+Testing &
+compliance
+ETL: TVAC, EMI/EMC, Vibration
+and Shock Tolerance
+ETL complete for ISRO PSLV profile. Individual
+modules can be tested based on customer
+requirements.
+Tested for 13g (vibration), 1500g (shock)
+ISRO PSLV profile
+Mission Life Expectancy
+5 Years
+Radiation Tolerance
+Radshield protection with proprietary Ta-tape
+for upto 10x reduction in TID for LEO
+3
+

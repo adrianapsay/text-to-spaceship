@@ -1,0 +1,224 @@
+Q7S SPECIFICATIONS
+Q7S
+FEATURE  HIGHLIGHTS
+The Q7S is the latest in the Xiphos Q-­Card family of low-­cost,
+embedded
+nodes for
+control,
+processing
+and
+interface
+applications,
+primarily
+for
+aerospace
+markets.
+Q-­Cards
+combine a small form factor with broad networking, processing
+and I/O capabilities.
+The Q7S is consists of a Q7 card which is ultimately capable of
+being used in space, loaded with space-­ready software and
+firmware and rigorously tested.
+At the core of each Q7S is a hybrid environment of powerful
+CPUs and reprogrammable logic, providing consistent, reliable
+performance.
+The library of logic and software functions is
+augmented by onboard analog and digital I/O.
+OVERVIEW
+The Q7S is the latest in a line of space qualified boards. The
+first commercial flight of the Q7S hardware is planned for Q3
+2015. Q7S predecessors includethe Q6,Q5 and Q4:
+•
+The Q6 was first flown in August 2011, and almost 100
+units have been deliveredto customers worldwide to date
+•
+The Q5 was first flown in June 2004 and has been
+operating continuously in orbit since June 2006
+•
+The Q4 is certified for manned space flight and has been
+used on the International SpaceStation
+FLIGHT  HERITAGE
+The   Q7   features  an   All-­Programmable   System-­
+on-­Chip   (AP   SoC),   including  multi-­core  CPUs  
+supported   by  massive  programmable   logic  
+resources   and  a   wide  array   of   hardware  
+interfaces.
+Industry-­
+Leading
+Performance
+The   Q7   measures   78  mm   x  43  mm   x  9 mm,  
+has  a  mass  of   24  g  (excluding  connectors)   and  
+consumes  1  W   for   typical  applications.  Its  small  
+size,  low  mass  and  power   consumption  make  
+the   Q7   ideal  for  aerospace   applications.
+Low  Mass,  
+Volume,  
+Power
+The   Q7   provides  Gigabit   Ethernet   networking  
+through   its  RJ45  connector,   and  USB   2.0    OTG.  
+The   Q7   also  provides  multiple  digital  I/O   lines,  
+including  up  to  24   LVDS  pairs  ,   and selectable  
+RS-­232/422/485   through   its  mezzanine  
+connectors.
+Flexible  
+Interfacing
+Health  
+Monitoring
+With  additional   Q7S   logic   and  software   features   for    
+robustness   in  space   environments:
+TMR  Logic
+EDAC  for  
+RAM
+TMR  (Triple   Mode   Redundancy)   can  
+prevent   errors   in  the   firmware   from  
+propagating   and   in  some   cases,  
+correct   them.
+EDAC   (Error  Detection   and   Correction)  
+logic   and   software   can   detect   and  
+correct   errors  and   scrub   the   RAM
+The   Q7S   can   detect   error   events   and  
+failures,   monitor   system   statistics   and  
+report   these   as  telemetry.
+And  several  
+others…
+Other   features   based   on   years   of  flight  
+heritage,   such   as  low   power   modes,  
+multiple   firmware   and   software   images,  
+and   Zynq logic   scrubbing.
+Licensed   Reseller   of  Xiphos  Products
+3554   Chain   Bridge  Rd,  Ste  400  
+Fairfax,  VA  22030
+(703)  424-­7801
+sales@spacequest.com
+XTI-­2001-­2020-­a  Q7S_SQL-­ver-­20160602  
+
+Q7S
+Front & Back
+Characteristics
+Memory  
+•
+Independent  1x512  MB  and  1x256  MB  
+LPDDR2   RAM   chips
+•
+2  MicroSD slots  (max.  32  GB  each)  on  
+independent  buses  /  power  control
+•
+2x  64  MB  QSPI  Flash  (NOR)
+•
+External  mass  memory  interface
+All-­Programmable   System-­on-­Chip
+•
+Xilinx  Zynq-­7020
+•
+ARM®  dual-­core  Cortex™-­A9  MPCore
+processors  each  up  to  766  MHz
+•
+106,400  flip-­flops  (FF)  and  
+53,200  look-­up  tables  (LUT)  
+•
+DSP  Slices  220
+Control   FPGA
+•
+Actel ProASIC3
+Operating  System
+•
+Linux  3.10+
+•
+Optional  alternative  configurations,  including  
+RTEMS   or  bare-­metal
+Real  Time  Clock
+•
+RTC   with  sleep  & wake-­up  on  alarm/interrupt
+•
+Dedicated  power  pin  for  external  battery
+Power
+•
+Scalable,  typ.  1  W
+•
+6  V  to  28V  (options  available  for  <  6V)
+•
+Power  modes  (including  deep  sleep)
+•
+Overcurrent  detection  and  protection
+Mass
+•
+32  g  with  RJ45  connector
+•
+24  g  without  RJ45  connector
+Form  Factor
+•
+78  mm  x  43  mm  x  19  mm  
+(with  RJ45  connector)
+•
+78  mm  x  43  mm  x  9 mm  
+(without  connectors)
+Environmental
+•
+Operating  Temperature  -­40C  to  +85C
+Interfaces
+•
+Gigabit  Ethernet  (RJ-­45)
+•
+USB  2.0  (Micro-­AB)
+•
+Software  selectable  RS232/422/485
+•
+Mezzanine  connectors  (90  I/O,  up  to  24  
+LVDS  pairs)
+Space-­Qualified  Software
+•
+Triple-­mode   redundancy
+•
+EDAC-­protected  RAM
+•
+Upset  monitoring
+•
+FPGA  Bit-­stream  scrubbing
+•
+Software  robustness  /  watchdog
+•
+…  plus  many  other  features
+www.xiphos.com
+Product   Integration   Module  (PIM)
+Each  Q7  is  delivered  with  a  detachable  PIM,  to  facilitate  development.  
+The  PIM  provides  standard  commercial  interfaces  (e.g.  CAN,  JTAG,  4  
+analog  input,  1-­wire)  ,  debug  LEDs  and  other  lab  developmentfeatures.
+Software  Development
+Xiphos provides  an  Application  Development  Kit  with  standard  Linux  
+libraries  for  C/C++  to  support  software  development  on  Windows  and  
+Linux  workstations.  Code  previously  developed  for  Linux  desktop  and  
+server  applications  can  be  easily  ported  to  the  Q7. Q7  hardware  and  
+logic  interfaces  are  all  accessible  through  either  standard  Linux  and  Xilinx  
+kernel  drivers  or  custom  drivers  provided  by  Xiphos.
+Logic  Development
+Logic  development  uses  standard  Xilinx  development  tools.  Xiphos,  Xilinx  
+and  many  third-­party  vendors  also  provide  a  wide  range  of  compatible  
+reusable  logic  cores  for  Xilinx  FPGAs.
+Xilinx	  Zynq
+AP	  SoC
+Another
+32	  GB
+of	  Flash
+Up	  to	  32	  GB
+of	  Flash
+Low-­‐power
+RAM
+Micro-­‐AB	  
+USB	  2.0	  OTG
+RJ45	  Gigabit	  
+Ethernet	  
+Power	  
+input
+High	  Reliability
+System	  Controller
+High	  Efficiency
+Power	  Supply
+Mezzanine
+Connectors	  
+(incl.	  RSXXX	  &	  USB)
+PIM	  Interface
+(incl.	  RSXXX)
+QSPI	  Flash	  
+(NOR)
+RTC
+

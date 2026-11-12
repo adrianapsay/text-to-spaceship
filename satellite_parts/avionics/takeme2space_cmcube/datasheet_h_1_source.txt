@@ -1,0 +1,3 @@
+url: https://satcatalog.s3.amazonaws.com/components/3282/SatCatalog_-_TakeMe2Space_-_CMCube_-_Datasheet.pdf
+found from: https://satcatalog.com/component/cmcube/
+downloaded on the lab laptop by harvest_catalogs.py (pass 6) on 2026-11-11

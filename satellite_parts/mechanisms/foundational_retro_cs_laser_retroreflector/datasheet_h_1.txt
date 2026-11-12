@@ -1,0 +1,30 @@
+PROFILE
+LEO qualified Laser Retroreflector (LRR) for precision 
+orbit determination.
+MISSION BRIEFING
+The Foundational Retro-CS laser retroreflector enables high-
+precision tracking of satellites with Satellite Laser Ranging 
+(SLR) up to 800km orbits for missions with a wide array of 
+challenging CONOPS. The Retro-CS has been designed 
+to enable easy integration into CubeSat missions where 
+volume is at a premium.
+The countersunk design allows the Retro-CS to sit almost 
+flush to the skin of the CubeSat enabling compliance with all 
+major dispensers.
+ASSET
+Retro-CS
+DATA
+Mass   15g
+Dimensions   42 x 42 x 14 mm
+Angle of Acceptance   100
+0
+Maximum Altitude   800km
+Qualification level   TRL 9
+Mounting   4 x M3 bolts
+The Retro-CS has been qualified at satellite-level and 
+has flight heritage over multiple missions.
+IMAGE CAPTURE
+VECTOR SPECS (mm)
+this is
+INITIATE CONTACT sales@foundational.space
+

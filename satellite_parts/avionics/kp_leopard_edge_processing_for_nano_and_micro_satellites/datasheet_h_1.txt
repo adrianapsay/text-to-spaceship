@@ -1,0 +1,162 @@
+Leopard DPU
+Edge Processing for Nano and Micro Satellites
+Hardware
+Compute Power
+High performance I/O
+and ﬂexible CPU and FPGA
+Algorithms
+Supports classical and AI
+workloads directly on-board
+Integration-Ready
+PC/104 form factor with
+industry-standard interfaces
+Architecture
+A library of pre-integrated software, programmable logic components and algorithms is available 
+for payload interfacing (SpaceWire, PUS-C) and on-board data processing - including image pre-processing,
+cloud screening and hyperspectral compression. All listed solutions are available on request.
+Processing algorithms & software
+Camera
+Radar
+SDR
+Multiple
+payloads
+Payload
+components
+System on a chip
+CPU
+High-speed
+buﬀer
+Long-term
+storage
+Operating
+memory
+Redundant
+mass memory
+L E O P A R D D P U
+OBC
+High-Speed
+Comms
+Satellite platform
+High-speed
+link
+TMTC
+Independent
+Supervisor
+FDIR
+FPGA
+Multi-gigabit
+interfacing
+Supported missions
+•
+Earth Observation
+•
+Space Situational Awareness
+•
+Autonomous Rendezvous & Docking
+•
+Lunar Missions
+Use cases
+On-board capabilities
+•
+Payload acquisition & control
+•
+Image pre-processing & AI inference
+•
+Hardware-accelerated compression
+•
+Mass memory storage
+Leopard DPU connects directly to payload 
+components and the satellite platform 
+- handling acquisition, processing, and 
+data storage in a single subsystem.
+Flight-proven Data Processing Unit supporting the full 
+payload data handling chain on-board. CPU + FPGA 
+architecture with redundant mass memory and industry 
+- standard interfaces in a low SWaP solution. Oﬀ-the-shelf 
+and custom Interface Boards enable integration with 
+various spacecraft platforms and payload components.
+
+Test before ﬂight
+Smart Mission Lab is a platform that provides remote access to Data Processing Units. 
+It enables testing before purchase and early veriﬁcation of compatibility with mission 
+requirements, algorithms, and planned workloads. This supports hardware evaluation 
+before integration. Scan the QR code and test our solutions remotely.
+Technical Sheet
+Architecture
+•
+Supervisor – telemetry and control, FDIR, software recovery
+•
+Processing Node – processing and memory
+Processing
+cores
+AMD Zynq UltraScale+ MPSoC ZU6EG | ZU9EG | ZU15EG
+•
+Quad ARM Cortex-A53 CPU 1.2 GHz
+•
+Dual ARM Cortex-R5 (lock-step)
+•
+FPGA for custom function implementation
+Interfaces
+•
+16 GiB PS-DDR4 (with ECC)
+•
+64 MB Boot ﬂash (NOR) with TMR
+•
+4 GiB SLC NAND ﬂash memory (with EDAC)
+•
+2 x 320 GB pSLC ﬂash-based mass data storage (redundant)
+•
+Supervisor TMTC interface: CAN with CSP, UART/RS422/485
+•
+PL-connected LVDS, GPIOs and QuadGTH transceivers
+•
+3 x Gigabit Ethernet 1000BASE-T
+•
+2 x SpaceWire
+•
+2 x CAN bus
+•
+2 x RS422/RS485/UART
+•
+2 x PPS input
+•
+CameraLink Base/LVDS
+Other interfaces available upon request
+•
+SDK and Reference Designs for software and FPGA development
+•
+Compatible with Vitis AI Deep Learning Accelerator
+•
+64-bit Linux (Yocto based)
+•
+Fully reconﬁgurable in-orbit
+Memory
+Software
+ecosystem
+•
+Qualiﬁed for launch and space environment at NASA GEVS levels
+•
+TID > 20 kRad (with enclosure)
+•
+Operating temperature: -25 °C to 75 °C
+•
+PC/104 form-factor with eﬃcient thermal interface
+•
+Dimensions: 95.89 x 90.17 x 47.2 mm
+•
+Mass: 725 g
+•
+Supply voltage: 7 to 14 V
+•
+Power consumption: 5 W to 20 W – depending on workload
+SWaP
+Interface
+extensions 
+Environmental
+rating
+sales@kplabs.pl 
+www.kplabs.space 
++48 32 35 64 950 
+Gliwice, Poland
+sml.kplabs.space
+

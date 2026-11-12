@@ -1,0 +1,102 @@
+Airbus’s LEOPARD Navigation Unit delivers position, 
+velocity and time to Low Earth Orbit satellites. LEOPARD 
+is a Global Navigation Satellite System (GNSS) 
+Receiver also supporting an optional star tracker. This 
+new navigation unit is fully based on flight-proven 
+hardware, and takes advantage of previous  GNSS 
+receiver experience at Airbus, in particular with our 
+MosaicGNSS and LION GNSS receiver products. Airbus 
+GNSS receivers have over 15 years in-orbit heritage and 
+more than 100 cumulated years in orbit on a global set 
+of missions and orbits. 
+LEOPARD belongs to the Airbus New Space PureLine 
+product family. PureLine was originally developed for mega-
+constellation applications, with first launch in early 2019. This 
+cost-effective approach is based on Airbus technological 
+heritage and batch procurement, utilizing mainly automotive 
+COTS parts and processes. 
+SPACECRAFT EQUIPMENT
+DEFENCE AND SPACE
+Spacecraft Equipment
+LEOPARD
+Navigation  Unit
+Single-frequency GNSS receiver 
+with optional star tracker
+P
+u
+r
+e
+L
+i
+n
+e
+A
+v
+i
+o
+n
+i
+c
+s
+
+Options:
+•	 Star tracker with SpaceWire interface
+•	 Hosted application SW with SpaceWire connection using the available computing power of the ARM processor
+•	 CAN interface
+•	 Enhanced navigation algorithm using phase measurement for high accuracy orbit determination
+LEOPARD is a standalone navigation unit, with two independent 
+halves, integrating a single frequency GNSS receiver with an optional 
+star tracker
+LEOPARD - specifications
+Lifetime
+10 years
+Interfaces
+•	RF interface
+•	Communication through SpaceWire 
+•	PPS interface (RS422)
+Weight
+3.5 kg
+Volume
+110 x 240 x 170 mm³
+Power
+10W
+Radiation
+Total Dase TID compatible with typical 
+10 years LEO
+Frequency
+GPS-L1,  Galileo-E1
+performance 
+LEO
+•	Position: 10m
+•	Velocity: 0.04m/s
+•	Time: 50 ns
+•	TTFF: 10 min
+SDRAM I/O
+SDRAM CPU
+FLASH
+Key features
+•	 Hardware architecture using flight proven COTS
+•	 GNSS receiver 
+•	 Optional star tracker
+•	 Full cold redundancy with 2 boards in one unit
+•	 ARM processor designed for safety critical mission:
+•	 Time & Space Partitioning hosting several application 
+with RTEMS OS : Master SW, GNSS Navigation SW 
+and optional hosted Star tracker SW
+•	 SEE mitigation 
+•	 ARM Triple Core Lock-Step architecture
+•	 EDAC protected memory
+•	 Flight proven FDIR strategy with fast recovery
+•	 GNSS signal processing :
+•	 RF Front end compatible for GPS L1 and Galileo E1 
+signal
+•	 Reloadable FPGA technology
+•	 Software stored and processed in SEE mitigated 
+memory
+•	 OCXO clock
+Airbus Defence and Space
+spacecraft.equipment@airbus.com
+Leopard GNSS / Non-contractual document, subject to changes. 
+This document shall not be reproduced, in whole or in part, without prior consent. 
+ © 2020 Airbus Defence and Space SAS
+

@@ -60,6 +60,20 @@
   },
   "face_counts": {
    "part": 336
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "washer",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__washer.stl"
+    }
+   ]
   }
  },
  "image": "preview.png",
@@ -78,13 +92,6 @@
     "url": null,
     "kind": "vendor_link",
     "title": "ISO 7089 plain washers, normal series (d1, d2, h)"
-   },
-   {
-    "file": "datasheet_1_page1.png",
-    "pdf": "datasheet_1.pdf",
-    "kind": "web_search",
-    "url": "https://apps.des.wa.gov/contracting/Vactor.parts.pdf",
-    "title": "Vactor.parts.pdf"
    }
   ],
   "stl_preview": "preview.png",
@@ -92,8 +99,8 @@
   "photo_url": null,
   "photo_source": null,
   "photo_page": null,
-  "photo_file": null,
-  "photo_kind": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "web_search_representative",
   "datasheet_url": null,
   "datasheet_page_file": "datasheet_page1.png",
   "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"

@@ -1,0 +1,77 @@
+NSGY-001
+FUNCTIONAL CHARACTERISTICS 
+Rate estimation accuracy [3σ]
+≤0.20 degrees/s (boresight)
+≤0.05 degrees/s (cross-boresight)
+Maximum slew rate
+≥1.00 degrees/s
+Detection capability
+Mv ≥5.0
+Maximum number of features tracked
+15
+Standard update rate
+>1 Hz
+Sky coverage
+>99%
+PHYSICAL CHARACTERISTICS
+Dimensions
+37.0 mm  x 35.5 mm x 49.0 mm
+Mass
+<55 g
+ENVIRONMENTAL  CHARACTERISTICS
+Thermal (operational)
+-25 °C to +50 °C
+Vibration (qualiﬁcation)
+14 grms (random)
+INTERFACES
+Power supply
+5 VDC
+Power Consumption
+<200 mW (average)
+Communication
+SPI
+Connector
+nano-D (P15)
+Mechanical
+Front:  3 x M3 (w/ alignment slots)
+Top: 2 x M3 (w/ alignment slots)
+S TE LL A R G Y RO 
+PER FO R MAN C E 
+CONFIGURATION MANAGEMENT: Speciﬁcations are subject to change. Please refer to latest version.
+
+The NewSpace stellar gyroscope uses a COTS 
+sensor and optics resulting in a very low-cost 
+attitude determination system that maintains 
+accuracy during the eclipse phase. It can 
+achieve this by using algorithms that tolerate 
+noise and does not require a star database. 
+It is thus far more robust against radiation 
+damage than a standard star mapper solution 
+would be if based on the same components.
+The NewSpace stellar gyroscope can be used 
+to propagate a spacecraft’s attitude from a 
+known initial condition, without drift, while 
+suﬃcient stars are common across frames. 
+The image-based rotation estimates can 
+complement a set of MEMS rate gyroscopes 
+to maintain a high accuracy attitude estimate 
+at low angular rates (where MEMS gyroscope 
+drift is most severe). 
+FEATURES
+•   Active pixel CMOS detector
+•   Small size and low mass
+•   No baﬄe required
+•   Low power
+•   Simple to interface
+•   Immune to Moon and Earth in FoV
+APPLICATIONS
+•   High performance 3-axis rate sensor
+•   Full sky sensor for agile satellites 
+QUALIFICATION
+The Stellar Gyro has passed through qualiﬁcation testing and is 
+due for ﬁrst launch in 2020.
+ Version: 10a
+UTILITY 
+S TE LL A R G YRO 
+mark@newspacesystems.com   .   www.newspacesystems.com
+

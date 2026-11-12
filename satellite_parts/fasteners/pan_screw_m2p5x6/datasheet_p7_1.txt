@@ -1,0 +1,233 @@
+Browse Product Range >
+Westfield Fasteners Product Specification:
+DIN 7985 - Pozi Pan Head Screws (type Z recess)
+This product guide contains the specification for metric threaded pozi pan head screws as available from Westfield
+Fasteners. The basis of this specification is the DIN standard DIN 7985, but this specification may include
+information on sizes and materials that are not covered by the DIN standard but are available.
+Product Description
+A machine screw with a pozi drive, designed to be tightened with a screwdriver. Typically found on consumer
+electronics and other small machinery where high torque fasteners are not necessary.
+Scope of the DIN Standard
+DIN 7985 specifies the tolerances and the permissable variation in form of phillips pan head machine screws, and
+covers metric thread diameters from M1.6 to M10 inclusive. The DIN 7985 standard covers both pozi (type Z) and
+phillips (type H) drives. Table 1 below defines the overall dimensions and tolerances of this screw type. Table 2
+defines the tolerance on the shank length.
+Although the DIN 7985 standard has now been superceded by ISO 7045, off the shelf parts are generally still
+manufactured to the older specification. The ISO standard specifies slightly smaller head diameters for M3 and
+M5, and slightly smaller head heights for M2.5, M3.5 and M5.
+
+Figure 1: Pozi Pan Head Machine Screw
+Variations from DIN 7985
+The DIN standard allows for a partially threaded shank, but off the shelf phillips or pozi pan head machine screws
+are seldom seen with this variation.
+Table 1: Dimensions & Tolerances according to DIN 7985
+Thread, d
+M1.6
+M2
+M2.5
+M3
+M3.5
+M4
+M5
+M6
+M8
+M10
+p
+0.35
+0.4
+0.45
+0.5
+0.6
+0.7
+0.8
+1
+1.25
+1.5
+a
+max
+0.7
+0.8
+0.9
+1
+1.2
+1.4
+1.6
+2
+2.5
+3
+b
+min
+15
+16
+18
+19
+20
+22
+25
+28
+34
+40
+da
+max
+2.1
+2.6
+3.1
+3.6
+4.1
+4.7
+5.7
+6.8
+9.2
+11.2
+dk
+nom=max
+3.2
+4
+5
+6
+7
+8
+10
+12
+16
+20
+min
+2.9
+3.7
+4.7
+5.7
+6.64
+7.64 9.64 11.57 15.57 19.48
+k
+nom
+1.3
+1.6
+2
+2.4
+2.7
+3.1
+3.8
+4.6
+6
+7.5
+max
+1.42
+1.72
+2.12
+2.52
+2.82
+3.25 3.95
+4.75
+6.15
+7.68
+min
+1.18
+1.48
+1.88
+2.28
+2.58
+2.95 3.65
+4.45
+5.85
+7.32
+r
+min
+0.1
+0.1
+0.1
+0.1
+0.2
+0.2
+0.2
+0.25
+0.4
+0.4
+r f
+≈
+3
+4
+5
+6
+7
+8
+10
+12
+16
+20
+x
+max
+0.8
+1.1
+1.3
+1.6
+1.9
+2
+2.5
+3
+3.7
+4.8
+Cross
+Recess
+Recess
+no.
+0
+1
+2
+3
+4
+Recess diameter,
+m
+≈
+1.8
+2.4
+2.6
+3
+4
+4.3
+5
+6.7
+8.8
+9.9
+Type Z Penetration
+max
+1.17
+1.35
+1.52
+1.93
+2.11
+2.36
+3.1
+3.48
+4.52
+5.69
+min
+0.92
+1.1
+1.27
+1.68
+1.65
+1.9
+2.64
+3.02
+4.06
+5.23
+
+Table 2: Shank Length Tolerance according to DIN 7985
+Shank Length (mm)
++/- (mm)
+3
+0.2
+4-6
+0.24
+8-10
+0.29
+12-16
+0.35
+20-30
+0.42
+35-50
+0.5
+55-60
+0.92
+For further details, please refer to the ISO/DIN standard document for this item.
+

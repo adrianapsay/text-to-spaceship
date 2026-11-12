@@ -1,0 +1,179 @@
+xHF | Technical Specifications | TM2.space 
+Revision: D 
+Date: 18-04-2026 
+ 
+ 
+ 
+ 
+xHF 
+Technical Specifications 
+ 
+ 
+ 
+ 
+Description: 
+The xHF Comms board is a communication module designed to facilitate robust and 
+reliable communication between a satellite and a ground station. It operates in the Ultra 
+High Frequency (UHF) band, with the specific frequency determined by the configuration. 
+The UHF channel operates at 300-500 MHz. This capability allows for flexibility in 
+communication, depending on the mission requirements, environmental conditions, and 
+regulatory constraints.  
+CIN: U61900TS2024PTC186392 
+1 
+
+xHF | Technical Specifications | TM2.space 
+Revision: D 
+Date: 18-04-2026 
+ 
+ 
+The default configuration supports a data rate of 9.6 kbps using GMSK modulation over a 
+14.4 kHz bandwidth in the 401–402 MHz frequency range.  
+Communication Protocol and Mode 
+The communication mode is half-duplex, meaning that the board can either transmit or 
+receive data at any given time, but not both simultaneously. This mode is particularly 
+suitable for satellite communication, where the ground station sends a telecommand (a 
+command signal) to the satellite, and the satellite responds with telemetry (data about 
+the satellite's status, health, and other mission-critical information). The half-duplex 
+operation ensures that the communication is efficient and minimizes the risk of signal 
+interference. 
+Power Supply 
+The xHF Comms board is powered by an isolated power supply, which is critical for 
+ensuring the reliability and safety of the communication system. The isolation prevents 
+electrical faults or noise from propagating through the system, which could otherwise 
+disrupt communication or damage sensitive components. The input voltage to the power 
+supply is 5V, which is a standard voltage level for many electronic systems, making it 
+compatible with a wide range of satellite power systems. 
+UHF Configuration Datasheet: 
+ 
+Properties 
+Specification 
+Frequency Range 
+300 - 1000 MHz 
+Maximum Symbol Rate 
+333.3 kbps 
+Bandwidth 
+1.1 - 850KHz 
+Modulation 
+OOK, 2FSK, 4FSK, 2GFSK, 4GFSK, GMSK 
+Power consumption during TX 
+8.5 W 
+Power consumption during RX 
+3.5 W 
+EIRP 
+30dBm 
+System Noise Figure 
+3.66 at 25°C 
+Frequency Stability 
+-2 - +2 ppm 
+RX Sensitivity 
+-110 dBm 
+ 
+ 
+CIN: U61900TS2024PTC186392 
+2 
+
+xHF | Technical Specifications | TM2.space 
+Revision: D 
+Date: 18-04-2026 
+ 
+ 
+Supported Interfaces: 
+ 
+ 
+Electrical, Mechanical and Thermal Characteristics: 
+ 
+Nominal Voltage 
+5.5V 
+Maximum Voltage 
+12V 
+Temperature range 
+-40 to 85°C 
+T-Vac 
+2 Cycles with temperature range of +60℃ to -25℃ 
+Vibration 
+Random vibration acceptance test levels  
+20 - 2000 Hz at 4.47grms for 60 seconds 
+Shock 
+100 Hz at 30g 
+1000 Hz at 1500g 
+5000 Hz at 1500g 
+Dimensions 
+90.83 mm x 85.21 mm x 25.36 mm 
+Mass 
+170 g 
+ 
+ 
+CIN: U61900TS2024PTC186392 
+3 
+Controller 
+ARM® Cortex®-M4 Microcontroller 32-Bit Single-Core 80MHz 1MB 
+Flash 
+Supported Interfaces 
+1x CAN Controller - upto 1Mbps 
+2x RS485 Full Duplex - upto 5Mbps 
+3x GPIO Outputs 
+Interface 
+CCSDS 
+
+xHF | Technical Specifications | TM2.space 
+Revision: D 
+Date: 18-04-2026 
+ 
+ 
+UHF Antenna Datasheet: 
+ 
+CIN: U61900TS2024PTC186392 
+4 
+Parameter  
+Value 
+Antenna Type 
+Turnstile - Uplink & Downlink 
+Frequency operation band 
+370 - 420 MHz 
+Realised Antenna Bandwidth  
+(<10 dB S11 consideration) 
+50 MHz 
+Axial Ratio 
+<3dB 
+Maximum Isotropic gain 
+5 dBi 
+Polarisation  
+RHCP 
+Directionality 
+Bi-Directional 
+FOV Azimuth (>0 dBi) 
+240 deg 
+FOV Elevation (>0 dBi) 
+120 deg 
+Dimensions (Each element) 
+ 135 mm x 3 mm ⌀ 
+Connector type  
+Jack SMA Female 
+Material 
+Gold plated copper 
+Operating Temperature 
+-55°C to 150°C 
+Impedance 
+50 Ω 
+VSWR (feed point) 
+1.22 
+Mass 
+50 g 
+
+xHF | Technical Specifications | TM2.space 
+Revision: D 
+Date: 18-04-2026 
+ 
+ 
+Radiation Pattern: 
+ 
+a.​ Azimuth 
+ 
+b.​ Elevation 
+ 
+ 
+ 
+Questions? Queries? Contact us at info@tm2.space 
+CIN: U61900TS2024PTC186392 
+5 
+

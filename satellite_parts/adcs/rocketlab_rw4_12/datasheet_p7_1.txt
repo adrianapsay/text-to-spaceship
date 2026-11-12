@@ -1,0 +1,88 @@
+MOMENTUM
++/-12 Nms
+TORQUE
++/-0.2 Nm
+CONTROL MODE
+Speed or torque, with built-in control CPU
+MECHANICAL
+264 mm diameter x 70 mm height; Mass: 5 kg max
+THERMAL
+Non-Operational: -40 to 70° C
+Operational: -20 to 60° C
+VIBRATION (QUAL)
+In-Plane: 16.7 gRMS  |  Normal: 20 gRMS
+SHOCK (QUAL)
+100Hz – 39g  |  1kHz – 729g  |  10kHz – 729g
+RELIABILITY
+Bearings: Hybrid ceramic bearings for 
+improved life and microvibration performance
+Electronics: LDRS tested. Hardware TMR on 
+all flip-flops, EDAC on all RAM
+UNBALANCE
+<26.7 g-mm static, <800g-mm² dynamic
+12.0 Nms RWA 
+RW4 [Rad-Hard] & RW5 [Standard] 
+Data Sheet
+r e ac t i o n 
+w h e e l
+RW5-12.0
+RW4-12.0
+Supply Voltage
+30 V to 50 V
+24 V to 34 V
+Power (Idle)
+<1.6W
+<2.0W
+Power (Active)
+<38W at 12Nms steady state
+<200W during full acceleration
+<100W regeneration during full deceleration
+<38W at 12Nms steady state
+<170W during full acceleration
+<100W regeneration during full deceleration
+Communications
+CAN-FD, bus common, galvanically isolated 
+from primary power
+Redundant RS-485, with galvanic isolation 
+from primary
+Radiation
+>12 krad TID, 2.5 mm AI equivalent shielding; 
+SEL >15 MeV-cm²/mg
+>60 krad TID, >5 mm Al equivalent shielding; 
+Heavy Ion >50 MeV-cm²/mg
+PRICE
+US $100,000 each
+US $120,000 each
+	>
+Designed for long-life and reliability 
+	>
+Based on lessons learned from 
+more than 250 wheels on-orbit 
+heritage
+	>
+Constellation-class manufacturing 
+capabilities for large volume 
+deliveries
+	>
+Standard and more radiation-
+hardened variants
+	>
+Modular assembly designed for 
+volume manufacturing 
+	>
+Low mass and volume envelope 
+	>
+CAN-FD or full/half duplex RS-485 
+	>
+Fully demisable
+f e at u r e s
+Document Number S300167, Rev 2.0
+components@rocketlabusa.com   |  rocketlabusa.com
+
+components@rocketlabusa.com
+rocketlabusa.com
+Fig 1: Reaction torque and power measurements 
+in vacuum using current control mode (6.2A)
+Fig 2: Reaction torque and power measurements 
+in vacuum using torque control mode (0.2Nm)
+

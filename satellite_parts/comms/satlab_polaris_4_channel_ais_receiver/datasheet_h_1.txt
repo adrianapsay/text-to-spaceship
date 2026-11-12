@@ -1,0 +1,442 @@
+Polaris
+Polaris 4-channel AIS Receiver
+Document ID SLDS-POLARIS-1.0, revision 1.0
+Introduction
+The Satlab Polaris is a fully self-contained software-deﬁned radio receiver for the maritime VHF band, with integrated
+demodulators for reception of standard and long-range AIS messages. This versatile SDR offers excellent performance
+given the typical size, weight and power constraints of a CubeSat - or as an additional payload on larger LEO satellites.
+Features
+• Stand-alone 4-channel AIS receiver
+• Integrated LNA and SAW ﬁlters
+• Onboard data storage for AIS frames
+• Support for spectrum sample capture
+• Safe on-orbit software upgrade support
+• CAN-bus, RS-422 and Ethernet interfaces using
+CubeSat Space Protocol (CSP)
+• Delivered with support library for easy integration
+• Wide input voltage range with protection
+• Integrated temperature and power monitoring
+• CubeSat Kit compatible aluminum enclosure
+• ESD protection on all interfaces
+Key Parameters
+Parameter
+Speciﬁcation
+Frequency coverage
+156.000 to 162.025 MHz
+AIS channel frequencies
+156.775, 156.825, 161.975, 162.025 MHz
+Sensitivity
+-118 dBm (80% reception rate)
+Noise ﬁgure
+2 dB
+Frame store capacity
+261120 frames
+Input voltage
+4.5 - 40 V
+Typical power consumption
+1350 mW (5 V input, 25°C)
+Operating temperature
+-40°C to +85°C
+CAN-bus
+Up to 1 Mbit/s
+RS-422
+Full duplex, up to 3 Mbit/s
+Ethernet
+Full duplex, 100 Mbit/s
+Primary storage
+128 MB NOR-ﬂash
+Secondary storage
+1 GB SLC SD card
+Dimensions
+93.0 x 87.2 x 12.5 mm
+Mass
+185 g
+Polaris Datasheet Revision 1.0
+1
+© 2017 Satlab ApS - http://www.satlab.com
+
+Polaris
+1
+Description
+Polaris is Satlab’s second generation Satellite-AIS receiver, based on the in-orbit experience gained from the QubeAIS
+receiver which has ﬂown on several missions since 2013.
+The Satlab Polaris is a fully self-contained software-deﬁned radio receiver for the maritime VHF band, with 4-channel
+integrated demodulators for reception of standard and long-range AIS messages. This versatile SDR offers excellent
+performance given the typical size, weight and power constraints of a CubeSat - or as an additional payload on larger
+LEO satellites.
+The receiver uses a high-performance, direct-conversion front end and large dynamic range ADC to receive the entire
+maritime VHF band. Digital ﬁltering and down conversion is used to extract and demodulate the 4 AIS channels in
+parallel. The board features on-board low noise ﬁgure LNA and SAW ﬁlters and only requires a passive VHF antenna
+for reception.
+All 1-5 slots Class-A/B AIS messages are supported, including type 27 long-range messages. The batch demodulation
+algorithm uses per-packet adaptive ﬁltering and center frequency estimation, which ensures good reception even for
+weak messages at large Doppler frequency offsets. Demodulators and wideband processing modules can safely be
+upgraded on-orbit, e.g. to test improved receiver algorithms or to add additional AIS channels or VHF services after
+launch.
+On-board data storage simpliﬁes integration, allowing received AIS messages to be queried directly from the receiver
+without intervention from the spacecraft OBC. The receiver can also be operated in a receive-and-forward mode if an
+external message store is preferred.
+Figure 1 shows the Polaris with external interfaces to the satellite bus and receiving VHF antenna.
+Figure 1: Overview of the Satlab Polaris subsystem external interfaces
+Polaris is powered from a single 4.5 to 40 V input voltage and is compliant with ECSS-E-ST-20-20C, 28 V unregulated
+power supplies. The power input and all onboard regulated voltages are protected against over-current.
+The receiver is delivered in a milled aluminium enclosure which provides a strong mechanical interface as well as EMI
+shielding and thermal contact. The main and debug connectors are latching, high-reliability Harwin Gecko connectors
+with beryllium copper contacts. A full detent Amphenol coaxial SMP connector is used for the antenna input.
+The board is operated via CAN-bus, RS-422 or Ethernet using Cubesat Space Protocol1 (CSP) commands. Multiple
+communication interfaces can be enabled simultaneously and serve as backup. Satlab supplies client libraries in C
+and Python to wrap the CSP protocol, along with example code to simplify integration even further.
+A serial command line shell is available through the debugging connector, which can be used for on-ground conﬁgura-
+tion, testing and performance veriﬁcation.
+1See http://www.libcsp.org for documentation on the open source reference implementation.
+Polaris Datasheet Revision 1.0
+2
+© 2017 Satlab ApS - http://www.satlab.com
+
+Polaris
+2
+Receiver Performance
+In ﬁgure 2 the typical measured reception performance for the AIS receiver is shown for the 4 AIS channels at room
+temperature. The intersections with the dashed line shows the -118 dBm power level required for the receiver to
+receive 80% of transmitted frames. Long-range messages transmitted on 156.775/156.825 MHz contain fewer bits, so
+the probability of error-free reception is slightly higher on these channels, leading to a marginally higher sensitivity.
+125
+120
+115
+110
+105
+100
+95
+90
+85
+80
+75
+70
+Input Signal Power [dBm]
+0
+20
+40
+60
+80
+100
+Reception Rate [%]
+156.775 MHz
+156.825 MHz
+161.975 MHz
+162.025 MHz
+80% reception rate
+Figure 2: Typical receiver performance as a function of signal power on the 4 AIS channels
+This sensitivity level can be related to a simpliﬁed link budget. The basis of the calculation is a Class A vessel with
+a vertical antenna, illustrated in ﬁgure 3. The ship transponder output is assumed to be 12.5 W, with 1 dB loss from
+transponder to the antenna. The 3 ship antenna types are assumed over an ideal ground plane and on the satellite
+side a 0 dBi antenna and 1 dB cable loss is assumed. This results in the signal levels into the receiver as shown in
+ﬁgure 4 for a 500 km orbit. The dashed lines shows the reception limit for the receiver, showing that with the default
+settings, the signal power falls within the operating range of the AIS receiver, even at the longest slant range.
+Satellite
+Ground Elevation Angle
+Orbit
+Altitude
+Class A Vessel
+Slant Range
+Figure 3: Simpliﬁed link budget simulation setup
+Class-B transponders transmit with 2 W output power, so given the same antenna model assumptions on the ship, the
+received signal powers will be 8 dB lower than a class-A vessel.
+It should be noted that this is a very simpliﬁed calculation and a detailed link budget analysis should be performed for
+each individual mission.
+Polaris Datasheet Revision 1.0
+3
+© 2017 Satlab ApS - http://www.satlab.com
+
+Polaris
+0
+10
+20
+30
+40
+50
+60
+70
+80
+90
+Ground Elevation Relative to Ship [deg]
+120
+110
+100
+90
+80
+70
+Input Signal Power [dBm]
+1/4 wavelength monopole
+1/2 wavelength monopole
+5/8 wavelength monopole
+80% reception rate
+500
+750
+1000
+1250
+1500
+1750
+2000
+2250
+2500
+Slant range [km]
+Figure 4: Estimated received signal power into the receiver with various ship antennas
+Polaris Datasheet Revision 1.0
+4
+© 2017 Satlab ApS - http://www.satlab.com
+
+Polaris
+3
+Hardware Overview
+This section provides a high-level overview of the Polaris platform hardware, with descriptions of the RF front end,
+baseband processing system, power domains and telemetry.
+3.1
+RF Front End
+The receiver uses a direct-conversion, low-IF quadrature front end in conjunction with a 16-bit, 25 Msps dual channel
+ADC. This allows a single front end to be used for receiving all AIS channels in the maritime VHF band simultaneously.
+Figure 5 shows the main receiver hardware components. Buffers and ADC drivers are not shown for simplicity.
+Figure 5: Overview of the RF hardware structure
+The receiver requires a single VHF antenna connected to the RF connector. The Low Pass Filter (LPF) reduces the
+inﬂuence of strong nearby transmitters, such as satellite downlink in the UHF- and S-band. If the satellite uses downlink
+in the VHF band, please consult Satlab before ordering.
+The on-board LNA ensures a good noise ﬁgure for the overall system, and simpliﬁes the ﬁnal integration process as
+the system only requires a passive antenna.
+Out-of-band rejection is ensured both by the on-board SAW ﬁlter and the IF band pass ﬁlters. The SAW ﬁlter covers
+the maritime band allowing the FPGA to receive 156 MHz to 162.025 MHz via dual 16-bit ADCs running at 25 Msps.
+The VCO is internally divided in the mixer to generate an upper-side LO, signiﬁcantly reducing any LO leakage.
+The quadrature mixer has a built-in VGA with adjustable gain that can be set via telecommands.
+The FPGA converts the wideband complex input stream into one ﬁltered baseband output stream per AIS channel.
+Internally the FPGA uses multiple ﬁltering and decimation stages to maintain the dynamic range needed when receiving
+from many different transmitters at the same time.
+Polaris Datasheet Revision 1.0
+5
+© 2017 Satlab ApS - http://www.satlab.com
+
+Polaris
+3.2
+Baseband Processing
+The MCU receives channelized data from the FPGA and demodulates the GMSK data streams and connects to data
+storage and communication interfaces. Figure 6 shows the MCU and connected peripheral devices.
+Figure 6: Overview of the MCU with data storage and communication interfaces
+A 128 MB NOR-ﬂash is used as the primary storage for received AIS messages. A 1 GB SD card is used as secondary
+storage for raw samples, software uploads and snapshots of the AIS store. The FRAM is used to store non-volatile
+conﬁguration parameters such as CSP address and communication interface settings. CAN-bus at 1 Mbit/s is the
+default interface, with RS-422 and Ethernet powered down by default. These interfaces can be enabled permanently
+or by command, e.g. when the spacecraft is within range of a high speed ground link.
+The board contains an external 64 MB SDRAM which is disabled by default to limit power consumption, and not
+required for normal AIS reception on the device. The external memory is used when capturing raw samples, and is
+automatically enabled on sample requests.
+Temperature and power sensors for telemetry are connected on a dedicated telemetry bus.
+The MCU and FPGA are connected using a unidirectional serial link for multiplexed data transfer and a bidirectional
+SPI bus for conﬁguration.
+3.3
+Power Domains and Telemetry
+Figure 7 shows a simpliﬁed diagram of the power domains, protection and monitoring of the device. The input protec-
+tion circuitry guards the board against over-voltage and reverse-voltage conditions, and performs active inrush current
+limiting and over-current protection. Refer to the Electrical Speciﬁcations section for the protection limits and recom-
+mended operating conditions. The external watchdog/reset timer is powered from VIN with a current-limiting 3.3 V LDO
+and resets the main regulator on system power-on or in case of watchdog timeout. This ensures that all components
+on the board are reset to a known state when the system boots.
+During power-on of the device, the inrush current is limited only by the voltage slope and the input capacitance of 1µF
+in series with a 1Ωresistor. In this moment the spacecraft Power Distribution Unit (PDU) or Electronic Power Supply
+(EPS) is responsible for keeping current spikes at a reasonable level. Once the input voltage is above the minimum
+threshold (max 4.5 V) the internal protection circuit is enabled and active current limitation of 2 A is used during system
+power on and operation. The protection reset timer of 420 ms actively discharge internal power nets before powering
+the MCU and FPGA using a strictly deﬁned startup sequence.
+Polaris Datasheet Revision 1.0
+6
+© 2017 Satlab ApS - http://www.satlab.com
+
+Polaris
+The main buck converter converts VIN to 3.3 V which powers the MCU and FPGA I/O, and the 2.0 and 1.0 V converters.
+Power for the MCU core, ADC and FPGA I/O is generated using LDOs from the 2.0 V rail. The MCU control the power
+for the RF, FPGA and ADC domains using GPIOs.
+The SD card and Ethernet PHY are powered off by default and must be powered on by the MCU. Both load switches
+are current limiting.
+Figure 7: Power domains and protection circuitry
+Each local power domain of the receiver features over current protection for error mitigation purpose, to reduce the
+impact of any Single Event Latchup (SEL) events. Voltage, current and power can be measured on the VIN, 3.3, 2.0
+and 1.0 V rails and can be downloaded using telemetry properties. The measurement points are marked in ﬁgure 7
+with yellow diamonds. Note that the VIN sensor is placed after the input protection circuitry, which has a equivalent
+series resistance of approximately 140mΩ, so the measured voltage and power are lower due to the corresponding
+voltage drop. It should also be noted that the 1.0 and 2.0 V supplies are generated from the 3.3 V rail, so the 3.3 V
+power measurement includes the power used by the two other rails.
+The board has seven temperature measurement points, located on-die or near key components on the PCB. The
+temperature and power sensors are listed in table 1 along with their telemetry property name.
+Table 1: Onboard telemetry sensors
+Property
+Description
+tm.{volt,cur,power}.vin
+VIN voltage, current and power
+tm.{volt,cur,power}.3v3
+V3.3V voltage, current and power
+tm.{volt,cur,power}.2v0
+V2.0V voltage, current and power
+tm.{volt,cur,power}.1v0
+V1.0V voltage, current and power
+tm.temp.core
+MCU junction temperature
+tm.temp.mcu
+MCU, SDRAM and NOR-ﬂash temperatures
+tm.temp.fpga
+FPGA junction temperature
+tm.temp.power
+1.0/2.0 V buck converters temperature
+tm.temp.lna
+LNA and front end components
+tm.temp.adc
+ADC temperature
+tm.temp.sdcard
+SD card temperature
+Polaris Datasheet Revision 1.0
+7
+© 2017 Satlab ApS - http://www.satlab.com
+
+Polaris
+4
+Software Overview
+Figure 8 shows the main software components and data ﬂow in the Polaris receiver. The software can be grouped in
+two main parts: the bitstream for the FPGA and ﬁrmware for the MCU. This section describes the operation of each
+component.
+Figure 8: Overview of the receiver software components.
+The system always boots from internal NOR-ﬂash on the MCU with the RF components and FPGA powered down. The
+ﬂash sectors are divided into two equally sized image partitions: A primary image which is programmed and locked at
+production time and can only be updated using JTAG/SWD through the debug connector, and a secondary image that
+can be ﬂashed by the board itself and upgraded on-orbit.
+On system startup the receiver selects between the two ﬁrmware images by checking a special section in FRAM. New
+receiver ﬁrmware can be uploaded to the SD card via CSP. Once the ﬁrmware is fully uploaded and veriﬁed, it can
+be programmed to internal ﬂash and marked for boot a speciﬁed number of times. Firmware images contain both the
+main application and the matching embedded FPGA bitstream, allowing synchronized on-orbit update of both.
+The receiver is operated remotely using CSP commands via one of the external communication interfaces.
+4.1
+FPGA Bitstream
+The FPGA is automatically powered on and loaded by the MCU during startup of the AIS demodulators. The bitstream
+contains a channelizer to convert the 25 Msps ADC input stream to one ﬁltered, 96 ksps, complex baseband output
+stream per AIS channel. The channelized data is sent to the MCU via a multiplexed serial link.
+The bitstream also implements a small internal sample buffer with a capacity of 8192 complex 16-bit samples, i.e.
+approximately 327 µs at 25 Msps. A capture to the buffer can be triggered via CSP command and the data downloaded
+from either SDRAM or the SD card. Because of the short capture length, this feature is mainly useful to check for
+interferers in the full spectrum data, on ground or after launch. Much longer captures of the ﬁltered AIS channels is
+possible using the capture interface through the MCU.
+An SPI slave controller is also included in the FPGA image, which provides access to various internal conﬁguration
+and status registers.
+Polaris Datasheet Revision 1.0
+8
+© 2017 Satlab ApS - http://www.satlab.com
+
+Polaris
+4.2
+MCU Firmware
+The MCU ﬁrmware implements a real-time operating system, device drivers for internal and external peripherals, AIS
+demodulators, frame storage and CSP servers for telecommands and telemetry.
+4.2.1
+Demodulator and Frame Decoder
+The demodulator and frame decoder are responsible for converting the sampled data to valid AIS messages. The four
+channelized sample streams from the FPGA are processed using parallel demodulator chains. Figure 9 outlines the
+data processing steps in each chain.
+Figure 9: Overview of the demodulator and frame decoder processing steps.
+Packet detectors are run on the ﬁltered data to search for possible packets on the channels. Key signal parameters are
+estimated for each individual AIS message, and passed on to the demodulator to ensure good reception in LEO. Using
+a packet detector has the additional advantage of lowering the power consumption of the receiver, since the remaining
+demodulator stages are only run when packets are detected. Since AIS messages received from space can be subject
+to large Doppler shifts and frequency offsets, a center frequency estimator is used to adjust the subsequent stages of
+the demodulation algorithm.
+When a packet is detected the samples are passed to a narrow packet ﬁlter. Output from the packet ﬁlter is processed
+by the GMSK demodulator and passed to the clock and data recovery block for reconstruction of the message bits.
+Finally, the message is checked for correct HDLC framing structure and CRC checksum by the packet veriﬁcation
+block. In case of CRC checksum error, the frame decoder can optionally attempt to correct one bit error by inverting
+the weakest bit in the packet and recalculate the CRC. If the checksum matches, the packet is accepted and passed
+to the message store queue.
+Various conﬁguration parameters, such as the packet detection threshold and telemetry counters for the demodulators,
+are available through conﬁguration and telemetry parameters. Using the demod.run boolean property it is possible
+to enable or disable the demodulation temporarily.
+A special operating mode allows the MCU to save raw channelized samples to external SDRAM or the SD card, for
+download and processing on ground. The default sample format is uncompressed, 16-bit quadrature samples at 96
+ksps, and the maximum sample length is only limited by the 64 MB SDRAM to approximately 175 seconds. Triggering
+a raw sample does not disable demodulation while sampling.
+4.2.2
+Message Store
+Each received message is tagged with a 32-bit sequence number and stored in NOR-ﬂash with reception metadata
+(estimated center frequency offset, signal level) and a 64-bit timestamp (number of nanoseconds since midnight on
+January 1st, 1970). All 1-5 slot messages are stored in the same store, and consumes 256 bytes of NOR ﬂash,
+including metadata, independent on the number of slots in the message. The store is a ring buffer and wraps around
+every 261120 messages.
+Frames can be selectively downloaded by their sequence number through the store CSP service, and provides access
+to the full AIS messages and metadata. The entire store can also be dumped as a binary ﬁle to the SD card for more
+efﬁcient download. It is of course possible to clear all stored data.
+Polaris Datasheet Revision 1.0
+9
+© 2017 Satlab ApS - http://www.satlab.com
+
+Polaris
+4.2.3
+CSP Services
+Three CSP servers are used to conﬁgure the receiver, read back status and to download messages and raw samples.
+File transfer is handled using the Blob Transfer Protocol (BTP), a lightweight ﬁle transfer protocol built on CSP that is
+used to provide reliable transfer of raw sample ﬁles and ﬁrmware images.
+4.2.4
+Debugging shell
+The system provides a serial debugging shell on the RX/TX pins in the debugging connector (see section 5.2). The
+serial conﬁguration is 8N1 at 115200 baud, and the console requires an ”Enter” key press to be activated.
+Listing 4.1 shows the nominal output on the debug serial during boot. A number of timestamped log messages are
+printed during boot from various logging groups. Additional logging can be enabled at runtime using the trace
+commands. The help command can be used to list available commands and their usage.
+The installed software version and build information is also printed in the debugging shell during boot.
+Listing 4.1: Example output from debugging shell
+[
+0.000057] system: Copyright (c) 2016-2017 Satlab ApS
+[
+0.000193] system: Reset cause: general reset
+[
+0.000331] system: board serial #00000001
+[
+0.000781] prop: using default system properties
+Satlab Polaris v1.0.0 (builder@builder) Nov 1 2017 12:00:00
+[polaris] help
+Available commands:
+boot
+Bootloader commands
+csp
+CSP commands
+fpga
+FPGA commands
+fs
+File system commands
+help
+Show available commands
+history
+Show previous commands
+prop
+System configuration properties
+reboot
+Reboot system
+store
+Frame store commands
+time
+Time command execution
+tm
+Telemetry commands
+trace
+Trace subcommands
+uptime
+Show system uptime
+watch
+Run command periodically
+[Some commands omitted...]
+4.3
+Conﬁguration & Telemetry
+Conﬁguration, status and telemetry download from the device is handled using a number of property variables. Each
+variable has a type (signed/unsigned integers of various sizes, ﬂoating point numbers, strings, etc.) and a default value.
+Some properties are used for conﬁguration and can be modiﬁed and stored in (optionally write-protected) non-volatile
+memory using the debugging shell or remotely via CSP commands. Others are read-only and used for telemetry
+purposes. These properties are periodically updated by the system during operation, and can also be viewed using
+either the debug shell or via CSP.
+Some property changes take effect immediately, while others require a store and a system reset after update.
+The system properties are divided into a number of property groups, each covering a speciﬁc part of the ﬁrmware.
+Property values can be read and updated from a remote system using CSP. The prop-client support library
+contains wrapper functions around the CSP protocol to read and update properties. The satctl Linux application
+can be used as a reference for the use of the library.
+Polaris Datasheet Revision 1.0
+10
+© 2017 Satlab ApS - http://www.satlab.com
+

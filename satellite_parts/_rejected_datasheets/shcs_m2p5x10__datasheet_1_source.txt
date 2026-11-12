@@ -1,0 +1,4 @@
+url: https://spaces.schmachtl.net/katalogy/Eltra_en-Accessories-ed.2023.pdf
+title: Eltra
+query: generic ISO 4762 M2.5x10 datasheet pdf
+found by web search; verify that it is the right part

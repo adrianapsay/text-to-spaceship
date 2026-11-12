@@ -1,0 +1,198 @@
+ 
+info@cubesource.space
+https://www.cubesource.space/
+ 
+Page 1 of 6 
+ 
+Burnwing Engineering Model 
+Technical Datasheet 
+(Rev. 2.1 – 2025-09-21) 
+ 
+1. Product Overview 
+The Burnwing Eng. Model is designed to 
+facilitate the development and testing of 
+burnwire release mechanisms.  
+Provided as a kit with a development guide. 
+The Burnwing can be used as a stand-alone 
+thermal knife release mechanism or as a 
+convenient power source/driver board for 
+the Flight model. 
+2. Key Features 
+● Configurable USB C Power Delivery 
+● Redundant Burn Channels 
+● Overcurrent, Overvoltage, Over Temp.  
+and ESD Protection 
+● Analog Drive Capability (Logic Level Input)  
+● Manual Drive Test Switches 
+● PicoBlade or Pico-Lock  
+Gold Plated 6-pin Connectors 
+● Surface Mount or Through-Hole  
+Pulse Withstanding Resistors 
+3. Product Specifications 
+Parameter 
+Value 
+Unit 
+Required Power 
+5 
+W 
+Release Time 
+10 
+sec 
+Resistor Cycle Life 
+50 
+x 10 sec 
+Mass 
+8 
+g 
+Dimensions 
+52.2 x 22.9 x 4.8 
+mm 
+Operating Temperature 
+-40 to +85 
+°C 
+*Release time measured as time to cut 1mm diameter Dyneema line in atmosphere.  
+ 
+
+ 
+info@cubesource.space
+https://www.cubesource.space/
+ 
+Page 2 of 6 
+ 
+3. Parts List 
+ 
+*Power Supply not included. A 36W or greater charger 
+ with USB C power delivery is required for 12V operation. 
+ 
+Part 
+Qty 
+ 
+Burnwing Eng Model 
+1 
+ 
+USB C Cable 
+1 
+ 
+UHMWPE (Dyneema) 
+1 
+  
+ 
+4.7 Ω Burn Resistors 
+2 
+ 
+36 Ω Burn Resistors 
+2 
+High Temperature Solder 
+Sn18 Pb82  
+220-280c 
+1 
+ 
+Hardware Set 
+1 
+ 
+
+ 
+info@cubesource.space
+https://www.cubesource.space/
+ 
+Page 3 of 6 
+ 
+4. Functional Description 
+The Burnwing operates as a thermal knife release mechanism. Dyneema hold down line is 
+used to secure a deployable subsystem in place. When ready for release, a trigger signal 
+(BurnCTRL1) is sent for 10 seconds causing the (R1) Burn Resistor to heat to a temperature 
+>150°C cutting the hold down line. If the first attempt was unsuccessful this can be repeated 
+multiple times. Allow 60 seconds between attempts. (BurnCTRL1) can be active for longer 
+than 10 seconds if necessary but this may reduce cycle life. The (R2) burn resistor is a 
+redundant backup controlled by (BurnCTRL2) which can be used in the event (R1) has 
+failed. Using (R1) and (R2) simultaneously is not recommended. Standoffs or spacers should 
+be used when mounting to prevent the resistors from shorting against a frame.  
+ 
+**Safety note: After use allow time for the Burnwing resistors to cool before handling.** 
+5. Pinout 
+ 
+Pin
+Function 
+Value 
+1 
+VDC 
+5V or 12V 
+2 
+Burn_CTRL_1 
+5 – 14V 
+3 
+GND 
+N/A 
+4 
+Burn_CTRL_2 
+5 – 14V 
+5 
+VDC 
+5V or 12V 
+6 
+GND 
+N/A 
+
+ 
+info@cubesource.space
+https://www.cubesource.space/
+ 
+Page 4 of 6 
+ 
+6. Electrical Characteristics 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+info@cubesource.space
+https://www.cubesource.space/
+ 
+Page 5 of 6 
+ 
+7. Typical Application Circuits 
+ 
+Flight Configuration 
+ 
+ 
+ 
+Test Configuration 
+ 
+ 
+ 
+ 
+ 
+● 
+When using a Burnwing Eng model to trigger a flight model it is recommended 
+to leave the (R1) and (R2) burn resistors unpopulated on the Eng model. 
+ 
+● 
+Power can be provided either by USB C or the VDC pins. 
+Disconnect USB before powering with VDC 
+
+ 
+info@cubesource.space
+https://www.cubesource.space/
+ 
+Page 6 of 6 
+ 
+8. Mechanical Specifications 
+ 
+ 
+9. Document Revision History 
+Date 
+Rev 
+Changes 
+2025-07-22 
+2025-09-21 
+2.0 
+2.1 
+Preliminary release 
+Test configuration diagram added 
+ 
+ 
+ 
+

@@ -1,0 +1,83 @@
+X-Band HR DownLink
+XDL-C301-HR 
+Honeywell Aerospace
+1944 East Sky Harbor Circle 
+Phoenix, AZ 85034 
+aerospace.honeywell.com
+N61-2037-000-001  I  06/19
+© 2019 Honeywell International Inc.
+Honeywell introduces a new family of flexible high efficiency DownLink 
+products to the space market. The HR Variant is an innovative DownLink 
+transmitter with flexible SDR functionality and has been optimized 
+for small to medium size missions that demand high data rates and 
+established PA standards
+A high reliability COTS variant (XDL-MS01-HR) of this product is also available. 
+For more details please contact Honeywell.
+Main features:
+•	 Optimized for small to medium satellites 
+•	 Suitable for high data rate applications 
+(400Mbps to 600Mbps typical)
+•	 Low mass and low volume unit
+•	 High Efficiency / Low Power consumption
+•	 User-selectable configuration
+•	 Telemetry/Telecommand via RS-422 or 
+UART protocol
+•	 Flexible SDR design, selectable modulation 
+and output power configurations
+•	 QPSK, 8PSK, 16APSK, 32APSK, 64APSK
+•	 Selectable coding
+•	 LVDS synchronous data ports with auto 
+detection 
+This is the second of a series of X-Band 
+DownLinks introduced by Honeywell aiming 
+to complement the existing range of compact 
+downlink transmitters for small/medium 
+satellites.
+General
+Input data rate 
+Up to 700Mbps 
+Expected life
+>6.5yrs
+Reliability / Class of Equipment
+ECSS Class 3 or COTS (High Reliability) 
+Tailored ECSS class 3
+Weight
+<1.5kg
+Size (mm)
+165x150x100mm
+Power Consumption (W)
+<65W at 39dBm dependent on operating mode
+Supply voltage range (V)
+20-36V
+Temperature range (deg C)
+-25C to +55C operating
+-35C to +65C non-operating
+Random Vibration
+25 g rms (all axis)
+Radiation Tolerance 
+12krad (TID), 20MeV SEE
+frequency range (MHz)
+8025-8400 MHz in 1 MHz steps
+Output power range (user configurable)
+33-39dBm tuneable
+Modulation Formats
+QPSK, 8PSK,16APSK,32APSK,64APSK
+Coding Options
+CCSSDS 131.2-B-1
+Data Rates
+Function of ACM (@ACM12 >600Mbps)
+Data Interface
+LVDS synchronous serial interface
+RF Interface
+Coaxial SMA 50Ohm
+TTC Interface
+RS422/UART protocol
+Filtering
+Compliant with ITU regulations
+Lead Time
+12 month
+For more information
+To find out more about our offering, visit 
+aerospace.honeywell.com/en/product-listing/space 
+or contact us at aero.marketing@honeywell.com 
+

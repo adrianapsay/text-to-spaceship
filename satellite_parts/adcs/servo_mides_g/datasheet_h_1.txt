@@ -1,0 +1,46 @@
+MiDES-G
+•Accuracy: 0.025° (3σ)
+•Supply Voltage: 28 (+7 -6) VDC
+•Supply Power: <4 W
+•Output: Digital (RS 422)
+•Detector: Proprietary LTO
+•Optical Pass Band: 14.6-15.8µ
+•Operational Range: Circular 33 °
+Environmental
+Specifications
+Description:
+The MiDES Earth sensor is designed to provide horizon position information in 
+two mutually orthogonal axes (X and Y) which form a plane that is normal to 
+nadir. This is accomplished utilizing one assembly that contains two optical 
+heads that view the Earth and share common electronic signal processing 
+circuitry and a common mechanical chopper.  
+The performance of the MiDES G is achieved through the use of a multi pixel 
+detector array of 16 discrete pixels in each of the two hybrid detector 
+assemblies. The radiant contrast needed to produce a voltage output from the 
+pyroelectric detectors is achieved through the use of a chopper mechanism that 
+causes the radiant energy falling on the detector to alternate between the energy 
+emitted from the scene and from the chopper. The chopper temperature is much 
+higher than the scene (space and Earth) thus producing a large output voltage at 
+all times.
+• Random Vibration: 28 Grms
+• Shock: 517Gs @ 10Khz
+•Temperature: -40 to + 60°C
+• Life: 15 years at GEO
+• EMC: Mil-Std 462
+Physical
+• Mass:  1.5 KG
+• Dimensions: 5.25 x 5.25 x 5.07 in.
+• Mounting Surface: Flat (flange)
+Contact Information
+Electrical
+•Hybridized Detector Assembly
+• 16 bit rad hard microprocessor
+• Opto-isolated digital interface
+•Built in test
+•Outputs actual direct angle data
+Servo Corporation of America
+123 Frost  Street, Westbury, NY 11590,  USA
+Tel: 516 938 9700 Ext. 228      Email: dickb@servo.com
+FAX: 516 938 9644   URL: www.servo.com
+Servo Data Sheet M001-400
+

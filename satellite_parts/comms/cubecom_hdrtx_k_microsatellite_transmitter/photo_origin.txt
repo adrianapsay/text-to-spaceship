@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-cubecom-hdrtx-k-microsatellite-transmitter-4h5ge6.pdf
+method: product image from the catalog page https://satsearch.co/products/cubecom-microsatellite-transmitter

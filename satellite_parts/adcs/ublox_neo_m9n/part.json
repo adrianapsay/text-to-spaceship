@@ -1,0 +1,137 @@
+{
+ "id": "ublox_neo_m9n",
+ "name": "u-blox NEO-M9N GNSS receiver module (4 constellations)",
+ "category": "adcs",
+ "subcategory": "gnss_receiver",
+ "vendor": "u-blox",
+ "model": "NEO-M9N",
+ "dimensions_mm": {
+  "x": 12.2,
+  "y": 16.0,
+  "z": 2.4
+ },
+ "mass_g": 1.0,
+ "source": {
+  "type": "datasheet",
+  "url": "https://content.u-blox.com/sites/default/files/NEO-M9N_ProductSummary_UBX-19027207.pdf",
+  "document": {
+   "title": "u-blox NEO-M9N product summary UBX-19027207",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "12.2 x 16.0 x 2.4 mm 24-pin LCC, 1.0 g, 2.7 to 3.6 V, 36 mA at 3.0 V (4 GNSS), UART / USB / SPI / I2C, -40 to +85 C. Commercial module, not space qualified."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "Switzerland",
+ "distributors": [
+  "Digi-Key",
+  "Mouser",
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "distributor",
+  "source": null
+ },
+ "electrical": {
+  "voltage_V": {
+   "min": 2.7,
+   "max": 3.6
+  },
+  "current_mA": 36,
+  "interfaces": [
+   "UART",
+   "USB",
+   "SPI",
+   "I2C"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -40,
+   "max": 85
+  }
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   12.2,
+   16.0,
+   2.4
+  ],
+  "mesh_volume_mm3": 468.5,
+  "watertight": true,
+  "render_kind": "box",
+  "effective_density_g_cm3": 2.135,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 12
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "I2C",
+   "SPI",
+   "UART",
+   "USB"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://content.u-blox.com/sites/default/files/NEO-M9N_ProductSummary_UBX-19027207.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

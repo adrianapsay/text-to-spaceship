@@ -29,13 +29,13 @@
   ],
   "notes": "PCB 96 x 90 x 1.6 mm, 24 mm above (/01) and 2 mm below, 210 g, two 7.4 V 1500 mAh batteries (22 Wh), outputs VBATT 6-8.2 V / 5 V / 3.3 V with 1500/1000/500 mA trips, no solar input (USB or external 5 V charge only), Hirose DF13 battery connectors, -40 to 85 C."
  },
- "status": "unknown",
+ "status": "in_production",
  "fidelity": "envelope",
  "vendor_country": "USA",
  "distributors": [
   "direct (Pumpkin)"
  ],
- "status_note": "2012 design; educational / lab EPS, no solar charging",
+ "status_note": "listed on satsearch (pumpkin-linear-eps-module) (web search 2026-11-11); confirm with Pumpkin",
  "electrical": {
   "energy_Wh": 22,
   "voltage_V": {
@@ -109,6 +109,95 @@
   },
   "face_counts": {
    "part": 732
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    96.0,
+    90.0,
+    25.6
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "pcb",
+     "color": [
+      0.09,
+      0.42,
+      0.24
+     ],
+     "file": "bodies_detail/pcb.stl"
+    },
+    {
+     "name": "standoffs",
+     "color": [
+      0.78,
+      0.62,
+      0.28
+     ],
+     "file": "bodies_detail/standoffs.stl"
+    },
+    {
+     "name": "stack_header",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/stack_header.stl"
+    },
+    {
+     "name": "header_pins",
+     "color": [
+      0.85,
+      0.66,
+      0.22
+     ],
+     "file": "bodies_detail/header_pins.stl"
+    },
+    {
+     "name": "shield",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/shield.stl"
+    },
+    {
+     "name": "ics",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/ics.stl"
+    },
+    {
+     "name": "passives",
+     "color": [
+      0.55,
+      0.45,
+      0.3
+     ],
+     "file": "bodies_detail/passives.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",

@@ -1,0 +1,118 @@
+{
+ "id": "ebad_tini_pin_puller_p100",
+ "name": "EBAD TiNi Pin Puller P100 (shape-memory)",
+ "category": "mechanisms",
+ "subcategory": "pin_puller",
+ "vendor": "Ensign-Bickford Aerospace & Defense (EBAD)",
+ "model": "TiNi Pin Puller P100",
+ "dimensions_mm": {
+  "x": 50.8,
+  "y": 50.8,
+  "z": 88.9
+ },
+ "mass_g": 150,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.ebad.com/wp-content/uploads/2022/04/TiNi_Pin_Puller_released_3-18-22.pdf",
+  "document": {
+   "title": "EBAD TiNi Pin Puller data sheet (3-18-22)",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "mechanism",
+   "electrical"
+  ],
+  "notes": "Height before retraction 3.5 in, max diameter with flange 2.0 in, mass 150 g, max pull load 100 lbf, operating current 2.25 to 6.5 A."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "USA",
+ "mechanism": {
+  "actuator_type": "shape_memory_alloy pin puller",
+  "max_load_N": 445
+ },
+ "electrical": {
+  "current_A_range": "2.25 to 6.5"
+ },
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   50.8,
+   50.66,
+   88.9
+  ],
+  "mesh_volume_mm3": 179513.8,
+  "watertight": true,
+  "render_kind": "cylinder",
+  "effective_density_g_cm3": 0.836,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 164
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "body",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://www.ebad.com/wp-content/uploads/2022/04/TiNi_Pin_Puller_released_3-18-22.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

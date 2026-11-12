@@ -75,6 +75,41 @@
   },
   "face_counts": {
    "part": 448
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    226.3,
+    100.0,
+    366.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "rails",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/rails.stl"
+    },
+    {
+     "name": "frames",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies_detail/frames.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",

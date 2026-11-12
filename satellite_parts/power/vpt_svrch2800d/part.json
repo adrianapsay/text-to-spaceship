@@ -1,0 +1,169 @@
+{
+ "id": "vpt_svrch2800d",
+ "name": "VPT SVRCH2800D space DC-DC converter (1.5 W, dual output)",
+ "category": "power",
+ "subcategory": "dc_dc_converter",
+ "vendor": "VPT, Inc. (HEICO)",
+ "model": "SVRCH2800D",
+ "dimensions_mm": {
+  "x": 27.31,
+  "y": 27.31,
+  "z": 6.86
+ },
+ "mass_g": 16,
+ "source": {
+  "type": "datasheet",
+  "url": "https://cdn.craft.cloud/8b2193af-9254-40b8-94b1-f0108baf88de/assets/products/datasheets/DS-SVRCH2800D-30993-6.pdf",
+  "document": {
+   "title": "VPT SVRCH2800D data sheet",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical"
+  ],
+  "notes": "1.075 x 1.075 x 0.270 in low-profile case, 16 g max non-flanged (20 g flanged), 1.5 W total, 16 to 40 V continuous input, 50 V transient. Models: SVRCH2805D, 2812D, 2815D (dual)."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "USA",
+ "mass_note": "maximum per data sheet",
+ "electrical": {
+  "voltage_V": {
+   "min": 16,
+   "nominal": 28,
+   "max": 40
+  },
+  "power_W": {
+   "peak": 1.5
+  }
+ },
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   27.31,
+   27.31,
+   6.86
+  ],
+  "mesh_volume_mm3": 5102.4,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 3.136,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    27.31,
+    27.31,
+    6.86
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 28
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://cdn.craft.cloud/8b2193af-9254-40b8-94b1-f0108baf88de/assets/products/datasheets/DS-SVRCH2800D-30993-6.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

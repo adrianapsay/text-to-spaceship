@@ -1,0 +1,163 @@
+{
+ "id": "adcole_mai_smallsat_sun_sensor",
+ "name": "Adcole Maryland Aerospace MAI-SmallSat Sun Sensor",
+ "category": "adcs",
+ "subcategory": "sun_sensor",
+ "vendor": "Adcole Maryland Aerospace",
+ "model": "MAI-SmallSat Sun Sensor",
+ "dimensions_mm": {
+  "x": 50.8,
+  "y": 19.05,
+  "z": 2.03
+ },
+ "mass_g": 5.5,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satcatalog.s3.amazonaws.com/components/357/SatCatalog_-_Adcole_Maryland_Aerospace_-_MAI-SmallSat_Sun_Sensor_-_Datasheet.pdf",
+  "document": {
+   "title": "Adcole Maryland Aerospace MAI-SmallSat Sun Sensor data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-11",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Read from the vendor data sheet (SatCatalog_-_Adcole_Maryland_Aerospace_-_MAI-SmallSat_Sun_Sensor_-_Datasheet.pdf): dimensions \"cations Performance Item Specification SmallSat Sun Sensor Dimensions 50.80 x 19.05 x 2.03 mm Mass 5\"; mass \"x 19.05 x 2.03 mm Mass 5.5 g Ou\". Catalog page lists 0.0055 kg.",
+  "found_via": "https://satcatalog.com/component/mai-smallsat-sun-sensor/"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "electrical": {
+  "power_W": {
+   "nominal": 0.0208
+  },
+  "note": "average power from the catalog page"
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   50.8,
+   19.05,
+   2.03
+  ],
+  "mesh_volume_mm3": 1964.5,
+  "watertight": true,
+  "render_kind": "sun_sensor",
+  "effective_density_g_cm3": 2.8,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    },
+    {
+     "name": "aperture",
+     "color": [
+      0.45,
+      0.65,
+      0.85
+     ],
+     "file": "bodies/part__aperture.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 12
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    50.8,
+    19.05,
+    2.2
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.17
+   ],
+   "bodies": [
+    {
+     "name": "pcb",
+     "color": [
+      0.09,
+      0.42,
+      0.24
+     ],
+     "file": "bodies_detail/pcb.stl"
+    },
+    {
+     "name": "ic",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/ic.stl"
+    },
+    {
+     "name": "pin_header",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/pin_header.stl"
+    },
+    {
+     "name": "passives",
+     "color": [
+      0.55,
+      0.45,
+      0.3
+     ],
+     "file": "bodies_detail/passives.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
+  "datasheet_url": "https://satcatalog.s3.amazonaws.com/components/357/SatCatalog_-_Adcole_Maryland_Aerospace_-_MAI-SmallSat_Sun_Sensor_-_Datasheet.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

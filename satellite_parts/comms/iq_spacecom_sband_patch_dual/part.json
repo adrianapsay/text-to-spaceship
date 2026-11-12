@@ -82,6 +82,50 @@
   },
   "face_counts": {
    "part": 28
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    80.0,
+    100.0,
+    3.5
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.1
+   ],
+   "bodies": [
+    {
+     "name": "ground_plate",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies_detail/ground_plate.stl"
+    },
+    {
+     "name": "patches",
+     "color": [
+      0.72,
+      0.45,
+      0.2
+     ],
+     "file": "bodies_detail/patches.stl"
+    },
+    {
+     "name": "feeds",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/feeds.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",
@@ -97,12 +141,12 @@
  "reference_images": {
   "datasheets": [],
   "stl_preview": "preview.png",
-  "drawing": null,
+  "drawing": "drawing.png",
   "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_qrcf2d_iq_s-band-antenna.jpg",
   "photo_source": "satsearch",
   "photo_page": "https://satsearch.co/products/iq-s-band-antenna",
-  "photo_file": null,
-  "photo_kind": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": null,
   "datasheet_page_file": null,
   "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"

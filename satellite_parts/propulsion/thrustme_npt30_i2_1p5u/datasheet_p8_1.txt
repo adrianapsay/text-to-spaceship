@@ -1,0 +1,148 @@
+PRODUCT INFORMATION
+Miniaturized electric propulsion with breakthrough performance for smallsats. ThrustMe’s NPT30-
+I2 is a fully integrated propulsion system based on the gridded ion thruster technology. It comes
+in 1U and 1.5U sizes. It has a modular design, and includes the ion thruster, the PPU, the
+propellant storage, feed system as well as passive thermal management and intelligent operation
+control. The I2 version uses solid iodine propellant, is delivered pre-filled and remains non-
+pressurized during launch. Use of iodine also avoids sloshing and provides extreme geometrical
+design flexibility to accommodate platform requirements.
+Copyright © 2021 ThrustMe – NPT30-I2-1U is a trademark of ThrustMe. All rights reserved
+ThrustMe
+4bis Rue des Petits
+Ruisseaux
+91370 Verrières-le-Buisson 
+France
+contact@thrustme.fr
+www.thrustme.fr
+INTERFACE
+Input Voltage
+12 – 28 V
+Bus interface
+I2C, CAN
+PERFORMANCE & SPECIFICATIONS
+Thrust 
+0.3 – 1.1 mN
+Total impulse
+up to 5500 Ns
+Specific impulse
+up to 2400 s
+Format factor
+1U
+Dimensions
+96x96x113 mm
+Total wet mass
+1.2 kg
+Total power
+35 – 65 W
+Thrust vector accuracy
+< 1°
+ADVANCED SAFETY FEATURES
+Embedded fail-safe modes
+Redundancy includes cathodes and ignition systems
+Rad-hardened main controller option
+Patented pipeless design to avoid clogging
+Non-pressurized solid propellant
+Continuous neutralization monitoring
+Iodine-compatible sealing for safe storage
+EASY TO OPERATE AND INTEGRATE
+Platform agnostic
+Full AIT support
+System shipped pre-filled
+Reduced lead times 
+Engineering models available on demand
+Clusterization possible for higher thrust & total 
+impulse
+EMBEDDED INTELLIGENCE
+Built-in-self-tuning algorithms
+Integrated thrust computer
+Thrust can be continuously throttled
+Supports multiple customizable operating modes
+Possible operation with thrust or power lock
+Over 50 internal parameters are continuously 
+monitored and used for algorithm adjustments
+PERFORMANCE MAP
+ThrustMe offers advanced mobility solutions for the growing space industry which is facing
+new challenges due to the rise of satellite constellations. As experts in in-space propulsion
+and satellite orbital manoeuvring strategies, we enable a future where space is used
+sustainably to create value both on Earth, and beyond. Founded in 2017, ThrustMe has a
+complete portfolio of game-changing turnkey propulsion products that have already been
+tested in space and delivered to clients worldwide. The company made history in 2019 and
+2020 with the world’s first in-orbit demonstration of iodine-fuelled electric propulsion
+systems: a technology that has the potential to revolutionize the entire industry.
+NPT30-I2-1U
+SMART IODINE ELECTRIC PROPULSION SYSTEM
+
+NPT30-I2-1.5U
+SMART IODINE ELECTRIC PROPULSION SYSTEM
+PRODUCT INFORMATION
+Miniaturized electric propulsion with breakthrough performance for smallsats. ThrustMe’s NPT30-
+I2 is a fully integrated propulsion system based on the gridded ion thruster technology. It comes
+in 1U and 1.5U sizes. It has a modular design, and includes the ion thruster, the PPU, the
+propellant storage, feed system as well as passive thermal management and intelligent operation
+control. The I2 version uses solid iodine propellant, is delivered pre-filled and remains non-
+pressurized during launch. Use of iodine also avoids sloshing and provides extreme geometrical
+design flexibility to accommodate platform requirements.
+Copyright © 2021 ThrustMe – NPT30-I2-1.5U is a trademark of ThrustMe. All rights reserved
+ThrustMe
+4bis Rue des Petits
+Ruisseaux
+91370 Verrières-le-Buisson 
+France
+contact@thrustme.fr
+www.thrustme.fr
+PERFORMANCE & SPECIFICATIONS
+Thrust 
+0.3 – 1.1 mN
+Total impulse
+up to 9500 Ns
+Specific impulse
+up to 2400 s
+Format factor
+1.5U
+Dimensions
+93x93x155 mm
+Total wet mass
+1.7 kg
+Total power
+35 – 65 W
+Thrust vector accuracy
+< 1°
+ThrustMe offers advanced mobility solutions for the growing space industry which is facing
+new challenges due to the rise of satellite constellations. As experts in in-space propulsion
+and satellite orbital manoeuvring strategies, we enable a future where space is used
+sustainably to create value both on Earth, and beyond. Founded in 2017, ThrustMe has a
+complete portfolio of game-changing turnkey propulsion products that have already been
+tested in space and delivered to clients worldwide. The company made history in 2019 and
+2020 with the world’s first in-orbit demonstration of iodine-fuelled electric propulsion
+systems: a technology that has the potential to revolutionize the entire industry.
+ADVANCED SAFETY FEATURES
+Embedded fail-safe modes
+Redundancy includes cathodes and ignition systems
+Rad-hardened main controller option
+Patented pipeless design to avoid clogging
+Non-pressurized solid propellant
+Continuous neutralization monitoring
+Iodine-compatible sealing for safe storage
+EASY TO OPERATE AND INTEGRATE
+Platform agnostic
+Full AIT support
+System shipped pre-filled
+Reduced lead times 
+Engineering models available on demand
+Clusterization possible for higher thrust & total 
+impulse
+EMBEDDED INTELLIGENCE
+Built-in-self-tuning algorithms
+Integrated thrust computer
+Thrust can be continuously throttled
+Supports multiple customizable operating modes
+Possible operation with thrust or power lock
+Over 50 internal parameters are continuously 
+monitored and used for algorithm adjustments
+INTERFACE
+Input Voltage
+12 – 28 V
+Bus interface
+I2C, CAN
+PERFORMANCE MAP
+

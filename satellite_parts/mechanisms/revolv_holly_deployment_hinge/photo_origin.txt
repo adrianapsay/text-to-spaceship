@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-revolv-space-holly-deployment-hinge-3tjj1k.pdf
+method: product image from the catalog page https://satsearch.co/products/revolv-space-holly-deployment-hinge

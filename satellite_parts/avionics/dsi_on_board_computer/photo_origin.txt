@@ -1,0 +1,2 @@
+url: https://cdn.satsearch.com/product-images/satsearch_product-image_l95n2q_dsi_obc.jpeg
+method: product image on https://satsearch.co/products/dsi-aerospace-on-board-computer

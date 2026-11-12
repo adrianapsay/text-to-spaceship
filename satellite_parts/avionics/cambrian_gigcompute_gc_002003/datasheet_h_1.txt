@@ -1,0 +1,58 @@
+GigCompute
+(Model GC-002003)
+Address
+985 University Avenue, Suite 30 
+Los Gatos, CA 95032 
+Learn more at
+www.cambrianworks.com
+Seamless Space Links
+Email
+info@cambrianworks.com
+Dimensions
+213.4x 160 x 61.5
+mm (TBF)
+Mass (with enclosure)
+1.9 kg
+OS
+Ubuntu-based
+optimized BSP
+Input Voltage Range
+9V to 14V
+CPU
+12-core Arm Cortex-
+A78AE 64-bit
+GPU
+2048-core NVIDIA
+Ampere architecture
+GPU with 64 Tensor
+Cores
+RAM
+64GB 256-bit
+LPDDR5
+Container Orchestration
+Kubernetes (K3S)
+Data Interfaces
+2x 10-Gbps Ethernet
+3x 1-Gbps Ethernet
+1x RS-422
+1x RS-422 (Debug)
+4x GPIOs
+Storage
+Flash Memory
+64GB eMMC
+2x 8TB SSD
+      (16TB total)
+Power Consumption*
+16 Watts (Idle)
+28 Watts (Max Data)
+30 Watts (Max CPU)
+55 Watts (Max GPU)
+84 Watts (Max)
+*Power Mode
+Adjustable
+Radiation Lifetime
+24 Years in 550km 90°
+8 Years in 1000km 90°
+5 Years in GEO with
+added 2mm shielding
+

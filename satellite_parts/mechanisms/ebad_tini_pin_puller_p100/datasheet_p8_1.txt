@@ -1,0 +1,182 @@
+Attention: The information and recommendations described in this brochure cannot possibly cover every application of the products or variation of conditions under which the products are used. The 
+recommendations here in are based on the manufacturer’s experience, research and testing. They are believed to be accurate, but no warranties are made, express or implied. In addition, the specifications 
+contained herein are all nominal which represent our current production. The products described may be subject to change. Please feel free to contact Ensign-Bickford Aerospace & Defense Company for 
+verification. No Warranties or Liabilities: THE PRODUCTS DESCRIBED HEREIN are sold “AS IS” and without any warranty or guaranty, express, or implied, arising by law or otherwise including 
+without limitation any warranty of merchantability or fitness for a particular purpose. Buyer and user agree further to release and discharge seller from any and all liabilities 
+whatsoever arising out of the purchase or use of any product described herein whether or not such liability is occasioned by seller’s negligence or based upon strict products 
+liability or upon principles of indemnity or contribution. Content©2021 Ensign-Bickford Aerospace & Defense Company, Simsbury, CT 06070, U.S.A.    
+ENSIGN-BICKFORD AEROSPACE & DEFENSE COMPANY
+640 HOPMEADOW STREET, P.O. BOX 429, SIMSBURY, CT 06070, USA  www.EBAD.com
+Mission Success
+Ensign-Bickford Aerospace & Defense Company (EBAD) 
+is dedicated to supporting our customers in the aerospace 
+and defense industry through on-time delivery of 
+innovative products that exceed expectations 
+and assure mission success.
+www.EBAD.com
+TiNi™ Pin Puller
+EBAD’s TiNi™ Pin Pullers are utilized in satellite applications to provide a 
+simple and effective non-pyro separation system between two components 
+where a pull force is required. Ranging in size from a 5lbF to 1000lbF pull 
+force, the pin pullers offer a versatile solution from small satellite solar array 
+deployments, launch locks for optical payloads and antenna releases. 
+Easy to use, resting the device is straightforward with our custom reset 
+tools and requiring no parts to replace.
+TiNi™ Pin Puller
+TiNi™ Pin Puller Mechanical Interface Drawing
+TiNi™ Pin Puller
+Principle of Operation
+The pin puller is a reliable fast operating device that ultilzes a shape memory 
+alloy “SMA” wire to release a latch to allow for the internal compression 
+springs to retract the pin. 
+In the fully reset mode, the internal circuit is closed. When sufficient power 
+is applied, the current raises the temperature of the SMA wire and 
+subsequently contracts at its transition temperature. This allows internal 
+ball locks to release and internal drive springs to retract the pin into the 
+body of the device. Once retracted, the circuit is open allowing no power to 
+continue to heat the SMA wire and provides the user with positive feedback 
+that the device has actuated.
+The device is reset with a custom tool that either pulls the pin out from 
+the front or pushes it out from the rear.
+Applications
+Since 1996 Mars Global Surveyor mission, EBAD’s TiNi™ Pin Pullers have 
+extensive heritage in space applictions. Such applications include solar array 
+and instrument deployment, instrument launch locks, optic cover releases 
+and other space applications where a pull force is needed. In addition, the 
+pin pullers have high non-actuated side load capability that can withstand 
+rigourous launch vehicle environmental levels. 
+Key Features
+• Nonpyrotechnic
+•	Easy to field reset and simple to use
+•	Minimum 50 cycles
+•	Redundant firing circuit
+•	Maximum reliability thru design simplicity
+•	Flight pedigree and testability
+Alternative applications include missile fin locks and underwater 
+acutations with our subsea versions.
+Pin Puller Family
+P5
+P10
+P25
+P50
+P100
+P1000
+Pull Force
+5lbF (22.2N)
+10lbF (44N)
+25lbF (111N)
+50lbF (222N)
+100lbF (445N)
+1000lbF (4450N)
+Side Load (actuation)
+7lbF (31.1N)
+10lbF (44.5N)
+20lbF (89N)
+50lbF (222N)
+100lbF (445N)
+200lbF (890N)
+1500lbF (6675N)
+Side Load (non-actuation)
+20lbF (88.9N)
+100lbF (444.8N)
+330lbF (1468N)
+400lbF (1823N)
+490lbF (2180N)
+600lbF (2670N)
+Contact EBAD
+Mass
+.73 oz (18g)
+1.06 oz (30g)
+1.7 oz (48g)
+2.6 oz (75g)
+5.3 oz (150g)
+12.7 oz (360g)
+17 oz (482g)
+Operating Current
+.5 to 2A
+.4 to 1.5A
+.6 to 2A
+1.25A to 4.5A
+2.25A to 6.5A
+2.25A to 6.5A
+2.75A to 8.75A
+Resistance
+5.2±.5 Ω
+7.7±.5 Ω
+5.8±.5 Ω
+3.1±.3 Ω
+2.7±.3 Ω
+3.1±.3 Ω
+2.2±.3 Ω
+Function Time @ 23ºC
+130ms max @ .5A
+100ms max 
+@ 1A
+130ms max 
+@ 2A
+100ms max @ 4A 100ms max @ 4A
+75ms max @ 4A
+Cycle Life (min)
+100
+100
+100
+50
+Operating Temp
+-65ºC + 70ºC
+-65ºC + 70ºC
+-65ºC + 70ºC
+-60ºC + 70ºC
+Height (before pin retraction)
+1.25"
+1.625"
+1.72"
+2.54"
+3.50"
+4.255"
+4.605"
+Height (after pin retraction)
+1.00"
+1.375"
+2"
+2.16"
+3.00"
+3.635"
+3.88"
+Max diameter (with flange)
+1.25" diam
+1.25" diam
+1.6" diam
+1.8" diam
+2.00" diam
+2.55" diam
+2.44" x 2.44"
+Front/Rear Resettable
+Yes
+Yes
+Yes
+Front Std; Rear Optional with growth in device
+Contact EBAD
+Contact EBAD about alternative voltages/resistance and pin type
+TiNi™ Pin Puller Family Technical Specifications
+Construction
+Utilizing a shape memory alloy “SMA” wire, the wire is threaded through a 
+latch and attached to the electrical contacts. The latch retains an internal ball 
+bearings that keeps the compressed drive springs in place before actuation. 
+Another smaller internal reset spring is installed to assist in the reset  process.
+The pin puller is fully vented and typically the enclosure is made with 
+aluminum alloy with a titanium flange. The output pin is made with stainless 
+steel with a tiolon finish.
+Alternative voltages utilize an internal resistor to protect the SMA wire 
+from overheating.
+TiNi™ Pin Puller Family of products
+TiNi™ Pin Puller Launch lock example 
+(before actuation)
+TiNi™ Pin Puller Launch lock example 
+(after actuation)
+Ø0.93 in. Nominal Dia.
+1.25 in. Nominal Length
+Ø1.5 in. Nominal Dia.
+2.75 in. Nominal Length
+Cleared for Open Publication by the Defense Office of Prepublication and Security Review, Department of Defense 03/18/2022   22-S-1402
+Cleared for Open Publication by the Defense Office of Prepublication and Security Review, Department of Defense 03/18/2022   22-S-1402
+

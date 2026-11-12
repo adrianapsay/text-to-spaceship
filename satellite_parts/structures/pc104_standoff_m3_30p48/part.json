@@ -61,6 +61,20 @@
   },
   "face_counts": {
    "part": 192
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "standoff",
+     "color": [
+      0.78,
+      0.62,
+      0.28
+     ],
+     "file": "bodies/part__standoff.stl"
+    }
+   ]
   }
  },
  "image": "preview.png",

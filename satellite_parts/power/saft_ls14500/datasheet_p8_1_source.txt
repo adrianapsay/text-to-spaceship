@@ -1,0 +1,3 @@
+url: https://media.elv.com/file/111947_ls14500_data.pdf
+found from: https://media.elv.com/file/111947_ls14500_data.pdf
+found by Claude (web search) on 2026-11-11; downloaded by fetch_pass5.py

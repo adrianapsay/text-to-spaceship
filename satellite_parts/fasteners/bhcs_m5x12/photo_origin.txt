@@ -1,0 +1,4 @@
+url: https://www.westfieldfasteners.co.uk/Images3/Main_Images_Published/Socket-Head-Button-Screws-ISO-7380-part-1-in-A2.jpg
+method: image on page https://www.westfieldfasteners.co.uk/A2-ScrewBolt-SHBtn-M5.html
+found by Claude (web search) on 2026-11-11; downloaded by fetch_pass5.py
+checked by eye against the CAD render on 2026-11-11

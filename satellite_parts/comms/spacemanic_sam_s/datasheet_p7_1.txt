@@ -1,0 +1,501 @@
+ 
+ 
+DATASHEET 
+Ref. & issue: 
+SM-SAM-DS-0016_4.2 
+Date: 
+19/08/2026 
+Pages: 
+1 of 9 
+ 
+Spacemanic CZ s.r.o. | sales@spacemanic.com | www.spacemanic.com 
+ 
+ 
+ 
+ 
+ 
+ 
+SAM S 
+SATELLITE ANTENNA 
+MODULE 
+ 
+DATASHEET 
+
+ 
+ 
+DATASHEET 
+Ref. & issue: 
+SM-SAM-DS-0016_4.2 
+Date: 
+19/08/2026 
+Pages: 
+2 of 9 
+ 
+Spacemanic CZ s.r.o. | sales@spacemanic.com | www.spacemanic.com 
+ 
+TABLE OF CONTENTS 
+1 
+PRODUCT OVERVIEW .........................................................................................4 
+2 
+TECHNICAL SPECIFICATION ............................................................................4 
+3 
+INTERFACES .........................................................................................................5 
+3.1 
+ELECTRICAL ...............................................................................................................5 
+3.1.1 
+MAIN CONNECTOR ......................................................................................................... 5 
+3.1.2 
+DEBUG AND PROGRAMMING CONNECTOR ................................................................ 6 
+3.1.3 
+RADIO INTERFACE .......................................................................................................... 6 
+3.2 
+SOFTWARE ..................................................................................................................6 
+3.3 
+MECHANICAL .............................................................................................................6 
+4 
+DELIVERABLES ....................................................................................................8 
+4.1 
+AFFIRMATION NOTE .................................................................................................8 
+5 
+RELATED PRODUCTS ..........................................................................................8 
+6 
+DISCLAIMER .........................................................................................................9 
+ 
+ 
+ 
+
+ 
+ 
+DATASHEET 
+Ref. & issue: 
+SM-SAM-DS-0016_4.2 
+Date: 
+19/08/2026 
+Pages: 
+3 of 9 
+ 
+Spacemanic CZ s.r.o. | sales@spacemanic.com | www.spacemanic.com 
+ 
+LIST OF FIGURES 
+Figure 3-1: Mounting points ..........................................................................................................7 
+Figure 3-2: SAM Dimensions........................................................................................................7 
+ 
+LIST OF TABLES 
+Table 2-1: Technical specification .................................................................................................4 
+Table 2-2: RF technical specification .............................................................................................4 
+Table 2-3: Materials found on SAM ..............................................................................................5 
+Table 3-1: SAM connector type .....................................................................................................5 
+Table 3-2: SAM connector pinout table .........................................................................................5 
+Table 3-3: Debug connector types .................................................................................................6 
+Table 3-4: Debug connector pinout table .......................................................................................6 
+Table 3-5: SAM radio interface connector type ..............................................................................6 
+Table 4-1: Deliverables .................................................................................................................8 
+ 
+GLOSSARY 
+ASSY 
+Assembly 
+CLI 
+Command Line Interface  
+CSK 
+Countersunk 
+CSP 
+Cubesat Space Protocol 
+DWG 
+Drawing 
+GND 
+Ground 
+ICD 
+Interface Control Document 
+PCB 
+Printed Circuit Board 
+PEEK 
+polyetheretherketone 
+SAM 
+Satellite Antenna Module 
+UHF 
+Ultra High Frequency 
+VCC 
+Voltage at the Common Collector 
+VHF 
+Very High Frequency 
+ 
+ 
+
+ 
+ 
+DATASHEET 
+Ref. & issue: 
+SM-SAM-DS-0016_4.2 
+Date: 
+19/08/2026 
+Pages: 
+4 of 9 
+ 
+Spacemanic CZ s.r.o. | sales@spacemanic.com | www.spacemanic.com 
+ 
+1 PRODUCT OVERVIEW 
+The Satellite Antenna Module (SAM) is the antenna module with the deployable mechanism and 
+two-level deployment safety feature. The module can be configured in several variants listed below. 
+Configurations options available: 
+- 
+VHF + UHF dipole 
+- 
+UHF cross dipole (turnstile) 
+- 
+VHF cross dipole (turnstile) 
+- 
+1x UHF dipole 
+- 
+1x VHF dipole 
+- 
+2x UHF dipole 
+- 
+2x VHF dipole 
+- 
+1x UHF V-dipole 
+- 
+1x VHF V-dipole 
+Flight heritage on multiple missions (e.g. LASARsat, CroCube, GRBBeta and external customers). 
+2 TECHNICAL SPECIFICATION 
+Table 2-1: Technical specification 
+Parameter 
+Value 
+Unit 
+Operating Temperature 
+-40 to +85 
+°C 
+Recommended deployment  
+temperature 
+0 to +40 
+°C 
+Dimensions 
+98 x 98 x 6.2 
+98 x 98 x 10,1 (incl. components) 
+mm 
+Power Supply 
+5 
+V 
+Mass 
+~55 
+g 
+Power Consumption - average 
+0.075 
+W 
+Power Consumption - peak 
+1.5 (deployment mode) 
+W 
+ 
+Table 2-2: RF technical specification 
+Parameter 
+Value 
+Unit 
+VHF Frequency covering 
+133 - 150 
+MHz 
+UHF Frequency covering 
+380 – 450 
+MHz 
+VHF dipole antenna gain 
+~2.3 
+dBi 
+UHF dipole antenna gain 
+~2.6 
+dBi 
+UHF turnstile antenna gain 
+~2.6 
+dBi 
+ 
+ 
+ 
+
+ 
+ 
+DATASHEET 
+Ref. & issue: 
+SM-SAM-DS-0016_4.2 
+Date: 
+19/08/2026 
+Pages: 
+5 of 9 
+ 
+Spacemanic CZ s.r.o. | sales@spacemanic.com | www.spacemanic.com 
+ 
+List of used materials is provided in the Table 2-3. 
+Table 2-3: Materials found on SAM 
+Part 
+Material 
+PCB 
+370HR 
+Module corners 
+Aluminium EN AW 6061  
+anodized 
+Element boxes,  
+String holders 
+PEEK 
+Hinges 
+brass 
+RF elements 
+NiTi 
+ 
+3 INTERFACES 
+3.1 ELECTRICAL 
+3.1.1 MAIN CONNECTOR 
+Table 3-1: SAM connector type 
+Placement 
+Connector type 
+On module 
+Molex PicoBlade  
+53261-0971 
+Mates with (cable) 
+Molex PicoBlade  
+51021-0900 
+ 
+Table 3-2: SAM connector pinout table 
+Pin 
+Signal 
+Description 
+Direction 
+Notes 
+1 
+I2C SDA 
+I2C Data signal 
+Input/Output 
+CSP communication 
+2 
+I2C CLK 
+I2C Clock signal 
+Input/Output 
+CSP communication 
+3 
+GND 
+Power supply ground 
+Power input 
+ 
+4 
+VCC 
+Power supply 
+Power input 
+ 
+5 
+VCC 
+Power supply 
+Power input 
+ 
+6 
+GND 
+Power supply ground 
+Power input 
+ 
+7 
+RS485 B 
+RS485 driver B signal 
+Input/Output 
+CSP communication 
+8 
+RS485 A 
+RS485 driver A signal 
+Input/Output 
+CSP communication 
+9 
+GND 
+Power supply ground 
+Power input 
+ 
+ 
+ 
+ 
+
+ 
+ 
+DATASHEET 
+Ref. & issue: 
+SM-SAM-DS-0016_4.2 
+Date: 
+19/08/2026 
+Pages: 
+6 of 9 
+ 
+Spacemanic CZ s.r.o. | sales@spacemanic.com | www.spacemanic.com 
+ 
+3.1.2 DEBUG AND PROGRAMMING CONNECTOR 
+The debug connector is used for firmware manipulation and debugging purposes. 
+Table 3-3: Debug connector types 
+Placement 
+Connector type 
+On module 
+Molex PicoLock  
+503763-0691 
+Mates with (cable) 
+Molex PicoLock  
+503764-0601 
+(housing) 
+ 
+Table 3-4: Debug connector pinout table 
+Pin 
+Signal 
+Description 
+Direction 
+Notes 
+1 
+VCC 
+Power supply (+3.3 V) 
+Power input 
+ 
+2 
+UART_0_TXD 
+3.3V level UART 
+Output 
+CLI communication 
+3 
+UART_0_RX 
+3.3V level UART 
+Input 
+CLI communication 
+4 
+SBWTCK 
+Spy-bi-wire test clock 
+Input/Output 
+Programming 
+interface 
+5 
+RST#SBWTDIO 
+Spy-bi-wire data in/out 
+Input/Output 
+Programming 
+interface 
+6 
+GND 
+Power supply ground 
+Power input 
+ 
+ 
+3.1.3 RADIO INTERFACE 
+The radio interface consists of two 50 Ω coaxial connectors (J2 and J3) for direct connection to the 
+onboard transceiver. If only one frequency band is used, only one connector is utilized. 
+Table 3-5: SAM radio interface connector type 
+Placement 
+Connector type 
+On module 
+Molex MMCX  
+73415-1000 
+Mates with (cable) 
+Molex MMCX  
+73415-0950 on 
+RG-178 
+ 
+3.2 SOFTWARE 
+SAM implements CSP v1 as the main communication protocol on its RS485 and I2C interfaces. The 
+CSP address is always the same as I2C slave address. Additionally, the module includes a command line 
+interface (CLI) for operation and configuration available over debug UART and a CSP service. For 
+software support and development support contact Spacemanic directly.  
+3.3 MECHANICAL 
+The SAM is designed to be mounted on the very top or bottom of the CubeSat structure. It is 
+recommended to use four M2.5x8 CSK Head screws. Mounting holes can be found on two sides of the 
+module (Figure 3-1, red circles) These are M2.5 clearance holes. 
+
+ 
+ 
+DATASHEET 
+Ref. & issue: 
+SM-SAM-DS-0016_4.2 
+Date: 
+19/08/2026 
+Pages: 
+7 of 9 
+ 
+Spacemanic CZ s.r.o. | sales@spacemanic.com | www.spacemanic.com 
+ 
+Additional solar panel can be mounted on the top of the module. Four M2.5x6 screws are required. 
+Mounting holes with the same spacing can be found on the other two sides of the module (Figure 3-1 
+blue circles). These are M2.5 threaded holes. 
+The overall dimensions and mounting interface are depicted in Figure 3-2. 
+ 
+Figure 3-1: Mounting points 
+ 
+Figure 3-2: SAM Dimensions 
+
+ 
+ 
+DATASHEET 
+Ref. & issue: 
+SM-SAM-DS-0016_4.2 
+Date: 
+19/08/2026 
+Pages: 
+8 of 9 
+ 
+Spacemanic CZ s.r.o. | sales@spacemanic.com | www.spacemanic.com 
+ 
+4 DELIVERABLES 
+Table 4-1: Deliverables 
+Type 
+Item 
+Note 
+Mechanical 
+Part 
+Top cover aluminium plate 
+ 
+Wiring 
+Debug cable 
+Molex PicoLock 503764-0601 
+~15cm terminated to female 2.54mm 
+header 
+Wiring 
+Platform cable 
+Molex PicoBlade 51021-0900 
+ ~15cm open-ended 
+Wiring 
+2 pcs of Refurbishment wires per 
+element 
+e.g. for 4 elements, 8 wires 
+Tool 
+Refurbishment 3D printed tool 
+ 
+Documentation 
+Interface Control Document 
+ 
+Support 
+Engineering support: 1 hour 
+ 
+ 
+4.1 AFFIRMATION NOTE 
+COAX is not included 
+ 
+5 RELATED PRODUCTS 
+You may be also interested in: 
+- 
+Murgas - The UHF / VHF Transceiver  
+- 
+SAM M - Satellite Antenna Module – Coming Soon 
+- 
+1-16U CubeSat Platforms / Complete Mission 
+ 
+ 
+
+ 
+ 
+DATASHEET 
+Ref. & issue: 
+SM-SAM-DS-0016_4.2 
+Date: 
+19/08/2026 
+Pages: 
+9 of 9 
+ 
+Spacemanic CZ s.r.o. | sales@spacemanic.com | www.spacemanic.com 
+ 
+6 DISCLAIMER 
+Spacemanic shall not be liable for any damages, losses, delays, or other consequences arising from 
+improper use, unauthorized modifications, or incompatibility of the product with other systems, even in 
+cases where these products are deployed in demanding environments such as satellite or space 
+applications. The product is designed for specific use according to the technical specifications outlined 
+in the official documentation, and the company is not responsible for any issues arising from usage 
+beyond this scope. 
+The company is also not liable for damages caused by external factors that cannot be predicted or 
+controlled, including but not limited to infrastructure failures, space conditions (e.g., radiation, 
+microgravity), natural disasters, human error, unauthorized third-party interference, or unplanned 
+changes in regulatory or legal requirements. 
+By using the product, the user acknowledges awareness of the risks associated with its use in satellite 
+and space applications and accepts full responsibility for the correct deployment and use of the product. 
+ 
+

@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/satsearch_datasheet_qj8ou9_gnssmart_gsd800.pdf
+method: product image from the catalog page https://satsearch.co/products/gnssmart-gsd800-gnss-receiver

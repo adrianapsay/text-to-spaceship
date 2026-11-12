@@ -1,0 +1,291 @@
+ 
+ 
+ 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+ 
+ 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+© 2020 Space Inventor · Nybrogade 14, st. · 9000 Aalborg · Denmark · www.space-inventor.com 
+1
+ 
+ 
+WHL-1000S
+1000 mNms Reaction Wheel
+For Micro Satellites
+Features
+●
+Performance
+○
+Max nominal RPM: 10.000
+○
+Momentum: 1000  mNms @ 10.000 RPM
+○
+Max Torque > 40 mNm
+○
+Control: Speed, torque
+●
+Physical
+○
+120 x 120 x 45 mm
+○
+Mass: 900 gram
+○
+Rotor inertia: 1 x 10-3 kg m2
+○
+Operating temperature range -40ºC to
+70ºC
+○
+Stainless steel rotor
+○
+Aluminium motor housing
+●
+Electrical
+○
+Bus interface: CAN
+○
+Voltage: 28V
+○
+Power: 50W max, 15W at 1000 mNms
+●
+Reliability
+○
+Long life brushless motor design
+○
+Redundant windings and drive stage
+○
+Hybrid ball bearings
+○
+Radiation total dose tested EEE parts
+○
+Vibration rated for all launch vehicles
+○
+5 years design lifetime
+Description
+Fully integrated reaction wheel unit for high performance 
+satellite attitude control for Micro satellite missions with 
+mission lifetime up to 5 years (minimum).
+The WHL-1000 wheel is an integrated 3-phase outrunner 
+BLDC with fully integrated motor control electronics and 
+software. Material for the body is Al-7075-T6, and the rotor 
+is made of ferritic stainless steel while the magnetsare
+Neodymium. The rotor is axially suspended between two
+hybrid ceramic high precision bearings chosen for long life
+and low friction in vacuum conditions. The wheel is 
+commutated by its own internal microcontroller, which runs 
+the control loop to control speed and acceleration upon 
+commands from the ADCS computer.
+Each wheel has a CAN bus interface with CSP making them 
+accessible to the satellite communication bus. The wheels 
+are fitted with basic telemetry sensors: Temperature,
+current, speed, vibration. Software can be updated runtime 
+with only a few seconds idle spinning.
+For reliability, the stator incorporates redundant wiring 
+which
+are
+complemented
+by
+redundant
+drive
+stage 
+electronics.
+The internal power supplies add latch-up 
+protection as well as over-current protection to all the 
+circuits.
+WHL-1000S
+Preliminary Factsheet- v1.0 - Jan  2020
+

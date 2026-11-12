@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-ecuadorian-space-agency-exa-sst02-small-satellite-transceiver-dbagrj.pdf
+method: product image from the catalog page https://satsearch.co/products/exa-sst02-small-satellite-transceiver

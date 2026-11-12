@@ -1,0 +1,82 @@
+Spectral Sensor| Technical Specifications | TM2.space 
+Revision: A 
+Date: 31-08-2026 
+ 
+ 
+ 
+ 
+​
+Spectral Sensor 
+Technical Specifications 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Description: 
+Spectral Sensor is a  compact, low-power spectral sensor designed for CubeSat 
+platforms where mass and power budgets are tight. It measures reflected solar radiation 
+to derive surface albedo across its spectral response band. The same measurement 
+supports use as an Earth sensor, providing coarse nadir determination for attitude and 
+pointing checks. A single I²C interface handles configuration, mode control, and data 
+readout, minimising harness count and integration effort. Its small form factor and low 
+quiescent draw allow continuous operation without impacting the platform power budget. 
+​
+CIN: U61900TS2024PTC186392 
+1 
+
+Spectral Sensor| Technical Specifications | TM2.space 
+Revision: A 
+Date: 31-08-2026 
+ 
+Specifications: 
+ 
+ 
+Parameter 
+Value 
+Mechanical 
+Dimensions (including 
+housing) 
+30 mm x 30 mm x 7.4 mm 
+Mass 
+23.5 g 
+Connector 
+1 x 4 pin 1.25mm pitch Molex Picoblade 
+Performance 
+Interface Type 
+I2C 
+Voltage Range 
+2.7V to 3.6V​
+3.3V nominal 
+Current Consumption 
+30mA 
+Operational 
+temperature  
+-30° to 70°C 
+ 
+Band 
+UV C - 200–280nm (peak sensitivity at 260nm )​
+UV B - 280–320nm (peak sensitivity at 300nm )​
+UV A - 320–400nm (peak sensitivity at 360nm )​
+Visible + IR - 400–1000nm (peak sensitivity at 
+640nm )​
+IR - 600–1000nm (peak sensitivity at 850nm ) 
+ 
+ 
+Questions? Queries? Contact us at info@tm2.space 
+​
+CIN: U61900TS2024PTC186392 
+2 
+

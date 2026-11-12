@@ -61,6 +61,32 @@
   },
   "face_counts": {
    "part": 700
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    95.9,
+    90.2,
+    1.6
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "pcb",
+     "color": [
+      0.09,
+      0.42,
+      0.24
+     ],
+     "file": "bodies_detail/pcb.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",

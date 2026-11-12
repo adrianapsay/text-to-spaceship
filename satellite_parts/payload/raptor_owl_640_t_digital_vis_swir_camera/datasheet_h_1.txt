@@ -1,0 +1,183 @@
+Owl 640 T
+High Sensitivity, Digital VIS-SWIR camera
+640 x 512 • 10μm x 10μm Pixel Pitch • <50e readout noise •
+Key Features and Benefits
+The World’s first SWaP optimised ½” / VGA sensor 
+with VIS-SWIR response
+• ½” Sensor Format
+	 Better for optical design, ideal for OEM integration into
+	 Electro-Optic systems.
+• 10μm x 10μm Pixel Pitch
+   Compatible with VIS-SWIR illuminators, markers & pointers
+• <50 Electrons Readout Noise
+	 Enables highest VIS-SWIR detection limit
+• On-board Automated Gain Control (AGC)
+	 Enables clear video in all light conditions
+• On-board Intelligent 3 point NUC
+	 Enables highest quality photos
+www.raptorphotonics.com
+Resolution	
+640 x 512
+Frame rate	
+10 to 60Hz
+Camera link 	
+          12 bit
+Wavelength Range	
+VIS-SWIR
+
+Sensor Type
+InGaAs PIN-Photodiode
+Active Pixel
+640 x 512
+Pixel Pitch
+10µm x 10µm
+Active Area
+6.4mm x 5.12mm
+Spectral response1
+0.6µm to 1.7µm
+Readout Noise (RMS)2
+LG = Low Gain HG = High Gain
+LG: <190e- (160e- typical) 
+HG: <50e- (47e- typical)
+Peak Quantum Efficiency
+>90% @1.3μm
+Full Well Capacity
+LG: 450ke-
+HG: 10ke-
+Pixel Operability
+>99.5%
+Dark Current (e/p/s)
+<19,000 @ 15°C 
+Digital Output Format
+12 bit Camera Link (Base Configuration)
+Exposure time
+LG: 20μs to 92.5ms
+HG: 40μs to 86.5ms
+Shutter mode
+Global shutter
+Frame Rate
+10 to 60Hz
+Optical Interface
+C mount (selection of SWIR lens avaliable) or M42
+Dynamic Range (Typical)
+LG: 69dB,
+HG: 47dB
+Trigger interface
+Trigger IN and OUT - TTL compatible
+Power supply
+12V DC ±0.5V
+TE Cooling
+Active
+Image Correction
+3 point NUC (offset, Gain & Dark Current) + pixel correction
+Functions controlled by serial 
+communication
+Exposure, intelligent AGC, Non Uniformity Correction,
+Gamma, Pk/Av, TEC, ALC ROI
+Camera Power Consumption3
+<8W with TEC ON, NUC ON
+Operating Case Temperature4
+-20˚C to +55˚C
+Storage Temperature
+-30˚C to +60˚C
+Dimensions (L*W*H)5
+67.60mm x 50.00mm x 50.00mm
+Weight
+247g
+Raptor Photonics Limited reserves the right to change this document at any time without notice and 
+disclaims liability for editorial, pictorial or typographical errors.
+Specification for Owl 640 T
+Quantum Efficiency
+Applications
+Surveillance
+• 860, 1064 & 1550nm laser line detection
+• Airborne and Ground Payload
+• Hand Held Systems
+• Driving Vision Enhancement (DVE)
+• Airborne EVS
+• Vision enhancement
+Scientific
+• Astronomy
+• Beam Profiling
+• Hyperspectral Imaging
+• Semiconductor Inspection
+• Solar Cell Inspection
+• Thermography
+Ordering Information
+Camera
+Owl 640 T Digital Camera
+OW1.7-VS-CL-640-T
+Power Supply Cable
+RPL-HR4-K
+Optional Accessories
+Mini PC with XCAP Std and
+frame grabber
+RPL-PC-EL1
+EPIX® EB1 Frame Grabber
+RPL-EPIX-EB1
+EPIX® XCAP Std software
+RPL-XCAP-STD
+MDR-SDR CameraLink Cable (2m)6
+RPL-MCL-CBL-2M
+Optical Lenses7
+RPL-xx-xxxx
+Note 1:  Optional filters available: Low, High or bandpass.
+Note 2: Typical readout noise is calculated from an average
+              of the last 20 cameras shipped. 
+Note 3: Measured in an ambient of 25°C with adequate heat
+              sinking. For more detailed power consumption
+              values, please refer to the user manual.
+Note 4: Extended operating temperature range on request.
+Note 5: Dimensions include all connector parts on the
+              camera interface.
+Note 6: One cable required. The maximum cable length
+              is 2m. For more information, please refer to the    
+              user manual.
+Note 7: Please consult us to check our range of lenses.
+Note 8. Windowless option available, please contact us for
+              further details
+  
+Demo is available on request.
+Pricing AOR subject to volumes.
+Document #: INOWL1.7-VS-CL-640 T 0521
+ISO 9001
+Registered
+Quality
+Management
+Detailed technical drawings 
+can be downloaded at 
+www.raptorphotonics.com
+Willowbank Business Park
+Larne, Co Antrim
+BT40 2SF, 
+Northern Ireland
+Raptor Photonics Ltd. (UK)
+T: +44(0)2828 270 141
+E: sales@raptorphotonics.com
+www.raptorphotonics.com
+Raptor Photonics Inc. (USA)
+T: +1 (877) 230-4836
+E: sales@raptorphotonics.com
+www.raptorphotonics.com
+600
+800
+1000
+1200
+1400
+0
+10
+20
+30
+40
+50
+60
+70
+80
+90
+Wavelength (nm)
+Quantum Efficiency (%)
+100
+1800
+1600
+*Data supplied by sensor manufacturer
+

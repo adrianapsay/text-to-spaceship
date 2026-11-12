@@ -107,6 +107,86 @@
   },
   "face_counts": {
    "part": 348
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    96.0,
+    96.0,
+    113.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "front_plate",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/front_plate.stl"
+    },
+    {
+     "name": "emitter",
+     "color": [
+      0.85,
+      0.66,
+      0.22
+     ],
+     "file": "bodies_detail/emitter.stl"
+    },
+    {
+     "name": "emitter_ring",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/emitter_ring.stl"
+    },
+    {
+     "name": "corner_screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/corner_screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    },
+    {
+     "name": "bolt_circle",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/bolt_circle.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",
@@ -123,12 +203,12 @@
  "reference_images": {
   "datasheets": [],
   "stl_preview": "preview.png",
-  "drawing": null,
+  "drawing": "drawing.png",
   "photo_url": "https://cdn.satsearch.com/product-images/satsearch_product-image_3qqgge_thrustme_npt30-i2_1u.jpg",
   "photo_source": "satsearch",
   "photo_page": "https://satsearch.co/products/thrustme-npt30-i2-1u-electric-propulsion-system",
-  "photo_file": null,
-  "photo_kind": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
   "datasheet_url": null,
   "datasheet_page_file": null,
   "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"

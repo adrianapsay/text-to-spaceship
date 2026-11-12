@@ -1,0 +1,160 @@
+ 
+TakeMe2Space 
+PowerDrive  
+Technical Specifications 
+ 
+ 
+ 
+ 
+ 
+ 
+Description: 
+ 
+PowerDrive is an electrical power supply (EPS) designed for use in  2U to 16 U cubesats. The 
+system integrates solar power conditioning and power distribution into a compact PC104 
+compliant aluminium enclosure. There are 3 independent MPPT enabled channels for solar 
+power collection that support 4 solar panel inputs. There are 6 independent DC-DC 
+converters which can be configured for different output levels, depending on the bus and 
+payload requirements. There are 10 output connectors for sub-system power and 6 outputs 
+for deployment systems in addition to the PC104 header. A low power STM32 
+microcontroller controls the system inputs, outputs, batteries, and provides telemetry 
+through isolated CAN and RS485 interfaces. The built-in hardware watchdog ensures 
+reliability during long-duration missions. PowerDrive can be connected to up to 6 
+PowerBank-50 battery packs, for a total energy storage capacity of over 300 Wh.  
+ 
+
+PowerDrive - Technical Specifications 
+Revision: B 
+Date: 12-08-2025 
+Specifications: 
+ 
+ 
+Parameter 
+Value 
+Input  
+Solar 
+Power 
+Independent Input Channels 
+3 x fast response MPPT channels 
+Total solar panel inputs 
+4 connectors (2 inputs share an MPPT channel) 
+Input Voltage Range 
+6 - 35 V 
+Peak Input Current 
+3 A per channel 
+Peak Input Power 
+60 W per channel;  
+150 W overall  
+Output 
+Power 
+DC Converters 
+3 x 5 V buck converters (configurable 3.3 to 12 V) 
+2 x 12 V buck converters (configurable 3.3 to 12 V) 
+1 x 12 V buck-boost (configurable 3.3 to 24 V) 
+Output Connections  
+Individual connectors: 
+5 x 12 V outputs (configurable)​
+5 x 5V outputs (configurable) 
+PC104: 
+2 x buck-boost outputs  
+12 x buck outputs  
+2 x V_raw outputs 
+Peak Current per output 
+channel 
+Up to 6 A per individual channel  
+Overall Peak Power Output  
+100 W 
+Deployment 
+Outputs 
+Deployment Outputs 
+6 x deployment connectors  
+Output voltage 
+Default: 5 V (configurable 3.3 to 12 V) 
+Maximum power 
+30 W for <5 seconds 
+System 
+Bus Voltage 
+12 - 20 V (with 4S1P pack config.) 
+Processor type 
+Single Core 32-bit Arm Cortex-M33 MCU 
+Memory  
+16 MB Serial Flash 
+MCU Power Supply 
+Dual-redundant independent 3.3 V supply 
+Real-Time Clock (RTC) 
+RTC with battery backup 
+Fault Tolerance 
+External Watchdog Timer (configurable) 
+Power Consumption 
+0.5 W nominal, 1 W peak 
+Interfaces 
+Interfaces Supported 
+1 x isolated CAN  
+1 x isolated RS-485 (full or half duplex) 
+Electrical Inhibits 
+1 x Deployment Switch (DSW) connector (NO logic) 
+1 x Remove-Before-Flight (RBF) (NO logic) 
+Connectors 
+1 x PC 104 Header  
+10 x Harwin Gecko-SL (6 pin) 
+2 
+
+PowerDrive - Technical Specifications 
+Revision: B 
+Date: 12-08-2025 
+6 x Molex Pico-Lock (2 mm pitch, 3 pin) 
+2 x Molex Pico-Lock (1.5 mm pitch, 6 pin) 
+4 x Molex Pico-Lock (2 mm pitch, 2 pin) 
+2 x Molex Pico-Lock (2 mm pitch, 4 pin) 
+1 x Molex Pico-Lock (2 mm pitch, 6 pin) 
+1 x Harwin Gecko-SL (26 pin) 
+Mechanical 
+Dimensions 
+95.5 x 90.5 x 31.8 mm  
+Weight 
+300 g 
+Form factor 
+PC104 compliant with stackable connector 
+Enclosure Material 
+Type III anodised Al 6061-T6 
+Temperature Range 
+-40°C to +85°C 
+Storage Temperature 
+-55°C to +85°C 
+Telemetry 
+Solar Panel Input Voltage x 3 
+Solar Panel MPPT Voltage x 3 
+Solar Panel Input Current x 3  
+MCU Temperature 
+Bus Voltage  
+Bus Current 
+Regulated Power Output Current x 10  
+Regulated Output Current x 5 
+Battery Telemetry (if Battery Pack is compatible) 
+Software 
+Software Development Kit 
+(SDK) 
+SDK will be provided  
+Supported Languages for 
+SDK 
+C - Language 
+Testing & 
+compliance 
+ETL: TVAC, EMI/EMC, 
+Vibration and Shock 
+Tolerance 
+TBD 
+Mission Life Expectancy 
+5 Years 
+ 
+3 
+
+PowerDrive - Technical Specifications 
+Revision: B 
+Date: 12-08-2025 
+Simplified Block Diagram: 
+ 
+ 
+ 
+4 
+

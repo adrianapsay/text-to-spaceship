@@ -1,0 +1,48 @@
+OBC-PRO-2
+PRO-2 is a low-proﬁle OBC designed for various missions, where intensive 
+processing is not a primary requirement. However, it oﬀers the capability to 
+deliver up to 200 DMIPS on its ARM Cortex-M3 core if processing demands arise.
+Equipped with a versatile range of interfaces—including GPIO, ADC, CAN, RS232, 
+RS422, and optional Ethernet—OBC-PRO-2 provides robust support for various 
+mission-critical functions while maintaining a compact & eﬃcient design.
+CAVU-OBC-PRO-2-Br-v2025.1
+TID: 30Krad (Si)
+KEY FEATURES
+Processor: ARM Cortex-M3 on SmartFusion2 FPGA SoC.
+Analog Inputs: 16 Channels, 16-bit (±5V, ±10V, ±20V)
+Digital I/O: 20 GPIOs (3.3V, 5V)
+Interfaces:
+ 
+Memory:
+ 
+128KB eNVM Flash (ROM)
+ 
+4Mbit Serial FRAM EEPROM
+RTC: 1 real-time clock
+Power Converters: Double Redundant for Main Power Converters
+Power Supply: 28V ±4V, with power consumption under 1.5W.
+Radiation Hardness:
+Customizable Options: Fully customizable without additional NRE costs.
+2 CAN
+4 RS422
+4 RS232
+TTL UART
+I2C
+Ethernet (non-standard)
+Single Event Eﬀects (SEE) tolerance at 60 MeV
+Latch-up immune
+144KB + 191Kb RAM
+128Mbit Flash
+MECHANICAL & ENVIRONMENTAL RESILIENCE
+Weight: Less than 500g.
+Operating Conditions: Suitable for spaceﬂight, capable of withstanding extreme temperature and pressure variations.
+FORM FACTOR
+Dimensions: 125x110x20 mm
+Connectors: Micro-D
+SOFTWARE SUPPORT
+FreeRTOS or uC-OS-3  with bare-metal programming for full hardware control.
+Development and debugging via SoftConsole, Keil, or IAR IDEs, with JTAG support for diagnostics.
+Sales@CavuAerospace.UK
++44 (0)1786 628002
+HQ: 12 Scion House, Stirling University Innovation Park, Stirling, UK. FK9 4NF
+

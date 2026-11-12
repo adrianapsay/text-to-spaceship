@@ -71,6 +71,29 @@
   },
   "face_counts": {
    "part": 356
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "head",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__head.stl"
+    },
+    {
+     "name": "shank",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__shank.stl"
+    }
+   ]
   }
  },
  "image": "preview.png",
@@ -82,7 +105,15 @@
   "power_bus_V": null
  },
  "reference_images": {
-  "datasheets": [],
+  "datasheets": [
+   {
+    "file": "datasheet_1_page1.png",
+    "pdf": "datasheet_1.pdf",
+    "kind": "web_search",
+    "url": "https://docs.rs-online.com/574c/A700000011307398.pdf",
+    "title": null
+   }
+  ],
   "stl_preview": "preview.png",
   "drawing": "drawing.png",
   "photo_url": null,

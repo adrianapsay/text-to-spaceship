@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-ecuadorian-space-agency-exa-htc01-microsatcubesat-hatch-shutter-for-reliable-protection-of-optics-and-devices-2xhr5f.pdf
+method: product image from the catalog page https://satsearch.co/products/exa-htc01-microsat-cubesat-hatch-shutter

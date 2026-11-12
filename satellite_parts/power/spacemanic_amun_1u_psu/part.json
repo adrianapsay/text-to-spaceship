@@ -1,0 +1,235 @@
+{
+ "id": "spacemanic_amun_1u_psu",
+ "name": "Spacemanic AMUN 1U power supply unit with 24 Wh battery (PC/104)",
+ "category": "power",
+ "subcategory": "eps",
+ "vendor": "Spacemanic CZ s.r.o.",
+ "model": "AMUN 1U PSU",
+ "dimensions_mm": {
+  "x": 90.2,
+  "y": 95.9,
+  "z": 19.7
+ },
+ "mass_g": 185,
+ "source": {
+  "type": "datasheet",
+  "url": "https://spacemanic.com/wp-content/uploads/2026/03/SM-AMU-DS-0001_5.2_Datasheet-AMUN-1U.pdf",
+  "document": {
+   "title": "Spacemanic AMUN 1U data sheet SM-AMU-DS-0001 5.2",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "90.2 x 95.9 x 19.7 mm, 185 g, 24 Wh 2S1P NCR18650B pack (7.2 V typical, 8.2 V max), MPPT solar input 5 V at 500 mA, outputs VBAT, 3.3 V, 5 V and 4 configurable 3.3/5 V (4 A per output, 6 A combined), CSP over I2C / RS485 / CAN, RBF and two deployment switch inputs, -40 to +85 C. The AMUN Compact sheet (5.3) states the same size and mass."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "Czech Republic",
+ "electrical": {
+  "battery_energy_Wh": 24,
+  "voltage_V": {
+   "nominal": 7.2,
+   "max": 8.2
+  },
+  "outputs": [
+   "VBAT",
+   "3.3 V",
+   "5 V",
+   "4 x 3.3/5 V"
+  ],
+  "interfaces": [
+   "CSP I2C",
+   "CSP RS485",
+   "CSP CAN",
+   "UART",
+   "PC/104"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -40,
+   "max": 85
+  }
+ },
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   95.9,
+   90.2,
+   19.7
+  ],
+  "mesh_volume_mm3": 105392.0,
+  "watertight": true,
+  "render_kind": "pc104_board",
+  "effective_density_g_cm3": 1.755,
+  "bodies": {
+   "part": [
+    {
+     "name": "pcb",
+     "color": [
+      0.09,
+      0.42,
+      0.24
+     ],
+     "file": "bodies/part__pcb.stl"
+    },
+    {
+     "name": "stack_header",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__stack_header.stl"
+    },
+    {
+     "name": "components",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__components.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 732
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    95.9,
+    90.2,
+    19.7
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "pcb",
+     "color": [
+      0.09,
+      0.42,
+      0.24
+     ],
+     "file": "bodies_detail/pcb.stl"
+    },
+    {
+     "name": "standoffs",
+     "color": [
+      0.78,
+      0.62,
+      0.28
+     ],
+     "file": "bodies_detail/standoffs.stl"
+    },
+    {
+     "name": "stack_header",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/stack_header.stl"
+    },
+    {
+     "name": "header_pins",
+     "color": [
+      0.85,
+      0.66,
+      0.22
+     ],
+     "file": "bodies_detail/header_pins.stl"
+    },
+    {
+     "name": "shield",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/shield.stl"
+    },
+    {
+     "name": "ics",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/ics.stl"
+    },
+    {
+     "name": "passives",
+     "color": [
+      0.55,
+      0.45,
+      0.3
+     ],
+     "file": "bodies_detail/passives.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "CAN",
+   "CSP",
+   "I2C",
+   "UART"
+  ],
+  "mechanical": "PC/104 stack",
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 7.2
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://spacemanic.com/wp-content/uploads/2026/03/SM-AMU-DS-0001_5.2_Datasheet-AMUN-1U.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

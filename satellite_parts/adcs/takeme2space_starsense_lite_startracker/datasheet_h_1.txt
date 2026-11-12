@@ -1,0 +1,97 @@
+StarSense Lite | Technical Specifications | TM2.space 
+Revision: D 
+Date: 10-2-2026 
+ 
+ 
+StarSense Lite 
+Technical Specifications 
+ 
+ 
+ 
+Description: 
+StarSense Lite is a compact, high-accuracy star tracker by TakeMe2Space for the 
+CubeSat and small satellite class. Built ground-up in India, we design and fabricate the 
+radiation-shielded lens assembly, electro-optical baffle, four-board read-out electronics, 
+and precision opto-mechanical enclosure in-house — only the detector and select lenses 
+are sourced externally. This depth of supply chain control eliminates the long lead times 
+typical of traditional star trackers. 
+ 
+At its core is a hybrid attitude-determination pipeline that pairs classical, flight-proven 
+algorithms with proprietary AI models running on a dedicated FPGA + AI-accelerator 
+board. Deep-learning based star detection and sub-pixel centroiding increase usable 
+stars per frame and sharpen centroid accuracy, while remaining fully deterministic at 
+ 
+CIN: U61900TS2024PTC186392 
+1 
+ 
+
+StarSense Lite | Technical Specifications | TM2.space 
+Revision: D 
+Date: 10-2-2026 
+runtime — fixed weights, bounded inference paths, suitable for spaceflight. The underlying 
+four-board modular architecture — sensor, FPGA + AI accelerator, power, and spacecraft 
+interface — isolates each function behind standardised interfaces, so detector upgrades 
+or bus protocol changes (CAN, RS485, SpaceWire, LVDS) can be absorbed by modifying a 
+single board rather than redesigning the unit. 
+ 
+Specifications: 
+ 
+Parameter 
+Value 
+Performance 
+Interface 
+Full Duplex RS485, CAN 
+FOV 
+19.4° x 10.6° half-angle 
+Cross boresight  
+32 arcsec 
+Around Boresight  
+45 arcsec 
+Max slew rate 
+ < 3 deg/s 
+Lost in Space availability 
+2 sec 
+Baffle sun rejection angle  
+34° 
+Output Rate 
+10Hz 
+Operating temperature 
+-20° to 65° 
+Electrical 
+Peak power consumption 
+10W 
+Nominal power consumption 
+5W 
+Operating Voltage 
+5V 
+Mechanical 
+Mass 
+200 g 
+Dimensions 
+61x82x117.2 mm 
+Radiation Shielded Lens 
+Yes 
+Connectors 
+1x 6 pin Harwin Gecko screw lock for Full 
+Duplex RS485 
+1x 6 pin Harwin Gecko screw lock for UART 
+and CAN 
+1x 4pin 1mm pitch Molex Pico Lock for 5V 
+power input 
+1x 2pin 1.5mm pitch Molex Pick Lock for 
+Power Shutdown 
+ 
+CIN: U61900TS2024PTC186392 
+2 
+ 
+
+StarSense Lite | Technical Specifications | TM2.space 
+Revision: D 
+Date: 10-2-2026 
+ 
+Questions? Queries? Contact us at info@tm2.space 
+ 
+CIN: U61900TS2024PTC186392 
+3 
+ 
+

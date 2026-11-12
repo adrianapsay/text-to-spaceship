@@ -1,0 +1,140 @@
+Overview 
+General Dynamics’ Viceroy-4 Global Positioning System 
+(GPS) Spaceborne Receiver provides position, velocity, 
+and time information for Low Earth Orbit (LEO) and 
+Geostationary Earth Orbit (GEO) applications. The use of 
+dual antennas for LEO enhances the performance and 
+satellite visibility. Each of the 12 GPS channels can be 
+assigned to either antenna. The design supports an RS-422 
+interface.
+Key Features
+n
+n Space Qualified Digital Design
+n
+n Full Spaceborne Capability
+n
+n Autonomous Operation
+n
+n Pseudorange and Integrated Carrier Phase at One Second 
+Rate
+n
+n One PPS Clock Output Synchronized to GPS Time
+n
+n Radiation Hardened Static RAM
+n
+n Up to 12 Receive Tracking Channels
+n
+n 53 Cubic Inches
+n
+n 2.4 Pounds
+n
+n 20 to 35 VDC Operation
+n
+n Improved Radiation Hardened Digital Electronics
+n
+n 12 Channels Support All-in-View Tracking
+n
+n Dual Antenna – Any Channel Assigned to Either Antenna 
+(LEO only)
+n
+n Fast Cold Start Mode Simplifies Integration and Autonomous 
+Operation
+n
+n Low Signal Acquisition and Tracking Supports GEO Sidelobe 
+Tracking
+n
+n Enhanced Resolution 1 Pulse per Second Output
+Viceroy®-4 GPS Spaceborne Receiver
+Superior positioning with 200+ years of on-orbit performance
+Design based on legacy space qualified digital design
+20 years of trouble-free spaceflight heritage
+Same reliable position, velocity, time, pseudorange 
+and carrier phase at 1Hz
+Same form-factor and interface control as heritage Viceroy receiver
+
+D-VICEROY4-02-0919 
+©2019 General Dynamics. All rights reserved. General Dynamics reserves the right to make changes in its products and specifications at anytime and without notice.  All trademarks 
+indicated as such herein are trademarks of General Dynamics. All other product and service names are the property of their respective owners. ® Reg. U.S. Pat. and Tm. Off. 
+PRI-1908-0054
+Performance Characteristics
+Receiver Architecture
+n
+n 12 channels with enhanced fast acquisition processor
+n
+n Dual antenna – any channel to either antenna (LEO only)
+n
+n L1: 1575.42 MHz, C/A code
+n
+n Carrier-aided code tracking
+n
+n Based on legacy Viceroy architecture (hardware and software)
+n
+n Kalman filter or least squares solution
+Input/Output
+n
+n RS-422 serial I/O (standard)
+n
+n X.25 protocol with ECEF position, velocity, time, longitude, latitude, 
+pseudorange, carrier phase
+n
+n One pulse per second (GPS, UTC, or Measurement Epoch Time)
+n
+n 9-pin male Mirco-D for prime power
+n
+n 37-pin female Sub-D for command and telemetry
+n
+n SMA female connector for RF signal
+Solution Accuracy
+n
+n Autonomous Position: < 15 meters, 1 sigma (LEO) 
+	 	
+	
+        < 100 meters, 1sigma (GEO)
+n
+n Autonomous Velocity: < 0.1 meters/second, 1 sigma (LEO) 
+	 	
+	
+        < 0.01 meters/second, 1 sigma (GEO)
+n
+n 1PPS time: < 100 ns, 1 sigma (typical)
+Time to First Fix
+n
+n LEO: 4 minutes, cold start
+n
+n GEO: 10 minutes, cold start
+Orbital Dynamics
+n
+n Altitude: approx 200km to 2000km (LEO)
+	 	
+  approx 35,800km  (GEO)
+n
+n Velocity: up to 16,000 meters/second
+n
+n Acceleration: 1G
+Optional and Custom Features: Contact Factory
+n
+n Single string or redundant configurations 
+n
+n Precision internal reference Ovenized Crystal Oscillator (OCXO)
+n
+n External 10 MHz reference oscillator
+n
+n Time Strobe Input: < 100 ns, 1 sigma
+n
+n MEO and HEO Altitudes
+Physical/Environmental
+n
+n Size: 6.0” x 5.2” x 1.7” (152 x 132 x 43 mm)
+n
+n Weight: 2.4 lbs (1.1 kg) max
+n
+n DC Power: 8 W max; steady-state tracking (20-35 V)
+n
+n Vibration: 17 Grms
+n
+n Shock: 1750 G @ 500 Hz
+n
+n Temperature: -20°C to +60°C
+Standard positioning service in space
+Space Inquiries   •  1-877-449-0600   •  www.gdmissionsystems.com/space  •  www.gdmissionsystems.com/contact-us
+

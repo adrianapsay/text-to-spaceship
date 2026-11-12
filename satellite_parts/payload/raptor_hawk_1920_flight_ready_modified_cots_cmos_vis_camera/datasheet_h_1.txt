@@ -1,0 +1,135 @@
+www.raptorphotonics.com
+Hawk 1920 “Flight Ready”
+Modified COTS, H igh Resolution, High Sensitivity, Digital CMOS camera
+• 1920 x 1080 • 30Hz • Digital • Global Shutter• C Mount
+• Robust, compact and athermalised structural design for 1U-12U Payloads
+• Lightweight custom layout and design - Results in reduced launch cost
+• Extended operating temperature from -40°C to +71°C
+• Radiation tolerant - Proven 60 months + in LEO Orbits, details under NDA
+• Ruggedised connectors - Single 80-pin connector - other options available
+• Class3a manufactured PCBs with solder standard IPC J-STD-001GS
+• Optional conformal board coatings
+• Flexi-rigid electronics to fit specific EO space systems
+• Customized mechanics finished in space industry recognised conformal coatings
+• Vented screws where necessary and options for bonding / staking material
+• Flat front or removable lens mounts
+• Advanced video enhancement and signal processing features - Optimizing image quality and output in real-time.
+Space Features and Benefits
+The best performing HD VIS NewSpace camera in the World, LEO Cube-Sat ready! 
+
+Document #: HK1920-CL-OEM-S 1024
+Willowbank Business Park
+Larne, Co Antrim
+BT40 2SF, 
+Northern Ireland
+Raptor Photonics Ltd. (UK)
+T: +44(0)2828 270 141
+E: sales@raptorphotonics.com
+www.raptorphotonics.com
+Raptor Photonics Inc. (USA)
+T: +1 (877) 230-4836
+E: sales@raptorphotonics.com
+www.raptorphotonics.com
+Specification for Hawk 1920 “Flight Ready”
+Ordering Information
+Camera
+Hawk 1920 Digital camera 
+Power & Comms Cable with D-type 
+Power & Comms Cable without D-type
+HK1920-CL-OEM-S
+RPL-SDPC-CBL-D-VERT 
+RPL-SDPC-CBL-FL-VERT
+Monochrome
+Color
+Sensor Type
+2/3" CMOS
+Active Pixel
+1944 x 1472
+Frame Rate
+ 50Hz (Max)
+ 25Hz
+Pixel Size
+4.5μm x 4.5μm
+Active Area (Diagonal)
+11.00mm
+Dynamic Range
+72dB
+Anti-blooming
+Yes
+Spectral Response
+300-1100nm
+Non-Linearity 
+<1%
+Total Power Consumption
+<5W
+Readout Noise 
+1.5e-
+Output Format
+12 bit Camera Link
+(base configuration)
+8 bit Camera Link
+Synchronization
+Trigger In & OUT - TTL compatible
+Trigger Connectors
+SMA type
+Lens Mount
+C mount, back focus capability
+Power Connector
+Hirose part code HR10A-7R-4PB
+Power Supply
+12V DC ±10%
+Operating Temperature Range 2
+-20°C to +55°C
+Storage Temperature Range
+-40°C to +70°C
+Dimensions (L*W*H)3
+43mm x 43mm x 37mm
+Weight (excluding lens)
+95g
+Raptor Photonics Limited reserves the right to change this document at any time without notice and 
+disclaims liability for editorial, pictorial or typographical errors.
+Other accessories such as frame grabbers, software and 
+cables are available on request.
+Notes
+1. Optional filters available: Low, High or bandpass.
+2. Typical readout noise is calculated from an average of the 
+last 20 cameras shipped. 
+3. Mode dependent
+4.
+5.
+6.
+Measured in an ambient of 25°C with adequate heat sinking. 
+For more detailed power consumption values, please refer 
+to the user manual.
+Dimensions include all connector parts on the camera 
+interface.
+Please consult us to check our range of lenses.
+Quantum Efficiency
+300
+400
+80
+70
+60
+50
+40
+30
+20
+10
+0
+500
+600
+800
+900
+1000
+1100
+Quantum Efficiency (%)
+Wavelength (nm)
+700
+*Data supplied by sensor manufacturer
+ Hawk 1920 COTS fitted with a 3rd party  lens
+We have outlined our standard space specifications 
+but appreciate your requirements may vary. Contact us 
+at sales@raptorphotonics.com to discuss your needs. 
+2D and 3D drawings , demo cameras and pricing available 
+on request. Pricing subject to volumes.
+

@@ -1,0 +1,5450 @@
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         1/53                                                          August 2021 
+ 
+1 
+FEATURES 
+o 
+Miniature package 
+o 
+Low noise 
+o 
+Low bias instability 
+o 
+Excellent performance in vibration and shock environments 
+o 
+1, 2 or 3 axes offered in same package 
+o 
+Electronically calibrated axis alignment 
+o 
+Single-crystal silicon technology 
+o 
+No intrinsic wear-out effects 
+o 
+Insensitive to magnetic fields 
+o 
+Full EMI compliance 
+o 
+Digital interface, RS422 
+o 
+Fully configurable:  
+o 
+5 different sample rates 
+o 
+5 different bandwidths 
+o 
+LP filter -3dB frequency can be set individually 
+for each axis 
+o 
+RS422 protocol, bit-rate and line termination 
+o 
+Selectable output unit: angular rate [deg/s], 
+incremental angle [deg], average angular rate 
+[deg/s] or integrated angle [°] 
+o 
+External Trigger input and Time Of Validity output to 
+enable synchronization 
+o 
+Continuous self-diagnostics 
+o 
+RoHS compatible 
+ 
+ 
+2 
+GENERAL DESCRIPTION 
+ 
+STIM210 is a cluster of 1, 2 or 3 high accuracy MEMS-based gyros in a miniature package. Any configuration of axes 
+can be provided. Each axis is factory-calibrated for bias, sensitivity and compensated for temperature effects to provide 
+high-accuracy measurements in the temperature range -40°C to +85°C. The unit runs off a single +5V supply. 
+ 
+STIM210 communicates via a standard high-level RS422 interface. The use of a 32 bit RISC ARM microcontroller 
+provides flexibility in the configuration, like choice of output unit, sample rate, LP filter -3dB frequency and RS422 bit-
+rate and protocol parameters. All configurable parameters can be defined when ordering or set by customer. 
+ 
+When STIM210 is powered up, it will perform an internal system check and synchronize the gyros. As an 
+acknowledgement of the complete power-up sequence, it will provide special datagrams containing data, like part 
+number, serial number, number of active axis and configuration parameters as mentioned above. STIM210 will then 
+automatically proceed to provide measurement data. Connect power and STIM210 will provide accurate gyro 
+measurements over the RS422 interface without any interaction with the device. 
+ 
+The measurement data is transmitted as packages of data on a fixed format (datagram) at intervals given by the sample 
+rate. The datagram is in binary coded format in order to have an efficient transfer of data. In addition to the measurement 
+data itself, the datagram contains an identifier, a status byte and a CRC (Cyclic Redundancy Check) byte to provide 
+high degree of fault detection in the transmissions. The status byte will flag any detected errors in the system. 
+ 
+For more advanced users, the gyro may be put in Service Mode. In this mode all the configuration parameters can be 
+intermediately or permanently changed by overwriting the current settings in the flash memory. In Service Mode the 
+commands and responses are in a human readable format; to enable the use of terminal-type software during typical 
+product integration. Service Mode also provides the ability to perform single measurements, perform diagnostics and 
+obtain a higher detail level of detected errors reported in the status byte. 
+ 
+ 
+ 
+ 
+Figure 1-1: STIM210 FUNCTION BLOCK DIAGRAM 
+ 
+ 
+ 
+ 
+Sensonor AS 
+Phone: +47 3303 5000 
+sales@sensonor.com   
+www.sensonor.com 
+TxData+
+TxData-
+RxData+
+RxData-
++5V
+GND
+POWER 
+MANAGEMENT / 
+VOLTAGE AND 
+FREQUENCY 
+REFERENCES
+X-AXIS
+GYRO
+Y-AXIS
+GYRO
+Z-AXIS
+GYRO
+SELF-
+DIAGNOSTICS
+GYRO DRIVE 
++ ADC
+CALIBRATION 
+AND 
+COMPENSATION
+RS422
+OUTPUT 
+DRIVER
+RS422 
+INPUT 
+BUFFER
+TOV
+GYRO DRIVE 
++ ADC
+GYRO DRIVE 
++ ADC
+ExtTrig
+SYSTEM 
+CONTROLLER
+Reset
+(38.6mm x 44.8mm x 21.5mm) 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         2/53                                                          August 2021 
+ 
+3 
+TABLE OF CONTENTS 
+ 
+1 
+FEATURES ................................................................................................................................................................ 1 
+2 
+GENERAL DESCRIPTION ......................................................................................................................................... 1 
+3 
+TABLE OF CONTENTS ............................................................................................................................................. 2 
+4 
+DEFINITIONS AND ABBREVIATIONS USED IN DOCUMENT ................................................................................ 3 
+4.1 
+Definitions ............................................................................................................................................................ 3 
+4.2 
+Abbreviations ....................................................................................................................................................... 3 
+5 
+ABSOLUTE MAXIMUM RATINGS ............................................................................................................................. 3 
+6 
+SPECIFICATIONS ...................................................................................................................................................... 3 
+6.1 
+TYPICAL PERFORMANCE CHARACTERISTICS ............................................................................................. 6 
+6.1.1 
+Root Allan Variance ..................................................................................................................................... 6 
+6.1.2 
+Initial bias drift .............................................................................................................................................. 7 
+6.1.3 
+Bias drift over temperature ........................................................................................................................... 7 
+6.1.4 
+Frequency characteristics ............................................................................................................................ 8 
+6.2 
+Configurable parameters ................................................................................................................................... 10 
+6.3 
+Datagram specifications .................................................................................................................................... 11 
+6.4 
+Status byte ........................................................................................................................................................ 15 
+7 
+MECHANICAL .......................................................................................................................................................... 16 
+7.1 
+Mechanical dimensions ..................................................................................................................................... 16 
+7.2 
+Advice on mounting orientation ......................................................................................................................... 17 
+7.3 
+Pin configuration ................................................................................................................................................ 17 
+7.4 
+Definition of axes ............................................................................................................................................... 17 
+8 
+BASIC OPERATION ................................................................................................................................................. 19 
+8.1 
+Reset ................................................................................................................................................................. 19 
+8.2 
+External Trigger ................................................................................................................................................. 19 
+8.3 
+Time of Validity (TOV) ....................................................................................................................................... 21 
+8.4 
+Operating modes ............................................................................................................................................... 22 
+8.4.1 
+Init Mode .................................................................................................................................................... 22 
+8.4.2 
+Normal Mode .............................................................................................................................................. 22 
+8.4.3 
+Service Mode ............................................................................................................................................. 26 
+8.5 
+Self diagnostics ................................................................................................................................................. 26 
+9 
+COMMANDS IN NORMAL MODE ........................................................................................................................... 27 
+9.1 
+N (PART NUMBER DATAGRAM) command .................................................................................................... 27 
+9.2 
+I (SERIAL NUMBER DATAGRAM) command .................................................................................................. 27 
+9.3 
+C (CONFIGURATION DATAGRAM) command ................................................................................................ 28 
+9.4 
+E (EXTENDED ERROR INFORMATION DATAGRAM) command .................................................................. 28 
+9.5 
+R (RESET) command ........................................................................................................................................ 28 
+9.6 
+SERVICEMODE command ............................................................................................................................... 29 
+10 
+COMMANDS IN SERVICE MODE ....................................................................................................................... 30 
+10.1 
+i (INFORMATION) command ........................................................................................................................ 31 
+10.2 
+a (SINGLE-SHOT MEASUREMENT) command ........................................................................................... 34 
+10.3 
+c (DIAGNOSTIC) command .......................................................................................................................... 35 
+10.4 
+d (DATAGRAM FORMAT) command ............................................................................................................ 37 
+10.5 
+t (TRANSMISSION PARAMETERS) command ............................................................................................ 38 
+10.6 
+r (TERMINATION) command ........................................................................................................................ 40 
+10.7 
+u (OUTPUT UNIT) command ........................................................................................................................ 41 
+10.8 
+f (LP FILTER -3dB FREQUENCY) command ............................................................................................... 42 
+10.9 
+m (SAMPLE RATE) command ...................................................................................................................... 43 
+10.10 
+s (SAVE) command ....................................................................................................................................... 44 
+10.11 
+x (EXIT) command ......................................................................................................................................... 45 
+10.12 
+z (RESTORE TO FACTORY SETTINGS) command .................................................................................... 47 
+10.13 
+? (HELP) command ....................................................................................................................................... 49 
+11 
+MARKING ............................................................................................................................................................. 52 
+12 
+PART NUMBER / ORDERING INFORMATION ................................................................................................... 52 
+ 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         3/53                                                          August 2021 
+ 
+4 
+DEFINITIONS AND ABBREVIATIONS USED IN DOCUMENT 
+ 
+4.1 
+Definitions 
+ 
+1g = 9.80665m/s2 
+ 
+ 
+4.2 
+Abbreviations 
+ 
+Table 4-1: Abbreviations 
+ABBREVIATION 
+FULL NAME 
+BCD 
+Binary Coded Decimal 
+CIC-filter 
+Cascaded Integrator Comb filter 
+CR 
+Carriage Return 
+ESD 
+Electro-Static Discharge 
+ExtTrig 
+External Trigger 
+GND 
+Ground 
+LF 
+Line Feed 
+LP filter 
+Low-Pass filter 
+NRST 
+Negative (active) Reset 
+rms 
+Root mean square 
+RxD 
+Receive Data 
+TOV 
+Time Of Validity 
+TxD 
+Transmit Data 
+VSUP 
+Voltage supply 
+ 
+ 
+5 
+ABSOLUTE MAXIMUM RATINGS 
+ 
+Stresses beyond those listed in Table 5-1 may cause permanent damage to the device. 
+Exposure to any Absolute Maximum Rating condition for extended periods may affect device reliability and lifetime. 
+ 
+Table 5-1: Absolute maximum ratings 
+Parameter 
+Rating 
+Comment 
+Mechanical shock 
+1 500g/0.5ms half-sine 
+Any direction. Ref: MIL STD-883G 
+ESD human body model 
+±2kV 
+Ref: JEDEC/ESDA JS-001 
+Storage temperature 
+-55°C to +90°C 
+Up to 1000 hours 
+VSUP to GND 
+-0.5 to +7V 
+ 
+RxD+ or RxD- to GND 
+-0.3V to +7V 
+ 
+RxD+ to RxD- 
+±6V 
+with 120Ω Line Termination = ON 
+TxD+ or TxD- to GND 
+-8V to +8V 
+ 
+ExtTrig to GND 
+-0.3V to +7V 
+ 
+TOV to GND 
+-0.3V to +7V 
+ 
+NRST to GND 
+-0.3V to +7V 
+ 
+Chassis to GND 
+500VDC 
+ 
+Helium sensitivity 
+ 
+Not to be exposed to helium concentrations higher 
+than those normally found in the atmosphere 
+ 
+ 
+6 
+SPECIFICATIONS 
+ 
+Table 6-1: Operating conditions 
+Parameter 
+Conditions 
+Min 
+Nom 
+Max 
+Unit 
+Note 
+INPUT RANGE 
+ 
+ 
+±400 
+ 
+°/s 
+ 
+POWER SUPPLY 
+ 
+4.5 
+5.0 
+5.5 
+V 
+ 
+OPERATING TEMPERATURE 
+ 
+-40 
+ 
++85 
+°C 
+ 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         4/53                                                          August 2021 
+ 
+Table 6-2: Functional specifications, general 
+Parameter 
+Conditions 
+Min 
+Nom 
+Max 
+Unit 
+Note 
+POWER CONSUMPTION 
+ 
+ 
+ 
+ 
+ 
+ 
+Power consumption 
+ 
+ 
+ 
+1.5 
+W 
+ 
+TIMING 
+ 
+ 
+ 
+ 
+ 
+ 
+Start-Up time after Power-On 
+ 
+ 
+ 
+0.3 
+s 
+1 
+Time to transmit after Reset 
+ 
+ 
+ 
+0.2 
+s 
+2 
+Time to valid data 
+ 
+T=+25°C 
+ 
+0.7 
+ 
+1 
+s 
+s 
+3 
+3 
+RS422 Bit-Rate 
+ 
+ref. Table 6-5 
+ 
+ 
+RS422 Bit-Rate Accuracy 
+ 
+ 
+ 
+±1 
+% 
+ 
+RS422 PROTOCOL 
+ 
+ 
+ 
+ 
+ 
+ 
+Start Bit 
+ 
+ 
+1 
+ 
+bit 
+ 
+Data Length 
+ 
+ 
+8 
+ 
+bits 
+ 
+Parity 
+ 
+None 
+ 
+4 
+Stop-bits 
+ 
+1 
+bit 
+4 
+RS422 LINE TERMINATION 
+ 
+ 
+ 
+ 
+ 
+ 
+Input resistance 
+Line termination = ON 
+ 
+120 
+ 
+Ω 
+ 
+Input resistance 
+Line termination = OFF 
+48 
+125 
+ 
+kΩ 
+ 
+RESET (NRST PIN) 
+ 
+ 
+ 
+ 
+ 
+ 
+Logic levels 
+“high” 
+“low” 
+2.3 
+ 
+ 
+0.6 
+V 
+V 
+ 
+Minimum hold time for reset 
+ 
+1 
+ 
+ 
+µs 
+ 
+Pull-Up Resistor 
+ 
+80 
+100 
+ 
+kΩ 
+ 
+EXTERNAL TRIGGER 
+ 
+ 
+ 
+ 
+ 
+ 
+Logic levels 
+“high” 
+“low” 
+2.3 
+ 
+ 
+0.6 
+V 
+V 
+ 
+Trigger 
+ 
+Negative transition  
+ 
+ 
+Minimum “high” time before trigger, 
+text_hi 
+ 
+250 
+ 
+ 
+ns 
+5 
+Minimum “low” time after trigger, 
+text_lo 
+ 
+250 
+ 
+ 
+ns 
+5 
+Delay from external trigger to start 
+of transmission, text_dl 
+ 
+ 
+ 
+86 
+µs 
+5 
+Time between triggers 
+Measurement.unit:  
+ 
+ 
+ 
+ 
+ 
+ 
+  angular rate 
+0.5 
+ 
+127 
+ms 
+6,7 
+ 
+  incremental angle 
+0.5 
+ 
+127 
+ms 
+6,8 
+ 
+  average rate 
+0.5 
+ 
+65 
+ms 
+6,9 
+ 
+  integrated angle 
+0.5 
+ 
+8 
+ms 
+6,10 
+Pull-Up Resistor 
+ 
+40 
+50 
+ 
+kΩ 
+ 
+Latency 
+ 
+ 
+ 
+1000 
+µs 
+ 
+TIME OF VALIDITY (TOV PIN) 
+ 
+ 
+ 
+ 
+ 
+ 
+Output configuration 
+ 
+Open drain 
+ 
+ 
+Internal Pull-Up Resistor to Vsup 
+ 
+10 
+kΩ 
+ 
+Sink capability 
+ 
+ 
+ 
+50 
+mA 
+ 
+TOV active level 
+ 
+Active “low” 
+ 
+ 
+Minimum time of TOV, ttov min 
+ 
+50 
+ 
+ 
+µs 
+11 
+Delay from internal time-tick to 
+TOV active, ttov_dl 
+ 
+ 
+0.5 
+6 
+µs 
+11 
+Delay from TOV “low” to start of 
+transmission, ttx dl 
+ 
+ 
+ 
+80 
+µs 
+11 
+CHASSIS 
+ 
+ 
+ 
+ 
+ 
+ 
+Isolation resistance chassis to 
+GND (pin 15)  
+500VDC 
+100 
+ 
+ 
+MΩ 
+ 
+Note 1: Time from Power-On to start of datagram transmissions (starting with part-number datagram) 
+Note 2: Time from Reset release to start of datagram transmissions (starting with part-number datagram) 
+Note 3: Time from Power-On or Reset to the reset of the Start-Up bit (Bit 6 in the STATUS byte ref. Table 6-13). 
+During this period the output data should be regarded as non-valid 
+Note 4: Other values can be configured, ref. Table 6-5 
+Note 5: For definition, ref. Figure 8-3 
+Note 6: If time between triggers is longer than 127ms, the sample counter will over-run  
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         5/53                                                          August 2021 
+ 
+Note 7: Time between triggers should be carefully evaluated as long time between triggers in combination with high 
+bandwidths could lead to issues related to folding 
+Note 8: If time between triggers is longer than 8ms, an overload may occur in the incremental angle. An overload will 
+be flagged in the status byte, ref. Table 6-13 
+Note 9: If time between triggers is longer than specified, the accuracy of average rate may be reduced 
+Note 10: If time between triggers is longer than specified, the integrated angle may have wrapped several times and 
+hence the change in angle from last sample will not be possible to calculate 
+Note 11: For definition, ref. Figure 8-4 and Figure 8-5 
+ 
+ 
+Table 6-3: Functional specifications, gyros 
+Parameter 
+Conditions 
+Min 
+Nom 
+Max 
+Unit 
+Note 
+Full Scale (FS) 
+ 
+ 
+±400 
+ 
+°/s 
+1 
+Resolution 
+ 
+ 
+24 
+0.22 
+ 
+bits 
+°/h 
+ 
+Scale Factor Accuracy 
+ 
+ 
+±500 
+ 
+ppm 
+ 
+Non-Linearity 
+±200°/s 
+±400°/s 
+ 
+15 
+25 
+ 
+ppm 
+ppm 
+2 
+2 
+Bandwidth (-3dB) 
+ 
+ 
+262 
+ 
+Hz 
+3 
+Sample Rate 
+ 
+ 
+ 
+2000 
+samples/s 
+4 
+Group Delay 
+ 
+ 
+2.2 
+ 
+ms 
+5 
+Bias Range 
+Bias Run-Run 
+Bias error over temperature 
+Bias error over temperature gradients 
+ 
+ 
+Static temperatures 
+ΔT < ±1°C/min 
+-250 
+0 
+4 
+9 
+10 
++250 
+°/h 
+°/h 
+°/h 
+°/h 
+ 
+ 
+6 
+7 
+Bias Instability 
+Allan Variance @25°C 
+ 
+0.3 
+ 
+°/h 
+ 
+Angular Random Walk 
+Allan Variance @25°C 
+ 
+0.15 
+ 
+°/√hr 
+ 
+Linear Acceleration Effect 
+ 
+ 
+7 
+ 
+°/h /g 
+8 
+Vibration Rectification Coefficient 
+ 
+Ref. Figure 6-1 
+°/h /grms2 
+ 
+Misalignment 
+ 
+ 
+ 
+ 
+ 
+ 
+  STIM210Z (1 axis version) 
+ 
+ 
+5 
+ 
+mrad 
+9 
+  STIM210XY,XZ,YZ (2 axis version) 
+ 
+ 
+5 
+ 
+mrad 
+9 
+  STIM210 (3 axis version) 
+ 
+ 
+1 
+ 
+mrad 
+9 
+Note 1: Output is monotonous and will saturate at ±480°/s 
+Note 2: Largest deviation from BSL (Best Straight Line) over the range specified 
+Note 3: Low-pass filter -3dB frequency can be configured, ref. Table 6-5 and section 6.1.4 
+Note 4: Other values can be configured, ref. Table 6-5 
+Note 5: Specified group delay is valid for a filter setting = 262Hz. See Table 6-5 to find group delay for other filter-
+settings. Total delay to start of datagram transmission = group delay + 0.5ms + ttov dl + ttx_dl 
+Note 6: rms-value calculated on the residuals at static temperatures over the temperature range 
+Note 7: rms-value calculated on the residual over two temperature-cycles, ref. Figure 6-4 
+Note 8: Section 7.2 gives advice on sensitive directions 
+Note 9: Ref. Figure 7-5 for definition of reference points used in axis alignment 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         6/53                                                          August 2021 
+ 
+ 
+Figure 6-1: Nominal VRC at 20g rms for gyros (ref. section 7.2 for sensitive directions to acceleration-forces) 
+ 
+ 
+  
+ 
+Table 6-4: Functional specifications, temperature 
+Parameter 
+Conditions 
+Min 
+Nom 
+Max 
+Unit 
+Note 
+Bias Accuracy 
+@25°C 
+ 
+±5 
+ 
+°C 
+1 
+Scale factor accuracy 
+ 
+ 
+±5 
+ 
+% 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Note 1: Temperature is calibrated to reflect ambient temperature and not the internal temperature. 
+ 
+ 
+6.1 
+TYPICAL PERFORMANCE CHARACTERISTICS 
+6.1.1 
+Root Allan Variance 
+ 
+Figure 6-2: Typical Root Allan-Variance 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         7/53                                                          August 2021 
+ 
+6.1.2 
+Initial bias drift 
+ 
+Figure 6-3: Typical normalized initial bias drift 
+6.1.3 
+Bias drift over temperature 
+ 
+Figure 6-4: Typical Bias drift over temperature 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         8/53                                                          August 2021 
+ 
+6.1.4 
+Frequency characteristics 
+ 
+Figure 6-5: Frequency characteristics with low-pass filter -3dB frequency set to 16Hz 
+ 
+Figure 6-6: Frequency characteristics with low-pass filter -3dB frequency set to 33Hz 
+ 
+ 
+Figure 6-7: Frequency characteristics with low-pass filter -3dB frequency set to 66Hz 
+ 
+0
+12.5
+25
+37.5
+50
+62.5
+0
+0.2
+0.4
+0.6
+0.8
+1
+Magnitude []
+Frequency [Hz]
+ 
+ 
+-15
+-12
+-9
+-6
+-3
+0
+Phase [rad]
+Magnitude
+Phase
+10
+0
+10
+1
+10
+2
+10
+3
+10
+4
+-80
+-70
+-60
+-50
+-40
+-30
+-20
+-10
+0
+Frequency [Hz]
+Magnitude [dB]
+0
+25
+50
+75
+100
+125
+0
+0.2
+0.4
+0.6
+0.8
+1
+Magnitude []
+Frequency [Hz]
+ 
+ 
+-15
+-12
+-9
+-6
+-3
+0
+Phase [rad]
+Magnitude
+Phase
+10
+0
+10
+1
+10
+2
+10
+3
+10
+4
+-80
+-70
+-60
+-50
+-40
+-30
+-20
+-10
+0
+Frequency [Hz]
+Magnitude [dB]
+0
+50
+100
+150
+200
+250
+0
+0.2
+0.4
+0.6
+0.8
+1
+Magnitude []
+Frequency [Hz]
+ 
+ 
+-15
+-12
+-9
+-6
+-3
+0
+Phase [rad]
+Magnitude
+Phase
+10
+0
+10
+1
+10
+2
+10
+3
+10
+4
+-80
+-70
+-60
+-50
+-40
+-30
+-20
+-10
+0
+Frequency [Hz]
+Magnitude [dB]
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         9/53                                                          August 2021 
+ 
+ 
+Figure 6-8: Frequency characteristics with low-pass filter -3dB frequency set to 131Hz 
+ 
+Figure 6-9: Frequency characteristics with low-pass filter -3dB frequency set to 262Hz 
+0
+100
+200
+300
+400
+500
+0
+0.2
+0.4
+0.6
+0.8
+1
+Magnitude []
+Frequency [Hz]
+ 
+ 
+-15
+-12
+-9
+-6
+-3
+0
+Phase [rad]
+Magnitude
+Phase
+10
+0
+10
+1
+10
+2
+10
+3
+10
+4
+-80
+-70
+-60
+-50
+-40
+-30
+-20
+-10
+0
+Frequency [Hz]
+Magnitude [dB]
+0
+200
+400
+600
+800
+1000
+0
+0.2
+0.4
+0.6
+0.8
+1
+Magnitude []
+Frequency [Hz]
+ 
+ 
+-15
+-12
+-9
+-6
+-3
+0
+Phase [rad]
+Magnitude
+Phase
+10
+0
+10
+1
+10
+2
+10
+3
+10
+4
+-80
+-70
+-60
+-50
+-40
+-30
+-20
+-10
+0
+Frequency [Hz]
+Magnitude [dB]
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         10/53                                                          August 2021 
+ 
+6.2 
+Configurable parameters 
+ 
+Table 6-5: Configurable parameters 
+Parameter 
+Configurations 
+Comments 
+DATAGRAM FORMAT 
+Standard 
+Contains measurements and status byte 
+ 
+Extended 
+For future use 
+ 
+Rate and temperature 
+ 
+ 
+Rate and counter 
+ 
+ 
+Rate and latency 
+ 
+ 
+Rate, counter and latency 
+ 
+ 
+Rate, temperature and counter 
+ 
+ 
+Rate, temperature and latency 
+ 
+ 
+Rate, temperature, counter and 
+latency 
+ 
+DATAGRAM TERMINATION 
+NONE 
+ 
+ 
+<CR><LF> 
+ 
+MEASUREMENT UNIT 
+Angular rate [°/s] 
+ 
+ 
+Incremental angle [°/sample] 
+Average angular rate [°/s] 
+Integrated angle [°] 
+ 
+SAMPLE RATE 
+125 samples/s 
+ 
+ 
+250 samples/s 
+ 
+ 
+500 samples/s 
+ 
+ 
+1000 samples/s 
+2000 samples/s 
+External trigger 
+ 
+LOW-PASS FILTER -3dB 
+FREQUENCY 
+-3dB freq.: 
+Filter group 
+delay: 
+Filter settings are independent of sample rate. 
+Low-pass filters are CIC type filters with linear 
+phase response. 
+Filter settings can be set individually for each 
+axis. 
+Total delay to the start of datagram 
+transmission = group delay + 0.5ms + ttov dl + 
+ttx_dl 
+16Hz 
+24.7ms 
+33Hz 
+12.7ms 
+ 
+66Hz 
+6.7ms 
+ 
+131Hz 
+3.7ms 
+ 
+262Hz 
+2.2ms 
+RS422 BIT-RATE 
+374400 bits/s 
+Some limitations apply to the use of 374400 
+and 460800 bits/s, dependent on chosen 
+sample rate and datagram format, ref Table 
+6-12. 
+For user-defined bit-rates, see section 10.5 
+ 
+ 
+460800 bits/s 
+921600 bits/s 
+1843200 bits/s 
+User-defined 
+RS422 PARITY 
+None 
+ 
+ 
+Odd 
+ 
+Even 
+RS422 STOP-BITS 
+1 stop-bit 
+ 
+ 
+ 
+2 stop-bits 
+RS422 120Ω LINE 
+TERMINATION 
+OFF 
+ 
+ON 
+ 
+ 
+Refer to section 12 for information on how to configure STIM210 when ordering. 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         11/53                                                          August 2021 
+ 
+6.3 
+Datagram specifications 
+ 
+Table 6-6: Specification of the Part Number datagram 
+Byte# 
+Bit# 
+Specification 
+ 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+0 
+ 
+0 
+0 
+ 
+1 
+1 
+ 
+0 
+0 
+ 
+1 
+1 
+ 
+0 
+0 
+ 
+1 
+1 
+ 
+0 
+1 
+ 
+0 
+0 
+Part Number datagram identifier: 
+  0x54 for datagrams without CR+LF termination 
+  0x56 for standard datagrams w.CR+LF 
+1 
+0 
+0 
+0 
+0 
+P13 
+P12 
+P11 
+P10 Low nibble: 1.digit (BCD) of part number 
+2 
+P23 
+P22 
+P21 
+P20 
+P33 
+P32 
+P31 
+P30 High nibble: 2.digit (BCD) of part number 
+Low nibble: 3.digit (BCD) of part number 
+3 
+P43 
+P42 
+P41 
+P40 
+P53 
+P52 
+P51 
+P50 High nibble: 4.digit (BCD) of part number 
+Low nibble: 5.digit (BCD) of part number 
+4 
+0 
+0 
+1 
+0 
+1 
+1 
+0 
+1 
+ASCII character “-“ (0x2D) 
+5 
+P63 
+P62 
+P61 
+P60 
+P73 
+P72 
+P71 
+P70 High nibble: 6.digit (BCD) of part number 
+Low nibble: 7.digit (BCD) of part number 
+6 
+P83 
+P82 
+P81 
+P80 
+P93 
+P92 
+P91 
+P90 High nibble: 8.digit (BCD) of part number 
+Low nibble: 9.digit (BCD) of part number 
+7 
+0 
+0 
+1 
+0 
+1 
+1 
+0 
+1 
+ASCII character “-“(0x2D) 
+8 
+P103 P102 P101 P100 P113 P112 P111 P110 High nibble: 10.digit (BCD) of part number 
+Low nibble: 11.digit (BCD) of part number 
+9 
+P113 P112 P111 P110 P133 P132 P131 P130 High nibble: 12.digit (BCD) of part number 
+Low nibble: 13.digit (BCD) of part number 
+10 
+r7 
+r6 
+r5 
+r4 
+r3 
+r2 
+r1 
+r0 
+Part number revision. Content of byte represents the ASCII character of the revision. 
+Numbering sequence: “-“, “A”, “B”, …., “Z” 
+11 
+c7 
+c6 
+c5 
+c4 
+c3 
+c2 
+c1 
+c0 
+Cyclic Redundancy Check is performed on all preceding bytes and is generated from the 
+polynomial: 
+ 
+x8 + x2 + x + 1, seed = 0xFF  
+(12) 
+0 
+0 
+0 
+0 
+1 
+1 
+0 
+1 
+<CR> only when <CR><LF> datagram termination have been chosen 
+(13) 
+0 
+0 
+0 
+0 
+1 
+0 
+1 
+0 
+<LF> only when <CR><LF> datagram termination have been chosen 
+ 
+ 
+Table 6-7: Specification of the Serial Number datagram 
+Byte# 
+Bit# 
+Specification 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+0 
+ 
+0 
+0 
+ 
+1 
+1 
+ 
+0 
+0 
+ 
+1 
+1 
+ 
+1 
+1 
+ 
+0 
+0 
+ 
+1 
+0 
+ 
+0 
+0 
+Serial Number datagram identifier:  
+  0x5A for datagrams without CR+LF termination  
+  0x5C for standard datagrams w.CR+LF 
+1 
+0 
+1 
+0 
+0 
+1 
+1 
+1 
+0 
+ASCII character for letter “N” 
+2 
+S13 
+S12 
+S11 
+S10 
+S23 
+S22 
+S21 
+S20 High nibble: 1.digit (BCD) of serial number 
+Low nibble: 2.digit (BCD) of serial number 
+3 
+S33 
+S32 
+S31 
+S30 
+S43 
+S42 
+S41 
+S40 High nibble: 3.digit (BCD) of serial number 
+Low nibble: 4.digit (BCD) of serial number 
+4 
+S53 
+S52 
+S51 
+S50 
+S63 
+S62 
+S61 
+S60 High nibble: 5.digit (BCD) of serial number 
+Low nibble: 6.digit (BCD) of serial number 
+5 
+S73 
+S72 
+S71 
+S70 
+S83 
+S82 
+S81 
+S80 High nibble: 7.digit (BCD) of serial number 
+Low nibble: 8.digit (BCD) of serial number 
+6 
+S93 
+S92 
+S91 
+S90 S103 S102 S101 S100 High nibble: 9.digit (BCD) of serial number 
+Low nibble: 10.digit (BCD) of serial number 
+7 
+S113 S112 S111 S110 S113 S112 S111 S110 High nibble: 11.digit (BCD) of serial number 
+Low nibble: 12.digit (BCD) of serial number 
+8 
+S133 S132 S131 S130 S143 S142 S141 S140 High nibble: 13.digit (BCD) of serial number 
+Low nibble: 14.digit (BCD) of serial number 
+9 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+For future use. 
+10 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+For future use. 
+11 
+c7 
+c6 
+c5 
+c4 
+c3 
+c2 
+c1 
+c0 
+Cyclic Redundancy Check is performed on all preceding bytes and is generated from 
+the polynomial: 
+ 
+x8 + x2 + x + 1, seed = 0xFF  
+(12) 
+0 
+0 
+0 
+0 
+1 
+1 
+0 
+1 
+<CR> only when <CR><LF> datagram termination have been chosen 
+(13) 
+0 
+0 
+0 
+0 
+1 
+0 
+1 
+0 
+<LF> only when <CR><LF> datagram termination have been chosen 
+ 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         12/53                                                          August 2021 
+ 
+Table 6-8: Specification of the Configuration datagram 
+Byte# 
+ 
+Bit# 
+Specification 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+0 
+ 
+0 
+0 
+ 
+0 
+0 
+ 
+1 
+1 
+ 
+0 
+0 
+ 
+1 
+1 
+ 
+0 
+0 
+ 
+0 
+1 
+ 
+0 
+1 
+Configuration datagram identifier: 
+  0x28  for datagrams without CR+LF termination 
+  0x2B for standard datagrams w.CR+LF 
+1 
+r7 
+r6 
+r5 
+r4 
+r3 
+r2 
+r1 
+r0 
+Part number revision. Content of byte represents the ASCII character of the 
+revision. Numbering sequence: “-“, “A”, “B”, …., “Z” 
+2 
+f7 
+f6 
+f5 
+f4 
+f3 
+f2 
+f1 
+f0 
+Firmware revision. Numbering sequence: 0, 1, …, 255 
+3 
+h7 
+h6 
+h5 
+h4 
+h3 
+h2 
+h1 
+h0 
+Hardware revision. Numbering sequence: 0, 1, …, 255 
+4 
+ 
+0 
+1 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+ 
+x 
+x 
+1 
+0 
+0 
+0 
+0 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+ 
+x 
+x 
+0 
+1 
+1 
+0 
+0 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+ 
+x 
+x 
+0 
+1 
+0 
+1 
+0 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+ 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+0 
+1 
+x 
+x 
+x 
+x 
+x 
+ 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+1 
+0 
+0 
+0 
+0 
+ 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+0 
+1 
+1 
+0 
+0 
+ 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+0 
+1 
+0 
+1 
+0 
+System configuration, Byte 1: 
+Z axis is inactive 
+Z axis is active 
+LP filter -3dB frequency for Z axis = 262Hz 
+LP filter -3dB frequency for Z axis = 131Hz 
+LP filter -3dB frequency for Z axis = 66Hz 
+LP filter -3dB frequency for Z axis = 33Hz 
+LP filter -3dB frequency for Z axis = 16Hz 
+Y-axis is inactive 
+Y-axis is active 
+LP filter -3dB frequency for Y axis = 262Hz 
+LP filter -3dB frequency for Y axis = 131Hz 
+LP filter -3dB frequency for Y axis = 66Hz 
+LP filter -3dB frequency for Y axis = 33Hz 
+LP filter -3dB frequency for Y axis = 16Hz 
+5 
+ 
+0 
+1 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+ 
+x 
+x 
+1 
+0 
+0 
+0 
+0 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+ 
+x 
+x 
+0 
+1 
+1 
+0 
+0 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+ 
+x 
+x 
+0 
+1 
+0 
+1 
+0 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+ 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+1 
+1 
+0 
+0 
+0 
+0 
+x 
+x 
+ 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+0 
+0 
+1 
+1 
+0 
+0 
+x 
+x 
+ 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+1 
+0 
+1 
+0 
+1 
+0 
+x 
+x 
+ 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+0 
+1 
+System configuration, Byte 2: 
+X-axis is inactive 
+X-axis is active 
+LP filter -3dB frequency for X axis = 262Hz 
+LP filter -3dB frequency for X axis = 131Hz 
+LP filter -3dB frequency for X axis = 66Hz 
+LP filter -3dB frequency for X axis = 33Hz 
+LP filter -3dB frequency for X axis = 16Hz 
+Sample rate = External trigger 
+Sample rate = 2000 samples/s 
+Sample rate = 1000 samples/s 
+Sample rate = 500 samples/s 
+Sample rate = 250 samples/s 
+Sample rate = 125 samples/s 
+Output unit = ANGULAR RATE 
+Output unit = other than ANGULAR RATE (ref. byte#8) 
+6 
+ 
+0 
+1 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+ 
+x 
+x 
+0 
+0 
+0 
+0 
+1 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+ 
+x 
+x 
+1 
+1 
+0 
+0 
+1 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+ 
+x 
+x 
+1 
+0 
+1 
+0 
+1 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+ 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+0 
+1 
+x 
+x 
+x 
+x 
+x 
+ 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+0 
+0 
+1 
+x 
+x 
+ 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+0 
+1 
+0 
+x 
+x 
+ 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+0 
+1 
+System configuration, Byte 3: 
+Datagram format = STANDARD 
+Datagram format = other than STANDARD (ref. byte#8) 
+Bit-rate = 1843200 bits/s 
+Bit-rate = 921600 bits/s 
+Bit-rate = 460800 bits/s 
+Bit-rate = 374400 bits/s 
+Bit-rate = User-defined, ref.section 10.5 
+Stop-bit = 1 
+Stop-bits = 2 
+Parity = none 
+Parity = even 
+Parity = odd  
+Line termination = OFF 
+Line termination = ON  
+7 
+s7 
+s6 
+s5 
+s4 
+s3 
+s2 
+s1 
+s0 
+STATUS byte. Ref. Table 6-13 for specification of the STATUS byte. 
+8 
+ 
+0 
+0 
+0 
+0 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+ 
+0 
+0 
+0 
+0 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+ 
+0 
+0 
+1 
+1 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+ 
+0 
+1 
+0 
+1 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+ 
+x 
+x 
+x 
+x 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+1 
+1 
+ 
+x 
+x 
+x 
+x 
+0 
+0 
+0 
+1 
+1 
+1 
+1 
+0 
+0 
+ 
+x 
+x 
+x 
+x 
+0 
+0 
+1 
+0 
+0 
+1 
+1 
+0 
+0 
+ 
+x 
+x 
+x 
+x 
+0 
+1 
+1 
+0 
+1 
+0 
+1 
+0 
+1 
+System configuration, Byte 4: 
+Output unit = ANGULAR RATE 
+Output unit = INCREMENTAL ANGLE 
+Output unit = AVERAGE ANGULAR RATE  
+Output unit = INTEGRATED ANGLE 
+Datagram format = Standard 
+Datagram format = Extended 
+Datagram format = Rate and temperature, 
+Datagram format = Rate and counter,  
+Datagram format = Rate and latency 
+Datagram format = Rate, counter and latency 
+Datagram format = Rate, temperature and counter 
+Datagram format = Rate, temperature and latency 
+Datagram format = Rate, temperature, counter and latency 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         13/53                                                          August 2021 
+ 
+Byte# 
+ 
+Bit# 
+Specification 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+9 
+ 
+0 
+ 
+x 
+ 
+0 
+ 
+x 
+ 
+0 
+ 
+x 
+ 
+0 
+ 
+x 
+ 
+x 
+ 
+0 
+ 
+x 
+ 
+0 
+ 
+x 
+ 
+0 
+ 
+x 
+ 
+0 
+High nibble: Gyro range, x-axis 
+- 
+400°/s 
+Low nibble: Gyro range, y-axis 
+- 
+400°/s 
+10 
+ 
+0 
+ 
+0 
+ 
+0 
+ 
+0 
+ 
+x 
+ 
+x 
+ 
+x 
+ 
+x 
+High nibble: Gyro range, z-axis 
+- 
+400°/s 
+11 
+c7 
+c6 
+c5 
+c4 
+c3 
+c2 
+c1 
+c0 
+Cyclic Redundancy Check is performed on all preceding bytes and is 
+generated from the polynomial:  x8 + x2 + x + 1, seed = 0xFF  
+(12) 
+0 
+0 
+0 
+0 
+1 
+1 
+0 
+1 
+<CR> only when <CR><LF> datagram termination have been chosen 
+(13) 
+0 
+0 
+0 
+0 
+1 
+0 
+1 
+0 
+<LF> only when <CR><LF> datagram termination have been chosen 
+ 
+ 
+Table 6-9: Specification of the Extended Error Information datagram 
+Byte# 
+Bit# 
+Specification 
+ 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+0 
+ 
+0 
+0 
+ 
+0 
+0 
+ 
+1 
+1 
+ 
+0 
+0 
+ 
+1 
+1 
+ 
+1 
+1 
+ 
+1 
+1 
+ 
+0 
+1 
+Extended Error Information datagram identifier: 
+  0x2E for datagrams without CR+LF termination 
+  0x2F for datagrams with CR+LF termination 
+1 
+E79 
+E78 
+E77 
+E76 
+E75 
+E74 
+E73 
+E72 
+Ref. Table 6-10 
+2 
+E71 
+E70 
+E69 
+E68 
+E67 
+E66 
+E65 
+E64 
+Ref. Table 6-10 
+3 
+E63 
+E62 
+E61 
+E60 
+E59 
+E58 
+E57 
+E56 
+Ref. Table 6-10 
+4 
+E55 
+E54 
+E53 
+E52 
+E51 
+E50 
+E49 
+E48 
+Ref. Table 6-10 
+5 
+E47 
+E46 
+E45 
+E44 
+E43 
+E42 
+E41 
+E40 
+Ref. Table 6-10 
+6 
+E39 
+E38 
+E37 
+E36 
+E35 
+E34 
+E33 
+E32 
+Ref. Table 6-10 
+7 
+E31 
+E30 
+E29 
+E28 
+E27 
+E26 
+E25 
+E24 
+Ref. Table 6-10 
+8 
+E23 
+E22 
+E21 
+E20 
+E19 
+E18 
+E17 
+E16 
+Ref. Table 6-10 
+9 
+E15 
+E14 
+E13 
+E12 
+E11 
+E10 
+E9 
+E8 
+Ref. Table 6-10 
+10 
+E7 
+E6 
+E5 
+E4 
+E3 
+E2 
+E1 
+E0 
+Ref. Table 6-10 
+11 
+C7 
+C6 
+C5 
+C4 
+C3 
+C2 
+C1 
+C0 
+Cyclic Redundancy Check is performed on all preceding bytes and is 
+generated from the polynomial: 
+ 
+x8 + x2 + x + 1, seed = 0xFF 
+(12) 
+0 
+0 
+0 
+0 
+1 
+1 
+0 
+1 
+<CR> If datagram termination has been selected 
+(13) 
+0 
+0 
+0 
+0 
+1 
+0 
+1 
+0 
+<LF> If datagram termination has been selected 
+ 
+ 
+Table 6-10: Specification of the Extended Error Information 
+Bit# Specification 
+Bit# 
+Specification 
+Bit# 
+Specification 
+Bit# 
+Specification 
+E79 
+For future use (=0) 
+E78 
+For future use (=0) 
+E77 
+For future use (=0) 
+E76 
+For future use (=0) 
+E75 
+For future use (=0) 
+E74 
+For future use (=0) 
+E73 
+For future use (=0) 
+E72 
+For future use (=0) 
+E71 
+For future use (=0) 
+E70 
+For future use (=0) 
+E69 
+For future use (=0) 
+E68 
+GYRO Z: Config,error 
+E67 
+GYRO Y: Config,error 
+E66 
+GYRO X: Config.error 
+E65 
+µC temperature failure 
+E64 
+GYRO Z: ASIC temp.dev. 
+E63 
+GYRO Y: ASIC temp.dev 
+E62 
+GYRO X: ASIC temp.dev 
+E61 
+GYRO Z: Temp.deviation 
+E60 
+GYRO Y: Temp.deviation 
+E59 
+GYRO X: Temp.deviation 
+E58 
+Self-test not running 
+E57 
+UART unable to transmit 
+E56 
+GYRO Z: data missing 
+E55 
+GYRO Y: Data missing 
+E54 
+GYRO X: Data missing 
+E53 
+Transmit stack warning 
+E52 
+Flash stack warning 
+E51 
+Sample stack warning 
+E50 
+Command stack warning 
+E49 
+Monitor stack warning 
+E48 
+Internal DAC error 
+E47 
+Supply overvoltage 
+E46 
+Flash check error 
+E45 
+RAM check error 
+E44 
+GYRO Z: Data lost 
+E43 
+GYRO Z: Exc.ampl.error 
+E42 
+GYRO Z: Int.comm.error 
+E41 
+For future use (=0) 
+E40 
+For future use (=0) 
+E39 
+GYRO Z: ASIC overflow, I 
+E38 
+GYRO Z: ASIC overflow, Q 
+E37 
+GYRO Y: Data lost 
+E36 
+GYRO Y: Exc.ampl.error 
+E35 
+GYRO Y: Int.comm.error 
+E34 
+For future use (=0) 
+E33 
+For future use (=0) 
+E32 
+GYRO Y: ASIC overflow, I 
+E31 
+GYRO Y: ASIC overflow, Q 
+E30 
+GYRO X: Data lost 
+E29 
+GYRO X: Exc.ampl.error 
+E28 
+GYRO X: Int.comm.error 
+E27 
+For future use (=0) 
+E26 
+For future use (=0) 
+E25 
+GYRO X: ASIC overflow, I 
+E24 
+GYRO X: ASIC overflow, 
+Q 
+E23 
+Regulated voltage#3 error 
+E22 
+Regulated voltage#2 error 
+E21 
+Regulated voltage#1 error 
+E20 
+Supply voltage error 
+E19 
+Reference voltage#3 error 
+E18 
+Reference voltage#2 error 
+E17 
+Reference voltage#1 error 
+E16 
+Start-up phase active  
+E15 
+GYRO Z: Int.comm.error 
+E14 
+GYRO Y: Int.comm.error 
+E13 
+GYRO X: Int.comm.error 
+E12 
+GYRO Z: Clipped 
+E11 
+GYRO Y: Clipped 
+E10 
+GYRO X: Clipped 
+E9 
+TEMP GYRO Z: Error 
+E8 
+TEMP GYRO Y: Error 
+E7 
+TEMP GYRO X: Error 
+E6 
+GYRO Z: ASIC temp.error 
+E5 
+GYRO Y: ASIC temp.error 
+E4 
+GYRO X: ASIC temp.error 
+E3 
+µC temperature error 
+E2 
+GYRO Z: Exc.freq.error 
+E1 
+GYRO Y: Exc.freq.error 
+E0 
+GYRO X: Exc.freq.error 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         14/53                                                          August 2021 
+ 
+Table 6-11: Specification of the Normal Mode datagram 
+Byte# 
+Bit# 
+Specification 
+Standard datagram 
+Extended datagram 
+Rate and temperature 
+Rate and counter 
+Rate and latency 
+Rate, counter and 
+latency 
+Rate, temperature and 
+counter 
+Rate, temperature and 
+latency 
+Rate, temperature, 
+counter and latency 
+7 
+6 
+5 
+4 
+3 
+2 
+1 
+0 
+ 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+0 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Normal Mode datagram identifier: 
+1 
+0 
+0 
+1 
+0 
+0 
+0 
+0 
+  0x90 standard datagram 
+1 
+0 
+0 
+1 
+0 
+0 
+1 
+0 
+  0x92 extended datagram 
+1 
+0 
+1 
+0 
+0 
+0 
+0 
+0 
+  0xA0 datagram with rate and 
+ 
+temperature 
+1 
+0 
+1 
+0 
+0 
+0 
+1 
+0 
+  0xA2 datagram with rate and counter 
+1 
+0 
+1 
+0 
+0 
+1 
+0 
+0 
+  0xA4 datagram with rate and latency 
+1 
+0 
+1 
+0 
+0 
+1 
+0 
+1 
+  0xA5 datagram with rate, 
+ 
+counter and latency 
+1 
+0 
+0 
+1 
+1 
+0 
+0 
+1 
+  0x99 datagram with rate, 
+ 
+temperature and counter 
+1 
+0 
+1 
+0 
+0 
+1 
+1 
+0 
+  0xA6 datagram with rate, 
+ 
+temperature and latency 
+1 
+0 
+1 
+0 
+1 
+0 
+0 
+0 
+  0xA8 datagram with rate, temperature, 
+ 
+counter and latency 
+1 
+1 
+1 
+1 
+1 
+1 
+1 
+1 
+1 
+x23 
+x22 
+x21 
+x20 
+x19 
+x18 
+x17 
+x16 
+X axis gyro output. Ref. section 8.4.2.2 
+for conversion to units 
+2 
+2 
+2 
+2 
+2 
+2 
+2 
+2 
+2 
+x15 
+x14 
+x13 
+x12 
+x11 
+x10 
+x9 
+x8 
+3 
+3 
+3 
+3 
+3 
+3 
+3 
+3 
+3 
+x7 
+x6 
+x5 
+x4 
+x3 
+x2 
+x1 
+x0 
+4 
+4 
+4 
+4 
+4 
+4 
+4 
+4 
+4 
+y23 
+y22 
+y21 
+y20 
+y19 
+y18 
+y17 
+y16 
+Y axis gyro output. Ref. section 8.4.2.2 
+for conversion to units 
+5 
+5 
+5 
+5 
+5 
+5 
+5 
+5 
+5 
+y15 
+y14 
+y13 
+y12 
+y11 
+y10 
+y9 
+y8 
+6 
+6 
+6 
+6 
+6 
+6 
+6 
+6 
+6 
+y7 
+y6 
+y5 
+y4 
+y3 
+y2 
+y1 
+y0 
+7 
+7 
+7 
+7 
+7 
+7 
+7 
+7 
+7 
+z23 
+z22 
+z21 
+z20 
+z19 
+z18 
+z17 
+z16 
+Z axis gyro output. Ref. section 8.4.2.2 
+for conversion to units 
+8 
+8 
+8 
+8 
+8 
+8 
+8 
+8 
+8 
+z15 
+z14 
+z13 
+z12 
+z11 
+z10 
+z9 
+z8 
+9 
+9 
+9 
+9 
+9 
+9 
+9 
+9 
+9 
+z7 
+z6 
+z5 
+z4 
+z3 
+z2 
+z1 
+z0 
+10 
+10 
+10 
+10 
+10 
+10 
+10 
+10 
+10 
+s7 
+s6 
+s5 
+s4 
+s3 
+s2 
+s1 
+s0 
+STATUS byte. Ref.  Table 6-13 for 
+specification of this byte. 
+N/A 
+11 
+N/A N/A N/A N/A N/A N/A N/A 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+For future use. 
+N/A 
+12 
+N/A N/A N/A N/A N/A N/A N/A 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+For future use. 
+N/A 
+13 
+N/A N/A N/A N/A N/A N/A N/A 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+x 
+For future use. 
+N/A N/A 
+11 
+N/A N/A N/A 
+11 
+11 
+11 
+Tx15 Tx14 Tx13 Tx12 Tx11 Tx10 Tx9 
+Tx8 
+X axis temperature data. Ref. section 
+8.4.2.2.5 for conversion to units 
+N/A N/A 
+12 
+N/A N/A N/A 
+12 
+12 
+12 
+Tx7 
+Tx6 
+Tx5 
+Tx4 
+Tx3 
+Tx2 
+Tx1 
+Tx0 
+N/A N/A 
+13 
+N/A N/A N/A 
+13 
+13 
+13 
+Ty15 Ty14 Ty13 Ty12 Ty11 Ty10 Ty9 
+Ty8 
+Y axis temperature data. Ref. section 
+8.4.2.2.5 for conversion to units 
+N/A N/A 
+14 
+N/A N/A N/A 
+14 
+14 
+14 
+Ty7 
+Ty6 
+Ty5 
+Ty4 
+Ty3 
+Ty2 
+Ty1 
+Ty0 
+N/A N/A 
+15 
+N/A N/A N/A 
+15 
+15 
+15 
+Tz15 Tz14 Tz13 Tz12 Tz11 Tz10 Tz9 
+Tz8 
+Z axis temperature data. Ref. section 
+8.4.2.2.5 for conversion to units 
+N/A N/A 
+16 
+N/A N/A N/A 
+16 
+16 
+16 
+Tz7 
+Tz6 
+Tz5 
+Tz4 
+Tz3 
+Tz2 
+Tz1 
+Tz0 
+N/A N/A N/A 
+11 
+N/A 
+11 
+17 
+N/A 
+17 
+n7 
+n6 
+n5 
+n4 
+n3 
+n2 
+n1 
+n0 
+Counter. Ref. section 8.4.2.2.6 
+N/A N/A N/A N/A 
+11 
+12 
+N/A 
+17 
+18 
+l15 
+l14 
+l13 
+l12 
+l11 
+l10 
+l9 
+l8 
+Latency. Ref. section 8.4.2.2.7 for 
+conversion to units. 
+N/A N/A N/A N/A 
+12 
+13 
+N/A 
+18 
+19 
+l7 
+l6 
+l5 
+l4 
+l3 
+l2 
+l1 
+l0 
+11 
+14 
+17 
+12 
+13 
+14 
+18 
+19 
+20 
+c7 
+c6 
+c5 
+c4 
+c3 
+c2 
+c1 
+c0 
+Cyclic Redundancy Check is performed 
+on all preceding bytes and is generated 
+from the polynomial: 
+    x8 + x2 + x + 1, seed = 0xFF  
+(12) (15) (18) (13) (14) (15) (19) (20) (21) 
+0 
+0 
+0 
+0 
+1 
+1 
+0 
+1 
+<CR> only when <CR><LF> datagram 
+termination have been chosen 
+(13) (16) (19) (14) (15) (16) (20) (21) (22) 
+0 
+0 
+0 
+0 
+1 
+0 
+1 
+0 
+<LF> only when <CR><LF> datagram 
+termination have been chosen 
+ 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         15/53                                                          August 2021 
+ 
+Table 6-12: Maximum sample rate 
+ 
+Number of 
+transmitted 
+bytesNote 1 
+374400 
+bits/sNote 2 
+460800 
+bits/sNote 2 
+921600 
+bits/sNote 
+2 
+1843200 
+bits/sNote 2 
+Standard datagram 
+12 
+2000 
+2000 
+2000 
+2000 
+Extended datagram 
+15 
+1000 
+2000 
+2000 
+2000 
+Rate and temperature 
+18 
+1000 
+1000 
+2000 
+2000 
+Rate and counter 
+13 
+2000 
+2000 
+2000 
+2000 
+Rate and latency 
+14 
+1000 
+2000 
+2000 
+2000 
+Rate, counter and latency 
+15 
+1000 
+2000 
+2000 
+2000 
+Rate, temperature and counter 
+19 
+1000 
+1000 
+2000 
+2000 
+Rate, temperature and latency 
+20 
+1000 
+1000 
+2000 
+2000 
+Rate, temperature, counter and latency 
+21 
+1000 
+1000 
+2000 
+2000 
+Note 1: excluding<CR><LF> termination 
+Note 2: 10 bits/byte (=1 start bit, 8 data bits, no parity bit, 1 stop bit) 
+ 
+ 
+6.4 
+Status byte 
+ 
+Table 6-13: Interpretation of bits in STATUS byte 
+Bit 
+STATUS bit information 
+Comment 
+7 
+0=OK, 1=System integrity error 
+ 
+6 
+0=OK, 1=Start-Up 
+ 
+5 
+0=OK, 1=Outside operating conditions 
+ 
+4 
+0=OK, 1=Overload 
+Bits 0-2 will flag the overload channel(s) 
+3 
+0=OK, 1=Error in gyro channel 
+Bits 0-2 will flag the error channel(s) 
+2 
+0=OK, 1=Z channel 
+ 
+1 
+0=OK, 1=Y channel 
+ 
+0 
+0=OK, 1=X channel 
+ 
+ 
+Refer to section 8.5 for more information related to the self-diagnostics of STIM210. 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         16/53                                                          August 2021 
+ 
+7 
+MECHANICAL 
+ 
+Table 7-1: Mechanical specifications 
+Parameter 
+Conditions 
+Min 
+Nom 
+Max 
+Unit 
+Note 
+HOUSING MATERIAL 
+ 
+Aluminium, 
+Alloy 6082-T6, DIN EN 754-2 
+ 
+ 
+SURFACE TREATMENT 
+Passivation 
+ 
+ 
+RoHS-compliant 
+ 
+ 
+ 
+WEIGHT 
+ 
+ 
+52 
+ 
+grams 
+ 
+VOLUME 
+ 
+ 
+32.6 
+1.99 
+ 
+ccm 
+cu in 
+ 
+DUST AND HUMIDITY 
+CLASSIFICATION 
+ 
+IP67 
+ 
+ 
+CONNECTOR 
+ 
+ 
+ 
+ 
+ 
+ 
+Type 
+ 
+Micro-D 
+ 
+ 
+Number of pins 
+ 
+ 
+15 
+ 
+ 
+ 
+Contact type 
+ 
+ 
+female 
+ 
+ 
+ 
+Contact manufacturer 
+ 
+Axon’ Cable SAS 
+ 
+ 
+PLUG 
+ 
+ 
+ 
+ 
+Proposed plug to fit connector 
+ 
+Axon MDA 2 15 P 
+ 
+ 
+Proposed cover to fit plug 
+For best EMI performance 
+Axon micro-D EMI backshell 
+ 
+ 
+FIXATION BOLTS 
+ 
+M4 
+ 
+ 
+ 
+ 
+ISO 4762 / DIN 912 
+ 
+ 
+Recommended torque 
+Steel base 
+Aluminium base 
+3.5 
+3.0 
+Nm 
+Nm 
+ 
+ 
+ 
+7.1 
+Mechanical dimensions 
+ 
+All dimensions are in mm. 
+ 
+Figure 7-1: Mechanical dimensions 
+ 
+Figure 7-2: Drilling pattern 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         17/53                                                          August 2021 
+ 
+7.2 
+Advice on mounting orientation 
+The gyros are sensitive to acceleration-forces in certain directions: 
+ 
+X- and Y-gyros have their highest sensitivity to acceleration-forces in Z-direction 
+ 
+Z-gyro has its highest sensitivity to acceleration-forces in Y-direction 
+ 
+X-gyro has its lowest sensitivity to acceleration-forces in X-direction 
+ 
+Y-gyro has its lowest sensitivity to acceleration-forces in Y-direction 
+ 
+Z-gyro has its lowest sensitivity to acceleration-forces in Z-direction 
+ 
+ 
+7.3 
+Pin configuration 
+1 TxD-
+2 RxD-
+3 TST
+4 TOV
+5 NRST
+6 
+7 
+8 VSUP
+  9 TxD+
+10 RxD+
+11 ExtTrig
+12 GND
+13 GND
+14 
+15 GND
+ 
+Figure 7-3: Pin configuration as seen from front of STIM210 
+ 
+ 
+Table 7-2: Pin descriptions 
+Pin# 
+Label 
+Type 
+Description 
+  1 
+TxD- 
+OUTPUT 
+RS422 negative output 
+  2 
+RxD- 
+INPUT 
+RS422 negative input 
+  3 
+TST 
+OUTPUT 
+Test pin: Do not connect 
+  4 
+TOV 
+OUTPUT 
+Time of Validity (if not in use, leave floating) 
+  5 
+NRST 
+INPUT 
+Reset (if not in use, connect to VSUP or leave floating) 
+  6 
+ 
+ 
+Not connected 
+  7 
+ 
+ 
+Not connected 
+  8 
+VSUP 
+SUPPLY 
+Power supply (+5V) 
+  9 
+TxD+ 
+OUTPUT 
+RS422 positive output 
+10 
+RxD+ 
+INPUT 
+RS422 positive input 
+11 
+ExtTrig 
+INPUT 
+External trigger (if not in use, connect to VSUP or leave floating) 
+12 
+GND 
+INPUT 
+Test pin: Connect to ground (0V) 
+13 
+GND 
+INPUT 
+Test pin: Connect to ground (0V) 
+14 
+ 
+ 
+Not connected 
+15 
+GND 
+SUPPLY 
+Power ground (0V) 
+ 
+ 
+7.4 
+Definition of axes 
+ 
+X
+Y
+Z
+ 
+Figure 7-4: Definition of axes 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         18/53                                                          August 2021 
+ 
+ 
+Figure 7-5: Reference points for alignment of axes 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         19/53                                                          August 2021 
+ 
+8 
+BASIC OPERATION 
+ 
+STIM210 is very simple to use. Unless having been configured to external trigger, the unit will start performing 
+measurements and transmit the results over the RS422 interface without any need for additional signalling or set-up 
+after power-on. Figure 8-1 shows the simplest connection set-up for STIM210. 
+ 
+5V
+TxD+
+TxD-
+NRST
+STIM210
+RxD-
+RxD+
+SYSTEM
+ExtTrig
+11
+8
+5
+9
+1
+15
+12
+13
+ 
+Figure 8-1: Transmit-Only Electrical Connection Diagram 
+ 
+In order to take full advantage of all features of STIM210, the unit needs to be connected as shown in Figure 8-2. In 
+this set-up the system can reset the unit without having to toggle power, the external trigger function can be utilized, 
+configuration parameters can be changed and extended information like diagnostic information can be read from the 
+device. 
+5V
+TxD+
+TxD-
+RxD-
+RxD+
+NRST
+TOV
+STIM210
+TxD+
+TxD-
+RxD-
+RxD+
+RESET
+SYSTEM
+External Trigger
+ExtTrig
+Time of Validiy
+11
+8
+4
+5
+9
+1
+10
+2
+15
+12
+13
+ 
+Figure 8-2: Full Function Electrical Connection Diagram 
+ 
+ 
+8.1 
+Reset 
+ 
+STIM210 has a separate reset pin (NRST) in order for the application to reset the unit without having to toggle power. 
+ 
+The reset is active low and has an internal pull-up. Hence the input could be left floating if not in use. 
+ 
+The reset signal is routed to the reset of the microcontroller and effectively forces STIM210 into Init Mode (ref. Figure 
+8-6 and section 8.4.1). 
+ 
+8.2 
+External Trigger 
+ 
+STIM210 has a separate digital input pin to be used when the unit has been configured to transmit only upon external 
+trigger. The measurements themselves will be continuously running at the highest sample rate (2000 samples/s) in 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         20/53                                                          August 2021 
+ 
+order to ensure shortest possible latency when a transmission is requested. The input is set to trigger on the falling 
+edge of the input signal and will then transmit one datagram containing the result of the latest measurement. 
+The input has an internal pull-up. Hence the input could be left floating if not in use. 
+Note that when requesting one of the special Normal Mode datagrams, ref. section 9, the datagram will be transmitted 
+at the next external trigger input, replacing the datagram containing sensor data. If several requests for special 
+datagrams are issued prior to an external trigger, it will be the last requested special datagram that will be transmitted. 
+When STIM210 is in Init Mode (after Power on or Reset), it will transmit the 3 special datagrams as described in 
+section 8.4.1 regardless of external input. 
+The timing diagram is shown in Figure 8-3. Latency is the time between the moment at which the sample has been 
+digitized + low pass-filtered and the receipt of the external trigger. 
+ 
+New raw data available
+tinternal_sample
+0.5ms
+Compensation
+#n
+#n+1
+#n+2
+#n+3
+Sample#
+n
+n+1
+n+2
+n+3
+Sample available for 
+transmission
+#n
+#n+1
+#n+2
+#n-1
+External trigger
+text_lo
+Transmitted data
+#n
+text_dl
+Latency
+#n+1
+Latency
+n+4
+n+5
+#n+4
+#n+5
+#n+3
+#n+4
+#n+4
+Latency
+tcomp
+text_hi
+ 
+Figure 8-3: Timing of external trigger 
+ 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         21/53                                                          August 2021 
+ 
+8.3 
+Time of Validity (TOV) 
+The TOV-output serves 2 purposes: 
+ 
+Provide a synchronization-signal derived from the internal clock of STIM210 
+ 
+Provide means to signal when a datagram is being transmitted (NB: not when configured to external trigger) 
+ 
+The TOV falling edge occurs synchronous to the sample rate. The raising edge occurs after the last bit of the 
+datagram has been transmitted. 
+ 
+Figure 8-4 and Figure 8-5 show the timing diagram of the TOV-output. 
+ 
+New raw data available
+tinternal_sample
+0.5ms
+Compensation
+#n
+#n+1
+#n+2
+#n+3
+Sample#
+n
+n+1
+n+2
+n+3
+TOV
+ttx_dl
+Transmitted data
+#n
+#n+2
+ttov_dl
+ 
+Figure 8-4: Timing of TOV (example: sample rate = 1000samples/s) 
+ 
+New raw data available
+tinternal_sample
+0.5ms
+Compensation
+#n
+#n+1
+#n+2
+#n+3
+Sample#
+n
+n+1
+n+2
+n+3
+TOV
+ttov_min
+Transmitted data
+#n
+#n+1
+External trigger
+ttov_dl
+ 
+Figure 8-5: Timing of TOV with external trigger 
+ 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         22/53                                                          August 2021 
+ 
+8.4 
+Operating modes 
+ 
+The operating modes of STIM210 are shown in Figure 8-6: 
+ 
+Normal
+Mode
+Init
+Mode
+Service
+Mode
+Reset
+Reset
+or
+EXIT to Init Mode-
+command
+Power on
+EXIT to
+Normal Mode-
+command
+SERVICEMODE-command
+ 
+Figure 8-6: Operating modes 
+8.4.1 
+Init Mode 
+Init Mode is entered after the following conditions: 
+ 
+power on 
+ 
+after an external reset 
+ 
+when receiving a reset-command in Normal Mode 
+ 
+when exiting to Init Mode from Service Mode. 
+ 
+In Init Mode the system waits for internal references to settle, resets and synchronizes the sensor channels and 
+transmits three special datagrams containing part number, serial number and configuration data. Please note that 
+length and format of the special datagrams are different to the datagrams in Normal Mode. 
+Table 6-6 specifies the sequence and contents of the Part Number datagram. 
+Table 6-7 specifies the sequence and contents of the Serial Number datagram. 
+Table 6-8 specifies the sequence and contents of the Configuration datagram. 
+ 
+After having transmitted the special Part Number, Serial Number and Configuration datagrams, STIM210 enters Normal 
+Mode. All these special datagrams can also be requested by commands in Normal Mode, ref. section 9. 
+ 
+8.4.2 
+Normal Mode 
+In Normal Mode STIM210 will constantly measure the gyro channels at an internal sample rate of 2000 samples/s and 
+transmit at the chosen sample rate, alternatively when receiving an external trigger. STIM210 will transmit data 
+regardless of any errors reported in the STATUS byte (ref. Table 6-13). Hence the content of the STATUS byte should 
+continuously be examined.  
+ 
+Table 6-11 specifies the sequence and contents of the datagrams transmitted in Normal Mode. 
+ 
+8.4.2.1 
+Start-Up 
+When STIM210 enters Normal Mode from Init Mode, there will be a start-up period where STIM210 is stabilizing the 
+gyros. This is a fixed period as specified in Table 6-2 and bit 6 is set in the STATUS byte (ref. Table 6-13) to 
+communicate this condition. During the start-up period STIM210 will continuously sample, compensate and output 
+data. However the data should not be regarded valid until bit 6 in STATUS byte is cleared. 
+ 
+There will not be any start-up period when STIM210 is exiting from Service Mode directly to Normal Mode. 
+ 
+ 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         23/53                                                          August 2021 
+ 
+8.4.2.2 
+Data output options and interpretation 
+The gyros in STIM210 measure angular rate [°/s]. However, in order to make the STIM210 more versatile, a few 
+simple functions are offered, ref. Table 8-1: 
+Table 8-1: Implemented functions for gyro output units 
+Function 
+Description of function 
+Equation 
+Output unit 
+Incremental 
+Adds all internal samples between 
+two transmissions multiplied by the 
+time between internal samples 
+𝐼𝑛𝑐𝑟𝑒𝑚𝑒𝑛𝑡𝑎𝑙= ∑𝐴𝑛𝑔𝑢𝑙𝑎𝑟𝑅𝑎𝑡𝑒𝑖∙
+1
+2000 𝑠
+𝑛
+𝑖=1
+ 
+ 
+n = 2000 / sample rate 
+[°] 
+Average 
+Calculates the average of the 
+internal samples between two 
+transmissions 
+𝐴𝑣𝑒𝑟𝑎𝑔𝑒= 1
+𝑛∙∑𝐴𝑛𝑔𝑢𝑙𝑎𝑟𝑅𝑎𝑡𝑒𝑖
+𝑛
+𝑖=1
+ 
+ 
+n = 2000 / sample rate 
+[°/s] 
+Integrated 
+Adds all internal samples multiplied 
+by the time between internal 
+samples since start-up / last reset. 
+Note that the result takes values in 
+the interval [-4°, 4°> and will 
+naturally wrap-around with no error-
+message indication in the Status-
+byte  
+𝐼𝑛𝑡𝑒𝑔𝑟𝑎𝑡𝑒𝑑= ∑𝐴𝑛𝑔𝑢𝑙𝑎𝑟𝑅𝑎𝑡𝑒𝑖∙
+1
+2000 𝑠
+𝑛
+𝑖=1
+ 
+ 
+n = internal samples (at a rate of 2000 samples/s) 
+since start-up or last reset) 
+[°] 
+ 
+8.4.2.2.1 
+Angular Rate 
+Angular Rate is available in all datagrams when STIM210 has been configured to output angular rate. The transmitted 
+data will be the last internal sample. E.g. in the case of continuous transmission of datagrams and a sample rate of 250 
+samples/s, every 8th internally sample will be transmitted.  
+ 
+Equation 1 and Figure 8-7 show how to convert to [°/s]. Note that the output data is represented as two’s complement. 
+ 
+Equation 1: Converting output to [°/s]: 
+
+
+14
+24
+23
+3
+8
+2
+16
+1
+2
+2
+)
+(
+)
+(
+2
+)
+(
+2
+)
+(
+/
+
+
+
+
+
+
+
+
+b
+AR
+AR
+AR
+AR
+s
+Output
+ 
+where  AR1 is the most significant byte of the 24bit output 
+ 
+AR2 is the middle byte of the 24bit output 
+ 
+AR3 is the least significant byte of the 24bit output 
+ARb23 is the most significant bit of AR1 
+ 
+29
+Bit 23
+28
+Bit 22
+27
+Bit 21
+26
+Bit 20
+25
+Bit 19
+24
+Bit 18
+23
+Bit 17
+22
+Bit 16
+21
+Bit 15
+20
+Bit 14
+2-1
+Bit 13
+2-2
+Bit 12
+2-3
+Bit 11
+2-4
+Bit 10
+2-5
+Bit 9
+2-6
+Bit 8
+2-7
+Bit 7
+2-8
+Bit 6
+2-9
+Bit 5
+2-10
+Bit 4
+2-11
+Bit 3
+2-12
+Bit 2
+2-13
+Bit 1
+2-14
+Bit 0
+AR1
+AR2
+AR3
+ 
+Figure 8-7: Converting output bytes to [°/s] 
+ 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         24/53                                                          August 2021 
+ 
+8.4.2.2.2 
+Incremental angle 
+Incremental angle is available in all datagrams when STIM210 has been configured to output incremental angle. The 
+transmitted data will be the integrated angle since last transmitted sample. E.g. in the case of continuous transmission 
+of datagrams and a sample rate of 250 samples/s, each transmission will contain the integrated angle of eight internal 
+samples. 
+Equation 2 and Figure 8-8 show how to convert to [°/sample]. Note that the output data is represented as two’s 
+complement: 
+ 
+Equation 2: Converting output to [°/sample] 
+
+
+21
+24
+23
+3
+8
+2
+16
+1
+2
+2
+)
+(
+)
+(
+2
+)
+(
+2
+)
+(
+/
+
+
+
+
+
+
+
+
+b
+IA
+IA
+IA
+IA
+sample
+Output
+ 
+where  IA1 is the most significant byte of the 24bit output 
+ 
+IA2 is the middle byte of the 24bit output 
+ 
+IA3 is the least significant byte of the 24bit output 
+ 
+IAb23 is the most significant bit of IA1 
+ 
+22
+Bit 23
+21
+Bit 22
+20
+Bit 21
+2-1
+Bit 20
+2-2
+Bit 19
+2-3
+Bit 18
+2-4
+Bit 17
+2-5
+Bit 16
+2-6
+Bit 15
+2-7
+Bit 14
+2-8
+Bit 13
+2-9
+Bit 12
+2-10
+Bit 11
+2-11
+Bit 10
+2-12
+Bit 9
+2-13
+Bit 8
+2-14
+Bit 7
+2-15
+Bit 6
+2-16
+Bit 5
+2-17
+Bit 4
+2-18
+Bit 3
+2-19
+Bit 2
+2-20
+Bit 1
+2-21
+Bit 0
+IA1
+IA2
+IA3
+ 
+Figure 8-8: Converting output bytes to [°/samples] 
+ 
+8.4.2.2.3 
+Average angular rate 
+Average angular rate is available in all datagrams when STIM210 has been configured to output average angular rate. 
+The transmitted data will be the average of the samples since last transmission. E.g. in the case of continuous 
+transmission of datagrams and a sample rate of 250 samples/s, each transmission will contain the average of the eight 
+internal samples. 
+ 
+Note that the configured low-pass filtering is performed prior to calculating the average. 
+ 
+Conversion to [°/s] is the same as for angular rate and is described in Equation 1. 
+ 
+8.4.2.2.4 
+Integrated angle 
+Integrated angle is available in all datagrams when STIM210 has been configured to output integrated angle. The 
+transmitted data will be continuously integrated angle since power-on or reset. The integrated angle takes values in the 
+interval [-4°,4°> and will naturally wrap around with no error message indication in the Status byte. 
+ 
+Conversion to [°] is the same as for incremental angle and is described in Equation 2. 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         25/53                                                          August 2021 
+ 
+8.4.2.2.5 
+Temperature 
+Temperature data for each axis is available in certain datagrams (ref. section 12). 
+ 
+Equation 3 and Figure 8-9 show how to convert to [°C]. Note that the output data is represented as two’s complement: 
+ 
+Equation 3: Converting temperature data to [°C] 
+
+
+8
+16
+15
+2
+8
+1
+2
+2
+)
+(
+)
+(
+2
+)
+(
+
+
+
+
+
+
+bT
+T
+T
+C
+Output
+ 
+where  T1 is the most significant byte of the 16bit output 
+ 
+T2 is the least significant byte of the 16bit output 
+ 
+Tb15 is the most significant byte of T1 
+ 
+27
+Bit 15
+26
+Bit 14
+25
+Bit 13
+24
+Bit 12
+23
+Bit 11
+22
+Bit 10
+21
+Bit 9
+20
+Bit 8
+2-1
+Bit 7
+2-2
+Bit 6
+2-3
+Bit 5
+2-4
+Bit 4
+2-5
+Bit 3
+2-6
+Bit 2
+2-7
+Bit 1
+2-8
+Bit 0
+T1
+T2
+ 
+Figure 8-9: Converting temperature data to [°C] 
+ 
+8.4.2.2.6 
+Counter 
+A counter is available in certain datagrams (ref. section 12). Counter is continuously counting the internal samples 
+(2000 samples/s). Counter is an un-signed single byte taking values in the interval [0 , 255]. The counter will naturally 
+wrap-around with no error-message indication in the Status-byte. 
+ 
+8.4.2.2.7 
+Latency 
+Latency is available in certain datagrams (ref. section 12) with external trigger. Latency is an unsigned word taking 
+values in the interval [0 , 65535] µs. 
+ 
+Equation 4 and Figure 8-10 show how to convert to [seconds]: 
+ 
+Equation 4: Converting latency data to [seconds] 
+
+
+
+6
+2
+8
+1
+10
+)
+(
+2
+)
+(
+
+
+
+
+
+t
+t
+seconds
+Output
+ 
+where  t1 is the most significant byte of the 16bit output 
+ 
+t2 is the least significant byte of the 16bit output 
+ 
+215·10-6
+Bit 15
+214·10-6
+Bit 14
+213·10-6
+Bit 13
+212·10-6
+Bit 12
+211·10-6
+Bit 11
+210·10-6
+Bit 10
+29·10-6
+Bit 9
+28·10-6
+Bit 8
+Bit 7
+Bit 6
+Bit 5
+Bit 4
+Bit 3
+Bit 2
+Bit 1
+Bit 0
+t1
+t2
+26·10-6
+25·10-6
+24·10-6
+23·10-6
+22·10-6
+21·10-6
+20·10-6
+27·10-6
+ 
+Figure 8-10: Converting latency data to [seconds] 
+ 
+ 
+ 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         26/53                                                          August 2021 
+ 
+8.4.3 
+Service Mode 
+The communication interface has been designed to be human-readable in Service Mode. This can for example be of 
+great help in the development phase when the device needs to be re-configured during investigations into an observed 
+problem, for example in combination with terminal based software. 
+ 
+When Service Mode is entered, STIM210 will respond with its configuration information (same as the response to the i 
+(INFORMATION) command, ref: Figure 10-1). 
+ 
+A set of commands are available, ref. section 10, enabling the user to change intermediately or permanently the 
+configuration parameters, display latest measurement results, display higher details on error information and perform a 
+full diagnostic of the unit. 
+ 
+In Service Mode the gyro measurements will still be running in the background, enabling to switch directly back to Normal 
+Mode without the need for any stabilization time of filters, etc. However the measurement data itself, when STIM210 is 
+in Service Mode are not transmitted and therefore lost. By using the a (SINGLE-SHOT MEASUREMENT) command 
+(ref. section 10.2) it is possible to display single measurement results. 
+ 
+Exiting Service Mode can be done in several ways: 
+1. Using the external reset. This will force STIM210 into Init Mode. Be advised that during Init Mode, all the 
+configuration parameters are loaded from flash. If any of the configuration parameters have been changed 
+during the Service Mode session but not saved to flash, these changes will be overwritten by the content already 
+stored in flash. 
+2. Using the x (EXIT) command. When using this command a parameter is required to decide whether the device 
+should go to Init Mode or to Normal Mode. When exiting to Normal Mode, any of the changes made to the 
+configuration parameters will still be valid. However, if not saved, the configuration parameters will be overwritten 
+by the content already stored in flash at the next power-up or reset. 
+ 
+ 
+8.5 
+Self diagnostics 
+STIM210 is constantly checking its internal status. The checks include: 
+o 
+Check of internal references 
+o 
+Check of gyros (error and overload) 
+o 
+Check of internal temperatures 
+o 
+Check of RAM and flash 
+o 
+Check of supply voltage 
+ 
+A full diagnostic can be run to see the result of the individual checks by using the c (DIAGNOSTIC) command, ref. 
+section 10.3 in SERVICEMODE. 
+ 
+When an error situation is detected, the corresponding bit in the STATUS byte (ref. Table 6-13) will be set. If the 
+sample-rate is set lower than 2000 samples/s, the STATUS byte will reflect the accumulated status of all the sub-
+samples between two data transmissions. The bits in the STATUS bytes are valid for the data in a single transmission 
+and hence not latched. 
+ 
+Access to extended error registers containing accumulated error-information can be achieved either by using the Normal 
+Mode-command "E" (EXTENDED ERROR INFORMATION DATAGRAM, ref. Table 6-9 and Table 6-10) or the 
+SERVICEMODE-command i e (INFORMATION on ACCUMULATED LAST ERRORS, ref. section 10.1). 
+ 
+The extended error registers are cleared at the following events: 
+ 
+After the start-up phase, triggered by power-on or reset 
+ 
+After transmission of Extended Error Information Datagram (ref. section 9.4) 
+ 
+After use of SERVICEMODE-command "i e" (INFORMATION on ACCUMULATED LAST ERRORS, ref. 
+section 10.1) 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         27/53                                                          August 2021 
+ 
+9 
+COMMANDS IN NORMAL MODE 
+ 
+Several commands are available in Normal Mode, as listed in Table 9-1. Note that all commands in Normal Mode 
+must be transmitted in upper case letters. 
+ 
+Table 9-1 Available commands in Normal Mode 
+Command 
+Short description 
+N 
+Transmits one Part Number datagram 
+I 
+Transmits one Serial Number datagram 
+C 
+Transmits one Configuration datagram 
+E 
+Transmits one Extended Error Information datagram 
+R 
+Resets the unit 
+SERVICEMODE 
+Enters Service Mode 
+ 
+Table 9-2 List of special ASCII characters used in Normal Mode 
+Char 
+Hex 
+Dec 
+Short description 
+<CR> 
+0x0D 
+13 
+“Carriage Return”: used as execution character for commands 
+ 
+No echo of received command characters nor error messages will appear for these commands. Only at the receipt of 
+the complete correct command, STIM210 executes accordingly. 
+ 
+NB: if OUTPUT UNIT is set to INCREMENTAL ANGLE (ref. section 10.7), the transmitted incremented angle in the 
+datagram following any of the requested special datagrams will NOT contain the incremental angle since the last 
+transmitted measurement. Hence the incremented angle occurring during the transmission of a special requested 
+datagram will be lost. 
+ 
+ 
+9.1 
+N (PART NUMBER DATAGRAM) command 
+General description: Requests transmission of a Part Number datagram (ref. Table 6-6). 
+ 
+Table 9-3 : Available I (PART NUMBER DATAGRAM) command 
+Syntax 
+Response 
+N<CR> 
+Transmits one Part Number datagram 
+ 
+The Part Number datagram will replace the next transmitted Normal Mode datagram. 
+ 
+If sample rate is set to external trigger, the Part Number datagram will be transmitted at the next external trigger input, 
+replacing the datagram containing sensor data. 
+ 
+ 
+9.2 
+I (SERIAL NUMBER DATAGRAM) command 
+General description: Requests transmission of a Serial number datagram (ref. Table 6-7). 
+ 
+Table 9-4 : Available I (SERIAL NUMBER DATAGRAM) command 
+Syntax 
+Response 
+I<CR> 
+Transmits one Serial Number datagram 
+ 
+The Serial Number datagram will replace the next transmitted Normal Mode datagram. 
+ 
+If sample rate is set to external trigger, the Serial Number datagram will be transmitted at the next external trigger 
+input, replacing the datagram containing sensor data. 
+ 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         28/53                                                          August 2021 
+ 
+9.3 
+C (CONFIGURATION DATAGRAM) command 
+General description: Requests transmission of a configuration datagram (ref. Table 6-8). 
+ 
+Table 9-5: Available C (CONFIGURATION DATAGRAM) command 
+Syntax 
+Response 
+C<CR> 
+Transmits one Configuration datagram 
+ 
+The Configuration datagram will replace the next transmitted Normal Mode datagram. 
+ 
+If sample rate is set to external trigger, the Configuration datagram will be transmitted at the next external trigger input, 
+replacing the datagram containing sensor data. 
+ 
+ 
+9.4 
+E (EXTENDED ERROR INFORMATION DATAGRAM) command 
+General description: Requests transmission of an Extended Error Information datagram (ref. Table 6-9). This 
+datagram contains the accumulated detected errors (ref. section 8.5). 
+Once the Extended Error Information datagram has been transmitted, the error-registers are cleared. 
+ 
+Table 9-6: Available E (EXTENDED ERROR INFORMATION) command 
+Syntax 
+Response 
+E<CR> 
+Resets the unit 
+ 
+The Extended Error Information datagram will replace the next transmitted Normal Mode datagram. 
+If sample rate is set to external trigger, the Extended Error Information datagram will be transmitted at the next 
+external trigger input, replacing the datagram containing sensor data. 
+ 
+ 
+9.5 
+R (RESET) command 
+General description: Force a Reset (ref. Figure 8-6). 
+ 
+Table 9-7: Available R (RESET) command 
+Syntax 
+Response 
+R<CR> 
+Resets the unit 
+ 
+ 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         29/53                                                          August 2021 
+ 
+9.6 
+SERVICEMODE command 
+General description : Enters Service Mode (ref. section 8.4.3). 
+ 
+Table 9-8: Available SERVICEMODE command 
+Syntax 
+Response 
+SERVICEMODE<CR> 
+Enters Service Mode 
+ 
+If the command is received during the transmission of a datagram, it will complete the transmission before entering 
+Service Mode. 
+ 
+When entering Service Mode, the configuration and identification data of the device will be listed, as shown in Figure 
+9-1: 
+ 
+SERIAL NUMBER = N25581820002002 
+PRODUCT = STIM210XZ 
+PART NUMBER = 84192-1034-0121 REV H 
+HW CONFIG = M5673 REV 7 
+FW CONFIG = SWD11860 REV 9 
+OUTPUT UNIT = [°/sample] – INCREMENTAL ANGLE 
+SAMPLE RATE [samples/s] = 1000 
+GYRO CONFIG = XZ 
+GYRO RANGE:  
+  X-AXIS: ± 400°/s  
+  Y-AXIS: NA  
+  Z-AXIS: ± 400°/s  
+LP FILTER -3dB FREQUENCY, X-AXIS [Hz] = 262 
+LP FILTER -3dB FREQUENCY, Y-AXIS [Hz] = NA 
+LP FILTER -3dB FREQUENCY, Z-AXIS [Hz] = 262 
+DATAGRAM FORMAT = STANDARD 
+BIT-RATE [bits/s] = 374400 
+DATA LENGTH = 8 
+STOP-BITS = 1 
+PARITY = EVEN 
+LINE TERMINATION = ON 
+DATAGRAM TERMINATION = NONE 
+ 
+> 
+Figure 9-1: Example of response from SERVICEMODE command 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         30/53                                                          August 2021 
+ 
+10 COMMANDS IN SERVICE MODE 
+Several commands are available in Service Mode, as listed in Table 10-1. Note that all commands in Service Mode must 
+be transmitted in lower case letters. 
+ 
+Table 10-1 Available commands in Service Mode 
+Command 
+Short description 
+i 
+Lists specific information (e.g. serial number, configuration, error information) 
+a 
+Performs a single-shot measurement 
+c 
+Performs a diagnostic of the unit 
+d 
+Changes datagram format 
+t 
+Changes transmission parameters (e.g. bit-rate, data length, stop-bits) 
+r 
+Changes line termination and datagram termination 
+u 
+Changes measurement output unit 
+f 
+Changes LP filter -3dB frequency 
+m 
+Changes sample rate 
+s 
+Saves configuration data 
+x 
+Exits Service Mode and returns to Normal Mode or Init Mode 
+z 
+Restore to factory settings 
+? 
+Help function on the available commands in Service Mode 
+ 
+Table 10-2 List of special ASCII characters used in Service Mode 
+Char 
+Hex 
+Dec 
+Short description 
+<BS> 
+0x08 
+8 
+“Back Space”: deletes last received character (received since last <CR>) 
+<CR> 
+0x0D 
+13 
+“Carriage Return”: typically used as execution character for commands 
+<SP> 
+0x20 
+32 
+“Space”: used to separate command and first parameter 
+‘,’ 
+0x2C 
+44 
+“Comma”: used to separate parameters in a command 
+‘>’ 
+0x3E 
+62 
+Used together with <CR> as: “Ready to receive new command” prompt 
+ 
+ 
+When STIM210 is in Service Mode and ready to receive a new command, it will issue the special ASCII character <CR> 
+followed by ‘>’. As some commands (e.g. SINGLE-SHOT MEASUREMENT command) may respond with a varying 
+number of lines, automated set-ups should look for the special prompt sequence (<CR>+’>’) before issuing a new 
+command. 
+ 
+Received characters will be echoed. A command is decoded and executed when receiving the special ASCII character 
+<CR>. <BS> is also recognized and will delete the last received character in the input buffer. The size of the input buffer 
+is 80 characters. <BS> is valid for the characters received since last <CR>. 
+ 
+The command character and first parameter (when applicable) are separated by a space (character 0x20). When there 
+are more than one parameter to a command (e.g. TRANSMISSION PARAMETER command), these must be separated 
+by a comma (character 0x2C). 
+ 
+In the event of an unknown command, inconsistent syntax or incorrect value of parameter(s), STIM210 will respond with 
+an error message. Error messages are on the format: 
+ 
+E<nnn><SP><Error description><CR> 
+where  nnn is an error number 
+ 
+ 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         31/53                                                          August 2021 
+ 
+10.1 i (INFORMATION) command 
+General description: Lists various requested information about the device 
+ 
+Table 10-3 : Available i (INFORMATION) commands 
+Syntax 
+Response 
+i<CR> 
+Lists the product configuration and identification data 
+i<SP><cmd><CR> 
+Gives information about the specific parameter  
+ 
+Table 10-4 : Allowed values for <cmd> parameter for i (INFORMATION) commands 
+<cmd> 
+Result 
+s 
+Returns the serial number of the device 
+n 
+Returns the product name of the device 
+x 
+Returns the part number of the device 
+a 
+Returns the axis configuration of the device 
+h 
+Returns the HW configuration and revision of the device 
+p 
+Returns the FW configuration and revision of the device 
+m 
+Returns the sample rate of the device 
+f 
+Returns the LP filter -3dB frequency for each axis 
+d 
+Returns the datagram format 
+t 
+Returns the transmission parameters of the device 
+r 
+Returns the line termination and datagram termination 
+u 
+Returns the output unit of the device 
+e 
+Prints the extended error information from the accumulated detected error(s) since last error 
+read-out in Service Mode or by the E-command in Normal Mode (ref. section 9.4) 
+ 
+Table 10-5: Error messages for i (INFORMATION) commands 
+Error 
+Message 
+Possible reason 
+E001 
+UNKOWN COMMAND 
+Command or parameter is not recognised 
+E002 
+INCORRECT NUMBER OF 
+PARAMETERS 
+Too many or too few parameters, use of comma between 
+command and first parameter 
+ 
+>i 
+SERIAL NUMBER = N25581820002002 
+PRODUCT = STIM210XZ 
+PART NUMBER = 84192-1034-0121 REV H 
+HW CONFIG = M5673 REV 7 
+FW CONFIG = SWD11860 REV 9 
+OUTPUT UNIT = [°/sample] – INCREMENTAL ANGLE 
+SAMPLE RATE [samples/s] = 1000 
+GYRO CONFIG = XZ 
+GYRO RANGE:  
+  X-AXIS: ± 400°/s  
+  Y-AXIS: NA  
+  Z-AXIS: ± 400°/s  
+LP FILTER -3dB FREQUENCY, X-AXIS [Hz] = 262 
+LP FILTER -3dB FREQUENCY, Y-AXIS [Hz] = NA 
+LP FILTER -3dB FREQUENCY, Z-AXIS [Hz] = 262 
+DATAGRAM TERMINATION = NONE 
+BIT-RATE [bits/s] = 374400 
+DATA LENGTH = 8 
+STOP-BITS = 1 
+PARITY = EVEN 
+LINE TERMINATION = ON 
+DATAGRAM FORMAT = STANDARD 
+ 
+> 
+Figure 10-1: Example of response from i (INFORMATION) command 
+ 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         32/53                                                          August 2021 
+ 
+>i s 
+SERIAL NUMBER = N25581820002002 
+ 
+> 
+Figure 10-2: Example of response from i s (INFORMATION on SERIAL NUMBER) command 
+ 
+ 
+>i n 
+PRODUCT = STIM210XZ 
+ 
+> 
+Figure 10-3: Example of response from i n (INFORMATION on PRODUCT NAME) command 
+ 
+ 
+>i x 
+PART NUMBER = 84192-1034-0121 REV H 
+ 
+> 
+Figure 10-4: Example of response from i x (INFORMATION on PART NUMBER) command 
+ 
+ 
+>i a 
+GYRO CONFIG = XZ 
+GYRO RANGE:  
+  X-AXIS: ± 400°/s  
+  Y-AXIS: NA  
+  Z-AXIS: ± 400°/s  
+ 
+> 
+Figure 10-5: Example of response from i a (INFORMATION on AXIS CONFIGURATION) command 
+ 
+ 
+>i h 
+HW CONFIG = M5673 REV 7 
+ 
+> 
+Figure 10-6: Example of response from i h (INFORMATION on HW CONFIGURATION) command 
+ 
+ 
+>i p 
+FW CONFIG = SWD11860 REV 9 
+ 
+> 
+Figure 10-7: Example of response from i p (INFORMATION on FW CONFIGURATION) command 
+ 
+ 
+>i m 
+SAMPLE RATE [samples/s] = 1000 
+ 
+> 
+Figure 10-8: Example of response from i m (INFORMATION on SAMPLE RATE) command 
+ 
+ 
+>i f 
+LP FILTER -3dB FREQUENCY, X-AXIS [Hz] = 262 
+LP FILTER -3dB FREQUENCY, Y-AXIS [Hz] = NA 
+LP FILTER -3dB FREQUENCY, Z-AXIS [Hz] = 262 
+ 
+> 
+Figure 10-9: Example of response from i f (INFORMATION on LP FILTER -3dB FREQUENCY) command 
+ 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         33/53                                                          August 2021 
+ 
+>i d 
+DATAGRAM FORMAT = STANDARD 
+ 
+> 
+Figure 10-10: Example of response from i d (INFORMATION on DATAGRAM CONTENT) command 
+ 
+ 
+>i t 
+BIT-RATE [bits/s] = 374400 
+DATA LENGTH = 8 
+STOP-BITS = 1 
+PARITY = EVEN 
+ 
+> 
+Figure 10-11: Example of response from i t (INFORMATION on TRANSMISSION PARAMETERS) command 
+ 
+ 
+>i r 
+LINE TERMINATION = ON 
+DATAGRAM TERMINATION = NONE 
+ 
+> 
+Figure 10-12: Example of response from i r (INFORMATION) command 
+ 
+ 
+>i u 
+OUTPUT UNIT = [°/sample] – INCREMENTAL ANGLE 
+ 
+> 
+Figure 10-13: Example of response from i u (INFORMATION on OUTPUT UNIT) command 
+ 
+ 
+>i e 
+GYRO X-AXIS I-CH OVERFLOW = FAILED 
+ 
+> 
+Figure 10-14: Example of response from i e (INFORMATION on LAST ERROR IN NORMAL MODE) command 
+ 
+ 
+ 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         34/53                                                          August 2021 
+ 
+10.2 a (SINGLE-SHOT MEASUREMENT) command 
+General description: Displays the result of latest measurement (measurement process running constantly in the 
+background). 
+ 
+If sample rate has been set to external trigger, the SINGLE-SHOT MEASUREMENT will respond to the measurement 
+result at the latest trigger. Hence if no trigger is received, the command will respond with the same data if sent multiple 
+times. 
+ 
+Table 10-6: Available a (SINGLE-SHOT MEASUREMENT) command 
+Syntax 
+Response 
+a<CR> 
+Displays the result of the latest measurement sample 
+ 
+Table 10-7: Error messages for a (SINGLE-SHOT MEASUREMENT) command 
+Error 
+Message 
+Possible reason 
+E001 
+UNKOWN COMMAND 
+Command is incorrectly entered 
+E002 
+INCORRECT NUMBER OF 
+PARAMETERS 
+Any characters between command and <CR> 
+ 
+ 
+>a 
+X-AXIS = 1.43255°/s 
+Y-AXIS = NA 
+Z-AXIS = 243.33667°/s 
+STATUS = 00000000 = OK 
+ 
+> 
+Figure 10-15: Example of response from a (SINGLE-SHOT MEASUREMENT) command 
+ 
+>a 
+X-AXIS = 0.000716275° 
+Y-AXIS = NA 
+Z-AXIS = 0.121668335° 
+STATUS = 00100101 = NOT OK 
+BIT 5: OUTSIDE OPERATING CONDITIONS 
+BIT 2: ERROR IN Z-CHANNEL 
+BIT 0: ERROR IN X-CHANNEL 
+ 
+> 
+Figure 10-16: Example of response from a (SINGLE-SHOT MEASUREMENT) command with error flagging 
+ 
+ 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         35/53                                                          August 2021 
+ 
+10.3 c (DIAGNOSTIC) command 
+General description: Performs a diagnostic of the unit. 
+ 
+Table 10-8: Available c (DIAGNOSTIC) command 
+Syntax 
+Response 
+c<CR> 
+Performs a diagnostic check 
+ 
+Table 10-9: Error messages for c (DIAGNOSTIC) command 
+Error 
+Message 
+Possible reason 
+E001 
+UNKOWN COMMAND 
+Command is incorrectly entered 
+E002 
+INCORRECT NUMBER OF 
+PARAMETERS 
+Any characters between command and <CR> 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         36/53                                                          August 2021 
+ 
+ 
+>c 
+SERIAL NUMBER = N25581025644346 
+PRODUCT = STIM210XZ 
+PART NUMBER = 84192-1034-0121 REV H 
+HW CONFIG = M5673 REV 7 
+FW CONFIG = SWD11860 REV 9 
+SYSTEM STATUS: 
+  RAM CHECK = OK 
+  FLASH CHECK = OK 
+  STACK STATUS MONITOR  = OK 
+  STACK COMMAND HANDLER  = OK 
+  STACK SAMPLE  = OK 
+  STACK FLASH  = OK 
+  MICRO CONTROLLER TEMPERATURE  = OK 
+VOLTAGE SUPPLIES: 
+  REFERENCE VOLTAGE 5.0V = OK 
+  REFERENCE VOLTAGE 2.5V = OK 
+  REFERENCE VOLTAGE 2.048V = OK 
+  REGULATED VOLTAGE 5.0V  = OK 
+  REGULATED VOLTAGE 1.8V  = OK 
+  INPUT VOLTAGE 5.0V = OK 
+  VOLTAGE BOOST = OK 
+GYRO X-AXIS: 
+  GYRO X-AXIS Data Ready = OK 
+  GYRO X-AXIS EXC.FREQ = OK 
+  GYRO X-AXIS ASIC TEMP = OK 
+  GYRO X-AXIS SENSOR TEMP = OK 
+  GYRO X-AXIS COMPENSATED RATE SIGNAL = OK 
+  GYRO X-AXIS DASIC COMMUNICATION = OK 
+  GYRO X-AXIS Q-CH RANGE = OK 
+  GYRO X-AXIS I-CH RANGE = OK 
+  GYRO X-AXIS DET. DC = OK 
+  GYRO X-AXIS EXC. DC = OK 
+  GYRO X-AXIS SPI = OK 
+  GYRO X-AXIS EXC.AMPL = OK 
+  GYRO X-AXIS OVERRUN = OK 
+  GYRO X-AXIS DAC = OK 
+GYRO Z-AXIS: 
+  GYRO Z-AXIS Data Ready = OK 
+  GYRO Z-AXIS EXC.FREQ = OK 
+  GYRO Z-AXIS ASIC TEMP = OK 
+  GYRO Z-AXIS SENSOR TEMP = OK 
+  GYRO Z-AXIS COMPENSATED RATE SIGNAL = OK 
+  GYRO Z-AXIS DASIC COMMUNICATION = OK 
+  GYRO Z-AXIS Q-CH RANGE = OK 
+  GYRO Z-AXIS I-CH RANGE = OK 
+  GYRO Z-AXIS DET. DC = OK 
+  GYRO Z-AXIS EXC. DC = OK 
+  GYRO Z-AXIS SPI = OK 
+  GYRO Z-AXIS EXC.AMPL = OK 
+  GYRO Z-AXIS OVERRUN = OK 
+  GYRO Z-AXIS DAC = OK 
+ 
+> 
+Figure 10-17: Example of response from c (DIAGNOSTIC) command 
+ 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         37/53                                                          August 2021 
+ 
+10.4 d (DATAGRAM FORMAT) command 
+General description: Changes the datagram format in Normal Mode (ref.Table 6-11). 
+ 
+Note that the datagram format could be considered invalid, even if it has been entered correctly. This is because a 
+valid datagram format also depends on the chosen sample rate and bit rate (ref. Table 6-12 and error message E007 
+in Table 10-12). 
+ 
+Note that this change will only be effective until STIM210 is initialized, reset or powered off, unless the new setting has 
+been stored in flash using the SAVE-command (ref. section 10.10). In order to use or test a new setting in Normal 
+Mode without permanently storing it, this can be achieved by using the EXIT n-command (ref. section 10.11). 
+ 
+Table 10-10 : Available d (DATAGRAM FORMAT) command 
+Syntax 
+Response 
+d<SP><d_format><CR> 
+Changes the datagram format in Normal Mode 
+ 
+Table 10-11 : Allowed values for d (DATAGRAM FORMAT) command 
+<d_format> 
+Result 
+s 
+Changes the datagram format in Normal Mode to standard format 
+e 
+Changes the datagram format in Normal Mode to extended format 
+j 
+Changes the datagram format in Normal Mode to rate and temperature 
+k 
+Changes the datagram format in Normal Mode to rate and counter 
+l 
+Changes the datagram format in Normal Mode to rate and latency 
+m 
+Changes the datagram format in Normal Mode to rate, counter and latency 
+n 
+Changes the datagram format in Normal Mode to rate, temperature and counter 
+o 
+Changes the datagram format in Normal Mode to rate, temperature and latency 
+p 
+Changes the datagram format in Normal Mode to rate, temperature, counter and 
+latency 
+ 
+Table 10-12: Error messages for d (DATAGRAM FORMAT) command 
+Error 
+Message 
+Possible reason 
+E001 
+UNKOWN COMMAND 
+Command is incorrectly entered 
+E002 
+INCORRECT NUMBER OF 
+PARAMETERS 
+Too many or too few parameters, use of comma between 
+command and first parameter 
+E003 
+INVALID PARAMETER 
+Value of parameter outside valid range 
+E007 
+DATAGRAM WILL BE TOO LONG 
+TO TRANSMIT 
+Combination of bit-rate, sample rate and datagram content results 
+in a datagram that cannot be transmitted 
+ 
+ 
+>d s 
+DATAGRAM FORMAT = STANDARD 
+ 
+> 
+Figure 10-18: Example of response from d s (DATAGRAM FORMAT) command 
+ 
+ 
+>d e 
+DATAGRAM FORMAT = EXTENDED 
+ 
+> 
+Figure 10-19: Example of response from d e (DATATGRAM FORMAT) command 
+ 
+ 
+>d m 
+DATAGRAM FORMAT = RATE, COUNTER AND LATENCY 
+ 
+> 
+Figure 10-20: Example of response from d m (DATATGRAM FORMAT) command 
+ 
+ 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         38/53                                                          August 2021 
+ 
+10.5 t (TRANSMISSION PARAMETERS) command 
+General description: Changes the transmission parameters for the RS422 interface. 
+ 
+Note that the bit-rate could be considered invalid, even if it has been entered correctly. This is because a valid bit-rate 
+also depends on the sample rate and chosen datagram content (ref. Table 6-12 and error message E007 in Table 
+10-16). 
+ 
+Note that this change will only be effective until STIM210 is initialized, reset or powered off, unless the new setting has 
+been stored in flash using the SAVE-command (ref. section 10.10). If confirmation to the SAVE-command is not "Y", 
+the transmission parameters will be reset to the previously stored settings. In order to use or test a new setting in 
+Normal Mode without permanently storing it, this can be achieved by using the EXIT n-command (ref. section 10.11). 
+ 
+Table 10-13 : Available t (TRANSMISSION PARAMETERS) commands 
+Syntax 
+Response 
+t<SP><bit-rate><CR> 
+Changes the transmission bit-rate and leaves number 
+of stop-bits and parity unchanged 
+t<SP><bit-rate>’,’<stop-bits>’,’<parity><CR> 
+Changes the transmission bit-rate, number of stop-bits 
+and parity 
+ 
+Table 10-14: Allowed values for <stop-bits> parameter for t (TRANSMISSION PARAMETERS) commands 
+<stop-bits> 
+Result 
+1 
+Will set number of stop-bits to 1 
+2 
+Will set number of stop-bits to 2 
+ 
+Table 10-15: Allowed values for <parity> parameter for t (TRANSMISSION PARAMETERS) commands 
+<stop-bits> 
+Result 
+n 
+Will set no parity 
+e 
+Will set even parity 
+o 
+Will set odd parity 
+ 
+ 
+The STIM210 hardware is capable of setting bit-rates in the range between 1500 and 3 750 000 bits/s. However, the 
+sample rate and the datagram length decide the minimum bit-rate possible, ref. Equation 5: 
+ 
+Equation 5: Minimum bit-rate 
+rate
+sample
+bytes
+bits
+rate
+Bit
+MIN
+_
+1.1
+
+
+
+
+
+ 
+ 
+where 
+bits  
+= start-bit (1) + data-bits (8) + stop-bits (1 or 2) + parity-bit (0 or 1) 
+bytes   = number of bytes in the chosen datagram including <CR><LF>, ref. Table 6-11 and Table 6-12 
+(NB: number of bytes in Table 6-12 excludes <CR><LF>) 
+ 
+sample_rate is the chosen sample rate [samples/s] 
+ 
+If a bit-rate, lower than the allowed bit-rate defined by Equation 5, is entered, the command will respond with error 
+message E007, ref. Table 10-16. 
+ 
+There are a finite number of bit-rates possible to set. This is defined in Equation 6: 
+ 
+Equation 6: Set bit-rate 
+s
+bits
+n
+rate
+Bit
+SET
+/
+59904000
+
+
+ 
+ 
+where 
+n is an integer 
+ 
+The actually set bit-rate will hence be the closest to requested bit-rate. The response of the t (TRANSMISSION 
+PARAMETERS)-command will be the set bit-rate. Be aware that for certain bit-rates above 1.2Mbit/s, the deviation 
+between the requested bit-rate and set bit-rate could be larger than 1% and may be in conflict with the RS422 
+specification. No warnings are issued related to this issue. As a safety precaution, the new bit-rate can only be 
+permanently set by the s (SAVE)-command later using the new bit-rate. 
+ 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         39/53                                                          August 2021 
+ 
+Table 10-16: Error messages for t (TRANSMISSION PARAMETERS) commands 
+Error 
+Message 
+Possible reason 
+E001 
+UNKOWN COMMAND 
+Command is incorrectly entered 
+E002 
+INCORRECT NUMBER OF 
+PARAMETERS 
+Too many or too few parameters, use of comma between 
+command and first parameter 
+E003 
+INVALID PARAMETER 
+Value of parameter outside valid range 
+E007 
+DATAGRAM WILL BE TOO LONG 
+TO TRANSMIT 
+Combination of bit-rate, sample rate and datagram content results 
+in a datagram that cannot be transmitted 
+ 
+ 
+>t 460800,2,e 
+TRANSMISSION PROTOCOL = 460800 bits/s, 2 STOP-BIT(S), EVEN PARITY 
+ 
+> 
+Figure 10-21: Example of response from t (TRANSMISSION PARAMETERS) command 
+ 
+ 
+>t 500000 
+TRANSMISSION PROTOCOL = 499200 bits/s, 2 STOP-BIT(S), EVEN PARITY 
+ 
+> 
+Figure 10-22: Example of response from t (TRANSMISSION PARAMETERS) command 
+ 
+ 
+Transmission parameters will change after the response as shown in Figure 10-21 or Figure 10-22 has been given. 
+ 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM210 Multi-Axis Gyro Module 
+ 
+TS1545 rev.20                                                                         40/53                                                          August 2021 
+ 
+10.6 r (TERMINATION) command 
+General description: Changes the line termination and datagram termination. Line termination should be ON when 
+communicating point-to-point (single master – single slave). 
+ 
+Note that this change will only be effective until STIM210 is initialized, reset or powered off, unless the new setting has 
+been stored in flash using the SAVE-command (ref. section 10.10). In order to use or test a new setting in Normal 
+Mode without permanently storing it, this can be achieved by using the EXIT n-command (ref. section 10.11). 
+ 
+Table 10-17: Available r (TERMINATION) command 
+Syntax 
+Response 
+r<SP><term><CR> 
+Changes the line termination and datagram termination 
+ 
+Table 10-18: Allowed values for r (TERMINATION) command 
+<term> 
+Result 
+0 
+Turns line termination = OFF, datagram termination = none 
+1 
+Turns line termination = ON, datagram termination = none 
+2 
+Turns line termination = OFF, datagram termination = <CR><LF> 
+3 
+Turns line termination = ON, datagram termination = <CR><LF> 
+ 
+Table 10-19: Error messages for r (TERMINATION) command 
+Error 
+Message 
+Possible reason 
+E001 
+UNKOWN COMMAND 
+Command is incorrectly entered 
+E002 
+INCORRECT NUMBER OF 
+PARAMETERS 
+Too many or too few parameters, use of comma between 
+command and first parameter 
+E003 
+INVALID PARAMETER 
+Value of parameter outside valid range 
+ 
+ 
+>r 0 
+LINE TERMINATION = OFF 
+DATAGRAM TERMINATION = NONE 
+ 
+> 
+Figure 10-23: Example of response from r 0 (TERMINATION) command 
+ 
+ 
+>r 3 
+LINE TERMINATION = ON 
+DATAGRAM TERMINATION = <CR><LF> 
+ 
+> 
+Figure 10-24: Example of response from r 3 (TERMINATION) command 
+ 
+ 
+ 
+

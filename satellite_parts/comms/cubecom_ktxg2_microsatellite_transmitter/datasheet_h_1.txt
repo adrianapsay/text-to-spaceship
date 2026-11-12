@@ -1,0 +1,101 @@
+ANTENNAS
+TRANSMITTERS
+DOWNCONVERTERS
+C U B E C O M . S PA C E
+The KTXG2 is an extremely compact high-speed transmitter providing excellent 
+data throughput performance. This next generation K-band radio’s design was 
+based on making small but signiﬁcant improvements on our original XTX. Thus 
+building on the ﬁrst generation’s legacy in performance and leveraging its 
+signiﬁcant flight heritage, to inform design decisions. The addition of 32GB of 
+onboard memory and dynamic re-transmit capability allows you to minimize 
+your link margin excess and maximize your data throughput.
+This exceptional nanosatellite transmitter has now been redesigned for the 
+microsatellite formfactor. The µKTXG2 implements the DVB-S2 standard up to 
+MODCOD 28 which supports QPSK, 8-PSK, 16-APSK and 32-APSK modulation 
+at a symbol rate of 50 Msps. The maximum encoded data rate is 250 Mbps, 
+making it the perfect transmitter for data intensive missions, constellations and 
+any space mission that may require a high data rate downlink.
+WE DESIGN, DEVELOP AND 
+MANUFACTURE COMMUNICATION 
+SYSTEMS FOR SATELLITES
+µKTX
+MICROSATELLITE  TRANSMITTER
+G2 Collection now available
+T E C H N I C A L S P E C I F I C A T I O N S
+for microsatellite missions!
+ALL NEW!
++ MICROSATELLITE FORMFACTOR
++ DVB-S2 ENCODING
++ CCSDS COMPLIANT
++ MAX DATA RATE 250 MBPS
++ 32GB INTERNAL MEMORY
+DIMENSIONS 150 x 130 x 50 mm
+TOTAL UNIT MASS
+1.2 kg
+BOARD TEMPERATURE -20 to 60 ºC
+INPUT VOLTAGE
+14 V - 50 V
+POWER CONSUMPTION
+<20 Watt
+G2
+
+15 Elektron Road, Techno Park, Stellenbosch, South Africa 7600
+Contact :  +27 (0)21 880 1163   /   sales@cubecom.space
+•  LATEST GEN MULTISPECTRAL & HYPERSPECTRAL IMAGER TECHNOLOGY
+P A I R S W E L L W I T H 
+FREQUENCY RANGE 
+MAXIMUM RF POWER
+CHANNEL SPACING  
+SPURIOUS RESPONSE
+TX SNR
+EVM
+SYMBOL RATE
+25.5 - 27 GHz 
+2 Watt (33 dBm)
+1 MHz
+< -60 dBc
+> 23 dB
+< 5%
+1 - 50 Msps
+R F S P E C I F I C A T I O N S
+1. LOW SPEED I²C, CAN 2.0, UART, RS-485 
+(TELEMETRY AND CONTROL)
+2. SPACEWIRE AND GENERIC LVDS
+(HIGH SPEED DATA INTERFACE)
+3. 50 Ω SMA RF CONNECTOR
+4. 32 GB INTERNAL STORAGE
+*CUSTOM DATA INTERFACES ON REQUEST
+I N T E R F A C E S
+•  LOW POWER FLASH BASED FPGA
+•  AVAILABLE IN DVB-S2 ENCODING
+•  BCH ENCODING FOR BURST ERROR CORRECTION
+•  LDPC ENCODING
+•  VARIABLE SYMBOL RATE ROOT-RAISED-COSINE FILTER 
+P R O C E S S I N G
+•  FLIGHT BOARD
+•  USER MANUAL + STEP MODEL
+•  ACCEPTANCE TEST REPORT
+D E L I V E R A B L E S
+M O D U L A T I O N
+• CONFORMS TO SFCG 21 2R4 EMISSIONS
+M O D U L A T I O N
+Q P S K
+8 - P S K
+1 6 - A P S K
+3 2 - A P S K
+3 2 - A P S K
+315°
+45°
+1 6 - A P S K
+315°
+45°
+Q P S K
+315°
+45°
+315°
+45°
+8 - P S K
+315°
+45°
+S P E C T R U M C A P T U R E
+

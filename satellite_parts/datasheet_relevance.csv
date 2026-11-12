@@ -1,0 +1,731 @@
+part_id,file,verdict,why,first_line
+2ndspace_verse_02,datasheet,match,names the model (verse),verse structures
+2ndspace_verse_02,datasheet_1,match,names the model (verse),verse structures
+2ndspace_verse_03,datasheet,match,names the model (verse),verse structures
+2ndspace_verse_03,datasheet_1,match,names the model (verse),verse structures
+2ndspace_verse_06,datasheet,match,names the model (verse),verse structures
+2ndspace_verse_06,datasheet_1,match,names the model (verse),verse structures
+aac_ant_gps,datasheet,match,names the model (antgps),communications
+aac_ant_gps,datasheet_1,match,names the model (antgps),communications
+aac_gnss_701,datasheet_1,match,"names the model (701, gnss701)",satellite gnss receiver
+aac_gnss_701,datasheet_2,match,"names the model (701, gnss701)",satellite gnss receiver
+aac_iadcs200,datasheet,match,names the model (iadcs200),attitude determination & control system
+aac_iadcs200,datasheet_1,match,names the model (iadcs200),attitude determination & control system
+aac_iadcs400,datasheet,match,names the model (iadcs400),attitude determination & control system
+aac_iadcs400,datasheet_1,match,names the model (iadcs400),attitude determination & control system
+aac_kryten_m3,datasheet,match,"names the model (kryten, krytenm3)",command & data handling
+aac_kryten_m3,datasheet_1,match,"names the model (kryten, krytenm3)",command & data handling
+aac_mag3,datasheet,match,names the model (mag3),three axis satellite magnetometer
+aac_mag3,datasheet_1,match,names the model (mag3),three axis satellite magnetometer
+aac_mm200_flanged,datasheet,match,names the model (mm200),magnetometer
+aac_mm200_flanged,datasheet_1,match,names the model (mm200),magnetometer
+aac_mtq800,datasheet,match,names the model (mtq800),magnetorquers
+aac_mtq800,datasheet_1,match,names the model (mtq800),magnetorquers
+aac_mtq800_driver,datasheet,match,"names the model (driver, mtq800)",magnetorquers
+aac_mtq800_driver,datasheet_1,match,"names the model (driver, mtq800)",magnetorquers
+aac_optimus_30,datasheet,match,"names the model (optimus, optimus30)",battery
+aac_optimus_30,datasheet_1,match,"names the model (optimus, optimus30)",battery
+aac_optimus_30,datasheet_2,match,"names the model (optimus, optimus30)",battery
+aac_optimus_40,datasheet,match,"names the model (optimus, optimus40)",battery
+aac_optimus_40,datasheet_1,match,"names the model (optimus, optimus40)",battery
+aac_optimus_40,datasheet_2,match,"names the model (optimus, optimus40)",battery
+aac_optimus_80,datasheet,match,"names the model (optimus, optimus80)",battery
+aac_optimus_80,datasheet_1,match,"names the model (optimus, optimus80)",battery
+aac_optimus_80,datasheet_2,match,"names the model (optimus, optimus80)",battery
+aac_pg400,datasheet,match,names the model (pg400),attitude determination & control system
+aac_pg400,datasheet_1,match,names the model (pg400),attitude determination & control system
+aac_photon_dd_3u,datasheet,match,"names the model (photon, photondd3u)",solar panels
+aac_photon_dd_3u,datasheet_1,match,"names the model (photon, photondd3u)",solar panels
+aac_photon_sd_3u,datasheet,match,names the model (photon),solar panels
+aac_photon_sd_3u,datasheet_1,match,names the model (photon),solar panels
+aac_photon_side_3u,datasheet,match,names the model (photon),solar panels
+aac_photon_side_3u,datasheet_1,match,names the model (photon),solar panels
+aac_pulsar_hstx,datasheet,match,"names the model (pulsar, pulsarhstx)",communications
+aac_pulsar_hstx,datasheet_1,match,"names the model (pulsar, pulsarhstx)",communications
+aac_pulsar_sant,datasheet_1,match,"names the model (pulsar, pulsarsant)",communications
+aac_pulsar_sant,datasheet_2,match,"names the model (pulsar, pulsarsant)",communications
+aac_pulsar_tmtc,datasheet,match,names the model (pulsar),communications
+aac_pulsar_tmtc,datasheet_1,match,"names the model (pulsar, pulsartmtc)",communications
+aac_pulsar_vutrx,datasheet_p5_1,match,"names the model (pulsar, pulsarvutrx, vutrx)",the pulsar-vutrx and pulsar-vutrxc are compact
+aac_quasar_strx,datasheet,match,"names the model (quasar, quasarstrx)",communications
+aac_quasar_strx,datasheet_1,match,"names the model (quasar, quasarstrx)",communications
+aac_rw210_1p5,datasheet,match,"names the model (rw210, rw21015)",reaction wheels
+aac_rw210_3,datasheet,match,names the model (rw210),reaction wheels
+aac_rw210_6,datasheet,match,names the model (rw210),reaction wheels
+aac_rw222,datasheet,match,names the model (rw222),reaction wheels
+aac_rw222,datasheet_1,match,names the model (rw222),reaction wheels
+aac_rw400_15,datasheet,match,names the model (rw400),reaction wheels
+aac_rw400_30,datasheet,match,names the model (rw400),reaction wheels
+aac_rw400_50,datasheet,match,names the model (rw400),reaction wheels
+aac_sirius_obc_leon3ft,datasheet,match,"names the model (leon3ft, sirius, siriusobcleon3ft)",command & data handling
+aac_sirius_obc_leon3ft,datasheet_1,match,"names the model (leon3ft, sirius, siriusobcleon3ft)",command & data handling
+aac_sirius_obc_leon3ft,datasheet_2,match,"names the model (leon3ft, sirius, siriusobcleon3ft)",command & data handling
+aac_sirius_tcm_leon3ft,datasheet,match,"names the model (leon3ft, sirius, siriustcmleon3ft)",command & data handling
+aac_sirius_tcm_leon3ft,datasheet_1,match,"names the model (leon3ft, sirius, siriustcmleon3ft)",command & data handling
+aac_sirius_tcm_leon3ft,datasheet_2,match,"names the model (leon3ft, sirius, siriustcmleon3ft)",command & data handling
+aac_ss200,datasheet,match,names the model (ss200),sun sensors
+aac_ss200,datasheet_1,match,names the model (ss200),sun sensors
+aac_ss200,datasheet_2,match,names the model (ss200),sun sensors
+aac_st200,datasheet,match,names the model (st200),attitude determination
+aac_st200,datasheet_1,match,names the model (st200),attitude determination
+aac_st400,datasheet,match,names the model (st400),attitude determination
+aac_st400,datasheet_1,match,names the model (st400),attitude determination
+aac_starbuck_micro,datasheet,match,"names the model (starbuck, starbuckmicro)",power conditioning & monitoring units
+aac_starbuck_micro,datasheet_1,match,"names the model (starbuck, starbuckmicro)",power conditioning & monitoring units
+aac_starbuck_nano,datasheet,match,"names the model (starbuck, starbucknano)",power conditioning & distribution units
+aac_starbuck_nano,datasheet_1,match,"names the model (starbuck, starbucknano)",power conditioning & distribution units
+aac_starbuck_nano,datasheet_2,match,"names the model (starbuck, starbucknano)",power conditioning & distribution units
+aac_trx_u,datasheet,match,names the model (trxu),communications
+aac_trx_u,datasheet_1,match,names the model (trxu),communications
+aac_zaphod_1u,datasheet,match,names the model (zaphod),structures
+aac_zaphod_1u,datasheet_1,match,names the model (zaphod),structures
+aac_zaphod_3u,datasheet,match,names the model (zaphod),structures
+aac_zaphod_3u,datasheet_1,match,names the model (zaphod),structures
+aac_zaphod_6u,datasheet,match,names the model (zaphod),structures
+aac_zaphod_6u,datasheet_1,match,names the model (zaphod),structures
+adcole_mai_400,datasheet,match,"names the model (400, mai400)","2145 priest bridge dr, suite 15"
+adcole_mai_400,datasheet_1,match,"names the model (400, mai400)","2145 priest bridge dr, suite 15"
+adcole_mai_400,datasheet_2,match,"names the model (400, mai400)","2145 priest bridge dr, suite 15"
+adcole_mai_ss,datasheet,match,names the model (maiss),"2145 priest bridge dr, suite 15"
+adcole_mai_ss,datasheet_1,match,names the model (maiss),"2145 priest bridge dr, suite 15"
+aim_sf070,datasheet,match,"names the model (compressor, sf070, sf070compressor)",flexure bearing stirling cooler sf070
+aim_sf070,datasheet_1,mismatch,names neither the vendor nor the model,national aeronautics and space administration
+al_bar_20x10,datasheet_1,match,names the model (6061),material data sheet
+al_bar_20x10,datasheet_2,match,names the model (6061),materials
+al_bar_20x20,datasheet_1,match,names the model (6061),material data sheet
+al_bar_20x20,datasheet_2,match,names the model (6061),aluminum 6061-t6; 6061-t651
+alenspace_sband_transceiver,datasheet,weak,names only generic words of the model (transceiver),modular sdr platform for high
+anywaves_compact_sband_ttc,datasheet_1,match,names the model (compactsbandttcantenna),product
+anywaves_compact_sband_ttc,datasheet_2,weak,names only generic words of the model (antenna),management system
+anywaves_wide_beam_xband,datasheet_1,weak,names only generic words of the model (antenna),product
+anywaves_wide_beam_xband,datasheet_2,weak,names only generic words of the model (antenna),management system
+arcsec_sagitta,datasheet,match,names the model (sagitta),sagitta star tracker
+arcsec_sagitta,datasheet_1,match,names the model (sagitta),sagitta star tracker
+arcsec_twinkle,datasheet_p5_1,match,names the model (twinkle),the twinkle star tracker offers arc second
+astrofein_rw100,datasheet,match,names the model (rw100),astrofein reaction wheel family
+astrofein_rw100,datasheet_1,match,names the model (rw100),astrofein reaction wheel family
+astrofein_rw100,datasheet_2,match,names the model (rw100),astrofein reaction wheel family
+astrofein_rw150,datasheet,match,names the model (rw150),astrofein reaction wheel family
+astrofein_rw150,datasheet_1,match,names the model (rw150),astrofein reaction wheel family
+astrofein_rw150,datasheet_2,match,names the model (rw150),astrofein reaction wheel family
+astrofein_rw1a,datasheet,match,"names the model (rw1, rw1typea)",astrofein reaction wheel family
+astrofein_rw1a,datasheet_1,match,"names the model (rw1, rw1typea)",astrofein reaction wheel family
+astrofein_rw1a,datasheet_2,match,"names the model (rw1, rw1typea)",astrofein reaction wheel family
+astrofein_rw1b,datasheet,match,"names the model (rw1, rw1typeb)",astrofein reaction wheel family
+astrofein_rw1b,datasheet_1,match,"names the model (rw1, rw1typeb)",astrofein reaction wheel family
+astrofein_rw1b,datasheet_2,match,"names the model (rw1, rw1typeb)",astrofein reaction wheel family
+astrofein_rw25,datasheet,match,names the model (rw25),astrofein reaction wheel family
+astrofein_rw25,datasheet_1,match,names the model (rw25),astrofein reaction wheel family
+astrofein_rw25,datasheet_2,match,names the model (rw25),astrofein reaction wheel family
+astrofein_rw35,datasheet,match,names the model (rw35),astrofein reaction wheel family
+astrofein_rw35,datasheet_1,match,names the model (rw35),astrofein reaction wheel family
+astrofein_rw35,datasheet_2,match,names the model (rw35),astrofein reaction wheel family
+astrofein_rw90,datasheet,match,names the model (rw90),astrofein reaction wheel family
+astrofein_rw90,datasheet_1,match,names the model (rw90),astrofein reaction wheel family
+astrofein_rw90,datasheet_2,match,names the model (rw90),astrofein reaction wheel family
+azur_3g30c_advanced_8x4,datasheet_1,match,names the model (3g30c),tj 3g30-advanced (4x8)
+azur_3g30c_advanced_8x4,datasheet_2,match,names the model (3g30c),this cell type is a gainp/gaas/ge on ge substrate triple junction sola
+azur_3g30c_advanced_hp,datasheet,match,"names the model (3g30c, 82942)",tj 3g30-advanced (hp)
+azur_3g30c_advanced_hp,datasheet_1,match,"names the model (3g30c, 82942)",tj 3g30-advanced (hp)
+bartington_spacemag_lite,datasheet_p5_1,match,"names the model (spacemag, spacemaglite)",bartington.com
+bradford_comet_1000,datasheet,match,"names the model (1000, comet, comet1000)",comet
+bradford_comet_1000,datasheet_1,match,"names the model (1000, comet, comet1000)",learn more
+bradford_mini_fine_sun_sensor,datasheet_p5_1,match,names the model (minifinesunsensor),the mini fine sun sensor (mini-fss) is designed to deliver exact infor
+bst_rwa05,datasheet,match,names the model (rwa05),reaction wheel
+bst_rwa05,datasheet_1,match,names the model (rwa05),reaction wheel assembly rwa05
+bst_st200,datasheet_p5_1,match,names the model (st200),further information   max-planck-str. 3 | 12489 berlin germany | info@
+bst_st200_baffle,datasheet_p5_1,match,"names the model (baffle, st200)",further information   max-planck-str. 3 | 12489 berlin germany | info@
+c3s_eps,datasheet_1,vendor_only,"names the vendor (c3s, electronics) but not this model",title
+c3s_eps,datasheet_2,vendor_only,"names the vendor (c3s, electronics) but not this model",title
+c3s_obc,datasheet_1,vendor_only,"names the vendor (c3s, electronics) but not this model",title
+c3s_obc,datasheet_2,vendor_only,"names the vendor (electronics, development) but not this model",onboard computer for a cubesat
+calian_tw1322_gnss_antenna,datasheet,match,names the model (tw1322),tw1322
+calian_tw1322_gnss_antenna,datasheet_1,match,names the model (tw1322),option sheet nanosense gps kit
+cesi_ctj30_40x80,datasheet,match,names the model (ctj30),triple-junction solar cell
+cesi_ctj30_40x80,datasheet_1,match,names the model (ctj30),triple-junction solar cell
+cesi_ctj30_60x120,datasheet,match,names the model (ctj30),triple-junction solar cell
+cesi_ctj30_60x120,datasheet_1,match,names the model (ctj30),triple-junction solar cell
+cesi_ctj30_69x39,datasheet,match,"names the model (69x39, ctj30)",triple-junction solar cell
+cesi_ctj30_69x39,datasheet_1,match,"names the model (69x39, ctj30)",triple-junction solar cell
+crystalspace_micro_camera,datasheet_p5_1,match,names the model (microcamerasystem),crystalspace micro camera system
+csk_m2p5x5,datasheet_2,generic,generic or standard part; any supplier sheet for the standard is acceptable,pm
+csk_m2p5x6,datasheet_1,generic,generic or standard part; any supplier sheet for the standard is acceptable,pm
+csk_m2p5x8,datasheet_1,generic,generic or standard part; any supplier sheet for the standard is acceptable,pm
+csk_m3x10,datasheet_2,generic,generic or standard part; any supplier sheet for the standard is acceptable,pm
+csk_m3x12,datasheet_2,generic,generic or standard part; any supplier sheet for the standard is acceptable,pm
+csk_m3x5,datasheet_1,generic,generic or standard part; any supplier sheet for the standard is acceptable,pm
+csk_m3x6,datasheet_2,generic,generic or standard part; any supplier sheet for the standard is acceptable,pm
+cua_chips_1000,datasheet,match,"names the model (1000, chips, chips1000)",cubesat high impulse propulsion system
+cua_chips_1000,datasheet_1,match,"names the model (1000, chips, chips1000)",cubesat high impulse propulsion system
+cua_chips_180,datasheet,match,"names the model (180, chips, chips180)",cubesat high impulse propulsion system
+cua_chips_180,datasheet_1,match,"names the model (180, chips, chips180)",cubesat high impulse propulsion system
+cua_chips_500,datasheet,match,"names the model (500, chips, chips500)",cubesat high impulse propulsion system
+cua_chips_500,datasheet_1,match,"names the model (500, chips, chips500)",cubesat high impulse propulsion system
+cubecom_xant,datasheet_p5_1,match,names the model (xant),antennas
+cubespace_cubemag_compact,datasheet_1,match,"names the model (cubemag, cubemagcompact)",www.cubespace.co.za
+cubespace_cubemag_compact,datasheet_2,weak,names only generic words of the model (compact),sensors
+cubespace_cubemag_deployable,datasheet_1,match,"names the model (cubemag, cubemagdeployable)",www.cubespace.co.za
+cubespace_cubemag_deployable,datasheet_2,match,"names the model (cubemag, cubemagdeployable)",closed-loop
+cubespace_cubesense_earth,datasheet_1,match,"names the model (cubesense, cubesenseearth, earth)",www.cubespace.co.za
+cubespace_cubesense_earth,datasheet_2,match,"names the model (cubesense, cubesenseearth, earth)",adcs sensors
+cubespace_cubesense_sun,datasheet_1,match,names the model (cubesense),www.cubespace.co.za
+cubespace_cubesense_sun,datasheet_2,match,"names the model (cubesense, cubesensesun)",adcs sensors
+cubespace_cubestar,datasheet,match,names the model (cubestar),www.cubespace.co.za
+cubespace_cubestar,datasheet_1,vendor_only,names the vendor (cubespace) but not this model,sensors
+cubespace_cubetorquer_cr0002,datasheet_1,match,names the model (cr0002),cubespace
+cubespace_cubetorquer_cr0002,datasheet_2,match,names the model (cr0002),lotus lifestyle llc | utah distribution center | 5533 west hammerfest 
+cubespace_cubetorquer_cr0003,datasheet_1,vendor_only,names the vendor (cubespace) but not this model,www.cubespace.co.za
+cubespace_cubetorquer_cr0003,datasheet_2,match,names the model (cr0003),kontakt-simon s.a.
+cubespace_cubetorquer_cr0004,datasheet_1,match,names the model (cr0004),www.cubespace.co.za
+cubespace_cubetorquer_cr0004,datasheet_2,match,names the model (cr0004),product-details
+cubespace_cubetorquer_cr0006,datasheet_1,match,names the model (cr0006),cubespace
+cubespace_cubetorquer_cr0006,datasheet_2,match,names the model (cr0006),magnetorquers
+cubespace_cubetorquer_cr0008,datasheet_1,vendor_only,names the vendor (cubespace) but not this model,attitude is everything
+cubespace_cubetorquer_cr0008,datasheet_2,vendor_only,names the vendor (cubespace) but not this model,magnetorquers
+cubespace_cubetorquer_cr0010,datasheet_1,vendor_only,names the vendor (cubespace) but not this model,attitude is everything
+cubespace_cubetorquer_cr0010,datasheet_2,match,names the model (cr0010),hp 23.8 inch all-in-one
+cubespace_cubetorquer_cr0012,datasheet_1,match,names the model (cr0012),magnetorquers
+cubespace_cubetorquer_cr0012,datasheet_2,match,names the model (cr0012),magnetorquers
+cubespace_cubetorquer_cr0020,datasheet_1,match,names the model (cr0020),www.cubespace.co.za
+cubespace_cubetorquer_cr0020,datasheet_2,match,names the model (cr0020),magnetorquers
+cubespace_cubewheel_cw0017,datasheet_1,match,names the model (cw0017),www.cubespace.co.za
+cubespace_cubewheel_cw0017,datasheet_2,match,names the model (cw0017),adcs actuators
+cubespace_cubewheel_cw0057,datasheet_1,match,names the model (cw0057),www.cubespace.co.za
+cubespace_cubewheel_cw0057,datasheet_2,match,names the model (cw0057),adcs actuators
+cubespace_cubewheel_cw0162,datasheet_1,match,names the model (cw0162),www.cubespace.co.za
+cubespace_cubewheel_cw0162,datasheet_2,match,names the model (cw0162),reaction wheels
+cubespace_cubewheel_cw0500,datasheet_1,match,names the model (cw0500),attitude is everything
+cubespace_cubewheel_cw0500,datasheet_2,match,names the model (cw0500),adcs actuators
+cubespace_cubewheel_cw1200,datasheet_1,vendor_only,names the vendor (cubespace) but not this model,www.cubespace.co.za
+cubespace_cubewheel_cw1200,datasheet_2,match,names the model (cw1200),newae
+cubespace_cubewheel_cw2500,datasheet_1,match,names the model (cw2500),attitude is everything
+cubespace_cubewheel_cw2500,datasheet_2,match,names the model (cw2500),reaction wheels
+dawn_b1_thruster,datasheet,vendor_only,names the vendor (dawn) but not this model,"available in a variety of form factors, the b1 thruster is currently u"
+dawn_cubedrive_1u,datasheet_p5_1,wrong_size,names the model family but not the size 1u,green propellants
+dawn_cubedrive_2u,datasheet,match,names the model (cubedrive),cubesat propulsion
+dcubed_nd3pp,datasheet,match,names the model (nd3pp),www.dcubed.space
+dcubed_nd3rn_alti,datasheet_p5_1,match,names the model (nd3rn),www.dcubed.space
+dcubed_nd3rn_steel,datasheet_p5_1,match,"names the model (nd3rn, stainless)",www.dcubed.space
+dcubed_ud3rn,datasheet,match,names the model (ud3rn),www.dcubed.space
+dragonfly_chameleon_imager,datasheet_p5_1,match,"names the model (chameleon, chameleonimager)","dragonﬂy aerospace is an industry leader in world-class, high-performa"
+dragonfly_gecko_imager,datasheet_2,match,"names the model (gecko, geckoimager)",+27 21 206 6556
+ebad_frangibolt_fc2,datasheet,match,"names the model (fc2, frangibolt)",tini™ frangibolt® actuator
+ebad_frangibolt_fc2,datasheet_1,match,"names the model (fc2, frangibolt)",tini™ frangibolt® actuator
+ebad_frangibolt_fc3,datasheet,match,"names the model (fc3, frangibolt)",tini™ frangibolt® actuator
+ebad_frangibolt_fc3,datasheet_1,match,"names the model (fc3, frangibolt)",tini™ frangibolt® actuator
+ebad_frangibolt_fc4,datasheet,match,"names the model (fc4, frangibolt)",tini™ frangibolt® actuator
+ebad_frangibolt_fc4,datasheet_1,match,"names the model (fc4, frangibolt)",tini™ frangibolt® actuator
+endurosat_cubesat_eps_2026,datasheet_1,weak,names only generic words of the model (cubesat),catalogue
+endurosat_cubesat_eps_2026,datasheet_2,weak,names only generic words of the model (cubesat),catalogue
+endurosat_eps_i,datasheet,mismatch,names neither the vendor nor the model,catalogue
+endurosat_eps_i_plus,datasheet,mismatch,names neither the vendor nor the model,catalogue
+endurosat_eps_ii,datasheet,mismatch,names neither the vendor nor the model,catalogue
+endurosat_obc,datasheet,weak,"names only generic words of the model (computer, onboard, onboardcomputer)",catalogue
+endurosat_obc,datasheet_1,weak,"names only generic words of the model (computer, onboard, onboardcomputer)",catalogue
+endurosat_sband_patch,datasheet,match,names the model (sbandantenna),catalogue
+endurosat_sband_patch,datasheet_1,match,names the model (sbandantenna),catalogue
+endurosat_sband_receiver,datasheet,match,names the model (sbandreceiver),catalogue
+endurosat_sband_transmitter,datasheet,match,names the model (sbandtransmitter),catalogue
+endurosat_sband_wideband_patch,datasheet,match,names the model (wideband),catalogue
+endurosat_sband_wideband_patch,datasheet_1,match,names the model (wideband),catalogue
+endurosat_solar_array_3u_double_deployable,datasheet_1,weak,names only generic words of the model (array),catalogue
+endurosat_solar_array_3u_single_deployable,datasheet,vendor_only,names the vendor (endurosat) but not this model,datasheet
+endurosat_solar_array_3u_single_deployable,datasheet_1,weak,names only generic words of the model (array),catalogue
+endurosat_solar_panel_3u,datasheet,match,names the model (3usolarpanel),datasheet
+endurosat_solar_panel_3u,datasheet_1,weak,names only generic words of the model (panel),catalogue
+endurosat_solar_panel_6u,datasheet_1,weak,names only generic words of the model (panel),catalogue
+endurosat_structure_1p5u,datasheet,weak,"names only generic words of the model (cubesat, structure)",catalogue
+endurosat_structure_1p5u,datasheet_1,weak,"names only generic words of the model (cubesat, structure)",catalogue
+endurosat_structure_1u,datasheet,weak,"names only generic words of the model (cubesat, structure)",catalogue
+endurosat_structure_1u,datasheet_1,weak,"names only generic words of the model (cubesat, structure)",catalogue
+endurosat_structure_3u,datasheet,weak,"names only generic words of the model (cubesat, structure)",catalogue
+endurosat_structure_3u,datasheet_1,weak,"names only generic words of the model (cubesat, structure)",catalogue
+endurosat_structure_6u,datasheet,weak,"names only generic words of the model (cubesat, structure)",catalogue
+endurosat_structure_6u,datasheet_1,weak,"names only generic words of the model (cubesat, structure)",catalogue
+endurosat_uhf_antenna,datasheet,match,names the model (uhfantenna),catalogue
+endurosat_uhf_antenna,datasheet_1,match,names the model (uhfantenna),catalogue
+endurosat_uhf_antenna_2u,datasheet_2,weak,names only generic words of the model (antenna),catalogue
+endurosat_uhf_transceiver_ii,datasheet,match,names the model (uhftransceiverii),catalogue
+endurosat_xband_2x2_patch,datasheet,weak,names only generic words of the model (patch),user manual
+endurosat_xband_4x4_patch,datasheet_p5_1,weak,names only generic words of the model (patch),user manual
+endurosat_xband_single_patch,datasheet_1,weak,"names only generic words of the model (antenna, patch)",cubesat antenna design
+endurosat_xband_single_patch,datasheet_2,weak,"names only generic words of the model (antenna, patch, single)",masters thesis
+endurosat_xband_transmitter,datasheet,match,names the model (xbandtransmitter),catalogue
+enpulsion_micro_r3_head,datasheet_1,weak,names only generic words of the model (thruster),feep | field emission
+enpulsion_micro_r3_ppu,datasheet_1,vendor_only,names the vendor (enpulsion) but not this model,feep | field emission
+enpulsion_nano_r3,datasheet,match,"names the model (030, nanor3configuration030)",nano r3
+enpulsion_nano_r3,datasheet_1,match,"names the model (030, nanor3configuration030)",nano r3
+enpulsion_nano_r3,datasheet_2,weak,names only generic words of the model (configuration),doc.no: enp2019-086 | iss/rev.: d.1
+epson_m_g370pds,datasheet_1,vendor_only,"names the vendor (seiko, epson) but not this model",sensing device
+epson_m_g370pds,datasheet_2,vendor_only,"names the vendor (seiko, epson) but not this model",khz range
+exa_ba01_d,datasheet_1,match,"names the model (ba01, ba01d)",ba01/s high energy density lipo battery array
+exa_ba01_d,datasheet_2,match,"names the model (ba01, ba01d)","as thin as 7 millimeters, the exa ba0x high"
+exa_ba01_s,datasheet_1,match,"names the model (ba01, ba01s)",ba01/s high energy density lipo battery array
+exa_ba01_s,datasheet_2,match,"names the model (ba01, ba01s)","as thin as 7 millimeters, the exa ba0x high"
+exa_titan_1,datasheet_p5_1,match,"names the model (titan, titan1)",v 1.2 rev b
+extrusion_2020_100,datasheet_p5_1,match,"names the model (2020, 2020tslot)",haluminium.com
+extrusion_2020_200,datasheet_p5_1,match,"names the model (2020, 2020tslot)",haluminium.com
+extrusion_2020_300,datasheet_p5_1,match,"names the model (2020, 2020tslot)",haluminium.com
+gomspace_18650_3000mah,datasheet_1,match,names the model (nanopower),nanopower
+gomspace_18650_3000mah,datasheet_2,match,names the model (3000),battery aging and the kinetic battery model
+gomspace_18650_3500mah,datasheet,match,"names the model (3500mah, nanopower, nanopowerbattery3500mah)",nanopower
+gomspace_18650_3500mah,datasheet_1,match,"names the model (3500mah, nanopower, nanopowerbattery3500mah)",nanopower
+gomspace_msp_a_1_1,datasheet,match,names the model (nanopower),nanopower
+gomspace_msp_a_1_1,datasheet_1,match,names the model (nanopower),nanopower
+gomspace_msp_a_2_1,datasheet,match,names the model (nanopower),nanopower
+gomspace_msp_a_2_1,datasheet_1,match,names the model (nanopower),nanopower
+gomspace_msp_a_3_1,datasheet,match,names the model (nanopower),nanopower
+gomspace_msp_a_3_1,datasheet_1,match,names the model (nanopower),nanopower
+gomspace_msp_a_4_1,datasheet,match,names the model (nanopower),nanopower
+gomspace_msp_a_4_1,datasheet_1,match,names the model (nanopower),nanopower
+gomspace_msp_a_5_1,datasheet,match,names the model (nanopower),nanopower
+gomspace_msp_a_5_1,datasheet_1,match,names the model (nanopower),nanopower
+gomspace_msp_a_6_1,datasheet,match,names the model (nanopower),nanopower
+gomspace_msp_a_6_1,datasheet_1,match,names the model (nanopower),nanopower
+gomspace_msp_a_7_1,datasheet,match,names the model (nanopower),nanopower
+gomspace_msp_a_7_1,datasheet_1,match,names the model (nanopower),nanopower
+gomspace_nanocam_c1u_70mm,datasheet_1,match,"names the model (70mm, c1u, nanocam)","vol. 22, n.°3, pp. 69-86, 2023"
+gomspace_nanocom_ant2150,datasheet_1,match,"names the model (ant2150, nanocom, nanocomant2150)",nanocom
+gomspace_nanocom_ant6f_uhf,datasheet,match,"names the model (nanocom, nanocomant6fuhf)",nanocom
+gomspace_nanocom_ant6f_uhf,datasheet_1,match,"names the model (nanocom, nanocomant6fuhf)",nanocom
+gomspace_nanocom_ax100,datasheet_1,match,"names the model (ax100, nanocom, nanocomax100)",nanocom
+gomspace_nanocom_ax2150,datasheet,match,"names the model (ax2150, nanocom, nanocomax2150)",nanocom ax2150
+gomspace_nanocom_ax2150,datasheet_1,match,"names the model (ax2150, nanocom, nanocomax2150)",nanocom ax2150
+gomspace_nanocom_sdr_mk3,datasheet,match,"names the model (mk3, nanocom, nanocomsdrmk3)",nanocom sdr mk3
+gomspace_nanocom_sdr_mk3,datasheet_1,match,"names the model (mk3, nanocom, nanocomsdrmk3)",nanocom sdr mk3
+gomspace_nanomind_a3200,datasheet,match,"names the model (a3200, nanomind, nanominda3200)",nanomind a3200 (200284)
+gomspace_nanomind_a3200,datasheet_1,match,"names the model (a3200, nanomind, nanominda3200)",nanomind a3200 (200284)
+gomspace_nanopower_bp4,datasheet_1,match,names the model (nanopower),nanopower
+gomspace_nanopower_bp4,datasheet_2,vendor_only,names the vendor (gomspace) but not this model,company confidential – do not distribute without permission
+gomspace_nanopower_bp8_100wh,datasheet_p5_1,match,"names the model (100, bp8, nanopower)",nanopower
+gomspace_nanopower_bpx_100wh,datasheet_1,match,names the model (nanopower),nanopower
+gomspace_nanopower_bpx_100wh,datasheet_2,match,names the model (nanopower),nanopower
+gomspace_nanopower_p110c,datasheet_1,match,names the model (nanopower),nanopower tsp-45w
+gomspace_nanopower_p110ua,datasheet_1,match,names the model (nanopower),nanopower tsp-45w
+gomspace_nanopower_p110ub,datasheet_1,match,names the model (nanopower),nanopower tsp-45w
+gomspace_nanopower_p110uc,datasheet_1,match,names the model (nanopower),nanopower tsp-45w
+gomspace_nanopower_p31u,datasheet_1,match,"names the model (nanopower, p31u)",nanopower
+gomspace_nanopower_p60_dock,datasheet,match,"names the model (nanopower, nanopowerp60dock, p60)",nanopower
+gomspace_nanopower_p60_dock,datasheet_1,match,"names the model (nanopower, nanopowerp60dock, p60)",nanopower
+gomspace_nanostruct_6u_mk2,datasheet,match,names the model (nanostruct),nanostructure
+gomspace_nanostruct_6u_mk2,datasheet_1,match,names the model (nanostruct),nanostructure
+gomspace_nanotorque_gst600_mk2,datasheet,match,"names the model (600, mk2, nanotorque)",nanotorque
+gomspace_nanotorque_gst600_mk2,datasheet_1,match,"names the model (600, mk2, nanotorque)",nanotorque
+gomspace_nanotorque_gsw600,datasheet,match,"names the model (600, nanotorque, nanotorquegsw600)",nanotorque
+gomspace_nanotorque_gsw600,datasheet_1,match,"names the model (600, nanotorque, nanotorquegsw600)",nanotorque
+gomspace_nanotorque_gsw600_pyramid,datasheet,match,"names the model (600, nanotorque, pyramid)",nanotorque
+gomspace_nanotorque_gsw600_pyramid,datasheet_1,match,"names the model (600, nanotorque, pyramid)",nanotorque
+harwin_gecko_g125_10,datasheet_1,vendor_only,names the vendor (harwin) but not this model,high reliability
+harwin_gecko_g125_12,datasheet,match,"names the model (0300, g125)",component specification
+harwin_gecko_g125_12,datasheet_1,match,names the model (g125),high reliability
+harwin_gecko_g125_20,datasheet_1,vendor_only,names the vendor (harwin) but not this model,high reliability
+harwin_gecko_g125_4,datasheet,match,"names the model (0300, g125)",component specification
+harwin_gecko_g125_4,datasheet_1,match,names the model (g125),high reliability
+harwin_gecko_g125_6,datasheet,match,"names the model (0300, g125)",g125 component specification
+harwin_gecko_g125_6,datasheet_1,match,names the model (g125),high reliability
+heat_pipe_6x150,datasheet_1,generic,generic or standard part; any supplier sheet for the standard is acceptable,heat pipe selection guide
+heat_pipe_6x150,datasheet_2,generic,generic or standard part; any supplier sheet for the standard is acceptable,heat
+heat_pipe_6x300,datasheet_1,generic,generic or standard part; any supplier sheet for the standard is acceptable,national aeronautics and space administration
+heat_pipe_8x300,datasheet_1,generic,generic or standard part; any supplier sheet for the standard is acceptable,national aeronautics and space administration
+hex_nut_m2,datasheet_p5_1,match,names the model (4032),all your fastener needs from a single source
+hex_nut_m2,datasheet_p5_2,match,names the model (4032),browse product range >
+hex_nut_m2p5,datasheet_p5_1,match,names the model (4032),all your fastener needs from a single source
+hex_nut_m2p5,datasheet_p5_2,match,names the model (4032),browse product range >
+hex_nut_m3,datasheet_p5_1,match,names the model (4032),all your fastener needs from a single source
+hex_nut_m3,datasheet_p5_2,match,names the model (4032),browse product range >
+hex_nut_m4,datasheet_p5_1,match,names the model (4032),all your fastener needs from a single source
+hex_nut_m4,datasheet_p5_2,match,names the model (4032),browse product range >
+hex_nut_m5,datasheet_p5_1,match,names the model (4032),all your fastener needs from a single source
+hex_nut_m5,datasheet_p5_2,match,names the model (4032),browse product range >
+hex_nut_m6,datasheet_p5_1,match,names the model (4032),all your fastener needs from a single source
+hex_nut_m6,datasheet_p5_2,match,names the model (4032),browse product range >
+honeywell_zm10_switch,datasheet_1,vendor_only,names the vendor (honeywell) but not this model,micro switch general technical bulletin no. 14
+honeywell_zm10_switch,datasheet_2,match,names the model (zm10),zm & zm1
+honeywell_zm50_switch,datasheet_1,vendor_only,names the vendor (honeywell) but not this model,micro switch general technical bulletin no. 14
+honeywell_zm50_switch,datasheet_2,match,names the model (zm50),art5987 02
+ibeos_b14_m45,datasheet,match,"names the model (b14, b14m45, m45)",n e w s pa c e m a r k e t
+ibeos_b14_m45,datasheet_1,match,"names the model (b14, b14m45, m45)",b14-m45/m90
+innoflight_cfc_400,datasheet_p5_1,match,"names the model (400, cfc400)",innoflight inc.
+iq_spacecom_sband_patch_dual,datasheet_p5_1,weak,"names only generic words of the model (antenna, patch)",iq technologies for earth and space gmbh
+iq_spacecom_sband_patch_single,datasheet_p5_1,weak,"names only generic words of the model (antenna, patch, single)",iq technologies for earth and space gmbh
+isis_antenna_system,datasheet_1,vendor_only,names the vendor (isispace) but not this model,deployable antenna system
+isis_antenna_system,datasheet_2,vendor_only,names the vendor (isispace) but not this model,cubesat development platform
+isis_antenna_system_6u,datasheet,vendor_only,names the vendor (isispace) but not this model,deployable antenna system
+isis_iceps2_type_a,datasheet_1,match,names the model (iceps2),isispace compact eps 2
+isis_iceps2_type_a,datasheet_2,match,names the model (iceps2),isispace compact eps 2
+isis_iceps2_type_b,datasheet_1,match,names the model (iceps2),isispace compact eps 2
+isis_iceps2_type_b,datasheet_2,match,names the model (iceps2),isispace compact eps 2
+isis_iceps2_type_c,datasheet_1,match,"names the model (iceps2, iceps2typec)",isispace compact eps 2
+isis_iceps2_type_c,datasheet_2,match,"names the model (iceps2, iceps2typec)",isispace compact eps 2
+isis_ieps_battery_4cell,datasheet_1,weak,names only generic words of the model (battery),isispace compact eps 2
+isis_ieps_battery_4cell,datasheet_2,weak,names only generic words of the model (battery),national aeronautics and space administration
+isis_ieps_type_a,datasheet,vendor_only,names the vendor (isispace) but not this model,isispace compact eps 2
+isis_ieps_type_a,datasheet_1,vendor_only,names the vendor (isispace) but not this model,isis eps
+isis_ieps_type_b,datasheet_1,vendor_only,names the vendor (isispace) but not this model,isispace compact eps 2
+isis_ieps_type_b,datasheet_2,vendor_only,names the vendor (isispace) but not this model,isis eps
+isis_ieps_type_c,datasheet_1,vendor_only,names the vendor (isispace) but not this model,isispace compact eps 2
+isis_ieps_type_c,datasheet_2,vendor_only,names the vendor (isispace) but not this model,isis eps
+isis_imtq,datasheet,match,names the model (imtq),magnetorquer board (imtq)
+isis_imtq,datasheet_1,match,names the model (imtq),magnetorquer board (imtq)
+isis_iobc,datasheet_1,match,names the model (iobc),isis on board computer
+isis_iobc,datasheet_2,match,names the model (iobc),isis on board computer
+isis_sband_tx,datasheet_1,weak,names only generic words of the model (transmitter),isis high data rate txs
+isis_sband_tx,datasheet_2,weak,names only generic words of the model (transmitter),txs s-band transmitter datasheet
+isis_solar_panel_1u,datasheet_1,weak,"names only generic words of the model (mounted, panel)",solar panels
+isis_solar_panel_1u,datasheet_2,weak,names only generic words of the model (panel),national aeronautics and space administration
+isis_solar_panel_2u,datasheet_1,weak,names only generic words of the model (panel),cubesat development platform
+isis_solar_panel_2u,datasheet_2,vendor_only,names the vendor (isispace) but not this model,isis – innovative solutions in space
+isis_solar_panel_3u,datasheet_1,weak,names only generic words of the model (panel),isispace compact eps 2
+isis_solar_panel_3u,datasheet_2,weak,names only generic words of the model (panel),cubesat structures
+isis_solar_panel_6u,datasheet_1,wrong_size,"names the model family but not the size 6u, 6u",isispace compact eps 2
+isis_solar_panel_6u,datasheet_2,match,names the model (6usolarpanel),solar panels
+isis_structure_2u,datasheet_1,wrong_size,names the model family but not the size 2u,isis 1u cubesat
+isis_structure_3u,datasheet_1,wrong_size,names the model family but not the size 3u,isis 1u cubesat
+isis_structure_6u,datasheet_1,wrong_size,names the model family but not the size 6u,isis 1u cubesat
+isis_trxuv,datasheet_1,match,names the model (trxuv),communication systems
+isis_trxvu,datasheet_1,match,names the model (trxvu),communication systems
+isis_trxvu,datasheet_2,vendor_only,names the vendor (isispace) but not this model,vhf/uhf duplex transceiver
+kairospace_star_tracker,datasheet_p5_1,match,names the model (startracker),space
+lensrd_bison64_et,datasheet,match,"names the model (bison64, bison64et)",doc. no.
+lensrd_bison64_et,datasheet_1,match,"names the model (bison64, bison64et)",doc. no.
+lensrd_bison64_et,datasheet_2,match,"names the model (bison64, bison64et)",doc. no.
+lockheed_micro1_1,datasheet_1,weak,names only generic words of the model (cryocooler),national aeronautics and space administration
+lockheed_micro1_2,datasheet_1,weak,names only generic words of the model (cryocooler),national aeronautics and space administration
+lusospace_mag28,datasheet_p5_1,match,names the model (mag28),+351 21 116 50 20      info@lusospace.com      www.lusospace.com
+micro_d_15,datasheet,generic,generic or standard part; any supplier sheet for the standard is acceptable,micro-d catalog
+micro_d_21,datasheet,generic,generic or standard part; any supplier sheet for the standard is acceptable,micro-d catalog
+micro_d_25,datasheet,generic,generic or standard part; any supplier sheet for the standard is acceptable,micro-d catalog
+micro_d_37,datasheet,generic,generic or standard part; any supplier sheet for the standard is acceptable,micro-d catalog
+micro_d_9,datasheet,generic,generic or standard part; any supplier sheet for the standard is acceptable,micro-d catalog
+mli_blanket_1u_face,datasheet_1,wrong_size,names the model family but not the size 1u,national aeronautics and space administration
+molicel_inr18650_m35a,datasheet,match,"names the model (inr18650, inr18650m35a, m35a)",approval sheet
+molicel_inr18650_p28a,datasheet,match,"names the model (inr18650, inr18650p28a, p28a)",product data sheet
+molicel_inr18650_p28a,datasheet_1,match,"names the model (inr18650, inr18650p28a, p28a)",product data sheet
+molicel_inr21700_p42a,datasheet,match,"names the model (inr21700, inr21700p42a, p42a)",product data sheet
+molicel_inr21700_p42a,datasheet_1,match,"names the model (inr21700, inr21700p42a, p42a)",product data sheet
+murata_us18650vtc6,datasheet,match,names the model (us18650vtc6),cylindrical type
+murata_us18650vtc6,datasheet_1,match,names the model (us18650vtc6),cylindrical type
+nanoavionics_battery_4s2p,datasheet,weak,names only generic words of the model (battery),isispace modular eps 2
+nanoavionics_frame_12u,datasheet,match,names the model (12u),multi-purpose 12u satellite bus
+nanoavionics_mtq_m6p,datasheet_1,match,names the model (m6p),nanoavionics.com
+nanoavionics_satcom_uhf,datasheet,vendor_only,names the vendor (nanoavionics) but not this model,n-avionics.com
+nanoavionics_uhf_antenna_1x1u,datasheet_1,weak,names only generic words of the model (antenna),national aeronautics and space administration
+nanoavionics_uhf_antenna_1x2u,datasheet_1,match,names the model (1x2u),national aeronautics and space administration
+nanoavionics_uhf_antenna_2x2u,datasheet_1,weak,names only generic words of the model (antenna),national aeronautics and space administration
+novatel_oem719,datasheet_1,match,names the model (oem719),oem719 product sheet
+novatel_oem719,datasheet_2,match,names the model (oem719),oem7
+npc_spacemind_sm_sp3x,datasheet,vendor_only,"names the vendor (npc, spacemind) but not this model",sm structures
+npc_spacemind_sm_sp3x,datasheet_1,match,"names the model (smsp3x, sp3x)",© n.p.c. new production concept s.r.l. – all right reserved -issue: ja
+nss_aquila_h01,datasheet_1,match,names the model (aquila),g u i d e
+nss_aquila_h01,datasheet_2,match,names the model (411),sun sensor
+nss_gemini_a01,datasheet_2,match,names the model (ptcl1),g p s re c e i ve r
+nss_gemini_sr5,datasheet_1,match,"names the model (422, gemini, sr5)",navigate
+nss_libra_6,datasheet_1,match,names the model (libra),control
+nss_nctr_m002,datasheet_1,vendor_only,names the vendor (newspace) but not this model,control
+nss_nctr_m012,datasheet_1,vendor_only,names the vendor (newspace) but not this model,control
+nss_nmrm_magnetometer,datasheet_1,match,"names the model (bn25o485, nmrmbn25o485)",guide
+nss_nrwa_t005,datasheet_1,vendor_only,names the vendor (newspace) but not this model,control
+nss_nrwa_t065,datasheet_1,match,"names the model (nrwat065, t065)",control
+nss_nrwa_t2,datasheet_1,match,names the model (nrwat2),control
+omron_d2f_deployment_switch,datasheet_p5_1,match,names the model (d2f),1
+omron_d2f_deployment_switch,datasheet_p5_2,match,names the model (d2f),onlinecomponents.com
+paleblue_pbr_20,datasheet_1,match,names the model (pbr20),we are
+panasonic_ncr18650b,datasheet,match,names the model (ncr18650b),ncr18650b standard data
+panasonic_ncr18650b,datasheet_1,match,names the model (ncr18650b),ncr18650b standard data
+panasonic_ncr18650ga,datasheet,no_text,image-only or empty PDF; cannot be checked,
+pc104_blank_board,datasheet,match,names the model (104),pc/104 specification
+pc104_blank_board,datasheet_1,match,names the model (104),pc/104 specification
+pocketqube_1p_frame,datasheet_p5_1,generic,generic or standard part; any supplier sheet for the standard is acceptable,the pocketqube standard
+polyimide_heater_12x50,datasheet_p5_1,match,names the model (polyimide),datasheet
+polyimide_heater_25x100,datasheet_p5_1,match,names the model (polyimide),datasheet
+polyimide_heater_25x25,datasheet_p5_1,match,names the model (polyimide),datasheet
+polyimide_heater_25x50,datasheet_p5_1,match,names the model (polyimide),datasheet
+polyimide_heater_50x50,datasheet_p5_1,match,names the model (polyimide),datasheet
+pumpkin_bm1,datasheet,match,"names the model (01006, 710)",tm
+pumpkin_bm1,datasheet_1,match,"names the model (01006, 710)",tm
+pumpkin_cubesatkit_1u,datasheet_1,weak,"names only generic words of the model (chassis, cubesat, skeletonized)",www.cubesatkit.com
+pumpkin_cubesatkit_2u,datasheet_1,weak,"names only generic words of the model (chassis, cubesat, skeletonized)",www.cubesatkit.com
+pumpkin_cubesatkit_3u,datasheet_1,weak,"names only generic words of the model (chassis, cubesat, skeletonized)",www.cubesatkit.com
+pumpkin_gpsrm1,datasheet,match,"names the model (00908, 710, gpsrm)",tm
+pumpkin_gpsrm1,datasheet_1,match,"names the model (00908, 710, gpsrm)",tm
+pumpkin_gpsrm1,datasheet_2,match,"names the model (00908, 710, gpsrm)",tm
+pumpkin_linear_eps_01,datasheet,match,"names the model (00338, 711, linear)",tm
+pumpkin_linear_eps_01,datasheet_1,match,"names the model (00338, 711, linear)",tm
+pumpkin_linear_eps_01,datasheet_2,match,"names the model (00338, 711, linear)",tm
+radiator_plate_1u_face,datasheet_p5_1,wrong_size,"names the model family but not the size 1u, 1u",final report
+radiator_plate_1u_face,datasheet_p5_2,generic,generic or standard part; any supplier sheet for the standard is acceptable,"thyssenkrupp materials services gmbh, thyssenkrupp allee 1, 45143 esse"
+radiator_plate_3u_face,datasheet_p5_1,wrong_size,"names the model family but not the size 3u, 3u",final report
+radiator_plate_3u_face,datasheet_p5_2,generic,generic or standard part; any supplier sheet for the standard is acceptable,"thyssenkrupp materials services gmbh, thyssenkrupp allee 1, 45143 esse"
+rafael_pept_200,datasheet,match,"names the model (200, pept200)",propellant tanks
+rafael_pept_200,datasheet_1,match,"names the model (200, pept200)",propellant tanks
+rafael_pept_230,datasheet,match,"names the model (230, pept230)",te c h n o l o g i e s
+rafael_pept_260,datasheet,match,"names the model (260, pept260)",te c h n o l o g i e s
+rafael_pept_330,datasheet,match,"names the model (330, pept330)",propellant tanks
+redwire_micro_sun_sensor,datasheet_p5_1,match,names the model (microsunsensor),f i n d o u t m o r e a b o u t r e d w i r e s o l u t i o n s .
+ricor_k508n,datasheet,match,"names the model (k508n, k508ncryocooler)",ricor's k508n highly reliable integral rotary cryogenic cooler
+ricor_k508n,datasheet_1,weak,names only generic words of the model (cryocooler),national aeronautics and space administration
+rocketlab_rw0003,datasheet,match,"names the model (003, rw0003)",r e ac t i o n
+rocketlab_rw0003,datasheet_1,match,"names the model (003, rw0003)",r e ac t i o n
+rocketlab_rw0003,datasheet_2,match,"names the model (003, rw0003)",r e ac t i o n
+rocketlab_rw001,datasheet_1,match,names the model (rw001),r e ac t i o n
+rocketlab_rw001,datasheet_2,match,names the model (rw001),picosatellite reaction wheels (rw-0.01)
+rocketlab_rw003,datasheet_1,match,names the model (rw003),r e ac t i o n
+rocketlab_rw003,datasheet_2,match,names the model (rw003),r e ac t i o n
+rocketlab_rw006,datasheet_1,vendor_only,"names the vendor (rocket, lab) but not this model",microsatellite reaction wheels
+rocketlab_rw006,datasheet_2,vendor_only,"names the vendor (rocket, lab) but not this model",r e ac t i o n
+rocketlab_rw02,datasheet_1,vendor_only,"names the vendor (rocket, lab) but not this model",rad-hard reaction wheels
+rocketlab_rw02,datasheet_2,vendor_only,"names the vendor (rocket, lab) but not this model",rad-hard reaction wheels
+rocketlab_st16rt2,datasheet,match,"names the model (16rt2, baffle, short)",s ta r
+rocketlab_st16rt2,datasheet_1,match,"names the model (16rt2, baffle, short)",s ta r
+rocketlab_st16rt2,datasheet_2,match,"names the model (16rt2, baffle, short)",s ta r
+rocketlab_st16rt2_large,datasheet,match,"names the model (16rt2, baffle, large)",s ta r
+rocketlab_st16rt2_large,datasheet_1,match,"names the model (16rt2, baffle, large)",s ta r
+rocketlab_st16rt2_large,datasheet_2,match,"names the model (16rt2, baffle, large)",s ta r
+rocketlab_st16rt2_nobaffle,datasheet,match,"names the model (16rt2, baffle)",s ta r
+rocketlab_st16rt2_nobaffle,datasheet_1,match,"names the model (16rt2, baffle)",s ta r
+rocketlab_st16rt2_nobaffle,datasheet_2,match,"names the model (16rt2, baffle)",s ta r
+samsung_inr18650_30q,datasheet,match,"names the model (30q, inr18650, inr1865030q)",-samsung sdi confidential proprietary –
+samsung_inr18650_30q,datasheet_1,match,"names the model (30q, inr18650, inr1865030q)",-samsung sdi confidential proprietary –
+samsung_inr18650_35e,datasheet,match,"names the model (35e, inr18650, inr1865035e)",samsung sdi confidential proprietary
+samsung_inr18650_35e,datasheet_1,match,"names the model (35e, inr18650, inr1865035e)",samsung sdi confidential proprietary
+samsung_inr21700_50e,datasheet,match,"names the model (50e, inr21700, inr2170050e)",samsung sdi confidential proprietary
+samsung_inr21700_50e,datasheet_1,match,"names the model (50e, inr21700, inr2170050e)",samsung sdi confidential proprietary
+samtec_esq_pc104_stack_64,datasheet,match,"names the model (132, esq13212gd)",elevated
+satlab_srs3,datasheet_1,match,names the model (srs3),srs-3
+satlab_srs3,datasheet_2,match,names the model (srs3),srs-3
+satlab_srs4,datasheet_1,match,names the model (srs4),srs-4
+scanway_sop_1u_65,datasheet_p5_1,match,names the model (sop1u65),scanway optical payload
+scs_gecko_imager,datasheet_p5_1,match,names the model (gecko),"dragonfly aerospace is an industry leader in world-class, high-perform"
+sensonor_stim277h,datasheet_1,match,names the model (stim277h),stim277h
+sensonor_stim277h,datasheet_2,match,names the model (stim277h),stim210/
+sensonor_stim300,datasheet_1,match,names the model (stim300),stim300
+sensonor_stim300,datasheet_2,match,names the model (stim300),user manual
+serenum_1u,datasheet_1,weak,names only generic words of the model (structure),juno cubesat
+serenum_2u,datasheet_1,weak,names only generic words of the model (structure),juno cubesat
+serenum_3u,datasheet_1,weak,names only generic words of the model (structure),juno cubesat
+shcs_m2x8,datasheet_1,match,names the model (4762),din 912
+shcs_m3x10,datasheet_1,match,names the model (4762),din 912
+shcs_m3x12,datasheet_1,match,names the model (4762),din 912
+shcs_m3x30,datasheet_1,match,names the model (4762),din 912
+shcs_m4x12,datasheet_1,match,names the model (4762),index
+shcs_m4x40,datasheet_1,match,names the model (4762),din 912
+shcs_m5x10,datasheet_1,match,names the model (4762),din 912
+shcs_m5x16,datasheet_1,match,names the model (4762),din 912
+shcs_m6x30,datasheet_1,generic,generic or standard part; any supplier sheet for the standard is acceptable,the world leader
+sierra_passive_heat_switch,datasheet,match,"names the model (passivethermalcontrolheatswitch, thermal)",spaceflight hardware catalog
+sierra_passive_heat_switch,datasheet_1,match,names the model (thermal),national aeronautics and space administration
+simera_triscape100,datasheet_p5_1,match,names the model (triscape100),036760
+solarmems_nanossoc_d60,datasheet_1,match,"names the model (d60, nanossoc, nanossocd60)",nanossoc - d60
+solarmems_nanossoc_d60,datasheet_2,match,"names the model (d60, nanossoc, nanossocd60)",nanossoc-d60
+solarmems_nanost_cubesat,datasheet_p5_1,match,names the model (nanost),nanost
+spacemanic_celeste_gnss,datasheet_p5_1,match,names the model (celeste),datasheet
+spacemanic_murgas,datasheet_p5_1,match,names the model (murgas),datasheet
+spectrolab_xtj_prime_27cm2,datasheet,match,"names the model (cm2, prime)",30.7% xtj prime
+spectrolab_xtj_prime_27cm2,datasheet_1,match,"names the model (cm2, prime)",30.7% xtj prime
+ss_shaft_3x50,datasheet_p5_1,match,"names the model (303, shaft, stainless)",8/12/2021
+ss_shaft_3x50,datasheet_p5_2,match,"names the model (303, stainless)",303 stainless steel is a non-magnetic austenitic stainless steel which
+ss_shaft_4x80,datasheet_p5_1,match,"names the model (303, shaft, stainless)",8/12/2021
+ss_shaft_4x80,datasheet_p5_2,match,"names the model (303, stainless)",303 stainless steel is a non-magnetic austenitic stainless steel which
+ss_shaft_6x100,datasheet_p5_1,match,"names the model (303, shaft, stainless)",8/12/2021
+ss_shaft_6x100,datasheet_p5_2,match,"names the model (303, stainless)",303 stainless steel is a non-magnetic austenitic stainless steel which
+ss_shaft_8x100,datasheet_p5_1,match,"names the model (303, shaft, stainless)",8/12/2021
+ss_shaft_8x100,datasheet_p5_2,match,"names the model (303, stainless)",303 stainless steel is a non-magnetic austenitic stainless steel which
+sstl_sgr_ligo,datasheet_p5_1,match,names the model (sgrligo),the sgr-ligo is sstl’s miniaturised space gnss (global navigation sate
+steamjet_steam_thruster_one,datasheet_p5_1,match,names the model (steam),"the steam thruster one is a safe, high-performance,"
+steel_electronique_mobc,datasheet_p5_1,match,names the model (mobc),mobc
+sunpower_cryotel_ds_mini,datasheet,match,"names the model (cryotel, cryotelds15)",cryotel ds 1.5
+sunpower_cryotel_ds_mini,datasheet_1,mismatch,names neither the vendor nor the model,national aeronautics and space administration
+syrlinks_ewc27,datasheet,no_text,image-only or empty PDF; cannot be checked,
+tai_cuts_ufi_26x1,datasheet,match,"names the model (26x1, ultraflex)",u
+tai_cuts_ufi_26x1,datasheet_1,match,"names the model (26x1, ultraflex)",u
+tai_cuts_ufii_4x1,datasheet,match,"names the model (4x1, ultraflex)",u
+tai_cuts_ufii_4x1,datasheet_1,match,"names the model (4x1, ultraflex)",u
+tai_cuts_ufii_9x1,datasheet,match,"names the model (9x1, ultraflex)",u
+tai_cuts_ufii_9x1,datasheet_1,match,"names the model (9x1, ultraflex)",u
+tensortech_adcs_mtq,datasheet_1,match,"names the model (tensoradcs, tensoradcsmtq)",​datasheet for integrated attitude determination​
+tensortech_fss_15m,datasheet_1,match,"names the model (15m, tensorfss, tensorfss15m)",datasheet for nano fine sun sensor:
+tensortech_fss_15m,datasheet_2,match,"names the model (15m, tensorfss, tensorfss15m)",attitude
+thrustme_npt30_i2,datasheet_p5_1,match,"names the model (npt30, npt30i21u)",copyright © 2020 thrustme npt30 is a trademark of thrustme. all rights
+trad_hircom,datasheet_p5_1,match,names the model (hircom),"trad mpt , bat. 6 , 950 rue saint priest . 39095 montpellier."
+vacco_marco_mips,datasheet,match,"names the model (marco, marcomips)",®
+vacco_marco_mips,datasheet_1,match,"names the model (marco, marcomips)",®
+vacco_standard_mips_0p3u,datasheet,match,"names the model (x14029003, x14029003103u)",standard micro propulsion system
+vacco_standard_mips_0p3u,datasheet_1,match,"names the model (x14029003, x14029003103u)",standard micro propulsion system
+vacco_standard_mips_0p5u,datasheet,match,"names the model (x14029003, x14029003405u)",standard micro propulsion system
+vacco_standard_mips_0p5u,datasheet_1,match,"names the model (x14029003, x14029003405u)",standard micro propulsion system
+vacco_standard_mips_0p8u,datasheet,match,"names the model (x14029003, x14029003708u)",standard micro propulsion system
+vacco_standard_mips_0p8u,datasheet_1,match,"names the model (x14029003, x14029003708u)",standard micro propulsion system
+vacco_standard_mips_1u,datasheet,match,"names the model (x14029003, x1402900391u)",standard micro propulsion system
+vacco_standard_mips_1u,datasheet_1,match,"names the model (x14029003, x1402900391u)",standard micro propulsion system
+washer_m2,datasheet_p5_1,match,names the model (7089),all your fastener needs from a single source
+washer_m2,datasheet_p5_2,generic,generic or standard part; any supplier sheet for the standard is acceptable,din 125  plain washer
+washer_m2p5,datasheet_p5_1,match,names the model (7089),all your fastener needs from a single source
+washer_m2p5,datasheet_p5_2,generic,generic or standard part; any supplier sheet for the standard is acceptable,din 125  plain washer
+washer_m3,datasheet_p5_1,match,names the model (7089),all your fastener needs from a single source
+washer_m3,datasheet_p5_2,generic,generic or standard part; any supplier sheet for the standard is acceptable,din 125  plain washer
+washer_m4,datasheet_p5_1,match,names the model (7089),all your fastener needs from a single source
+washer_m4,datasheet_p5_2,generic,generic or standard part; any supplier sheet for the standard is acceptable,din 125  plain washer
+washer_m5,datasheet,match,names the model (7089),"specifications for: m5 din 125 type a / iso 7089, metric, standard fla"
+washer_m6,datasheet,match,names the model (7089),international
+xcam_c3d,datasheet_p5_1,match,names the model (c3d),specifications
+xiphos_q7,datasheet_1,vendor_only,names the vendor (xiphos) but not this model,q7 specifications
+xiphos_q7,datasheet_2,vendor_only,names the vendor (xiphos) but not this model,q7 specifications
+aac_pm200,datasheet_p7_1,match,names the model (pm200),the pm200 is a bi-propellant propulsion module offered in
+aac_pulsar_stx,datasheet_p7_1,match,"names the model (pulsar, pulsarstx)",the pulsar-stx and pulsar-stxc are compact
+aac_pulsar_xant_plus,datasheet_p7_1,match,"names the model (pulsar, pulsarxantplus)",[type here]
+aac_quasar_wsant,datasheet_p7_1,match,"names the model (quasar, quasarwsant, wsant)",communications
+azur_3g30a_advanced_8x8_cic,datasheet_p7_1,match,"names the model (3g30a, 81752, assembly)",issue date: 11-apr-2025
+azur_3g30c_advanced_6x12,datasheet_p7_1,match,"names the model (3g30c, 82943, material)",issue date: 24-marr-2026
+azur_3g30c_advanced_8x8,datasheet_p7_1,match,"names the model (3g30c, 81780, material)",issue date: 11-apr-2025
+azur_4g32a_advanced_8x8_cic,datasheet_p7_1,match,"names the model (4g32a, assembly, coverglass)",issue date: 23-jun-2025
+azur_4g32c_advanced_4x8,datasheet_p7_1,match,"names the model (4g32c, 82921, material)",issue date: 24-mar-2026
+azur_4g32c_advanced_8x8,datasheet_p7_1,match,names the model (4g32c),issue date: 23-jun-2025
+azur_4g32c_advanced_hp,datasheet_p7_1,match,"names the model (4g32c, 82902, material)",issue date: 26-jun-2025
+basler_dart_daa1920_160um,datasheet_p8_1,match,"names the model (160um, daa1920, daa1920160um)",general information
+beyondgravity_cobc,datasheet_p7_1,match,names the model (cobc),constellation
+beyondgravity_gnss_antenna_extended_pec,datasheet_p7_1,match,"names the model (extended, extendedgnsspecantenna)",beyond gravity │ satellites
+beyondgravity_gnss_antenna_geo_pec,datasheet_p7_1,match,names the model (geognsspecantenna),beyond gravity │ satellites
+beyondgravity_gnss_antenna_helix,datasheet_p7_1,match,"names the model (gnsshelixantenna, helix)",beyond gravity │ satellites
+beyondgravity_gnss_antenna_pec,datasheet_p7_1,match,names the model (gnsspecantenna),beyond gravity │ satellites
+beyondgravity_pas_381s,datasheet_p7_1,match,"names the model (381s, pas381s)",beyond gravity │ launchers
+beyondgravity_pas_381s,datasheet_p7_2,match,"names the model (381s, pas381s)",beyond gravity │ launchers
+bhcs_m3x10,datasheet_p7_1,match,names the model (7380),browse product range >
+bhcs_m3x12,datasheet_p7_1,match,names the model (7380),browse product range >
+bhcs_m3x16,datasheet_p7_1,match,names the model (7380),browse product range >
+bhcs_m3x20,datasheet_p7_1,match,names the model (7380),browse product range >
+bhcs_m3x6,datasheet_p7_1,match,names the model (7380),browse product range >
+bhcs_m3x8,datasheet_p7_1,match,names the model (7380),browse product range >
+bhcs_m4x10,datasheet_p7_1,match,names the model (7380),browse product range >
+bhcs_m4x12,datasheet_p7_1,match,names the model (7380),browse product range >
+bhcs_m4x16,datasheet_p7_1,match,names the model (7380),browse product range >
+bhcs_m4x20,datasheet_p7_1,match,names the model (7380),browse product range >
+bhcs_m4x6,datasheet_p7_1,match,names the model (7380),browse product range >
+bhcs_m4x8,datasheet_p7_1,match,names the model (7380),browse product range >
+bhcs_m5x10,datasheet_p7_1,match,names the model (7380),browse product range >
+bhcs_m5x12,datasheet_p7_1,match,names the model (7380),browse product range >
+bhcs_m5x16,datasheet_p7_1,match,names the model (7380),browse product range >
+bhcs_m5x20,datasheet_p7_1,match,names the model (7380),browse product range >
+bhcs_m5x8,datasheet_p7_1,match,names the model (7380),browse product range >
+bhcs_m6x10,datasheet_p7_1,match,names the model (7380),browse product range >
+bhcs_m6x12,datasheet_p7_1,match,names the model (7380),browse product range >
+bhcs_m6x16,datasheet_p7_1,match,names the model (7380),browse product range >
+bhcs_m6x20,datasheet_p7_1,match,names the model (7380),browse product range >
+calian_tw2710,datasheet_p8_1,match,names the model (tw2710),revision:
+ebad_tini_pin_puller_p1000,datasheet_p8_1,match,"names the model (p1000, puller)",attention: the information and recommendations described in this broch
+ebad_tini_pin_puller_p100,datasheet_p8_1,match,"names the model (p100, puller)",attention: the information and recommendations described in this broch
+ebad_tini_pin_puller_p10,datasheet_p8_1,match,"names the model (p10, puller)",attention: the information and recommendations described in this broch
+ebad_tini_pin_puller_p50,datasheet_p8_1,match,"names the model (p50, puller)",attention: the information and recommendations described in this broch
+ebad_tini_pin_puller_p5,datasheet_p8_1,match,names the model (puller),attention: the information and recommendations described in this broch
+enersys_absl_8s16p,datasheet_p7_1,match,"names the model (8s16p, absl8s16p)",the absl™ 8s16p 56 ah battery was first commercial
+enersys_absl_8s16p,datasheet_p7_2,match,"names the model (8s16p, absl8s16p)",the absl™ 8s16p 56 ah battery was first commercial
+enersys_absl_cm1040_8s18p,datasheet_p7_1,match,"names the model (28v, 36ah, 8s18p)",product data sheet
+enersys_absl_cm170_4s6p,datasheet_p7_1,match,"names the model (12ah, 14v, 4s6p)",product data sheet
+enersys_absl_cm2300_8s40p,datasheet_p7_1,match,"names the model (28v, 80ah, 8s40p)",product data sheet
+enersys_absl_cm230_8s4p,datasheet_p7_1,match,"names the model (28v, 8ah, 8s4p)",product data sheet
+enersys_absl_cm520_8s9p,datasheet_p7_1,match,"names the model (18ah, 28v, 8s9p)",product data sheet
+enersys_absl_cm58_8s1p,datasheet_p7_1,match,"names the model (28v, 2ah, 8s1p)",product data sheet
+flir_boson_core,datasheet_p8_1,match,"names the model (320, 640, boson)",copyright 2021 flir systems inc.      this datasheet is subject to cha
+interpoint_msa_plus,datasheet_p8_1,vendor_only,"names the vendor (crane, electronics) but not this model",features
+javad_spaceant,datasheet_p7_1,match,"names the model (spaceant, spaceantoem)",spaceant is a wide-band oem gnss antenna designed for reliable signal
+jenaoptronik_astro_aps,datasheet_p7_1,match,"names the model (astro, astroaps)",autonomous star sensor astro aps
+jenaoptronik_astro_aps,datasheet_p7_2,match,"names the model (astro, astroaps)",autonomous star sensor astro aps
+l3harris_cxs_1000,datasheet_p7_1,match,"names the model (1000, cxs1000)","l3harris brings over 50 years of telemetry, tracking and"
+lg_inr21700_m50lt,datasheet_p8_1,match,"names the model (inr21700, inr21700m50lt, m50lt)",product specification
+libre_space_satnogs_comms,datasheet_p7_1,match,"names the model (comms, satnogs, satnogscomms)",the satnogs-comms is a dual-band software configurable radio transceiv
+molicel_inr21700_p45b,datasheet_p8_1,match,"names the model (21700, inr21700p45b, p45b)",document
+moog_monoprop_module_baseline,datasheet_p7_1,match,"names the model (baseline, monopropellant, propulsion)",the moog additive manufactured small liquid
+moog_monoprop_module_baseline,datasheet_p7_2,match,"names the model (baseline, monopropellant, propulsion)",the moog additive manufactured small liquid
+pan_screw_m2p5x10,datasheet_p7_1,match,names the model (7045),browse product range >
+pan_screw_m2p5x4,datasheet_p7_1,match,names the model (7045),browse product range >
+pan_screw_m2p5x6,datasheet_p7_1,match,names the model (7045),browse product range >
+pan_screw_m2p5x8,datasheet_p7_1,match,names the model (7045),browse product range >
+pan_screw_m2x10,datasheet_p7_1,match,names the model (7045),browse product range >
+pan_screw_m2x4,datasheet_p7_1,match,names the model (7045),browse product range >
+pan_screw_m2x6,datasheet_p7_1,match,names the model (7045),browse product range >
+pan_screw_m2x8,datasheet_p7_1,match,names the model (7045),browse product range >
+pan_screw_m3x10,datasheet_p7_1,match,names the model (7045),browse product range >
+pan_screw_m3x12,datasheet_p7_1,match,names the model (7045),browse product range >
+pan_screw_m3x4,datasheet_p7_1,match,names the model (7045),browse product range >
+pan_screw_m3x6,datasheet_p7_1,match,names the model (7045),browse product range >
+pan_screw_m3x8,datasheet_p7_1,match,names the model (7045),browse product range >
+pan_screw_m4x10,datasheet_p7_1,match,names the model (7045),browse product range >
+pan_screw_m4x12,datasheet_p7_1,match,names the model (7045),browse product range >
+pan_screw_m4x16,datasheet_p7_1,match,names the model (7045),browse product range >
+pan_screw_m4x6,datasheet_p7_1,match,names the model (7045),browse product range >
+pan_screw_m4x8,datasheet_p7_1,match,names the model (7045),browse product range >
+rocketlab_rw04_heavy,datasheet_p7_1,match,"names the model (heavy, rotor)",components@rocketlabusa.com
+rocketlab_rw04_heavy,datasheet_p7_2,match,"names the model (heavy, rotor)",components@rocketlabusa.com
+rocketlab_rw4_12,datasheet_p7_1,match,names the model (rw4),momentum
+rocketlab_rw4_12,datasheet_p7_2,match,names the model (rw4),momentum
+rocketlab_rw4_1p0,datasheet_p7_1,match,"names the model (rw4, rw410)",components@rocketlabusa.com
+rocketlab_rw4_1p0,datasheet_p7_2,match,"names the model (rw4, rw410)",components@rocketlabusa.com
+rocketlab_rw5_12,datasheet_p7_1,match,names the model (rw5),momentum
+rocketlab_rw5_12,datasheet_p7_2,match,names the model (rw5),momentum
+saft_ls14500,datasheet_p8_1,match,"names the model (14500, ls14500)",benefits
+saft_mp176065_xtd,datasheet_p7_1,match,names the model (176065),rechargeable lithium-ion battery
+sensonor_stim210,datasheet_p8_1,match,names the model (stim210),datasheet
+set_screw_m3x10,datasheet_p7_1,match,names the model (4026),browse product range >
+set_screw_m3x4,datasheet_p7_1,match,names the model (4026),browse product range >
+set_screw_m3x6,datasheet_p7_1,match,names the model (4026),browse product range >
+set_screw_m3x8,datasheet_p7_1,match,names the model (4026),browse product range >
+set_screw_m4x10,datasheet_p7_1,match,names the model (4026),browse product range >
+set_screw_m4x12,datasheet_p7_1,match,names the model (4026),browse product range >
+set_screw_m4x4,datasheet_p7_1,match,names the model (4026),browse product range >
+set_screw_m4x6,datasheet_p7_1,match,names the model (4026),browse product range >
+set_screw_m4x8,datasheet_p7_1,match,names the model (4026),browse product range >
+set_screw_m5x10,datasheet_p7_1,match,names the model (4026),browse product range >
+set_screw_m5x12,datasheet_p7_1,match,names the model (4026),browse product range >
+set_screw_m5x5,datasheet_p7_1,match,names the model (4026),browse product range >
+set_screw_m5x8,datasheet_p7_1,match,names the model (4026),browse product range >
+set_screw_m6x10,datasheet_p7_1,match,names the model (4026),browse product range >
+set_screw_m6x12,datasheet_p7_1,match,names the model (4026),browse product range >
+set_screw_m6x6,datasheet_p7_1,match,names the model (4026),browse product range >
+set_screw_m6x8,datasheet_p7_1,match,names the model (4026),browse product range >
+skf_bearing_604_2z,datasheet_p8_1,match,"names the model (604, 6042z)",product tables
+skf_bearing_619_4_2z,datasheet_p8_1,match,"names the model (619, 61942z)",product tables
+skf_bearing_619_5_2z,datasheet_p8_1,match,"names the model (619, 61952z)",product tables
+skf_bearing_619_6_2z,datasheet_p8_1,match,"names the model (619, 61962z)",product tables
+skf_bearing_623_2z,datasheet_p8_1,match,"names the model (623, 6232z)",product tables
+skf_bearing_624_2z,datasheet_p8_1,match,"names the model (624, 6242z)",product tables
+skf_bearing_625_2z,datasheet_p8_1,match,"names the model (625, 6252z)",product tables
+skf_bearing_626_2z,datasheet_p8_1,match,"names the model (626, 6262z)",product tables
+skf_bearing_628_4_2z,datasheet_p8_1,match,"names the model (628, 62842z)",product tables
+skf_bearing_628_5_2z,datasheet_p8_1,match,"names the model (628, 62852z)",product tables
+skf_bearing_628_6_2z,datasheet_p8_1,match,"names the model (628, 62862z)",product tables
+skf_bearing_634_2z,datasheet_p8_1,match,"names the model (634, 6342z)",product tables
+skf_bearing_635_2z,datasheet_p8_1,match,"names the model (635, 6352z)",product tables
+skf_bearing_638_4_2z,datasheet_p8_1,match,"names the model (638, 63842z)",product tables
+skf_bearing_638_5_2z,datasheet_p8_1,match,"names the model (638, 63852z)",product tables
+spacemanic_deep_thought_obc,datasheet_p7_1,match,"names the model (deepthoughtobc, thought)",datasheet
+spacemanic_eddie_obc,datasheet_p7_1,match,"names the model (eddie, eddieobcv4a, v4a)",datasheet
+spacemanic_sam_s,datasheet_p7_1,match,names the model (sams),datasheet
+terma_t1_baffle_26deg,datasheet_p7_1,match,names the model (baffle),www.terma.com
+terma_t1_baffle_26deg,datasheet_p7_2,match,names the model (baffle),www.terma.com
+terma_t1_baffle_30deg,datasheet_p7_1,match,names the model (baffle),www.terma.com
+terma_t1_baffle_30deg,datasheet_p7_2,match,names the model (baffle),www.terma.com
+terma_t1_electrical_unit,datasheet_p7_1,match,"names the model (electrical, t1electricalunit)",www.terma.com
+terma_t1_electrical_unit,datasheet_p7_2,match,"names the model (electrical, t1electricalunit)",www.terma.com
+terma_t1_optical_head,datasheet_p7_1,match,"names the model (optical, t1opticalhead)",www.terma.com
+terma_t1_optical_head,datasheet_p7_2,match,"names the model (optical, t1opticalhead)",www.terma.com
+terma_t3,datasheet_p7_1,vendor_only,names the vendor (terma) but not this model,www.terma.com
+terma_t3,datasheet_p7_2,vendor_only,names the vendor (terma) but not this model,www.terma.com
+thrustme_npt30_i2_1p5u,datasheet_p8_1,match,"names the model (npt30, npt30i215u)",product information
+ublox_neo_m9n,datasheet_p8_1,match,"names the model (m9n, neom9n)",neo-m9n module
+umbra_magnetorquer_6,datasheet_p7_1,match,"names the model (5031h10001, magnetorquer)",we build it.
+umbra_mss_package,datasheet_p7_1,match,"names the model (5041h10001, package)",we build it.
+umbra_network_switch_8_1g,datasheet_p7_1,match,"names the model (5091h10001, network)",we build it.
+umbra_s_band_radio,datasheet_p7_1,match,names the model (5111h10001),we build it.
+umbra_syncrelease_4,datasheet_p7_1,match,"names the model (5011h10001, syncrelease)",we build it.
+vectronic_vst_41m,datasheet_p7_1,match,"names the model (41m, vst41m)",vectronic aerospace gmbh
+vectronic_vst_68m,datasheet_p7_1,match,"names the model (68m, vst68m)",vectronic aerospace gmbh
+voyager_vantagesun_medium_mss01,datasheet_p7_1,match,"names the model (medium, vantagesun)",product specifications
+voyager_vantagesun_medium_mss02,datasheet_p7_1,match,"names the model (medium, vantagesun)",product specifications
+vpt_svfl2800s,datasheet_p8_1,match,"names the model (flanged, svfl2800s)",sales information
+vpt_svpl3r306sg,datasheet_p8_1,match,names the model (svpl3r306sg),sales information
+vpt_svrch2800d,datasheet_p8_1,match,names the model (svrch2800d),sales information
+vpt_svrch2800s,datasheet_p8_1,match,"names the model (flanged, svrch2800s)",sales information
+vpt_svsa2800s,datasheet_p8_1,match,"names the model (flanged, svsa2800s)",sales information
+vpt_vsc5_2800d,datasheet_p8_1,match,"names the model (2800d, vsc5, vsc52800d)",sales information
+xiphos_q7s,datasheet_p7_1,match,names the model (q7s),q7s specifications
+xiphos_q8,datasheet_p7_1,vendor_only,names the vendor (xiphos) but not this model,1
+xiphos_q8j,datasheet_p7_1,match,names the model (q8j),1

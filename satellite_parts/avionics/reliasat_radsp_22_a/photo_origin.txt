@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-reliasat-radsp-22-a-6kg4db.pdf
+method: product image from the catalog page https://satsearch.co/products/reliasat-radsp-22-a

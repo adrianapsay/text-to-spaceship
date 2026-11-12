@@ -1,0 +1,74 @@
+SpaceQuest,  Ltd.      3554  Chain  Bridge  Road,  Suite  400        Fairfax,  Virginia  22030          I          703.  424.  7801          I          www.spacequest.com  
+The  TX-­2400  is  a  proven  satellite  and  launch  vehicle  S-­Band  transmitter  with  built  in  FM/FSK  modem  
+for  downlink  of  payload  data  and  telemetry.  The  TX-­2400  has  been  a  workhorse  for  SpaceQuest’s  own  
+satellites  and  a  mainstay  of  our  customers  for  over  a  decade.    
+Frequency:  
+2000  MHz  to  2400  MHz  
+Transmit  Power:  
+1.0  -­  2.5  Watts  (5  and  10  Watts  Available  with  TX-­2400M-­HP)  
+Data  Rate:  
+56  Kbps  to  6  Mbps  
+Modulation:  
+FM,  FSK  
+Channels:                    
+Up  to  16  Channels,  Selectable  On  Orbit  in  25  KHz  Steps  
+TX-­‐2400	  	  S-­‐Band	  Transmitter	  
+Key	  Features	  
+à16  Pre-­configured  Channels
+àFM  or  FSK  Modulation
+àVariable  Data  Rates  from  56  Kbps  to  6  Mbps
+àLow  Mass,  Power  Efficient  Design
+àCubeSat  Compatible
+General	  Specifications	  
+Search powered by 
+
+	  
+	  
+SpaceQuest,  Ltd.      3554  Chain  Bridge  Road,  Suite  400        Fairfax,  Virginia  22030          I          703.  424.  7801          I          www.spacequest.com  
+TX-­‐2400-­‐ver-­‐20160707	  
+àAprizeSats  3,  4,  5,  8,  and  10  
+àexactView  5,  6,  and  11  (exactEarth)  
+àGenesis  1  and  2  (Bigelow  Aerospace)   
+àFalconSat-­6  (USAFA)  
+àUnisat-­4  (Univ.  of  Rome)  
+àProx-­1  (Georgia  Tech)   
+  
+	  
+	  
+	  
+	  
+	  
+	  
+Input  Voltage:  
+8  to  32  Volts  DC  
+Current:  
+800  mA  Maximum  (2.4  Watts  Version)  
+Power  Connector:  
+MDM  9S  Mounted  to  Enclosure  
+Power  Return:  
+Power  and  Modulation  Return  Common  to  Chassis  
+Frequency  Stability:  
+±  .002%  (-­20°C  to  +50°C)  
+Distortion:  
+1%  Max  
+RF  Output  Impedance:  
+50  Ohms  Nominal  
+RF  Output  Connector:  
+SMA  Female  
+Reverse  Polarity:  
+Protected  
+VSWR:  
+12.0:1    
+Mass:  
+70  grams  
+Size:  
+68  mm  x  35  mm  x  15  mm  
+Operating  Temperature:  
+-­20°C  to  +70°C  
+Storage  Temperature:    
+-­30°C  to  +80°C  
+TX-­‐2400	  
+Electrical	  and	  RF	  Specifications	  
+Mechanical	  and	  Environmental	  Specifications	  
+Heritage	  
+

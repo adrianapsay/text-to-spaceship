@@ -1,0 +1,124 @@
+
+Coarse Earth Sun Sensor
+CESS
+The Coarse Earth and Sun Sensor CESS is a passive sensor 
+that provides spacecraft orientation at any time, crucial for 
+SC deployment, de-spin, and survival in safe mode.
+After launcher release and in case of 
+emergency, a spacecraft typically operates 
+a so-called safe mode. In this phase, a 
+reliable sensor is essential to provide 
+orientation information, relative to Sun and 
+Earth.
+The CESS is a passive device which can 
+provide instantaneous attitude information, 
+independent of the satellite orientation. It 
+is equipped with two thermo-optical sensor 
+areas, which react differently to solar and 
+infrared heat sources. With 6 CESS heads 
+accommodated along the +/- axes of the 
+satellite, a simple algorithm determines 
+the different heat contributions, by means 
+of space qualified thermistors.
+The different temperature read-outs 
+allows for in-situ determination of its 
+orientation, relative to Earth and Sun. This 
+is fundamental for the spacecraft’s attitude 
+and orbit control system as well as for the 
+power charging via solar arrays.
+Heritage
+The CESS has been used successfully on 
+various satellite missions (GRACE, CHAMP, 
+CryoSat-2 etc.). The success story of the 
+Coarse Earth and Sun Sensors as most 
+reliable acquisition and safe mode sensors 
+will continue.
+Illustration of different heat sources from earth and sun on 6 CESS heads accommodated to spacecraft
+
+Coarse Earth Sun Sensor
+Mechanical
+Dimensions
+108 x 42 x 58 mm³
+Mass
+80 g
+Interface
+4 x M4 Mounting
+Electrical
+Thermistors
+6x Heraeus M222 PT1000
+Measurement Current 
+< 0.5 mA (permanent)
+< 5 mA (switched)
+Interface
+26 Pin HD D-Sub Connector
+Thermistor Readout
+12-bit ADC or higher
+TRL
+TRL
+9 / 8 (improved HW)
+Heritage
+CHAMP, GRACE, Terra-
+SAR-X, TanDEM-X, Paz, 
+CryoSat-2, SWARM  
+Environmental
+Operating Temp. Range
+-175 °C to +150 °C
+Shock (Qual.)
+25 g (25 Hz) -  
+2000 g (≥ 1500 Hz)
+Vibration (Qual.)
+100 g sine (in all axes) 
+50.3 g RMS (in all axes)
+ATOX Resistance
+Teflon SSM Foil 
+Lifetime / Storage
+15 years / 5 years
+Performance
+Percentile
+LVHL
+ROT.
+EARTH 
+vector error
+68%
+7.3°
+12.6°
+99%
+19°
+24.4°
+99.9%
+25°
+29.6°
+SUN
+vector error
+68%
+4.4°
+9.8°
+99%
+10.6°
+16.6°
+99.9%
+13°
+19.9°
+CESS dimensions
+CESS Head Specification and Sensor 
+Performance
+Deliverables
+n 6 FM + 2 spare CESS heads incl.
+      protective caps (= S/C set)
+n Performance and thermal simulator  
+      (Matlab/Simulink or C/C++)
+n Flight S/W algorithm
+Unique Features of the CESS at a Glance
+n Provides both attitude information
+      during de-spin and earth-oriented safe
+      mode
+n Robust, lightweight, easy to
+      accommodate
+n Zero power consumption
+n Excessive flight heritage
+If you are interested in our existing 
+components or are in need of a new 
+development, please do not hesitate to 
+contact us. 
+
+

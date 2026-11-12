@@ -1,0 +1,267 @@
+ 
+WWW.TERMA.COM 
+2026-06-03 
+ 
+T1 STAR TRACKER 
+ 
+Miniaturized Optical Head and Electrical Unit
+ 
+ 
+STAR-TRACKER-ON-A-CHIP TECHNOLOGY 
+The T1 Optical Head (OH) is based on the sensor 
+chip FaintStar2 developed under ESA contracts. The 
+FaintStar2 is a CMOS Active Pixel Sensor with a 
+suite of integrated on-chip functionality supporting a 
+completely new class of miniaturized high 
+performance star trackers. 
+ 
+Terma has taken the miniaturization challenge as far 
+as possible, without compromising the accuracy 
+required from a state-of-the-art star tracker. 
+ 
+The T1 Optical Head has been designed with very 
+few components, for high reliability and low recurrent 
+cost. The Optical Head is offered with SpaceWire 
+interface, enabling an optimal solution for mass, 
+power, and cost savings, by connecting the Optical 
+Head directly to the S/C on board computer, without 
+the need for the dedicated Electrical Unit. 
+ 
+ 
+ 
+ 
+ 
+FEATURES 
+• 
+Rad-hard aspherical large aperture optics 
+with outstanding straylight attenuation. 
+• 
+Completely separated baffle and camera for 
+best thermal stability. 
+• 
+Kinematic mounting legs, compatibility to 
+any S/C panel CTE. 
+• 
+Extremely low recurrent cost at larger 
+quantities. 
+ 
+SALES OPTIONS 
+• 
+Optical Head stand-alone. 
+• 
+Optical Head + Software STR Library. 
+• 
+Optical Head + Electrical Unit (fully 
+autonomous). 
+ 
+QUALIFICATION STATUS 
+• 
+Optical Head is at TRL 9. 
+• 
+Baffle is at TRL 9. 
+• 
+Electrical Unit is at TRL 9.
+Interested parties are invited to write to our team, terma.space@terma.com. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+Miniaturized Optical Head and Electrical Unit  
+ 
+ 
+T1 Optical Head 
+ 
+Power Consumption 
+0.8 W 
+Interface CMD/Data 
+SpaceWire, 80 MHz 
+Maximum Update Rate 
+10 Hz 
+APS Resolution 
+1024 x 1024 
+Camera Head Mass 
+313 g 
+Optical Head Dimension 
+Footprint Ø92 mm 
+Height 68 mm 
+Straylight Baffle Options 
+(SEA, Dimension, Mass) 
+30 deg, Ø125 mm, h165 mm, 242 g 
+26 deg, Ø155 mm, h213 mm, 324 g 
+Customized 
+Supply Voltage 
+5.0 V 
+Operating Temperature (qualification limits) 
+-40 °C to +65 °C  
+(reduced performance above +30 °C on sensor) 
+Survival Temperature (qualification limits) 
+-40 °C to +65 °C 
+Lifetime 
+12 years in LEO @ 1000km 
+15 years in GEO 
+Lenses 
+Aspherical, radiation hard glasses 
+Field of View 
+20 deg circular, full moon accepted in FOV 
+Failure Rate in FITS (10e-9 failure/hour) 
+60 @ 35 °C 
+T1 Electrical Unit 
+ 
+Architecture 
+LEON3-FT 
+Dimensions 
+100 x 100 x 40 mm3 
+Mass 
+450 g 
+Power Consumption excl. OH 
+2.5 W 
+Supply Voltage 
+Redundant +28 V (20 V to 36 V) 
+Operating Temperature (qualification limits) 
+-40 °C to +65 °C 
+Survival Temperature (qualification limits) 
+-40 °C to +70 °C 
+Spacecraft Interface (TC/TM) 
+Redundant SpaceWire or RS422 
+Camera Head Interfaces 
+SpaceWire (maximum 2 OHs) 
+SAA & SEU Tolerance 
+Worst Case GEO flux (25k protons/cm2/s) 
+Acquisition & tracking full performance 
+Slew Rate 
+< 0.5 deg/s full performance 
+< 3.0 deg/s reduced performance 
+Acquisition Time (typical) 
+< 10 s 
+Failure Rate in FITS (10e-9 failure/hour) 
+323 @ 35 °C 
+ 
+
+ 
+Miniaturized Optical Head and Electrical Unit  
+ 
+ 
+T1 Performance 
+ 
+BOL (EOL: 15 years GEO) 
+Bias 
+[arcsec] max 
+10 
+Thermal Stability 
+[arcsec/K] max 
+0.1 
+Spatial Error (FOV)1 
+[arcsec] 3σ 
+2.1 - 2.4 
+Spatial Error (Pixel) 
+[arcsec] 3σ 
+1.3 (1.7) 
+ 
+ 
++30°C 
++50°C 
+Temporal Noise (rate < 0.5 deg/s) 
+[arcsec] 3σ 
+1.7 (2.2) 
+6.7 (9) 
+Temporal Noise (rate < 1.5 deg/s) 
+[arcsec] 3σ 
+5 (6) 
+20 (26) 
+Temporal Noise (rate < 3.0 deg/s) 
+[arcsec] 3σ 
+18 (24) 
+74 (95) 
+ 
+ 
+ 
+1Acceptance range can be tightened on request. Contact sales. 
+ 
+General remark: All parameters are quoted for cross-boresight directions. Around boresight values are a 
+factor of 7 higher, except for the Bias and Thermal stability parameters. 
+ 
+ 
+ 
+
+ 
+Miniaturized Optical Head and Electrical Unit  
+ 
+ 
+ORDERING INFORMATION 
+The T1 Star Tracker components can be ordered according to the table below.   
+ 
+Legend: 
+• 
+EU: Electrical Unit (computer). 
+• 
+OH: Optical head (camera part). 
+• 
+A component is identified by a part number and dash variant according to xxxxxxx-yyy. 
+• 
+A component can be ordered as an engineering model (EM) or flight model (FM). 
+• 
+EEE screening level is per default Class 2 (QML-Q/JAN Class B). Class 1 screening level possible 
+on request. 
+ 
+Component 
+P/N [xxxxxxx] 
+EM [-yyy] 
+FM [-yyy] 
+EU, redundant RS422 TCTM and PPS, 1 OH 
+interface (fully qualified) 
+1148219 
+-203 
+-003 
+EU, redundant RS422 TCTM and PPS, 2 OH 
+interfaces (under development, contact sales) 
+1148219 
+-201 
+-001 
+OH with alignment cube, 26 mm aperture  
+(fully qualified) 
+1141039 
+-226 
+-026 
+OH with alignment bore-holes, 26 mm aperture 
+(fully qualified) 
+1423506 
+-226 
+-026 
+Baffle, 26 deg Sun exclusion  
+(fully qualified) 
+856722 
+-226 
+-026 
+Baffle, 30 deg Sun exclusion  
+(fully qualified) 
+856722 
+-230 
+-030 
+Baffle Custom Sun exclusion  
+(contact sales) 
+856722 
+-2yy 
+-0yy 
+EM EU-OH cable harness (zzz = length in cm) 
+1596276-zzz 
+FM EU-OH cable harness (zzz = length in cm) 
+1193922-zzz 
+Dynamic OGSE, 26 deg SEA Baffle interface 
+1423511-026 
+Dynamic OGSE, 30 deg SEA Baffle interface 
+1423511-030 
+Static OGSE, 26 deg SEA Baffle interface 
+903964-026 
+Static OGSE, 30 deg SEA Baffle interface 
+903964-030 
+ 
+ 
+

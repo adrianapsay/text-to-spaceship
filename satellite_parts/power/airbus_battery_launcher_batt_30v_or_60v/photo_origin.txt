@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-airbus-defence-and-space-battery-launcher-batt-rxbcvs.pdf
+method: product image from the catalog page https://satsearch.co/products/airbus-defence-and-space-launcherbatt

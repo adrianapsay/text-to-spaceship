@@ -1,0 +1,125 @@
+ 
+  
+ 
+ 
+ 
+ 
+ 
+FURTHER INFORMATION   Max-Planck-Str. 3 | 12489 Berlin Germany | info@berlin-space-tech.com | www.berlin-space-tech.com 
+ 
+ 
+ 
+HRVI-6HD 2
+ND GENERATION 
+The HRVI-6HD 2nd Generation is the latest version of our heritage line camera systems. It 
+consists of three sub-units, the DCP (Dual Camera Payload) and two PLSU (Payload Support 
+Unit), one attached to each of the DCP’s two optical heads. The HRVI-6HD 2nd Gen offers 
+4.6m GSD resolution imagery with a 70km swath. The hyperspectral version provides flexibility 
+to adjust the GSD/SNR/spectral resolution to the mission needs. More information can be 
+found in the ICD. 
+ 
+HRVI-6HD 2nd Generation FM (1x DCP & 2x PLSU) mounted on transport frame 
+SPECIFICATION 
+Multispectral 
+Super Spectral 
+Hyper Spectral 
+Resolution (@ 500km)  
+4.6m / 9.2m  
+(PAN / MS)  
+5.4m  
+(MS) 
+4.6m / 9.2m / 27.6 
+(PAN / MS / HS) 
+Swath Width (@ 500km) 
+70km 
+70km 
+27km 
+Spectral Band 
+450-900nm 
+450-900nm 
+HS: 450-950nm 
+Channels 
+1+4 
+7 
+1+4+100 
+MTF 
+>0.1 - across the field & at full resolution 
+SNR 
+>100 / >100 
+>100 
+>100 / >100 / >90 
+Size (x,y,z) 
+DCP (with Baffle): 540x320x170mm³ w/o PLSU 
+Total Mass  
+10.450 kg (PLSU + 2x DCP) 
+Temperature  
+0 to 30°C / -15°C to +35°C (OP/Non-Op) 
+Design Life 
+5 years LEO 
+ 
+
+ 
+  
+ 
+ 
+ 
+ 
+ 
+FURTHER INFORMATION   Max-Planck-Str. 3 | 12489 Berlin Germany | info@berlin-space-tech.com | www.berlin-space-tech.com 
+ 
+ 
+ 
+Mechanical Interface 
+INTERFACES & 
+CAPABILITIES 
+Multispectral 
+Super Spectral 
+Hyper Spectral 
+1x DCP 
+ 
+2x Lens 
+89mm Aperture, 500mm Focal Length 
+In-Orbit Focus System: Yes 
+Thermal System: Heaters 
+Filter & Spectral Bands 
+PAN: 450-900nm 
+BLUE: 450-520nm 
+GREEN: 520-600nm 
+RED: 630-690nm 
+NIR: 750-900nm 
+ 
+Coastal I: 400-450nm 
+Blue II: 450-520nm 
+Green: 520-580nm 
+Yellow: 580-630nm 
+Red: 630-690nm 
+Red Edge: 690-750nm 
+NIR: 750-900nm 
+PAN + MS as in 
+Multispectral version 
+ 
++100 HS channels 
+450-950nm  
+2%-4% FWHM, OD4, 
+spectral sampling 
+distance 5.0nm 
+2x FPU  
+Detector Size: 2x 7920x6004 px 
+Bit Depth (User Selectable): 8/10/12 
+2x PLSU 
+Per Unit 
+Storage 
+1TB 
+Compression 
+JPEG 
+selectable ratio 
+Encryption Engine 
+Yes 
+CCSDS Engine 
+Yes 
+X-Band Data Output 
+1x LVDS – 100 Mbit/s (up to 1Gbit/s optional), Gigabit Ethernet 
+TMTC Interface 
+RS422 
+ 
+

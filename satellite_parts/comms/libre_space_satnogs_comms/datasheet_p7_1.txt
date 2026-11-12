@@ -1,0 +1,87 @@
+The SatNOGS-COMMS is a dual-band software configurable radio transceiver specifically designed for
+Telemetry and Telecommand (TMTC) in the S-band and UHF.
+The radio module supports full in-flight reconfiguration of the carrier and
+intermediate frequencies, bitrate, modulation options, and channel-filter bandwidth.
+SatNOGS-COMMS is fully compatible with SatNOGS Network for all TMTC
+functionality. The software and hardware are released as open source projects,
+which can be tailored to user needs.
+SatNOGS-COMMS KEY FEATURES
+Transceiver / Controller
+●
+STM32H7 ARM® Cortex®-M7 based microcontroller
+●
+AT86RF215 high flexibility dual-band transceiver with I/Q Radio capabilities
+●
+FPGA ZYNQ-7020
+●
+Internal Memory: 8GB
+●
+Latch-up protection with mitigation mechanism
+RF Features
+●
+Dual radio, UHF and S-Band, Half-duplex operation per band
+●
+Adjustable TX power: 26 - 32dBm, 1dB step with no ALC and stability ±1.5dB
+(uncalibrated), SFCG 21-2R4 compatible
+●
+Receiver Noise Figure: 1.5dB
+●
+AGC dynamic range: 58dB
+●
+Frequency step size: 100Hz in UHF and 400Hz in S-Band
+●
+Frequency Stability: ±0.5 ppm (uncalibrated)
+●
+Frequency Ranges:
+○
+2025-2110MHz (Rx)
+○
+2200-2290MHz(Tx)
+○
+2400-2450 (Rx/Tx)
+○
+400-440MHz (Rx/Tx)
+Baseband and Protocol
+●
+GMSK/GFSK,BPSK,QPSK modulation schemes
+●
+Data rates
+○
+up to 50 kbps for UHF
+○
+up to 1 Mbps for S-band
+●
+Framing encapsulation
+○
+CCSDS
+○
+IEEE 802.15.4
+●
+Framing options
+○
+CCSDS coding schemes
+
+●
+IQ support for both UHF and S-Band
+Interfaces
+●
+Electrical: CAN-FD. UART, I2C, SPI, LVDS, Antenna deployment interface
+●
+Mechanical: LibreCube Board Specification compliant
+●
+RF Connector: SMC
+Mass
+●
+Less than 200 g with aluminum shield
+Dimensions
+●
+90x90x25 mm
+Power
+●
+DC supply voltage: 6 - 14V
+●
+Power consumption: 8 W (peak when transmit 31dBm in S-Band radio)
+Environmental
+●
+Operating Temperature: -40 to +85 °C
+

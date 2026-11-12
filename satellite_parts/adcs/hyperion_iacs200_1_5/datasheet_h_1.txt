@@ -1,0 +1,174 @@
+iACS200 
+Attitude control system 
+The iACS200 series 
+attitude control systems 
+are low power, fully 
+integrated attitude control 
+systems, aimed at small 
+satellites with a 3U 
+CubeSat form factor or 
+similar. 
+The standard version of the iACS200 
+integrates three MTQ200 series 
+magnetorquers and offers interfaces 
+for 
+six 
+(external) 
+sun-sensors, 
+allowing for different pointing modes.  
+The iACS200 can be equipped with three of 
+Hyperion 
+Technologies’ 
+RW210 
+series 
+reaction control wheels offering up to 6.0 
+mN.m.s of angular momentum storage per 
+axis. 
+The iACS200 features an internal fire-and-
+forget controller, which frees up the host 
+processor’s workload, providing pointing 
+and de-tumbling modes.  
+The iACS200 is delivered with a PC104-
+compatible footprint, consuming the space 
+of 2 standard CubeSat PCB’s, or a total of 0.3 
+U. The CubeSat connector is fed through, 
+allowing designers to place this system 
+anywhere in their CubeSat stack 
+ 
+ 
+ 
+• 
+Fully integrated attitude determination and 
+control system, including three MTQ200-
+series magnetorquers and built-in IMU and 
+magnetometer 
+• 
+Three-axis magnetorquer configuration with 
+up to 0.4 A.m² of magnetic dipole moment 
+• 
+External interface for 6 or more external 
+sun sensors 
+• 
+Fire-and-forget control 
+• 
+Standard I2C-compatible interface.  
+RS422, RS485 and CAN interfaces are 
+optional 
+• 
+Plug-and-play ready design 
+• 
+Primary components passed radiation 
+tolerance testing up to 45 krad 
+• 
+Optionally: three RW210 series reaction 
+wheels with +/- 1.5, +/- 3.0, +/- 6.0 mN.m.s 
+maximum storage 
+• 
+Nadir and sun pointing and de-tumbling 
+• 
+Low mass:    
+ 
+ 
+   260 g 
+• 
+Low power: (nominal) 
+         < 600 mW 
+• 
+Outer dimensions:        95.1 x 90.3 x 32 mm 
+ 
+ 
+HIGHLIGHTS 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Flight heritage since 2017  
+
+  
+ 
+ 
+ 
+ 
+ 
+SPECIFICATIONS 
+MECHANICAL CHARACTERISTICS (IN MM) 
+Performance 
+Total momentum storage per axis6 
++/- 1.5, +/- 3.0, +/- 6.0 
+mN.m.s 
+Maximum torque6 
+0.1 
+mN.m 
+Nominal magnetic moment 
+0.2 (X, Y), 0.1 (Z) 
+A.m2 
+Boost mode dipole moment1 
+1 (X, Y), 0.25 (Z) 
+A.m2 
+Pointing accuracy 
+< 15 
+° 
+Slew rate 
+> 1.56 
+°/s 
+Radiation tolerance 
+> 45 
+krad (Si) 
+Operating temperature 
+- 45 to + 85 (- 40 to + 60)6 
+°C 
+ 
+ 
+ 
+Dimensions 
+Outer dimensions 
+95.1 x 90.3 x 32 
+mm 
+Mass 
+260 (340 to 410)6 
+g 
+ 
+ 
+ 
+Electrical specifications 
+ 
+Min. 
+Typ. 
+Max. 
+ 
+Supply voltage 
+4.0 
+5.02 
+153 
+V 
+Bus logic level voltage 
+Referenced to Vsys4 
+V 
+Power consumption 
+3505 
+550 (1300)6 
+1000 
+mW 
+1 Boost mode consumes more power, yet allows for rapid manouevres 
+2 When using the 5V system power pins on the standard CubeSat header  
+3 When using the VBAT pin on the standard CubeSat header  
+4 Vsys can range from 3.3 to 5.1V for I²C applications  
+5 Minimum consumption will decrease with future firmware revisions 
+6 With three RW210.15 series reaction wheels installed 
+V2.0 
+For pricing, delivery, configuration and ordering information please contact us 
+at sales@hyperion.space or call us at +31(0)15-5160905 
+ 
+

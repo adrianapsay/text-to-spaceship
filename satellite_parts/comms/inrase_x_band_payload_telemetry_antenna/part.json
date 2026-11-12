@@ -1,0 +1,154 @@
+{
+ "id": "inrase_x_band_payload_telemetry_antenna",
+ "name": "INRASE X-band Payload Telemetry Antenna",
+ "category": "comms",
+ "subcategory": "antenna",
+ "vendor": "INRASE",
+ "model": "X-band Payload Telemetry Antenna",
+ "dimensions_mm": {
+  "x": 100.0,
+  "y": 200.0,
+  "z": 3.0
+ },
+ "mass_g": 130.0,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-electronic-communication-systems-fzc-x-band-payload-telemetry-antenna-5lupxm.pdf",
+  "document": {
+   "title": "INRASE X-band Payload Telemetry Antenna data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-11",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Read from the vendor data sheet (datasheet-electronic-communication-systems-fzc-x-band-payload-telemetry-antenna-5lupxm.pdf): dimensions \"10-12 10-5 torr Mechanical specifications Dimensions (w/o connector) 100x200x3 mm Mass\"; mass \"or) 100x200x3 mm Mass 130 g N\". Catalog page lists no mass.",
+  "found_via": "https://satsearch.co/products/inrase-antenna-2"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "electrical": {
+  "power_W": {
+   "nominal": 10.0
+  },
+  "note": "from the data sheet / catalog page text: \"power at the input connector 10 W\""
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   100.0,
+   200.0,
+   4.0
+  ],
+  "mesh_volume_mm3": 75456.0,
+  "watertight": true,
+  "render_kind": "patch_antenna",
+  "effective_density_g_cm3": 1.723,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "patch",
+     "color": [
+      0.72,
+      0.45,
+      0.2
+     ],
+     "file": "bodies/part__patch.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 28
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    100.0,
+    200.0,
+    4.1
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.1
+   ],
+   "bodies": [
+    {
+     "name": "ground_plate",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies_detail/ground_plate.stl"
+    },
+    {
+     "name": "patches",
+     "color": [
+      0.72,
+      0.45,
+      0.2
+     ],
+     "file": "bodies_detail/patches.stl"
+    },
+    {
+     "name": "feeds",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/feeds.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
+  "datasheet_url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-electronic-communication-systems-fzc-x-band-payload-telemetry-antenna-5lupxm.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

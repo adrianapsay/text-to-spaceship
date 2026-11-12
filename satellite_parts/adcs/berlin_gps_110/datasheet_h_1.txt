@@ -1,0 +1,109 @@
+Version 1.0.0
+2021-09-13
+Datasheet
+BST GPS-110
+The GPS-110 is a reliable computation unit with two GPS receivers and RS422 interface for
+measuring the position and velocity in orbit. The fully redundant GPS receivers are able to work 
+independently with two active GPS antennas and provide one position and velocity update per 
+second.
+The device operates on a single 12 V supply, drawing a typical of 250 mA including Skyfox GPS 
+antennas, when both receivers are switched on. (antennas not part of GPS-110)
+Parameter
+Value / Comment
+Operation voltage
+12 V +- 1 V
+Power Consumption
+300 mW (both GPS receivers switched off)
+3 W (both GPS receivers switched on)
+Position Accuracy
+< 10 m
+Orbital operation
+yes
+Time to First Fix
+40 seconds (cold start)
+GNSS
+GPS only
+Main Interface
+RS422
+Mass
+285 g +- 5g
+Dimensions
+91 x 84 x 41 mm
+Key Specifications
+Berlin Space Technologies GmbH - Max-Planck-Str. 3, 12489 Berlin, Germany
+
+Version 1.0.0
+2021-09-13
+Berlin Space Technologies GmbH - Max-Planck-Str. 3, 12489 Berlin, Germany
+Illustration 1: Mechanical Interface
+1 / 1 
+A3
+GPS110
+BST-GPS-001-00
+Status
+Modification
+Date
+Name
+Issued
+Released
+Date
+Name
+2019-12-19
+R.Kirchberger
+ 
+black anodized
+Surface
+Scale
+Mass
+Quantity
+Material
+Tolerances
+Sheet
+1 : 1
+ 
+BST-GPS-001-00_v1.0.1_GPS110.idw
+v1.0.1 / Mechanical Interface
+DIN EN ISO 14405-1
+ISO 2768-mK
+2019-12-19
+R.Kirchberger
+Z
+X
+X
+Y
+Mass: 285 B15g
+Center of Mass (CoM)
+P8mm blank area
+for grounding
+P8mm blank area
+for grounding
+83,9
+68
+75,9
+72,5
+9,25
+91
+41
+30
+60
+47
+19,7
+54
+P4,3 (4x)
+L P0,2
+22,2
+37,7
+5
+13,4
+27,8
+8
+30,5
+15,5
+18,4
+43,1
+GPS-Antenna 1
+J101: OBC / PCU
+J102: Debug
+9
+GPS-Antenna 2
+

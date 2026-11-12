@@ -1,0 +1,2 @@
+url: https://satcatalog.s3.amazonaws.com/components/88/SatCatalog_-_Adcole_Maryland_Aerospace_-_MAI-25_-_Datasheet.pdf
+method: largest product picture on page 1-2 of the vendor data sheet (pdfimages), checked by eye 2026-11-11

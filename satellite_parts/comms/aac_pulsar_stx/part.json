@@ -1,0 +1,244 @@
+{
+ "id": "aac_pulsar_stx",
+ "name": "AAC Clyde Space PULSAR-STX / STXC S-band transmitter (PC/104)",
+ "category": "comms",
+ "subcategory": "transmitter",
+ "vendor": "AAC Clyde Space",
+ "model": "PULSAR-STX",
+ "dimensions_mm": {
+  "x": 96,
+  "y": 90,
+  "z": 16.9
+ },
+ "mass_g": 100,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.aac-clyde.space/wp-content/uploads/2021/10/Pulsar-STX-S-band.pdf",
+  "document": {
+   "title": "AAC Clyde Space PULSAR-STX data sheet",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "rf",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "96 x 90 x 16.9 mm, <100 g, <5 W, 6-12 V (5 V alternative), 2.2-2.3 GHz (STXC) or 2.4-2.45 GHz (STX), up to 2 Mbps, I2C control, SPI payload data, SMA, -25 to +51 C. Mass is the stated upper bound."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "Sweden / UK",
+ "mass_note": "upper bound (<100 g) per datasheet",
+ "rf": {
+  "band": "S",
+  "frequency_MHz": [
+   [
+    2200,
+    2300
+   ],
+   [
+    2400,
+    2450
+   ]
+  ],
+  "data_rate_bps": {
+   "max": 2000000
+  }
+ },
+ "electrical": {
+  "voltage_V": {
+   "min": 6,
+   "max": 12
+  },
+  "power_W": {
+   "peak": 5
+  },
+  "interfaces": [
+   "I2C",
+   "SPI"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -25,
+   "max": 51
+  }
+ },
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   96.0,
+   90.0,
+   16.9
+  ],
+  "mesh_volume_mm3": 91763.0,
+  "watertight": true,
+  "render_kind": "pc104_board",
+  "effective_density_g_cm3": 1.09,
+  "bodies": {
+   "part": [
+    {
+     "name": "pcb",
+     "color": [
+      0.09,
+      0.42,
+      0.24
+     ],
+     "file": "bodies/part__pcb.stl"
+    },
+    {
+     "name": "stack_header",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__stack_header.stl"
+    },
+    {
+     "name": "components",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__components.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 732
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    96.0,
+    90.0,
+    16.9
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "pcb",
+     "color": [
+      0.09,
+      0.42,
+      0.24
+     ],
+     "file": "bodies_detail/pcb.stl"
+    },
+    {
+     "name": "standoffs",
+     "color": [
+      0.78,
+      0.62,
+      0.28
+     ],
+     "file": "bodies_detail/standoffs.stl"
+    },
+    {
+     "name": "stack_header",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/stack_header.stl"
+    },
+    {
+     "name": "header_pins",
+     "color": [
+      0.85,
+      0.66,
+      0.22
+     ],
+     "file": "bodies_detail/header_pins.stl"
+    },
+    {
+     "name": "shield",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/shield.stl"
+    },
+    {
+     "name": "ics",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/ics.stl"
+    },
+    {
+     "name": "passives",
+     "color": [
+      0.55,
+      0.45,
+      0.3
+     ],
+     "file": "bodies_detail/passives.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "I2C",
+   "SPI"
+  ],
+  "mechanical": "PC/104 stack",
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://www.aac-clyde.space/wp-content/uploads/2021/10/Pulsar-STX-S-band.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

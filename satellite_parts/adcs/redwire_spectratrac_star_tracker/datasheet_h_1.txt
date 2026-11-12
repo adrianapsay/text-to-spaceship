@@ -1,0 +1,100 @@
+F I N D O U T M O R E A B O U T R E D W I R E S O L U T I O N S .
+R E D W I R E S P A C E . C O M  |  @ R E D W I R E S P A C E  |  S A L E S @ R E D W I R E S P A C E . C O M
+MADE IN THE USA
+Copyright 02/2021 Redwire Corporation. Redwire reserves the right to make changes without further notice to any products herein. Redwire makes no warranty, representation or guarantee regarding the suitability of its products for any 
+particular purpose, nor does Redwire assume any liability arising out of the application or use of any product or circuit, and specifically disclaims any and all liability, including without limitation special, consequential, or incidental damages. 
+“Typical” parameters, including “Typicals” must be validated for each customer application by customer’s technical experts. Redwire does not convey any license under its patent rights nor the rights of others. Redwire products are not 
+designed, intended, or authorized for use as components in systems or any other application in which the failure of the Redwire product could create a situation where personal injury or death may occur. Should Buyer purchase or use Redwire 
+products for any such intended or unauthorized application, Buyer shall indemnify and hold Redwire and its officers, employees, subsidiaries, affiliates, and distributors harmless against all claims, costs, damages, and expenses, and reasonable 
+attorney fees arising out of, directly or indirectly, any claim of personal injury or death associated with such intended or unauthorized use, even if such claim alleges that Redwire was negligent regarding the design or manufacture of the part. 
+Redwire is an is an Equal Opportunity/Affirmative Action Employer. This literature is subject to all applicable copyright laws and is not resale in any manner.
+V7 MAY 2021
+The Redwire SpectraTRAC Star Tracker is intended for
+Spaceflight, CubeSat, and NanoSat missions. The unit
+is completely self-contained and features Lost in Space 
+star identification. 
+When 
+power 
+is 
+applied, 
+you 
+begin receiving quarternions accurate to 10 arcsec at  4 
+Hz rate, and a maximum tracking rate >2° degrees per 
+second.
+STAR TRACKER
+SpectraTRAC
+PARAMETERS
+APPLICATIONS
+MADE IN THE USA
+10 ARCSEC / 27 ARCSEC* 
+Accuracy (Cross Axis / Boresight)
+230 MS LIS, 170 MS TRACK (TYPICAL) 
+Time to Solution
+> 2.0°/SEC
+Max Tracking Rate 
+4 HZ 
+Update Rate
+1889 STARS (6 VM) 
+Star Catalog
+22 mm APERTURE, F1.2 BK7 GLASS 
+Lens
+45° 
+Sun Exclusion w/ Baffle 
+-30° TO 55° C
+Operating Temperature 
+120 X 61 X 61 
+Dimensions L x W x H (mm) w/Baffle
+475 GRAMS 
+Mass (baffle & star tracker) 
+5.0 V 
+DC Voltage
+ 2.5 W 
+Average power consumption 
+RS-422 
+Serial Interface
++ Spaceflight Missions
++ Nano Sat & Cube Sat Missions
++ Attitude Awareness & Positional Knowledge
+Leveraging its heritage in producing advanced star trackers 
+and compliant with the Buy America Act, Redwire's low-cost, 
+high-performance SpectraTRAC is a COTS component 
+supporting commercial, civil, and defense missions.
+* 10 arcsec is a test capability. The accuracy is <6 arcsec.
+
+F I N D O U T M O R E A B O U T R E D W I R E S O L U T I O N S .
+R E D W I R E S P A C E . C O M  |  @ R E D W I R E S P A C E  |  S A L E S @ R E D W I R E S P A C E . C O M
+MADE IN THE USA
+Copyright 02/2021 Redwire Corporation. Redwire reserves the right to make changes without further notice to any products herein. Redwire makes no warranty, representation or guarantee regarding the suitability of its products for any 
+particular purpose, nor does Redwire assume any liability arising out of the application or use of any product or circuit, and specifically disclaims any and all liability, including without limitation special, consequential, or incidental damages. 
+“Typical” parameters, including “Typicals” must be validated for each customer application by customer’s technical experts. Redwire does not convey any license under its patent rights nor the rights of others. Redwire products are not 
+designed, intended, or authorized for use as components in systems or any other application in which the failure of the Redwire product could create a situation where personal injury or death may occur. Should Buyer purchase or use Redwire 
+products for any such intended or unauthorized application, Buyer shall indemnify and hold Redwire and its officers, employees, subsidiaries, affiliates, and distributors harmless against all claims, costs, damages, and expenses, and reasonable 
+attorney fees arising out of, directly or indirectly, any claim of personal injury or death associated with such intended or unauthorized use, even if such claim alleges that Redwire was negligent regarding the design or manufacture of the part. 
+Redwire is an is an Equal Opportunity/Affirmative Action Employer. This literature is subject to all applicable copyright laws and is not resale in any manner.
+V7 MAY 2021
+STAR TRACKER
+SpectraTRAC
+HERITAGE 
+Redwire is a new leader in mission critical space solutions and high reliability components 
+for the next generation space economy. With decades of flight heritage combined with the 
+agile and innovative culture of a commercial space platform, Redwire is uniquely positioned 
+to assist its customers in solving the complex challenges of future space missions. For 
+more information, please visit www.redwirespace.com.
+For more information about our space capabilities,
+CONTACT REDWIRE SPACE SALES
++ Typical design life is 5 years (based on each specific mission), 25% duty cycle.
++ Sky coverage >99%
++ AFOV is 19° x 14°
+Redwire’s compact and autonomous SpectraTRAC star tracker is ruggedized, radiation tested, optimized for low 
+weight (475 grams, including baffle, and star tracker), small size (120 x 61 x 61 mm), and low power consumption 
+(< 2.5W) with a design life > 5 years in Low Earth Orbit (LEO).
+SpectraTRAC’s processing unit, including an advanced star-tracking algorithm, records the accurate measurement of 
+your spacecraft mission’s position during orbit for optimum real-time attitude determination, and accounts 
+for interference effects of light reflecting from the satellite’s surfaces and exhaust plumes during propulsion 
+sequences.
+While 50-60 main navigational stars are primarily used to determine a satellite’s position, the minimum number of 
+catalog stars visible in any stationary image of arbitrary attitude (free of Earth, Sun, or Moon blockage) will be at 
+least 7 and more typically 10 or 11 stars.
+SpectraTRAC Star Trackers are export controlled through an ECCN (Export Control Classification Number) issued by the United States Department of 
+Commerce. Export shipment requires successful application for an export license (under ECCN7A004 for Redwire SpectraCAM Flight Cameras).
+

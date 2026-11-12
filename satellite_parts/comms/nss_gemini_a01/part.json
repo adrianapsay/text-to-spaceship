@@ -94,6 +94,50 @@
   },
   "face_counts": {
    "part": 28
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    54.0,
+    54.0,
+    14.1
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.1
+   ],
+   "bodies": [
+    {
+     "name": "ground_plate",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies_detail/ground_plate.stl"
+    },
+    {
+     "name": "patches",
+     "color": [
+      0.72,
+      0.45,
+      0.2
+     ],
+     "file": "bodies_detail/patches.stl"
+    },
+    {
+     "name": "feeds",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/feeds.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",
@@ -108,13 +152,6 @@
  },
  "reference_images": {
   "datasheets": [
-   {
-    "file": "datasheet_1_page1.png",
-    "pdf": "datasheet_1.pdf",
-    "kind": "web_search",
-    "url": "https://vitessesys.com/wp-content/uploads/2025/07/005-Feed_Network_Design_Using_NewSpace_Techniques_Meeting_mass_size_cost_and_schedule_requirements.pdf",
-    "title": "Feed Network Design Using NewSpace Techniques - Vitesse Systems"
-   },
    {
     "file": "datasheet_2_page1.png",
     "pdf": "datasheet_2.pdf",

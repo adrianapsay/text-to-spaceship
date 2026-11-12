@@ -1,0 +1,186 @@
+{
+ "id": "space_whl_50",
+ "name": "Space Inventor WHL-50",
+ "category": "adcs",
+ "subcategory": "reaction_wheel",
+ "vendor": "Space Inventor",
+ "model": "WHL-50",
+ "dimensions_mm": {
+  "x": 50.0,
+  "y": 50.0,
+  "z": 25.0
+ },
+ "mass_g": 165.0,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satcatalog.s3.amazonaws.com/components/257/SatCatalog_-_Space_Inventor_-_WHL-50_-_Datasheet.pdf",
+  "document": {
+   "title": "Space Inventor WHL-50 data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-11",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Read from the vendor data sheet (SatCatalog_-_Space_Inventor_-_WHL-50_-_Datasheet.pdf): dimensions \"eed or motor voltage \u25cb Automatic motor flux reduction (FOC) \u25cf Physical \u25cb 50 x 50 x 25 mm \u25cb Mass:\"; mass \"50 x 50 x 25 mm \u25cb Mass: 165 gram \u25cb R\". Catalog page lists 0.165 kg. Further values from the same data sheet: {\"adcs\": {\"momentum_mNms\": 42, \"torque_mNm\": 5}, \"electrical\": {\"voltage_V\": {\"min\": 12, \"max\": 16}}}",
+  "found_via": "https://satcatalog.com/component/rewl-50/"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "flight_heritage": true,
+ "adcs": {
+  "momentum_mNms": 42,
+  "torque_mNm": 5
+ },
+ "electrical": {
+  "voltage_V": {
+   "min": 12,
+   "max": 16
+  }
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   50.0,
+   50.0,
+   25.0
+  ],
+  "mesh_volume_mm3": 46343.3,
+  "watertight": true,
+  "render_kind": "reaction_wheel",
+  "effective_density_g_cm3": 3.56,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "flywheel",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__flywheel.stl"
+    },
+    {
+     "name": "motor_cap",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__motor_cap.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 348
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    50.0,
+    50.0,
+    25.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "base",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/base.stl"
+    },
+    {
+     "name": "cover",
+     "color": [
+      0.24,
+      0.26,
+      0.3
+     ],
+     "file": "bodies_detail/cover.stl"
+    },
+    {
+     "name": "cap",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/cap.stl"
+    },
+    {
+     "name": "bolts",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/bolts.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
+  "datasheet_url": "https://satcatalog.s3.amazonaws.com/components/257/SatCatalog_-_Space_Inventor_-_WHL-50_-_Datasheet.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

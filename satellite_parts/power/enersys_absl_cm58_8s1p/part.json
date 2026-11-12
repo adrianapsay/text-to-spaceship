@@ -1,0 +1,185 @@
+{
+ "id": "enersys_absl_cm58_8s1p",
+ "name": "EnerSys ABSL CM58 8s1p P20 28V 2Ah Li-ion space battery",
+ "category": "power",
+ "subcategory": "battery",
+ "vendor": "EnerSys (ABSL)",
+ "model": "ABSL CM58 8s1p P20 28V 2Ah",
+ "dimensions_mm": {
+  "x": 105,
+  "y": 70,
+  "z": 74
+ },
+ "mass_g": 520,
+ "source": {
+  "type": "datasheet",
+  "url": "https://integration.enersys.com/4964a0/globalassets/documents/product-documentation/absl/emea/emea_apac-en-ds-absl-cm58-8s1p-0722--web.pdf",
+  "document": {
+   "title": "EnerSys ABSL CM58 8s1p P20 28V 2Ah datasheet (EMEA/APAC, 07/2022)",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "Nameplate 2 Ah / 59.2 Wh, 24.0 to 33.6 V, measured mass 0.52 kg, footprint 105 x 70 mm, height 74 mm, ABSL P20 cells. Operating 0 to 40 C (thermal chamber only)."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "United Kingdom",
+ "distributors": [
+  "direct"
+ ],
+ "satellite_class": "smallsat",
+ "electrical": {
+  "chemistry": "Li-ion (ABSL P20 cells)",
+  "configuration": "8s1p",
+  "energy_Wh": 59.2,
+  "capacity_mAh": 2000,
+  "voltage_V": {
+   "min": 24.0,
+   "max": 33.6
+  }
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": 0,
+   "max": 40
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   105.0,
+   70.0,
+   74.0
+  ],
+  "mesh_volume_mm3": 517067.0,
+  "watertight": true,
+  "render_kind": "battery_pack",
+  "effective_density_g_cm3": 1.006,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "cells",
+     "color": [
+      0.85,
+      0.72,
+      0.3
+     ],
+     "file": "bodies/part__cells.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 520
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    105.0,
+    70.0,
+    74.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "cells",
+     "color": [
+      0.2,
+      0.45,
+      0.7
+     ],
+     "file": "bodies_detail/cells.stl"
+    },
+    {
+     "name": "end_plates",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/end_plates.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://integration.enersys.com/4964a0/globalassets/documents/product-documentation/absl/emea/emea_apac-en-ds-absl-cm58-8s1p-0722--web.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

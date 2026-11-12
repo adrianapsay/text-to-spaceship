@@ -1,0 +1,442 @@
+4 
+ 
+ 
+ 
+© 2019 GomSpace A/S 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+NanoSense 
+M315 
+ 
+Datasheet 
+Compact low noise magnetometer for high performance 
+attitude determination systems 
+
+© 2019 GomSpace A/S 
+All printed copies, and all electronic copies and versions except the one accessible on 
+the GomSpace A/S server, are considered uncontrolled copies used for reference only. 
+ 
+ 
+Datasheet NanoSense M315 
+06 June 2019 
+DS 1018558 1.2 
+2 
+ 
+ 
+ 
+ 
+Product name: NanoSense M315 
+ 
+Document No.: 1018558 
+ 
+Revision: 1.2 
+ 
+Author: MABO 
+ 
+Approved by: MB 
+ 
+Approval date: 2019 
+ 
+ 
+ 
+Confidentiality Notice 
+ 
+This document is submitted for a specific purpose as agreed in writing and contains information, 
+which is confidential and proprietary. The recipient agrees by accepting this document, that this 
+material will not be used, transferred, reproduced, modified, copied or disclosed in whole or in 
+part, in any manner or to any third party, except own staff to meet the purpose for which it was 
+submitted without prior written consent. 
+ 
+GomSpace © 2019 
+
+© 2019 GomSpace A/S 
+All printed copies, and all electronic copies and versions except the one accessible on 
+the GomSpace A/S server, are considered uncontrolled copies used for reference only. 
+ 
+ 
+Datasheet NanoSense M315 
+06 June 2019 
+DS 1018558 1.2 
+3 
+ 
+1 Table of Contents 
+2 
+OVERVIEW ............................................................................................................................................... 4 
+2.1 
+Highlighted Features .................................................................................................................... 4 
+2.2 
+Usage ........................................................................................................................................... 4 
+2.3 
+3-Axis Magnetometer ................................................................................................................... 4 
+2.4 
+Block Diagram ............................................................................................................................. 5 
+3 
+HARDWARE LAYOUT ............................................................................................................................. 5 
+3.1 
+Connector Location ...................................................................................................................... 5 
+3.2 
+P1 - I2C ........................................................................................................................................ 5 
+4 
+ABSOLUTE MAXIMUM RATINGS ........................................................................................................... 6 
+5 
+ELECTRICAL CHARACTERISTICS ........................................................................................................ 6 
+6 
+PHYSICAL CHARACTERISTICS ............................................................................................................. 6 
+7 
+PRODUCT CHARACTERISTICS ............................................................................................................. 6 
+8 
+MECHANICAL DRAWING ........................................................................................................................ 7 
+9 
+DISCLAIMER ............................................................................................................................................ 7 
+10 
+NANOSENSE M315 WITH OTHER GOMSPACE PRODUCTS .............................................................. 8 
+ 
+ 
+ 
+ 
+
+© 2019 GomSpace A/S 
+All printed copies, and all electronic copies and versions except the one accessible on 
+the GomSpace A/S server, are considered uncontrolled copies used for reference only. 
+ 
+ 
+Datasheet NanoSense M315 
+06 June 2019 
+DS 1018558 1.2 
+4 
+2 Overview 
+The NanoSense M315 (M315) is a flight proven compact and low noise magnetometer with an I2C interface 
+designed especially for nano-satellites with high ADCS requirements. The compact design allows flexible 
+mounting which in turns allows the magnetometer to be placed far away from magnetic disturbance sources.  
+ 
+ 
+2.1 
+Highlighted Features 
+ 
+• 
+3-axis magnetometer with a range of up to ±800 μT 
+• 
+Small, reliable, light 
+• 
+Low power 
+• 
+Digital interface (I2C slave) 
+• 
+Very low noise 
+• 
+Integrated temperature sensor 
+• 
+Mass: 8 g 
+• 
+Size 23 x 20 x 8 mm 
+• 
+Flight proven 
+ 
+2.2 
+Usage 
+A magnetometer is a crucial part of a satellite attitude determination and control system, both for detumbling 
+and attitude determination. The reliability and fast sample time makes the M315 perfectly suited for detumbling 
+applications and its very low noise makes it equally suited for high performance attitude determination. 
+ 
+The M315 is a highly accurate and low noise sensor with a very low temperature dependency. However, it is 
+important to note that it can be difficult to achieve the lowest noise due to magnetic noise in near field 
+environment. It is important to place the sensor as far as possible from current consuming devices as possible. 
+It is also advised to place the sensor as far as possible away from hard and soft iron sources.  
+ 
+Due to its small size, the M315 can be fitted into many locations on a nano-satellite including on a deployable 
+boom for lower magnetic disturbances. 
+ 
+2.3 
+3-Axis Magnetometer 
+The directions of the 3-axis are shown in the drawing below. 
+ 
+ 
+ 
+ 
+ 
+ 
+
+© 2019 GomSpace A/S 
+All printed copies, and all electronic copies and versions except the one accessible on 
+the GomSpace A/S server, are considered uncontrolled copies used for reference only. 
+ 
+ 
+Datasheet NanoSense M315 
+06 June 2019 
+DS 1018558 1.2 
+5 
+2.4 
+Block Diagram 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+3 Hardware Layout 
+ 
+3.1 
+Connector Location 
+Drawing below is seen from the front.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+3.2 
+P1 - I2C 
+Pico-blade 1.25 mm Pitch. Molex 53261-0471. 
+ 
+Pin 
+Description 
+1 
+Vcc 
+2 
+GND 
+3 
+SDA 
+4 
+SCL 
+ 
+
+© 2019 GomSpace A/S 
+All printed copies, and all electronic copies and versions except the one accessible on 
+the GomSpace A/S server, are considered uncontrolled copies used for reference only. 
+ 
+ 
+Datasheet NanoSense M315 
+06 June 2019 
+DS 1018558 1.2 
+6 
+4 Absolute Maximum Ratings 
+Stresses above those listed under Absolute Maximum Rating may cause permanent damage to the device. 
+Exposure to absolute maximum rating conditions for extended periods may effect the reliability. 
+ 
+Parameter 
+Description 
+Min 
+Typ. 
+Max 
+Unit 
+Vcc 
+Maximum supply range 
+-0.3 
+ 
+6.0 
+V 
+Vio 
+Voltage on SDA and SCL 
+-0.3 
+ 
+5.0 
+V 
+Top 
+Operational temperature range 
+-40 
+ 
+85 
+oC 
+Tst 
+Storage temperature range 
+-40 
+ 
+85 
+oC 
+ 
+ 
+5 Electrical Characteristics 
+ 
+Parameter 
+Description 
+Min 
+Typ. 
+Max 
+Unit 
+Vcc 
+Supply voltage 
+3.2 
+3.3 
+5.0 
+V 
+Icc 
+Supply current (Not sampling) 
+ 
+100 
+ 
+μA 
+Icc 
+Supply current (Sampling) 
+ 
+2.5 
+ 
+mA 
+Fi2c 
+I2C frequency 
+ 
+100 
+400 
+kHz 
+I2C add 
+Magnetometer 
+ 
+0x201 
+ 
+hex 
+I2C add 
+Temperature sensor 
+ 
+0x481 
+ 
+hex 
+1 I2C addresses can be switched to an alternative address upon request when ordering 
+ 
+6 Physical Characteristics 
+ 
+Description 
+Value 
+Unit 
+Mass 
+8 
+g 
+Size 
+23 x 20 x 8 
+mm 
+ 
+7 Product Characteristics 
+ 
+Parameter 
+Condition 
+Value 
+Noise (1-sigma) 
+No external magnetic disturbances 
+15 nT 
+Sample frequency 
+Max 
+140 Hz 
+Range 
+ 
+± 800 μT 
+Linearity 
+At +/- 200 uT 
+0.5 % 
+Temperature dependency 
+ 
+<0.1 nT/ oC 
+Temperature measurement accuracy 
+Typical 
++/1 oC 
+ 
+
+© 2019 GomSpace A/S 
+All printed copies, and all electronic copies and versions except the one accessible on 
+the GomSpace A/S server, are considered uncontrolled copies used for reference only. 
+ 
+ 
+Datasheet NanoSense M315 
+06 June 2019 
+DS 1018558 1.2 
+7 
+8 Mechanical Drawing 
+All dimension in mm. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+9 Disclaimer 
+The information in this document is subject to change without notice and should not be construed as a 
+commitment by GomSpace. GomSpace assumes no responsibility for any errors that may appear in this 
+document. 
+ 
+In no event shall GomSpace be liable for incidental or consequential damages arising from use of this document 
+or the software and hardware described in this document. 
+ 
+ 
+
+© 2019 GomSpace A/S 
+All printed copies, and all electronic copies and versions except the one accessible on 
+the GomSpace A/S server, are considered uncontrolled copies used for reference only. 
+ 
+ 
+Datasheet NanoSense M315 
+06 June 2019 
+DS 1018558 1.2 
+8 
+10 NanoSense M315 with other GomSpace Products 
+ 
+The list below are GomSpace products that can interface directly with the M315. 
+ 
+The NanoMind A3200 has a connector that the M315 can be plugged into directly, but usually both the A3200 
+and the M315 is connected to a NanoUtil Interstage GSSB. 
+ 
+ 
+ 
+ 
+ 
+Both the NanoDock ADCS-3 and NanoDock ADCS-6 can be connected directly. Both units are designed to 
+be the central part of a ADCS system. Options to mount a dedicated A3200, a GPS and either reactions wheels 
+or reaction wheel control electronics. Both docks also contain a number of connectors to peripheral units. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Figure 1 NanoMind A3200 
+Figure 2 NanoUtil GSSB Type A 
+Figure 3 NanoDock ADCS-3 
+Figure 4 CAD of NanoDock ADCS-6 
+

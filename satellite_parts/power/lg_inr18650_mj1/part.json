@@ -1,0 +1,143 @@
+{
+ "id": "lg_inr18650_mj1",
+ "name": "LG INR18650 MJ1 cylindrical Li-ion cell (3500 mAh)",
+ "category": "power",
+ "subcategory": "cell",
+ "vendor": "LG Energy Solution",
+ "model": "INR18650 MJ1",
+ "dimensions_mm": {
+  "x": 18.65,
+  "y": 18.65,
+  "z": 65.3
+ },
+ "mass_g": 49.0,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.mikrocontroller.net/attachment/667554/30708_datasheet.pdf",
+  "document": {
+   "title": "LG INR18650 MJ1 product specification",
+   "revision": null,
+   "date": "2026-11-11"
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "Diameter 18.5 mm (max 18.65), height 65.1 mm (max 65.3); the envelope uses the maxima. Weight approx. max 49.0 g, 3500 mAh nominal, 3.635 V average, charge 0 to 45 C, discharge -20 to 60 C."
+ },
+ "status": "in_production",
+ "fidelity": "envelope_plus_features",
+ "vendor_country": "South Korea",
+ "distributors": [
+  "distributors"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "distributor",
+  "source": null
+ },
+ "mass_note": "maximum per specification",
+ "electrical": {
+  "capacity_Ah": 3.5,
+  "voltage_V": {
+   "nominal": 3.635,
+   "max": 4.2
+  }
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -20,
+   "max": 60
+  }
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   18.65,
+   18.6,
+   65.3
+  ],
+  "mesh_volume_mm3": 17398.5,
+  "watertight": true,
+  "render_kind": "cell_18650",
+  "effective_density_g_cm3": 2.816,
+  "bodies": {
+   "part": [
+    {
+     "name": "can",
+     "color": [
+      0.85,
+      0.72,
+      0.3
+     ],
+     "file": "bodies/part__can.stl"
+    },
+    {
+     "name": "positive_cap",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__positive_cap.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 332
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "can",
+     "color": [
+      0.85,
+      0.72,
+      0.3
+     ],
+     "file": "bodies/part__can.stl"
+    },
+    {
+     "name": "positive_cap",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__positive_cap.stl"
+    }
+   ]
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": 3.635
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://www.mikrocontroller.net/attachment/667554/30708_datasheet.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

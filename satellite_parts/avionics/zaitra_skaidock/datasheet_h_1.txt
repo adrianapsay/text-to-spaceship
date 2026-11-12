@@ -1,0 +1,85 @@
+SKAIDOCK  Datasheet
+Technical specification
+DATA PROCESSING UNIT
+SIMERA SENSE XSCAPE COMPATIBILITY
+SKAIDOCK is fully compatible with Simera Sense xScape imagers. 
+Its dedicated camera connector provides I2C, SPI, PPS, LVDS, 
+and 5V power interfaces, with a pinout that matches the xScape 
+specification. The standard Simera Sense harness can be used 
+directly for integration. When combined with the Data Readout 
+IP Core, the setup offers true plug-and-play functionality: you can 
+command the camera and retrieve TIFF imagery with zero 
+additional development effort.
+MECHANICAL DESIGN 
+The SKAIDOCK DPU is enclosed in an anodized aluminum housing, 
+machined from 6061-grade alloy for optimal strength-to-
+weight performance. It includes four mounting holes compliant 
+with the PC104 standard, allowing secure integration into 
+the spacecraft structure.
+Utilizing Xiphos Q8J computational module 
+Plug&Play compatibility with Simera Sense xScape imagers
+CubeSat-compatible PC104 form factor
+Space qualified and flight heritage since 2025
+FEATURES
+SKAIDOCK delivers high-performance data processing 
+and handling for small satellite missions. Designed for CubeSats, 
+it offers seamless integration and plug-and-play compatibility 
+with Simera Sense xScape imagers, making it the ideal choice 
+for modern Earth Observation missions.
+At its core, SKAIDOCK features the Xiphos Q8 module powered 
+by a Zynq UltraScale+ MPSoC. With flight heritage from hundreds 
+of missions, the Q8 ensures trusted reliability in space 
+environments. SKAIDOCK includes redundant system and data 
+storage for increased mission resilience. Its versatile interface 
+suite, ranging from RS422 to Ethernet and beyond, makes 
+it adaptable to a wide range of platforms and payloads.
+Qualification Testing
+SKAIDOCK has been qualified for operation in a space 
+environment. During thermal-vacuum (TVAC) testing, it was 
+tested for operational temperatures between -40°C and +60°C. 
+The board has also undergone sine and random vibration 
+testing, shock testing, and radiated emissions measurements. 
+The Xiphos Q8J module, with extensive flight heritage, has also 
+been fully qualified.
+© This document remains the intellectual property of Zaitra s.r.o and may not be copied, or used without their prior written consent. 
+Xilinx®, Zynq™, and UltraScale+™ are registered trademarks of Advanced Micro Devices, Inc. 
+Version 3.0
+Zaitra s.r.o, Bauerova 491/10, 
+603 00 Brno, Czech republic
+zaitra.io/products
+OVERVIEW
+Delivery
+Interface Control Document (ICD)
+User Manual
+CAD model
+Yocto project 
+Example Vivado project
+Qualification report
+SKAIDOCK IS DELIVERED WITH:
+Temperature range
+-40°C to +60°C
+Interfaces
+2x 1Gbps Ethernet
+2x CAN
+I2C
+SPI
+LVDS
+USB
+Serial (configurable 1x RS422
+or 1x RS485 or 2x RS232)
+Dimensions
+94mm * 90mm * 25,5 mm
+Voltage range signal input
+6 - 15V
+Weight 
+250g
+Power Consumption
+4W idle
+5W to 6W during processing
+AMD UltraScale+ XCZU7EG
+ProASIC3
+4GB of LPDDR4 ECC RAM
+2x 256MB QSPI Flash
+2x 128GB eMMC
+COMPUTE AND MEMORY RESOURCES
+

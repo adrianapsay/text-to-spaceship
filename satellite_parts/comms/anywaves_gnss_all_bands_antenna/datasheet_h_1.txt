@@ -1,0 +1,123 @@
+GNSS All-Bands
+Antenna
+Anywaves GNSS all-bands antenna is perfectly suited 
+for LEO platforms. Operating in the frequency band 
+from 1.16 GHz to 1.61 GHz, our antenna covers all 
+GNSS constellations simultaneously with its very 
+stable phase center and circular polarization. This 
+offers excellent signal stability, ensuring no signal 
+blackouts occur even if one GNSS constellation 
+breaks down.
+This antenna has a TRL 8 and has successfully passed 
+qualification tests. Developed under the European 
+Space Agency Navisp contract, this antenna is reliable 
+and efficient, giving you the accuracy and precision 
+you need to ensure your satellite is always in the 
+right position.
+NB : compatible with Anywaves Test Hat for GNSS 
+All-Bands Antenna.
+All GNSS bands : GPS, 
+Galileo, Glonass, Beidou, 
+IRNSS L5, QZSS L6, 
+INMARSAT in L-band for 
+precise point positioning 
+(PPP).
+Hemispherical Coverage
+Rx
+Very High Accuracy
+Size < 1U
+Unique GNSS All-Bands 
+antenna on the market
+Acceptance Tests (RF, Mechanical,
+Thermal) included:
+•	
+Return loss
+•	
+Z-axis random vibration
+•	
+Thermal cycling
+ITAR Free
+NAVIGATION ANTENNAS
+Benefits
+Radome protection against 
+harsh environment: 
+temperature & ESD
+
+Typical Measured Performance
+GNSS ALL-BANDS ANTENNA
+Disclaimer: facts and ﬁ gures herein are for information only and do not represent any warranty of any kind.
+Reflection Coefficient [dB]
+Axial Ratio [dB]
+Realized Gain [dBi]
+Realized Gain @ 1 575.42 MHz [dBi]
+Frequency [MHz]
+Frequency [MHz]
+Frequency [MHz]
+Elevation Angle θ [deg]
+ 
+  Typical Performance
+Frequency Bands
+1 160 MHz to 1 610 MHz:
+GPS L1/L2/L5, Galileo E1/E5a/E5b/E6
+Glonass G1/G2/G3, Beidou B1/B2a/B2/B3
+Inmarsat L-band:
+1 525 – 1 559 MHz
+Polarization
+Right Hand Circular Polarization
+Reflection Coefficient
+≤ -10 dB
+Realized Gain
+@ boresight > 0 dBi
+Gain Variation
+In all individual sub-bands:
+< 0.6 dBi
+Axial Ratio
+@ boresight < 3 dB
+Phase Center Offset
+(± 30° FoV)
+Maximum Variation vs 
+Frequency
+Variation within a sphere of radius 
+< 4.7 mm for all bands
+Variation within a sphere of radius
+< 1.8 mm for individual sub-bands
+Phase Center Variation
+(± 30° FoV)
+Maximum Variation vs 
+Elevation
+Variation < 0.4 mm within ± 30°
+Variation < 2.6 mm within ± 60°
+Group Delay Variation
+< 1.2 ns
+ 
+  Physical Characteristics
+Envelope Size
+99.4 mm x 99.4 mm x 15.2 mm
+Protruding height: 8.7 mm
+Mass With Connector 
+130 g
+Connector
+Coaxial SMA female 50 Ω
+Mechanical Interface
+4 x M3 (unthreaded hole)
+Qualification Temperature
+-120°C / +120°C
+Protective Radome
+PEEK coated with SG- 121FD
+white paint (on Flight Models only)
+resistant to thermal and radiation
+environments and preventing
+electrostatic discharges.
+Acceptance Tests on 
+Flight Models
+- Radio Frequency
+- Mechanical
+- Thermal
+Acceptance Tests on 
+Engineering Models
+Radio Frequency Only
+Hemispherical Coverage
+Rx
+Very High Accuracy
+Size < 1U
+

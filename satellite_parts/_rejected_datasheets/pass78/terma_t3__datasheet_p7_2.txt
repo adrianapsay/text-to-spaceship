@@ -1,0 +1,204 @@
+ 
+ 
+WWW.TERMA.COM 
+2026-06-03 
+ 
+T3 STAR TRACKER 
+ 
+Miniaturized Optical Head with Built-In Processing Unit 
+ 
+ 
+ 
+STAR-TRACKER-ON-A-CHIP TECHNOLOGY 
+The compact T3 Star Tracker is ideally suited for 
+nano- and microsatellite missions with lifetime in 
+excess of 5 years. The star tracker is based on a 
+scaled-down version of the Terma T1 Star Tracker 
+with a smaller optical system and computer 
+processing unit based on high reliable COTS 
+components. 
+ 
+The Optical Head (OH) is based on the sensor chip 
+FaintStar-2 developed under ESA contracts. The 
+FaintStar-2 is a CMOS Active Pixel Sensor with a 
+suite of integrated on-chip functionality supporting a 
+completely new class of miniaturized high 
+performance star trackers. 
+ 
+Terma has taken the miniaturization challenge as far 
+as possible, without compromising the accuracy 
+required from a state-of-the-art star tracker. 
+The processing unit accommodates the star 
+catalogue and software algorithms for autonomous 
+attitude acquisition and tracking. 
+ 
+FEATURES 
+• 
+High accuracy 
+• 
+Very compact with build in processing unit 
+• 
+Rad-hard aspherical optics. 
+• 
+Integrated baffle with outstanding straylight 
+attenuation. 
+• 
+Excellent thermal stability. 
+• 
+Extremely low recurrent cost at larger 
+quantities. 
+• 
+5 as reference cube for alignment. 
+ 
+QUALIFICATION STATUS 
+• 
+T3 STR is at TRL 9. 
+ 
+ 
+ 
+Interested parties are invited to write our team, terma.space@terma.com. 
+ 
+ 
+
+ 
+Miniaturized Optical Head with Built-In Processing Unit 
+ 
+ 
+T3 
+ 
+Accuracy 
+See next page 
+Maximum Update Rate 
+5 Hz 
+Slew Rate 
+ 
+< 0.3 deg/s full performance 
+< 1.5 deg/s reduced performance 
+Acquisition time (typical) 
+< 10 s 
+Sun exclusion angle (shown example, other options 
+on request) 
+37.5 deg 
+SAA & SEU Tolerance 
+worst case GEO flux (25k protons/cm2/s) 
+Acquisition & tracking full performance 
+ 
+Field of View 
+20 deg circular, full moon accepted in FOV 
+APS Resolution 
+1024 x 1024 pixels 
+Lifetime 
+> 5 years 
+Lenses 
+Aspherical, radiation hard glasses 
+Power consumption 
+2 W 
+Supply Voltage 
+4.5 - 5.5 V 
+7 – 33 V (variant) 
+Spacecraft Interface (TC/TM) 
+RS422 
+CAN (variant) 
+Interface Connector 
+Harwin M80 
+Computer Architecture 
+Zynq Ultrascale 
+Mass 
+350 g 
+Dimensions 
+60 x 60 x 100 mm3 
+Operating Temperature (qualification limits) 
+-35 °C to +65 °C  
+(reduced performance above +30 °C on sensor) 
+Survival Temperature (qualification limits) 
+-35 °C to +70 °C 
+ 
+ 
+ 
+
+ 
+Miniaturized Optical Head with Built-In Processing Unit 
+ 
+ 
+T3 PERFORMANCE 
+Performance 
+ 
+BOL (EOL) 
+Bias 
+[as] max 
+10 
+Thermal Stability 
+[as/K] max 
+0.1 
+Spatial Error (FOV) 
+[as] 3σ 
+2.1 
+Spatial Error (Pixel) 
+[as] 3σ 
+1.3 (1.7) 
+ 
+ 
++30°C 
++50°C 
+Temporal Noise (rate < 0.3 deg/s) 
+[as] 3σ 
+2.0 (2.6) 
+8.0 (10) 
+Temporal Noise (rate < 0.8 deg/s) 
+[as] 3σ 
+6.0 (8) 
+24 (31) 
+Temporal Noise (rate < 1.5 deg/s) 
+[as] 3σ 
+22 (29) 
+89 (114) 
+ 
+ 
+ 
+ 
+General remark: All parameters are quoted for normal to cross-boresight directions. Around boresight, values are a factor 
+of 7 higher, except for the Bias and Thermal Stability parameters. 
+ 
+
+ 
+Miniaturized Optical Head with Built-In Processing Unit 
+ 
+ 
+ORDERING INFORMATION 
+The T3 Star Tracker components can be ordered according to the table below.   
+ 
+Legend: 
+• 
+A component is identified by a part number and dash variant according to xxxxxxx-yyy. 
+• 
+A component can be ordered as an engineering model (EM) or flight model (FM). 
+• 
+EEE screening level is per default grade 2 (QML-Q) for sensor and proximity electronics. Computer 
+EEE components are high reliable COTS. 
+ 
+ 
+Component 
+P/N [xxxxxxx] 
+EM [-yyy] 
+FM [-yyy] 
+T3 with RS422 TCTM interface and 37.5 Sun 
+exclusion angle baffle (fully qualified) 
+ 
+1445040 
+-218 
+-001 
+T3 with CAN bus TCTM interface and 37.5 Sun 
+exclusion angle baffle (under development) 
+ 
+TBD 
+TBD 
+TBD 
+Dynamic OGSE, 37.5 deg SEA Baffle interface 
+ 
+1665815-037 
+Static OGSE, 37.5 deg SEA Baffle interface 
+ 
+903964-037 
+ 
+ 
+

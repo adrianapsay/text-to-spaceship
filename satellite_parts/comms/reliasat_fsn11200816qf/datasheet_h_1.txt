@@ -1,0 +1,119 @@
+FSN11200816QF
+Issue Date: 07/07/2023
+DOC REV 1
+Page 1 of 2
+Information furnished by ReliaSat is believed to be accurate. No responsibility is assumed by ReliaSat for its use, nor for any infringements on the rights of other parties that may result for the use 
+of the information herein. All specifications are subject to change without notice. 
+FSN11200816QF
+Fixed frequency Microwave Synthesizer.
+Overview 
+The FSN11200816QF is a low-phase noise, 
+fixed frequency band Microwave Frequency 
+Synthesizer. This product comes in a tiny surface 
+mount package measuring 25.4 mm x 25.4 mm 
+x 6.35 mm. The frequency of the synthesizer is 
+custom in the range of 8-16 GHz. 
+Features
+Applications
+•	 Satellite communications              
+•	 Radar
+•	 Mobile communications
+•	 5G
+•	 Fixed frequency in the range of 
+8-16 GHz
+•	 -103 dBc/ Hz phase noise at 10 
+KHz
+•	 25.4 x 25.4 mm surface mount 
+package 
+•	 0 dBm output power
+•	 Low reference spurs (<-80 dBc)
+•	 Reference signal input 10 MHz, 
+100 MHz or custom on request
+Fixed Frequency 
+Synthesizer 
+8-16 GHz  
+ReliaSat
+Product Datasheet
+Physical Specifications 
+Parameter
+Typ
+Unit
+Size
+25.4 x 25.4 x 6.35
+mm
+Weight
+4
+grams
+
+FSN11200816QF
+Issue Date: 07/07/2023
+DOC REV 1
+Page 2 of 2
+Information furnished by ReliaSat is believed to be accurate. No responsibility is assumed by ReliaSat for its use, nor for any infringements on the rights of other parties that may result for the use 
+of the information herein. All specifications are subject to change without notice. 
+Specification Overview
+Parameter
+Typ
+Unit
+Frequency Range1
+8-16
+GHz
+Phase Noise2
+1 kHz
+-93
+dBc/Hz
+10 kHz
+-103
+dBc/Hz
+100 kHz
+-107
+dBc/Hz
+1 MHz
+-121
+dBc/Hz
+Power Supply @ 3.3 V
+Power Supply @ 5.0 V
+250 
+150
+mA
+Output Power
+1 ±2
+dBm
+Load Impedance
+50 
+Ω
+Spurious
+<-80 
+dBc
+Harmonics3
+-25
+dBc
+Subharmonics3
+-25
+dBc
+Reference Signal Input4
+10 / 100 / Custom on request
+MHz
+Operating Temperature
+-40 to +85
+OC
+Fixed Frequency 
+Synthesizer 
+8-16 GHz  
+ReliaSat
+Product Datasheet
+Specification References
+1.	
+Can operate up to 16.8 GHz but not guaranteed.
+2.	
+16 GHz carrier with 200 MHz step size. Lower frequencies have better phase 
+noise performance. The phase noise degrades with a lower step size.
+3.	
+Please contact us for detailed harmonics/subharmonics suppression.
+4.	
+Should be lower than 200 MHz.
+ReliaSat European Offices
+e: sales@reliasat.com
+www.reliasat.com
+Contact Information
+

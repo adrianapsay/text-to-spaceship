@@ -27,7 +27,7 @@
   ],
   "notes": "10 x 10 x 5.16 cm, 694 g, 1.1 W average (satcatalog); 3 reaction wheels, 3-axis magnetometer, 2-camera Earth horizon sensor, 3 torque rods, ADACS computer, 90 day lead (CubeSatShop). Datasheet: https://satcatalog.s3.amazonaws.com/components/87/SatCatalog_-_Adcole_Maryland_Aerospace_-_MAI-400_-_Datasheet.pdf"
  },
- "status": "unknown",
+ "status": "in_production",
  "fidelity": "envelope",
  "vendor_country": "USA",
  "distributors": [
@@ -35,7 +35,7 @@
   "satsearch",
   "Redwire"
  ],
- "status_note": "Adcole Maryland Aerospace became part of Redwire (2020); product line continuation not verified",
+ "status_note": "listed on CubeSatShop (MAI-400 ADACS, control board, wheel) (web search 2026-11-11); Adcole Space is now part of Redwire",
  "lead_time": "90 days",
  "adcs": {
   "wheels": 3,
@@ -106,6 +106,95 @@
   },
   "face_counts": {
    "part": 40
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    100.0,
+    100.0,
+    51.6
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "feet",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/feet.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "connector_shell",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/connector_shell.stl"
+    },
+    {
+     "name": "connector_insert",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector_insert.stl"
+    },
+    {
+     "name": "jackscrews",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/jackscrews.stl"
+    },
+    {
+     "name": "label",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies_detail/label.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",

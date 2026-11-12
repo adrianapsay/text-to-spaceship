@@ -55,7 +55,7 @@ add("arcsec_twinkle", "arcsec Twinkle miniature star tracker", "adcs", "star_tra
     "https://cdn.satsearch.com/product-images/image-arcsec-twinkle-star-tracker-x82vtk.jpg", fields=("dimensions_mm", "mass_g", "electrical", "adcs"),
     vendor_country="Belgium", electrical={"power_W": {"nominal": 1.0}, "voltage_V": {"nominal": 5}, "interfaces": ["RS485"]}, adcs={"accuracy_arcsec_cross_boresight": 15, "accuracy_arcsec_about_boresight": 90})
 add("kairospace_star_tracker", "KAIROSPACE star tracker (with baffle)", "adcs", "star_tracker", "KAIROSPACE Co., Ltd.", "Star tracker", (56, 60, 93), 197,
-    {"kind": "camera_box_lens", "x": 56, "y": 60, "z": 45, "lens_diameter": 30, "lens_length": 48, "baffle_diameter": 56},
+    {"kind": "camera_box_lens", "x": 56, "y": 60, "z": 20, "lens_diameter": 56, "lens_length": 73},
     "https://satsearch.co/products/kairospace-star-tracker", "KAIROSPACE star tracker", "56 x 60 x 93 mm, 197 g including baffle, 5 V, CAN / RS485, <5 arcsec 3-sigma, -30 to 40 C.",
     "https://cdn.satsearch.com/product-images/satsearch_product-image_vhveeq_kairo-space_star-tracker.png", fields=("dimensions_mm", "mass_g", "electrical", "adcs", "thermal"),
     vendor_country="South Korea", electrical={"voltage_V": {"nominal": 5}, "interfaces": ["CAN", "RS485"]}, adcs={"accuracy_arcsec": 5}, thermal={"operating_temperature_C": {"min": -30, "max": 40}})
@@ -133,11 +133,7 @@ add("npc_spacemind_gemini_eps", "NPC SPACEMIND GEMINI CubeSat EPS (PC/104)", "po
     "https://satsearch.co/products/npcspacemind-gemini-cubesat-eps", "NPC SPACEMIND GEMINI EPS", "90.2 x 95.9 x 25 mm, 300 g, 6 input channels 5-20 V, programmable outputs 3.3 / 5 / 6-12 / 24 V, 84 Wh per 8-cell pack (packs separate).",
     "https://cdn.satsearch.com/product-images/satsearch_product-image_g7vace_npc_spacemind_eps.jpg", fields=("dimensions_mm", "mass_g", "electrical"),
     vendor_country="Italy", electrical={"voltage_V": {"nominal": 5}, "interfaces": ["PC/104 stack"]})
-add("exa_bat_25whr_lipo", "EXA 25 Whr high energy density LiPo battery array (1U face)", "power", "battery", "EXA (Ecuadorian Civilian Space Agency)", "25 Whr LiPo array", (95, 89, 7), 125,
-    {"kind": "box", "x": 95, "y": 89, "z": 7},
-    "https://satsearch.co/products/exa-25-whr-high-energy-density-li-po-battery-array", "EXA 25 Whr LiPo battery array", "95 x 89 x 7 mm, 125 g, 6000 mAh at 3.7 V (22.2 Wh; listing title says 25 Whr).",
-    "https://cdn.satsearch.com/product-images/satsearch_product-image_fwt7h3_exa_1u-high-capacity-battery-arrays.JPG", fields=("dimensions_mm", "mass_g", "electrical"),
-    vendor_country="Ecuador", electrical={"capacity_Wh": 22.2, "voltage_V": {"nominal": 3.7}})
+# (EXA 25 Whr array removed 2026-11-11: it is the same product as exa_ba01_s in power.py, now verified from the EXA datasheet.)
 
 # ---- Avionics
 add("steel_electronique_mobc", "STEEL Electronique MOBC on-board computer for nanosatellites (Zynq 7030)", "avionics", "obc", "STEEL Electronique", "MOBC", (99.4, 90.2, 34.4), 286,

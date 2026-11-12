@@ -10,27 +10,27 @@
   "y": 18.5,
   "z": 65.3
  },
- "mass_g": 48.5,
+ "mass_g": 47.5,
  "source": {
-  "type": "unverified",
+  "type": "datasheet",
   "url": "https://cdn.shopify.com/s/files/1/0481/9678/0183/files/panasonic_18650b_data_sheet.pdf",
   "document": {
-   "title": "Panasonic NCR18650B datasheet (mirror indexed at https://www.18650batterystore.com/pages/data-sheets)",
+   "title": "Panasonic NCR18650B standard data, March 2012",
    "revision": null,
-   "date": null
+   "date": "2026-11-11"
   },
   "accessed": "2026-11-08",
-  "fields_from_source": [],
-  "notes": "Datasheet link recorded but not opened from this session; diameter, length, mass, capacity and current are from memory of the datasheet and must be checked against the PDF (max dimensions, typical mass)."
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "Maximum with tube 18.50 mm diameter x 65.30 mm height (18.25 x 65.10 without tube), 47.5 g max. 3350 mAh typical at 25 C, minimum 3200 mAh at 20 C, 3.6 V nominal, 4.2 V charge, 1625 mA standard charge. Charge 10 to 45 C, discharge -20 to 60 C. The sheet gives discharge curves up to 2C but no maximum current, so none is recorded."
  },
- "status": "in_production",
+ "status": "discontinued",
  "fidelity": "envelope",
  "vendor_country": "Japan",
- "distributors": [
-  "18650batterystore",
-  "Digi-Key (some)",
-  "cell distributors"
- ],
  "electrical": {
   "chemistry": "Li-ion 18650",
   "capacity_mAh": 3350,
@@ -39,8 +39,7 @@
    "min": 2.5,
    "nominal": 3.6,
    "max": 4.2
-  },
-  "max_discharge_A": 6.8
+  }
  },
  "cost": {
   "value": 4,
@@ -50,6 +49,13 @@
  },
  "cost_note": "typical single-cell retail, approximate",
  "cost_basis_note": "approximate",
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -20,
+   "max": 60
+  }
+ },
+ "status_note": "listed as discontinued by Abacus Electronics and Botland; some retailers still stock it (web search 2026-11-11)",
  "geometry": {
   "measured_bbox_mm": [
    18.5,
@@ -59,7 +65,7 @@
   "mesh_volume_mm3": 17119.8,
   "watertight": true,
   "render_kind": "cell_18650",
-  "effective_density_g_cm3": 2.833,
+  "effective_density_g_cm3": 2.775,
   "bodies": {
    "part": [
     {
@@ -84,6 +90,29 @@
   },
   "face_counts": {
    "part": 332
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "can",
+     "color": [
+      0.85,
+      0.72,
+      0.3
+     ],
+     "file": "bodies/part__can.stl"
+    },
+    {
+     "name": "positive_cap",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__positive_cap.stl"
+    }
+   ]
   }
  },
  "image": "preview.png",
@@ -101,7 +130,7 @@
     "pdf": null,
     "url": "https://cdn.shopify.com/s/files/1/0481/9678/0183/files/panasonic_18650b_data_sheet.pdf",
     "kind": "vendor_link",
-    "title": "Panasonic NCR18650B datasheet (mirror indexed at https://www.18650batterystore.com/pages/data-sheets)"
+    "title": "Panasonic NCR18650B standard data, March 2012"
    },
    {
     "file": "datasheet_1_page1.png",

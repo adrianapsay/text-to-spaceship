@@ -1,0 +1,110 @@
+Scanway Camera System
+SCS: MultiCam
+Rocket Dual Cam
+Key highlights
+The SCS MultiCam Rocket-2-Cam is a one of the available configurations of Scanway Camera System,
+consisting of 2 wide-angle cameras dedicated to monitoring of the spacecrafts processes. This kind of system
+was used on the first launch of the biggest European carrier rocket Ariane-6 on July 2024. The system
+provided the high quality imagery (photo and video) of the main fairing separation and satellites deployment
+processes. 
+Applications
+The system allows the acquisition and processing of
+visual information of many key processes during the
+flight of the rocket, such as:
+Main Engine Ignition and Liftoff
+First and Second Stages Burn and Shutdown
+Stage Separation
+Second Stage Ignition
+Fairing Separation
+Payload Deployment
+Customization
+Product customization is possible, such as amount of the
+camera modules, processing modules, interfaces.
+Flight heritage
+The payload was tested during the first launch of the Ariane
+6 rocket, July 2024.
+2-cam
+system
+Scanway Space Corp.
+2529 Foothill Blvd, 
+La Crescenta-Montrose,  CA 91214
+Scanway S.A.
+Strzegomska 140A, 
+54-429 Wrocław,  Poland
+scanway.pl
+space@scanway.pl
+
+Img. Scanway
+SCS
+MultiCam Rocket Dual Cam
+Mechanical properties
+Mass
+  105 g
+Dimensions
+182 x 81.5 x 10 mm
+Electronic properties
+  Electricity supply
+  
+12 VDC (while two cameras are
+  working)
+  Power
+consumption
+  
+2.2W @ 12VDC 
+(quiescent current)
+3.2W @ 12VDC
+(during the work of 2 cameras)
+6W @ 12 VDC 
+(maximum current )
+Interface
+SPI / UART
+Ethernet  
+Processed video
+H.265 (HEVC) (up to 4Kp60
+decode), 
+H.264 (up to 1080p60 decode,
+1080p30 encode)
+Pixel pitch
+5.5 um
+ Focal Length
+2.7 mm 
+FoV
+136° x 102°
+Minimum focus distance
+200mm from the front
+Fixed focus
+Manual iris
+ Image size
+4056 x 3040 pixels
+Exposure time
+from 20 microseconds to 1
+second in standard mode;
+possible long exposure time
+up to 10 seconds
+Bit modes
+8 or 10 bits  
+Image modes  
+video (up to 1080p @ 30 fps;
+720p @ 60 fps), 
+photo (12.3 Mpix or less)
+System parameters
+Camera parameters
+2 inputs for CSI cameras
+6 temperature sensors PT1000
+Hard disk NVMe M. 2 2030 with 128GB
+Processor 4 cores x 1. 5 GHz
+2GB RAM LPDDR4
+Operating system LINUX
+3 communication interfaces: SPI, UART, Ethernet
+2 digital inputs
+Interface features
+Scanway Space Corp.
+2529 Foothill Blvd, 
+La Crescenta-Montrose,  CA 91214
+Scanway S.A.
+Strzegomska 140A, 
+54-429 Wrocław,  Poland
+scanway.pl
+Image Scanway
+space@scanway.pl
+

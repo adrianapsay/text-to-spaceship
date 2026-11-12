@@ -35,3 +35,45 @@ for size, (dk, k, shank, lengths) in {"m2p5": (5.5, 1.5, 2.5, (5, 6, 8, 10)), "m
     for length in lengths:
         PARTS.append(part("csk_" + size + "x" + str(length), "Countersunk socket screw " + size.upper().replace("P", ".") + " x " + str(length) + " (ISO 10642)", "fasteners", "screw", "generic (ISO 10642)", size.upper().replace("P", ".") + "x" + str(length) + " ISO 10642", (dk, dk, length), round((3.14159 * (shank / 2) ** 2 * (length - k) + 3.14159 / 12 * k * (dk ** 2 + dk * shank + shank ** 2) / 4 * 4 / 3) * 7.85 / 1000, 3), {"kind": "countersunk_screw", "head_diameter": dk, "head_height": k, "shank_diameter": shank, "length": length},
             source("standard", ISO10642, "ISO 10642 hexagon socket countersunk head screws, dimension table (values from memory of the table; page not fetched this session)", ["dimensions_mm"], notes="dk theoretical max " + str(dk) + ", k " + str(k) + "; mass derived from steel 7.85 g/cm3 (cone + shank volume). Overall length includes the head per ISO 10642."), status="in_production", material="steel 10.9 or A2 stainless", mass_note="derived", distributors=["McMaster-Carr", "Fabory", "Bossard"], cost=cost(value=0.1, currency="USD", basis="list_price"), cost_note="approximate bulk price"))
+
+# ISO 7380-1 hexagon socket button head screws (added 2026-11-11). Head dk / k / socket s from the Westfield Fasteners ISO 7380 standard sheet;
+# mass per piece from the fasten.it ISO 7380-1 table ("approximate mass, kg x 1000 pcs", steel).
+ISO7380_SHEET = "https://westfieldfasteners.co.uk/Standards/ScrewBolt-SHBtn-M.pdf"
+ISO7380_MASS = "https://fasten.it/norms/norm/din_en_iso_7380-1"
+button_heads = {"m3": (0.5, 5.7, 1.65, 2.0, {6: 0.42, 8: 0.50, 10: 0.59, 12: 0.67, 16: 0.83, 20: 0.99}),
+                "m4": (0.7, 7.6, 2.2, 2.5, {6: 0.86, 8: 1.0, 10: 1.15, 12: 1.29, 16: 1.57, 20: 1.86}),
+                "m5": (0.8, 9.5, 2.75, 3.0, {8: 1.80, 10: 2.03, 12: 2.26, 16: 2.73, 20: 3.19}),
+                "m6": (1.0, 10.5, 3.3, 4.0, {10: 2.92, 12: 3.25, 16: 3.92, 20: 4.58})}
+for size, (pitch, dk, k, s, lengths) in button_heads.items():
+    diameter = float(size[1:].replace("p", "."))
+    for length, kg_per_1000 in lengths.items():
+        PARTS.append(part("bhcs_" + size + "x" + str(length), "Button head socket screw " + size.upper() + " x " + str(length) + " (ISO 7380-1)", "fasteners", "screw", "generic (ISO 7380-1)", "ISO 7380-1 " + size.upper() + "x" + str(length), (dk, dk, k + length), kg_per_1000,
+            {"kind": "screw", "head_diameter": dk, "head_height": k, "shank_diameter": diameter, "length": length, "socket_diameter": s * 1.15, "socket_depth": k * 0.5, "tolerance": 0.05},
+            source("standard", ISO7380_SHEET, "ISO 7380-1 hexagon socket button head screws, dimension table (Westfield Fasteners standards sheet)", ["dimensions_mm", "mass_g"], notes="dk (max) " + str(dk) + ", k (max) " + str(k) + ", socket s " + str(s) + ", pitch " + str(pitch) + " mm. Mass " + str(kg_per_1000) + " g per piece from the approximate mass table (kg per 1000 pcs, steel) at " + ISO7380_MASS + ". Head drawn as a short cylinder (the real head is domed)."),
+            status="in_production", material="stainless steel A2/A4 or alloy steel 10.9", thread_pitch_mm=pitch, mass_note="from the ISO 7380-1 mass table (steel)", cost=cost(value=0.1, currency="USD", basis="list_price"), cost_note="typical COTS price per piece, approximate"))
+
+# ISO 4026 hexagon socket set screws with flat point (added 2026-11-11): socket s and mass per piece from the fasten.it DIN EN ISO 4026 table
+# ("kg x1000 pcs", steel 7.85 kg/dm3). The envelope is the thread cylinder d x l.
+ISO4026 = "https://fasten.it/norms/norm/din_en_iso_4026"
+set_screws = {"m3": (0.5, 1.5, {4: 0.14, 6: 0.22, 8: 0.3, 10: 0.38}), "m4": (0.7, 2.0, {4: 0.22, 6: 0.38, 8: 0.54, 10: 0.7, 12: 0.86}),
+              "m5": (0.8, 2.5, {5: 0.44, 8: 0.8, 10: 1.04, 12: 1.28}), "m6": (1.0, 3.0, {6: 0.76, 8: 1.11, 10: 1.46, 12: 1.81})}
+for size, (pitch, s, lengths) in set_screws.items():
+    diameter = float(size[1:])
+    for length, kg_per_1000 in lengths.items():
+        PARTS.append(part("set_screw_" + size + "x" + str(length), "Socket set screw, flat point " + size.upper() + " x " + str(length) + " (ISO 4026)", "fasteners", "set_screw", "generic (ISO 4026)", "ISO 4026 " + size.upper() + "x" + str(length), (diameter, diameter, length), kg_per_1000,
+            {"kind": "cylinder", "diameter": diameter, "length": length, "axis": "z", "tolerance": 0.05},
+            source("standard", ISO4026, "DIN EN ISO 4026 hexagon socket set screws with flat point (fasten.it table)", ["dimensions_mm", "mass_g"], notes="Thread " + size.upper() + " x " + str(length) + " mm, socket s " + str(s) + " mm, pitch " + str(pitch) + " mm, mass " + str(kg_per_1000) + " g per piece (table: kg per 1000 pcs, steel)."),
+            status="in_production", material="alloy steel 45H or stainless steel A2/A4", thread_pitch_mm=pitch, mass_note="from the ISO 4026 mass table (steel)", cost=cost(value=0.08, currency="USD", basis="list_price"), cost_note="typical COTS price per piece, approximate"))
+
+# ISO 7045 cross-recessed pan head screws (added 2026-11-11): head dk / k and mass from the fasten.it DIN 7985 table (DIN 7985 is withdrawn and
+# replaced by DIN EN ISO 7045 with the same head sizes for M2 to M5; "kg x1000 pcs", steel).
+PAN = "https://fasten.it/norms/norm/din_7985"
+pan_heads = {"m2": (0.4, 4.0, 1.6, {4: 0.194, 6: 0.231, 8: 0.268, 10: 0.303}), "m2p5": (0.45, 5.0, 2.0, {4: 0.37, 6: 0.428, 8: 0.486, 10: 0.544}),
+             "m3": (0.5, 6.0, 2.4, {4: 0.635, 6: 0.714, 8: 0.793, 10: 0.872, 12: 0.951}), "m4": (0.7, 8.0, 3.1, {6: 1.48, 8: 1.63, 10: 1.79, 12: 1.94, 16: 2.25})}
+for size, (pitch, dk, k, lengths) in pan_heads.items():
+    diameter = float(size[1:].replace("p", "."))
+    for length, kg_per_1000 in lengths.items():
+        PARTS.append(part("pan_screw_" + size + "x" + str(length), "Cross-recessed pan head screw " + size.upper().replace("P", ".") + " x " + str(length) + " (ISO 7045)", "fasteners", "screw", "generic (ISO 7045)", "ISO 7045 " + size.upper().replace("P", ".") + "x" + str(length), (dk, dk, k + length), kg_per_1000,
+            {"kind": "screw", "head_diameter": dk, "head_height": k, "shank_diameter": diameter, "length": length, "tolerance": 0.05},
+            source("standard", PAN, "DIN 7985 / ISO 7045 cross recessed pan head screws (fasten.it table, 08-1990 edition)", ["dimensions_mm", "mass_g"], notes="dk " + str(dk) + ", k " + str(k) + ", pitch " + str(pitch) + " mm, mass " + str(kg_per_1000) + " g per piece (kg per 1000 pcs, steel). The cross recess is not modelled."),
+            status="in_production", material="stainless steel A2 or steel 4.8", thread_pitch_mm=pitch, mass_note="from the DIN 7985 mass table (steel)", cost=cost(value=0.05, currency="USD", basis="list_price"), cost_note="typical COTS price per piece, approximate"))

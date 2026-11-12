@@ -1,31 +1,32 @@
 {
  "id": "aim_sf070",
- "name": "AIM Infrarot-Module SF070 cryocooler",
+ "name": "AIM SF070 flexure-bearing Stirling cooler, compressor (cold finger separate)",
  "category": "thermal",
  "subcategory": "cryocooler",
  "vendor": "AIM Infrarot-Module",
- "model": "SF070 cryocooler",
+ "model": "SF070 compressor",
  "dimensions_mm": {
-  "x": 100,
-  "y": 100,
-  "z": 100
+  "x": 44,
+  "y": 44,
+  "z": 113
  },
  "mass_g": 850,
  "source": {
-  "type": "unverified",
-  "url": "https://nasa.gov/smallsat-institute/sst-soa/thermal-control",
+  "type": "datasheet",
+  "url": "https://www.aim-ir.com/fileadmin/files/Data_Sheets_Security/Coolers/02_Flexure_Bearing_Coolers/2018_AIM_datenblatt_cooler_SF070_engl.pdf",
   "document": {
-   "title": "NASA SmallSat State-of-the-Art, Thermal Control chapter, cryocooler table",
+   "title": "AIM Infrarot-Module, Flexure Bearing Stirling Cooler SF070 data sheet (2018)",
    "revision": null,
-   "date": null
+   "date": "2026-11-11"
   },
   "accessed": "2026-11-08",
   "fields_from_source": [
+   "dimensions_mm",
    "mass_g",
    "electrical",
    "thermal"
   ],
-  "notes": "Mass, input power, cooling performance and TRL from the SOA table (manufacturer supplied, not NASA verified). Dimensions NOT given: envelope assumed from the '~1U' / '<2U' form factor column."
+  "notes": "Compressor diameter 44 mm, length 113 mm, weight 850 g; supply 5 to 15 VAC; ambient -54 to +80 C; cold fingers of 6, 8 or 9 mm are separate and not modelled; lifetime over 30,000 h. Input power 24 W and 0.6 W at 80 K are from the NASA SoA cryocooler table."
  },
  "status": "in_production",
  "fidelity": "envelope",
@@ -33,15 +34,23 @@
  "distributors": [
   "direct"
  ],
- "dimensions_note": "assumed from form factor",
  "thermal": {
   "cooling_performance": "0.6 W at 80 K",
-  "trl": "6-9"
+  "trl": "6-9",
+  "operating_temperature_C": {
+   "min": -54,
+   "max": 80
+  }
  },
  "electrical": {
   "power_W": {
    "nominal": 24
-  }
+  },
+  "voltage_V": {
+   "min": 5,
+   "max": 15
+  },
+  "voltage_note": "VAC drive from the cooler controller"
  },
  "cost": {
   "value": null,
@@ -51,29 +60,43 @@
  },
  "geometry": {
   "measured_bbox_mm": [
-   100.0,
-   100.0,
-   100.0
+   44.0,
+   43.88,
+   113.0
   ],
-  "mesh_volume_mm3": 1000000.0,
+  "mesh_volume_mm3": 171179.8,
   "watertight": true,
-  "render_kind": "box",
-  "effective_density_g_cm3": 0.85,
+  "render_kind": "cylinder",
+  "effective_density_g_cm3": 4.966,
   "bodies": {
    "part": [
     {
      "name": "body",
      "color": [
-      0.36,
-      0.4,
-      0.46
+      0.62,
+      0.64,
+      0.66
      ],
      "file": "bodies/part__body.stl"
     }
    ]
   },
   "face_counts": {
-   "part": 12
+   "part": 164
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "body",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
   }
  },
  "image": "preview.png",
@@ -89,16 +112,9 @@
    {
     "file": "datasheet_page1.png",
     "pdf": null,
-    "url": null,
+    "url": "https://www.aim-ir.com/fileadmin/files/Data_Sheets_Security/Coolers/02_Flexure_Bearing_Coolers/2018_AIM_datenblatt_cooler_SF070_engl.pdf",
     "kind": "vendor_link",
-    "title": "NASA SmallSat State-of-the-Art, Thermal Control chapter, cryocooler table"
-   },
-   {
-    "file": "datasheet_1_page1.png",
-    "pdf": "datasheet_1.pdf",
-    "kind": "web_search",
-    "url": "https://www.nasa.gov/wp-content/uploads/2026/05/7-soa-thermal-2026-final.pdf?emrc=6af3dff847a13",
-    "title": null
+    "title": "AIM Infrarot-Module, Flexure Bearing Stirling Cooler SF070 data sheet (2018)"
    }
   ],
   "stl_preview": "preview.png",
@@ -106,9 +122,9 @@
   "photo_url": null,
   "photo_source": null,
   "photo_page": null,
-  "photo_file": null,
-  "photo_kind": null,
-  "datasheet_url": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
+  "datasheet_url": "https://www.aim-ir.com/fileadmin/files/Data_Sheets_Security/Coolers/02_Flexure_Bearing_Coolers/2018_AIM_datenblatt_cooler_SF070_engl.pdf",
   "datasheet_page_file": "datasheet_page1.png",
   "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
  },

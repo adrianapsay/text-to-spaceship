@@ -1,0 +1,240 @@
+{
+ "id": "adi_adis16488a",
+ "name": "Analog Devices ADIS16488A MEMS inertial measurement unit",
+ "category": "adcs",
+ "subcategory": "imu",
+ "vendor": "Analog Devices",
+ "model": "ADIS16488A",
+ "dimensions_mm": {
+  "x": 47,
+  "y": 44,
+  "z": 14
+ },
+ "mass_g": 48,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www-cce.cldnet.analog.com/media/en/technical-documentation/data-sheets/ADIS16488A.pdf",
+  "document": {
+   "title": "Analog Devices ADIS16488A data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "adcs",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "Package approximately 47 x 44 x 14 mm, 48 g (device weight table), 3.0 to 3.6 V single supply, 245 mA typical normal mode, gyro up to +-450 deg/s, in-run bias stability 5.1 deg/h (best range model), accelerometer +-18 g, SPI, -40 to +105 C. Commercial part, not space qualified."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "USA",
+ "distributors": [
+  "Digi-Key",
+  "Mouser",
+  "Analog Devices"
+ ],
+ "satellite_class": "cubesat_and_smallsat",
+ "adcs": {
+  "gyro_range_deg_s": 450,
+  "gyro_bias_stability_deg_h": 5.1,
+  "accel_range_g": 18
+ },
+ "electrical": {
+  "voltage_V": {
+   "min": 3.0,
+   "max": 3.6
+  },
+  "current_mA": 245,
+  "interfaces": [
+   "SPI"
+  ]
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -40,
+   "max": 105
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "distributor",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   47.0,
+   44.0,
+   14.0
+  ],
+  "mesh_volume_mm3": 28924.8,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.659,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    47.0,
+    44.0,
+    14.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "feet",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/feet.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "connector_shell",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/connector_shell.stl"
+    },
+    {
+     "name": "connector_insert",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector_insert.stl"
+    },
+    {
+     "name": "jackscrews",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/jackscrews.stl"
+    },
+    {
+     "name": "label",
+     "color": [
+      0.93,
+      0.93,
+      0.92
+     ],
+     "file": "bodies_detail/label.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [
+   "SPI"
+  ],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://www-cce.cldnet.analog.com/media/en/technical-documentation/data-sheets/ADIS16488A.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

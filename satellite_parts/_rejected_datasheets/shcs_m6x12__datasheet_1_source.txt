@@ -1,0 +1,4 @@
+url: https://www.emerson.com/is/content/emerson/en/final-control/actuation/documents/discontinued-product-data-sheet-fieldq-release-1-actuator-pre-2020.pdf
+title: FieldQ Valve Actuator | Emerson
+query: generic ISO 4762 M6x12 datasheet pdf
+found by web search; verify that it is the right part

@@ -1,0 +1,3 @@
+url: https://content.u-blox.com/sites/default/files/NEO-M9N_ProductSummary_UBX-19027207.pdf
+found from: https://content.u-blox.com/sites/default/files/NEO-M9N_ProductSummary_UBX-19027207.pdf
+found by Claude (web search) on 2026-11-11; downloaded by fetch_pass5.py

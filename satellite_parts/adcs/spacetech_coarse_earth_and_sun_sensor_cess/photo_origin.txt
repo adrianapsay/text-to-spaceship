@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-spacetech-gmbh-coarse-earth-and-sun-sensor-cess-5q100p.pdf
+method: product image from the catalog page https://satsearch.co/products/sti-spacetech-gmbh-cess

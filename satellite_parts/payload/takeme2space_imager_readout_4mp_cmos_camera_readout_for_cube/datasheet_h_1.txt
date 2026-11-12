@@ -1,0 +1,85 @@
+CMV4K Readout | Technical Specifications | TM2.space 
+Revision: A 
+Date: 16-07-2026 
+ 
+ 
+ 
+CMV4K Readout 
+Technical Specifications 
+ 
+ 
+ 
+ 
+ 
+Description: 
+The CMV4K Readout is a compact snapshot imaging system built around a 4-megapixel 
+global-shutter CMOS image sensor, delivering RAW imagery at 8/10/12-bit depth or 
+JPEG-compressed output. Image data is transferred over Gigabit Ethernet, with RS485 and 
+CAN interfaces provided for telemetry and telecommand. 
+ 
+​
+CIN: U61900TS2024PTC186392 
+1 
+
+CMV4K Readout | Technical Specifications | TM2.space 
+Revision: A 
+Date: 16-07-2026 
+ 
+Electronics Specifications: 
+ 
+Parameter 
+Value 
+Sensor 
+Specifications 
+Imager Type 
+Global Shutter 
+Resolution 
+4MP 
+Colour Format 
+Mono/RGB  
+Data Format 
+8/10/12bit 
+Image format 
+RAW or JPEG 
+Integrated storage 
+Non Volatile Storage 
+128GB 
+Communication 
+Interfaces 
+Data Interface 
+Gigabit Ethernet 
+TMTC Interface 
+Full Duplex RS485 and CAN 
+Power 
+Input Voltage 
+Range :- 10V to 26V 
+Nominal :- 12V 
+Protection Features 
+The power input has an eFuse with  
+-​
+Over Voltage Protection (OVP) 
+-​
+ Under Voltage Lockout (UVLO) 
+-​
+ Over Current Protection and 
+-​
+Reverse Polarity Protection 
+Mechanical 
+Mass 
+513 g 
+Dimensions 
+60x64x100.5 mm 
+Connectors  
+1 x 6 pin Harwin Gecko screw lock for 
+power input 
+1 x 6 pin Harwin Gecko screw lock for Full 
+Duplex RS485 
+1 x 6 pin Harwin Gecko screw lock for CAN 
+1 x 10 pin Harwin Gecko screw lock for 
+Gigabit Ethernet 
+ 
+Questions? Queries? Contact us at info@tm2.space 
+​
+CIN: U61900TS2024PTC186392 
+2 
+

@@ -1,0 +1,244 @@
+   
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+STELLAR-BATT is a product line developed by Airbus 
+Space for LEO constellations. It has a strong flight 
+heritage as this product is used on the OneWeb 
+satellite constellation, with more than 630 satellites in 
+orbit (first launch in February 2019). 
+ 
+The 
+STELLAR-BATT 
+product 
+line 
+consists 
+of 
+two different modules that can be used stand-alone 
+or in series/parallel: 
+ 
+ 
+STELLAR-BATT 
+Small 
+(-S) 
+– 
+providing 
+≈ 1,700 Wh, designed for an external mounting 
+configuration, 
+thermally 
+insulated 
+from 
+the 
+spacecraft. The module has its own radiator. 
+ 
+STELLAR-BATT Large (-L) – providing 900 to 
+3,600 Wh 
+(modular 
+configuration). 
+Thermal 
+management of the unit is ensured by direct contact 
+between the unit baseplate and the spacecraft 
+panel. 
+ 
+To meet the new challenges of the space industry and to achieve a breakthrough in the battery market, the module 
+is equipped with automotive EEE COTS components and COTS lithium-ion cells, fully qualified by Airbus for Space 
+applications and with flight heritage. 
+ 
+Thanks to its industrial design, STELLAR-BATT offers competitive lead times and high production rates on 
+Airbus’s dedicated Battery Assembly Line in Toulouse (France). 
+ 
+ 
+ 
+ 
+ 
+DEFENCE AND SPACE 
+Space Products 
+ 
+ 
+ 
+STELLAR-BATT 
+A battery product line 
+made for LEO constellations 
+P
+o
+w
+e
+r 
+ 
+ 
+ 
+ 
+
+ 
+STELLAR-BATT 
+Small (-S) 
+STELLAR-BATT Large (-L) 
+1 BRICK
+2 BRICKS
+3 BRICKS
+4 BRICKS
+Electrical 
+Battery type 
+COTS Li-ion  
+Voltage range 
+22.5 to 37.8 V 
+Recommended use at 36.9 V during cycling operations 
+Nominal 
+capacity1 
+51 Ah 
+27.2 Ah 
+54.4 Ah 
+81.6 Ah 
+108.8 Ah 
+Nominal energy1
+1,685 Wh 
+900 Wh 
+1,800 Wh 
+2,700 Wh 
+3,600 Wh 
+Energy density 
+170 Wh/kg 
+90 Wh/kg 
+135 Wh/kg
+155 Wh/kg
+170 Wh/kg
+Max. continuous 
+charge current 
+15 A 
+27.2 A 
+30 A 
+30 A 
+30 A 
+Max. continuous 
+discharge current
+15 A 
+27.2 A 
+54.4 A 
+81.6 A 
+108.8 A 
+Max. pulse 
+discharge current
+55 A (< 22.5 min.) 
+70 A (< 1 min.) 
+41 A  
+(< 1 min.) 
+82 A  
+(< 1 min.) 
+122 A  
+(< 1 min.) 
+140 A  
+(< 1 min.) 
+Physical 
+characteristics
+Dimensions  
+(L x W x H) 
+338 x 275 x 110 mm
+434 x 400 x 114 mm 
+Weight 
+9.8 kg 
+10 kg 
+13.7 kg 
+17.4 kg 
+21.1 kg 
+Environment 
+Mounting 
+configuration 
+Inside the S/C 
+Inside the S/C 
+Thermal control 
+Radiative through 
+module own radiator 
+on top 
+Conductive coupling between unit baseplate and 
+S/C panel 
+Vibrations 
+Sine: 20 g 
+Random:  
+8.5 g RMS in plane, 
+11.6 g RMS out of 
+plane 
+Sine: 20 g 
+Random: 9.3 g RMS in plane,  
+12.6 g RMS out of plane 
+Shock 
+20 g 100 Hz,  
+2,000 g 2 kHz,  
+2,000 g 10 kHz 
+Radiation 
+8.5 years in LEO, 
+SEP tolerant 
+9.5 years in LEO, SEP tolerant 
+Embedded 
+functions 
+Thermal 
+hardware 
+3 regulation 
+thermistors 
+4 heaters, 2 nominal 
+and 2 redundant 
+3 regulation thermistors 
+4 double-layer heaters 
+Electronics 
+Passive balancing function 
+Timer (delay between strap removal and ON state) 
+ON/OFF power switch (based on straps connection/disconnection) 
+Shunt current measurement 
+Use case 
+example 
+Mission type 
+LEO, 9.5 years 
+Typical cycle life 
+On ground: 2 years at +25°C, 50% SoC 
+6 months at +25°C, 100% SoC 
+In operation: 9.5 years 
+52,000 cycles at mean C/2, 15% DoD 
+Nominal 
+temperature 
+range 
+(at cell level) 
++10 to +40°C 
+Startup at -20°C 
+Failure 
+1 cell failure compatible at least 
+Reliability 
+> 0.999 
+ 
+1 At C/5, 25°C, on 2.5-4.2 V range at cells level 
+ 
+ 
+STELLAR-BATT / Non-contractual document, subject to changes. 
+This document shall not be reproduced, in whole or in part, without prior consent. 
+© 2024 Airbus Defence and Space SAS 
+Airbus Defence and Space 
+space.products@airbus.com 
+https://www.airbus.com/en/space/space-equipment 
+

@@ -1,0 +1,212 @@
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ASTRO-BATT is a versatile and configurable battery 
+module developed by Airbus Space for use in 
+Low-Earth Orbits (LEO) to meet the requirements of 
+both radar and optical missions – for up to 12.5 years 
+in orbit. Supplied with ECSS Class 1 components, it is 
+compatible with ESA missions. 
+ 
+Thanks to its ingenious design, the ASTRO-BATT 
+module is available in three different voltage 
+configurations – 30, 50 and 100 V – with the same 
+mechanical design and can be installed inside or 
+outside the spacecraft. Two mounting configurations 
+are proposed, either with direct contact between the 
+module baseplate and the spacecraft panel, or with the 
+module insulated from the structure and equipped with 
+its own radiator on top (radiator under customer 
+responsibility or part of the ASTRO-BATT product). 
+ 
+ 
+The module is equipped with COTS lithium-ion cells, fully qualified by Airbus for Space applications and with flight 
+heritage, allowing Airbus to propose a very competitive price.  
+ 
+ASTRO-BATT qualification is planned for mid-2024, with the possibility of delivering the first FM units by the end 
+of 2024. 
+ 
+ 
+ 
+ 
+ 
+ 
+SPACE PRODUCTS 
+ 
+ 
+DEFENCE AND SPACE 
+Space Products 
+ 
+ 
+   ASTRO-BATT 
+A battery product line 
+made for LEO Radar and  
+Optical missions 
+P
+o
+w
+e
+r 
+ 
+ 
+
+ 
+
+30 V configuration (-30 V) 50 V configuration
+(-50 V) 
+100 V configuration
+(-100 V) 
+SMALL (-S) 
+LARGE (-L)
+Electrical 
+Battery type 
+COTS Li-ion 
+Voltage range 
+20 to 33.6 V 
+Recommended use at 
+32.8 V during cycling 
+operations 
+30 to 50.4 V 
+Recommended 
+use at 49.2 V 
+during cycling 
+operations 
+60 to 100.8 V 
+Recommended use 
+at 98.4 V during 
+cycling operations 
+Nominal capacity1 
+122 Ah 
+183 Ah 
+122 Ah 
+61 Ah 
+Nominal energy1 
+3,600 Wh 
+5,400 Wh 
+5,400 Wh 
+5,400 Wh 
+Energy density 
+170 Wh/kg 
+180 Wh/kg 
+Max. continuous charge 
+current 
+60 A 
+40 A 
+60 A 
+Max. continuous 
+discharge current 
+60 A 
+40 A 
+80 A 
+Max. pulse discharge 
+current 
+75 A (< 20 sec.) 
+50 A (< 20 sec.) 
+100 A (< 20 sec.) 
+Physical 
+characteristics 
+Dimensions (L x W x H) 
+350 x 355 x 
+155 mm 
+509 x 355 x 155 mm 
+Weight 
+21 kg 
+30 kg 
+Environment 
+Mounting configuration 
+Inside 
+OR outside the S/C 
+Thermal control 
+Conductive coupling between unit baseplate and S/C panel 
+OR between unit upper interface and a radiator 
+Vibrations 
+Sine: 24 g 
+Random: 12.5 g RMS in plane, 14 g RMS out of plane 
+Shock 
+20 g 100 Hz, 2,000 g 2 kHz, 2,000 g 10 kHz 
+Radiation 
+12.5 years in LEO, SEP tolerant 
+Embedded 
+functions 
+Thermal hardware 
+3 regulation thermistors, 6 monitoring thermistors 
+Optional: internal heaters 
+Electronics 
+Passive balancing function 
+Protected voltage telemetry 
+Use case  
+example 
+Mission type 
+LEO, 12.5 years 
+Optical mission 
+LEO, 10 years 
+Radar mission 
+Typical cycle life 
+On ground: 10 years storage at -10°C,  
+30% SoC 
+1.5 years AIT at +20°C, 70% SoC 
+In operation: 12.5 years 
+70,000 cycles at C/5, 10% DoD 
+On ground: 
+8 years storage at 
+-10°C, 30% SoC 
+1.5 years AIT at 
++20°C, 70% SoC 
+In operation:  
+10 years 
+26,000 cycles at 
+C/3, 10% DoD 
+30,000 cycles at 
+C/5, 10% DoD 
+With peaks  
+< 20 sec. at C 
+Nominal temperature 
+range 
+(at cell level) 
++10 to +30°C 
+Failure 
+1 string failure compatible at least 
+Reliability 
+> 0.999 
+ 
+1 At C/5, 25°C, on 2.5-4.2 V range at cell level 
+ 
+ 
+ 
+STELLAR-BATT / Non-contractual document, subject to changes. 
+This document shall not be reproduced, in whole or in part, without prior consent. 
+© 2024 Airbus Defence and Space SAS 
+Airbus Defence and Space 
+space.products@airbus.com 
+https://www.airbus.com/en/space/space-equipment 
+

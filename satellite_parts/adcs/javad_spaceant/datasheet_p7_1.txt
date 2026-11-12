@@ -1,0 +1,95 @@
+SpaceAnt is a wide-band OEM GNSS antenna designed for reliable signal 
+tracking of GPS, GLONASS, Galileo, BeiDou, NavIC, QZSS, and SBAS 
+frequencies, as well as L-Band. This antenna features a stable phase center 
+with enhanced signal reception and is usable for single, dual, and triple 
+frequency applications. The compact and robust design allows flexibility, 
+performance, and easy integration in the LEO satellite environment.
+SpaceAnt complements our space-hardened TR-2S LEO receiver to create a 
+complete OEM solution on small satellites.
+•	 All GNSS Constellations
+•	 Extended Operating Temperature
+•	 L-Band Tracking
+•	 Stable Phase Center
+•	 Zenith to Horizon Tracking
+•	 Out-of-Band Rejection
+SpaceAnt
+OEM GNSS Antenna
+Key Features
+
+SpaceAnt Specifications
+www.javad.com
+JAVAD GNSS Inc, 900 Rock Avenue, San Jose CA 95131 USA
+GNSS Constellations
+Constellation
+Channels
+Gain*, dB
+Channels
+Gain*, dB
+GPS
+L1
+5
+L2/L5
+4
+GLONASS
+L1
+L2/L3
+Galileo
+E1
+E5A/E5B
+BeiDou
+B1/B1C
+B2A/B2B
+QZSS
+L1
+L1/L2
+SBAS
+L1
+L5
+NavIC
+L1
+L5
+L-Band
+1525-1559 MHz
+Out-of-Band Rejection
+1165-1254 MHz
+1520-1610 MHz
+>50 dB @ 1000 MHz, >25 dB @ 1300 MHz
+>30 dB @ 1400 MHz, >20 dB @ 1462 MHz, >10 dB @ 1480 MHz
+>10 dB @ 1690 MHz, >30 dB @ 1710 MHz, >45 dB @ 1800 MHz
+Electrical
+Axial Ratio Output
+3.0 dB max.
+Impedance
+50 Ohm
+VSWR Max
+2.0:1
+LNA Gain
+32 ± 2 dB
+Noise Figure
+1.7 dB typical
+Power
+Input
++3.6 to +5.5 VDC
+Current
+100 mA typical
+Power Consumption
+0.68 W max.
+Physical
+Dimensions
+70.1 mm x 70.1 mm x 16.6 mm
+Weight
+62 g
+Environmental
+Operating Temperature
+-45°C to +85° C
+Storage Temperature
+-50°C to +85°C
+Shock & Vibration
+MIL-STD-810H Method 516.8 Functional Procedure I
+MIL-STD-810H Method 514.8 Procedure I, Category 4
+GNSS performance is dependent on signal quality, satellite geometry, ionospheric and tropospheric conditions, baseline length, multipath effects and RF interference. 
+Specifications may be changed without notice.
+* Typical at zenith.
+Detailed Dimensions & 
+Mounting Points
+

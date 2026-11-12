@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-skyfox-labs-sro-picam-digital-cubesat-camera-nyokot.pdf
+method: product image from the catalog page https://satsearch.co/products/skyfox-labs-picam-digital-cubesat-camera

@@ -102,6 +102,68 @@
   },
   "face_counts": {
    "part": 684
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    94.0,
+    84.0,
+    23.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "cells",
+     "color": [
+      0.2,
+      0.45,
+      0.7
+     ],
+     "file": "bodies_detail/cells.stl"
+    },
+    {
+     "name": "end_plates",
+     "color": [
+      0.8,
+      0.81,
+      0.83
+     ],
+     "file": "bodies_detail/end_plates.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies_detail/screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
   }
  },
  "image": "preview.png",
@@ -122,13 +184,6 @@
     "kind": "web_search",
     "url": "https://gomspace.com/wp-content/uploads/2025/09/Data-Sheet-NanoPower-P80.pdf",
     "title": "NanoPower P80 Datasheet - GomSpace"
-   },
-   {
-    "file": "datasheet_2_page1.png",
-    "pdf": "datasheet_2.pdf",
-    "kind": "web_search",
-    "url": "http://www.itu.int/en/ITU-R/space/workshops/2015-prague-small-sat/Presentations/GomSpace.pdf",
-    "title": "GOMX-3 (GomSpace Express-3) - eoPortal"
    }
   ],
   "stl_preview": "preview.png",

@@ -1,0 +1,69 @@
+20936 Theseus Terrace, Germantown, MD  20876 USA 
+www.magnetometer.com     sales@magnetometer.com 
+301-540-8338                         301-774-7707 (LAB) 
+ 
+BILLINGSLEY AEROSPACE & DEFENSE 
+TFM65-VQS 
+ULTRA MINIATURE FLIGHT MAGNETOMETER 
+ 
+FEBRUARY 2008 SPECIFICATIONS 
+ 
+ 
+Axial Alignment: 
+Orthogonality better than ± 1°  
+Input Voltage Options: 
+20 - 34 VDC  
+Input Current: 
+≈ 18 mA @ 28 VDC  in – Constant Power 
+ 
+Power and Signal Lines Galvanically Isolated  
+ Field Measurement Range: 
+± 60 μT = ± 6.0 V (Other Options Available) 
+Accuracy: 
+± 0. 5% of Full Scale  
+Linearity: 
+± 0.003% of Full Scale, Typical < ± 0.001% 
+Sensitivity: 
+100 µV/nT  (TFM100G4-S) 
+ Scale Factor Temperature Shift: 
+0.002% Full Scale/ °C 
+Noise: 
+<35 pT RMS/ Hz @1 Hz, Typical < 20 pT 
+Output Ripple: 
+3 µV Peak to Peak at 2nd Harmonic 
+Analog Output @ Zero Field: 
+± 0.005 V  
+Zero Shift with Temperature: 
+± 0.2 nT/°C /  < 0.05 nT/◦C (Special) 
+Susceptibility to Perming: 
+± 20 nT shift with ± 5 Gauss Applied 
+Output Impedance: 
+332 Ω ± 5% (Can Drive > 3500’ of Cable) 
+Frequency Response: 
+3 dB @ ≥ 3.5 kHz (Can be rolled off to lower frequency.) 
+Over Load Recovery: 
+± 5 Gauss slew < 2 milliseconds 
+Sensor Type: 
+Vacquier – Immune to Crossfield Effects 
+ 
+EMI: 
+Designed to meet CEO1, CEO3, REO2, CS01, CSO2, CSO6, 
+RSO1, RSO2, RS03  
+Random Vibration: 
+> 23G RMS 20 Hz to 2 KHz 
+Temperature Range: 
+- 55° to + 80° Celsius operating 
+Acceleration: 
+> 60G 
+Radiation Hardened: 
+> 200 kRADs 
+Weight: 
+117 g 
+Size: 
+3.51 cm x 3.23 cm x 8.26 cm 
+Connector: 
+9 PIN MALE "D" TYPE; Female Mating Connector Supplied 
+ 
+ 
+ 
+

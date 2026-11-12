@@ -1,0 +1,95 @@
+ 
+  
+ 
+ 
+ 
+ 
+ 
+FURTHER INFORMATION   Max-Planck-Str. 3 | 12489 Berlin Germany | info@berlin-space-tech.com | www.berlin-space-tech.com 
+v. 1.0.0 
+ 
+COMMAND AND DATA HANDLING SYSTEM 
+The BST CDH system consist of two main parts: the OBC-110 and the ACC-110. The OBC-
+110 is responsible for scheduling all tasks and coordinating TMTC functions of the bus whereas 
+the ACC-110 which is integrated in the same housing runs the attitude algorithm and connects 
+to all ADCS components. Optionally an auxiliary processor can be attached to the OBC-110 
+that allows centralized operation via a Linux operation system. 
+ 
+ 
+Command and Data Handling System (CDH) 
+ 
+C H A R A C T E R I S T I C S 
+ 
+Size 
+176x94x69mm³ 
+Weight 
+815g 
+Power   (digital electronics) 
+5V DC 
+             (magnetic coils)   
+bus voltage or 5V DC 
+Storage Temperature 
+-30°C to +50°C 
+Operating Temperature 
+-20°C to +40°C 
+Design Life 
+5 years LEO 
+Space Heritage 
+Yes  
+Radiation Test (Co60) 
+20 krad 
+ 
+
+ 
+  
+ 
+ 
+ 
+ 
+ 
+FURTHER INFORMATION   Max-Planck-Str. 3 | 12489 Berlin Germany | info@berlin-space-tech.com | www.berlin-space-tech.com 
+v. 1.0.0 
+ 
+INTERFACES & CAPABILITIES 
+ 
+OBC-110 
+ 
+Data Interfaces  
+8x RS422 + 2x SPI/RS422  
+ 
+4x TMTC, 1x PCU, 1x payload, 1x GPS, 1x ACC, 1x 
+OBC-HP, 1x EGSE interface  
+Time Synchronisation 
+dedicated pins for subsystems 
+Process Power 
+90 MIPS 
+OBC-HP  
+Optionally attached to OBC-110 
+Interfaces 
+1x RS422 (OBC-110) 1x USB (S/C EGSE), 16 
+Temp, 16 Analogue, 32 GPIO 
+Time Synchronisation 
+dedicated pins for subsystems 
+Process Power 
+400 MIPS 
+Operating System 
+Linux 
+Authentication 
+Yes 
+TMTC Data Encryption 
+Optional 
+CCSDS Engine for TMTC 
+Yes 
+ACC-110 
+ 
+Data Interfaces  
+10x RS422, 3x PWM (coil) 
+ 
+3x RW & FOG, 1x mems gyro, 1x magneto meter, 
+2x star tracker, 2x sun sensors (3), 1x OBC, 3x Coil  
+Time Synchronisation 
+dedicated pins for subsystems 
+Process Power 
+90 MIPS 
+ 
+

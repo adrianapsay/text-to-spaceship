@@ -1,0 +1,1580 @@
+  HIGH PERFORMANCE 
+INERTIAL MEASUREMENT UNIT 
+STIM377H 
+ Small size, low weight and low cost 
+ Hermetic package without paint and separate label 
+ ITAR free 
+ Insensitive to magnetic fields 
+ 0.3 °/h gyro bias instability 
+ 0.15 °/√h angular random walk 
+ ±400 °/s angular rate input range 
+ 10 °/h gyro bias error over temperature gradients 
+ 0.05 mg accelerometer bias instability 
+ ±10 g acceleration input range (optional ranges available) 
+ 3 inclinometers for accurate levelling 
+ Backwards compatible with STIM300 
+STIM377H is a tactical grade 3-axis 
+inertial measurement unit (IMU) comprised 
+of 3 highly accurate MEMS gyros, 3 high 
+stability accelerometers and 3 
+inclinometers. It is based on the well 
+established STIM300, the STIM377H is 
+packaged in a cleanroom and the 
+aluminum enclosure has a glass-to-metal 
+sealed electrical micro-d connector and a 
+laser welded lid to secure long term 
+hermetic operation. All parts are tested for 
+fine and gross leak to conform to MIL-STD-
+883J, Class H. The STIM377H enclosure 
+is also free of paint and the label is 
+supplied separately. 
+The IMU is factory calibrated and 
+compensated for temperature effects over 
+the full operating temperature range. 
+Sensonor's proven gyro sensor technology 
+has been in production for more than two 
+decades. It performs exceptionally well 
+across many applications due to its very 
+low vibration and shock sensitivity. The 
+gyro is qualified according to high-
+performance aircraft vibration standard. 
+ 
+Range and features 
+STIM377H full-scale angular rate input 
+range is ±400 °/s and the output is capped 
+at ±480 °/s. Standard acceleration input 
+range is ±10 g. Axis misalignment of 1 
+mrad is achieved by electronic axis 
+alignment. STIM377H requires a  
+single 5 V power supply and has a digital 
+serial RS422 interface.  
+STIM377H offers several user selectable 
+output formats and sample rates for gyro 
+and accelerometer data: 
+ Angular Rate  
+ Incremental Angle  
+ Average Angular Rate  
+ Integrated Angle  
+ Acceleration  
+ Integrated Velocity 
+ Incremental Velocity 
+ Average Acceleration 
+ 
+Device configurations and self-
+diagnostics  
+A reliable RISC ARM microcontroller 
+enables easy device configuration and 
+programming. The user can set output unit 
+format, sample frequency and datagram 
+content, LP filter cut-off frequency, RS422 
+transmission bit rate and line termination.  
+STIM377H is continuously monitoring its 
+internal status and track more than 100 
+parameters that the user can access. This 
+includes monitoring of: 
+ 
+Internal references 
+ 
+Sensors for error and overload 
+ 
+Internal temperatures  
+ 
+RAM and flash  
+ 
+Supply voltage 
+Evaluation tools 
+STIM377H evaluation tools supporting PCI 
+or USB connectivity are available. The 
+evaluation tools offer easy access to 
+measurement data and configuration of the 
+IMU. It supports data sampling at 
+alternative rates, graphical presentation, 
+and data logging to file. The evaluation 
+tools contain a RS422 interface for USB or 
+PCI hardware setup, all necessary cabling, 
+and PC software. 
+ 
+Application areas  
+STIM377H is a good fit for satellite attitude 
+& orbit control systems (AOCS) 
+and  launchers. Other applications are 
+stabilization, guidance and navigation 
+applications in Industrial, Aerospace and 
+Defence markets. The design is field 
+proven in Military Land Navigators, Missile 
+systems, Target acquisition systems, 
+Airborne surveillance, DIRCM, Remote 
+Weapon Systems, Launch vehicles and 
+Satellites. 
+In many applications, STIM377H can 
+competitively replace IMUs based on Fiber 
+Optic Gyros (FOGs) and improve system 
+performance with respect to robustness, 
+reliability, size, weight, power and cost. 
+(39 mm x  45 mm x 22 mm) 
+PRODUCT BRIEF 
+
+Information furnished by Sensonor  is believed to be accurate and reliable. However, no responsibility is assumed by Sensonor  for its use, nor for any infringements of patents or other rights of third parties that may 
+result from its use. Sensonor  reserves the right to make changes without further notice to any products herein. Sensonor  makes no warranty, representation or guarantee regarding the suitability of its products for 
+any particular purpose, nor does Sensonor  assume any liability arising out of the application or use of any product or circuit, and specifically disclaims any and all liability, including without limitation consequential or 
+incidental damages. No license is granted by implication or otherwise under any patent or patent rights of Sensonor . Trademarks and registered trademarks are the property of their respective owners. Sensonor  
+products are not intended for any application in which the failure of the Sensonor  product could create a situation where personal injury or death may occur. Should Buyer purchase or use Sensonor Technologies 
+products for any such unintended or unauthorized application, Buyer shall indemnify and hold Sensonor Technologies and its officers, employees, subsidiaries, affiliates, and distributors harmless against all claims, 
+costs, damages, and expenses, and reasonable legal fees arising out of, directly or indirectly, any claim of personal injury or death associated with such unintended or unauthorized use, even if such claim alleges that 
+Sensonor Technologies was negligent regarding the design or manufacture of the part. 
+Sensonor  AS • Horten, Norway • sales@sensonor.com • www.sensonor.com 
+PRODUCT BRIEF STIM377H 
+Ed. 2020-09 
+MECHANICAL DIMENSIONS 
+All dimensions in mm. Volume < 2,0 cu. in (33 cm3) 
+FUNCTIONAL BLOCK DIAGRAM 
+Parameter 
+Min 
+Nom 
+Max 
+Unit 
+GENERAL 
+ 
+ 
+ 
+ 
+Weight 
+ 
+55 
+ 
+g 
+Operating temperature 
+-40 
+ 
+85 
+°C 
+Supply voltage 
+4.5 
+5.0 
+5.5 
+V 
+Power consumption 
+ 
+1.5 
+2 
+W 
+Start-up time 
+ 
+ 
+1 
+s 
+Sample rate 
+ 
+ 
+2000 
+SPS 
+Mechanical shock, any direction 
+ 
+ 
+1500 
+g 
+RS422 transmission bit rate 
+ 
+ 
+5.18 
+Mbit/s 
+Misalignment 
+ 
+1 
+ 
+mrad 
+GYRO 
+ 
+ 
+ 
+ 
+Input range 
+ 
+±400 
+ 
+°/s 
+Non-linearity (condition: ±200 °/s) 
+ 
+15 
+ 
+ppm 
+Resolution 
+ 
+0.22 
+ 
+°/h 
+Bias instability 
+ 
+0.3 
+ 
+°/h 
+Angular random walk 
+ 
+0.15 
+ 
+°/√h 
+Bias error over temperature gradients 
+ 
+±10 1) 
+ 
+°/h rms 
+Linear acceleration effect 
+ 
+ 
+ 
+ 
+ 
+Bias 
+ 
+1 2) 
+ 
+°/h/g 
+ 
+Scale factor 
+ 
+50 2) 
+ 
+ppm/g 
+Scale factor accuracy 
+ 
+±500 
+ 
+ppm 
+ACCELEROMETER 
+ 
+ 
+ 
+ 
+Input range 
+ 
+±10 3) 
+ 
+g 
+Resolution 
+ 
+1.9 
+ 
+µg 
+Bias instability 
+ 
+0.05 
+ 
+mg 
+Velocity random walk 
+ 
+0.07 
+ 
+m/s/√h 
+Bias error over temperature gradients 
+ 
+±2 1) 
+ 
+mg rms 
+Scale factor accuracy 
+ 
+±300 
+ 
+ppm 
+INCLINOMETER 
+ 
+ 
+ 
+ 
+Input range 
+ 
+±1.7 
+ 
+g 
+Resolution 
+ 
+0.2 
+ 
+µg 
+Scale factor accuracy 
+ 
+±500 
+ 
+ppm 
+PINOUT 
+AXIS DEFINITIONS 
+(TRANSMIT ONLY) 
+ELECTRICAL CONNECTIONS 
+TxData+
+TxData-
+RxData+
+RxData-
++5V
+GND
+POWER 
+MANAGEMENT / 
+VOLTAGE AND 
+FREQUENCY 
+REFERENCES
+X-AXIS
+GYRO
+Y-AXIS
+GYRO
+Z-AXIS
+GYRO
+SELF-
+DIAGNOSTICS
+GYRO DRIVE 
++ ADC + LPF
+RS422
+OUTPUT 
+DRIVER
+RS422 
+INPUT 
+BUFFER
+ExtTrig
+SYSTEM 
+CONTROLLER
+GYRO DRIVE 
++ ADC + LPF
+GYRO DRIVE 
++ ADC + LPF
+X-AXIS
+ACC.
+Y-AXIS
+ACC.
+Z-AXIS
+ACC.
+ADC + LPF
+TOV
+ADC + LPF
+ADC + LPF
+ADC + LPF
+AUX+
+AUX-
+Reset
+X-AXIS
+INCL.
+Y-AXIS
+INCL.
+Z-AXIS
+INCL.
+ADC + LPF
+ADC + LPF
+ADC + LPF
+CALIBRATION 
+AND 
+COMPENSATION
+1 TxD-
+2 RxD-
+3 TST
+4 TOV
+5 NRST
+6 AUX_GND
+7 AUX-
+8 VSUP
+  9 TxD+
+10 RxD+
+11 ExtTrig
+12 GND
+13 GND
+14 AUX+
+15 GND
+1) Condition: ΔT ≤ 1°C/min 
+2) With g-compensation 
+3) Optional ranges: ±5 g and ±30 g  
+ 
+(FULL FUNCTION) 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM377H Inertia Measurement Unit 
+ 
+TS1673 rev.1                                                                  1/123                                                                 October 2020 
+ 
+1 
+FEATURES 
+o 
+Miniature laser welded hermetic package 
+o 
+Aluminum casing, 6082-T6 alloy - SurTec 650 surface treated 
+o 
+ITAR-free 
+o 
+Low noise and bias instability 
+o 
+Calibrated and verified over operating range 
+o 
+Excellent performance in vibration and shock environments 
+o 
+9 axes offered in same package 
+o 
+Electronically calibrated axis alignment 
+o 
+Gyros based on Sensonor ButterflyGyroTM 
+o 
+Single-crystal silicon technology 
+o 
+No intrinsic wear-out effects 
+o 
+High stability accelerometers and inclinometers 
+o 
+Separate “AUX” input for 24 bit ADC 
+o 
+Insensitive to magnetic fields 
+o 
+Full EMI compliance 
+o 
+Digital interface, RS422 
+o 
+Fully configurable 
+o 
+Continuous self-diagnostics 
+o 
+Delivered in dust free clean-room packaging 
+ 
+2 
+GENERAL DESCRIPTION 
+ 
+STIM377H is an IMU consisting of 3 high accuracy 
+MEMS-based gyros, 3 high stability accelerometers and 3 
+high stability inclinometers in a miniature package. Each 
+axis is factory-calibrated for bias, scale factor and 
+compensated for temperature effects to provide high-
+accuracy measurements in the temperature range -40°C 
+to +85°C. The unit runs off a single +5V supply. 
+STIM377H communicates via a standard high-level 
+RS422 interface. The use of a 32-bit RISC ARM 
+microcontroller provides flexibility in the configuration, like 
+choice of output unit, sample rate, low pass filter ‒3dB 
+frequency and RS422 bit-rate and protocol parameters. 
+All configurable parameters can be defined when ordering 
+or set by customer. 
+When STIM377H is powered up, it will perform an internal 
+system check and synchronize the sensor channels. As 
+an acknowledgement of the complete power-up 
+sequence, it will provide special datagrams containing 
+part number, serial number, configuration and bias trim data. STIM377H will then automatically proceed to provide 
+measurement data. 
+The measurement data is transmitted as packages of data on a fixed format (datagram) at intervals given by the 
+sample rate together with a synchronization signal (TOV). The datagram is in binary coded format in order to have an 
+efficient transfer of data. In addition to the measurement data itself, the datagram contains an identifier, status bytes 
+and a 32 bit CRC (Cyclic Redundancy Check) to provide high degree of fault detection in the transmissions. The 
+status bytes will flag any detected errors in the system. STIM377H can also be configured to transmit data only when 
+triggered by a separate digital input signal (ExtTrig).  
+For more advanced users, the gyro may be put in Service Mode. In this mode all the configuration parameters can be 
+intermediately or permanently changed by overwriting the current settings in the flash memory. In Service Mode the 
+commands and responses are in a human readable format (ASCII); to enable the use of terminal-type software during 
+typical product integration. Service Mode also provides the ability to perform single measurements, perform 
+diagnostics and obtain a higher detail level of detected errors reported in the status bytes. 
+Finally, STIM377H may be put in Utility Mode. This mode is similar to Service Mode, but made for machine-machine 
+communication. 
+ 
+ 
+TxData+
+TxData-
+RxData+
+RxData-
++5V
+GND
+POWER 
+MANAGEMENT / 
+VOLTAGE AND 
+FREQUENCY 
+REFERENCES
+X-AXIS
+GYRO
+Y-AXIS
+GYRO
+Z-AXIS
+GYRO
+SELF-
+DIAGNOSTICS
+GYRO DRIVE 
++ ADC + LPF
+RS422
+OUTPUT 
+DRIVER
+RS422 
+INPUT 
+BUFFER
+ExtTrig
+SYSTEM 
+CONTROLLER
+GYRO DRIVE 
++ ADC + LPF
+GYRO DRIVE 
++ ADC + LPF
+X-AXIS
+ACC.
+Y-AXIS
+ACC.
+Z-AXIS
+ACC.
+ADC + LPF
+TOV
+ADC + LPF
+ADC + LPF
+ADC + LPF
+AUX+
+AUX-
+Reset
+X-AXIS
+INCL.
+Y-AXIS
+INCL.
+Z-AXIS
+INCL.
+ADC + LPF
+ADC + LPF
+ADC + LPF
+CALIBRATION 
+AND 
+COMPENSATION
+Figure 2-1: STIM377H FUNCTION BLOCK DIAGRAM 
+Sensonor AS 
+Phone: +47 3303 5000 - Fax: +47 3303 5005  
+sales@sensonor.com   
+www.sensonor.com 
+(38.6mm x 44.8mm x 21.5mm) 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM377H Inertia Measurement Unit 
+ 
+TS1673 rev.1                                                                  2/123                                                                 October 2020 
+ 
+3 
+TABLE OF CONTENTS 
+ 
+DOCUMENT HISTORY ..................................................................................................................................................... 1 
+1 
+FEATURES ................................................................................................................................................................ 1 
+2 
+GENERAL DESCRIPTION ......................................................................................................................................... 1 
+3 
+TABLE OF CONTENTS ............................................................................................................................................. 2 
+4 
+DEFINITIONS AND ABBREVIATIONS USED IN DOCUMENT ................................................................................ 5 
+4.1 
+Definitions ............................................................................................................................................................ 5 
+4.2 
+Abbreviations ....................................................................................................................................................... 5 
+5 
+ABSOLUTE MAXIMUM RATINGS ............................................................................................................................. 5 
+6 
+SPECIFICATIONS ...................................................................................................................................................... 6 
+6.1 
+TYPICAL PERFORMANCE CHARACTERISTICS ........................................................................................... 15 
+6.1.1 
+GYRO CHARACTERISTICS ..................................................................................................................... 15 
+6.1.2 
+ACCELEROMETER CHARACTERISTICS................................................................................................ 19 
+6.1.3 
+INCLINOMETER CHARACTERISTICS ..................................................................................................... 22 
+6.1.4 
+AUX CHARACTERISTICS ......................................................................................................................... 25 
+6.2 
+Configurable parameters ................................................................................................................................... 27 
+6.3 
+Datagram specifications .................................................................................................................................... 28 
+6.3.1 
+Part Number datagram .............................................................................................................................. 28 
+6.3.2 
+Serial Number datagram ............................................................................................................................ 29 
+6.3.3 
+Configuration datagram ............................................................................................................................. 30 
+6.3.4 
+Bias Trim Offset datagram ......................................................................................................................... 33 
+6.3.5 
+Extended Error Information datagram........................................................................................................ 34 
+6.3.6 
+Normal Mode datagram ............................................................................................................................. 35 
+6.3.7 
+Cyclic Redundancy Check (CRC) .............................................................................................................. 36 
+6.4 
+Status byte ........................................................................................................................................................ 37 
+7 
+MECHANICAL .......................................................................................................................................................... 38 
+7.1 
+Mechanical dimensions ..................................................................................................................................... 38 
+7.2 
+Advice on mounting orientation ......................................................................................................................... 39 
+7.3 
+Pin configuration ................................................................................................................................................ 39 
+7.4 
+Definition of axes ............................................................................................................................................... 39 
+8 
+BASIC OPERATION ................................................................................................................................................. 40 
+8.1 
+Reset ................................................................................................................................................................. 40 
+8.2 
+External Trigger ................................................................................................................................................. 41 
+8.3 
+Time of Validity (TOV) ....................................................................................................................................... 41 
+8.4 
+Auxiliary input .................................................................................................................................................... 42 
+8.5 
+Operating modes ............................................................................................................................................... 43 
+8.5.1 
+Init Mode .................................................................................................................................................... 43 
+8.5.2 
+Normal Mode .............................................................................................................................................. 43 
+8.5.3 
+Service Mode ............................................................................................................................................. 50 
+8.5.4 
+Utility Mode ................................................................................................................................................ 51 
+8.6 
+Self-diagnostics ................................................................................................................................................. 51 
+9 
+COMMANDS IN NORMAL MODE ........................................................................................................................... 52 
+9.1 
+N (PART NUMBER DATAGRAM) command .................................................................................................... 52 
+9.2 
+I (SERIAL NUMBER DATAGRAM) command .................................................................................................. 52 
+9.3 
+C (CONFIGURATION DATAGRAM) command ................................................................................................ 53 
+9.4 
+T (BIAS TRIM OFFSET DATAGRAM) command ............................................................................................. 53 
+9.5 
+E (EXTENDED ERROR INFORMATION DATAGRAM) command .................................................................. 53 
+9.6 
+R (RESET) command ........................................................................................................................................ 53 
+9.7 
+SERVICEMODE command ............................................................................................................................... 54 
+9.8 
+UTILITYMODE command ................................................................................................................................. 56 
+10 
+COMMANDS IN SERVICE MODE ....................................................................................................................... 57 
+10.1 
+i (INFORMATION) command ........................................................................................................................ 58 
+10.2 
+a (SINGLE-SHOT MEASUREMENT) command ........................................................................................... 64 
+10.3 
+c (DIAGNOSTIC) command .......................................................................................................................... 66 
+10.4 
+d (DATAGRAM FORMAT) command ............................................................................................................ 68 
+10.5 
+t (TRANSMISSION PARAMETERS) command ............................................................................................ 70 
+10.5.1 
+User-defined bit-rate .................................................................................................................................. 70 
+10.6 
+r (LINE TERMINATION) command ............................................................................................................... 72 
+10.7 
+u (OUTPUT UNIT) command ........................................................................................................................ 73 
+10.8 
+f (LP FILTER -3dB FREQUENCY) command ............................................................................................... 74 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM377H Inertia Measurement Unit 
+ 
+TS1673 rev.1                                                                  3/123                                                                 October 2020 
+ 
+10.9 
+m (SAMPLE RATE) command ...................................................................................................................... 76 
+10.10 
+k (AUX COMP) command ............................................................................................................................. 77 
+10.11 
+g (GYRO G-COMP) command ...................................................................................................................... 78 
+10.12 
+b (BIAS TRIM OFFSET) command ............................................................................................................... 81 
+10.13 
+s (SAVE) command ....................................................................................................................................... 83 
+10.14 
+x (EXIT) command ......................................................................................................................................... 84 
+10.15 
+z (RESTORE TO FACTORY SETTINGS) command .................................................................................... 86 
+10.16 
+h (SYSTEMS CONFIGURATIONS) command ............................................................................................. 88 
+10.17 
+? (HELP) command ....................................................................................................................................... 90 
+11 
+COMMANDS IN UTILITY  MODE ......................................................................................................................... 96 
+11.1 
+Acknowledgement for entering Utility Mode .................................................................................................. 97 
+11.2 
+Command protocol for Utility Mode ............................................................................................................... 97 
+11.2.1 
+Command string ......................................................................................................................................... 97 
+11.2.2 
+Response string ......................................................................................................................................... 97 
+11.2.3 
+Checksum .................................................................................................................................................. 97 
+11.2.4 
+Command status codes ............................................................................................................................. 98 
+11.3 
+General commands ..................................................................................................................................... 100 
+11.3.1 
+$isn ........................................................................................................................................................... 100 
+11.3.2 
+$in............................................................................................................................................................. 100 
+11.3.3 
+$ix ............................................................................................................................................................. 101 
+11.3.4 
+$ihw .......................................................................................................................................................... 101 
+11.3.5 
+$ifw ........................................................................................................................................................... 101 
+11.3.6 
+$iax ........................................................................................................................................................... 101 
+11.3.7 
+$irng ......................................................................................................................................................... 102 
+11.3.8 
+$im............................................................................................................................................................ 102 
+11.3.9 
+$igf............................................................................................................................................................ 102 
+11.3.10 
+$iaf ........................................................................................................................................................ 103 
+11.3.11 
+$iif ......................................................................................................................................................... 103 
+11.3.12 
+$iuf ........................................................................................................................................................ 103 
+11.3.13 
+$iaux ..................................................................................................................................................... 104 
+11.3.14 
+$id ......................................................................................................................................................... 104 
+11.3.15 
+$it .......................................................................................................................................................... 104 
+11.3.16 
+$igu ....................................................................................................................................................... 104 
+11.3.17 
+$iau ....................................................................................................................................................... 105 
+11.3.18 
+$iiu ........................................................................................................................................................ 105 
+11.3.19 
+$ig ......................................................................................................................................................... 105 
+11.3.20 
+$iconf .................................................................................................................................................... 106 
+11.3.21 
+$ie ......................................................................................................................................................... 106 
+11.3.22 
+$save .................................................................................................................................................... 107 
+11.3.23 
+$isv ....................................................................................................................................................... 107 
+11.3.24 
+$xn ........................................................................................................................................................ 107 
+11.4 
+Commands for reconfiguration .................................................................................................................... 108 
+11.4.1 
+$sm........................................................................................................................................................... 108 
+11.4.2 
+$sgf .......................................................................................................................................................... 109 
+11.4.3 
+$saf .......................................................................................................................................................... 109 
+11.4.4 
+$sif ............................................................................................................................................................ 110 
+11.4.5 
+$suf .......................................................................................................................................................... 110 
+11.4.6 
+$saux ........................................................................................................................................................ 111 
+11.4.7 
+$sd............................................................................................................................................................ 111 
+11.4.8 
+$sgu ......................................................................................................................................................... 112 
+11.4.9 
+$sau ......................................................................................................................................................... 112 
+11.4.10 
+$siu ....................................................................................................................................................... 113 
+11.4.11 
+$sg ........................................................................................................................................................ 113 
+11.4.12 
+$sconf ................................................................................................................................................... 114 
+11.5 
+Commands for bias trim offset ..................................................................................................................... 114 
+11.5.1 
+$ibto ......................................................................................................................................................... 115 
+11.5.2 
+$sdbto ...................................................................................................................................................... 115 
+11.5.3 
+$sbto ........................................................................................................................................................ 116 
+11.5.4 
+$irf ............................................................................................................................................................ 117 
+11.5.5 
+$srf ........................................................................................................................................................... 117 
+11.6 
+Special commands ...................................................................................................................................... 117 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM377H Inertia Measurement Unit 
+ 
+TS1673 rev.1                                                                  4/123                                                                 October 2020 
+ 
+11.6.1 
+$iead ........................................................................................................................................................ 117 
+11.6.2 
+$itemp ...................................................................................................................................................... 118 
+11.6.3 
+$ivolt ......................................................................................................................................................... 118 
+11.6.4 
+$igdc ......................................................................................................................................................... 119 
+12 
+PACKAGING AND MARKING ............................................................................................................................ 120 
+12.1 
+Product marking ........................................................................................................................................... 120 
+12.2 
+Packaging .................................................................................................................................................... 120 
+13 
+CONFIGURATION / ORDERING INFORMATION ............................................................................................. 121 
+ 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM377H Inertia Measurement Unit 
+ 
+TS1673 rev.1                                                                  5/123                                                                 October 2020 
+ 
+4 
+DEFINITIONS AND ABBREVIATIONS USED IN DOCUMENT 
+ 
+4.1 
+Definitions 
+ 
+g0= 9.80665m/s2 (standard gravity) 
+ 
+4.2 
+Abbreviations 
+ 
+Table 4-1: Abbreviations 
+ABBREVIATION 
+FULL NAME 
+AUX 
+Auxiliary 
+BCD 
+Binary Coded Decimal 
+BSL 
+Best Straight Line 
+BTO 
+Bias Trim Offset 
+CIC-filter 
+Cascaded Integrator-Comb filter 
+CR 
+Carriage Return 
+CRC 
+Cyclic Redundancy Check 
+ESD 
+Electro-Static Discharge 
+ExtTrig 
+External Trigger 
+GND 
+Ground 
+IMU 
+Inertial Measurement Unit 
+LF 
+Line Feed 
+LP filter 
+Low-Pass filter 
+MEMS 
+Micro Electro Mechanical Structure 
+NRST 
+Negative (active) Reset 
+rms 
+root mean square 
+RxD 
+Receive Data 
+TOV 
+Time of Validity 
+TxD 
+Transmit Data 
+VRC 
+Vibration Rectification Coefficient 
+VSUP 
+Voltage supply 
+ 
+ 
+ 
+5 
+ABSOLUTE MAXIMUM RATINGS 
+ 
+Stresses beyond those listed in Table 5-1 may cause permanent damage to the device. 
+Exposure to any Absolute Maximum Rating condition for extended periods may affect device reliability and lifetime. 
+Table 5-1: Absolute maximum ratings 
+Parameter 
+Rating 
+Comment 
+Mechanical shock 
+1 500g/0.5ms half-sine 
+Any direction. Ref: MIL STD-883G 
+ESD human body model 
+±2kV 
+Ref: JEDEC/ESDA JS-001 
+Storage temperature 
+-55°C to +90°C 
+Up to 1000 hours 
+VSUP to GND 
+-0.5 to +7V 
+ 
+RxD+ or RxD- to GND 
+-0.3V to +7V 
+ 
+RxD+ to RxD- 
+±6V 
+with 120Ω Line Termination = ON 
+TxD+ or TxD- to GND 
+-8V to +8V 
+ 
+ExtTrig to GND 
+-0.3V to +7V 
+ 
+TOV to GND 
+-0.3V to +7V 
+ 
+NRST to GND 
+-0.3V to +7V 
+ 
+AUX+ to AUX- 
+±6.5V 
+ 
+AUX+ or AUX- to GND 
+±6.5V 
+ 
+Chassis to GND 
+Helium sensitivity  
+ 
+500V 
+ 
+Exposure to high concentrations of helium over 
+several days may affect the overall performance 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM377H Inertia Measurement Unit 
+ 
+TS1673 rev.1                                                                  6/123                                                                 October 2020 
+ 
+6 
+SPECIFICATIONS 
+ 
+Table 6-1: Operating conditions 
+Parameter 
+Conditions 
+Min 
+Nom 
+Max 
+Unit 
+Note 
+INPUT RANGE, ANGULAR RATE 
+ 
+ 
+±400 
+ 
+°/s 
+ 
+INPUT RANGE, ACCELERATION 
+ 
+ 
+±10 
+ 
+g 
+1 
+INPUT RANGE, INCLINATION 
+ 
+ 
+±1.7 
+ 
+g 
+ 
+POWER SUPPLY 
+ 
+4.5 
+5.0 
+5.5 
+V 
+2,3 
+OPERATING TEMPERATURE 
+ 
+-40 
+ 
++85 
+°C 
+ 
+Note 1: Other ranges available, ref. Table 6-5 (5g), Table 6-6 (30g) and Table 6-7 (80g) 
+Note 2: At supply voltages above 5.85V (nominal value) an internal voltage protection circuit will cut power and the unit 
+will go into reset until the voltage is back within operating conditions. 
+Note 3: At supply voltages below 4.05V (nominal value) the unit will go into reset until the voltage is back within 
+operating conditions. Due to power consumption being much lower in reset compared to normal operation, the 
+series resistance between power source and STIM377H could give rise to an oscillating behavior of the input 
+voltage to the unit. 
+ 
+Table 6-2: Functional specifications, general 
+Parameter 
+Conditions 
+Min 
+Nom 
+Max 
+Unit 
+Note 
+POWER CONSUMPTION 
+ 
+ 
+ 
+ 
+ 
+ 
+Power consumption 
+ 
+ 
+1.5 
+2 
+W 
+ 
+TIMING 
+ 
+ 
+ 
+ 
+ 
+ 
+Start-Up time after Power-On 
+ 
+ 
+ 
+0.3 
+s 
+1 
+Time to transmit after Reset 
+ 
+ 
+ 
+0.2 
+s 
+2 
+Time to valid data 
+ 
+T=+25°C 
+ 
+0.7 
+ 
+1 
+s 
+s 
+3 
+3 
+RS422 Bit-Rate 
+ 
+ref. Table 6-11 
+ 
+ 
+RS422 Bit-Rate Accuracy 
+ 
+ 
+ 
+±1 
+% 
+4 
+RS422 PROTOCOL 
+ 
+ 
+ 
+ 
+ 
+ 
+Start Bit 
+ 
+ 
+1 
+ 
+bit 
+ 
+Data Length 
+ 
+ 
+8 
+ 
+bits 
+ 
+Parity 
+ 
+None 
+ 
+5 
+Stop Bits 
+ 
+1 
+bit 
+5 
+RS422 LINE TERMINATION 
+ 
+ 
+ 
+ 
+ 
+ 
+Input resistance 
+Line termination = ON 
+ 
+120 
+ 
+Ω 
+ 
+Input resistance 
+Line termination = OFF 
+48 
+125 
+ 
+kΩ 
+ 
+RESET (NRST PIN) 
+ 
+ 
+ 
+ 
+ 
+ 
+Logic levels 
+“high” 
+“low” 
+2.3 
+ 
+ 
+0.6 
+V 
+V 
+ 
+Minimum hold time for reset 
+ 
+1 
+ 
+ 
+µs 
+ 
+Pull-Up Resistor 
+ 
+80 
+100 
+ 
+kΩ 
+ 
+EXTERNAL TRIGGER (ExtTrig 
+PIN) 
+ 
+ 
+ 
+ 
+ 
+ 
+Logic levels 
+“high” 
+“low” 
+2.3 
+ 
+ 
+0.6 
+V 
+V 
+ 
+Trigger 
+ 
+Negative transition  
+ 
+ 
+Time between triggers 
+Measurement unit:  
+ 
+ 
+ 
+ 
+ 
+ 
+  angular rate 
+0.5 
+ 
+127 
+ms 
+6,7 
+ 
+  incremental angle 
+0.5 
+ 
+127 
+ms 
+6,8 
+ 
+  average rate 
+0.5 
+ 
+65 
+ms 
+6,9 
+ 
+  integrated angle 
+0.5 
+ 
+8 
+ms 
+6,10 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Minimum “high” time before 
+trigger, text_hi 
+ 
+250 
+ 
+ 
+ns 
+11 
+Minimum “low” time after trigger, 
+text_lo 
+ 
+250 
+ 
+ 
+ns 
+11 
+Delay from external trigger to 
+start of transmission, text_dl 
+ 
+ 
+ 
+86 
+µs 
+11 
+Pull-Up Resistor 
+ 
+40 
+50 
+ 
+kΩ 
+ 
+Latency 
+ 
+ 
+ 
+1000 
+µs 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM377H Inertia Measurement Unit 
+ 
+TS1673 rev.1                                                                  7/123                                                                 October 2020 
+ 
+Parameter 
+Conditions 
+Min 
+Nom 
+Max 
+Unit 
+Note 
+TIME OF VALIDITY (TOV PIN) 
+ 
+ 
+ 
+ 
+ 
+ 
+Output configuration 
+ 
+Open drain with internal pull up 
+ 
+ 
+VOH 
+5V logic: IOH = -10 µA 
+5V logic: IOH = -100 µA 
+3.3V logic: IOH = -10 µA 
+3.3V logic: IOH = -100 µA 
+0.9 VSUP 
+0.7 VSUP 
+0.6 VSUP 
+0.47 VSUP 
+ 
+ 
+V 
+V 
+V 
+V 
+12 
+12 
+12 
+12 
+VOL 
+IOL = 10 mA 
+ 
+ 
+0.1 
+V 
+ 
+TOV active level 
+ 
+Active “low” 
+ 
+ 
+Minimum time of TOV, ttov_min 
+ 
+50 
+ 
+ 
+µs 
+13 
+Delay from internal time-tick to 
+TOV active, ttov_dl 
+ 
+ 
+1.2 
+6 
+µs 
+13 
+Delay from TOV active (to start of 
+transmission, ttx_dl 
+ 
+ 
+ 
+80 
+µs 
+13 
+CHASSIS 
+ 
+ 
+ 
+ 
+ 
+ 
+Isolation resistance chassis to 
+GND (pin 15) 
+500V 
+100 
+ 
+ 
+MΩ 
+ 
+Note 1: Time from Power-On to start of datagram transmissions (starting with part-number datagram) 
+Note 2: Time from Reset release to start of datagram transmissions (starting with part-number datagram) 
+Note 3: Time from Power-On or Reset to the reset of the Start-Up bit (Bit 6 in the STATUS byte ref. Table 6-22). 
+During this period the output data should be regarded as non-valid. 
+Note 4: If a user-defined bit-rate larger than 1.5Mbit/s is used, the deviation may exceed the specification due to the 
+resolution of the bit-rate generator, ref. section 10.5.1 
+Note 5: Other values can be configured, ref. Table 6-11 
+Note 6: If time between triggers is longer than 127ms, the sample counter will over-run  
+Note 7: Time between triggers should be carefully evaluated as long time between triggers in combination with high 
+bandwidths could lead to issues related to folding. Similar for accelerometer and inclinometer outputs 
+Note 8: If time between triggers is longer than 8ms, an overload may occur in the incremental angle. An overload will 
+be flagged in the status byte, ref. Table 6-22. Similar for accelerometer and inclinometer outputs 
+Note 9: If time between triggers is longer, the accuracy of average rate may also be reduced. Similar for accelerometer 
+and inclinometer outputs 
+Note 10: If time between triggers is longer, the integrated angle may have wrapped several times and hence the 
+change in angle from last sample will not be possible to calculate. Similar for accelerometer and inclinometer 
+outputs 
+Note 11: For definition, ref. Figure 8-3 
+Note 12: Digital output level can be configured to 5V or 3.3V in SERVICEMODE (ref. section 10.16) or when ordering 
+(ref. section 13) 
+Note 13: For definition, ref. Figure 8-4 and Figure 8-5 
+ 
+ 
+Table 6-3: Functional specifications, gyros 
+Parameter 
+Conditions 
+Min 
+Nom 
+Max 
+Unit 
+Note 
+GYRO 
+ 
+ 
+ 
+ 
+ 
+ 
+Full Scale 
+ 
+ 
+±400 
+ 
+°/s 
+1 
+Resolution 
+ 
+ 
+24 
+0.22 
+ 
+bits 
+°/h 
+ 
+Scale Factor Accuracy 
+ 
+ 
+±500 
+ 
+ppm 
+ 
+Non-Linearity 
+±200°/s 
+±400°/s 
+ 
+15 
+20 
+ 
+ppm 
+ppm 
+2 
+2 
+Bandwidth (-3dB) 
+ 
+ 
+262 
+ 
+Hz 
+3 
+Sample Rate 
+ 
+ 
+ 
+2000 
+samples/s 
+4 
+Group Delay 
+LP filter -3dB = 262Hz 
+LP filter -3dB = 131Hz 
+LP filter -3dB = 66Hz 
+LP filter -3dB = 33Hz 
+LP filter -3dB = 16Hz 
+ 
+1.5 
+3.0 
+6.0 
+12 
+24 
+ 
+ms 
+ms 
+ms 
+ms 
+ms 
+5 
+5 
+5 
+5 
+5 
+Bias Range 
+Bias Trim Offset range 
+Bias Run-Run 
+Drift Rate Stability 
+Bias error over temperature 
+ 
+ 
+ 
+ 
+Static temperatures 
+-250 
+0 
+±1 
+4 
+3 
+9 
++250 
+°/h 
+°/s 
+°/h 
+°/h 
+°/h rms 
+ 
+ 
+ 
+ 
+6 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM377H Inertia Measurement Unit 
+ 
+TS1673 rev.1                                                                  8/123                                                                 October 2020 
+ 
+Bias error over temperature gradients 
+ΔT ≤ ±1°C/min 
+10 
+°/h rms 
+7 
+Bias Instability 
+Allan Variance @25°C 
+ 
+0.3 
+ 
+°/h 
+ 
+Angular Random Walk 
+Allan Variance @25°C 
+ 
+0.15 
+ 
+°/√h 
+ 
+Linear Acceleration Effect 
+ 
+Bias 
+ 
+ 
+Scale Factor 
+ 
+With g-compensation 
+No g-compensation 
+With g-compensation 
+No g-compensation 
+ 
+ 
+1 
+7 
+50 
+400 
+ 
+ 
+ 
+ 
+°/h/g 
+°/h/g 
+ppm/g 
+ppm/g 
+ 
+8 
+8 
+8 
+8 
+Vibration Rectification Coefficient 
+ 
+Ref. Figure 6-1 
+°/h/grms2 
+ 
+Misalignment 
+ 
+ 
+1 
+ 
+mrad 
+9 
+Orthogonality 
+ 
+ 
+0.2 
+ 
+mrad 
+10 
+Note 1: Output is monotonous and will saturate at ±480°/s 
+Note 2: Largest deviation from BSL (Best Straight Line) over the range specified 
+Note 3: Low-pass filter -3dB frequency can be configured, ref. Table 6-11 and section 6.1.1.4 
+Note 4: Other values can be configured, ref. Table 6-11. Sample rate will be same for gyros, accelerometers, 
+inclinometers, AUX and temperature 
+Note 5: Total delay to start of datagram transmission = group delay + 0.5ms + ttov dl + ttx_dl. For output units with 
+delayed output, the group delay will be 5ms longer, ref. section 8.5.2.2.1. For more details, see TS1631 Application 
+Note “Timing details between sampling and datagram transmission” 
+Note 6: rms-value calculated on the residuals at static temperatures over the temperature range 
+Note 7: rms-value calculated on the residual over two temperature-cycles, ref. Figure 6-7 
+Note 8: Section 7.2 gives advice on sensitive directions 
+Note 9: Ref. Figure 6-2 for definition of reference points used in axis alignment 
+Note 10: Gyros, accelerometers and inclinometers are calibrated in the same test-insertion to ensure minimum 
+misalignment between the three sensor-axis systems 
+ 
+ 
+Figure 6-1: Nominal VRC at 20g rms for gyros (ref. section 7.2 for sensitive directions to acceleration-forces) 
+ 
+ 
+

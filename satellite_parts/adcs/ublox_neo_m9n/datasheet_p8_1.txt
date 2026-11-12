@@ -1,0 +1,212 @@
+NEO-M9N module
+u-blox M9 standard precision GNSS module
+Ultra-robust meter-level GNSS positioning module 
+•	 Maximum position availability with concurrent reception of 4 GNSS
+•	 Advanced spoofing and jamming detection
+•	 Excellent RF interference mitigation
+•	 Pin-compatible with previous NEO products
+Product summary
+Product description 
+The NEO-M9N module is built on the robust u-blox M9 GNSS 
+chip, which provides exceptional sensitivity and acquisition 
+times for all L1 GNSS systems. The u-blox M9 standard pre­
+cision GNSS platform, which delivers meter-level accuracy, 
+succeeds the well-known u-blox M8 product range. 
+NEO-M9N supports concurrent reception of four GNSS. The 
+high number of visible satellites enables the receiver to select 
+the best signals. This maximizes the position accuracy, in 
+particular under challenging conditions such as in deep urban 
+canyons.
+NEO-M9N detects jamming and spoofing events and reports 
+them to the host, so that the system can react to such events. 
+Advanced filtering algorithms mitigate the impact of RF inter­
+ference and jamming, thus enabling the product to operate as 
+intended. 
+A SAW filter combined with an LNA in the RF path is integrat­
+ed in the NEO-M9N module. This setup allows normal opera­
+tion even under strong RF interferences, for example when a 
+cellular modem is co-located with NEO-M9N.
+NEO-M9N offers backwards pin-to-pin compatibility with pre­
+vious u-blox generations, which saves designers time and cost 
+when upgrading their design. Software migration requires lit­
+tle effort thanks to the continuous support of UBX messages 
+across product generations.
+T = TCXO 
+NEO-M9N
+Grade
+Automotive
+Professional
+•
+Standard
+GNSS
+GPS + QZSS/SBAS
+•
+GLONASS
+•
+Galileo
+•
+BeiDou
+•
+Number of concurrent GNSS
+4
+Interfaces
+UART
+1
+USB
+1
+SPI
+1
+DDC (I2C compliant)
+1
+Features
+Firmware upgrade
+•
+Data logging
+•
+RTC crystal
+•
+Oscillator
+T
+Antenna supply & supervisor
+Timepulse
+1
+Power supply
+2.7 V – 3.6 V
+•
+Standard
+Professional
+Automotive
+12.2 × 16.0 × 2.4 mm
+
+UBX-19027207 - R07
+
+NEO-M9N module
+Product performance
+Receiver type
+92-channel u-blox M9 engine
+GPS L1 C/A, QZSS L1 C/A/S, GLONASS L10F
+BeiDou B1I, Galileo E1B/C
+SBAS L1 C/A: WAAS, EGNOS, MSAS, GAGAN
+Nav. update rate
+Up to 25 Hz (4 concurrent GNSS)
+Horizontal position 
+accuracy
+1.5 m CEP (with SBAS)
+2.0 m CEP (without SBAS)
+Acquisition 1
+Cold start	                         24 s
+Aided start	
+  2 s
+Hot start	                            2 s
+Sensitivity 1
+Tracking & Nav.	
+–167 dBm
+Reacquisition	
+–160 dBm
+Cold start	                      –148 dBm
+Hot start	                      –159 dBm
+Tracking features
+Power save modes
+On/off, cyclic
+Data batching
+Autonomous tracking up to 5 minutes
+Data-logger
+Position, velocity, time, and odometer data
+Geofencing
+Up to 4 circular areas;	
+	
+	
+Software message or GPIO for waking up the 
+host CPU 
+Security features
+Signal integrity
+RF interference & jamming detection and reporting
+Active GNSS in-band filtering
+Spoofing detection and reporting
+Device integrity
+Secure boot of firmware downloaded from host 
+or flash 
+Receiver configuration lock by command
+Secure interface
+Signed UBX messages (SHA-256)
+JTAG port locked
+Electrical data
+Power supply
+2.7 V to 3.6 V
+Power 
+Consumption 1
+36 mA at 3.0 V (4 GNSS continuous)	
+32 mA at 3.0 V (2 GNSS continuous)
+28 mA at 3.0 V (1 GNSS continuous) 
+Backup Supply
+1.65 V to 3.6 V
+Package
+24 pin LCC (Leadless Chip Carrier): 12.2 x 16.0 x 2.4 mm, 1.0 g
+Environmental data, quality & reliability
+Operating temp.
+−40 °C to +85 °C
+Storage temp.
+−40 °C to +85 °C
+Environmental 
+grade
+2015/863/EU RoHS-3
+EMC
+2014/53/EU RED
+Environmental 
+testing
+ISO 16750
+Quality manage­
+ment
+Manufactured and fully tested in IATF 16949 
+certified production sites
+Interfaces 
+Serial interfaces
+1 UART
+1 USB (NEO-M9N)
+1 SPI (optional)
+1 DDC (I2C compliant) 
+Digital I/O
+Configurable timepulse
+1 EXTINT input for Wakeup
+Raw Data output
+Code phase data
+Timepulse
+Configurable: 0.25 Hz to 10 MHz
+Supported 
+antennas
+Active and passive
+Protocols
+NMEA 4.10, UBX binary, RTCM 3.3
+Services
+Assistance GNSS
+AssistNow
+Support products	
+XPLR-M9
+u-blox M9 GNSS Explorer Kit with easy-to-use 
+software for first product evaluation
+EVK-M91
+u-blox M9 GNSS Evaluation Kit with 
+UBX-M9140 chip and I/O interface
+Product variants
+NEO-M9N
+u-blox M9 concurrent GNSS LCC module,
+upgradeable firmware in flash, USB interface, 
+flash memory, SAW filter, LNA
+1  = For default mode: GPS/GLONASS/BeiDou/Galileo + SBAS/QZSS
+
+UBX-19027207 - R07
+Legal Notice:  
+u-blox or third parties may hold intellectual property rights in the products, names, logos 
+and designs included in this document. Copying, reproduction, or modification of this 
+document or any part thereof is only permitted with the express written permission of 
+u-blox. Disclosure to third parties is permitted for clearly public documents only. 
+The information contained herein is provided “as is”. No warranty of any kind, either 
+express or implied, is made in relation to the accuracy, reliability, fitness for a particular 
+purpose, or content of this document. This document may be revised by u-blox at any 
+time. For most recent documents and product statuses, please visit www.u-blox.com.
+Copyright © 2025, u-blox AG
+Further information
+For contact information, see www.u-blox.com/contact-u-blox.
+For more product details and ordering information, see the product data 
+sheet.
+

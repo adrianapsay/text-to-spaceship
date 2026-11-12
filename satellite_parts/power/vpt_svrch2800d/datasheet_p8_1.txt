@@ -1,0 +1,1393 @@
+Sales Information
+Phone:(425) 353-3010
+E-mail: vptsales@vptpower.com
+Fax: (425) 353-4030
+Web: www.vptpower.com
+SVRCH2800D – 6.0
+Page 1
+SPACE QUALIFIED HYBRID DC-DC CONVERTERS
+SVRCH2800D – Exact marking may differ from that shown
+Models Available
+Input: 16 V to 40 V continuous, 50 V 
+transient Dual outputs: ±5 V, ±12 V, ±15 
+V
+Wattage: 1.5 W
+MIL-PRF-38534: Class H and Class K; RHA 
+level R Designed for TOR Compliance
+1.0 DESCRIPTION
+The SVRCH Series of space qualified DC-DC converters is 
+specifically designed for the harsh radiation environment of 
+space applications and is designed in accordance with 
+Aerospace TOR requirements. Performance is guaranteed 
+through the use of hardened semiconductor components, 
+radiation lot acceptance testing (RLAT) of non-hardened 
+components, and analysis. The SVRCH Series has been 
+characterized for Total Ionizing Dose (TID) performance 
+including Enhanced Low Dose Rate Sensitivity (ELDRS) and for 
+Single Event Effects (SEE) according to VPT’s DLA-approved 
+Radiation Hardness Assurance (RHA) plan per MIL-PRF-38534, 
+Appendix G, Level R. Characterization is performed at both the 
+component level and at the SVRCH Series hybrid converter 
+level.
+The SVRCH Series of DC-DC converters is radiation hardened 
+and suited for use in low Earth orbit (LEO), medium Earth orbit 
+(MEO), geostationary orbit (GEO), deep space, and launch 
+vehicle programs.
+1.1 FEATURES
+• Output Voltage: ±5 V / 1.5W, ±12 V / 1.5W, ±15 V / 1.5W
+• Wide input voltage range: 16 V to 40 V plus 50 V transient
+• Continuous operation over full military temperature range of
+-55 °C to +125 °C with no power derating
+• Very low output noise
+• No use of optoisolators
+• Undervoltage lockout
+• Current limit protection / short circuit protection
+1.2 SPACE LEVEL CHARACTERIZATIONS
+• Guaranteed TID performance to 100 krad(Si) including LDR
+• SEE performance to 85 MeV/mg/cm2. Transients 
+are fully characterized for cross section and 
+magnitude
+• Worst-case analysis, stress, radiation, reliability reports available
+1.3 MANUFACTURING AND COMPLIANCE
+• Qualified to MIL-PRF-38534 Class H and 
+Class K, DLA SMD 5962-17222
+• Available compliant to MIL-HDBK-1547 and Aerospace 
+TOR component level element evaluation
+• MIL-PRF-38534 element evaluated components
+• MIL-STD-461 when used with appropriate VPT EMI filter
+• Manufactured in an ISO9001, MIL-PRF-38534 Class H and Class K 
+facility
+• MIL-STD-883
+1.4 PACKAGING
+• Low-profile: 1.075” x 1.075” x 0.270”
+• Max weight: 20 g
+• Industry standard pinout
+• Precision projection-welded hermetic metal case
+• Flanged and Non-Flanged versions available
+1.5 ACCESSORIES
+• EMI filters
+• Thermal Pad TP-005
+SVRCH2800D SERIES
+
+Sales Information
+SVRCH2800D Series
+Phone:(425) 353-3010
+E-mail: vptsales@vptpower.com
+Fax: (425) 353-4030
+Web: www.vptpower.com
+SVRCH2800D – 6.0
+Page 2
+2.0 DIAGRAMS
+2.1 BLOCK DIAGRAM
+2.2 CONNECTION DIAGRAM
+3.0 SPECIFICATIONS
+3.1 ABSOLUTE MAXIMUM RATINGS
+Absolute Maximum Ratings
+Input Voltage (Continuous):
+-0.5 V to 404 V
+Operating Temperature (Full Load):
+-55 °C to +125 °C
+Input Voltage (Transient, 1 second):
+-0.5 V to 50 V
+Storage Temperature:
+-65 °C to +150 °C
+ESD Rating per MIL-PRF-38534:
+1C
+Lead Solder Temperature (10 seconds):
+270 °C
+
+Sales Information
+SVRCH2800D Series
+Phone:(425) 353-3010
+E-mail: vptsales@vptpower.com
+Fax: (425) 353-4030
+Web: www.vptpower.com
+SVRCH2800D – 6.0
+Page 3
+3.2 PERFORMANCE SPECIFICATIONS
+Tcase = -55 °C to +125 °C, Vin = +28 V ± 5%, Full Load1, Unless Otherwise Specified
+SVRCH2805D
+SVRCH2812D
+Parameter
+Conditions
+Min
+Typ
+Max
+Min
+Typ
+Max
+Units
+INPUT
+Continuous
+16
+28
+407
+16
+28
+407
+V
+Voltage
+Transient, 1 sec4
+-
+-
+50
+-
+-
+50
+V
+INH < 1.5 V
+-
+3.2
+6
+-
+3.2
+6
+mA
+Current
+No Load
+-
+8
+15
+-
+12
+18
+mA
+Ripple Current
+20 Hz to 10 MHz
+-
+15
+40
+-
+15
+40
+mApp
+Turn-On
+9.3
+-
+12.55
+9.3
+-
+12.55
+V
+Undervoltage Lockout
+Turn-Off4
+8.4
+-
+11.39
+8.4
+-
+11.39
+V
+OUTPUT STATIC
++Vout, Tcase = 25 °C
+4.95
+5
+5.05
+11.88
+12
+12.12
+V
++Vout, Tcase = -55 °C to +125 °C
+4.89
+5
+5.15
+11.72
+12
+12.40
+V
+-Vout, Tcase = 25 °C
+4.95
+5
+5.05
+11.88
+12
+12.12
+V
+Voltage
+-Vout, Tcase = -55 °C to +125 °C
+4.89
+5
+5.15
+11.72
+12
+12.40
+V
+Total
+0
+-
+1.5
+0
+-
+1.5
+W
+Power2
+Either Output
+0
+-
+1.05
+0
+-
+1.05
+W
+Total
+0
+-
+0.3
+0
+-
+0.125
+A
+Current2
+Either Output
+0
+-
+0.21
+0
+-
+0.0875
+A
+Ripple Voltage
++Vout, -Vout, 20 Hz to 10 MHz
+-
+25
+50
+-
+15
+50
+mVpp
+Line Regulation
++Vout, -Vout, VIN = 16 V to 40 V
+-
+20
+70
+-
+70
+140
+mV
++Vout, -Vout, 10% Load to Full Load
+-
+220
+400
+-
+380
+700
+mV
+Load Regulation
++Vout, -Vout, 50% Load to Full Load
+-
+65
+200
+-
+110
+300
+mV
++Vout: 70% load, -Vout: 30% load
+-
+45
+150
+-
+50
+150
+mV
+Cross Regulation
++Vout: 30% load, -Vout: 70% load
+-
+40
+120
+-
+35
+120
+mV
+Overload4
+-
+1.3
+3
+-
+1.4
+3
+W
+Load Fault Power Dissipation
+Short Circuit4
+-
+2.5
+4.5
+-
+2.5
+4.5
+W
+OUTPUT DYNAMIC
+Output Transient
+-
+20
+100
+-
+45
+150
+mVpk
+Load Step, Half to Full Load, Either Output
+Recovery3
+-
+-
+400
+-
+-
+300
+µs
+Output Transient
+-
+200
+350
+-
+170
+350
+mVpk
+Line Step4, Vin = 18V to 40 V
+Recovery3
+-
+570
+750
+-
+360
+500
+µs
+Delay
+-
+6
+20
+-
+8
+20
+ms
+Turn-On, Vin = 0 to 28 V
+Overshoot
+-
+0
+25
+-
+0
+50
+mVpk
+FUNCTION
+INH Pin Input4
+Output Inhibited
+0
+-
+1.5
+0
+-
+1.5
+V
+INH Pin Open Circuit Voltage4
+Output Enabled
+9
+11.0
+14
+9
+11.0
+14
+V
+1. Half load at +Vout and half load at -Vout.
+2. Up to 70% of the total power or current can be drawn either of the two outputs.
+3. Time for output voltage to settle within 1% of steady-state value.
+4. Verified by initial electrical design verification. Post design verification, parameter shall be guaranteed to the limits specified.
+5. End-of-Life performance includes aging and radiation degradation and is within standard limits except where noted.
+6. Correction factor of 0.12 added to ceramic capacitors.
+7. 37.5 V Max continuous to be compliant to MIL-HDBK-1547 and Aerospace TOR.
+
+Sales Information
+SVRCH2800D Series
+Phone:(425) 353-3010
+E-mail: vptsales@vptpower.com
+Fax: (425) 353-4030
+Web: www.vptpower.com
+SVRCH2800D – 6.0
+Page 4
+3.2 PERFORMANCE SPECIFICATIONS (CONTINUED)
+Tcase = -55 °C to +125 °C, Vin = +28 V ± 5%, Full Load1, Unless Otherwise Specified
+Parameter
+Conditions
+Min
+Typ
+Max
+Min
+Typ
+Max
+Units
+GENERAL
+Efficiency
+68
+75
+-
+69.5
+76
+-
+%
+Capacitive Load4
+-
+-
+500
+-
+-
+165
+µF
+Switching Frequency
+370
+400
+430
+370
+400
+430
+kHz
+Isolation
+500 V DC, Tcase = 25 °C
+100
+-
+-
+100
+-
+-
+MΩ
+Non-Flanged Package Option
+-
+-
+16
+-
+-
+16
+Weight
+Flanged Package Option
+-
+-
+20
+-
+-
+20
+g
+MTBF (MIL-HDBK-217F)6
+SF @ Tcase = 55 °C
+-
+4.03
+-
+-
+4.03
+-
+MHr
+POST-RAD END-OF-LIFE LIMITS5
+Input Ripple Current
+-
+-
+70
+-
+-
+75
+mA
+Output Ripple Voltage
++Vout, -Vout
+-
+-
+90
+-
+-
+60
+mVpp
++Vout, Tcase = -55 °C to +85 °C
+4.74
+-
+5.22
+11.47
+-
+12.54
+V
+Output Voltage
+-Vout, Tcase = -55 °C to +85 °C
+4.74
+-
+5.22
+11.47
+-
+12.54
+V
+Switching Frequency
+Tcase = -55 °C to +85 °C
+300
+-
+450
+300
+-
+450
+kHz
+1. Half load at +Vout and half load at -Vout.
+2. Up to 70% of the total power or current can be drawn either of the two outputs.
+3. Time for output voltage to settle within 1% of steady-state value.
+4. Verified by initial electrical design verification. Post design verification, parameter shall be guaranteed to the limits specified.
+5. End-of-Life performance includes aging and radiation degradation and is within standard limits except where noted.
+6. Correction factor of 0.12 added to ceramic capacitors.
+7. 37.5 V Max continuous to be compliant to MIL-HDBK-1547 and Aerospace TOR.
+SVRCH2805D
+SVRCH2812D
+
+Sales Information
+SVRCH2800D Series
+Phone:(425) 353-3010
+E-mail: vptsales@vptpower.com
+Fax: (425) 353-4030
+Web: www.vptpower.com
+SVRCH2800D – 6.0
+Page 5
+3.2 PERFORMANCE SPECIFICATIONS (CONTINUED)
+Tcase = -55 °C to +125 °C, Vin = +28 V ± 5%, Full Load1, Unless Otherwise Specified
+SVRCH2815D
+Parameter
+Conditions
+Min
+Typ
+Max
+Units
+INPUT
+Continuous
+16
+28
+407
+V
+Voltage
+Transient, 1 sec4
+-
+-
+50
+V
+INH < 1.5 V
+-
+3.2
+6
+mA
+Current
+No Load
+-
+15
+20
+mA
+Ripple Current
+20 Hz to 10 MHz
+-
+15
+40
+mApp
+Turn-On
+9.3
+-
+12.55
+V
+Undervoltage Lockout
+Turn-Off4
+8.4
+-
+11.39
+V
+OUTPUT STATIC
++Vout, Tcase = 25 °C
+14.85
+15
+15.15
+V
++Vout, Tcase = -55 °C to +125 °C
+14.75
+15
+15.40
+V
+-Vout, Tcase = 25 °C
+14.85
+15
+15.15
+V
+Voltage
+-Vout, Tcase = -55 °C to +125 °C
+14.75
+15
+15.40
+V
+Total
+0
+-
+1.5
+W
+Power2
+Either Output
+0
+-
+1.05
+W
+Total
+0
+-
+0.10
+A
+Current2
+Either Output
+0
+-
+0.07
+A
+Ripple Voltage
++Vout, -Vout, 20 Hz to 10 MHz
+-
+15
+50
+mVpp
+Line Regulation
++Vout, -Vout, VIN = 18 V to 40 V
+-
+65
+140
+mV
++Vout, -Vout, 10% Load to Full Load
+-
+520
+800
+mV
+Load Regulation
++Vout, -Vout, 50% Load to Full Load
+-
+170
+400
+mV
++Vout: 70% load, -Vout: 30% load
+-
+55
+150
+mV
+Cross Regulation
++Vout: 30% load, -Vout: 70% load
+-
+35
+120
+mV
+Overload4
+-
+1.6
+3
+W
+Load Fault Power Dissipation
+Short Circuit4
+-
+2.7
+4.5
+W
+OUTPUT DYNAMIC
+Output Transient
+-
+30
+120
+mVpk
+Load Step, Half to Full Load, Either Output
+Recovery3
+-
+-
+300
+µs
+Output Transient
+-
+210
+400
+mVpk
+Line Step4, Vin = 18V to 40 V
+Recovery3
+-
+180
+300
+µs
+Delay
+-
+8
+20
+ms
+Turn-On, Vin = 0 to 28 V
+Overshoot
+-
+0
+50
+mVpk
+FUNCTION
+INH Pin Input4
+Output Inhibited
+0
+-
+1.5
+V
+INH Pin Open Circuit Voltage4
+Output Enabled
+9
+11.3
+14
+V
+1. Half load at +Vout and half load at -Vout.
+2. Up to 70% of the total power or current can be drawn from either of the two outputs.
+3. Time for output voltage to settle within 1% of steady-state value.
+4. Verified by initial electrical design verification. Post design verification, parameter shall be guaranteed to the limits specified.
+5. End-of-Life performance includes aging and radiation degradation and is within standard limits except where noted.
+6. Correction factor of 0.12 added to ceramic capacitors.
+7.
+37.5 V Max continuous to be compliant to MIL-HDBK-1547 and Aerospace TOR.
+
+Sales Information
+SVRCH2800D Series
+Phone:(425) 353-3010
+E-mail: vptsales@vptpower.com
+Fax: (425) 353-4030
+Web: www.vptpower.com
+SVRCH2800D – 6.0
+Page 6
+3.2 PERFORMANCE SPECIFICATIONS (CONTINUED)
+Tcase = -55 °C to +125 °C, Vin = +28 V ± 5%, Full Load1, Unless Otherwise Specified
+Min
+Typ
+Max
+Units
+Parameter 
+GENERAL
+Efficiency
+Conditions
+73
+80
+-
+%
+Capacitive Load4
+-
+-
+165
+µF
+Switching Frequency
+370
+400
+430
+kHz
+Isolation
+500 V DC, Tcase = 25 °C
+100
+-
+-
+MΩ
+Non-Flanged Package Option
+-
+-
+16
+Weight
+Flanged Package Option
+-
+-
+20
+g
+MTBF (MIL-HDBK-217F)6
+SF @ Tcase = 55 °C
+-
+4.03
+-
+MHr
+POST-RAD END-OF-LIFE LIMITS5
+Input Ripple Current
+-
+-
+80
+mApp
+Output Ripple Voltage
++Vout, -Vout
+-
+-
+60
+mVpp
++Vout, Tcase = -55 °C to +85 °C
+14.36
+-
+15.63
+V
+Output Voltage
+-Vout, Tcase = -55 °C to +85 °C
+14.36
+-
+15.63
+V
+Switching Frequency
+Tcase = -55 °C to +85 °C
+300
+-
+450
+kHz
+1. Half load at +Vout and half load at -Vout.
+2. Up to 70% of the total power or current can be drawn either of the two outputs.
+3. Time for output voltage to settle within 1% of steady-state value.
+4. Verified by initial electrical design verification. Post design verification, parameter shall be guaranteed to the limits specified.
+5. End-of-Life performance includes aging and radiation degradation and is within standard limits except where noted.
+6. Correction factor of 0.12 added to ceramic capacitors.
+7. 37.5 V Max continuous to be compliant to MIL-HDBK-1547 and Aerospace TOR.
+SVRCH2815D
+
+Sales Information
+SVRCH2800D Series
+Phone:(425) 353-3010
+E-mail: vptsales@vptpower.com
+Fax: (425) 353-4030
+Web: www.vptpower.com
+SVRCH2800D – 6.0
+Page 7
+4.0 PERFORMANCE CURVES
+4.1.1   SVRCH2805D Efficiency (Typical, 25 °C)
+4.1.2 SVRCH2812D Efficiency (Typical, 25 °C)
+4.1.3 SVRCH2815D Efficiency (Typical, 25 °C)
+
+Sales Information
+SVRCH2800D Series
+Phone:(425) 353-3010
+E-mail: vptsales@vptpower.com
+Fax: (425) 353-4030
+Web: www.vptpower.com
+SVRCH2800D – 6.0
+Page 8
+4.0 PERFORMANCE CURVES (CONTINUED)
+4.2.1   SVRCH2805D Cross-Regulation (Typical, 25 °C)
+4.2.2 SVRCH2812D Cross-Regulation (Typical, 25 °C)
+4.2.3 SVRCH2815D Cross-Regulation (Typical, 25 °C)
+
+Sales Information
+SVRCH2800D Series
+Phone:(425) 353-3010
+E-mail: vptsales@vptpower.com
+Fax: (425) 353-4030
+Web: www.vptpower.com
+SVRCH2800D – 6.0
+Page 9
+1.075in 27.31mm MAX
+1.075in 27.31mm MAX
+PIN 1
+8X PIN
+0.025in±0.002
+0.64mm±0.05
+7X SEAL
+0.070in±0.002
+1.78mm±0.05
+0in 0mm
+0.132in 3.35mm
+0.200in 5.08mm
+0.600in 15.24mm
+0.800in 20.32mm
+0.400in 10.16mm
+0in 0mm
+0.132in 3.35mm
+0.800in 20.32mm
+1
+2
+3
+4
+5
+6
+7
+8
+BASEPLATE
+SURFACE
+0.270in 6.86mm MAX
+0.200in±0.010
+5.08mm±0.25
+5.0 MECHANICAL OUTLINES AND PINOUT
+Non-Flanged Package Option:
+1. Tolerances are ±0.005” unless otherwise stated.
+2. Case temperature is measured on the center of the baseplate surface.
+3. Materials: Case (Steel, gold over nickel plated); Cover (Steel, nickel plated); Pin (Copper-cored alloy 52, gold over nickel plated); Pin Seals (Glass).
+1
++VOUT
+4
+NC
+7
+INCOM
+2
+OUTCOM
+5
+INH
+8
+CASE
+3
+-VOUT
+6
+28VIN
+Pin
+Function
+Pin
+Function
+Pin
+Function
+
+Sales Information
+SVRCH2800D Series
+Phone:(425) 353-3010
+E-mail: vptsales@vptpower.com
+Fax: (425) 353-4030
+Web: www.vptpower.com
+SVRCH2800D – 6.0
+Page 10
+5.0 MECHANICAL OUTLINES AND PINOUT (CONTINUED)
+         Flanged Package Option:
+1. Tolerances are ±0.005” unless otherwise stated.
+2. Case temperature is measured on the center of the baseplate surface.
+3.   Mounting holes are not threaded. Recommended fastener is #4-40 screw.
+4. Materials: Case (Steel, gold over nickel plated); Cover (Steel, nickel plated); Pin (Copper-cored alloy 52, gold over nickel plated); Pin Seals (Glass).
+Pin
+Function
+Pin
+Function
+Pin
+Function
+1
++VOUT
+4
+NC
+7
+INCOM
+2
+OUTCOM
+5
+INH
+8
+CASE
+3
+NC
+6
+28VIN
+
+Sales Information
+Phone:(425) 353-3010
+E-mail: vptsales@vptpower.com
+Fax: (425) 353-4030
+Web: www.vptpower.com
+SVRCH2800D – 6.0
+Page 11
+SVRCH2800D Series
+6.0 TECHNICAL NOTES
+Please note that many of these functions are also demonstrated in detail on the VPT website in the form of technical video labs.
+6.1 GENERAL INFORMATION
+6.1.1 Topology Description
+The SVRCH2800D Series is an isolated dual-output flyback converter. It operates over a wide input voltage range and 
+provides a cross-regulated positive and negative output voltage with respect to the OUTCOM pin. Feedback isolation is 
+accomplished using a primary side winding reducing parts and reducing power consumption.
+6.1.2 External Components
+The SVRCH2800D Series is designed to operate stand-alone in most applications. It does not require any external components for 
+proper operation or to meet the datasheet specifications. Input and output L-C filters are provided internally for low ripple and noise. 
+To further reduce output ripple and noise, a small ceramic capacitor, 1 µF to 10 µF, can be added at the output. Most application 
+specific ripple requirements can be met with the addition of output capacitors alone. External output capacitance can be added up 
+to the maximum listed in Section 3.2.
+6.1.3 Source Impedance
+The impedance of the 28 V input source can interact with the DC-DC converter and can affect performance. High source 
+impedance is often caused by a long input cable or components added in series with the input. Source resistance will cause a DC 
+voltage drop as the converter draws DC input current. This voltage drop is simply the cable resistance multiplied by the input 
+current at low line. The voltage drop and the actual voltage at the input to the converter will determine the minimum source voltage 
+at which the converter will operate. A high source inductance can interact with the feedback control loop of the converter. VPT’s 
+EMI filters will usually isolate the source and eliminate this problem. In some cases, additional input capacitance will be needed to 
+stabilize the system.
+6.1.4 Output Configurations
+Since the converter is isolated, the outputs can be used as a traditional dual-output, with a positive and negative voltage 
+referenced to OUTCOM, or as a single-ended output referenced to –VOUT or +VOUT. For example, the SVRCH2812D can 
+provide +12 V and -12 V in the traditional dual output configuration, or can provide +24 V referenced to –VOUT, or -24 V 
+referenced to +VOUT in single-ended configuration. In the single-ended configuration, the OUTCOM pin will be at +12 V relative to 
+–VOUT.
+The outputs of multiple converters can be stacked in series to provide higher voltages. When outputs of multiple modules are 
+stacked, they naturally share the load. For example, two SVRCH2812D converters can be stacked to provide a 48 V output at 3 
+W.
+6.2 FUNCTION DESCRIPTIONS
+6.2.1 On/Off Control (Inhibit)
+The INH (Inhibit) pin is a primary-side control pin referenced to INCOM. 
+The INH pin must be driven using an open collector or open drain 
+configuration. Pulling the INH pin low disables the converter output, 
+removes bias voltage from internal control circuitry, and puts the 
+converter in a state of minimum input current draw. Leaving INH open 
+enables the output, allowing the converter to operate normally. The pin 
+must be pulled below 1.5 V to disable the output. An optional capacitor 
+from INH to INCOM may be used to delay turn-on. The INH pin should 
+be left open if not used.
+
+Sales Information
+Phone:(425) 353-3010
+E-mail: vptsales@vptpower.com
+SVRCH2800D Series
+Fax: (425) 353-4030
+Web: www.vptpower.com
+SVRCH2800D – 6.0
+Page 12
+6.3 PROTECTION FEATURES
+6.3.1 Input Undervoltage Lockout
+The SVRCH2800D Series provides input undervoltage lockout protection. For input voltages below the turn-on voltage, the 
+converter will remain off, drawing minimal current from the source. When the input voltage exceeds the turn-on voltage, the 
+converter will start. The lockout circuit is designed to tolerate slow ramping input voltage waveforms.
+6.3.2 Output Soft Start
+The SVRCH2800D Series utilizes an output soft-start function to ramp the output in a controlled manner, eliminating output voltage 
+overshoot and limiting inrush current at turn on. A voltage-mode soft-start ensures the output waveform remains consistent 
+regardless of changes in the load current. The output rise time is approximately 5 ms. The soft-start function is active whether the 
+module is turned on with an application of input voltage or from release of the inhibit pin. Under normal conditions, current drawn 
+from the source during turn-on will not exceed the full-load input current. The turn-on delay time is specified from the application of 
+input voltage (or release of the inhibit pin) until the output reaches 90% of its final value.
+6.3.3 Output Overcurrent Protection
+The SVRCH2800D Series provides output overcurrent and output short circuit protection. During a load fault condition, a peak 
+current control circuit reduces the converter duty cycle to limit the output current. The converter will continue to provide constant 
+current into any overload or short circuit condition. This feature allows the converter to start into any capacitive load. Recovery is 
+automatic and immediate upon removal of the fault condition. Sustained short circuit or overload operation can cause excessive 
+power dissipation. Care should be taken to control the operating temperature of the converter in this condition.
+6.4 THERMAL CONSIDERATIONS
+The SVRCH2800S Series is rated for full power operation at 125 °C. Operation above 125 °C is allowed at reduced power. 
+Specifically, the output power should be derated linearly from full power at 125 °C to half power at 130 °C and to zero power at 135 
+°C. The operating temperature of the converter is specified on the baseplate of the converter. The converter is designed to be 
+conduction- cooled, with the baseplate mounted to a heat sink, chassis, PCB or other thermal surface. The internal power 
+dissipating components are mounted to the baseplate of the converter and all heat flow is through the baseplate and mounting 
+flanges. The lid of the converter does not provide a good thermal path.
+The hybrid DC-DC converter contains many semiconductor components. The maximum temperature rise from junction to 
+case is 5 °C at full load.
+
+Sales Information
+Phone:(425) 353-3010
+E-mail: vptsales@vptpower.com
+SVRCH2800D Series
+Fax: (425) 353-4030
+Web: www.vptpower.com
+SVRCH2800D – 6.0
+Page 13
+6.5 RADIATION HARDNESS ASSURANCE
+VPT takes a conservative approach to radiation testing to ensure product performance in a space environment. VPT’s DLA-
+approved Radiation Hardness Assurance (RHA) plan documents VPT’s processes and procedures for guaranteeing the 
+performance of VPT products under various environmental conditions in space including Total Ionizing Dose (TID) and Single-
+Event Effects (SEE).
+Additionally, Enhanced Low Dose-Rate Sensitivity (ELDRS) effects are considered for all bipolar ICs used in the hybrid. Hardness 
+is guaranteed by a combination of both hybrid-level characterization and Radiation Lot Acceptance Testing (RLAT) of all sensitive 
+semiconductor piece-parts used within the hybrid.
+6.5.1 Radiation Test and Performance Levels
+Radiation Environment
+Piece Part RLAT
+Hybrid-Level Characterization
+High Dose Rate (HDR)
+100 krad(Si)
+100 krad(Si)
+Total Ionizing Dose (TID)
+Low Dose Rate (LDR)
+1100 krad(Si)
+100 krad(Si)
+Destructive (SEB, SEGR, SEL)
+Not applicable
+≥ 85 MeV/mg/cm2
+Single-Event Effects (SEE)
+2Non-Destructive (SET, SEU, SEFI)
+Not applicable
+≥ 85 MeV/mg/cm2
+1.
+Piece-part LDR screening performed only on potentially ELDRS parts (bipolar ICs).
+2.
+The PWM IC used in this part is suceptible to a non-destructive SEFI/SEL event with threshold LET ≥ 42 MeV/mg/cm2. The SEFI manifests as a shutdown 
+for up to 1 second followed by a controlled soft-start of the converter. The non-destructive SEL manifests itself as a shutdown requiring user intervention to 
+recover by cycling either the input power or the inhibit function. At the worst-case 125 °C and 85 MeV/mg/cm2, the cross-section of these events is 3.18 x 
+10-6 cm2. Full details available in the Radiation Test Report.
+6.5.2 RHA Plan Summary
+Test
+RHA Plan for SV Series Isolated DC-DC Converters
+Total Ionizing Dose (TID):
+Sensitive semiconductor components undergo RLAT to 100 krad(Si) per 
+MIL-STD-883 Method 1019. Converters are characterized to 100 krad(Si).
+Enhanced Low Dose Rate Sensitivity (ELDRS):
+All bipolar linear ICs are characterized for ELDRS and tested in accordance with MIL-STD-883 test method 1019 
+section 3.13
+Single Event Effects (SEE):
+Converters are characterized to LET ≥ 85 MeV/mg/cm2 for both catastrophic events (SEL, SEB, SEGR) and functional 
+interrupts (SEFI) under heavy ion exposure. Converters are also characterized for cross-section and magnitude of 
+output transients (SET) for at least 3 different LET levels.
+Radiation Lot Acceptance Testing (RLAT):
+All production lots of sensitive semiconductor components undergo RLAT for TID at HDR and/or LDR as appropriate 
+per part type.
+6.5.3 RHA Designators available on SMD
+The SVRCH2800D series converters are available on SMD with RHA level R. See section 8.0 for full SMD number information.
+6.5.4 Supporting Documentation Available (Contact Sales)
+Report
+Description
+Radiation Hardness Assurance Plan:
+DLA-approved RHA plan covering TID, SEE, and ELDRS
+Worst-Case Analysis Report:
+Detailed worst-case analysis including electrical stress/derating limits and guaranteed circuit performance post-radiation and end 
+of life
+Radiation Test Summary Report:
+Overview of piece-part RLAT and hybrid characterization for all guaranteed environments. Also includes SEE cross-section data.
+Reliability Report:
+MTBF report based on MIL-HDBK-217 reliability calculations.
+Thermal Analysis Report:
+Component temperature rise analysis and measurement results.
+
+Sales Information
+Phone:(425) 353-3010
+E-mail: vptsales@vptpower.com
+SVRCH2800D Series
+Fax: (425) 353-4030
+Web: www.vptpower.com
+SVRCH2800D – 6.0
+Page 14
+7.0 ENVIRONMENTAL SCREENING
+100% tested per MIL-STD-883 as referenced to MIL-PRF-38534.
+Contact sales for more information concerning additional environmental screening and testing options. VPT Inc. reserves the right 
+to ship higher screened or SMD products to meet orders for lower screening levels at our sole discretion unless specifically 
+forbidden by customer contract.
+Bond Pull
+Temperature 
+Cycling
+Constant 
+Acceleration
+TM1010, Condition C
+-65 °C to 150 °C, Ambient
+●
+●
+TM2001, 3000g, Y1
+Direction
+●
+●
+PIND3
+TM2020, Condition A
+●2
+●
+Pre Burn-In 
+Electrical
+Burn-In
+25 °C
+●
+TM1015, 320 hrs.,
+125 °C, Case Typ
+●
+TM1015, 160 hrs.,
+125 °C, Case Typ
+●
+24 hrs., 125 °C, Case Typ
+●
+MIL-PRF-38534, Group A
+Final Electrical
+Hermeticity 
+(Seal)
+Subgroups 1-6
+●
+●
+-55 °C, 25 °C, 125 °C4
+MIL-PRF-38534, Group A
+Subgroups 1 and 4
+●
+25 °C
+TM1014, Fine Leak,
+Condition A2 or B1
+●
+●
+TM1014, Gross Leak,
+Condition C1 or B2
+●
+●
+Gross Leak, Dip (No Bomb), Visual Verification
+●
+Radiography5
+TM2012
+●
+External Visual
+TM2009
+●
+●
+●
+1. Non-QML products may not meet all requirements of MIL-PRF-38534
+2. Not required per MIL-PRF-38534. Test performed for additional product quality assurance
+3. PIND test Certificate of Compliance included in product shipment
+4. 100% R&R testing with all test data included in product shipment
+5. Radiographic test Certificate of Compliance and film(s) or data CD included in product shipment
+6. Engineering models utilize only the screening specified and are not considered compliant for flight use
+7. -KL1 products are identical in every way with Class K products in compliance with MIL-PRF-38534 revision L and later revisions except they contain 
+elements evaluated to the requirements of MIL-PRF-38534 revision K and previous revisions. These devices are not marked with an SMD number 
+or MIL- PRF-38534 certification mark and are marked with -KL1 screening code in place of -K.
+Non-Destructive
+TM2023
+●2
+●
+●2
+TM2010, TM2017, TM2032
+Internal Visual
+(MIL-STD-750, TM2072,
+●
+●
+●
+TM2073)
+Test
+MIL-STD-883 Test
+/H+
+/K and /KL11,7 
+Method, Condition
+(Class H Screening + PIND)
+(Class K Screening)
+/EM
+(Engineering Model, Non-QML1,6)
+
+Sales Information
+Phone:(425) 353-3010
+E-mail: vptsales@vptpower.com
+SVRCH2800D Series
+Fax: (425) 353-4030
+Web: www.vptpower.com
+SVRCH2800D – 6.0
+Page 15
+8.0 STANDARD MICROCIRCUIT DRAWING (SMD) NUMBERS
+Standard Microcircuit 
+Drawing Number
+SVRCH2800D Series 
+Similar Part Number
+5962R1722201HXC
+5962R1722201HXA
+5962R1722201KXC
+5962R1722201KXA
+5962R1722201HYC
+5962R1722201HYA
+5962R1722201KYC
+5962R1722201KYA
+SVRCH2805D/H+
+SVRCH2805D/H+-E
+SVRCH2805D/K
+SVRCH2805D/K-E
+SVRCH2805DF/H+
+SVRCH2805DF/H+-E
+SVRCH2805DF/K
+SVRCH2805DF/K-E
+5962R1722202HXC
+5962R1722202HXA
+5962R1722202KXC
+5962R1722202KXA
+5962R1722202HYC
+5962R1722202HYA
+5962R1722202KYC
+5962R1722202KYA
+SVRCH2812D/H+
+SVRCH2812D/H+-E
+SVRCH2812D/K
+SVRCH2812D/K-E
+SVRCH2812DF/H+
+SVRCH2812DF/H+-E
+SVRCH2812DF/K
+SVRCH2812DF/K-E
+5962R1722203HXC
+5962R1722203HXA
+5962R1722203KXC
+5962R1722203KXA
+5962R1722203HYC
+5962R1722203HYA
+5962R1722203KYC
+5962R1722203KYA
+SVRCH2815D/H+
+SVRCH2815D/H+-E
+SVRCH2815D/K
+SVRCH2815D/K-E
+SVRCH2815DF/H+
+SVRCH2815DF/H+-E
+SVRCH2815DF/K
+SVRCH2815DF/K-E
+Do not use the SVLSA2800D Series similar part number for SMD product acquisition. It is listed for reference only. For exact 
+specifications for the SMD product, refer to the SMD drawing. SMDs can be downloaded from the DLA Land and Maritime (Previously 
+known as DSCC) website at https://landandmaritimeapps.dla.mil/programs/defaultapps.asp. The SMD number listed above represents 
+the Federal Stock Class, Device Type, Device Class Designator, Case Outline, Lead Finish and RHA Designator (where applicable). 
+Please reference the SMD for other screening levels, lead finishes, and radiation levels. All SMD products are marked with a “Q” on 
+the cover as specified by the QML certification mark requirement of MIL-PRF-38534.
+
+Sales Information
+Phone:(425) 353-3010
+E-mail: vptsales@vptpower.com
+SVRCH2800D Series
+Fax: (425) 353-4030
+Web: www.vptpower.com
+SVRCH2800D – 6.0
+Page 16
+9.0 ORDERING INFORMATION
+SVRCH
+28
+05
+D
+F
+/K
+-
+XXX
+1
+2
+3
+4
+5
+6
+7
+(1)
+Product 
+Series
+(2)
+Nominal Input 
+Voltage
+(3)
+Output 
+Voltage
+(4)
+Number of 
+Outputs
+(5)
+Package Option
+(6)
+Screening Code1,2,3,4
+(7)
+Additional 
+Screening 
+Code
+SVRCH
+28
+28 Volts
+05
+12
+15
+5 Volts
+12 Volts
+15 Volts
+D
+Dual
+(None)
+F
+Non-Flanged
+Flanged
+/EM
+/H+
+/K
+/KL1
+Engineering Model
+Class H + PIND
+Class K
+Class K (KL1)
+Contact Sales
+1. Contact the VPT Sales Department for availability of Class H (/H), Class K (/K), or KL1 (/KL1) qualified products.
+2. VPT Inc. reserves the right to ship higher screened or SMD products to meet lower screened orders at our sole discretion unless specifically forbidden by 
+customer contract.
+3. Engineering models utilize only the standard screening specified and are not considered compliant for flight use. These models are intended for low volume 
+engineering characterization only and have no guarantee regarding operation in a radiation environment. The customer must place the following statement on each 
+line item of their purchase order(s) for /EM units when ordering engineering models:
+“(Customer Name) acknowledges that the /EM unit listed in this line item is not permitted for flight use and will be used for Engineering characterization only.”
+4. -KL1 products are identical in every way with Class K products in compliance with MIL-PRF-38534 revision L and later revisions except they contain elements 
+evaluated to the requirements of MIL-PRF-38534 revision K and previous revisions. These devices are not marked with an SMD number or MIL-PRF-38534 
+certification mark and are marked with -KL1 screening code in place of -K.
+Please contact your sales representative or the VPT Inc. Sales Department for more information concerning additional 
+environmental screening and testing, different input voltage, output voltage, power requirements, source inspection, and/or special 
+element evaluation for space or other higher quality applications.
+
+Sales Information
+Phone:(425) 353-3010
+E-mail: vptsales@vptpower.com
+SVRCH2800D Series
+Fax: (425) 353-4030
+Web: www.vptpower.com
+SVRCH2800D – 6.0
+Page 17
+10.0 CONTACT INFORMATION
+To request a quotation or place orders please contact your sales representative or the VPT, Inc. Sales Department at:
+Phone:
+(425) 353-3010
+Fax:
+(425) 353-4030
+E-mail:
+vptsales@vptpower.com
+All information contained in this datasheet is believed to be accurate, however, no responsibility is assumed for possible errors 
+or omissions. The products or specifications contained herein are subject to change without notice.
+11.0 ADDITIONAL INFORMATION
+Visit the VPT website for additional technical resources, including:
+Product Catalogs
+Application Notes and White Papers
+Technical Video Labs
+Additional Products For 
+Avionics/Military, Hi-Rel COTS, and 
+Space Applications
+

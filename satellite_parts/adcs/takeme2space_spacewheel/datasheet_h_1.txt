@@ -1,0 +1,105 @@
+ 
+ 
+ 
+ 
+ 
+SPACEWHEEL 
+​
+​
+​
+​
+​
+​
+REACTION WHEEL FOR CUBESATS 
+ 
+BY TAKEME2SPACE 
+ 
+ 
+ 
+ 
+AUGUST  2025 
+ 
+ 
+ 
+ 
+1 
+TakeMe2Space, India ​
+tm2.space​
+CIN: U61900TS2024PTC186392 
+
+ 
+ 
+ 
+Reaction Wheels​
+​
+ 
+ 
+Exploded view of the reaction wheel 
+​
+ 
+​
+Description:​
+​
+The TakeMe2Space Reaction Wheels serve as a vital part of the satellite’s Attitude 
+Determination and Control System (ADCS), enabling dependable and high-precision 
+orientation management essential for mission success. 
+ 
+Engineered for robust in-orbit performance, the RW-Medium model delivers a nominal 
+momentum of 30 mNms and maximum torque of 75 mNm, supporting fine control 
+accuracy of ±1 RPM at speeds above 100 RPM.
+ 
+2 
+TakeMe2Space, India ​
+tm2.space​
+CIN: U61900TS2024PTC186392 
+
+ 
+ 
+Technical Specifications:​
+ 
+ 
+3 
+TakeMe2Space, India ​
+tm2.space​
+CIN: U61900TS2024PTC186392 
+Category 
+Parameter 
+RW-Medium 
+Performance 
+Momentum (nominal) 
+30 mNms 
+Torque 
+75 mNm 
+Control accuracy 
+±1 RPM @ >100 RPM 
+Interface 
+Control mode 
+Speed or Torque 
+Command/Telemetry 
+RS-485, CAN 
+Connector type 
+16 Pin Harwin connector 
+Mechanical 
+Dimensions 
+55 x 55 x 40mm 
+Mass 
+280 g 
+Balancing 
+Residual unbalance <0.1 g.mm 
+after balancing to G0.4 grade 
+Electrical 
+Supply voltage 
+24V (nominal) 
+Power draw at max RPM 
+12 W 
+Maximum RPM 
+6500 
+Power at zero momentum 
+0 W 
+Environment 
+Thermal 
+−40°C to +100°C (operating) 
+Vibration & shock 
+Tested for 14 gRMS random, 70g 
+shock in all axes 
+

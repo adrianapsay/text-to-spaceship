@@ -1,0 +1,132 @@
+COMMUNICATIONS
+The Quasar-WSANT is a next-generation S-band 
+antenna designed for telecommand, telemetry, and 
+payload data downlink in SmallSat and CubeSat 
+missions.
+Built on proven augmented patch antenna technology 
+and manufactured with materials boasting extensive 
+flight heritage, the Quasar-WSANT delivers a reliable 
+and compact solution for satellite communication 
+subsystems. As part of our co-developed family of 
+communication 
+products, 
+it 
+provides 
+maximum 
+flexibility for mission designers selecting TMTC and 
+payload transmitter configurations.
+By eliminating integration challenges and reducing the 
+risk of costly delays, the Quasar-WSANT enables a 
+streamlined, single-version antenna solution that 
+ensures mission-ready performance in even the most 
+demanding small satellite applications.
+Engineered for versatility, the Quasar-WSANT offers:
+•
+Full ITU-R S-band coverage (2025–2290 MHz) for both 
+uplink and downlink
+•
+Selectable Left- or Right-Hand Circular Polarization on 
+either port
+•
+Up to 5 W transmit power handling
+Its  wideband design allows multiple configuration 
+options:
+•
+Use polarization separation for dedicated Tx and Rx 
+paths
+•
+Integrate with a diplexer for combined operation on a 
+single port
+•
+Replace two separate antennas with one compact unit, 
+reducing complexity and mass
+Developed from flight-proven 
+heritage and enhanced with 
+our latest innovations, the 
+Quasar-WSANT delivers 
+reliable, high-efficiency 
+performance. The antenna 
+provides excellent gain and 
+axial ratio across a wide 
+beamwidth, ensuring 
+consistent link quality over the 
+entire ITU-R S-Band spectrum 
+on either port.
+Performance
+Flexibility
+Reliability
+With full ITU-R S-Band 
+coverage available on both 
+ports, the Quasar-WSANT 
+allows seamless selection 
+between Left- and Right-Hand 
+Circular Polarization. 
+Side-mounted SMP connectors 
+simplify integration by avoiding 
+intrusion into the spacecraft’s 
+internal volume, enabling 
+straightforward installation 
+even in tight satellite layouts.
+WIDE BAND, 
+DUAL PORT, 
+DUAL POLARIZATION 
+S-BAND ANTENNA
+QUASAR-WSANT
+The Quasar-WSANT is built on a 
+robust, compact design using a 
+single grounded dielectric slab 
+and side-mounted SMP RF 
+ports. This proven architecture 
+reduces complexity and 
+enhances mechanical durability, 
+ensuring dependable operation 
+throughout mission lifetime..
+
+General
+TECHNICAL SPECIFICATIONS
+Dimensions
+Length 
+83 mm
+Width
+83 mm
+Width 
+7 mm 
+www.aac-clyde.space
+#SPACEISAWESOME
+Copyright AAC Clyde Space AB 2025. All rights reserved.
+All information subject to change. 
+Release date 23 September 2025..
+To make an enquiry, request a quotation or
+learn about AAC Clyde Space’s other
+products and services, please contact:
+enquiries@aac-clyde.space
+Temperature
+Mass
+RF Interfaces
+Radiation Tolerance
+Design Life 
+-20°C to +60°C (operational)
+-40°C to +85°C (storage)
+68.5 g
+50 Ω, 2x SMP-Female
+TBC
+5-6 years
+Frequency band 
+2025 - 2290 MHz
+RF power 
+5 W max. at any port
+Half power beam width
+60°
+Polarizations/ports 
+port R = RHCP
+port L = LHCP
+Return Loss 2025 – 2290 MHz
+> 13 dB
+Gain 2025 – 2290 MHz
+Axial Ratio 2025 – 2290 MHz
+Port isolation 2110 – 2290 MHz
+> 5 dBic
+< 3 dB
+> 10dB
+Antenna RF characteristics
+

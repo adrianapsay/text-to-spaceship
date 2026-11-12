@@ -1,0 +1,208 @@
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+GCA02 –HIGH GAIN L1 GNSS  
+ACTIVE PATCH ANTENNA 
+PRODUCT NAME 
+GCA02- HIGH GAIN GNSS L1 ACTIVE PATCH ANTENNA 
+SUMMARY 
+The EXA GCA02 is a two-stage, 33dB gain compact GNSS active patch antenna solution than works 
+with your GNSS card and link it to GPS and GALILEO constellations in the L1 band, It is the ideal 
+antenna for space-grade GNSS devices to achieve good sensitivity across all bands in a small form 
+factor. 
+The active patch antenna, by means of a double resonance design, has a wide-band operation over 
+GPS/GALILEO systems from 1575.42MHz L1 band. It includes a one-stage LNA and front-end SAW 
+filter to reduce out of band noise; this antenna offers better protection from LEO radiation and 
+greatly reduces the probability of damaging your GNSS receiver due to nearby transmissions. 
+FEATURES 
+• 
+Flight heritage since 2021 
+• 
+Active antenna, LNA integrated, SAW filter integrated 
+• 
+Anti-AOA (Atomic Oxygen Attack) coating for long duration missions 
+• 
+Suitable for mounting inside spacecraft 
+• 
+Custom choice of cables and connectors  
+• 
+Wide FOV of 120 degrees 
+• 
+Designed for LEO missions and requirements 
+• 
+Manufactured according to NASA and ESA space standards and materials 
+• 
+Functional, performance, thermal bake out and vibration tests provided w/documentation. 
+• 
+Compatible and compliant with standard deployers and CubeSat Standard 
+ 
+
+ 
+PERFORMANCEE 
+ 
+  PARAMETER 
+GCA02 
+FREQUENCY 
+1575.42mhZ  L1 GPS 
+NOMINAL IMPEDANCE (Ω) 
+50 
+VSWR 
+1.5:1 
+GAIN RADIATING ELEMENT 
+3.4dBic +/- 1 dB 
+GAIN LNA 
+33 dB +/- 2 dB 
+LNA NOISE FIGURE 
+< 3.4 dB 
+POLARIZATION 
+RCHP 
+OPERATING VOLTAGE 
+3.3-5 Vdc +/- 0.5 V 
+CURRENT COMSUMPTION 
+< 10A mA 
+OPERATION TEMPERATURE 
+-40 to +85°C 
+WEIGHT 
+13.5g 
+DIMENSIONS 
+25 mm x 25 mm 
+CABLE LENGTH 
+User TBD 
+MOUNTING 
+Glue using 3M2216 A/B 
+CABLE TYPE 
+RG316/RG178/RG174 
+CONNECTOR 
+SMA/MCX/MMCX/MMBX/Uf.l 
+ 
+Out of Band Rejection 
+698MHz 
+90dB 
+960MHz 
+93dB 
+1710MHz 
+85dB 
+2170MHz 
+75dB 
+2400MHz 
+75dB 
+2700MHz 
+84dB 
+PRODUCT PROPERTIES 
+• 
+Ceramic Dimension: 
+o  25.1 x 25.1 x 4.7mm 
+• 
+Total Dimension (including shielding case) 
+o 25.1 x 25.1 x 7.9mm 
+• 
+Connector IPEX MHFI (U.FL) / SMA / MCX / MMCX 
+• 
+Cable coaxial cable:  custom choice between RG316, RG178, RG174 
+• 
+Mass: 13.5 grams 
+• 
+Operating Temperature: -40 to +85°C 
+• 
+Radiation Tolerance: 4 years minimum in LEO 
+MATERIALS 
+• 
+Only TML and CVCM < 1% materials used, NASA and ESA approved 
+• 
+Antenna Material:  Ceramic 
+• 
+Connector:  SMA, MCX, MMCX, MBX, MMBX or U.FL  
+• 
+Anti AOA, Anti-Corona coating 
+• 
+PTFE (Teflon) space grade cables, coaxial RG316, RG178, RG174 
+ 
+2 
+ 
+
+ 
+Y 
+X 
+PRODUCT CHARTS: 
+ 
+2D RADIATION PATTERN 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Z 
+ 
+3 
+ 
+
+ 
+3D RADIATION PATTERN 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+TESTING 
+All antennas are provided with tests reports regarding: 
+• 
+Thermal Bake out (10E-5 mbar @ 50C for 72 hours) 
+• 
+Full vibration test for Falcon 9, Electron, Soyuz, Dnepr and Long March 2D 
+• 
+QT and AT is performed on the unit to be shipped 
+Test 
+QT 
+AT 
+Functional 
+✔ 
+✔ 
+Vibration 
+ 
+✔ 
+Thermal Cycling 
+ 
+✔ 
+Thermal Vacuum 
+ 
+✔ 
+Antenna network VSWR Test 
+✔ 
+✔ 
+ 
+4 
+ 
+
+ 
+MECHANICAL INTERFACE AND DIMENSIONS 
+ 
+ 
+ 
+5 
+ 
+

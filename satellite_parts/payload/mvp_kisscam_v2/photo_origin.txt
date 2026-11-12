@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/satsearch_datasheet_jexj8g_mvp-aerospace_kisscam-v2.pdf
+method: product image from the catalog page https://satsearch.co/products/mvp-aerospace-kisscam-v2

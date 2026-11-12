@@ -1,0 +1,127 @@
+{
+ "id": "bhcs_m3x12",
+ "name": "Button head socket screw M3 x 12 (ISO 7380-1)",
+ "category": "fasteners",
+ "subcategory": "screw",
+ "vendor": "generic (ISO 7380-1)",
+ "model": "ISO 7380-1 M3x12",
+ "dimensions_mm": {
+  "x": 5.7,
+  "y": 5.7,
+  "z": 13.65
+ },
+ "mass_g": 0.67,
+ "source": {
+  "type": "standard",
+  "url": "https://westfieldfasteners.co.uk/Standards/ScrewBolt-SHBtn-M.pdf",
+  "document": {
+   "title": "ISO 7380-1 hexagon socket button head screws, dimension table (Westfield Fasteners standards sheet)",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "dk (max) 5.7, k (max) 1.65, socket s 2.0, pitch 0.5 mm. Mass 0.67 g per piece from the approximate mass table (kg per 1000 pcs, steel) at https://fasten.it/norms/norm/din_en_iso_7380-1. Head drawn as a short cylinder (the real head is domed)."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "material": "stainless steel A2/A4 or alloy steel 10.9",
+ "thread_pitch_mm": 0.5,
+ "mass_note": "from the ISO 7380-1 mass table (steel)",
+ "cost": {
+  "value": 0.1,
+  "currency": "USD",
+  "basis": "list_price",
+  "source": null
+ },
+ "cost_note": "typical COTS price per piece, approximate",
+ "geometry": {
+  "measured_bbox_mm": [
+   5.7,
+   5.68,
+   13.65
+  ],
+  "mesh_volume_mm3": 122.7,
+  "watertight": true,
+  "render_kind": "screw",
+  "effective_density_g_cm3": 5.462,
+  "bodies": {
+   "part": [
+    {
+     "name": "head",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__head.stl"
+    },
+    {
+     "name": "shank",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__shank.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 356
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "head",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__head.stl"
+    },
+    {
+     "name": "shank",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__shank.stl"
+    }
+   ]
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": null,
+  "photo_kind": null,
+  "datasheet_url": "https://westfieldfasteners.co.uk/Standards/ScrewBolt-SHBtn-M.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

@@ -1,0 +1,121 @@
+ 
+SSA01 – WIDE BANDWIDTH S-BAND 
+PATCH ANTENNA 
+PRODUCT NAME 
+SSA01- WIDE BANDWIDTH S-BAND PATCH ANTENNA 
+SUMMARY 
+The EXA SSA01 is a wide bandwidth S-band antenna than can accommodate a bandwidth of up to 
+195 MHz for missions that need greater speed and/or bandwidth separation capabilities and great 
+flexibility on the final frequencies selection. It will work between 2025 and 2120 MHz and 2200 and 
+2300 MHz without sacrificing gain, allowing your mission to not wait for the final bands and 
+frequencies approval: By the time you get your approval papers from your telecommunications 
+authority, you will be ready to fly, just request a frequency within SSA01’s ample range and you save 
+at least 6 months of red tape time. 
+FEATURES 
+• 
+Flight heritage since 2020 
+• 
+Wide bandwidth: 2025 to 2120 MHz and 2200 to 2300 MHz 
+• 
+Only 4.8mm thickness 
+• 
+Custom configurable choice of connectors and/or cables  
+• 
+Wide FOV of 120 degrees 
+• 
+Designed for LEO missions and requirements 
+• 
+Manufactured according to NASA and ESA space standards and materials 
+• 
+Functional, performance, thermal bake out and vibration tests provided with 
+documentation. 
+• 
+Compatible and compliant with standard deployers and CubeSat Standard 
+
+ 
+PERFORMANCE 
+• 
+Band Range:  
+o First range: 2025 to 2120MHz 
+o Second range: 2200 to 2300MHz 
+• 
+6.5 dB Gain typical 
+• 
+195 MHz total bandwidth 
+• 
+FOV 120 degrees aperture: 
+o Vertical beam: 60 degrees 
+o Horizontal beam: 60 degrees 
+• 
+Impedance: 50 Ohms 
+• 
+Polarization: RHCP 
+• 
+F/B ratio: > 20 dB 
+• 
+RH/LH isolation: 14 dB typical 
+• 
+VSWR: 
+o < 1.20 for center band frequencies 
+o < 1.85 for frequency range 
+PRODUCT PROPERTIES 
+• 
+Mass:  40 g  
+• 
+Dimensions: 96.5 x 69.7 x 4.8  mm 
+• 
+Operating Temperature: -80 to +140°C 
+• 
+Radiation Tolerance: 4 years minimum in LEO 
+MATERIALS 
+• 
+Only TML and CVCM < 1% materials used, NASA and ESA approved 
+• 
+Antenna Material:  Rogers 4350 
+• 
+Connector:  SMA, MCX or Uf.l  
+• 
+PTFE (Teflon) space grade cables, coax, custom choice 
+TESTING 
+All antennas are provided with tests reports regarding: 
+• 
+Thermal Bake out (10E-5 mbar @ 50C for 72 hours) 
+• 
+Full vibration test for Falcon 9, Electron, Soyuz, Dnepr and Long March 2D 
+• 
+QT and AT is performed on the unit to be shipped 
+Test 
+QT 
+AT 
+Functional 
+✔ 
+✔ 
+Vibration 
+ 
+✔ 
+Thermal Cycling 
+ 
+✔ 
+Thermal Vacuum 
+ 
+✔ 
+Antenna network VSWR Test 
+✔ 
+✔ 
+ 
+2 
+ 
+
+ 
+ 
+CONFIGURATION and PRICES 
+• 
+SSA01  Wide Bandwidth S-Band Patch Antenna: 1700€  
+AVAILABILITY: 
+• 
+Immediately  
+ 
+ 
+3 
+ 
+

@@ -1,0 +1,90 @@
+MS289 Hydrogen Peroxide​
++ Alchohol Based Additives​
+Our proprietary hydrogen
+peroxide-alchohol based fuel
+with specialized additives
+enhances performance.
+Efficient & Reliable 
+Engine ​Design
+Advanced combustion
+chamber optimizes efficiency
+for our unique fuel.
+Ultra-High Temperature 
+Ceramic Catalyst
+1400 °C catalyst optimizes
+performance by decomposing
+H₂O₂ and combusting alchohol to
+give steam and carbon-dioxide
+ACHIEVABLE THROUGH 
+THREE MAJOR INNOVATIONS
+COST-EFFECTIVE
+60% reduced operational costs. 
+RAPID AGILITY
+20x times more agile than the
+electric propulsion system
+SAFE AND GREEN
+Proprietary fuel comparable
+in safety to common salt
+HIGH PERFORMANCE
+Achieved an ISP of 250 seconds.
+CUTTING-EDGE:  TECHNOLOGY
+manastuspace.com
+@2025 by Manastu Space Technologies Private Limited
+Manastu Space's Vyom 2U is an innovative monopropellant
+green propulsion system designed specifically for CubeSats.
+Engineered for compactness and customization, our system
+provides unparalleled safety and ease of handling, utilizing a
+non-toxic 
+propellant 
+MS289 
+that 
+significantly 
+reduces
+operational risks. This advanced and cost effective propulsion
+technology ensures high agility and performance, making it the
+ideal solution for CubeSat missions requiring attitude control,
+orbit change, station keeping, collision avoidance and de-
+orbiting
+VYOM 2U
+GREEN PROPULSION SYSTEM
+
+VYOM 2U
+Thrust
+1.1 N 
+Total Impulse 
+1700 N-s
+Specific Impulse
+~250 s (at BOL)
+Max continuous firing time
+30 s
+Supply voltage /Operating
+5 VDC (Regulated),
+12 VDC (Unregulated)
+Propellant 
+MS289 (Hydrogen peroxide
+- alchohol based)
+Mass (Dry/Wet)
+1.98 kg (Dry), 2.75 kg (Wet)
+System Dimensions  
+96 x 96 x 220 mm
+Operational Temp. Range
+- 10 °C to 50 °C
+Pre-heat time/ temperature
+10 to 20 mins (Based on power)
+Interfaces:
+Mechanical
+Electrical 
+Data 
+8 X M4 Threaded Holes
+As per user requirements 
+RS485 (can be customized)  
+System Power
+Satellite Weight
+For 5U to 24U+ satellites
+THRUSTER FIRING
+ 15 W (Preheat), 5 W (Firing)
+manastuspace.com
+@2025 by Manastu Space Technologies Private Limited
+VYOM 2U
+THRUSTER SPECIFICATIONS
+

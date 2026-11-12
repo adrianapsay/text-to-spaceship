@@ -1,0 +1,215 @@
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Based on Airbus Space’s expertise and flight-proven 
+heritage with lithium-ion batteries, this product line is 
+geared towards the launcher market. 
+ 
+Composed 
+of 
+two 
+different 
+electrical 
+configurations, it offers the best compromise 
+between mechanical performance, safety and 
+reliability, all necessary for the success of launcher 
+missions. The modules can be used to power the 
+launcher or to power the pyrotechnics, for example. 
+Each module can operate stand-alone or in 
+series/parallel with other modules. 
+ 
+The module is based on a simple design, using 
+COTS lithium-ion cells, fully qualified by Airbus for 
+launcher 
+applications, 
+resulting 
+in 
+a 
+very 
+competitive 
+price 
+proposal. 
+Each 
+module 
+incorporates fuses welded to a PCB to ensure safety 
+in the event of an external short circuit, for example.  
+ 
+LAUNCHER-BATT was selected by ArianeGroup, the European leader of space launchers, for the future 
+Ariane 6.  
+ 
+To date, more than 150 modules have been successfully manufactured and tested at the Airbus Battery 
+Assembly Line in Toulouse (France). The first launch is planned for mid-2024. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+DEFENCE AND SPACE 
+Space Products 
+ 
+ 
+ 
+  LAUNCHER-BATT 
+A battery product line made  
+for Launchers 
+ 
+P
+o
+w
+e
+r 
+ 
+
+SPACE PRODUCTS 
+ 
+SMALL (-S) 
+LARGE (-L) 
+Electrical 
+Battery type 
+COTS Li-ion  
+Voltage range 
+21.6 to 33.6 V 
+40.5 to 63 V 
+Nominal capacity1 
+9 Ah 
+30 Ah 
+Nominal energy1 
+259 Wh 
+1,620 Wh 
+Energy density 
+115 Wh/kg 
+165 Wh/kg 
+Max. continuous charge 
+current 
+3 A 
+10 A 
+Max. continuous 
+discharge current 
+9 A 
+33 A 
+Max. pulse discharge 
+current 
+50 A (< 20 ms) 
+62 A (< 600 ms) 
+230 A (< 15 ms) 
+Physical 
+characteristics 
+Dimensions (L x W x H) 
+220 x 130 x 110 mm 
+365 x 270 x 110 mm 
+Weight 
+2.2 kg 
+9.8 kg 
+Environment 
+Mounting configuration 
+Internal to the S/C 
+Internal to the S/C 
+Thermal control 
+Insulated modules 
+Insulated modules 
+Vibrations 
+Sine: 22.5 g 
+Random: 25 g RMS 
+Sine: 22.5 g 
+Random: 17.6 g RMS 
+Shock 
+100 g 100 Hz, 1,800 g 2 kHz, 
+5,000 g 3.5 kHz 
+100 g 100 Hz, 1,000 g 1 kHz, 
+1,000 g 10 kHz 
+Radiation 
+N/A 
+Embedded functions 
+Thermal hardware 
+No hardware in baseline 
+No hardware in baseline 
+Electronics 
+Protection fuses 
+Protection fuses 
+Use case example 
+Mission type 
+Launcher missions 
+(Pyrotechnics order) 
+Launcher missions 
+(Auxiliary Power Unit supply
+Power conditioning and 
+distribution units supply) 
+Typical cycle life 
+On ground:  
+3 years storage at +5°C, 30% 
+SoC 
+11.5 months at +25°C, 40% 
+SoC 
+2 months at +40°C, 40% SoC
+1 month at +28°C, 100% SoC
+10 days at +50°C, 100% SoC
+In operation: 
+1 cycle, avg. C/2, max. 5C, 
+15% DoD 
+On ground: 
+3 years storage at +5°C, 30% 
+SoC 
+11.5 months at +25°C, 40% 
+SoC 
+2 months at +40°C, 40% SoC
+1 month at +28°C, 100% SoC
+10 days at +50°C, 100% SoC
+In operation: 
+1 cycle, avg. C/6, max. 1.5C, 
+70% DoD 
+Nominal temperature 
+range 
+(at cell level) 
++0 to +60°C 
++0 to +60°C 
+Failure 
+1 cell failure compatible at 
+least 
+1 cell failure compatible at 
+least 
+ 
+1 At C/5, 25°C, on 2.5-4.2 V range at cell level
+ 
+ 
+ 
+ 
+ 
+LAUNCHER-BATT / Non-contractual document, subject to changes. 
+This document shall not be reproduced, in whole or in part, without prior consent. 
+© 2024 Airbus Defence and Space SAS 
+Airbus Defence and Space 
+space.products@airbus.com 
+https://www.airbus.com/en/space/space-equipment 
+

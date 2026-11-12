@@ -1,0 +1,844 @@
+id,category,complete,photo,cad,datasheets,source_type,image_cad_verdict,image_cad_note,missing
+aac_gnss_701,adcs,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+aac_iadcs200,adcs,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+aac_iadcs400,adcs,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+aac_mag3,adcs,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+aac_mm200_flanged,adcs,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+aac_mtq800,adcs,yes,vendor,yes,2,datasheet,match,"detail level: rod with clamps and driver board, matches the photo",
+aac_mtq800_driver,adcs,no,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",fields: adcs or electrical or rf
+aac_pg400,adcs,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+aac_rw210_1p5,adcs,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+aac_rw210_3,adcs,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+aac_rw210_6,adcs,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+aac_rw222,adcs,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+aac_rw400_15,adcs,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+aac_rw400_30,adcs,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+aac_rw400_50,adcs,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+aac_ss200,adcs,yes,vendor,yes,3,datasheet,match,"same overall form, proportions and main features",
+aac_st200,adcs,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+aac_st400,adcs,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+adcole_mai_25,adcs,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+adcole_mai_400,adcs,yes,vendor,yes,3,datasheet,match,"same overall form, proportions and main features",
+adcole_mai_500,adcs,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+adcole_mai_smallsat_sun_sensor,adcs,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+adcole_mai_ss,adcs,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+adcole_miniature_spinning_sun_sensor,adcs,no,none,yes,1,datasheet,no_photo,,photo
+adi_adis16470,adcs,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+adi_adis16475,adcs,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+adi_adis16488a,adcs,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+adi_adis16495,adcs,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+adi_adis16505,adcs,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+airbus_astrix_ns,adcs,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+airbus_leopard,adcs,yes,vendor,yes,1,datasheet,match_family,same overall form; detail differs (photo shows the product family or internal layout),
+airbus_lion_1300_gnss_receiver,adcs,yes,vendor,yes,1,datasheet,match_family,same overall form; detail differs (photo shows the product family or internal layout),
+arcsec_sagitta,adcs,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+arcsec_twinkle,adcs,yes,vendor,yes,1,datasheet,match_family,photo shows the product family or several units; CAD matches the envelope and main features of this model,
+astrofein_rw100,adcs,yes,vendor,yes,3,datasheet,match,rebuilt 2026-11-10: round housing on a flange,
+astrofein_rw150,adcs,yes,vendor,yes,3,datasheet,match,rebuilt 2026-11-10: round housing on a flange,
+astrofein_rw1a,adcs,yes,vendor,yes,3,datasheet,match,rebuilt 2026-11-10: round housing on a flange,
+astrofein_rw1b,adcs,yes,vendor,yes,3,datasheet,match,rebuilt 2026-11-10: round housing on a flange,
+astrofein_rw25,adcs,yes,vendor,yes,3,datasheet,match,rebuilt 2026-11-10: round housing on a flange,
+astrofein_rw35,adcs,yes,vendor,yes,3,datasheet,match,rebuilt 2026-11-10: round housing on a flange,
+astrofein_rw90,adcs,yes,vendor,yes,3,datasheet,match,rebuilt 2026-11-10: round housing on a flange,
+azista_magnetorquer,adcs,no,none,yes,1,datasheet,no_photo,,photo
+bartington_mag_13_three_axis_fluxgate_magnetometer,adcs,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+bartington_spacemag_lite,adcs,yes,vendor,yes,1,datasheet,match_family,photo shows the product family or several units; CAD matches the envelope and main features of this model,
+bct_nst_full,adcs,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+bct_nst_mid,adcs,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+bct_nst_standard,adcs,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+bct_rw1,adcs,no,vendor,yes,0,datasheet,match,same overall form and main features,datasheet
+bct_rw16,adcs,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+bct_rw4,adcs,no,vendor,yes,0,datasheet,match_family,photo shows this product family (group shot or sibling unit); detail CAD matches the main features,datasheet
+bct_rw8,adcs,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+bct_rwp015,adcs,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+bct_rwp050,adcs,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+bct_rwp100,adcs,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+bct_rwp500,adcs,no,vendor,yes,0,datasheet,match,same overall form and main features,datasheet
+bct_xact100_electronics,adcs,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+bct_xact15,adcs,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+bct_xact50,adcs,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+berlin_gps_110,adcs,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+beyond_leorix,adcs,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+beyondgravity_gnss_antenna_extended_pec,adcs,no,none,yes,1,datasheet,no_photo,,photo
+beyondgravity_gnss_antenna_geo_pec,adcs,no,none,yes,1,datasheet,no_photo,,photo
+beyondgravity_gnss_antenna_helix,adcs,no,none,yes,1,datasheet,no_photo,,photo
+beyondgravity_gnss_antenna_l1_pec,adcs,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+beyondgravity_gnss_antenna_pec,adcs,no,none,yes,1,datasheet,no_photo,,photo
+beyondgravity_navrix_pinpoint,adcs,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+billingsley_hfm500_high_field_triaxial_fluxgate_magnetometer,adcs,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+billingsley_tfm100g2,adcs,no,none,yes,1,datasheet,no_photo,,photo
+billingsley_tfm100s,adcs,no,none,yes,1,datasheet,no_photo,,photo
+billingsley_tfm65_vqs,adcs,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+bradford_fine_sun_sensor,adcs,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, or product family photo)",
+bradford_mini_fine_sun_sensor,adcs,yes,vendor,yes,1,datasheet,match,"detail level: housing with two bolt ears and window, matches the photo",
+bst_rwa05,adcs,yes,vendor,yes,2,datasheet,match,rebuilt 2026-11-10: round housing on a flange,
+bst_st200,adcs,yes,vendor,yes,1,datasheet,match_family,photo shows the product family or several units; CAD matches the envelope and main features of this model,
+bst_st200_baffle,adcs,yes,vendor,yes,1,datasheet,match_family,photo shows the product family or several units; CAD matches the envelope and main features of this model,
+calian_tw2710,adcs,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+cgstl_cgudss01,adcs,no,vendor,yes,0,datasheet,match,"same overall form, proportions and main features",datasheet
+cgstl_cgumm01,adcs,no,vendor,yes,0,datasheet,match,"same overall form, proportions and main features",datasheet
+cubespace_cubemag_compact,adcs,yes,vendor,yes,2,datasheet,match_family,photo shows the product family or several units; CAD matches the envelope and main features of this model,
+cubespace_cubemag_deployable,adcs,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+cubespace_cubesense_earth,adcs,yes,vendor,yes,2,datasheet,match_family,geometry rebuilt 2026-11-11 to follow the photo (cylindrical body / lens on the box); details simplified,
+cubespace_cubesense_sun,adcs,yes,vendor,yes,2,datasheet,match_family,geometry rebuilt 2026-11-11 to follow the photo (cylindrical body / lens on the box); details simplified,
+cubespace_cubestar,adcs,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+cubespace_cubetorquer_cr0002,adcs,yes,vendor,yes,2,datasheet,match_family,photo shows the product family or several units; CAD matches the envelope and main features of this model,
+cubespace_cubetorquer_cr0003,adcs,yes,vendor,yes,1,datasheet,match_family,photo shows the product family or several units; CAD matches the envelope and main features of this model,
+cubespace_cubetorquer_cr0004,adcs,yes,vendor,yes,2,datasheet,match_family,photo shows the product family or several units; CAD matches the envelope and main features of this model,
+cubespace_cubetorquer_cr0006,adcs,yes,vendor,yes,2,datasheet,match_family,photo shows the product family or several units; CAD matches the envelope and main features of this model,
+cubespace_cubetorquer_cr0008,adcs,no,vendor,yes,0,datasheet,match_family,photo shows the product family or several units; CAD matches the envelope and main features of this model,datasheet
+cubespace_cubetorquer_cr0010,adcs,yes,vendor,yes,1,datasheet,match_family,photo shows the product family or several units; CAD matches the envelope and main features of this model,
+cubespace_cubetorquer_cr0012,adcs,yes,vendor,yes,2,datasheet,match_family,photo shows the product family or several units; CAD matches the envelope and main features of this model,
+cubespace_cubetorquer_cr0020,adcs,yes,vendor,yes,2,datasheet,match_family,photo shows the product family or several units; CAD matches the envelope and main features of this model,
+cubespace_cubewheel_cw0017,adcs,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+cubespace_cubewheel_cw0057,adcs,yes,vendor,yes,2,datasheet,match_family,photo shows the product family or several units; CAD matches the envelope and main features of this model,
+cubespace_cubewheel_cw0162,adcs,yes,representative,yes,2,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+cubespace_cubewheel_cw0500,adcs,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+cubespace_cubewheel_cw1200,adcs,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+cubespace_cubewheel_cw2500,adcs,yes,representative,yes,2,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+ecuadorian_gca01_compact_gnss_active_patch_antenna,adcs,no,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, or product family photo)",fields: adcs or electrical or rf
+ecuadorian_gca02_high_gain_l1_gnss_active_patch_antenna,adcs,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, or product family photo)",
+epson_m_g370pds,adcs,no,representative,yes,0,datasheet,match_family,"photo is a representative or family image, same form and proportions",datasheet
+exa_dmt01_ultra_high_precision_magnetorquer_controller,adcs,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+general_explorer_gps_spaceborne_receiver,adcs,no,none,yes,1,datasheet,no_photo,,photo
+general_sentinel_m_code_gps_receiver,adcs,no,none,yes,1,datasheet,no_photo,,photo
+general_viceroy_4_gps_spaceborne_receiver,adcs,no,none,yes,1,datasheet,no_photo,,photo
+gomspace_nanosense_fss,adcs,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+gomspace_nanosense_gps_kits,adcs,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+gomspace_nanosense_m315,adcs,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+gomspace_nanotorque_gst600_mk2,adcs,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+gomspace_nanotorque_gsw600,adcs,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+gomspace_nanotorque_gsw600_pyramid,adcs,no,vendor,yes,2,datasheet,envelope_only,box envelope; the unit is four wheels on a pyramid bracket,photo-CAD check (envelope_only)
+gomspace_nanotorque_z_axis_internal,adcs,no,vendor,yes,1,datasheet,envelope_only,CAD is the stated envelope; the photo shows a differently shaped assembly,photo-CAD check (envelope_only); fields: adcs or electrical or rf
+granstal_gs_rw_reaction_wheels,adcs,no,vendor,yes,1,datasheet,envelope_only,CAD is the stated envelope; the photo shows a differently shaped assembly,photo-CAD check (envelope_only)
+granstal_gsd400_gnss_receiver,adcs,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+granstal_gsd700_gnss_receiver,adcs,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+granstal_gsd800_gnss_receiver,adcs,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+huav_wis210y_3_axis_high_performance_mems_gyroscope,adcs,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+huav_wis310y_3_axis_high_performance_mems_gyroscope,adcs,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+hyperion_gnss200,adcs,no,none,yes,1,datasheet,no_photo,,photo
+hyperion_iacs200_1_5,adcs,no,none,yes,1,datasheet,no_photo,,photo
+isis_gnss_patch_gapa,adcs,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+isis_imtq,adcs,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+javad_spaceant,adcs,no,none,yes,1,datasheet,no_photo,,photo
+jenaoptronik_astro_aps,adcs,yes,vendor,yes,3,datasheet,match_family,photo shows this product family (group shot or sibling unit); detail CAD matches the main features,
+kairospace_star_tracker,adcs,yes,vendor,yes,1,datasheet,match_family,geometry rebuilt 2026-11-11 to follow the photo (cylindrical body / lens on the box); details simplified,
+lensrd_bison64_et,adcs,no,vendor,yes,3,unverified,match,"same overall form, proportions and main features",verified source
+leonardo_a_str,adcs,yes,vendor,yes,1,datasheet,match_family,"detail level: electronics box with conical sun baffle, same form as the photo (photo shows MLI-wrapped units)",
+leonardo_ires,adcs,no,vendor,yes,1,datasheet,envelope_only,CAD is the stated envelope; the photo shows a differently shaped assembly,photo-CAD check (envelope_only)
+letscom_cosmoorbit_xe_gnss_receiver,adcs,no,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",fields: adcs or electrical or rf
+lusospace_mag28,adcs,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+nanoavionics_4rw0,adcs,no,vendor,yes,0,datasheet,match_family,same overall form; detail differs (photo shows the product family or internal layout),datasheet
+nanoavionics_mtq_m6p,adcs,no,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",sourced dimensions
+nanoavionics_rw0,adcs,no,vendor,yes,0,datasheet,match,rebuilt 2026-11-10: round housing on a flange,datasheet
+needronix_eagle_fss,adcs,no,vendor,yes,0,datasheet,match,"same overall form, proportions and main features",datasheet
+newspace_nctr_m003,adcs,no,none,yes,1,datasheet,no_photo,,photo
+newspace_nsgy_001,adcs,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, or product family photo)",
+novatel_imu_kvh1750,adcs,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+novatel_oem719,adcs,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+nss_aquila_h01,adcs,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+nss_gemini_sr5,adcs,yes,vendor,yes,1,datasheet,match,"detail level: flat housing with mounting feet, same form as the photo",
+nss_libra_6,adcs,yes,vendor,yes,1,datasheet,match,rebuilt 2026-11-10: round housing on a flange,
+nss_ncss_sa05,adcs,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+nss_nctr_m002,adcs,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+nss_nctr_m012,adcs,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+nss_ngps_01_422,adcs,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+nss_nmrm_magnetometer,adcs,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+nss_nrwa_t005,adcs,yes,vendor,yes,1,datasheet,match,rebuilt 2026-11-10: round housing on a flange,
+nss_nrwa_t065,adcs,yes,vendor,yes,1,datasheet,match,rebuilt 2026-11-10: round housing on a flange,
+nss_nrwa_t2,adcs,yes,vendor,yes,1,datasheet,match,rebuilt 2026-11-10: round housing on a flange,
+pumpkin_gpsrm1,adcs,yes,vendor,yes,3,datasheet,match,"same overall form, proportions and main features",
+redwire_micro_sun_sensor,adcs,yes,vendor,yes,1,datasheet,match,"detail level: small PCB with sensor, matches the photo",
+redwire_spectratrac_star_tracker,adcs,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+rocketlab_rw0003,adcs,yes,vendor,yes,3,datasheet,match,rebuilt 2026-11-10: round housing on a flange,
+rocketlab_rw001,adcs,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+rocketlab_rw003,adcs,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+rocketlab_rw006,adcs,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+rocketlab_rw02,adcs,yes,vendor,yes,2,datasheet,match,rebuilt 2026-11-10: round housing on a flange,
+rocketlab_rw04_heavy,adcs,no,none,yes,3,datasheet,no_photo,,photo
+rocketlab_rw4_12,adcs,no,none,yes,3,datasheet,no_photo,,photo
+rocketlab_rw4_1p0,adcs,no,none,yes,3,datasheet,no_photo,,photo
+rocketlab_rw5_12,adcs,no,none,yes,3,datasheet,no_photo,,photo
+rocketlab_st16rt2,adcs,yes,vendor,yes,3,datasheet,match,rebuilt 2026-11-10: conical baffle,
+rocketlab_st16rt2_large,adcs,yes,vendor,yes,3,datasheet,match,rebuilt 2026-11-10: conical baffle,
+rocketlab_st16rt2_nobaffle,adcs,yes,vendor,yes,3,datasheet,match,"same overall form, proportions and main features",
+safran_stim277h,adcs,no,none,yes,1,datasheet,no_photo,,photo
+safran_stim300,adcs,no,none,yes,1,datasheet,no_photo,,photo
+safran_stim377h,adcs,no,none,yes,1,datasheet,no_photo,,photo
+sensonor_stim210,adcs,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (family photo, flange or housing detail)",
+sensonor_stim277h,adcs,yes,representative,yes,2,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+sensonor_stim300,adcs,yes,representative,yes,2,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+sensonor_stim318,adcs,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+septentrio_mosaic_x5,adcs,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+servo_dual_horizon_crossing_indicator,adcs,no,vendor,yes,1,datasheet,envelope_only,CAD is the stated envelope; the photo shows a differently shaped assembly,photo-CAD check (envelope_only)
+servo_mides_earth_sensor,adcs,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+servo_mides_g,adcs,yes,vendor,yes,1,datasheet,match_family,same overall form; detail differs (photo shows the product family or internal layout),
+sitael_sitael_gps_receiver,adcs,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+sitael_sitael_rmw,adcs,yes,vendor,yes,1,datasheet,match_family,same overall form; detail differs (photo shows the product family or internal layout),
+skyfox_pinav_ng_space_friendly_cubesat_gps_l1_c_a_receiver_w,adcs,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+sodern_auriga_cp,adcs,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+sodern_auriga_sa_electronics,adcs,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+sodern_auriga_sa_head,adcs,no,vendor,yes,0,datasheet,match_family,photo shows this product family (group shot or sibling unit); detail CAD matches the main features,datasheet
+solar_advanced_coarse_sun_sensor_acss,adcs,no,none,yes,1,datasheet,no_photo,,photo
+solar_horizon_sensor_for_nano_satellites,adcs,no,none,yes,1,datasheet,no_photo,,photo
+solarmems_nanossoc_d60,adcs,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+solarmems_nanost_cubesat,adcs,yes,vendor,yes,1,datasheet,match_family,photo shows the product family or several units; CAD matches the envelope and main features of this model,
+space_fss_1_g1,adcs,no,none,yes,1,datasheet,no_photo,,photo
+space_whl_10,adcs,yes,vendor,yes,1,datasheet,match_family,same overall form; detail differs (photo shows the product family or internal layout),
+space_whl_1000s,adcs,yes,vendor,yes,1,datasheet,match_family,same overall form; detail differs (photo shows the product family or internal layout),
+space_whl_50,adcs,yes,vendor,yes,1,datasheet,match_family,same overall form; detail differs (photo shows the product family or internal layout),
+spacemanic_celeste_gnss,adcs,yes,vendor,yes,1,datasheet,match_family,photo shows the product family or several units; CAD matches the envelope and main features of this model,
+spacetech_coarse_earth_and_sun_sensor_cess,adcs,no,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",fields: adcs or electrical or rf
+sstl_sgr_ligo,adcs,yes,vendor,yes,1,datasheet,match_family,photo shows the product family or several units; CAD matches the envelope and main features of this model,
+takeme2space_30mnms_reaction_wheel_pyramidal_assembly,adcs,no,vendor,yes,1,datasheet,envelope_only,CAD is the stated envelope; the photo shows a differently shaped assembly,photo-CAD check (envelope_only); fields: adcs or electrical or rf
+takeme2space_aircoil,adcs,no,vendor,yes,1,datasheet,envelope_only,CAD is the stated envelope; the photo shows a differently shaped assembly,photo-CAD check (envelope_only); fields: adcs or electrical or rf
+takeme2space_earthsense,adcs,no,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",fields: adcs or electrical or rf
+takeme2space_motionsense_imu_sensor_set_for_satellites,adcs,no,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",fields: adcs or electrical or rf
+takeme2space_navcube_multi_gnss_navigation_module_for_cubesa,adcs,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, or product family photo)",
+takeme2space_spacewheel,adcs,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+takeme2space_starsense_lite_startracker,adcs,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, or product family photo)",
+takeme2space_sunsense,adcs,no,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",fields: adcs or electrical or rf
+tensortech_adcs_mtq,adcs,no,vendor,yes,1,unverified,match,"same overall form, proportions and main features",verified source
+tensortech_fss_15m,adcs,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+terma_t1_baffle_26deg,adcs,yes,vendor,yes,3,datasheet,match_family,photo shows this product family (group shot or sibling unit); detail CAD matches the main features,
+terma_t1_baffle_30deg,adcs,yes,vendor,yes,3,datasheet,match_family,photo shows this product family (group shot or sibling unit); detail CAD matches the main features,
+terma_t1_electrical_unit,adcs,yes,vendor,yes,3,datasheet,match_family,photo shows this product family (group shot or sibling unit); detail CAD matches the main features,
+terma_t1_optical_head,adcs,yes,vendor,yes,3,datasheet,match_family,photo shows this product family (group shot or sibling unit); detail CAD matches the main features,
+terma_t3,adcs,yes,vendor,yes,1,datasheet,match_family,photo shows this product family (group shot or sibling unit); detail CAD matches the main features,
+ublox_neo_m9n,adcs,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+umbra_magnetorquer_6,adcs,no,none,yes,1,datasheet,no_photo,,photo
+umbra_mss_package,adcs,no,none,yes,1,datasheet,no_photo,,photo
+umbra_reaction_wheel,adcs,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+vectronic_vst_41m,adcs,no,none,yes,1,datasheet,no_photo,,photo
+vectronic_vst_68m,adcs,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+voyager_vantagesun_medium_mss01,adcs,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (family photo, flange or housing detail)",
+voyager_vantagesun_medium_mss02,adcs,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (family photo, flange or housing detail)",
+wittenstein_cyber_reaction_wheel_2,adcs,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+xovian_4pi_sun_sensor,adcs,no,none,yes,1,datasheet,no_photo,,photo; fields: adcs or electrical or rf
+xovian_magnetic_torquer_rod_leo_0_2_am2,adcs,no,none,yes,1,datasheet,no_photo,,photo
+2ndspace_master_obc_satellite_on_board_computer,avionics,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+aac_kryten_m3,avionics,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+aac_sirius_obc_leon3ft,avionics,yes,vendor,yes,3,datasheet,match,"same overall form, proportions and main features",
+aac_sirius_tcm_leon3ft,avionics,yes,vendor,yes,3,datasheet,match,"same overall form, proportions and main features",
+airbus_clock_monitoring_and_control_unit,avionics,no,none,yes,1,datasheet,no_photo,,photo
+berlin_cdh_110,avionics,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+beyond_fox_payload_processor,avionics,no,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",fields: electrical or compute
+beyond_next_generation_on_board_computer,avionics,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+beyondgravity_cobc,avionics,no,none,yes,1,datasheet,no_photo,,photo
+c3s_obc,avionics,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+cambrian_gigcompute_gc_002003,avionics,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+cavu_cdh_fs,avionics,no,none,yes,1,datasheet,no_photo,,photo
+cavu_instrument_control_unit_icu,avionics,no,none,yes,1,datasheet,no_photo,,photo; fields: electrical or compute
+cavu_obc_pro2,avionics,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+cesiumastro_sbc_1461,avionics,no,none,yes,1,datasheet,no_photo,,photo; fields: electrical or compute
+colossus_colossus_falcon_gpu_platform,avionics,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+colossus_colossus_kestrel_gpu_platform,avionics,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+colossus_colossus_pelican_ssd,avionics,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+craft_spacewire_router,avionics,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+dsi_on_board_computer,avionics,no,vendor,yes,1,datasheet,envelope_only,CAD is the stated envelope; the photo shows a differently shaped assembly,photo-CAD check (envelope_only); fields: electrical or compute
+endurosat_obc,avionics,no,vendor,yes,2,unverified,match,"same overall form, proportions and main features",verified source
+gomspace_nanomind_a3200,avionics,yes,representative,yes,2,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+innoflight_cfc_400,avionics,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+innoflight_cfc_500_1,avionics,no,none,yes,1,datasheet,no_photo,,photo
+innoflight_cfc_500_3,avionics,no,none,yes,1,datasheet,no_photo,,photo
+isis_iobc,avionics,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+kp_leopard_edge_processing_for_nano_and_micro_satellites,avionics,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+nanoavionics_payload_controller_2p0,avionics,no,vendor,yes,0,unverified,match,"same overall form, proportions and main features",datasheet; verified source
+nanoavionics_satbus_3c2,avionics,no,vendor,yes,0,unverified,match,"same overall form, proportions and main features",datasheet; verified source
+reliasat_radsp_22_a,avionics,no,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",fields: electrical or compute
+sitle_sitle_ethernet_switch_es_01,avionics,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+space_ma61c_smallsat,avionics,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+space_proton2x_box,avionics,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+spacemanic_deep_thought_obc,avionics,no,none,yes,1,datasheet,no_photo,,photo
+spacemanic_eddie_obc,avionics,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+steel_electronique_mobc,avionics,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+steel_ninano_on_board_computer_for_nanosatellites,avionics,no,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",fields: electrical or compute
+takeme2space_cmcube,avionics,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+takeme2space_hosted_payload_control_board,avionics,no,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, or product family photo)",fields: electrical or compute
+takeme2space_zerocube,avionics,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+umbra_network_switch_8_1g,avionics,no,none,yes,1,datasheet,no_photo,,photo
+xiphos_q7,avionics,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+xiphos_q7s,avionics,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (family photo, flange or housing detail)",
+xiphos_q8,avionics,no,vendor,yes,0,datasheet,match,"same overall form, proportions and main features",datasheet
+xiphos_q8j,avionics,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+xiphos_xiphos_q9_versal_computer_on_module,avionics,no,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",fields: electrical or compute
+zaitra_skaidock,avionics,no,vendor,yes,1,datasheet,envelope_only,CAD is the stated envelope; the photo shows a differently shaped assembly,photo-CAD check (envelope_only)
+aac_ant_gps,comms,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+aac_pulsar_hstx,comms,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+aac_pulsar_sant,comms,no,vendor,yes,2,derived,match,"same overall form, proportions and main features",sourced dimensions
+aac_pulsar_stx,comms,no,none,yes,1,datasheet,no_photo,,photo
+aac_pulsar_tmtc,comms,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+aac_pulsar_vutrx,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+aac_pulsar_xant_plus,comms,no,none,yes,1,datasheet,no_photo,,photo
+aac_quasar_strx,comms,yes,representative,yes,2,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+aac_quasar_wsant,comms,no,none,yes,1,datasheet,no_photo,,photo
+aac_trx_u,comms,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+alenspace_sband_transceiver,comms,no,vendor,yes,0,unverified,match,"same overall form, proportions and main features",datasheet; verified source
+anywaves_compact_sband_ttc,comms,yes,vendor,yes,1,datasheet,match,rebuilt 2026-11-10: round radome (was a square patch),
+anywaves_gnss_all_bands_antenna,comms,no,vendor,yes,1,datasheet,envelope_only,CAD is the stated envelope; the photo shows a differently shaped assembly,photo-CAD check (envelope_only)
+anywaves_wide_beam_xband,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+beyond_ka_band_slice_frequency_converter,comms,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, or product family photo)",
+beyond_master_local_oscillator,comms,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, or product family photo)",
+calian_tw1322_gnss_antenna,comms,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+cavu_nano_x,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+cavu_x_transmitter,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+cesiumastro_sdr1701_110,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+cubecom_hdrtx_k_microsatellite_transmitter,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+cubecom_ktxg2_microsatellite_transmitter,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+cubecom_xant,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+ecuadorian_ssa01_wide_bandwidth_s_band_patch_antenna,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+ecuadorian_ssa02_34db_wide_bandwidth_amplified_s_band_patch_,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+endurosat_sband_patch,comms,no,vendor,yes,2,unverified,match,"same overall form, proportions and main features",verified source
+endurosat_sband_receiver,comms,no,representative,yes,1,unverified,match_family,"photo is a representative or family image, same form and proportions",verified source
+endurosat_sband_transmitter,comms,no,representative,yes,1,unverified,match_family,"photo is a representative or family image, same form and proportions",verified source
+endurosat_sband_wideband_patch,comms,no,vendor,yes,2,unverified,match,"same overall form, proportions and main features",verified source
+endurosat_uhf_antenna,comms,no,vendor,yes,2,unverified,match,"same overall form, proportions and main features",verified source
+endurosat_uhf_antenna_2u,comms,no,vendor,yes,1,unverified,match,"same overall form, proportions and main features",verified source
+endurosat_uhf_transceiver_gen3,comms,no,vendor,yes,1,unverified,match,"same overall form, proportions and main features",verified source
+endurosat_uhf_transceiver_ii,comms,no,vendor,yes,1,unverified,match,"same overall form, proportions and main features",verified source
+endurosat_xband_2x2_patch,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+endurosat_xband_4x4_patch,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+endurosat_xband_single_patch,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+endurosat_xband_transmitter,comms,no,vendor,yes,1,unverified,match,"same overall form, proportions and main features",verified source
+endurosat_xband_transmitter_2026,comms,no,vendor,yes,1,unverified,match,"same overall form, proportions and main features",verified source
+ettus_usrp_b205mini_i,comms,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+exa_ssa04_dual_s_c_band_patch_antenna,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+exa_sst01_secure_fhss_cubesat_uhf_transceiver,comms,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+exa_sst02_small_satellite_transceiver,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+general_hrt440_x_band_high_rate_transmitter,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+gomspace_nanocom_ant1090_p,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+gomspace_nanocom_ant2150,comms,yes,representative,yes,1,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+gomspace_nanocom_ant6f_uhf,comms,yes,representative,yes,2,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+gomspace_nanocom_ax100,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+gomspace_nanocom_ax2150,comms,yes,representative,yes,2,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+gomspace_nanocom_sdr_mk3,comms,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+honeywell_xdl_c301_hr_transmitter,comms,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, or product family photo)",
+hyperion_cubecat,comms,no,none,yes,1,datasheet,no_photo,,photo
+innovative_txs_s_band_transmitter,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+inrase_high_throughput_x_band_transmitter,comms,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, or product family photo)",
+inrase_x_band_payload_telemetry_antenna,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+iq_s_band_antennas,comms,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+iq_spacecom_sband_patch_dual,comms,yes,vendor,yes,1,datasheet,match_family,photo shows the product family or several units; CAD matches the envelope and main features of this model,
+iq_spacecom_sband_patch_single,comms,yes,vendor,yes,1,datasheet,match_family,photo shows the product family or several units; CAD matches the envelope and main features of this model,
+iq_spacecom_xlink_x,comms,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+isis_antenna_system,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+isis_antenna_system_6u,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+isis_sband_patch_sspa,comms,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+isis_sband_tx,comms,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+isis_trxuv,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+isis_trxvu,comms,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+isis_txs2,comms,no,vendor,yes,0,datasheet,match_family,photo matches the envelope and main features; details simplified,datasheet
+l3harris_ctt_524,comms,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+l3harris_cxs_1000,comms,no,none,yes,1,datasheet,no_photo,,photo
+libre_space_satnogs_comms,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+microwave_space_qualified_horn_antennas,comms,no,none,yes,1,datasheet,no_photo,,photo
+nanoavionics_satcom_uhf,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+nanoavionics_uhf_antenna_1x1u,comms,no,vendor,yes,0,datasheet,match,"same overall form, proportions and main features",datasheet
+nanoavionics_uhf_antenna_1x2u,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+nanoavionics_uhf_antenna_2x2u,comms,no,vendor,yes,0,datasheet,match,"same overall form, proportions and main features",datasheet
+needronix_cormorant,comms,no,vendor,yes,0,datasheet,match,"same overall form, proportions and main features",datasheet
+nss_gemini_a01,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+picosats_beamsat_ku_band_4x4_rgwg_antenna,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+picosats_radiosat_k_ka_band_transponder,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+picosats_radiosat_ku_band_transponder,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+picosats_radiosat_software_defined_radio,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+printech_ka_band_patch_antenna_array,comms,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+printech_x_band_2x2_patch_antenna_array,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+printech_x_band_8x8_patch_antenna_array,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+reliasat_fsn11200816qf,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+reliasat_leolink200_ka_band_beam_steering_antenna,comms,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+satlab_polaris_4_channel_ais_receiver,comms,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+satlab_srs3,comms,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+satlab_srs4,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+sdl_iris_lna,comms,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+sdl_iris_sspa,comms,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+sdl_iris_transponder,comms,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+skyfox_minipatch_l1_space_friendly_mini_active_gps_l1_patch_,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+skyfox_piadsb_ng_space_friendly_cubesat_ads_b_receiver,comms,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+skyfox_pipatch_dualband_space_friendly_active_cubesat_gnss_d,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+skyfox_pipatch_l1e1_space_friendly_active_gps_galileo_patch_,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+skyfox_pipatch_l1l2_space_friendly_active_gnss_l1_l2_patch_a,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+skyfox_pipatch_lg_space_friendly_cubesat_gps_l1_glonass_g1_a,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+skyfox_pipatch_max_space_friendly_active_multi_constellation,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+skyfox_pocketqube_ads_b_receiver_next_generation_pqadsb_ng_f,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+space_nanocom_ka_band_sdr,comms,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, or product family photo)",
+space_sdr_c,comms,no,vendor,yes,1,datasheet,envelope_only,CAD is the stated envelope; the photo shows a differently shaped assembly,photo-CAD check (envelope_only)
+spacemanic_murgas,comms,yes,vendor,yes,1,datasheet,match_family,photo shows the product family or several units; CAD matches the envelope and main features of this model,
+spacemanic_sam_s,comms,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (family photo, flange or housing detail)",
+spacequest_rx_2000_s_band_receiver,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+spacequest_trx_v_vhf_transceiver,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+spacequest_tx_2400_s_band_transmitter,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+syrlinks_ewc27,comms,no,vendor,yes,1,unverified,match,"same overall form, proportions and main features",verified source
+takeme2space_xhf_comms_uhf_vhf_communications_module,comms,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, or product family photo)",
+tendeg_katenna_1m,comms,no,vendor,yes,1,datasheet,envelope_only,CAD is the stated envelope; the photo shows a differently shaped assembly,photo-CAD check (envelope_only)
+trad_hircom,comms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+umbra_s_band_radio,comms,no,none,yes,1,datasheet,no_photo,,photo
+voyager_usgls_100,comms,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+voyager_ustdn_100,comms,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+voyager_uxbt_x_transponder,comms,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+bhcs_m3x10,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+bhcs_m3x12,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+bhcs_m3x16,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+bhcs_m3x20,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+bhcs_m3x6,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+bhcs_m3x8,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+bhcs_m4x10,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+bhcs_m4x12,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+bhcs_m4x16,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+bhcs_m4x20,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+bhcs_m4x6,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+bhcs_m4x8,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+bhcs_m5x10,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+bhcs_m5x12,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+bhcs_m5x16,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+bhcs_m5x20,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+bhcs_m5x8,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+bhcs_m6x10,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+bhcs_m6x12,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+bhcs_m6x16,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+bhcs_m6x20,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+csk_m2p5x10,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+csk_m2p5x5,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+csk_m2p5x6,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+csk_m2p5x8,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+csk_m3x10,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+csk_m3x12,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+csk_m3x16,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+csk_m3x5,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+csk_m3x6,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+csk_m3x8,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+hex_nut_m2,fasteners,yes,representative,yes,2,standard,match_family,"photo is a representative or family image, same form and proportions",
+hex_nut_m2p5,fasteners,yes,representative,yes,2,standard,match_family,"photo is a representative or family image, same form and proportions",
+hex_nut_m3,fasteners,yes,representative,yes,2,standard,match_family,"photo is a representative or family image, same form and proportions",
+hex_nut_m4,fasteners,yes,representative,yes,2,standard,match_family,"photo is a representative or family image, same form and proportions",
+hex_nut_m5,fasteners,yes,representative,yes,2,standard,match_family,"photo is a representative or family image, same form and proportions",
+hex_nut_m6,fasteners,yes,representative,yes,2,standard,match_family,"photo is a representative or family image, same form and proportions",
+pan_screw_m2p5x10,fasteners,no,none,yes,1,standard,no_photo,,photo
+pan_screw_m2p5x4,fasteners,no,none,yes,1,standard,no_photo,,photo
+pan_screw_m2p5x6,fasteners,no,none,yes,1,standard,no_photo,,photo
+pan_screw_m2p5x8,fasteners,no,none,yes,1,standard,no_photo,,photo
+pan_screw_m2x10,fasteners,no,none,yes,1,standard,no_photo,,photo
+pan_screw_m2x4,fasteners,no,none,yes,1,standard,no_photo,,photo
+pan_screw_m2x6,fasteners,no,none,yes,1,standard,no_photo,,photo
+pan_screw_m2x8,fasteners,no,none,yes,1,standard,no_photo,,photo
+pan_screw_m3x10,fasteners,no,none,yes,1,standard,no_photo,,photo
+pan_screw_m3x12,fasteners,no,none,yes,1,standard,no_photo,,photo
+pan_screw_m3x4,fasteners,no,none,yes,1,standard,no_photo,,photo
+pan_screw_m3x6,fasteners,no,none,yes,1,standard,no_photo,,photo
+pan_screw_m3x8,fasteners,no,none,yes,1,standard,no_photo,,photo
+pan_screw_m4x10,fasteners,no,none,yes,1,standard,no_photo,,photo
+pan_screw_m4x12,fasteners,no,none,yes,1,standard,no_photo,,photo
+pan_screw_m4x16,fasteners,no,none,yes,1,standard,no_photo,,photo
+pan_screw_m4x6,fasteners,no,none,yes,1,standard,no_photo,,photo
+pan_screw_m4x8,fasteners,no,none,yes,1,standard,no_photo,,photo
+set_screw_m3x10,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+set_screw_m3x4,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+set_screw_m3x6,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+set_screw_m3x8,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+set_screw_m4x10,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+set_screw_m4x12,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+set_screw_m4x4,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+set_screw_m4x6,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+set_screw_m4x8,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+set_screw_m5x10,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+set_screw_m5x12,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+set_screw_m5x5,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+set_screw_m5x8,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+set_screw_m6x10,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+set_screw_m6x12,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+set_screw_m6x6,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+set_screw_m6x8,fasteners,yes,representative,yes,1,standard,match,"same overall form, proportions and main features; representative family photo",
+shcs_m2p5x10,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m2p5x12,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m2p5x16,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m2p5x20,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m2p5x5,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m2p5x6,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m2p5x8,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m2x10,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m2x12,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m2x16,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m2x4,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m2x6,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m2x8,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m3x10,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m3x12,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m3x16,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m3x20,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m3x25,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m3x30,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m3x5,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m3x6,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m3x8,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m4x10,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m4x12,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m4x16,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m4x20,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m4x25,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m4x30,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m4x40,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m4x8,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m5x10,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m5x12,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m5x16,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m5x20,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m5x25,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m5x30,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m5x40,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m5x50,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m6x12,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m6x16,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m6x20,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m6x25,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m6x30,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m6x40,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m6x50,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+shcs_m6x60,fasteners,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+washer_m2,fasteners,yes,representative,yes,2,standard,match_family,photo shows the product family or several units; CAD matches the envelope and main features of this model,
+washer_m2p5,fasteners,yes,representative,yes,2,standard,match_family,photo shows the product family or several units; CAD matches the envelope and main features of this model,
+washer_m3,fasteners,yes,representative,yes,2,standard,match_family,photo shows the product family or several units; CAD matches the envelope and main features of this model,
+washer_m4,fasteners,yes,representative,yes,2,standard,match_family,photo shows the product family or several units; CAD matches the envelope and main features of this model,
+washer_m5,fasteners,yes,representative,yes,1,standard,match_family,photo shows the product family or several units; CAD matches the envelope and main features of this model,
+washer_m6,fasteners,yes,representative,yes,1,standard,match_family,photo shows the product family or several units; CAD matches the envelope and main features of this model,
+harwin_gecko_g125_10,harness,yes,representative,yes,1,derived,match_family,"photo is a representative or family image, same form and proportions",
+harwin_gecko_g125_12,harness,yes,representative,yes,2,derived,match_family,"photo is a representative or family image, same form and proportions",
+harwin_gecko_g125_20,harness,yes,representative,yes,1,derived,match_family,"photo is a representative or family image, same form and proportions",
+harwin_gecko_g125_4,harness,yes,representative,yes,2,derived,match_family,"photo is a representative or family image, same form and proportions",
+harwin_gecko_g125_6,harness,yes,representative,yes,2,derived,match_family,"photo is a representative or family image, same form and proportions",
+honeywell_zm10_switch,harness,no,representative,yes,1,datasheet,envelope_only,plain body; the lever and terminals are not modelled,photo-CAD check (envelope_only)
+honeywell_zm50_switch,harness,no,representative,yes,1,datasheet,envelope_only,plain body; the lever and terminals are not modelled,photo-CAD check (envelope_only)
+micro_d_15,harness,no,representative,yes,1,unverified,match_family,"photo is a representative or family image, same form and proportions",verified source
+micro_d_21,harness,no,representative,yes,1,unverified,match_family,"photo is a representative or family image, same form and proportions",verified source
+micro_d_25,harness,no,representative,yes,1,unverified,match_family,"photo is a representative or family image, same form and proportions",verified source
+micro_d_37,harness,no,representative,yes,1,unverified,match_family,"photo is a representative or family image, same form and proportions",verified source
+micro_d_9,harness,no,representative,yes,1,unverified,match_family,"photo is a representative or family image, same form and proportions",verified source
+samtec_esq_pc104_stack_64,harness,no,representative,yes,1,unverified,match_family,"photo is a representative or family image, same form and proportions",verified source
+bct_sada3,mechanisms,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+bct_sada3h,mechanisms,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+beyondgravity_pas_381s,mechanisms,no,none,yes,3,datasheet,no_photo,,photo
+cubesource_burnwing_eng_model,mechanisms,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+cubesource_burnwing_flight,mechanisms,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+dcubed_nd3pp,mechanisms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+dcubed_nd3rn_alti,mechanisms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+dcubed_nd3rn_steel,mechanisms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+dcubed_ud3pp,mechanisms,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+dcubed_ud3rn,mechanisms,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+ebad_frangibolt_fb12,mechanisms,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+ebad_frangibolt_fc2,mechanisms,yes,representative,yes,2,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+ebad_frangibolt_fc3,mechanisms,yes,representative,yes,2,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+ebad_frangibolt_fc4,mechanisms,yes,representative,yes,2,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+ebad_frangibolt_fc6,mechanisms,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+ebad_frangibolt_fc8,mechanisms,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+ebad_frangibolt_fd04,mechanisms,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+ebad_tini_erm_e1000,mechanisms,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+ebad_tini_erm_e2000,mechanisms,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+ebad_tini_erm_e250,mechanisms,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+ebad_tini_erm_e4000,mechanisms,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+ebad_tini_erm_e500,mechanisms,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+ebad_tini_microlatch_ml50,mechanisms,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+ebad_tini_pin_puller_p10,mechanisms,no,none,yes,1,datasheet,no_photo,,photo
+ebad_tini_pin_puller_p100,mechanisms,no,none,yes,1,datasheet,no_photo,,photo
+ebad_tini_pin_puller_p1000,mechanisms,no,none,yes,1,datasheet,no_photo,,photo
+ebad_tini_pin_puller_p5,mechanisms,no,none,yes,1,datasheet,no_photo,,photo
+ebad_tini_pin_puller_p50,mechanisms,no,none,yes,1,datasheet,no_photo,,photo
+ecuadorian_hinges_nano_nanosat_hinges_for_reliable_deploy_op,mechanisms,no,none,yes,1,datasheet,no_photo,,photo; fields: mechanism or electrical
+exa_hdrm_clamp_motor_operated_rotary_hdrm_device_for_reliabl,mechanisms,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+exa_hinges_micro_l_microsat_sized_hinges_with_integrated_loc,mechanisms,no,vendor,yes,1,datasheet,envelope_only,CAD is the stated envelope; the photo shows a differently shaped assembly,photo-CAD check (envelope_only); fields: mechanism or electrical
+exa_htc01_microsat_cubesat_hatch_shutter_for_reliable_protec,mechanisms,no,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",fields: mechanism or electrical
+faulhaber_2232_sr,mechanisms,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+foundational_retro_1_laser_retroreflector,mechanisms,no,vendor,yes,1,datasheet,envelope_only,CAD is the stated envelope; the photo shows a differently shaped assembly,photo-CAD check (envelope_only); fields: mechanism or electrical
+foundational_retro_2_laser_retroreflector,mechanisms,no,vendor,yes,1,datasheet,envelope_only,CAD is the stated envelope; the photo shows a differently shaped assembly,photo-CAD check (envelope_only); fields: mechanism or electrical
+foundational_retro_cs_laser_retroreflector,mechanisms,no,vendor,yes,1,datasheet,envelope_only,CAD is the stated envelope; the photo shows a differently shaped assembly,photo-CAD check (envelope_only); fields: mechanism or electrical
+omron_d2f_deployment_switch,mechanisms,yes,vendor,yes,2,datasheet,match_family,photo shows the product family or several units; CAD matches the envelope and main features of this model,
+revolv_holly_deployment_hinge,mechanisms,no,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",fields: mechanism or electrical
+skf_bearing_604_2z,mechanisms,yes,representative,yes,1,datasheet,match,"same overall form, proportions and main features; representative family photo",
+skf_bearing_619_4_2z,mechanisms,yes,representative,yes,1,datasheet,match,"same overall form, proportions and main features; representative family photo",
+skf_bearing_619_5_2z,mechanisms,yes,representative,yes,1,datasheet,match,"same overall form, proportions and main features; representative family photo",
+skf_bearing_619_6_2z,mechanisms,yes,representative,yes,1,datasheet,match,"same overall form, proportions and main features; representative family photo",
+skf_bearing_623_2z,mechanisms,yes,representative,yes,1,datasheet,match,"same overall form, proportions and main features; representative family photo",
+skf_bearing_624_2z,mechanisms,yes,representative,yes,1,datasheet,match,"same overall form, proportions and main features; representative family photo",
+skf_bearing_625_2z,mechanisms,yes,representative,yes,1,datasheet,match,"same overall form, proportions and main features; representative family photo",
+skf_bearing_626_2z,mechanisms,yes,representative,yes,1,datasheet,match,"same overall form, proportions and main features; representative family photo",
+skf_bearing_628_4_2z,mechanisms,yes,representative,yes,1,datasheet,match,"same overall form, proportions and main features; representative family photo",
+skf_bearing_628_5_2z,mechanisms,yes,representative,yes,1,datasheet,match,"same overall form, proportions and main features; representative family photo",
+skf_bearing_628_6_2z,mechanisms,yes,representative,yes,1,datasheet,match,"same overall form, proportions and main features; representative family photo",
+skf_bearing_634_2z,mechanisms,yes,representative,yes,1,datasheet,match,"same overall form, proportions and main features; representative family photo",
+skf_bearing_635_2z,mechanisms,yes,representative,yes,1,datasheet,match,"same overall form, proportions and main features; representative family photo",
+skf_bearing_638_4_2z,mechanisms,yes,representative,yes,1,datasheet,match,"same overall form, proportions and main features; representative family photo",
+skf_bearing_638_5_2z,mechanisms,yes,representative,yes,1,datasheet,match,"same overall form, proportions and main features; representative family photo",
+umbra_syncrelease_4,mechanisms,no,none,yes,1,datasheet,no_photo,,photo
+basler_dart_daa1920_160um,payload,no,none,yes,1,datasheet,no_photo,,photo
+berlin_his_100,payload,no,vendor,yes,1,datasheet,envelope_only,CAD is the stated envelope; the photo shows a differently shaped assembly,photo-CAD check (envelope_only); fields: electrical or payload
+berlin_hrvi_6,payload,no,vendor,yes,1,datasheet,envelope_only,CAD is the stated envelope; the photo shows a differently shaped assembly,photo-CAD check (envelope_only)
+berlin_hrvi_6hd_2nd_generation,payload,no,none,yes,1,datasheet,no_photo,,photo
+craft_cloud_detector,payload,no,vendor,yes,1,datasheet,envelope_only,CAD is the stated envelope; the photo shows a differently shaped assembly,photo-CAD check (envelope_only)
+crystalspace_cs_101_kikas,payload,no,vendor,yes,1,datasheet,envelope_only,CAD is the stated envelope; the photo shows a differently shaped assembly,photo-CAD check (envelope_only)
+crystalspace_micro_camera,payload,yes,vendor,yes,1,datasheet,match_family,photo shows the product family or several units; CAD matches the envelope and main features of this model,
+dragonfly_caiman_imager,payload,yes,vendor,yes,1,datasheet,match_family,geometry rebuilt 2026-11-11 to follow the photo (cylindrical body / lens on the box); details simplified,
+dragonfly_chameleon_imager,payload,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+dragonfly_gecko_imager,payload,yes,vendor,yes,1,datasheet,match,rebuilt 2026-11-11 to the datasheet envelope 65 x 90 x 105 mm with the lens on the long axis,
+flir_boson_core,payload,no,none,yes,1,datasheet,no_photo,,photo
+flir_lepton_2p5,payload,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+flir_lepton_3p1r,payload,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+flir_lepton_3p5,payload,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+gomspace_nanocam_c1u_35mm,payload,yes,representative,yes,1,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+gomspace_nanocam_c1u_70mm,payload,yes,representative,yes,1,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+gomspace_nanocam_c1u_8mm,payload,yes,representative,yes,1,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+mvp_kisscam_v2,payload,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+raptor_hawk_1920_flight_ready_modified_cots_cmos_vis_camera,payload,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+raptor_owl_1280_digital_vis_swir_flight_ready_modified_cots_,payload,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+raptor_owl_640_m_vis_swir_camera,payload,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+raptor_owl_640_t_digital_vis_swir_camera,payload,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+scanway_scs_multicam_rocket_2_cam,payload,no,none,yes,1,datasheet,no_photo,,photo
+scanway_sop_1u_65,payload,no,vendor,yes,1,datasheet,envelope_only,"CAD is the stated envelope; photo shows flanges, open optics or external parts not modelled",photo-CAD check (envelope_only)
+scs_gecko_imager,payload,no,representative,yes,1,datasheet,envelope_only,lens axis drawn along z; the photo shows the lens along the board plane,photo-CAD check (envelope_only)
+simera_hyperscape100,payload,no,none,yes,1,datasheet,no_photo,,photo
+simera_multiscape100_cis,payload,no,none,yes,1,datasheet,no_photo,,photo
+simera_multiscape200_cis,payload,no,none,yes,1,datasheet,no_photo,,photo
+simera_triscape100,payload,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+simera_triscape200,payload,yes,vendor,yes,1,datasheet,match_family,photo matches the envelope and main features; details simplified,
+simera_xscape200_vis_ofe,payload,no,none,yes,1,datasheet,no_photo,,photo; fields: electrical or payload
+skyfox_picam_space_friendly_digital_cubesat_camera,payload,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+takeme2space_imager_readout_4mp_cmos_camera_readout_for_cube,payload,no,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",fields: electrical or payload
+usu_sdl_disc_camera,payload,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+xcam_c3d,payload,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+2ndspace_solo_eps_4,power,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+2ndspace_solo_eps_8,power,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+aac_optimus_30,power,yes,vendor,yes,3,datasheet,match,rebuilt 2026-11-10: cells visible in a pocket,
+aac_optimus_40,power,yes,vendor,yes,3,datasheet,match,rebuilt 2026-11-10: cells visible in a pocket,
+aac_optimus_80,power,yes,vendor,yes,3,datasheet,match,rebuilt 2026-11-10: cells visible in a pocket,
+aac_photon_dd_3u,power,no,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",sourced dimensions
+aac_photon_sd_3u,power,no,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",sourced dimensions
+aac_photon_side_3u,power,no,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",sourced dimensions
+aac_starbuck_micro,power,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+aac_starbuck_nano,power,yes,vendor,yes,3,datasheet,match,"same overall form, proportions and main features",
+airbus_battery_astro_batt_30v_50v_or_100v,power,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+airbus_battery_launcher_batt_30v_or_60v,power,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+airbus_battery_stellar_batt_37v,power,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+azur_3g30a_advanced_8x8_cic,power,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (family photo, flange or housing detail)",
+azur_3g30c_advanced_6x12,power,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (family photo, flange or housing detail)",
+azur_3g30c_advanced_8x4,power,yes,representative,yes,2,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+azur_3g30c_advanced_8x8,power,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (family photo, flange or housing detail)",
+azur_3g30c_advanced_hp,power,yes,representative,yes,2,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+azur_4g32a_advanced_8x8_cic,power,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (family photo, flange or housing detail)",
+azur_4g32c_advanced_4x8,power,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (family photo, flange or housing detail)",
+azur_4g32c_advanced_8x8,power,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (family photo, flange or housing detail)",
+azur_4g32c_advanced_hp,power,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (family photo, flange or housing detail)",
+bct_battery_1p8s,power,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+bct_battery_2p8s,power,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+berlin_bat_110,power,yes,vendor,yes,1,datasheet,match_family,same overall form; detail differs (photo shows the product family or internal layout),
+berlin_pcu_110,power,no,none,yes,1,datasheet,no_photo,,photo
+beyond_core_drive_electronics,power,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+beyond_multi_purpose_drive_electronics,power,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+beyond_software_defined_drive_electronics,power,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+bradford_propulsion_remote_terminal_unit_prtu,power,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+bradford_supernova_pcdu,power,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+c3s_eps,power,no,vendor,yes,1,datasheet,envelope_only,box envelope; the photo shows a battery pack in a frame,photo-CAD check (envelope_only)
+cesi_ctj30_40x80,power,yes,representative,yes,2,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+cesi_ctj30_60x120,power,yes,representative,yes,2,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+cesi_ctj30_69x39,power,yes,representative,yes,2,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+dhv_3u_solar_panel,power,no,vendor,yes,1,unverified,match,"same overall form, proportions and main features",verified source
+endurosat_cubesat_eps_2026,power,no,vendor,yes,2,unverified,match,"same overall form, proportions and main features",verified source
+endurosat_eps_i,power,no,vendor,yes,1,unverified,envelope_only,drawn as a board with a block; the vendor image shows a boxed stack,photo-CAD check (envelope_only); verified source
+endurosat_eps_i_plus,power,no,vendor,yes,1,unverified,envelope_only,drawn as a board with a block; the vendor image shows a boxed stack,photo-CAD check (envelope_only); verified source
+endurosat_eps_ii,power,no,vendor,yes,1,unverified,match,"same overall form, proportions and main features",verified source
+endurosat_solar_array_3u_double_deployable,power,no,vendor,yes,1,unverified,match,"same overall form, proportions and main features",verified source
+endurosat_solar_array_3u_single_deployable,power,no,vendor,yes,2,unverified,match,"same overall form, proportions and main features",verified source
+endurosat_solar_panel_3u,power,no,vendor,yes,2,unverified,match,"same overall form, proportions and main features",verified source
+endurosat_solar_panel_6u,power,no,vendor,yes,1,unverified,match,"same overall form, proportions and main features",verified source; fields: electrical
+enersys_absl_8s16p,power,no,none,yes,3,datasheet,no_photo,,photo
+enersys_absl_cm1040_8s18p,power,no,none,yes,1,datasheet,no_photo,,photo
+enersys_absl_cm170_4s6p,power,no,none,yes,1,datasheet,no_photo,,photo
+enersys_absl_cm2300_8s40p,power,no,none,yes,1,datasheet,no_photo,,photo
+enersys_absl_cm230_8s4p,power,no,none,yes,1,datasheet,no_photo,,photo
+enersys_absl_cm520_8s9p,power,no,none,yes,1,datasheet,no_photo,,photo
+enersys_absl_cm58_8s1p,power,no,none,yes,1,datasheet,no_photo,,photo
+exa_ba01_d,power,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+exa_ba01_s,power,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+exa_ba02_s,power,no,vendor,yes,0,unverified,match,"same overall form, proportions and main features",datasheet; verified source
+exa_rbl_12u_remove_before_launch,power,no,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",fields: electrical
+exa_rbl_micro_remove_before_lauch,power,no,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",fields: electrical
+exa_titan_1,power,yes,vendor,yes,1,datasheet,match,rebuilt 2026-11-10: cells visible in a pocket,
+exa_umppt_solar_panel_joiner_adder_module,power,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+gomspace_18650_3000mah,power,no,none,yes,2,datasheet,no_photo,nothing to compare yet,photo
+gomspace_18650_3500mah,power,no,none,yes,2,datasheet,no_photo,nothing to compare yet,photo
+gomspace_msp_a_1_1,power,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+gomspace_msp_a_2_1,power,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+gomspace_msp_a_3_1,power,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+gomspace_msp_a_4_1,power,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+gomspace_msp_a_5_1,power,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+gomspace_msp_a_6_1,power,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+gomspace_msp_a_7_1,power,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+gomspace_nanopower_bp4,power,yes,representative,yes,1,datasheet,match_family,"rebuilt 2026-11-10: cells visible in a pocket; photo is a representative or family image, same form and proportions",
+gomspace_nanopower_bp8_100wh,power,yes,vendor,yes,1,datasheet,match,rebuilt 2026-11-10: cells visible in a pocket,
+gomspace_nanopower_bpx_100wh,power,yes,vendor,yes,2,datasheet,match,rebuilt 2026-11-10: cells visible in a pocket,
+gomspace_nanopower_p110a,power,no,representative,yes,0,datasheet,match_family,"rebuilt 2026-11-10: cells tiled along the panel; photo is a representative or family image, same form and proportions",datasheet
+gomspace_nanopower_p110b,power,no,representative,yes,0,datasheet,match_family,"rebuilt 2026-11-10: cells tiled along the panel; photo is a representative or family image, same form and proportions",datasheet
+gomspace_nanopower_p110c,power,yes,representative,yes,1,datasheet,match_family,"rebuilt 2026-11-10: cells tiled along the panel; photo is a representative or family image, same form and proportions",
+gomspace_nanopower_p110ua,power,yes,representative,yes,1,datasheet,match_family,"rebuilt 2026-11-10: cells tiled along the panel; photo is a representative or family image, same form and proportions",
+gomspace_nanopower_p110ub,power,yes,representative,yes,1,datasheet,match_family,"rebuilt 2026-11-10: cells tiled along the panel; photo is a representative or family image, same form and proportions",
+gomspace_nanopower_p110uc,power,yes,representative,yes,1,datasheet,match_family,"rebuilt 2026-11-10: cells tiled along the panel; photo is a representative or family image, same form and proportions",
+gomspace_nanopower_p31u,power,no,none,yes,1,datasheet,no_photo,nothing to compare yet,photo
+gomspace_nanopower_p60_dock,power,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+gomspace_nanopower_p80,power,no,representative,yes,0,unverified,match_family,"photo is a representative or family image, same form and proportions",datasheet; verified source
+ibeos_b14_m45,power,yes,vendor,yes,2,datasheet,match,rebuilt 2026-11-10: cells visible in a pocket,
+interpoint_msa_plus,power,no,vendor,yes,0,datasheet,match_family,"same overall form; detail differs (family photo, flange or housing detail)",datasheet
+interpoint_smhf_dcdc,power,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+interpoint_smhf_dcdc_flanged,power,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+isis_iceps2_type_a,power,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+isis_iceps2_type_b,power,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+isis_iceps2_type_c,power,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+isis_ieps_battery_4cell,power,no,vendor,yes,0,datasheet,match,rebuilt 2026-11-10: cells visible in a pocket,datasheet
+isis_ieps_type_a,power,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+isis_ieps_type_b,power,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+isis_ieps_type_c,power,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+isis_solar_panel_1u,power,yes,vendor,yes,1,datasheet,match,rebuilt 2026-11-10: cells tiled along the panel,
+isis_solar_panel_2u,power,no,vendor,yes,0,datasheet,match,rebuilt 2026-11-10: cells tiled along the panel,datasheet
+isis_solar_panel_3u,power,no,vendor,yes,0,datasheet,match,rebuilt 2026-11-10: cells tiled along the panel,datasheet
+isis_solar_panel_6u,power,yes,vendor,yes,1,datasheet,match,rebuilt 2026-11-10: cells tiled along the panel,
+lg_inr18650_mj1,power,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+lg_inr21700_m50lt,power,no,none,yes,1,datasheet,no_photo,,photo
+molicel_inr18650_m35a,power,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+molicel_inr18650_p28a,power,yes,representative,yes,2,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+molicel_inr21700_p42a,power,yes,representative,yes,2,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+molicel_inr21700_p45b,power,no,none,yes,1,datasheet,no_photo,,photo
+mp_pack2_8s3p_28v_battery_pack,power,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+mp_pack2_8s6p_28v_battery_pack,power,yes,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",
+murata_us18650vtc6,power,yes,representative,yes,2,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+nanoavionics_battery_2s2p,power,no,vendor,yes,0,derived,match,rebuilt 2026-11-10: cells visible in a pocket,datasheet
+nanoavionics_battery_4s2p,power,no,vendor,yes,0,derived,match,rebuilt 2026-11-10: cells visible in a pocket,datasheet
+nanoavionics_eps_1p0,power,no,vendor,yes,0,unverified,match,"same overall form, proportions and main features",datasheet; verified source
+nanoavionics_eps_2p0,power,no,vendor,yes,0,unverified,match,"same overall form, proportions and main features",datasheet; verified source
+nanoavionics_solar_array_6u_double,power,no,vendor,yes,0,unverified,match,"same overall form, proportions and main features",datasheet; verified source
+nanoavionics_solar_panel_6u_fixed,power,no,vendor,yes,0,unverified,match,"same overall form, proportions and main features",datasheet; verified source
+npc_spacemind_gemini_eps,power,no,vendor,yes,0,datasheet,match_family,photo shows the product family or several units; CAD matches the envelope and main features of this model,datasheet
+npc_spacemind_sm_sp3x,power,no,vendor,yes,1,derived,match,"same overall form, proportions and main features",sourced dimensions
+panasonic_ncr18650b,power,yes,representative,yes,2,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+panasonic_ncr18650ga,power,no,representative,yes,1,unverified,match_family,"photo is a representative or family image, same form and proportions",verified source
+pumpkin_bm1,power,yes,representative,yes,2,datasheet,match_family,"rebuilt 2026-11-10: cells visible in a pocket; photo is a representative or family image, same form and proportions",
+pumpkin_linear_eps_01,power,yes,vendor,yes,3,datasheet,match,"same overall form, proportions and main features",
+saft_ls14250,power,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+saft_ls14500,power,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+saft_ls17330,power,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+saft_ls17500,power,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+saft_ls26500,power,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+saft_ls33600,power,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+saft_mp176065_xtd,power,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+samsung_inr18650_30q,power,yes,representative,yes,2,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+samsung_inr18650_35e,power,yes,representative,yes,2,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+samsung_inr21700_50e,power,yes,representative,yes,2,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+spaceinventor_bat_14_p4,power,no,vendor,yes,0,datasheet,match,rebuilt 2026-11-10: cells visible in a pocket,datasheet
+spaceinventor_bat_28_p4,power,no,vendor,yes,0,datasheet,match,rebuilt 2026-11-10: cells visible in a pocket,datasheet
+spacemanic_amun_1u_psu,power,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+spectrolab_xtj_prime_27cm2,power,yes,representative,yes,2,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+takeme2space_powerbank,power,yes,vendor,yes,1,datasheet,match_family,same overall form; detail differs (photo shows the closed housing),
+takeme2space_powerdrive,power,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+umbra_battery_8s1p,power,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+umbra_battery_8s2p,power,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+umbra_solar_array,power,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+vpt_svfl2800s,power,no,none,yes,1,datasheet,no_photo,,photo
+vpt_svpl3r306sg,power,no,none,yes,1,datasheet,no_photo,,photo
+vpt_svrch2800d,power,no,none,yes,1,datasheet,no_photo,,photo
+vpt_svrch2800s,power,no,none,yes,1,datasheet,no_photo,,photo
+vpt_svsa2800s,power,no,none,yes,1,datasheet,no_photo,,photo
+vpt_vsc5_2800d,power,no,none,yes,1,datasheet,no_photo,,photo
+aac_pm200,propulsion,no,none,yes,1,datasheet,no_photo,,photo
+aerojet_mr_502a_impeht,propulsion,no,none,yes,1,datasheet,no_photo,,photo; fields: propulsion
+bradford_comet_1000,propulsion,no,vendor,yes,2,datasheet,envelope_only,datasheet envelope 10 x 10 x 26 cm drawn as a box with a nozzle; the photo shows the tank and thruster as separate rounded bodies,photo-CAD check (envelope_only)
+cua_chips_1000,propulsion,no,representative,yes,2,datasheet,envelope_only,box with nozzle; the photo shows an open frame with tank and valves,photo-CAD check (envelope_only)
+cua_chips_180,propulsion,no,vendor,yes,2,datasheet,envelope_only,"CAD is the stated envelope; photo shows flanges, open optics or external parts not modelled",photo-CAD check (envelope_only)
+cua_chips_500,propulsion,no,representative,yes,2,datasheet,envelope_only,box with nozzle; the vendor figure shows several nozzles and ports,photo-CAD check (envelope_only)
+cua_fppt_1p7u,propulsion,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+dawn_b1_thruster,propulsion,no,representative,yes,1,datasheet,envelope_only,box with nozzle; the photo shows a thruster head with valves and standoffs,photo-CAD check (envelope_only)
+dawn_cubedrive_1u,propulsion,yes,representative,yes,1,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+dawn_cubedrive_2u,propulsion,yes,representative,yes,1,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+enpulsion_ifm_nano,propulsion,no,none,yes,0,datasheet,no_photo,,photo; datasheet
+enpulsion_micro_r3_head,propulsion,no,vendor,yes,0,datasheet,match,"same overall form, proportions and main features",datasheet
+enpulsion_micro_r3_ppu,propulsion,no,vendor,yes,0,datasheet,match,"same overall form, proportions and main features",datasheet; fields: propulsion
+enpulsion_nano_r3,propulsion,yes,vendor,yes,3,datasheet,match,"same overall form, proportions and main features",
+gomspace_nanoprop_cgp3,propulsion,no,none,yes,1,datasheet,no_photo,,photo; fields: propulsion
+manastu_sharanga_micro_propulsion_system_for_cubesats,propulsion,no,vendor,yes,1,datasheet,match_family,"same overall form; detail differs (closed housing vs board, family photo or connectors)",fields: propulsion
+manastu_vyom_2u_green_propulsion_system,propulsion,no,vendor,yes,1,datasheet,envelope_only,CAD is the stated envelope; the photo shows a differently shaped assembly,photo-CAD check (envelope_only); fields: propulsion
+moog_monoprop_module_baseline,propulsion,no,none,yes,3,datasheet,no_photo,,photo
+paleblue_pbr_20,propulsion,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+rafael_pept_200,propulsion,yes,vendor,yes,2,derived,match,"same overall form, proportions and main features",
+rafael_pept_230,propulsion,yes,vendor,yes,1,derived,match,"same overall form, proportions and main features",
+rafael_pept_260,propulsion,yes,vendor,yes,1,derived,match,"same overall form, proportions and main features",
+rafael_pept_330,propulsion,yes,vendor,yes,1,derived,match,"same overall form, proportions and main features",
+steamjet_steam_thruster_one,propulsion,yes,vendor,yes,1,datasheet,match_family,photo shows the product family or several units; CAD matches the envelope and main features of this model,
+thrustme_npt30_i2,propulsion,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+thrustme_npt30_i2_1p5u,propulsion,no,none,yes,1,datasheet,no_photo,,photo
+vacco_marco_mips,propulsion,yes,representative,yes,2,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+vacco_standard_mips_0p3u,propulsion,yes,representative,yes,2,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+vacco_standard_mips_0p5u,propulsion,yes,representative,yes,2,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+vacco_standard_mips_0p8u,propulsion,yes,representative,yes,2,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+vacco_standard_mips_1u,propulsion,yes,representative,yes,2,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+al_bar_10x10,stock,yes,representative,yes,1,derived,match_family,"photo is a representative or family image, same form and proportions",
+al_bar_10x10_long,stock,yes,representative,yes,1,derived,match_family,"photo is a representative or family image, same form and proportions",
+al_bar_20x10,stock,no,none,yes,2,derived,no_photo,nothing to compare yet,photo
+al_bar_20x20,stock,no,none,yes,2,derived,no_photo,nothing to compare yet,photo
+al_bar_25x25,stock,yes,representative,yes,1,derived,match_family,"photo is a representative or family image, same form and proportions",
+al_bar_8p5x8p5_rail,stock,yes,representative,yes,1,derived,match_family,"photo is a representative or family image, same form and proportions",
+al_bracket_l_20x20x20,stock,yes,representative,yes,2,derived,match_family,"photo is a representative or family image, same form and proportions",
+al_bracket_l_30x30x20,stock,yes,representative,yes,2,derived,match_family,"photo is a representative or family image, same form and proportions",
+al_bracket_l_40x40x25,stock,yes,representative,yes,2,derived,match_family,"photo is a representative or family image, same form and proportions",
+al_plate_1u_1p5,stock,yes,representative,yes,1,derived,match_family,"photo is a representative or family image, same form and proportions",
+al_plate_1u_3,stock,yes,representative,yes,1,derived,match_family,"photo is a representative or family image, same form and proportions",
+al_plate_3u_side_2,stock,yes,representative,yes,1,derived,match_family,"photo is a representative or family image, same form and proportions",
+al_plate_pc104_1p6,stock,yes,representative,yes,1,derived,match_family,"photo is a representative or family image, same form and proportions",
+extrusion_2020_100,stock,yes,representative,yes,1,derived,match_family,"photo is a representative or family image, same form and proportions",
+extrusion_2020_200,stock,yes,representative,yes,1,derived,match_family,"photo is a representative or family image, same form and proportions",
+extrusion_2020_300,stock,yes,representative,yes,1,derived,match_family,"photo is a representative or family image, same form and proportions",
+ss_shaft_3x50,stock,yes,representative,yes,2,derived,match_family,"photo is a representative or family image, same form and proportions",
+ss_shaft_4x80,stock,yes,representative,yes,2,derived,match_family,"photo is a representative or family image, same form and proportions",
+ss_shaft_6x100,stock,yes,representative,yes,2,derived,match_family,"photo is a representative or family image, same form and proportions",
+ss_shaft_8x100,stock,yes,representative,yes,2,derived,match_family,"photo is a representative or family image, same form and proportions",
+2ndspace_verse_02,structures,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+2ndspace_verse_03,structures,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+2ndspace_verse_06,structures,yes,vendor,yes,2,datasheet,match,rebuilt 2026-11-11 as a skeleton frame (was a solid box); photo is a representative or family image,
+aac_zaphod_1u,structures,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+aac_zaphod_3u,structures,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+aac_zaphod_6u,structures,yes,vendor,yes,2,datasheet,match,rebuilt 2026-11-10 as a skeleton frame (was a solid box),
+endurosat_structure_1p5u,structures,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+endurosat_structure_1u,structures,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+endurosat_structure_3u,structures,yes,vendor,yes,2,datasheet,match,"same overall form, proportions and main features",
+endurosat_structure_6u,structures,yes,vendor,yes,2,datasheet,match,rebuilt 2026-11-10 as a skeleton frame (was a solid box),
+gomspace_nanostruct_6u_mk2,structures,yes,vendor,yes,2,datasheet,match,rebuilt 2026-11-10 as a skeleton frame (was a solid box),
+isis_structure_1u,structures,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+isis_structure_2u,structures,no,vendor,yes,0,datasheet,match,"same overall form, proportions and main features",datasheet
+isis_structure_3u,structures,no,vendor,yes,0,datasheet,match,"same overall form, proportions and main features",datasheet
+isis_structure_6u,structures,no,vendor,yes,0,datasheet,match,rebuilt 2026-11-10 as a skeleton frame (was a solid box),datasheet
+nanoavionics_frame_12u,structures,no,vendor,yes,1,unverified,match,rebuilt 2026-11-10 as a skeleton frame (was a solid box),verified source
+nanoavionics_frame_6u,structures,no,vendor,yes,0,unverified,match,rebuilt 2026-11-10 as a skeleton frame (was a solid box),datasheet; verified source
+pc104_blank_board,structures,yes,representative,yes,2,standard,match_family,"photo is a representative or family image, same form and proportions",
+pc104_standoff_m3_15p24,structures,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+pc104_standoff_m3_23p5,structures,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+pc104_standoff_m3_30p48,structures,yes,representative,yes,1,standard,match_family,"photo is a representative or family image, same form and proportions",
+pocketqube_1p_frame,structures,yes,vendor,yes,1,standard,match,rebuilt 2026-11-10 as a skeleton frame (was a solid box),
+pumpkin_cubesatkit_1u,structures,no,vendor,yes,1,unverified,match,"same overall form, proportions and main features",verified source
+pumpkin_cubesatkit_2u,structures,no,vendor,yes,1,unverified,match,"same overall form, proportions and main features",verified source
+pumpkin_cubesatkit_3u,structures,no,vendor,yes,1,unverified,match,"same overall form, proportions and main features",verified source
+serenum_1u,structures,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+serenum_2u,structures,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+serenum_3u,structures,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+aim_sf070,thermal,yes,vendor,yes,1,datasheet,match_family,photo is the product picture on the datasheet cover; cylinder compressor matches,
+cavu_thermal_control_unit,thermal,yes,vendor,yes,1,datasheet,match,"same overall form, proportions and main features",
+heat_pipe_6x150,thermal,no,none,yes,2,derived,no_photo,nothing to compare yet,photo; fields: thermal or electrical
+heat_pipe_6x300,thermal,no,representative,yes,1,derived,match_family,"photo is a representative or family image, same form and proportions",fields: thermal or electrical
+heat_pipe_8x300,thermal,no,none,yes,1,derived,no_photo,nothing to compare yet,photo; fields: thermal or electrical
+lockheed_micro1_1,thermal,no,none,yes,0,unverified,no_photo,100 mm cube placeholder; no sourced dimensions,photo; datasheet; verified source
+lockheed_micro1_2,thermal,no,representative,yes,0,unverified,placeholder,100 mm cube placeholder; no sourced dimensions,photo-CAD check (placeholder); datasheet; verified source
+mli_blanket_1u_face,thermal,no,none,yes,1,derived,no_photo,nothing to compare yet,photo; fields: thermal or electrical
+polyimide_heater_12x50,thermal,yes,vendor,yes,1,derived,match,"same overall form, proportions and main features",
+polyimide_heater_25x100,thermal,yes,vendor,yes,1,derived,match,"same overall form, proportions and main features",
+polyimide_heater_25x25,thermal,yes,vendor,yes,1,derived,match,"same overall form, proportions and main features",
+polyimide_heater_25x50,thermal,yes,vendor,yes,1,derived,match,"same overall form, proportions and main features",
+polyimide_heater_50x50,thermal,yes,vendor,yes,1,derived,match,"same overall form, proportions and main features",
+radiator_plate_1u_face,thermal,no,none,yes,2,derived,no_photo,nothing to compare yet,photo; fields: thermal or electrical
+radiator_plate_3u_face,thermal,no,none,yes,2,derived,no_photo,nothing to compare yet,photo; fields: thermal or electrical
+ricor_k508n,thermal,no,representative,yes,1,unverified,placeholder,100 mm cube placeholder; no sourced dimensions,photo-CAD check (placeholder); verified source
+sierra_passive_heat_switch,thermal,yes,representative,yes,2,datasheet,match,rebuilt 2026-11-11 from the datasheet: cylinder 36.1 x 50.8 mm; the mounting flange in the photo is not modelled,
+sunpower_cryotel_ds_mini,thermal,no,none,yes,1,datasheet,no_photo,rebuilt 2026-11-11 from the datasheet as two cylinders; no photo yet,photo
+tai_cuts_ufi_26x1,thermal,yes,representative,yes,2,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+tai_cuts_ufii_4x1,thermal,yes,representative,yes,2,datasheet,match_family,"photo is a representative or family image, same form and proportions",
+tai_cuts_ufii_9x1,thermal,yes,representative,yes,2,datasheet,match_family,"photo is a representative or family image, same form and proportions",

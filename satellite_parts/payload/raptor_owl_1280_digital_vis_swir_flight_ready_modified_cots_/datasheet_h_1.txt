@@ -1,0 +1,158 @@
+www.raptorphotonics.com
+Owl 1280 “Flight Ready”
+Modified COTS, H igh Resolution, High Sensitivity, Digital VIS-SWIR camera 1280 x 1024
+• 10μm x 10μm Pixel Pitch • 28e- readout noise • Wavelength Range 600-1700nm
+• Robust, compact and athermalised structural design for 1U-12U Payloads
+• Lightweight custom layout and design - Results in reduced launch cost
+• Extended operating temperature from -40°C to +75°C
+• Radiation tolerant - Proven 36 months + in LEO Orbits, details under NDA
+• Ruggedised connectors - Single 80-pin connector - other options available
+• Class3a manufactured PCBs with solder standard IPC J-STD-001GS
+• Optional conformal board coatings
+• Flexi-rigid electronics to fit specific EO space systems
+• Customized mechanics finished in space industry recognised conformal coatings
+• Vented screws where necessary and options for bonding / staking material
+• Flat front or removable lens mounts
+• Advanced video enhancement and signal processing features - Optimizing image quality and output in real-time.
+Space
+Features
+vailable
+Raptor has unique Space Heritage, with cameras flying on several live LEO Cubesat Missions. Camera cores are SWaP 
+optimised, athermalised and ruggedised to withstand launch conditions and maintain optical performance while being 
+exposed to the extreme operating conditions experienced in the space environment. Our in-depth knowledge and 
+experience allows us to work with OEMs and integrators to offer unique custom design features.
+Space Features and Benefits
+The best performing HD VIS-SWIR camera in the World, LEO Cube-Sat ready! 
+
+Document #: INOW1.7-VS-CL-1280 0124
+Willowbank Business Park
+Larne, Co Antrim
+BT40 2SF, 
+Northern Ireland
+Raptor Photonics Ltd. (UK)
+T: +44(0)2828 270 141
+E: sales@raptorphotonics.com
+www.raptorphotonics.com
+Raptor Photonics Inc. (USA)
+T: +1 (877) 230-4836
+E: sales@raptorphotonics.com
+www.raptorphotonics.com
+Sensor Type
+InGaAs PIN-Photodiode
+Active Pixel
+1280 x 1024
+Pixel Pitch
+10µm x 10µm
+Active Area
+12.8mm x 10.24mm
+Spectral response1
+0.6µm to 1.7µm
+Readout Noise (RMS)2
+LG = Low Gain HG = High Gain
+LG: <180e- (160e- typical)
+HG: <50e- (28e- typical)
+Peak Quantum Efficiency
+>90% @ 1.3μm
+Full Well Depth
+LG: 450ke-
+ HG: 10ke-
+Pixel Operability
+>99.5%
+Dark Current (e/p/s)
+<19,000 @ 15°C
+Digital Output Format
+12 bit Camera Link (medium configuration) / LVDS
+Exposure time
+LG: 10μs to 92.5ms
+HG: 10μs to 86.5ms
+Shutter mode
+Global shutter
+Frame Rate
+Up to 120Hz3
+Optical Interface
+Flat front / Removable lens mount
+Dynamic Range
+LG: 69dB,  HG: 51dB
+Trigger interface
+Trigger IN and OUT - TTL compatible
+Power supply
+12V DC ±0.5V
+TE Cooling
+Active
+Image Correction
+3 point NUC (offset, Gain & Dark Current) + pixel correction
+Functions controlled by serial 
+communication
+Eg. Exposure, intelligent AGC, Non Uniformity Correction,
+Gamma, Pk/Av, TEC, ROI, etc
+Camera Power Consumption4
+<8W with TEC ON, NUC ON
+Operating Case Temperature
+-40˚C to +71˚C
+Storage Temperature
+-55˚C to +85˚C
+Dimensions (L*W*H)5 
+56mm x 50.00mm x 50.00mm
+Weight
+213g
+Raptor Photonics Limited reserves the right to change this document at any time without notice 
+and disclaims liability for editorial, pictorial or typographical errors. This product is under the export 
+control of UK government and maybe subject to an Single Individual export licence before shipment.
+Specification for Owl 1280 “Flight Ready”
+Quantum Efficiency
+Ordering Information
+Camera
+OW1.7-VS-CL-1280-OEM-S 
+RPL-HR4-K
+RPL-xx-xxxx
+1. Optional filters available: Low, High or bandpass.
+2. Typical readout noise is calculated from an average of the 
+last 20 cameras shipped. 
+3. Mode dependent
+4. Measured in an ambient of 25°C with adequate heat sinking. 
+For more detailed power consumption values, please refer 
+to the user manual.
+5.
+6.
+Dimensions include all connector parts on the camera 
+interface.
+Please consult us to check our range of lenses.
+Demo is available on request.
+Pricing AOR subject to volumes.
+Detailed technical drawings can be downloaded at 
+www.raptorphotonics.com
+600
+800
+1000
+1200
+1400
+0
+10
+20
+30
+40
+50
+60
+70
+80
+90
+Wavelength (nm)
+Quantum Efficiency (%)
+100
+1800
+1600
+*Data supplied by sensor manufacturer
+Owl 1280 Digital Camera Power 
+Supply Cable
+Optional Accessories 
+Optical lenses6
+We have outlined our standard Space specifications 
+but appreciate your requirements may vary. Raptor has 
+acquired a lot of space heritage and can offer custom 
+capabilities. We would be delighted to talk to you about  
+your Space camera requirements. Contact us at 
+sales@raptorphotonics.com. 
+Other accessories such as frame grabbers, software and 
+cables are available on request.
+Notes
+

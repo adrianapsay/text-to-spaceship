@@ -1,0 +1,2 @@
+url: https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-skyfox-labs-sro-pipatch-lg-cubesat-gps-l1-glonass-antenna-u4c1hk.pdf
+method: largest picture on page 1-2 of datasheet.pdf

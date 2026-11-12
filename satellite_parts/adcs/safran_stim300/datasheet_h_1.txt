@@ -1,0 +1,1615 @@
+ULTRA-HIGH PERFORMANCE 
+INERTIAL MEASUREMENT UNIT (IMU) 
+STIM300 
+ Small size, low weight and low cost 
+ ITAR free 
+ Insensitive to magnetic fields 
+ 0.3 °/h gyro bias instability 
+ 0.15 °/√h angular random walk 
+ ±400 °/s angular rate input range 
+ 10 °/h gyro bias error over temperature gradients 
+ 0.05 mg accelerometer bias instability 
+ ±10 g acceleration input range (optional ranges available) 
+ 3 inclinometers for accurate levelling 
+ Auxiliary input 
+STIM300 is a high performance and 
+rugged Inertial Measurement Unit (IMU) 
+comprised of 3 highly accurate MEMS 
+gyros, 3 high stability accelerometers  
+and 3 inclinometers. The IMU is factory 
+calibrated and compensated for 
+temperature effects over the full 
+temperature operating range. 
+ 
+The STIM300 is based upon Sensonor's 
+proven gyro sensor technology in 
+production for more than a decade,  
+and its high precision Gyro Modules are 
+already designed into many applications 
+worldwide. Another advantage of the 
+Sensonor MEMS technology is the very 
+low vibration and shock sensitivity in  
+any direction. 
+ 
+Range and features 
+STIM300 full-scale angular rate input 
+range is ±400 °/s and the output is capped 
+at ±480 °/s. Standard acceleration input 
+range is ±10 g. Axis misalignment of as 
+little as 1 mrad is achieved by electronic 
+axis alignment. STIM300 requires a  
+single 5 Vdc power supply and has a 
+digital serial RS422 interface.  
+ 
+STIM300 offers several user selectable 
+output formats and sample rates for  
+gyro and accelerometer data: 
+ Angular Rate  
+ Incremental Angle  
+ Average Angular Rate  
+ Integrated Angle  
+ Acceleration  
+ Incremental Velocity 
+ Average Acceleration 
+ 
+Device configurations and self-
+diagnostics  
+A reliable RISC ARM microcontroller 
+enables easy device configuration and 
+programming. The user selectable  
+Service Mode allows for setting the 
+output unit format, sample frequency,  
+LP filter cut-off frequency, RS422 
+transmission bit rate and line  
+termination. Service Mode also enables 
+single measurements on demand,  
+and to access detailed diagnostics 
+information. 
+ 
+ 
+Evaluation tools 
+STIM300 evaluation tools supporting PCI 
+or USB connectivity are available. The 
+evaluation tools offer easy access to 
+measurement data and configuration of 
+the IMU. It supports data sampling at 
+alternative rates, graphical presentation, 
+and data logging to file. The evaluation 
+tools contain a RS422 interface for USB or 
+PCI hardware setup, all necessary cabling, 
+and PC software. 
+ 
+Application areas  
+The STIM300 IMU is well suited for 
+stabilization, guidance and navigation 
+applications in Industrial, Aerospace and 
+Defense markets. It is a crucial building 
+block for inertial navigation systems in 
+UAVs, AUVs, AGVs, UGVs and ROVs, 
+robotics, and more, and offers the 
+designer an ITAR free alternative. In many 
+applications, STIM300 can competitively 
+replace IMU's based on Fiber Optic Gyros 
+(FOGs) and improve system performance 
+with respect to robustness, reliability, 
+size, weight, power and cost.  
+(39 mm x  45 mm x 22 mm) 
+PRODUCT BRIEF 
+
+Information furnished by Sensonor  is believed to be accurate and reliable. However, no responsibility is assumed by Sensonor  for its use, nor for any infringements of patents or other rights of third parties that may 
+result from its use. Sensonor  reserves the right to make changes without further notice to any products herein. Sensonor  makes no warranty, representation or guarantee regarding the suitability of its products for 
+any particular purpose, nor does Sensonor  assume any liability arising out of the application or use of any product or circuit, and specifically disclaims any and all liability, including without limitation consequential or 
+incidental damages. No license is granted by implication or otherwise under any patent or patent rights of Sensonor . Trademarks and registered trademarks are the property of their respective owners. Sensonor  
+products are not intended for any application in which the failure of the Sensonor  product could create a situation where personal injury or death may occur. Should Buyer purchase or use Sensonor Technologies 
+products for any such unintended or unauthorized application, Buyer shall indemnify and hold Sensonor Technologies and its officers, employees, subsidiaries, affiliates, and distributors harmless against all claims, 
+costs, damages, and expenses, and reasonable legal fees arising out of, directly or indirectly, any claim of personal injury or death associated with such unintended or unauthorized use, even if such claim alleges that 
+Sensonor Technologies was negligent regarding the design or manufacture of the part. 
+Sensonor  AS • Horten, Norway • sales@sensonor.com • www.sensonor.com 
+ 
+PRODUCT BRIEF STIM300 
+Ed. 2017-08 
+MECHANICAL DIMENSIONS 
+All dimensions in mm. Volume < 2,0 cu. in (33 cm3) 
+FUNCTIONAL BLOCK DIAGRAM 
+Parameter 
+Min 
+Nom 
+Max 
+Unit 
+GENERAL 
+ 
+ 
+ 
+ 
+Weight 
+ 
+55 
+ 
+g 
+Operating temperature 
+-40 
+ 
+85 
+°C 
+Supply voltage 
+4.5 
+5.0 
+5.5 
+V 
+Power consumption 
+ 
+1.5 
+2 
+W 
+Start-up time 
+ 
+3 
+ 
+s 
+Sample rate 
+ 
+ 
+2000 
+SPS 
+Mechanical shock, any direction 
+ 
+ 
+1500 
+g 
+RS422 transmission bit rate 
+ 
+ 
+5.18 
+Mbits/s 
+Misalignment 
+ 
+1 
+ 
+mrad 
+GYRO 
+ 
+ 
+ 
+ 
+Input range 
+ 
+±400 1) 
+ 
+°/s 
+Non-linearity (condition: ±200 °/s) 
+ 
+15 
+ 
+ppm 
+Resolution 
+ 
+0.22 
+ 
+°/h 
+Bias instability 
+ 
+0.3 
+ 
+°/h 
+Angular random walk 
+ 
+0.15 
+ 
+°/√h 
+Bias error over temperature gradients 
+ 
+±10 2) 
+ 
+°/h rms 
+Linear acceleration effect 
+ 
+ 
+ 
+ 
+ 
+Bias 
+ 
+1 4) 
+ 
+°/h/g 
+ 
+Scale factor 
+ 
+50 4) 
+ 
+ppm/g 
+Scale factor accuracy 
+ 
+±500 
+ 
+ppm 
+ACCELEROMETER 
+ 
+ 
+ 
+ 
+Input range 
+ 
+±10 3) 
+ 
+g 
+Resolution 
+ 
+1.9 
+ 
+µg 
+Bias instability 
+ 
+0.05 
+ 
+mg 
+Velocity random walk 
+ 
+0.07 
+ 
+m/s/√h 
+Bias error over temperature gradients 
+ 
+±2 2) 
+ 
+mg rms 
+Scale factor accuracy 
+ 
+±300 
+ 
+ppm 
+INCLINOMETER 
+ 
+ 
+ 
+ 
+Input range 
+ 
+±1.7 
+ 
+g 
+Resolution 
+ 
+0.2 
+ 
+µg 
+Scale factor accuracy 
+ 
+±500 
+ 
+ppm 
+PIN OUT 
+AXIS DEFINITIONS 
+(TRANSMIT ONLY) 
+(FULL FUNCTION) 
+ELECTRICAL CONNECTIONS 
+TxData+
+TxData-
+RxData+
+RxData-
++5V
+GND
+POWER 
+MANAGEMENT / 
+VOLTAGE AND 
+FREQUENCY 
+REFERENCES
+X-AXIS
+GYRO
+Y-AXIS
+GYRO
+Z-AXIS
+GYRO
+SELF-
+DIAGNOSTICS
+GYRO DRIVE 
++ ADC + LPF
+RS422
+OUTPUT 
+DRIVER
+RS422 
+INPUT 
+BUFFER
+ExtTrig
+SYSTEM 
+CONTROLLER
+GYRO DRIVE 
++ ADC + LPF
+GYRO DRIVE 
++ ADC + LPF
+X-AXIS
+ACC.
+Y-AXIS
+ACC.
+Z-AXIS
+ACC.
+ADC + LPF
+TOV
+ADC + LPF
+ADC + LPF
+ADC + LPF
+AUX+
+AUX-
+Reset
+X-AXIS
+INCL.
+Y-AXIS
+INCL.
+Z-AXIS
+INCL.
+ADC + LPF
+ADC + LPF
+ADC + LPF
+CALIBRATION 
+AND 
+COMPENSATION
+1 TxD-
+2 RxD-
+3 TST
+4 TOV
+5 NRST
+6 AUX_GND
+7 AUX-
+8 VSUP
+  9 TxD+
+10 RxD+
+11 ExtTrig
+12 GND
+13 GND
+14 AUX+
+15 GND
+5V
+TxD+
+TxD-
+NRST
+STIM300
+RxD-
+RxD+
+SYSTEM
+ExtTrig
+8
+11
+5
+9
+1
+15
+12
+13
+5V
+TxD+
+TxD-
+RxD-
+RxD+
+NRST
+TOV
+STIM300
+TxD+
+TxD-
+RxD-
+RxD+
+RESET
+SYSTEM
+External Trigger
+ExtTrig
+AUX+
+AUX-
+EXTERNAL
+UNIT
+Out+
+Out-
+Time of Validiy
+8
+11
+4
+5
+9
+1
+10
+2
+14
+7
+15
+12
+13
+6
+AUX_GND
+1) Optional ranges are available 
+2) Condition: ΔT ≤ 1°C/min 
+X
+Y
+Z
+3) Optional ranges: ±5 g, ±30 g, ±80 g  
+4) With g-compensation 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM300 Inertia Measurement Unit 
+ 
+TS1524 rev.25                                                                  1/86                                                                  February 2020 
+ 
+1 
+FEATURES 
+o 
+Miniature package 
+o 
+Low noise 
+o 
+Low bias instability 
+o 
+Excellent performance in vibration and shock environments 
+o 
+9 axes offered in same package 
+o 
+Electronically calibrated axis alignment 
+o 
+Gyros based on Sensonor ButterflyGyroTM 
+o 
+Single-crystal silicon technology 
+o 
+No intrinsic wear-out effects 
+o 
+High stability accelerometers and inclinometers 
+o 
+Separate “AUX” input for 24 bit ADC 
+o 
+Insensitive to magnetic fields 
+o 
+Full EMI compliance 
+o 
+Digital interface, RS422 
+o 
+Fully configurable 
+o 
+Continuous self-diagnostics 
+o 
+RoHS compatible 
+ 
+ 
+2 
+GENERAL DESCRIPTION 
+ 
+STIM300 is an IMU consisting of 3 high accuracy 
+MEMS-based gyros, 3 high stability accelerometers 
+and 3 high stability inclinometers in a miniature 
+package. Each axis is factory-calibrated for bias, 
+sensitivity and compensated for temperature effects 
+to provide high-accuracy measurements in the 
+temperature range -40°C to +85°C. The unit runs off 
+a single +5V supply. 
+STIM300 communicates via a standard high-level 
+RS422 interface. The use of a 32-bit RISC ARM 
+microcontroller provides flexibility in the 
+configuration, like choice of output unit, sample rate, 
+low pass filter ‒3dB frequency and RS422 bit-rate 
+and protocol parameters. All configurable parameters 
+can be defined when ordering or set by customer. 
+When STIM300 is powered up, it will perform an 
+internal system check and synchronise the sensor 
+channels. As an acknowledgement of the complete 
+power-up sequence, it will provide special datagrams 
+containing part number, serial number and 
+configuration data. STIM300 will then automatically 
+proceed to provide measurement data. Connect power 
+and STIM300 will provide accurate measurements over the RS422 interface. 
+The measurement data is transmitted as packages of data on a fixed format (datagram) at intervals given by the 
+sample rate together with a synchronization signal (TOV). The datagram is in binary coded format in order to have an 
+efficient transfer of data. In addition to the measurement data itself, the datagram contains an identifier, status bytes 
+and a 32 bit CRC (Cyclic Redundancy Check) to provide high degree of fault detection in the transmissions. The 
+status bytes will flag any detected errors in the system. STIM300 can also be configured to transmit data only when 
+triggered by a separate digital input signal (ExtTrig).  
+For more advanced users, the gyro may be put in Service Mode. In this mode all the configuration parameters can be 
+intermediately or permanently changed by overwriting the current settings in the flash memory. In Service Mode the 
+commands and responses are in a human readable format (ASCII); to enable the use of terminal-type software during 
+typical product integration. Service Mode also provides the ability to perform single measurements, perform 
+diagnostics and obtain a higher detail level of detected errors reported in the status bytes. 
+TxData+
+TxData-
+RxData+
+RxData-
++5V
+GND
+POWER 
+MANAGEMENT / 
+VOLTAGE AND 
+FREQUENCY 
+REFERENCES
+X-AXIS
+GYRO
+Y-AXIS
+GYRO
+Z-AXIS
+GYRO
+SELF-
+DIAGNOSTICS
+GYRO DRIVE 
++ ADC + LPF
+RS422
+OUTPUT 
+DRIVER
+RS422 
+INPUT 
+BUFFER
+ExtTrig
+SYSTEM 
+CONTROLLER
+GYRO DRIVE 
++ ADC + LPF
+GYRO DRIVE 
++ ADC + LPF
+X-AXIS
+ACC.
+Y-AXIS
+ACC.
+Z-AXIS
+ACC.
+ADC + LPF
+TOV
+ADC + LPF
+ADC + LPF
+ADC + LPF
+AUX+
+AUX-
+Reset
+X-AXIS
+INCL.
+Y-AXIS
+INCL.
+Z-AXIS
+INCL.
+ADC + LPF
+ADC + LPF
+ADC + LPF
+CALIBRATION 
+AND 
+COMPENSATION
+Figure 2-1: STIM300 FUNCTION BLOCK DIAGRAM 
+Sensonor AS 
+Phone: +47 3303 5000 - Fax: +47 3303 5005  
+sales@sensonor.com   
+www.sensonor.com 
+(38.6mm x 44.8mm x 21.5mm) 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM300 Inertia Measurement Unit 
+ 
+TS1524 rev.25                                                                  2/86                                                                  February 2020 
+ 
+3 
+TABLE OF CONTENTS 
+ 
+DOCUMENT HISTORY .................................................................................................... Error! Bookmark not defined. 
+1 
+FEATURES ................................................................................................................................................................ 1 
+2 
+GENERAL DESCRIPTION ......................................................................................................................................... 1 
+3 
+TABLE OF CONTENTS ............................................................................................................................................. 2 
+4 
+DEFINITIONS AND ABBREVIATIONS USED IN DOCUMENT ................................................................................ 4 
+4.1 
+Definitions ............................................................................................................................................................ 4 
+4.2 
+Abbreviations ....................................................................................................................................................... 4 
+5 
+ABSOLUTE MAXIMUM RATINGS ............................................................................................................................. 4 
+6 
+SPECIFICATIONS ...................................................................................................................................................... 5 
+6.1 
+TYPICAL PERFORMANCE CHARACTERISTICS ........................................................................................... 12 
+6.1.1 
+GYRO CHARACTERISTICS ..................................................................................................................... 12 
+6.1.2 
+ACCELEROMETER CHARACTERISTICS................................................................................................ 16 
+6.1.3 
+INCLINOMETER CHARACTERISTICS ..................................................................................................... 19 
+6.1.4 
+AUX CHARACTERISTICS ......................................................................................................................... 22 
+6.2 
+Configurable parameters ................................................................................................................................... 24 
+6.3 
+Datagram specifications .................................................................................................................................... 25 
+6.3.1 
+Part Number datagram .............................................................................................................................. 25 
+6.3.2 
+Serial Number datagram ............................................................................................................................ 26 
+6.3.3 
+Configuration datagram ............................................................................................................................. 27 
+6.3.4 
+Extended Error Information datagram........................................................................................................ 30 
+6.3.5 
+Normal Mode datagram ............................................................................................................................. 31 
+6.3.6 
+Cyclic Redundancy Check (CRC) .............................................................................................................. 32 
+6.4 
+Status byte ........................................................................................................................................................ 33 
+7 
+MECHANICAL .......................................................................................................................................................... 34 
+7.1 
+Mechanical dimensions ..................................................................................................................................... 34 
+7.2 
+Advice on mounting orientation ......................................................................................................................... 35 
+7.3 
+Pin configuration ................................................................................................................................................ 35 
+7.4 
+Definition of axes ............................................................................................................................................... 35 
+8 
+BASIC OPERATION ................................................................................................................................................. 36 
+8.1 
+Reset ................................................................................................................................................................. 36 
+8.2 
+External Trigger ................................................................................................................................................. 36 
+8.3 
+Time of Validity (TOV) ....................................................................................................................................... 37 
+8.4 
+Auxiliary input .................................................................................................................................................... 38 
+8.5 
+Operating modes ............................................................................................................................................... 38 
+8.5.1 
+Init Mode .................................................................................................................................................... 39 
+8.5.2 
+Normal Mode .............................................................................................................................................. 39 
+8.5.3 
+Service Mode ............................................................................................................................................. 47 
+8.6 
+Self-diagnostics ................................................................................................................................................. 47 
+9 
+COMMANDS IN NORMAL MODE ........................................................................................................................... 48 
+9.1 
+N (PART NUMBER DATAGRAM) command .................................................................................................... 48 
+9.2 
+I (SERIAL NUMBER DATAGRAM) command .................................................................................................. 48 
+9.3 
+C (CONFIGURATION DATAGRAM) command ................................................................................................ 49 
+9.4 
+E (EXTENDED ERROR INFORMATION DATAGRAM) command .................................................................. 49 
+9.5 
+R (RESET) command ........................................................................................................................................ 49 
+9.6 
+SERVICEMODE command ............................................................................................................................... 49 
+10 
+COMMANDS IN SERVICE MODE ....................................................................................................................... 51 
+10.1 
+i (INFORMATION) command ........................................................................................................................ 52 
+10.2 
+a (SINGLE-SHOT MEASUREMENT) command ........................................................................................... 57 
+10.3 
+c (DIAGNOSTIC) command .......................................................................................................................... 59 
+10.4 
+d (DATAGRAM FORMAT) command ............................................................................................................ 61 
+10.5 
+t (TRANSMISSION PARAMETERS) command ............................................................................................ 63 
+10.5.1 
+User-defined bit-rate .................................................................................................................................. 63 
+10.6 
+r (LINE TERMINATION) command ............................................................................................................... 65 
+10.7 
+u (OUTPUT UNIT) command ........................................................................................................................ 66 
+10.8 
+f (LP FILTER -3dB FREQUENCY) command ............................................................................................... 67 
+10.9 
+m (SAMPLE RATE) command ...................................................................................................................... 69 
+10.10 
+k (AUX COMP) command ............................................................................................................................. 70 
+10.11 
+g (GYRO G-COMP) command ...................................................................................................................... 71 
+10.12 
+s (SAVE) command ....................................................................................................................................... 74 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM300 Inertia Measurement Unit 
+ 
+TS1524 rev.25                                                                  3/86                                                                  February 2020 
+ 
+10.13 
+x (EXIT) command ......................................................................................................................................... 75 
+10.14 
+z (RESTORE TO FACTORY SETTINGS) command .................................................................................... 77 
+10.15 
+? (HELP) command ....................................................................................................................................... 79 
+11 
+MARKING ............................................................................................................................................................. 84 
+12 
+CONFIGURATION / ORDERING INFORMATION ............................................................................................... 85 
+ 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM300 Inertia Measurement Unit 
+ 
+TS1524 rev.25                                                                  4/86                                                                  February 2020 
+ 
+4 
+DEFINITIONS AND ABBREVIATIONS USED IN DOCUMENT 
+ 
+4.1 
+Definitions 
+ 
+g0= 9.80665m/s2 (standard gravity) 
+ 
+4.2 
+Abbreviations 
+ 
+Table 4-1: Abbreviations 
+ABBREVIATION 
+FULL NAME 
+BCD 
+Binary Coded Decimal 
+BSL 
+Best Straight Line 
+CIC-filter 
+Cascaded Integrator-Comb filter 
+CR 
+Carriage Return 
+FS 
+Full-Scale 
+LF 
+Line Feed 
+LP filter 
+Low-Pass filter 
+tbd 
+to be defined 
+LSB 
+Least Significant Byte 
+MSB 
+Most Significant Byte 
+lsb 
+Least significant bit 
+TOV 
+Time of Validity 
+ 
+ 
+ 
+5 
+ABSOLUTE MAXIMUM RATINGS 
+ 
+Stresses beyond those listed in Table 5-1 may cause permanent damage to the device. 
+Exposure to any Absolute Maximum Rating condition for extended periods may affect device reliability and lifetime. 
+Table 5-1: Absolute maximum ratings 
+Parameter 
+Rating 
+Comment 
+Mechanical shock 
+1 500g/0.5ms half-sine 
+Any direction. Ref: MIL STD-883G 
+ESD human body model 
+±2kV 
+Ref: JEDEC/ESDA JS-001 
+Storage temperature 
+-55°C to +90°C 
+Up to 1000 hours 
+VSUP to GND 
+-0.5 to +7V 
+ 
+RxD+ or RxD- to GND 
+-0.3V to +7V 
+ 
+RxD+ to RxD- 
+±6V 
+with 120Ω Line Termination = ON 
+TxD+ or TxD- to GND 
+-8V to +8V 
+ 
+ExtTrig to GND 
+-0.3V to +7V 
+ 
+TOV to GND 
+-0.3V to +7V 
+ 
+NRST to GND 
+-0.3V to +7V 
+ 
+AUX+ to AUX- 
+±6.5V 
+ 
+AUX+ or AUX- to GND 
+±6.5V 
+ 
+Chassis to GND 
+Helium sensitivity  
+ 
+500V 
+ 
+Not to be exposed to helium concentrations higher 
+than those normally found in the atmosphere  
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM300 Inertia Measurement Unit 
+ 
+TS1524 rev.25                                                                  5/86                                                                  February 2020 
+ 
+6 
+SPECIFICATIONS 
+ 
+Table 6-1: Operating conditions 
+Parameter 
+Conditions 
+Min 
+Nom 
+Max 
+Unit 
+Note 
+INPUT RANGE, ANGULAR RATE 
+ 
+ 
+±400 
+ 
+°/s 
+ 
+INPUT RANGE, ACCELERATION 
+ 
+ 
+±10 
+ 
+g 
+1 
+INPUT RANGE, INCLINATION 
+ 
+ 
+±1.7 
+ 
+g 
+ 
+POWER SUPPLY 
+ 
+4.5 
+5.0 
+5.5 
+V 
+2,3 
+OPERATING TEMPERATURE 
+ 
+-40 
+ 
++85 
+°C 
+ 
+Note 1: Other ranges available, ref. Table 6-5 (5g), Table 6-6 (30g) and Table 6-7 (80g) 
+Note 2: At supply voltages above 5.85V (nominal value) an internal voltage protection circuit will cut power and the unit 
+will go into reset until the voltage is back within operating conditions. 
+Note 3: At supply voltages below 4.05V (nominal value) the unit will go into reset until the voltage is back within 
+operating conditions. Due to power consumption being much lower in reset compared to normal operation, the 
+series resistance between power source and STIM300 could give rise to an oscillating behaviour of the input 
+voltage to the unit. 
+ 
+Table 6-2: Functional specifications, general 
+Parameter 
+Conditions 
+Min 
+Nom 
+Max 
+Unit 
+Note 
+POWER CONSUMPTION 
+ 
+ 
+ 
+ 
+ 
+ 
+Power consumption 
+ 
+ 
+1.5 
+2 
+W 
+ 
+TIMING 
+ 
+ 
+ 
+ 
+ 
+ 
+Start-Up time after Power-On 
+ 
+ 
+ 
+0.3 
+s 
+1 
+Time to transmit after Reset 
+ 
+ 
+ 
+0.2 
+s 
+2 
+Time to valid data 
+ 
+T=+25°C 
+ 
+0.7 
+ 
+1 
+s 
+s 
+3 
+3 
+RS422 Bit-Rate 
+ 
+ref. Table 6-11 
+ 
+ 
+RS422 Bit-Rate Accuracy 
+ 
+ 
+ 
+±1 
+% 
+4 
+RS422 PROTOCOL 
+ 
+ 
+ 
+ 
+ 
+ 
+Start Bit 
+ 
+ 
+1 
+ 
+bit 
+ 
+Data Length 
+ 
+ 
+8 
+ 
+bits 
+ 
+Parity 
+ 
+None 
+ 
+5 
+Stop Bits 
+ 
+1 
+bit 
+5 
+RS422 LINE TERMINATION 
+ 
+ 
+ 
+ 
+ 
+ 
+Input resistance 
+Line termination = ON 
+ 
+120 
+ 
+Ω 
+ 
+Input resistance 
+Line termination = OFF 
+48 
+125 
+ 
+kΩ 
+ 
+RESET (NRST PIN) 
+ 
+ 
+ 
+ 
+ 
+ 
+Logic levels 
+“high” 
+“low” 
+2.3 
+ 
+ 
+0.6 
+V 
+V 
+ 
+Minimum hold time for reset 
+ 
+1 
+ 
+ 
+µs 
+ 
+Pull-Up Resistor 
+ 
+80 
+100 
+ 
+kΩ 
+ 
+EXTERNAL TRIGGER (ExtTrig 
+PIN) 
+ 
+ 
+ 
+ 
+ 
+ 
+Logic levels 
+“high” 
+“low” 
+2.3 
+ 
+ 
+0.6 
+V 
+V 
+ 
+Trigger 
+ 
+Negative transition  
+ 
+ 
+Time between triggers 
+Measurement unit:  
+ 
+ 
+ 
+ 
+ 
+ 
+  angular rate 
+0.5 
+ 
+127 
+ms 
+6,7 
+ 
+  incremental angle 
+0.5 
+ 
+127 
+ms 
+6,8 
+ 
+  average rate 
+0.5 
+ 
+65 
+ms 
+6,9 
+ 
+  integrated angle 
+0.5 
+ 
+8 
+ms 
+6,10 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Minimum “high” time before trigger, 
+text_hi 
+ 
+250 
+ 
+ 
+ns 
+11 
+Minimum “low” time after trigger, 
+text_lo 
+ 
+250 
+ 
+ 
+ns 
+11 
+Delay from external trigger to start 
+of transmission, text_dl 
+ 
+ 
+ 
+86 
+µs 
+11 
+Pull-Up Resistor 
+ 
+40 
+50 
+ 
+kΩ 
+ 
+Latency 
+ 
+ 
+ 
+1000 
+µs 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM300 Inertia Measurement Unit 
+ 
+TS1524 rev.25                                                                  6/86                                                                  February 2020 
+ 
+TIME OF VALIDITY (TOV PIN) 
+ 
+ 
+ 
+ 
+ 
+ 
+Output configuration 
+ 
+Open drain 
+ 
+ 
+Internal Pull-Up Resistor to Vsup 
+ 
+10 
+kΩ 
+ 
+Sink capability 
+ 
+ 
+ 
+50 
+mA 
+ 
+TOV active level 
+ 
+Active “low” 
+ 
+ 
+Minimum time of TOV, ttov_min 
+ 
+50 
+ 
+ 
+µs 
+12 
+Delay from internal time-tick to 
+TOV active, ttov_dl 
+ 
+ 
+1.2 
+6 
+µs 
+12 
+Delay from TOV active (to start of 
+transmission, ttx_dl 
+ 
+ 
+ 
+80 
+µs 
+12 
+CHASSIS 
+ 
+ 
+ 
+ 
+ 
+ 
+Isolation resistance chassis to 
+GND (pin 15) 
+500V 
+100 
+ 
+ 
+MΩ 
+ 
+Note 1: Time from Power-On to start of datagram transmissions (starting with part-number datagram) 
+Note 2: Time from Reset release to start of datagram transmissions (starting with part-number datagram) 
+Note 3: Time from Power-On or Reset to the reset of the Start-Up bit (Bit 6 in the STATUS byte ref. Table 6-21). 
+During this period the output data should be regarded as non-valid. 
+Note 4: If a user-defined bit-rate larger than 1.5Mbit/s is used, the deviation may exceed the specification due to the 
+resolution of the bit-rate generator, ref. section 10.5.1 
+Note 5: Other values can be configured, ref. Table 6-11 
+Note 6: If time between triggers is longer than 127ms, the sample counter will over-run  
+Note 7: Time between triggers should be carefully evaluated as long time between triggers in combination with high 
+bandwidths could lead to issues related to folding. Similar for accelerometer and inclinometer outputs 
+Note 8: If time between triggers is longer than 8ms, an overload may occur in the incremental angle. An overload will 
+be flagged in the status byte, ref. Table 6-21. Similar for accelerometer and inclinometer outputs 
+Note 9: If time between triggers is longer, the accuracy of average rate may also be reduced. Similar for accelerometer 
+and inclinometer outputs 
+Note 10: If time between triggers is longer, the integrated angle may have wrapped several times and hence the 
+change in angle from last sample will not be possible to calculate. Similar for accelerometer and inclinometer 
+outputs 
+Note 11: For definition, ref. Figure 8-3 
+Note 12: For definition, ref. Figure 8-4 and Figure 8-5 
+ 
+ 
+Table 6-3: Functional specifications, gyros 
+Parameter 
+Conditions 
+Min 
+Nom 
+Max 
+Unit 
+Note 
+GYRO 
+ 
+ 
+ 
+ 
+ 
+ 
+Full Scale (FS) 
+ 
+ 
+±400 
+ 
+°/s 
+1 
+Resolution 
+ 
+ 
+24 
+0.22 
+ 
+bits 
+°/h 
+ 
+Scale Factor Accuracy 
+ 
+ 
+±500 
+ 
+ppm 
+ 
+Non-Linearity 
+±200°/s 
+±400°/s 
+ 
+15 
+20 
+ 
+ppm 
+ppm 
+2 
+2 
+Bandwidth (-3dB) 
+ 
+ 
+262 
+ 
+Hz 
+3 
+Sample Rate 
+ 
+ 
+ 
+2000 
+samples/s 
+4 
+Group Delay 
+LP-filter -3dB = 262Hz 
+LP-filter -3dB = 131Hz 
+LP-filter -3dB = 66Hz 
+LP-filter -3dB = 33Hz 
+LP-filter -3dB = 16Hz 
+ 
+1.5 
+3.0 
+6.0 
+12 
+24 
+ 
+ms 
+ms 
+ms 
+ms 
+ms 
+5 
+5 
+5 
+5 
+5 
+Bias Range 
+Bias Run-Run 
+Drift Rate Stability 
+Bias error over temperature 
+Bias error over temperature gradients 
+ 
+ 
+ 
+Static temperatures 
+ΔT ≤ ±1°C/min 
+-250 
+0 
+4 
+3 
+9 
+10 
++250 
+°/h 
+°/h 
+°/h 
+°/h 
+°/h 
+ 
+ 
+ 
+6 
+7 
+Bias Instability 
+Allan Variance @25°C 
+ 
+0.3 
+ 
+°/h 
+ 
+Angular Random Walk 
+Allan Variance @25°C 
+ 
+0.15 
+ 
+°/√hr 
+ 
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM300 Inertia Measurement Unit 
+ 
+TS1524 rev.25                                                                  7/86                                                                  February 2020 
+ 
+Linear Acceleration Effect 
+ 
+Bias 
+ 
+ 
+Scale Factor 
+ 
+With g-compensation 
+No g-compensation 
+With g-compensation 
+No g-compensation 
+ 
+ 
+1 
+7 
+50 
+400 
+ 
+ 
+ 
+ 
+°/h /g 
+°/h /g 
+ppm/g 
+ppm/g 
+ 
+8 
+8 
+8 
+8 
+Vibration Rectification Coefficient 
+ 
+Ref. Figure 6-1 
+°/h /g2rms 
+ 
+Misalignment 
+ 
+ 
+1 
+ 
+mrad 
+9 
+Orthogonality 
+ 
+ 
+0.2 
+ 
+mrad 
+10 
+Note 1: Output is monotonous and will saturate at ±480°/s 
+Note 2: Largest deviation from BSL (Best Straight Line) over the range specified 
+Note 3: Low-pass filter -3dB frequency can be configured, ref. Table 6-11 and section 6.1.1.4 
+Note 4: Other values can be configured, ref. Table 6-11. Sample rate will be same for gyros, accelerometers, 
+inclinometers, AUX and temperature 
+Note 5: Total delay to start of datagram transmission = group delay + 0.5ms + ttov dl + ttx_dl. For output units with 
+delayed output, the group delay will be 5ms longer, ref. section 8.5.2.2.1. 
+Note 6: rms-value calculated on the residuals at static temperatures over the temperature range 
+Note 7: rms-value calculated on the residual over two temperature-cycles, ref. Figure 6-7 
+Note 8: Section 7.2 gives advice on sensitive directions 
+Note 9: Ref. Figure 6-2 for definition of reference points used in axes alignment 
+Note 10: Gyros, accelerometers and inclinometers are calibrated in the same test-insertion to ensure minimum 
+misalignment between the three sensor-axis systems 
+ 
+ 
+Figure 6-1: Nominal VRC at 5g rms for gyros 
+ 
+ 
+ 
+Figure 6-2: Reference points for alignment of axes 
+ 
+0
+200
+400
+600
+800
+1000
+1200
+1400
+1600
+1800
+2000
+0
+0.02
+0.04
+0.06
+0.08
+0.1
+0.12
+VRC [°/h/g2rms]
+Frequency [Hz]
+y
+
+ 
+DATASHEET 
+ButterflyGyro™ 
+STIM300 Inertia Measurement Unit 
+ 
+TS1524 rev.25                                                                  8/86                                                                  February 2020 
+ 
+ 
+Table 6-4: Functional specifications, 10g accelerometers 
+Parameter 
+Conditions 
+Min 
+Nom 
+Max 
+Unit 
+Note 
+ACCELEROMETER 
+ 
+ 
+ 
+ 
+Full Scale (FS) 
+ 
+ 
+±10 
+ 
+g 
+1 
+Resolution 
+ 
+ 
+24 
+1.9 
+ 
+bits 
+µg 
+ 
+ 
+Scale Factor Accuracy 
+ 
+ 
+±200 
+ 
+ppm 
+ 
+Scale Factor 1 year stability 
+Non-Linearity 
+ 
+±10g 
+ 
+300 
+100 
+1000 
+ppm 
+ppm 
+ 
+2 
+Bandwidth (-3dB) 
+LP-filter -3dB = 262Hz 
+90 
+214 
+ 
+Hz 
+3 
+Sample Rate 
+ 
+ 
+ 
+2000 
+samples/s 
+4 
+Group Delay 
+LP-filter -3dB = 262Hz 
+LP-filter -3dB = 131Hz 
+LP-filter -3dB = 66Hz 
+LP-filter -3dB = 33Hz 
+LP-filter -3dB = 16Hz 
+ 
+6.5 
+8.0 
+11 
+17 
+29 
+ 
+ms 
+ms 
+ms 
+ms 
+ms 
+5 
+5 
+5 
+5 
+5 
+Bias switch on/off repeatability 
+Bias 1 year stability 
+Bias error over temperature 
+ 
+ 
+ΔT ≤ ±1°C/min 
+-0.75 
+0 
+1.5 
+±2 
++0.75 
+7.5 
+mg 
+mg 
+mg rms 
+ 
+Bias Instability 
+Allan Variance @25°C 
+ 
+0.05 
+ 
+mg 
+ 
+Velocity Random Walk 
+Allan Variance @25°C 
+ 
+0.07 
+ 
+m/s/√hr 
+ 
+Vibration Rectification Coefficient 
+ 
+Ref.Figure 6-3  
+mg/g2rms 
+ 
+Misalignment 
+ 
+ 
+1 
+ 
+mrad 
+6 
+Orthogonality 
+ 
+ 
+0.2 
+ 
+mrad 
+7 
+Note 1: Overload-bit in STATUS-byte (ref. section 6.4) will be set at 11g (+10% of range) 
+Note 2: Largest deviation from BSL (Best Straight Line) over the range specified 
+Note 3: Other values can be configured, ref. Table 6-11 and section 6.1.2.3 
+Note 4: Other values can be configured, ref. Table 6-11. Sample rate will be same for gyros, accelerometers, 
+inclinometers, AUX and temperature 
+Note 5: Total delay to start of datagram transmission = group delay + 0.5ms + ttov dl + ttx_dl 
+Note 6: Ref. Figure 6-2 for definition of reference points used in axes alignment 
+Note 7: Gyros, accelerometers and inclinometers are calibrated in the same test-insertion to ensure minimum 
+misalignment between the three sensor-axis systems 
+ 
+ 
+Figure 6-3: Nominal VRC at 10g rms for 10g accelerometers 
+ 
+

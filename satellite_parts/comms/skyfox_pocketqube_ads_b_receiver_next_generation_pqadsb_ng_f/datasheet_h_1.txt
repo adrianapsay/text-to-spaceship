@@ -1,0 +1,834 @@
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Space-Friendly   
+PocketQube ADS-B Receiver 
+pqADSB-NG 
+  
+Product Datasheet 
+Rev. A/2026 
+ 
+ 
+Intended to track Aircrafts from Space.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Made in Czech Republic, a country with space heritage since 1978. 
+© 2014-2026 SkyFox Labs, All rights reserved. 
+
+ 
+ 
+Space-Friendly 
+PocketQube ADS-B Receiver
+ 
+Intended to track Aircrafts from Space.  
+ 
+ 
+ 
+               www.SkyFoxLabs.com, Space-Friendly products 
+2             pqADSB-NG Product Datasheet, Rev. A 
+Issue rev. A, 2026, info@skyfoxlabs.com, U studanky 620/13. CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2026 SkyFox Labs, s.r.o., All rights reserved 
+ 
+ 
+                           
+FEATURES 
+ 
+Realtime Aircraft Surveillance for Space Stations 
+ 
+PocketQube ADS-B Receiver with No Deployables 
+ 
+Fully functional Passive Radar for Aircraft tracking 
+ 
+Automatic Dependent Surveillance – Broadcast 
+(ADS-B) Receiver, Mode-S 1090ES 
+ 
+Complete Receiver with Embedded Antenna 
+ 
+1090 MHz L-band Zero-IF receiver 
+ 
+112bit + 56bit Extended Squitters 
+ 
+Downlink Format 11, 17 (DF11, DF17) output 
+ 
+Highly Sensitive, Ultra Low Power, World's Lowest 
+PocketQube Profile 
+ 
+Up to 1600 km slant range (maximum) 
+ 
+Squitter Counter for sanity check 
+ 
+Embedded RHCP Patch Antenna system 
+ 
+Intended to LEO up to h = 500+ km  
+ 
+Squitter Filters, CRC calculation 
+ 
+PocketQube standard Compatible 
+ 
+Mega-Constellation Ready! product 
+ 
+Easy-to-Implement Data Interface  
+ 
+UART 230400-8-N-1, 3V3-CMOS levels 
+ 
+2.7 to 3.6V Power supply 
+ 
+Power consumption 
+ 
+260 mW (typical), 3.3 V @ 25°C 
+ 
+Velocity  
+ 
+0 up to 9 km/s (Flight Model) 
+ 
+Startup time less than 3 seconds (typical) 
+ 
+Protocols 
+ 
+ASCII output (standard) 
+ 
+HEX or Binary (on request) 
+ 
+Ultra Low Profile and Dimensions  
+ 
+Very compact 50×50×12.5 mm 
+ 
+Wide temperature range 
+ 
+-40˚C to +85˚C 
+ 
+Connectors 
+ 
+PicoBlade™ 6P connector 
+ 
+doubled (+, GND and TXD signal) 
+ 
+Low mass 55 grams 
+ 
+ 
+APPLICATIONS 
+ 
+Nonstop Aircraft tracking on Small Satellites 
+ 
+Aircraft Search & Rescue (SAR) Node 
+ 
+Air Trafic Control (ATC) Management 
+ 
+Limited Power Budget Space Projects 
+ 
+Stratospheric, Meteorological, Scientific Balloons 
+ 
+PocketQube Missions, Tech Demo 
+ 
+ 
+Fig. 1 Ultra Low Profile PocketQube ADS-B 
+Receiver with embedded antenna, Flight Model. 
+ 
+GENERAL DESCRIPTION 
+ 
+ 
+The pqADSB-NG/Flight Model is the Next 
+Generation of the World's First Space-Friendly 
+Automatic Dependent Surveillance–Broadcast or 
+ADS-B Extended Squitter, Mode-S Passive Radar 
+Receiver System with No Deployables, Ultra Low 
+Profile and Power requirements intended for 
+PocketQubes. With integrated RHCP patch antenna 
+the product is intended to track Aircrafts from 
+satellites in Low Earth Orbit (LEO), High Altitude 
+Balloons (HAB) or Unmanned Aerial Vehicles 
+(UAVs) with limited power and mass budgets.  
+ 
+It requires only 10 % of power in 
+comparison with conventional SDR-based space-
+grade ADS-B receivers allowing permanent data 
+output. 
+ 
+Easy-to-use UART serial data interface 
+output providing standardized ASCII sentences 
+together with embedded ADS-B antenna provides a 
+smart standalone solution for all kind of Space-
+grade or terrestrial projects where the precise 
+Aircraft position, type, velocity, direction or 
+ICAO/airliner information is required.  
+ 
+The unit is interfaced with power supply 
+and data output using single six pin PicoBladeTM 
+connector with double-redundant pins. 
+ 
+Very low mass and dimensions fits 
+perfectly with all kind of space-demanding projects. 
+The pqADSB-NG Evaluation Kit is available. 
+PRODUCT DATA SHEET                   
+pqADSB-NG
+
+ 
+ 
+ 
+ 
+  
+ 3       
+www.SkyFoxLabs.com, Space-Friendly products 
+pqADSB-NG Product Datasheet, Rev. A 
+Issue rev. A, 2026, info@skyfoxlabs.com, U studanky 620/13. CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2026 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+pqADSB-NG
+TABLE OF CONTENTS 
+ 
+APPLICATIONS...................................................................2 
+GENERAL DESCRIPTION..................................................2 
+TABLE OF CONTENTS .......................................................3 
+ABSOLUTE MAXIMUM RATINGS ....................................3 
+PARAMETRIC SPECIFICATION........................................3 
+CONNECTORS DESCRIPTION ..........................................4 
+FUNCTIONAL BLOCK DIAGRAM .....................................4 
+THEORY OF OPERATION..................................................5 
+PROTOCOLS .......................................................................6 
+OUTPUT DATA DESCRIPTION .........................................6 
+EVALUATION KIT.............................................................. 7 
+ANTENNA ...........................................................................9 
+APPLICATION NOTES & RECOMMENDATIONS............9 
+QUALITY ASSURANCE .................................................... 10 
+EXPORT CONTROL...........................................................11 
+DISCLAIMER .................................................................... 12 
+ 
+ 
+ 
+ 
+ABSOLUTE MAXIMUM RATINGS 
+ 
+VDD to GND………….…………………………..-0.3 V to +4.2 V 
+Other Pins to GND:.............................. -0.3 V to +(VDD +0.3) V 
+DC Input Voltage: VI  ....... -0.3 V to VDD + 0.3 V (≤ 4.2 V max.) 
+Maximum RF Input Power:........................................ +15 dBm 
+DC Output Voltage: VO ....-0.3 V to VDD + 0.3 V (≤ 4.2 V max.) 
+ 
+DC Input Current: II at VI < 0 V or VI > VDD ...................±20 mA 
+Operating Temperature Range:……………..…-40°C to +85°C 
+DC Output Current: IO at VO < 0 V or VO > VDD..............±20 mA 
+Storage Temperature Range:………………...-45°C to +105°C 
+ 
+NOTE: Stresses beyond those listed under “Absolute Maximum Ratings” may cause permanent damage to the 
+device. These are stress ratings only, and functional operation of the device at these or any other conditions 
+beyond those indicated under specification conditions is not implied. Exposure to absolute maximum rated 
+conditions for extended periods may affect device reliability. Voltage values are with respect to system ground 
+terminal. 
+ 
+ 
+PARAMETRIC SPECIFICATION 
+ 
+TA = −40°C to +85°C, VDD = 3.3 V, Integrated RHCP patch antenna used, unless otherwise noted. 
+Parameter 
+Symbol 
+Min 
+Typ 
+Max 
+Units 
+Notes/Conditions 
+Operating Supply Voltage 
+VDD 
+2.7 
+3.3 
+3.6 
+V 
+ 
+Operating Supply Current 
+ID 
+ 
+78 
+ 
+mA 
+Continuous DC current consumption during 
+nominal operations. 
+Operating Power Consumption 
+POperation 
+ 
+260 
+ 
+mW 
+ 
+Operating Frequency 
+fRFIN 
+  
+1090 
+  
+MHz 
+1090ES, L-band 
+RF Bandwidth 
+BW 
+ 
+15 
+ 
+MHz 
+-3dB 
+Operating Velocity 
+V 
+0 
+ 
+9 
+km/s 
+ 
+Time-to-First-Frame 
+tTTFF 
+  
+ 
+3  
+s 
+The pqADSB-NG Start-up time. 
+RF Sensitivity 
+PIN 
+-104 
+-105 
+-106 
+dB 
+BER 10-2 
+Dynamic range 
+DR 
+ 
+20 
+30 
+dB 
+-76 to -86 dBm maximum input power 
+Slant Range 
+d 
+ 
+800 
+1600 
+km 
+Depending on the ADS-B Out transponder 
+output power/aircraft antenna radiation 
+pattern. 
+Output Data Framerate 
+FR 
+1 
+ 
+~75000 
+fpm 
+Frame rate given by DF11, DF17 frames 
+filtering and provided at 1.25 Mbps output 
+bitrate per minute. 
+ 
+Frame rate is limited by amount of 
+Downlink Format frames selected and 
+output bitrates and was measured with 
+periodical frame transmission generator, at 
+1.25 Mbps output data rate. 
+Minimum frame rate is 1 fpm telemetry 
+frame, if no aircraft transponder is received.
+Output Data Bitrate 
+BR 
+  
+230400 
+1250000  
+bps 
+Bitrate settings are uploaded and fixed 
+during manufacturing process. No post-
+manufacturing settings possible. 
+Output Frame Data Quality 
+DQ 
+ 
+99.999 
+100  
+% 
+As a standard, only CRC-checked 
+Downlink Format 11 and 17 frames are 
+provided. Most civil airliners uses ADS-B 
+1090ES frames to broadcast the most 
+useful and detailed data in this frame type. 
+100% of all output data frames are valid, 
+based on internal software-defined Cyclic 
+redundancy check. 
+
+ 
+ 
+ 
+ 
+  
+ 4       
+www.SkyFoxLabs.com, Space-Friendly products 
+pqADSB-NG Product Datasheet, Rev. A 
+Issue rev. A, 2026, info@skyfoxlabs.com, U studanky 620/13. CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2026 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+pqADSB-NG
+CONNECTORS DESCRIPTION 
+ 
+ 
+The pqADSB-NG/FM receiver is connected to the target system via standardized MOLEX 6 pin 
+connector. Each pin, its function and direction or manner of use is indicated in the Tab.: 1 below. The connector 
+location within the Flight Model is displayed in Fig. 2. 
+ 
+ 
+Tab.: 1 The pqADSB-NG/Flight Model Pin Description, NOTE: Minimum required interface pins are highlighted. 
+Pin
+Name
+Input, 
+Output, 
+Power 
+Description 
+1 
+2 
+VDD 
+Power 
+Positive system power input. Positive power supply input, connect to +3.3 V with respect to 
+GND system ground pins.  
+3 
+4 
+TXD 
+Output 
+ADS-B Receiver serial data output. ASCII sentences are present on this pin. Data is provided 
+by standard UART serial transfer at a rate of 230400 bps (up to 1.25 Mbit), no parity, 8 data bits, 1 
+stop bit. LVCMOS compatible signaling. 
+5 
+6 
+GND 
+ Power 
+System ground. Must be connected to ground potential. This pin may be internally connected to 
+standoff pads. Solder GND-1, GND-2, GND-3 or GND-4 to connect ground potential to chassis 
+pads. 
+ 
+ 
+  
+ 
+Fig. 2 The pqADSB-NG/FM Connector pinout and LED location. NOTE: The pqADSB-NG/FM is displayed from the 
+BOTTOM side. The SMD mount connector type is MOLEX 53398-0671 with 1.25mm pitch. Detailed dimensions drawing is 
+available online as STEP model. 
+ 
+ 
+ 
+ 
+FUNCTIONAL BLOCK DIAGRAM 
+ 
+ 
+The key functional blocks of the pqADSB-NG/FM are described in Fig. 3. The system consists of the 
+high gain Patch antenna, Low Noise Amplifier (LNA), SAW Filter, Down Converter to Zero-IF and High speed 
+baseband data processing core. The design of the front-end guarantees excellent noise figure and ensure high 
+suppression of the out of band signals. The frame decoder, downlink format filter, CRC calculation and 
+serialization is performed in high speed digital core. Output ASCII sentences are provided via UART interface. 
+The pqADSB-NG/FM receiver is realized on 6-layers PCB including two power planes to maximally suppress 
+the noise of analogue and digital circuits and protect the receiver circuits against interference from the other 
+electronics (EMC susceptibility). Frame transmission indication LED is used for quick check of the receiver's 
+activity. DC discharge attenuation and ESD protection is applied on the RF connector input. 
+
+ 
+ 
+ 
+ 
+  
+ 5       
+www.SkyFoxLabs.com, Space-Friendly products 
+pqADSB-NG Product Datasheet, Rev. A 
+Issue rev. A, 2026, info@skyfoxlabs.com, U studanky 620/13. CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2026 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+pqADSB-NG
+ 
+Fig. 3 The pqADSB-NG Receiver Block Diagram.  
+ 
+ 
+THEORY OF OPERATION 
+ 
+ 
+The pqADSB-NG/FM unit is the standalone single channel zero-IF receiver processing freely available 
+frame transmissions of the Aircrafts' Mode-S Automatic Dependent Surveillance–Broadcast or ADS-B Extended 
+Squitter, Mode-S Passive Radar working on 1090 MHz frequency band. Signals are broadcasted by flying or fly-
+ready aircraft transponders upon terrestrial Air Traffic Control (ATC) interrogations broadcasted at 1030 MHz. 
+Concurrent in-flight transponders interrogations occurs also by line-of-sight airplanes in the air.  
+ 
+Data processing core and RF signal chain supports 1090ES transport protocol only. Interrogation 
+reception on 1030 MHz or 978 MHz Universal Access Transceiver (UAT) transport protocol are not 
+implemented. 
+ 
+Aircraft Flight Management System (FMS) produces data which are then stored in Binary Data Store or 
+so-called BDS registers. This aircraft's digital memory space is updated according to actual in-flight values as a 
+database source for Mode-S interrogation replies. Moreover a total of 56 and 112 bits long Mode-S Extended 
+Squitter frames transmitted at a rate of 1 Mbps contains cyclic redundant check (CRC) bytes to help control the 
+correctness of transmitted data on receiver side. 
+ 
+ 
+High frequency L-band RF signal from the passive antenna is fed through the Low Noise Amplifier 
+with ultra low Noise Figure and ESD protection blocking the DC bias and possible antenna plasma charging in 
+space. Signal is then filtered out to clean out-of-band signals using SAW filter with as low as 2 dB passband 
+attenuation. Downconversion to zero-IF band is then performed to feed the high speed data processing core. The 
+frame header pattern is continuously searched in digitized input signal. In case the frame initial header is 
+correctly found in the signal, the record of following 56 and 112 bits long datagram is extracted using SkyFox 
+Labs' developed demodulator and decoder. Zero-IF conversion together with software-defined decoder allows 
+the receiver to perform the whole reception task using ultra low power requirement only.  
+ 
+On top of signal recordings the Downlink Format or data type filtering is performed and in case of 
+Downlink Format 11 and 17, the CRC is calculated. If the calculated CRC matches the received CRC data, the 
+serialized data output is provided on output TX pin. During the processed datagram transmission the associated 
+SMD LED is On to indicate the receiver performance. Ultra low power LED requirement and short duty cycle 
+allows user to remain the LED soldered even for flight conditions with negligible impact on power requirements. 
+ 
+The pqADSB-NG receiver software-defined demodulator and data processing core allows to perform 
+also other Downlink Format reception processing and output. However, in most cases Downlink Format 11 and 
+17 frames provided by civil aircrafts' broadcasts contains the most useful and most detailed data such as position, 
+ICAO callsign, velocity, heading, etc. From this point of view, the DF11 and DF17 filter has been implemented 
+as fixed providing CRC-checked datagrams. 
+ 
+The same frequency band (1090 MHz) is also shared with the Traffic Collision Avoidance System 
+(TCAS), by different frequency channel spacing also due to the Distance Measuring Equipment (DME) system 
+interrogations. Furthermore, more aircraft transponders may share the same band at a time by nature of timing-
+uncoordinated media access transmissions. Several transponders in the range are also broadcasting different 
+types of frames. Certain amount of packet loss rate is thus always expected. Including the CRC filtering, the 
+frame rate of DF11 and DF17 pqADSB-NG/FM output data is therefore in order of 4000 sentences per minute in 
+a typical open space (yet terrestrial) environment. 
+ 
+
+ 
+ 
+ 
+ 
+  
+ 6       
+www.SkyFoxLabs.com, Space-Friendly products 
+pqADSB-NG Product Datasheet, Rev. A 
+Issue rev. A, 2026, info@skyfoxlabs.com, U studanky 620/13. CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2026 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+pqADSB-NG
+PROTOCOLS 
+ 
+ 
+The physical communication is realized via the standard UART data interface. The baud rate is set to 
+230400 (up to 1.25M) bps, no parity, 8 data bits, 1 stop bit. Logical levels are equal to LVCMOS (3.3V) levels 
+as defined in JEDEC JESD8C.01 standard. 
+ 
+Baudrate is defined during the manufacturing process and cannot be changed later on. The 
+recommended 230400 bps bitrate is a well tested compromise between the receiver lock-out time needed to 
+process the data transfer and slow enough to not overload upper level system with too much interrupt requests 
+caused by UART data reception. 
+ 
+OUTPUT DATA DESCRIPTION 
+ 
+ 
+Data is provided in ASCII representation of HEX characters. Thus for example one received byte from 
+air radio traffic represented by binary set (0b00111100), which means 60d (Decadic) and 0x3C in Hexadecimal 
+representation is provided as two bytes - ASCII letter "3" followed by ASCII letter "C". This is to make the data 
+reception easily readable using standard serial terminal in PC. Fully binary data output would cause non-
+printable characters to be shown on serial terminal (like Hyperterminal, etc.) However, fully binary data output is 
+two times shorter than ASCII representation. 
+ 
+NOTE: Firmware modification to provide only BINARY data is possible to perform on request during 
+manufacturing process. To make the use of the unit as much simple as possible, no settings is needed and 
+also is not possible (no RXD pin on the Main Interface Connector). Customer shall decide which format 
+requires in advance. 
+ 
+A) ASCII Output - STANDARD: 
+ 
+As a standard, the pqADSB-NG unit is delivered with firmware providing 56 bit and 112 bit long 
+1090ES sentences of Downlink Format 11 and 17, which means the datagram contains 14 and 28 bytes of ASCII 
+data with 1 byte prefix and 3 bytes suffix. Total of 1+14+3 = 18 bytes or 1+28+3 = 32 bytes, respectively are 
+provided, with fixed length. 
+ 
+B) BINARY Output - ON REQUEST ONLY: 
+ 
+In case the Binary output is selected during the order process, the prefix and suffix characters remains 
+the same, to keep good orientation in data stream. However, internal datagram is shorter, only 7 or 14 bytes. 
+Total of 1+7+3 = 11 bytes or 1 + 14 + 3 = 18 bytes, respectively are provided, with fixed length. 
+ 
+ 
+Each datagram is initiated with the character "*" (star) prefix and ended with semicolon ";" and CR + 
+LF (0x13h + 0x10h) suffix string.  
+ 
+There are four different types of datagrams provided by the pqADSB-NG in the output serial data 
+stream: 
+ 
+1) The Initial Sentence available after power up or automatic reset (via watchdog within the radiation 
+environment) is still the same and distinguishing between the Engineering and Flight Model firmware as 
+highlighted below (0xAF for PocketQube Flight Model): 
+ 
+pqADSB-NG INITIAL SENTENCE (Flight Model) 
+*AF00112233445566778899AABBCC; 
+ 
+2) During nominal operations, the 56 bit squitter sentence is provided in following form, 
+ 
+pqADSB-NG 56bit Squitter OUTPUT SENTENCE Example 
+*5DA2A3D2010CDA; 
+ 
+3) and the 112 bit squitter sentence in following form: 
+ 
+pqADSB-NG 112bit Squitter OUTPUT SENTENCE Example 
+*8D3C54659909C8173004A132B0C5; 
+ 
+
+ 
+ 
+ 
+ 
+  
+ 7       
+www.SkyFoxLabs.com, Space-Friendly products 
+pqADSB-NG Product Datasheet, Rev. A 
+Issue rev. A, 2026, info@skyfoxlabs.com, U studanky 620/13. CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2026 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+pqADSB-NG
+ 
+There are several freely available online resources describing how to parse the output data into 
+dedicated BDS register's information. It is out of scope of this document to provide detailed squitter content and 
+parsing procedures.  
+ 
+However, for Search and Rescue (SAR) applications, the most valuable content is stored on byte 
+positions shown in underlined bold below. Each received sentence provided by the pqADSB-NG represents 
+published unique Mode - S Aircraft ICAO Registration Code. From the example above is thus the ICAO code 
+as following: 
+ 
+*8D3C54659909C8173004A132B0C5; 
+ 
+ Identified Aircraft ICAO Code is: 3C5465  
+ 
+There is much more information provided about the aircraft flight parameters such as Aircraft 
+Velocity, Altitude, Heading, GPS position, etc. in pqADSB-NG data output, DF11 and DF17. Above is listed 
+only one example showing how to easily interpret the data. 
+ 
+4) For a backward compatibility with the piADSB-NG unit intended for CubeSats, allowing larger electronics to 
+accurately measure input bus voltage and input current, the pqADSB-NG does not measure these values, but 
+keep them filled as fixed (3.30V, 78 mA, +21°C). However, the Received Squitter counter is fully supported and 
+shown actual. If the counter reaches 99999999 frames, the value is reset down to 00000000. 
+ 
+piADSB-NG Telemetry OUTPUT SENTENCE Example (Packet Counter Valid Only!) 
+#3.30V,078mA,+21°C,00004187; 
+ 
+ 
+ 
+EVALUATION KIT 
+ 
+ 
+To connect the pqADSB-NG with a conventional PC during satellite development, the Evaluation Kit is 
+provided to serve as a power supply from the USB bus via voltage regulator (3.3V), ESD protection and EMI 
+filters. The PCB contains signal test pins for oscilloscope probe hooks, current sensing/power cycling jumper 
+(3.3V Main Power) and a set of indicating LEDs. A Starboard Side (Right wing) green LED indicates the 
+available power. It is lit up once the input power is available (regardless the ADS-B 3.3V Main Power jumper 
+status). Port Side (Left wing) red LED is active during the data transmission FROM the pqADSB-NG towards 
+the PC/satellite/terminal, the idle status is indicated as OFF (no light).  
+ 
+A front side yellow LED is indicating the transmission of data TO the pqADSB-NG from the 
+PC/satellite/terminal. Not connected on pqADSB-NG, intended for future use. 
+ 
+The layout of the Evaluation Kit PCB is depicted in Fig. 4. The associated USB-to-Serial FTDI cable 
+can connect and power the unit from the USB. A simple communication with PC App is realized via Virtual 
+COM Port (VCP). 
+ 
+ 
+Fig. 4 The pqADSB-NG Evaluation Kit. 
+
+ 
+ 
+ 
+ 
+  
+ 8       
+www.SkyFoxLabs.com, Space-Friendly products 
+pqADSB-NG Product Datasheet, Rev. A 
+Issue rev. A, 2026, info@skyfoxlabs.com, U studanky 620/13. CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2026 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+pqADSB-NG
+EVAL KIT SCHEMATICS 
+ 
+When interfacing the pqADSB-NG unit, the effect of power bootstrapping of a typical UART receiver 
+needs to be considered. When UART line is idle, it holds the logical level HIGH or 1 (3.3V in case of LVCMOS 
+levels). Such voltage and current capability is able to power up the digital core, which is naturally very low 
+power in order of 5 - 10 mA. Thus, even if the main power input is held LOW (or 0V), the bootstrapping via 
+communication interface may still prevent the unit from proper power cycle / restart. It is thus highly 
+recommended to disable the receiver pull-up resistor of UART interface on RXD channel or forcing it directly to 
+zero Volts in input mode (set UART RX pin to input, force it with log. 0). 
+ 
+Each successful unit boot-up is indicated by three blinks of BLUE LED and with sending Initial 
+sentence towards the onboard computer. An example of interface including the bus receiver/driver is provided 
+within the Evaluation Kit schematics in Fig. 5. 
+ 
+ 
+ 
+Fig. 5 pqADSB-NG/EK Evaluation Kit Schematics with highlighted 3.3V LED Flash Driver Example circuitry. 
+ 
+ 
+Fig. 6 pqADSB-NG ADS-B Receiver Eval Kit Parsing Software App. 
+ 
+ 
+The PocketQube ADS-B Receiver Evaluation Kit is associated with the shared with parallel 
+pqADSB-NG CubeSat ADS-B Receiver Eval Kit Parsing Software App to visualize the measured data. In Fig. 6 
+a screenshot of the application is shown, covering the data logging, data view from the log file as well as the plot 
+of ICAO, Callsign, Latitude, Longitude, Altitude, Velocity, Heading and Last heard time. 
+
+ 
+ 
+ 
+ 
+  
+ 9       
+www.SkyFoxLabs.com, Space-Friendly products 
+pqADSB-NG Product Datasheet, Rev. A 
+Issue rev. A, 2026, info@skyfoxlabs.com, U studanky 620/13. CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2026 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+pqADSB-NG
+ANTENNA 
+ 
+ 
+The pqADSB-NG/FM receiver system is equipped with high gain RHCP ceramic patch antenna with 
+benefit to neglect vertical/horizontal polarization losses in orbit operations. The pqADSB-NG embedded antenna 
+uses the PocketQube Conductive structure as an extension of the basic 50×50 mm groundplane. A proper 
+DC+AC coupling between the PocketQube structure and the pqADSB-NG ground potential and mounting holes 
+must be provided to keep the antenna performance working nominally. An example of the antenna mount on the 
+Z- part of the 3p PocketQube structure is depicted in Fig. 7. To achieve fully symmetrical radiation pattern the 
+opposite-to-slider panel mount is recommended. Conductive elements, parts or other obstacles elevated above 
+the pqADSB-NG ceramic antenna groundplane and in its close proximity might decrease the overall system 
+performance. 
+ 
+ 
+ 
+Fig. 7 Optimized pqADSB-NG/FM Antenna mount. 
+ 
+ 
+ 
+As aircrafts typically uses vertically polarized monopole antenna, their radiation pattern minimizes the 
+power transmitted directly from Aircraft to Zenith. From this reason, it is recommended to keep the pqADSB-
+NG antenna facing slightly off the Nadir (downstream) with suitable ADCS (Attitude Determination and Control 
+Subsystem) during orbital operations. In-flight aircraft's Angle-of-Attack (AoA) helps to increase the off-Zenith 
+(upstream) transmitter radiation pattern angle and thus increases the datagram reception probability. 
+ 
+Recommended range of deviation angles-of-Nadir allowing the pqADSB-NG to track data is presented 
+for two LEO altitude is in the range of ~20°-70°.  
+ 
+ 
+ 
+APPLICATION NOTES & RECOMMENDATIONS 
+ 
+ 
+ 
+EMC CONSIDERATIONS 
+ 
+As the size of the small satellites imply the high level of integration of different electronic devices 
+(switch mode power supplies, high speed digital electronics, pulse-width modulated electromagnetic actuators, 
+etc.) into a limited satellite structure volume containing potential sources of disturbing signals, the 
+electromagnetic susceptibility and compatibility is critical for implementation of any subsystems sensitive to 
+electromagnetic radiation.  
+ 
+Proper ground planes and PCB design rules minimizing the radiated and conducted emissions shall be 
+applied within the whole small satellite structure, including custom payloads, conventional (Communication and 
+Data Handling, Power Supply and Power Distribution, Onboard Computer, Attitude Determination and Control) 
+and third party electronic subsystems. The small satellite electronics should be properly designed to not disturb 
+the ADS-B receiver input with harmonic frequencies falling to the 1090 MHz L-band. 
+  
+ 
+Observe the maximum distance logged over 1 hour of daylight operations and compare it with 
+switched On/Off  electronic subsystem to identify the potential source of the disturbance if needed, unless 
+the ADS-B Signal Generator is used to validate the sensitivity once the complete spacecraft is up and 
+running. 
+
+ 
+ 
+ 
+ 
+  
+ 10     
+www.SkyFoxLabs.com, Space-Friendly products 
+pqADSB-NG Product Datasheet, Rev. A 
+Issue rev. A, 2026, info@skyfoxlabs.com, U studanky 620/13. CZ-17000, Prague, Czech Republic, EU,  
+© 2014-2026 SkyFox Labs, s.r.o., All rights reserved 
+ 
+PRODUCT DATA SHEET                   
+pqADSB-NG
+QUALITY ASSURANCE 
+ 
+GENERAL INFORMATION 
+ 
+ 
+Since the pqADSB-NG/FM receiver has been designed for the operation in harsh space environment as 
+a specially featured electronic device based on Commercial Off-the-Shelf (COTS) components, the special care 
+is taken to follow the standardized space-grade product assembly procedures, materials and components where 
+possible (i.e. no Radiation Hardened integrated circuit are used). 
+ 
+ 
+MATERIALS 
+ 
+ 
+ 
+Components are soldered on the Space-grade 4-layers FR-4 PCB, using 60/40% (Tin/Lead) compound. 
+Special flux is used for precise soldering of the integrated circuits for its excellent soft soldering quality 
+properties, complying with the RoHS 2002/95/EC directive. No PCB conformal coating is used on products to 
+minimize the outgassing. The NASA approved 3M Scotch Weld Epoxy is used for critical component fixings. 
+ 
+Vacuum-proof electronic components from ESA and NASA-preferred space-grade vendors are used (i.e. 
+no electrolytic capacitors) in industrial or military temperature grade, where possible.  
+ 
+ 
+ 
+PACKAGING & SHIPPING 
+ 
+ 
+ 
+Once the pqADSB-NG/FM successfully passes the production screening test, it is finally cleaned, 
+optically inspected and shipped encapsulated in ESD protective packaging.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+

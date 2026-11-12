@@ -1,0 +1,167 @@
+{
+ "id": "exa_hdrm_clamp_motor_operated_rotary_hdrm_device_for_reliabl",
+ "name": "EXA (Ecuadorian Space Agency) HDRM Clamp: Motor operated rotary HDRM device for reliable deploy/release operations",
+ "category": "mechanisms",
+ "subcategory": "mechanism",
+ "vendor": "EXA (Ecuadorian Space Agency)",
+ "model": "HDRM Clamp: Motor operated rotary HDRM device for reliable deploy/release operations",
+ "dimensions_mm": {
+  "x": 56.0,
+  "y": 22.0,
+  "z": 15.0
+ },
+ "mass_g": 32.0,
+ "source": {
+  "type": "datasheet",
+  "url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-exa-ecuadorian-space-agency-hdrm-clamp-motor-operated-rotary-hdrm-device-for-reliable-deployrelease-operations-8r5xyv.pdf",
+  "document": {
+   "title": "EXA (Ecuadorian Space Agency) HDRM Clamp: Motor operated rotary HDRM device for reliable deploy/release operations data sheet",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-11",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g"
+  ],
+  "notes": "Read from the vendor data sheet (datasheet-exa-ecuadorian-space-agency-hdrm-clamp-motor-operated-rotary-hdrm-device-for-reliable-deployrelease-operations-8r5xyv.pdf): dimensions \"safe, no-compromise, electrically powered HDRM. With a very small footprint (56x22x15 mm), surface\"; mass \"ace mount, very low mass (32 g) and\". Catalog page lists no mass. Electrical / RF values found in the data sheet or page text by pattern (quoted where possible).",
+  "found_via": "https://satsearch.co/products/exa-hdrm-clamp"
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "distributors": [
+  "direct"
+ ],
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "quote",
+  "source": null
+ },
+ "electrical": {
+  "power_W": {
+   "nominal": 1.0
+  },
+  "quote": "power consumption (&lt;1W",
+  "voltage_V": {
+   "min": 5.0,
+   "max": 24.0
+  }
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   56.0,
+   22.0,
+   15.0
+  ],
+  "mesh_volume_mm3": 18462.7,
+  "watertight": true,
+  "render_kind": "module_box",
+  "effective_density_g_cm3": 1.733,
+  "bodies": {
+   "part": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__housing.stl"
+    },
+    {
+     "name": "lid",
+     "color": [
+      0.78,
+      0.8,
+      0.82
+     ],
+     "file": "bodies/part__lid.stl"
+    },
+    {
+     "name": "screws",
+     "color": [
+      0.62,
+      0.64,
+      0.66
+     ],
+     "file": "bodies/part__screws.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies/part__connector.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 40
+  },
+  "detail": {
+   "same_as_envelope": false,
+   "measured_bbox_mm": [
+    56.0,
+    22.0,
+    15.0
+   ],
+   "inside_envelope": true,
+   "overshoot_mm": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bodies": [
+    {
+     "name": "housing",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies_detail/housing.stl"
+    },
+    {
+     "name": "connector",
+     "color": [
+      0.16,
+      0.16,
+      0.18
+     ],
+     "file": "bodies_detail/connector.stl"
+    }
+   ],
+   "step": "detail.step"
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": null,
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
+  "datasheet_url": "https://satsearch.s3.eu-central-1.amazonaws.com/datasheets/datasheet-exa-ecuadorian-space-agency-hdrm-clamp-motor-operated-rotary-hdrm-device-for-reliable-deployrelease-operations-8r5xyv.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

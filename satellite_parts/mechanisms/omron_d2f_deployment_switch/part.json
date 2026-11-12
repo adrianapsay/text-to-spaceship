@@ -1,0 +1,136 @@
+{
+ "id": "omron_d2f_deployment_switch",
+ "name": "Omron D2F ultra subminiature basic switch (pin plunger), used as a CubeSat deployment switch",
+ "category": "mechanisms",
+ "subcategory": "deployment_switch",
+ "vendor": "Omron",
+ "model": "D2F",
+ "dimensions_mm": {
+  "x": 12.8,
+  "y": 6.5,
+  "z": 5.8
+ },
+ "mass_g": 0.5,
+ "source": {
+  "type": "datasheet",
+  "url": "https://www.farnell.com/datasheets/659393.pdf",
+  "document": {
+   "title": "Omron Ultra Subminiature Basic Switch D2F, Cat. No. B036-E1-08",
+   "revision": null,
+   "date": null
+  },
+  "accessed": "2026-11-08",
+  "fields_from_source": [
+   "dimensions_mm",
+   "mass_g",
+   "mechanism",
+   "electrical",
+   "thermal"
+  ],
+  "notes": "Body 12.8 x 6.5 x 5.8 mm and about 0.5 g (pin plunger models) from the datasheet. Pin plunger drawn as part of the box envelope. CDS Rev 14.1 section 2.3.2 requires at least one deployment switch; the D2F family (often the roller-lever D2F-L2) is a common choice."
+ },
+ "status": "in_production",
+ "fidelity": "envelope",
+ "vendor_country": "Japan",
+ "distributors": [
+  "Farnell",
+  "Digi-Key",
+  "Mouser"
+ ],
+ "material": "thermoplastic housing, gold-clad (D2F-01) or silver contacts",
+ "mechanism": {
+  "actuator_type": "microswitch (pin plunger)",
+  "operating_force_N_max": 1.47,
+  "pretravel_mm_max": 0.5,
+  "overtravel_mm_min": 0.25,
+  "variants": "D2F (3 A 125 VAC / 2 A 30 VDC), D2F-01 (0.1 A 30 VDC micro load), -F low force 0.74 N, -L lever options"
+ },
+ "electrical": {
+  "voltage_V": {
+   "max": 30
+  },
+  "current_A": {
+   "max": 2.0
+  }
+ },
+ "thermal": {
+  "operating_temperature_C": {
+   "min": -25,
+   "max": 65
+  }
+ },
+ "cost": {
+  "value": null,
+  "currency": "USD",
+  "basis": "unknown",
+  "source": null
+ },
+ "geometry": {
+  "measured_bbox_mm": [
+   12.8,
+   6.5,
+   5.8
+  ],
+  "mesh_volume_mm3": 482.6,
+  "watertight": true,
+  "render_kind": "box",
+  "effective_density_g_cm3": 1.036,
+  "bodies": {
+   "part": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  },
+  "face_counts": {
+   "part": 12
+  },
+  "detail": {
+   "same_as_envelope": true,
+   "bodies": [
+    {
+     "name": "body",
+     "color": [
+      0.36,
+      0.4,
+      0.46
+     ],
+     "file": "bodies/part__body.stl"
+    }
+   ]
+  }
+ },
+ "image": "preview.png",
+ "interfaces": {
+  "data_buses": [],
+  "mechanical": null,
+  "electrical_connectors": [],
+  "rf_connectors": [],
+  "power_bus_V": null
+ },
+ "reference_images": {
+  "datasheets": [],
+  "stl_preview": "preview.png",
+  "drawing": "drawing.png",
+  "photo_url": null,
+  "photo_source": null,
+  "photo_page": null,
+  "photo_file": "reference_photo.jpg",
+  "photo_kind": "vendor_or_marketplace",
+  "datasheet_url": "https://www.farnell.com/datasheets/659393.pdf",
+  "datasheet_page_file": null,
+  "note": "reference_photo.jpg and datasheet_page1.png are downloaded by fetch_reference_images.py on a machine with web access; drawing.png by make_drawings.py"
+ },
+ "files": {
+  "part": [
+   "part.step",
+   "part.stl"
+  ]
+ }
+}

@@ -1,0 +1,28 @@
+Parameters
+Description
+Frequency Band
+32.3-32.6 (32-33) GHz
+VSWR
+< 1.5:1
+Peak Gain
+19.2 ± 0.2dBic
+Half-Power Beamwidth (HPBW)
+8.1o± 0.2o
+Polarisation
+Left-Handed Circular (LHCP)
+Axial Ratio Bandwidth
+< 3.0 dB with HPBW
+Power Handling
+5W CW Typ.
+Configuration
+Multilayer Space-Qualified PCBs
+Connector
+Edge-Mount K(2.92mm) Connector
+Dimensions
+70mm x 70mm x 1.2mm, Excl. Connector
+Mass
+20.2g + Fixings
+Notes – 7x φ = 3.2mm (M3) PTH & SS Cap Screws
+Ka-Band Patch Antenna Array
+
+

@@ -1,0 +1,186 @@
+WIS210Y
+Product Data Sheet
+V1.1
+3-axis high-performance
+MEMS gyroscope
+
+WIS210Y Product Data Sheet V1.1
+目录
+1 Product Introduction.............................................................................................................................................1
+2 Technical Parameters and Specifications............................................................................................................2
+2.1 Main Parameter Specifications..................................................................................................................... 2
+2.2 Installation Dimensions................................................................................................................................. 3
+3 Electrical Interface................................................................................................................................................. 4
+3.1 Interface Pinout Description......................................................................................................................... 4
+3.2 Electrical Interface......................................................................................................................................... 4
+4 Equipment Installation and Usage......................................................................................................................5
+4.1 Coordinate System........................................................................................................................................5
+4.2 Equipment Installation.................................................................................................................................. 5
+4.3 Data Recording............................................................................................................................................. 5
+4.4 Firmware Upgrade........................................................................................................................................ 5
+5 User Serial Communication Protocol..................................................................................................................6
+
+WIS210Y Product Data Sheet V1.1
+1
+1
+Product Introduction
+Figure 1-1
+Exterior View of the WIS210Y Gyroscope
+The WIS210Y is a high-performance MEMS gyroscope independently developed by HUAV. It
+features a compact size and lightweight design, integrating a triaxial high-performance
+MEMS gyroscope internally, and is screened according to aerospace standards.
+Prior to shipment, the WIS210Y undergoes precise calibration and full-temperature range
+calibration. It has passed tests including thermal vacuum, EMC, magnetic testing, and
+ionizing radiation total dose, enabling it to meet the requirements of aerospace applications.
+It can reliably output angular rate, temperature, and real-time diagnostic information in the
+space environment.
+Key Features
+
+Independent
+Intellectual Property
+
+Full-Temperature
+Range Calibration
+
+Aerospace Standard
+Screening
+
+In-Orbit
+Reconfiguration
+
+WIS210Y Product Data Sheet V1.1
+2
+2
+Technical Parameters and Specifications
+2.1 Main Parameter Specifications
+Table 2-1 Parameter Specifications
+MEMS Gyroscope
+A
+Range
+±100°/s
+Bias
+≤10°/h
+Bias Stability Over
+Temperature (10s 1σ)
+≤5°/h
+Bias Repeatability (1σ)
+≤5°/h
+Bias Instability
+≤0.5°/h
+Angle Random Walk
+≤0.15°/√h
+Scale Factor Nonlinearity
+≤200ppm
+Scale Factor Repeatability
+≤200ppm
+Orthogonality
+≤0.1%
+Bandwidth
+≥10Hz
+System Specifications
+Power Supply Voltage
+5±0.5V
+Power Consumption
+1.5W
+Dimensions (L x W x H)
+44.8mm x 38.6mm x 21.5mm
+Weight
+48g±5
+Operating Temperature
+-40℃~+70℃
+Start-up Time
+<1s
+Output Frequency
+Supports blind submission
+Supports polling mode output
+Interface
+Electrical Interface
+RS422 x 1
+Connector
+J30J-15ZK
+
+WIS210Y Product Data Sheet V1.1
+3
+2.2 Installation Dimensions
+Detailed dimensions are shown in the figure below:
+Figure 2-1 WIS210Y Dimension Diagram
+
+WIS210Y Product Data Sheet V1.1
+4
+3
+Electrical Interface
+The device utilizes a J30J-15ZK rectangular connector, which incorporates both power supply and signal interfaces.
+3.1 Interface Pinout Description
+The interface pinout configuration when viewed from the external side of the product is shown in the figure below:
+Figure 3-1 Interface Signal Pinout
+3.2 Electrical Interface
+The signal definitions are shown in the table below:
+Table 3-1 Interface Pinout Definition
+Pin Number
+Name
+Description
+1
+RS422 TX-
+Device Serial Transmit Negative
+2
+RS422 RX-
+Device Serial Receive Negative
+8
+PVCC
+Power Input (Nominal 5V)
+9
+RS422 TX+
+Device Serial Transmit Positive
+10
+RS422 RX+
+Device Serial Receive Positive
+12~13
+GND
+Signal Ground (SGND)
+15
+GND
+Power Ground (PGND)
+3~7、11、14
+\
+Reserved
+
+WIS210Y Product Data Sheet V1.1
+5
+4
+Equipment Installation and Usage
+4.1 Coordinate System
+The coordinate system of the WIS210Y is configured as shown in the figure
+below. With the connector end facing forward, the X-axis points forward, the
+Y-axis points left, and the Z-axis points upward.
+4.2 Equipment Installation
+
+The WIS210Y gyroscope must be securely and reliably connected to the user's platform. It should be fastened using
+bolts, and the rectangular connector must be securely mated.
+
+Hex socket head cap screws (specification: M4x12, 304 Stainless Steel, Grade 8.8) are recommended for mounting the
+device. Recommended torque: 2.45 N·m. If washers are required, the recommended washer specification is: M4x7x0.5
+(Stainless Steel).
+4.3 Data Recording
+After correctly connecting the gyroscope and confirming data output upon power-on, click the "Start Recording" function in
+the WisView interactive software. The software will generate a text file in the same directory as the application for real-time
+data storage.
+4.4 Firmware Upgrade
+The WisView interactive software includes a firmware
+upgrade function for the gyroscope.
+Click the "Firmware Upgrade" button in the Tools menu.
+Within the upgrade interface, click "Load Firmware" and
+select the correct firmware file from the path. Upon completion, click "Upgrade" to initiate the firmware upgrade process.
+Figure 4-1 Coordinate System Diagram
+Figure 4-2 Firmware Upgrade Function
+
+WIS210Y Product Data Sheet V1.1
+6
+5
+User Serial Communication Protocol
+The default serial port configuration is: Baud rate 115200 bps, 8 data bits, 1 stop bit, and odd parity. Multi-byte transmission byte
+order: high byte first, low byte last.
+The product can be configured for either Broadcast or Telemetry mode, which requires a restart to take effect. The default output
+mode is Telemetry. The output frequency in Broadcast mode is configurable, supporting up to 1000Hz. In Telemetry mode, the
+gyroscope's response time does not exceed 2ms. Response time is defined as the interval between the last bit of a sent command
+and the first bit of the gyroscope's reply.
+

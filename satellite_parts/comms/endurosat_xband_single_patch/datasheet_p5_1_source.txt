@@ -1,0 +1,3 @@
+url: https://satcatalog.s3.amazonaws.com/components/551/SatCatalog_-_EnduroSat_-_X-Band_Patch_Antenna_-_Datasheet.pdf?lastmod=20210714191904
+found from: https://satcatalog.com/component/x-band-patch-antenna
+found by Claude (web search) on 2026-11-11; downloaded by fetch_pass5.py

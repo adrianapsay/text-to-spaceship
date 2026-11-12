@@ -331,6 +331,21 @@ def patch_antenna(x, y, z, patch_inset=8.0, patch_height=1.0, **_):
     return bodies(("housing", WHITE, base), ("patch", COPPER, patch))
 
 
+def cryocooler_split(compressor_diameter, compressor_length, cold_head_diameter, cold_head_length, gap=6.0, **_):
+    """Split Stirling / pulse-tube cooler drawn as its two cylinders side by side along z: the pressure wave generator (compressor) and the cold head with its cold tip, joined by a short transfer line."""
+    height = max(compressor_length, cold_head_length)
+    total_x = compressor_diameter + gap + cold_head_diameter
+    compressor_x = -total_x / 2 + compressor_diameter / 2
+    cold_head_x = total_x / 2 - cold_head_diameter / 2
+    compressor = b.Pos(compressor_x, 0, -height / 2 + compressor_length / 2) * b.Cylinder(compressor_diameter / 2.0, compressor_length)
+    cold_body_length = cold_head_length * 0.55
+    cold_body = b.Pos(cold_head_x, 0, -height / 2 + cold_body_length / 2) * b.Cylinder(cold_head_diameter / 2.0, cold_body_length)
+    cold_finger = b.Pos(cold_head_x, 0, -height / 2 + cold_body_length + (cold_head_length - cold_body_length) / 2 - 0.1) * b.Cylinder(cold_head_diameter * 0.22, cold_head_length - cold_body_length + 0.2)
+    line_length = cold_head_x - compressor_x
+    transfer_line = b.Pos((compressor_x + cold_head_x) / 2, 0, -height / 2 + min(compressor_length, cold_body_length) * 0.5) * b.Cylinder(2.0, line_length).rotate(b.Axis.Y, 90)
+    return bodies(("compressor", ANODIZED, compressor), ("cold head", STEEL, cold_body), ("cold finger", GOLD, cold_finger), ("transfer line", ALUMINIUM, transfer_line))
+
+
 def radome_puck(diameter, length, flange_diameter=None, flange_thickness=2.0, **_):
     """Round antenna: white radome disc on a thin aluminium mounting flange."""
     flange_d = flange_diameter if flange_diameter is not None else diameter
@@ -482,6 +497,47 @@ def build(spec):
     fused = shift * fused
     centered = [(name, color, shift * part) for name, color, part in body_list]
     return fused, centered
+
+
+
+
+def box_with_ears(x, y, z, ear_length, ear_thickness=3.0, ear_width=None, hole_diameter=3.4, **_):
+    """Sensor housing with two bolt-down ears on the -x and +x sides; overall envelope x by y by z (body x - 2 * ear_length)."""
+    body_x = x - 2 * ear_length
+    ear_width = ear_width or 0.4 * y
+    body = b.Box(body_x, y, z)
+    ears = None
+    for sx in (-1, 1):
+        ear = b.Pos(sx * (body_x / 2 + ear_length / 2), 0, -z / 2 + ear_thickness / 2) * b.Box(ear_length + 0.2, ear_width, ear_thickness)
+        ear = ear - b.Pos(sx * (body_x / 2 + ear_length / 2), 0, -z / 2 + ear_thickness / 2) * b.Cylinder(hole_diameter / 2, ear_thickness + 1)
+        ears = ear if ears is None else ears + ear
+    window = b.Pos(0, 0, z / 2 - 0.25) * b.Box(0.45 * body_x, 0.45 * y, 0.5)
+    return bodies(("body", ANODIZED, body + ears), ("window", GLASS, window))
+
+
+def rod_with_driver(x, y, z, rod_diameter, board_x, board_y, board_z, **_):
+    """Magnetorquer rod along x with clamp feet, plus its driver board beside it; overall envelope x by y by z."""
+    rod_y = -y / 2 + rod_diameter / 2
+    rod = b.Pos(0, rod_y, z / 2 - rod_diameter / 2) * b.Cylinder(rod_diameter / 2, x).rotate(b.Axis.Y, 90)
+    clamps = None
+    for sx in (-0.3, 0.3):
+        clamp = b.Pos(sx * x, rod_y, -z / 2 + (z - rod_diameter / 2) / 2) * b.Box(8, rod_diameter + 4, z - rod_diameter / 2)
+        clamps = clamp if clamps is None else clamps + clamp
+    board = b.Pos(0, y / 2 - board_y / 2, -z / 2 + board_z / 2) * b.Box(board_x, board_y, board_z)
+    return bodies(("coil", COPPER, rod), ("clamps", ANODIZED, clamps), ("driver_board", PCB, board))
+
+
+def wheel_pyramid(x, y, z, base_thickness=5.0, **_):
+    """Four reaction wheels on a pyramid bracket: base plate and four wheel housings at the corners, each tilted inward (drawn as blocks leaning 20 deg)."""
+    base = b.Pos(0, 0, -z / 2 + base_thickness / 2) * b.Box(x, y, base_thickness)
+    wheel = min(x, y) * 0.42
+    height = z - base_thickness
+    wheels = None
+    for sx, sy, angle_axis, sign in ((-1, 0, b.Axis.Y, 1), (1, 0, b.Axis.Y, -1), (0, -1, b.Axis.X, -1), (0, 1, b.Axis.X, 1)):
+        block = b.Box(wheel, wheel, min(height * 0.55, wheel * 0.6)).rotate(angle_axis, sign * 20)
+        block = b.Pos(sx * (x / 2 - wheel / 2 - 2), sy * (y / 2 - wheel / 2 - 2), -z / 2 + base_thickness + height * 0.45) * block
+        wheels = block if wheels is None else wheels + block
+    return bodies(("bracket", ALUMINIUM, base), ("wheels", BLACK, wheels))
 
 
 BUILDERS = {name: function for name, function in globals().items() if callable(function) and not name.startswith("_") and name not in ("center", "bodies", "build")}
